@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Margin -->
+    <dimen name="extra_small_margin">16dp</dimen>
+    <dimen name="small_margin">8dp</dimen>
+    <dimen name="normal_margin">16dp</dimen>
+    <dimen name="large_margin">32dp</dimen>
+    <dimen name="extra_large_margin">48dp</dimen>
+
+
+    <!-- Padding -->
+    <dimen name="extra_small_padding">4dp</dimen>
+    <dimen name="small_padding">8dp</dimen>
+    <dimen name="normal_padding">16dp</dimen>
+    <dimen name="large_padding">32dp</dimen>
+    <dimen name="extra_large_padding">48dp</dimen>
+</resources>

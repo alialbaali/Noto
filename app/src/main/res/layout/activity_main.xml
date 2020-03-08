@@ -8,17 +8,14 @@
     tools:context=".MainActivity">
 
 
-    <Button
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/extendedFloatingActionButton2"
+        style="@style/bottom_nav_create_btn_style"
         android:layout_width="wrap_content"
-        android:text="@string/create"
-        android:background="@android:color/black"
-        android:textColor="@android:color/white"
-        android:drawableStart="@drawable/ic_add_black_24dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_view_list_black_24dp"
-        android:layout_marginBottom="32dp"
-        android:elevation="1dp"
+        android:layout_marginBottom="@dimen/large_margin"
+        android:text="@string/create"
+        app:icon="@drawable/ic_add_black_24dp"
         app:layout_constraintBottom_toBottomOf="@id/cl"
         app:layout_constraintEnd_toEndOf="@+id/bottom_nav"
         app:layout_constraintStart_toStartOf="@+id/bottom_nav"
