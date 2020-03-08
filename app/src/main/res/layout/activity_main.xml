@@ -1,29 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
 
+    <Button
+        android:id="@+id/extendedFloatingActionButton2"
+        android:layout_width="wrap_content"
+        android:text="@string/create"
+        android:background="@android:color/black"
+        android:textColor="@android:color/white"
+        android:drawableStart="@drawable/ic_add_black_24dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_view_list_black_24dp"
+        android:layout_marginBottom="32dp"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="@id/cl"
+        app:layout_constraintEnd_toEndOf="@+id/bottom_nav"
+        app:layout_constraintStart_toStartOf="@+id/bottom_nav"
+        app:layout_constraintTop_toBottomOf="@id/nav_host_fragment" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:background="@color/bottom_nav_color"
-        android:layout_gravity="bottom"
-        app:menu="@menu/bottom_nav_menu"
-        android:layout_weight="0" />
+        app:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="@id/cl"
+        app:layout_constraintLeft_toLeftOf="@id/cl"
+        app:layout_constraintRight_toRightOf="@id/cl"
+        app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"
+        app:layout_constraintVertical_weight="0.3"
+        app:menu="@menu/bottom_nav_menu" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/nav_graph" />
+        app:layout_constraintBottom_toTopOf="@id/extendedFloatingActionButton2"
+        app:layout_constraintLeft_toLeftOf="@id/cl"
+        app:layout_constraintRight_toRightOf="@id/cl"
+        app:layout_constraintTop_toTopOf="@id/cl"
+        app:layout_constraintVertical_weight="3"
+        app:navGraph="@navigation/nav_graph">
+
+    </androidx.fragment.app.FragmentContainerView>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

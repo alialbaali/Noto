@@ -8,6 +8,10 @@
         android:visible="true" />
 
     <item
+        android:id="@+id/bottom_nav_menu_notebook1s"
+        android:visible="true" />
+
+    <item
         android:id="@+id/bottom_nav_menu_notebooks"
         android:icon="@drawable/ic_library_books_black_24dp"
         android:title="@string/notebooks"

@@ -2,4 +2,8 @@
     <string name="app_name">Noto</string>
     <string name="notebooks">Notebooks</string>
     <string name="lists">Lists</string>
+    <string name="create">CREATE</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
