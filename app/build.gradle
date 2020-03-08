@@ -49,7 +49,6 @@ dependencies {
     // LiveCycle Library (ViewModel, LiveData)
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
-
     // RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
 

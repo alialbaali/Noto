@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Noto</string>
+    <string name="notebooks">Notebooks</string>
+    <string name="lists">Lists</string>
 </resources>
