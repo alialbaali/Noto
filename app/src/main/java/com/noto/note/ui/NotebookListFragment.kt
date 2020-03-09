@@ -7,20 +7,20 @@ import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.noto.R
-import com.noto.databinding.FragmentNotebookBinding
+import com.noto.databinding.FragmentNotebookListBinding
 
 /**
  * A simple [Fragment] subclass.
  */
-class NotebookFragment : Fragment() {
+class NotebookListFragment : Fragment() {
 
-    private lateinit var binding: FragmentNotebookBinding
+    private lateinit var binding: FragmentNotebookListBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNotebookBinding.inflate(inflater, container, false)
+        binding = FragmentNotebookListBinding.inflate(inflater, container, false)
 
         // Binding
         binding.let {

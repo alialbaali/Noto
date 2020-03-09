@@ -34,5 +34,9 @@
         <item name="android:textSize">@dimen/ctb_col_title_dimen</item>
     </style>
 
-
+    <style name="notebook_item_tv_style" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/notebook_item_tv_text_color</item>
+        <item name="android:textSize">@dimen/notebook_item_tv_dimen</item>
+    </style>
 </resources>

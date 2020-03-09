@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/notebookFragment"
-        android:name="com.noto.note.ui.NotebookFragment"
+        android:name="com.noto.note.ui.NotebookListFragment"
         android:label="fragment_notebook"
-        tools:layout="@layout/fragment_notebook" />
+        tools:layout="@layout/fragment_notebook_list" />
 </navigation>

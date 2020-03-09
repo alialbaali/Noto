@@ -6,4 +6,6 @@
     <color name="bottom_nav_color">#FAFAFA</color>
     <color name="ctb_background_color">#FFFFFF</color>
     <color name="ctb_content_scrim_color">#FFFFFF</color>
+    <color name="notebook_item_tv_background_color">#E0E0E0</color>
+    <color name="notebook_item_tv_text_color">#000000</color>
 </resources>
