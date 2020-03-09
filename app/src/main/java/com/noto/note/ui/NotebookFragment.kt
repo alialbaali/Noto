@@ -1,24 +1,41 @@
 package com.noto.note.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import com.noto.R
+import com.noto.databinding.FragmentNotebookBinding
 
 /**
  * A simple [Fragment] subclass.
  */
 class NotebookFragment : Fragment() {
 
+    private lateinit var binding: FragmentNotebookBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notebook, container, false)
+        binding = FragmentNotebookBinding.inflate(inflater, container, false)
+
+        // Binding
+        binding.let {
+
+            it.lifecycleOwner = this
+
+        }
+
+        // Collapse Toolbar
+        binding.ctb.let { ctb ->
+            ctb.setCollapsedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_bold))
+            ctb.setExpandedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_medium))
+        }
+
+        return binding.root
     }
 
 }

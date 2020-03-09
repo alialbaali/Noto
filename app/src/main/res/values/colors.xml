@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="bottom_nav_color">#FAFAFA</color>
+    <color name="ctb_background_color">#FFFFFF</color>
+    <color name="ctb_content_scrim_color">#FFFFFF</color>
 </resources>

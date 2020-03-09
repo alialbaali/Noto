@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <dimen name="abl_height_dimen">100dp</dimen>
+    <dimen name="ctb_exp_title_dimen">48sp</dimen>
+    <dimen name="ctb_col_title_dimen">20sp</dimen>
+
     <!-- Margin -->
     <dimen name="extra_small_margin">16dp</dimen>
     <dimen name="small_margin">8dp</dimen>

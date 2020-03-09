@@ -1,18 +1,38 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+
+        <item name="android:statusBarColor">@android:color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    
+
     <style name="bottom_nav_create_btn_style" parent="Widget.MaterialComponents.Button">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:backgroundTint">@android:color/black</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">18sp</item>
     </style>
+
+    <style name="ctb_style" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+        <item name="android:background">@color/ctb_background_color</item>
+        <item name="contentScrim">@color/ctb_content_scrim_color</item>
+        <item name="expandedTitleTextAppearance">@style/ctb_exp_title_style</item>
+        <item name="collapsedTitleTextAppearance">@style/ctb_col_title_style</item>
+        <item name="layout_scrollFlags">scroll|snap|exitUntilCollapsed</item>
+        <item name="collapsedTitleGravity">start</item>
+        <item name="expandedTitleGravity">start|bottom</item>
+    </style>
+
+    <style name="ctb_exp_title_style" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">@dimen/ctb_exp_title_dimen</item>
+    </style>
+
+    <style name="ctb_col_title_style" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">@dimen/ctb_col_title_dimen</item>
+    </style>
+
 
 </resources>

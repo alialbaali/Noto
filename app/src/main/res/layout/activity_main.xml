@@ -9,7 +9,7 @@
 
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/extendedFloatingActionButton2"
+        android:id="@+id/bottom_nav_create_btn"
         style="@style/bottom_nav_create_btn_style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toTopOf="@id/extendedFloatingActionButton2"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav_create_btn"
         app:layout_constraintLeft_toLeftOf="@id/cl"
         app:layout_constraintRight_toRightOf="@id/cl"
         app:layout_constraintTop_toTopOf="@id/cl"
