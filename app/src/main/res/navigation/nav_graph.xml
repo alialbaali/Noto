@@ -1,13 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/notebookFragment">
-
+    app:startDestination="@id/notebookListFragment">
+    <fragment
+        android:id="@+id/notebookListFragment"
+        android:name="com.noto.note.ui.NotebookListFragment"
+        android:label="NotebookListFragment">
+        <action
+            android:id="@+id/action_notebookListFragment_to_notebookFragment"
+            app:destination="@id/notebookFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notebookFragment"
-        android:name="com.noto.note.ui.NotebookListFragment"
-        android:label="fragment_notebook"
-        tools:layout="@layout/fragment_notebook_list" />
+        android:name="com.noto.note.ui.NotebookFragment"
+        android:label="NotebookFragment">
+        <action
+            android:id="@+id/action_notebookFragment_to_notebookListFragment"
+            app:destination="@id/notebookListFragment" />
+        <argument
+            android:name="id"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="color"
+            app:argType="com.noto.note.model.NotebookColor"
+            android:defaultValue="GRAY" />
+    </fragment>
 </navigation>

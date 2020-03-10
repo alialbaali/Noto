@@ -1,11 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+
+    <!-- Bottom Navigation Bar -->
     <color name="bottom_nav_color">#FAFAFA</color>
+
+    <!-- Collapsing Toolbar -->
     <color name="ctb_background_color">#FFFFFF</color>
     <color name="ctb_content_scrim_color">#FFFFFF</color>
-    <color name="notebook_item_tv_background_color">#E0E0E0</color>
+
+    <!-- Notebook -->
     <color name="notebook_item_tv_text_color">#000000</color>
+
+    <!-- Note -->
+    <color name="note_item_background_color">#FAFAFA</color>
+    <color name="note_item_title_color">#424242</color>
+    <color name="note_item_body_color">#757575</color>
+
+    <!-- Notebook Background -->
+    <color name="notebook_item_background_gray_color">#E0E0E0</color>
+    <color name="notebook_item_background_blue_color">#90CAF9</color>
+    <color name="notebook_item_background_pink_color">#F48FB1</color>
+    <color name="notebook_item_background_cyan_color">#80DEEA</color>
+
+    <!-- Notebook FAB -->
+    <color name="notebook_fab_background_gray_color">#757575</color>
+    <color name="notebook_fab_background_blue_color">#2196F3</color>
+    <color name="notebook_fab_background_pink_color">#E91E63</color>
+    <color name="notebook_fab_background_cyan_color">#00BCD4</color>
+
 </resources>
