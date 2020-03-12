@@ -7,8 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.R
 import com.noto.databinding.FragmentNotebookBinding
+import com.noto.note.adapter.NotebookRVAdapter
+import com.noto.note.model.Note
 import com.noto.note.model.NotebookColor
 
 /**
@@ -16,19 +19,18 @@ import com.noto.note.model.NotebookColor
  */
 class NotebookFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     // Binding
     private lateinit var binding: FragmentNotebookBinding
+
+    private lateinit var adapter: NotebookRVAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNotebookBinding.inflate(inflater, container, false)
+
+        adapter = NotebookRVAdapter()
 
         val arguments = requireArguments()
 
@@ -59,6 +61,20 @@ class NotebookFragment : Fragment() {
         // RV
         binding.rv.let { rv ->
 
+            rv.adapter = adapter
+            rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            val list = mutableListOf<Note>()
+            for (i in 1..100) {
+                list.add(
+                    Note(
+                        id = i.toLong(),
+                        notebookId = i.toLong(),
+                        title = "Note $i",
+                        body = "Note test  $i"
+                    )
+                )
+            }
+            adapter.submitList(list)
         }
 
         // FAB

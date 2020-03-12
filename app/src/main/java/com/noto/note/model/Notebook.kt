@@ -5,7 +5,7 @@ import com.noto.R
 data class Notebook(
     val id: Long = 0L,
     val title: String,
-    val color: NotebookColor = NotebookColor.PINK
+    val color: NotebookColor = NotebookColor.GRAY
 )
 
 enum class NotebookColor {
