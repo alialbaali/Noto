@@ -62,9 +62,9 @@ internal class NotebookItemViewHolder(
 
     // Bind notebook's values to the list item
     fun bind(notebook: Notebook) {
-        binding.notebookTv.text = notebook.title
+        binding.notebookTv.text = notebook.notebookTitle
 
-        when (notebook.color) {
+        when (notebook.notebookColor) {
             NotebookColor.GRAY -> {
                 binding.cl.setBackgroundResource(R.drawable.notebook_item_background_gray_drawable)
             }
@@ -85,7 +85,7 @@ internal class NotebookItemViewHolder(
 // Notebook Item Difference Callback
 private class NotebookItemDiffCallback() : DiffUtil.ItemCallback<Notebook>() {
     override fun areItemsTheSame(oldItem: Notebook, newItem: Notebook): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.notebookId == newItem.notebookId
     }
 
     override fun areContentsTheSame(oldItem: Notebook, newItem: Notebook): Boolean {

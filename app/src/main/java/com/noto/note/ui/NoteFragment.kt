@@ -17,19 +17,28 @@ class NoteFragment : Fragment() {
     // Binding
     private lateinit var binding: FragmentNoteBinding
 
+    private var noteId = 0L
+
+    private var notebookId = 0L
+
+    private var notebookColor = NotebookColor.GRAY
+
+    private var notebookTitle = ""
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNoteBinding.inflate(inflater, container, false)
 
-        val arguments = requireArguments()
+        requireArguments().let { args ->
+            noteId = args.getLong("note_id")
+            notebookId = args.getLong("notebook_id")
+            notebookTitle = args.getString("notebook_title") ?: ""
+            notebookColor = args.get("notebook_color") as NotebookColor
+        }
 
-        val id = arguments.getLong("id")
-        val notebookId = arguments.getLong("notebook_id")
-        val title = arguments.getString("title")
-
-        when (arguments.get("color") as NotebookColor) {
+        when (notebookColor) {
             NotebookColor.GRAY -> setGray()
             NotebookColor.BLUE -> setBlue()
             NotebookColor.PINK -> setPink()
@@ -37,7 +46,7 @@ class NoteFragment : Fragment() {
         }
 
         binding.tb.let { tb ->
-            tb.title = title
+            tb.title = notebookTitle
         }
 
         binding.title.setText("This is a note title")

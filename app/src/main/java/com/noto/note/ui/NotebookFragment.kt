@@ -28,9 +28,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
     private var notebookId = 0L
 
-    private var title = ""
+    private var notebookTitle = ""
 
-    private var color = NotebookColor.GRAY
+    private var notebookColor = NotebookColor.GRAY
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +40,13 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
         adapter = NotebookRVAdapter(this)
 
-        val arguments = requireArguments()
 
-        notebookId = arguments.getLong("id")
-        title = arguments.getString("title") ?: ""
-        color = arguments.get("color") as NotebookColor
+        // Arguments
+        requireArguments().let { args ->
+            notebookId = args.getLong("notebook_id")
+            notebookTitle = args.getString("notebook_title") ?: ""
+            notebookColor = args.get("notebook_color") as NotebookColor
+        }
 
 
         // Binding
@@ -52,7 +54,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
             it.lifecycleOwner = this
 
-            when (color) {
+            when (notebookColor) {
                 NotebookColor.GRAY -> setGray()
                 NotebookColor.BLUE -> setBlue()
                 NotebookColor.PINK -> setPink()
@@ -75,10 +77,10 @@ class NotebookFragment : Fragment(), NavigateToNote {
             for (i in 1..100) {
                 list.add(
                     Note(
-                        id = i.toLong(),
+                        noteId = i.toLong(),
                         notebookId = i.toLong(),
-                        title = "Note $i",
-                        body = "Note test  $i"
+                        noteTitle = "Note $i",
+                        noteBody = "Note test  $i"
                     )
                 )
             }
@@ -92,7 +94,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
         // Collapsing Toolbar
         binding.ctb.let { ctb ->
-            ctb.title = title
+            ctb.title = notebookTitle
         }
 
         return binding.root
@@ -254,8 +256,8 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 NotebookFragmentDirections.actionNotebookFragmentToNoteFragment(
                     id,
                     notebookId,
-                    title,
-                    color
+                    notebookTitle,
+                    notebookColor
                 )
             )
     }

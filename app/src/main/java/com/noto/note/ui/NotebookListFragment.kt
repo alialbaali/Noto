@@ -59,7 +59,7 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
             rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             val list = mutableListOf<Notebook>()
             for (i in 1..100) {
-                list.add(Notebook(title = "Notebook $i"))
+                list.add(Notebook(notebookTitle = "Notebook $i"))
             }
             adapter.submitList(list)
         }
@@ -70,9 +70,9 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
     override fun navigate(notebook: Notebook) {
         this.findNavController().navigate(
             NotebookListFragmentDirections.actionNotebookListFragmentToNotebookFragment(
-                notebook.id,
-                notebook.title,
-                notebook.color
+                notebook.notebookId,
+                notebook.notebookTitle,
+                notebook.notebookColor
             )
         )
     }

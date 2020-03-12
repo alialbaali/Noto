@@ -22,14 +22,14 @@
             android:id="@+id/action_notebookFragment_to_notebookListFragment"
             app:destination="@id/notebookListFragment" />
         <argument
-            android:name="id"
+            android:name="notebook_id"
             android:defaultValue="0L"
             app:argType="long" />
         <argument
-            android:name="title"
+            android:name="notebook_title"
             app:argType="string" />
         <argument
-            android:name="color"
+            android:name="notebook_color"
             android:defaultValue="GRAY"
             app:argType="com.noto.note.model.NotebookColor" />
         <action
@@ -45,7 +45,7 @@
             android:id="@+id/action_noteFragment_to_notebookFragment"
             app:destination="@id/notebookFragment" />
         <argument
-            android:name="id"
+            android:name="note_id"
             app:argType="long"
             android:defaultValue="0L" />
         <argument
@@ -53,10 +53,10 @@
             app:argType="long"
             android:defaultValue="0L"/>
         <argument
-            android:name="title"
+            android:name="notebook_title"
             app:argType="string" />
         <argument
-            android:name="color"
+            android:name="notebook_color"
             app:argType="com.noto.note.model.NotebookColor"
             android:defaultValue="GRAY" />
     </fragment>

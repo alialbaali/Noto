@@ -18,7 +18,7 @@ class NotebookRVAdapter(private val navigateToNote: NavigateToNote) : ListAdapte
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
         val note = getItem(position)
         holder.bind(note)
-        holder.id = note.id
+        holder.id = note.noteId
     }
 
 }
@@ -54,8 +54,8 @@ class NoteItemViewHolder(private val binding: NoteItemBinding, navigateToNote: N
 
     // Bind note's values to the list item
     fun bind(note: Note) {
-        binding.title.text = note.title
-        binding.body.text = note.body
+        binding.title.text = note.noteTitle
+        binding.body.text = note.noteBody
     }
 }
 
@@ -63,7 +63,7 @@ class NoteItemViewHolder(private val binding: NoteItemBinding, navigateToNote: N
 class NoteItemDiffCallback() : DiffUtil.ItemCallback<Note>() {
 
     override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.noteId == newItem.noteId
     }
 
     override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
