@@ -62,16 +62,20 @@
         <item name="android:maxLines">5</item>
     </style>
 
-    <style name="note_fragment_title_style" parent="Widget.MaterialComponents.TextView">
+    <style name="note_fragment_title_style" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:background">@color/transparent</item>
         <item name="android:maxLength">64</item>
+        <item name="android:gravity">top|start</item>
         <item name="android:textColor">@color/note_item_title_color</item>
         <item name="android:textSize">@dimen/note_fragment_title_dimen</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:maxLines">3</item>
     </style>
 
-    <style name="note_fragment_body_style" parent="Widget.MaterialComponents.TextView">
+    <style name="note_fragment_body_style" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:gravity">top|start</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textColor">@color/note_item_body_color</item>
         <item name="android:textSize">@dimen/note_fragment_body_dimen</item>

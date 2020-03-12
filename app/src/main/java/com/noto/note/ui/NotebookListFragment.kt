@@ -10,14 +10,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.R
 import com.noto.databinding.FragmentNotebookListBinding
-import com.noto.note.adapter.Navigate
+import com.noto.note.adapter.NavigateToNotebook
 import com.noto.note.adapter.NotebookListRVAdapter
 import com.noto.note.model.Notebook
 
 /**
  * A simple [Fragment] subclass.
  */
-class NotebookListFragment : Fragment(), Navigate {
+class NotebookListFragment : Fragment(), NavigateToNotebook {
 
     // Binding
     private lateinit var binding: FragmentNotebookListBinding

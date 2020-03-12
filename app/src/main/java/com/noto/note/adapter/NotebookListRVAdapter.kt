@@ -11,12 +11,12 @@ import com.noto.note.model.Notebook
 import com.noto.note.model.NotebookColor
 
 // Notebook List RV Adapter
-internal class NotebookListRVAdapter(private val navigate: Navigate) :
+internal class NotebookListRVAdapter(private val navigateToNotebook: NavigateToNotebook) :
     ListAdapter<Notebook, NotebookItemViewHolder>(NotebookItemDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotebookItemViewHolder {
-        return NotebookItemViewHolder.create(parent, navigate)
+        return NotebookItemViewHolder.create(parent, navigateToNotebook)
     }
 
     override fun onBindViewHolder(holder: NotebookItemViewHolder, position: Int) {
@@ -30,7 +30,7 @@ internal class NotebookListRVAdapter(private val navigate: Navigate) :
 // Notebook Item ViewHolder
 internal class NotebookItemViewHolder(
     private val binding: NotebookItemBinding,
-    private val navigate: Navigate
+    private val navigateToNotebook: NavigateToNotebook
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
@@ -40,7 +40,7 @@ internal class NotebookItemViewHolder(
         binding.root.let {
 
             it.setOnClickListener {
-                navigate.navigate(notebook)
+                navigateToNotebook.navigate(notebook)
             }
 
         }
@@ -49,13 +49,13 @@ internal class NotebookItemViewHolder(
     companion object {
 
         // Create ViewHolder Instance
-        fun create(parent: ViewGroup, navigate: Navigate): NotebookItemViewHolder {
+        fun create(parent: ViewGroup, navigateToNotebook: NavigateToNotebook): NotebookItemViewHolder {
             return NotebookItemViewHolder(
                 NotebookItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                ), navigate
+                ), navigateToNotebook
             )
         }
     }
@@ -93,6 +93,6 @@ private class NotebookItemDiffCallback() : DiffUtil.ItemCallback<Notebook>() {
     }
 }
 
-internal interface Navigate {
+internal interface NavigateToNotebook {
     fun navigate(notebook: Notebook)
 }

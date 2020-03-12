@@ -18,6 +18,8 @@
 
     <color name="note_fragment_background_color">#FAFAFA</color>
 
+    <color name="transparent">#00FFFFFF</color>
+
     <!-- Notebook Background -->
     <color name="notebook_item_background_gray_color">#E0E0E0</color>
     <color name="notebook_item_background_blue_color">#90CAF9</color>

@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="@id/cl_back_layer"
             app:layout_constraintTop_toBottomOf="@id/tb">
 
-            <com.google.android.material.textview.MaterialTextView
+            <EditText
                 android:id="@+id/title"
                 style="@style/note_fragment_title_style"
                 android:layout_marginTop="@dimen/normal_margin"
@@ -47,7 +47,7 @@
                 app:layout_constraintTop_toTopOf="@id/cl_front_layer"
                 tools:text="This is a note Title"  />
 
-            <com.google.android.material.textview.MaterialTextView
+            <EditText
                 android:id="@+id/body"
                 style="@style/note_fragment_body_style"
                 android:layout_marginTop="@dimen/small_margin"

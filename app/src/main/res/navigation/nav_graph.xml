@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/notebookListFragment">
     <fragment
         android:id="@+id/notebookListFragment"
         android:name="com.noto.note.ui.NotebookListFragment"
-        android:label="NotebookListFragment">
+        android:label="NotebookListFragment"
+        tools:layout="@layout/fragment_notebook_list">
         <action
             android:id="@+id/action_notebookListFragment_to_notebookFragment"
             app:destination="@id/notebookFragment" />
@@ -14,7 +16,8 @@
     <fragment
         android:id="@+id/notebookFragment"
         android:name="com.noto.note.ui.NotebookFragment"
-        android:label="NotebookFragment">
+        android:label="NotebookFragment"
+        tools:layout="@layout/fragment_notebook">
         <action
             android:id="@+id/action_notebookFragment_to_notebookListFragment"
             app:destination="@id/notebookListFragment" />
@@ -22,6 +25,33 @@
             android:name="id"
             android:defaultValue="0L"
             app:argType="long" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="color"
+            android:defaultValue="GRAY"
+            app:argType="com.noto.note.model.NotebookColor" />
+        <action
+            android:id="@+id/action_notebookFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.noto.note.ui.NoteFragment"
+        android:label="NoteFragment"
+        tools:layout="@layout/fragment_note">
+        <action
+            android:id="@+id/action_noteFragment_to_notebookFragment"
+            app:destination="@id/notebookFragment" />
+        <argument
+            android:name="id"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <argument
+            android:name="notebook_id"
+            app:argType="long"
+            android:defaultValue="0L"/>
         <argument
             android:name="title"
             app:argType="string" />

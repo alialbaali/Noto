@@ -9,10 +9,10 @@ import com.noto.databinding.NoteItemBinding
 import com.noto.note.model.Note
 
 // Notebook RV Adapter
-class NotebookRVAdapter : ListAdapter<Note, NoteItemViewHolder>(NoteItemDiffCallback()) {
+class NotebookRVAdapter(private val navigateToNote: NavigateToNote) : ListAdapter<Note, NoteItemViewHolder>(NoteItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder {
-        return NoteItemViewHolder.create(parent)
+        return NoteItemViewHolder.create(parent, navigateToNote)
     }
 
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
@@ -24,21 +24,30 @@ class NotebookRVAdapter : ListAdapter<Note, NoteItemViewHolder>(NoteItemDiffCall
 }
 
 // Note Item ViewHolder
-class NoteItemViewHolder(private val binding: NoteItemBinding) :
+class NoteItemViewHolder(private val binding: NoteItemBinding, navigateToNote: NavigateToNote) :
     RecyclerView.ViewHolder(binding.root) {
 
     var id = 0L
 
+    init {
+        binding.root.setOnClickListener {
+            navigateToNote.navigate(id)
+        }
+    }
+
     companion object {
 
         // Create ViewHolder Instance
-        fun create(parent: ViewGroup): NoteItemViewHolder {
+        fun create(
+            parent: ViewGroup,
+            navigateToNote: NavigateToNote
+        ): NoteItemViewHolder {
             return NoteItemViewHolder(
                 NoteItemBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ), navigateToNote
             )
         }
     }
@@ -61,4 +70,8 @@ class NoteItemDiffCallback() : DiffUtil.ItemCallback<Note>() {
         return oldItem == newItem
     }
 
+}
+
+interface NavigateToNote {
+    fun navigate(id: Long)
 }
