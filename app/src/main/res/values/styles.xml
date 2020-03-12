@@ -13,7 +13,7 @@
         <item name="android:textSize">16sp</item>
     </style>
 
-    <!-- Collapse Toolbar -->
+    <!-- Collapsing Toolbar -->
     <style name="ctb_style" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
         <item name="android:background">@color/ctb_background_color</item>
         <item name="contentScrim">@color/ctb_content_scrim_color</item>
@@ -60,6 +60,22 @@
         <item name="android:textSize">@dimen/note_item_body_dimen</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:maxLines">5</item>
+    </style>
+
+    <style name="note_fragment_title_style" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:maxLength">64</item>
+        <item name="android:textColor">@color/note_item_title_color</item>
+        <item name="android:textSize">@dimen/note_fragment_title_dimen</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:maxLines">3</item>
+    </style>
+
+    <style name="note_fragment_body_style" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/note_item_body_color</item>
+        <item name="android:textSize">@dimen/note_fragment_body_dimen</item>
+        <item name="android:textAlignment">textStart</item>
     </style>
 
 </resources>

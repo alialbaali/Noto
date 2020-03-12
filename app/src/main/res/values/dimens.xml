@@ -15,7 +15,11 @@
     <!-- Note -->
     <dimen name="note_item_radius">14dp</dimen>
     <dimen name="note_item_title_dimen">20sp</dimen>
-    <dimen name="note_item_body_dimen">15sp</dimen>
+    <dimen name="note_item_body_dimen">18sp</dimen>
+
+    <dimen name="note_fragment_radius">40dp</dimen>
+    <dimen name="note_fragment_title_dimen">36sp</dimen>
+    <dimen name="note_fragment_body_dimen">24sp</dimen>
 
     <!-- Margin -->
     <dimen name="extra_small_margin">4dp</dimen>

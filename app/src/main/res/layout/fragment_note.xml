@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_back_layer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/notebook_item_background_gray_color">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/notebook_item_background_gray_color"
+            app:layout_constraintLeft_toLeftOf="@id/cl_back_layer"
+            app:layout_constraintRight_toRightOf="@id/cl_back_layer"
+            app:layout_constraintTop_toTopOf="@id/cl_back_layer" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_front_layer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/note_fragment_background"
+            app:layout_constraintBottom_toBottomOf="@id/cl_back_layer"
+            app:layout_constraintEnd_toEndOf="@id/cl_back_layer"
+            app:layout_constraintStart_toStartOf="@id/cl_back_layer"
+            app:layout_constraintTop_toBottomOf="@id/tb">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
+                style="@style/note_fragment_title_style"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/body"
+                app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
+                app:layout_constraintStart_toStartOf="@id/cl_front_layer"
+                app:layout_constraintTop_toTopOf="@id/cl_front_layer"
+                tools:text="This is a note Title"  />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/body"
+                style="@style/note_fragment_body_style"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@id/cl_front_layer"
+                app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
+                app:layout_constraintStart_toStartOf="@id/cl_front_layer"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="This is a note body" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

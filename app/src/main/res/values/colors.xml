@@ -16,6 +16,8 @@
     <color name="note_item_title_color">#424242</color>
     <color name="note_item_body_color">#757575</color>
 
+    <color name="note_fragment_background_color">#FAFAFA</color>
+
     <!-- Notebook Background -->
     <color name="notebook_item_background_gray_color">#E0E0E0</color>
     <color name="notebook_item_background_blue_color">#90CAF9</color>
