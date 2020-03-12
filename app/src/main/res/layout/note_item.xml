@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cl"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="@dimen/normal_margin"
-    android:background="@drawable/note_item_background">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/title"
-        style="@style/note_item_title_style"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/extra_small_margin"
-        android:padding="@dimen/extra_small_padding"
-        app:layout_constraintBottom_toTopOf="@id/body"
-        app:layout_constraintEnd_toEndOf="@id/cl"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/cl"
-        app:layout_constraintTop_toTopOf="@id/cl"
-        tools:text="This is a note title" />
+        android:layout_margin="@dimen/normal_margin"
+        android:background="@drawable/note_item_background">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/body"
-        style="@style/note_item_body_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/extra_small_margin"
-        android:padding="@dimen/extra_small_padding"
-        app:layout_constraintBottom_toBottomOf="@id/cl"
-        app:layout_constraintEnd_toEndOf="@id/cl"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@id/cl"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        tools:text="This is a note body" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            style="@style/note_item_title_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_small_margin"
+            android:padding="@dimen/extra_small_padding"
+            app:layout_constraintBottom_toTopOf="@id/body"
+            app:layout_constraintEnd_toEndOf="@id/cl"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/cl"
+            app:layout_constraintTop_toTopOf="@id/cl"
+            tools:text="This is a note title" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/body"
+            style="@style/note_item_body_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/extra_small_margin"
+            android:padding="@dimen/extra_small_padding"
+            app:layout_constraintBottom_toBottomOf="@id/cl"
+            app:layout_constraintEnd_toEndOf="@id/cl"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/cl"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            tools:text="This is a note body" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
