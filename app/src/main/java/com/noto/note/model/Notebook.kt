@@ -13,7 +13,7 @@ data class Notebook(
     val notebookTitle: String,
 
     @ColumnInfo(name = "notebook_color")
-    val notebookColor: NotebookColor = NotebookColor.BLUE
+    val notebookColor: NotebookColor = NotebookColor.CYAN
 )
 
 enum class NotebookColor {

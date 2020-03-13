@@ -6,13 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.R
 import com.noto.databinding.FragmentNotebookListBinding
+import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNotebook
 import com.noto.note.adapter.NotebookListRVAdapter
 import com.noto.note.model.Notebook
+import com.noto.note.viewModel.NotebookListViewModel
+import com.noto.note.viewModel.NotebookListViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -24,6 +28,10 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
 
     // Notebook List RV Adapter
     private lateinit var adapter: NotebookListRVAdapter
+
+    private val viewModel by viewModels<NotebookListViewModel> {
+        NotebookListViewModelFactory(Repos.notebookRepository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,11 +65,6 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
 
             // RV Layout Manger
             rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            val list = mutableListOf<Notebook>()
-            for (i in 1..100) {
-                list.add(Notebook(notebookTitle = "Notebook $i"))
-            }
-            adapter.submitList(list)
         }
 
         return binding.root

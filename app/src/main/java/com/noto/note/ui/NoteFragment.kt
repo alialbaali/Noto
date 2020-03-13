@@ -5,9 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.noto.R
 import com.noto.databinding.FragmentNoteBinding
+import com.noto.network.Repos
 import com.noto.note.model.NotebookColor
+import com.noto.note.viewModel.NoteViewModel
+import com.noto.note.viewModel.NoteViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -25,12 +29,16 @@ class NoteFragment : Fragment() {
 
     private var notebookTitle = ""
 
+    private val viewModel by viewModels<NoteViewModel> {
+        NoteViewModelFactory(Repos.noteRepository)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNoteBinding.inflate(inflater, container, false)
-        
+
         requireArguments().let { args ->
             noteId = args.getLong("note_id")
             notebookId = args.getLong("notebook_id")
@@ -48,9 +56,6 @@ class NoteFragment : Fragment() {
         binding.tb.let { tb ->
             tb.title = notebookTitle
         }
-
-        binding.title.setText("This is a note title")
-        binding.body.setText("This is a note body")
 
         return binding.root
     }

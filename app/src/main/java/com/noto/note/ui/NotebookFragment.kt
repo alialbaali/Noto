@@ -1,22 +1,23 @@
 package com.noto.note.ui
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.noto.R
-import com.noto.databinding.ActivityMainBinding
 import com.noto.databinding.FragmentNotebookBinding
+import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNote
 import com.noto.note.adapter.NotebookRVAdapter
-import com.noto.note.model.Note
 import com.noto.note.model.NotebookColor
+import com.noto.note.viewModel.NotebookViewModel
+import com.noto.note.viewModel.NotebookViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -36,6 +37,16 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
     private lateinit var exFab: ExtendedFloatingActionButton
 
+    private lateinit var exFabNewNote: ExtendedFloatingActionButton
+
+    private lateinit var exFabNewNotebook: ExtendedFloatingActionButton
+
+    private lateinit var fabs: List<ExtendedFloatingActionButton>
+
+    private val viewModel by viewModels<NotebookViewModel> {
+        NotebookViewModelFactory(Repos.notebookRepository, Repos.noteRepository)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +54,10 @@ class NotebookFragment : Fragment(), NavigateToNote {
         binding = FragmentNotebookBinding.inflate(inflater, container, false)
 
         exFab = activity?.findViewById(R.id.exFab)!!
+
+        exFabNewNote = activity?.findViewById(R.id.exFab_new_note)!!
+
+        fabs = listOf(exFab, exFabNewNote, exFabNewNotebook)
 
         adapter = NotebookRVAdapter(this)
 
@@ -79,18 +94,6 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
             rv.adapter = adapter
             rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            val list = mutableListOf<Note>()
-            for (i in 1..100) {
-                list.add(
-                    Note(
-                        noteId = i.toLong(),
-                        notebookId = i.toLong(),
-                        noteTitle = "Note $i",
-                        noteBody = "Note test  $i"
-                    )
-                )
-            }
-            adapter.submitList(list)
         }
 
         // Collapsing Toolbar
@@ -134,14 +137,15 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            exFab.backgroundTintList =
-                ColorStateList.valueOf(
-                    resources.getColor(
-                        R.color.notebook_fab_background_gray_color,
-                        null
+            fabs.forEach { fab ->
+                fab.backgroundTintList =
+                    ColorStateList.valueOf(
+                        resources.getColor(
+                            R.color.notebook_fab_background_gray_color,
+                            null
+                        )
                     )
-                )
-            exFab.foregroundTintList = ColorStateList.valueOf(Color.WHITE)
+            }
         }
     }
 
@@ -176,9 +180,15 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            exFab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.notebook_fab_background_blue_color, null))
-            exFab.foregroundTintList = ColorStateList.valueOf(Color.WHITE)
+            fabs.forEach { fab ->
+                fab.backgroundTintList =
+                    ColorStateList.valueOf(
+                        resources.getColor(
+                            R.color.notebook_fab_background_blue_color,
+                            null
+                        )
+                    )
+            }
         }
     }
 
@@ -213,9 +223,15 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            exFab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.notebook_fab_background_pink_color, null))
-            exFab.foregroundTintList = ColorStateList.valueOf(Color.WHITE)
+            fabs.forEach { fab ->
+                fab.backgroundTintList =
+                    ColorStateList.valueOf(
+                        resources.getColor(
+                            R.color.notebook_fab_background_pink_color,
+                            null
+                        )
+                    )
+            }
         }
     }
 
@@ -250,9 +266,15 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            exFab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.notebook_fab_background_cyan_color, null))
-            exFab.foregroundTintList = ColorStateList.valueOf(Color.WHITE)
+            fabs.forEach { fab ->
+                fab.backgroundTintList =
+                    ColorStateList.valueOf(
+                        resources.getColor(
+                            R.color.notebook_fab_background_cyan_color,
+                            null
+                        )
+                    )
+            }
         }
     }
 

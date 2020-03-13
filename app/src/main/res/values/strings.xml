@@ -7,6 +7,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="todos">Todos</string>
+    <string name="new_note">New Note</string>
+    <string name="new_notebook">New Notebook</string>
+    <string name="cancel">Cancel</string>
+    <string name="body">Body</string>
+    <string name="title">Title</string>
 
 
 </resources>

@@ -35,31 +35,33 @@
             <EditText
                 android:id="@+id/title"
                 style="@style/note_fragment_title_style"
-                android:layout_marginTop="@dimen/normal_margin"
-                android:layout_marginStart="@dimen/large_margin"
-                android:layout_marginBottom="@dimen/small_margin"
-                android:layout_marginEnd="@dimen/large_margin"
+                android:hint="@string/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:layout_marginEnd="@dimen/large_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:inputType="textAutoCorrect|textPersonName|textAutoComplete"
                 app:layout_constraintBottom_toTopOf="@id/body"
                 app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
                 app:layout_constraintStart_toStartOf="@id/cl_front_layer"
-                app:layout_constraintTop_toTopOf="@id/cl_front_layer"
-                tools:text="This is a note Title"  />
+                app:layout_constraintTop_toTopOf="@id/cl_front_layer" />
 
             <EditText
                 android:id="@+id/body"
+                android:hint="@string/body"
                 style="@style/note_fragment_body_style"
                 android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginEnd="@dimen/large_margin"
                 android:layout_marginStart="@dimen/large_margin"
                 android:layout_width="0dp"
+                android:inputType="textAutoCorrect|textPersonName|textAutoComplete"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="@id/cl_front_layer"
                 app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
                 app:layout_constraintStart_toStartOf="@id/cl_front_layer"
-                app:layout_constraintTop_toBottomOf="@id/title"
-                tools:text="This is a note body" />
+                app:layout_constraintTop_toBottomOf="@id/title" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
