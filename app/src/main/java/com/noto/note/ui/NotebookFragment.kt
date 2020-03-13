@@ -9,7 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.noto.R
+import com.noto.databinding.ActivityMainBinding
 import com.noto.databinding.FragmentNotebookBinding
 import com.noto.note.adapter.NavigateToNote
 import com.noto.note.adapter.NotebookRVAdapter
@@ -32,11 +34,15 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
     private var notebookColor = NotebookColor.GRAY
 
+    private lateinit var exFab: ExtendedFloatingActionButton
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNotebookBinding.inflate(inflater, container, false)
+
+        exFab = activity?.findViewById(R.id.exFab)!!
 
         adapter = NotebookRVAdapter(this)
 
@@ -87,11 +93,6 @@ class NotebookFragment : Fragment(), NavigateToNote {
             adapter.submitList(list)
         }
 
-        // FAB
-        binding.fab.let { fab ->
-
-        }
-
         // Collapsing Toolbar
         binding.ctb.let { ctb ->
             ctb.title = notebookTitle
@@ -133,9 +134,14 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.notebook_fab_background_gray_color))
-            it.fab.imageTintList = ColorStateList.valueOf(Color.WHITE)
+            exFab.backgroundTintList =
+                ColorStateList.valueOf(
+                    resources.getColor(
+                        R.color.notebook_fab_background_gray_color,
+                        null
+                    )
+                )
+            exFab.foregroundTintList = ColorStateList.valueOf(Color.WHITE)
         }
     }
 
@@ -170,9 +176,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.notebook_fab_background_blue_color))
-            it.fab.imageTintList = ColorStateList.valueOf(Color.WHITE)
+            exFab.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.notebook_fab_background_blue_color, null))
+            exFab.foregroundTintList = ColorStateList.valueOf(Color.WHITE)
         }
     }
 
@@ -207,9 +213,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.notebook_fab_background_pink_color))
-            it.fab.imageTintList = ColorStateList.valueOf(Color.WHITE)
+            exFab.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.notebook_fab_background_pink_color, null))
+            exFab.foregroundTintList = ColorStateList.valueOf(Color.WHITE)
         }
     }
 
@@ -244,9 +250,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.notebook_fab_background_cyan_color))
-            it.fab.imageTintList = ColorStateList.valueOf(Color.WHITE)
+            exFab.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.notebook_fab_background_cyan_color, null))
+            exFab.foregroundTintList = ColorStateList.valueOf(Color.WHITE)
         }
     }
 
