@@ -32,13 +32,16 @@
             android:layout_height="wrap_content"
             android:background="@color/bottom_nav_color"
             app:elevation="0dp"
+            app:itemIconTint="@color/ic_library_notebooks_selector"
+            app:itemTextColor="@color/ic_library_notebooks_selector"
+            app:itemRippleColor="@android:color/darker_gray"
             app:layout_constraintBottom_toBottomOf="@id/cl"
             app:layout_constraintLeft_toLeftOf="@id/cl"
             app:layout_constraintRight_toRightOf="@id/cl"
             app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"
             app:menu="@menu/bottom_nav_menu" />
 
-        <androidx.fragment.app.FragmentContainerView
+        <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="0dp"
@@ -50,7 +53,7 @@
             app:layout_constraintTop_toTopOf="@id/cl"
             app:navGraph="@navigation/nav_graph">
 
-        </androidx.fragment.app.FragmentContainerView>
+        </fragment>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

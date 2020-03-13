@@ -30,7 +30,7 @@ class NoteFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNoteBinding.inflate(inflater, container, false)
-
+        
         requireArguments().let { args ->
             noteId = args.getLong("note_id")
             notebookId = args.getLong("notebook_id")
