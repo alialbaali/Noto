@@ -21,15 +21,18 @@
     <color name="transparent">#00FFFFFF</color>
 
     <!-- Notebook Background -->
-    <color name="notebook_item_background_gray_color">#E0E0E0</color>
-    <color name="notebook_item_background_blue_color">#90CAF9</color>
-    <color name="notebook_item_background_pink_color">#F48FB1</color>
-    <color name="notebook_item_background_cyan_color">#80DEEA</color>
+    <color name="gray_primary">#E0E0E0</color>
+    <color name="blue_primary">#90CAF9</color>
+    <color name="pink_primary">#F48FB1</color>
+    <color name="cyan_primary">#80DEEA</color>
 
     <!-- Notebook FAB -->
-    <color name="notebook_fab_background_gray_color">#757575</color>
-    <color name="notebook_fab_background_blue_color">#2196F3</color>
-    <color name="notebook_fab_background_pink_color">#E91E63</color>
-    <color name="notebook_fab_background_cyan_color">#00BCD4</color>
+    <color name="gray_primary_dark">#757575</color>
+    <color name="blue_primary_dark">#2196F3</color>
+    <color name="pink_primary_dark">#E91E63</color>
+    <color name="cyan_primary_dark">#00BCD4</color>
+
+    <color name="light_black">#424242</color>
+    <color name="dialog_et_color">#757575</color>
 
 </resources>

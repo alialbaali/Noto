@@ -64,13 +64,13 @@ class NoteFragment : Fragment() {
         binding.let {
             it.clBackLayer.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_cyan_color,
+                    R.color.cyan_primary,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_cyan_color,
+                    R.color.cyan_primary,
                     null
                 )
             )
@@ -81,13 +81,13 @@ class NoteFragment : Fragment() {
         binding.let {
             it.clBackLayer.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_pink_color,
+                    R.color.pink_primary,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_pink_color,
+                    R.color.pink_primary,
                     null
                 )
             )
@@ -98,13 +98,13 @@ class NoteFragment : Fragment() {
         binding.let {
             it.clBackLayer.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_blue_color,
+                    R.color.blue_primary,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_blue_color,
+                    R.color.blue_primary,
                     null
                 )
             )
@@ -115,13 +115,13 @@ class NoteFragment : Fragment() {
         binding.let {
             it.clBackLayer.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_gray_color,
+                    R.color.gray_primary,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_gray_color,
+                    R.color.gray_primary,
                     null
                 )
             )

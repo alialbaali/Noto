@@ -35,4 +35,12 @@
     <dimen name="large_padding">32dp</dimen>
     <dimen name="extra_large_padding">48dp</dimen>
 
+    <dimen name="dialog_btn_radius">20dp</dimen>
+    <dimen name="dialog_background_radius">15dp</dimen>
+
+    <dimen name="dialog_create_btn_text_dimen">20sp</dimen>
+    <dimen name="dialog_cancel_btn_text_dimen">20sp</dimen>
+
+    <dimen name="dialog_rbtn_radius">25dp</dimen>
+    <dimen name="dialog_rbtn_selected_stroke_width">5dp</dimen>
 </resources>

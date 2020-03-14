@@ -11,13 +11,13 @@
         android:id="@+id/cl_back_layer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/notebook_item_background_gray_color">
+        android:background="@color/gray_primary">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/tb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/notebook_item_background_gray_color"
+            android:background="@color/gray_primary"
             app:layout_constraintLeft_toLeftOf="@id/cl_back_layer"
             app:layout_constraintRight_toRightOf="@id/cl_back_layer"
             app:layout_constraintTop_toTopOf="@id/cl_back_layer" />

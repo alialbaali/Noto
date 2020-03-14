@@ -12,6 +12,12 @@
     <string name="cancel">Cancel</string>
     <string name="body">Body</string>
     <string name="title">Title</string>
+    <string name="create_new_notebook">Create new notebook</string>
+    <string name="gray">Gray</string>
+    <string name="blue">Blue</string>
+    <string name="pink">Pink</string>
+    <string name="cyan">Cyan</string>
+    <string name="notebook_title">Notebook Title</string>
 
 
 </resources>

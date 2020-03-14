@@ -10,10 +10,10 @@ data class Notebook(
     val notebookId: Long = 0L,
 
     @ColumnInfo(name = "notebook_title")
-    val notebookTitle: String,
+    var notebookTitle: String = "",
 
     @ColumnInfo(name = "notebook_color")
-    val notebookColor: NotebookColor = NotebookColor.CYAN
+    var notebookColor: NotebookColor = NotebookColor.CYAN
 )
 
 enum class NotebookColor {

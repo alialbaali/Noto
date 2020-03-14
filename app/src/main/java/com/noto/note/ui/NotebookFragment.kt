@@ -110,30 +110,30 @@ class NotebookFragment : Fragment(), NavigateToNote {
         binding.let {
 
             activity?.window?.statusBarColor =
-                resources.getColor(R.color.notebook_item_background_gray_color, null)
+                resources.getColor(R.color.gray_primary, null)
 
             it.cool.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_gray_color,
+                    R.color.gray_primary,
                     null
                 )
             )
 
             it.ctb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_gray_color,
+                    R.color.gray_primary,
                     null
                 )
             )
             it.ctb.setContentScrimColor(
                 resources.getColor(
-                    R.color.notebook_item_background_gray_color,
+                    R.color.gray_primary,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_gray_color,
+                    R.color.gray_primary,
                     null
                 )
             )
@@ -141,7 +141,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 fab.backgroundTintList =
                     ColorStateList.valueOf(
                         resources.getColor(
-                            R.color.notebook_fab_background_gray_color,
+                            R.color.gray_primary_dark,
                             null
                         )
                     )
@@ -153,30 +153,30 @@ class NotebookFragment : Fragment(), NavigateToNote {
         binding.let {
 
             activity?.window?.statusBarColor =
-                resources.getColor(R.color.notebook_item_background_blue_color, null)
+                resources.getColor(R.color.blue_primary, null)
 
             it.cool.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_blue_color,
+                    R.color.blue_primary,
                     null
                 )
             )
 
             it.ctb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_blue_color,
+                    R.color.blue_primary,
                     null
                 )
             )
             it.ctb.setContentScrimColor(
                 resources.getColor(
-                    R.color.notebook_item_background_blue_color,
+                    R.color.blue_primary,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_blue_color,
+                    R.color.blue_primary,
                     null
                 )
             )
@@ -184,7 +184,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 fab.backgroundTintList =
                     ColorStateList.valueOf(
                         resources.getColor(
-                            R.color.notebook_fab_background_blue_color,
+                            R.color.blue_primary_dark,
                             null
                         )
                     )
@@ -196,30 +196,30 @@ class NotebookFragment : Fragment(), NavigateToNote {
         binding.let {
 
             activity?.window?.statusBarColor =
-                resources.getColor(R.color.notebook_item_background_pink_color, null)
+                resources.getColor(R.color.pink_primary, null)
 
             it.cool.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_pink_color,
+                    R.color.pink_primary,
                     null
                 )
             )
 
             it.ctb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_pink_color,
+                    R.color.pink_primary,
                     null
                 )
             )
             it.ctb.setContentScrimColor(
                 resources.getColor(
-                    R.color.notebook_item_background_pink_color,
+                    R.color.pink_primary,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_pink_color,
+                    R.color.pink_primary,
                     null
                 )
             )
@@ -227,7 +227,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 fab.backgroundTintList =
                     ColorStateList.valueOf(
                         resources.getColor(
-                            R.color.notebook_fab_background_pink_color,
+                            R.color.pink_primary_dark,
                             null
                         )
                     )
@@ -239,30 +239,30 @@ class NotebookFragment : Fragment(), NavigateToNote {
         binding.let {
 
             activity?.window?.statusBarColor =
-                resources.getColor(R.color.notebook_item_background_cyan_color, null)
+                resources.getColor(R.color.cyan_primary, null)
 
             it.cool.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_cyan_color,
+                    R.color.cyan_primary,
                     null
                 )
             )
 
             it.ctb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_cyan_color,
+                    R.color.cyan_primary,
                     null
                 )
             )
             it.ctb.setContentScrimColor(
                 resources.getColor(
-                    R.color.notebook_item_background_cyan_color,
+                    R.color.cyan_primary,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.notebook_item_background_cyan_color,
+                    R.color.cyan_primary,
                     null
                 )
             )
@@ -270,7 +270,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 fab.backgroundTintList =
                     ColorStateList.valueOf(
                         resources.getColor(
-                            R.color.notebook_fab_background_cyan_color,
+                            R.color.cyan_primary_dark,
                             null
                         )
                     )

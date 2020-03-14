@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.noto.note.viewModel.NotebookListViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/normal_margin"
+        android:background="@drawable/dialog_background_gray_drawable">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv"
+            style="@style/dialog_tv_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:fontFamily="@font/roboto"
+            android:text="@string/create_new_notebook"
+            app:layout_constraintBottom_toTopOf="@id/et"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toTopOf="@id/cl" />
+
+        <EditText
+            android:id="@+id/et"
+            style="@style/dialog_et_style"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:backgroundTint="@color/gray_primary_dark"
+            android:fontFamily="@font/roboto_bold"
+            android:hint="@string/notebook_title"
+            android:inputType="text|textPersonName"
+            android:maxLength="20"
+            android:singleLine="true"
+            android:text="@={viewModel.notebook.notebookTitle}"
+            android:textCursorDrawable="@null"
+            app:layout_constraintBottom_toTopOf="@id/rg"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/tv" />
+
+        <LinearLayout
+            android:id="@+id/rg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/dialog_rg_drawable"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@id/et">
+
+            <ImageButton
+                android:id="@+id/rbtn_gray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/dialog_rbtn_gray_drawable"
+                android:contentDescription="@string/gray" />
+
+            <ImageButton
+                android:id="@+id/rbtn_blue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/dialog_rbtn_blue_drawable"
+                android:contentDescription="@string/blue" />
+
+            <ImageButton
+                android:id="@+id/rbtn_pink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/dialog_rbtn_pink_drawable"
+                android:contentDescription="@string/pink" />
+
+            <ImageButton
+                android:id="@+id/rbtn_cyan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@drawable/dialog_rbtn_cyan_drawable"
+                android:contentDescription="@string/cyan" />
+
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/create_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/extra_small_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginBottom="@dimen/normal_margin"
+            android:backgroundTint="@color/gray_primary_dark"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/create"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            app:cornerRadius="@dimen/dialog_btn_radius"
+            app:layout_constraintBottom_toBottomOf="@id/cl"
+            app:layout_constraintEnd_toEndOf="@id/end_guideline"
+            app:layout_constraintStart_toEndOf="@id/cancel_btn"
+            app:layout_constraintTop_toBottomOf="@+id/rg" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_btn"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/extra_small_margin"
+            android:layout_marginBottom="@dimen/normal_margin"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/gray_primary_dark"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@id/cl"
+            app:layout_constraintEnd_toStartOf="@+id/create_btn"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/start_guideline"
+            app:layout_constraintTop_toBottomOf="@+id/rg" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/normal_margin" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/normal_margin" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

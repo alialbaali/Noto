@@ -3,6 +3,5 @@
     android:shape="rectangle">
 
     <solid android:color="@color/blue_primary" />
-    <corners android:radius="@dimen/notebook_item_radius" />
-
+    <corners android:radius="@dimen/dialog_background_radius" />
 </shape>
