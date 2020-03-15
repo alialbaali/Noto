@@ -16,11 +16,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.snackbar.SnackbarContentLayout
 import com.noto.R
-import com.noto.database.AppDatabase
 import com.noto.databinding.DialogNotebookBinding
 import com.noto.databinding.FragmentNotebookListBinding
-import com.noto.network.DAOs
 import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNotebook
 import com.noto.note.adapter.NotebookListRVAdapter
@@ -115,20 +114,9 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
 
             dialogBinding.rbtnBlue.setOnClickListener {
 
-//                dialogBinding.rbtnBlue.background = resources.getDrawable(R.drawable.dialog_rbtn_blue_state, null)
-
-                dialogBinding.et.backgroundTintList =
-                    ColorStateList.valueOf(resources.getColor(R.color.blue_primary_dark, null))
-
                 dialogBinding.root.background =
                     resources.getDrawable(R.drawable.dialog_background_blue_drawable, null)
 
-                dialogBinding.cancelBtn.setTextColor(
-                    resources.getColor(
-                        R.color.blue_primary_dark,
-                        null
-                    )
-                )
                 viewModel.notebook.value?.notebookColor = NotebookColor.BLUE
 
                 dialogBinding.createBtn.backgroundTintList =
@@ -137,19 +125,9 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
 
             dialogBinding.rbtnPink.setOnClickListener {
 
-                dialogBinding.et.backgroundTintList =
-                    ColorStateList.valueOf(resources.getColor(R.color.pink_primary_dark, null))
-//                dialogBinding.rbtnPink.background = resources.getDrawable(R.drawable.dialog_rbtn_pink_state, null)
 
                 dialogBinding.root.background =
                     resources.getDrawable(R.drawable.dialog_background_pink_drawable, null)
-
-                dialogBinding.cancelBtn.setTextColor(
-                    resources.getColor(
-                        R.color.pink_primary_dark,
-                        null
-                    )
-                )
 
                 viewModel.notebook.value?.notebookColor = NotebookColor.PINK
 
@@ -159,19 +137,8 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
 
             dialogBinding.rbtnCyan.setOnClickListener {
 
-                dialogBinding.et.backgroundTintList =
-                    ColorStateList.valueOf(resources.getColor(R.color.cyan_primary_dark, null))
-//                dialogBinding.rbtnCyan.background = resources.getDrawable(R.drawable.dialog_rbtn_cyan_state, null)
-
                 dialogBinding.root.background =
                     resources.getDrawable(R.drawable.dialog_background_cyan_drawable, null)
-
-                dialogBinding.cancelBtn.setTextColor(
-                    resources.getColor(
-                        R.color.cyan_primary_dark,
-                        null
-                    )
-                )
 
                 viewModel.notebook.value?.notebookColor = NotebookColor.CYAN
 
@@ -181,20 +148,9 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
 
             dialogBinding.rbtnGray.setOnClickListener {
 
-                dialogBinding.et.backgroundTintList =
-                    ColorStateList.valueOf(resources.getColor(R.color.gray_primary_dark, null))
-
-//                dialogBinding.rbtnGray.background = resources.getDrawable(R.drawable.dialog_rbtn_gray_state, null)
-
                 dialogBinding.root.background =
                     resources.getDrawable(R.drawable.dialog_background_gray_drawable, null)
 
-                dialogBinding.cancelBtn.setTextColor(
-                    resources.getColor(
-                        R.color.gray_primary_dark,
-                        null
-                    )
-                )
 
                 viewModel.notebook.value?.notebookColor = NotebookColor.GRAY
 
@@ -206,7 +162,7 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
 
                 if (viewModel.notebook.value?.notebookTitle?.isBlank()!!) {
                     Snackbar.make(
-                        binding.root,
+                        dialogBinding.cool,
                         "Title can't be empty!",
                         Snackbar.LENGTH_SHORT
                     ).show()

@@ -13,7 +13,7 @@ data class Notebook(
     var notebookTitle: String = "",
 
     @ColumnInfo(name = "notebook_color")
-    var notebookColor: NotebookColor = NotebookColor.CYAN
+    var notebookColor: NotebookColor = NotebookColor.GRAY
 )
 
 enum class NotebookColor {

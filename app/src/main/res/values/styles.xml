@@ -78,16 +78,4 @@
         <item name="android:textAlignment">textStart</item>
     </style>
 
-    <style name="Style.Dialog.TextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/light_black</item>
-        <item name="android:textSize">24sp</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
-    </style>
-
-    <style name="Style.Dialog.EditText" parent="Widget.AppCompat.EditText">
-        <item name="android:textColor">@color/dialog_et_color</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
-    </style>
-
 </resources>

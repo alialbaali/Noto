@@ -10,144 +10,167 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cool"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/normal_margin"
-        android:background="@drawable/dialog_background_gray_drawable">
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/normal_margin">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv"
-            style="@style/Style.Dialog.TextView"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_margin"
-            android:layout_marginBottom="@dimen/small_margin"
-            android:fontFamily="@font/roboto"
-            android:text="@string/create_new_notebook"
-            app:layout_constraintBottom_toTopOf="@id/et"
-            app:layout_constraintEnd_toEndOf="@id/end_guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toTopOf="@id/cl" />
+            android:background="@drawable/dialog_background_gray_drawable">
 
-        <EditText
-            android:id="@+id/et"
-            style="@style/Style.Dialog.EditText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:layout_marginBottom="@dimen/small_margin"
-            android:backgroundTint="@color/gray_primary_dark"
-            android:fontFamily="@font/roboto_bold"
-            android:hint="@string/notebook_title"
-            android:inputType="text|textPersonName"
-            android:maxLength="20"
-            android:singleLine="true"
-            android:text="@={viewModel.notebook.notebookTitle}"
-            android:textCursorDrawable="@null"
-            app:layout_constraintBottom_toTopOf="@id/rg"
-            app:layout_constraintEnd_toEndOf="@id/end_guideline"
-            app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/tv" />
-
-        <LinearLayout
-            android:id="@+id/rg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:background="@drawable/dialog_rg_drawable"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="@id/end_guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/et">
-
-            <ImageButton
-                android:id="@+id/rbtn_gray"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_gray_drawable"
-                android:contentDescription="@string/gray" />
+                android:layout_marginTop="@dimen/normal_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:fontFamily="@font/roboto"
+                android:text="@string/create_new_notebook"
+                android:textColor="@color/light_black"
+                android:textSize="24sp"
+                app:fontFamily="@font/roboto_medium"
+                app:layout_constraintBottom_toTopOf="@id/til"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toTopOf="@id/cl" />
 
-            <ImageButton
-                android:id="@+id/rbtn_blue"
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:id="@+id/til"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                app:boxStrokeColor="@color/dialog_et_color"
+                app:boxStrokeWidth="1dp"
+                app:boxStrokeWidthFocused="1dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:counterTextColor="@color/dialog_et_color"
+                app:hintTextColor="@color/dialog_et_color"
+                app:layout_constraintBottom_toTopOf="@id/rg"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/tv">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/roboto_bold"
+                    android:hint="@string/notebook_title"
+                    android:inputType="text|textPersonName|textCapCharacters"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:text="@={viewModel.notebook.notebookTitle}"
+                    android:textColor="@color/light_black"
+                    android:textCursorDrawable="@null"
+                    android:textSize="18sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:id="@+id/rg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_blue_drawable"
-                android:contentDescription="@string/blue" />
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@drawable/dialog_rg_drawable"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/til">
 
-            <ImageButton
-                android:id="@+id/rbtn_pink"
+                <ImageButton
+                    android:id="@+id/rbtn_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    android:background="@drawable/dialog_rbtn_gray_drawable"
+                    android:contentDescription="@string/gray" />
+
+                <ImageButton
+                    android:id="@+id/rbtn_blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    android:background="@drawable/dialog_rbtn_blue_drawable"
+                    android:contentDescription="@string/blue" />
+
+                <ImageButton
+                    android:id="@+id/rbtn_pink"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    android:background="@drawable/dialog_rbtn_pink_drawable"
+                    android:contentDescription="@string/pink" />
+
+                <ImageButton
+                    android:id="@+id/rbtn_cyan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/small_margin"
+                    android:background="@drawable/dialog_rbtn_cyan_drawable"
+                    android:contentDescription="@string/cyan" />
+
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/create_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_pink_drawable"
-                android:contentDescription="@string/pink" />
+                android:layout_marginStart="@dimen/extra_small_margin"
+                android:layout_marginTop="@dimen/normal_margin"
+                android:layout_marginBottom="@dimen/normal_margin"
+                android:backgroundTint="@color/gray_primary_dark"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/create"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                app:cornerRadius="@dimen/dialog_btn_radius"
+                app:layout_constraintBottom_toBottomOf="@id/cl"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toEndOf="@id/cancel_btn"
+                app:layout_constraintTop_toBottomOf="@+id/rg" />
 
-            <ImageButton
-                android:id="@+id/rbtn_cyan"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_cyan_drawable"
-                android:contentDescription="@string/cyan" />
+                android:layout_marginTop="@dimen/normal_margin"
+                android:layout_marginEnd="@dimen/extra_small_margin"
+                android:layout_marginBottom="@dimen/normal_margin"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/light_black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/cl"
+                app:layout_constraintEnd_toStartOf="@+id/create_btn"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/rg" />
 
-        </LinearLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/normal_margin" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/create_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/extra_small_margin"
-            android:layout_marginTop="@dimen/normal_margin"
-            android:layout_marginBottom="@dimen/normal_margin"
-            android:backgroundTint="@color/gray_primary_dark"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/create"
-            android:textAllCaps="false"
-            android:textSize="14sp"
-            app:cornerRadius="@dimen/dialog_btn_radius"
-            app:layout_constraintBottom_toBottomOf="@id/cl"
-            app:layout_constraintEnd_toEndOf="@id/end_guideline"
-            app:layout_constraintStart_toEndOf="@id/cancel_btn"
-            app:layout_constraintTop_toBottomOf="@+id/rg" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/cancel_btn"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_margin"
-            android:layout_marginEnd="@dimen/extra_small_margin"
-            android:layout_marginBottom="@dimen/normal_margin"
-            android:fontFamily="@font/roboto_medium"
-            android:text="@string/cancel"
-            android:textAllCaps="false"
-            android:textColor="@color/gray_primary_dark"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="@id/cl"
-            app:layout_constraintEnd_toStartOf="@+id/create_btn"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@+id/rg" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/start_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/normal_margin" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/end_guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/normal_margin" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/normal_margin" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
