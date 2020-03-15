@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.noto.R
-import com.noto.databinding.NotebookItemBinding
+import com.noto.databinding.ListItemNotebookBinding
 import com.noto.note.model.Notebook
 import com.noto.note.model.NotebookColor
 
@@ -29,7 +29,7 @@ internal class NotebookListRVAdapter(private val navigateToNotebook: NavigateToN
 
 // Notebook Item ViewHolder
 internal class NotebookItemViewHolder(
-    private val binding: NotebookItemBinding,
+    private val binding: ListItemNotebookBinding,
     private val navigateToNotebook: NavigateToNotebook
 ) :
     RecyclerView.ViewHolder(binding.root) {
@@ -49,9 +49,12 @@ internal class NotebookItemViewHolder(
     companion object {
 
         // Create ViewHolder Instance
-        fun create(parent: ViewGroup, navigateToNotebook: NavigateToNotebook): NotebookItemViewHolder {
+        fun create(
+            parent: ViewGroup,
+            navigateToNotebook: NavigateToNotebook
+        ): NotebookItemViewHolder {
             return NotebookItemViewHolder(
-                NotebookItemBinding.inflate(
+                ListItemNotebookBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

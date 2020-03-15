@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.noto.databinding.NoteItemBinding
+import com.noto.databinding.ListItemNoteBinding
 import com.noto.note.model.Note
 
 // Notebook RV Adapter
@@ -24,7 +24,7 @@ class NotebookRVAdapter(private val navigateToNote: NavigateToNote) : ListAdapte
 }
 
 // Note Item ViewHolder
-class NoteItemViewHolder(private val binding: NoteItemBinding, navigateToNote: NavigateToNote) :
+class NoteItemViewHolder(private val binding: ListItemNoteBinding, navigateToNote: NavigateToNote) :
     RecyclerView.ViewHolder(binding.root) {
 
     var id = 0L
@@ -43,7 +43,7 @@ class NoteItemViewHolder(private val binding: NoteItemBinding, navigateToNote: N
             navigateToNote: NavigateToNote
         ): NoteItemViewHolder {
             return NoteItemViewHolder(
-                NoteItemBinding.inflate(
+                ListItemNoteBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false

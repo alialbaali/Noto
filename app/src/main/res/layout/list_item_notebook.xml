@@ -19,7 +19,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/notebook_tv"
-            style="@style/notebook_item_tv_style"
+            style="@style/Style.NotebookItem.TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_margin"

@@ -16,7 +16,7 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/exFab"
-            style="@style/bottom_nav_create_btn_style"
+            style="@style/Style.BottomNav.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/create"
@@ -28,7 +28,7 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/exFab_new_notebook"
-            style="@style/bottom_nav_create_btn_style"
+            style="@style/Style.BottomNav.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_notebook"
@@ -40,7 +40,7 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/exFab_new_note"
-            style="@style/bottom_nav_create_btn_style"
+            style="@style/Style.BottomNav.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/new_note"

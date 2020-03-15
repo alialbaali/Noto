@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            tools:listitem="@layout/note_item" />
+            tools:listitem="@layout/list_item_note" />
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/abl"
@@ -30,7 +30,7 @@
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/ctb"
-                style="@style/ctb_style"
+                style="@style/Style.CollapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:title="Notes">

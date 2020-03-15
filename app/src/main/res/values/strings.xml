@@ -4,8 +4,6 @@
     <string name="lists">Lists</string>
     <string name="create">CREATE</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="todos">Todos</string>
     <string name="new_note">New Note</string>
     <string name="new_notebook">New Notebook</string>

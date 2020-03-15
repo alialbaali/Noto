@@ -19,7 +19,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv"
-            style="@style/dialog_tv_style"
+            style="@style/Style.Dialog.TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/normal_margin"
@@ -34,7 +34,7 @@
 
         <EditText
             android:id="@+id/et"
-            style="@style/dialog_et_style"
+            style="@style/Style.Dialog.EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"

@@ -19,7 +19,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
-            style="@style/note_item_title_style"
+            style="@style/Style.NoteItem.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
@@ -35,7 +35,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/body"
-            style="@style/note_item_body_style"
+            style="@style/Style.NoteItem.Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"

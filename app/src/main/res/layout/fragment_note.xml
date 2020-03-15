@@ -34,7 +34,7 @@
 
             <EditText
                 android:id="@+id/title"
-                style="@style/note_fragment_title_style"
+                style="@style/Style.NoteFragment.Title"
                 android:hint="@string/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             <EditText
                 android:id="@+id/body"
                 android:hint="@string/body"
-                style="@style/note_fragment_body_style"
+                style="@style/Style.NoteFragment.Body"
                 android:layout_marginTop="@dimen/small_margin"
                 android:layout_marginEnd="@dimen/large_margin"
                 android:layout_marginStart="@dimen/large_margin"

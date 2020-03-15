@@ -18,8 +18,8 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import com.google.android.material.snackbar.Snackbar
 import com.noto.R
 import com.noto.database.AppDatabase
+import com.noto.databinding.DialogNotebookBinding
 import com.noto.databinding.FragmentNotebookListBinding
-import com.noto.databinding.NotebookDialogBinding
 import com.noto.network.DAOs
 import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNotebook
@@ -44,7 +44,7 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
 
     private lateinit var exFab: ExtendedFloatingActionButton
 
-    private lateinit var dialogBinding: NotebookDialogBinding
+    private lateinit var dialogBinding: DialogNotebookBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +99,7 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
 
         exFab.setOnClickListener {
 
-            dialogBinding = NotebookDialogBinding.inflate(layoutInflater, container, false)
+            dialogBinding = DialogNotebookBinding.inflate(layoutInflater, container, false)
 
             dialogBinding.viewModel = viewModel
 
