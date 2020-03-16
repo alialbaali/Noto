@@ -90,97 +90,9 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
             activity?.findViewById(R.id.exFab_new_notebook) as ExtendedFloatingActionButton
 
         exFabNewNotebook.setOnClickListener {
-
-            dialogBinding = DialogNotebookBinding.inflate(layoutInflater, container, false)
-
-            if (dialogBinding.et.text?.length!! >= 20) {
-
-            }
-
-            dialogBinding.viewModel = viewModel
-
-            viewModel.notebook.value = Notebook()
-
-            val dialog = AlertDialog.Builder(context).let {
-                it.setView(dialogBinding.root)
-                it.create()
-                it.show()
-            }.apply {
-                this.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            }
-
-            dialogBinding.rbtnBlue.setOnClickListener {
-
-                dialogBinding.root.background =
-                    resources.getDrawable(R.drawable.dialog_background_blue_drawable, null)
-
-                dialogBinding.til.boxBackgroundColor = resources.getColor(R.color.blue_primary, null)
-
-                viewModel.notebook.value?.notebookColor = NotebookColor.BLUE
-
-                dialogBinding.createBtn.backgroundTintList =
-                    ColorStateList.valueOf(resources.getColor(R.color.blue_primary_dark, null))
-            }
-
-            dialogBinding.rbtnPink.setOnClickListener {
-
-
-                dialogBinding.root.background =
-                    resources.getDrawable(R.drawable.dialog_background_pink_drawable, null)
-
-                dialogBinding.til.boxBackgroundColor = resources.getColor(R.color.pink_primary, null)
-
-                viewModel.notebook.value?.notebookColor = NotebookColor.PINK
-
-                dialogBinding.createBtn.backgroundTintList =
-                    ColorStateList.valueOf(resources.getColor(R.color.pink_primary_dark, null))
-            }
-
-            dialogBinding.rbtnCyan.setOnClickListener {
-
-                dialogBinding.root.background =
-                    resources.getDrawable(R.drawable.dialog_background_cyan_drawable, null)
-
-                dialogBinding.til.boxBackgroundColor = resources.getColor(R.color.cyan_primary, null)
-
-                viewModel.notebook.value?.notebookColor = NotebookColor.CYAN
-
-                dialogBinding.createBtn.backgroundTintList =
-                    ColorStateList.valueOf(resources.getColor(R.color.cyan_primary_dark, null))
-            }
-
-            dialogBinding.rbtnGray.setOnClickListener {
-
-                dialogBinding.til.boxBackgroundColor = resources.getColor(R.color.gray_primary, null)
-
-                dialogBinding.root.background =
-                    resources.getDrawable(R.drawable.dialog_background_gray_drawable, null)
-
-
-                viewModel.notebook.value?.notebookColor = NotebookColor.GRAY
-
-                dialogBinding.createBtn.backgroundTintList =
-                    ColorStateList.valueOf(resources.getColor(R.color.gray_primary_dark, null))
-            }
-
-            dialogBinding.createBtn.setOnClickListener {
-
-                if (viewModel.notebook.value?.notebookTitle?.isBlank()!!) {
-                    dialogBinding.til.error = resources.getString(R.string.new_notebook_empty_error)
-
-                    dialogBinding.til.counterTextColor = ColorStateList.valueOf(Color.RED)
-
-                } else {
-                    dialog.dismiss()
-
-                    viewModel.insertNotebook()
-                }
-            }
-
-            dialogBinding.cancelBtn.setOnClickListener {
-                dialog.dismiss()
-            }
+            dialog()
         }
+
 
         return binding.root
     }
@@ -193,5 +105,96 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
                 notebook.notebookColor
             )
         )
+    }
+
+    private fun dialog() {
+        dialogBinding = DialogNotebookBinding.inflate(layoutInflater)
+
+        dialogBinding.viewModel = viewModel
+
+        viewModel.notebook.value = Notebook()
+
+        val dialog = AlertDialog.Builder(context).let {
+            it.setView(dialogBinding.root)
+            it.create()
+            it.show()
+        }.apply {
+            this.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+
+        dialogBinding.rbtnBlue.setOnClickListener {
+
+            dialogBinding.root.background =
+                resources.getDrawable(R.drawable.dialog_background_blue_drawable, null)
+
+            dialogBinding.til.boxBackgroundColor =
+                resources.getColor(R.color.blue_primary, null)
+
+            viewModel.notebook.value?.notebookColor = NotebookColor.BLUE
+
+            dialogBinding.createBtn.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.blue_primary_dark, null))
+        }
+
+        dialogBinding.rbtnPink.setOnClickListener {
+
+
+            dialogBinding.root.background =
+                resources.getDrawable(R.drawable.dialog_background_pink_drawable, null)
+
+            dialogBinding.til.boxBackgroundColor =
+                resources.getColor(R.color.pink_primary, null)
+
+            viewModel.notebook.value?.notebookColor = NotebookColor.PINK
+
+            dialogBinding.createBtn.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.pink_primary_dark, null))
+        }
+
+        dialogBinding.rbtnCyan.setOnClickListener {
+
+            dialogBinding.root.background =
+                resources.getDrawable(R.drawable.dialog_background_cyan_drawable, null)
+
+            dialogBinding.til.boxBackgroundColor =
+                resources.getColor(R.color.cyan_primary, null)
+
+            viewModel.notebook.value?.notebookColor = NotebookColor.CYAN
+
+            dialogBinding.createBtn.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.cyan_primary_dark, null))
+        }
+
+        dialogBinding.rbtnGray.setOnClickListener {
+
+            dialogBinding.til.boxBackgroundColor =
+                resources.getColor(R.color.gray_primary, null)
+
+            dialogBinding.root.background =
+                resources.getDrawable(R.drawable.dialog_background_gray_drawable, null)
+
+
+            viewModel.notebook.value?.notebookColor = NotebookColor.GRAY
+
+            dialogBinding.createBtn.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.gray_primary_dark, null))
+        }
+
+        dialogBinding.createBtn.setOnClickListener {
+
+            if (viewModel.notebook.value?.notebookTitle?.isBlank()!!) {
+                dialogBinding.til.error = resources.getString(R.string.new_notebook_empty_error)
+
+                dialogBinding.til.counterTextColor = ColorStateList.valueOf(Color.RED)
+
+            } else {
+                viewModel.saveNotebook()
+                dialog.dismiss()
+            }
+        }
+
+        dialogBinding.cancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 }

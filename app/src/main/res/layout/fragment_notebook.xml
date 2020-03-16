@@ -16,12 +16,29 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
+            android:visibility="visible"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_marginEnd="@dimen/small_margin"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:listitem="@layout/list_item_note" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/empty_notebook"
+            android:textAppearance="@style/TextAppearance.Notebook.Empty"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:lineSpacingMultiplier="1.5"
+            android:lines="2"
+            android:maxLines="2"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:layout_height="match_parent"
+            android:text="@string/empty_notebook"
+            />
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/abl"
@@ -31,12 +48,16 @@
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/ctb"
                 style="@style/Style.CollapsingToolbar"
+                android:layout_marginStart="0dp"
+                app:expandedTitleMargin="@dimen/normal_margin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:title="Notes">
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/tb"
+                    app:menu="@menu/menu_notebook"
+                    app:navigationIcon="@drawable/ic_back_24px"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin" />

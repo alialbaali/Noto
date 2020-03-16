@@ -8,12 +8,9 @@ import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.noto.R
-import com.noto.database.AppDatabase
 import com.noto.databinding.FragmentNoteBinding
-import com.noto.network.DAOs
 import com.noto.network.Repos
 import com.noto.note.model.NotebookColor
 import com.noto.note.viewModel.NoteViewModel
@@ -66,6 +63,22 @@ class NoteFragment : Fragment() {
 
         binding.tb.let { tb ->
             tb.title = notebookTitle
+
+            tb.setNavigationOnClickListener {
+                viewModel.saveNote()
+                this.findNavController().navigateUp()
+            }
+
+            tb.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.delete -> {
+                        viewModel.deleteNote()
+                        this.findNavController().navigateUp()
+                        true
+                    }
+                    else -> false
+                }
+            }
         }
 
         // Configure Back Dispatcher to save the note

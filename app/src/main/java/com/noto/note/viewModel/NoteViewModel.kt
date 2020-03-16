@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.noto.note.model.Note
 import com.noto.note.repository.NoteRepository
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 internal class NoteViewModel(private val noteRepository: NoteRepository) : ViewModel() {
 
@@ -15,13 +14,11 @@ internal class NoteViewModel(private val noteRepository: NoteRepository) : ViewM
 
     internal fun saveNote() {
         viewModelScope.launch {
-            if (!(note.value!!.noteTitle!!.isBlank() || note.value!!.noteBody!!.isBlank())) {
+            if ((note.value!!.noteTitle!!.isNotBlank() || note.value!!.noteBody!!.isNotBlank())) {
 
                 if (note.value!!.noteId == 0L) {
-                    Timber.i("Insert Note")
                     noteRepository.insertNote(note.value!!)
                 } else {
-                    Timber.i("Update Note")
                     noteRepository.updateNote(note.value!!)
                 }
 
@@ -35,6 +32,18 @@ internal class NoteViewModel(private val noteRepository: NoteRepository) : ViewM
                 note.postValue(Note(notebookId = notebookId))
             } else {
                 note.postValue(noteRepository.getNoteById(noteId))
+            }
+        }
+    }
+
+
+    internal fun deleteNote() {
+        viewModelScope.launch {
+            if (note.value!!.noteId != 0L) {
+                noteRepository.deleteNote(note.value!!)
+            } else {
+                note.value!!.noteTitle = ""
+                note.value!!.noteBody = ""
             }
         }
     }

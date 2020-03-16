@@ -51,7 +51,7 @@
             app:layout_constraintLeft_toLeftOf="@id/cl"
             app:layout_constraintRight_toRightOf="@id/cl"
             app:layout_constraintTop_toBottomOf="@+id/nav_host_fragment"
-            app:menu="@menu/bottom_nav_menu" />
+            app:menu="@menu/menu_bottom_nav" />
 
         <fragment
             android:id="@+id/nav_host_fragment"
