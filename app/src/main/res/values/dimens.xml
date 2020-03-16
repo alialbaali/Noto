@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Action Bar Layout -->
-    <dimen name="abl_height_dimen">100dp</dimen>
+    <dimen name="abl_height_dimen">110dp</dimen>
 
     <!-- Collapsing Toolbar -->
     <dimen name="ctb_exp_title_dimen">48sp</dimen>
@@ -43,4 +43,6 @@
 
     <dimen name="dialog_rbtn_radius">25dp</dimen>
     <dimen name="dialog_rbtn_selected_stroke_width">5dp</dimen>
+
+    <dimen name="empty_notebook_dimen">25dp</dimen>
 </resources>

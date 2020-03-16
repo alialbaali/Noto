@@ -17,8 +17,12 @@
     <style name="Style.CollapsingToolbar" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
         <item name="android:background">@color/ctb_background_color</item>
         <item name="contentScrim">@color/ctb_content_scrim_color</item>
-        <item name="expandedTitleTextAppearance">@style/TextAppearance.CollapsingToolbar.Expanded.Title</item>
-        <item name="collapsedTitleTextAppearance">@style/TextAppearance.CollapsingToolbar.Collapsed.Title</item>
+        <item name="expandedTitleTextAppearance">
+            @style/TextAppearance.CollapsingToolbar.Expanded.Title
+        </item>
+        <item name="collapsedTitleTextAppearance">
+            @style/TextAppearance.CollapsingToolbar.Collapsed.Title
+        </item>
         <item name="layout_scrollFlags">scroll|snap|exitUntilCollapsed</item>
         <item name="collapsedTitleGravity">start</item>
         <item name="expandedTitleGravity">start|bottom</item>
@@ -72,10 +76,17 @@
     <style name="Style.NoteFragment.Body" parent="Widget.AppCompat.EditText">
         <item name="android:background">@color/transparent</item>
         <item name="android:gravity">top|start</item>
+        <item name="android:singleLine">false</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textColor">@color/note_item_body_color</item>
         <item name="android:textSize">@dimen/note_fragment_body_dimen</item>
         <item name="android:textAlignment">textStart</item>
+    </style>
+
+    <style name="TextAppearance.Notebook.Empty" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/empty_notebook_dimen</item>
+        <item name="android:textColor">@color/light_black</item>
+        <item name="android:fontFamily">@font/roboto</item>
     </style>
 
 </resources>

@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.R
+import com.noto.databinding.DialogNotebookBinding
 import com.noto.databinding.FragmentNotebookBinding
 import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNote
@@ -36,6 +37,8 @@ class NotebookFragment : Fragment(), NavigateToNote {
     private var notebookTitle = ""
 
     private var notebookColor = NotebookColor.GRAY
+
+    private lateinit var dialogBinding: DialogNotebookBinding
 
     private val viewModel by viewModels<NotebookViewModel> {
         NotebookViewModelFactory(Repos.notebookRepository, Repos.noteRepository)
@@ -81,7 +84,14 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
             viewModel.notes.observe(viewLifecycleOwner, Observer {
                 it?.let {
-                    adapter.submitList(it)
+                    if (it.isEmpty()) {
+                        rv.visibility = View.GONE
+                        binding.emptyNotebook.visibility = View.VISIBLE
+                    } else {
+                        rv.visibility = View.VISIBLE
+                        binding.emptyNotebook.visibility = View.GONE
+                        adapter.submitList(it)
+                    }
                 }
             })
         }
@@ -108,6 +118,27 @@ class NotebookFragment : Fragment(), NavigateToNote {
         }
 
         binding.fab.imageTintList = ColorStateList.valueOf(Color.WHITE)
+
+        binding.tb.let { tb ->
+
+            tb.setNavigationOnClickListener {
+                this.findNavController().navigateUp()
+            }
+
+            tb.setOnMenuItemClickListener {
+
+                when (it.itemId) {
+                    R.id.style -> {
+                        true
+                    }
+                    else -> {
+                        false
+                    }
+                }
+            }
+        }
+
+
 
         return binding.root
     }
@@ -146,6 +177,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 )
             )
 
+            it.ctb.contentScrim =
+                resources.getDrawable(R.drawable.notebook_item_background_gray_drawable, null)
+
             it.fab.backgroundTintList =
                 ColorStateList.valueOf(resources.getColor(R.color.gray_primary_dark, null))
         }
@@ -182,6 +216,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
+
+            it.ctb.contentScrim =
+                resources.getDrawable(R.drawable.notebook_item_background_blue_drawable, null)
 
             it.fab.backgroundTintList =
                 ColorStateList.valueOf(resources.getColor(R.color.blue_primary_dark, null))
@@ -221,6 +258,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 )
             )
 
+            it.ctb.contentScrim =
+                resources.getDrawable(R.drawable.notebook_item_background_pink_drawable, null)
+
             it.fab.backgroundTintList =
                 ColorStateList.valueOf(resources.getColor(R.color.pink_primary_dark, null))
         }
@@ -258,6 +298,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
+
+            it.ctb.contentScrim =
+                resources.getDrawable(R.drawable.notebook_item_background_cyan_drawable, null)
 
             it.fab.backgroundTintList =
                 ColorStateList.valueOf(resources.getColor(R.color.cyan_primary_dark, null))

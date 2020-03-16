@@ -18,6 +18,11 @@
     <string name="notebook_title">Notebook Title</string>
     <string name="new_notebook_empty_error">Notebook title can not be empty!</string>
     <string name="new_notebook_max_length_error">Notebook title can not be more than 20 characters!</string>
+    <string name="change_style">Change Style</string>
+    <string name="update">Update</string>
+    <string name="delete">Delete</string>
+    <string name="delete_note">Delete note</string>
+    <string name="empty_notebook">Oops there are no notes! Try to create some</string>
 
 
 </resources>

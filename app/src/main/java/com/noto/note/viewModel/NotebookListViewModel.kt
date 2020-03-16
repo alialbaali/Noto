@@ -22,9 +22,15 @@ internal class NotebookListViewModel(private val notebookRepository: NotebookRep
         }
     }
 
-    internal fun insertNotebook() {
+    internal fun saveNotebook() {
         viewModelScope.launch {
-            notebookRepository.insertNotebook(notebook.value!!)
+            if (notebooks.value?.any {
+                    it.notebookId == notebook.value?.notebookId
+                }!!) {
+                notebookRepository.updateNotebook(notebook.value!!)
+            } else {
+                notebookRepository.insertNotebook(notebook.value!!)
+            }
             notebooks.postValue(notebookRepository.getNotebooks())
         }
     }
