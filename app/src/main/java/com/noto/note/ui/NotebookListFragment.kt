@@ -10,16 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.snackbar.SnackbarContentLayout
 import com.noto.R
+import com.noto.database.AppDatabase
 import com.noto.databinding.DialogNotebookBinding
 import com.noto.databinding.FragmentNotebookListBinding
+import com.noto.network.DAOs
 import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNotebook
 import com.noto.note.adapter.NotebookListRVAdapter
@@ -39,18 +41,12 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
     // Notebook List RV Adapter
     private lateinit var adapter: NotebookListRVAdapter
 
-    private lateinit var viewModel: NotebookListViewModel
-
     private lateinit var exFab: ExtendedFloatingActionButton
 
     private lateinit var dialogBinding: DialogNotebookBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        viewModel =
-            ViewModelProviders.of(this, NotebookListViewModelFactory(Repos.notebookRepository))
-                .get(NotebookListViewModel::class.java)
+    private val viewModel by viewModels<NotebookListViewModel> {
+        NotebookListViewModelFactory(Repos.notebookRepository)
     }
 
     override fun onCreateView(
@@ -168,7 +164,7 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
                     ).show()
                 } else {
                     dialog.dismiss()
-                    viewModel.insertNote()
+                    viewModel.insertNotebook()
                 }
             }
 

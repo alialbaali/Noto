@@ -1,28 +1,31 @@
 package com.noto.note.viewModel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.noto.note.model.Notebook
 import com.noto.note.repository.NotebookRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.DisposableHandle
 import kotlinx.coroutines.launch
 
 internal class NotebookListViewModel(private val notebookRepository: NotebookRepository) :
     ViewModel() {
 
-    lateinit var notebooks : LiveData<List<Notebook>>
+    internal val notebooks = MutableLiveData<List<Notebook>>()
 
     val notebook = MutableLiveData<Notebook>()
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            notebooks = notebookRepository.getNotebooks()
+            notebooks.postValue(notebookRepository.getNotebooks())
         }
     }
 
-    internal fun insertNote() {
+    internal fun insertNotebook() {
         viewModelScope.launch {
             notebookRepository.insertNotebook(notebook.value!!)
+            notebooks.postValue(notebookRepository.getNotebooks())
         }
     }
 }

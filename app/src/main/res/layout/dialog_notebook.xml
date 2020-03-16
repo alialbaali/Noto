@@ -64,7 +64,7 @@
                     android:layout_height="match_parent"
                     android:fontFamily="@font/roboto_bold"
                     android:hint="@string/notebook_title"
-                    android:inputType="text|textPersonName|textCapCharacters"
+                    android:inputType="text|textPersonName|textCapWords"
                     android:maxLength="20"
                     android:singleLine="true"
                     android:text="@={viewModel.notebook.notebookTitle}"
@@ -156,7 +156,8 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@id/start_guideline"
-                app:layout_constraintTop_toBottomOf="@+id/rg" />
+                app:layout_constraintTop_toBottomOf="@+id/rg"
+                app:rippleColor="@color/gray_primary_dark" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/start_guideline"

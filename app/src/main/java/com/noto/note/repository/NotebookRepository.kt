@@ -8,7 +8,7 @@ import kotlinx.coroutines.withContext
 
 class NotebookRepository(private val notebookDao: NotebookDao) {
 
-    suspend fun getNotebooks(): LiveData<List<Notebook>> {
+    suspend fun getNotebooks(): List<Notebook> {
         return withContext(Dispatchers.IO) {
             notebookDao.getNotebooks()
         }

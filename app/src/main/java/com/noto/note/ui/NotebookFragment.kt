@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.noto.R
+import com.noto.database.AppDatabase
 import com.noto.databinding.FragmentNotebookBinding
+import com.noto.network.DAOs
 import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNote
 import com.noto.note.adapter.NotebookRVAdapter
@@ -39,7 +43,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
     private lateinit var exFabNewNote: ExtendedFloatingActionButton
 
-    private lateinit var exFabNewNotebook: ExtendedFloatingActionButton
+    private lateinit var bottomNav: BottomNavigationView
 
     private lateinit var fabs: List<ExtendedFloatingActionButton>
 
@@ -53,21 +57,20 @@ class NotebookFragment : Fragment(), NavigateToNote {
     ): View? {
         binding = FragmentNotebookBinding.inflate(inflater, container, false)
 
-        exFab = activity?.findViewById(R.id.exFab)!!
-
-        exFabNewNote = activity?.findViewById(R.id.exFab_new_note)!!
-
-        fabs = listOf(exFab, exFabNewNote, exFabNewNotebook)
-
-        adapter = NotebookRVAdapter(this)
-
-
         // Arguments
-        requireArguments().let { args ->
+        arguments?.let { args ->
             notebookId = args.getLong("notebook_id")
             notebookTitle = args.getString("notebook_title") ?: ""
             notebookColor = args.get("notebook_color") as NotebookColor
         }
+
+        exFab = activity?.findViewById(R.id.exFab)!!
+
+        exFabNewNote = activity?.findViewById(R.id.exFab_new_note)!!
+
+        bottomNav = activity?.findViewById(R.id.bottom_nav)!!
+
+        fabs = listOf(exFab, exFabNewNote)
 
 
         // Binding
@@ -84,21 +87,39 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
         }
 
-        // Coordinator Layout
-        binding.cool.let { cool ->
-
-        }
-
         // RV
         binding.rv.let { rv ->
 
+            viewModel.getNotes(notebookId)
+
+            adapter = NotebookRVAdapter(this)
             rv.adapter = adapter
-            rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+            rv.layoutManager =
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+
+            viewModel.notes.observe(viewLifecycleOwner, Observer {
+                it?.let {
+                    adapter.submitList(it)
+                }
+            })
         }
+
 
         // Collapsing Toolbar
         binding.ctb.let { ctb ->
             ctb.title = notebookTitle
+        }
+
+        exFabNewNote.setOnClickListener {
+            this.findNavController().navigate(
+                NotebookFragmentDirections.actionNotebookFragmentToNoteFragment(
+                    0L,
+                    notebookId,
+                    notebookTitle,
+                    notebookColor
+                )
+            )
         }
 
         return binding.root
@@ -111,6 +132,8 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
             activity?.window?.statusBarColor =
                 resources.getColor(R.color.gray_primary, null)
+
+            bottomNav.setBackgroundColor(resources.getColor(R.color.gray_primary))
 
             it.cool.setBackgroundColor(
                 resources.getColor(
@@ -155,6 +178,8 @@ class NotebookFragment : Fragment(), NavigateToNote {
             activity?.window?.statusBarColor =
                 resources.getColor(R.color.blue_primary, null)
 
+            bottomNav.setBackgroundColor(resources.getColor(R.color.blue_primary))
+
             it.cool.setBackgroundColor(
                 resources.getColor(
                     R.color.blue_primary,
@@ -198,6 +223,8 @@ class NotebookFragment : Fragment(), NavigateToNote {
             activity?.window?.statusBarColor =
                 resources.getColor(R.color.pink_primary, null)
 
+            bottomNav.setBackgroundColor(resources.getColor(R.color.pink_primary))
+
             it.cool.setBackgroundColor(
                 resources.getColor(
                     R.color.pink_primary,
@@ -240,6 +267,8 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
             activity?.window?.statusBarColor =
                 resources.getColor(R.color.cyan_primary, null)
+
+            bottomNav.setBackgroundColor(resources.getColor(R.color.cyan_primary))
 
             it.cool.setBackgroundColor(
                 resources.getColor(
@@ -289,6 +318,5 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 )
             )
     }
-
 }
 

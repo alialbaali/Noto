@@ -1,15 +1,17 @@
 package com.noto.database
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.noto.note.model.Note
 
 @Dao
 interface NoteDao {
 
-    @Query("SELECT * FROM notes ORDER BY note_id DESC")
-    fun getNotes(): List<Note>
+    @Query("SELECT * FROM notes WHERE notebookId = :notebookId")
+    fun getNotes(notebookId: Long): List<Note>
 
-    @Query("SELECT * FROM notes WHERE note_id = :noteId LIMIT 1")
+    @Query("SELECT * FROM notes WHERE note_id = :noteId")
     fun getNoteById(noteId: Long): Note
 
     @Insert

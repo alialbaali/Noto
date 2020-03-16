@@ -4,10 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.noto.R
+import com.noto.database.AppDatabase
 import com.noto.databinding.FragmentNoteBinding
+import com.noto.network.DAOs
 import com.noto.network.Repos
 import com.noto.note.model.NotebookColor
 import com.noto.note.viewModel.NoteViewModel
@@ -29,6 +35,7 @@ class NoteFragment : Fragment() {
 
     private var notebookTitle = ""
 
+
     private val viewModel by viewModels<NoteViewModel> {
         NoteViewModelFactory(Repos.noteRepository)
     }
@@ -39,7 +46,9 @@ class NoteFragment : Fragment() {
     ): View? {
         binding = FragmentNoteBinding.inflate(inflater, container, false)
 
-        requireArguments().let { args ->
+        binding.viewModel = viewModel
+
+        arguments?.let { args ->
             noteId = args.getLong("note_id")
             notebookId = args.getLong("notebook_id")
             notebookTitle = args.getString("notebook_title") ?: ""
@@ -53,9 +62,25 @@ class NoteFragment : Fragment() {
             NotebookColor.CYAN -> setCyan()
         }
 
+        viewModel.getNoteById(notebookId, noteId)
+
         binding.tb.let { tb ->
             tb.title = notebookTitle
         }
+
+        // Configure Back Dispatcher to save the note
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            this@NoteFragment.findNavController().navigateUp()
+            viewModel.saveNote()
+        }.isEnabled = true
+
+        // A workarount to one way data binding
+        viewModel.note.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                binding.title.setText(it.noteTitle)
+                binding.body.setText(it.noteBody)
+            }
+        })
 
         return binding.root
     }

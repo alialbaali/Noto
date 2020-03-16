@@ -7,9 +7,9 @@ import kotlinx.coroutines.withContext
 
 class NoteRepository(private val noteDao: NoteDao) {
 
-    suspend fun getNotes(): List<Note> {
+    suspend fun getNotes(notebookId: Long): List<Note> {
         return withContext(Dispatchers.IO) {
-            noteDao.getNotes()
+            noteDao.getNotes(notebookId)
         }
     }
 

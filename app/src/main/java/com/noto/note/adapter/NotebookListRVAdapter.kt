@@ -9,6 +9,7 @@ import com.noto.R
 import com.noto.databinding.ListItemNotebookBinding
 import com.noto.note.model.Notebook
 import com.noto.note.model.NotebookColor
+import timber.log.Timber
 
 // Notebook List RV Adapter
 internal class NotebookListRVAdapter(private val navigateToNotebook: NavigateToNotebook) :

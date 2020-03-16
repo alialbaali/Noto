@@ -10,7 +10,7 @@ data class Note(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "note_id")
-    val noteId: Long,
+    val noteId: Long = 0L,
 
     @ForeignKey(
         entity = Notebook::class,
@@ -21,8 +21,8 @@ data class Note(
     val notebookId: Long,
 
     @ColumnInfo(name = "note_title")
-    val noteTitle: String = "",
+    var noteTitle: String? = null,
 
     @ColumnInfo(name = "note_body")
-    val noteBody: String = ""
+    var noteBody: String? = null
 )
