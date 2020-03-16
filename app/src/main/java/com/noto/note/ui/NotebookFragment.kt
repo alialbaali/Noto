@@ -1,21 +1,19 @@
 package com.noto.note.ui
 
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.noto.R
-import com.noto.database.AppDatabase
 import com.noto.databinding.FragmentNotebookBinding
-import com.noto.network.DAOs
 import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNote
 import com.noto.note.adapter.NotebookRVAdapter
@@ -39,14 +37,6 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
     private var notebookColor = NotebookColor.GRAY
 
-    private lateinit var exFab: ExtendedFloatingActionButton
-
-    private lateinit var exFabNewNote: ExtendedFloatingActionButton
-
-    private lateinit var bottomNav: BottomNavigationView
-
-    private lateinit var fabs: List<ExtendedFloatingActionButton>
-
     private val viewModel by viewModels<NotebookViewModel> {
         NotebookViewModelFactory(Repos.notebookRepository, Repos.noteRepository)
     }
@@ -63,15 +53,6 @@ class NotebookFragment : Fragment(), NavigateToNote {
             notebookTitle = args.getString("notebook_title") ?: ""
             notebookColor = args.get("notebook_color") as NotebookColor
         }
-
-        exFab = activity?.findViewById(R.id.exFab)!!
-
-        exFabNewNote = activity?.findViewById(R.id.exFab_new_note)!!
-
-        bottomNav = activity?.findViewById(R.id.bottom_nav)!!
-
-        fabs = listOf(exFab, exFabNewNote)
-
 
         // Binding
         binding.let {
@@ -105,13 +86,17 @@ class NotebookFragment : Fragment(), NavigateToNote {
             })
         }
 
-
         // Collapsing Toolbar
         binding.ctb.let { ctb ->
+
             ctb.title = notebookTitle
+
+            ctb.setCollapsedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_bold))
+
+            ctb.setExpandedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_medium))
         }
 
-        exFabNewNote.setOnClickListener {
+        binding.fab.setOnClickListener {
             this.findNavController().navigate(
                 NotebookFragmentDirections.actionNotebookFragmentToNoteFragment(
                     0L,
@@ -121,6 +106,8 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 )
             )
         }
+
+        binding.fab.imageTintList = ColorStateList.valueOf(Color.WHITE)
 
         return binding.root
     }
@@ -133,8 +120,6 @@ class NotebookFragment : Fragment(), NavigateToNote {
             activity?.window?.statusBarColor =
                 resources.getColor(R.color.gray_primary, null)
 
-            bottomNav.setBackgroundColor(resources.getColor(R.color.gray_primary))
-
             it.cool.setBackgroundColor(
                 resources.getColor(
                     R.color.gray_primary,
@@ -160,15 +145,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            fabs.forEach { fab ->
-                fab.backgroundTintList =
-                    ColorStateList.valueOf(
-                        resources.getColor(
-                            R.color.gray_primary_dark,
-                            null
-                        )
-                    )
-            }
+
+            it.fab.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.gray_primary_dark, null))
         }
     }
 
@@ -178,8 +157,6 @@ class NotebookFragment : Fragment(), NavigateToNote {
             activity?.window?.statusBarColor =
                 resources.getColor(R.color.blue_primary, null)
 
-            bottomNav.setBackgroundColor(resources.getColor(R.color.blue_primary))
-
             it.cool.setBackgroundColor(
                 resources.getColor(
                     R.color.blue_primary,
@@ -205,15 +182,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            fabs.forEach { fab ->
-                fab.backgroundTintList =
-                    ColorStateList.valueOf(
-                        resources.getColor(
-                            R.color.blue_primary_dark,
-                            null
-                        )
-                    )
-            }
+
+            it.fab.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.blue_primary_dark, null))
         }
     }
 
@@ -223,7 +194,6 @@ class NotebookFragment : Fragment(), NavigateToNote {
             activity?.window?.statusBarColor =
                 resources.getColor(R.color.pink_primary, null)
 
-            bottomNav.setBackgroundColor(resources.getColor(R.color.pink_primary))
 
             it.cool.setBackgroundColor(
                 resources.getColor(
@@ -250,15 +220,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            fabs.forEach { fab ->
-                fab.backgroundTintList =
-                    ColorStateList.valueOf(
-                        resources.getColor(
-                            R.color.pink_primary_dark,
-                            null
-                        )
-                    )
-            }
+
+            it.fab.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.pink_primary_dark, null))
         }
     }
 
@@ -268,7 +232,6 @@ class NotebookFragment : Fragment(), NavigateToNote {
             activity?.window?.statusBarColor =
                 resources.getColor(R.color.cyan_primary, null)
 
-            bottomNav.setBackgroundColor(resources.getColor(R.color.cyan_primary))
 
             it.cool.setBackgroundColor(
                 resources.getColor(
@@ -295,15 +258,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     null
                 )
             )
-            fabs.forEach { fab ->
-                fab.backgroundTintList =
-                    ColorStateList.valueOf(
-                        resources.getColor(
-                            R.color.cyan_primary_dark,
-                            null
-                        )
-                    )
-            }
+
+            it.fab.backgroundTintList =
+                ColorStateList.valueOf(resources.getColor(R.color.cyan_primary_dark, null))
         }
     }
 

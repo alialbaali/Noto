@@ -10,14 +10,9 @@
 
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/cool"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/normal_margin">
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl"
+            android:layout_margin="@dimen/normal_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/dialog_background_gray_drawable">
@@ -49,7 +44,9 @@
                 app:boxStrokeColor="@color/dialog_et_color"
                 app:boxStrokeWidth="1dp"
                 app:boxStrokeWidthFocused="1dp"
+                app:errorIconDrawable="@null"
                 app:counterEnabled="true"
+                app:errorEnabled="true"
                 app:counterMaxLength="20"
                 app:counterTextColor="@color/dialog_et_color"
                 app:hintTextColor="@color/dialog_et_color"
@@ -173,5 +170,4 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="@dimen/normal_margin" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

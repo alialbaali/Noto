@@ -14,11 +14,11 @@
         tools:context=".note.ui.NotebookFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginStart="@dimen/small_margin"
-            android:layout_marginEnd="@dimen/small_margin"
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:listitem="@layout/list_item_note" />
@@ -43,24 +43,14 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/normal_margin"
+            android:src="@drawable/ic_add_white_24dp" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
-
-    <!--        <com.google.android.material.textfield.TextInputEditText-->
-    <!--            android:id="@+id/title"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            app:layout_constraintBottom_toTopOf="@id/body"-->
-    <!--            app:layout_constraintEnd_toEndOf="@id/cl"-->
-    <!--            app:layout_constraintStart_toStartOf="@id/cl"-->
-    <!--            app:layout_constraintTop_toBottomOf="@id/tb" />-->
-
-
-    <!--        <com.google.android.material.textfield.TextInputEditText-->
-    <!--            android:id="@+id/body"-->
-    <!--            android:layout_width="0dp"-->
-    <!--            android:layout_height="0dp"-->
-    <!--            app:layout_constraintBottom_toBottomOf="@id/cl"-->
-    <!--            app:layout_constraintEnd_toEndOf="@id/cl"-->
-    <!--            app:layout_constraintStart_toStartOf="@id/cl"-->
-    <!--            app:layout_constraintTop_toBottomOf="@id/title" />-->

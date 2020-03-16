@@ -16,6 +16,8 @@
     <string name="pink">Pink</string>
     <string name="cyan">Cyan</string>
     <string name="notebook_title">Notebook Title</string>
+    <string name="new_notebook_empty_error">Notebook title can not be empty!</string>
+    <string name="new_notebook_max_length_error">Notebook title can not be more than 20 characters!</string>
 
 
 </resources>

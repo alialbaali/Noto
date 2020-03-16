@@ -15,14 +15,16 @@ internal class NoteViewModel(private val noteRepository: NoteRepository) : ViewM
 
     internal fun saveNote() {
         viewModelScope.launch {
-//            if ((note.value!!.noteTitle.isBlank() || note.value!!.noteBody.isBlank())) {
-            if (note.value!!.noteId == 0L) {
-                Timber.i("Insert Note")
-                noteRepository.insertNote(note.value!!)
-            } else {
-                Timber.i("Update Note")
-                noteRepository.updateNote(note.value!!)
-//                }
+            if (!(note.value!!.noteTitle!!.isBlank() || note.value!!.noteBody!!.isBlank())) {
+
+                if (note.value!!.noteId == 0L) {
+                    Timber.i("Insert Note")
+                    noteRepository.insertNote(note.value!!)
+                } else {
+                    Timber.i("Update Note")
+                    noteRepository.updateNote(note.value!!)
+                }
+
             }
         }
     }
@@ -30,7 +32,7 @@ internal class NoteViewModel(private val noteRepository: NoteRepository) : ViewM
     internal fun getNoteById(notebookId: Long, noteId: Long) {
         viewModelScope.launch {
             if (noteId == 0L) {
-                note.postValue(Note( notebookId = notebookId))
+                note.postValue(Note(notebookId = notebookId))
             } else {
                 note.postValue(noteRepository.getNoteById(noteId))
             }

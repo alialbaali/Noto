@@ -34,22 +34,9 @@
             android:text="@string/new_notebook"
             android:visibility="gone"
             app:icon="@drawable/ic_new_notebook_24dp"
-            app:layout_constraintBottom_toTopOf="@id/exFab_new_note"
-            app:layout_constraintEnd_toEndOf="@+id/bottom_nav"
-            app:layout_constraintStart_toStartOf="@+id/bottom_nav" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/exFab_new_note"
-            style="@style/Style.BottomNav.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/new_note"
-            android:visibility="gone"
-            app:icon="@drawable/ic_new_note_24dp"
             app:layout_constraintBottom_toTopOf="@id/exFab"
             app:layout_constraintEnd_toEndOf="@+id/bottom_nav"
             app:layout_constraintStart_toStartOf="@+id/bottom_nav" />
-
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"

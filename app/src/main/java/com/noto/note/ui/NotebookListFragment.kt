@@ -12,16 +12,12 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import com.noto.R
-import com.noto.database.AppDatabase
 import com.noto.databinding.DialogNotebookBinding
 import com.noto.databinding.FragmentNotebookListBinding
-import com.noto.network.DAOs
 import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNotebook
 import com.noto.note.adapter.NotebookListRVAdapter
@@ -41,7 +37,7 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
     // Notebook List RV Adapter
     private lateinit var adapter: NotebookListRVAdapter
 
-    private lateinit var exFab: ExtendedFloatingActionButton
+    private lateinit var exFabNewNotebook: ExtendedFloatingActionButton
 
     private lateinit var dialogBinding: DialogNotebookBinding
 
@@ -90,11 +86,16 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
             })
         }
 
-        exFab = activity?.findViewById(R.id.exFab) as ExtendedFloatingActionButton
+        exFabNewNotebook =
+            activity?.findViewById(R.id.exFab_new_notebook) as ExtendedFloatingActionButton
 
-        exFab.setOnClickListener {
+        exFabNewNotebook.setOnClickListener {
 
             dialogBinding = DialogNotebookBinding.inflate(layoutInflater, container, false)
+
+            if (dialogBinding.et.text?.length!! >= 20) {
+
+            }
 
             dialogBinding.viewModel = viewModel
 
@@ -113,6 +114,8 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
                 dialogBinding.root.background =
                     resources.getDrawable(R.drawable.dialog_background_blue_drawable, null)
 
+                dialogBinding.til.boxBackgroundColor = resources.getColor(R.color.blue_primary, null)
+
                 viewModel.notebook.value?.notebookColor = NotebookColor.BLUE
 
                 dialogBinding.createBtn.backgroundTintList =
@@ -125,6 +128,8 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
                 dialogBinding.root.background =
                     resources.getDrawable(R.drawable.dialog_background_pink_drawable, null)
 
+                dialogBinding.til.boxBackgroundColor = resources.getColor(R.color.pink_primary, null)
+
                 viewModel.notebook.value?.notebookColor = NotebookColor.PINK
 
                 dialogBinding.createBtn.backgroundTintList =
@@ -136,6 +141,8 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
                 dialogBinding.root.background =
                     resources.getDrawable(R.drawable.dialog_background_cyan_drawable, null)
 
+                dialogBinding.til.boxBackgroundColor = resources.getColor(R.color.cyan_primary, null)
+
                 viewModel.notebook.value?.notebookColor = NotebookColor.CYAN
 
                 dialogBinding.createBtn.backgroundTintList =
@@ -143,6 +150,8 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
             }
 
             dialogBinding.rbtnGray.setOnClickListener {
+
+                dialogBinding.til.boxBackgroundColor = resources.getColor(R.color.gray_primary, null)
 
                 dialogBinding.root.background =
                     resources.getDrawable(R.drawable.dialog_background_gray_drawable, null)
@@ -157,13 +166,13 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
             dialogBinding.createBtn.setOnClickListener {
 
                 if (viewModel.notebook.value?.notebookTitle?.isBlank()!!) {
-                    Snackbar.make(
-                        dialogBinding.cool,
-                        "Title can't be empty!",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    dialogBinding.til.error = resources.getString(R.string.new_notebook_empty_error)
+
+                    dialogBinding.til.counterTextColor = ColorStateList.valueOf(Color.RED)
+
                 } else {
                     dialog.dismiss()
+
                     viewModel.insertNotebook()
                 }
             }

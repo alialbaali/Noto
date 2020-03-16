@@ -1,7 +1,5 @@
 package com.noto
 
-import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -27,110 +25,38 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setupWithNavController(navController)
 
-        var isVisible = false
+
+        binding.exFab.setOnClickListener {
+            if (binding.exFabNewNotebook.visibility == View.GONE) {
+
+                binding.exFabNewNotebook.visibility = View.VISIBLE
+
+                binding.exFab.text = resources.getString(R.string.cancel)
+
+            } else {
+
+                binding.exFabNewNotebook.visibility = View.GONE
+
+                binding.exFab.text = resources.getString(R.string.create)
+            }
+        }
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
 
-            when (destination.id) {
-                R.id.notebookListFragment -> {
+            if (destination.id != R.id.notebookListFragment) {
 
-                    binding.exFab.visibility = View.VISIBLE
+                binding.exFab.visibility = View.GONE
 
-                    binding.exFab.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
+                binding.bottomNav.visibility = View.GONE
 
-                    binding.exFabNewNote.backgroundTintList = ColorStateList.valueOf(Color.BLACK)
+                binding.exFabNewNotebook.visibility = View.GONE
 
-                    binding.exFabNewNotebook.backgroundTintList =
-                        ColorStateList.valueOf(Color.BLACK)
-
-                    binding.bottomNav.visibility = View.VISIBLE
-
-                    binding.root.setOnClickListener {
-
-                        binding.exFabNewNotebook.visibility = View.GONE
-
-                        binding.exFabNewNote.visibility = View.GONE
-
-                        binding.exFab.text = resources.getString(R.string.create)
-
-                        isVisible = false
-                    }
-
-                    binding.exFab.setOnClickListener {
-
-                        if (isVisible) {
-
-                            binding.exFabNewNotebook.visibility = View.GONE
-
-                            binding.exFabNewNote.visibility = View.GONE
-
-                            binding.exFab.text = resources.getString(R.string.create)
-
-                            isVisible = false
-
-                        } else {
-
-                            binding.exFabNewNotebook.visibility = View.VISIBLE
-
-                            binding.exFabNewNote.visibility = View.VISIBLE
-
-                            binding.exFab.text = resources.getString(R.string.cancel)
-
-                            isVisible = true
-
-                        }
-                    }
-                }
-                R.id.notebookFragment -> {
-
-                    binding.exFab.visibility = View.VISIBLE
-
-                    binding.bottomNav.visibility = View.VISIBLE
-
-                    binding.root.setOnClickListener {
-
-                        binding.exFabNewNote.visibility = View.GONE
-
-                        binding.exFab.text = resources.getString(R.string.create)
-
-                        isVisible = false
-                    }
-
-                    binding.exFab.setOnClickListener {
-
-                        if (isVisible) {
-
-                            binding.exFabNewNotebook.visibility = View.GONE
-
-                            binding.exFabNewNote.visibility = View.GONE
-
-                            binding.exFab.text = resources.getString(R.string.create)
-
-                            isVisible = false
-                        } else {
-
-                            binding.exFabNewNote.visibility = View.VISIBLE
-
-                            binding.exFab.text = resources.getString(R.string.cancel)
-
-                            isVisible = true
-
-                        }
-                    }
-                }
-                R.id.noteFragment -> {
-
-                    binding.bottomNav.visibility = View.GONE
-
-                    binding.exFabNewNotebook.visibility = View.GONE
-
-                    binding.exFabNewNote.visibility = View.GONE
-
-                    binding.exFab.visibility = View.GONE
-
-                    isVisible = false
-                }
+            } else {
+                binding.exFab.visibility = View.VISIBLE
+                binding.exFab.text = resources.getString(R.string.create)
+                binding.bottomNav.visibility = View.VISIBLE
             }
         }
+
     }
 }
