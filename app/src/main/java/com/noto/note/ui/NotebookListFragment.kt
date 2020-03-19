@@ -41,6 +41,8 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
 
     private lateinit var dialogBinding: DialogNotebookBinding
 
+    private lateinit var dialog: AlertDialog
+
     private val viewModel by viewModels<NotebookListViewModel> {
         NotebookListViewModelFactory(Repos.notebookRepository)
     }
@@ -110,17 +112,18 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
     private fun dialog() {
         dialogBinding = DialogNotebookBinding.inflate(layoutInflater)
 
-        dialogBinding.viewModel = viewModel
-
-        viewModel.notebook.value = Notebook()
-
-        val dialog = AlertDialog.Builder(context).let {
+        dialog = AlertDialog.Builder(context).let {
             it.setView(dialogBinding.root)
             it.create()
             it.show()
         }.apply {
             this.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            this.window?.setWindowAnimations(R.style.DialogAnimation)
         }
+
+        dialogBinding.viewModel = viewModel
+
+        viewModel.notebook.value = Notebook()
 
         dialogBinding.rbtnBlue.setOnClickListener {
 

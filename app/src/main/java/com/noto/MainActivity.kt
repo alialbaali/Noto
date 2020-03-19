@@ -2,13 +2,17 @@ package com.noto
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.OvershootInterpolator
+import android.view.animation.RotateAnimation
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.noto.database.AppDatabase
 import com.noto.databinding.ActivityMainBinding
 import com.noto.network.DAOs
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
