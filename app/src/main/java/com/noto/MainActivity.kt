@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        DAOs.notebookDao = AppDatabase.getInstance(applicationContext).notebookDao
+        DAOs.notebookDao = AppDatabase.getInstance(application).notebookDao
 
         DAOs.noteDao = AppDatabase.getInstance(applicationContext).noteDao
 

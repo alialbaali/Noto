@@ -8,8 +8,8 @@ import kotlinx.coroutines.withContext
 
 class NotebookRepository(private val notebookDao: NotebookDao) {
 
-    suspend fun getNotebooks(): List<Notebook> {
-        return withContext(Dispatchers.IO) {
+    suspend fun getNotebooks(): LiveData<List<Notebook>> {
+        return withContext(Dispatchers.Main) {
             notebookDao.getNotebooks()
         }
     }
@@ -32,9 +32,10 @@ class NotebookRepository(private val notebookDao: NotebookDao) {
         }
     }
 
-    suspend fun deleteNotebook(notebook: Notebook) {
+    suspend fun deleteNotebook(notebookId: Long) {
         withContext(Dispatchers.IO) {
-            notebookDao.deleteNotebook(notebook)
+            notebookDao.deleteNotebook(notebookId)
         }
     }
+
 }

@@ -1,5 +1,6 @@
 package com.noto.note.repository
 
+import androidx.lifecycle.LiveData
 import com.noto.database.NoteDao
 import com.noto.note.model.Note
 import kotlinx.coroutines.Dispatchers
@@ -7,8 +8,8 @@ import kotlinx.coroutines.withContext
 
 class NoteRepository(private val noteDao: NoteDao) {
 
-    suspend fun getNotes(notebookId: Long): List<Note> {
-        return withContext(Dispatchers.IO) {
+    suspend fun getNotes(notebookId: Long): LiveData<List<Note>> {
+        return withContext(Dispatchers.Main) {
             noteDao.getNotes(notebookId)
         }
     }

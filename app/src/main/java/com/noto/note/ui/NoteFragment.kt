@@ -71,7 +71,7 @@ class NoteFragment : Fragment() {
 
             tb.setOnMenuItemClickListener {
                 when (it.itemId) {
-                    R.id.delete -> {
+                    R.id.delete_note -> {
                         viewModel.deleteNote()
                         this.findNavController().navigateUp()
                         true

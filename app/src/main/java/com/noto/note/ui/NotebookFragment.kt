@@ -18,9 +18,11 @@ import com.noto.databinding.FragmentNotebookBinding
 import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNote
 import com.noto.note.adapter.NotebookRVAdapter
+import com.noto.note.model.Notebook
 import com.noto.note.model.NotebookColor
 import com.noto.note.viewModel.NotebookViewModel
 import com.noto.note.viewModel.NotebookViewModelFactory
+import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -37,8 +39,6 @@ class NotebookFragment : Fragment(), NavigateToNote {
     private var notebookTitle = ""
 
     private var notebookColor = NotebookColor.GRAY
-
-    private lateinit var dialogBinding: DialogNotebookBinding
 
     private val viewModel by viewModels<NotebookViewModel> {
         NotebookViewModelFactory(Repos.notebookRepository, Repos.noteRepository)
@@ -129,6 +129,43 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
                 when (it.itemId) {
                     R.id.style -> {
+                        NotebookDialog(context!!).apply {
+                            this.notebook = Notebook(notebookId, notebookTitle, notebookColor)
+                            dialogBinding.createBtn.text = resources.getString(R.string.update)
+                            dialogBinding.tv.text = resources.getString(R.string.update_notebook)
+                            dialogBinding.createBtn.setOnClickListener {
+                                when {
+                                    this.notebook.notebookTitle.isBlank() -> {
+
+                                        this.dialogBinding.til.error =
+                                            "Notebook with the same title already exists!"
+                                        this.dialogBinding.til.counterTextColor =
+                                            ColorStateList.valueOf(Color.RED)
+
+                                    }
+//                                    viewModel.getNotebooks().any { it.notebookTitle == this.notebook.notebookTitle } -> {
+//
+//                                        this.dialogBinding.til.error =
+//                                            "Notebook with the same title already exists!"
+//                                        this.dialogBinding.til.counterTextColor =
+//                                            ColorStateList.valueOf(Color.RED)
+//
+//                                    }
+                                    else -> {
+                                        viewModel.updateNotebook(this.notebook)
+                                        this.dismiss()
+                                    }
+                                }
+                            }
+                            create()
+                            show()
+                        }
+                        true
+                    }
+
+                    R.id.delete_notebook -> {
+                        viewModel.deleteNotebook(notebookId)
+                        this.findNavController().navigateUp()
                         true
                     }
                     else -> {

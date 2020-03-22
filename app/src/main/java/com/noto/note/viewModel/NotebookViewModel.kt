@@ -1,9 +1,6 @@
 package com.noto.note.viewModel
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.noto.note.model.Note
 import com.noto.note.model.Notebook
 import com.noto.note.repository.NoteRepository
@@ -15,13 +12,11 @@ internal class NotebookViewModel(
     private val noteRepository: NoteRepository
 ) : ViewModel() {
 
-    internal val notes = MutableLiveData<List<Note>>()
-
-    val notebook = MutableLiveData<Notebook>()
+    lateinit var notes: LiveData<List<Note>>
 
     internal fun getNotes(notebookId: Long) {
         viewModelScope.launch {
-            notes.postValue(noteRepository.getNotes(notebookId))
+            notes = noteRepository.getNotes(notebookId)
         }
     }
 
@@ -33,10 +28,24 @@ internal class NotebookViewModel(
         return notebook
     }
 
-    internal fun updateNotebook() {
+    internal fun updateNotebook(notebook: Notebook) {
         viewModelScope.launch {
-            notebookRepository.updateNotebook(notebook.value!!)
+            notebookRepository.updateNotebook(notebook)
         }
+    }
+
+    internal fun deleteNotebook(notebookId: Long) {
+        viewModelScope.launch {
+            notebookRepository.deleteNotebook(notebookId)
+        }
+    }
+
+    internal fun getNotebooks(): List<Notebook> {
+        val notebooks = MutableLiveData<List<Notebook>>()
+        viewModelScope.launch {
+            notebooks.postValue(notebookRepository.getNotebooks().value)
+        }
+        return notebooks.value ?: throw KotlinNullPointerException("EMPTY NOTEBOOKS")
     }
 }
 

@@ -15,17 +15,17 @@ import com.noto.note.model.NotebookColorConverter
     version = 1,
     exportSchema = false
 )
-internal abstract class AppDatabase : RoomDatabase() {
+ abstract class AppDatabase : RoomDatabase() {
 
-    internal abstract val notebookDao: NotebookDao
-    internal abstract val noteDao: NoteDao
+     abstract val notebookDao: NotebookDao
+     abstract val noteDao: NoteDao
 
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
 
-        internal fun getInstance(context: Context): AppDatabase {
+         fun getInstance(context: Context): AppDatabase {
             synchronized(this) {
                 var instance = INSTANCE
 
