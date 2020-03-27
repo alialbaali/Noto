@@ -1,38 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Bottom Navigation Bar -->
-    <color name="bottom_nav_color">#FAFAFA</color>
+    <color name="colorPrimary">#FAFAFA</color>
+    <color name="colorOnPrimary_900">#212121</color>
+    <color name="colorOnPrimary_800">#424242</color>
+    <color name="colorOnPrimary_600">#757575</color>
 
-    <!-- Collapsing Toolbar -->
-    <color name="ctb_background_color">#FFFFFF</color>
-    <color name="ctb_content_scrim_color">#FFFFFF</color>
+    <color name="colorPrimaryGray">#E0E0E0</color>
+    <color name="colorPrimaryBlue">#90CAF9</color>
+    <color name="colorPrimaryPink">#F48FB1</color>
+    <color name="colorPrimaryCyan">#80DEEA</color>
 
-    <!-- Notebook -->
-    <color name="notebook_item_tv_text_color">#000000</color>
-
-    <!-- Note -->
-    <color name="note_item_background_color">#FAFAFA</color>
-    <color name="note_item_title_color">#424242</color>
-    <color name="note_item_body_color">#757575</color>
-
-    <color name="note_fragment_background_color">#FAFAFA</color>
+    <color name="colorOnPrimaryGray">#757575</color>
+    <color name="colorOnPrimaryBlue">#2196F3</color>
+    <color name="colorOnPrimaryPink">#E91E63</color>
+    <color name="colorOnPrimaryCyan">#00BCD4</color>
 
     <color name="transparent">#00FFFFFF</color>
-
-    <!-- Notebook Background -->
-    <color name="gray_primary">#E0E0E0</color>
-    <color name="blue_primary">#90CAF9</color>
-    <color name="pink_primary">#F48FB1</color>
-    <color name="cyan_primary">#80DEEA</color>
-
-    <!-- Notebook FAB -->
-    <color name="gray_primary_dark">#757575</color>
-    <color name="blue_primary_dark">#2196F3</color>
-    <color name="pink_primary_dark">#E91E63</color>
-    <color name="cyan_primary_dark">#00BCD4</color>
-
-    <color name="light_black">#424242</color>
-    <color name="dialog_et_color">#757575</color>
 
 </resources>
