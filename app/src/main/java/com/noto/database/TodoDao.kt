@@ -6,18 +6,18 @@ import com.noto.todo.model.Todo
 
 @Dao
 interface TodoDao {
-    @Query("SELECT * FROM todos WHERE todo_id= :todoId")
-    fun getNotes(todoId: Long): LiveData<List<Todo>>
+    @Query("SELECT * FROM todos WHERE todo_list_id= :todoListId")
+    fun getTodos(todoListId: Long): LiveData<List<Todo>>
 
     @Query("SELECT * FROM todos WHERE todo_id = :todoId")
-    fun getNoteById(todoId: Long): Todo
+    fun getTodoById(todoId: Long): Todo
 
     @Insert
-    fun insertNote(todo: Todo)
+    fun insertTodo(todo: Todo)
 
     @Update
-    fun updateNote(todo: Todo)
+    fun updateTodo(todo: Todo)
 
     @Delete
-    fun deleteNote(todo: Todo)
+    fun deleteTodo(todo: Todo)
 }

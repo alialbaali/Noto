@@ -14,13 +14,13 @@ interface TodoListDao {
     fun getTodoListById(todoListId: Long): TodoList
 
     @Insert
-    fun insertNotebook(todoList: TodoList)
+    fun insertTodoList(todoList: TodoList)
 
     @Update
-    fun updateNotebook(todoList: TodoList)
+    fun updateTodoList(todoList: TodoList)
 
     @Transaction
     @Query("DELETE FROM todo_lists WHERE todo_list_Id = :todoListId")
-    fun deleteNotebook(todoListId: Long)
+    fun deleteTodoList(todoListId: Long)
 
 }
