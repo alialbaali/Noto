@@ -1,22 +1,22 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-
+        <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
     </style>
 
     <style name="Style.BottomNav.Button" parent="Widget.MaterialComponents.Button">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:backgroundTint">@android:color/black</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:backgroundTint">@color/colorOnPrimary_900</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">16sp</item>
     </style>
 
     <!-- Collapsing Toolbar -->
     <style name="Style.CollapsingToolbar" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
-        <item name="android:background">@color/ctb_background_color</item>
-        <item name="contentScrim">@color/ctb_content_scrim_color</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="contentScrim">@color/colorPrimary</item>
         <item name="expandedTitleTextAppearance">
             @style/TextAppearance.CollapsingToolbar.Expanded.Title
         </item>
@@ -31,23 +31,25 @@
     <!-- Collapse Toolbar Title -->
     <style name="TextAppearance.CollapsingToolbar.Expanded.Title" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">@dimen/ctb_exp_title_dimen</item>
+        <item name="android:textColor">@color/colorOnPrimary_900</item>
     </style>
 
     <style name="TextAppearance.CollapsingToolbar.Collapsed.Title" parent="TextAppearance.MaterialComponents.Body1">
         <item name="android:textSize">@dimen/ctb_col_title_dimen</item>
+        <item name="android:textColor">@color/colorOnPrimary_900</item>
     </style>
 
     <!-- Notebook Item TextView -->
     <style name="Style.NotebookItem.TextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textColor">@color/notebook_item_tv_text_color</item>
+        <item name="android:textColor">@color/colorOnPrimary_800</item>
         <item name="android:textSize">@dimen/notebook_item_tv_dimen</item>
     </style>
 
     <!-- Note Item Title -->
     <style name="Style.NoteItem.Title" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textColor">@color/note_item_title_color</item>
+        <item name="android:textColor">@color/colorOnPrimary_800</item>
         <item name="android:textSize">@dimen/note_item_title_dimen</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:maxLines">3</item>
@@ -56,7 +58,7 @@
     <!-- Note Item Body -->
     <style name="Style.NoteItem.Body" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/note_item_body_color</item>
+        <item name="android:textColor">@color/colorOnPrimary_600</item>
         <item name="android:textSize">@dimen/note_item_body_dimen</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:maxLines">5</item>
@@ -67,7 +69,7 @@
         <item name="android:background">@color/transparent</item>
         <item name="android:maxLength">64</item>
         <item name="android:gravity">top|start</item>
-        <item name="android:textColor">@color/note_item_title_color</item>
+        <item name="android:textColor">@color/colorOnPrimary_800</item>
         <item name="android:textSize">@dimen/note_fragment_title_dimen</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:maxLines">3</item>
@@ -78,20 +80,24 @@
         <item name="android:gravity">top|start</item>
         <item name="android:singleLine">false</item>
         <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/note_item_body_color</item>
+        <item name="android:textColor">@color/colorOnPrimary_600</item>
         <item name="android:textSize">@dimen/note_fragment_body_dimen</item>
         <item name="android:textAlignment">textStart</item>
     </style>
 
     <style name="TextAppearance.Notebook.Empty" parent="TextAppearance.AppCompat">
         <item name="android:textSize">@dimen/empty_notebook_dimen</item>
-        <item name="android:textColor">@color/light_black</item>
+        <item name="android:textColor">@color/colorOnPrimary_800</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
 
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/slide_up</item>
         <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
+
+    <style name="TextAppearance.Sheet.Item" parent="TextAppearance.AppCompat">
+
     </style>
 
 </resources>

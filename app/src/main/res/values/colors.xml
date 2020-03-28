@@ -11,10 +11,10 @@
     <color name="colorPrimaryPink">#F48FB1</color>
     <color name="colorPrimaryCyan">#80DEEA</color>
 
-    <color name="colorOnPrimaryGray">#757575</color>
-    <color name="colorOnPrimaryBlue">#2196F3</color>
-    <color name="colorOnPrimaryPink">#E91E63</color>
-    <color name="colorOnPrimaryCyan">#00BCD4</color>
+    <color name="colorOnPrimaryGray">#9E9E9E</color>
+    <color name="colorOnPrimaryBlue">#42A5F5</color>
+    <color name="colorOnPrimaryPink">#EC407A</color>
+    <color name="colorOnPrimaryCyan">#26C6DA</color>
 
     <color name="transparent">#00FFFFFF</color>
 
