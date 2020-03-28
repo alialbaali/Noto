@@ -1,6 +1,9 @@
 package com.noto.note.model
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.noto.database.NotoColor
 
 @Entity(tableName = "notebooks")
 data class Notebook(
@@ -12,26 +15,7 @@ data class Notebook(
     @ColumnInfo(name = "notebook_title")
     var notebookTitle: String = "",
 
-    @ColumnInfo(name = "notebook_color")
-    var notebookColor: NotebookColor = NotebookColor.GRAY
+    @ColumnInfo(name = "noto_color")
+    var notoColor: NotoColor = NotoColor.GRAY
+
 )
-
-enum class NotebookColor {
-    GRAY,
-    BLUE,
-    PINK,
-    CYAN
-}
-
-object NotebookColorConverter {
-
-    @TypeConverter
-    @JvmStatic
-    fun toOrdinal(notebookColor: NotebookColor): Int = notebookColor.ordinal
-
-    @TypeConverter
-    @JvmStatic
-    fun toEnum(ordinal: Int): NotebookColor =
-        NotebookColor.values().first { notebookColor -> notebookColor.ordinal == ordinal }
-
-}

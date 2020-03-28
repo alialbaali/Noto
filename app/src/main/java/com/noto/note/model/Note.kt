@@ -21,8 +21,8 @@ data class Note(
     val notebookId: Long,
 
     @ColumnInfo(name = "note_title")
-    var noteTitle: String? = null,
+    var noteTitle: String = "",
 
     @ColumnInfo(name = "note_body")
-    var noteBody: String? = null
+    var noteBody: String = ""
 )
