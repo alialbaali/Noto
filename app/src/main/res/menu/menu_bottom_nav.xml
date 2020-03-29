@@ -15,9 +15,9 @@
         android:visible="true" />
 
     <item
-        android:id="@+id/notebookFragment"
+        android:id="@+id/todoListFragment"
         android:icon="@drawable/ic_library_todos_24dp"
-        android:title="@string/todos"
+        android:title="@string/todo_lists"
         android:visible="true"
         app:showAsAction="always" />
 

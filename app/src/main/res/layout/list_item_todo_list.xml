@@ -14,23 +14,23 @@
         android:layout_marginStart="@dimen/normal_margin"
         android:layout_marginTop="@dimen/small_margin"
         android:layout_marginEnd="@dimen/normal_margin"
-        android:layout_marginBottom="@dimen/small_margin"
-        android:background="@drawable/notebook_item_background_gray_drawable">
+        android:layout_marginBottom="@dimen/small_margin">
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/notebook_tv"
+            android:id="@+id/todoList_tv"
             style="@style/Style.NotoItem.TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_margin"
-            android:drawableStart="@drawable/ic_new_notebook_24dp"
+            android:drawableStart="@drawable/ic_list_24dp"
             android:drawablePadding="@dimen/normal_margin"
+            android:drawableTint="@color/colorPrimaryGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Notebook" />
+            tools:text="List" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

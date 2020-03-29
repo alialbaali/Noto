@@ -40,10 +40,11 @@
     </style>
 
     <!-- Notebook Item TextView -->
-    <style name="Style.NotebookItem.TextView" parent="Widget.MaterialComponents.TextView">
+    <style name="Style.NotoItem.TextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textColor">@color/colorOnPrimary_800</item>
         <item name="android:textSize">@dimen/notebook_item_tv_dimen</item>
+        <item name="android:singleLine">true</item>
     </style>
 
     <!-- Note Item Title -->

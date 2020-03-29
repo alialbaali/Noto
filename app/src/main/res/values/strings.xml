@@ -25,4 +25,8 @@
     <string name="update">Update</string>
     <string name="update_notebook">Update Notebook</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="todo_lists">Todo Lists</string>
+
 </resources>
