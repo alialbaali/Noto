@@ -12,38 +12,51 @@ import com.noto.database.NotoColor
 import com.noto.databinding.ListItemTodolistBinding
 import com.noto.todo.model.Todolist
 
-internal class TodoListListRVAdapter(private val context: Context) :
-    ListAdapter<Todolist, TodoListItemViewHolder>(TodoListItemDiffCallback()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoListItemViewHolder {
-        return TodoListItemViewHolder.create(parent, context)
+internal class TodolistListRVAdapter(
+    private val context: Context,
+    private val navigateToTodolist: NavigateToTodolist
+) :
+    ListAdapter<Todolist, TodolistItemViewHolder>(TodolistItemDiffCallback()) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodolistItemViewHolder {
+        return TodolistItemViewHolder.create(parent, context, navigateToTodolist)
     }
 
-    override fun onBindViewHolder(holder: TodoListItemViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
-        holder.item = item
+    override fun onBindViewHolder(holder: TodolistItemViewHolder, position: Int) {
+        val todolist = getItem(position)
+        holder.bind(todolist)
+        holder.item = todolist
     }
 
 
 }
 
-internal class TodoListItemViewHolder(
+internal class TodolistItemViewHolder(
     private val binding: ListItemTodolistBinding,
-    private val context: Context
+    private val context: Context,
+    private val navigateToTodolist: NavigateToTodolist
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
-
     lateinit var item: Todolist
 
+    init {
+        binding.root.setOnClickListener {
+            navigateToTodolist.navigate(item.todolistId)
+        }
+    }
+
     companion object {
-        fun create(parent: ViewGroup, context: Context): TodoListItemViewHolder {
-            return TodoListItemViewHolder(
+        fun create(
+            parent: ViewGroup,
+            context: Context,
+            navigateToTodolist: NavigateToTodolist
+        ): TodolistItemViewHolder {
+            return TodolistItemViewHolder(
                 ListItemTodolistBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                ), context
+                ), context, navigateToTodolist
             )
         }
     }
@@ -90,7 +103,7 @@ internal class TodoListItemViewHolder(
 
 }
 
-private class TodoListItemDiffCallback() : DiffUtil.ItemCallback<Todolist>() {
+private class TodolistItemDiffCallback() : DiffUtil.ItemCallback<Todolist>() {
     override fun areItemsTheSame(oldItem: Todolist, newItem: Todolist): Boolean {
         return oldItem.todolistId == newItem.todolistId
     }
@@ -98,4 +111,8 @@ private class TodoListItemDiffCallback() : DiffUtil.ItemCallback<Todolist>() {
     override fun areContentsTheSame(oldItem: Todolist, newItem: Todolist): Boolean {
         return oldItem == newItem
     }
+}
+
+interface NavigateToTodolist {
+    fun navigate(todolistId: Long)
 }
