@@ -18,6 +18,7 @@ interface TodoDao {
     @Update
     fun updateTodo(todo: Todo)
 
+    @Transaction
     @Delete
     fun deleteTodo(todo: Todo)
 }
