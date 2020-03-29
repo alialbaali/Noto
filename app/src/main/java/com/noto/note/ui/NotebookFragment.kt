@@ -11,18 +11,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.R
-import com.noto.databinding.DialogNotebookBinding
+import com.noto.database.NotoColor
 import com.noto.databinding.FragmentNotebookBinding
 import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNote
 import com.noto.note.adapter.NotebookRVAdapter
 import com.noto.note.model.Notebook
-import com.noto.note.model.NotebookColor
 import com.noto.note.viewModel.NotebookViewModel
 import com.noto.note.viewModel.NotebookViewModelFactory
-import timber.log.Timber
 
 /**
  * A simple [Fragment] subclass.
@@ -34,11 +33,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
     private lateinit var adapter: NotebookRVAdapter
 
-    private var notebookId = 0L
-
-    private var notebookTitle = ""
-
-    private var notebookColor = NotebookColor.GRAY
+    private val args by navArgs<NotebookFragmentArgs>()
 
     private val viewModel by viewModels<NotebookViewModel> {
         NotebookViewModelFactory(Repos.notebookRepository, Repos.noteRepository)
@@ -50,56 +45,51 @@ class NotebookFragment : Fragment(), NavigateToNote {
     ): View? {
         binding = FragmentNotebookBinding.inflate(inflater, container, false)
 
-        // Arguments
-        arguments?.let { args ->
-            notebookId = args.getLong("notebook_id")
-            notebookTitle = args.getString("notebook_title") ?: ""
-            notebookColor = args.get("notebook_color") as NotebookColor
-        }
+        binding.lifecycleOwner = this
 
-        // Binding
-        binding.let {
-
-            it.lifecycleOwner = this
-
-            when (notebookColor) {
-                NotebookColor.GRAY -> setGray()
-                NotebookColor.BLUE -> setBlue()
-                NotebookColor.PINK -> setPink()
-                NotebookColor.CYAN -> setCyan()
-            }
-
+        when (args.notoColor) {
+            NotoColor.GRAY -> setGray()
+            NotoColor.BLUE -> setBlue()
+            NotoColor.PINK -> setPink()
+            NotoColor.CYAN -> setCyan()
         }
 
         // RV
         binding.rv.let { rv ->
 
-            viewModel.getNotes(notebookId)
+            viewModel.getNotes(args.notebookId)
 
             adapter = NotebookRVAdapter(this)
+
             rv.adapter = adapter
 
             rv.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
             viewModel.notes.observe(viewLifecycleOwner, Observer {
+
                 it?.let {
+
                     if (it.isEmpty()) {
                         rv.visibility = View.GONE
                         binding.emptyNotebook.visibility = View.VISIBLE
                     } else {
+
                         rv.visibility = View.VISIBLE
                         binding.emptyNotebook.visibility = View.GONE
                         adapter.submitList(it)
                     }
+
                 }
+
             })
+
         }
 
         // Collapsing Toolbar
         binding.ctb.let { ctb ->
 
-            ctb.title = notebookTitle
+            ctb.title = args.notebookTitle
 
             ctb.setCollapsedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_bold))
 
@@ -110,14 +100,12 @@ class NotebookFragment : Fragment(), NavigateToNote {
             this.findNavController().navigate(
                 NotebookFragmentDirections.actionNotebookFragmentToNoteFragment(
                     0L,
-                    notebookId,
-                    notebookTitle,
-                    notebookColor
+                    args.notebookId,
+                    args.notebookTitle,
+                    args.notoColor
                 )
             )
         }
-
-        binding.fab.imageTintList = ColorStateList.valueOf(Color.WHITE)
 
         binding.tb.let { tb ->
 
@@ -129,8 +117,10 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
                 when (it.itemId) {
                     R.id.style -> {
-                        NotebookDialog(context!!).apply {
-                            this.notebook = Notebook(notebookId, notebookTitle, notebookColor)
+                        NotebookDialog(
+                            context!!,
+                            Notebook(args.notebookId, args.notebookTitle, args.notoColor)
+                        ).apply {
                             dialogBinding.createBtn.text = resources.getString(R.string.update)
                             dialogBinding.tv.text = resources.getString(R.string.update_notebook)
                             dialogBinding.createBtn.setOnClickListener {
@@ -164,7 +154,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
                     }
 
                     R.id.delete_notebook -> {
-                        viewModel.deleteNotebook(notebookId)
+                        viewModel.deleteNotebook(args.notebookId)
                         this.findNavController().navigateUp()
                         true
                     }
@@ -186,30 +176,30 @@ class NotebookFragment : Fragment(), NavigateToNote {
         binding.let {
 
             activity?.window?.statusBarColor =
-                resources.getColor(R.color.gray_primary, null)
+                resources.getColor(R.color.colorPrimaryGray, null)
 
             it.cool.setBackgroundColor(
                 resources.getColor(
-                    R.color.gray_primary,
+                    R.color.colorPrimaryGray,
                     null
                 )
             )
 
             it.ctb.setBackgroundColor(
                 resources.getColor(
-                    R.color.gray_primary,
+                    R.color.colorPrimaryGray,
                     null
                 )
             )
             it.ctb.setContentScrimColor(
                 resources.getColor(
-                    R.color.gray_primary,
+                    R.color.colorPrimaryGray,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.gray_primary,
+                    R.color.colorPrimaryGray,
                     null
                 )
             )
@@ -218,7 +208,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 resources.getDrawable(R.drawable.notebook_item_background_gray_drawable, null)
 
             it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.gray_primary_dark, null))
+                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryGray, null))
         }
     }
 
@@ -226,30 +216,30 @@ class NotebookFragment : Fragment(), NavigateToNote {
         binding.let {
 
             activity?.window?.statusBarColor =
-                resources.getColor(R.color.blue_primary, null)
+                resources.getColor(R.color.colorPrimaryBlue, null)
 
             it.cool.setBackgroundColor(
                 resources.getColor(
-                    R.color.blue_primary,
+                    R.color.colorPrimaryBlue,
                     null
                 )
             )
 
             it.ctb.setBackgroundColor(
                 resources.getColor(
-                    R.color.blue_primary,
+                    R.color.colorPrimaryBlue,
                     null
                 )
             )
             it.ctb.setContentScrimColor(
                 resources.getColor(
-                    R.color.blue_primary,
+                    R.color.colorPrimaryBlue,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.blue_primary,
+                    R.color.colorPrimaryBlue,
                     null
                 )
             )
@@ -258,7 +248,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 resources.getDrawable(R.drawable.notebook_item_background_blue_drawable, null)
 
             it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.blue_primary_dark, null))
+                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryBlue, null))
         }
     }
 
@@ -266,31 +256,31 @@ class NotebookFragment : Fragment(), NavigateToNote {
         binding.let {
 
             activity?.window?.statusBarColor =
-                resources.getColor(R.color.pink_primary, null)
+                resources.getColor(R.color.colorPrimaryPink, null)
 
 
             it.cool.setBackgroundColor(
                 resources.getColor(
-                    R.color.pink_primary,
+                    R.color.colorPrimaryPink,
                     null
                 )
             )
 
             it.ctb.setBackgroundColor(
                 resources.getColor(
-                    R.color.pink_primary,
+                    R.color.colorPrimaryPink,
                     null
                 )
             )
             it.ctb.setContentScrimColor(
                 resources.getColor(
-                    R.color.pink_primary,
+                    R.color.colorPrimaryPink,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.pink_primary,
+                    R.color.colorPrimaryPink,
                     null
                 )
             )
@@ -299,7 +289,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 resources.getDrawable(R.drawable.notebook_item_background_pink_drawable, null)
 
             it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.pink_primary_dark, null))
+                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryPink, null))
         }
     }
 
@@ -307,31 +297,31 @@ class NotebookFragment : Fragment(), NavigateToNote {
         binding.let {
 
             activity?.window?.statusBarColor =
-                resources.getColor(R.color.cyan_primary, null)
+                resources.getColor(R.color.colorPrimaryCyan, null)
 
 
             it.cool.setBackgroundColor(
                 resources.getColor(
-                    R.color.cyan_primary,
+                    R.color.colorPrimaryCyan,
                     null
                 )
             )
 
             it.ctb.setBackgroundColor(
                 resources.getColor(
-                    R.color.cyan_primary,
+                    R.color.colorPrimaryCyan,
                     null
                 )
             )
             it.ctb.setContentScrimColor(
                 resources.getColor(
-                    R.color.cyan_primary,
+                    R.color.colorPrimaryCyan,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.cyan_primary,
+                    R.color.colorPrimaryCyan,
                     null
                 )
             )
@@ -340,7 +330,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 resources.getDrawable(R.drawable.notebook_item_background_cyan_drawable, null)
 
             it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.cyan_primary_dark, null))
+                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryCyan, null))
         }
     }
 
@@ -349,9 +339,9 @@ class NotebookFragment : Fragment(), NavigateToNote {
             .navigate(
                 NotebookFragmentDirections.actionNotebookFragmentToNoteFragment(
                     id,
-                    notebookId,
-                    notebookTitle,
-                    notebookColor
+                    args.notebookId,
+                    args.notebookTitle,
+                    args.notoColor
                 )
             )
     }

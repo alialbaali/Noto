@@ -9,69 +9,93 @@
             type="com.noto.note.viewModel.NoteViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl_back_layer"
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cool"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/gray_primary">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/tb"
-            android:layout_width="0dp"
-            app:navigationIcon="@drawable/ic_back_24px"
-            app:menu="@menu/menu_note"
-            android:layout_height="wrap_content"
-            android:background="@color/gray_primary"
-            app:layout_constraintLeft_toLeftOf="@id/cl_back_layer"
-            app:layout_constraintRight_toRightOf="@id/cl_back_layer"
-            app:layout_constraintTop_toTopOf="@id/cl_back_layer" />
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_front_layer"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/note_fragment_background"
-            app:layout_constraintBottom_toBottomOf="@id/cl_back_layer"
-            app:layout_constraintEnd_toEndOf="@id/cl_back_layer"
-            app:layout_constraintStart_toStartOf="@id/cl_back_layer"
-            app:layout_constraintTop_toBottomOf="@id/tb">
+            android:id="@+id/cl_back_layer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryGray">
 
-            <EditText
-                android:id="@+id/title"
-                style="@style/Style.NoteFragment.Title"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb"
                 android:layout_width="0dp"
+                app:titleTextColor="@color/colorOnPrimary_900"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/large_margin"
-                android:layout_marginTop="@dimen/normal_margin"
-                android:layout_marginEnd="@dimen/large_margin"
-                android:layout_marginBottom="@dimen/small_margin"
-                android:hint="@string/title"
-                android:inputType="textAutoCorrect|textPersonName|textAutoComplete|textCapSentences|textMultiLine|textImeMultiLine"
-                android:text="@={viewModel.note.noteTitle}"
-                app:layout_constraintBottom_toTopOf="@id/body"
-                app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
-                app:layout_constraintStart_toStartOf="@id/cl_front_layer"
-                app:layout_constraintTop_toTopOf="@id/cl_front_layer" />
+                android:background="@color/colorPrimaryGray"
+                app:layout_constraintLeft_toLeftOf="@id/cl_back_layer"
+                app:layout_constraintRight_toRightOf="@id/cl_back_layer"
+                app:layout_constraintTop_toTopOf="@id/cl_back_layer"
+                app:navigationIcon="@drawable/ic_back_24px" />
 
-            <EditText
-                android:id="@+id/body"
-                style="@style/Style.NoteFragment.Body"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_front_layer"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="@dimen/large_margin"
-                android:layout_marginTop="@dimen/small_margin"
-                android:layout_marginEnd="@dimen/large_margin"
-                android:hint="@string/body"
-                android:inputType="textAutoCorrect|textPersonName|textAutoComplete|textMultiLine|textImeMultiLine|textCapSentences"
-                android:text="@={viewModel.note.noteBody}"
-                app:layout_constraintBottom_toBottomOf="@id/cl_front_layer"
-                app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
-                app:layout_constraintStart_toStartOf="@id/cl_front_layer"
-                app:layout_constraintTop_toBottomOf="@id/title" />
+                android:background="@drawable/note_fragment_background"
+                app:layout_constraintBottom_toBottomOf="@id/cl_back_layer"
+                app:layout_constraintEnd_toEndOf="@id/cl_back_layer"
+                app:layout_constraintStart_toStartOf="@id/cl_back_layer"
+                app:layout_constraintTop_toBottomOf="@id/tb">
+
+                <EditText
+                    android:id="@+id/title"
+                    style="@style/Style.NoteFragment.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/large_margin"
+                    android:layout_marginTop="@dimen/normal_margin"
+                    android:layout_marginEnd="@dimen/large_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:hint="@string/title"
+                    android:textColorHint="@color/colorOnPrimary_600"
+                    android:inputType="textAutoCorrect|textPersonName|textAutoComplete|textCapSentences|textMultiLine|textImeMultiLine|text"
+                    android:text="@={viewModel.note.noteTitle}"
+                    app:layout_constraintBottom_toTopOf="@id/body"
+                    app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
+                    app:layout_constraintStart_toStartOf="@id/cl_front_layer"
+                    app:layout_constraintTop_toTopOf="@id/cl_front_layer" />
+
+                <EditText
+                    android:id="@+id/body"
+                    style="@style/Style.NoteFragment.Body"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/large_margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginEnd="@dimen/large_margin"
+                    android:hint="@string/body"
+                    android:textColorHint="@color/colorOnPrimary_600"
+                    android:inputType="textAutoCorrect|textPersonName|textAutoComplete|textMultiLine|textImeMultiLine|textCapSentences|text"
+                    android:text="@={viewModel.note.noteBody}"
+                    app:layout_constraintBottom_toBottomOf="@id/cl_front_layer"
+                    app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
+                    app:layout_constraintStart_toStartOf="@id/cl_front_layer"
+                    app:layout_constraintTop_toBottomOf="@id/title" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="bottom"-->
+<!--            android:background="@drawable/dialog_rbtn_gray_drawable">-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+<!--            <ImageButton-->
+<!--                android:id="@+id/bold"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:backgroundTint="@color/transparent"-->
+<!--                android:src="@drawable/ic_format_bold_24dp" />-->
+
+
+<!--        </LinearLayout>-->
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

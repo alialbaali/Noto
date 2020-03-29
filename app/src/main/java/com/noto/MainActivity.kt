@@ -1,5 +1,7 @@
 package com.noto
 
+import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.animation.OvershootInterpolator
@@ -59,6 +61,18 @@ class MainActivity : AppCompatActivity() {
                 binding.exFab.visibility = View.VISIBLE
                 binding.exFab.text = resources.getString(R.string.create)
                 binding.bottomNav.visibility = View.VISIBLE
+            }
+        }
+
+        when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES ->
+                window.decorView.systemUiVisibility = 0
+
+            Configuration.UI_MODE_NIGHT_NO
+            -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                }
             }
         }
 

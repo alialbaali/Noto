@@ -9,10 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.noto.R
+import com.noto.database.NotoColor
 import com.noto.databinding.FragmentNoteBinding
 import com.noto.network.Repos
-import com.noto.note.model.NotebookColor
 import com.noto.note.viewModel.NoteViewModel
 import com.noto.note.viewModel.NoteViewModelFactory
 
@@ -24,18 +25,11 @@ class NoteFragment : Fragment() {
     // Binding
     private lateinit var binding: FragmentNoteBinding
 
-    private var noteId = 0L
-
-    private var notebookId = 0L
-
-    private var notebookColor = NotebookColor.GRAY
-
-    private var notebookTitle = ""
-
-
     private val viewModel by viewModels<NoteViewModel> {
         NoteViewModelFactory(Repos.noteRepository)
     }
+
+    private val args by navArgs<NoteFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,24 +39,17 @@ class NoteFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        arguments?.let { args ->
-            noteId = args.getLong("note_id")
-            notebookId = args.getLong("notebook_id")
-            notebookTitle = args.getString("notebook_title") ?: ""
-            notebookColor = args.get("notebook_color") as NotebookColor
+        when (args.notoColor) {
+            NotoColor.GRAY -> setGray()
+            NotoColor.BLUE -> setBlue()
+            NotoColor.PINK -> setPink()
+            NotoColor.CYAN -> setCyan()
         }
 
-        when (notebookColor) {
-            NotebookColor.GRAY -> setGray()
-            NotebookColor.BLUE -> setBlue()
-            NotebookColor.PINK -> setPink()
-            NotebookColor.CYAN -> setCyan()
-        }
-
-        viewModel.getNoteById(notebookId, noteId)
+        viewModel.getNoteById(args.notebookId, args.noteId)
 
         binding.tb.let { tb ->
-            tb.title = notebookTitle
+            tb.title = args.notebookTitle
 
             tb.setNavigationOnClickListener {
                 viewModel.saveNote()
@@ -87,7 +74,7 @@ class NoteFragment : Fragment() {
             viewModel.saveNote()
         }.isEnabled = true
 
-        // A workarount to one way data binding
+        // A workaround to one way data binding
         viewModel.note.observe(viewLifecycleOwner, Observer {
             it?.let {
                 binding.title.setText(it.noteTitle)
@@ -102,13 +89,13 @@ class NoteFragment : Fragment() {
         binding.let {
             it.clBackLayer.setBackgroundColor(
                 resources.getColor(
-                    R.color.cyan_primary,
+                    R.color.colorPrimaryCyan,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.cyan_primary,
+                    R.color.colorPrimaryCyan,
                     null
                 )
             )
@@ -119,13 +106,13 @@ class NoteFragment : Fragment() {
         binding.let {
             it.clBackLayer.setBackgroundColor(
                 resources.getColor(
-                    R.color.pink_primary,
+                    R.color.colorPrimaryPink,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.pink_primary,
+                    R.color.colorPrimaryPink,
                     null
                 )
             )
@@ -136,13 +123,13 @@ class NoteFragment : Fragment() {
         binding.let {
             it.clBackLayer.setBackgroundColor(
                 resources.getColor(
-                    R.color.blue_primary,
+                    R.color.colorPrimaryBlue,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.blue_primary,
+                    R.color.colorPrimaryBlue,
                     null
                 )
             )
@@ -153,13 +140,13 @@ class NoteFragment : Fragment() {
         binding.let {
             it.clBackLayer.setBackgroundColor(
                 resources.getColor(
-                    R.color.gray_primary,
+                    R.color.colorPrimaryGray,
                     null
                 )
             )
             it.tb.setBackgroundColor(
                 resources.getColor(
-                    R.color.gray_primary,
+                    R.color.colorPrimaryGray,
                     null
                 )
             )

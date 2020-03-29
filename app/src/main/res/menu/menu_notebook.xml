@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/style"
         android:contentDescription="@string/change_style"
@@ -10,13 +11,13 @@
         android:visible="true"
         app:showAsAction="ifRoom" />
 
-        <item
-            android:id="@+id/delete_notebook"
-            android:contentDescription="@string/delete_notebook"
-            android:enabled="true"
-            android:icon="@drawable/ic_delete_sweep_24px"
-            android:title="@string/delete_notebook"
-            android:visible="true"
-            app:showAsAction="never" />
+    <item
+        android:id="@+id/delete_notebook"
+        android:contentDescription="@string/delete_notebook"
+        android:enabled="true"
+        android:icon="@drawable/ic_delete_sweep_24px"
+        android:title="@string/delete_notebook"
+        android:visible="true"
+        app:showAsAction="never" />
 
 </menu>

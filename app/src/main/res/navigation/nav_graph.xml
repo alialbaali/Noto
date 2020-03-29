@@ -29,9 +29,9 @@
             android:name="notebook_title"
             app:argType="string" />
         <argument
-            android:name="notebook_color"
-            android:defaultValue="GRAY"
-            app:argType="com.noto.note.model.NotebookColor" />
+            android:name="noto_color"
+            app:argType="com.noto.database.NotoColor"
+            android:defaultValue="GRAY" />
         <action
             android:id="@+id/action_notebookFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
@@ -56,8 +56,8 @@
             android:name="notebook_title"
             app:argType="string" />
         <argument
-            android:name="notebook_color"
-            app:argType="com.noto.note.model.NotebookColor"
+            android:name="noto_color"
+            app:argType="com.noto.database.NotoColor"
             android:defaultValue="GRAY" />
     </fragment>
 </navigation>

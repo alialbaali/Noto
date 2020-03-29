@@ -9,16 +9,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowManager
 import com.noto.R
+import com.noto.database.NotoColor
 import com.noto.databinding.DialogNotebookBinding
 import com.noto.note.model.Notebook
-import com.noto.note.model.NotebookColor
 
-class NotebookDialog(context: Context) : AlertDialog(context) {
+class NotebookDialog(context: Context, val notebook: Notebook) : AlertDialog(context) {
     private val resources = context.resources
 
     internal val dialogBinding = DialogNotebookBinding.inflate(LayoutInflater.from(context))
-
-    lateinit var notebook: Notebook
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +29,11 @@ class NotebookDialog(context: Context) : AlertDialog(context) {
 
         dialogBinding.notebook = notebook
 
-        when (notebook.notebookColor) {
-            NotebookColor.GRAY -> setGray()
-            NotebookColor.BLUE -> setBlue()
-            NotebookColor.PINK -> setPink()
-            NotebookColor.CYAN -> setCyan()
+        when (notebook.notoColor) {
+            NotoColor.GRAY -> setGray()
+            NotoColor.BLUE -> setBlue()
+            NotoColor.PINK -> setPink()
+            NotoColor.CYAN -> setCyan()
         }
 
         dialogBinding.rbtnGray.setOnClickListener {
@@ -57,60 +55,74 @@ class NotebookDialog(context: Context) : AlertDialog(context) {
 
     private fun setGray() {
 
-        notebook.notebookColor = NotebookColor.GRAY
+        notebook.notoColor = NotoColor.GRAY
 
         dialogBinding.til.boxBackgroundColor =
-            resources.getColor(R.color.gray_primary, null)
+            resources.getColor(R.color.colorPrimaryGray, null)
 
         dialogBinding.root.background =
             resources.getDrawable(R.drawable.dialog_background_gray_drawable, null)
 
+        dialogBinding.et.setBackgroundColor(
+            resources.getColor(R.color.colorPrimaryGray, null)
+        )
+
         dialogBinding.createBtn.backgroundTintList =
-            ColorStateList.valueOf(resources.getColor(R.color.gray_primary_dark, null))
+            ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryGray, null))
     }
 
     private fun setBlue() {
 
-        notebook.notebookColor = NotebookColor.BLUE
+        notebook.notoColor = NotoColor.BLUE
 
         dialogBinding.root.background =
             resources.getDrawable(R.drawable.dialog_background_blue_drawable, null)
 
         dialogBinding.til.boxBackgroundColor =
-            resources.getColor(R.color.blue_primary, null)
+            resources.getColor(R.color.colorPrimaryBlue, null)
+
+        dialogBinding.et.setBackgroundColor(
+            resources.getColor(R.color.colorPrimaryBlue, null)
+        )
 
         dialogBinding.createBtn.backgroundTintList =
-            ColorStateList.valueOf(resources.getColor(R.color.blue_primary_dark, null))
+            ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryBlue, null))
     }
 
     private fun setPink() {
 
-        notebook.notebookColor = NotebookColor.PINK
+        notebook.notoColor = NotoColor.PINK
 
         dialogBinding.root.background =
             resources.getDrawable(R.drawable.dialog_background_pink_drawable, null)
 
         dialogBinding.til.boxBackgroundColor =
-            resources.getColor(R.color.pink_primary, null)
+            resources.getColor(R.color.colorPrimaryPink, null)
+
+        dialogBinding.et.setBackgroundColor(
+            resources.getColor(R.color.colorPrimaryPink, null)
+        )
 
         dialogBinding.createBtn.backgroundTintList =
-            ColorStateList.valueOf(resources.getColor(R.color.pink_primary_dark, null))
+            ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryPink, null))
     }
 
     private fun setCyan() {
 
-        notebook.notebookColor = NotebookColor.CYAN
+        notebook.notoColor = NotoColor.CYAN
 
         dialogBinding.root.background =
             resources.getDrawable(R.drawable.dialog_background_cyan_drawable, null)
 
         dialogBinding.til.boxBackgroundColor =
-            resources.getColor(R.color.cyan_primary, null)
+            resources.getColor(R.color.colorPrimaryCyan, null)
 
-//            viewModel.notebook.value?.notebookColor = NotebookColor.CYAN
+        dialogBinding.et.setBackgroundColor(
+            resources.getColor(R.color.colorPrimaryCyan, null)
+        )
 
         dialogBinding.createBtn.backgroundTintList =
-            ColorStateList.valueOf(resources.getColor(R.color.cyan_primary_dark, null))
+            ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryCyan, null))
 
     }
 }

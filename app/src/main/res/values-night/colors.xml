@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#212121</color>
+    <color name="colorOnPrimary_900">#FAFAFA</color>
+    <color name="colorOnPrimary_800">#FEFEFE</color>
+    <color name="colorOnPrimary_600">#E0E0E0</color>
+
+    <color name="colorPrimaryGray">#616161</color>
+    <color name="colorPrimaryBlue">#0D47A1</color>
+    <color name="colorPrimaryPink">#880E4F</color>
+    <color name="colorPrimaryCyan">#006064</color>
+
+    <color name="colorOnPrimaryGray">#9E9E9E</color>
+    <color name="colorOnPrimaryBlue">#1976D2</color>
+    <color name="colorOnPrimaryPink">#C2185B</color>
+    <color name="colorOnPrimaryCyan">#0097A7</color>
+
+    <color name="transparent">#00FFFFFF</color>
+
+</resources>

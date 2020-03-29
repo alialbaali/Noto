@@ -6,6 +6,6 @@
         android:radius="100dp"/>
 
     <solid
-        android:color="@color/note_fragment_background_color"/>
+        android:color="@color/colorPrimary"/>
 
 </shape>

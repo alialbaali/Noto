@@ -14,12 +14,6 @@ class NotebookRepository(private val notebookDao: NotebookDao) {
         }
     }
 
-    suspend fun getNotebookById(notebookId: Long): Notebook {
-        return withContext(Dispatchers.IO) {
-            notebookDao.getNotebookById(notebookId)
-        }
-    }
-
     suspend fun insertNotebook(notebook: Notebook) {
         withContext(Dispatchers.IO) {
             notebookDao.insertNotebook(notebook)

@@ -20,14 +20,6 @@ internal class NotebookViewModel(
         }
     }
 
-    internal fun getNotebookById(notebookId: Long): Notebook {
-        var notebook = Notebook()
-        viewModelScope.launch {
-            notebook = notebookRepository.getNotebookById(notebookId)
-        }
-        return notebook
-    }
-
     internal fun updateNotebook(notebook: Notebook) {
         viewModelScope.launch {
             notebookRepository.updateNotebook(notebook)
@@ -38,14 +30,6 @@ internal class NotebookViewModel(
         viewModelScope.launch {
             notebookRepository.deleteNotebook(notebookId)
         }
-    }
-
-    internal fun getNotebooks(): List<Notebook> {
-        val notebooks = MutableLiveData<List<Notebook>>()
-        viewModelScope.launch {
-            notebooks.postValue(notebookRepository.getNotebooks().value)
-        }
-        return notebooks.value ?: throw KotlinNullPointerException("EMPTY NOTEBOOKS")
     }
 }
 

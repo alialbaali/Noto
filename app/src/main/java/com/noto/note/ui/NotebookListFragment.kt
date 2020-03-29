@@ -11,12 +11,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.noto.R
 import com.noto.databinding.FragmentNotebookListBinding
 import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNotebook
+import com.noto.note.adapter.NotebookItemTouchHelperCallback
 import com.noto.note.adapter.NotebookListRVAdapter
 import com.noto.note.model.Notebook
 import com.noto.note.viewModel.NotebookListViewModel
@@ -44,14 +46,9 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
     ): View? {
         binding = FragmentNotebookListBinding.inflate(inflater, container, false)
 
-        // Binding
-        binding.let {
+        binding.lifecycleOwner = this
 
-            it.lifecycleOwner = this
-
-        }
-
-        activity?.window?.statusBarColor = resources.getColor(R.color.bottom_nav_color, null)
+        activity?.window?.statusBarColor = resources.getColor(R.color.colorPrimary, null)
 
         // Collapse Toolbar
         binding.ctb.let { ctb ->
@@ -66,8 +63,12 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
         binding.rv.let { rv ->
 
             // RV Adapter
-            adapter = NotebookListRVAdapter(this)
+            adapter = NotebookListRVAdapter(this, viewModel)
             rv.adapter = adapter
+
+            NotebookItemTouchHelperCallback(adapter).let {
+                ItemTouchHelper(it).attachToRecyclerView(rv)
+            }
 
             // RV Layout Manger
             rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -83,37 +84,37 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
             activity?.findViewById(R.id.exFab_new_notebook) as ExtendedFloatingActionButton
 
         exFabNewNotebook.setOnClickListener {
+            NotebookDialog(
+                context!!,
+                Notebook()
+            ).apply {
+                this.dialogBinding.createBtn.setOnClickListener {
 
-            val dialog = NotebookDialog(context!!).apply {
-                this.notebook = Notebook()
-                create()
-                show()
-            }
+                    when {
+                        this.notebook.notebookTitle.isBlank() -> {
 
-            dialog.dialogBinding.createBtn.setOnClickListener {
+                            this.dialogBinding.til.error =
+                                "Notebook with the same title already exists!"
+                            this.dialogBinding.til.counterTextColor =
+                                ColorStateList.valueOf(Color.RED)
 
-                when {
-                    dialog.notebook.notebookTitle.isBlank() -> {
+                        }
+                        viewModel.notebooks.value?.any { it.notebookTitle == this.notebook.notebookTitle }!! -> {
 
-                        dialog.dialogBinding.til.error =
-                            "Notebook with the same title already exists!"
-                        dialog.dialogBinding.til.counterTextColor =
-                            ColorStateList.valueOf(Color.RED)
+                            this.dialogBinding.til.error =
+                                "Notebook with the same title already exists!"
+                            this.dialogBinding.til.counterTextColor =
+                                ColorStateList.valueOf(Color.RED)
 
-                    }
-                    viewModel.notebooks.value?.any { it.notebookTitle == dialog.notebook.notebookTitle }!! -> {
-
-                        dialog.dialogBinding.til.error =
-                            "Notebook with the same title already exists!"
-                        dialog.dialogBinding.til.counterTextColor =
-                            ColorStateList.valueOf(Color.RED)
-
-                    }
-                    else -> {
-                        viewModel.saveNotebook(dialog.notebook)
-                        dialog.dismiss()
+                        }
+                        else -> {
+                            viewModel.saveNotebook(this.notebook)
+                            this.dismiss()
+                        }
                     }
                 }
+                create()
+                show()
 
             }
         }
@@ -129,8 +130,35 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
             NotebookListFragmentDirections.actionNotebookListFragmentToNotebookFragment(
                 notebook.notebookId,
                 notebook.notebookTitle,
-                notebook.notebookColor
+                notebook.notoColor
             )
         )
     }
+
+//    override fun onDrag(notebook: Notebook, target: Notebook) {
+//        if (notebook.notebookPosition < target.notebookPosition) {
+//            for (i in notebook.notebookPosition until target.notebookPosition) {
+//                Timber.i("UPDATING")
+//                val list = viewModel.get.value!!.toMutableList()
+//
+//                list[notebook.notebookPosition] = list[target.notebookPosition].also {
+//                    list[target.notebookPosition] = list[notebook.notebookPosition]
+//                }
+//            }
+//
+//            } else {
+////            for (i in fromPosition downTo toPosition + 1) {
+////                Collections.swap(mItems, i, i - 1)
+////            }
+//            }
+//            adapter.notifyItemMoved(notebook.notebookPosition, target.notebookPosition)
+//        }
+//
+//    override fun onSwipe(notebook: Notebook) {
+//        viewModel.deleteNotebook(notebook.notebookId)
+//    }
+//
+//    override fun clearView() {
+//        viewModel.update(viewModel.get.value!!)
+//    }
 }

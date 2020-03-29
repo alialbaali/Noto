@@ -25,7 +25,7 @@
             android:layout_marginBottom="@dimen/small_margin"
             android:fontFamily="@font/roboto"
             android:text="@string/create_new_notebook"
-            android:textColor="@color/light_black"
+            android:textColor="@color/colorOnPrimary_800"
             android:textSize="24sp"
             app:fontFamily="@font/roboto_medium"
             app:layout_constraintBottom_toTopOf="@id/til"
@@ -41,15 +41,15 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_marginBottom="@dimen/small_margin"
-            app:boxStrokeColor="@color/dialog_et_color"
+            app:boxStrokeColor="@color/colorOnPrimary_600"
             app:boxStrokeWidth="1dp"
             app:boxStrokeWidthFocused="1dp"
             app:counterEnabled="true"
             app:counterMaxLength="20"
-            app:counterTextColor="@color/dialog_et_color"
+            app:counterTextColor="@color/colorOnPrimary_600"
             app:errorEnabled="true"
             app:errorIconDrawable="@null"
-            app:hintTextColor="@color/dialog_et_color"
+            app:hintTextColor="@color/colorOnPrimary_600"
             app:layout_constraintBottom_toTopOf="@id/rg"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
@@ -66,7 +66,7 @@
                 android:maxLength="20"
                 android:singleLine="true"
                 android:text="@={notebook.notebookTitle}"
-                android:textColor="@color/light_black"
+                android:textColor="@color/colorOnPrimary_800"
                 android:textCursorDrawable="@null"
                 android:textSize="18sp" />
 
@@ -125,7 +125,7 @@
             android:layout_marginStart="@dimen/extra_small_margin"
             android:layout_marginTop="@dimen/normal_margin"
             android:layout_marginBottom="@dimen/normal_margin"
-            android:backgroundTint="@color/gray_primary_dark"
+            android:backgroundTint="@color/colorOnPrimaryGray"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/create"
             android:textAllCaps="false"
@@ -147,7 +147,7 @@
             android:fontFamily="@font/roboto_medium"
             android:text="@string/cancel"
             android:textAllCaps="false"
-            android:textColor="@color/light_black"
+            android:textColor="@color/colorOnPrimary_800"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="@id/cl"
             app:layout_constraintEnd_toStartOf="@+id/create_btn"
@@ -155,7 +155,7 @@
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@+id/rg"
-            app:rippleColor="@color/gray_primary_dark" />
+            app:rippleColor="@color/colorOnPrimaryGray" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/start_guideline"

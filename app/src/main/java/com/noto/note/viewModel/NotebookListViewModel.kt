@@ -30,6 +30,12 @@ internal class NotebookListViewModel(private val notebookRepository: NotebookRep
             }
         }
     }
+
+    internal fun deleteNotebook(notebookId: Long) {
+        viewModelScope.launch {
+            notebookRepository.deleteNotebook(notebookId)
+        }
+    }
 }
 
 internal class NotebookListViewModelFactory(private val notebookDao: NotebookRepository) :
