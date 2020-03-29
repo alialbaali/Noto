@@ -4,10 +4,7 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.animation.OvershootInterpolator
-import android.view.animation.RotateAnimation
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -23,9 +20,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        DAOs.notebookDao = AppDatabase.getInstance(application).notebookDao
+        DAOs.notebookDao = AppDatabase.getInstance(applicationContext).notebookDao
 
         DAOs.noteDao = AppDatabase.getInstance(applicationContext).noteDao
+
+        DAOs.todolistDao = AppDatabase.getInstance(applicationContext).todolistDao
+
+        DAOs.todoDao = AppDatabase.getInstance(applicationContext).todoDao
+
+        DAOs.subTodoDao = AppDatabase.getInstance(applicationContext).subTodoDao
 
         val navController = findNavController(R.id.nav_host_fragment)
 

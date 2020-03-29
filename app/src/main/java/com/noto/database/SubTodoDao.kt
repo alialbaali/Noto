@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.noto.todo.model.SubTodo
 
+@Dao
 interface SubTodoDao {
 
     @Insert

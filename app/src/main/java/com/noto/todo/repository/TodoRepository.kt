@@ -8,9 +8,9 @@ import kotlinx.coroutines.withContext
 
 class TodoRepository(private val todoDao: TodoDao) {
 
-    suspend fun getTodos(todoListId: Long): LiveData<List<Todo>> {
+    suspend fun getTodos(todolistId: Long): LiveData<List<Todo>> {
         return withContext(Dispatchers.Main) {
-            todoDao.getTodos(todoListId)
+            todoDao.getTodos(todolistId)
         }
     }
 

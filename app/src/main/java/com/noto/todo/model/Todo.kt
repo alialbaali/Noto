@@ -13,12 +13,12 @@ data class Todo(
     val todoId: Long = 0L,
 
     @ForeignKey(
-        entity = TodoList::class,
-        parentColumns = ["todo_list_id"],
+        entity = Todolist::class,
+        parentColumns = ["todolist_id"],
         childColumns = ["todo_id"],
         onDelete = ForeignKey.CASCADE
     )
-    @ColumnInfo(name = "todo_list_id")
+    @ColumnInfo(name = "todolist_id")
     val todoListId: Long,
 
     @ColumnInfo(name = "todo_title")

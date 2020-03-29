@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_notebookListFragment_to_notebookFragment"
             app:destination="@id/notebookFragment" />
+        <action
+            android:id="@+id/action_notebookListFragment_to_todolistListFragment"
+            app:destination="@id/todolistListFragment" />
     </fragment>
     <fragment
         android:id="@+id/notebookFragment"
@@ -59,5 +62,14 @@
             android:name="noto_color"
             app:argType="com.noto.database.NotoColor"
             android:defaultValue="GRAY" />
+    </fragment>
+    <fragment
+        android:id="@+id/todolistListFragment"
+        android:name="com.noto.todo.ui.TodolistListFragment"
+        android:label="TodolistListFragment"
+        tools:layout="@layout/fragment_todolist_list">
+        <action
+            android:id="@+id/action_todolistListFragment_to_notebookListFragment"
+            app:destination="@id/notebookListFragment" />
     </fragment>
 </navigation>

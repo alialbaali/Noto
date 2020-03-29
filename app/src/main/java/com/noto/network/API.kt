@@ -4,7 +4,7 @@ import com.noto.database.*
 import com.noto.note.repository.NoteRepository
 import com.noto.note.repository.NotebookRepository
 import com.noto.todo.repository.SubTodoRepository
-import com.noto.todo.repository.TodoListRepository
+import com.noto.todo.repository.TodolistRepository
 import com.noto.todo.repository.TodoRepository
 
 internal object DAOs {
@@ -13,7 +13,7 @@ internal object DAOs {
 
     internal lateinit var noteDao: NoteDao
 
-    internal lateinit var todoListDao: TodoListDao
+    internal lateinit var todolistDao: TodolistDao
 
     internal lateinit var todoDao: TodoDao
 
@@ -31,8 +31,8 @@ internal object Repos {
         NoteRepository(DAOs.noteDao)
     }
 
-    internal val todoListRepository by lazy {
-        TodoListRepository(DAOs.todoListDao)
+    internal val todolistRepository by lazy {
+        TodolistRepository(DAOs.todolistDao)
     }
 
     internal val todoRepository by lazy {

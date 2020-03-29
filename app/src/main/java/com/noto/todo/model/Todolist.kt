@@ -5,19 +5,18 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.noto.database.NotoColor
 
-@Entity(tableName = "todo_lists")
-data class TodoList(
+@Entity(tableName = "todolists")
+data class Todolist(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "todo_list_Id")
-    val todoListId: Long,
+    @ColumnInfo(name = "todolist_Id")
+    val todolistId: Long,
 
-    @ColumnInfo(name = "todo_list_title")
-    var todoListTitle: String,
+    @ColumnInfo(name = "todolist_title")
+    var todolistTitle: String,
 
     @ColumnInfo(name = "noto_color")
     var notoColor: NotoColor = NotoColor.GRAY
-
 
 )
 
