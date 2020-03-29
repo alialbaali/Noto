@@ -7,22 +7,27 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.noto.note.model.Note
 import com.noto.note.model.Notebook
+import com.noto.todo.model.SubTodo
 import com.noto.todo.model.Todo
 import com.noto.todo.model.TodoList
 
 @TypeConverters(NotoColorConverter::class)
 @Database(
-    entities = [Notebook::class, Note::class, TodoList::class, Todo::class],
+    entities = [Notebook::class, Note::class, TodoList::class, Todo::class, SubTodo::class],
     version = 1,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
     abstract val notebookDao: NotebookDao
+
     abstract val noteDao: NoteDao
 
     abstract val todoListDao: TodoListDao
+
     abstract val todoDao: TodoDao
+
+    abstract val subTodoDao: SubTodoDao
 
     companion object {
         @Volatile
