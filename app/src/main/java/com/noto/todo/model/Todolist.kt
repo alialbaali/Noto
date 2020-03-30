@@ -10,10 +10,10 @@ data class Todolist(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "todolist_Id")
-    val todolistId: Long,
+    val todolistId: Long = 0L,
 
     @ColumnInfo(name = "todolist_title")
-    var todolistTitle: String,
+    var todolistTitle: String = "",
 
     @ColumnInfo(name = "noto_color")
     var notoColor: NotoColor = NotoColor.GRAY

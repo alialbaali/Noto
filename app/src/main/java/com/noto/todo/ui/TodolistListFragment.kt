@@ -1,5 +1,6 @@
 package com.noto.todo.ui
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,16 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.noto.NotoDialog
 import com.noto.R
 import com.noto.databinding.FragmentTodolistListBinding
 import com.noto.network.Repos
+import com.noto.note.model.Notebook
 import com.noto.todo.adapter.NavigateToTodolist
 import com.noto.todo.adapter.TodolistListRVAdapter
+import com.noto.todo.model.Todolist
 import com.noto.todo.viewModel.TodolistListViewModel
 import com.noto.todo.viewModel.TodolistListViewModelFactory
 
@@ -56,7 +61,48 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
                     R.font.roboto_medium
                 )
             )
+        }
 
+        binding.tb.menu.findItem(R.id.create).setOnMenuItemClickListener {
+
+            NotoDialog(requireContext(), null, Todolist()).apply {
+                this.todolist!!
+
+                this.dialogBinding.et.hint = "Todolist title"
+
+                this.dialogBinding.createBtn.setOnClickListener {
+
+                    when {
+                        viewModel.todolists.value!!.any {
+                            it.todolistTitle ==
+                                    dialogBinding.et.text.toString()
+                        } -> {
+
+                            this.dialogBinding.til.error =
+                                "Notebook with the same title already exists!"
+
+                        }
+                        this.dialogBinding.et.text.toString().isBlank() -> {
+
+                            this.dialogBinding.til.error =
+                                "Notebook title can't be empty"
+
+                            this.dialogBinding.til.counterTextColor =
+                                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryPink, null))
+
+                        }
+                        else -> {
+                            this.todolist.todolistTitle = this.dialogBinding.et.text.toString()
+                            viewModel.saveTodolist(this.todolist)
+                            this.dismiss()
+                        }
+                    }
+                }
+                this.create()
+                this.show()
+            }
+
+            true
         }
 
         // RV
@@ -82,8 +128,15 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
 
     }
 
-    override fun navigate(todolistId: Long) {
-        
+    override fun navigate(todolist: Todolist) {
+        this.findNavController()
+            .navigate(
+                TodolistListFragmentDirections.actionTodolistListFragmentToTodolistFragment(
+                    todolist.todolistId,
+                    todolist.todolistTitle,
+                    todolist.notoColor
+                )
+            )
     }
 
 }

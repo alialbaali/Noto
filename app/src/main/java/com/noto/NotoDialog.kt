@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.WindowManager
 import androidx.core.view.isVisible
 import com.noto.database.NotoColor
-import com.noto.databinding.DialogNotebookBinding
+import com.noto.databinding.DialogNotoBinding
 import com.noto.note.model.Notebook
 import com.noto.todo.model.Todolist
 
@@ -21,7 +21,7 @@ class NotoDialog(context: Context, val notebook: Notebook?, val todolist: Todoli
 
     internal var selected = 0
 
-    internal val dialogBinding = DialogNotebookBinding.inflate(LayoutInflater.from(context))
+    internal val dialogBinding = DialogNotoBinding.inflate(LayoutInflater.from(context))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -45,4 +45,6 @@
     <dimen name="dialog_rbtn_selected_stroke_width">5dp</dimen>
 
     <dimen name="empty_notebook_dimen">25dp</dimen>
+
+    <dimen name="todo_item_radius">25dp</dimen>
 </resources>

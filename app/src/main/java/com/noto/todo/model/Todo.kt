@@ -25,6 +25,12 @@ data class Todo(
     var todoTitle: String,
 
     @ColumnInfo(name = "todo_note")
-    var todoNote: String
+    var todoNote: String,
+
+    @ColumnInfo(name = "is_checked")
+    var todoIsChecked: Boolean = false,
+
+    @ColumnInfo(name = "is_starred")
+    var todoIsStared: Boolean = false
 
 )

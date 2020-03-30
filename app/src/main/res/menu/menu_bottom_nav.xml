@@ -4,6 +4,7 @@
 
     <item
         android:id="@+id/notebookListFragment"
+        android:enabled="true"
         android:icon="@drawable/ic_library_notebooks_24dp"
         android:title="@string/notebooks"
         android:visible="true"
@@ -11,12 +12,16 @@
 
     <item
         android:id="@+id/bottom_nav_menu_notebook1s"
-        android:enabled="false"
-        android:visible="true" />
+        android:enabled="true"
+        android:title="@string/search"
+        android:icon="@drawable/ic_search_24dp"
+        android:visible="true"
+        app:showAsAction="always" />
 
     <item
-        android:id="@+id/todoListFragment"
-        android:icon="@drawable/ic_library_todos_24dp"
+        android:id="@+id/todolistListFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_library_todolists_24dp"
         android:title="@string/todo_lists"
         android:visible="true"
         app:showAsAction="always" />
