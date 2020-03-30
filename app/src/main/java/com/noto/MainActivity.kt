@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -34,48 +35,30 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNav.setupWithNavController(navController)
 
+        val slideDown = AnimationUtils.loadAnimation(this, R.anim.slide_down)
 
-        binding.exFab.setOnClickListener {
-            if (binding.exFabNewNotebook.visibility == View.GONE) {
-
-                binding.exFabNewNotebook.visibility = View.VISIBLE
-
-                binding.exFab.text = resources.getString(R.string.cancel)
-
-            } else {
-
-                binding.exFabNewNotebook.visibility = View.GONE
-
-                binding.exFab.text = resources.getString(R.string.create)
-            }
-        }
+        val slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up)
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
 
-            if (destination.id != R.id.notebookListFragment) {
+            if (destination.id == R.id.notebookListFragment || destination.id == R.id.todolistListFragment) {
 
-                binding.exFab.visibility = View.GONE
+//                binding.bottomNav.startAnimation(slideUp)
+
+                binding.bottomNav.visibility = View.VISIBLE
+
+            } else {
+
+//                binding.bottomNav.startAnimation(slideDown)
 
                 binding.bottomNav.visibility = View.GONE
 
-                binding.exFabNewNotebook.visibility = View.GONE
-
-            } else {
-                binding.exFab.visibility = View.VISIBLE
-                binding.exFab.text = resources.getString(R.string.create)
-                binding.bottomNav.visibility = View.VISIBLE
             }
         }
 
         when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-            Configuration.UI_MODE_NIGHT_YES ->
+            Configuration.UI_MODE_NIGHT_YES -> {
                 window.decorView.systemUiVisibility = 0
-
-            Configuration.UI_MODE_NIGHT_NO
-            -> {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                }
             }
         }
 

@@ -13,39 +13,13 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/exFab"
-            style="@style/Style.BottomNav.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/create"
-            app:icon="@drawable/ic_create_24dp"
-            app:layout_constraintBottom_toTopOf="@id/bottom_nav"
-            app:layout_constraintEnd_toEndOf="@+id/bottom_nav"
-            app:layout_constraintStart_toStartOf="@+id/bottom_nav"
-            app:layout_constraintTop_toBottomOf="@id/nav_host_fragment" />
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/exFab_new_notebook"
-            style="@style/Style.BottomNav.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/new_notebook"
-            android:visibility="gone"
-            app:icon="@drawable/ic_new_notebook_24dp"
-            app:layout_constraintBottom_toTopOf="@id/exFab"
-            app:layout_constraintEnd_toEndOf="@+id/bottom_nav"
-            app:layout_constraintStart_toStartOf="@+id/bottom_nav" />
-
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            app:elevation="0dp"
             app:itemIconTint="@color/ic_library_notebooks_selector"
-            app:itemRippleColor="@android:color/darker_gray"
+            app:itemRippleColor="@color/colorOnPrimaryGray"
             app:itemTextColor="@color/ic_library_notebooks_selector"
             app:layout_constraintBottom_toBottomOf="@id/cl"
             app:layout_constraintLeft_toLeftOf="@id/cl"
@@ -66,7 +40,5 @@
             app:navGraph="@navigation/nav_graph">
 
         </fragment>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
