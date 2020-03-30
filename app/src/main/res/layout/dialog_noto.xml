@@ -4,10 +4,6 @@
 
     <data>
 
-        <variable
-            name="notebook"
-            type="com.noto.note.model.Notebook" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,62 +11,92 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/normal_margin"
-        android:background="@drawable/dialog_background_gray_drawable">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_margin"
-            android:layout_marginBottom="@dimen/small_margin"
-            android:fontFamily="@font/roboto"
-            android:text="@string/create_new_notebook"
-            android:textColor="@color/colorOnPrimary_800"
-            android:textSize="24sp"
-            app:fontFamily="@font/roboto_medium"
-            app:layout_constraintBottom_toTopOf="@id/til"
-            app:layout_constraintEnd_toEndOf="@id/end_guideline"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toTopOf="@id/cl" />
+        android:background="@drawable/dialog_background_drawable">
 
         <com.google.android.material.textfield.TextInputLayout
-
             android:id="@+id/til"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginTop="@dimen/normal_margin"
             android:layout_marginBottom="@dimen/small_margin"
-            app:boxStrokeColor="@color/colorOnPrimary_600"
-            app:boxStrokeWidth="1dp"
-            app:boxStrokeWidthFocused="1dp"
+            app:boxBackgroundMode="none"
             app:counterEnabled="true"
-            app:counterMaxLength="20"
-            app:counterTextColor="@color/colorOnPrimary_600"
+            app:counterMaxLength="32"
+            app:counterTextColor="@color/colorOnPrimaryGray"
             app:errorEnabled="true"
-            app:errorIconDrawable="@null"
-            app:hintTextColor="@color/colorOnPrimary_600"
+            app:hintEnabled="false"
             app:layout_constraintBottom_toTopOf="@id/rg"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
-            app:layout_constraintTop_toBottomOf="@id/tv">
+            app:layout_constraintTop_toTopOf="@id/cl">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:autofillHints="@string/type_a_title"
+                android:background="@color/transparent"
+                android:cursorVisible="true"
                 android:focusable="true"
                 android:fontFamily="@font/roboto_bold"
-                android:hint="@string/notebook_title"
+                android:hint="@string/type_a_title"
                 android:inputType="text|textPersonName|textCapWords"
-                android:maxLength="20"
+                android:maxLength="32"
+                android:padding="@dimen/small_padding"
                 android:singleLine="true"
-                android:text="@={notebook.notebookTitle}"
                 android:textColor="@color/colorOnPrimary_800"
+                android:textColorHint="@color/colorOnPrimaryGray"
                 android:textCursorDrawable="@null"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!--        <LinearLayout-->
+        <!--            android:id="@+id/chooser"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="@dimen/small_margin"-->
+        <!--            android:layout_marginBottom="@dimen/normal_margin"-->
+        <!--            android:background="@drawable/dialog_rg_drawable"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:visibility="gone"-->
+        <!--            app:layout_constraintBottom_toTopOf="@id/rg"-->
+        <!--            app:layout_constraintEnd_toEndOf="@id/end_guideline"-->
+        <!--            app:layout_constraintHorizontal_bias="0.0"-->
+        <!--            app:layout_constraintStart_toStartOf="@id/start_guideline"-->
+        <!--            app:layout_constraintTop_toBottomOf="@id/til">-->
+
+        <!--            <com.google.android.material.textview.MaterialTextView-->
+        <!--                android:id="@+id/rbtn_notebook"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:background="@drawable/dialog_rbtn_drawable"-->
+        <!--                android:backgroundTint="@color/colorOnPrimaryGray"-->
+        <!--                android:drawableStart="@drawable/ic_notebook_24dp"-->
+        <!--                android:drawablePadding="@dimen/small_padding"-->
+        <!--                android:drawableTint="@color/colorPrimary"-->
+        <!--                android:gravity="center"-->
+        <!--                android:paddingStart="@dimen/normal_padding"-->
+        <!--                android:paddingEnd="@dimen/normal_padding"-->
+        <!--                android:text="@string/notebook"-->
+        <!--                android:textColor="@color/colorPrimary" />-->
+
+        <!--            <com.google.android.material.textview.MaterialTextView-->
+        <!--                android:id="@+id/rbtn_todolist"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:background="@drawable/dialog_rbtn_drawable"-->
+        <!--                android:backgroundTint="@color/colorPrimary"-->
+        <!--                android:drawableStart="@drawable/ic_list_24dp"-->
+        <!--                android:drawablePadding="@dimen/small_padding"-->
+        <!--                android:gravity="center"-->
+        <!--                android:paddingStart="@dimen/normal_padding"-->
+        <!--                android:paddingEnd="@dimen/normal_padding"-->
+        <!--                android:text="@string/todolist"-->
+        <!--                android:textColor="@color/colorOnPrimary_800" />-->
+
+        <!--        </LinearLayout>-->
+
 
         <LinearLayout
             android:id="@+id/rg"
@@ -89,7 +115,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_gray_drawable"
+                android:background="@drawable/dialog_rbtn_drawable"
+                android:backgroundTint="@color/colorPrimaryGray"
                 android:contentDescription="@string/gray" />
 
             <ImageButton
@@ -97,7 +124,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_blue_drawable"
+                android:background="@drawable/dialog_rbtn_drawable"
+                android:backgroundTint="@color/colorPrimaryBlue"
                 android:contentDescription="@string/blue" />
 
             <ImageButton
@@ -105,7 +133,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_pink_drawable"
+                android:background="@drawable/dialog_rbtn_drawable"
+                android:backgroundTint="@color/colorPrimaryPink"
                 android:contentDescription="@string/pink" />
 
             <ImageButton
@@ -113,7 +142,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_cyan_drawable"
+                android:background="@drawable/dialog_rbtn_drawable"
+                android:backgroundTint="@color/colorPrimaryCyan"
                 android:contentDescription="@string/cyan" />
 
         </LinearLayout>
