@@ -123,8 +123,13 @@ class NotebookFragment : Fragment(), NavigateToNote {
                             Notebook(args.notebookId, args.notebookTitle, args.notoColor),
                             null
                         ).apply {
-                            dialogBinding.createBtn.text = resources.getString(R.string.update)
                             this.notebook!!
+
+                            dialogBinding.createBtn.text = resources.getString(R.string.update)
+
+                            dialogBinding.et.setText(args.notebookTitle)
+
+                            dialogBinding.et.setSelection(args.notebookTitle.length)
 
                             this.dialogBinding.et.hint = "Notebook title"
 

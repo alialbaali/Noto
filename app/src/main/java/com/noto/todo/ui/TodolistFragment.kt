@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -15,8 +17,11 @@ import com.noto.NotoDialog
 import com.noto.R
 import com.noto.database.NotoColor
 import com.noto.databinding.FragmentTodolistBinding
+import com.noto.network.Repos
 import com.noto.todo.adapter.TodolistRVAdapter
 import com.noto.todo.model.Todolist
+import com.noto.todo.viewModel.TodolistViewModel
+import com.noto.todo.viewModel.TodolistViewModelFactory
 
 /**
  * A simple [Fragment] subclass.
@@ -28,6 +33,10 @@ class TodolistFragment : Fragment() {
     private lateinit var adapter: TodolistRVAdapter
 
     private val args by navArgs<TodolistFragmentArgs>()
+
+    private val viewModel by viewModels<TodolistViewModel> {
+        TodolistViewModelFactory(Repos.todolistRepository, Repos.todoRepository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +56,7 @@ class TodolistFragment : Fragment() {
         // RV
         binding.rv.let { rv ->
 
-//            viewModel.getNotes(args.notebookId)
+            viewModel.getTodos(args.todolistId)
 
             adapter = TodolistRVAdapter()
 
@@ -56,45 +65,45 @@ class TodolistFragment : Fragment() {
             rv.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-//            viewModel.notes.observe(viewLifecycleOwner, Observer {
-//
-//                it?.let {
-//
-//                    if (it.isEmpty()) {
-//                        rv.visibility = View.GONE
-//                        binding.emptyTodolist.visibility = View.VISIBLE
-//                    } else {
-//
-//                        rv.visibility = View.VISIBLE
-//                        binding.emptyTodolist.visibility = View.GONE
-//                        adapter.submitList(it)
-//                    }
-//
-//                }
-//
-//            })
-//
-//        }
+            viewModel.todos.observe(viewLifecycleOwner, Observer {
 
-            // Collapsing Toolbar
-            binding.ctb.let { ctb ->
+                it?.let {
 
-                ctb.title = args.todolistTitle
+                    if (it.isEmpty()) {
+                        rv.visibility = View.GONE
+                        binding.emptyTodolist.visibility = View.VISIBLE
+                    } else {
 
-                ctb.setCollapsedTitleTypeface(
-                    ResourcesCompat.getFont(
-                        context!!,
-                        R.font.roboto_bold
-                    )
+                        rv.visibility = View.VISIBLE
+                        binding.emptyTodolist.visibility = View.GONE
+                        adapter.submitList(it)
+                    }
+
+                }
+
+            })
+
+        }
+
+        // Collapsing Toolbar
+        binding.ctb.let { ctb ->
+
+            ctb.title = args.todolistTitle
+
+            ctb.setCollapsedTitleTypeface(
+                ResourcesCompat.getFont(
+                    context!!,
+                    R.font.roboto_bold
                 )
+            )
 
-                ctb.setExpandedTitleTypeface(
-                    ResourcesCompat.getFont(
-                        context!!,
-                        R.font.roboto_medium
-                    )
+            ctb.setExpandedTitleTypeface(
+                ResourcesCompat.getFont(
+                    context!!,
+                    R.font.roboto_medium
                 )
-            }
+            )
+        }
 
 //        binding.fab.setOnClickListener {
 //            this.findNavController().navigate(
@@ -107,29 +116,34 @@ class TodolistFragment : Fragment() {
 //            )
 //        }
 //
-            binding.tb.let { tb ->
+        binding.tb.let { tb ->
 
-                tb.setNavigationOnClickListener {
-                    this.findNavController().navigateUp()
-                }
+            tb.setNavigationOnClickListener {
+                this.findNavController().navigateUp()
+            }
 
-                tb.setOnMenuItemClickListener {
+            tb.setOnMenuItemClickListener {
 
-                    when (it.itemId) {
-                        R.id.style -> {
-                            NotoDialog(
-                                context!!,
-                                null,
-                                Todolist(args.todolistId, args.todolistTitle, args.notoColor)
-                            ).apply {
-                                dialogBinding.createBtn.text = resources.getString(R.string.update)
-                                this.todolist!!
+                when (it.itemId) {
+                    R.id.style -> {
+                        NotoDialog(
+                            context!!,
+                            null,
+                            Todolist(args.todolistId, args.todolistTitle, args.notoColor)
+                        ).apply {
+                            this.todolist!!
 
-                                this.dialogBinding.et.hint = "Todolist title"
+                            dialogBinding.createBtn.text = resources.getString(R.string.update)
 
-                                this.dialogBinding.createBtn.setOnClickListener {
+                            dialogBinding.et.setText(args.todolistTitle)
 
-                                    when {
+                            dialogBinding.et.setSelection(args.todolistTitle.length)
+
+                            this.dialogBinding.et.hint = "Todolist title"
+
+                            this.dialogBinding.createBtn.setOnClickListener {
+
+                                when {
 //                                    viewModel.notebooks.value!!.any {
 //                                        it.notebookTitle ==
 //                                                dialogBinding.et.text.toString()
@@ -139,45 +153,44 @@ class TodolistFragment : Fragment() {
 //                                            "Notebook with the same title already exists!"
 //
 //                                    }
-                                        this.dialogBinding.et.text.toString().isBlank() -> {
+                                    this.dialogBinding.et.text.toString().isBlank() -> {
 
-                                            this.dialogBinding.til.error =
-                                                "Todolist title can't be empty"
+                                        this.dialogBinding.til.error =
+                                            "Todolist title can't be empty"
 
-                                            this.dialogBinding.til.counterTextColor =
-                                                ColorStateList.valueOf(
-                                                    resources.getColor(
-                                                        R.color.colorOnPrimaryPink,
-                                                        null
-                                                    )
+                                        this.dialogBinding.til.counterTextColor =
+                                            ColorStateList.valueOf(
+                                                resources.getColor(
+                                                    R.color.colorOnPrimaryPink,
+                                                    null
                                                 )
+                                            )
 
-                                        }
-                                        else -> {
-                                            this.todolist.todolistTitle=
-                                                this.dialogBinding.et.text.toString()
-//                                        viewModel.updateNotebook(this.notebook)
-                                            this.dismiss()
-                                        }
+                                    }
+                                    else -> {
+                                        this.todolist.todolistTitle =
+                                            this.dialogBinding.et.text.toString()
+                                        viewModel.updateTodolist(this.todolist)
+                                        this.dismiss()
                                     }
                                 }
-                                this.create()
-                                this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-                                this.show()
-                                dialogBinding.et.requestFocus()
-                                this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
                             }
-                            true
+                            this.create()
+                            this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+                            this.show()
+                            dialogBinding.et.requestFocus()
+                            this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
                         }
-//
-//                    R.id.delete_notebook -> {
-//                        viewModel.deleteNotebook(args.notebookId)
-//                        this.findNavController().navigateUp()
-//                        true
-//                    }
-                        else ->
-                            false
+                        true
                     }
+
+                    R.id.delete_notebook -> {
+                        this.findNavController().navigateUp()
+                        viewModel.deleteTodolist(args.todolistId)
+                        true
+                    }
+                    else ->
+                        false
                 }
             }
         }
