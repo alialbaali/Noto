@@ -1,4 +1,4 @@
-package com.noto.note.ui
+package com.noto.todo.ui
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -8,43 +8,32 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.NotoDialog
 import com.noto.R
 import com.noto.database.NotoColor
-import com.noto.databinding.FragmentNotebookBinding
-import com.noto.network.Repos
-import com.noto.note.adapter.NavigateToNote
-import com.noto.note.adapter.NotebookRVAdapter
-import com.noto.note.model.Notebook
-import com.noto.note.viewModel.NotebookViewModel
-import com.noto.note.viewModel.NotebookViewModelFactory
+import com.noto.databinding.FragmentTodolistBinding
+import com.noto.todo.adapter.TodolistRVAdapter
+import com.noto.todo.model.Todolist
 
 /**
  * A simple [Fragment] subclass.
  */
-class NotebookFragment : Fragment(), NavigateToNote {
+class TodolistFragment : Fragment() {
 
-    // Binding
-    private lateinit var binding: FragmentNotebookBinding
+    private lateinit var binding: FragmentTodolistBinding
 
-    private lateinit var adapter: NotebookRVAdapter
+    private lateinit var adapter: TodolistRVAdapter
 
-    private val args by navArgs<NotebookFragmentArgs>()
-
-    private val viewModel by viewModels<NotebookViewModel> {
-        NotebookViewModelFactory(Repos.notebookRepository, Repos.noteRepository)
-    }
+    private val args by navArgs<TodolistFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNotebookBinding.inflate(inflater, container, false)
+        binding = FragmentTodolistBinding.inflate(inflater, container, false)
 
         binding.lifecycleOwner = this
 
@@ -58,79 +47,89 @@ class NotebookFragment : Fragment(), NavigateToNote {
         // RV
         binding.rv.let { rv ->
 
-            viewModel.getNotes(args.notebookId)
+//            viewModel.getNotes(args.notebookId)
 
-            adapter = NotebookRVAdapter(this)
+            adapter = TodolistRVAdapter()
 
             rv.adapter = adapter
 
             rv.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
-            viewModel.notes.observe(viewLifecycleOwner, Observer {
+//            viewModel.notes.observe(viewLifecycleOwner, Observer {
+//
+//                it?.let {
+//
+//                    if (it.isEmpty()) {
+//                        rv.visibility = View.GONE
+//                        binding.emptyTodolist.visibility = View.VISIBLE
+//                    } else {
+//
+//                        rv.visibility = View.VISIBLE
+//                        binding.emptyTodolist.visibility = View.GONE
+//                        adapter.submitList(it)
+//                    }
+//
+//                }
+//
+//            })
+//
+//        }
 
-                it?.let {
+            // Collapsing Toolbar
+            binding.ctb.let { ctb ->
 
-                    if (it.isEmpty()) {
-                        rv.visibility = View.GONE
-                        binding.emptyNotebook.visibility = View.VISIBLE
-                    } else {
+                ctb.title = args.todolistTitle
 
-                        rv.visibility = View.VISIBLE
-                        binding.emptyNotebook.visibility = View.GONE
-                        adapter.submitList(it)
-                    }
-
-                }
-
-            })
-
-        }
-
-        // Collapsing Toolbar
-        binding.ctb.let { ctb ->
-
-            ctb.title = args.notebookTitle
-
-            ctb.setCollapsedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_bold))
-
-            ctb.setExpandedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_medium))
-        }
-
-        binding.fab.setOnClickListener {
-            this.findNavController().navigate(
-                NotebookFragmentDirections.actionNotebookFragmentToNoteFragment(
-                    0L,
-                    args.notebookId,
-                    args.notebookTitle,
-                    args.notoColor
+                ctb.setCollapsedTitleTypeface(
+                    ResourcesCompat.getFont(
+                        context!!,
+                        R.font.roboto_bold
+                    )
                 )
-            )
-        }
 
-        binding.tb.let { tb ->
-
-            tb.setNavigationOnClickListener {
-                this.findNavController().navigateUp()
+                ctb.setExpandedTitleTypeface(
+                    ResourcesCompat.getFont(
+                        context!!,
+                        R.font.roboto_medium
+                    )
+                )
             }
 
-            tb.setOnMenuItemClickListener {
+//        binding.fab.setOnClickListener {
+//            this.findNavController().navigate(
+//                NotebookFragmentDirections.actionNotebookFragmentToNoteFragment(
+//                    0L,
+//                    args.notebookId,
+//                    args.notebookTitle,
+//                    args.notoColor
+//                )
+//            )
+//        }
+//
+            binding.tb.let { tb ->
 
-                when (it.itemId) {
-                    R.id.style -> {
-                        NotoDialog(
-                            context!!,
-                            Notebook(args.notebookId, args.notebookTitle, args.notoColor),
-                            null
-                        ).apply {
-                            dialogBinding.createBtn.text = resources.getString(R.string.update)
-                            this.notebook!!
+                tb.setNavigationOnClickListener {
+                    this.findNavController().navigateUp()
+                }
 
-                            this.dialogBinding.et.hint = "Notebook title"
+                tb.setOnMenuItemClickListener {
 
-                            this.dialogBinding.createBtn.setOnClickListener {
+                    when (it.itemId) {
+                        R.id.style -> {
+                            NotoDialog(
+                                context!!,
+                                null,
+                                Todolist(args.todolistId, args.todolistTitle, args.notoColor)
+                            ).apply {
+                                dialogBinding.createBtn.text = resources.getString(R.string.update)
+                                this.todolist!!
 
-                                when {
+                                this.dialogBinding.et.hint = "Todolist title"
+
+                                this.dialogBinding.createBtn.setOnClickListener {
+
+                                    when {
 //                                    viewModel.notebooks.value!!.any {
 //                                        it.notebookTitle ==
 //                                                dialogBinding.et.text.toString()
@@ -140,51 +139,48 @@ class NotebookFragment : Fragment(), NavigateToNote {
 //                                            "Notebook with the same title already exists!"
 //
 //                                    }
-                                    this.dialogBinding.et.text.toString().isBlank() -> {
+                                        this.dialogBinding.et.text.toString().isBlank() -> {
 
-                                        this.dialogBinding.til.error =
-                                            "Notebook title can't be empty"
+                                            this.dialogBinding.til.error =
+                                                "Todolist title can't be empty"
 
-                                        this.dialogBinding.til.counterTextColor =
-                                            ColorStateList.valueOf(
-                                                resources.getColor(
-                                                    R.color.colorOnPrimaryPink,
-                                                    null
+                                            this.dialogBinding.til.counterTextColor =
+                                                ColorStateList.valueOf(
+                                                    resources.getColor(
+                                                        R.color.colorOnPrimaryPink,
+                                                        null
+                                                    )
                                                 )
-                                            )
 
-                                    }
-                                    else -> {
-                                        this.notebook.notebookTitle =
-                                            this.dialogBinding.et.text.toString()
-                                        viewModel.updateNotebook(this.notebook)
-                                        this.dismiss()
+                                        }
+                                        else -> {
+                                            this.todolist.todolistTitle=
+                                                this.dialogBinding.et.text.toString()
+//                                        viewModel.updateNotebook(this.notebook)
+                                            this.dismiss()
+                                        }
                                     }
                                 }
+                                this.create()
+                                this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+                                this.show()
+                                dialogBinding.et.requestFocus()
+                                this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
                             }
-                            this.create()
-                            this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-                            this.show()
-                            dialogBinding.et.requestFocus()
-                            this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+                            true
                         }
-                        true
-                    }
-
-                    R.id.delete_notebook -> {
-                        viewModel.deleteNotebook(args.notebookId)
-                        this.findNavController().navigateUp()
-                        true
-                    }
-                    else -> {
-                        false
+//
+//                    R.id.delete_notebook -> {
+//                        viewModel.deleteNotebook(args.notebookId)
+//                        this.findNavController().navigateUp()
+//                        true
+//                    }
+                        else ->
+                            false
                     }
                 }
             }
         }
-
-
-
         return binding.root
     }
 
@@ -323,17 +319,4 @@ class NotebookFragment : Fragment(), NavigateToNote {
                 ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryCyan, null))
         }
     }
-
-    override fun navigate(id: Long) {
-        this.findNavController()
-            .navigate(
-                NotebookFragmentDirections.actionNotebookFragmentToNoteFragment(
-                    id,
-                    args.notebookId,
-                    args.notebookTitle,
-                    args.notoColor
-                )
-            )
-    }
 }
-

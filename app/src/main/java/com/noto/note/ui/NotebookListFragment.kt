@@ -1,11 +1,11 @@
 package com.noto.note.ui
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -91,13 +91,15 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
                     }
                 }
                 this.create()
+                this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
                 this.show()
+                dialogBinding.et.requestFocus()
+                this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
             }
 
             true
         }
 
-// RV
         binding.rv.let { rv ->
 
             // RV Adapter

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,7 +16,6 @@ import com.noto.NotoDialog
 import com.noto.R
 import com.noto.databinding.FragmentTodolistListBinding
 import com.noto.network.Repos
-import com.noto.note.model.Notebook
 import com.noto.todo.adapter.NavigateToTodolist
 import com.noto.todo.adapter.TodolistListRVAdapter
 import com.noto.todo.model.Todolist
@@ -79,13 +79,13 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
                         } -> {
 
                             this.dialogBinding.til.error =
-                                "Notebook with the same title already exists!"
+                                "Todolist with the same title already exists!"
 
                         }
                         this.dialogBinding.et.text.toString().isBlank() -> {
 
                             this.dialogBinding.til.error =
-                                "Notebook title can't be empty"
+                                "Todolist title can't be empty"
 
                             this.dialogBinding.til.counterTextColor =
                                 ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryPink, null))
@@ -99,9 +99,11 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
                     }
                 }
                 this.create()
+                this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
                 this.show()
+                dialogBinding.et.requestFocus()
+                this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
             }
-
             true
         }
 
@@ -123,9 +125,7 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
             })
         }
 
-
         return binding.root
-
     }
 
     override fun navigate(todolist: Todolist) {
