@@ -80,7 +80,12 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
                                 "Notebook title can't be empty"
 
                             this.dialogBinding.til.counterTextColor =
-                                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryPink, null))
+                                ColorStateList.valueOf(
+                                    resources.getColor(
+                                        R.color.colorOnPrimaryPink,
+                                        null
+                                    )
+                                )
 
                         }
                         else -> {
@@ -103,7 +108,7 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
         binding.rv.let { rv ->
 
             // RV Adapter
-            adapter = NotebookListRVAdapter(requireContext(), this, viewModel)
+            adapter = NotebookListRVAdapter(this)
             rv.adapter = adapter
 
 //            NotebookItemTouchHelperCallback(adapter).let {

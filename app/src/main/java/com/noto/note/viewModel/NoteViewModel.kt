@@ -14,7 +14,7 @@ internal class NoteViewModel(private val noteRepository: NoteRepository) : ViewM
 
     internal fun saveNote() {
         viewModelScope.launch {
-            if ((note.value!!.noteTitle!!.isNotBlank() || note.value!!.noteBody!!.isNotBlank())) {
+            if ((note.value!!.noteTitle.isNotBlank() || note.value!!.noteBody.isNotBlank())) {
 
                 if (note.value!!.noteId == 0L) {
                     noteRepository.insertNote(note.value!!)
