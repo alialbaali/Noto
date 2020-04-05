@@ -33,5 +33,12 @@
     <string name="notebook">Notebook</string>
     <string name="type_a_title">Type a title</string>
     <string name="search">Search</string>
+    <string name="todo">Todo</string>
+    <string name="sub_todo">Sub todo</string>
+    <string name="remind_me">Remind me</string>
+    <string name="repeat">Repeat</string>
+    <string name="sub_todos">Sub todos</string>
+    <string name="type_a_sub_todo">Type a sub todo</string>
+    <string name="todo_body">Todo body</string>
 
 </resources>

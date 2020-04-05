@@ -29,6 +29,7 @@
                 style="@style/Style.CollapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:expandedTitleMargin="@dimen/spacing_normal"
                 app:title="@string/todo_lists">
 
                 <androidx.appcompat.widget.Toolbar

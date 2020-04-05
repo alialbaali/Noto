@@ -30,14 +30,15 @@
                 style="@style/Style.CollapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:expandedTitleMargin="@dimen/spacing_normal"
                 app:title="@string/notebooks">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/tb"
-                    app:menu="@menu/menu_main"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin" />
+                    app:layout_collapseMode="pin"
+                    app:menu="@menu/menu_main" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

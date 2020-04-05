@@ -8,23 +8,24 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:elevation="@dimen/elevation_extra_small"
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/normal_margin"
-        android:layout_marginTop="@dimen/small_margin"
-        android:layout_marginEnd="@dimen/normal_margin"
-        android:layout_marginBottom="@dimen/small_margin"
-        android:background="@drawable/notebook_item_background_gray_drawable">
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:background="@drawable/shape_notebook_item">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/notebook_tv"
             style="@style/Style.NotoItem.TextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_margin"
-            android:drawableStart="@drawable/ic_new_notebook_24dp"
-            android:drawablePadding="@dimen/normal_margin"
+            android:layout_margin="@dimen/spacing_normal"
+            android:drawableStart="@drawable/ic_notebook_24dp"
+            android:drawablePadding="@dimen/spacing_normal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

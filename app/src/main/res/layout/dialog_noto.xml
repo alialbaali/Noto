@@ -10,15 +10,15 @@
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/normal_margin"
-        android:background="@drawable/dialog_background_drawable">
+        android:layout_margin="@dimen/spacing_normal"
+        android:background="@drawable/shape_dialog">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_margin"
-            android:layout_marginBottom="@dimen/small_margin"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_small"
             app:boxBackgroundMode="none"
             app:counterEnabled="true"
             app:counterMaxLength="32"
@@ -42,7 +42,7 @@
                 android:hint="@string/type_a_title"
                 android:inputType="text|textPersonName|textCapWords"
                 android:maxLength="32"
-                android:padding="@dimen/small_padding"
+                android:padding="@dimen/spacing_small"
                 android:singleLine="true"
                 android:textColor="@color/colorOnPrimary_800"
                 android:textColorHint="@color/colorOnPrimaryGray"
@@ -51,110 +51,63 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--        <LinearLayout-->
-        <!--            android:id="@+id/chooser"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginTop="@dimen/small_margin"-->
-        <!--            android:layout_marginBottom="@dimen/normal_margin"-->
-        <!--            android:background="@drawable/dialog_rg_drawable"-->
-        <!--            android:orientation="horizontal"-->
-        <!--            android:visibility="gone"-->
-        <!--            app:layout_constraintBottom_toTopOf="@id/rg"-->
-        <!--            app:layout_constraintEnd_toEndOf="@id/end_guideline"-->
-        <!--            app:layout_constraintHorizontal_bias="0.0"-->
-        <!--            app:layout_constraintStart_toStartOf="@id/start_guideline"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/til">-->
-
-        <!--            <com.google.android.material.textview.MaterialTextView-->
-        <!--                android:id="@+id/rbtn_notebook"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:background="@drawable/dialog_rbtn_drawable"-->
-        <!--                android:backgroundTint="@color/colorOnPrimaryGray"-->
-        <!--                android:drawableStart="@drawable/ic_notebook_24dp"-->
-        <!--                android:drawablePadding="@dimen/small_padding"-->
-        <!--                android:drawableTint="@color/colorPrimary"-->
-        <!--                android:gravity="center"-->
-        <!--                android:paddingStart="@dimen/normal_padding"-->
-        <!--                android:paddingEnd="@dimen/normal_padding"-->
-        <!--                android:text="@string/notebook"-->
-        <!--                android:textColor="@color/colorPrimary" />-->
-
-        <!--            <com.google.android.material.textview.MaterialTextView-->
-        <!--                android:id="@+id/rbtn_todolist"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:background="@drawable/dialog_rbtn_drawable"-->
-        <!--                android:backgroundTint="@color/colorPrimary"-->
-        <!--                android:drawableStart="@drawable/ic_list_24dp"-->
-        <!--                android:drawablePadding="@dimen/small_padding"-->
-        <!--                android:gravity="center"-->
-        <!--                android:paddingStart="@dimen/normal_padding"-->
-        <!--                android:paddingEnd="@dimen/normal_padding"-->
-        <!--                android:text="@string/todolist"-->
-        <!--                android:textColor="@color/colorOnPrimary_800" />-->
-
-        <!--        </LinearLayout>-->
-
-
-        <LinearLayout
+        <RadioGroup
             android:id="@+id/rg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/small_margin"
-            android:background="@drawable/dialog_rg_drawable"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:background="@drawable/shape_dialog_rg"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@id/end_guideline"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/start_guideline"
             app:layout_constraintTop_toBottomOf="@id/til">
 
-            <ImageButton
+            <RadioButton
                 android:id="@+id/rbtn_gray"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_drawable"
-                android:backgroundTint="@color/colorPrimaryGray"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@drawable/selector_dialog_rbtn_gray"
+                android:button="@null"
+                android:checked="true"
                 android:contentDescription="@string/gray" />
 
-            <ImageButton
+            <RadioButton
                 android:id="@+id/rbtn_blue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_drawable"
-                android:backgroundTint="@color/colorPrimaryBlue"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@drawable/selector_dialog_rbtn_blue"
+                android:button="@null"
                 android:contentDescription="@string/blue" />
 
-            <ImageButton
+            <RadioButton
                 android:id="@+id/rbtn_pink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_drawable"
-                android:backgroundTint="@color/colorPrimaryPink"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@drawable/selector_dialog_rbtn_pink"
+                android:button="@null"
                 android:contentDescription="@string/pink" />
 
-            <ImageButton
+            <RadioButton
                 android:id="@+id/rbtn_cyan"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/small_margin"
-                android:background="@drawable/dialog_rbtn_drawable"
-                android:backgroundTint="@color/colorPrimaryCyan"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="@dimen/spacing_small"
+                android:background="@drawable/selector_dialog_rbtn_cyan"
+                android:button="@null"
                 android:contentDescription="@string/cyan" />
-
-        </LinearLayout>
+        </RadioGroup>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/create_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/extra_small_margin"
-            android:layout_marginTop="@dimen/normal_margin"
-            android:layout_marginBottom="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/spacing_extra_small"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
             android:backgroundTint="@color/colorOnPrimaryGray"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/create"
@@ -171,9 +124,9 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/normal_margin"
-            android:layout_marginEnd="@dimen/extra_small_margin"
-            android:layout_marginBottom="@dimen/normal_margin"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_extra_small"
+            android:layout_marginBottom="@dimen/spacing_normal"
             android:fontFamily="@font/roboto_medium"
             android:text="@string/cancel"
             android:textAllCaps="false"
@@ -192,13 +145,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_begin="@dimen/normal_margin" />
+            app:layout_constraintGuide_begin="@dimen/spacing_normal" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/end_guideline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_end="@dimen/normal_margin" />
+            app:layout_constraintGuide_end="@dimen/spacing_normal" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
