@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.noto.todo.viewModel.TodoViewModel" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cool"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_back_layer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryGray">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryGray"
+                app:layout_constraintLeft_toLeftOf="@id/cl_back_layer"
+                app:layout_constraintRight_toRightOf="@id/cl_back_layer"
+                app:layout_constraintTop_toTopOf="@id/cl_back_layer"
+                app:navigationIcon="@drawable/ic_back_24px"
+                app:titleTextColor="@color/colorOnPrimary_900" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_front_layer"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/shape_note_fragment"
+                app:layout_constraintBottom_toBottomOf="@id/cl_back_layer"
+                app:layout_constraintEnd_toEndOf="@id/cl_back_layer"
+                app:layout_constraintStart_toStartOf="@id/cl_back_layer"
+                app:layout_constraintTop_toBottomOf="@id/tb">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/check"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="@dimen/spacing_large"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:background="@drawable/selector_todo_check"
+                    android:backgroundTint="@color/colorOnPrimaryGray"
+                    android:button="@null"
+                    android:checked="@={viewModel.todo.todoIsChecked}"
+                    app:layout_constraintEnd_toStartOf="@+id/title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <EditText
+                    android:id="@+id/title"
+                    style="@style/Style.TodoFragment.Title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_normal"
+                    android:background="@color/transparent"
+                    android:hint="Type a todo"
+                    android:maxLines="3"
+                    android:singleLine="false"
+                    android:text="@={viewModel.todo.todoTitle}"
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout"
+                    app:layout_constraintEnd_toStartOf="@id/star"
+                    app:layout_constraintStart_toEndOf="@id/check"
+                    app:layout_constraintTop_toTopOf="@id/cl_front_layer" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/star"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_marginEnd="@dimen/spacing_large"
+                    android:background="@drawable/selector_todo_star"
+                    android:backgroundTint="@color/colorOnPrimaryGray"
+                    android:button="@null"
+                    app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
+                    app:layout_constraintStart_toEndOf="@id/title"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_large"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_large"
+                    android:layout_marginBottom="@dimen/spacing_normal"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@id/rv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/remind_me"
+                        style="@style/TextAppearance.TodoFragment.Settings"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawableBottom="@drawable/ic_bell_24dp"
+                        android:drawablePadding="@dimen/spacing_normal"
+                        android:drawableTint="@color/colorOnPrimaryGray"
+                        android:gravity="center"
+                        android:padding="@dimen/spacing_small"
+                        android:text="@string/remind_me" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/repeat"
+                        style="@style/TextAppearance.TodoFragment.Settings"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawableBottom="@drawable/ic_repeat_24dp"
+                        android:drawablePadding="@dimen/spacing_normal"
+                        android:drawableTint="@color/colorOnPrimaryGray"
+                        android:gravity="center"
+                        android:padding="@dimen/spacing_small"
+                        android:text="@string/repeat" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_large"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_large"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@id/sub_todo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout"
+                    tools:itemCount="2"
+                    tools:listitem="@layout/list_item_sub_todo" />
+
+                <ImageView
+                    android:id="@+id/add_sub_todo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_large"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:src="@drawable/ic_add_24dp"
+                    android:tint="@color/colorOnPrimaryGray"
+                    app:layout_constraintEnd_toStartOf="@id/sub_todo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv" />
+
+                <EditText
+                    android:id="@+id/sub_todo"
+                    style="@style/Style.TodoFragment.SubTodo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:layout_marginBottom="@dimen/spacing_normal"
+                    android:hint="@string/type_a_sub_todo"
+                    app:layout_constraintBottom_toTopOf="@id/body"
+                    app:layout_constraintEnd_toStartOf="@id/done"
+                    app:layout_constraintStart_toEndOf="@id/add_sub_todo"
+                    app:layout_constraintTop_toBottomOf="@id/rv" />
+
+                <ImageView
+                    android:id="@+id/done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_large"
+                    android:src="@drawable/ic_done_24dp"
+                    android:tint="@color/colorOnPrimaryGray"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/sub_todo"
+                    app:layout_constraintTop_toBottomOf="@id/rv" />
+
+                <EditText
+                    android:id="@+id/body"
+                    style="@style/TextAppearance.TodoFragment.TodoBody"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/spacing_large"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_large"
+                    android:gravity="top"
+                    android:hint="Type a todo note"
+                    android:inputType="textAutoCorrect|textPersonName|textAutoComplete|textMultiLine|textImeMultiLine|textCapSentences|text"
+                    app:layout_constraintBottom_toBottomOf="@id/cl_front_layer"
+                    app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
+                    app:layout_constraintStart_toStartOf="@id/cl_front_layer"
+                    app:layout_constraintTop_toBottomOf="@id/sub_todo" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
