@@ -12,13 +12,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.NotoDialog
 import com.noto.R
 import com.noto.database.NotoColor
 import com.noto.databinding.FragmentTodolistBinding
 import com.noto.network.Repos
+import com.noto.todo.adapter.NavigateToTodo
 import com.noto.todo.adapter.TodolistRVAdapter
+import com.noto.todo.model.Todo
 import com.noto.todo.model.Todolist
 import com.noto.todo.viewModel.TodolistViewModel
 import com.noto.todo.viewModel.TodolistViewModelFactory
@@ -26,7 +28,7 @@ import com.noto.todo.viewModel.TodolistViewModelFactory
 /**
  * A simple [Fragment] subclass.
  */
-class TodolistFragment : Fragment() {
+class TodolistFragment : Fragment(), NavigateToTodo {
 
     private lateinit var binding: FragmentTodolistBinding
 
@@ -58,12 +60,12 @@ class TodolistFragment : Fragment() {
 
             viewModel.getTodos(args.todolistId)
 
-            adapter = TodolistRVAdapter()
+            adapter = TodolistRVAdapter(args.notoColor, this)
 
             rv.adapter = adapter
 
             rv.layoutManager =
-                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
             viewModel.todos.observe(viewLifecycleOwner, Observer {
 
@@ -105,17 +107,17 @@ class TodolistFragment : Fragment() {
             )
         }
 
-//        binding.fab.setOnClickListener {
-//            this.findNavController().navigate(
-//                NotebookFragmentDirections.actionNotebookFragmentToNoteFragment(
-//                    0L,
-//                    args.notebookId,
-//                    args.notebookTitle,
-//                    args.notoColor
-//                )
-//            )
-//        }
-//
+        binding.fab.setOnClickListener {
+            this.findNavController().navigate(
+                TodolistFragmentDirections.actionTodolistFragmentToTodoFragment(
+                    0L,
+                    args.todolistId,
+                    args.todolistTitle,
+                    args.notoColor
+                )
+            )
+        }
+
         binding.tb.let { tb ->
 
             tb.setNavigationOnClickListener {
@@ -331,5 +333,16 @@ class TodolistFragment : Fragment() {
             it.fab.backgroundTintList =
                 ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryCyan, null))
         }
+    }
+
+    override fun navigate(todo: Todo) {
+        this.findNavController().navigate(
+            TodolistFragmentDirections.actionTodolistFragmentToTodoFragment(
+                todo.todoId,
+                args.todolistId,
+                args.todolistTitle,
+                args.notoColor
+            )
+        )
     }
 }

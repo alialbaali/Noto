@@ -33,8 +33,8 @@
             app:argType="string" />
         <argument
             android:name="noto_color"
-            app:argType="com.noto.database.NotoColor"
-            android:defaultValue="GRAY" />
+            android:defaultValue="GRAY"
+            app:argType="com.noto.database.NotoColor" />
         <action
             android:id="@+id/action_notebookFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
@@ -49,19 +49,19 @@
             app:destination="@id/notebookFragment" />
         <argument
             android:name="note_id"
-            app:argType="long"
-            android:defaultValue="0L" />
+            android:defaultValue="0L"
+            app:argType="long" />
         <argument
             android:name="notebook_id"
-            app:argType="long"
-            android:defaultValue="0L"/>
+            android:defaultValue="0L"
+            app:argType="long" />
         <argument
             android:name="notebook_title"
             app:argType="string" />
         <argument
             android:name="noto_color"
-            app:argType="com.noto.database.NotoColor"
-            android:defaultValue="GRAY" />
+            android:defaultValue="GRAY"
+            app:argType="com.noto.database.NotoColor" />
     </fragment>
     <fragment
         android:id="@+id/todolistListFragment"
@@ -71,5 +71,54 @@
         <action
             android:id="@+id/action_todolistListFragment_to_notebookListFragment"
             app:destination="@id/notebookListFragment" />
+        <action
+            android:id="@+id/action_todolistListFragment_to_todolistFragment"
+            app:destination="@id/todolistFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todolistFragment"
+        android:name="com.noto.todo.ui.TodolistFragment"
+        android:label="TodolistFragment"
+        tools:layout="@layout/fragment_todolist">
+        <action
+            android:id="@+id/action_todolistFragment_to_todolistListFragment"
+            app:destination="@id/todolistListFragment" />
+        <argument
+            android:name="todolist_id"
+            app:argType="long" />
+        <argument
+            android:name="todolist_title"
+            app:argType="string" />
+        <argument
+            android:name="noto_color"
+            android:defaultValue="GRAY"
+            app:argType="com.noto.database.NotoColor" />
+        <action
+            android:id="@+id/action_todolistFragment_to_todoFragment"
+            app:destination="@id/todoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="com.noto.todo.ui.TodoFragment"
+        android:label="TodoFragment"
+        tools:layout="@layout/fragment_todo">
+        <argument
+            android:name="todo_id"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <argument
+            android:name="todolist_id"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <argument
+            android:name="todolist_title"
+            app:argType="string" />
+        <argument
+            android:name="noto_color"
+            android:defaultValue="GRAY"
+            app:argType="com.noto.database.NotoColor" />
+        <action
+            android:id="@+id/action_todoFragment_to_todolistFragment"
+            app:destination="@id/todolistFragment" />
     </fragment>
 </navigation>

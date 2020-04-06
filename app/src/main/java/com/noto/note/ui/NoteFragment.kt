@@ -1,13 +1,14 @@
 package com.noto.note.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.R
@@ -23,7 +24,12 @@ import com.noto.note.viewModel.NoteViewModelFactory
 class NoteFragment : Fragment() {
 
     // Binding
-    private lateinit var binding: FragmentNoteBinding
+    private val binding by lazy {
+        FragmentNoteBinding.inflate(layoutInflater).also {
+            it.lifecycleOwner = this
+            it.viewModel = viewModel
+        }
+    }
 
     private val viewModel by viewModels<NoteViewModel> {
         NoteViewModelFactory(Repos.noteRepository)
@@ -31,14 +37,14 @@ class NoteFragment : Fragment() {
 
     private val args by navArgs<NoteFragmentArgs>()
 
+    private val imm by lazy {
+        activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNoteBinding.inflate(inflater, container, false)
-
-        binding.viewModel = viewModel
-
         when (args.notoColor) {
             NotoColor.GRAY -> setGray()
             NotoColor.BLUE -> setBlue()
@@ -52,8 +58,9 @@ class NoteFragment : Fragment() {
             tb.title = args.notebookTitle
 
             tb.setNavigationOnClickListener {
-                viewModel.saveNote()
+                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
                 this.findNavController().navigateUp()
+                viewModel.saveNote()
             }
 
             tb.setOnMenuItemClickListener {
@@ -74,16 +81,15 @@ class NoteFragment : Fragment() {
             viewModel.saveNote()
         }.isEnabled = true
 
-        // A workaround to one way data binding
-        viewModel.note.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                binding.title.setText(it.noteTitle)
-                binding.body.setText(it.noteBody)
-            }
-        })
+        binding.body.requestFocus()
+        imm.toggleSoftInput(
+            InputMethodManager.SHOW_FORCED,
+            InputMethodManager.HIDE_IMPLICIT_ONLY
+        )
 
         return binding.root
     }
+
 
     private fun setCyan() {
         binding.let {

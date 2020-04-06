@@ -6,6 +6,10 @@
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:colorControlActivated">@color/colorOnPrimary_900</item>
+        <item name="android:colorControlHighlight">@color/colorOnPrimary_900</item>
+        <item name="android:colorControlNormal">@color/colorOnPrimary_900</item>
+        <item name="android:textColorHighlight">@color/colorPrimaryGray</item>
     </style>
 
     <style name="Style.BottomNav.Button" parent="Widget.MaterialComponents.Button">

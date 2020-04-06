@@ -88,7 +88,12 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
                                 "Todolist title can't be empty"
 
                             this.dialogBinding.til.counterTextColor =
-                                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryPink, null))
+                                ColorStateList.valueOf(
+                                    resources.getColor(
+                                        R.color.colorOnPrimaryPink,
+                                        null
+                                    )
+                                )
 
                         }
                         else -> {
@@ -111,7 +116,7 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
         binding.rv.let { rv ->
 
             // RV Adapter
-            adapter = TodolistListRVAdapter(requireContext(), this)
+            adapter = TodolistListRVAdapter(this)
             rv.adapter = adapter
 
             // RV Layout Manger
