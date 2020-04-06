@@ -38,4 +38,10 @@ class SubTodoRepository(private val subTodoDao: SubTodoDao) {
         }
     }
 
+    suspend fun updateSubTodos(subTodos: List<SubTodo>) {
+        withContext(Dispatchers.IO){
+            subTodoDao.updateSubTodos(subTodos)
+        }
+    }
+
 }

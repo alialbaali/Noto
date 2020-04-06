@@ -19,13 +19,13 @@ data class Todo(
         onDelete = ForeignKey.CASCADE
     )
     @ColumnInfo(name = "todolist_id")
-    val todoListId: Long,
+    var todoListId: Long = 0L,
 
     @ColumnInfo(name = "todo_title")
-    var todoTitle: String,
+    var todoTitle: String = "",
 
     @ColumnInfo(name = "todo_note")
-    var todoNote: String,
+    var todoNote: String = "",
 
     @ColumnInfo(name = "is_checked")
     var todoIsChecked: Boolean = false,

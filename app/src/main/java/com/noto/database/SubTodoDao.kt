@@ -22,4 +22,7 @@ interface SubTodoDao {
     @Query("SELECT * FROM sub_todos WHERE sub_todo_id = :subTodoId ")
     fun getSubTodoById(subTodoId: Long): SubTodo
 
+    @Update
+    fun updateSubTodos(subTodos: List<SubTodo>)
+
 }

@@ -8,7 +8,6 @@
         <variable
             name="viewModel"
             type="com.noto.todo.viewModel.TodoViewModel" />
-
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -61,7 +60,6 @@
                         android:backgroundTint="@color/colorOnPrimaryGray"
                         android:button="@null"
                         android:checked="@={viewModel.todo.todoIsChecked}"
-                        app:isOn="@{true}"
                         app:layout_constraintEnd_toStartOf="@+id/title"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -80,11 +78,12 @@
                         android:maxLines="3"
                         android:singleLine="false"
                         android:text="@={viewModel.todo.todoTitle}"
+                        app:isChecked="@{viewModel.todo.todoIsChecked}"
                         app:layout_constraintBottom_toTopOf="@id/linearLayout"
                         app:layout_constraintEnd_toStartOf="@id/star"
                         app:layout_constraintStart_toEndOf="@id/check"
                         app:layout_constraintTop_toTopOf="@id/cl_front_layer"
-                        app:onCheck="@{viewModel.todo.todoIsChecked}" />
+                        app:onCheck="@{check}" />
 
                     <com.google.android.material.checkbox.MaterialCheckBox
                         android:id="@+id/star"
@@ -96,7 +95,6 @@
                         android:background="@drawable/selector_todo_star"
                         android:backgroundTint="@color/colorOnPrimaryGray"
                         android:button="@null"
-                        app:isOn="@{true}"
                         app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
                         app:layout_constraintStart_toEndOf="@id/title"
                         app:layout_constraintTop_toTopOf="parent"

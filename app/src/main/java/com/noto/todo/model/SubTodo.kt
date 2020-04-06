@@ -10,7 +10,7 @@ data class SubTodo(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "sub_todo_id")
-    val subTodoId: Long,
+    val subTodoId: Long = 0L,
 
     @ForeignKey(
         entity = Todo::class,
@@ -19,5 +19,11 @@ data class SubTodo(
         onDelete = ForeignKey.CASCADE
     )
     @ColumnInfo(name = "todo_id")
-    val todoId: Long
+    val todoId: Long,
+
+    @ColumnInfo(name = "sub_todo_title")
+    var subTodoTitle: String = "",
+
+    @ColumnInfo(name = "sub_todo_is_checked")
+    var subTodoIsChecked: Boolean = false
 )
