@@ -6,7 +6,7 @@ import com.noto.todo.model.Todo
 
 @Dao
 interface TodoDao {
-    @Query("SELECT * FROM todos WHERE todolist_id= :todolistId")
+    @Query("SELECT * FROM todos WHERE todolist_id= :todolistId ORDER BY todo_id DESC")
     fun getTodos(todolistId: Long): LiveData<List<Todo>>
 
     @Query("SELECT * FROM todos WHERE todo_id = :todoId")

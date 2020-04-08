@@ -77,7 +77,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="@string/body"
-                        android:inputType="textAutoCorrect|textPersonName|textAutoComplete|textMultiLine|textImeMultiLine|textCapSentences|text"
+                        android:inputType="textAutoCorrect|textAutoComplete|textMultiLine|textImeMultiLine|text|textCapSentences"
                         android:text="@={viewModel.note.noteBody}"
                         android:textColorHint="@color/colorOnPrimary_600" />
 

@@ -12,7 +12,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/delete_notebook"
+        android:id="@+id/delete"
         android:contentDescription="@string/delete_notebook"
         android:enabled="true"
         android:icon="@drawable/ic_delete_sweep_24px"

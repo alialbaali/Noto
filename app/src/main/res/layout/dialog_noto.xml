@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:autofillHints="@string/type_a_title"
-                android:background="@color/transparent"
+                android:background="@android:color/transparent"
                 android:cursorVisible="true"
                 android:focusable="true"
                 android:fontFamily="@font/roboto_medium"

@@ -5,6 +5,14 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.noto.todo.viewModel.TodolistViewModel" />
+
+        <variable
+            name="todo"
+            type="com.noto.todo.model.Todo" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -12,9 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_small"
-        android:padding="@dimen/spacing_small"
         android:background="@drawable/shape_todo_item"
-        android:elevation="@dimen/elevation_extra_small">
+        android:elevation="@dimen/elevation_extra_small"
+        android:padding="@dimen/spacing_small">
 
         <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/check"
@@ -24,6 +32,7 @@
             android:background="@drawable/selector_todo_check"
             android:backgroundTint="@color/colorOnPrimaryGray"
             android:button="@null"
+            android:checked="@={todo.todoIsChecked}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/title"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,6 +45,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_small"
             android:singleLine="true"
+            android:text="@{todo.todoTitle}"
+            app:checkBox="@{check}"
+            app:updateTodo="@{() -> viewModel.updateTodo(todo)}"
+            app:isChecked="@{todo.todoIsChecked}"
             app:layout_constraintBottom_toBottomOf="@id/cl"
             app:layout_constraintEnd_toStartOf="@id/star"
             app:layout_constraintStart_toEndOf="@id/check"
@@ -50,6 +63,8 @@
             android:background="@drawable/selector_todo_star"
             android:backgroundTint="@color/colorOnPrimaryGray"
             android:button="@null"
+            android:checked="@={todo.todoIsStared}"
+            android:onClick="@{() -> viewModel.updateTodo(todo)}"
             app:layout_constraintBottom_toBottomOf="@id/cl"
             app:layout_constraintEnd_toEndOf="@id/cl"
             app:layout_constraintStart_toEndOf="@id/title"

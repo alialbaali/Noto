@@ -19,8 +19,7 @@
             android:id="@+id/cl_back_layer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimaryGray"
-            app:notoColor="@{viewModel.notoColor}">
+            android:background="@color/colorPrimaryGray">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/tb"
@@ -31,7 +30,6 @@
                 app:layout_constraintRight_toRightOf="@id/cl_back_layer"
                 app:layout_constraintTop_toTopOf="@id/cl_back_layer"
                 app:navigationIcon="@drawable/ic_back_24px"
-                app:notoColor="@{viewModel.notoColor}"
                 app:titleTextColor="@color/colorOnPrimary_900" />
 
             <androidx.core.widget.NestedScrollView
@@ -62,8 +60,7 @@
                         android:checked="@={viewModel.todo.todoIsChecked}"
                         app:layout_constraintEnd_toStartOf="@+id/title"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:notoColor="@{viewModel.notoColor}" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <EditText
                         android:id="@+id/title"
@@ -73,17 +70,18 @@
                         android:layout_marginStart="@dimen/spacing_small"
                         android:layout_marginTop="@dimen/spacing_large"
                         android:layout_marginEnd="@dimen/spacing_small"
-                        android:background="@color/transparent"
-                        android:hint="Type a todo"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/type_a_todo"
                         android:maxLines="3"
                         android:singleLine="false"
                         android:text="@={viewModel.todo.todoTitle}"
                         app:isChecked="@{viewModel.todo.todoIsChecked}"
+                        app:updateTodo="@{null}"
                         app:layout_constraintBottom_toTopOf="@id/linearLayout"
                         app:layout_constraintEnd_toStartOf="@id/star"
                         app:layout_constraintStart_toEndOf="@id/check"
                         app:layout_constraintTop_toTopOf="@id/cl_front_layer"
-                        app:onCheck="@{check}" />
+                        app:checkBox="@{check}" />
 
                     <com.google.android.material.checkbox.MaterialCheckBox
                         android:id="@+id/star"
@@ -95,10 +93,10 @@
                         android:background="@drawable/selector_todo_star"
                         android:backgroundTint="@color/colorOnPrimaryGray"
                         android:button="@null"
+                        android:checked="@={viewModel.todo.todoIsStared}"
                         app:layout_constraintEnd_toEndOf="@id/cl_front_layer"
                         app:layout_constraintStart_toEndOf="@id/title"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:notoColor="@{viewModel.notoColor}" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <LinearLayout
                         android:id="@+id/linearLayout"
@@ -194,7 +192,7 @@
                         android:layout_marginEnd="@dimen/spacing_large"
                         android:src="@drawable/ic_done_24dp"
                         android:tint="@color/colorOnPrimaryGray"
-                        android:visibility="visible"
+                        android:visibility="invisible"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/sub_todo"
                         app:layout_constraintTop_toBottomOf="@id/rv" />

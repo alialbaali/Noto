@@ -5,10 +5,12 @@
 
     <data>
 
+        <variable
+            name="todolist"
+            type="com.noto.todo.model.Todolist" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@drawable/shape_todolist_item"
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,6 +18,7 @@
         android:layout_marginTop="@dimen/spacing_small"
         android:layout_marginEnd="@dimen/spacing_normal"
         android:layout_marginBottom="@dimen/spacing_small"
+        android:background="@drawable/shape_todolist_item"
         android:elevation="@dimen/elevation_extra_small">
 
         <com.google.android.material.textview.MaterialTextView
@@ -27,6 +30,7 @@
             android:drawableStart="@drawable/ic_list_24dp"
             android:drawablePadding="@dimen/spacing_normal"
             android:drawableTint="@color/colorPrimaryGray"
+            android:text="@{todolist.todolistTitle}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

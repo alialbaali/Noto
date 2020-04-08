@@ -31,8 +31,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:notoColor="@{viewModel.notoColor}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/title"
@@ -47,13 +46,14 @@
             app:layout_constraintEnd_toStartOf="@id/delete"
             app:layout_constraintStart_toEndOf="@id/check"
             app:layout_constraintTop_toTopOf="parent"
-            app:onCheck="@{check}"
+            app:checkBox="@{check}"
             tools:text="This is a sub todo" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:layout_marginStart="@dimen/spacing_small"
             android:onClick="@{() -> viewModel.deleteSubTodo(subTodo)}"
             android:src="@drawable/ic_cancel_24dp"
@@ -61,7 +61,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/title"
-            app:layout_constraintTop_toTopOf="parent"
-            app:notoColor="@{viewModel.notoColor}" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
