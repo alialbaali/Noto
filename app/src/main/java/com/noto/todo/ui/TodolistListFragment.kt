@@ -1,11 +1,9 @@
 package com.noto.todo.ui
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -27,9 +25,15 @@ import com.noto.todo.viewModel.TodolistListViewModelFactory
  */
 class TodolistListFragment : Fragment(), NavigateToTodolist {
 
-    private lateinit var binding: FragmentTodolistListBinding
+    private val binding by lazy {
+        FragmentTodolistListBinding.inflate(layoutInflater).also {
+            it.lifecycleOwner = this
+        }
+    }
 
-    private lateinit var adapter: TodolistListRVAdapter
+    private val adapter by lazy {
+        TodolistListRVAdapter(this)
+    }
 
     private val viewModel by viewModels<TodolistListViewModel> {
         TodolistListViewModelFactory(Repos.todolistRepository)
@@ -39,10 +43,6 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTodolistListBinding.inflate(inflater, container, false)
-
-        binding.lifecycleOwner = this
-
         activity?.window?.statusBarColor = resources.getColor(R.color.colorPrimary, null)
 
         // Collapse Toolbar
@@ -63,60 +63,23 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
             )
         }
 
-        binding.tb.menu.findItem(R.id.create).setOnMenuItemClickListener {
+        binding.tb.setOnMenuItemClickListener {
 
-            NotoDialog(requireContext(), null, Todolist()).apply {
-                this.todolist!!
+            when (it.itemId) {
 
-                this.dialogBinding.et.hint = "Todolist title"
-
-                this.dialogBinding.createBtn.setOnClickListener {
-
-                    when {
-                        viewModel.todolists.value!!.any {
-                            it.todolistTitle ==
-                                    dialogBinding.et.text.toString()
-                        } -> {
-
-                            this.dialogBinding.til.error =
-                                "Todolist with the same title already exists!"
-
-                        }
-                        this.dialogBinding.et.text.toString().isBlank() -> {
-
-                            this.dialogBinding.til.error =
-                                "Todolist title can't be empty"
-
-                            this.dialogBinding.til.counterTextColor =
-                                ColorStateList.valueOf(
-                                    resources.getColor(
-                                        R.color.colorOnPrimaryPink,
-                                        null
-                                    )
-                                )
-
-                        }
-                        else -> {
-                            this.todolist.todolistTitle = this.dialogBinding.et.text.toString()
-                            viewModel.saveTodolist(this.todolist)
-                            this.dismiss()
-                        }
-                    }
+                R.id.create -> {
+                    NotoDialog(requireContext(), viewModel)
                 }
-                this.create()
-                this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-                this.show()
-                dialogBinding.et.requestFocus()
-                this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+
             }
             true
         }
+
 
         // RV
         binding.rv.let { rv ->
 
             // RV Adapter
-            adapter = TodolistListRVAdapter(this)
             rv.adapter = adapter
 
             // RV Layout Manger

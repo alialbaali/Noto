@@ -1,8 +1,6 @@
 package com.noto.todo.viewModel
 
-import android.content.res.ColorStateList
 import androidx.lifecycle.*
-import com.noto.database.NotoColor
 import com.noto.todo.model.SubTodo
 import com.noto.todo.model.Todo
 import com.noto.todo.repository.SubTodoRepository
@@ -13,13 +11,12 @@ class TodoViewModel(
     private val todoRepository: TodoRepository,
     private val subTodoRepository: SubTodoRepository
 ) : ViewModel() {
+
     val todo = MutableLiveData<Todo>()
 
     lateinit var subTodos: LiveData<List<SubTodo>>
 
     val subTodo = MutableLiveData<SubTodo>()
-
-    val notoColor = MutableLiveData<NotoColor>()
 
     fun saveTodo() {
         viewModelScope.launch {

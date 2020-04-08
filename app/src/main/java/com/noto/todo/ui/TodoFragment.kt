@@ -1,12 +1,15 @@
 package com.noto.todo.ui
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -20,6 +23,9 @@ import com.noto.todo.adapter.SubTodoRVAdapter
 import com.noto.todo.model.SubTodo
 import com.noto.todo.viewModel.TodoViewModel
 import com.noto.todo.viewModel.TodoViewModelFactory
+import com.noto.util.getColorOnPrimary
+import com.noto.util.getColorPrimary
+import com.noto.util.setStatusBarColor
 
 /**
  * A simple [Fragment] subclass.
@@ -44,7 +50,11 @@ class TodoFragment : Fragment() {
     }
 
     private val adapter by lazy {
-        SubTodoRVAdapter(viewModel)
+        SubTodoRVAdapter(viewModel, args.notoColor)
+    }
+
+    private val rvLayoutManger by lazy {
+        LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
     override fun onCreateView(
@@ -52,13 +62,13 @@ class TodoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        setNotoColor()
+
         viewModel.getTodoById(args.todolistId, args.todoId)
 
         viewModel.getSubTodos(args.todoId)
 
         viewModel.subTodo.value = SubTodo(todoId = args.todoId)
-
-        viewModel.notoColor.value = args.notoColor
 
         binding.tb.let { tb ->
             tb.title = args.todolistTitle
@@ -83,9 +93,10 @@ class TodoFragment : Fragment() {
         }
 
         binding.rv.let { rv ->
-            rv.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
             rv.adapter = adapter
+
+            rv.layoutManager = rvLayoutManger
 
             viewModel.subTodos.observe(viewLifecycleOwner, Observer {
                 it?.let {
@@ -101,30 +112,31 @@ class TodoFragment : Fragment() {
             viewModel.updateSubTodos()
         }.isEnabled = true
 
-        viewModel.todo.observe(viewLifecycleOwner, Observer {
-            if (it.todoTitle.isBlank()) {
-                binding.title.requestFocus()
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-            }
-        })
-
         binding.addSubTodo.setOnClickListener {
             binding.subTodo.requestFocus()
-            imm.showSoftInput(binding.subTodo, InputMethodManager.SHOW_FORCED)
+            imm.showSoftInput(binding.subTodo, InputMethodManager.SHOW_IMPLICIT)
+        }
+
+        binding.subTodo.addTextChangedListener {
+            binding.done.isVisible = !it.toString().isBlank()
         }
 
         binding.done.setOnClickListener {
-            if (viewModel.subTodo.value?.subTodoTitle?.isNotBlank() == true) {
-                imm.hideSoftInputFromWindow(
-                    binding.subTodo.windowToken,
-                    InputMethodManager.SHOW_FORCED
-                )
-                viewModel.saveSubTodo()
-                binding.subTodo.setText("")
-                viewModel.subTodo.value = SubTodo(todoId = args.todoId)
-            }
+            viewModel.saveSubTodo()
+            viewModel.subTodo.value = SubTodo(todoId = args.todoId)
         }
 
         return binding.root
+    }
+
+    private fun setNotoColor() {
+        val colorPrimary = args.notoColor.getColorPrimary(binding.root.context)
+        val colorOnPrimary = args.notoColor.getColorOnPrimary(binding.root.context)
+
+        activity?.setStatusBarColor(args.notoColor)
+        binding.clBackLayer.backgroundTintList = ColorStateList.valueOf(colorPrimary)
+        binding.tb.backgroundTintList = ColorStateList.valueOf(colorPrimary)
+        binding.check.backgroundTintList = ColorStateList.valueOf(colorOnPrimary)
+        binding.star.backgroundTintList = ColorStateList.valueOf(colorOnPrimary)
     }
 }

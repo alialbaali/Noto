@@ -1,9 +1,6 @@
 package com.noto.todo.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.noto.todo.model.Todo
 import com.noto.todo.model.Todolist
 import com.noto.todo.repository.TodoRepository
@@ -17,21 +14,35 @@ class TodolistViewModel(
 
     lateinit var todos: LiveData<List<Todo>>
 
+    val todo = MutableLiveData<Todo>()
+
     fun getTodos(todolistId: Long) {
         viewModelScope.launch {
             todos = todoRepository.getTodos(todolistId)
         }
     }
 
-    fun deleteTodolist(todolistId: Long){
+    fun deleteTodolist(todolistId: Long) {
         viewModelScope.launch {
             todolistRepository.deleteTodoListById(todolistId)
         }
     }
 
-    fun updateTodolist(todolist: Todolist){
+    fun updateTodolist(todolist: Todolist) {
         viewModelScope.launch {
             todolistRepository.updateTodoList(todolist)
+        }
+    }
+
+    fun updateTodo(todo: Todo) {
+        viewModelScope.launch {
+            todoRepository.updateTodo(todo)
+        }
+    }
+
+    fun insertTodo() {
+        viewModelScope.launch {
+            todoRepository.insertTodo(todo.value!!)
         }
     }
 }
