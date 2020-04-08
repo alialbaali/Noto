@@ -5,74 +5,136 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.noto.todo.viewModel.TodolistViewModel" />
+
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/cool"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:background="@color/colorPrimaryGray">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/spacing_small"
-            android:visibility="visible"
-            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            tools:listitem="@layout/list_item_todo" />
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/cool"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/new_todo"
+            app:layout_constraintEnd_toEndOf="@id/cl"
+            app:layout_constraintStart_toStartOf="@id/cl"
+            app:layout_constraintTop_toTopOf="@id/cl">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/empty_todolist"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginEnd="@dimen/spacing_normal"
-            android:gravity="center"
-            android:lineSpacingMultiplier="1.5"
-            android:lines="2"
-            android:maxLines="2"
-            android:text="@string/empty_notebook"
-            android:textAppearance="@style/TextAppearance.Notebook.Empty"
-            android:visibility="gone"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/abl"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/abl_height_dimen">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/ctb"
-                style="@style/Style.CollapsingToolbar"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                app:expandedTitleGravity="start|bottom"
-                app:expandedTitleMargin="@dimen/spacing_normal"
-                tools:background="@color/colorPrimaryGray"
-                tools:title="Todos">
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:visibility="visible"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                tools:listitem="@layout/list_item_todo" />
 
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/tb"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/empty_todolist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:gravity="center"
+                android:lineSpacingMultiplier="1.5"
+                android:lines="2"
+                android:maxLines="2"
+                android:text="@string/empty_notebook"
+                android:textAppearance="@style/TextAppearance.Notebook.Empty"
+                android:visibility="gone"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/abl"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/abl_height_dimen"
+                app:layout_constraintBottom_toTopOf="@id/rv"
+                app:layout_constraintEnd_toEndOf="@id/cl"
+                app:layout_constraintStart_toStartOf="@id/cl"
+                app:layout_constraintTop_toTopOf="@id/cl">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    android:id="@+id/ctb"
+                    style="@style/Style.CollapsingToolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:menu="@menu/menu_notebook"
-                    app:navigationIcon="@drawable/ic_back_24px" />
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="0dp"
+                    app:expandedTitleGravity="start|bottom"
+                    app:expandedTitleMargin="@dimen/spacing_normal"
+                    tools:background="@color/colorPrimaryGray"
+                    tools:title="Todos">
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+                    <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/tb"
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        app:layout_collapseMode="pin"
+                        app:menu="@menu/menu_notebook"
+                        app:navigationIcon="@drawable/ic_back_24px" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/new_todo"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="@dimen/spacing_normal"
-            android:src="@drawable/ic_add_24dp" />
+            android:background="@drawable/shape_et"
+            android:backgroundTint="@color/colorOnPrimaryGray"
+            app:layout_constraintBottom_toBottomOf="@id/cl"
+            app:layout_constraintEnd_toEndOf="@id/cl"
+            app:layout_constraintStart_toStartOf="@id/cl"
+            app:layout_constraintTop_toBottomOf="@id/cool">
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <EditText
+                android:id="@+id/new_todo_et"
+                style="@style/Style.TodoFragment.Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:backgroundTint="@android:color/transparent"
+                android:fontFamily="@font/roboto_medium"
+                android:hint="@string/type_a_todo"
+                android:maxLines="3"
+                android:singleLine="false"
+                android:text="@={viewModel.todo.todoTitle}"
+                android:textColor="#FAFAFA"
+                android:textColorHint="#CCFAFAFA"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/new_todo_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/new_todo_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:background="@drawable/ripple_btn"
+                android:backgroundTint="@color/colorPrimary"
+                android:src="@drawable/ic_arrow_up_24dp"
+                android:tint="@color/colorOnPrimaryGray"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/new_todo_et"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

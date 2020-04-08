@@ -1,38 +1,48 @@
 package com.noto.todo.ui
 
+import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.noto.NotoDialog
 import com.noto.R
-import com.noto.database.NotoColor
 import com.noto.databinding.FragmentTodolistBinding
 import com.noto.network.Repos
 import com.noto.todo.adapter.NavigateToTodo
 import com.noto.todo.adapter.TodolistRVAdapter
 import com.noto.todo.model.Todo
-import com.noto.todo.model.Todolist
 import com.noto.todo.viewModel.TodolistViewModel
 import com.noto.todo.viewModel.TodolistViewModelFactory
+import com.noto.util.getColorOnPrimary
+import com.noto.util.getColorPrimary
+import com.noto.util.setStatusBarColor
 
 /**
  * A simple [Fragment] subclass.
  */
 class TodolistFragment : Fragment(), NavigateToTodo {
 
-    private lateinit var binding: FragmentTodolistBinding
+    private val binding by lazy {
+        FragmentTodolistBinding.inflate(layoutInflater).also {
+            it.lifecycleOwner = this
+            it.viewModel = viewModel
+        }
+    }
 
-    private lateinit var adapter: TodolistRVAdapter
+    private val adapter by lazy {
+        TodolistRVAdapter(viewModel, args.notoColor, this)
+    }
 
     private val args by navArgs<TodolistFragmentArgs>()
 
@@ -40,32 +50,46 @@ class TodolistFragment : Fragment(), NavigateToTodo {
         TodolistViewModelFactory(Repos.todolistRepository, Repos.todoRepository)
     }
 
+    private val imm by lazy {
+        activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
+
+    private val rvLayoutManager by lazy {
+        LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTodolistBinding.inflate(inflater, container, false)
 
-        binding.lifecycleOwner = this
+        setNotoColor()
 
-        when (args.notoColor) {
-            NotoColor.GRAY -> setGray()
-            NotoColor.BLUE -> setBlue()
-            NotoColor.PINK -> setPink()
-            NotoColor.CYAN -> setCyan()
+        viewModel.todo.postValue(Todo(todoListId = args.todolistId))
+
+        viewModel.getTodos(args.todolistId)
+
+        binding.newTodoBtn.setOnClickListener {
+            viewModel.insertTodo()
+            viewModel.todo.postValue(Todo(todoListId = args.todolistId))
+        }
+
+        binding.newTodoBtn.isEnabled = false
+        binding.newTodoEt.addTextChangedListener {
+            binding.newTodoBtn.isEnabled = !it.toString().isBlank()
+        }
+
+        binding.newTodo.setOnClickListener {
+            binding.newTodoEt.requestFocus()
+            imm.showSoftInput(binding.newTodoEt, InputMethodManager.SHOW_IMPLICIT)
         }
 
         // RV
         binding.rv.let { rv ->
 
-            viewModel.getTodos(args.todolistId)
-
-            adapter = TodolistRVAdapter(args.notoColor, this)
-
             rv.adapter = adapter
 
-            rv.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            rv.layoutManager = rvLayoutManager
 
             viewModel.todos.observe(viewLifecycleOwner, Observer {
 
@@ -75,7 +99,6 @@ class TodolistFragment : Fragment(), NavigateToTodo {
                         rv.visibility = View.GONE
                         binding.emptyTodolist.visibility = View.VISIBLE
                     } else {
-
                         rv.visibility = View.VISIBLE
                         binding.emptyTodolist.visibility = View.GONE
                         adapter.submitList(it)
@@ -107,232 +130,52 @@ class TodolistFragment : Fragment(), NavigateToTodo {
             )
         }
 
-        binding.fab.setOnClickListener {
-            this.findNavController().navigate(
-                TodolistFragmentDirections.actionTodolistFragmentToTodoFragment(
-                    0L,
-                    args.todolistId,
-                    args.todolistTitle,
-                    args.notoColor
-                )
-            )
-        }
-
         binding.tb.let { tb ->
 
             tb.setNavigationOnClickListener {
+                imm.hideSoftInputFromWindow(
+                    binding.newTodoEt.windowToken,
+                    InputMethodManager.HIDE_IMPLICIT_ONLY
+                )
                 this.findNavController().navigateUp()
             }
 
             tb.setOnMenuItemClickListener {
 
                 when (it.itemId) {
+
                     R.id.style -> {
-                        NotoDialog(
-                            context!!,
-                            null,
-                            Todolist(args.todolistId, args.todolistTitle, args.notoColor)
-                        ).apply {
-                            this.todolist!!
-
-                            dialogBinding.createBtn.text = resources.getString(R.string.update)
-
-                            dialogBinding.et.setText(args.todolistTitle)
-
-                            dialogBinding.et.setSelection(args.todolistTitle.length)
-
-                            this.dialogBinding.et.hint = "Todolist title"
-
-                            this.dialogBinding.createBtn.setOnClickListener {
-
-                                when {
-//                                    viewModel.notebooks.value!!.any {
-//                                        it.notebookTitle ==
-//                                                dialogBinding.et.text.toString()
-//                                    } -> {
-//
-//                                        this.dialogBinding.til.error =
-//                                            "Notebook with the same title already exists!"
-//
-//                                    }
-                                    this.dialogBinding.et.text.toString().isBlank() -> {
-
-                                        this.dialogBinding.til.error =
-                                            "Todolist title can't be empty"
-
-                                        this.dialogBinding.til.counterTextColor =
-                                            ColorStateList.valueOf(
-                                                resources.getColor(
-                                                    R.color.colorOnPrimaryPink,
-                                                    null
-                                                )
-                                            )
-
-                                    }
-                                    else -> {
-                                        this.todolist.todolistTitle =
-                                            this.dialogBinding.et.text.toString()
-                                        viewModel.updateTodolist(this.todolist)
-                                        this.dismiss()
-                                    }
-                                }
-                            }
-                            this.create()
-                            this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-                            this.show()
-                            dialogBinding.et.requestFocus()
-                            this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
-                        }
-                        true
+//                        NotoDialog(requireContext(), viewModel)
                     }
 
-                    R.id.delete_notebook -> {
+                    R.id.delete -> {
                         this.findNavController().navigateUp()
                         viewModel.deleteTodolist(args.todolistId)
-                        true
                     }
-                    else ->
-                        false
                 }
+                true
             }
         }
+
         return binding.root
     }
 
+    private fun setNotoColor() {
+        val colorPrimary = args.notoColor.getColorPrimary(requireContext())
+        val colorOnPrimary = args.notoColor.getColorOnPrimary(requireContext())
 
-    private fun setGray() {
+        activity?.setStatusBarColor(args.notoColor)
+        binding.cl.setBackgroundColor(colorPrimary)
+        binding.tb.setBackgroundColor(colorPrimary)
+        binding.ctb.setBackgroundColor(colorPrimary)
+        binding.ctb.setContentScrimColor(colorPrimary)
+        binding.newTodo.backgroundTintList = ColorStateList.valueOf(colorOnPrimary)
+        binding.newTodoBtn.imageTintList = ColorStateList.valueOf(colorOnPrimary)
+        val drawable = resources.getDrawable(R.drawable.ripple_btn, null)
+        val rippleDrawable =
+            RippleDrawable(ColorStateList.valueOf(colorPrimary), drawable, drawable)
+        binding.newTodoBtn.background = rippleDrawable
 
-        binding.let {
-
-            activity?.window?.statusBarColor =
-                resources.getColor(R.color.colorPrimaryGray, null)
-
-            it.root.setBackgroundColor(resources.getColor(R.color.colorPrimaryGray, null))
-
-            it.ctb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryGray,
-                    null
-                )
-            )
-            it.ctb.setContentScrimColor(
-                resources.getColor(
-                    R.color.colorPrimaryGray,
-                    null
-                )
-            )
-            it.tb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryGray,
-                    null
-                )
-            )
-
-
-            it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryGray, null))
-        }
-    }
-
-    private fun setBlue() {
-        binding.let {
-
-            activity?.window?.statusBarColor =
-                resources.getColor(R.color.colorPrimaryBlue, null)
-
-            it.root.setBackgroundColor(resources.getColor(R.color.colorPrimaryBlue, null))
-
-            it.ctb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryBlue,
-                    null
-                )
-            )
-
-            it.ctb.setContentScrimColor(
-                resources.getColor(
-                    R.color.colorPrimaryBlue,
-                    null
-                )
-            )
-
-            it.tb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryBlue,
-                    null
-                )
-            )
-
-
-            it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryBlue, null))
-        }
-    }
-
-    private fun setPink() {
-        binding.let {
-
-            activity?.window?.statusBarColor =
-                resources.getColor(R.color.colorPrimaryPink, null)
-
-
-            it.root.setBackgroundColor(resources.getColor(R.color.colorPrimaryPink, null))
-
-            it.ctb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryPink,
-                    null
-                )
-            )
-            it.ctb.setContentScrimColor(
-                resources.getColor(
-                    R.color.colorPrimaryPink,
-                    null
-                )
-            )
-            it.tb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryPink,
-                    null
-                )
-            )
-
-            it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryPink, null))
-        }
-    }
-
-    private fun setCyan() {
-        binding.let {
-
-            activity?.window?.statusBarColor =
-                resources.getColor(R.color.colorPrimaryCyan, null)
-
-
-            it.root.setBackgroundColor(resources.getColor(R.color.colorPrimaryCyan, null))
-
-            it.ctb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryCyan,
-                    null
-                )
-            )
-            it.ctb.setContentScrimColor(
-                resources.getColor(
-                    R.color.colorPrimaryCyan,
-                    null
-                )
-            )
-            it.tb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryCyan,
-                    null
-                )
-            )
-
-            it.fab.backgroundTintList =
-                ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryCyan, null))
-        }
     }
 
     override fun navigate(todo: Todo) {

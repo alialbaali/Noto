@@ -73,7 +73,7 @@
 
     <style name="Style.NoteFragment.Title" parent="Widget.AppCompat.EditText">
         <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:background">@color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:maxLength">64</item>
         <item name="android:gravity">top|start</item>
         <item name="android:textColor">@color/colorOnPrimary_800</item>
@@ -83,7 +83,7 @@
     </style>
 
     <style name="Style.NoteFragment.Body" parent="Widget.AppCompat.EditText">
-        <item name="android:background">@color/transparent</item>
+        <item name="android:background">@android:color/transparent</item>
         <item name="android:gravity">top|start</item>
         <item name="android:singleLine">false</item>
         <item name="android:fontFamily">@font/roboto</item>
@@ -139,6 +139,10 @@
         <item name="android:textColorHint">@color/colorOnPrimary_600</item>
         <item name="android:textSize">16sp</item>
         <item name="android:background">@null</item>
+    </style>
+
+    <style name="TextAppearance.TodoFragment.Todo.Input" parent="TextAppearance.AppCompat">
+
     </style>
 
 </resources>

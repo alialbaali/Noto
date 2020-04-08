@@ -40,5 +40,6 @@
     <string name="sub_todos">Sub todos</string>
     <string name="type_a_sub_todo">Type a sub todo</string>
     <string name="todo_body">Todo body</string>
+    <string name="type_a_todo">Type a todo</string>
 
 </resources>
