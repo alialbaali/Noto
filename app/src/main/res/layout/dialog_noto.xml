@@ -22,7 +22,7 @@
             app:boxBackgroundMode="none"
             app:counterEnabled="true"
             app:counterMaxLength="32"
-            app:counterTextColor="@color/colorOnPrimaryGray"
+            app:counterTextColor="@color/colorOnPrimary_600"
             app:errorEnabled="true"
             app:hintEnabled="false"
             app:layout_constraintBottom_toTopOf="@id/rg"
@@ -38,15 +38,14 @@
                 android:background="@color/transparent"
                 android:cursorVisible="true"
                 android:focusable="true"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="@font/roboto_medium"
                 android:hint="@string/type_a_title"
                 android:inputType="text|textPersonName|textCapWords"
                 android:maxLength="32"
                 android:padding="@dimen/spacing_small"
                 android:singleLine="true"
                 android:textColor="@color/colorOnPrimary_800"
-                android:textColorHint="@color/colorOnPrimaryGray"
-                android:textCursorDrawable="@null"
+                android:textColorHint="@color/colorOnPrimary_600"
                 android:textSize="20sp" />
 
         </com.google.android.material.textfield.TextInputLayout>

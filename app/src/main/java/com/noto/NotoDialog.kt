@@ -6,108 +6,121 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.view.WindowManager
+import androidx.lifecycle.ViewModel
 import com.noto.database.NotoColor
 import com.noto.databinding.DialogNotoBinding
 import com.noto.note.model.Notebook
+import com.noto.note.viewModel.NotebookListViewModel
 import com.noto.todo.model.Todolist
+import com.noto.todo.viewModel.TodolistListViewModel
+import com.noto.util.getColorOnPrimary
+import com.noto.util.getColorPrimary
 
-class NotoDialog(context: Context, val notebook: Notebook?, val todolist: Todolist?) :
-    AlertDialog(context) {
+class NotoDialog(context: Context, private val viewModel: ViewModel) : AlertDialog(context) {
 
-    private val resources = context.resources
+    private var notoColor = NotoColor.GRAY
 
-    internal val dialogBinding = DialogNotoBinding.inflate(LayoutInflater.from(context))
+    private val dialogBinding = DialogNotoBinding.inflate(layoutInflater)
+
+    init {
+        create()
+        window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+        show()
+        dialogBinding.et.requestFocus()
+        window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(dialogBinding.root)
+
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window?.setWindowAnimations(R.style.DialogAnimation)
-//        window?.setDimAmount(0f)
-
-
-        when (notebook?.notoColor) {
-            NotoColor.GRAY -> setGray()
-            NotoColor.BLUE -> setBlue()
-            NotoColor.PINK -> setPink()
-            NotoColor.CYAN -> setCyan()
-        }
-
-        when (todolist?.notoColor) {
-            NotoColor.GRAY -> setGray()
-            NotoColor.BLUE -> setBlue()
-            NotoColor.PINK -> setPink()
-            NotoColor.CYAN -> setCyan()
-        }
 
         dialogBinding.rbtnGray.setOnClickListener {
-            setGray()
+            notoColor = NotoColor.GRAY
+            setNotoColor()
         }
         dialogBinding.rbtnBlue.setOnClickListener {
-            setBlue()
+            notoColor = NotoColor.BLUE
+            setNotoColor()
         }
         dialogBinding.rbtnPink.setOnClickListener {
-            setPink()
+            notoColor = NotoColor.PINK
+            setNotoColor()
         }
         dialogBinding.rbtnCyan.setOnClickListener {
-            setCyan()
+            notoColor = NotoColor.CYAN
+            setNotoColor()
         }
         dialogBinding.cancelBtn.setOnClickListener {
             dismiss()
         }
+        dialogBinding.createBtn.setOnClickListener {
+            val title = dialogBinding.et.text.toString()
+
+            if (title.isBlank()) {
+
+                dialogBinding.til.error = "Title can't be empty"
+
+            } else {
+
+                when (viewModel) {
+                    is NotebookListViewModel -> {
+                        notebookListViewModel(title)
+                    }
+                    is TodolistListViewModel -> {
+                        todolistListViewModel(title)
+                    }
+                    else -> {
+                    }
+                }
+            }
+        }
     }
 
-    private fun setGray() {
+    private fun notebookListViewModel(title: String) {
+        viewModel as NotebookListViewModel
 
-        notebook?.notoColor = NotoColor.GRAY
-        todolist?.notoColor = NotoColor.GRAY
+        if (viewModel.notebooks.value!!.any { it.notebookTitle == title }) {
 
-        dialogBinding.root.backgroundTintList =
-            ColorStateList.valueOf(context.getColor(R.color.colorPrimaryGray))
+            dialogBinding.til.error = "Title already exists"
 
-        dialogBinding.createBtn.backgroundTintList =
-            ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryGray, null))
+        } else {
 
+            val notebook = Notebook(notebookTitle = title, notoColor = notoColor)
+
+            viewModel.saveNotebook(notebook)
+
+            dismiss()
+        }
     }
 
-    private fun setBlue() {
+    private fun todolistListViewModel(title: String) {
 
-        notebook?.notoColor = NotoColor.BLUE
-        todolist?.notoColor = NotoColor.BLUE
+        viewModel as TodolistListViewModel
 
-        dialogBinding.root.backgroundTintList =
-            ColorStateList.valueOf(context.getColor(R.color.colorPrimaryBlue))
+        if (viewModel.todolists.value!!.any { it.todolistTitle == title }) {
 
-        dialogBinding.createBtn.backgroundTintList =
-            ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryBlue, null))
+            dialogBinding.til.error = "Title already exists"
 
+        } else {
+
+            val todolist = Todolist(todolistTitle = title, notoColor = notoColor)
+
+            viewModel.saveTodolist(todolist)
+
+            dismiss()
+        }
     }
 
-    private fun setPink() {
-
-        notebook?.notoColor = NotoColor.PINK
-        todolist?.notoColor = NotoColor.PINK
-
+    private fun setNotoColor() {
         dialogBinding.root.backgroundTintList =
-            ColorStateList.valueOf(context.getColor(R.color.colorPrimaryPink))
+            ColorStateList.valueOf(notoColor.getColorPrimary(context))
 
         dialogBinding.createBtn.backgroundTintList =
-            ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryPink, null))
-
-    }
-
-    private fun setCyan() {
-
-        notebook?.notoColor = NotoColor.CYAN
-        todolist?.notoColor = NotoColor.CYAN
-
-        dialogBinding.root.backgroundTintList =
-            ColorStateList.valueOf(context.getColor(R.color.colorPrimaryCyan))
-
-        dialogBinding.createBtn.backgroundTintList =
-            ColorStateList.valueOf(resources.getColor(R.color.colorOnPrimaryCyan, null))
-
+            ColorStateList.valueOf(notoColor.getColorOnPrimary(context))
     }
 }
