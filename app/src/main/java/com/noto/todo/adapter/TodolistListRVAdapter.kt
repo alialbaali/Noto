@@ -1,109 +1,79 @@
 package com.noto.todo.adapter
 
-import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.RippleDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.noto.R
-import com.noto.database.NotoColor
 import com.noto.databinding.ListItemTodolistBinding
 import com.noto.todo.model.Todolist
+import com.noto.util.getColorOnPrimary
+import com.noto.util.getColorPrimary
 
-internal class TodolistListRVAdapter(
-    private val context: Context,
-    private val navigateToTodolist: NavigateToTodolist
-) :
+internal class TodolistListRVAdapter(private val navigateToTodolist: NavigateToTodolist) :
+
     ListAdapter<Todolist, TodolistItemViewHolder>(TodolistItemDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodolistItemViewHolder {
-        return TodolistItemViewHolder.create(parent, context, navigateToTodolist)
+        return TodolistItemViewHolder.create(parent, navigateToTodolist)
     }
 
     override fun onBindViewHolder(holder: TodolistItemViewHolder, position: Int) {
         val todolist = getItem(position)
         holder.bind(todolist)
-        holder.item = todolist
+        holder.todolist = todolist
     }
-
 
 }
 
 internal class TodolistItemViewHolder(
     private val binding: ListItemTodolistBinding,
-    private val context: Context,
     private val navigateToTodolist: NavigateToTodolist
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
-    lateinit var item: Todolist
+    lateinit var todolist: Todolist
 
     init {
         binding.root.setOnClickListener {
-            navigateToTodolist.navigate(item.todolistId)
+            navigateToTodolist.navigate(todolist)
         }
     }
 
     companion object {
         fun create(
             parent: ViewGroup,
-            context: Context,
             navigateToTodolist: NavigateToTodolist
         ): TodolistItemViewHolder {
-            return TodolistItemViewHolder(
-                ListItemTodolistBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                ), context, navigateToTodolist
-            )
+
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = ListItemTodolistBinding.inflate(layoutInflater, parent, false)
+
+            return TodolistItemViewHolder(binding, navigateToTodolist)
         }
     }
 
-    fun bind(item: Todolist) {
-        binding.todoListTv.text = item.todolistTitle
+    fun bind(todolist: Todolist) {
+        binding.todolist = todolist
+        binding.executePendingBindings()
 
-        when (item.notoColor) {
+        val colorPrimary = todolist.notoColor.getColorPrimary(binding.root.context)
+        val colorOnPrimary = todolist.notoColor.getColorOnPrimary(binding.root.context)
 
-            NotoColor.GRAY -> {
-                binding.todoListTv.compoundDrawableTintList = ColorStateList.valueOf(
-                    context.resources.getColor(
-                        R.color.colorPrimaryGray,
-                        null
-                    )
-                )
-            }
-            NotoColor.BLUE -> {
-                binding.todoListTv.compoundDrawableTintList = ColorStateList.valueOf(
-                    context.resources.getColor(
-                        R.color.colorPrimaryBlue,
-                        null
-                    )
-                )
-            }
-            NotoColor.PINK -> {
-                binding.todoListTv.compoundDrawableTintList = ColorStateList.valueOf(
-                    context.resources.getColor(
-                        R.color.colorPrimaryPink,
-                        null
-                    )
-                )
-            }
-            NotoColor.CYAN -> {
-                binding.todoListTv.compoundDrawableTintList = ColorStateList.valueOf(
-                    context.resources.getColor(
-                        R.color.colorPrimaryCyan,
-                        null
-                    )
-                )
-            }
-        }
+        val drawable = binding.root.resources.getDrawable(R.drawable.shape_todolist_item, null)
+        val ripple = RippleDrawable(ColorStateList.valueOf(colorPrimary), drawable, drawable)
+
+        binding.todoListTv.compoundDrawableTintList = ColorStateList.valueOf(colorOnPrimary)
+        binding.todoListTv.setTextColor(colorOnPrimary)
+        binding.root.background = ripple
     }
 
 }
 
-private class TodolistItemDiffCallback() : DiffUtil.ItemCallback<Todolist>() {
+private class TodolistItemDiffCallback : DiffUtil.ItemCallback<Todolist>() {
+
     override fun areItemsTheSame(oldItem: Todolist, newItem: Todolist): Boolean {
         return oldItem.todolistId == newItem.todolistId
     }
@@ -111,8 +81,9 @@ private class TodolistItemDiffCallback() : DiffUtil.ItemCallback<Todolist>() {
     override fun areContentsTheSame(oldItem: Todolist, newItem: Todolist): Boolean {
         return oldItem == newItem
     }
+    
 }
 
 interface NavigateToTodolist {
-    fun navigate(todolistId: Long)
+    fun navigate(todolist: Todolist)
 }
