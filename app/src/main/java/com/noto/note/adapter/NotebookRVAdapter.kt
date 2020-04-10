@@ -5,33 +5,51 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.noto.database.NotoColor
 import com.noto.databinding.ListItemNoteBinding
 import com.noto.note.model.Note
+import com.noto.note.viewModel.NotebookViewModel
+import com.noto.util.getColorOnPrimary
+import com.noto.util.getColorPrimary
 
 // Notebook RV Adapter
-class NotebookRVAdapter(private val navigateToNote: NavigateToNote) : ListAdapter<Note, NoteItemViewHolder>(NoteItemDiffCallback()) {
+class NotebookRVAdapter(
+    private val viewModel: NotebookViewModel,
+    private val notoColor: NotoColor,
+    private val navigateToNote: NavigateToNote
+) :
+    ListAdapter<Note, NoteItemViewHolder>(NoteItemDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder {
-        return NoteItemViewHolder.create(parent, navigateToNote)
+        return NoteItemViewHolder.create(parent, viewModel, notoColor, navigateToNote)
     }
 
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
         val note = getItem(position)
+        holder.note = note
         holder.bind(note)
-        holder.id = note.noteId
     }
 
 }
 
 // Note Item ViewHolder
-class NoteItemViewHolder(private val binding: ListItemNoteBinding, navigateToNote: NavigateToNote) :
+class NoteItemViewHolder(
+    private val binding: ListItemNoteBinding,
+    private val viewModel: NotebookViewModel,
+    private val notoColor: NotoColor,
+    private val navigateToNote: NavigateToNote
+) :
     RecyclerView.ViewHolder(binding.root) {
 
-    var id = 0L
+    lateinit var note: Note
+
+    private val colorPrimary = notoColor.getColorPrimary(binding.root.context)
+
+    private val colorOnPrimary = notoColor.getColorOnPrimary(binding.root.context)
 
     init {
         binding.root.setOnClickListener {
-            navigateToNote.navigate(id)
+            navigateToNote.navigate(note.noteId)
         }
     }
 
@@ -40,22 +58,23 @@ class NoteItemViewHolder(private val binding: ListItemNoteBinding, navigateToNot
         // Create ViewHolder Instance
         fun create(
             parent: ViewGroup,
+            viewModel: NotebookViewModel,
+            notoColor: NotoColor,
             navigateToNote: NavigateToNote
         ): NoteItemViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = ListItemNoteBinding.inflate(layoutInflater, parent, false)
+
             return NoteItemViewHolder(
-                ListItemNoteBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                ), navigateToNote
+                binding, viewModel, notoColor, navigateToNote
             )
         }
     }
 
     // Bind note's values to the list item
     fun bind(note: Note) {
-        binding.title.text = note.noteTitle
-        binding.body.text = note.noteBody
+        binding.note = note
+        binding.executePendingBindings()
     }
 }
 

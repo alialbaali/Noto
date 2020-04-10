@@ -30,7 +30,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
     }
 
     private val rvAdapter by lazy {
-        NotebookRVAdapter(this)
+        NotebookRVAdapter(viewModel, args.notoColor, this)
     }
 
     private val rvLayoutManager by lazy {
