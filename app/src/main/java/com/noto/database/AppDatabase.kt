@@ -11,7 +11,12 @@ import com.noto.todo.model.SubTodo
 import com.noto.todo.model.Todo
 import com.noto.todo.model.Todolist
 
-@TypeConverters(NotoColorConverter::class)
+@TypeConverters(
+    NotoColorConverter::class,
+    DateConverter::class,
+    SortTypeConverter::class,
+    SortMethodConverter::class
+)
 @Database(
     entities = [Notebook::class, Note::class, Todolist::class, Todo::class, SubTodo::class],
     version = 1,
