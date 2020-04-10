@@ -2,11 +2,13 @@ package com.noto.util
 
 import android.app.Activity
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Paint
-import android.widget.EditText
+import android.view.View
 import android.widget.TextView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.noto.R
 import com.noto.database.NotoColor
 
@@ -40,4 +42,26 @@ fun TextView.setUnchecked() {
 
 fun Activity.setStatusBarColor(notoColor: NotoColor) {
     this.window.statusBarColor = notoColor.getColorPrimary(this)
+}
+
+fun CollapsingToolbarLayout.setFontFamily() {
+    this.setCollapsedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_bold))
+    this.setExpandedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_medium))
+}
+
+fun <T : Any, VH : RecyclerView.ViewHolder> RecyclerView.setList(
+    list: List<T>?,
+    rvAdapter: ListAdapter<T, VH>,
+    view: View
+) {
+    list?.let {
+        if (list.isEmpty()){
+            this.visibility = View.GONE
+            view.visibility = View.VISIBLE
+        } else {
+            this.visibility = View.VISIBLE
+            view.visibility = View.GONE
+            rvAdapter.submitList(list)
+        }
+    }
 }
