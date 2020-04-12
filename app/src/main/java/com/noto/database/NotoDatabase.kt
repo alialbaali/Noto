@@ -35,6 +35,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val subTodoDao: SubTodoDao
 
     companion object {
+
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
@@ -47,7 +48,7 @@ abstract class AppDatabase : RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context,
                         AppDatabase::class.java,
-                        "AppDatabase"
+                        "Noto Database"
                     )
                         .fallbackToDestructiveMigration()
                         .build()
