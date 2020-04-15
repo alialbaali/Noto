@@ -13,8 +13,7 @@ android {
         minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
-        versionName '0.0.30'
-
+        versionName '0.0.4'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -32,6 +31,7 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs = ["-Xallow-result-return-type"]
     }
 
     dataBinding {
@@ -99,4 +99,7 @@ dependencies {
 
     // OKHTTP Logger
     implementation "com.squareup.okhttp3:logging-interceptor:4.4.0"
+
+    // Koin
+    implementation "org.koin:koin-android-viewmodel:2.1.5"
 }
