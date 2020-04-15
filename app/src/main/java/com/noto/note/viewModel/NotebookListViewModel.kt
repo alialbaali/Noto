@@ -1,33 +1,59 @@
 package com.noto.note.viewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.noto.database.SortMethod
+import com.noto.database.SortType
 import com.noto.note.model.Notebook
 import com.noto.note.repository.NotebookRepository
+import com.noto.util.sortAsc
+import com.noto.util.sortDesc
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-internal class NotebookListViewModel(private val notebookRepository: NotebookRepository) :
-    ViewModel() {
+class NotebookListViewModel(private val notebookRepository: NotebookRepository) : ViewModel() {
 
-    lateinit var notebooks: LiveData<List<Notebook>>
+    private val _notebooks = MediatorLiveData<List<Notebook>>()
+    val notebooks: LiveData<List<Notebook>> = _notebooks
+
+    private val _sortType = MutableLiveData<SortType>()
+    val sortType :LiveData<SortType> = _sortType
+
+    private val _sortMethod = MutableLiveData<SortMethod>()
+    val sortMethod :LiveData<SortMethod> = _sortMethod
 
     init {
-        viewModelScope.launch {
-            notebooks = notebookRepository.getNotebooks()
-        }
+        getNotebooks()
+        getSortType()
+        getSortMethod()
     }
 
     internal fun saveNotebook(notebook: Notebook) {
         viewModelScope.launch {
-            if (notebooks.value?.any {
-                    it.notebookId == notebook.notebookId
-                }!!) {
+
+            if (_notebooks.value?.any { it.notebookId == notebook.notebookId }!!) {
+
                 notebookRepository.updateNotebook(notebook)
             } else {
+
                 notebookRepository.insertNotebook(notebook)
+
+                _notebooks.postValue(notebookRepository.getNotebooks())
+
             }
+        }
+    }
+
+    private fun getNotebooks() {
+        viewModelScope.launch(Dispatchers.Default) {
+            _notebooks.postValue(sort(notebookRepository.getNotebooks()))
+        }
+    }
+
+    private fun sort(list: List<Notebook>): List<Notebook> {
+        return if (_sortType.value == SortType.ASC) {
+            list.sortAsc(_sortMethod.value ?: SortMethod.Custom)
+        } else {
+            list.sortDesc(_sortMethod.value ?: SortMethod.Custom)
         }
     }
 
@@ -36,17 +62,43 @@ internal class NotebookListViewModel(private val notebookRepository: NotebookRep
             notebookRepository.deleteNotebook(notebookId)
         }
     }
-}
 
-internal class NotebookListViewModelFactory(private val notebookDao: NotebookRepository) :
-    ViewModelProvider.Factory {
-
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(NotebookListViewModel::class.java)) {
-            return NotebookListViewModel(notebookDao) as T
+    internal fun swapNotebooks(from: Notebook, to: Notebook) {
+        viewModelScope.launch {
+            notebookRepository.swapNotebooks(from, to)
         }
-        throw KotlinNullPointerException("Unknown ViewModel Class")
     }
 
+    fun updateNotebooks(notebooks: List<Notebook>) {
+        viewModelScope.launch {
+            notebookRepository.updateNotebooks(notebooks)
+        }
+    }
+
+    fun updateSortType() {
+        if (_sortType.value == SortType.ASC) {
+            notebookRepository.updateSortType(SortType.DESC)
+        } else {
+            notebookRepository.updateSortType(SortType.ASC)
+        }
+        getSortType()
+        getNotebooks()
+    }
+
+    fun updateSortMethod(sortMethod: SortMethod) {
+        notebookRepository.updateSortMethod(sortMethod)
+        getSortMethod()
+
+        if (_sortMethod.value != SortMethod.Custom) {
+            getNotebooks()
+        }
+    }
+
+    private fun getSortType() {
+        _sortType.value = notebookRepository.getSortType()
+    }
+
+    private fun getSortMethod() {
+        _sortMethod.value = notebookRepository.getSortMethod()
+    }
 }

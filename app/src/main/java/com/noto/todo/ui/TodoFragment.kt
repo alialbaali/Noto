@@ -11,21 +11,20 @@ import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.R
 import com.noto.databinding.FragmentTodoBinding
-import com.noto.network.Repos
+import com.noto.note.model.Notebook
 import com.noto.todo.adapter.SubTodoRVAdapter
 import com.noto.todo.model.SubTodo
 import com.noto.todo.viewModel.TodoViewModel
-import com.noto.todo.viewModel.TodoViewModelFactory
 import com.noto.util.getColorOnPrimary
 import com.noto.util.getColorPrimary
 import com.noto.util.setStatusBarColor
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -41,12 +40,10 @@ class TodoFragment : Fragment() {
 
     private val args by navArgs<TodoFragmentArgs>()
 
-    private val viewModel by viewModels<TodoViewModel> {
-        TodoViewModelFactory(Repos.todoRepository, Repos.subTodoRepository)
-    }
+    private val viewModel by viewModel<TodoViewModel>()
 
     private val imm by lazy {
-        activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
     private val adapter by lazy {
@@ -133,7 +130,7 @@ class TodoFragment : Fragment() {
         val colorPrimary = args.notoColor.getColorPrimary(binding.root.context)
         val colorOnPrimary = args.notoColor.getColorOnPrimary(binding.root.context)
 
-        activity?.setStatusBarColor(args.notoColor)
+        requireActivity().setStatusBarColor(args.notoColor)
         binding.clBackLayer.backgroundTintList = ColorStateList.valueOf(colorPrimary)
         binding.tb.backgroundTintList = ColorStateList.valueOf(colorPrimary)
         binding.check.backgroundTintList = ColorStateList.valueOf(colorOnPrimary)

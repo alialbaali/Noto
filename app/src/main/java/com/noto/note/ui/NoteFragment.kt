@@ -1,6 +1,7 @@
 package com.noto.note.ui
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,19 +9,17 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.R
-import com.noto.database.NotoColor
 import com.noto.databinding.FragmentNoteBinding
-import com.noto.network.Repos
 import com.noto.note.viewModel.NoteViewModel
-import com.noto.note.viewModel.NoteViewModelFactory
+import com.noto.util.getColorOnPrimary
+import com.noto.util.getColorPrimary
+import com.noto.util.setStatusBarColor
+import org.koin.android.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass.
- */
 class NoteFragment : Fragment() {
 
     // Binding
@@ -31,26 +30,20 @@ class NoteFragment : Fragment() {
         }
     }
 
-    private val viewModel by viewModels<NoteViewModel> {
-        NoteViewModelFactory(Repos.noteRepository)
-    }
+    private val viewModel by viewModel<NoteViewModel>()
 
     private val args by navArgs<NoteFragmentArgs>()
 
     private val imm by lazy {
-        activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        when (args.notoColor) {
-            NotoColor.GRAY -> setGray()
-            NotoColor.BLUE -> setBlue()
-            NotoColor.PINK -> setPink()
-            NotoColor.CYAN -> setCyan()
-        }
+
+        setNotoColor()
 
         viewModel.getNoteById(args.notebookId, args.noteId)
 
@@ -58,7 +51,10 @@ class NoteFragment : Fragment() {
             tb.title = args.notebookTitle
 
             tb.setNavigationOnClickListener {
-                imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+                imm.hideSoftInputFromWindow(
+                    binding.body.windowToken,
+                    InputMethodManager.HIDE_IMPLICIT_ONLY
+                )
                 this.findNavController().navigateUp()
                 viewModel.saveNote()
             }
@@ -81,81 +77,28 @@ class NoteFragment : Fragment() {
             viewModel.saveNote()
         }.isEnabled = true
 
-        binding.body.requestFocus()
-        imm.toggleSoftInput(
-            InputMethodManager.SHOW_FORCED,
-            InputMethodManager.HIDE_IMPLICIT_ONLY
-        )
+        viewModel.note.observe(viewLifecycleOwner, Observer {
+            if (it.noteBody.isBlank()) {
+                binding.body.requestFocus()
+                imm.showSoftInput(binding.body, InputMethodManager.SHOW_IMPLICIT)
+            } else {
+                binding.root.clearFocus()
+            }
+        })
 
         return binding.root
     }
 
 
-    private fun setCyan() {
-        binding.let {
-            it.clBackLayer.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryCyan,
-                    null
-                )
-            )
-            it.tb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryCyan,
-                    null
-                )
-            )
-        }
-    }
+    private fun setNotoColor() {
+        val colorPrimary = args.notoColor.getColorPrimary(binding.root.context)
+        val colorOnPrimary = args.notoColor.getColorOnPrimary(binding.root.context)
 
-    private fun setPink() {
-        binding.let {
-            it.clBackLayer.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryPink,
-                    null
-                )
-            )
-            it.tb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryPink,
-                    null
-                )
-            )
-        }
-    }
+        requireActivity().setStatusBarColor(args.notoColor)
 
-    private fun setBlue() {
-        binding.let {
-            it.clBackLayer.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryBlue,
-                    null
-                )
-            )
-            it.tb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryBlue,
-                    null
-                )
-            )
-        }
-    }
-
-    private fun setGray() {
-        binding.let {
-            it.clBackLayer.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryGray,
-                    null
-                )
-            )
-            it.tb.setBackgroundColor(
-                resources.getColor(
-                    R.color.colorPrimaryGray,
-                    null
-                )
-            )
+        with(binding) {
+            clBackLayer.backgroundTintList = ColorStateList.valueOf(colorPrimary)
+            tb.backgroundTintList = ColorStateList.valueOf(colorPrimary)
         }
     }
 

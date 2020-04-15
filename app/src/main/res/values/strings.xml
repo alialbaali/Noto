@@ -41,5 +41,12 @@
     <string name="type_a_sub_todo">Type a sub todo</string>
     <string name="todo_body">Todo body</string>
     <string name="type_a_todo">Type a todo</string>
+    <string name="creation_date">Creation date</string>
+    <string name="modification_date">Modification date</string>
+    <string name="alphabetically">Alphabetically</string>
+    <string name="custom">Custom</string>
+    <string name="sort_by">Sort by</string>
+    <string name="sort">Sort</string>
+    <string name="more">more</string>
 
 </resources>

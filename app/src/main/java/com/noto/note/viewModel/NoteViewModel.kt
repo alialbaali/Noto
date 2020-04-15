@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.noto.note.model.Note
 import com.noto.note.repository.NoteRepository
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 internal class NoteViewModel(private val noteRepository: NoteRepository) : ViewModel() {
 
@@ -14,9 +15,10 @@ internal class NoteViewModel(private val noteRepository: NoteRepository) : ViewM
 
     internal fun saveNote() {
         viewModelScope.launch {
-            if ((note.value!!.noteTitle.isNotBlank() || note.value!!.noteBody.isNotBlank())) {
-
-                if (note.value!!.noteId == 0L) {
+            if ((note.value?.noteTitle?.isNotBlank() == true || note.value?.noteBody?.isNotBlank() == true)) {
+                Timber.i("Not Blank")
+                if (note.value?.noteId == 0L) {
+                Timber.i("Inserted")
                     noteRepository.insertNote(note.value!!)
                 } else {
                     noteRepository.updateNote(note.value!!)
@@ -29,7 +31,7 @@ internal class NoteViewModel(private val noteRepository: NoteRepository) : ViewM
     internal fun getNoteById(notebookId: Long, noteId: Long) {
         viewModelScope.launch {
             if (noteId == 0L) {
-                note.postValue(Note(notebookId = notebookId))
+                note.postValue(Note(notebookId = notebookId, notePosition = noteRepository.getNotes(notebookId).size))
             } else {
                 note.postValue(noteRepository.getNoteById(noteId))
             }
@@ -39,25 +41,12 @@ internal class NoteViewModel(private val noteRepository: NoteRepository) : ViewM
 
     internal fun deleteNote() {
         viewModelScope.launch {
-            if (note.value!!.noteId != 0L) {
+            if (note.value?.noteId != 0L) {
                 noteRepository.deleteNote(note.value!!)
             } else {
-                note.value!!.noteTitle = ""
-                note.value!!.noteBody = ""
+                note.value = null
             }
         }
-    }
-
-}
-
-internal class NoteViewModelFactory(private val noteRepository: NoteRepository) :
-    ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(NoteViewModel::class.java)) {
-            return NoteViewModel(noteRepository) as T
-        }
-        throw KotlinNullPointerException("Unknown ViewModel Class")
     }
 
 }

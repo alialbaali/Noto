@@ -4,21 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.NotoDialog
 import com.noto.R
 import com.noto.databinding.FragmentTodolistListBinding
-import com.noto.network.Repos
 import com.noto.todo.adapter.NavigateToTodolist
 import com.noto.todo.adapter.TodolistListRVAdapter
 import com.noto.todo.model.Todolist
 import com.noto.todo.viewModel.TodolistListViewModel
-import com.noto.todo.viewModel.TodolistListViewModelFactory
+import com.noto.util.setFontFamily
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -31,37 +29,23 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
         }
     }
 
-    private val adapter by lazy {
+    private val rvAdapter by lazy {
         TodolistListRVAdapter(this)
     }
 
-    private val viewModel by viewModels<TodolistListViewModel> {
-        TodolistListViewModelFactory(Repos.todolistRepository)
+    private val viewModel by viewModel<TodolistListViewModel>()
+
+    private val rvLayoutManager by lazy {
+        LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        activity?.window?.statusBarColor = resources.getColor(R.color.colorPrimary, null)
+        requireActivity().window?.statusBarColor = resources.getColor(R.color.colorPrimary, null)
 
-        // Collapse Toolbar
-        binding.ctb.let { ctb ->
-
-            ctb.setCollapsedTitleTypeface(
-                ResourcesCompat.getFont(
-                    requireContext(),
-                    R.font.roboto_bold
-                )
-            )
-
-            ctb.setExpandedTitleTypeface(
-                ResourcesCompat.getFont(
-                    requireContext(),
-                    R.font.roboto_medium
-                )
-            )
-        }
+        binding.ctb.setFontFamily()
 
         binding.tb.setOnMenuItemClickListener {
 
@@ -80,15 +64,14 @@ class TodolistListFragment : Fragment(), NavigateToTodolist {
         binding.rv.let { rv ->
 
             // RV Adapter
-            rv.adapter = adapter
+            rv.adapter = rvAdapter
 
             // RV Layout Manger
-            rv.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            rv.layoutManager = rvLayoutManager
 
             viewModel.todolists.observe(viewLifecycleOwner, Observer {
                 it?.let {
-                    adapter.submitList(it)
+                    rvAdapter.submitList(it)
                 }
             })
         }

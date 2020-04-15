@@ -1,12 +1,13 @@
 package com.noto.todo.repository
 
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import com.noto.database.TodolistDao
 import com.noto.todo.model.Todolist
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class TodolistRepository(private val todolistDao: TodolistDao) {
+class TodolistRepository(private val sharedPreferences: SharedPreferences, private val todolistDao: TodolistDao) {
 
     suspend fun getTodoLists(): LiveData<List<Todolist>> {
         return withContext(Dispatchers.Main) {

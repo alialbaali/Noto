@@ -5,21 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.noto.R
 import com.noto.databinding.FragmentNotebookBinding
-import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNote
 import com.noto.note.adapter.NotebookRVAdapter
 import com.noto.note.viewModel.NotebookViewModel
-import com.noto.note.viewModel.NotebookViewModelFactory
 import com.noto.util.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class NotebookFragment : Fragment(), NavigateToNote {
 
@@ -39,9 +35,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
     private val args by navArgs<NotebookFragmentArgs>()
 
-    private val viewModel by viewModels<NotebookViewModel> {
-        NotebookViewModelFactory(Repos.notebookRepository, Repos.noteRepository)
-    }
+    private val viewModel by viewModel<NotebookViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +60,6 @@ class NotebookFragment : Fragment(), NavigateToNote {
         binding.ctb.setFontFamily()
         binding.ctb.title = args.notebookTitle
 
-
         binding.fab.setOnClickListener {
             this.findNavController().navigate(
                 NotebookFragmentDirections.actionNotebookFragmentToNoteFragment(
@@ -90,7 +83,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
         val colorOnPrimary = args.notoColor.getColorOnPrimary(requireContext())
 
         with(binding) {
-            activity?.setStatusBarColor(args.notoColor)
+            requireActivity().setStatusBarColor(args.notoColor)
             root.setBackgroundColor(colorPrimary)
             tb.setBackgroundColor(colorPrimary)
             ctb.setBackgroundColor(colorPrimary)

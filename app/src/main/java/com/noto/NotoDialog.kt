@@ -16,6 +16,7 @@ import com.noto.todo.model.Todolist
 import com.noto.todo.viewModel.TodolistListViewModel
 import com.noto.util.getColorOnPrimary
 import com.noto.util.getColorPrimary
+import timber.log.Timber
 
 class NotoDialog(context: Context, private val viewModel: ViewModel) : AlertDialog(context) {
 
@@ -90,7 +91,7 @@ class NotoDialog(context: Context, private val viewModel: ViewModel) : AlertDial
 
         } else {
 
-            val notebook = Notebook(notebookTitle = title, notoColor = notoColor)
+            val notebook = Notebook(notebookTitle = title, notoColor = notoColor, notebookPosition = viewModel.notebooks.value!!.size)
 
             viewModel.saveNotebook(notebook)
 

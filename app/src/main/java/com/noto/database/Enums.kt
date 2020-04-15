@@ -18,5 +18,5 @@ enum class SortMethod {
     ModificationDate,
     Checked,
     Starred,
-    Position
+    Custom
 }

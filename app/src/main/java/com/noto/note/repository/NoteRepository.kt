@@ -8,8 +8,8 @@ import kotlinx.coroutines.withContext
 
 class NoteRepository(private val noteDao: NoteDao) {
 
-    suspend fun getNotes(notebookId: Long): LiveData<List<Note>> {
-        return withContext(Dispatchers.Main) {
+    suspend fun getNotes(notebookId: Long): List<Note> {
+        return withContext(Dispatchers.IO) {
             noteDao.getNotes(notebookId)
         }
     }

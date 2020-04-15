@@ -8,8 +8,8 @@ import com.noto.note.model.Note
 @Dao
 interface NoteDao {
 
-    @Query("SELECT * FROM notes WHERE notebookId = :notebookId ORDER BY note_id DESC")
-    fun getNotes(notebookId: Long): LiveData<List<Note>>
+    @Query("SELECT * FROM notes WHERE notebookId = :notebookId")
+    fun getNotes(notebookId: Long): List<Note>
 
     @Query("SELECT * FROM notes WHERE note_id = :noteId")
     fun getNoteById(noteId: Long): Note

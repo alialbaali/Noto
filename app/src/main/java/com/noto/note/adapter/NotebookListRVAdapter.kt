@@ -46,17 +46,9 @@ internal class NotebookListRVAdapter(
             it.notebookPosition == toViewHolder.adapterPosition
         }!!
 
-        Timber.i(fromNotebook.notebookPosition.toString())
-        Timber.i(toNotebook.notebookPosition.toString())
-
-
         fromNotebook.notebookPosition = toNotebook.notebookPosition.also {
             toNotebook.notebookPosition = fromNotebook.notebookPosition
         }
-
-        Timber.i(fromNotebook.notebookPosition.toString())
-        Timber.i(toNotebook.notebookPosition.toString())
-
 
         fromViewHolder.drag(fromViewHolder.notebook)
 

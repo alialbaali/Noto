@@ -64,16 +64,3 @@ class TodoViewModel(
         }
     }
 }
-
-class TodoViewModelFactory(
-    private val todoRepository: TodoRepository,
-    private val subTodoRepository: SubTodoRepository
-) : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(TodoViewModel::class.java)) {
-            return TodoViewModel(todoRepository, subTodoRepository) as T
-        }
-        throw KotlinNullPointerException("Unknown ViewModel Class")
-    }
-}

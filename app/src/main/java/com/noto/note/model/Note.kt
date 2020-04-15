@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import com.noto.database.SortMethod
+import com.noto.database.SortType
+import java.util.*
 
 @Entity(tableName = "notes")
 data class Note(
@@ -24,5 +27,14 @@ data class Note(
     var noteTitle: String = "",
 
     @ColumnInfo(name = "note_body")
-    var noteBody: String = ""
+    var noteBody: String = "",
+
+    @ColumnInfo(name = "note_position")
+    var notePosition: Int,
+
+    @ColumnInfo(name = "note_creation_date")
+    val noteCreationDate: Date = Date(),
+
+    @ColumnInfo(name = "note_modification_date")
+    val noteModificationDate: Date = noteCreationDate
 )

@@ -7,7 +7,7 @@
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:colorControlActivated">@color/colorOnPrimary_900</item>
-        <item name="android:colorControlHighlight">@color/colorOnPrimary_900</item>
+        <item name="android:colorControlHighlight">@color/colorOnPrimary_600</item>
         <item name="android:colorControlNormal">@color/colorOnPrimary_900</item>
         <item name="android:textColorHighlight">@color/colorPrimaryGray</item>
     </style>
@@ -17,6 +17,12 @@
         <item name="android:backgroundTint">@color/colorOnPrimary_900</item>
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Theme.OverFlowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:tint">@color/colorOnPrimary_900</item>
+        <item name="android:textColor">@color/colorOnPrimary_900</item>
     </style>
 
     <!-- Collapsing Toolbar -->
@@ -45,7 +51,6 @@
         <item name="android:textColor">@color/colorOnPrimary_900</item>
     </style>
 
-    <!-- Notebook Item TextView -->
     <style name="Style.NotoItem.TextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/roboto_medium</item>
         <item name="android:textColor">@color/colorOnPrimary_800</item>
@@ -143,6 +148,12 @@
 
     <style name="TextAppearance.TodoFragment.Todo.Input" parent="TextAppearance.AppCompat">
 
+    </style>
+
+    <style name="TextAppearance.BottomSheet.Sort" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/colorOnPrimary_800</item>
     </style>
 
 </resources>

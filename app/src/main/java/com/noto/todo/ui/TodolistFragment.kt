@@ -8,25 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.R
 import com.noto.databinding.FragmentTodolistBinding
-import com.noto.network.Repos
 import com.noto.todo.adapter.NavigateToTodo
 import com.noto.todo.adapter.TodolistRVAdapter
 import com.noto.todo.model.Todo
 import com.noto.todo.viewModel.TodolistViewModel
-import com.noto.todo.viewModel.TodolistViewModelFactory
-import com.noto.util.getColorOnPrimary
-import com.noto.util.getColorPrimary
-import com.noto.util.setStatusBarColor
+import com.noto.util.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 /**
  * A simple [Fragment] subclass.
@@ -40,18 +35,16 @@ class TodolistFragment : Fragment(), NavigateToTodo {
         }
     }
 
-    private val adapter by lazy {
+    private val rvAdapter by lazy {
         TodolistRVAdapter(viewModel, args.notoColor, this)
     }
 
     private val args by navArgs<TodolistFragmentArgs>()
 
-    private val viewModel by viewModels<TodolistViewModel> {
-        TodolistViewModelFactory(Repos.todolistRepository, Repos.todoRepository)
-    }
+    private val viewModel by viewModel<TodolistViewModel>()
 
     private val imm by lazy {
-        activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }
 
     private val rvLayoutManager by lazy {
@@ -87,48 +80,18 @@ class TodolistFragment : Fragment(), NavigateToTodo {
         // RV
         binding.rv.let { rv ->
 
-            rv.adapter = adapter
+            rv.adapter = rvAdapter
 
             rv.layoutManager = rvLayoutManager
 
             viewModel.todos.observe(viewLifecycleOwner, Observer {
-
-                it?.let {
-
-                    if (it.isEmpty()) {
-                        rv.visibility = View.GONE
-                        binding.emptyTodolist.visibility = View.VISIBLE
-                    } else {
-                        rv.visibility = View.VISIBLE
-                        binding.emptyTodolist.visibility = View.GONE
-                        adapter.submitList(it)
-                    }
-
-                }
-
+                binding.rv.setList(it, rvAdapter, binding.emptyTodolist)
             })
 
         }
 
-        // Collapsing Toolbar
-        binding.ctb.let { ctb ->
-
-            ctb.title = args.todolistTitle
-
-            ctb.setCollapsedTitleTypeface(
-                ResourcesCompat.getFont(
-                    context!!,
-                    R.font.roboto_bold
-                )
-            )
-
-            ctb.setExpandedTitleTypeface(
-                ResourcesCompat.getFont(
-                    context!!,
-                    R.font.roboto_medium
-                )
-            )
-        }
+        binding.ctb.title = args.todolistTitle
+        binding.ctb.setFontFamily()
 
         binding.tb.let { tb ->
 
@@ -144,9 +107,9 @@ class TodolistFragment : Fragment(), NavigateToTodo {
 
                 when (it.itemId) {
 
-                    R.id.style -> {
+//                    R.id.style -> {
 //                        NotoDialog(requireContext(), viewModel)
-                    }
+//                    }
 
                     R.id.delete -> {
                         this.findNavController().navigateUp()
@@ -164,17 +127,21 @@ class TodolistFragment : Fragment(), NavigateToTodo {
         val colorPrimary = args.notoColor.getColorPrimary(requireContext())
         val colorOnPrimary = args.notoColor.getColorOnPrimary(requireContext())
 
-        activity?.setStatusBarColor(args.notoColor)
-        binding.cl.setBackgroundColor(colorPrimary)
-        binding.tb.setBackgroundColor(colorPrimary)
-        binding.ctb.setBackgroundColor(colorPrimary)
-        binding.ctb.setContentScrimColor(colorPrimary)
-        binding.newTodo.backgroundTintList = ColorStateList.valueOf(colorOnPrimary)
-        binding.newTodoBtn.imageTintList = ColorStateList.valueOf(colorOnPrimary)
-        val drawable = resources.getDrawable(R.drawable.ripple_btn, null)
-        val rippleDrawable =
-            RippleDrawable(ColorStateList.valueOf(colorPrimary), drawable, drawable)
-        binding.newTodoBtn.background = rippleDrawable
+        with(binding) {
+
+            requireActivity().setStatusBarColor(args.notoColor)
+            cl.setBackgroundColor(colorPrimary)
+            tb.setBackgroundColor(colorPrimary)
+            ctb.setBackgroundColor(colorPrimary)
+            ctb.setContentScrimColor(colorPrimary)
+            newTodo.backgroundTintList = ColorStateList.valueOf(colorOnPrimary)
+            newTodoBtn.imageTintList = ColorStateList.valueOf(colorOnPrimary)
+            val drawable = resources.getDrawable(R.drawable.ripple_btn, null)
+            val rippleDrawable =
+                RippleDrawable(ColorStateList.valueOf(colorPrimary), drawable, drawable)
+            newTodoBtn.background = rippleDrawable
+
+        }
 
     }
 

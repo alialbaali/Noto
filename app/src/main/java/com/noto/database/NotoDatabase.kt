@@ -11,6 +11,8 @@ import com.noto.todo.model.SubTodo
 import com.noto.todo.model.Todo
 import com.noto.todo.model.Todolist
 
+private const val NOTO_DATABASE = "Noto Database"
+
 @TypeConverters(
     NotoColorConverter::class,
     DateConverter::class,
@@ -22,7 +24,7 @@ import com.noto.todo.model.Todolist
     version = 1,
     exportSchema = false
 )
-abstract class AppDatabase : RoomDatabase() {
+abstract class NotoDatabase : RoomDatabase() {
 
     abstract val notebookDao: NotebookDao
 
@@ -37,25 +39,20 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
 
         @Volatile
-        private var INSTANCE: AppDatabase? = null
+        private var INSTANCE: NotoDatabase? = null
 
-
-        fun getInstance(context: Context): AppDatabase {
-            synchronized(this) {
-                var instance = INSTANCE
-
-                if (instance == null) {
-                    instance = Room.databaseBuilder(
-                        context,
-                        AppDatabase::class.java,
-                        "Noto Database"
-                    )
-                        .fallbackToDestructiveMigration()
-                        .build()
-                    INSTANCE = instance
-                }
-                return instance
+        fun getInstance(context: Context): NotoDatabase =
+            INSTANCE ?: synchronized(this) {
+                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
-        }
+
+        private fun buildDatabase(context: Context) =
+            Room.databaseBuilder(
+                context.applicationContext,
+                NotoDatabase::class.java,
+                NOTO_DATABASE
+            )
+                .fallbackToDestructiveMigration()
+                .build()
     }
 }
