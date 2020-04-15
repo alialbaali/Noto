@@ -8,13 +8,17 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.noto.R
-import com.noto.database.NotoColor
+import com.noto.database.SortMethod
 import com.noto.databinding.ListItemNotebookBinding
 import com.noto.note.model.Notebook
 import com.noto.note.viewModel.NotebookListViewModel
+import com.noto.util.getColorOnPrimary
+import com.noto.util.getColorPrimary
+import timber.log.Timber
 
 // Notebook List RV Adapter
 internal class NotebookListRVAdapter(
+    private val viewModel: NotebookListViewModel,
     private val navigateToNotebook: NavigateToNotebook
 ) :
     ListAdapter<Notebook, NotebookItemViewHolder>(NotebookItemDiffCallback()),
@@ -26,60 +30,45 @@ internal class NotebookListRVAdapter(
 
     override fun onBindViewHolder(holder: NotebookItemViewHolder, position: Int) {
         val notebook = getItem(position)
-        holder.bind(notebook)
         holder.notebook = notebook
+        holder.bind(notebook)
     }
 
-    override fun onMove(fromPosition: Int, toPosition: Int) {
-//        TODO("Not yet implemented")
+    override fun onMoveViewHolder(
+        fromViewHolder: NotebookItemViewHolder, toViewHolder: NotebookItemViewHolder
+    ) {
+
+        val fromNotebook = currentList.find {
+            it.notebookPosition == fromViewHolder.adapterPosition
+        }!!
+
+        val toNotebook = currentList.find {
+            it.notebookPosition == toViewHolder.adapterPosition
+        }!!
+
+        Timber.i(fromNotebook.notebookPosition.toString())
+        Timber.i(toNotebook.notebookPosition.toString())
+
+
+        fromNotebook.notebookPosition = toNotebook.notebookPosition.also {
+            toNotebook.notebookPosition = fromNotebook.notebookPosition
+        }
+
+        Timber.i(fromNotebook.notebookPosition.toString())
+        Timber.i(toNotebook.notebookPosition.toString())
+
+
+        fromViewHolder.drag(fromViewHolder.notebook)
+
+        notifyItemMoved(fromViewHolder.adapterPosition, toViewHolder.adapterPosition)
     }
 
-    override fun onSwipe(position: Int) {
-//        TODO("Not yet implemented")
+    override fun onClearViewHolder(viewHolder: NotebookItemViewHolder) {
+        viewHolder.clear(viewHolder.notebook)
+        viewModel.updateSortMethod(SortMethod.Custom)
+        viewModel.updateNotebooks(currentList)
     }
-
-    override fun clearView() {
-//        TODO("Not yet implemented")
-    }
-
-//    override fun onMove(fromPosition: Int, toPosition: Int) {
-//        val notebook1 = getItem(fromPosition)
-//        val notebook2 = getItem(toPosition)
-//
-//        Timber.i(notebook1.notebookPosition.toString())
-//        Timber.i(notebook2.notebookPosition.toString())
-//
-//        notebook1.notebookPosition = notebook2.notebookPosition.also {
-//            notebook2.notebookPosition = notebook1.notebookPosition
-//        }
-//
-//        Timber.i(notebook1.notebookPosition.toString())
-//        Timber.i(notebook2.notebookPosition.toString())
-//
-//
-//        viewModel.viewModelScope.launch(Dispatchers.IO) {
-//            viewModel.notebookRepository.updateNotebook(notebook1)
-//            viewModel.notebookRepository.updateNotebook(notebook2)
-//            viewModel.list = viewModel.notebookRepository.get()
-//            Timber.i(viewModel.list.toString())
-//        }
-//
-//
-//
-//        notifyItemMoved(fromPosition, toPosition)
-
-
-//        notebookItemTouchHelper.onDrag(getItem(fromPosition), getItem(toPosition))
 }
-
-//    override fun onSwipe(position: Int) {
-////        notebookItemTouchHelper.onSwipe(getItem(position))
-//    }
-//
-//    override fun clearView() {
-////        notebookItemTouchHelper.clearView()
-//    }
-
 
 // Notebook Item ViewHolder
 internal class NotebookItemViewHolder(
@@ -90,13 +79,32 @@ internal class NotebookItemViewHolder(
 
     lateinit var notebook: Notebook
 
+    private val colorPrimary by lazy {
+        notebook.notoColor.getColorPrimary(binding.root.context)
+    }
+
+    private val colorOnPrimary by lazy {
+        notebook.notoColor.getColorOnPrimary(binding.root.context)
+    }
+
+    private val resources = binding.root.resources
+
+    private val drawable = resources.getDrawable(R.drawable.shape_notebook_item, null)
+
+    private val rippleDrawable by lazy {
+        RippleDrawable(
+            ColorStateList.valueOf(colorOnPrimary),
+            drawable,
+            drawable
+        )
+    }
+
     init {
         binding.root.let {
 
             it.setOnClickListener {
                 navigateToNotebook.navigate(notebook)
             }
-
         }
     }
 
@@ -119,38 +127,26 @@ internal class NotebookItemViewHolder(
 
     // Bind notebook's values to the list item
     fun bind(notebook: Notebook) {
-        binding.notebookTv.text = notebook.notebookTitle
-        val context = itemView.context
-        val ripple = RippleDrawable(
-            ColorStateList.valueOf(context.getColor(R.color.colorOnPrimaryGray)),
-            context.getDrawable(R.drawable.shape_notebook_item),
-            context.getDrawable(R.drawable.shape_notebook_item)
-        )
+        binding.notebook = notebook
+        binding.executePendingBindings()
 
-        when (notebook.notoColor) {
-            NotoColor.GRAY -> {
-                ripple.setTint(context.getColor(R.color.colorPrimaryGray))
-                ripple.setColor(ColorStateList.valueOf(context.getColor(R.color.colorOnPrimaryGray)))
-                binding.root.background = ripple
-            }
-            NotoColor.BLUE -> {
-                ripple.setTint(context.getColor(R.color.colorPrimaryBlue))
-                ripple.setColor(ColorStateList.valueOf(context.getColor(R.color.colorOnPrimaryBlue)))
-                binding.root.background = ripple
-            }
-            NotoColor.PINK -> {
-                ripple.setTint(context.getColor(R.color.colorPrimaryPink))
-                ripple.setColor(ColorStateList.valueOf(context.getColor(R.color.colorOnPrimaryPink)))
-                binding.root.background = ripple
-            }
-            NotoColor.CYAN -> {
-                ripple.setTint(context.getColor(R.color.colorPrimaryCyan))
-                ripple.setColor(ColorStateList.valueOf(context.getColor(R.color.colorOnPrimaryCyan)))
-                binding.root.background = ripple
-            }
-        }
+        setDefaultBackground()
     }
 
+    fun drag(notebook: Notebook) {
+        binding.root.elevation = resources.getDimension(R.dimen.elevation_normal)
+    }
+
+    fun clear(notebook: Notebook) {
+        binding.root.elevation = resources.getDimension(R.dimen.elevation_extra_small)
+
+        setDefaultBackground()
+    }
+
+    private fun setDefaultBackground() {
+        binding.root.background = rippleDrawable
+        binding.root.backgroundTintList = ColorStateList.valueOf(colorPrimary)
+    }
 }
 
 // Notebook Item Difference Callback
@@ -167,12 +163,3 @@ private class NotebookItemDiffCallback() : DiffUtil.ItemCallback<Notebook>() {
 internal interface NavigateToNotebook {
     fun navigate(notebook: Notebook)
 }
-
-//internal interface NotebookItemTouchHelper {
-//
-//    fun onDrag(notebook: Notebook, target: Notebook)
-//
-//    fun onSwipe(notebook: Notebook)
-//
-//    fun clearView()
-//}
