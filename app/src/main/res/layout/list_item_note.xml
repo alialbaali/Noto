@@ -5,15 +5,19 @@
 
     <data>
 
+        <variable
+            name="note"
+            type="com.noto.note.model.Note" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="@dimen/elevation_extra_small"
         android:layout_margin="@dimen/spacing_small"
-        android:background="@drawable/shape_note_item">
+        android:background="@drawable/shape_note_item"
+        android:elevation="@dimen/elevation_extra_small">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title"
@@ -24,6 +28,7 @@
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/spacing_small"
             android:padding="@dimen/spacing_small"
+            android:text="@{note.noteTitle}"
             app:layout_constraintBottom_toTopOf="@id/body"
             app:layout_constraintEnd_toEndOf="@id/cl"
             app:layout_constraintStart_toStartOf="@id/cl"
@@ -39,6 +44,7 @@
             android:layout_marginEnd="@dimen/spacing_small"
             android:layout_marginBottom="@dimen/spacing_small"
             android:padding="@dimen/spacing_small"
+            android:text="@{note.noteBody}"
             app:layout_constraintBottom_toBottomOf="@id/cl"
             app:layout_constraintEnd_toEndOf="@id/cl"
             app:layout_constraintStart_toStartOf="@id/cl"

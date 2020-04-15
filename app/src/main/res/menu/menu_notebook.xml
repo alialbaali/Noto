@@ -3,21 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/style"
-        android:contentDescription="@string/change_style"
-        android:enabled="true"
-        android:icon="@drawable/ic_style_24px"
-        android:title="@string/change_style"
-        android:visible="true"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/more"
+        android:icon="@drawable/ic_more_24px"
+        android:title="@string/more"
+        app:showAsAction="ifRoom">
 
-    <item
-        android:id="@+id/delete"
-        android:contentDescription="@string/delete_notebook"
-        android:enabled="true"
-        android:icon="@drawable/ic_delete_sweep_24px"
-        android:title="@string/delete_notebook"
-        android:visible="true"
-        app:showAsAction="never" />
+        <menu>
+            <item
+                android:id="@+id/style"
+                android:contentDescription="@string/change_style"
+                android:enabled="true"
+                android:icon="@drawable/ic_style_24px"
+                android:title="@string/change_style"
+                android:visible="true"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/delete"
+                android:contentDescription="@string/delete_notebook"
+                android:enabled="true"
+                android:icon="@drawable/ic_delete_sweep_24px"
+                android:title="@string/delete_notebook"
+                android:visible="true"
+                app:showAsAction="ifRoom" />
+
+            <item
+                android:id="@+id/sort"
+                android:contentDescription="@string/sort"
+                android:enabled="true"
+                android:icon="@drawable/ic_sort"
+                android:title="@string/sort"
+                android:visible="true"
+                app:showAsAction="ifRoom" />
+        </menu>
+    </item>
 
 </menu>

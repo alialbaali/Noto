@@ -48,9 +48,9 @@
                 android:id="@+id/ctb"
                 style="@style/Style.CollapsingToolbar"
                 android:layout_width="match_parent"
-                app:expandedTitleGravity="start|bottom"
                 android:layout_height="match_parent"
                 android:layout_marginStart="0dp"
+                app:expandedTitleGravity="start|bottom"
                 app:expandedTitleMargin="@dimen/spacing_normal"
                 tools:title="Notes">
 

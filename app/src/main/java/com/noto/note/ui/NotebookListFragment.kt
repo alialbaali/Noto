@@ -1,130 +1,129 @@
 package com.noto.note.ui
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.noto.NotoDialog
 import com.noto.R
+import com.noto.database.SortMethod
+import com.noto.database.SortType
 import com.noto.databinding.FragmentNotebookListBinding
-import com.noto.network.Repos
 import com.noto.note.adapter.NavigateToNotebook
+import com.noto.note.adapter.NotebookItemTouchHelperCallback
 import com.noto.note.adapter.NotebookListRVAdapter
 import com.noto.note.model.Notebook
 import com.noto.note.viewModel.NotebookListViewModel
-import com.noto.note.viewModel.NotebookListViewModelFactory
+import com.noto.util.setFontFamily
+import org.koin.android.viewmodel.ext.android.viewModel
 
-/**
- * A simple [Fragment] subclass.
- */
 class NotebookListFragment : Fragment(), NavigateToNotebook {
 
     // Binding
-    private lateinit var binding: FragmentNotebookListBinding
-
-    private val viewModel by viewModels<NotebookListViewModel> {
-        NotebookListViewModelFactory(Repos.notebookRepository)
+    private val binding by lazy {
+        FragmentNotebookListBinding.inflate(layoutInflater).also {
+            it.lifecycleOwner = this
+        }
     }
 
-    private lateinit var adapter: NotebookListRVAdapter
+    private val viewModel by viewModel<NotebookListViewModel>()
+
+    private val rvLayoutManager by lazy {
+        LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+    }
+
+    private val rvAdapter by lazy {
+        NotebookListRVAdapter(viewModel, this)
+    }
+
+    private val bs by lazy {
+        BottomSheetBehavior.from(binding.bs)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentNotebookListBinding.inflate(inflater, container, false)
+        bs.state = BottomSheetBehavior.STATE_HIDDEN
 
-        binding.lifecycleOwner = this
+        requireActivity().window?.statusBarColor = resources.getColor(R.color.colorPrimary, null)
 
-        activity?.window?.statusBarColor = resources.getColor(R.color.colorPrimary, null)
+        binding.ctb.setFontFamily()
 
-        // Collapse Toolbar
-        binding.ctb.let { ctb ->
+        binding.tb.setOnMenuItemClickListener {
+            if (bs.state == BottomSheetBehavior.STATE_EXPANDED){
+                bs.state = BottomSheetBehavior.STATE_HIDDEN
+            }
 
-            ctb.setCollapsedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_bold))
+            when (it.itemId) {
 
-            ctb.setExpandedTitleTypeface(ResourcesCompat.getFont(context!!, R.font.roboto_medium))
+                R.id.create -> NotoDialog(requireContext(), viewModel)
 
-        }
-
-        binding.tb.menu.findItem(R.id.create).setOnMenuItemClickListener {
-
-            NotoDialog(requireContext(), Notebook(), null).apply {
-                this.notebook!!
-
-                this.dialogBinding.et.hint = "Notebook title"
-
-                this.dialogBinding.createBtn.setOnClickListener {
-
-                    when {
-                        viewModel.notebooks.value!!.any {
-                            it.notebookTitle ==
-                                    dialogBinding.et.text.toString()
-                        } -> {
-
-                            this.dialogBinding.til.error =
-                                "Notebook with the same title already exists!"
-
-                        }
-                        this.dialogBinding.et.text.toString().isBlank() -> {
-
-                            this.dialogBinding.til.error =
-                                "Notebook title can't be empty"
-
-                            this.dialogBinding.til.counterTextColor =
-                                ColorStateList.valueOf(
-                                    resources.getColor(
-                                        R.color.colorOnPrimaryPink,
-                                        null
-                                    )
-                                )
-
-                        }
-                        else -> {
-                            this.notebook.notebookTitle = this.dialogBinding.et.text.toString()
-                            viewModel.saveNotebook(this.notebook)
-                            this.dismiss()
-                        }
-                    }
+                R.id.sort -> {
+                    bs.state = BottomSheetBehavior.STATE_EXPANDED
                 }
-                this.create()
-                this.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-                this.show()
-                dialogBinding.et.requestFocus()
-                this.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
             }
 
             true
         }
 
-        binding.rv.let { rv ->
+        with(binding.rv) {
 
-            // RV Adapter
-            adapter = NotebookListRVAdapter(this)
-            rv.adapter = adapter
+            adapter = rvAdapter
+            layoutManager = rvLayoutManager
 
-//            NotebookItemTouchHelperCallback(adapter).let {
-//                ItemTouchHelper(it).attachToRecyclerView(rv)
-//            }
-
-            // RV Layout Manger
-            rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            NotebookItemTouchHelperCallback(rvAdapter).let {
+                ItemTouchHelper(it).attachToRecyclerView(this)
+            }
 
             viewModel.notebooks.observe(viewLifecycleOwner, Observer {
-                it?.let {
-                    adapter.submitList(it)
+                it.let {
+                    rvAdapter.submitList(it)
+                }
+            })
+            viewModel.sortMethod.observe(viewLifecycleOwner, Observer {
+                when (it){
+                    SortMethod.Alphabetically -> binding.alphabetically.isChecked = true
+                    SortMethod.Custom -> binding.custom.isChecked = true
+                    SortMethod.CreationDate -> binding.creationDate.isChecked = true
+                    SortMethod.ModificationDate -> binding.modificationDate.isChecked = true
+                }
+            })
+
+            viewModel.sortType.observe(viewLifecycleOwner, Observer {
+                when (it){
+                    SortType.ASC -> binding.sortType.isChecked = true
+                    SortType.DESC -> binding.sortType.isChecked = false
                 }
             })
         }
 
+        binding.creationDate.setOnClickListener {
+            bs.state = BottomSheetBehavior.STATE_COLLAPSED
+            viewModel.updateSortMethod(SortMethod.CreationDate)
+        }
+        binding.alphabetically.setOnClickListener {
+            bs.state = BottomSheetBehavior.STATE_COLLAPSED
+            viewModel.updateSortMethod(SortMethod.Alphabetically)
+        }
+        binding.custom.setOnClickListener {
+            bs.state = BottomSheetBehavior.STATE_COLLAPSED
+            viewModel.updateSortMethod(SortMethod.Custom)
+        }
+        binding.modificationDate.setOnClickListener {
+            bs.state = BottomSheetBehavior.STATE_COLLAPSED
+            viewModel.updateSortMethod(SortMethod.ModificationDate)
+        }
+        binding.sortType.setOnClickListener {
+            bs.state = BottomSheetBehavior.STATE_COLLAPSED
+            viewModel.updateSortType()
+        }
         return binding.root
     }
 

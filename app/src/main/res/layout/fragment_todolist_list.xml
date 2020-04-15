@@ -34,10 +34,11 @@
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/tb"
-                    app:menu="@menu/menu_main"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin" />
+                    app:layout_collapseMode="pin"
+                    app:menu="@menu/menu_main"
+                    app:popupTheme="@style/Theme.OverFlowMenu" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

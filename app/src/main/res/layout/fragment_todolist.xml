@@ -77,7 +77,8 @@
                         android:layout_height="?attr/actionBarSize"
                         app:layout_collapseMode="pin"
                         app:menu="@menu/menu_notebook"
-                        app:navigationIcon="@drawable/ic_back_24px" />
+                        app:navigationIcon="@drawable/ic_back_24px"
+                        app:popupTheme="@style/Theme.OverFlowMenu" />
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
             </com.google.android.material.appbar.AppBarLayout>
