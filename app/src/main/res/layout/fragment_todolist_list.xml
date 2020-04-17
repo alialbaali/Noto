@@ -43,5 +43,109 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
+<!--        <view-->
+<!--            android:id="@+id/dim"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:alpha="0.5"-->
+<!--            android:backgroundTint="@color/colorOnPrimary_800"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <RadioGroup
+            android:id="@+id/bs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_et"
+            android:backgroundTint="@color/colorPrimary"
+            android:elevation="@dimen/elevation_large"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_normal"
+            app:behavior_hideable="true"
+            app:behavior_peekHeight="100dp"
+            app:behavior_skipCollapsed="false"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_normal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/sort_by"
+                    android:textColor="@color/colorOnPrimary_900"
+                    android:textSize="20sp" />
+
+                <CheckBox
+                    android:id="@+id/sort_type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.8"
+                    android:button="@drawable/selector_sort_type"
+                    android:buttonTint="@color/colorOnPrimary_900"
+                    android:contentDescription="@string/sort_by" />
+
+            </LinearLayout>
+
+            <RadioButton
+                android:id="@+id/creation_date"
+                style="@style/TextAppearance.BottomSheet.Sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:button="@drawable/ic_sort_creation_date"
+                android:buttonTint="@drawable/selector_sort_method"
+                android:checked="false"
+                android:paddingHorizontal="@dimen/spacing_normal"
+                android:text="@string/creation_date"
+                android:textColor="@drawable/selector_sort_method" />
+
+            <RadioButton
+                android:id="@+id/modification_date"
+                style="@style/TextAppearance.BottomSheet.Sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:button="@drawable/ic_sort_modification_date"
+                android:buttonTint="@drawable/selector_sort_method"
+                android:paddingHorizontal="@dimen/spacing_normal"
+                android:text="@string/modification_date"
+                android:textColor="@drawable/selector_sort_method" />
+
+            <RadioButton
+                android:id="@+id/alphabetically"
+                style="@style/TextAppearance.BottomSheet.Sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:button="@drawable/ic_sort_alphabetically"
+                android:buttonTint="@drawable/selector_sort_method"
+                android:paddingHorizontal="@dimen/spacing_normal"
+                android:text="@string/alphabetically"
+                android:textColor="@drawable/selector_sort_method" />
+
+            <RadioButton
+                android:id="@+id/custom"
+                style="@style/TextAppearance.BottomSheet.Sort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:button="@drawable/ic_sort_custom_24dp"
+                android:buttonTint="@drawable/selector_sort_method"
+                android:text="@string/custom"
+                android:paddingHorizontal="@dimen/spacing_normal"
+                android:textColor="@drawable/selector_sort_method" />
+        </RadioGroup>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
