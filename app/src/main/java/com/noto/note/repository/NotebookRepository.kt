@@ -9,7 +9,6 @@ import com.noto.util.getValue
 import com.noto.util.setValue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 private const val NOTEBOOK_LIST_SORT_TYPE_KEY = "notebook_list_sort_type"
 private const val NOTEBOOK_LIST_SORT_METHOD_KEY = "notebook_list_sort_method"
@@ -19,6 +18,12 @@ class NotebookRepository(private val sharedPreferences: SharedPreferences, priva
     suspend fun getNotebooks(): List<Notebook> {
         return withContext(Dispatchers.IO) {
             notebookDao.getNotebooks()
+        }
+    }
+
+    suspend fun getNotebookById(notebookId: Long): Notebook {
+        return withContext(Dispatchers.IO){
+            notebookDao.getNotebookById(notebookId)
         }
     }
 

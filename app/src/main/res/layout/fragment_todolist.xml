@@ -11,7 +11,6 @@
 
     </data>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl"
         android:layout_width="match_parent"
@@ -21,6 +20,7 @@
             android:id="@+id/cool"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@color/colorPrimaryGray"
             app:layout_constraintBottom_toTopOf="@id/new_todo"
             app:layout_constraintEnd_toEndOf="@id/cl"
             app:layout_constraintStart_toStartOf="@id/cl"
@@ -30,8 +30,11 @@
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/spacing_small"
-                android:layout_marginEnd="@dimen/spacing_small"
+                android:background="@drawable/shape_fragment_todos_background"
+                android:elevation="@dimen/elevation_small"
+                android:paddingStart="@dimen/spacing_small"
+                android:paddingTop="@dimen/spacing_extra_small"
+                android:paddingEnd="@dimen/spacing_small"
                 android:visibility="visible"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
                 tools:listitem="@layout/list_item_todo" />
@@ -40,13 +43,12 @@
                 android:id="@+id/empty_todolist"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
+                android:background="@drawable/shape_fragment_todos_background"
                 android:gravity="center"
                 android:lineSpacingMultiplier="1.5"
                 android:lines="2"
                 android:maxLines="2"
-                android:text="@string/empty_notebook"
+                android:text="@string/empty_todolist"
                 android:textAppearance="@style/TextAppearance.Notebook.Empty"
                 android:visibility="gone"
                 app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
@@ -54,22 +56,81 @@
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/abl"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/abl_height_dimen"
-                app:layout_constraintBottom_toTopOf="@id/rv"
-                app:layout_constraintEnd_toEndOf="@id/cl"
-                app:layout_constraintStart_toStartOf="@id/cl"
-                app:layout_constraintTop_toTopOf="@id/cl">
+                android:layout_height="250dp"
+                app:elevation="@dimen/elevation_0">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:id="@+id/ctb"
                     style="@style/Style.CollapsingToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="0dp"
-                    app:expandedTitleGravity="start|bottom"
-                    app:expandedTitleMargin="@dimen/spacing_normal"
-                    tools:background="@color/colorPrimaryGray"
+                    android:background="@color/colorPrimaryGray"
+                    app:expandedTitleGravity="center"
                     tools:title="Todos">
+
+                    <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="match_parent"-->
+                    <!--                        app:layout_collapseMode="pin">-->
+
+                    <!--                        &lt;!&ndash;                        <ImageView&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            android:id="@+id/imageView2"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            android:layout_width="0dp"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            android:layout_height="0dp"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            android:alpha="0.03"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            android:src="@drawable/ic_list_24dp"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+                    <!--                        &lt;!&ndash;                            app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:id="@+id/todolist_title"-->
+                    <!--                            android:layout_width="0dp"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:fontFamily="@font/roboto"-->
+                    <!--                            android:gravity="center"-->
+                    <!--                            android:maxLines="1"-->
+                    <!--                            android:text="Coding"-->
+                    <!--                            android:textSize="48sp"-->
+                    <!--                            android:textColor="@color/colorOnPrimary_800"-->
+                    <!--                            app:layout_constraintBottom_toTopOf="@id/todos_count"-->
+                    <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                            app:layout_constraintTop_toTopOf="parent"-->
+                    <!--                            app:layout_constraintVertical_chainStyle="packed" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:id="@+id/todos_count"-->
+                    <!--                            android:layout_width="0dp"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
+                    <!--                            android:fontFamily="@font/roboto_medium"-->
+                    <!--                            android:gravity="center"-->
+                    <!--                            android:maxLines="1"-->
+                    <!--                            android:text="7 Todos"-->
+                    <!--                            android:textColor="@color/colorOnPrimary_600"-->
+                    <!--                            android:textSize="20sp"-->
+                    <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                    <!--                            app:layout_constraintTop_toBottomOf="@id/todolist_title" />-->
+
+                    <!--                        <TextView-->
+                    <!--                            android:id="@+id/creation_date"-->
+                    <!--                            android:layout_width="0dp"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_marginBottom="@dimen/spacing_small"-->
+                    <!--                            android:fontFamily="@font/roboto_thin"-->
+                    <!--                            android:gravity="center"-->
+                    <!--                            android:maxLines="1"-->
+                    <!--                            android:text="Created at: Mar 31"-->
+                    <!--                            android:textColor="@color/colorOnPrimary_600"-->
+                    <!--                            android:textSize="14sp"-->
+                    <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                    <!--                            app:layout_constraintStart_toStartOf="parent" />-->
+                    <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/tb"
@@ -90,6 +151,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_et"
             android:backgroundTint="@color/colorOnPrimaryGray"
+            android:elevation="@dimen/elevation_normal"
             app:layout_constraintBottom_toBottomOf="@id/cl"
             app:layout_constraintEnd_toEndOf="@id/cl"
             app:layout_constraintStart_toStartOf="@id/cl"
@@ -136,6 +198,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

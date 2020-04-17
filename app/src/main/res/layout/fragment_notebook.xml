@@ -5,20 +5,26 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.noto.note.viewModel.NotebookViewModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/cool"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimary"
         tools:context=".note.ui.NotebookFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginEnd="@dimen/spacing_small"
+            android:paddingStart="@dimen/spacing_small"
+            android:paddingTop="@dimen/spacing_extra_small"
+            android:paddingEnd="@dimen/spacing_small"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
@@ -28,8 +34,6 @@
             android:id="@+id/empty_notebook"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginEnd="@dimen/spacing_normal"
             android:gravity="center"
             android:lineSpacingMultiplier="1.5"
             android:lines="2"
@@ -42,16 +46,17 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/abl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/abl_height_dimen">
+            android:layout_height="200dp"
+            android:background="@color/colorPrimary">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/ctb"
                 style="@style/Style.CollapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="0dp"
-                app:expandedTitleGravity="start|bottom"
-                app:expandedTitleMargin="@dimen/spacing_normal"
+                android:background="@drawable/share_fragment_notes_background"
+                android:elevation="@dimen/elevation_small"
+                app:expandedTitleGravity="center"
                 tools:title="Notes">
 
                 <com.google.android.material.appbar.MaterialToolbar
@@ -71,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/spacing_normal"
-            android:src="@drawable/ic_add_24dp" />
+            android:src="@drawable/ic_create_24dp" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

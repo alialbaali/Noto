@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_small"
         android:background="@drawable/shape_todo_item"
-        android:elevation="@dimen/elevation_extra_small"
         android:padding="@dimen/spacing_small">
 
         <com.google.android.material.checkbox.MaterialCheckBox

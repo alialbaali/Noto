@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.databinding.FragmentNotebookBinding
 import com.noto.note.adapter.NavigateToNote
 import com.noto.note.adapter.NotebookRVAdapter
+import com.noto.note.model.Note
 import com.noto.note.viewModel.NotebookViewModel
 import com.noto.util.*
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -57,7 +58,7 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
         }
 
-        binding.ctb.setFontFamily()
+//        binding.ctb.setFontFamily()
         binding.ctb.title = args.notebookTitle
 
         binding.fab.setOnClickListener {
@@ -84,12 +85,10 @@ class NotebookFragment : Fragment(), NavigateToNote {
 
         with(binding) {
             requireActivity().setStatusBarColor(args.notoColor)
-            root.setBackgroundColor(colorPrimary)
             tb.setBackgroundColor(colorPrimary)
-            ctb.setBackgroundColor(colorPrimary)
+            ctb.backgroundTintList = ColorStateList.valueOf(colorPrimary)
             ctb.setContentScrimColor(colorPrimary)
-            fab.backgroundTintList =
-                ColorStateList.valueOf(colorOnPrimary)
+            fab.backgroundTintList = ColorStateList.valueOf(colorOnPrimary)
         }
     }
 

@@ -16,9 +16,18 @@ class NotebookViewModel(
     val notes: LiveData<List<Note>>
         get() = _notes
 
+    private val _notebook = MutableLiveData<Notebook>()
+    val notebook : LiveData<Notebook> = _notebook
+
     internal fun getNotes(notebookId: Long) {
         viewModelScope.launch {
             _notes.postValue(noteRepository.getNotes(notebookId))
+        }
+    }
+
+    fun getNotebook(notebookId: Long) {
+        viewModelScope.launch {
+            _notebook.postValue(notebookRepository.getNotebookById(notebookId))
         }
     }
 

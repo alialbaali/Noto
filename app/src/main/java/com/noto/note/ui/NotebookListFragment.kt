@@ -57,7 +57,7 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
         binding.ctb.setFontFamily()
 
         binding.tb.setOnMenuItemClickListener {
-            if (bs.state == BottomSheetBehavior.STATE_EXPANDED){
+            if (bs.state == BottomSheetBehavior.STATE_EXPANDED) {
                 bs.state = BottomSheetBehavior.STATE_HIDDEN
             }
 
@@ -88,7 +88,7 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
                 }
             })
             viewModel.sortMethod.observe(viewLifecycleOwner, Observer {
-                when (it){
+                when (it) {
                     SortMethod.Alphabetically -> binding.alphabetically.isChecked = true
                     SortMethod.Custom -> binding.custom.isChecked = true
                     SortMethod.CreationDate -> binding.creationDate.isChecked = true
@@ -97,7 +97,7 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
             })
 
             viewModel.sortType.observe(viewLifecycleOwner, Observer {
-                when (it){
+                when (it) {
                     SortType.ASC -> binding.sortType.isChecked = true
                     SortType.DESC -> binding.sortType.isChecked = false
                 }
@@ -128,7 +128,6 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
     }
 
     override fun navigate(notebook: Notebook) {
-
         this.findNavController().navigate(
             NotebookListFragmentDirections.actionNotebookListFragmentToNotebookFragment(
                 notebook.notebookId,

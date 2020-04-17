@@ -14,15 +14,10 @@ import com.noto.note.model.Notebook
 import com.noto.note.viewModel.NotebookListViewModel
 import com.noto.util.getColorOnPrimary
 import com.noto.util.getColorPrimary
-import timber.log.Timber
 
 // Notebook List RV Adapter
-internal class NotebookListRVAdapter(
-    private val viewModel: NotebookListViewModel,
-    private val navigateToNotebook: NavigateToNotebook
-) :
-    ListAdapter<Notebook, NotebookItemViewHolder>(NotebookItemDiffCallback()),
-    NotebookItemTouchHelperAdapter {
+internal class NotebookListRVAdapter(private val viewModel: NotebookListViewModel, private val navigateToNotebook: NavigateToNotebook) :
+    ListAdapter<Notebook, NotebookItemViewHolder>(NotebookItemDiffCallback()), NotebookItemTouchHelperAdapter {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotebookItemViewHolder {
         return NotebookItemViewHolder.create(parent, navigateToNotebook)
@@ -34,21 +29,13 @@ internal class NotebookListRVAdapter(
         holder.bind(notebook)
     }
 
-    override fun onMoveViewHolder(
-        fromViewHolder: NotebookItemViewHolder, toViewHolder: NotebookItemViewHolder
-    ) {
+    override fun onMoveViewHolder(fromViewHolder: NotebookItemViewHolder, toViewHolder: NotebookItemViewHolder) {
 
-        val fromNotebook = currentList.find {
-            it.notebookPosition == fromViewHolder.adapterPosition
-        }!!
+        val fromNotebook = currentList.find { it.notebookPosition == fromViewHolder.adapterPosition }!!
 
-        val toNotebook = currentList.find {
-            it.notebookPosition == toViewHolder.adapterPosition
-        }!!
+        val toNotebook = currentList.find { it.notebookPosition == toViewHolder.adapterPosition }!!
 
-        fromNotebook.notebookPosition = toNotebook.notebookPosition.also {
-            toNotebook.notebookPosition = fromNotebook.notebookPosition
-        }
+        fromNotebook.notebookPosition = toNotebook.notebookPosition.also { toNotebook.notebookPosition = fromNotebook.notebookPosition }
 
         fromViewHolder.drag(fromViewHolder.notebook)
 
@@ -83,37 +70,21 @@ internal class NotebookItemViewHolder(
 
     private val drawable = resources.getDrawable(R.drawable.shape_notebook_item, null)
 
-    private val rippleDrawable by lazy {
-        RippleDrawable(
-            ColorStateList.valueOf(colorOnPrimary),
-            drawable,
-            drawable
-        )
-    }
+    private val rippleDrawable by lazy { RippleDrawable(ColorStateList.valueOf(colorOnPrimary), drawable, drawable) }
 
     init {
-        binding.root.let {
-
-            it.setOnClickListener {
-                navigateToNotebook.navigate(notebook)
-            }
-        }
+        binding.root.let { it.setOnClickListener { navigateToNotebook.navigate(notebook) } }
     }
 
     companion object {
 
         // Create ViewHolder Instance
-        fun create(
-            parent: ViewGroup,
-            navigateToNotebook: NavigateToNotebook
-        ): NotebookItemViewHolder {
-            return NotebookItemViewHolder(
-                ListItemNotebookBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                ), navigateToNotebook
-            )
+        fun create(parent: ViewGroup, navigateToNotebook: NavigateToNotebook): NotebookItemViewHolder {
+
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val binding = ListItemNotebookBinding.inflate(layoutInflater, parent, false)
+
+            return NotebookItemViewHolder(binding, navigateToNotebook)
         }
     }
 

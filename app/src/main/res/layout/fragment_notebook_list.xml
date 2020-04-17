@@ -51,6 +51,17 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
+<!--        <view-->
+<!--            android:id="@+id/dim"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:alpha="0.5"-->
+<!--            android:backgroundTint="@color/colorOnPrimary_800"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
         <RadioGroup
             android:id="@+id/bs"
             android:layout_width="match_parent"

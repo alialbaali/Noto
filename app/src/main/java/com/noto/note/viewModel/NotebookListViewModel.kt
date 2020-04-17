@@ -5,8 +5,8 @@ import com.noto.database.SortMethod
 import com.noto.database.SortType
 import com.noto.note.model.Notebook
 import com.noto.note.repository.NotebookRepository
-import com.noto.util.sortAsc
-import com.noto.util.sortDesc
+import com.noto.util.sortNotebookAsc
+import com.noto.util.sortNotebookDesc
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -51,9 +51,9 @@ class NotebookListViewModel(private val notebookRepository: NotebookRepository) 
 
     private fun sort(list: List<Notebook>): List<Notebook> {
         return if (_sortType.value == SortType.ASC) {
-            list.sortAsc(_sortMethod.value ?: SortMethod.Custom)
+            list.sortNotebookAsc(_sortMethod.value ?: SortMethod.Custom)
         } else {
-            list.sortDesc(_sortMethod.value ?: SortMethod.Custom)
+            list.sortNotebookDesc(_sortMethod.value ?: SortMethod.Custom)
         }
     }
 
