@@ -10,10 +10,12 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.noto.NotoDialog
 import com.noto.R
 import com.noto.database.SortMethod
 import com.noto.database.SortType
+import com.noto.databinding.DialogNotoBinding
 import com.noto.databinding.FragmentNotebookListBinding
 import com.noto.note.adapter.NavigateToNotebook
 import com.noto.note.adapter.NotebookItemTouchHelperCallback
@@ -64,6 +66,15 @@ class NotebookListFragment : Fragment(), NavigateToNotebook {
             when (it.itemId) {
 
                 R.id.create -> NotoDialog(requireContext(), viewModel)
+
+//                R.id.create -> BottomSheetDialog(requireContext(), R.style.Style_BottomSheetDialog).also {
+//                    it.setContentView(DialogNotoBinding.inflate(layoutInflater).root)
+//                    it.dismissWithAnimation = true
+//                    it.create()
+//                    it.show()
+//                }
+
+//                R.id.create -> this.findNavController().navigate(NotebookListFragmentDirections.actionNotebookListFragmentToBottomSheetDialog())
 
                 R.id.sort -> {
                     bs.state = BottomSheetBehavior.STATE_EXPANDED

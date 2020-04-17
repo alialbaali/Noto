@@ -48,5 +48,7 @@
     <string name="sort_by">Sort by</string>
     <string name="sort">Sort</string>
     <string name="more">more</string>
+    <string name="icon">Icon</string>
+    <string name="choose_an_icon">Choose an icon</string>
 
 </resources>

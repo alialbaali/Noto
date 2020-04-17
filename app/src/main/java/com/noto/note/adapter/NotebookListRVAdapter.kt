@@ -14,6 +14,7 @@ import com.noto.note.model.Notebook
 import com.noto.note.viewModel.NotebookListViewModel
 import com.noto.util.getColorOnPrimary
 import com.noto.util.getColorPrimary
+import com.noto.util.getImageResource
 
 // Notebook List RV Adapter
 internal class NotebookListRVAdapter(private val viewModel: NotebookListViewModel, private val navigateToNotebook: NavigateToNotebook) :
@@ -91,6 +92,7 @@ internal class NotebookItemViewHolder(
     // Bind notebook's values to the list item
     fun bind(notebook: Notebook) {
         binding.notebook = notebook
+        binding.notebookIcon.setImageResource(notebook.notoIcon.getImageResource())
         binding.executePendingBindings()
 
         setDefaultBackground()

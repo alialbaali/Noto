@@ -14,6 +14,7 @@ import com.noto.todo.model.Todolist
 import com.noto.todo.viewModel.TodolistListViewModel
 import com.noto.util.getColorOnPrimary
 import com.noto.util.getColorPrimary
+import com.noto.util.getImageResource
 
 internal class TodolistListRVAdapter(private val viewModel: TodolistListViewModel, private val navigateToTodolist: NavigateToTodolist) :
     ListAdapter<Todolist, TodolistItemViewHolder>(TodolistItemDiffCallback()), TodoListItemTouchHelperAdapter {
@@ -89,6 +90,7 @@ internal class TodolistItemViewHolder(
 
     fun bind(todolist: Todolist, viewModel: TodolistListViewModel) {
         binding.todolist = todolist
+        binding.todolistIcon.setImageResource(todolist.notoIcon.getImageResource())
         binding.executePendingBindings()
 
         binding.todosCount.text = viewModel.countTodos(todolist.todolistId).toString().plus(" Todos")

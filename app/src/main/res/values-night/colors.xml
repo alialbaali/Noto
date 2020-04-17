@@ -16,4 +16,6 @@
     <color name="colorOnPrimaryPink">#C2185B</color>
     <color name="colorOnPrimaryCyan">#0097A7</color>
 
+    <color name="list_item_todo_color">#282828</color>
+
 </resources>

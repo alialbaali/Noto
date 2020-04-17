@@ -31,6 +31,7 @@
     <dimen name="padding_small_normal">12dp</dimen>
 
     <!-- Elevation -->
+    <dimen name="elevation_0">0dp</dimen>
     <dimen name="elevation_extra_small">1dp</dimen>
     <dimen name="elevation_small">2dp</dimen>
     <dimen name="elevation_normal">4dp</dimen>

@@ -4,6 +4,7 @@
         <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="android:colorPrimary">@color/colorOnPrimary_900</item>
         <item name="android:navigationBarColor">@color/colorPrimary</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:colorControlActivated">@color/colorOnPrimary_900</item>
@@ -29,12 +30,8 @@
     <style name="Style.CollapsingToolbar" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
         <item name="android:background">@color/colorPrimary</item>
         <item name="contentScrim">@color/colorPrimary</item>
-        <item name="expandedTitleTextAppearance">
-            @style/TextAppearance.CollapsingToolbar.Expanded.Title
-        </item>
-        <item name="collapsedTitleTextAppearance">
-            @style/TextAppearance.CollapsingToolbar.Collapsed.Title
-        </item>
+        <item name="expandedTitleTextAppearance">@style/TextAppearance.CollapsingToolbar.Expanded.Title</item>
+        <item name="collapsedTitleTextAppearance">@style/TextAppearance.CollapsingToolbar.Collapsed.Title</item>
         <item name="layout_scrollFlags">scroll|snap|exitUntilCollapsed</item>
         <item name="collapsedTitleGravity">start</item>
         <item name="expandedTitleGravity">start</item>
@@ -42,7 +39,7 @@
 
     <!-- Collapse Toolbar Title -->
     <style name="TextAppearance.CollapsingToolbar.Expanded.Title" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textSize">@dimen/ctb_exp_title_dimen</item>
+        <item name="android:textSize">48sp</item>
         <item name="android:textColor">@color/colorOnPrimary_900</item>
     </style>
 
@@ -154,6 +151,16 @@
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/roboto</item>
         <item name="android:textColor">@color/colorOnPrimary_800</item>
+    </style>
+
+    <style name="Style.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="behavior_skipCollapsed">true</item>
+        <item name="behavior_hideable">true</item>
+        <item name="android:colorBackground">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
     </style>
 
 </resources>

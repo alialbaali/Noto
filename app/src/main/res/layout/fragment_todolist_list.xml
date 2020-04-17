@@ -43,16 +43,16 @@
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
-<!--        <view-->
-<!--            android:id="@+id/dim"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:alpha="0.5"-->
-<!--            android:backgroundTint="@color/colorOnPrimary_800"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
+        <!--        <view-->
+        <!--            android:id="@+id/dim"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:alpha="0.5"-->
+        <!--            android:backgroundTint="@color/colorOnPrimary_800"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent" />-->
 
         <RadioGroup
             android:id="@+id/bs"
@@ -142,8 +142,8 @@
                 android:layout_marginTop="@dimen/spacing_small"
                 android:button="@drawable/ic_sort_custom_24dp"
                 android:buttonTint="@drawable/selector_sort_method"
-                android:text="@string/custom"
                 android:paddingHorizontal="@dimen/spacing_normal"
+                android:text="@string/custom"
                 android:textColor="@drawable/selector_sort_method" />
         </RadioGroup>
 

@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.noto.R
 import com.noto.database.NotoColor
+import com.noto.database.NotoIcon
 import com.noto.database.SortMethod
 import com.noto.note.model.Notebook
+import com.noto.todo.model.Todolist
 import timber.log.Timber
 
 fun NotoColor.getColorPrimary(context: Context): Int {
@@ -99,7 +101,7 @@ fun SharedPreferences.getValue(key: String): Any? {
     return this.all[key]
 }
 
-fun List<Notebook>.sortAsc(sortMethod: SortMethod): List<Notebook> {
+fun List<Notebook>.sortNotebookAsc(sortMethod: SortMethod): List<Notebook> {
     return when (sortMethod) {
         SortMethod.Alphabetically -> this.sortedBy { it.notebookTitle }
         SortMethod.CreationDate -> this.sortedBy { it.notebookCreationDate }
@@ -109,12 +111,54 @@ fun List<Notebook>.sortAsc(sortMethod: SortMethod): List<Notebook> {
     }
 }
 
-fun List<Notebook>.sortDesc(sortMethod: SortMethod): List<Notebook> {
-   return when (sortMethod) {
+fun List<Notebook>.sortNotebookDesc(sortMethod: SortMethod): List<Notebook> {
+    return when (sortMethod) {
         SortMethod.Alphabetically -> this.sortedByDescending { it.notebookTitle }
         SortMethod.CreationDate -> this.sortedByDescending { it.notebookCreationDate }
         SortMethod.ModificationDate -> this.sortedByDescending { it.notebookModificationDate }
         SortMethod.Custom -> this.sortedByDescending { it.notebookPosition }
-       else -> this.sortedByDescending { it.notebookPosition }
-   }
+        else -> this.sortedByDescending { it.notebookPosition }
+    }
+}
+
+fun List<Todolist>.sortTodolistAsc(sortMethod: SortMethod): List<Todolist> {
+    return when (sortMethod) {
+        SortMethod.Alphabetically -> this.sortedBy { it.todolistTitle }
+        SortMethod.CreationDate -> this.sortedBy { it.todolistCreationDate }
+        SortMethod.ModificationDate -> this.sortedBy { it.todolistModificationDate }
+        SortMethod.Custom -> this.sortedBy { it.todolistPosition }
+        else -> this.sortedBy { it.todolistPosition }
+    }
+}
+
+fun List<Todolist>.sortTodolistDesc(sortMethod: SortMethod): List<Todolist> {
+    return when (sortMethod) {
+        SortMethod.Alphabetically -> this.sortedByDescending { it.todolistTitle }
+        SortMethod.CreationDate -> this.sortedByDescending { it.todolistCreationDate }
+        SortMethod.ModificationDate -> this.sortedByDescending { it.todolistModificationDate }
+        SortMethod.Custom -> this.sortedByDescending { it.todolistPosition }
+        else -> this.sortedByDescending { it.todolistPosition }
+    }
+}
+
+fun NotoIcon.getImageResource(): Int {
+    return when (this) {
+        NotoIcon.NOTEBOOK -> R.drawable.ic_notebook_24dp
+        NotoIcon.LIST -> R.drawable.ic_list_24dp
+        NotoIcon.FITNESS -> R.drawable.ic_fitness_24dp
+        NotoIcon.HOME -> R.drawable.ic_home_24dp
+        NotoIcon.BOOK -> R.drawable.ic_book_24dp
+        NotoIcon.SCHOOL -> R.drawable.ic_school_24dp
+        NotoIcon.WORK -> R.drawable.ic_work_24dp
+        NotoIcon.LAPTOP -> R.drawable.ic_laptop_24dp
+        NotoIcon.GROCERY -> R.drawable.ic_grocery_24dp
+        NotoIcon.SHOP -> R.drawable.ic_shop_24dp
+        NotoIcon.GAME -> R.drawable.ic_game_24dp
+        NotoIcon.TRAVEL -> R.drawable.ic_travel_24dp
+        NotoIcon.MUSIC -> R.drawable.ic_music_24dp
+        NotoIcon.IDEA -> R.drawable.ic_idea_24dp
+        NotoIcon.WRENCH -> R.drawable.ic_wrench_24dp
+        NotoIcon.CHART -> R.drawable.ic_chart_24dp
+        NotoIcon.CALENDAR -> R.drawable.ic_calendar_24dp
+    }
 }
