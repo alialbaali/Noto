@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.noto.database.NotoColor
+import com.noto.database.NotoIcon
 import com.noto.database.SortMethod
 import com.noto.database.SortType
 import java.util.*
@@ -29,6 +30,9 @@ data class Notebook(
 
     @ColumnInfo(name = "noto_color")
     var notoColor: NotoColor = NotoColor.GRAY,
+
+    @ColumnInfo(name = "noto_icon")
+    var notoIcon: NotoIcon = NotoIcon.NOTEBOOK,
 
     @ColumnInfo(name = "notebook_sort_type")
     var notebookSortType: SortType = SortType.DESC,

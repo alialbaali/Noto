@@ -20,3 +20,23 @@ enum class SortMethod {
     Starred,
     Custom
 }
+
+enum class NotoIcon {
+    NOTEBOOK,
+    LIST,
+    FITNESS,
+    HOME,
+    BOOK,
+    SCHOOL,
+    WORK,
+    LAPTOP,
+    GROCERY,
+    SHOP,
+    GAME,
+    TRAVEL,
+    MUSIC,
+    IDEA,
+    WRENCH,
+    CHART,
+    CALENDAR
+}

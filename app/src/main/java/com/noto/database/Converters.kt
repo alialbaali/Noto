@@ -58,3 +58,14 @@ object SortMethodConverter {
         SortMethod.values().first { sortMethod -> sortMethod.ordinal == ordinal }
 
 }
+
+object NotoIconConverter {
+
+    @TypeConverter
+    @JvmStatic
+    fun toOrdinal(notoIcon: NotoIcon): Int = notoIcon.ordinal
+
+    @TypeConverter
+    @JvmStatic
+    fun toEnum(ordinal: Int): NotoIcon = NotoIcon.values().first { notoIcon -> notoIcon.ordinal == ordinal }
+}

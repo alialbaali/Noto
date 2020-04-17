@@ -17,7 +17,8 @@ private const val NOTO_DATABASE = "Noto Database"
     NotoColorConverter::class,
     DateConverter::class,
     SortTypeConverter::class,
-    SortMethodConverter::class
+    SortMethodConverter::class,
+    NotoIconConverter::class
 )
 @Database(
     entities = [Notebook::class, Note::class, Todolist::class, Todo::class, SubTodo::class],
