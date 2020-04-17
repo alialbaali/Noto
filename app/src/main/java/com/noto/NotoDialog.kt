@@ -12,10 +12,9 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.noto.database.NotoColor
@@ -44,7 +43,7 @@ class NotoDialog(context: Context, private val viewModel: ViewModel) : BottomShe
     }
 
     private val rvLayoutManager by lazy {
-        GridLayoutManager(context, 4)
+        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     init {
@@ -61,6 +60,8 @@ class NotoDialog(context: Context, private val viewModel: ViewModel) : BottomShe
 
         window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         window?.setWindowAnimations(R.style.DialogAnimation)
+
+        dialogBinding.rvNotoIcon.layoutManager = rvLayoutManager
 
         dialogBinding.rbtnGray.setOnClickListener {
             notoColor = NotoColor.GRAY
@@ -115,12 +116,6 @@ class NotoDialog(context: Context, private val viewModel: ViewModel) : BottomShe
                 }
             }
         }
-
-        dialogBinding.til.setStartIconOnClickListener {
-            dialogBinding.listNotoIcon.visibility = View.VISIBLE
-            dialogBinding.rvNotoIcon.layoutManager = rvLayoutManager
-            this.behavior.state = BottomSheetBehavior.STATE_EXPANDED
-        }
     }
 
     private fun notebookListViewModel(title: String) {
@@ -171,7 +166,6 @@ class NotoDialog(context: Context, private val viewModel: ViewModel) : BottomShe
     override fun onClick(notoIcon: NotoIcon) {
         this.notoIcon = notoIcon
         dialogBinding.til.setStartIconDrawable(notoIcon.getImageResource())
-        dialogBinding.listNotoIcon.visibility = View.GONE
     }
 }
 

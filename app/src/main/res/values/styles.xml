@@ -154,8 +154,6 @@
     </style>
 
     <style name="Style.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="behavior_skipCollapsed">true</item>
-        <item name="behavior_hideable">true</item>
         <item name="android:colorBackground">@android:color/transparent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowIsFloating">false</item>
