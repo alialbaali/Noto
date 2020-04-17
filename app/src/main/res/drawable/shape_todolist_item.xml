@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/colorOnPrimary_600">
+    android:color="@color/list_item_todo_color">
     <item>
         <shape>
             <solid android:color="@color/colorPrimary" />

@@ -5,7 +5,7 @@
 
         <shape android:shape="rectangle">
 
-            <solid android:color="@color/colorPrimary" />
+            <solid android:color="@color/list_item_todo_color" />
             <corners android:radius="@dimen/note_item_radius" />
 
         </shape>
