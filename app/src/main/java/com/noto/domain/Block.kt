@@ -6,7 +6,6 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.util.*
 
-@Entity(tableName = "blocks")
 abstract class Block(
 
     @PrimaryKey(autoGenerate = true)
