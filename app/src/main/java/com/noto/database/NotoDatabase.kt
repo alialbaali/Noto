@@ -5,37 +5,29 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.noto.note.model.Note
-import com.noto.note.model.Notebook
-import com.noto.todo.model.SubTodo
-import com.noto.todo.model.Todo
-import com.noto.todo.model.Todolist
+import com.noto.domain.Library
+import com.noto.domain.NoteBlock
+import com.noto.domain.Noto
+import com.noto.domain.TodoBlock
 
 private const val NOTO_DATABASE = "Noto Database"
 
 @TypeConverters(
     NotoColorConverter::class,
-    DateConverter::class,
+    NotoIconConverter::class,
     SortTypeConverter::class,
     SortMethodConverter::class,
-    NotoIconConverter::class
+    BlockConverter::class,
+    DateConverter::class
 )
-@Database(
-    entities = [Notebook::class, Note::class, Todolist::class, Todo::class, SubTodo::class],
-    version = 1,
-    exportSchema = false
-)
+@Database(entities = [NoteBlock::class, TodoBlock::class, Noto::class, Library::class], version = 1, exportSchema = false)
 abstract class NotoDatabase : RoomDatabase() {
 
-    abstract val notebookDao: NotebookDao
+    abstract val notoDao: NotoDao
 
-    abstract val noteDao: NoteDao
+    abstract val blockDao: BlockDao
 
-    abstract val todolistDao: TodolistDao
-
-    abstract val todoDao: TodoDao
-
-    abstract val subTodoDao: SubTodoDao
+    abstract val libraryDao: LibraryDao
 
     companion object {
 
@@ -43,17 +35,9 @@ abstract class NotoDatabase : RoomDatabase() {
         private var INSTANCE: NotoDatabase? = null
 
         fun getInstance(context: Context): NotoDatabase =
-            INSTANCE ?: synchronized(this) {
-                INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
-            }
+            INSTANCE ?: synchronized(this) { INSTANCE ?: buildDatabase(context).also { INSTANCE = it } }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(
-                context.applicationContext,
-                NotoDatabase::class.java,
-                NOTO_DATABASE
-            )
-                .fallbackToDestructiveMigration()
-                .build()
+            Room.databaseBuilder(context.applicationContext, NotoDatabase::class.java, NOTO_DATABASE).fallbackToDestructiveMigration().build()
     }
 }

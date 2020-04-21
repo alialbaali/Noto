@@ -1,9 +1,9 @@
 package com.noto.database
 
 import androidx.room.TypeConverter
+import com.noto.domain.*
 import java.text.DateFormat
 import java.util.*
-
 
 object NotoColorConverter {
 
@@ -15,7 +15,6 @@ object NotoColorConverter {
     @JvmStatic
     fun toEnum(ordinal: Int): NotoColor =
         NotoColor.values().first { notebookColor -> notebookColor.ordinal == ordinal }
-
 }
 
 object SortTypeConverter {
@@ -27,7 +26,6 @@ object SortTypeConverter {
     @TypeConverter
     @JvmStatic
     fun toEnum(ordinal: Int): SortType = SortType.values().first { sort -> sort.ordinal == ordinal }
-
 }
 
 object DateConverter {
@@ -36,14 +34,11 @@ object DateConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toString(date: Date): String =
-        DateFormat.getDateTimeInstance(dateFormat, dateFormat).format(date)
+    fun toString(date: Date): String = DateFormat.getDateTimeInstance(dateFormat, dateFormat).format(date)
 
     @TypeConverter
     @JvmStatic
-    fun toDate(value: String): Date =
-        DateFormat.getDateTimeInstance(dateFormat, dateFormat).parse(value) ?: Date()
-
+    fun toDate(value: String): Date = DateFormat.getDateTimeInstance(dateFormat, dateFormat).parse(value) ?: Date()
 }
 
 object SortMethodConverter {
@@ -54,9 +49,7 @@ object SortMethodConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): SortMethod =
-        SortMethod.values().first { sortMethod -> sortMethod.ordinal == ordinal }
-
+    fun toEnum(ordinal: Int): SortMethod = SortMethod.values().first { sortMethod -> sortMethod.ordinal == ordinal }
 }
 
 object NotoIconConverter {
@@ -68,4 +61,15 @@ object NotoIconConverter {
     @TypeConverter
     @JvmStatic
     fun toEnum(ordinal: Int): NotoIcon = NotoIcon.values().first { notoIcon -> notoIcon.ordinal == ordinal }
+}
+
+object BlockConverter {
+
+    @TypeConverter
+    @JvmStatic
+    fun toOrdinal(blockType: BlockType): Int = blockType.ordinal
+
+    @TypeConverter
+    @JvmStatic
+    fun toEnum(ordinal: Int): BlockType = BlockType.values().first { blockType -> blockType.ordinal == ordinal }
 }
