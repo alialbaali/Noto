@@ -24,10 +24,19 @@ enum class NotoIcon(val resId: Int) {
 }
 
 enum class NotoColor(val resId: Int) {
-    GRAY(R.color.colorPrimaryGray),
-    BLUE(R.color.colorPrimaryBlue),
-    PINK(R.color.colorPrimaryPink),
-    CYAN(R.color.colorPrimaryCyan)
+    GRAY(R.color.colorAccentGray),
+    BLUE(R.color.colorAccentBlue),
+    PINK(R.color.colorAccentPink),
+    CYAN(R.color.colorAccentCyan),
+    PURPLE(R.color.colorAccentPurple),
+    RED(R.color.colorAccentRed),
+    YELLOW(R.color.colorAccentYellow),
+    ORANGE(R.color.colorAccentOrange),
+    GREEN(R.color.colorAccentGreen),
+    BROWN(R.color.colorAccentBrown),
+    BLUE_GRAY(R.color.colorAccentBlueGray),
+    TEAL(R.color.colorAccentTeal),
+    LIME(R.color.colorAccentLime),
 }
 
 enum class SortMethod {
