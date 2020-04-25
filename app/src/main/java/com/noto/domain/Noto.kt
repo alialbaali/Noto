@@ -67,5 +67,5 @@ data class Noto(
     val notoCreationDate: Date = Date(),
 
     @ColumnInfo(name = "noto_is_starred")
-    val notoIsStarred: Boolean = false
+    var notoIsStarred: Boolean = false
 )

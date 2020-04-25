@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="@color/list_item_todo_color" />
-    <corners android:topRightRadius="@dimen/spacing_extra_large" />
-
-</shape>

@@ -6,52 +6,60 @@
     <data>
 
         <variable
-            name="notebook"
-            type="com.noto.note.model.Notebook" />
-
+            name="library"
+            type="com.noto.domain.Library" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginEnd="@dimen/spacing_normal"
-        android:layout_marginBottom="@dimen/spacing_small"
-        android:background="@drawable/shape_notebook_item"
+        android:layout_margin="@dimen/spacing_small"
+        android:background="@drawable/shape_item_library"
         android:elevation="@dimen/elevation_extra_small">
 
         <ImageView
-            android:id="@+id/notebook_icon"
+            android:id="@+id/iv_library_noto_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_small"
             android:layout_marginBottom="@dimen/spacing_normal"
-            android:src="@drawable/ic_notebook_24dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/notebook_tv"
+            android:src="@drawable/ic_list_24dp"
+            android:tint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/tv_library_noto_count"
+            app:layout_constraintEnd_toStartOf="@id/tv_library_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/notebook_tv"
-            style="@style/Style.NotoItem.TextView"
+            android:id="@+id/tv_library_title"
+            style="@style/TextView.Item.Primary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_normal"
-            android:text="@{notebook.notebookTitle}"
+            android:text="@{library.libraryTitle}"
+            app:layout_constraintBottom_toTopOf="@id/tv_library_noto_count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/iv_library_noto_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Library" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_library_noto_count"
+            style="@style/TextView.Item.Secondary"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:gravity="end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@id/notebook_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Notebook" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_library_title"
+            tools:text="3 Notos" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
