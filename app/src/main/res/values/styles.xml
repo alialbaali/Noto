@@ -1,103 +1,51 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:windowBackground">@color/colorPrimary</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
-        <item name="android:colorPrimary">@color/colorOnPrimary_900</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-        <item name="android:colorControlActivated">@color/colorOnPrimary_900</item>
-        <item name="android:colorControlHighlight">@color/colorOnPrimary_600</item>
-        <item name="android:colorControlNormal">@color/colorOnPrimary_900</item>
-        <item name="android:textColorHighlight">@color/colorPrimaryGray</item>
+        <item name="android:colorControlActivated">@color/colorPrimary</item>
+        <item name="android:colorControlHighlight">@color/colorPrimary</item>
+        <item name="android:colorControlNormal">@color/colorPrimary</item>
+        <item name="android:textColorHighlight">@color/colorOnPrimary</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textColorHint">@color/colorOnPrimary</item>
+        <item name="hintTextColor">@color/colorOnPrimary</item>
     </style>
 
-    <style name="Style.BottomNav.Button" parent="Widget.MaterialComponents.Button">
+    <style name="PopupMenu.Overflow" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:backgroundTint">@color/colorBackground</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:backgroundTint">@color/colorOnPrimary_900</item>
-        <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="Theme.OverFlowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
-        <item name="android:backgroundTint">@color/colorPrimary</item>
-        <item name="android:tint">@color/colorOnPrimary_900</item>
-        <item name="android:textColor">@color/colorOnPrimary_900</item>
+        <item name="android:tint">@color/colorPrimary</item>
     </style>
 
     <!-- Collapsing Toolbar -->
     <style name="Style.CollapsingToolbar" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
-        <item name="android:background">@color/colorPrimary</item>
-        <item name="contentScrim">@color/colorPrimary</item>
-        <item name="expandedTitleTextAppearance">@style/TextAppearance.CollapsingToolbar.Expanded.Title</item>
-        <item name="collapsedTitleTextAppearance">@style/TextAppearance.CollapsingToolbar.Collapsed.Title</item>
+        <item name="android:background">@drawable/shape_collapsing_toolbar</item>
+        <item name="contentScrim">@color/colorSurface</item>
         <item name="layout_scrollFlags">scroll|snap|exitUntilCollapsed</item>
-        <item name="collapsedTitleGravity">start</item>
-        <item name="expandedTitleGravity">start</item>
+        <item name="expandedTitleTextAppearance">@style/CollapsingToolbar.ExpandedTitle</item>
+        <item name="collapsedTitleTextAppearance">@style/CollapsingToolbar.CollapsedTitle</item>
     </style>
 
-    <!-- Collapse Toolbar Title -->
-    <style name="TextAppearance.CollapsingToolbar.Expanded.Title" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textSize">48sp</item>
-        <item name="android:textColor">@color/colorOnPrimary_900</item>
+    <style name="CollapsingToolbar.ExpandedTitle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">44sp</item>
+        <item name="android:textColor">@color/colorSecondary</item>
     </style>
 
-    <style name="TextAppearance.CollapsingToolbar.Collapsed.Title" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="android:textSize">@dimen/ctb_col_title_dimen</item>
-        <item name="android:textColor">@color/colorOnPrimary_900</item>
+    <style name="CollapsingToolbar.CollapsedTitle" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorSecondary</item>
     </style>
 
-    <style name="Style.NotoItem.TextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textColor">@color/colorOnPrimary_800</item>
-        <item name="android:textSize">@dimen/notebook_item_tv_dimen</item>
-        <item name="android:singleLine">true</item>
-    </style>
-
-    <!-- Note Item Title -->
-    <style name="Style.NoteItem.Title" parent="Widget.MaterialComponents.TextView">
-        <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:textColor">@color/colorOnPrimary_800</item>
-        <item name="android:textSize">@dimen/note_item_title_dimen</item>
-        <item name="android:textAlignment">textStart</item>
-        <item name="android:maxLines">3</item>
-    </style>
-
-    <!-- Note Item Body -->
-    <style name="Style.NoteItem.Body" parent="Widget.MaterialComponents.TextView">
-        <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/colorOnPrimary_600</item>
-        <item name="android:textSize">@dimen/note_item_body_dimen</item>
-        <item name="android:textAlignment">textStart</item>
-        <item name="android:maxLines">5</item>
-    </style>
-
-    <style name="Style.NoteFragment.Title" parent="Widget.AppCompat.EditText">
-        <item name="android:fontFamily">@font/roboto_medium</item>
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:maxLength">64</item>
-        <item name="android:gravity">top|start</item>
-        <item name="android:textColor">@color/colorOnPrimary_800</item>
-        <item name="android:textSize">@dimen/note_fragment_title_dimen</item>
-        <item name="android:textAlignment">textStart</item>
-        <item name="android:maxLines">3</item>
-    </style>
-
-    <style name="Style.NoteFragment.Body" parent="Widget.AppCompat.EditText">
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:gravity">top|start</item>
-        <item name="android:singleLine">false</item>
-        <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/colorOnPrimary_600</item>
-        <item name="android:textSize">@dimen/note_fragment_body_dimen</item>
-        <item name="android:textAlignment">textStart</item>
-    </style>
-
-    <style name="TextAppearance.Notebook.Empty" parent="TextAppearance.AppCompat">
-        <item name="android:textSize">@dimen/empty_notebook_dimen</item>
-        <item name="android:textColor">@color/colorOnPrimary_800</item>
-        <item name="android:fontFamily">@font/roboto</item>
+    <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="titleTextColor">@color/colorSecondary</item>
+        <item name="android:backgroundTint">@color/colorSurface</item>
+        <item name="popupTheme">@style/PopupMenu.Overflow</item>
     </style>
 
     <style name="DialogAnimation">
@@ -105,60 +53,70 @@
         <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
-    <style name="Style.TodoFragment.Title" parent="Widget.AppCompat.EditText">
-        <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/colorOnPrimary_800</item>
-        <item name="android:textColorHint">@color/colorOnPrimary_600</item>
-        <item name="android:textSize">@dimen/todo_fragment_title_dimen</item>
-        <item name="android:background">@null</item>
-    </style>
-
-    <style name="Style.TodoFragment.SubTodo" parent="Widget.AppCompat.EditText">
-        <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/colorOnPrimary_800</item>
-        <item name="android:textColorHint">@color/colorOnPrimary_600</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:background">@null</item>
-    </style>
-
-    <style name="Style.SubTodoFragment.Title" parent="Widget.AppCompat.EditText">
-        <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/colorOnPrimary_800</item>
-        <item name="android:textColorHint">@color/colorOnPrimary_600</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:background">@null</item>
-    </style>
-
-    <style name="TextAppearance.TodoFragment.Settings" parent="TextAppearance.AppCompat">
-        <item name="android:fontFamily">@font/roboto_light</item>
-        <item name="android:textColor">@color/colorOnPrimary_600</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="TextAppearance.TodoFragment.TodoBody" parent="TextAppearance.AppCompat">
-        <item name="android:fontFamily">@font/roboto_light</item>
-        <item name="android:textColor">@color/colorOnPrimary_800</item>
-        <item name="android:textColorHint">@color/colorOnPrimary_600</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:background">@null</item>
-    </style>
-
-    <style name="TextAppearance.TodoFragment.Todo.Input" parent="TextAppearance.AppCompat">
-
-    </style>
-
-    <style name="TextAppearance.BottomSheet.Sort" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">@font/roboto</item>
-        <item name="android:textColor">@color/colorOnPrimary_800</item>
-    </style>
-
-    <style name="Style.BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
         <item name="android:colorBackground">@android:color/transparent</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowSoftInputMode">adjustResize</item>
-        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/colorBackground</item>
+    </style>
+
+    <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/colorBackground</item>
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/spacing_small</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/spacing_small</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/spacing_small</item>
+        <item name="boxCornerRadiusTopStart">@dimen/spacing_small</item>
+        <item name="errorEnabled">true</item>
+        <item name="hintEnabled">true</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="counterTextColor">@color/colorOnPrimary</item>
+        <item name="hintTextColor">@color/colorOnPrimary</item>
+    </style>
+
+    <style name="TextInputEditText">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:cursorVisible">true</item>
+    </style>
+
+    <style name="MaterialButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/colorBackground</item>
+        <item name="android:textSize">16sp</item>
+        <item name="cornerRadius">@dimen/spacing_small</item>
+    </style>
+
+    <style name="MaterialButtonSecondary" parent="MaterialButton">
+        <item name="android:backgroundTint">@color/colorSurface</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+    </style>
+
+    <style name="HorizontalScrollView">
+        <item name="android:background">@drawable/shape_dialog_rg</item>
+        <item name="android:padding">@dimen/spacing_extra_small</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <style name="FAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="tint">@color/colorBackground</item>
+    </style>
+
+    <style name="TextView.Item.Primary" parent="Widget.MaterialComponents.TextView">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextView.Item.Secondary" parent="Widget.MaterialComponents.TextView">
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
 </resources>

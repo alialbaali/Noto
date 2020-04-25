@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">#FAFAFA</color>
-    <color name="colorOnPrimary_900">#212121</color>
-    <color name="colorOnPrimary_800">#424242</color>
-    <color name="colorOnPrimary_600">#757575</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorPrimary">#121212</color>
+    <color name="colorOnPrimary">#616161</color>
 
-    <color name="colorPrimaryGray">#E0E0E0</color>
-    <color name="colorPrimaryBlue">#90CAF9</color>
-    <color name="colorPrimaryPink">#F48FB1</color>
-    <color name="colorPrimaryCyan">#80DEEA</color>
+    <color name="colorSurface">#F0F0F0</color>
+    <color name="colorSecondary">#1E1E1E</color>
+    <color name="colorOnSecondary">#858585</color>
 
-    <color name="colorOnPrimaryGray">#9E9E9E</color>
-    <color name="colorOnPrimaryBlue">#42A5F5</color>
-    <color name="colorOnPrimaryPink">#EC407A</color>
-    <color name="colorOnPrimaryCyan">#26C6DA</color>
-
-    <color name="list_item_todo_color">#f4f4f4</color>
-
+    <color name="colorAccentGray">#E0E0E0</color>
+    <color name="colorAccentBlue">#BBDEFB</color>
+    <color name="colorAccentPink">#F48FB1</color>
+    <color name="colorAccentCyan">#80DEEA</color>
+    <color name="colorAccentPurple">#CE93D8</color>
+    <color name="colorAccentRed">#EF9A9A</color>
+    <color name="colorAccentYellow">#FFF59D</color>
+    <color name="colorAccentOrange">#FFCC80</color>
+    <color name="colorAccentGreen">#A5D6A7</color>
+    <color name="colorAccentBrown">#BCAAA4</color>
+    <color name="colorAccentBlueGray">#B0BEC5</color>
+    <color name="colorAccentTeal">#80CBC4</color>
+    <color name="colorAccentLime">#E6EE9C</color>
 </resources>

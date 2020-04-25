@@ -1,53 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Action Bar Layout -->
-    <dimen name="abl_height_dimen">100dp</dimen>
-
-    <!-- Collapsing Toolbar -->
-    <dimen name="ctb_exp_title_dimen">40sp</dimen>
-    <dimen name="ctb_col_title_dimen">20sp</dimen>
-
-    <!-- Notebook -->
-    <dimen name="notebook_item_tv_dimen">18sp</dimen>
-    <dimen name="notebook_item_radius">7dp</dimen>
-
-    <!-- Note -->
-    <dimen name="note_item_radius">14dp</dimen>
-    <dimen name="note_item_title_dimen">18sp</dimen>
-    <dimen name="note_item_body_dimen">16sp</dimen>
-
-    <dimen name="note_fragment_radius">40dp</dimen>
-    <dimen name="note_fragment_title_dimen">26sp</dimen>
-    <dimen name="note_fragment_body_dimen">18sp</dimen>
-    <dimen name="todo_fragment_title_dimen">26sp</dimen>
-
     <!-- Margin -->
     <dimen name="spacing_extra_small">4dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_normal">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_extra_large">36dp</dimen>
-    <dimen name="padding_small_normal">12dp</dimen>
 
     <!-- Elevation -->
-    <dimen name="elevation_0">0dp</dimen>
+    <dimen name="elevation_no">0dp</dimen>
     <dimen name="elevation_extra_small">1dp</dimen>
     <dimen name="elevation_small">2dp</dimen>
     <dimen name="elevation_normal">4dp</dimen>
     <dimen name="elevation_large">8dp</dimen>
     <dimen name="elevation_extra_large">16dp</dimen>
 
-    <dimen name="dialog_btn_radius">20dp</dimen>
-    <dimen name="dialog_background_radius">15dp</dimen>
+    <dimen name="shape_corner">16dp</dimen>
 
-    <dimen name="dialog_create_btn_text_dimen">20sp</dimen>
-    <dimen name="dialog_cancel_btn_text_dimen">20sp</dimen>
-
-    <dimen name="dialog_rbtn_radius">25dp</dimen>
-    <dimen name="dialog_rbtn_selected_stroke_width">5dp</dimen>
-
-    <dimen name="empty_notebook_dimen">25dp</dimen>
-
-    <dimen name="todo_item_radius">25dp</dimen>
 </resources>

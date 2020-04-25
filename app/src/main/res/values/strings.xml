@@ -29,7 +29,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="todo_lists">Todo lists</string>
-    <string name="todolist">Todolist</string>
+    <string name="todolist">Todo-List</string>
     <string name="notebook">Notebook</string>
     <string name="type_a_title">Type a title</string>
     <string name="search">Search</string>
@@ -50,5 +50,20 @@
     <string name="more">more</string>
     <string name="icon">Icon</string>
     <string name="choose_an_icon">Choose an icon</string>
+    <string name="home">Home</string>
+    <string name="notos">Notos</string>
+    <string name="libraries">Libraries</string>
+    <string name="add_label">Add label</string>
+    <string name="labels">Labels</string>
+    <string name="create_label">Create label</string>
+    <string name="create_library">Create library</string>
+    <string name="label_title">Label title</string>
+    <string name="update_label">Update label</string>
+    <string name="delete_label">Delete label</string>
+    <string name="library_title">Library title</string>
+    <string name="done">Done</string>
+    <string name="there_are_no_libraries">There are no libraries!</string>
+    <string name="there_are_no_labels">There are no labels!</string>
+    <string name="schedule">Schedule</string>
 
 </resources>
