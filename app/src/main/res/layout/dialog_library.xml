@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_dialog">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til"
+            style="@style/TextInputLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_small"
+            app:counterEnabled="true"
+            app:counterMaxLength="32"
+            app:endIconDrawable="@drawable/selector_dialog_rbtn_gray"
+            app:endIconMode="custom"
+            app:endIconTint="@color/colorAccentGray"
+            app:layout_constraintBottom_toTopOf="@id/hsv_rg_noto_colors"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toEndOf="@id/guideline_start"
+            app:layout_constraintTop_toTopOf="@id/cl"
+            app:layout_constraintVertical_chainStyle="spread"
+            app:startIconDrawable="@drawable/ic_list_24dp"
+            app:startIconTint="@color/colorOnPrimary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/library_title"
+                android:inputType="text|textPersonName|textCapWords"
+                android:maxLength="32"
+                android:padding="@dimen/spacing_small" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/hsv_rg_noto_colors"
+            style="@style/HorizontalScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_small"
+            app:layout_constraintBottom_toTopOf="@id/hsv_rg_noto_icons"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/til">
+
+            <RadioGroup
+                android:id="@+id/rg_noto_icons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+        </HorizontalScrollView>
+
+        <HorizontalScrollView
+            android:id="@+id/hsv_rg_noto_icons"
+            style="@style/HorizontalScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_small"
+            app:layout_constraintBottom_toTopOf="@id/btn_create"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@id/hsv_rg_noto_colors">
+
+            <RadioGroup
+                android:id="@+id/rg_noto_colors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+        </HorizontalScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_create"
+            style="@style/MaterialButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:text="@string/create_library"
+            app:layout_constraintBottom_toBottomOf="@id/cl"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/hsv_rg_noto_icons" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/spacing_normal" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/spacing_normal" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
