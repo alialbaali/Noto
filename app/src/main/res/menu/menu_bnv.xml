@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/homeFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_home_24dp"
+        android:iconTint="@color/colorPrimary"
+        android:title="@string/home"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:enabled="true"
+        android:icon="@drawable/ic_search_24dp"
+        android:iconTint="@color/colorPrimary"
+        android:title="@string/search"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:enabled="false"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/calendarFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_calendar_24dp"
+        android:iconTint="@color/colorPrimary"
+        android:title="Calendar"
+        android:visible="true"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/libraryListFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_bookshelf_24dp"
+        android:iconTint="@color/colorPrimary"
+        android:title="@string/libraries"
+        android:visible="true"
+        app:showAsAction="always" />
+
+</menu>

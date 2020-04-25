@@ -1,5 +1,6 @@
 package com.noto
 
+import android.content.res.ColorStateList
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
@@ -20,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment)
 
-        binding.bottomNav.setupWithNavController(navController)
+        binding.bnv.setupWithNavController(navController)
 
         val slideDown = AnimationUtils.loadAnimation(this, R.anim.slide_down)
 
@@ -28,17 +29,21 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
 
-            if (destination.id == R.id.notebookListFragment || destination.id == R.id.todolistListFragment) {
+            if (destination.id == R.id.libraryListFragment || destination.id == R.id.calendarFragment) {
 
-//                binding.bottomNav.startAnimation(slideUp)
+                binding.fab.visibility = View.VISIBLE
+                binding.fab.startAnimation(slideUp)
 
-                binding.bottomNav.visibility = View.VISIBLE
+                binding.bnv.visibility = View.VISIBLE
+                binding.bnv.startAnimation(slideUp)
 
             } else {
 
-//                binding.bottomNav.startAnimation(slideDown)
+                binding.fab.visibility = View.GONE
+                binding.fab.startAnimation(slideDown)
 
-                binding.bottomNav.visibility = View.GONE
+                binding.bnv.visibility = View.GONE
+                binding.bnv.startAnimation(slideDown)
 
             }
         }
