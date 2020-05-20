@@ -7,7 +7,7 @@
 
         <variable
             name="label"
-            type="com.noto.domain.Label" />
+            type="com.noto.domain.model.Label" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

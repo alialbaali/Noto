@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.noto.noto.NotoViewModel" />
+    </data>
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cool"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/abl"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abl"
+            android:background="@color/colorBackground"
+            app:layout_scrollFlags="enterAlwaysCollapsed|snap">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/ctb"
+                style="@style/Style.CollapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/tb_cl"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_collapseMode="pin">
+
+                    <HorizontalScrollView
+                        android:id="@+id/hsv_cg_labels"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:scrollbars="none"
+                        app:layout_constraintBottom_toTopOf="@+id/til_noto_reminder"
+                        app:layout_constraintEnd_toStartOf="@id/img_noto_star"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/cg_labels"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            app:chipSpacing="@dimen/spacing_small"
+                            app:singleLine="false"
+                            app:singleSelection="false">
+
+                            <com.google.android.material.chip.Chip
+                                android:id="@+id/cp_add"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="@dimen/spacing_small"
+                                android:checkable="false"
+                                android:text="Add label"
+                                android:textColor="@color/colorSecondary"
+                                app:chipBackgroundColor="@color/colorSurface"
+                                app:chipCornerRadius="@dimen/spacing_normal"
+                                app:chipIcon="@drawable/ic_add_24dp"
+                                app:chipIconTint="@color/colorSecondary"
+                                app:chipStrokeColor="@color/colorOnSecondary"
+                                app:chipStrokeWidth="1dp"
+                                app:rippleColor="@color/colorOnSecondary" />
+                        </com.google.android.material.chip.ChipGroup>
+
+                    </HorizontalScrollView>
+
+                    <CheckBox
+                        android:id="@+id/img_noto_star"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="@dimen/spacing_large"
+                        android:background="@drawable/selector_star"
+                        android:button="@null"
+                        android:checked="@={viewModel.noto.notoIsStarred}"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="@dimen/spacing_extra_small"
+                        android:src="@drawable/selector_star"
+                        app:layout_constraintBottom_toBottomOf="@+id/hsv_cg_labels"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/hsv_cg_labels"
+                        app:layout_constraintTop_toTopOf="@+id/hsv_cg_labels" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_noto_reminder"
+                        style="@style/TextInputLayout.NotoTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:hint="@string/reminder"
+                        app:endIconDrawable="@drawable/ic_schedule_24dp"
+                        app:endIconMode="custom"
+                        app:endIconTint="@color/colorOnSecondary"
+                        app:hintEnabled="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_noto_reminder"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="none"
+                            android:singleLine="true"
+                            tools:text="Wed 12, 2020" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/tb"
+                    style="@style/Toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:menu="@menu/menu_noto"
+                    app:navigationIcon="@drawable/ic_back_24px"
+                    app:popupTheme="@style/PopupMenu.Overflow" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <EditText
+                android:id="@+id/et_noto_title"
+                style="@style/EditText.NotoTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginEnd="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:hint="@string/title"
+                app:layout_constraintBottom_toTopOf="@id/et_noto_body"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
+
+            <EditText
+                android:id="@+id/et_noto_body"
+                style="@style/EditText.NotoBody"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:gravity="top"
+                android:text="@={viewModel.noto.notoBody}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_noto_title"
+                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

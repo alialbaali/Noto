@@ -7,7 +7,7 @@
 
         <variable
             name="library"
-            type="com.noto.domain.Library" />
+            type="com.noto.domain.model.Library" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_library_title"
-            style="@style/TextView.Item.Primary"
+            style="@style/TextView.LibraryTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
@@ -50,7 +50,7 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_library_noto_count"
-            style="@style/TextView.Item.Secondary"
+            style="@style/TextView.LibraryNotoCount"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
