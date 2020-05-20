@@ -1,9 +1,12 @@
-package com.noto.database
+package com.noto.local
 
 import androidx.room.TypeConverter
-import com.noto.domain.*
-import java.text.DateFormat
-import java.util.*
+import com.noto.domain.model.NotoColor
+import com.noto.domain.model.NotoIcon
+import com.noto.domain.model.SortMethod
+import com.noto.domain.model.SortType
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 
 object NotoColorConverter {
 
@@ -30,15 +33,15 @@ object SortTypeConverter {
 
 object DateConverter {
 
-    private const val dateFormat = DateFormat.FULL
+    private val formatter = DateTimeFormat.shortDate()
 
     @TypeConverter
     @JvmStatic
-    fun toString(date: Date): String = DateFormat.getDateTimeInstance(dateFormat, dateFormat).format(date)
+    fun toString(date: DateTime?): String? = formatter.print(date)
 
     @TypeConverter
     @JvmStatic
-    fun toDate(value: String): Date = DateFormat.getDateTimeInstance(dateFormat, dateFormat).parse(value) ?: Date()
+    fun toDate(value: String?): DateTime? = formatter.parseDateTime(value)
 }
 
 object SortMethodConverter {
@@ -62,14 +65,14 @@ object NotoIconConverter {
     @JvmStatic
     fun toEnum(ordinal: Int): NotoIcon = NotoIcon.values().first { notoIcon -> notoIcon.ordinal == ordinal }
 }
-
-object BlockConverter {
-
-    @TypeConverter
-    @JvmStatic
-    fun toOrdinal(blockType: BlockType): Int = blockType.ordinal
-
-    @TypeConverter
-    @JvmStatic
-    fun toEnum(ordinal: Int): BlockType = BlockType.values().first { blockType -> blockType.ordinal == ordinal }
-}
+//
+//object BlockConverter {
+//
+//    @TypeConverter
+//    @JvmStatic
+//    fun toOrdinal(blockType: BlockType): Int = blockType.ordinal
+//
+//    @TypeConverter
+//    @JvmStatic
+//    fun toEnum(ordinal: Int): BlockType = BlockType.values().first { blockType -> blockType.ordinal == ordinal }
+//}
