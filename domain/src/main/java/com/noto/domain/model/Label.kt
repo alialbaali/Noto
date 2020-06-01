@@ -13,7 +13,7 @@ data class Label(
     var labelTitle: String = "",
 
     @ColumnInfo(name = "noto_color")
-    var notoColor: NotoColor
+    var notoColor: NotoColor = NotoColor.BLUE
 )
 
 @Entity(tableName = "noto_labels", primaryKeys = ["noto_id", "label_id"])

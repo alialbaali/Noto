@@ -5,6 +5,6 @@ import com.noto.domain.repository.LibraryRepository
 
 class GetLibraries(private val libraryRepository: LibraryRepository) {
 
-    suspend operator fun invoke(): Result<List<Library>> = libraryRepository.getLibraries()
+    suspend operator fun invoke() = libraryRepository.getLibraries()
 
 }

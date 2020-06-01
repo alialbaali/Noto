@@ -1,6 +1,7 @@
 package com.noto.domain.repository
 
 import com.noto.domain.model.Library
+import kotlinx.coroutines.flow.Flow
 
 interface LibraryRepository {
 
@@ -10,8 +11,10 @@ interface LibraryRepository {
 
     suspend fun updateLibrary(library: Library)
 
-    suspend fun getLibraries(): Result<List<Library>>
+    suspend fun getLibraries(): Result<Flow<List<Library>>>
 
-    suspend fun getLibraryById(libraryId: Long): Result<Library>
+    suspend fun getLibraryById(libraryId: Long): Result<Flow<Library>>
+
+    suspend fun countNotos(libraryId: Long): Int
 
 }

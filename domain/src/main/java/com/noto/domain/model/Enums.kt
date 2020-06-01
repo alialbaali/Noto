@@ -35,7 +35,6 @@ enum class NotoColor {
     BROWN,
     BLUE_GRAY,
     TEAL,
-    LIME,
 }
 
 enum class SortMethod {

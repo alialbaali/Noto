@@ -20,10 +20,10 @@ data class Library(
     var libraryPosition: Int,
 
     @ColumnInfo(name = "noto_color")
-    var notoColor: NotoColor,
+    var notoColor: NotoColor = NotoColor.GRAY,
 
     @ColumnInfo(name = "noto_icon")
-    var notoIcon: NotoIcon,
+    var notoIcon: NotoIcon = NotoIcon.BOOK,
 
     @ColumnInfo(name = "sort_type")
     var sortType: SortType = SortType.DESC,

@@ -6,8 +6,5 @@ class NotoUseCases(
     val updateNoto: UpdateNoto,
     val deleteNoto: DeleteNoto,
     val getNoto: GetNoto,
-    val getNotos: GetNotos,
-    val getNotoLabels: GetNotoLabels,
-    val insertNotoLabels: InsertNotoLabels,
-    val updateNotoLabels: UpdateNotoLabels
+    val getNotos: GetNotos
 )
