@@ -15,11 +15,10 @@
     <color name="colorAccentCyan">#006064</color>
     <color name="colorAccentPurple">#7B1FA2</color>
     <color name="colorAccentRed">#D32F2F</color>
-    <color name="colorAccentYellow">#A0A000</color>
-    <color name="colorAccentOrange">#F57C00</color>
+    <color name="colorAccentYellow">#99751B</color>
+    <color name="colorAccentOrange">#AB5600</color>
     <color name="colorAccentGreen">#388E3C</color>
     <color name="colorAccentBrown">#5D4037</color>
     <color name="colorAccentBlueGray">#455A64</color>
     <color name="colorAccentTeal">#00796B</color>
-    <color name="colorAccentLime">#AFB42B</color>
 </resources>

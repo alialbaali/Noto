@@ -2,8 +2,8 @@
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@color/colorBackground</item>
-        <item name="android:statusBarColor">@color/colorBackground</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
+        <item name="android:statusBarColor">@color/colorSurface</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
         <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
@@ -11,8 +11,6 @@
         <item name="android:colorControlHighlight">@color/colorPrimary</item>
         <item name="android:colorControlNormal">@color/colorPrimary</item>
         <item name="android:textColorHighlight">@color/colorOnPrimary</item>
-        <item name="android:fontFamily">@font/roboto</item>
-        <item name="fontFamily">@font/roboto</item>
         <item name="android:textColorHint">@color/colorOnPrimary</item>
         <item name="hintTextColor">@color/colorOnPrimary</item>
     </style>
@@ -25,7 +23,6 @@
 
     <!-- Collapsing Toolbar -->
     <style name="Style.CollapsingToolbar" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
-        <item name="android:background">@drawable/shape_collapsing_toolbar</item>
         <item name="contentScrim">@color/colorSurface</item>
         <item name="layout_scrollFlags">scroll|snap|exitUntilCollapsed</item>
         <item name="expandedTitleTextAppearance">@style/CollapsingToolbar.ExpandedTitle</item>
@@ -43,8 +40,8 @@
     </style>
 
     <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="titleTextColor">@color/colorSecondary</item>
-        <item name="android:backgroundTint">@color/colorSurface</item>
+        <!--        <item name="titleTextColor">@color/colorSecondary</item>-->
+        <!--        <item name="android:backgroundTint">@color/colorSurface</item>-->
         <item name="popupTheme">@style/PopupMenu.Overflow</item>
     </style>
 
@@ -107,16 +104,52 @@
         <item name="tint">@color/colorBackground</item>
     </style>
 
-    <style name="TextView.Item.Primary" parent="Widget.MaterialComponents.TextView">
+    <style name="TextView.LibraryTitle" parent="Widget.MaterialComponents.TextView">
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="TextView.Item.Secondary" parent="Widget.MaterialComponents.TextView">
+    <style name="TextView.LibraryNotoCount" parent="Widget.MaterialComponents.TextView">
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
         <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextInputLayout.NotoTitle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxBackgroundMode">none</item>
+        <item name="hintEnabled">true</item>
+        <item name="hintAnimationEnabled">true</item>
+    </style>
+
+    <style name="EditText.NotoTitle" parent="Widget.AppCompat.EditText">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColorHint">@color/colorOnSecondary</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="EditText.NotoBody" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+
+    <style name="TextView.NotoTitle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorSecondary</item>
+    </style>
+
+    <style name="TextView.NotoBody" parent="Widget.MaterialComponents.TextView">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 
 </resources>
