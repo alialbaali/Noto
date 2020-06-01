@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.noto.viewModel.LibraryListViewModel" />
+            type="com.noto.library.LibraryListViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -29,7 +29,8 @@
             android:id="@+id/abl"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/colorBackground">
+            android:background="@drawable/shape_fragment_library"
+            android:backgroundTint="@color/colorSurface">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/ctb"
@@ -38,7 +39,8 @@
                 android:layout_height="match_parent"
                 app:expandedTitleGravity="center"
                 app:expandedTitleMargin="@dimen/spacing_normal"
-                app:title="@string/libraries">
+                app:title="@string/libraries"
+                app:titleEnabled="true">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/tb"
@@ -46,7 +48,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:menu="@menu/menu_library_list" />
+                    app:menu="@menu/menu_library_list"
+                    app:popupTheme="@style/PopupMenu.Overflow">
+
+                    <!--                    <ImageView-->
+                    <!--                        android:id="@+id/img"-->
+                    <!--                        android:src="@drawable/ic_round_person_outline_24"-->
+                    <!--                        android:layout_width="36dp"-->
+                    <!--                        android:layout_height="36dp"-->
+                    <!--                        android:contentDescription="@string/profile" />-->
+
+                </androidx.appcompat.widget.Toolbar>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>

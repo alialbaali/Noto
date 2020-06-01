@@ -42,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/shape_fragment_library"
+                android:backgroundTint="@color/colorAccentBlueGray"
                 android:elevation="@dimen/elevation_small"
                 app:expandedTitleGravity="center_vertical"
                 app:titleEnabled="false"
@@ -51,8 +52,6 @@
                     android:id="@+id/cl"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/shape_fragment_library"
-                    android:backgroundTint="@color/colorAccentBlueGray"
                     app:layout_collapseMode="parallax">
 
                     <TextView
@@ -71,8 +70,7 @@
                         app:layout_constraintBottom_toTopOf="@id/tv_library_noto_count"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        tools:text="Daily Thoughts"
-                        tools:targetApi="o" />
+                        tools:text="Daily Thoughts" />
 
                     <TextView
                         android:id="@+id/tv_library_noto_count"
@@ -99,8 +97,8 @@
                         android:layout_marginBottom="@dimen/spacing_normal"
                         android:fontFamily="@font/roboto_light"
                         android:maxLines="1"
-                        android:textAlignment="center"
                         android:singleLine="true"
+                        android:textAlignment="center"
                         android:textColor="@color/colorOnPrimary"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"

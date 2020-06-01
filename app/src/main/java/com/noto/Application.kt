@@ -2,7 +2,9 @@ package com.noto
 
 import android.app.Application
 import android.content.Context
+import com.alialbaali.noto.di.*
 import com.noto.di.appModule
+import net.danlew.android.joda.JodaTimeAndroid
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -16,15 +18,20 @@ class Application : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
+        JodaTimeAndroid.init(this)
 
         startKoin {
             androidLogger()
             androidContext(this@Application)
             modules(
                 appModule,
-                module {
-                    single { androidContext().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE) }
-                }
+                repositoryModule,
+                labelUseCasesModule,
+                libraryUseCasesModule,
+                notoUseCasesModule,
+                labelUseCasesModule,
+                remoteDataSourceModule,
+                localDataSourceModule
             )
         }
     }

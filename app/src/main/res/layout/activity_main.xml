@@ -53,35 +53,35 @@
         <!--                    app:layout_constraintStart_toStartOf="parent"-->
         <!--                    app:menu="@menu/menu_bnv" />-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            style="@style/FAB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_normal"
-            android:src="@drawable/ic_add_24dp"
-            app:borderWidth="0dp"
-            app:elevation="@dimen/elevation_normal"
-            app:layout_constraintBottom_toBottomOf="@id/bnv"
-            app:layout_constraintEnd_toEndOf="@id/bnv"
-            app:layout_constraintStart_toStartOf="@id/bnv" />
+<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--            android:id="@+id/fab"-->
+<!--            style="@style/FAB"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="@dimen/spacing_normal"-->
+<!--            android:src="@drawable/ic_add_24dp"-->
+<!--            app:borderWidth="0dp"-->
+<!--            app:elevation="@dimen/elevation_normal"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/bnv"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/bnv"-->
+<!--            app:layout_constraintStart_toStartOf="@id/bnv" />-->
 
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bnv"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_normal"
-            android:background="@drawable/shape_dialog_rg"
-            app:backgroundTint="@color/colorBackground"
-            app:elevation="@dimen/elevation_small"
-            app:itemIconTint="@color/color_ic_bnv"
-            app:itemRippleColor="@color/colorOnPrimary"
-            app:itemTextColor="@color/color_ic_bnv"
-            app:layout_constraintBottom_toBottomOf="@id/cl"
-            app:layout_constraintLeft_toLeftOf="@id/cl"
-            app:layout_constraintRight_toRightOf="@id/cl"
-            app:menu="@menu/menu_bnv" />
+<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:id="@+id/bnv"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_margin="@dimen/spacing_normal"-->
+<!--            android:background="@drawable/shape_dialog_rg"-->
+<!--            app:backgroundTint="@color/colorBackground"-->
+<!--            app:elevation="@dimen/elevation_small"-->
+<!--            app:itemIconTint="@color/color_ic_bnv"-->
+<!--            app:itemRippleColor="@color/colorOnPrimary"-->
+<!--            app:itemTextColor="@color/color_ic_bnv"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/cl"-->
+<!--            app:layout_constraintLeft_toLeftOf="@id/cl"-->
+<!--            app:layout_constraintRight_toRightOf="@id/cl"-->
+<!--            app:menu="@menu/menu_bnv" />-->
 
         <fragment
             android:id="@+id/nav_host_fragment"

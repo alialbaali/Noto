@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_dialog">
+
+        <TextView
+            android:id="@+id/tv_sort_by"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_normal"
+            android:text="@string/sort_by"
+            android:textColor="@color/colorOnPrimary"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/rg_sort_library"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/rg_sort_library"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_sort_by">
+
+            <RadioButton
+                android:id="@+id/creation_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/ic_sort_creation_date"
+                android:buttonTint="@drawable/selector_sort_method"
+                android:checked="false"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/creation_date"
+                android:textColor="@drawable/selector_sort_method"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/alphabetically"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/ic_sort_alphabetically"
+                android:buttonTint="@drawable/selector_sort_method"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/alphabetically"
+                android:textColor="@drawable/selector_sort_method"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/custom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@drawable/ic_sort"
+                android:buttonTint="@drawable/selector_sort_method"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/custom"
+                android:textColor="@drawable/selector_sort_method"
+                android:textSize="20sp" />
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

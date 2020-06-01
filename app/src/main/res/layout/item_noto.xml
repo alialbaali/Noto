@@ -22,20 +22,20 @@
         android:layout_margin="@dimen/spacing_small"
         android:background="@drawable/shape_item_noto">
 
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/cb_noto_star"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginEnd="@dimen/spacing_normal"
-            android:background="@drawable/selector_star"
-            android:button="@null"
-            android:checked="@={noto.notoIsStarred}"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintBottom_toTopOf="@+id/tv_noto_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <com.google.android.material.checkbox.MaterialCheckBox-->
+<!--            android:id="@+id/cb_noto_star"-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:layout_marginTop="@dimen/spacing_normal"-->
+<!--            android:layout_marginEnd="@dimen/spacing_normal"-->
+<!--            android:background="@drawable/selector_star"-->
+<!--            android:button="@null"-->
+<!--            android:checked="@={noto.notoIsStarred}"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/tv_noto_title"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
         <!--            android:onClick="@{() -> viewModel.updateNoto(noto)}"-->
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_extra_small"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_extra_small"
             android:padding="@dimen/spacing_extra_small"
@@ -52,7 +52,7 @@
             app:layout_constraintBottom_toTopOf="@id/tv_noto_body"
             app:layout_constraintEnd_toEndOf="@id/cl"
             app:layout_constraintStart_toStartOf="@id/cl"
-            app:layout_constraintTop_toBottomOf="@id/cb_noto_star"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Lorem Ipsum is simply dummy text of thess printing and typesetting industry." />
 
         <TextView

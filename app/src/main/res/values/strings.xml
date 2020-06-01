@@ -19,7 +19,7 @@
     <string name="new_notebook_empty_error">Notebook title can not be empty!</string>
     <string name="new_notebook_max_length_error">Notebook title can not be more than 20 characters!</string>
     <string name="change_style">Change Style</string>
-    <string name="delete_note">Delete note</string>
+    <string name="delete_note">Delete noto</string>
     <string name="empty_notebook">Oops there are no notes! Try to create some</string>
     <string name="empty_todolist">Oops there are no todos! Try to create some</string>
     <string name="delete_notebook">Delete notebook</string>
@@ -46,7 +46,8 @@
     <string name="alphabetically">Alphabetically</string>
     <string name="custom">Custom</string>
     <string name="sort_by">Sort by</string>
-    <string name="sort">Sort</string>
+    <string name="sort_notos">Sort Notos</string>
+    <string name="sort_libraries">Sort Libraries</string>
     <string name="more">more</string>
     <string name="icon">Icon</string>
     <string name="choose_an_icon">Choose an icon</string>
@@ -65,5 +66,7 @@
     <string name="there_are_no_libraries">There are no libraries!</string>
     <string name="there_are_no_labels">There are no labels!</string>
     <string name="schedule">Schedule</string>
+    <string name="profile">Profile</string>
+    <string name="reminder">Reminder</string>
 
 </resources>
