@@ -54,6 +54,7 @@
     <string name="home">Home</string>
     <string name="notos">Notos</string>
     <string name="libraries">Libraries</string>
+    <string name="library">Library</string>
     <string name="add_label">Add label</string>
     <string name="labels">Labels</string>
     <string name="create_label">Create label</string>

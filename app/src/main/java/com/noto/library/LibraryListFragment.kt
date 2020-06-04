@@ -1,13 +1,10 @@
 package com.noto.library
 
-import android.content.Context
-import android.inputmethodservice.InputMethodService
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -44,20 +41,24 @@ class LibraryListFragment : Fragment(), LibraryItemClickListener {
     ): View? {
         requireActivity().window?.statusBarColor = resources.getColor(R.color.colorSurface)
 
-        binding.tb.setOnMenuItemClickListener {
+//        binding.tb.setOnMenuItemClickListener {
+//
+//            when (it.itemId) {
+//
+//                R.id.create_library -> {
+//                    LibraryDialog(requireContext(), viewModel)
+//                }
+//
+////                R.id.sort -> LibrarySortDialog(requireContext(), viewModel)
+//
+////                R.id.labels -> this.findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLabelListFragment())
+//            }
+//
+//            true
+//        }
 
-            when (it.itemId) {
-
-                R.id.create_library -> {
-                    LibraryDialog(requireContext(), viewModel)
-                }
-
-//                R.id.sort -> LibrarySortDialog(requireContext(), viewModel)
-
-//                R.id.labels -> this.findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLabelListFragment())
-            }
-
-            true
+        binding.fabLibrary.setOnClickListener {
+            LibraryDialog(requireContext(), viewModel)
         }
 
         with(binding.rv) {

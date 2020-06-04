@@ -48,7 +48,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:menu="@menu/menu_library_list"
                     app:popupTheme="@style/PopupMenu.Overflow">
 
                     <!--                    <ImageView-->
@@ -62,5 +61,18 @@
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab_library"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/spacing_normal"
+            android:text="@string/library"
+            android:textColor="@color/colorBackground"
+            app:backgroundTint="@color/colorPrimary"
+            app:icon="@drawable/ic_add_24dp"
+            app:iconTint="@color/colorBackground" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

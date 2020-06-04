@@ -152,4 +152,19 @@
         <item name="android:textColor">@color/colorOnSecondary</item>
     </style>
 
+    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:statusBarColor">@color/colorBackground</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:navigationBarColor">@color/colorBackground</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:colorControlActivated">@color/colorPrimary</item>
+        <item name="android:colorControlHighlight">@color/colorPrimary</item>
+        <item name="android:colorControlNormal">@color/colorPrimary</item>
+        <item name="android:textColorHighlight">@color/colorOnPrimary</item>
+        <item name="android:textColorHint">@color/colorOnPrimary</item>
+        <item name="hintTextColor">@color/colorOnPrimary</item>
+    </style>
+
 </resources>
