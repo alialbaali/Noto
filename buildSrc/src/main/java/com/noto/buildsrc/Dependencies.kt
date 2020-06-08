@@ -120,7 +120,7 @@ object Modules {
 
 object App {
     const val APP_ID = "com.alialbaali.noto"
-    const val APP_VERSION_NAME = "0.1.0"
+    const val APP_VERSION_NAME = "0.2.0"
     const val APP_NAME = "Noto"
     const val APP_VERSION_CODE = 6
     const val MIN_SDK = 21
