@@ -167,4 +167,48 @@
         <item name="hintTextColor">@color/colorOnPrimary</item>
     </style>
 
+    <style name="Style.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="hintEnabled">true</item>
+        <item name="hintAnimationEnabled">true</item>
+        <item name="boxBackgroundColor">@color/colorBackground</item>
+        <item name="endIconTint">@color/colorOnSecondary</item>
+        <item name="helperTextTextColor">@color/colorOnSecondary</item>
+        <item name="counterTextColor">@color/colorOnSecondary</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeColor">@color/colorPrimary</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+        <item name="hintTextColor">@color/colorOnPrimary</item>
+        <item name="android:textColorHint">@color/colorOnSecondary</item>
+    </style>
+
+    <style name="TextAppearance.TextInputEditText" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="singleLine">true</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="TextAppearance.Toolbar.Text" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="Style.Sign.Button" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="rippleColor">@android:color/transparent</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_dimen</item>
+    </style>
+
+    <style name="Style.Button" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">@dimen/btn_text_dimen</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textColor">@color/colorBackground</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+    </style>
+
+
 </resources>
