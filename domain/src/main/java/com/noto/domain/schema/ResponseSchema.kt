@@ -1,7 +1,9 @@
 package com.noto.domain.schema
 
-data class ResponseSchema(
+data class ResponseSchema<T>(
     val success: Boolean,
-    val error: String?,
-    val data: Any?
+
+    val error: String? = null,
+
+    val data: T? = null
 )
