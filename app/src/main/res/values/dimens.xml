@@ -7,6 +7,7 @@
     <dimen name="spacing_normal">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_extra_large">36dp</dimen>
+    <dimen name="text_dimen">14sp</dimen>
 
     <!-- Elevation -->
     <dimen name="elevation_no">0dp</dimen>
@@ -18,5 +19,10 @@
 
     <dimen name="shape_corner">16dp</dimen>
     <dimen name="abl">200dp</dimen>
+    <dimen name="tb_tv_dimen">26sp</dimen>
+    <dimen name="tiet_text_dimen">18sp</dimen>
+    <dimen name="btn_text_dimen">20sp</dimen>
+    <dimen name="tv_dimen">18sp</dimen>
+    <dimen name="sign_in_tv_dimen">32sp</dimen>
 
 </resources>

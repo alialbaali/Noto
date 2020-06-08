@@ -69,5 +69,10 @@
     <string name="schedule">Schedule</string>
     <string name="profile">Profile</string>
     <string name="reminder">Reminder</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="name">Name</string>
+    <string name="sign_up">Sign up</string>
 
 </resources>

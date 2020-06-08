@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/libraryListFragment">
+    android:label="SignInGraph"
+    app:startDestination="@id/sign">
     <fragment
         android:id="@+id/libraryListFragment"
         android:name="com.noto.library.LibraryListFragment"
@@ -70,4 +71,35 @@
         android:id="@+id/notoNewFragment"
         android:name="com.noto.noto.NotoNewFragment"
         android:label="NotoNewFragment" />
+    <navigation
+        android:id="@+id/sign"
+        app:startDestination="@id/signInFragment">
+        <fragment
+            android:id="@+id/signInFragment"
+            android:name="com.noto.sign.SignInFragment"
+            android:label="SignInFragment" >
+            <action
+                android:id="@+id/action_signInFragment_to_signUpFragment"
+                app:destination="@id/signUpFragment"
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out"
+                app:popEnterAnim="@android:anim/fade_in"
+                app:popExitAnim="@android:anim/fade_out" />
+        </fragment>
+        <action
+            android:id="@+id/action_global_libraryListFragment"
+            app:destination="@id/libraryListFragment" />
+        <fragment
+            android:id="@+id/signUpFragment"
+            android:name="com.noto.sign.SignUpFragment"
+            android:label="SignUpFragment" >
+            <action
+                android:id="@+id/action_signUpFragment_to_signInFragment"
+                app:destination="@id/signInFragment"
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out"
+                app:popEnterAnim="@android:anim/fade_in"
+                app:popExitAnim="@android:anim/fade_out" />
+        </fragment>
+    </navigation>
 </navigation>

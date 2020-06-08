@@ -1,12 +1,18 @@
 package com.noto.util
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.view.View
+import android.widget.Toast
 import androidx.core.content.edit
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputLayout
 import com.noto.R
 import com.noto.domain.model.*
 
@@ -20,8 +26,22 @@ import com.noto.domain.model.*
 //    this.setTextColor(resources.getColor(R.color.colorOnPrimary_900, null))
 //}
 
+fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
+
+fun View.snackbar(message: String) {
+    Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
+        animationMode = Snackbar.ANIMATION_MODE_SLIDE
+        setBackgroundTint(resources.getColor(R.color.colorPrimary))
+        setTextColor(resources.getColor(R.color.colorBackground))
+    }.show()
+}
+
+fun Context.toast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+}
+
 fun NotoColor.getValue(): Int {
-    return when(this){
+    return when (this) {
         NotoColor.BLUE -> R.color.colorAccentBlue
         NotoColor.GRAY -> R.color.colorAccentGray
         NotoColor.PINK -> R.color.colorAccentPink
@@ -37,8 +57,8 @@ fun NotoColor.getValue(): Int {
     }
 }
 
-fun NotoIcon.getValue(): Int{
-    return when(this){
+fun NotoIcon.getValue(): Int {
+    return when (this) {
         NotoIcon.NOTEBOOK -> R.drawable.ic_notebook_24dp
         NotoIcon.LIST -> R.drawable.ic_list_24dp
         NotoIcon.FITNESS -> R.drawable.ic_fitness_24dp
