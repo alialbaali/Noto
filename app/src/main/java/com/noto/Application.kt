@@ -25,12 +25,12 @@ class Application : Application() {
             androidContext(this@Application)
             modules(
                 appModule,
+                remoteDataSourceModule,
                 repositoryModule,
-                labelUseCasesModule,
                 libraryUseCasesModule,
                 notoUseCasesModule,
+                userUseCasesModule,
                 labelUseCasesModule,
-                remoteDataSourceModule,
                 localDataSourceModule
             )
         }

@@ -6,6 +6,7 @@ import com.noto.label.LabelListViewModel
 import com.noto.library.LibraryListViewModel
 import com.noto.library.LibraryViewModel
 import com.noto.noto.NotoViewModel
+import com.noto.sign.SignSharedViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -19,6 +20,8 @@ val appModule = module {
     viewModel { NotoViewModel(get(), get(), get()) }
 
     viewModel { LabelListViewModel(get()) }
+
+    viewModel { SignSharedViewModel(get()) }
 
     single { androidContext().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE) }
 }

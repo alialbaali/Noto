@@ -39,7 +39,6 @@ android {
 
 dependencies {
     api(project(com.noto.buildsrc.Modules.DATA))
-    api(Libraries.RETROFIT)
     api(Libraries.OKHTTP_LOGGER)
     api(Libraries.RETROFIT_MOSHI_CONVERTER)
 }

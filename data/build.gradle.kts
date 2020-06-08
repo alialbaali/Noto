@@ -41,5 +41,6 @@ android {
 
 dependencies {
     api(Libraries.CORE)
+    api(Libraries.RETROFIT)
     api(project(Modules.DOMAIN))
 }
