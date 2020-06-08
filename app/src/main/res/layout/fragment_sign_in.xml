@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.noto.sign.SignSharedViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/cool"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_anchor="@+id/cl"
+            app:layout_anchorGravity="center"
+            tools:context=".app.login.SignInFragment">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_app_name"
+                style="@style/TextAppearance.Toolbar.Text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="36sp"
+                app:fontFamily="@font/roboto_medium"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_email"
+                style="@style/Style.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:hint="@string/email"
+                app:endIconMode="clear_text"
+                app:layout_constraintBottom_toTopOf="@+id/til_password"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_app_name"
+                app:layout_constraintVertical_chainStyle="packed">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email"
+                    style="@style/TextAppearance.TextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:text="@={viewModel.user.userEmail}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_password"
+                style="@style/Style.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/password"
+                app:endIconMode="password_toggle"
+                app:layout_constraintBottom_toTopOf="@+id/tv_forgot_password"
+                app:layout_constraintEnd_toStartOf="@+id/end_guideline"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/til_email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
+                    style="@style/TextAppearance.TextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword"
+                    android:text="@={viewModel.user.userPassword}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:fontFamily="@font/roboto"
+                android:text="Forgot password ?"
+                android:textColor="@color/colorPrimary"
+                android:textColorLink="@color/colorPrimary"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@id/btn_sign_in"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintTop_toBottomOf="@id/til_password" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_sign_in"
+                style="@style/Style.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/sign_in"
+                app:layout_constraintBottom_toTopOf="@id/tv_sign_up"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/tv_forgot_password" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv_sign_up"
+                style="@style/Style.Sign.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="Don't have account? Sign up"
+                app:layout_constraintBottom_toTopOf="@+id/tv_skip"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@id/start_guideline"
+                app:layout_constraintTop_toBottomOf="@id/btn_sign_in" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/tv_skip"
+                style="@style/Style.Sign.Button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:text="Skip"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/end_guideline"
+                app:layout_constraintStart_toStartOf="@id/start_guideline" />
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/start_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/spacing_normal" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/end_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/spacing_normal" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
