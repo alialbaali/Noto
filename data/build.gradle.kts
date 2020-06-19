@@ -40,6 +40,5 @@ android {
 }
 
 dependencies {
-    api(Libraries.CORE)
     api(project(Modules.DOMAIN))
 }

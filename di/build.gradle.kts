@@ -38,9 +38,8 @@ android {
 }
 
 dependencies {
-    implementation (project(com.noto.buildsrc.Modules.LOCAL))
-    implementation (project(com.noto.buildsrc.Modules.REMOTE))
-    implementation (project(com.noto.buildsrc.Modules.DATA))
-    implementation (project(com.noto.buildsrc.Modules.DOMAIN))
-    api(Libraries.KOIN)
+    implementation (project(Modules.LOCAL))
+    implementation (project(Modules.REMOTE))
+    implementation (project(Modules.DATA))
+    api(Libraries.Main.KOIN)
 }

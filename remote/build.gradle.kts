@@ -1,4 +1,6 @@
+import com.noto.buildsrc.App
 import com.noto.buildsrc.Libraries
+import com.noto.buildsrc.Modules
 
 plugins {
     val plugins = com.noto.buildsrc.Plugins
@@ -8,13 +10,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion(com.noto.buildsrc.App.COMPILE_SDK)
-    buildToolsVersion(com.noto.buildsrc.App.BUILD_TOOLS)
+    compileSdkVersion(App.COMPILE_SDK)
+    buildToolsVersion(App.BUILD_TOOLS)
     defaultConfig {
-        minSdkVersion(com.noto.buildsrc.App.MIN_SDK)
-        targetSdkVersion(com.noto.buildsrc.App.TARGET_SDK)
-        versionCode = com.noto.buildsrc.App.APP_VERSION_CODE
-        versionName = com.noto.buildsrc.App.APP_VERSION_NAME
+        minSdkVersion(App.MIN_SDK)
+        targetSdkVersion(App.TARGET_SDK)
+        versionCode = App.APP_VERSION_CODE
+        versionName = App.APP_VERSION_NAME
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -38,9 +40,9 @@ android {
 }
 
 dependencies {
-    api(project(com.noto.buildsrc.Modules.DATA))
-    api(Libraries.KTOR)
-    api(Libraries.JACKSON)
-    api(Libraries.JSON)
-    api(Libraries.LOGGER)
+    implementation(project(Modules.DATA))
+    api(Libraries.Remote.KTOR)
+    api(Libraries.Remote.JACKSON)
+    api(Libraries.Remote.JSON)
+    api(Libraries.Remote.LOGGER)
 }

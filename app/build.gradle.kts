@@ -46,43 +46,41 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     packagingOptions {
-        exclude("META-INF/DEPENDENCIES")
-        exclude("META-INF/LICENSE")
-        exclude("META-INF/LICENSE.txt")
-        exclude("META-INF/license.txt")
-        exclude("META-INF/NOTICE")
-        exclude("META-INF/NOTICE.txt")
-        exclude("META-INF/notice.txt")
-        exclude("META-INF/ASL2.0")
-        exclude("META-INF/INDEX.LIST")
-        exclude("META-INF/metadata.jvm.kotlin_module")
-        exclude("META-INF/metadata.kotlin_module")
-        exclude("com.google.guava")
+        exclude("META-INF/kotlinx-coroutines-core.kotlin_module")
     }
 }
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+
     implementation(project(Modules.DOMAIN))
+
+    // DI
     implementation(project(Modules.DI))
-    implementation(Libraries.NAVIGATION)
-    implementation(Libraries.NAVIGATION_FRAGMENT)
-    implementation(Libraries.CONSTRAINT_LAYOUT)
-    implementation(Libraries.APP_COMPAT)
-    implementation(Libraries.COORDINATOR_LAYOUT)
-    implementation(Libraries.COROUTINES)
-    implementation(Libraries.COROUTINES_ANDROID)
-    implementation(Libraries.LIFE_CYCLE)
-    implementation(Libraries.VIEW_MODEL)
-    implementation(Libraries.VIEW_MODEL_STATE)
-    implementation(Libraries.RECYCLER_VIEW)
-    implementation(Libraries.LIVE_DATA)
-    implementation(Libraries.SUPPORT)
-    implementation(Libraries.MATERIAL_DESIGN)
-    implementation(Libraries.PROGRESS_BUTTON)
-    implementation(Libraries.GLIDE)
-    implementation(Libraries.WORK_MANAGER)
-    kapt(Libraries.GLIDE_COMPILER)
-    kapt(Libraries.DATA_BINDING_COMPILER)
-    implementation("com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava")
+
+    // Main
+    implementation(Libraries.Main.NAVIGATION)
+    implementation(Libraries.Main.NAVIGATION_FRAGMENT)
+    implementation(Libraries.Main.CONSTRAINT_LAYOUT)
+    implementation(Libraries.Main.APP_COMPAT)
+    implementation(Libraries.Main.COORDINATOR_LAYOUT)
+    implementation(Libraries.Main.LIFE_CYCLE)
+    implementation(Libraries.Main.VIEW_MODEL)
+    implementation(Libraries.Main.VIEW_MODEL_STATE)
+    implementation(Libraries.Main.RECYCLER_VIEW)
+    implementation(Libraries.Main.LIVE_DATA)
+    implementation(Libraries.Main.SUPPORT)
+    implementation(Libraries.Main.MATERIAL_DESIGN)
+    implementation(Libraries.Main.WORK_MANAGER)
+    implementation(Libraries.Main.CORE)
+    kapt(Libraries.Main.DATA_BINDING_COMPILER)
+
+    // Coroutines
+    implementation(Libraries.Main.COROUTINES)
+    implementation(Libraries.Main.COROUTINES_ANDROID)
+
+    // Test
+    testImplementation(Libraries.Test.JUNIT)
+    androidTestImplementation(Libraries.Test.ANDROID_ESPRESSO)
+    androidTestImplementation(Libraries.Test.ANDROID_JUNIT)
 }

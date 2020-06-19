@@ -6,10 +6,10 @@ plugins {
 }
 
 dependencies {
-    api(kotlin(Libraries.KOTLIN))
-    api(Libraries.ROOM)
-    api(Libraries.JODA_TIME)
-    api(Libraries.TIMBER)
+    api(kotlin(Libraries.Main.KOTLIN))
+    api(Libraries.Main.JODA_TIME)
+    api(Libraries.Main.TIMBER)
+    api(Libraries.Local.ROOM)
 }
 
 java {

@@ -41,7 +41,8 @@ android {
 }
 
 dependencies {
-    api(project(Modules.DATA))
-    implementation(Libraries.ROOM_RUNTIME)
-    kapt(Libraries.ROOM_COMPILER)
+    implementation(project(Modules.DATA))
+    api(Libraries.Main.CORE)
+    api(Libraries.Local.ROOM_RUNTIME)
+    kapt(Libraries.Local.ROOM_COMPILER)
 }

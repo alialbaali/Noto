@@ -4,9 +4,9 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath(com.noto.buildsrc.Libraries.GRADLE)
-        classpath(com.noto.buildsrc.Libraries.KOTLIN_GRADLE)
-        classpath(com.noto.buildsrc.Libraries.NAVIGATION_SAFE_ARGS)
+        classpath(com.noto.buildsrc.Libraries.Gradle.KOTLIN)
+        classpath(com.noto.buildsrc.Libraries.Gradle.ANDROID)
+        classpath(com.noto.buildsrc.Libraries.Gradle.NAVIGATION)
     }
 }
 
