@@ -5,10 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.noto.domain.model.Label
-import com.noto.domain.model.Library
-import com.noto.domain.model.Noto
-import com.noto.domain.model.NotoLabel
+import com.noto.domain.model.*
 
 private const val NOTO_DATABASE = "Noto Database"
 
@@ -17,16 +14,18 @@ private const val NOTO_DATABASE = "Noto Database"
     NotoIconConverter::class,
     SortTypeConverter::class,
     SortMethodConverter::class,
-    DateConverter::class
+    DateConverter::class,
+    StatusConverter::class,
+    TypeConverter::class
 )
-@Database(entities = [Noto::class, Library::class, Label::class, NotoLabel::class], version = 1, exportSchema = false)
+@Database(entities = [Noto::class, Library::class, EntityStatus::class], version = 1, exportSchema = false)
 abstract class NotoDatabase : RoomDatabase() {
-
-    abstract val labelDao: LabelDao
 
     abstract val notoDao: NotoDao
 
     abstract val libraryDao: LibraryDao
+
+    abstract val entityStatusDao: EntityStatusDao
 
     companion object {
 

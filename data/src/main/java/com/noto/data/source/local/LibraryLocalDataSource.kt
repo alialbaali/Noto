@@ -1,9 +1,10 @@
-package com.alialbaali.noto.data.source.local
+package com.noto.data.source.local
 
 import com.noto.domain.model.Library
 import kotlinx.coroutines.flow.Flow
 
 interface LibraryLocalDataSource {
+
     fun getLibraries(): Flow<List<Library>>
 
     suspend fun createLibrary(library: Library)
@@ -17,4 +18,6 @@ interface LibraryLocalDataSource {
     suspend fun updateLibraries(libraries: List<Library>)
 
     suspend fun updateLibrary(library: Library)
+
+    suspend fun createLibrary(libraries: List<Library>)
 }

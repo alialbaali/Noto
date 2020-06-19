@@ -1,7 +1,5 @@
-package com.alialbaali.noto.data.repository.util
+package com.noto.data.repository.util
 
-import org.json.JSONObject
-import retrofit2.HttpException
 import java.net.ConnectException
 import java.net.UnknownHostException
 
@@ -12,14 +10,15 @@ internal inline fun <R> tryCatching(block: () -> (R)): Result<R> {
     return try {
         Result.success(block())
     } catch (e: Throwable) {
+        println(e.printStackTrace())
         when (e) {
             is UnknownHostException -> Result.failure(Throwable(NETWORK_ERROR))
             is ConnectException -> Result.failure(Throwable(NETWORK_ERROR))
-            is HttpException -> {
-                val errorBody = e.response()?.errorBody()?.string() ?: return Result.failure(Throwable(UNKNOWN_ERROR))
-                val error = JSONObject(errorBody).get("error") as String?
-                Result.failure(Throwable(error))
-            }
+//            is HttpException -> {
+//                val errorBody = e.response()?.errorBody()?.string() ?: return Result.failure(Throwable(UNKNOWN_ERROR))
+//                val error = JSONObject(errorBody).get("error") as String?
+//                Result.failure(Throwable(error))
+//            }
             else -> Result.failure(Throwable(e.message))
         }
     }

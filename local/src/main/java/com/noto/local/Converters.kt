@@ -1,10 +1,7 @@
 package com.noto.local
 
 import androidx.room.TypeConverter
-import com.noto.domain.model.NotoColor
-import com.noto.domain.model.NotoIcon
-import com.noto.domain.model.SortMethod
-import com.noto.domain.model.SortType
+import com.noto.domain.model.*
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 
@@ -76,3 +73,25 @@ object NotoIconConverter {
 //    @JvmStatic
 //    fun toEnum(ordinal: Int): BlockType = BlockType.values().first { blockType -> blockType.ordinal == ordinal }
 //}
+
+object StatusConverter {
+
+    @TypeConverter
+    @JvmStatic
+    fun toOrdinal(status: Status): Int = status.ordinal
+
+    @TypeConverter
+    @JvmStatic
+    fun toEnum(ordinal: Int): Status = Status.values().first { status -> status.ordinal == ordinal }
+}
+
+object TypeConverter {
+
+    @TypeConverter
+    @JvmStatic
+    fun toOrdinal(type: Type): Int = type.ordinal
+
+    @TypeConverter
+    @JvmStatic
+    fun toEnum(ordinal: Int): Type = Type.values().first { type -> type.ordinal == ordinal }
+}

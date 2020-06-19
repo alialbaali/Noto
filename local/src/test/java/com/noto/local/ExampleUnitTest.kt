@@ -1,4 +1,4 @@
-package com.alialbaali.noto.data
+package com.noto.local
 
 import org.junit.Test
 

@@ -1,12 +1,12 @@
 package com.noto.local
 
 import androidx.room.*
-import com.alialbaali.noto.data.source.local.LibraryLocalDataSource
+import com.noto.data.source.local.LibraryLocalDataSource
 import com.noto.domain.model.Library
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface LibraryDao: LibraryLocalDataSource {
+interface LibraryDao : LibraryLocalDataSource {
 
     @Delete
     override suspend fun deleteLibrary(library: Library)
@@ -30,4 +30,6 @@ interface LibraryDao: LibraryLocalDataSource {
     @Update
     override suspend fun updateLibrary(library: Library)
 
+    @Insert
+    override suspend fun createLibrary(libraries: List<Library>)
 }
