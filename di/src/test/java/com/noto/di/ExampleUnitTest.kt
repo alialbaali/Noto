@@ -1,4 +1,4 @@
-package com.alialbaali.noto.di
+package com.noto.di
 
 import org.junit.Test
 
