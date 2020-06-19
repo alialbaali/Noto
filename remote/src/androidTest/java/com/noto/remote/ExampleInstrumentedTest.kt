@@ -1,4 +1,4 @@
-package com.alialbaali.noto.remote
+package com.noto.remote
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

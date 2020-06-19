@@ -1,4 +1,4 @@
-import com.noto.buildsrc.*
+import com.noto.buildsrc.Libraries
 
 plugins {
     val plugins = com.noto.buildsrc.Plugins
@@ -39,6 +39,8 @@ android {
 
 dependencies {
     api(project(com.noto.buildsrc.Modules.DATA))
-    api(Libraries.OKHTTP_LOGGER)
-    api(Libraries.RETROFIT_MOSHI_CONVERTER)
+    api(Libraries.KTOR)
+    api(Libraries.JACKSON)
+    api(Libraries.JSON)
+    api(Libraries.LOGGER)
 }

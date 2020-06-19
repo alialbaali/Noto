@@ -1,10 +1,13 @@
-package com.alialbaali.noto.data.source.remote
+package com.noto.data.source.remote
 
 import com.noto.domain.model.User
 import com.noto.domain.schema.ResponseSchema
 import com.noto.domain.schema.UserResponse
 
 interface UserRemoteDataSource {
+
+    val baseUrl: String
+        get() = "/user"
 
     suspend fun createUser(user: User): ResponseSchema<UserResponse>
 
