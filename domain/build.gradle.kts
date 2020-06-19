@@ -7,10 +7,8 @@ plugins {
 
 dependencies {
     api(kotlin(Libraries.KOTLIN))
-    testImplementation(Libraries.JUNIT)
     api(Libraries.ROOM)
     api(Libraries.JODA_TIME)
-    api(Libraries.MOSHI)
     api(Libraries.TIMBER)
 }
 
