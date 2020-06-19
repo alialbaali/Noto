@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface LibraryRepository {
 
+    val userToken: String
+
     suspend fun createLibrary(library: Library)
 
     suspend fun deleteLibrary(library: Library)
