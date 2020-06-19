@@ -49,3 +49,14 @@ enum class SortType {
     ASC,
     DESC
 }
+
+enum class Status {
+    CREATED,
+    UPDATED,
+    DELETED
+}
+
+enum class Type {
+    LIBRARY,
+    NOTO
+}

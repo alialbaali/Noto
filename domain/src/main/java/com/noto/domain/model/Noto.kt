@@ -26,7 +26,6 @@ data class Noto(
     @ColumnInfo(name = "noto_title")
     var notoTitle: String = "",
 
-
     @ColumnInfo(name = "noto_body")
     var notoBody: String = "",
 
