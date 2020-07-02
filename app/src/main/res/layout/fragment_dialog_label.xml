@@ -28,7 +28,7 @@
             app:startIconTint="@color/colorAccentGray">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/title"
+                android:id="@+id/et"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_normal"
-            android:padding="@dimen/spacing_small"
+            android:padding="@dimen/spacing_normal"
             android:text="@string/create_label"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@id/cl"
@@ -79,7 +79,7 @@
             android:layout_marginStart="@dimen/spacing_small"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_normal"
-            android:padding="@dimen/spacing_small"
+            android:padding="@dimen/spacing_normal"
             android:text="@string/done"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/cl"
@@ -93,7 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/spacing_small"
-            android:padding="@dimen/spacing_small"
+            android:padding="@dimen/spacing_normal"
             android:text="@string/delete_label"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
