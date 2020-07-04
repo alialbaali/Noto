@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
+import java.time.LocalDate
+import java.time.ZonedDateTime
 
 @Entity(tableName = "notos")
 data class Noto(
@@ -21,26 +21,30 @@ data class Noto(
         onDelete = ForeignKey.CASCADE
     )
     @ColumnInfo(name = "library_id")
-    var libraryId: Long,
+    val libraryId: Long,
 
     @ColumnInfo(name = "noto_title")
-    var notoTitle: String = "",
+    var notoTitle: String = String(),
 
     @ColumnInfo(name = "noto_body")
-    var notoBody: String = "",
+    var notoBody: String = String(),
 
     @ColumnInfo(name = "noto_position")
-    var notoPosition: Int,
+    val notoPosition: Int,
 
     @ColumnInfo(name = "noto_creation_date")
-    val notoCreationDate: DateTime = DateTime.now(DateTimeZone.getDefault()),
+    val notoCreationDate: LocalDate = LocalDate.now(),
 
     @ColumnInfo(name = "noto_is_starred")
-    var notoIsStarred: Boolean = false,
+    val notoIsStarred: Boolean = false,
 
-    @ColumnInfo(name = "noto_schedule")
-    val notoReminder: DateTime? = null,
+    @ColumnInfo(name = "noto_is_archived")
+    val notoIsArchived: Boolean = false,
+
+    @ColumnInfo(name = "noto_reminder")
+    val notoReminder: ZonedDateTime? = null,
 
     @ColumnInfo(name = "noto_is_completed")
     val notoIsCompleted: Boolean = false
+
 )
