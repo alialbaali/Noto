@@ -38,6 +38,9 @@ android {
     }
 
     compileOptions {
+
+        coreLibraryDesugaringEnabled = true
+
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -79,8 +82,8 @@ dependencies {
     implementation(Libraries.Main.COROUTINES)
     implementation(Libraries.Main.COROUTINES_ANDROID)
 
-    // Test
-    testImplementation(Libraries.Test.JUNIT)
-    androidTestImplementation(Libraries.Test.ANDROID_ESPRESSO)
-    androidTestImplementation(Libraries.Test.ANDROID_JUNIT)
+    implementation(project(Modules.LOCAL))
+    implementation(project(Modules.DATA))
+
+    coreLibraryDesugaring(Libraries.Main.JAVA_TIME)
 }

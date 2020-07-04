@@ -1,4 +1,5 @@
-import com.noto.buildsrc.*
+import com.noto.buildsrc.Libraries
+import com.noto.buildsrc.Modules
 
 plugins {
     val plugins = com.noto.buildsrc.Plugins
@@ -22,8 +23,8 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                    getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
             )
         }
     }
@@ -38,8 +39,7 @@ android {
 }
 
 dependencies {
-    implementation (project(Modules.LOCAL))
-    implementation (project(Modules.REMOTE))
-    implementation (project(Modules.DATA))
+    implementation(project(Modules.LOCAL))
+    implementation(project(Modules.DATA))
     api(Libraries.Main.KOIN)
 }
