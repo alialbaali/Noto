@@ -44,7 +44,11 @@ class ArchiveFragment : Fragment() {
             val rvAdapter = NotoListRVAdapter(viewModel, object : NotoItemClickListener {
 
                 override fun onClick(noto: Noto) {
+                    findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(noto.notoId))
+                }
 
+                override fun onLongClick(noto: Noto) {
+                    findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(noto.notoId))
                 }
 
             })
