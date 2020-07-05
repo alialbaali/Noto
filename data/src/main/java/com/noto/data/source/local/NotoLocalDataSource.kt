@@ -7,6 +7,10 @@ interface NotoLocalDataSource {
 
     fun getNotos(libraryId: Long): Flow<List<Noto>>
 
+    fun getArchivedNotos(): Flow<List<Noto>>
+
+    fun getAllNotos(): Flow<List<Noto>>
+
     fun getNotoById(notoId: Long): Flow<Noto>
 
     suspend fun createNoto(noto: Noto)

@@ -5,7 +5,9 @@ class NotoUseCases(
     val createNoto: CreateNoto,
     val updateNoto: UpdateNoto,
     val deleteNoto: DeleteNoto,
-    val getNoto: GetNoto,
+    val getNotoById: GetNoto,
     val getNotos: GetNotos,
+    val getAllNotos: GetAllNotos,
+    val getArchivedNotos: GetArchivedNotos,
     val countLibraryNotos: CountLibraryNotos
 )

@@ -45,4 +45,5 @@ dependencies {
     api(Libraries.Main.CORE)
     api(Libraries.Local.ROOM_RUNTIME)
     kapt(Libraries.Local.ROOM_COMPILER)
+    api ("com.github.tfcporciuncula:flow-preferences:1.2.0")
 }

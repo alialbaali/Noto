@@ -9,17 +9,16 @@
     <color name="colorSecondary">#1E1E1E</color>
     <color name="colorOnSecondary">#858585</color>
 
-    <color name="colorAccentGray">#E0E0E0</color>
-    <color name="colorAccentBlue">#BBDEFB</color>
-    <color name="colorAccentPink">#F48FB1</color>
-    <color name="colorAccentCyan">#80DEEA</color>
-    <color name="colorAccentPurple">#CE93D8</color>
-    <color name="colorAccentRed">#EF9A9A</color>
-    <color name="colorAccentYellow">#FFF59D</color>
-    <color name="colorAccentOrange">#FFCC80</color>
-    <color name="colorAccentGreen">#A5D6A7</color>
-    <color name="colorAccentBrown">#BCAAA4</color>
-    <color name="colorAccentBlueGray">#B0BEC5</color>
-    <color name="colorAccentTeal">#80CBC4</color>
-    <color name="colorAccentLime">#E6EE9C</color>
+    <color name="colorAccentGray">#616161</color>
+    <color name="colorAccentBlue">#1A237E</color>
+    <color name="colorAccentPink">#880E4F</color>
+    <color name="colorAccentCyan">#006064</color>
+    <color name="colorAccentPurple">#7B1FA2</color>
+    <color name="colorAccentRed">#D32F2F</color>
+    <color name="colorAccentYellow">#99751B</color>
+    <color name="colorAccentOrange">#AB5600</color>
+    <color name="colorAccentGreen">#388E3C</color>
+    <color name="colorAccentBrown">#5D4037</color>
+    <color name="colorAccentBlueGray">#455A64</color>
+    <color name="colorAccentTeal">#00796B</color>
 </resources>

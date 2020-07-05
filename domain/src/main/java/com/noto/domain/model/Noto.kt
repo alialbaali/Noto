@@ -39,7 +39,7 @@ data class Noto(
     val notoIsStarred: Boolean = false,
 
     @ColumnInfo(name = "noto_is_archived")
-    val notoIsArchived: Boolean = false,
+    var notoIsArchived: Boolean = false,
 
     @ColumnInfo(name = "noto_reminder")
     val notoReminder: ZonedDateTime? = null,
