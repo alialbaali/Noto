@@ -29,6 +29,64 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:listitem="@layout/item_noto" />
 
+        <LinearLayout
+            android:id="@+id/ll_place_holder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="vertical"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+            <ImageView
+                android:id="@+id/iv_place_holder"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:src="@drawable/ic_round_border_all_24"
+                android:tint="@color/colorPrimary"
+                tools:tint="@color/colorAccentTeal" />
+
+
+            <TextView
+                android:id="@+id/tv_place_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_extra_small"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center"
+                android:maxLines="3"
+                android:text="@string/all_notos"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                tools:textColor="@color/colorAccentTeal" />
+
+            <TextView
+                android:id="@+id/tv_desc_place_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_extra_small"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:fontFamily="@font/roboto_light"
+                android:gravity="center"
+                android:text="@string/empty_library"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                tools:textColor="@color/colorOnPrimary" />
+
+        </LinearLayout>
+
+
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/abl"
             android:layout_width="match_parent"
