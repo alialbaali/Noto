@@ -4,46 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     android:label="SignInGraph"
-    app:startDestination="@id/sign">
-    <fragment
-        android:id="@+id/libraryListFragment"
-        android:name="com.noto.library.LibraryListFragment"
-        android:label="LibraryListFragment"
-        tools:layout="@layout/fragment_list_library">
-        <action
-            android:id="@+id/action_libraryListFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@anim/fragment_close_enter"
-            app:popExitAnim="@anim/fragment_close_exit" />
-        <action
-            android:id="@+id/action_libraryListFragment_to_labelListFragment"
-            app:destination="@id/labelListFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/libraryFragment"
-        android:name="com.noto.library.LibraryFragment"
-        android:label="LibraryFragment"
-        tools:layout="@layout/fragment_library">
-        <argument
-            android:name="library_id"
-            android:defaultValue="0L"
-            app:argType="long" />
-        <argument
-            android:name="notoColor"
-            app:argType="com.noto.domain.model.NotoColor" />
-        <action
-            android:id="@+id/action_libraryFragment_to_notoFragment"
-            app:destination="@id/notoFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@anim/fragment_close_enter"
-            app:popExitAnim="@anim/fragment_close_exit" />
-        <action
-            android:id="@+id/action_libraryFragment_to_notoNewFragment"
-            app:destination="@id/notoNewFragment" />
-    </fragment>
+    app:startDestination="@id/libraryListFragment">
     <argument
         android:name="library_id"
         app:argType="long" />
@@ -51,55 +12,152 @@
         android:name="noto_id"
         app:argType="long" />
     <fragment
+        android:id="@+id/labelListFragment"
+        android:name="com.noto.label.LabelListFragment"
+        android:label="LabelListFragment"
+        tools:layout="@layout/fragment_list_label">
+        <action
+            android:id="@+id/action_labelListFragment_to_labelDialogFragment"
+            app:destination="@id/labelDialogFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_exit"
+            app:popExitAnim="@anim/nav_default_pop_enter_anim" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/labelDialogFragment"
+        android:name="com.noto.label.LabelDialogFragment"
+        android:label="LabelDialogFragment">
+        <argument
+            android:name="label_id"
+            android:defaultValue="0L"
+            app:argType="long" />
+    </dialog>
+    <fragment
+        android:id="@+id/libraryListFragment"
+        android:name="com.noto.library.LibraryListFragment"
+        android:label="LibraryListFragment">
+        <action
+            android:id="@+id/action_libraryListFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_libraryListFragment_to_libraryDialogFragment"
+            app:destination="@id/newLibraryDialogFragment" />
+        <action
+            android:id="@+id/action_libraryListFragment_to_archiveFragment"
+            app:destination="@id/archiveFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_libraryListFragment_to_themeDialogFragment"
+            app:destination="@id/themeDialogFragment" />
+        <action
+            android:id="@+id/action_libraryListFragment_to_labelListFragment"
+            app:destination="@id/labelListFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+    </fragment>
+    <fragment
+        android:id="@+id/libraryFragment"
+        android:name="com.noto.library.LibraryFragment"
+        android:label="LibraryFragment">
+        <action
+            android:id="@+id/action_libraryFragment_to_notoFragment"
+            app:destination="@id/notoFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+        <argument
+            android:name="library_id"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_libraryFragment_to_archiveFragment"
+            app:destination="@id/archiveFragment"
+            app:enterAnim="@anim/fragment_open_enter"
+            app:exitAnim="@anim/fragment_open_exit"
+            app:popEnterAnim="@anim/fragment_open_enter"
+            app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_libraryFragment_to_notoDialogFragment"
+            app:destination="@id/notoDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/newLibraryDialogFragment"
+        android:name="com.noto.library.NewLibraryDialogFragment"
+        android:label="NewLibraryDialogFragment" />
+    <fragment
         android:id="@+id/notoFragment"
         android:name="com.noto.noto.NotoFragment"
-        android:label="NotoFragment"
-        tools:layout="@layout/fragment_noto">
+        android:label="NotoFragment">
+        <argument
+            android:name="library_id"
+            app:argType="long" />
+        <argument
+            android:name="noto_id"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_notoFragment_to_reminderDialogFragment"
+            app:destination="@id/reminderDialogFragment" />
+        <action
+            android:id="@+id/action_notoFragment_to_notoDialogFragment"
+            app:destination="@id/notoDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/archiveFragment"
+        android:name="com.noto.library.ArchiveFragment"
+        android:label="ArchiveFragment">
+        <argument
+            android:name="library_id"
+            android:defaultValue="0L"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_archiveFragment_to_archiveDialogFragment"
+            app:destination="@id/archiveDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/reminderDialogFragment"
+        android:name="com.noto.noto.ReminderDialogFragment"
+        android:label="ReminderDialogFragment">
+        <argument
+            android:name="noto_id"
+            android:defaultValue="0L"
+            app:argType="long" />
+    </dialog>
+    <dialog
+        android:id="@+id/archiveDialogFragment"
+        android:name="com.noto.library.ArchiveDialogFragment"
+        android:label="ArchiveDialogFragment">
+        <argument
+            android:name="noto_id"
+            app:argType="long" />
+    </dialog>
+    <dialog
+        android:id="@+id/notoDialogFragment"
+        android:name="com.noto.noto.NotoDialogFragment"
+        android:label="NotoDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
         <argument
             android:name="noto_id"
             app:argType="long" />
-    </fragment>
-    <fragment
-        android:id="@+id/labelListFragment"
-        android:name="com.noto.label.LabelListFragment"
-        android:label="LabelListFragment"
-        tools:layout="@layout/fragment_list_label" />
-    <fragment
-        android:id="@+id/notoNewFragment"
-        android:name="com.noto.noto.NotoNewFragment"
-        android:label="NotoNewFragment" />
-    <navigation
-        android:id="@+id/sign"
-        app:startDestination="@id/signInFragment">
-        <fragment
-            android:id="@+id/signInFragment"
-            android:name="com.noto.sign.SignInFragment"
-            android:label="SignInFragment" >
-            <action
-                android:id="@+id/action_signInFragment_to_signUpFragment"
-                app:destination="@id/signUpFragment"
-                app:enterAnim="@android:anim/fade_in"
-                app:exitAnim="@android:anim/fade_out"
-                app:popEnterAnim="@android:anim/fade_in"
-                app:popExitAnim="@android:anim/fade_out" />
-        </fragment>
         <action
-            android:id="@+id/action_global_libraryListFragment"
-            app:destination="@id/libraryListFragment" />
-        <fragment
-            android:id="@+id/signUpFragment"
-            android:name="com.noto.sign.SignUpFragment"
-            android:label="SignUpFragment" >
-            <action
-                android:id="@+id/action_signUpFragment_to_signInFragment"
-                app:destination="@id/signInFragment"
-                app:enterAnim="@android:anim/fade_in"
-                app:exitAnim="@android:anim/fade_out"
-                app:popEnterAnim="@android:anim/fade_in"
-                app:popExitAnim="@android:anim/fade_out" />
-        </fragment>
-    </navigation>
+            android:id="@+id/action_notoDialogFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/themeDialogFragment"
+        android:name="com.noto.ThemeDialogFragment"
+        android:label="ThemeDialogFragment" />
 </navigation>

@@ -3,46 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/more"
-        android:icon="@drawable/ic_more_24px"
-        android:title="@string/more"
-        app:showAsAction="ifRoom">
+        android:id="@+id/archived_notos"
+        android:contentDescription="@string/archived_notos"
+        android:icon="@drawable/archive_outline"
+        android:title="@string/archived_notos"
+        app:showAsAction="ifRoom" />
 
-        <menu>
-            <item
-                android:id="@+id/delete_library"
-                android:icon="@drawable/ic_delete_24px"
-                android:title="Delete library"
-                android:visible="true"
-                android:enabled="true"
-                app:showAsAction="never" />
-            <!--            <item-->
-            <!--                android:id="@+id/style"-->
-            <!--                android:contentDescription="@string/change_style"-->
-            <!--                android:enabled="true"-->
-            <!--                android:icon="@drawable/ic_style_24px"-->
-            <!--                android:title="@string/change_style"-->
-            <!--                android:visible="true"-->
-            <!--                app:showAsAction="ifRoom" />-->
+    <item
+        android:id="@+id/delete_library"
+        android:enabled="true"
+        android:icon="@drawable/ic_delete_24px"
+        android:title="@string/delete_library"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
 
-            <!--            <item-->
-            <!--                android:id="@+id/delete"-->
-            <!--                android:contentDescription="@string/delete_notebook"-->
-            <!--                android:enabled="true"-->
-            <!--                android:icon="@drawable/ic_delete_sweep_24px"-->
-            <!--                android:title="@string/delete_notebook"-->
-            <!--                android:visible="true"-->
-            <!--                app:showAsAction="ifRoom" />-->
+    <item
+        android:id="@+id/view"
+        android:contentDescription="@string/view"
+        android:icon="@drawable/view_agenda_outline"
+        android:title="@string/view"
+        app:showAsAction="ifRoom" />
 
-            <!--            <item-->
-            <!--                android:id="@+id/sort"-->
-            <!--                android:contentDescription="@string/sort_notos"-->
-            <!--                android:enabled="true"-->
-            <!--                android:icon="@drawable/ic_sort_custom_24dp"-->
-            <!--                android:title="@string/sort_notos"-->
-            <!--                android:visible="true"-->
-            <!--                app:showAsAction="ifRoom" />-->
-        </menu>
-    </item>
+    <!--            <item-->
+    <!--                android:id="@+id/style"-->
+    <!--                android:contentDescription="@string/change_style"-->
+    <!--                android:enabled="true"-->
+    <!--                android:icon="@drawable/ic_style_24px"-->
+    <!--                android:title="@string/change_style"-->
+    <!--                android:visible="true"-->
+    <!--                app:showAsAction="ifRoom" />-->
+
+    <!--            <item-->
+    <!--                android:id="@+id/delete"-->
+    <!--                android:contentDescription="@string/delete_notebook"-->
+    <!--                android:enabled="true"-->
+    <!--                android:icon="@drawable/ic_delete_sweep_24px"-->
+    <!--                android:title="@string/delete_notebook"-->
+    <!--                android:visible="true"-->
+    <!--                app:showAsAction="ifRoom" />-->
+
+    <!--            <item-->
+    <!--                android:id="@+id/sort"-->
+    <!--                android:contentDescription="@string/sort_notos"-->
+    <!--                android:enabled="true"-->
+    <!--                android:icon="@drawable/ic_sort_custom_24dp"-->
+    <!--                android:title="@string/sort_notos"-->
+    <!--                android:visible="true"-->
+    <!--                app:showAsAction="ifRoom" />-->
 
 </menu>

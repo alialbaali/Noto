@@ -2,36 +2,39 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <!--            <item-->
+    <!--                android:id="@+id/sort"-->
+    <!--                android:enabled="true"-->
+    <!--                android:icon="@drawable/ic_sort_custom_24dp"-->
+    <!--                android:title="@string/sort_libraries"-->
+    <!--                android:visible="true"-->
+    <!--                app:showAsAction="ifRoom" />-->
+
     <item
-        android:id="@+id/more"
-        android:icon="@drawable/ic_more_24px"
-        android:title="@string/more"
-        app:showAsAction="ifRoom">
+        android:id="@+id/view"
+        android:contentDescription="@string/view"
+        android:icon="@drawable/view_agenda_outline"
+        android:title="@string/view"
+        app:showAsAction="always" />
 
-        <menu>
-            <item
-                android:id="@+id/create_library"
-                android:enabled="true"
-                android:icon="@drawable/ic_library_add_24dp"
-                android:title="@string/create_library"
-                android:visible="true"
-                app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/archived_notos"
+        android:contentDescription="@string/archived_notos"
+        android:icon="@drawable/archive_outline"
+        android:title="@string/archived_notos"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/labels"
+        android:icon="@drawable/ic_labels_24dp"
+        android:title="@string/labels"
+        android:visible="true"
+        app:showAsAction="always" />
 
-<!--            <item-->
-<!--                android:id="@+id/sort"-->
-<!--                android:enabled="true"-->
-<!--                android:icon="@drawable/ic_sort_custom_24dp"-->
-<!--                android:title="@string/sort_libraries"-->
-<!--                android:visible="true"-->
-<!--                app:showAsAction="ifRoom" />-->
-
-<!--            <item-->
-<!--                android:id="@+id/labels"-->
-<!--                android:enabled="true"-->
-<!--                android:icon="@drawable/ic_labels_24dp"-->
-<!--                android:title="@string/labels"-->
-<!--                android:visible="true"-->
-<!--                app:showAsAction="ifRoom" />-->
-        </menu>
-    </item>
+    <item
+        android:id="@+id/theme"
+        android:icon="@drawable/theme"
+        android:title="@string/theme"
+        android:visible="true"
+        app:showAsAction="always" />
 </menu>

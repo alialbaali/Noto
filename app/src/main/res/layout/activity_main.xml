@@ -7,94 +7,19 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <!--        <androidx.coordinatorlayout.widget.CoordinatorLayout-->
-        <!--            android:id="@+id/cool"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="match_parent"-->
-        <!--            android:elevation="@dimen/elevation_normal"-->
-        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--            app:layout_constraintEnd_toEndOf="parent"-->
-        <!--            app:layout_constraintStart_toStartOf="parent">-->
-
-        <!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--                android:id="@+id/fab"-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                app:layout_anchor="@id/bottom_nav" />-->
-
-        <!--            <com.google.android.material.bottomappbar.BottomAppBar-->
-        <!--                android:id="@+id/bottom_nav"-->
-        <!--                app:hideOnScroll="true"-->
-        <!--                android:layout_margin="@dimen/spacing_normal"-->
-        <!--                android:layout_gravity="bottom"-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                app:fabAlignmentMode="center"-->
-        <!--                app:elevation="@dimen/elevation_normal"-->
-        <!--                app:fabAnimationMode="scale"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                app:menu="@menu/menu_bnv" />-->
-
-
-        <!--                <com.google.android.material.bottomappbar.BottomAppBar-->
-        <!--                    android:id="@+id/bottom_nav"-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_margin="@dimen/spacing_normal"-->
-        <!--                    android:backgroundTint="@color/colorOnPrimary_900"-->
-        <!--                    app:backgroundTint="@color/colorOnPrimary_900"-->
-        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-        <!--                    app:layout_constraintStart_toStartOf="parent"-->
-        <!--                    app:menu="@menu/menu_bnv" />-->
-
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/fab"-->
-<!--            style="@style/FAB"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="@dimen/spacing_normal"-->
-<!--            android:src="@drawable/ic_add_24dp"-->
-<!--            app:borderWidth="0dp"-->
-<!--            app:elevation="@dimen/elevation_normal"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/bnv"-->
-<!--            app:layout_constraintEnd_toEndOf="@id/bnv"-->
-<!--            app:layout_constraintStart_toStartOf="@id/bnv" />-->
-
-
-<!--        <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--            android:id="@+id/bnv"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_margin="@dimen/spacing_normal"-->
-<!--            android:background="@drawable/shape_dialog_rg"-->
-<!--            app:backgroundTint="@color/colorBackground"-->
-<!--            app:elevation="@dimen/elevation_small"-->
-<!--            app:itemIconTint="@color/color_ic_bnv"-->
-<!--            app:itemRippleColor="@color/colorOnPrimary"-->
-<!--            app:itemTextColor="@color/color_ic_bnv"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/cl"-->
-<!--            app:layout_constraintLeft_toLeftOf="@id/cl"-->
-<!--            app:layout_constraintRight_toRightOf="@id/cl"-->
-<!--            app:menu="@menu/menu_bnv" />-->
-
         <fragment
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="@id/cl"
-            app:layout_constraintRight_toRightOf="@id/cl"
-            app:layout_constraintTop_toTopOf="@id/cl"
             app:navGraph="@navigation/nav_graph" />
 
-        <!--        </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
