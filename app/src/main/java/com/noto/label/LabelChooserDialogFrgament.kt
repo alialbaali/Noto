@@ -4,9 +4,12 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.chip.Chip
+import com.noto.BaseBottomSheetDialogFragment
 import com.noto.R
 import com.noto.databinding.DialogChooserLabelBinding
 import com.noto.domain.model.Label
@@ -14,18 +17,26 @@ import com.noto.noto.NotoViewModel
 import com.noto.util.getValue
 import timber.log.Timber
 
-class LabelSelectorDialog(context: Context, private val viewModel: NotoViewModel) : BottomSheetDialog(context, R.style.BottomSheetDialog) {
+class LabelSelectorDialog : BaseBottomSheetDialogFragment() {
 
     private val binding = DialogChooserLabelBinding.inflate(layoutInflater)
 
-    init {
-        create()
-        show()
-    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+        val chip = Chip(requireContext())
+
+//        chip
+        
+
+
+
+        binding.cg.setOnCheckedChangeListener { group, checkedId ->
+
+        }
+
+        return binding.root
+    }
 //
 //        val list = mutableListOf<Label>()
 //
@@ -71,6 +82,5 @@ class LabelSelectorDialog(context: Context, private val viewModel: NotoViewModel
 //                dismiss()
 //            }
 //        }
-    }
 
 }
