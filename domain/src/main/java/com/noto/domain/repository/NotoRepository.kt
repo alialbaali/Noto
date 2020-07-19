@@ -1,6 +1,9 @@
 package com.noto.domain.repository
 
+import com.noto.domain.model.Label
 import com.noto.domain.model.Noto
+import com.noto.domain.model.NotoLabel
+import com.noto.domain.model.NotoWithLabels
 import kotlinx.coroutines.flow.Flow
 
 interface NotoRepository {
@@ -17,8 +20,14 @@ interface NotoRepository {
 
     suspend fun getNoto(notoId: Long): Result<Flow<Noto>>
 
-    suspend fun countLibraryNotos(libraryId: Long): Int
-
     suspend fun getAllNotos(): Result<Flow<List<Noto>>>
+
+    suspend fun getNotoWithLabels(notoId: Long) : Result<Flow<NotoWithLabels>>
+
+    suspend fun createNotoWithLabels(noto: Noto, labels: Set<Label>)
+
+    suspend fun updateNotoWithLabels(noto: Noto, labels: Set<Label>)
+
+    suspend fun deleteNotoWithLabels(notoId: Long)
 
 }

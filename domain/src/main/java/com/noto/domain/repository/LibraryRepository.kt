@@ -15,6 +15,8 @@ interface LibraryRepository {
 
     suspend fun getLibraryById(libraryId: Long): Result<Flow<Library>>
 
-    suspend fun countNotos(libraryId: Long): Int
+    suspend fun countLibraryNotos(libraryId: Long): Int
+
+    suspend fun countLibraries(): Int
 
 }

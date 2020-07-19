@@ -36,13 +36,13 @@ data class Noto(
     val notoCreationDate: LocalDate = LocalDate.now(),
 
     @ColumnInfo(name = "noto_is_starred")
-    val notoIsStarred: Boolean = false,
+    var notoIsStarred: Boolean = false,
 
     @ColumnInfo(name = "noto_is_archived")
     var notoIsArchived: Boolean = false,
 
     @ColumnInfo(name = "noto_reminder")
-    val notoReminder: ZonedDateTime? = null,
+    var notoReminder: ZonedDateTime? = null,
 
     @ColumnInfo(name = "noto_is_completed")
     val notoIsCompleted: Boolean = false

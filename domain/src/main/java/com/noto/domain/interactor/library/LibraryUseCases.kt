@@ -6,5 +6,6 @@ class LibraryUseCases(
     val updateLibrary: UpdateLibrary,
     val getLibraries: GetLibraries,
     val getLibraryById: GetLibraryById,
-    val countNotos: CountNotos
+    val countLibraryNotos: CountLibraryNotos,
+    val countLibraries: CountLibraries
 )
