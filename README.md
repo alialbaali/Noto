@@ -9,14 +9,14 @@ The app is a part of my [Portfolio](https://alialbaali.com) projects. It showcas
 
 ## Screenshots
 
-<img src="https://lh3.googleusercontent.com/gZEnPNJ8S5OCvD13L_6p53LAgsJVS1Lx_Zypzf9aQ4JTuNoZjSyZbHFaZlSddybJq7w=w1920-h979" alt="Screenshot">
-<img src="https://lh3.googleusercontent.com/P6SrNqnnjOSgSQMWIMvbLB1-2b7sE7LLELDgJIPKiXNd45dQy2OGbSvrZ35pVabxUgY=w1920-h979" alt="Screenshot">
-<img src="https://lh3.googleusercontent.com/lVdn68iYeecY47f82RZWzTwSxXDoBgnX6ku0dnjDsrm6_Z6-fmoDWaev_h1hUL4OQBtR=w1920-h979" alt="Screenshot">
-<img src="https://lh3.googleusercontent.com/lo7bvJJF7_QulrJGXQdACHRhbzcPXfRvYp-MMcscjPIFvHtqNECeiS2yut6_gpfCSaU=w1920-h979" alt="Screenshot">
-<img src="https://lh3.googleusercontent.com/RMe53Fkb5iH93OE9CZZxVXuTocwwo7VeP2S3onHENMNHm_dKGNvgyUisqaQcidpHoQ=w1920-h979" alt="Screenshot">
-<img src="https://lh3.googleusercontent.com/BxuV0mE-oybSzwigqtEapss83Y3vHaoWE30tC_Q0zgNkNlFUYBn3ioCRXc3NuwIRzkIs=w1920-h979" alt="Screenshot">
-<img src="https://lh3.googleusercontent.com/kVKqHaJtOq1eMnWDBwXnZ70b43z1OelkHsglfL0zNfusD9RXRtzUegXpGHP2-iQ3Zw=w1920-h979" alt="Screenshot">
-<img src="https://lh3.googleusercontent.com/RZtXvv4lm2cwE86_TH_pc8WYrt0FHd_H0qgAtDz2XiZK_O7HIR5fuRozhZdN0P2lZuFi=w1920-h979" alt="Screenshot">
+<img src="https://lh3.googleusercontent.com/gZEnPNJ8S5OCvD13L_6p53LAgsJVS1Lx_Zypzf9aQ4JTuNoZjSyZbHFaZlSddybJq7w=w720-h310" alt="Screenshot">
+<img src="https://lh3.googleusercontent.com/P6SrNqnnjOSgSQMWIMvbLB1-2b7sE7LLELDgJIPKiXNd45dQy2OGbSvrZ35pVabxUgY=w720-h310" alt="Screenshot">
+<img src="https://lh3.googleusercontent.com/lVdn68iYeecY47f82RZWzTwSxXDoBgnX6ku0dnjDsrm6_Z6-fmoDWaev_h1hUL4OQBtR=w720-h310" alt="Screenshot">
+<img src="https://lh3.googleusercontent.com/lo7bvJJF7_QulrJGXQdACHRhbzcPXfRvYp-MMcscjPIFvHtqNECeiS2yut6_gpfCSaU=w720-h310" alt="Screenshot">
+<img src="https://lh3.googleusercontent.com/RMe53Fkb5iH93OE9CZZxVXuTocwwo7VeP2S3onHENMNHm_dKGNvgyUisqaQcidpHoQ=w720-h310" alt="Screenshot">
+<img src="https://lh3.googleusercontent.com/BxuV0mE-oybSzwigqtEapss83Y3vHaoWE30tC_Q0zgNkNlFUYBn3ioCRXc3NuwIRzkIs=w720-h310" alt="Screenshot">
+<img src="https://lh3.googleusercontent.com/kVKqHaJtOq1eMnWDBwXnZ70b43z1OelkHsglfL0zNfusD9RXRtzUegXpGHP2-iQ3Zw=w720-h310" alt="Screenshot">
+<img src="https://lh3.googleusercontent.com/RZtXvv4lm2cwE86_TH_pc8WYrt0FHd_H0qgAtDz2XiZK_O7HIR5fuRozhZdN0P2lZuFi=w720-h310" alt="Screenshot">
 
 ## Features
 
