@@ -1,6 +1,5 @@
 package com.noto.noto
 
-import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.DatePickerDialog
 import android.app.PendingIntent
@@ -13,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.navArgs
 import com.noto.BaseBottomSheetDialogFragment
 import com.noto.R
 import com.noto.databinding.FragmentDialogReminderBinding
@@ -25,11 +25,15 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
+const val PENDING_INTENT_FLAGS = PendingIntent.FLAG_ONE_SHOT
+
 class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentDialogReminderBinding
 
     private val viewModel by sharedViewModel<NotoViewModel>()
+
+    private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -48,10 +52,10 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
                 binding.til.endIconDrawable = ResourcesCompat.getDrawable(resources, R.drawable.bell_remove_outline, null)
 
                 if (time.year > ZonedDateTime.now().year) {
-                    val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM HH:mm a"))
+                    val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm a"))
                     binding.et.setText(format)
                 } else {
-                    val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm a"))
+                    val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM HH:mm a"))
                     binding.et.setText(format)
                 }
             }
@@ -62,8 +66,20 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
             }
 
         }
+
+
         binding.til.setEndIconOnClickListener {
-            if (viewModel.noto.value?.notoReminder == null) showDateTimeDialog() else viewModel.setNotoReminder(null)
+            if (viewModel.noto.value?.notoReminder == null) showDateTimeDialog() else {
+                viewModel.noto.value?.let { noto ->
+
+                    val intent = Intent(requireContext(), AlarmReceiver::class.java)
+                    val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.notoId.toInt(), intent, PENDING_INTENT_FLAGS)
+
+                    alarmManager.cancel(pendingIntent)
+
+                    viewModel.setNotoReminder(null)
+                }
+            }
         }
 
         return binding.root
@@ -79,13 +95,15 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
                     putExtra(NOTO_ID, noto.notoId.toInt())
                     putExtra(NOTO_TITLE, noto.notoTitle)
                     putExtra(NOTO_BODY, noto.notoBody)
+                    putExtra(NOTO_COLOR, viewModel.library.value?.notoColor?.ordinal ?: 0)
+                    putExtra(NOTO_ICON, viewModel.library.value?.notoIcon?.ordinal ?: 0)
                 }
 
-                val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.notoId.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_ONE_SHOT)
+                val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.notoId.toInt(), intent, PENDING_INTENT_FLAGS)
 
                 val timeInMills = zonedDateTime.toInstant().toEpochMilli()
 
-                (requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager).setAlarm(AlarmManager.RTC_WAKEUP, timeInMills, pendingIntent)
+                alarmManager.setAlarm(AlarmManager.RTC_WAKEUP, timeInMills, pendingIntent)
 
                 viewModel.setNotoReminder(zonedDateTime)
             }
@@ -98,7 +116,6 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
         val startDay = currentDateTime.get(Calendar.DAY_OF_MONTH)
         val startHour = currentDateTime.get(Calendar.HOUR_OF_DAY)
         val startMinute = currentDateTime.get(Calendar.MINUTE)
-
 
         DatePickerDialog(requireContext(), R.style.PickerDialog, DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
             TimePickerDialog(requireContext(), R.style.PickerDialog, TimePickerDialog.OnTimeSetListener { _, hour, minute ->

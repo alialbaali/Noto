@@ -4,17 +4,13 @@ import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.noto.domain.interactor.noto.GetNoto
-import com.noto.noto.NOTO_BODY
-import com.noto.noto.NOTO_ID
-import com.noto.noto.NOTO_TITLE
+import com.noto.domain.model.NotoColor
+import com.noto.domain.model.NotoIcon
+import com.noto.noto.*
 import com.noto.util.createChannel
 import com.noto.util.sendNotification
-import org.koin.core.KoinComponent
-import org.koin.core.inject
-import timber.log.Timber
 
-class AlarmReceiver : BroadcastReceiver(){
+class AlarmReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
@@ -22,13 +18,19 @@ class AlarmReceiver : BroadcastReceiver(){
 
         nm.createChannel(context)
 
+        println(intent?.extras?.toString())
+
         intent?.let {
 
-            val id = intent.getIntExtra(NOTO_ID, 0)
-            val title = intent.getStringExtra(NOTO_TITLE) ?: String()
-            val body = intent.getStringExtra(NOTO_BODY) ?: String()
+            val id = it.getIntExtra(NOTO_ID, 0)
+            val title = it.getStringExtra(NOTO_TITLE) ?: String()
+            val body = it.getStringExtra(NOTO_BODY) ?: String()
+            val notoColorOrdinal = it.getIntExtra(NOTO_COLOR, 0)
+            val notoIconOrdinal = it.getIntExtra(NOTO_ICON, 0)
+            val notoColor = NotoColor.values().first { it.ordinal == notoColorOrdinal }
+            val notoIcon = NotoIcon.values().first { it.ordinal == notoIconOrdinal }
 
-            nm.sendNotification(context, id, title, body)
+            nm.sendNotification(context, id, title, body, notoColor, notoIcon)
 
         }
 
