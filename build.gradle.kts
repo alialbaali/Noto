@@ -1,3 +1,4 @@
+import java.net.URI
 buildscript {
     repositories {
         google()
@@ -14,6 +15,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url= URI("https://jitpack.io") }
     }
 
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
