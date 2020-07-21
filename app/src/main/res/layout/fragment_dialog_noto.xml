@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/cl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/shape_dialog"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/v_head"
+            android:layout_width="30dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing_normal"
+            android:background="@drawable/shape_view_head" />
+
+
+        <TextView
+            android:id="@+id/tv_remind_me"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple"
+            android:drawableStart="@drawable/bell_plus_outline"
+            android:text="@string/add_reminder" />
+
+
+        <TextView
+            android:id="@+id/tv_archive_noto"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple"
+            android:drawableStart="@drawable/archive_arrow_down_outline"
+            android:text="@string/archive_noto" />
+
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_move_to"-->
+<!--            style="@style/DialogItem"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/ripple"-->
+<!--            android:drawableStart="@drawable/file_move_outline"-->
+<!--            android:text="@string/move_to" />-->
+
+        <TextView
+            android:id="@+id/tv_copy_to_clipboard"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple"
+            android:drawableStart="@drawable/content_copy"
+            android:text="@string/copy_to_clipboard" />
+
+        <TextView
+            android:id="@+id/tv_share_noto"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple"
+            android:drawableStart="@drawable/ic_outline_share_24"
+            android:text="@string/share_noto" />
+
+
+        <TextView
+            android:id="@+id/tv_delete_noto"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple"
+            android:drawableStart="@drawable/ic_delete_24px"
+            android:text="@string/delete_noto" />
+
+    </LinearLayout>
+</layout>
