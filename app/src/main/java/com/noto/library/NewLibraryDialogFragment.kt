@@ -7,27 +7,37 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.observe
+import androidx.navigation.fragment.navArgs
 import com.noto.BaseBottomSheetDialogFragment
 import com.noto.R
 import com.noto.databinding.FragmentDialogLibraryNewBinding
-import com.noto.domain.model.Library
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
 import com.noto.util.getValue
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class NewLibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentDialogLibraryNewBinding
 
-    private val viewModel by viewModel<LibraryListViewModel>()
+    private val viewModel by sharedViewModel<LibraryViewModel>()
 
-    private val library: Library = Library(libraryPosition = 0)
+    private val args by navArgs<NewLibraryDialogFragmentArgs>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentDialogLibraryNewBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = this@NewLibraryDialogFragment
+            viewModel = this@NewLibraryDialogFragment.viewModel
+        }
+
+        if (args.libraryId == 0L) viewModel.postLibrary()
+        else binding.btnCreate.text = getString(R.string.update_library)
+
+        viewModel.library.observe(viewLifecycleOwner) {library ->
+            binding.til.setEndIconTintList(ResourcesCompat.getColorStateList(resources, library.notoColor.getValue(), null))
+            binding.til.startIconDrawable = ResourcesCompat.getDrawable(resources, library.notoIcon.getValue(), null)
         }
 
         for (notoColor in NotoColor.values()) {
@@ -54,13 +64,13 @@ class NewLibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
         binding.rgNotoColors.setOnCheckedChangeListener { _, checkedId ->
             val notoColor = NotoColor.values()[checkedId]
-            library.notoColor = notoColor
-            binding.til.setEndIconTintList(binding.root.resources.getColorStateList(notoColor.getValue()))
+            viewModel.setNotoColor(notoColor)
+            binding.til.setEndIconTintList(ResourcesCompat.getColorStateList(resources, notoColor.getValue(), null))
         }
 
         binding.rgNotoIcons.setOnCheckedChangeListener { _, checkedId ->
             val notoIcon = NotoIcon.values()[checkedId]
-            library.notoIcon = notoIcon
+            viewModel.setNotoIcon(notoIcon)
             binding.til.startIconDrawable = ResourcesCompat.getDrawable(resources, notoIcon.getValue(), null)
         }
 
@@ -68,17 +78,11 @@ class NewLibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
             val title = binding.et.text.toString()
 
-            when {
-                title.isBlank() -> binding.til.error = "Title can't be empty"
-
-                viewModel.libraries.value?.any { it.libraryTitle == title } == true -> binding.til.error = "Title already exists"
-
-                else -> {
-                    library.libraryTitle = title
-                    val new = library.copy(libraryPosition = 0)
-                    viewModel.saveLibrary(new)
-                    dismiss()
-                }
+            if (title.isBlank()) binding.til.error = "Title can't be empty"
+            else {
+                dismiss()
+                if (args.libraryId == 0L) viewModel.createLibrary()
+                else viewModel.updateLibrary()
             }
         }
 
