@@ -1,6 +1,7 @@
+
 import com.noto.buildsrc.App
 import com.noto.buildsrc.Libraries
-import com.noto.buildsrc.*
+import com.noto.buildsrc.Modules
 
 plugins {
     val plugins = com.noto.buildsrc.Plugins
@@ -41,4 +42,16 @@ android {
 
 dependencies {
     api(project(Modules.DOMAIN))
+    testImplementation(Libraries.Testing.COROUTINES)
+    testImplementation(Libraries.Testing.JUNIT)
+    testImplementation(Libraries.Testing.KOIN_TEST)
+    testImplementation(Libraries.Testing.KOTEST_JUNIT)
+    testImplementation(Libraries.Testing.KOTEST_PROPERTY)
+    testImplementation(Libraries.Testing.KOTEST_ASSERTION)
+    testImplementation(Libraries.Testing.KOTEST_KOIN)
+
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
