@@ -7,17 +7,14 @@ interface LibraryLocalDataSource {
 
     fun getLibraries(): Flow<List<Library>>
 
+    fun getLibrary(libraryId: Long): Flow<Library>
+
     suspend fun createLibrary(library: Library)
-
-    fun getLibraryById(libraryId: Long): Flow<Library>
-
-    suspend fun deleteLibrary(library: Library)
-
-    suspend fun countNotos(libraryId: Long): Int
-
-    suspend fun updateLibraries(libraries: List<Library>)
 
     suspend fun updateLibrary(library: Library)
 
-    suspend fun createLibrary(libraries: List<Library>)
+    suspend fun deleteLibrary(library: Library)
+
+    suspend fun countLibraryNotos(libraryId: Long): Int
+
 }

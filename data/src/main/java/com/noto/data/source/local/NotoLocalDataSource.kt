@@ -1,17 +1,15 @@
 package com.noto.data.source.local
 
 import com.noto.domain.model.Noto
+import com.noto.domain.model.NotoLabel
+import com.noto.domain.model.NotoWithLabels
 import kotlinx.coroutines.flow.Flow
 
 interface NotoLocalDataSource {
 
-    fun getNotos(libraryId: Long): Flow<List<Noto>>
+    fun getNotos(): Flow<List<Noto>>
 
-    fun getArchivedNotos(): Flow<List<Noto>>
-
-    fun getAllNotos(): Flow<List<Noto>>
-
-    fun getNotoById(notoId: Long): Flow<Noto>
+    fun getNoto(notoId: Long): Flow<Noto>
 
     suspend fun createNoto(noto: Noto)
 
@@ -19,8 +17,12 @@ interface NotoLocalDataSource {
 
     suspend fun deleteNoto(noto: Noto)
 
-    suspend fun countLibraryNotos(libraryId: Long): Int
+    fun getNotoWithLabels(notoId: Long): Flow<NotoWithLabels>
 
-    suspend fun countNotos(): Int
+    fun createNotoWithLabels(noto: Noto, notoLabels: Set<NotoLabel>)
+
+    fun updateNotoWithLabels(noto: Noto, notoLabels: Set<NotoLabel>)
+
+    fun deleteNotoWithLabels(notoId: Long)
 
 }

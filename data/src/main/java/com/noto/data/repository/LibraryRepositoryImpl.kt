@@ -5,37 +5,28 @@ import com.noto.domain.model.Library
 import com.noto.domain.repository.LibraryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.withContext
 
-class LibraryRepositoryImpl(private val localSource: LibraryLocalDataSource) : LibraryRepository {
+class LibraryRepositoryImpl(private val libraryLocalDataSource: LibraryLocalDataSource) : LibraryRepository {
+
+    override fun getLibraries(): Flow<List<Library>> = libraryLocalDataSource.getLibraries()
+
+    override fun getLibrary(libraryId: Long): Flow<Library> = libraryLocalDataSource.getLibrary(libraryId)
 
     override suspend fun createLibrary(library: Library) = withContext(Dispatchers.IO) {
-
-        localSource.createLibrary(library)
-
-    }
-
-    override suspend fun deleteLibrary(library: Library) = withContext(Dispatchers.IO) {
-
-        localSource.deleteLibrary(library)
-
+        libraryLocalDataSource.createLibrary(library.copy(libraryTitle = library.libraryTitle.trim()))
     }
 
     override suspend fun updateLibrary(library: Library) = withContext(Dispatchers.IO) {
-
-        localSource.updateLibrary(library)
-
+        libraryLocalDataSource.updateLibrary(library.copy(libraryTitle = library.libraryTitle.trim()))
     }
 
-    override suspend fun getLibraries(): Result<Flow<List<Library>>> = Result.success(localSource.getLibraries())
-
-
-    override suspend fun getLibraryById(libraryId: Long): Result<Flow<Library>> = withContext(Dispatchers.IO) {
-        Result.success(localSource.getLibraryById(libraryId))
+    override suspend fun deleteLibrary(library: Library) = withContext(Dispatchers.IO) {
+        libraryLocalDataSource.deleteLibrary(library)
     }
 
-    override suspend fun countNotos(libraryId: Long): Int = withContext(Dispatchers.IO) {
-        localSource.countNotos(libraryId)
+    override suspend fun countLibraryNotos(libraryId: Long): Int = withContext(Dispatchers.IO) {
+        libraryLocalDataSource.countLibraryNotos(libraryId)
     }
+
 }

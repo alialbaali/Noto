@@ -80,6 +80,10 @@ object Libraries {
 
         const val KOTEST_PROPERTY = "io.kotest:kotest-property-jvm:${Versions.Testing.KOTEST}"
 
+        const val KOTEST_RUNNER = "io.kotest:kotest-runner-console-jvm:${Versions.Testing.KOTEST}"
+
+        const val KOTEST_KOIN = "io.kotest:kotest-extensions-koin:${Versions.Testing.KOTEST}"
+
         const val JUNIT = "junit:junit:${Versions.Testing.JUNIT}"
 
         const val ANDROID_CORE = "androidx.test:core:${Versions.Testing.ANDROID_CORE}"
@@ -114,7 +118,7 @@ private object Versions {
 
     const val COORDINATOR_LAYOUT = "1.1.0"
 
-    const val CONSTRAINT_LAYOUT = "2.0.0-beta7"
+    const val CONSTRAINT_LAYOUT = "2.0.0-beta8"
 
     const val VIEW_MODEL_STATE = "2.2.0"
 
@@ -150,15 +154,15 @@ private object Versions {
     const val ROOM = "2.2.5"
 
     // Coroutines
-    const val COROUTINES = "1.3.7"
-    const val COROUTINES_ANDROID = "1.3.7"
+    const val COROUTINES = "1.3.8"
+    const val COROUTINES_ANDROID = "1.3.8"
 
     // Gradle
-    const val GRADLE_ANDROID = "4.0.0"
+    const val GRADLE_ANDROID = "4.0.1"
     const val GRADLE_NAVIGATION = "2.2.2"
 
     // DI
-    const val KOIN = "2.1.6"
+    const val KOIN = "2.1.5"
 
     const val DEPENDENCIES_VERSIONS = "0.28.0"
 
@@ -166,7 +170,7 @@ private object Versions {
 
         const val MOCKK = "1.10.0"
 
-        const val KOTEST = "4.1.0.RC1"
+        const val KOTEST = "4.0.0"
 
         const val TEST_JUNIT = "1.1.1"
 

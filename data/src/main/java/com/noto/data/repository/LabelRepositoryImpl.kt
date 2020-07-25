@@ -9,20 +9,20 @@ import kotlinx.coroutines.withContext
 
 class LabelRepositoryImpl(private val dataSource: LabelLocalDataSource) : LabelRepository {
 
+    override fun getLabels(): Flow<List<Label>> = dataSource.getLabels()
+
+    override fun getLabel(labelId: Long): Flow<Label> = dataSource.getLabel(labelId)
+
     override suspend fun createLabel(label: Label) = withContext(Dispatchers.IO) {
-        dataSource.createLabel(label)
+        dataSource.createLabel(label.copy(labelTitle = label.labelTitle.trim()))
     }
 
     override suspend fun updateLabel(label: Label) = withContext(Dispatchers.IO) {
-        dataSource.updateLabel(label)
+        dataSource.updateLabel(label.copy(labelTitle = label.labelTitle.trim()))
     }
 
-    override suspend fun deleteLabel(labelId: Long) = withContext(Dispatchers.IO) {
-        dataSource.deleteLabel(labelId)
+    override suspend fun deleteLabel(label: Label) = withContext(Dispatchers.IO) {
+        dataSource.deleteLabel(label)
     }
-
-    override fun getLabels(): Result<Flow<List<Label>>> = Result.success(dataSource.getLabels())
-
-    override fun getLabelById(labelId: Long): Result<Flow<Label>> = Result.success(dataSource.getLabelById(labelId))
 
 }
