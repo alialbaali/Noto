@@ -5,18 +5,16 @@ import kotlinx.coroutines.flow.Flow
 
 interface LibraryRepository {
 
-    suspend fun createLibrary(library: Library)
+    fun getLibraries(): Flow<List<Library>>
 
-    suspend fun deleteLibrary(library: Library)
+    fun getLibrary(libraryId: Long): Flow<Library>
+
+    suspend fun createLibrary(library: Library)
 
     suspend fun updateLibrary(library: Library)
 
-    suspend fun getLibraries(): Result<Flow<List<Library>>>
-
-    suspend fun getLibraryById(libraryId: Long): Result<Flow<Library>>
+    suspend fun deleteLibrary(library: Library)
 
     suspend fun countLibraryNotos(libraryId: Long): Int
-
-    suspend fun countLibraries(): Int
 
 }
