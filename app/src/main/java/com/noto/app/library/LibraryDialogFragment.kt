@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseBottomSheetDialogFragment
@@ -32,14 +32,18 @@ class LibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
         viewModel.getLibrary(args.libraryId)
 
-        viewModel.library.observe(viewLifecycleOwner) {
-            binding.vHead.backgroundTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                listOf(binding.tvEditLibrary).forEach { tv ->
-                    tv.compoundDrawableTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
+        viewModel.library.observe(viewLifecycleOwner, Observer { library ->
+            library?.let {
+
+                binding.vHead.backgroundTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    listOf(binding.tvEditLibrary).forEach { tv ->
+                        tv.compoundDrawableTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
+                    }
                 }
+
             }
-        }
+        })
 
         binding.tvEditLibrary.setOnClickListener {
             dismiss()
@@ -47,17 +51,16 @@ class LibraryDialogFragment : BaseBottomSheetDialogFragment() {
         }
 
         binding.tvDeleteLibrary.setOnClickListener {
-
-            val navController = findNavController()
+            dismiss()
 
             ConfirmationDialogFragment { dialogFragment, dialogBinding ->
+
 
                 dialogBinding.btnConfirm.text = dialogFragment.getString(R.string.delete_library)
                 dialogBinding.tvTitle.text = dialogFragment.getString(R.string.delete_library_confirmation)
 
                 dialogBinding.btnConfirm.setOnClickListener {
                     dialogFragment.dismiss()
-                    navController.navigate(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToLibraryListFragment())
                     viewModel.deleteLibrary()
                 }
             }.show(parentFragmentManager, null)

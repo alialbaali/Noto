@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.FragmentDialogLibraryNewBinding
+import com.noto.app.util.getValue
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
-import com.noto.app.library.NewLibraryDialogFragmentArgs
-import com.noto.app.util.getValue
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class NewLibraryDialogFragment : BaseBottomSheetDialogFragment() {
@@ -36,10 +35,12 @@ class NewLibraryDialogFragment : BaseBottomSheetDialogFragment() {
         if (args.libraryId == 0L) viewModel.postLibrary()
         else binding.btnCreate.text = getString(R.string.update_library)
 
-        viewModel.library.observe(viewLifecycleOwner) {library ->
-            binding.til.setEndIconTintList(ResourcesCompat.getColorStateList(resources, library.notoColor.getValue(), null))
-            binding.til.startIconDrawable = ResourcesCompat.getDrawable(resources, library.notoIcon.getValue(), null)
-        }
+        viewModel.library.observe(viewLifecycleOwner, Observer { library ->
+            library?.let {
+                binding.til.setEndIconTintList(ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null))
+                binding.til.startIconDrawable = ResourcesCompat.getDrawable(resources, it.notoIcon.getValue(), null)
+            }
+        })
 
         for (notoColor in NotoColor.values()) {
             val radBtn = RadioButton(context)
