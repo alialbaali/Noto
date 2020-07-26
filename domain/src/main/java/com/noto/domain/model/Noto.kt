@@ -42,9 +42,6 @@ data class Noto(
     var notoIsArchived: Boolean = false,
 
     @ColumnInfo(name = "noto_reminder")
-    var notoReminder: ZonedDateTime? = null,
-
-    @ColumnInfo(name = "noto_is_completed")
-    val notoIsCompleted: Boolean = false
+    var notoReminder: ZonedDateTime? = null
 
 )

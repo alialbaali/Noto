@@ -1,18 +1,18 @@
-package com.noto.data.source.fake
+package com.noto.app.repository.fake
 
-import com.noto.data.source.local.LibraryLocalDataSource
 import com.noto.domain.model.Library
 import com.noto.domain.replaceWith
+import com.noto.domain.repository.LibraryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
-class FakeLibraryDao : LibraryLocalDataSource {
+class FakeLibraryRepository : LibraryRepository {
 
     private val libraries = mutableListOf<Library>()
 
     override fun getLibraries(): Flow<List<Library>> = flowOf(libraries)
 
-    override fun getLibrary(libraryId: Long): Flow<Library> = flowOf(libraries.first { library -> library.libraryId == libraryId })
+    override fun getLibrary(libraryId: Long): Flow<Library> = flowOf(libraries.first { it.libraryId == libraryId })
 
     override suspend fun createLibrary(library: Library) {
         libraries.add(library)

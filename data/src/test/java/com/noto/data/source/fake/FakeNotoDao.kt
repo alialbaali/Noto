@@ -4,6 +4,7 @@ import com.noto.data.source.local.NotoLocalDataSource
 import com.noto.domain.model.Noto
 import com.noto.domain.model.NotoLabel
 import com.noto.domain.model.NotoWithLabels
+import com.noto.domain.replaceWith
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -11,11 +12,7 @@ class FakeNotoDao : NotoLocalDataSource {
 
     private val notos = mutableListOf<Noto>()
 
-    override fun getNotos(libraryId: Long): Flow<List<Noto>> = flowOf(notos.filter { noto -> noto.libraryId == libraryId && !noto.notoIsArchived })
-
-    override fun getArchivedNotos(): Flow<List<Noto>> = flowOf(notos.filter { noto -> noto.notoIsArchived })
-
-    override fun getAllNotos(): Flow<List<Noto>> = flowOf(notos.filter { noto -> !noto.notoIsArchived })
+    override fun getNotos(): Flow<List<Noto>> = flowOf(notos)
 
     override fun getNoto(notoId: Long): Flow<Noto> = flowOf(notos.first { it.notoId == notoId })
 
@@ -30,8 +27,6 @@ class FakeNotoDao : NotoLocalDataSource {
     override suspend fun deleteNoto(noto: Noto) {
         notos.remove(noto)
     }
-
-    override suspend fun countNotos(): Int = notos.count()
 
     override fun getNotoWithLabels(notoId: Long): Flow<NotoWithLabels> {
         TODO("Not yet implemented")

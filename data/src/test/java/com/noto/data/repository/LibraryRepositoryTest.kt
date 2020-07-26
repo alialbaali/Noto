@@ -4,10 +4,12 @@ import com.noto.data.source.fake.FakeLibraryDao
 import com.noto.domain.model.Library
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
+import com.noto.domain.repository.LibraryRepository
 import io.kotest.core.spec.Spec
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.*
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.shouldNotBe
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.runBlocking
 import org.koin.core.context.startKoin
@@ -19,13 +21,13 @@ val libraryRepositoryModule = module {
 
     single { FakeLibraryDao() }
 
-    single { LibraryRepositoryImpl(get<FakeLibraryDao>()) }
+    single<LibraryRepository> { LibraryRepositoryImpl(get<FakeLibraryDao>()) }
 
 }
 
 class LibraryRepositoryTest : KoinTest, StringSpec() {
 
-    private val libraryRepository by inject<LibraryRepositoryImpl>()
+    private val libraryRepository by inject<LibraryRepository>()
 
     private val libraries by lazy { libraryRepository.getLibraries().run { runBlocking { single() } } }
 
@@ -47,7 +49,10 @@ class LibraryRepositoryTest : KoinTest, StringSpec() {
 
         "get libraries"{
 
+            val list = libraryRepository.getLibraries().single()
 
+            list shouldHaveSize 0
+            list.shouldBeEmpty()
 
         }
 
@@ -58,7 +63,7 @@ class LibraryRepositoryTest : KoinTest, StringSpec() {
 
             libraries shouldContain library
             libraries shouldHaveSize 1
-            libraries.shouldNotContainNoNulls()
+            libraries.shouldContainNoNulls()
 
         }
 
@@ -66,15 +71,33 @@ class LibraryRepositoryTest : KoinTest, StringSpec() {
 
             libraryRepository.updateLibrary(updatedLibrary)
 
+            val result = libraries.find { it.libraryId == updatedLibrary.libraryId }
+
             libraries shouldContain updatedLibrary
             libraries shouldNotContain library
-            libraries.first() shouldBe library
+            libraries.first() shouldBe updatedLibrary
+            result shouldNotBe null
+            result!!.libraryTitle shouldBe updatedLibrary.libraryTitle
+            result.notoColor shouldBe updatedLibrary.notoColor
+            result.notoIcon shouldBe updatedLibrary.notoIcon
+
+        }
+
+        "get library"{
+
+            val result = libraryRepository.getLibrary(library.libraryId).single()
+
+            result shouldBe  updatedLibrary
+            result shouldNotBe library
+            result.libraryTitle shouldBe updatedLibrary.libraryTitle
+            result.notoColor shouldBe updatedLibrary.notoColor
+            result.notoIcon shouldBe updatedLibrary.notoIcon
 
         }
 
         "delete library"{
 
-            libraryRepository.deleteLibrary(library)
+            libraryRepository.deleteLibrary(updatedLibrary)
 
             libraries shouldNotContain library
             libraries shouldNotContain updatedLibrary

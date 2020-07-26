@@ -10,15 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.FragmentDialogNotoBinding
-import com.noto.app.noto.NotoDialogFragmentArgs
-import com.noto.app.noto.NotoDialogFragmentDirections
 import com.noto.app.util.getValue
 import com.noto.app.util.toast
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -41,26 +39,34 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
 
         viewModel.getLibraryById(args.libraryId)
 
-        viewModel.library.observe(viewLifecycleOwner) {
-            binding.vHead.backgroundTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                listOf(binding.tvCopyToClipboard, binding.tvShareNoto, binding.tvArchiveNoto, binding.tvRemindMe).forEach { tv ->
-                    tv.compoundDrawableTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
+        viewModel.library.observe(viewLifecycleOwner, Observer { library ->
+            library?.let {
+
+                binding.vHead.backgroundTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    listOf(binding.tvCopyToClipboard, binding.tvShareNoto, binding.tvArchiveNoto, binding.tvRemindMe).forEach { tv ->
+                        tv.compoundDrawableTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
+                    }
                 }
+
             }
-        }
 
-        viewModel.noto.observe(viewLifecycleOwner) { noto ->
+        })
 
-            binding.tvArchiveNoto.compoundDrawablesRelative[0] =
-                if (noto.notoIsArchived) ResourcesCompat.getDrawable(resources, R.drawable.ic_outline_unarchive_24, null)
-                else ResourcesCompat.getDrawable(resources, R.drawable.archive_arrow_down_outline, null)
+        viewModel.noto.observe(viewLifecycleOwner, Observer { noto ->
+            noto?.let {
 
-            binding.tvRemindMe.compoundDrawablesRelative[0] =
-                if (noto.notoReminder == null) ResourcesCompat.getDrawable(resources, R.drawable.bell_plus_outline, null)
-                else ResourcesCompat.getDrawable(resources, R.drawable.bell_ring_outline, null)
+                binding.tvArchiveNoto.compoundDrawablesRelative[0] =
+                    if (noto.notoIsArchived) ResourcesCompat.getDrawable(resources, R.drawable.ic_outline_unarchive_24, null)
+                    else ResourcesCompat.getDrawable(resources, R.drawable.archive_arrow_down_outline, null)
 
-        }
+                binding.tvRemindMe.compoundDrawablesRelative[0] =
+                    if (noto.notoReminder == null) ResourcesCompat.getDrawable(resources, R.drawable.bell_plus_outline, null)
+                    else ResourcesCompat.getDrawable(resources, R.drawable.bell_ring_outline, null)
+
+            }
+
+        })
 
         binding.tvArchiveNoto.setOnClickListener {
             dismiss()
@@ -99,8 +105,7 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
         }
 
         binding.tvDeleteNoto.setOnClickListener {
-
-            val navController = findNavController()
+            dismiss()
 
             ConfirmationDialogFragment { dialogFragment, dialogBinding ->
 
@@ -109,7 +114,6 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
 
                 dialogBinding.btnConfirm.setOnClickListener {
                     dialogFragment.dismiss()
-                    navController.navigate(NotoDialogFragmentDirections.actionNotoDialogFragmentToLibraryFragment(args.libraryId))
                     viewModel.deleteNoto()
                 }
             }.show(parentFragmentManager, null)

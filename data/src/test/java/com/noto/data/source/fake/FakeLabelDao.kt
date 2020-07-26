@@ -2,6 +2,7 @@ package com.noto.data.source.fake
 
 import com.noto.data.source.local.LabelLocalDataSource
 import com.noto.domain.model.Label
+import com.noto.domain.replaceWith
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -17,17 +18,12 @@ class FakeLabelDao : LabelLocalDataSource {
         it.labelId == label.labelId
     }
 
-    override suspend fun deleteLabel(labelId: Long) {
-        labels.removeIf { it.labelId == labelId }
+    override suspend fun deleteLabel(label: Label) {
+        labels.remove(label)
     }
 
     override fun getLabels(): Flow<List<Label>> = flowOf(labels)
 
-    override fun getLabelById(labelId: Long): Flow<Label> = flowOf(labels.first { it.labelId == labelId })
+    override fun getLabel(labelId: Long): Flow<Label> = flowOf(labels.first { it.labelId == labelId })
 
-}
-
-fun <T> MutableList<T>.replaceWith(value: T, predicate: (T) -> Boolean) {
-    val result = first(predicate)
-    this[indexOf(result)] = value
 }
