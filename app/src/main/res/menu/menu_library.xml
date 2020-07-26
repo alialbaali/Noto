@@ -10,45 +10,17 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/delete_library"
-        android:enabled="true"
-        android:icon="@drawable/ic_delete_24px"
-        android:title="@string/delete_library"
-        android:visible="true"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/view"
         android:contentDescription="@string/view"
         android:icon="@drawable/view_agenda_outline"
         android:title="@string/view"
         app:showAsAction="ifRoom" />
 
-    <!--            <item-->
-    <!--                android:id="@+id/style"-->
-    <!--                android:contentDescription="@string/change_style"-->
-    <!--                android:enabled="true"-->
-    <!--                android:icon="@drawable/ic_style_24px"-->
-    <!--                android:title="@string/change_style"-->
-    <!--                android:visible="true"-->
-    <!--                app:showAsAction="ifRoom" />-->
-
-    <!--            <item-->
-    <!--                android:id="@+id/delete"-->
-    <!--                android:contentDescription="@string/delete_notebook"-->
-    <!--                android:enabled="true"-->
-    <!--                android:icon="@drawable/ic_delete_sweep_24px"-->
-    <!--                android:title="@string/delete_notebook"-->
-    <!--                android:visible="true"-->
-    <!--                app:showAsAction="ifRoom" />-->
-
-    <!--            <item-->
-    <!--                android:id="@+id/sort"-->
-    <!--                android:contentDescription="@string/sort_notos"-->
-    <!--                android:enabled="true"-->
-    <!--                android:icon="@drawable/ic_sort_custom_24dp"-->
-    <!--                android:title="@string/sort_notos"-->
-    <!--                android:visible="true"-->
-    <!--                app:showAsAction="ifRoom" />-->
+    <item
+        android:id="@+id/search"
+        android:contentDescription="@string/search"
+        android:icon="@drawable/ic_search_24dp"
+        android:title="@string/search"
+        app:showAsAction="ifRoom"/>
 
 </menu>

@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
@@ -33,11 +36,19 @@ class LibraryFragment : Fragment() {
 
     private val args by navArgs<LibraryFragmentArgs>()
 
+    private val rvAdapter by lazy {
+        NotoListRVAdapter(object : NotoItemClickListener {
+            override fun onClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(noto.libraryId, noto.notoId))
+            override fun onLongClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(noto.libraryId, noto.notoId))
+        })
+    }
+
     @ExperimentalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentLibraryBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = this@LibraryFragment
+            viewModel = this@LibraryFragment.viewModel
         }
 
         binding.ctb.setFontFamily()
@@ -83,6 +94,36 @@ class LibraryFragment : Fragment() {
                         true
                     }
 
+                    R.id.search -> {
+
+                        val searchEt = binding.etSearch
+
+                        searchEt.isVisible = !searchEt.isVisible
+
+                        val rvAnimation: Animation
+
+                        if (searchEt.isVisible) {
+
+                            rvAnimation = TranslateAnimation(0F, 0F, -50F, 0F).apply {
+                                duration = 250
+                            }
+
+                            binding.rv.startAnimation(rvAnimation)
+                            searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.et_anim_hide))
+
+                        } else {
+
+                            rvAnimation = TranslateAnimation(0F, 0F, 50F, 0F).apply {
+                                duration = 250
+                            }
+
+                            binding.rv.startAnimation(rvAnimation)
+                            searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.et_anim_show))
+                        }
+
+                        true
+                    }
+
                     else -> false
                 }
             }
@@ -101,19 +142,6 @@ class LibraryFragment : Fragment() {
         }
 
         with(binding.rv) {
-
-            val rvAdapter = NotoListRVAdapter(
-                object : NotoItemClickListener {
-
-                    override fun onClick(noto: Noto) {
-                        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(noto.libraryId, noto.notoId))
-                    }
-
-                    override fun onLongClick(noto: Noto) {
-                        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(noto.libraryId, noto.notoId))
-                    }
-
-                })
 
             adapter = rvAdapter
 
@@ -158,6 +186,12 @@ class LibraryFragment : Fragment() {
                     rvAdapter.submitList(it)
                 }
             }
+        }
+
+        viewModel.searchTerm.observe(viewLifecycleOwner) { searchTerm ->
+            val notos = viewModel.notos.value
+            if (searchTerm.isBlank()) rvAdapter.submitList(notos)
+            else rvAdapter.submitList(notos?.filter { it.notoTitle.contains(searchTerm) || it.notoBody.contains(searchTerm) })
         }
 
         return binding.root

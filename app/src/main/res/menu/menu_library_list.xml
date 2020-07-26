@@ -24,12 +24,12 @@
         android:icon="@drawable/archive_outline"
         android:title="@string/archived_notos"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/labels"
-        android:icon="@drawable/ic_labels_24dp"
-        android:title="@string/labels"
-        android:visible="true"
-        app:showAsAction="always" />
+<!--    <item-->
+<!--        android:id="@+id/labels"-->
+<!--        android:icon="@drawable/ic_labels_24dp"-->
+<!--        android:title="@string/labels"-->
+<!--        android:visible="true"-->
+<!--        app:showAsAction="always" />-->
 
     <item
         android:id="@+id/theme"

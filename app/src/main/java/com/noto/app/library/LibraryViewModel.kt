@@ -23,6 +23,8 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
     private var _notos = MutableLiveData<List<Noto>>()
     val notos: LiveData<List<Noto>> = _notos
 
+    val searchTerm = MutableLiveData<String>().apply { value = String() }
+
     val layoutManager = liveData<Int> {
         val flow = storage.getInt(LAYOUT_MANAGER_KEY, LINEAR_LAYOUT_MANAGER).asFlow()
         emitSource(flow.asLiveData())

@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="viewModelShared"
-            type="com.noto.library.LibraryViewModel" />
+            name="viewModel"
+            type="com.noto.app.library.LibraryViewModel" />
 
     </data>
 
@@ -34,8 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:visibility="gone"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <ImageView
@@ -64,9 +64,8 @@
                 android:gravity="center"
                 android:maxLines="3"
                 android:text="@string/all_notos"
-                android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="24sp"
+                android:textSize="30sp"
                 tools:textColor="@color/colorAccentTeal" />
 
             <TextView
@@ -113,43 +112,6 @@
                     android:layout_height="match_parent"
                     app:layout_collapseMode="parallax">
 
-                    <ImageView
-                        android:id="@+id/iv_library_icon"
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:layout_marginStart="@dimen/spacing_normal"
-                        android:layout_marginTop="@dimen/spacing_normal"
-                        android:layout_marginEnd="@dimen/spacing_normal"
-                        android:layout_marginBottom="@dimen/spacing_small"
-                        android:src="@drawable/ic_round_border_all_24"
-                        android:tint="@color/colorPrimary"
-                        app:layout_constraintBottom_toTopOf="@+id/tv_library_title"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tb"
-                        tools:tint="@color/colorAccentTeal" />
-
-                    <TextView
-                        android:id="@+id/tv_library_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/spacing_normal"
-                        android:layout_marginTop="@dimen/spacing_small"
-                        android:layout_marginEnd="@dimen/spacing_normal"
-                        android:layout_marginBottom="@dimen/spacing_normal"
-                        android:fontFamily="@font/roboto_medium"
-                        android:gravity="center"
-                        android:maxLines="3"
-                        android:text="@string/all_notos"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="24sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/iv_library_icon"
-                        tools:textColor="@color/colorAccentTeal" />
-
                     <com.google.android.material.appbar.MaterialToolbar
                         android:id="@+id/tb"
                         android:layout_width="0dp"
@@ -169,11 +131,66 @@
                             android:gravity="end"
                             android:singleLine="true"
                             android:textAllCaps="true"
-                            android:textColor="@color/colorOnPrimary"
                             android:textSize="12sp"
+                            android:textStyle="italic"
                             tools:text="7 Notos"
                             tools:textColor="@color/colorAccentTeal" />
                     </com.google.android.material.appbar.MaterialToolbar>
+
+                    <ImageView
+                        android:id="@+id/iv_library_icon"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginStart="@dimen/spacing_normal"
+                        android:layout_marginTop="@dimen/spacing_normal"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:layout_marginBottom="@dimen/spacing_extra_small"
+                        app:layout_constraintBottom_toTopOf="@+id/tv_library_title"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tb"
+                        tools:src="@drawable/ic_round_border_all_24"
+                        tools:tint="@color/colorAccentTeal" />
+
+                    <TextView
+                        android:id="@+id/tv_library_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_normal"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:layout_marginBottom="@dimen/spacing_normal"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:maxLines="3"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toTopOf="@id/et_search"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/iv_library_icon"
+                        tools:text="@string/all_notos"
+                        tools:textColor="@color/colorAccentTeal" />
+
+                    <EditText
+                        android:id="@+id/et_search"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/spacing_normal"
+                        android:layout_marginTop="@dimen/spacing_extra_small"
+                        android:layout_marginEnd="@dimen/spacing_normal"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:background="@drawable/shape_et"
+                        android:hint="@string/search"
+                        android:inputType="text"
+                        android:padding="@dimen/spacing_normal"
+                        android:singleLine="true"
+                        android:text="@={viewModel.searchTerm}"
+                        android:textColor="@color/colorSecondary"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_library_title" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
