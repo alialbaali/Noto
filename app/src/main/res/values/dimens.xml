@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Margin -->
+    <!-- Margin & Padding -->
     <dimen name="spacing_extra_small">4dp</dimen>
     <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_normal">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_extra_large">36dp</dimen>
-    <dimen name="text_dimen">14sp</dimen>
 
     <!-- Elevation -->
     <dimen name="elevation_no">0dp</dimen>
@@ -17,12 +16,15 @@
     <dimen name="elevation_large">8dp</dimen>
     <dimen name="elevation_extra_large">16dp</dimen>
 
-    <dimen name="shape_corner">16dp</dimen>
-    <dimen name="abl">200dp</dimen>
-    <dimen name="tb_tv_dimen">26sp</dimen>
-    <dimen name="tiet_text_dimen">18sp</dimen>
-    <dimen name="btn_text_dimen">20sp</dimen>
-    <dimen name="tv_dimen">18sp</dimen>
-    <dimen name="sign_in_tv_dimen">32sp</dimen>
+    <!-- Text Size -->
+    <dimen name="size_extra_tiny">12sp</dimen>
+    <dimen name="size_tiny">14sp</dimen>
+    <dimen name="size_extra_small">16sp</dimen>
+    <dimen name="size_small">18sp</dimen>
+    <dimen name="size_normal">20sp</dimen>
+    <dimen name="size_large">22sp</dimen>
+    <dimen name="size_extra_large">24sp</dimen>
+    <dimen name="size_huge">26sp</dimen>
+    <dimen name="size_extra_huge">28sp</dimen>
 
 </resources>
