@@ -5,12 +5,12 @@
         <shape
             android:shape="rectangle"
             android:tint="@color/colorBackground">
-            <corners android:radius="@dimen/shape_corner" />
+            <corners android:radius="@dimen/spacing_normal" />
         </shape>
     </item>
 
     <item
-        android:drawable="@drawable/ic_launcher_foreground"
+        android:drawable="@drawable/ic_splash_screen"
         android:gravity="center" />
 
 </layer-list>
