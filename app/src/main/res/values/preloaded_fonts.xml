@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
-        <item>@font/roboto</item>
-        <item>@font/roboto_bold</item>
-        <item>@font/roboto_light</item>
-        <item>@font/roboto_medium</item>
-        <item>@font/roboto_thin</item>
+        <item>@font/arima_madurai</item>
+        <item>@font/arima_madurai_bold</item>
+        <item>@font/arima_madurai_light</item>
+        <item>@font/arima_madurai_medium</item>
     </array>
 </resources>
