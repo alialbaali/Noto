@@ -1,99 +1,64 @@
 <resources>
+
+    <!-- App -->
     <string name="app_name">Noto</string>
-    <string name="notebooks">Notebooks</string>
-    <string name="lists">Lists</string>
-    <string name="create">CREATE</string>
-
-    <string name="todos">Todos</string>
-    <string name="new_note">New Note</string>
-    <string name="new_notebook">New Notebook</string>
+    <string name="edit">Edit</string>
+    <string name="done">Done</string>
     <string name="cancel">Cancel</string>
-    <string name="body">Body</string>
-    <string name="title">Title</string>
-    <string name="create_new_notebook">Create new notebook</string>
-    <string name="gray">Gray</string>
-    <string name="blue">Blue</string>
-    <string name="pink">Pink</string>
-    <string name="cyan">Cyan</string>
-    <string name="notebook_title">Notebook Title</string>
-    <string name="new_notebook_empty_error">Notebook title can not be empty!</string>
-    <string name="new_notebook_max_length_error">Notebook title can not be more than 20 characters!</string>
-    <string name="change_style">Change Style</string>
-    <string name="delete_noto">Delete noto</string>
-    <string name="archive_noto">Archive noto</string>
-    <string name="empty_notebook">Oops there are no notes! Try to create some</string>
-    <string name="empty_todolist">Oops there are no todos! Try to create some</string>
-    <string name="delete_notebook">Delete notebook</string>
     <string name="update">Update</string>
-    <string name="update_notebook">Update Notebook</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="todo_lists">Todo lists</string>
-    <string name="todolist">Todo-List</string>
-    <string name="notebook">Notebook</string>
     <string name="type_a_title">Type a title</string>
     <string name="search">Search</string>
-    <string name="todo">Todo</string>
-    <string name="sub_todo">Sub todo</string>
-    <string name="no_reminder">No reminder setup</string>
     <string name="repeat">Repeat</string>
-    <string name="sub_todos">Sub todos</string>
-    <string name="type_a_sub_todo">Type a sub todo</string>
-    <string name="todo_body">Todo body</string>
-    <string name="type_a_todo">Type a todo</string>
-    <string name="creation_date">Creation date</string>
-    <string name="modification_date">Modification date</string>
-    <string name="alphabetically">Alphabetically</string>
-    <string name="custom">Custom</string>
-    <string name="sort_by">Sort by</string>
-    <string name="sort_notos">Sort Notos</string>
-    <string name="sort_libraries">Sort Libraries</string>
-    <string name="more">more</string>
-    <string name="icon">Icon</string>
-    <string name="choose_an_icon">Choose an icon</string>
-    <string name="home">Home</string>
-    <string name="notos">Notos</string>
+    <string name="more">More</string>
+    <string name="share_to">Share to</string>
+    <string name="share">Share</string>
+    <string name="copy_to">Copy to</string>
+    <string name="view">View</string>
+    <string name="created_at">Created at</string>
+
+    <!-- Library -->
     <string name="libraries">Libraries</string>
     <string name="library">Library</string>
-    <string name="add_label">Add label</string>
-    <string name="noto_archived">Noto has been archived</string>
-    <string name="noto_unarchived">Noto has been unarchived</string>
-    <string name="labels">Labels</string>
-    <string name="create_label">Create label</string>
     <string name="create_library">Create library</string>
-    <string name="label_title">Label title</string>
-    <string name="update_label">Update label</string>
-    <string name="delete_label">Delete label</string>
+    <string name="update_library">Update library</string>
+    <string name="edit_library">Edit library</string>
     <string name="library_title">Library title</string>
-    <string name="done">Done</string>
-    <string name="there_are_no_libraries">There are no libraries!</string>
-    <string name="there_are_no_labels">There are no labels!</string>
-    <string name="profile">Profile</string>
-    <string name="reminder">Reminder</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="sign_in">Sign in</string>
-    <string name="name">Name</string>
-    <string name="sign_up">Sign up</string>
-    <string name="archived_notos">Archived notos</string>
-    <string name="all_notos">All Notos</string>
     <string name="delete_library">Delete library</string>
+    <string name="empty_library">(Empty library)</string>
+    <string name="delete_library_confirmation">Are you sure you want to delete this library?</string>
+
+    <!-- Noto -->
+    <string name="all_notos">All notos</string>
+    <string name="body">Body</string>
+    <string name="title">Title</string>
+    <string name="delete_noto">Delete noto</string>
+    <string name="archive_noto">Archive noto</string>
     <string name="unarchive_noto">Unarchive Noto</string>
-    <string name="view">View</string>
-    <string name="drag">Drag</string>
-    <string name="copy_to">Copy to</string>
-    <string name="move_to">Move to</string>
+    <string name="notos">Notos</string>
+    <string name="noto_archived">Noto has been archived</string>
+    <string name="no_reminder">No reminder setup</string>
+    <string name="noto_unarchived">Noto has been unarchived</string>
+    <string name="reminder">Reminder</string>
+    <string name="archived_notos">Archived notos</string>
     <string name="copy_to_clipboard">Copy to Clipboard</string>
     <string name="copied_to_clipboard">Copied to Clipboard</string>
     <string name="delete_noto_confirmation">Are you sure you want to delete this noto?</string>
     <string name="share_noto">Share Noto</string>
-    <string name="share_to">Share to</string>
-    <string name="share">Share</string>
-    <string name="empty_library">(Empty Library)</string>
+    <string name="add_reminder">Add Reminder</string>
+
+    <!-- Label -->
+    <string name="add_label">Add label</string>
+    <string name="labels">Labels</string>
+    <string name="create_label">Create label</string>
+    <string name="label_title">Label title</string>
+    <string name="update_label">Update label</string>
+    <string name="delete_label">Delete label</string>
+    <string name="there_are_no_labels">There are no labels!</string>
+
+    <!-- Theme -->
+    <string name="theme">Theme</string>
     <string name="system_theme">System Theme</string>
     <string name="light_theme">Light Theme</string>
     <string name="dark_theme">Dark Theme</string>
-    <string name="theme">Theme</string>
 
 </resources>
