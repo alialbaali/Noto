@@ -7,7 +7,7 @@
     app:startDestination="@id/sign">
     <fragment
         android:id="@+id/libraryListFragment"
-        android:name="com.noto.library.LibraryListFragment"
+        android:name="com.noto.app.library.LibraryListFragment"
         android:label="LibraryListFragment"
         tools:layout="@layout/fragment_list_library">
         <action
@@ -18,12 +18,12 @@
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
         <action
-            android:id="@+id/action_libraryListFragment_to_labelListFragment"
-            app:destination="@id/labelListFragment" />
+            android:id="@+id/action_libraryListFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.noto.library.LibraryFragment"
+        android:name="com.noto.app.library.LibraryFragment"
         android:label="LibraryFragment"
         tools:layout="@layout/fragment_library">
         <argument
@@ -40,9 +40,6 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_close_enter"
             app:popExitAnim="@anim/fragment_close_exit" />
-        <action
-            android:id="@+id/action_libraryFragment_to_notoNewFragment"
-            app:destination="@id/notoNewFragment" />
     </fragment>
     <argument
         android:name="library_id"
@@ -52,7 +49,7 @@
         app:argType="long" />
     <fragment
         android:id="@+id/notoFragment"
-        android:name="com.noto.noto.NotoFragment"
+        android:name="com.noto.app.noto.NotoFragment"
         android:label="NotoFragment"
         tools:layout="@layout/fragment_noto">
         <argument
@@ -62,21 +59,12 @@
             android:name="noto_id"
             app:argType="long" />
     </fragment>
-    <fragment
-        android:id="@+id/labelListFragment"
-        android:name="com.noto.label.LabelListFragment"
-        android:label="LabelListFragment"
-        tools:layout="@layout/fragment_list_label" />
-    <fragment
-        android:id="@+id/notoNewFragment"
-        android:name="com.noto.noto.NotoNewFragment"
-        android:label="NotoNewFragment" />
     <navigation
         android:id="@+id/sign"
         app:startDestination="@id/signInFragment">
         <fragment
             android:id="@+id/signInFragment"
-            android:name="com.noto.sign.SignInFragment"
+            android:name="com.noto.app.sign.SignInFragment"
             android:label="SignInFragment" >
             <action
                 android:id="@+id/action_signInFragment_to_signUpFragment"
@@ -88,10 +76,13 @@
         </fragment>
         <action
             android:id="@+id/action_global_libraryListFragment"
-            app:destination="@id/libraryListFragment" />
+            app:destination="@id/libraryListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/libraryListFragment"
+            app:popUpToInclusive="false" />
         <fragment
             android:id="@+id/signUpFragment"
-            android:name="com.noto.sign.SignUpFragment"
+            android:name="com.noto.app.sign.SignUpFragment"
             android:label="SignUpFragment" >
             <action
                 android:id="@+id/action_signUpFragment_to_signInFragment"
@@ -102,4 +93,8 @@
                 app:popExitAnim="@android:anim/fade_out" />
         </fragment>
     </navigation>
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.noto.app.user.UserFragment"
+        android:label="UserFragment" />
 </navigation>

@@ -42,4 +42,5 @@ dependencies {
     implementation (project(Modules.REMOTE))
     implementation (project(Modules.DATA))
     api(Libraries.Main.KOIN)
+//    testImplementation(Libraries.Testing.KTOR_TEST)
 }

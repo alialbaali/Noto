@@ -37,7 +37,7 @@ class NotoClient(private val client: HttpClient) : NotoRemoteDataSource {
 
     }
 
-    override suspend fun deleteNoto(userToken: String, libraryId: Long, notoId: Long): ResponseSchema<Nothing> {
+    override suspend fun deleteNoto(userToken: String, libraryId: Long, notoId: Long) {
 
         return client.delete("$baseUrl/$libraryId/$notoId") {
             authHeader(userToken)

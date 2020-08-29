@@ -30,8 +30,8 @@ class NotoRepositoryImpl(
         localSource.createNoto(noto)
 
         localSource.getNotos(noto.libraryId).collect { notos ->
-            notos.last().run {
-                entityStatusDataSource.createEntityStatus(EntityStatus(id = this.notoId, type = Type.NOTO, status = Status.CREATED))
+            notos.lastOrNull()?.let {
+                entityStatusDataSource.createEntityStatus(EntityStatus(libraryId = noto.libraryId, notoId = it.notoId, type = Type.NOTO, status = Status.CREATED))
             }
 
         }
@@ -42,7 +42,7 @@ class NotoRepositoryImpl(
 
         localSource.deleteNoto(noto)
 
-        entityStatusDataSource.createEntityStatus(EntityStatus(id = noto.notoId, type = Type.NOTO, status = Status.DELETED))
+        entityStatusDataSource.createEntityStatus(EntityStatus(libraryId = noto.libraryId, notoId = noto.notoId, type = Type.NOTO, status = Status.DELETED))
 
     }
 
@@ -50,7 +50,7 @@ class NotoRepositoryImpl(
 
         localSource.updateNoto(noto)
 
-        entityStatusDataSource.createEntityStatus(EntityStatus(id = noto.notoId, type = Type.NOTO, status = Status.UPDATED))
+        entityStatusDataSource.createEntityStatus(EntityStatus(libraryId = noto.libraryId, notoId = noto.notoId, type = Type.NOTO, status = Status.UPDATED))
 
     }
 

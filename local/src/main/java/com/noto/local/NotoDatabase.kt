@@ -14,7 +14,6 @@ private const val NOTO_DATABASE = "Noto Database"
     NotoIconConverter::class,
     SortTypeConverter::class,
     SortMethodConverter::class,
-    DateConverter::class,
     StatusConverter::class,
     TypeConverter::class
 )

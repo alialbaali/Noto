@@ -14,6 +14,6 @@ interface LibraryRemoteDataSource {
 
     suspend fun updateLibrary(userToken: String, library: Library): ResponseSchema<Library>
 
-    suspend fun deleteLibrary(userToken: String, libraryId: Long): ResponseSchema<Nothing>
+    suspend fun deleteLibrary(userToken: String, libraryId: Long)
 
 }

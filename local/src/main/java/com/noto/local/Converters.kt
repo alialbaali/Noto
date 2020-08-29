@@ -2,8 +2,6 @@ package com.noto.local
 
 import androidx.room.TypeConverter
 import com.noto.domain.model.*
-import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormat
 
 object NotoColorConverter {
 
@@ -26,19 +24,6 @@ object SortTypeConverter {
     @TypeConverter
     @JvmStatic
     fun toEnum(ordinal: Int): SortType = SortType.values().first { sort -> sort.ordinal == ordinal }
-}
-
-object DateConverter {
-
-    private val formatter = DateTimeFormat.shortDate()
-
-    @TypeConverter
-    @JvmStatic
-    fun toString(date: DateTime?): String? = formatter.print(date)
-
-    @TypeConverter
-    @JvmStatic
-    fun toDate(value: String?): DateTime? = formatter.parseDateTime(value)
 }
 
 object SortMethodConverter {

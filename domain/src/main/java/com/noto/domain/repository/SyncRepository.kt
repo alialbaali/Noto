@@ -4,8 +4,8 @@ interface SyncRepository {
 
     val userToken: String
 
-    suspend fun fetchData()
+    suspend fun fetchData(): Result<Unit>
 
-    suspend fun syncData()
+    suspend fun syncData(): Result<Unit>
 
 }

@@ -23,13 +23,9 @@ interface LibraryDao : LibraryLocalDataSource {
     @Query("SELECT COUNT(*) FROM notos WHERE library_id = :libraryId")
     override suspend fun countNotos(libraryId: Long): Int
 
-    @Transaction
-    @Update
-    override suspend fun updateLibraries(libraries: List<Library>)
-
     @Update
     override suspend fun updateLibrary(library: Library)
 
-    @Insert
-    override suspend fun createLibrary(libraries: List<Library>)
+    @Query("SELECT * FROM libraries WHERE library_id = :libraryId")
+    override suspend fun getLibrary(libraryId: Long): Library
 }

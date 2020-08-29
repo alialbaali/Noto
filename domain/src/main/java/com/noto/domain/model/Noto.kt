@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
 
 @Entity(tableName = "notos")
 data class Noto(
@@ -32,15 +30,6 @@ data class Noto(
     @ColumnInfo(name = "noto_position")
     var notoPosition: Int,
 
-    @ColumnInfo(name = "noto_creation_date")
-    val notoCreationDate: DateTime = DateTime.now(DateTimeZone.getDefault()),
-
     @ColumnInfo(name = "noto_is_starred")
-    var notoIsStarred: Boolean = false,
-
-    @ColumnInfo(name = "noto_schedule")
-    val notoReminder: DateTime? = null,
-
-    @ColumnInfo(name = "noto_is_completed")
-    val notoIsCompleted: Boolean = false
+    var notoIsStarred: Boolean = false
 )

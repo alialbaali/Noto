@@ -92,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_normal"
+            android:padding="@dimen/spacing_normal"
             android:text="@string/create_library"
             app:layout_constraintBottom_toBottomOf="@id/cl"
             app:layout_constraintEnd_toEndOf="@id/guideline_end"

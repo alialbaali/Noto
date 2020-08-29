@@ -67,7 +67,7 @@
     <string name="there_are_no_libraries">There are no libraries!</string>
     <string name="there_are_no_labels">There are no labels!</string>
     <string name="schedule">Schedule</string>
-    <string name="profile">Profile</string>
+    <string name="user">User</string>
     <string name="reminder">Reminder</string>
     <string name="email">Email</string>
     <string name="password">Password</string>

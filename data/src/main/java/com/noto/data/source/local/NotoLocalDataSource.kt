@@ -9,6 +9,8 @@ interface NotoLocalDataSource {
 
     fun getNotoById(notoId: Long): Flow<Noto>
 
+    suspend fun getNoto(notoId: Long): Noto
+
     suspend fun createNoto(noto: Noto)
 
     suspend fun updateNoto(noto: Noto)

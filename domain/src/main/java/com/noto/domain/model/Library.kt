@@ -3,8 +3,6 @@ package com.noto.domain.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import org.joda.time.DateTime
-import org.joda.time.DateTimeZone
 
 @Entity(tableName = "libraries")
 data class Library(
@@ -29,8 +27,6 @@ data class Library(
     var sortType: SortType = SortType.DESC,
 
     @ColumnInfo(name = "sort_method")
-    var sortMethod: SortMethod = SortMethod.CreationDate,
+    var sortMethod: SortMethod = SortMethod.CreationDate
 
-    @ColumnInfo(name = "library_creation_date")
-    val libraryCreationDate: DateTime = DateTime.now(DateTimeZone.getDefault())
 )

@@ -38,7 +38,7 @@ class LibraryClient(private val client: HttpClient) : LibraryRemoteDataSource {
 
     }
 
-    override suspend fun deleteLibrary(userToken: String, libraryId: Long): ResponseSchema<Nothing> {
+    override suspend fun deleteLibrary(userToken: String, libraryId: Long) {
 
         return client.delete("${baseUrl}/$libraryId") {
             authHeader(userToken)

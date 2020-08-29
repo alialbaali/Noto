@@ -41,4 +41,11 @@ android {
 
 dependencies {
     api(project(Modules.DOMAIN))
+//    testImplementation(Libraries.Testing.COROUTINES)
+//    testImplementation(Libraries.Testing.JUNIT)
+//    testImplementation(Libraries.Testing.KOTEST_JUNIT)
+//    testImplementation(Libraries.Testing.KOTEST_ASSERTION)
+//    testImplementation(Libraries.Testing.KOTEST_PROPERTY)
+//    testImplementation(Libraries.Testing.MOCKK)
+//    testImplementation(Libraries.Testing.KOIN_TEST)
 }

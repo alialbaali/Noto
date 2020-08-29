@@ -10,8 +10,11 @@ data class EntityStatus(
     @PrimaryKey(autoGenerate = true)
     val entityStatusId: Long = 0L,
 
-    @ColumnInfo(name = "id")
-    val id: Long,
+    @ColumnInfo(name = "library_id")
+    val libraryId: Long,
+
+    @ColumnInfo(name = "noto_id")
+    val notoId: Long? = null,
 
     @ColumnInfo(name = "type")
     val type: Type,

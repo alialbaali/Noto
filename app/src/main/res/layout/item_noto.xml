@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.noto.noto.NotoViewModel" />
+            type="com.noto.app.noto.NotoViewModel" />
 
     </data>
 

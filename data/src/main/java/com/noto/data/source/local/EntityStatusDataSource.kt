@@ -8,6 +8,6 @@ interface EntityStatusDataSource {
 
     fun getEntitiesStatus(): List<EntityStatus>
 
-    fun deleteEntityStatus(entityStatus: EntityStatus)
+    fun deleteEntityStatusById(entityStatusId: Long)
 
 }

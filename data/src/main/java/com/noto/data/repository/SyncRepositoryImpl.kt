@@ -7,12 +7,12 @@ import com.noto.data.source.local.NotoLocalDataSource
 import com.noto.data.source.local.UserLocalDataSource
 import com.noto.data.source.remote.LibraryRemoteDataSource
 import com.noto.data.source.remote.NotoRemoteDataSource
-import com.noto.domain.model.EntityStatus
 import com.noto.domain.model.Status
 import com.noto.domain.model.Type
 import com.noto.domain.repository.AUTH_SCHEME
 import com.noto.domain.repository.SyncRepository
-import kotlinx.coroutines.flow.single
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class SyncRepositoryImpl(
     private val userLocalDataSource: UserLocalDataSource,
@@ -26,7 +26,7 @@ class SyncRepositoryImpl(
     override val userToken: String
         get() = AUTH_SCHEME.plus(userLocalDataSource.getUserToken())
 
-    override suspend fun fetchData() {
+    override suspend fun fetchData(): Result<Unit> = withContext(Dispatchers.IO) {
         tryCatching {
             val response = libraryRemoteDataSource.getLibraries(userToken)
             if (response.success) {
@@ -46,75 +46,72 @@ class SyncRepositoryImpl(
         }
     }
 
-    private lateinit var entitiesStatus: List<EntityStatus>
 
-    override suspend fun syncData() {
+    override suspend fun syncData() = withContext(Dispatchers.IO) {
 
-        entityStatusDataSource.getEntitiesStatus().let { list ->
-            entitiesStatus = list
-        }
+        tryCatching {
 
-        entitiesStatus.forEach { entityStatus ->
+            entityStatusDataSource.getEntitiesStatus().forEach { entityStatus ->
 
-            when (entityStatus.type) {
+                when (entityStatus.type) {
 
-                Type.LIBRARY -> {
 
-                    val library = libraryLocalDataSource.getLibraryById(entityStatus.id).single()
+                    Type.LIBRARY -> {
 
-                    when (entityStatus.status) {
+                        val library = libraryLocalDataSource.getLibrary(entityStatus.libraryId)
 
-                        Status.CREATED ->
+                        when (entityStatus.status) {
 
-                            libraryRemoteDataSource.createLibrary(userToken, library).run {
-                                if (this.success) entityStatusDataSource.deleteEntityStatus(entityStatus)
-                            }
+                            Status.CREATED ->
 
-                        Status.UPDATED ->
+                                libraryRemoteDataSource.createLibrary(userToken, library).run {
+                                    if (this.success) entityStatusDataSource.deleteEntityStatusById(entityStatus.entityStatusId)
+                                }
 
-                            libraryRemoteDataSource.updateLibrary(userToken, library).run {
-                                if (this.success) entityStatusDataSource.deleteEntityStatus(entityStatus)
-                            }
+                            Status.UPDATED ->
 
-                        Status.DELETED ->
+                                libraryRemoteDataSource.updateLibrary(userToken, library).run {
+                                    if (this.success) entityStatusDataSource.deleteEntityStatusById(entityStatus.entityStatusId)
+                                }
 
-                            libraryRemoteDataSource.deleteLibrary(userToken, library.libraryId).run {
-                                if (this.success) entityStatusDataSource.deleteEntityStatus(entityStatus)
-                            }
+                            Status.DELETED ->
 
-                    }
-                }
+                                libraryRemoteDataSource.deleteLibrary(userToken, entityStatus.libraryId).run {
+                                    entityStatusDataSource.deleteEntityStatusById(entityStatus.entityStatusId)
+                                }
 
-                Type.NOTO -> {
-
-                    val noto = notoLocalDataSource.getNotoById(entityStatus.id).single()
-
-                    when (entityStatus.status) {
-
-                        Status.CREATED ->
-
-                            notoRemoteDataSource.createNoto(userToken, noto).run {
-                                if (this.success) entityStatusDataSource.deleteEntityStatus(entityStatus)
-                            }
-
-                        Status.UPDATED ->
-
-                            notoRemoteDataSource.updateNoto(userToken, noto).run {
-                                if (this.success) entityStatusDataSource.deleteEntityStatus(entityStatus)
-                            }
-
-                        Status.DELETED ->
-
-                            notoRemoteDataSource.deleteNoto(userToken, noto.libraryId, noto.notoId).run {
-                                if (this.success) entityStatusDataSource.deleteEntityStatus(entityStatus)
-                            }
-
+                        }
                     }
 
+                    Type.NOTO -> {
+
+                        val noto = notoLocalDataSource.getNoto(entityStatus.notoId!!)
+
+                        when (entityStatus.status) {
+
+                            Status.CREATED ->
+
+                                notoRemoteDataSource.createNoto(userToken, noto).run {
+                                    if (this.success) entityStatusDataSource.deleteEntityStatusById(entityStatus.entityStatusId)
+                                }
+
+                            Status.UPDATED ->
+
+                                notoRemoteDataSource.updateNoto(userToken, noto).run {
+                                    if (this.success) entityStatusDataSource.deleteEntityStatusById(entityStatus.entityStatusId)
+                                }
+
+                            Status.DELETED ->
+
+                                notoRemoteDataSource.deleteNoto(userToken, entityStatus.libraryId, entityStatus.notoId!!).run {
+                                    entityStatusDataSource.deleteEntityStatusById(entityStatus.entityStatusId)
+                                }
+
+                        }
+
+                    }
                 }
             }
         }
     }
-
-
 }

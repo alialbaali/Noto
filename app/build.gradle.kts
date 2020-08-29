@@ -47,6 +47,7 @@ android {
     }
     packagingOptions {
         exclude("META-INF/kotlinx-coroutines-core.kotlin_module")
+        exclude("META-INF/LICENSE.md")
     }
 }
 
@@ -73,14 +74,11 @@ dependencies {
     implementation(Libraries.Main.MATERIAL_DESIGN)
     implementation(Libraries.Main.WORK_MANAGER)
     implementation(Libraries.Main.CORE)
+    implementation(Libraries.Main.COIL)
     kapt(Libraries.Main.DATA_BINDING_COMPILER)
 
+
     // Coroutines
-    implementation(Libraries.Main.COROUTINES)
     implementation(Libraries.Main.COROUTINES_ANDROID)
 
-    // Test
-    testImplementation(Libraries.Test.JUNIT)
-    androidTestImplementation(Libraries.Test.ANDROID_ESPRESSO)
-    androidTestImplementation(Libraries.Test.ANDROID_JUNIT)
 }

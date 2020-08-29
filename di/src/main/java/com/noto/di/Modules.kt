@@ -19,7 +19,7 @@ import com.noto.remote.LibraryClient
 import com.noto.remote.NotoClient
 import com.noto.remote.UserClient
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.android.Android
+import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.features.defaultRequest
 import io.ktor.client.features.json.JacksonSerializer
 import io.ktor.client.features.json.Json
@@ -35,7 +35,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import java.util.concurrent.TimeUnit
 
-private const val HOST = "192.168.1.24"
+private const val HOST = "api-noto.herokuapp.com"
 
 private const val PORT = 8080
 
@@ -63,18 +63,17 @@ val repositoryModule = module {
 val remoteDataSourceModule = module {
 
     single {
-        HttpClient(Android) {
+        HttpClient(OkHttp) {
 
             expectSuccess = false
 
             defaultRequest {
                 host = HOST
-                port = PORT
                 contentType(ContentType.Application.Json)
             }
 
             Json {
-                serializer = JacksonSerializer() {
+                serializer = JacksonSerializer {
                     enable(SerializationFeature.INDENT_OUTPUT)
                     writerWithDefaultPrettyPrinter()
                 }

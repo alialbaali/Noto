@@ -31,7 +31,7 @@ class LibraryRepositoryImpl(
 
         localSource.getLibraries().collect { libraries ->
             libraries.lastOrNull()?.let {
-                entityStatusDataSource.createEntityStatus(EntityStatus(id = it.libraryId, type = Type.LIBRARY, status = Status.CREATED))
+                entityStatusDataSource.createEntityStatus(EntityStatus(libraryId = it.libraryId, type = Type.LIBRARY, status = Status.CREATED))
             }
         }
 
@@ -41,14 +41,14 @@ class LibraryRepositoryImpl(
 
         localSource.deleteLibrary(library)
 
-        entityStatusDataSource.createEntityStatus(EntityStatus(id = library.libraryId, type = Type.LIBRARY, status = Status.DELETED))
+        entityStatusDataSource.createEntityStatus(EntityStatus(libraryId = library.libraryId, type = Type.LIBRARY, status = Status.DELETED))
     }
 
     override suspend fun updateLibrary(library: Library) = withContext(Dispatchers.IO) {
 
         localSource.updateLibrary(library)
 
-        entityStatusDataSource.createEntityStatus(EntityStatus(id = library.libraryId, type = Type.LIBRARY, status = Status.UPDATED))
+        entityStatusDataSource.createEntityStatus(EntityStatus(libraryId = library.libraryId, type = Type.LIBRARY, status = Status.UPDATED))
 
     }
 

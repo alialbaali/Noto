@@ -11,7 +11,7 @@
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".app.MainActivity">
 
         <!--        <androidx.coordinatorlayout.widget.CoordinatorLayout-->
         <!--            android:id="@+id/cool"-->

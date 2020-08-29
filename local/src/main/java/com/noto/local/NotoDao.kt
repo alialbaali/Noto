@@ -29,4 +29,7 @@ interface NotoDao : NotoLocalDataSource {
     @Query("SELECT COUNT(*) FROM notos")
     override suspend fun countNotos(): Int
 
+    @Query("SELECT * FROM notos WHERE noto_id = :notoId")
+    override suspend fun getNoto(notoId: Long): Noto
+
 }

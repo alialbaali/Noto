@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.noto.library.LibraryListViewModel" />
+            type="com.noto.app.library.LibraryListViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -50,12 +50,12 @@
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/PopupMenu.Overflow">
 
-                    <!--                    <ImageView-->
-                    <!--                        android:id="@+id/img"-->
-                    <!--                        android:src="@drawable/ic_round_person_outline_24"-->
-                    <!--                        android:layout_width="36dp"-->
-                    <!--                        android:layout_height="36dp"-->
-                    <!--                        android:contentDescription="@string/profile" />-->
+                    <ImageView
+                        android:id="@+id/iv"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:contentDescription="@string/user"
+                        android:src="@drawable/ic_round_person_outline_24" />
 
                 </androidx.appcompat.widget.Toolbar>
 

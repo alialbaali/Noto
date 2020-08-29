@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.noto.sign.SignSharedViewModel" />
+            type="com.noto.app.sign.SignSharedViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

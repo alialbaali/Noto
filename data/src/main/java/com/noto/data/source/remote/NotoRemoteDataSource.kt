@@ -14,6 +14,6 @@ interface NotoRemoteDataSource {
 
     suspend fun updateNoto(userToken: String, noto: Noto): ResponseSchema<Noto>
 
-    suspend fun deleteNoto(userToken: String, libraryId: Long, notoId: Long): ResponseSchema<Nothing>
+    suspend fun deleteNoto(userToken: String, libraryId: Long, notoId: Long)
 
 }

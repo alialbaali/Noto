@@ -15,9 +15,7 @@ interface LibraryLocalDataSource {
 
     suspend fun countNotos(libraryId: Long): Int
 
-    suspend fun updateLibraries(libraries: List<Library>)
-
     suspend fun updateLibrary(library: Library)
 
-    suspend fun createLibrary(libraries: List<Library>)
+    suspend fun getLibrary(libraryId: Long) : Library
 }

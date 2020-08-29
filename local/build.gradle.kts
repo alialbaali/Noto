@@ -38,6 +38,10 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    packagingOptions {
+        exclude("META-INF/kotlinx-coroutines-core.kotlin_module")
+        exclude("META-INF/LICENSE.md")
+    }
 }
 
 dependencies {
@@ -45,4 +49,17 @@ dependencies {
     api(Libraries.Main.CORE)
     api(Libraries.Local.ROOM_RUNTIME)
     kapt(Libraries.Local.ROOM_COMPILER)
+//    androidTestImplementation(Libraries.Testing.ARCHITECTURE_COMPONENTS)
+//    androidTestImplementation(Libraries.Testing.ANDROID_JUNIT)
+//    androidTestImplementation(Libraries.Testing.COROUTINES)
+//    androidTestImplementation(Libraries.Testing.JUNIT)
+//    androidTestImplementation(Libraries.Testing.KOTEST_JUNIT)
+//    androidTestImplementation(Libraries.Testing.KOTEST_ASSERTION)
+//    androidTestImplementation(Libraries.Testing.KOTEST_PROPERTY)
+//    androidTestImplementation(Libraries.Testing.MOCKK)
+//    androidTestImplementation(Libraries.Testing.KOIN_TEST)
+//    androidTestImplementation(Libraries.Testing.ROOM)
+//    androidTestImplementation(Libraries.Testing.ANDROID_RULES)
+//    androidTestImplementation(Libraries.Testing.ANDROID_CORE)
+//    androidTestImplementation(Libraries.Testing.ANDROID_CORE_KTX)
 }
