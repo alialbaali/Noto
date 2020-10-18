@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.noto.library.LibraryListViewModel" />
+            type="com.noto.app.library.LibraryListViewModel" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -74,7 +74,7 @@
                         android:layout_marginTop="@dimen/spacing_extra_small"
                         android:layout_marginEnd="@dimen/spacing_normal"
                         android:layout_marginBottom="@dimen/spacing_normal"
-                        android:fontFamily="@font/roboto_medium"
+                        android:fontFamily="@font/arima_madurai_medium"
                         android:maxLines="3"
                         android:text="@string/libraries"
                         android:textAllCaps="true"
@@ -92,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="start|bottom"
                         android:layout_marginEnd="@dimen/spacing_normal"
-                        android:fontFamily="@font/roboto"
+                        android:fontFamily="@font/arima_madurai"
                         android:gravity="end"
                         android:singleLine="true"
                         android:textAllCaps="true"

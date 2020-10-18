@@ -16,9 +16,9 @@ object Libraries {
 
         const val VIEW_MODEL_STATE = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.VIEW_MODEL_STATE}"
 
-        const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${Versions.NAVIGATION_FRAGMENT}"
+        const val NAVIGATION_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${Versions.Navigation}"
 
-        const val NAVIGATION = "androidx.navigation:navigation-ui-ktx:${Versions.NAVIGATION}"
+        const val NAVIGATION = "androidx.navigation:navigation-ui-ktx:${Versions.Navigation}"
 
         const val KOTLIN = "stdlib:${Versions.KOTLIN}"
 
@@ -54,7 +54,7 @@ object Libraries {
 
         const val ANDROID = "com.android.tools.build:gradle:${Versions.GRADLE_ANDROID}"
 
-        const val NAVIGATION = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.GRADLE_NAVIGATION}"
+        const val NAVIGATION = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.Navigation}"
 
     }
 
@@ -107,14 +107,14 @@ object Libraries {
 
 }
 
-private object Versions {
+object Versions {
 
     // Main
-    const val KOTLIN = "1.3.72"
+    const val KOTLIN = "1.4.10"
 
-    const val JAVA_TIME = "1.0.4"
+    const val JAVA_TIME = "1.0.9"
 
-    const val NAVIGATION_FRAGMENT = "2.2.1"
+    const val Navigation = "2.3.1"
 
     const val COORDINATOR_LAYOUT = "1.1.0"
 
@@ -125,8 +125,6 @@ private object Versions {
     const val MATERIAL_DESIGN = "1.2.0-alpha06"
 
     const val RECYCLER_VIEW = "1.1.0"
-
-    const val NAVIGATION = "2.2.1"
 
     const val LIFE_CYCLE = "2.2.0"
 
@@ -142,8 +140,6 @@ private object Versions {
 
     const val WORK_MANAGER = "2.3.4"
 
-    const val JODA_TIME = "2.10.6"
-
     const val APP_COMPAT = "1.1.0"
 
     const val SUPPORT = "1.0.0"
@@ -158,8 +154,7 @@ private object Versions {
     const val COROUTINES_ANDROID = "1.3.8"
 
     // Gradle
-    const val GRADLE_ANDROID = "4.0.1"
-    const val GRADLE_NAVIGATION = "2.2.2"
+    const val GRADLE_ANDROID = "4.1.0"
 
     // DI
     const val KOIN = "2.1.5"

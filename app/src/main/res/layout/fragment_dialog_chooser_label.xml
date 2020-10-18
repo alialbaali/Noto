@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/arima_madurai"
             android:text="Select labels"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp" />
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
             android:backgroundTint="@color/colorPrimary"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/arima_madurai_medium"
             android:padding="@dimen/spacing_small"
             android:text="Done"
             android:textAllCaps="false"

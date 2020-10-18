@@ -18,7 +18,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/spacing_normal"
-            android:text="@string/sort_by"
             android:textColor="@color/colorOnPrimary"
             android:textSize="18sp"
             app:layout_constraintBottom_toTopOf="@id/rg_sort_library"
@@ -44,7 +43,6 @@
                 android:buttonTint="@drawable/selector_sort_method"
                 android:checked="false"
                 android:padding="@dimen/spacing_normal"
-                android:text="@string/creation_date"
                 android:textColor="@drawable/selector_sort_method"
                 android:textSize="20sp" />
 
@@ -55,7 +53,6 @@
                 android:button="@drawable/ic_sort_alphabetically"
                 android:buttonTint="@drawable/selector_sort_method"
                 android:padding="@dimen/spacing_normal"
-                android:text="@string/alphabetically"
                 android:textColor="@drawable/selector_sort_method"
                 android:textSize="20sp" />
 
@@ -66,7 +63,6 @@
                 android:button="@drawable/ic_sort"
                 android:buttonTint="@drawable/selector_sort_method"
                 android:padding="@dimen/spacing_normal"
-                android:text="@string/custom"
                 android:textColor="@drawable/selector_sort_method"
                 android:textSize="20sp" />
         </RadioGroup>

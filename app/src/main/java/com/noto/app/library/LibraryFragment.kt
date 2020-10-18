@@ -109,7 +109,7 @@ class LibraryFragment : Fragment() {
                             }
 
                             binding.rv.startAnimation(rvAnimation)
-                            searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.et_anim_hide))
+                            searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
 
                         } else {
 
@@ -118,7 +118,7 @@ class LibraryFragment : Fragment() {
                             }
 
                             binding.rv.startAnimation(rvAnimation)
-                            searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.et_anim_show))
+                            searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
                         }
 
                         true

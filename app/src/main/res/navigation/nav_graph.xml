@@ -13,7 +13,7 @@
         app:argType="long" />
     <fragment
         android:id="@+id/labelListFragment"
-        android:name="com.noto.label.LabelListFragment"
+        android:name="com.noto.app.label.LabelListFragment"
         android:label="LabelListFragment"
         tools:layout="@layout/fragment_list_label">
         <action
@@ -27,7 +27,7 @@
 
     <dialog
         android:id="@+id/labelDialogFragment"
-        android:name="com.noto.label.LabelDialogFragment"
+        android:name="com.noto.app.label.LabelDialogFragment"
         android:label="LabelDialogFragment">
         <argument
             android:name="label_id"
@@ -36,7 +36,7 @@
     </dialog>
     <fragment
         android:id="@+id/libraryListFragment"
-        android:name="com.noto.library.LibraryListFragment"
+        android:name="com.noto.app.library.LibraryListFragment"
         android:label="LibraryListFragment">
         <action
             android:id="@+id/action_libraryListFragment_to_libraryFragment"
@@ -46,7 +46,7 @@
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit" />
         <action
-            android:id="@+id/action_libraryListFragment_to_libraryDialogFragment"
+            android:id="@+id/action_libraryListFragment_to_newLibraryDialogFragment"
             app:destination="@id/newLibraryDialogFragment" />
         <action
             android:id="@+id/action_libraryListFragment_to_archiveFragment"
@@ -65,10 +65,13 @@
             app:exitAnim="@anim/fragment_open_exit"
             app:popEnterAnim="@anim/fragment_open_enter"
             app:popExitAnim="@anim/fragment_open_exit" />
+        <action
+            android:id="@+id/action_libraryListFragment_to_libraryDialogFragment"
+            app:destination="@id/libraryDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.noto.library.LibraryFragment"
+        android:name="com.noto.app.library.LibraryFragment"
         android:label="LibraryFragment">
         <action
             android:id="@+id/action_libraryFragment_to_notoFragment"
@@ -90,14 +93,22 @@
         <action
             android:id="@+id/action_libraryFragment_to_notoDialogFragment"
             app:destination="@id/notoDialogFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_libraryDialogFragment"
+            app:destination="@id/libraryDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/newLibraryDialogFragment"
-        android:name="com.noto.library.NewLibraryDialogFragment"
-        android:label="NewLibraryDialogFragment" />
+        android:name="com.noto.app.library.NewLibraryDialogFragment"
+        android:label="NewLibraryDialogFragment" >
+        <argument
+            android:name="library_id"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </dialog>
     <fragment
         android:id="@+id/notoFragment"
-        android:name="com.noto.noto.NotoFragment"
+        android:name="com.noto.app.noto.NotoFragment"
         android:label="NotoFragment">
         <argument
             android:name="library_id"
@@ -115,7 +126,7 @@
     </fragment>
     <fragment
         android:id="@+id/archiveFragment"
-        android:name="com.noto.library.ArchiveFragment"
+        android:name="com.noto.app.library.ArchiveFragment"
         android:label="ArchiveFragment">
         <argument
             android:name="library_id"
@@ -127,7 +138,7 @@
     </fragment>
     <dialog
         android:id="@+id/reminderDialogFragment"
-        android:name="com.noto.noto.ReminderDialogFragment"
+        android:name="com.noto.app.noto.ReminderDialogFragment"
         android:label="ReminderDialogFragment">
         <argument
             android:name="noto_id"
@@ -136,7 +147,7 @@
     </dialog>
     <dialog
         android:id="@+id/archiveDialogFragment"
-        android:name="com.noto.library.ArchiveDialogFragment"
+        android:name="com.noto.app.library.ArchiveDialogFragment"
         android:label="ArchiveDialogFragment">
         <argument
             android:name="noto_id"
@@ -144,7 +155,7 @@
     </dialog>
     <dialog
         android:id="@+id/notoDialogFragment"
-        android:name="com.noto.noto.NotoDialogFragment"
+        android:name="com.noto.app.noto.NotoDialogFragment"
         android:label="NotoDialogFragment">
         <argument
             android:name="library_id"
@@ -155,9 +166,24 @@
         <action
             android:id="@+id/action_notoDialogFragment_to_libraryFragment"
             app:destination="@id/libraryFragment" />
+        <action
+            android:id="@+id/action_notoDialogFragment_to_reminderDialogFragment"
+            app:destination="@id/reminderDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"
-        android:name="com.noto.ThemeDialogFragment"
+        android:name="com.noto.app.ThemeDialogFragment"
         android:label="ThemeDialogFragment" />
+    <dialog
+        android:id="@+id/libraryDialogFragment"
+        android:name="com.noto.app.library.LibraryDialogFragment"
+        android:label="LibraryDialogFragment" >
+        <argument
+            android:name="library_id"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_libraryDialogFragment_to_newLibraryDialogFragment"
+            app:destination="@id/newLibraryDialogFragment" />
+    </dialog>
 </navigation>

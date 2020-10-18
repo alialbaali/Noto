@@ -129,7 +129,7 @@ class LibraryListFragment : BaseBottomSheetDialogFragment() {
             viewModel.libraries.observe(viewLifecycleOwner) {
                 rvAdapter.submitList(it)
 
-                binding.tvLibraryCount.text = "${it.size} ${getString(R.string.libraries)}"
+                binding.tvLibraryNotoCount.text = "${it.size} ${getString(R.string.libraries)}"
 
             }
 

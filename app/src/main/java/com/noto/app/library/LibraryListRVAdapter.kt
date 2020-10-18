@@ -73,11 +73,11 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
                 true
             }
 
-            binding.ivDrag.setOnTouchListener { v, event ->
-                v.performClick()
-                binding.root.animate().scaleX(0.90F).scaleY(0.90F).setDuration(50)
-                true
-            }
+//            binding.ivDrag.setOnTouchListener { v, event ->
+//                v.performClick()
+//                binding.root.animate().scaleX(0.90F).scaleY(0.90F).setDuration(50)
+//                true
+//            }
 
         }
 

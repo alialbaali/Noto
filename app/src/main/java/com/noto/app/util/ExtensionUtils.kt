@@ -30,8 +30,8 @@ fun View.snackbar(message: String) = Snackbar.make(this, message, Snackbar.LENGT
 fun View.toast(message: String) = Toast.makeText(context, message, Toast.LENGTH_SHORT)
 
 fun CollapsingToolbarLayout.setFontFamily() {
-    setCollapsedTitleTypeface(ResourcesCompat.getFont(requireNotNull(context), R.font.roboto_bold))
-    setExpandedTitleTypeface(ResourcesCompat.getFont(requireNotNull(context), R.font.roboto_medium))
+    setCollapsedTitleTypeface(ResourcesCompat.getFont(requireNotNull(context), R.font.arima_madurai_bold))
+    setExpandedTitleTypeface(ResourcesCompat.getFont(requireNotNull(context), R.font.arima_madurai_medium))
 }
 
 fun SharedPreferences.setValue(key: String, value: Any) {

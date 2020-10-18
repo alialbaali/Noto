@@ -35,7 +35,7 @@
             android:id="@+id/tv_label_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/roboto"
+            android:fontFamily="@font/arima_madurai"
             android:padding="@dimen/spacing_normal"
             android:singleLine="true"
             android:text="@{label.labelTitle}"

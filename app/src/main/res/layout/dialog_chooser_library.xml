@@ -30,7 +30,7 @@
             android:layout_marginTop="@dimen/spacing_large"
             android:layout_marginEnd="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_small"
-            android:fontFamily="@font/roboto_medium"
+            android:fontFamily="@font/arima_madurai_medium"
             android:text="Change noto's library to"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp" />
@@ -53,7 +53,6 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/spacing_small"
             android:gravity="center"
-            android:text="@string/there_are_no_libraries"
             android:textColor="@color/colorOnPrimary"
             android:textSize="22sp"
             android:visibility="gone" />

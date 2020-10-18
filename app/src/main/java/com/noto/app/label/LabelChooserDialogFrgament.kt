@@ -56,7 +56,7 @@ class LabelChooserDialogFragment : BaseBottomSheetDialogFragment() {
                     chipEndPadding = 8.dp(requireContext())
                     chipStartPadding = 8.dp(requireContext())
                     chipMinHeight = 42.dp(requireContext())
-                    typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_medium)
+                    typeface = ResourcesCompat.getFont(requireContext(), R.font.arima_madurai_medium)
 
                     setOnCheckedChangeListener { _, isChecked ->
 

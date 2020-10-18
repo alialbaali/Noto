@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.noto.noto.NotoViewModel" />
+            type="com.noto.app.noto.NotoViewModel" />
     </data>
 
 
@@ -21,119 +21,84 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorBackground"
-            app:layout_scrollFlags="enterAlwaysCollapsed|snap">
+            android:elevation="0dp"
+            app:elevation="0dp">
 
-            <!--            <com.google.android.material.appbar.CollapsingToolbarLayout-->
-            <!--                android:id="@+id/ctb"-->
-            <!--                style="@style/Style.CollapsingToolbar"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="match_parent">-->
-
-            <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
-            <!--                    android:id="@+id/tb_cl"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="match_parent"-->
-            <!--                    app:layout_collapseMode="pin">-->
-
-            <!--                    <HorizontalScrollView-->
-            <!--                        android:id="@+id/hsv_cg_labels"-->
-            <!--                        android:layout_width="0dp"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_margin="@dimen/spacing_normal"-->
-            <!--                        android:scrollbars="none"-->
-            <!--                        app:layout_constraintBottom_toTopOf="@+id/til_noto_reminder"-->
-            <!--                        app:layout_constraintEnd_toStartOf="@id/img_noto_star"-->
-            <!--                        app:layout_constraintStart_toStartOf="parent">-->
-
-            <!--                        <com.google.android.material.chip.ChipGroup-->
-            <!--                            android:id="@+id/cg_labels"-->
-            <!--                            android:layout_width="wrap_content"-->
-            <!--                            android:layout_height="match_parent"-->
-            <!--                            app:chipSpacing="@dimen/spacing_small"-->
-            <!--                            app:singleLine="false"-->
-            <!--                            app:singleSelection="false">-->
-
-            <!--                            <com.google.android.material.chip.Chip-->
-            <!--                                android:id="@+id/cp_add"-->
-            <!--                                android:layout_width="wrap_content"-->
-            <!--                                android:layout_height="wrap_content"-->
-            <!--                                android:layout_margin="@dimen/spacing_small"-->
-            <!--                                android:checkable="false"-->
-            <!--                                android:text="Add label"-->
-            <!--                                android:textColor="@color/colorSecondary"-->
-            <!--                                app:chipBackgroundColor="@color/colorSurface"-->
-            <!--                                app:chipCornerRadius="@dimen/spacing_normal"-->
-            <!--                                app:chipIcon="@drawable/ic_add_24dp"-->
-            <!--                                app:chipIconTint="@color/colorSecondary"-->
-            <!--                                app:chipStrokeColor="@color/colorOnSecondary"-->
-            <!--                                app:chipStrokeWidth="1dp"-->
-            <!--                                app:rippleColor="@color/colorOnSecondary" />-->
-            <!--                        </com.google.android.material.chip.ChipGroup>-->
-
-            <!--                    </HorizontalScrollView>-->
-
-            <!--                    <CheckBox-->
-            <!--                        android:id="@+id/img_noto_star"-->
-            <!--                        android:layout_width="32dp"-->
-            <!--                        android:layout_height="32dp"-->
-            <!--                        android:layout_marginEnd="@dimen/spacing_large"-->
-            <!--                        android:background="@drawable/selector_star"-->
-            <!--                        android:button="@null"-->
-            <!--                        android:checked="@={viewModelShared.noto.notoIsStarred}"-->
-            <!--                        android:clickable="true"-->
-            <!--                        android:focusable="true"-->
-            <!--                        android:padding="@dimen/spacing_extra_small"-->
-            <!--                        android:src="@drawable/selector_star"-->
-            <!--                        app:layout_constraintBottom_toBottomOf="@+id/hsv_cg_labels"-->
-            <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                        app:layout_constraintStart_toEndOf="@id/hsv_cg_labels"-->
-            <!--                        app:layout_constraintTop_toTopOf="@+id/hsv_cg_labels" />-->
-
-            <!--                    <com.google.android.material.textfield.TextInputLayout-->
-            <!--                        android:id="@+id/til_noto_reminder"-->
-            <!--                        style="@style/TextInputLayout.NotoTitle"-->
-            <!--                        android:layout_width="0dp"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:layout_margin="@dimen/spacing_normal"-->
-            <!--                        android:hint="@string/reminder"-->
-            <!--                        app:endIconDrawable="@drawable/ic_schedule_24dp"-->
-            <!--                        app:endIconMode="custom"-->
-            <!--                        app:endIconTint="@color/colorOnSecondary"-->
-            <!--                        app:hintEnabled="true"-->
-            <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-            <!--                        app:layout_constraintStart_toStartOf="parent">-->
-
-            <!--                        <com.google.android.material.textfield.TextInputEditText-->
-            <!--                            android:id="@+id/et_noto_reminder"-->
-            <!--                            android:layout_width="match_parent"-->
-            <!--                            android:layout_height="match_parent"-->
-            <!--                            android:enabled="false"-->
-            <!--                            android:singleLine="true"-->
-            <!--                            tools:text="Wed 12, 2020" />-->
-            <!--                    </com.google.android.material.textfield.TextInputLayout>-->
-
-            <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/tb"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/ctb"
+                style="@style/Style.CollapsingToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_back_24px"
-                app:titleTextColor="@color/colorPrimary" />
+                android:layout_height="match_parent"
+                android:background="@drawable/shape_fragment_library"
+                app:contentScrim="@color/colorBackground"
+                app:expandedTitleGravity="center_vertical"
+                app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"
+                app:titleEnabled="false"
+                tools:title="Notes">
 
-            <!--            </com.google.android.material.appbar.CollapsingToolbarLayout>-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_collapseMode="parallax">
+
+                    <com.google.android.material.appbar.MaterialToolbar
+                        android:id="@+id/tb"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:navigationIcon="@drawable/ic_back_24px">
+
+                        <TextView
+                            android:id="@+id/tv_created_at"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/spacing_normal"
+                            android:fontFamily="@font/arima_madurai"
+                            android:gravity="end"
+                            android:singleLine="true"
+                            android:textAllCaps="true"
+                            android:textSize="12sp"
+                            android:textStyle="italic"
+                            tools:text="Created at"
+                            tools:textColor="@color/colorAccentTeal" />
+                    </com.google.android.material.appbar.MaterialToolbar>
+
+
+                    <TextView
+                        android:id="@+id/tv_library_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/spacing_normal"
+                        android:fontFamily="@font/arima_madurai_medium"
+                        android:gravity="center"
+                        android:maxLines="3"
+                        android:textAlignment="textStart"
+                        android:textSize="24sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tb"
+                        tools:text="@string/all_notos"
+                        tools:textColor="@color/colorAccentTeal" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
-                android:id="@+id/cl"
+                android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -143,9 +108,9 @@
                     style="@style/EditText.NotoTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_large"
-                    android:layout_marginTop="@dimen/spacing_large"
-                    android:layout_marginEnd="@dimen/spacing_large"
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_normal"
                     android:layout_marginBottom="@dimen/spacing_small"
                     android:autofillHints="@string/title"
                     android:hint="@string/title"
@@ -160,10 +125,10 @@
                     style="@style/EditText.NotoBody"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="@dimen/spacing_large"
+                    android:layout_marginStart="@dimen/spacing_normal"
                     android:layout_marginTop="@dimen/spacing_small"
-                    android:layout_marginEnd="@dimen/spacing_large"
-                    android:layout_marginBottom="@dimen/spacing_small"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:layout_marginBottom="@dimen/spacing_normal"
                     android:autofillHints="@string/body"
                     android:focusable="true"
                     android:gravity="top"
@@ -197,7 +162,8 @@
             android:tint="@color/colorPrimary"
             app:backgroundTint="@color/colorAccentTeal"
             app:layout_anchor="@id/bab"
-            tools:src="@drawable/bell_plus_outline" />
+            tools:src="@drawable/bell_plus_outline"
+            android:contentDescription="@string/add_reminder" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

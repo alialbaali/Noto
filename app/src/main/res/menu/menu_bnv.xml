@@ -7,7 +7,6 @@
         android:enabled="true"
         android:icon="@drawable/ic_home_24dp"
         android:iconTint="@color/colorPrimary"
-        android:title="@string/home"
         android:visible="true"
         app:showAsAction="always" />
 

@@ -1,4 +1,5 @@
 import java.net.URI
+import com.noto.buildsrc.Libraries
 buildscript {
     repositories {
         google()
