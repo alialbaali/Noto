@@ -1,23 +1,17 @@
-import com.noto.buildsrc.App
-import com.noto.buildsrc.Libraries
-import com.noto.buildsrc.Modules
-
 plugins {
-    val plugins = com.noto.buildsrc.Plugins
-    id(plugins.ANDROID_LIBRARY)
-    kotlin(plugins.KOTLIN_ANDROID)
-    id(plugins.KOTLIN_ANDROID_EXTENSIONS)
-    kotlin(plugins.KOTLIN_KAPT)
+    id(Plugins.AndroidLibrary)
+    kotlin(Plugins.KotlinAndroid)
+    kotlin(Plugins.KotlinKapt)
 }
 
 android {
-    compileSdkVersion(App.COMPILE_SDK)
-    buildToolsVersion(App.BUILD_TOOLS)
+    compileSdkVersion(App.CompileSDK)
+    buildToolsVersion(App.BuildTools)
     defaultConfig {
-        minSdkVersion(App.MIN_SDK)
-        targetSdkVersion(App.TARGET_SDK)
-        versionCode = App.APP_VERSION_CODE
-        versionName = App.APP_VERSION_NAME
+        minSdkVersion(App.MinSDK)
+        targetSdkVersion(App.TargetSDK)
+        versionCode = App.VersionCode
+        versionName = App.VersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,9 +35,9 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.DATA))
-    api(Libraries.Main.CORE)
-    api(Libraries.Local.ROOM_RUNTIME)
-    kapt(Libraries.Local.ROOM_COMPILER)
+    implementation(project(Modules.Data))
+    api(AndroidX.Core.ktx)
+    api(AndroidX.Room.runtime)
+    kapt(AndroidX.Room.compiler)
     api ("com.github.tfcporciuncula:flow-preferences:1.2.0")
 }

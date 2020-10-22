@@ -1,25 +1,20 @@
-import com.noto.buildsrc.App
-import com.noto.buildsrc.Libraries
-import com.noto.buildsrc.Modules
 
 plugins {
-    val plugins = com.noto.buildsrc.Plugins
-    id(plugins.ANDROID_APPLICATION)
-    kotlin(plugins.KOTLIN_ANDROID)
-    id(plugins.KOTLIN_ANDROID_EXTENSIONS)
-    kotlin(plugins.KOTLIN_KAPT)
-    id(plugins.NAVIGATION_SAFE_ARGS)
+    id(Plugins.AndroidApplication)
+    kotlin(Plugins.KotlinAndroid)
+    kotlin(Plugins.KotlinKapt)
+    id(Plugins.NavigationSafeArgs)
 }
 
 android {
-    compileSdkVersion(App.COMPILE_SDK)
-    buildToolsVersion(App.BUILD_TOOLS)
+    compileSdkVersion(App.CompileSDK)
+    buildToolsVersion(App.BuildTools)
     defaultConfig {
-        applicationId = App.APP_ID
-        minSdkVersion(App.MIN_SDK)
-        targetSdkVersion(App.TARGET_SDK)
-        versionCode = App.APP_VERSION_CODE
-        versionName = App.APP_VERSION_NAME
+        applicationId = App.ID
+        minSdkVersion(App.MinSDK)
+        targetSdkVersion(App.TargetSDK)
+        versionCode = App.VersionCode
+        versionName = App.VersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -56,34 +51,26 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(Modules.DOMAIN))
-
-    // DI
+    implementation(project(Modules.Local))
+    implementation(project(Modules.Data))
+    implementation(project(Modules.Domain))
     implementation(project(Modules.DI))
 
-    // Main
-    implementation(Libraries.Main.NAVIGATION)
-    implementation(Libraries.Main.NAVIGATION_FRAGMENT)
-    implementation(Libraries.Main.CONSTRAINT_LAYOUT)
-    implementation(Libraries.Main.APP_COMPAT)
-    implementation(Libraries.Main.COORDINATOR_LAYOUT)
-    implementation(Libraries.Main.LIFE_CYCLE)
-    implementation(Libraries.Main.VIEW_MODEL)
-    implementation(Libraries.Main.VIEW_MODEL_STATE)
-    implementation(Libraries.Main.RECYCLER_VIEW)
-    implementation(Libraries.Main.LIVE_DATA)
-    implementation(Libraries.Main.SUPPORT)
-    implementation(Libraries.Main.MATERIAL_DESIGN)
-    implementation(Libraries.Main.WORK_MANAGER)
-    implementation(Libraries.Main.CORE)
-    kapt(Libraries.Main.DATA_BINDING_COMPILER)
-
-    // Coroutines
-    implementation(Libraries.Main.COROUTINES)
-    implementation(Libraries.Main.COROUTINES_ANDROID)
-
-    implementation(project(Modules.LOCAL))
-    implementation(project(Modules.DATA))
-
-    coreLibraryDesugaring(Libraries.Main.JAVA_TIME)
+    implementation(AndroidX.Navigation.uiKtx)
+    implementation(AndroidX.Navigation.fragmentKtx)
+    implementation(AndroidX.constraintLayout)
+    implementation(AndroidX.appCompat)
+    implementation(AndroidX.coordinatorLayout)
+    implementation(AndroidX.Lifecycle.viewModelKtx)
+    implementation(AndroidX.Lifecycle.runtimeKtx)
+    implementation(AndroidX.Lifecycle.liveDataKtx)
+    implementation(AndroidX.Lifecycle.liveDataCoreKtx)
+    implementation(AndroidX.Lifecycle.viewModelSavedState)
+    implementation(AndroidX.recyclerView)
+    implementation(AndroidX.Legacy.supportV4)
+    implementation(Google.Android.material)
+    implementation(AndroidX.Work.runtimeKtx)
+    implementation(KotlinX.Coroutines.core)
+    implementation(KotlinX.Coroutines.android)
+    coreLibraryDesugaring(Libraries.Main.JavaTime)
 }

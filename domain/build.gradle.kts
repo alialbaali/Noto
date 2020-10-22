@@ -1,14 +1,12 @@
-import com.noto.buildsrc.Libraries
-
 plugins {
     id("java-library")
     kotlin("jvm")
 }
 
 dependencies {
-    api(kotlin(Libraries.Main.KOTLIN))
-    api(Libraries.Main.TIMBER)
-    api(Libraries.Local.ROOM)
+    api(Kotlin.stdlib.jdk8)
+    api(JakeWharton.timber)
+    api(AndroidX.Room.ktx)
 }
 
 java {

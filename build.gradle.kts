@@ -1,14 +1,13 @@
 import java.net.URI
-import com.noto.buildsrc.Libraries
 buildscript {
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath(com.noto.buildsrc.Libraries.Gradle.KOTLIN)
-        classpath(com.noto.buildsrc.Libraries.Gradle.ANDROID)
-        classpath(com.noto.buildsrc.Libraries.Gradle.NAVIGATION)
+        classpath(Libraries.Gradle.Kotlin)
+        classpath(Libraries.Gradle.Android)
+        classpath(Libraries.Gradle.Navigation)
     }
 }
 
@@ -18,7 +17,6 @@ allprojects {
         jcenter()
         maven { url= URI("https://jitpack.io") }
     }
-
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xallow-result-return-type")

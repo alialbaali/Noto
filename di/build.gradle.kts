@@ -1,21 +1,16 @@
-import com.noto.buildsrc.Libraries
-import com.noto.buildsrc.Modules
-
 plugins {
-    val plugins = com.noto.buildsrc.Plugins
-    id(plugins.ANDROID_LIBRARY)
-    kotlin(plugins.KOTLIN_ANDROID)
-    id(plugins.KOTLIN_ANDROID_EXTENSIONS)
+    id(Plugins.AndroidLibrary)
+    kotlin(Plugins.KotlinAndroid)
 }
 
 android {
-    compileSdkVersion(com.noto.buildsrc.App.COMPILE_SDK)
-    buildToolsVersion(com.noto.buildsrc.App.BUILD_TOOLS)
+    compileSdkVersion(App.CompileSDK)
+    buildToolsVersion(App.BuildTools)
     defaultConfig {
-        minSdkVersion(com.noto.buildsrc.App.MIN_SDK)
-        targetSdkVersion(com.noto.buildsrc.App.TARGET_SDK)
-        versionCode = com.noto.buildsrc.App.APP_VERSION_CODE
-        versionName = com.noto.buildsrc.App.APP_VERSION_NAME
+        minSdkVersion(App.MinSDK)
+        targetSdkVersion(App.TargetSDK)
+        versionCode = App.VersionCode
+        versionName = App.VersionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.LOCAL))
-    implementation(project(Modules.DATA))
-    api(Libraries.Main.KOIN)
+    implementation(project(Modules.Local))
+    implementation(project(Modules.Data))
+    api(Libraries.Main.Koin)
 }
