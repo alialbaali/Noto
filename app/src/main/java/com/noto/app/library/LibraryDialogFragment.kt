@@ -60,6 +60,7 @@ class LibraryDialogFragment : BaseBottomSheetDialogFragment() {
                 dialogBinding.btnConfirm.setOnClickListener {
                     dialogFragment.dismiss()
                     viewModel.deleteLibrary()
+                    dialogFragment.findNavController().navigate(R.id.libraryListFragment)
                 }
             }.show(parentFragmentManager, null)
         }
