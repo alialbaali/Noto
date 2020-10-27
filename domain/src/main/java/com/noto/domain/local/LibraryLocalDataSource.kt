@@ -1,4 +1,4 @@
-package com.noto.data.source.local
+package com.noto.domain.local
 
 import com.noto.domain.model.Library
 import kotlinx.coroutines.flow.Flow
@@ -16,5 +16,7 @@ interface LibraryLocalDataSource {
     suspend fun deleteLibrary(library: Library)
 
     suspend fun countLibraryNotos(libraryId: Long): Int
+
+    suspend fun updateLibraries(libraries: List<Library>)
 
 }

@@ -1,40 +1,45 @@
 package com.noto.di
 
-import android.content.Context
-import com.noto.data.repository.LabelRepositoryImpl
-import com.noto.data.repository.LibraryRepositoryImpl
-import com.noto.data.repository.NotoRepositoryImpl
+import androidx.datastore.DataStore
+import androidx.datastore.preferences.Preferences
+import androidx.datastore.preferences.createDataStore
+import com.noto.data.LabelRepositoryImpl
+import com.noto.data.LibraryRepositoryImpl
+import com.noto.data.NotoRepositoryImpl
+import com.noto.domain.local.LabelLocalDataSource
+import com.noto.domain.local.LibraryLocalDataSource
+import com.noto.domain.local.LocalStorage
+import com.noto.domain.local.NotoLocalDataSource
 import com.noto.domain.repository.LabelRepository
 import com.noto.domain.repository.LibraryRepository
 import com.noto.domain.repository.NotoRepository
-import com.noto.local.LabelDao
-import com.noto.local.LibraryDao
-import com.noto.local.NotoDao
+import com.noto.local.LocalStorageImpl
 import com.noto.local.NotoDatabase
-import com.tfcporciuncula.flow.FlowSharedPreferences
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-const val SHARED_PREFERENCES_NAME = "Noto Shared Preferences"
+private const val DataStoreName = "Noto Data Store"
 
 val repositoryModule = module {
 
-    single<LibraryRepository> { LibraryRepositoryImpl(get<LibraryDao>()) }
+    single<LibraryRepository> { LibraryRepositoryImpl(get<LibraryLocalDataSource>()) }
 
-    single<NotoRepository> { NotoRepositoryImpl(get<NotoDao>()) }
+    single<NotoRepository> { NotoRepositoryImpl(get<NotoLocalDataSource>()) }
 
-    single<LabelRepository> { LabelRepositoryImpl(get<LabelDao>()) }
+    single<LabelRepository> { LabelRepositoryImpl(get<LabelLocalDataSource>()) }
 
 }
 
 val localDataSourceModule = module {
 
-    single<LibraryDao> { NotoDatabase.getInstance(androidContext()).libraryDao }
+    single<LibraryLocalDataSource> { NotoDatabase.getInstance(androidContext()).libraryDao }
 
-    single<NotoDao> { NotoDatabase.getInstance(androidContext()).notoDao }
+    single<NotoLocalDataSource> { NotoDatabase.getInstance(androidContext()).notoDao }
 
-    single<LabelDao> { NotoDatabase.getInstance(androidContext()).labelDao }
+    single<LabelLocalDataSource> { NotoDatabase.getInstance(androidContext()).labelDao }
 
-    single { FlowSharedPreferences(androidContext().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE)) }
+    single<DataStore<Preferences>> { androidContext().createDataStore(DataStoreName) }
+
+    single<LocalStorage> { LocalStorageImpl(get()) }
 
 }

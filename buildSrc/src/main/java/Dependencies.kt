@@ -2,6 +2,7 @@ object Libraries {
     object Main {
         const val Koin = "org.koin:koin-android-viewmodel:${Versions.Koin}"
         const val JavaTime = "com.android.tools:desugar_jdk_libs:${Versions.JavaTime}"
+        const val DataStore = "androidx.datastore:datastore-preferences:1.0.0-alpha02"
     }
     object Gradle {
         const val Kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.Kotlin}"

@@ -17,7 +17,9 @@ import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.FragmentDialogNotoBinding
-import com.noto.app.util.getValue
+import com.noto.app.util.colorStateResource
+import com.noto.app.util.drawableResource
+import com.noto.app.util.toResource
 import com.noto.app.util.toast
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
@@ -42,10 +44,10 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
         viewModel.library.observe(viewLifecycleOwner, Observer { library ->
             library?.let {
 
-                binding.vHead.backgroundTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
+                binding.vHead.backgroundTintList = colorStateResource(it.notoColor.toResource())
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     listOf(binding.tvCopyToClipboard, binding.tvShareNoto, binding.tvArchiveNoto, binding.tvRemindMe).forEach { tv ->
-                        tv.compoundDrawableTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
+                        tv.compoundDrawableTintList = colorStateResource(it.notoColor.toResource())
                     }
                 }
 
@@ -57,12 +59,12 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
             noto?.let {
 
                 binding.tvArchiveNoto.compoundDrawablesRelative[0] =
-                    if (noto.notoIsArchived) ResourcesCompat.getDrawable(resources, R.drawable.ic_outline_unarchive_24, null)
-                    else ResourcesCompat.getDrawable(resources, R.drawable.archive_arrow_down_outline, null)
+                    if (noto.notoIsArchived) drawableResource(R.drawable.ic_outline_unarchive_24)
+                    else drawableResource(R.drawable.archive_arrow_down_outline)
 
                 binding.tvRemindMe.compoundDrawablesRelative[0] =
-                    if (noto.notoReminder == null) ResourcesCompat.getDrawable(resources, R.drawable.bell_plus_outline, null)
-                    else ResourcesCompat.getDrawable(resources, R.drawable.bell_ring_outline, null)
+                    if (noto.notoReminder == null) drawableResource(R.drawable.bell_plus_outline)
+                    else drawableResource(R.drawable.bell_ring_outline)
 
             }
 

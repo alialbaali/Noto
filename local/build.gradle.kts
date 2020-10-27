@@ -39,5 +39,5 @@ dependencies {
     api(AndroidX.Core.ktx)
     api(AndroidX.Room.runtime)
     kapt(AndroidX.Room.compiler)
-    api ("com.github.tfcporciuncula:flow-preferences:1.2.0")
+    api(Libraries.Main.DataStore)
 }

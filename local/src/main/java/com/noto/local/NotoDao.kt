@@ -1,7 +1,7 @@
 package com.noto.local
 
 import androidx.room.*
-import com.noto.data.source.local.NotoLocalDataSource
+import com.noto.domain.local.NotoLocalDataSource
 import com.noto.domain.model.Noto
 import com.noto.domain.model.NotoLabel
 import com.noto.domain.model.NotoWithLabels
@@ -10,11 +10,14 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface NotoDao : NotoLocalDataSource {
 
-    @Query("SELECT * FROM notos")
-    override fun getNotos(): Flow<List<Noto>>
+    @Query("SELECT * FROM notos WHERE library_id = :libraryId AND noto_is_archived = 0")
+    override fun getNotosByLibraryId(libraryId: Long): Flow<List<Noto>>
+
+    @Query("SELECT * FROM notos WHERE library_id = :libraryId AND noto_is_archived = 1")
+    override fun getArchivedNotosByLibraryId(libraryId: Long): Flow<List<Noto>>
 
     @Query("SELECT * FROM notos WHERE noto_id = :notoId")
-    override fun getNoto(notoId: Long): Flow<Noto>
+    override fun getNotoById(notoId: Long): Flow<Noto>
 
     @Insert
     override suspend fun createNoto(noto: Noto)

@@ -7,7 +7,7 @@ interface LibraryRepository {
 
     fun getLibraries(): Flow<List<Library>>
 
-    fun getLibrary(libraryId: Long): Flow<Library>
+    fun getLibraryById(libraryId: Long): Flow<Library>
 
     suspend fun createLibrary(library: Library)
 
@@ -16,5 +16,7 @@ interface LibraryRepository {
     suspend fun deleteLibrary(library: Library)
 
     suspend fun countLibraryNotos(libraryId: Long): Int
+
+    suspend fun updateLibraries(libraries: List<Library>)
 
 }

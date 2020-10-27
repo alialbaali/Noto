@@ -1,4 +1,4 @@
-package com.noto.data.source.local
+package com.noto.domain.local
 
 import com.noto.domain.model.Noto
 import com.noto.domain.model.NotoLabel
@@ -7,9 +7,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface NotoLocalDataSource {
 
-    fun getNotos(): Flow<List<Noto>>
+    fun getNotosByLibraryId(libraryId: Long): Flow<List<Noto>>
 
-    fun getNoto(notoId: Long): Flow<Noto>
+    fun getArchivedNotosByLibraryId(libraryId: Long): Flow<List<Noto>>
+
+    fun getNotoById(notoId: Long): Flow<Noto>
 
     suspend fun createNoto(noto: Noto)
 

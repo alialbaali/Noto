@@ -1,5 +1,6 @@
 package com.noto.data.repository
 
+import com.noto.data.LabelRepositoryImpl
 import com.noto.data.source.fake.FakeLabelDao
 import com.noto.domain.model.Label
 import com.noto.domain.model.NotoColor

@@ -16,6 +16,9 @@ import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.LibraryItemTouchHelper
 import com.noto.app.R
 import com.noto.app.databinding.FragmentListLibraryBinding
+import com.noto.app.util.colorResource
+import com.noto.app.util.colorStateResource
+import com.noto.app.util.drawableResource
 import com.noto.domain.model.Library
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -39,7 +42,7 @@ class LibraryListFragment : BaseBottomSheetDialogFragment() {
 
         with(binding.fab) {
 
-            imageTintList = ResourcesCompat.getColorStateList(resources, R.color.colorBackground, null)
+            imageTintList = colorStateResource(R.color.colorBackground)
 
             binding.fab.setOnClickListener {
                 findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToNewLibraryDialogFragment())
@@ -48,7 +51,7 @@ class LibraryListFragment : BaseBottomSheetDialogFragment() {
 
         with(binding.bab) {
 
-            navigationIcon?.mutate()?.setTint(ResourcesCompat.getColor(resources, R.color.colorPrimary, null))
+            navigationIcon?.mutate()?.setTint(colorResource(R.color.colorPrimary))
 
             setNavigationOnClickListener {
 
@@ -111,10 +114,10 @@ class LibraryListFragment : BaseBottomSheetDialogFragment() {
             viewModel.layoutManager.observe(viewLifecycleOwner) { value ->
 
                 if (value == LINEAR_LAYOUT_MANAGER) {
-                    layoutManagerMenuItem.icon = ResourcesCompat.getDrawable(resources, R.drawable.view_grid_outline, null)
+                    layoutManagerMenuItem.icon = drawableResource(R.drawable.view_grid_outline)
                     layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                 } else {
-                    layoutManagerMenuItem.icon = ResourcesCompat.getDrawable(resources, R.drawable.view_agenda_outline, null)
+                    layoutManagerMenuItem.icon = drawableResource(R.drawable.view_agenda_outline)
                     layoutManager = GridLayoutManager(requireContext(), 2)
                 }
 

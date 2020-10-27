@@ -1,6 +1,6 @@
 package com.noto.data.source.fake
 
-import com.noto.data.source.local.LabelLocalDataSource
+import com.noto.domain.local.LabelLocalDataSource
 import com.noto.domain.model.Label
 import com.noto.domain.replaceWith
 import kotlinx.coroutines.flow.Flow

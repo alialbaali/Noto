@@ -1,7 +1,7 @@
 package com.noto.local
 
 import androidx.room.*
-import com.noto.data.source.local.LabelLocalDataSource
+import com.noto.domain.local.LabelLocalDataSource
 import com.noto.domain.model.Label
 import kotlinx.coroutines.flow.Flow
 

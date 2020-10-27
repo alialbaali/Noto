@@ -1,11 +1,7 @@
-package com.noto.app.list
+package com.noto.app.libraryList
 
-import android.content.SharedPreferences
-import com.noto.app.library.LibraryListViewModel
 import com.noto.app.repository.fake.FakeLibraryRepository
 import com.noto.domain.repository.LibraryRepository
-import com.tfcporciuncula.flow.FlowSharedPreferences
-import io.mockk.mockkClass
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -13,9 +9,7 @@ val libraryListModule = module {
 
     single<LibraryRepository> { FakeLibraryRepository() }
 
-    single<SharedPreferences> { mockkClass(SharedPreferences::class) }
-
-    single { FlowSharedPreferences(get()) }
+//    single<SharedPreferences> { mockkClass(SharedPreferences::class) }
 
     viewModel { LibraryListViewModel(get(), get()) }
 

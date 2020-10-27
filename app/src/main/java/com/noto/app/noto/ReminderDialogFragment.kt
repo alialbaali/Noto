@@ -16,6 +16,7 @@ import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.FragmentDialogReminderBinding
 import com.noto.app.receiver.AlarmReceiver
+import com.noto.app.util.drawableResource
 import com.noto.app.util.setAlarm
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import java.time.LocalDateTime
@@ -48,7 +49,7 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
             noto.notoReminder?.let { time ->
 
-                binding.til.endIconDrawable = ResourcesCompat.getDrawable(resources, R.drawable.bell_remove_outline, null)
+                binding.til.endIconDrawable = drawableResource(R.drawable.bell_remove_outline)
 
                 if (time.year > ZonedDateTime.now().year) {
                     val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm a"))
@@ -61,7 +62,7 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
             if (noto.notoReminder == null) {
                 binding.et.setText(getString(R.string.no_reminder))
-                binding.til.endIconDrawable = ResourcesCompat.getDrawable(resources, R.drawable.bell_plus_outline, null)
+                binding.til.endIconDrawable = drawableResource(R.drawable.bell_plus_outline)
             }
 
         }

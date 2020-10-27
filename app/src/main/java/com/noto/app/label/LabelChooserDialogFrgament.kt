@@ -15,7 +15,7 @@ import com.noto.app.R
 import com.noto.app.databinding.FragmentDialogChooserLabelBinding
 import com.noto.app.noto.NotoViewModel
 import com.noto.app.util.dp
-import com.noto.app.util.getValue
+import com.noto.app.util.toResource
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class LabelChooserDialogFragment : BaseBottomSheetDialogFragment() {
@@ -38,7 +38,7 @@ class LabelChooserDialogFragment : BaseBottomSheetDialogFragment() {
 
             labels.forEach { label ->
 
-                val labelColor = label.labelColor.getValue()
+                val labelColor = label.labelColor.toResource()
 
                 val resourceLabelColor = ResourcesCompat.getColor(resources, labelColor, null)
 

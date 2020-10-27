@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -20,8 +18,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.noto.app.NotoItemTouchHelper
 import com.noto.app.R
 import com.noto.app.databinding.FragmentLibraryBinding
-import com.noto.app.util.getValue
-import com.noto.app.util.setFontFamily
+import com.noto.app.util.*
 import com.noto.domain.model.Noto
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
@@ -37,7 +34,7 @@ class LibraryFragment : Fragment() {
     private val args by navArgs<LibraryFragmentArgs>()
 
     private val rvAdapter by lazy {
-        NotoListRVAdapter(object : NotoItemClickListener {
+        LibraryRVAdapter(object : NotoItemClickListener {
             override fun onClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(noto.libraryId, noto.notoId))
             override fun onLongClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(noto.libraryId, noto.notoId))
         })
@@ -60,7 +57,7 @@ class LibraryFragment : Fragment() {
 
         with(binding.fab) {
 
-            imageTintList = ResourcesCompat.getColorStateList(resources, R.color.colorBackground, null)
+            imageTintList = colorStateResource(R.color.colorBackground)
 
             setOnClickListener {
                 findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(args.libraryId))
@@ -70,7 +67,7 @@ class LibraryFragment : Fragment() {
 
         with(binding.bab) {
 
-            navigationIcon?.mutate()?.setTint(ResourcesCompat.getColor(resources, R.color.colorPrimary, null))
+            navigationIcon?.mutate()?.setTint(colorResource(R.color.colorPrimary))
 
             setNavigationOnClickListener {
                 findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
@@ -155,11 +152,11 @@ class LibraryFragment : Fragment() {
 
                 when (value) {
                     LINEAR_LAYOUT_MANAGER -> {
-                        layoutManagerMenuItem.icon = ResourcesCompat.getDrawable(resources, R.drawable.view_dashboard_outline, null)
+                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_dashboard_outline)
                         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     }
                     STAGGERED_LAYOUT_MANAGER -> {
-                        layoutManagerMenuItem.icon = ResourcesCompat.getDrawable(resources, R.drawable.view_agenda_outline, null)
+                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_agenda_outline)
                         layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                     }
                 }
@@ -199,18 +196,19 @@ class LibraryFragment : Fragment() {
 
     private fun setLibraryColors(notoColor: NotoColor, notoIcon: NotoIcon) {
 
-        val color = ResourcesCompat.getColor(resources, notoColor.getValue(), null)
+        val color = colorResource(notoColor.toResource())
+        val colorStateList = colorStateResource(notoColor.toResource())
 
         binding.tvLibraryTitle.setTextColor(color)
         binding.tvLibraryNotoCount.setTextColor(color)
         binding.tb.navigationIcon?.mutate()?.setTint(color)
-        binding.ivLibraryIcon.setImageResource(notoIcon.getValue())
-        binding.ivLibraryIcon.imageTintList = ResourcesCompat.getColorStateList(resources, notoColor.getValue(), null)
-        binding.fab.backgroundTintList = ResourcesCompat.getColorStateList(resources, notoColor.getValue(), null)
+        binding.ivLibraryIcon.setImageResource(notoIcon.toResource())
+        binding.ivLibraryIcon.imageTintList = colorStateList
+        binding.fab.backgroundTintList = colorStateList
 
         binding.tvPlaceHolder.setTextColor(color)
-        binding.ivPlaceHolder.setImageResource(notoIcon.getValue())
-        binding.ivPlaceHolder.imageTintList = ResourcesCompat.getColorStateList(resources, notoColor.getValue(), null)
+        binding.ivPlaceHolder.setImageResource(notoIcon.toResource())
+        binding.ivPlaceHolder.imageTintList = colorStateList
     }
 
 }

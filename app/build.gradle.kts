@@ -51,8 +51,6 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(project(Modules.Local))
-    implementation(project(Modules.Data))
     implementation(project(Modules.Domain))
     implementation(project(Modules.DI))
 

@@ -10,7 +10,7 @@ import com.noto.app.R
 import com.noto.app.databinding.ItemNotoBinding
 import com.noto.domain.model.Noto
 
-class NotoListRVAdapter(private val listener: NotoItemClickListener) : ListAdapter<Noto, NotoItemViewHolder>(
+class LibraryRVAdapter(private val listener: NotoItemClickListener) : ListAdapter<Noto, NotoItemViewHolder>(
     NoteItemDiffCallback()
 ),
     BaseItemTouchHelperListener {

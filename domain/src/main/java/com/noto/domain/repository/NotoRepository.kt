@@ -7,9 +7,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface NotoRepository {
 
-    fun getNotos(): Flow<List<Noto>>
+    fun getNotosByLibraryId(libraryId: Long): Flow<List<Noto>>
 
-    fun getNoto(notoId: Long): Flow<Noto>
+    fun getArchivedNotosByLibraryId(libraryId: Long): Flow<List<Noto>>
+
+    fun getNotoById(notoId: Long): Flow<Noto>
 
     suspend fun createNoto(noto: Noto)
 

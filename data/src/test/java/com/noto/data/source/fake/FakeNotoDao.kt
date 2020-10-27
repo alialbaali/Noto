@@ -1,6 +1,6 @@
 package com.noto.data.source.fake
 
-import com.noto.data.source.local.NotoLocalDataSource
+import com.noto.domain.local.NotoLocalDataSource
 import com.noto.domain.model.Noto
 import com.noto.domain.model.NotoLabel
 import com.noto.domain.model.NotoWithLabels
@@ -14,7 +14,7 @@ class FakeNotoDao : NotoLocalDataSource {
 
     override fun getNotos(): Flow<List<Noto>> = flowOf(notos)
 
-    override fun getNoto(notoId: Long): Flow<Noto> = flowOf(notos.first { it.notoId == notoId })
+    override fun getNotoById(notoId: Long): Flow<Noto> = flowOf(notos.first { it.notoId == notoId })
 
     override suspend fun createNoto(noto: Noto) {
         notos.add(noto.copy(notoId = notos.size.toLong()))

@@ -28,7 +28,7 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
 
     fun getNotoById(notoId: Long) = viewModelScope.launch {
 
-        notoRepository.getNoto(notoId).collect { value ->
+        notoRepository.getNotoById(notoId).collect { value ->
             _noto.postValue(value)
         }
 
@@ -42,14 +42,14 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
     }
 
     fun getLibraryById(libraryId: Long) = viewModelScope.launch {
-        libraryRepository.getLibrary(libraryId).collect { value ->
+        libraryRepository.getLibraryById(libraryId).collect { value ->
             _library.postValue(value)
         }
     }
 
     fun postNoto(libraryId: Long) = viewModelScope.launch {
 
-        notoRepository.getNotos().collect { value ->
+        notoRepository.getNotosByLibraryId(libraryId).collect { value ->
             _noto.postValue(Noto(libraryId = libraryId, notoPosition = value.count()))
         }
 

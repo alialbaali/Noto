@@ -19,10 +19,10 @@ fun NotificationManager.sendNotification(context: Context, id: Int, title: Strin
     val builder = NotificationCompat.Builder(context, CHANNEL_ID)
         .setContentTitle(title)
         .setContentText(body)
-        .setColor(ResourcesCompat.getColor(context.resources, notoColor.getValue(), null))
+        .setColor(ResourcesCompat.getColor(context.resources, notoColor.toResource(), null))
         .setCategory(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Notification.CATEGORY_REMINDER else null)
-        .setBadgeIconType(notoIcon.getValue())
-        .setSmallIcon(notoIcon.getValue())
+        .setBadgeIconType(notoIcon.toResource())
+        .setSmallIcon(notoIcon.toResource())
         .setPriority(NotificationCompat.PRIORITY_HIGH)
 //        .setLargeIcon(BitmapFactory.decodeResource(context.resources,  R.mipmap.))
 

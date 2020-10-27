@@ -1,5 +1,6 @@
 package com.noto.data.repository
 
+import com.noto.data.NotoRepositoryImpl
 import com.noto.data.source.fake.FakeNotoDao
 import com.noto.domain.model.Noto
 import com.noto.domain.repository.NotoRepository
@@ -31,7 +32,7 @@ class NotoRepositoryTest : KoinTest, StringSpec() {
 
     private val notoRepository by inject<NotoRepository>()
 
-    private val notos by lazy { runBlocking { notoRepository.getNotos().single() } }
+    private val notos by lazy { runBlocking { notoRepository.getNotosByLibraryId().single() } }
 
     private val noto = Noto(libraryId = LIBRARY_ID, notoTitle = "TITLE", notoBody = "BODY", notoPosition = 0)
 
@@ -51,7 +52,7 @@ class NotoRepositoryTest : KoinTest, StringSpec() {
 
         "get notos"{
 
-            val result = notoRepository.getNotos().single()
+            val result = notoRepository.getNotosByLibraryId().single()
 
             result shouldHaveSize 0
             result.shouldBeEmpty()
@@ -89,7 +90,7 @@ class NotoRepositoryTest : KoinTest, StringSpec() {
 
         "get noto"{
 
-            val result = notoRepository.getNoto(noto.notoId).single()
+            val result = notoRepository.getNotoById(noto.notoId).single()
 
             result shouldBe updatedNoto
             result shouldNotBe noto

@@ -12,14 +12,11 @@ import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.databinding.FragmentNotoBinding
-import com.noto.app.noto.NotoFragmentArgs
-import com.noto.app.util.getValue
-import com.noto.app.util.snackbar
+import com.noto.app.util.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -98,7 +95,7 @@ class NotoFragment : Fragment() {
 
         with(binding.fab) {
 
-            imageTintList = ResourcesCompat.getColorStateList(resources, R.color.colorBackground, null)
+            imageTintList = colorStateResource(R.color.colorBackground)
 
             setOnClickListener {
                 findNavController().navigate(NotoFragmentDirections.actionNotoFragmentToReminderDialogFragment())
@@ -108,7 +105,7 @@ class NotoFragment : Fragment() {
 
         with(binding.bab) {
 
-            navigationIcon?.mutate()?.setTint(ResourcesCompat.getColor(resources, R.color.colorPrimary, null))
+            navigationIcon?.mutate()?.setTint(colorResource(R.color.colorPrimary))
 
             setNavigationOnClickListener {
                 findNavController().navigate(NotoFragmentDirections.actionNotoFragmentToNotoDialogFragment(args.libraryId, args.notoId))
@@ -136,7 +133,7 @@ class NotoFragment : Fragment() {
 
                     R.id.archive_noto -> {
 
-                        menuItem.icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_outline_unarchive_24, null)
+                        menuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
 
                         if (viewModel.noto.value?.notoIsArchived == true) {
                             viewModel.setArchived(false)
@@ -162,11 +159,11 @@ class NotoFragment : Fragment() {
             it?.let { noto ->
 
 
-                if (noto.notoIsArchived) archiveMenuItem.icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_outline_unarchive_24, null)
-                else archiveMenuItem.icon = ResourcesCompat.getDrawable(resources, R.drawable.archive_arrow_down_outline, null)
+                if (noto.notoIsArchived) archiveMenuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
+                else archiveMenuItem.icon = drawableResource(R.drawable.archive_arrow_down_outline)
 
-                if (noto.notoReminder == null) binding.fab.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.bell_plus_outline, null))
-                else binding.fab.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.bell_ring_outline, null))
+                if (noto.notoReminder == null) binding.fab.setImageDrawable(drawableResource(R.drawable.bell_plus_outline))
+                else binding.fab.setImageDrawable(drawableResource(R.drawable.bell_ring_outline))
 
                 noto.notoCreationDate.apply {
                     val dateFormat = if (year > ZonedDateTime.now().year) format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
@@ -178,13 +175,13 @@ class NotoFragment : Fragment() {
         })
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
-            val color = ResourcesCompat.getColor(resources, library.notoColor.getValue(), null)
+            val color = colorResource(library.notoColor.toResource())
 
             binding.tvLibraryTitle.text = library.libraryTitle
             binding.tvLibraryTitle.setTextColor(color)
             binding.tvCreatedAt.setTextColor(color)
             binding.tb.navigationIcon?.mutate()?.setTint(color)
-            binding.fab.backgroundTintList = ResourcesCompat.getColorStateList(resources, library.notoColor.getValue(), null)
+            binding.fab.backgroundTintList = colorStateResource(library.notoColor.toResource())
 //            binding.chip.setTextColor(color)
 //            binding.chip.chipIconTint = ColorStateList.valueOf(color)
 //            binding.chip.chipStrokeColor = ColorStateList.valueOf(color)

@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.FragmentDialogLabelBinding
-import com.noto.app.util.getValue
+import com.noto.app.util.toResource
 import com.noto.domain.model.Label
 import com.noto.domain.model.NotoColor
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -71,7 +71,7 @@ class LabelDialogFragment : BaseBottomSheetDialogFragment() {
 
                 labelColor = label.labelColor
 
-                binding.til.setStartIconTintList(ResourcesCompat.getColorStateList(resources, label.labelColor.getValue(), null))
+                binding.til.setStartIconTintList(ResourcesCompat.getColorStateList(resources, label.labelColor.toResource(), null))
 
             }
 
@@ -111,7 +111,7 @@ class LabelDialogFragment : BaseBottomSheetDialogFragment() {
 
             radBtn.buttonDrawable = ResourcesCompat.getDrawable(resources, R.drawable.selector_dialog_rbtn_gray, null)
 
-            radBtn.buttonTintList = ResourcesCompat.getColorStateList(resources, notoColor.getValue(), null)
+            radBtn.buttonTintList = ResourcesCompat.getColorStateList(resources, notoColor.toResource(), null)
 
             val layoutParams = RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT)
 
@@ -125,7 +125,7 @@ class LabelDialogFragment : BaseBottomSheetDialogFragment() {
 
         binding.rgNotoColors.setOnCheckedChangeListener { group, checkedId ->
             labelColor = NotoColor.values()[checkedId]
-            binding.til.setStartIconTintList(ResourcesCompat.getColorStateList(resources, labelColor.getValue(), null))
+            binding.til.setStartIconTintList(ResourcesCompat.getColorStateList(resources, labelColor.toResource(), null))
         }
 
         return binding.root

@@ -14,7 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.BaseItemTouchHelperListener
 import com.noto.app.R
 import com.noto.app.databinding.ItemLibraryBinding
-import com.noto.app.util.getValue
+import com.noto.app.util.colorResource
+import com.noto.app.util.toResource
 import com.noto.domain.model.Library
 
 
@@ -60,8 +61,6 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
 
         lateinit var library: Library
 
-        private val resources = binding.root.resources
-
         init {
 
             binding.root.setOnClickListener {
@@ -97,8 +96,8 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
             binding.library = library
             binding.executePendingBindings()
 
-            val notoColor = ResourcesCompat.getColor(resources, library.notoColor.getValue(), null)
-            val backgroundColor = ResourcesCompat.getColor(resources, R.color.colorBackground, null)
+            val notoColor = binding.root.colorResource(library.notoColor.toResource())
+            val backgroundColor = binding.root.colorResource(R.color.colorBackground)
 
             val gradientDrawable = GradientDrawable(
                 GradientDrawable.Orientation.TL_BR,
@@ -123,7 +122,7 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
             binding.tvLibraryNotoCount.text = "$count".plus(if (count == 1) " Noto" else " Notos")
             binding.tvLibraryTitle.setTextColor(notoColor)
             binding.tvLibraryNotoCount.setTextColor(notoColor)
-            binding.ivLibraryNotoIcon.setImageResource(library.notoIcon.getValue())
+            binding.ivLibraryNotoIcon.setImageResource(library.notoIcon.toResource())
             binding.ivLibraryNotoIcon.imageTintList = ColorStateList.valueOf(notoColor)
 
             setDefaultBackground()

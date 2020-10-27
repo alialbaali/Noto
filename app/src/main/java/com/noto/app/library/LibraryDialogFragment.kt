@@ -6,15 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.FragmentDialogLibraryBinding
-import com.noto.app.util.getValue
+import com.noto.app.util.colorStateResource
+import com.noto.app.util.toResource
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class LibraryDialogFragment : BaseBottomSheetDialogFragment() {
@@ -25,25 +24,24 @@ class LibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
     private val args by navArgs<LibraryDialogFragmentArgs>()
 
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentDialogLibraryBinding.inflate(inflater, container, false)
 
         viewModel.getLibrary(args.libraryId)
 
-        viewModel.library.observe(viewLifecycleOwner, Observer { library ->
+        viewModel.library.observe(viewLifecycleOwner) { library ->
             library?.let {
 
-                binding.vHead.backgroundTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
+                binding.vHead.backgroundTintList = colorStateResource(it.notoColor.toResource())
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     listOf(binding.tvEditLibrary).forEach { tv ->
-                        tv.compoundDrawableTintList = ResourcesCompat.getColorStateList(resources, it.notoColor.getValue(), null)
+                        tv.compoundDrawableTintList = colorStateResource(it.notoColor.toResource())
                     }
                 }
 
             }
-        })
+        }
 
         binding.tvEditLibrary.setOnClickListener {
             dismiss()

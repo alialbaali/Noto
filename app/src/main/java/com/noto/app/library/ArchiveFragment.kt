@@ -5,16 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.FragmentArchiveBinding
+import com.noto.app.util.colorResource
+import com.noto.app.util.colorStateResource
 import com.noto.domain.model.Noto
-import com.noto.app.util.getValue
+import com.noto.app.util.toResource
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ArchiveFragment : Fragment() {
@@ -41,7 +41,7 @@ class ArchiveFragment : Fragment() {
 
         with(binding.rv) {
 
-            val rvAdapter = NotoListRVAdapter(object : NotoItemClickListener {
+            val rvAdapter = LibraryRVAdapter(object : NotoItemClickListener {
 
                 override fun onClick(noto: Noto) {
                     findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(noto.notoId))
@@ -65,9 +65,9 @@ class ArchiveFragment : Fragment() {
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
             if (args.libraryId != 0L) {
-                val color = ResourcesCompat.getColor(resources, library.notoColor.getValue(), null)
+                val color = colorResource(library.notoColor.toResource())
                 binding.tb.navigationIcon?.mutate()?.setTint(color)
-                binding.ivLibraryIcon.imageTintList = ResourcesCompat.getColorStateList(resources, library.notoColor.getValue(), null)
+                binding.ivLibraryIcon.imageTintList = colorStateResource(library.notoColor.toResource())
                 binding.tvLibraryNotoCount.setTextColor(color)
                 binding.tvLibraryTitle.setTextColor(color)
                 binding.tvLibraryTitle.text = "${library.libraryTitle} ${getString(R.string.archived_notos)}"

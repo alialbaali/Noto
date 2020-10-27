@@ -1,5 +1,6 @@
 package com.noto.data.repository
 
+import com.noto.data.LibraryRepositoryImpl
 import com.noto.data.source.fake.FakeLibraryDao
 import com.noto.domain.model.Library
 import com.noto.domain.model.NotoColor
@@ -85,7 +86,7 @@ class LibraryRepositoryTest : KoinTest, StringSpec() {
 
         "get library"{
 
-            val result = libraryRepository.getLibrary(library.libraryId).single()
+            val result = libraryRepository.getLibraryById(library.libraryId).single()
 
             result shouldBe  updatedLibrary
             result shouldNotBe library
