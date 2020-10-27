@@ -90,8 +90,8 @@ class NotoItemViewHolder(
 
     // Bind note's values to the list item
     fun bind(noto: Noto) {
-        binding.noto = noto
-        binding.executePendingBindings()
+        binding.tvNotoTitle.text = noto.notoTitle
+        binding.tvNotoBody.text = noto.notoBody
 
 //        if (noto.notoTitle.isBlank()) binding.tvNotoTitle.visibility = View.GONE
 //        if (noto.notoBody.isBlank()) binding.tvNotoBody.visibility = View.GONE

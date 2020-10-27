@@ -1,20 +1,37 @@
 package com.noto.app
 
-import androidx.core.content.edit
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
-import com.tfcporciuncula.flow.FlowSharedPreferences
-import kotlinx.coroutines.ExperimentalCoroutinesApi
+import androidx.lifecycle.viewModelScope
+import com.noto.domain.local.LocalStorage
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
-class MainViewModel(private val storage: FlowSharedPreferences) : ViewModel() {
+private const val ThemeKey = "Theme"
 
-    val theme = liveData<Int> {
-        val flow = storage.getInt(THEME_KEY, SYSTEM_THEME).asFlow()
-        emitSource(flow.asLiveData())
+class MainViewModel(private val storage: LocalStorage) : ViewModel() {
+
+    val viewState = liveData {
+        storage.get(ThemeKey)
+            .mapCatching { flow -> flow.map { Theme.valueOf(it) } }
+            .getOrDefault(flowOf(Theme.SystemTheme))
+            .map { MainState(it) }
+            .asLiveData()
+            .let { emitSource(it) }
     }
 
-    fun setTheme(value: Int) = storage.sharedPreferences.edit { putInt(THEME_KEY, value) }
+    fun setTheme(value: Theme) = viewModelScope.launch {
+        storage.put(ThemeKey, value.toString())
+    }
 
+}
+
+data class MainState(
+    val theme: Theme = Theme.SystemTheme
+)
+
+enum class Theme {
+    SystemTheme, LightTheme, DarkTheme
 }

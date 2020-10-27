@@ -1,76 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@drawable/shape_dialog"
+    android:orientation="vertical">
 
-    <data>
-
-    </data>
-
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shape_dialog"
-        android:orientation="vertical">
+        android:layout_margin="@dimen/spacing_normal"
+        android:fontFamily="@font/arima_madurai"
+        android:text="Select labels"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/tv_label"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/sv_cg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_normal"
-            android:fontFamily="@font/arima_madurai"
-            android:text="Select labels"
-            android:textColor="@color/colorPrimary"
-            android:textSize="20sp" />
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/sv_cg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_normal" />
-        </androidx.core.widget.NestedScrollView>
+            android:layout_margin="@dimen/spacing_normal" />
+    </androidx.core.widget.NestedScrollView>
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_done"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_normal"
-            android:backgroundTint="@color/colorPrimary"
-            android:fontFamily="@font/arima_madurai_medium"
-            android:padding="@dimen/spacing_small"
-            android:text="Done"
-            android:textAllCaps="false"
-            android:textColor="@color/colorBackground"
-            android:textSize="18sp"
-            app:cornerRadius="@dimen/spacing_small" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal"
+        android:backgroundTint="@color/colorPrimary"
+        android:fontFamily="@font/arima_madurai_medium"
+        android:padding="@dimen/spacing_small"
+        android:text="Done"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBackground"
+        android:textSize="18sp"
+        app:cornerRadius="@dimen/spacing_small" />
 
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_place_holder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing_small"
-            android:text="@string/there_are_no_labels"
-            android:textSize="22sp"
-            android:visibility="gone" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_place_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing_small"
+        android:text="@string/there_are_no_labels"
+        android:textSize="22sp"
+        android:visibility="gone" />
 
-        <ImageView
-            android:id="@+id/iv_place_holder"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing_small"
-            android:contentDescription="@string/labels"
-            android:src="@drawable/ic_labels_24dp"
-            android:tint="@color/colorOnPrimary"
-            android:visibility="gone" />
-    </LinearLayout>
-</layout>
+    <ImageView
+        android:id="@+id/iv_place_holder"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing_small"
+        android:contentDescription="@string/labels"
+        android:src="@drawable/ic_labels_24dp"
+        android:tint="@color/colorOnPrimary"
+        android:visibility="gone" />
+</LinearLayout>

@@ -27,9 +27,7 @@ class LabelDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogLabelBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = this@LabelDialogFragment
-        }
+        binding = FragmentDialogLabelBinding.inflate(inflater, container, false)
 
         var labelColor = NotoColor.GRAY
 

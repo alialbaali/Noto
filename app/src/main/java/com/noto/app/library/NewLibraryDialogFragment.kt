@@ -6,8 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.Observer
+import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.R
@@ -29,54 +28,23 @@ class NewLibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogLibraryNewBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = this@NewLibraryDialogFragment
-            viewModel = this@NewLibraryDialogFragment.viewModel
-        }
+        binding = FragmentDialogLibraryNewBinding.inflate(inflater, container, false)
+        initNotoColors()
+        initNotoIcons()
 
         if (args.libraryId == 0L) viewModel.postLibrary()
         else binding.btnCreate.text = getString(R.string.update_library)
 
-        viewModel.library.observe(viewLifecycleOwner, Observer { library ->
+        viewModel.library.observe(viewLifecycleOwner) { library ->
             library?.let {
+                binding.et.setText(it.libraryTitle)
+                binding.et.setSelection(it.libraryTitle.length)
                 binding.til.setEndIconTintList(colorStateResource(it.notoColor.toResource()))
                 binding.til.startIconDrawable = drawableResource(it.notoIcon.toResource())
             }
-        })
-
-        for (notoColor in NotoColor.values()) {
-            val radBtn = RadioButton(context)
-            radBtn.id = notoColor.ordinal
-            radBtn.buttonDrawable = drawableResource(R.drawable.selector_dialog_rbtn_gray)
-            radBtn.buttonTintList = colorStateResource(notoColor.toResource())
-            val layoutParams = RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT)
-            layoutParams.setMargins(24, 16, 24, 16)
-            radBtn.layoutParams = layoutParams
-            binding.rgNotoColors.addView(radBtn)
         }
 
-        for (notoIcon in NotoIcon.values()) {
-            val radBtn = RadioButton(context)
-            radBtn.id = notoIcon.ordinal
-            radBtn.buttonDrawable = drawableResource(notoIcon.toResource())
-            radBtn.buttonTintList = colorStateResource(R.color.colorOnSecondary)
-            val layoutParams = RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT)
-            layoutParams.setMargins(24, 16, 24, 16)
-            radBtn.layoutParams = layoutParams
-            binding.rgNotoIcons.addView(radBtn)
-        }
-
-        binding.rgNotoColors.setOnCheckedChangeListener { _, checkedId ->
-            val notoColor = NotoColor.values()[checkedId]
-            viewModel.setNotoColor(notoColor)
-            binding.til.setEndIconTintList(colorStateResource(notoColor.toResource()))
-        }
-
-        binding.rgNotoIcons.setOnCheckedChangeListener { _, checkedId ->
-            val notoIcon = NotoIcon.values()[checkedId]
-            viewModel.setNotoIcon(notoIcon)
-            binding.til.startIconDrawable = drawableResource(notoIcon.toResource())
-        }
+        binding.et.doAfterTextChanged { viewModel.setLibraryTitle(it.toString()) }
 
         binding.btnCreate.setOnClickListener {
 
@@ -93,4 +61,39 @@ class NewLibraryDialogFragment : BaseBottomSheetDialogFragment() {
         return binding.root
     }
 
+    private fun initNotoColors() {
+        NotoColor.values().forEach { notoColor ->
+            RadioButton(context).apply {
+                id = notoColor.ordinal
+                buttonDrawable = drawableResource(R.drawable.selector_dialog_rbtn_gray)
+                buttonTintList = colorStateResource(notoColor.toResource())
+                val layoutParams = RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT)
+                layoutParams.setMargins(24, 16, 24, 16)
+                this.layoutParams = layoutParams
+                binding.rgNotoColors.addView(this)
+            }
+        }
+        binding.rgNotoColors.setOnCheckedChangeListener { _, checkedId ->
+            NotoColor.values()[checkedId]
+                .apply { viewModel.setNotoColor(this) }
+        }
+    }
+
+    private fun initNotoIcons() {
+        NotoIcon.values().forEach { notoIcon ->
+            RadioButton(context).apply {
+                id = notoIcon.ordinal
+                buttonDrawable = drawableResource(notoIcon.toResource())
+                buttonTintList = colorStateResource(R.color.colorOnSecondary)
+                val layoutParams = RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT)
+                layoutParams.setMargins(24, 16, 24, 16)
+                this.layoutParams = layoutParams
+                binding.rgNotoIcons.addView(this)
+            }
+        }
+        binding.rgNotoIcons.setOnCheckedChangeListener { _, checkedId ->
+            NotoIcon.values()[checkedId]
+                .apply { viewModel.setNotoIcon(this) }
+        }
+    }
 }

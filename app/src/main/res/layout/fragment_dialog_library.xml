@@ -1,43 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@drawable/shape_dialog"
+    android:orientation="vertical">
 
-    <data>
+    <View
+        android:id="@+id/v_head"
+        android:layout_width="30dp"
+        android:layout_height="2dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing_normal"
+        android:background="@drawable/shape_view_head" />
 
-    </data>
-
-    <LinearLayout
-        android:id="@+id/cl"
+    <TextView
+        android:id="@+id/tv_edit_library"
+        style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shape_dialog"
-        android:orientation="vertical">
+        android:background="@drawable/ripple"
+        android:drawableStart="@drawable/ic_outline_edit_24"
+        android:text="@string/edit_library" />
 
-        <View
-            android:id="@+id/v_head"
-            android:layout_width="30dp"
-            android:layout_height="2dp"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing_normal"
-            android:background="@drawable/shape_view_head" />
+    <TextView
+        android:id="@+id/tv_delete_library"
+        style="@style/DialogItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple"
+        android:drawableStart="@drawable/ic_delete_sweep_24px"
+        android:text="@string/delete_library" />
 
-        <TextView
-            android:id="@+id/tv_edit_library"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ripple"
-            android:drawableStart="@drawable/ic_outline_edit_24"
-            android:text="@string/edit_library" />
-
-        <TextView
-            android:id="@+id/tv_delete_library"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ripple"
-            android:drawableStart="@drawable/ic_delete_sweep_24px"
-            android:text="@string/delete_library" />
-
-    </LinearLayout>
-</layout>
+</LinearLayout>

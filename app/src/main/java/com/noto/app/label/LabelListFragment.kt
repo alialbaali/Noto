@@ -37,9 +37,7 @@ class LabelListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentListLabelBinding.inflate(layoutInflater, container, false).apply {
-            lifecycleOwner = this@LabelListFragment
-        }
+        binding = FragmentListLabelBinding.inflate(layoutInflater, container, false)
 
         binding.fab.imageTintList = ResourcesCompat.getColorStateList(resources, R.color.colorBackground, null)
 

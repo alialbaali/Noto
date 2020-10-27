@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@drawable/shape_dialog"
+    android:orientation="vertical">
 
-    <data>
+    <View
+        android:id="@+id/v_head"
+        android:layout_width="30dp"
+        android:layout_height="2dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing_normal"
+        android:background="@drawable/shape_view_head" />
 
-    </data>
-
-    <LinearLayout
-        android:id="@+id/ll"
+    <TextView
+        android:id="@+id/tv_unarchive_noto"
+        style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shape_dialog"
-        android:orientation="vertical">
+        android:background="@drawable/ripple"
+        android:drawableStart="@drawable/ic_outline_unarchive_24"
+        android:text="@string/unarchive_noto" />
 
-        <View
-            android:id="@+id/v_head"
-            android:layout_width="30dp"
-            android:layout_height="2dp"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing_normal"
-            android:background="@drawable/shape_view_head" />
-
-        <TextView
-            android:id="@+id/tv_unarchive_noto"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ripple"
-            android:drawableStart="@drawable/ic_outline_unarchive_24"
-            android:text="@string/unarchive_noto" />
-
-    </LinearLayout>
-</layout>
+</LinearLayout>

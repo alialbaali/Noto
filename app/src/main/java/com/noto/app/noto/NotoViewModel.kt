@@ -2,6 +2,7 @@ package com.noto.app.noto
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import com.noto.app.util.asLiveData
 import com.noto.app.util.isValid
@@ -18,7 +19,7 @@ import java.time.ZonedDateTime
 class NotoViewModel(private val libraryRepository: LibraryRepository, private val notoRepository: NotoRepository) : ViewModel() {
 
     private val _noto = MutableLiveData<Noto>()
-    val noto = _noto.asLiveData()
+    val noto = _noto.asLiveData().distinctUntilChanged()
 
     private val _library = MutableLiveData<Library>()
     val library = _library.asLiveData()
@@ -81,5 +82,13 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
     }
 
     fun notifyLabelsObserver() = _labels.notifyObserver()
+
+    fun setNotoTitle(title: String) {
+        _noto.value = _noto.value?.copy(notoTitle = title)
+    }
+
+    fun setNotoBody(body: String) {
+        _noto.value = _noto.value?.copy(notoBody = body)
+    }
 
 }

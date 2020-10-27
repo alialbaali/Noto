@@ -1,64 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@drawable/shape_dialog"
+    android:orientation="vertical">
 
-    <data>
+    <View
+        android:id="@+id/v_head"
+        android:layout_width="30dp"
+        android:layout_height="2dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing_normal"
+        android:background="@drawable/shape_view_head" />
 
-    </data>
-
-    <LinearLayout
-        android:id="@+id/cl"
+    <RadioGroup
+        android:id="@+id/rg_theme"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="@drawable/shape_dialog"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <View
-            android:id="@+id/v_head"
-            android:layout_width="30dp"
-            android:layout_height="2dp"
-            android:layout_gravity="center"
-            android:layout_margin="@dimen/spacing_normal"
-            android:background="@drawable/shape_view_head" />
-
-        <RadioGroup
-            android:id="@+id/rg_theme"
+        <RadioButton
+            android:id="@+id/rb_system_theme"
+            style="@style/DialogThemeRadioButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:checked="true"
+            android:text="@string/system_theme" />
 
-            <RadioButton
-                android:id="@+id/rb_system_theme"
-                style="@style/DialogThemeRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:checked="true"
-                android:text="@string/system_theme" />
+        <RadioButton
+            android:id="@+id/rb_light_theme"
+            style="@style/DialogThemeRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:text="@string/light_theme" />
 
-            <RadioButton
-                android:id="@+id/rb_light_theme"
-                style="@style/DialogThemeRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:text="@string/light_theme" />
+        <RadioButton
+            android:id="@+id/rb_dark_theme"
+            style="@style/DialogThemeRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginEnd="@dimen/spacing_normal"
+            android:text="@string/dark_theme" />
 
-            <RadioButton
-                android:id="@+id/rb_dark_theme"
-                style="@style/DialogThemeRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:text="@string/dark_theme" />
+    </RadioGroup>
 
-
-        </RadioGroup>
-
-
-    </LinearLayout>
-
-
-</layout>
+</LinearLayout>

@@ -58,8 +58,8 @@ class LabelListRVAdapter(private val labelItemListener: LabelItemListener) : Lis
         }
 
         fun bind(label: Label) {
-            binding.label = label
-            binding.executePendingBindings()
+            binding.ivLabelNotoColor.contentDescription = label.labelTitle
+            binding.tvLabelTitle.text = label.labelTitle
             binding.ivLabelNotoColor.imageTintList = ResourcesCompat.getColorStateList(resources, label.labelColor.toResource(), null)
             binding.root.background = rippleDrawable
             binding.root.backgroundTintList = ResourcesCompat.getColorStateList(resources, label.labelColor.toResource(), null)

@@ -22,9 +22,7 @@ class ArchiveDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogArchiveBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = this@ArchiveDialogFragment
-        }
+        binding = FragmentDialogArchiveBinding.inflate(inflater, container, false)
 
         viewModel.getNotoById(args.notoId)
 

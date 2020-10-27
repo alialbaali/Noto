@@ -43,10 +43,7 @@ class LibraryFragment : Fragment() {
     @ExperimentalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentLibraryBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = this@LibraryFragment
-            viewModel = this@LibraryFragment.viewModel
-        }
+        binding = FragmentLibraryBinding.inflate(inflater, container, false)
 
         binding.ctb.setFontFamily()
 
@@ -56,8 +53,6 @@ class LibraryFragment : Fragment() {
         viewModel.getNotos(args.libraryId)
 
         with(binding.fab) {
-
-            imageTintList = colorStateResource(R.color.colorBackground)
 
             setOnClickListener {
                 findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(args.libraryId))

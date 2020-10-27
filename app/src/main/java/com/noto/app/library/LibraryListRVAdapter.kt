@@ -93,8 +93,7 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
         }
 
         fun bind(library: Library) {
-            binding.library = library
-            binding.executePendingBindings()
+            binding.tvLibraryTitle.text = library.libraryTitle
 
             val notoColor = binding.root.colorResource(library.notoColor.toResource())
             val backgroundColor = binding.root.colorResource(R.color.colorBackground)

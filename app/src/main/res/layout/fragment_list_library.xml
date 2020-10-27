@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="viewModel"
-            type="com.noto.app.library.LibraryListViewModel" />
-    </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -58,12 +51,12 @@
                         android:layout_marginEnd="@dimen/spacing_normal"
                         android:layout_marginBottom="@dimen/spacing_extra_small"
                         android:src="@drawable/ic_round_border_all_24"
-                        android:tint="@color/colorPrimary"
                         app:layout_constraintBottom_toTopOf="@id/tv_library_title"
                         app:layout_constraintEnd_toStartOf="@id/tv_library_noto_count"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:tint="@color/colorPrimary" />
+                        tools:tint="@color/colorPrimary"
+                        app:tint="@color/colorPrimary" />
 
                     <TextView
                         android:id="@+id/tv_library_title"
@@ -272,4 +265,3 @@
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</layout>

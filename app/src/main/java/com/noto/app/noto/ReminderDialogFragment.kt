@@ -10,8 +10,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.observe
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.FragmentDialogReminderBinding
@@ -37,9 +35,7 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogReminderBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = this@ReminderDialogFragment
-        }
+        binding = FragmentDialogReminderBinding.inflate(inflater, container, false)
 
         binding.btnDone.setOnClickListener {
             dismiss()

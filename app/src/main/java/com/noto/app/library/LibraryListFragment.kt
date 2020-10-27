@@ -35,10 +35,7 @@ class LibraryListFragment : BaseBottomSheetDialogFragment() {
     @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentListLibraryBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = this@LibraryListFragment
-            viewModel = this@LibraryListFragment.viewModel
-        }
+        binding = FragmentListLibraryBinding.inflate(inflater, container, false)
 
         with(binding.fab) {
 

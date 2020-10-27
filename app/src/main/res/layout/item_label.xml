@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="label"
-            type="com.noto.domain.model.Label" />
-
-    </data>
-
     <LinearLayout
+ xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/cl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +14,6 @@
             android:id="@+id/iv_label_noto_color"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:contentDescription="@{label.labelTitle}"
             android:padding="@dimen/spacing_normal"
             android:src="@drawable/selector_dialog_rbtn_gray"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +28,6 @@
             android:fontFamily="@font/arima_madurai"
             android:padding="@dimen/spacing_normal"
             android:singleLine="true"
-            android:text="@{label.labelTitle}"
             android:textColor="@color/colorPrimary"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,4 +37,3 @@
             tools:text="Label" />
 
     </LinearLayout>
-</layout>

@@ -28,9 +28,7 @@ class ArchiveFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentArchiveBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = this@ArchiveFragment
-        }
+        binding = FragmentArchiveBinding.inflate(inflater, container, false)
 
         viewModel.getArchivedNotos(args.libraryId)
         viewModel.getLibrary(args.libraryId)

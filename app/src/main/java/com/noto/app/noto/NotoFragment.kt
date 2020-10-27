@@ -1,6 +1,5 @@
 package com.noto.app.noto
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +9,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -38,15 +37,15 @@ class NotoFragment : Fragment() {
 
     private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
         binding = FragmentNotoBinding.inflate(inflater, container, false).apply {
-            lifecycleOwner = this@NotoFragment
-            viewModel = this@NotoFragment.viewModel
+            fab.setOnClickListener {
+                findNavController().navigate(NotoFragmentDirections.actionNotoFragmentToReminderDialogFragment())
+            }
         }
 
         viewModel.getLibraryById(args.libraryId)
@@ -61,14 +60,12 @@ class NotoFragment : Fragment() {
             requireActivity().onBackPressedDispatcher.addCallback(this) {
                 this@NotoFragment.findNavController().navigateUp()
                 viewModel.createNoto()
-//                viewModel.createNotoWithLabels()
             }.isEnabled = true
 
             binding.tb.setNavigationOnClickListener {
                 imm.hideSoftInputFromWindow(binding.etNotoBody.windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
                 findNavController().navigateUp()
                 viewModel.createNoto()
-//                viewModel.createNotoWithLabels()
             }
 
         } else {
@@ -90,18 +87,6 @@ class NotoFragment : Fragment() {
         }
 
         binding.nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
-//        binding.chip.typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_medium)
-//        binding.chip.setOnClickListener { findNavController().navigate(NotoFragmentDirections.actionNotoFragmentToLabelChooserDialogFragment()) }
-
-        with(binding.fab) {
-
-            imageTintList = colorStateResource(R.color.colorBackground)
-
-            setOnClickListener {
-                findNavController().navigate(NotoFragmentDirections.actionNotoFragmentToReminderDialogFragment())
-            }
-
-        }
 
         with(binding.bab) {
 
@@ -153,11 +138,20 @@ class NotoFragment : Fragment() {
 
         val archiveMenuItem = binding.bab.menu.findItem(R.id.archive_noto)
 
+        binding.etNotoTitle.doAfterTextChanged {
+            viewModel.setNotoTitle(it.toString())
+        }
+        binding.etNotoBody.doAfterTextChanged {
+            viewModel.setNotoBody(it.toString())
+        }
 
-        viewModel.noto.observe(viewLifecycleOwner, androidx.lifecycle.Observer { it ->
-
+        viewModel.noto.observe(viewLifecycleOwner) {
             it?.let { noto ->
 
+                binding.etNotoTitle.setText(it.notoTitle)
+                binding.etNotoBody.setText(it.notoBody)
+                binding.etNotoTitle.setSelection(it.notoTitle.length)
+                binding.etNotoBody.setSelection(it.notoBody.length)
 
                 if (noto.notoIsArchived) archiveMenuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
                 else archiveMenuItem.icon = drawableResource(R.drawable.archive_arrow_down_outline)
@@ -172,7 +166,7 @@ class NotoFragment : Fragment() {
                     binding.tvCreatedAt.text = "${getString(R.string.created_at)} ${dateFormat.toUpperCase(Locale.getDefault())}"
                 }
             }
-        })
+        }
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
             val color = colorResource(library.notoColor.toResource())
@@ -182,40 +176,7 @@ class NotoFragment : Fragment() {
             binding.tvCreatedAt.setTextColor(color)
             binding.tb.navigationIcon?.mutate()?.setTint(color)
             binding.fab.backgroundTintList = colorStateResource(library.notoColor.toResource())
-//            binding.chip.setTextColor(color)
-//            binding.chip.chipIconTint = ColorStateList.valueOf(color)
-//            binding.chip.chipStrokeColor = ColorStateList.valueOf(color)
-
         }
-
-
-//        viewModel.labels.observe(viewLifecycleOwner) { labels ->
-//
-//
-//            labels.forEach { label ->
-//
-//                val labelColor = label.labelColor.getValue()
-//
-//                val textColor = ResourcesCompat.getColor(resources, R.color.colorBackground, null)
-//
-//                val chip = Chip(requireContext()).apply {
-//
-//                    id = label.labelId.toInt()
-//                    setChipBackgroundColorResource(labelColor)
-//                    setTextColor(textColor)
-//                    text = label.labelTitle
-//                    chipEndPadding = 8.dp(requireContext())
-//                    chipStartPadding = 8.dp(requireContext())
-//                    chipMinHeight = 42.dp(requireContext())
-//                    typeface = ResourcesCompat.getFont(requireContext(), R.font.roboto_medium)
-//
-//                }
-//
-//                binding.cg.findViewById<Chip>(chip.id) ?: binding.cg.addView(chip)
-//
-//            }
-//
-//        }
 
         return binding.root
     }
