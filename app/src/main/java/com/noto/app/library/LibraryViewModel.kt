@@ -1,6 +1,7 @@
 package com.noto.app.library
 
 import androidx.lifecycle.*
+import com.noto.app.util.LayoutManager
 import com.noto.domain.local.LocalStorage
 import com.noto.domain.model.Library
 import com.noto.domain.model.Noto
@@ -9,6 +10,9 @@ import com.noto.domain.model.NotoIcon
 import com.noto.domain.repository.LibraryRepository
 import com.noto.domain.repository.NotoRepository
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 
 private const val LAYOUT_MANAGER_KEY = "Library_Layout_Manager"
@@ -21,10 +25,19 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
     private var _notos = MutableLiveData<List<Noto>>()
     val notos: LiveData<List<Noto>> = _notos
 
-    val searchTerm = MutableLiveData<String>().apply { value = String() }
+    val searchTerm = MutableLiveData("")
 
-    val layoutManager = liveData<Int> {
-        emit(LINEAR_LAYOUT_MANAGER)
+    val layoutManager = liveData {
+        storage.get(LAYOUT_MANAGER_KEY)
+            .mapCatching { flow -> flow.map { LayoutManager.valueOf(it) } }
+            .getOrDefault(flowOf(LayoutManager.Linear))
+            .onStart { emit(LayoutManager.Linear) }
+            .asLiveData()
+            .let { emitSource(it) }
+    }
+
+    fun setLayoutManager(value: LayoutManager) = viewModelScope.launch {
+        storage.put(LAYOUT_MANAGER_KEY, value.toString())
     }
 
     fun setLibraryTitle(title: String) {
@@ -59,9 +72,6 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
 
     fun updateLibrary() = viewModelScope.launch {
         libraryRepository.updateLibrary(library.value!!)
-    }
-
-    fun setLayoutManager(value: Int) {
     }
 
     fun setNotoColor(notoColor: NotoColor) {

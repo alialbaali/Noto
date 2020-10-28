@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -16,15 +14,12 @@ import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.LibraryItemTouchHelper
 import com.noto.app.R
 import com.noto.app.databinding.FragmentListLibraryBinding
+import com.noto.app.util.LayoutManager
 import com.noto.app.util.colorResource
-import com.noto.app.util.colorStateResource
 import com.noto.app.util.drawableResource
 import com.noto.domain.model.Library
 import org.koin.android.viewmodel.ext.android.viewModel
-
-const val LINEAR_LAYOUT_MANAGER = 1
-const val GRID_LAYOUT_MANAGER = 2
-const val STAGGERED_LAYOUT_MANAGER = 3
+import timber.log.Timber
 
 class LibraryListFragment : BaseBottomSheetDialogFragment() {
 
@@ -37,85 +32,88 @@ class LibraryListFragment : BaseBottomSheetDialogFragment() {
 
         binding = FragmentListLibraryBinding.inflate(inflater, container, false)
 
-        with(binding.fab) {
-
-            imageTintList = colorStateResource(R.color.colorBackground)
-
-            binding.fab.setOnClickListener {
+        with(binding) {
+            fab.setOnClickListener {
                 findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToNewLibraryDialogFragment())
             }
         }
 
-        with(binding.bab) {
+        bab()
+        rv()
 
-            navigationIcon?.mutate()?.setTint(colorResource(R.color.colorPrimary))
+        return binding.root
+    }
 
-            setNavigationOnClickListener {
+    private fun bab() = with(binding.bab) {
+        navigationIcon?.mutate()?.setTint(colorResource(R.color.colorPrimary))
 
-            }
+        setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.archived_notos -> {
+                    findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToArchiveFragment())
+                    true
+                }
 
-            setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.archived_notos -> {
-                        findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToArchiveFragment())
-                        true
+                R.id.view -> {
+
+                    when (viewModel.layoutManager.value) {
+                        LayoutManager.Linear -> viewModel.setLayoutManager(LayoutManager.Grid)
+                        LayoutManager.Grid -> viewModel.setLayoutManager(LayoutManager.Linear)
                     }
 
-                    R.id.view -> {
+                    true
+                }
 
-                        val currentLayoutManager = viewModel.layoutManager.value
-
-                        if (currentLayoutManager == LINEAR_LAYOUT_MANAGER) viewModel.setLayoutManager(GRID_LAYOUT_MANAGER)
-                        else if (currentLayoutManager == GRID_LAYOUT_MANAGER) viewModel.setLayoutManager(LINEAR_LAYOUT_MANAGER)
-
-                        true
-                    }
-
-                    R.id.theme -> {
-                        findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToThemeDialogFragment())
-                        true
-                    }
+                R.id.theme -> {
+                    findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToThemeDialogFragment())
+                    true
+                }
 
 //                    R.id.labels -> {
 //                        findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLabelListFragment())
 //                        true
 //                    }
 
-                    else -> false
-                }
+                else -> false
             }
         }
+    }
 
-        with(binding.rv) {
+    private fun rv() = with(binding.rv) {
 
-            val rvAdapter = LibraryListRVAdapter(object : LibraryItemClickListener {
+        val rvAdapter = LibraryListRVAdapter(object : LibraryItemClickListener {
 
-                override fun onClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryFragment(library.libraryId))
+            override fun onClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryFragment(library.libraryId))
 
-                override fun onLongClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryDialogFragment(library.libraryId))
+            override fun onLongClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryDialogFragment(library.libraryId))
 
-                override fun countLibraryNotos(library: Library): Int = viewModel.countNotos(library.libraryId)
+            override fun countLibraryNotos(library: Library): Int = viewModel.countNotos(library.libraryId)
 
-            })
+        })
 
-            adapter = rvAdapter
+        adapter = rvAdapter
 
 //            LinearSnapHelper().attachToRecyclerView(this)
 
-            LibraryItemTouchHelper(rvAdapter).let {
-                ItemTouchHelper(it).attachToRecyclerView(this)
-            }
+        LibraryItemTouchHelper(rvAdapter).let {
+            ItemTouchHelper(it).attachToRecyclerView(this)
+        }
 
-            val layoutManagerMenuItem = binding.bab.menu.findItem(R.id.view)
+        val layoutManagerMenuItem = binding.bab.menu.findItem(R.id.view)
 
-            viewModel.layoutManager.observe(viewLifecycleOwner) { value ->
+        viewModel.layoutManager.observe(viewLifecycleOwner) { value ->
+            Timber.i("$value")
+            value?.let {
 
-                if (value == LINEAR_LAYOUT_MANAGER) {
-                    layoutManagerMenuItem.icon = drawableResource(R.drawable.view_grid_outline)
-                    layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                } else {
-                    layoutManagerMenuItem.icon = drawableResource(R.drawable.view_agenda_outline)
-                    layoutManager = GridLayoutManager(requireContext(), 2)
+                when (value) {
+                    LayoutManager.Linear -> {
+                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_grid_outline)
+                        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    }
+                    LayoutManager.Grid -> {
+                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_agenda_outline)
+                        layoutManager = GridLayoutManager(requireContext(), 2)
+                    }
                 }
 
                 visibility = View.INVISIBLE
@@ -126,16 +124,13 @@ class LibraryListFragment : BaseBottomSheetDialogFragment() {
 
             }
 
-            viewModel.libraries.observe(viewLifecycleOwner) {
-                rvAdapter.submitList(it)
-
-                binding.tvLibraryNotoCount.text = "${it.size} ${getString(R.string.libraries)}"
-
-            }
-
         }
 
+        viewModel.libraries.observe(viewLifecycleOwner) {
+            rvAdapter.submitList(it)
 
-        return binding.root
+            binding.tvLibraryNotoCount.text = "${it.size} ${getString(R.string.libraries)}"
+
+        }
     }
 }

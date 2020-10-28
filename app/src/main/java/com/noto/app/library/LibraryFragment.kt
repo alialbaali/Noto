@@ -22,8 +22,8 @@ import com.noto.app.util.*
 import com.noto.domain.model.Noto
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.android.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class LibraryFragment : Fragment() {
 
@@ -33,94 +33,12 @@ class LibraryFragment : Fragment() {
 
     private val args by navArgs<LibraryFragmentArgs>()
 
-    private val rvAdapter by lazy {
-        LibraryRVAdapter(object : NotoItemClickListener {
-            override fun onClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(noto.libraryId, noto.notoId))
-            override fun onLongClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(noto.libraryId, noto.notoId))
-        })
-    }
-
-    @ExperimentalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentLibraryBinding.inflate(inflater, container, false)
 
-        binding.ctb.setFontFamily()
-
-        binding.tb.setNavigationOnClickListener { findNavController().navigateUp() }
-
         viewModel.getLibrary(args.libraryId)
         viewModel.getNotos(args.libraryId)
-
-        with(binding.fab) {
-
-            setOnClickListener {
-                findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(args.libraryId))
-            }
-
-        }
-
-        with(binding.bab) {
-
-            navigationIcon?.mutate()?.setTint(colorResource(R.color.colorPrimary))
-
-            setNavigationOnClickListener {
-                findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
-            }
-
-
-            setOnMenuItemClickListener { menuItem ->
-                when (menuItem.itemId) {
-                    R.id.archived_notos -> {
-                        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToArchiveFragment(args.libraryId))
-                        true
-                    }
-
-                    R.id.view -> {
-
-                        when (viewModel.layoutManager.value) {
-                            LINEAR_LAYOUT_MANAGER -> viewModel.setLayoutManager(STAGGERED_LAYOUT_MANAGER)
-                            STAGGERED_LAYOUT_MANAGER -> viewModel.setLayoutManager(LINEAR_LAYOUT_MANAGER)
-                        }
-
-                        true
-                    }
-
-                    R.id.search -> {
-
-                        val searchEt = binding.etSearch
-
-                        searchEt.isVisible = !searchEt.isVisible
-
-                        val rvAnimation: Animation
-
-                        if (searchEt.isVisible) {
-
-                            rvAnimation = TranslateAnimation(0F, 0F, -50F, 0F).apply {
-                                duration = 250
-                            }
-
-                            binding.rv.startAnimation(rvAnimation)
-                            searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
-
-                        } else {
-
-                            rvAnimation = TranslateAnimation(0F, 0F, 50F, 0F).apply {
-                                duration = 250
-                            }
-
-                            binding.rv.startAnimation(rvAnimation)
-                            searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
-                        }
-
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-
-        }
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
 
@@ -133,58 +51,14 @@ class LibraryFragment : Fragment() {
 
         }
 
-        with(binding.rv) {
-
-            adapter = rvAdapter
-
-            NotoItemTouchHelper(rvAdapter).let {
-                ItemTouchHelper(it).attachToRecyclerView(this)
-            }
-
-            val layoutManagerMenuItem = binding.bab.menu.findItem(R.id.view)
-
-            viewModel.layoutManager.observe(viewLifecycleOwner) { value ->
-
-                when (value) {
-                    LINEAR_LAYOUT_MANAGER -> {
-                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_dashboard_outline)
-                        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                    }
-                    STAGGERED_LAYOUT_MANAGER -> {
-                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_agenda_outline)
-                        layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                    }
-                }
-
-                visibility = View.INVISIBLE
-                startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
-
-                visibility = View.VISIBLE
-                startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
-
-            }
-
-            val placeHolderItems = listOf(binding.tvLibraryNotoCount, binding.tvLibraryTitle, binding.ivLibraryIcon, binding.rv)
-
-            viewModel.notos.observe(viewLifecycleOwner) {
-                if (it.isEmpty()) {
-                    placeHolderItems.forEach { it.visibility = View.GONE }
-                    binding.llPlaceHolder.visibility = View.VISIBLE
-                    val layoutParams = binding.ctb.layoutParams as AppBarLayout.LayoutParams
-                    layoutParams.scrollFlags = 0
-                } else {
-                    placeHolderItems.forEach { it.visibility = View.VISIBLE }
-                    binding.llPlaceHolder.visibility = View.GONE
-                    rvAdapter.submitList(it)
-                }
-            }
+        with(binding) {
+            ctb.setFontFamily()
+            fab.setOnClickListener { findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(args.libraryId)) }
+            tb.setNavigationOnClickListener { findNavController().navigateUp() }
         }
 
-        viewModel.searchTerm.observe(viewLifecycleOwner) { searchTerm ->
-            val notos = viewModel.notos.value
-            if (searchTerm.isBlank()) rvAdapter.submitList(notos)
-            else rvAdapter.submitList(notos?.filter { it.notoTitle.contains(searchTerm) || it.notoBody.contains(searchTerm) })
-        }
+        bab()
+        rv()
 
         return binding.root
     }
@@ -204,6 +78,125 @@ class LibraryFragment : Fragment() {
         binding.tvPlaceHolder.setTextColor(color)
         binding.ivPlaceHolder.setImageResource(notoIcon.toResource())
         binding.ivPlaceHolder.imageTintList = colorStateList
+    }
+
+    private fun bab() = with(binding.bab) {
+        navigationIcon?.mutate()?.setTint(colorResource(R.color.colorPrimary))
+
+        setNavigationOnClickListener {
+            findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
+        }
+
+        setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.archived_notos -> {
+                    findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToArchiveFragment(args.libraryId))
+                    true
+                }
+
+                R.id.view -> {
+
+                    when (viewModel.layoutManager.value) {
+                        LayoutManager.Linear -> viewModel.setLayoutManager(LayoutManager.Grid)
+                        LayoutManager.Grid -> viewModel.setLayoutManager(LayoutManager.Linear)
+                    }
+
+                    true
+                }
+
+                R.id.search -> {
+
+                    val searchEt = binding.etSearch
+
+                    searchEt.isVisible = !searchEt.isVisible
+
+                    val rvAnimation: Animation
+
+                    if (searchEt.isVisible) {
+
+                        rvAnimation = TranslateAnimation(0F, 0F, -50F, 0F).apply {
+                            duration = 250
+                        }
+
+                        binding.rv.startAnimation(rvAnimation)
+                        searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
+
+                    } else {
+
+                        rvAnimation = TranslateAnimation(0F, 0F, 50F, 0F).apply {
+                            duration = 250
+                        }
+
+                        binding.rv.startAnimation(rvAnimation)
+                        searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+                    }
+
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun rv() = with(binding.rv) {
+        val rvAdapter = LibraryRVAdapter(object : NotoItemClickListener {
+            override fun onClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(noto.libraryId, noto.notoId))
+            override fun onLongClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(noto.libraryId, noto.notoId))
+        })
+
+        adapter = rvAdapter
+
+        NotoItemTouchHelper(rvAdapter).let {
+            ItemTouchHelper(it).attachToRecyclerView(this)
+        }
+
+        val layoutManagerMenuItem = binding.bab.menu.findItem(R.id.view)
+
+        viewModel.layoutManager.observe(viewLifecycleOwner) { value ->
+            Timber.e("VALUE $value")
+            value?.let {
+
+                when (value) {
+                    LayoutManager.Linear -> {
+                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_dashboard_outline)
+                        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    }
+                    LayoutManager.Grid -> {
+                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_agenda_outline)
+                        layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                    }
+                }
+
+                visibility = View.INVISIBLE
+                startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
+
+                visibility = View.VISIBLE
+                startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+
+            }
+        }
+
+        val placeHolderItems = listOf(binding.tvLibraryNotoCount, binding.tvLibraryTitle, binding.ivLibraryIcon, binding.rv)
+
+        viewModel.notos.observe(viewLifecycleOwner) {
+            if (it.isEmpty()) {
+                placeHolderItems.forEach { it.visibility = View.GONE }
+                binding.llPlaceHolder.visibility = View.VISIBLE
+                val layoutParams = binding.ctb.layoutParams as AppBarLayout.LayoutParams
+                layoutParams.scrollFlags = 0
+            } else {
+                placeHolderItems.forEach { it.visibility = View.VISIBLE }
+                binding.llPlaceHolder.visibility = View.GONE
+                rvAdapter.submitList(it)
+            }
+        }
+
+        viewModel.searchTerm.observe(viewLifecycleOwner) { searchTerm ->
+            val notos = viewModel.notos.value
+            if (searchTerm.isBlank()) rvAdapter.submitList(notos)
+            else rvAdapter.submitList(notos?.filter { it.notoTitle.contains(searchTerm) || it.notoBody.contains(searchTerm) })
+        }
     }
 
 }
