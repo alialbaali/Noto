@@ -13,7 +13,6 @@ import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotContain
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.single
 import kotlinx.coroutines.runBlocking
 import org.koin.core.context.startKoin
@@ -29,7 +28,6 @@ private val labelRepositoryModule = module {
 
 }
 
-@ExperimentalCoroutinesApi
 class LabelRepositoryTest : KoinTest, StringSpec() {
 
     private val labelRepository by inject<LabelRepository>()

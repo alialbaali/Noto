@@ -1,267 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/ll"
+    android:id="@+id/ll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".note.ui.fragment_notebook">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".note.ui.fragment_notebook">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/item_library" />
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:elevation="0dp"
+        app:elevation="0dp">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctb"
+            style="@style/Style.CollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-            tools:listitem="@layout/item_library" />
+            android:background="@drawable/shape_fragment_library"
+            app:contentScrim="@color/colorBackground"
+            app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"
+            app:titleEnabled="false"
+            tools:title="Notes">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/abl"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorBackground"
-            android:elevation="0dp"
-            app:elevation="0dp">
-
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/ctb"
-                style="@style/Style.CollapsingToolbar"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/shape_fragment_library"
-                app:contentScrim="@color/colorBackground"
-                app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"
-                app:titleEnabled="false"
-                tools:title="Notes">
+                app:layout_collapseMode="parallax">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_collapseMode="parallax">
+                <ImageView
+                    android:id="@+id/iv_library_icon"
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_normal"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:layout_marginBottom="@dimen/spacing_extra_small"
+                    android:src="@drawable/ic_round_border_all_24"
+                    app:layout_constraintBottom_toTopOf="@id/tv_library_title"
+                    app:layout_constraintEnd_toStartOf="@id/tv_library_noto_count"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/colorPrimary"
+                    tools:tint="@color/colorPrimary" />
 
-                    <ImageView
-                        android:id="@+id/iv_library_icon"
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:layout_marginStart="@dimen/spacing_normal"
-                        android:layout_marginTop="@dimen/spacing_normal"
-                        android:layout_marginEnd="@dimen/spacing_normal"
-                        android:layout_marginBottom="@dimen/spacing_extra_small"
-                        android:src="@drawable/ic_round_border_all_24"
-                        app:layout_constraintBottom_toTopOf="@id/tv_library_title"
-                        app:layout_constraintEnd_toStartOf="@id/tv_library_noto_count"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:tint="@color/colorPrimary"
-                        app:tint="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/tv_library_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/spacing_normal"
+                    android:layout_marginTop="@dimen/spacing_extra_small"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:layout_marginBottom="@dimen/spacing_normal"
+                    android:fontFamily="@font/arima_madurai_medium"
+                    android:maxLines="3"
+                    android:text="@string/libraries"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_library_icon"
+                    tools:textColor="@color/colorPrimary" />
 
-                    <TextView
-                        android:id="@+id/tv_library_title"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/spacing_normal"
-                        android:layout_marginTop="@dimen/spacing_extra_small"
-                        android:layout_marginEnd="@dimen/spacing_normal"
-                        android:layout_marginBottom="@dimen/spacing_normal"
-                        android:fontFamily="@font/arima_madurai_medium"
-                        android:maxLines="3"
-                        android:text="@string/libraries"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="24sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/iv_library_icon"
-                        tools:textColor="@color/colorPrimary" />
+                <TextView
+                    android:id="@+id/tv_library_noto_count"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|bottom"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    android:fontFamily="@font/arima_madurai"
+                    android:gravity="end"
+                    android:singleLine="true"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorOnPrimary"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_library_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/iv_library_icon"
+                    app:layout_constraintTop_toTopOf="@+id/iv_library_icon"
+                    tools:text="7 Libraries"
+                    tools:textColor="@color/colorPrimary" />
 
-                    <TextView
-                        android:id="@+id/tv_library_noto_count"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start|bottom"
-                        android:layout_marginEnd="@dimen/spacing_normal"
-                        android:fontFamily="@font/arima_madurai"
-                        android:gravity="end"
-                        android:singleLine="true"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorOnPrimary"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/iv_library_icon"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/iv_library_icon"
-                        app:layout_constraintTop_toTopOf="@+id/iv_library_icon"
-                        tools:text="7 Libraries"
-                        tools:textColor="@color/colorPrimary" />
+                <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+                <!--                        android:id="@+id/cl_all_notos"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_margin="@dimen/spacing_normal"-->
+                <!--                        android:background="@drawable/shape_item_library"-->
+                <!--                        android:elevation="@dimen/elevation_extra_small"-->
+                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                        app:layout_constraintEnd_toStartOf="@id/cl_archived_notos"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent">-->
 
-                    <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-                    <!--                        android:id="@+id/cl_all_notos"-->
-                    <!--                        android:layout_width="0dp"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_margin="@dimen/spacing_normal"-->
-                    <!--                        android:background="@drawable/shape_item_library"-->
-                    <!--                        android:elevation="@dimen/elevation_extra_small"-->
-                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                        app:layout_constraintEnd_toStartOf="@id/cl_archived_notos"-->
-                    <!--                        app:layout_constraintStart_toStartOf="parent">-->
+                <!--                        <ImageView-->
+                <!--                            android:id="@+id/iv_all_notos"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_marginStart="@dimen/spacing_normal"-->
+                <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
+                <!--                            android:layout_marginEnd="@dimen/spacing_small"-->
+                <!--                            android:layout_marginBottom="@dimen/spacing_normal"-->
+                <!--                            android:src="@drawable/ic_round_border_all_24"-->
+                <!--                            android:tint="@color/colorAccentTeal"-->
+                <!--                            app:layout_constraintBottom_toTopOf="@id/tv_all_notos_count"-->
+                <!--                            app:layout_constraintEnd_toStartOf="@id/tv_all_notos"-->
+                <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                <!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <!--                        <ImageView-->
-                    <!--                            android:id="@+id/iv_all_notos"-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:layout_marginStart="@dimen/spacing_normal"-->
-                    <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
-                    <!--                            android:layout_marginEnd="@dimen/spacing_small"-->
-                    <!--                            android:layout_marginBottom="@dimen/spacing_normal"-->
-                    <!--                            android:src="@drawable/ic_round_border_all_24"-->
-                    <!--                            android:tint="@color/colorAccentTeal"-->
-                    <!--                            app:layout_constraintBottom_toTopOf="@id/tv_all_notos_count"-->
-                    <!--                            app:layout_constraintEnd_toStartOf="@id/tv_all_notos"-->
-                    <!--                            app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                            app:layout_constraintTop_toTopOf="parent" />-->
+                <!--                        <com.google.android.material.textview.MaterialTextView-->
+                <!--                            android:id="@+id/tv_all_notos"-->
+                <!--                            style="@style/TextView.LibraryTitle"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_marginStart="@dimen/spacing_small"-->
+                <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
+                <!--                            android:layout_marginEnd="@dimen/spacing_normal"-->
+                <!--                            android:text="@string/all_notos"-->
+                <!--                            android:textColor="@color/colorAccentTeal"-->
+                <!--                            app:layout_constraintBottom_toTopOf="@id/tv_all_notos_count"-->
+                <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                            app:layout_constraintStart_toEndOf="@+id/iv_all_notos"-->
+                <!--                            app:layout_constraintTop_toTopOf="parent"-->
+                <!--                            tools:text="All Notos" />-->
 
-                    <!--                        <com.google.android.material.textview.MaterialTextView-->
-                    <!--                            android:id="@+id/tv_all_notos"-->
-                    <!--                            style="@style/TextView.LibraryTitle"-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:layout_marginStart="@dimen/spacing_small"-->
-                    <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
-                    <!--                            android:layout_marginEnd="@dimen/spacing_normal"-->
-                    <!--                            android:text="@string/all_notos"-->
-                    <!--                            android:textColor="@color/colorAccentTeal"-->
-                    <!--                            app:layout_constraintBottom_toTopOf="@id/tv_all_notos_count"-->
-                    <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                            app:layout_constraintStart_toEndOf="@+id/iv_all_notos"-->
-                    <!--                            app:layout_constraintTop_toTopOf="parent"-->
-                    <!--                            tools:text="All Notos" />-->
+                <!--                        <com.google.android.material.textview.MaterialTextView-->
+                <!--                            android:id="@+id/tv_all_notos_count"-->
+                <!--                            style="@style/TextView.LibraryNotoCount"-->
+                <!--                            android:layout_width="0dp"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_margin="@dimen/spacing_normal"-->
+                <!--                            android:gravity="center"-->
+                <!--                            android:textColor="@color/colorAccentTeal"-->
+                <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                <!--                            app:layout_constraintTop_toBottomOf="@+id/tv_all_notos"-->
+                <!--                            tools:text="3 Notos" />-->
 
-                    <!--                        <com.google.android.material.textview.MaterialTextView-->
-                    <!--                            android:id="@+id/tv_all_notos_count"-->
-                    <!--                            style="@style/TextView.LibraryNotoCount"-->
-                    <!--                            android:layout_width="0dp"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:layout_margin="@dimen/spacing_normal"-->
-                    <!--                            android:gravity="center"-->
-                    <!--                            android:textColor="@color/colorAccentTeal"-->
-                    <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                            app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                            app:layout_constraintTop_toBottomOf="@+id/tv_all_notos"-->
-                    <!--                            tools:text="3 Notos" />-->
+                <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-                    <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+                <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+                <!--                        android:id="@+id/cl_archived_notos"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_margin="@dimen/spacing_normal"-->
+                <!--                        android:background="@drawable/shape_item_library"-->
+                <!--                        android:elevation="@dimen/elevation_extra_small"-->
+                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                        app:layout_constraintStart_toEndOf="@+id/cl_all_notos">-->
 
-                    <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-                    <!--                        android:id="@+id/cl_archived_notos"-->
-                    <!--                        android:layout_width="0dp"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:layout_margin="@dimen/spacing_normal"-->
-                    <!--                        android:background="@drawable/shape_item_library"-->
-                    <!--                        android:elevation="@dimen/elevation_extra_small"-->
-                    <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                        app:layout_constraintStart_toEndOf="@+id/cl_all_notos">-->
+                <!--                        <ImageView-->
+                <!--                            android:id="@+id/iv_archived_notos"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_marginStart="@dimen/spacing_normal"-->
+                <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
+                <!--                            android:layout_marginEnd="@dimen/spacing_small"-->
+                <!--                            android:layout_marginBottom="@dimen/spacing_normal"-->
+                <!--                            android:src="@drawable/archive_outline"-->
+                <!--                            android:tint="@color/colorAccentTeal"-->
+                <!--                            app:layout_constraintBottom_toTopOf="@id/tv_archived_notos_count"-->
+                <!--                            app:layout_constraintEnd_toStartOf="@id/tv_archived_notos"-->
+                <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                <!--                            app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <!--                        <ImageView-->
-                    <!--                            android:id="@+id/iv_archived_notos"-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:layout_marginStart="@dimen/spacing_normal"-->
-                    <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
-                    <!--                            android:layout_marginEnd="@dimen/spacing_small"-->
-                    <!--                            android:layout_marginBottom="@dimen/spacing_normal"-->
-                    <!--                            android:src="@drawable/archive_outline"-->
-                    <!--                            android:tint="@color/colorAccentTeal"-->
-                    <!--                            app:layout_constraintBottom_toTopOf="@id/tv_archived_notos_count"-->
-                    <!--                            app:layout_constraintEnd_toStartOf="@id/tv_archived_notos"-->
-                    <!--                            app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                            app:layout_constraintTop_toTopOf="parent" />-->
+                <!--                        <com.google.android.material.textview.MaterialTextView-->
+                <!--                            android:id="@+id/tv_archived_notos"-->
+                <!--                            style="@style/TextView.LibraryTitle"-->
+                <!--                            android:layout_width="wrap_content"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_marginStart="@dimen/spacing_small"-->
+                <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
+                <!--                            android:layout_marginEnd="@dimen/spacing_normal"-->
+                <!--                            android:text="@string/archived_notos"-->
+                <!--                            android:textColor="@color/colorAccentTeal"-->
+                <!--                            app:layout_constraintBottom_toTopOf="@id/tv_archived_notos_count"-->
+                <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                            app:layout_constraintStart_toEndOf="@+id/iv_archived_notos"-->
+                <!--                            app:layout_constraintTop_toTopOf="parent"-->
+                <!--                            tools:text="@string/archived_notos" />-->
 
-                    <!--                        <com.google.android.material.textview.MaterialTextView-->
-                    <!--                            android:id="@+id/tv_archived_notos"-->
-                    <!--                            style="@style/TextView.LibraryTitle"-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:layout_marginStart="@dimen/spacing_small"-->
-                    <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
-                    <!--                            android:layout_marginEnd="@dimen/spacing_normal"-->
-                    <!--                            android:text="@string/archived_notos"-->
-                    <!--                            android:textColor="@color/colorAccentTeal"-->
-                    <!--                            app:layout_constraintBottom_toTopOf="@id/tv_archived_notos_count"-->
-                    <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                            app:layout_constraintStart_toEndOf="@+id/iv_archived_notos"-->
-                    <!--                            app:layout_constraintTop_toTopOf="parent"-->
-                    <!--                            tools:text="@string/archived_notos" />-->
+                <!--                        <com.google.android.material.textview.MaterialTextView-->
+                <!--                            android:id="@+id/tv_archived_notos_count"-->
+                <!--                            style="@style/TextView.LibraryNotoCount"-->
+                <!--                            android:layout_width="0dp"-->
+                <!--                            android:layout_height="wrap_content"-->
+                <!--                            android:layout_margin="@dimen/spacing_normal"-->
+                <!--                            android:gravity="center"-->
+                <!--                            android:textColor="@color/colorAccentTeal"-->
+                <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                            app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                            app:layout_constraintStart_toStartOf="parent"-->
+                <!--                            app:layout_constraintTop_toBottomOf="@+id/tv_archived_notos"-->
+                <!--                            tools:text="3 Notos" />-->
 
-                    <!--                        <com.google.android.material.textview.MaterialTextView-->
-                    <!--                            android:id="@+id/tv_archived_notos_count"-->
-                    <!--                            style="@style/TextView.LibraryNotoCount"-->
-                    <!--                            android:layout_width="0dp"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:layout_margin="@dimen/spacing_normal"-->
-                    <!--                            android:gravity="center"-->
-                    <!--                            android:textColor="@color/colorAccentTeal"-->
-                    <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-                    <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--                            app:layout_constraintStart_toStartOf="parent"-->
-                    <!--                            app:layout_constraintTop_toBottomOf="@+id/tv_archived_notos"-->
-                    <!--                            tools:text="3 Notos" />-->
+                <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-                </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:backgroundTint="@color/colorBackground"
+        app:fabAlignmentMode="end"
+        app:fabAnimationMode="scale"
+        app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
+        app:hideOnScroll="true"
+        app:menu="@menu/menu_library_list"
+        app:navigationIcon="@drawable/ic_round_menu_24" />
 
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bab"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:backgroundTint="@color/colorBackground"
-            app:fabAlignmentMode="end"
-            app:fabAnimationMode="scale"
-            app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
-            app:hideOnScroll="true"
-            app:menu="@menu/menu_library_list"
-            app:navigationIcon="@drawable/ic_round_menu_24" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal"
+        android:src="@drawable/ic_add_24dp"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_anchor="@id/bab"
+        app:tint="@color/colorBackground" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_normal"
-            android:src="@drawable/ic_add_24dp"
-            android:tint="#FFF"
-            app:backgroundTint="@color/colorPrimary"
-            app:layout_anchor="@id/bab" />
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv_all_notos"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:drawableStart="@drawable/ic_round_border_all_24"-->
+    <!--            android:drawablePadding="@dimen/spacing_normal"-->
+    <!--            android:padding="@dimen/spacing_normal"-->
+    <!--            android:text="All Notos"-->
+    <!--            android:textColor="@color/colorOnPrimary"-->
+    <!--            android:textSize="18sp" />-->
 
-        <!--        <TextView-->
-        <!--            android:id="@+id/tv_all_notos"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:drawableStart="@drawable/ic_round_border_all_24"-->
-        <!--            android:drawablePadding="@dimen/spacing_normal"-->
-        <!--            android:padding="@dimen/spacing_normal"-->
-        <!--            android:text="All Notos"-->
-        <!--            android:textColor="@color/colorOnPrimary"-->
-        <!--            android:textSize="18sp" />-->
-
-        <!--        <TextView-->
-        <!--            android:id="@+id/tv"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:drawableStart="@drawable/ic_add_24dp"-->
-        <!--            android:drawablePadding="@dimen/spacing_normal"-->
-        <!--            android:padding="@dimen/spacing_normal"-->
-        <!--            android:text="New Library"-->
-        <!--            android:textColor="@color/colorOnPrimary"-->
-        <!--            android:textSize="18sp" />-->
+    <!--        <TextView-->
+    <!--            android:id="@+id/tv"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:drawableStart="@drawable/ic_add_24dp"-->
+    <!--            android:drawablePadding="@dimen/spacing_normal"-->
+    <!--            android:padding="@dimen/spacing_normal"-->
+    <!--            android:text="New Library"-->
+    <!--            android:textColor="@color/colorOnPrimary"-->
+    <!--            android:textSize="18sp" />-->
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

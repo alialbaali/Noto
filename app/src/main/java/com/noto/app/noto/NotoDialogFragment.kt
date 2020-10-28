@@ -9,10 +9,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.navigation.navOptions
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
@@ -117,6 +118,10 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
                 dialogBinding.btnConfirm.setOnClickListener {
                     dialogFragment.dismiss()
                     viewModel.deleteNoto()
+                    dialogFragment.findNavController().navigate(
+                        R.id.libraryFragment,
+                        bundleOf("library_id" to viewModel.library.value?.libraryId),
+                        navOptions { popUpTo(R.id.libraryFragment) { inclusive = true } })
                 }
             }.show(parentFragmentManager, null)
         }

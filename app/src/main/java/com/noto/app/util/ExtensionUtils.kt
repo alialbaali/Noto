@@ -25,6 +25,10 @@ import com.noto.domain.model.Noto
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
 
+enum class LayoutManager {
+    Linear, Grid
+}
+
 fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
 fun Fragment.colorStateResource(@ColorRes id: Int): ColorStateList? = ResourcesCompat.getColorStateList(resources, id, null)
