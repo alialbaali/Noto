@@ -13,8 +13,9 @@ import com.noto.app.R
 import com.noto.app.databinding.FragmentArchiveBinding
 import com.noto.app.util.colorResource
 import com.noto.app.util.colorStateResource
-import com.noto.domain.model.Noto
 import com.noto.app.util.toResource
+import com.noto.domain.model.Noto
+import org.koin.android.ext.android.get
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ArchiveFragment : Fragment() {
@@ -47,6 +48,10 @@ class ArchiveFragment : Fragment() {
 
                 override fun onLongClick(noto: Noto) {
                     findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(noto.notoId))
+                }
+
+                override fun toggleNotoStar(noto: Noto) {
+                    viewModel.toggleNotoStar(noto)
                 }
 
             })

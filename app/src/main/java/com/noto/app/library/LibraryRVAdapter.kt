@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.BaseItemTouchHelperListener
 import com.noto.app.R
 import com.noto.app.databinding.ItemNotoBinding
+import com.noto.app.noto.NotoViewModel
 import com.noto.domain.model.Noto
 
-class LibraryRVAdapter(private val listener: NotoItemClickListener) : ListAdapter<Noto, NotoItemViewHolder>(
+class LibraryRVAdapter(
+    private val listener: NotoItemClickListener,
+) : ListAdapter<Noto, NotoItemViewHolder>(
     NoteItemDiffCallback()
-),
-    BaseItemTouchHelperListener {
+), BaseItemTouchHelperListener {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotoItemViewHolder {
@@ -55,7 +57,7 @@ class LibraryRVAdapter(private val listener: NotoItemClickListener) : ListAdapte
 // Note Item ViewHolder
 class NotoItemViewHolder(
     private val binding: ItemNotoBinding,
-    private val listener: NotoItemClickListener
+    private val listener: NotoItemClickListener,
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
@@ -71,13 +73,16 @@ class NotoItemViewHolder(
             true
         }
 
+        binding.rbNotoStar.setOnClickListener {
+            listener.toggleNotoStar(noto)
+        }
     }
 
     companion object {
 
         fun create(
             parent: ViewGroup,
-            listener: NotoItemClickListener
+            listener: NotoItemClickListener,
         ): NotoItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = ItemNotoBinding.inflate(layoutInflater, parent, false)
@@ -92,6 +97,7 @@ class NotoItemViewHolder(
     fun bind(noto: Noto) {
         binding.tvNotoTitle.text = noto.notoTitle
         binding.tvNotoBody.text = noto.notoBody
+        binding.rbNotoStar.isChecked = noto.notoIsStarred
 
 //        if (noto.notoTitle.isBlank()) binding.tvNotoTitle.visibility = View.GONE
 //        if (noto.notoBody.isBlank()) binding.tvNotoBody.visibility = View.GONE
@@ -121,4 +127,5 @@ class NoteItemDiffCallback() : DiffUtil.ItemCallback<Noto>() {
 interface NotoItemClickListener {
     fun onClick(noto: Noto)
     fun onLongClick(noto: Noto)
+    fun toggleNotoStar(noto: Noto)
 }

@@ -30,4 +30,8 @@ class FakeLibraryRepository : LibraryRepository {
         TODO("Not yet implemented")
     }
 
+    override suspend fun updateLibraries(libraries: List<Library>) {
+        TODO("Not yet implemented")
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.noto.app.libraryList
 
+import com.noto.app.library.LibraryListViewModel
 import com.noto.app.repository.fake.FakeLibraryRepository
 import com.noto.domain.repository.LibraryRepository
 import org.koin.android.viewmodel.dsl.viewModel

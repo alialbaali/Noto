@@ -88,4 +88,8 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
         }
     }
 
+    fun toggleNotoStar(noto: Noto) = viewModelScope.launch {
+        notoRepository.updateNoto(noto.copy(notoIsStarred = !noto.notoIsStarred))
+    }
+
 }

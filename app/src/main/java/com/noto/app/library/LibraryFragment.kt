@@ -22,6 +22,7 @@ import com.noto.app.util.*
 import com.noto.domain.model.Noto
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
+import org.koin.android.ext.android.get
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -143,6 +144,7 @@ class LibraryFragment : Fragment() {
         val rvAdapter = LibraryRVAdapter(object : NotoItemClickListener {
             override fun onClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(noto.libraryId, noto.notoId))
             override fun onLongClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(noto.libraryId, noto.notoId))
+            override fun toggleNotoStar(noto: Noto) { viewModel.toggleNotoStar(noto) }
         })
 
         adapter = rvAdapter
