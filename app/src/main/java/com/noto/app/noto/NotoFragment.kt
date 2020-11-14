@@ -145,6 +145,8 @@ class NotoFragment : Fragment() {
             viewModel.setNotoBody(it.toString())
         }
 
+        binding.rbNotoStar.setOnClickListener {  viewModel.toggleNotoStar() }
+
         viewModel.noto.observe(viewLifecycleOwner) {
             it?.let { noto ->
 
@@ -152,6 +154,8 @@ class NotoFragment : Fragment() {
                 binding.etNotoBody.setText(it.notoBody)
                 binding.etNotoTitle.setSelection(it.notoTitle.length)
                 binding.etNotoBody.setSelection(it.notoBody.length)
+                binding.rbNotoStar.isChecked = it.notoIsStarred
+
 
                 if (noto.notoIsArchived) archiveMenuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
                 else archiveMenuItem.icon = drawableResource(R.drawable.archive_arrow_down_outline)

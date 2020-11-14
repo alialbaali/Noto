@@ -91,4 +91,8 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
         _noto.value = _noto.value?.copy(notoBody = body)
     }
 
+    fun toggleNotoStar() {
+        _noto.value?.let { _noto.value = it.copy(notoIsStarred = !it.notoIsStarred) }
+    }
+
 }

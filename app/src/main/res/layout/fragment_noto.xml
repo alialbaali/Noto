@@ -63,16 +63,27 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_normal"
                     android:fontFamily="@font/arima_madurai_medium"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:maxLines="3"
-                    android:textAlignment="textStart"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/rb_noto_star"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tb"
                     tools:text="@string/all_notos"
                     tools:textColor="@color/colorAccentTeal" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_noto_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/spacing_normal"
+                    android:background="@drawable/selector_star"
+                    android:button="@null"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_library_title"
+                    app:layout_constraintTop_toBottomOf="@+id/tb" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
