@@ -18,7 +18,7 @@ object Versions {
     const val Kotlin = "1.4.10"
     const val JavaTime = "1.0.9"
     const val Navigation = "2.3.1"
-    const val GradleAndroid = "4.1.0"
+    const val GradleAndroid = "4.1.1"
     const val Koin = "2.1.6"
 }
 
@@ -30,13 +30,13 @@ object Modules {
 }
 
 object App {
-    const val ID = "com.note"
-    const val VersionName = "0.4.0"
+    const val ID = "com.noto"
+    const val VersionName = "1.0.0"
     const val Name = "Noto"
-    const val VersionCode = 8
+    const val VersionCode = 9
     const val MinSDK = 21
     const val CompileSDK = 30
-    const val BuildTools = "30.0.0"
+    const val BuildTools = "30.0.2"
     const val TargetSDK = CompileSDK
 }
 

@@ -19,7 +19,7 @@ allprojects {
     }
     tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
         kotlinOptions {
-            freeCompilerArgs = listOf("-Xallow-result-return-type", "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi")
+            freeCompilerArgs = listOf("-Xallow-result-return-type")
         }
     }
 }
