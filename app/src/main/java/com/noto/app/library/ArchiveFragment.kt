@@ -30,7 +30,7 @@ class ArchiveFragment : Fragment() {
 
         binding = FragmentArchiveBinding.inflate(inflater, container, false)
 
-        viewModel.getArchivedNotos(args.libraryId)
+        viewModel.getArchivedNotes(args.libraryId)
         viewModel.getLibrary(args.libraryId)
 
         binding.tb.setNavigationOnClickListener {
@@ -50,7 +50,7 @@ class ArchiveFragment : Fragment() {
                 }
 
                 override fun toggleNotoStar(note: Note) {
-                    viewModel.toggleNotoStar(note)
+                    viewModel.toggleNoteStar(note)
                 }
 
             })

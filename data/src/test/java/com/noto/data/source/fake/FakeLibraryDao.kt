@@ -26,7 +26,7 @@ class FakeLibraryDao : LibraryLocalDataSource {
         libraries.remove(library)
     }
 
-    override suspend fun countLibraryNotos(libraryId: Long): Int {
+    override suspend fun countLibraryNotes(libraryId: Long): Int {
         TODO("Not yet implemented")
     }
 

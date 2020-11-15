@@ -1,4 +1,4 @@
-package com.noto.app.noto
+package com.noto.app.note
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,15 +11,15 @@ import com.noto.domain.model.Label
 import com.noto.domain.model.Library
 import com.noto.domain.model.Note
 import com.noto.domain.repository.LibraryRepository
-import com.noto.domain.repository.NotoRepository
+import com.noto.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.time.ZonedDateTime
 
-class NotoViewModel(private val libraryRepository: LibraryRepository, private val notoRepository: NotoRepository) : ViewModel() {
+class NoteViewModel(private val libraryRepository: LibraryRepository, private val noteRepository: NoteRepository) : ViewModel() {
 
-    private val _noto = MutableLiveData<Note>()
-    val noto = _noto.asLiveData().distinctUntilChanged()
+    private val _note = MutableLiveData<Note>()
+    val note = _note.asLiveData().distinctUntilChanged()
 
     private val _library = MutableLiveData<Library>()
     val library = _library.asLiveData()
@@ -27,15 +27,15 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
     private val _labels = MutableLiveData<MutableSet<Label>>()
     val labels = _labels.asLiveData()
 
-    fun getNotoById(notoId: Long) = viewModelScope.launch {
+    fun getNoteById(notoId: Long) = viewModelScope.launch {
 
-        notoRepository.getNotoById(notoId).collect { value ->
-            _noto.postValue(value)
+        noteRepository.getNoteById(notoId).collect { value ->
+            _note.postValue(value)
         }
 
 //        notoUseCases.getNotoWithLabels(notoId).onSuccess { flow ->
 //            flow.collect { notoWithLabels ->
-//                _noto.postValue(notoWithLabels.noto)
+//                _noto.postValue(notoWithLabels.note)
 //                _labels.postValue(notoWithLabels.labels.toMutableSet())
 //            }
 //        }
@@ -48,10 +48,10 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
         }
     }
 
-    fun postNoto(libraryId: Long) = viewModelScope.launch {
+    fun postNote(libraryId: Long) = viewModelScope.launch {
 
-        notoRepository.getNotosByLibraryId(libraryId).collect { value ->
-            _noto.postValue(Note(libraryId = libraryId, position = value.count()))
+        noteRepository.getNotesByLibraryId(libraryId).collect { value ->
+            _note.postValue(Note(libraryId = libraryId, position = value.count()))
         }
 
 //        _labels.postValue(mutableSetOf())
@@ -59,40 +59,39 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
     }
 
     fun setNotoReminder(zonedDateTime: ZonedDateTime?) {
-        _noto.value?.reminderDate = zonedDateTime
-        _noto.value = _noto.value
+        _note.value = _note.value?.copy(reminderDate = zonedDateTime)
     }
 
-    fun createNoto() = viewModelScope.launch {
-        if (noto.value?.isValid() == true) notoRepository.createNoto(noto.value!!)
+    fun createNote() = viewModelScope.launch {
+        if (note.value?.isValid() == true) noteRepository.createNote(note.value!!)
     }
 
-    fun updateNoto() = viewModelScope.launch {
-        if (noto.value?.isValid() == true) notoRepository.updateNoto(noto.value!!) else deleteNoto()
+    fun updateNote() = viewModelScope.launch {
+        if (note.value?.isValid() == true) noteRepository.updateNote(note.value!!) else deleteNoto()
     }
 
-    fun setArchived(value: Boolean) {
-        noto.value?.isArchived = value
+    fun setNotoArchived(value: Boolean) {
+        _note.value = _note.value?.copy(isArchived = value)
     }
 
-    fun deleteNoto() = viewModelScope.launch { notoRepository.deleteNoto(noto.value!!) }
+    fun deleteNoto() = viewModelScope.launch { noteRepository.deleteNote(note.value!!) }
 
     fun createNotoWithLabels() = viewModelScope.launch {
-        if (noto.value?.isValid() == true) notoRepository.createNotoWithLabels(noto.value!!, labels.value!!)
+        if (note.value?.isValid() == true) noteRepository.createNoteWithLabels(note.value!!, labels.value!!)
     }
 
     fun notifyLabelsObserver() = _labels.notifyObserver()
 
     fun setNotoTitle(title: String) {
-        _noto.value = _noto.value?.copy(title = title)
+        _note.value = _note.value?.copy(title = title)
     }
 
     fun setNotoBody(body: String) {
-        _noto.value = _noto.value?.copy(body = body)
+        _note.value = _note.value?.copy(body = body)
     }
 
     fun toggleNotoStar() {
-        _noto.value?.let { _noto.value = it.copy(isStarred = !it.isStarred) }
+        _note.value?.let { _note.value = it.copy(isStarred = !it.isStarred) }
     }
 
 }

@@ -26,8 +26,8 @@ class LibraryRepositoryImpl(private val dataSource: LibraryLocalDataSource) : Li
         dataSource.deleteLibrary(library)
     }
 
-    override suspend fun countLibraryNotos(libraryId: Long): Int = withContext(Dispatchers.IO) {
-        dataSource.countLibraryNotos(libraryId)
+    override suspend fun countLibraryNotes(libraryId: Long): Int = withContext(Dispatchers.IO) {
+        dataSource.countLibraryNotes(libraryId)
     }
 
     override suspend fun updateLibraries(libraries: List<Library>) = withContext(Dispatchers.IO) {

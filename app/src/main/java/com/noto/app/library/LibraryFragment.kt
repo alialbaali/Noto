@@ -38,7 +38,7 @@ class LibraryFragment : Fragment() {
         binding = FragmentLibraryBinding.inflate(inflater, container, false)
 
         viewModel.getLibrary(args.libraryId)
-        viewModel.getNotos(args.libraryId)
+        viewModel.getNotes(args.libraryId)
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
 
@@ -143,7 +143,7 @@ class LibraryFragment : Fragment() {
         val rvAdapter = LibraryRVAdapter(object : NotoItemClickListener {
             override fun onClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
             override fun onLongClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id))
-            override fun toggleNotoStar(note: Note) { viewModel.toggleNotoStar(note) }
+            override fun toggleNotoStar(note: Note) { viewModel.toggleNoteStar(note) }
         })
 
         adapter = rvAdapter

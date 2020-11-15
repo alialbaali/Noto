@@ -1,4 +1,4 @@
-package com.noto.app.noto
+package com.noto.app.note
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -24,13 +24,13 @@ import com.noto.app.util.toResource
 import com.noto.app.util.toast
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
-class NotoDialogFragment : BaseBottomSheetDialogFragment() {
+class NoteDialogFragment : BaseBottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentDialogNotoBinding
 
-    private val viewModel by sharedViewModel<NotoViewModel>()
+    private val viewModel by sharedViewModel<NoteViewModel>()
 
-    private val args by navArgs<NotoDialogFragmentArgs>()
+    private val args by navArgs<NoteDialogFragmentArgs>()
 
     private val clipboardManager by lazy { requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
 
@@ -38,7 +38,7 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
 
         binding = FragmentDialogNotoBinding.inflate(inflater, container, false)
 
-        if (args.notoId != 0L) viewModel.getNotoById(args.notoId)
+        if (args.notoId != 0L) viewModel.getNoteById(args.notoId)
 
         viewModel.getLibraryById(args.libraryId)
 
@@ -56,7 +56,7 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
 
         })
 
-        viewModel.noto.observe(viewLifecycleOwner, Observer { noto ->
+        viewModel.note.observe(viewLifecycleOwner, Observer { noto ->
             noto?.let {
 
                 binding.tvArchiveNoto.compoundDrawablesRelative[0] =
@@ -73,18 +73,18 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
 
         binding.tvArchiveNoto.setOnClickListener {
             dismiss()
-            if (viewModel.noto.value?.isArchived == true) viewModel.setArchived(false) else viewModel.setArchived(true)
-            viewModel.updateNoto()
+            if (viewModel.note.value?.isArchived == true) viewModel.setNotoArchived(false) else viewModel.setNotoArchived(true)
+            viewModel.updateNote()
         }
 
         binding.tvRemindMe.setOnClickListener {
             dismiss()
-            findNavController().navigate(NotoDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.notoId))
+            findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.notoId))
         }
 
         binding.tvCopyToClipboard.setOnClickListener { v ->
             dismiss()
-            val clipData = ClipData.newPlainText(viewModel.library.value?.libraryTitle, "${viewModel.noto.value?.title}\n${viewModel.noto.value?.body}")
+            val clipData = ClipData.newPlainText(viewModel.library.value?.libraryTitle, "${viewModel.note.value?.title}\n${viewModel.note.value?.body}")
             clipboardManager.setPrimaryClip(clipData)
             v.toast(getString(R.string.copied_to_clipboard))
         }
@@ -93,7 +93,7 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
 
             dismiss()
 
-            val noto = viewModel.noto.value
+            val noto = viewModel.note.value
 
             val intent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"

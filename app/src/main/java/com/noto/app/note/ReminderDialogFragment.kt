@@ -1,4 +1,4 @@
-package com.noto.app.noto
+package com.noto.app.note
 
 import android.app.AlarmManager
 import android.app.DatePickerDialog
@@ -29,7 +29,7 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentDialogReminderBinding
 
-    private val viewModel by sharedViewModel<NotoViewModel>()
+    private val viewModel by sharedViewModel<NoteViewModel>()
 
     private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
@@ -41,7 +41,7 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
             dismiss()
         }
 
-        viewModel.noto.observe(viewLifecycleOwner) { noto ->
+        viewModel.note.observe(viewLifecycleOwner) { noto ->
 
             noto.reminderDate?.let { time ->
 
@@ -65,8 +65,8 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
 
         binding.til.setEndIconOnClickListener {
-            if (viewModel.noto.value?.reminderDate == null) showDateTimeDialog() else {
-                viewModel.noto.value?.let { noto ->
+            if (viewModel.note.value?.reminderDate == null) showDateTimeDialog() else {
+                viewModel.note.value?.let { noto ->
 
                     val intent = Intent(requireContext(), AlarmReceiver::class.java)
                     val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.id.toInt(), intent, PENDING_INTENT_FLAGS)
@@ -85,7 +85,7 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
         fun createAlarm(zonedDateTime: ZonedDateTime) {
 
-            viewModel.noto.value?.let { noto ->
+            viewModel.note.value?.let { noto ->
 
                 val intent = Intent(requireContext(), AlarmReceiver::class.java).apply {
                     putExtra(NOTO_ID, noto.id.toInt())

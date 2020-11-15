@@ -19,3 +19,13 @@ object Migration1To2 : Migration(1, 2) {
     }
 
 }
+
+object Migration2To3 : Migration(2, 3) {
+
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.beginTransaction()
+        database.execSQL("ALTER TABLE notos RENAME TO notes")
+        database.endTransaction()
+    }
+
+}

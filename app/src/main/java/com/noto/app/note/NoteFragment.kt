@@ -1,4 +1,4 @@
-package com.noto.app.noto
+package com.noto.app.note
 
 import android.content.Context
 import android.content.Intent
@@ -31,7 +31,7 @@ class NotoFragment : Fragment() {
 
     private lateinit var binding: FragmentNotoBinding
 
-    private val viewModel by sharedViewModel<NotoViewModel>()
+    private val viewModel by sharedViewModel<NoteViewModel>()
 
     private val args by navArgs<NotoFragmentArgs>()
 
@@ -52,36 +52,36 @@ class NotoFragment : Fragment() {
 
         if (args.notoId == 0L) {
 
-            viewModel.postNoto(args.libraryId)
+            viewModel.postNote(args.libraryId)
 
             binding.etNotoBody.requestFocus()
             imm.showSoftInput(binding.etNotoBody, InputMethodManager.SHOW_IMPLICIT)
 
             requireActivity().onBackPressedDispatcher.addCallback(this) {
                 this@NotoFragment.findNavController().navigateUp()
-                viewModel.createNoto()
+                viewModel.createNote()
             }.isEnabled = true
 
             binding.tb.setNavigationOnClickListener {
                 imm.hideSoftInputFromWindow(binding.etNotoBody.windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
                 findNavController().navigateUp()
-                viewModel.createNoto()
+                viewModel.createNote()
             }
 
         } else {
 
-            viewModel.getNotoById(args.notoId)
+            viewModel.getNoteById(args.notoId)
 
             requireActivity().onBackPressedDispatcher.addCallback(this) {
                 this@NotoFragment.findNavController().navigateUp()
-                viewModel.updateNoto()
+                viewModel.updateNote()
             }.isEnabled = true
 
 
             binding.tb.setNavigationOnClickListener {
                 imm.hideSoftInputFromWindow(binding.etNotoBody.windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
                 findNavController().navigateUp()
-                viewModel.updateNoto()
+                viewModel.updateNote()
             }
 
         }
@@ -101,7 +101,7 @@ class NotoFragment : Fragment() {
 
                     R.id.share_noto -> {
 
-                        val noto = viewModel.noto.value
+                        val noto = viewModel.note.value
 
                         val intent = Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"
@@ -120,11 +120,11 @@ class NotoFragment : Fragment() {
 
                         menuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
 
-                        if (viewModel.noto.value?.isArchived == true) {
-                            viewModel.setArchived(false)
+                        if (viewModel.note.value?.isArchived == true) {
+                            viewModel.setNotoArchived(false)
                             binding.root.snackbar(getString(R.string.noto_unarchived))
                         } else {
-                            viewModel.setArchived(true)
+                            viewModel.setNotoArchived(true)
                             binding.root.snackbar(getString(R.string.noto_archived))
                         }
 
@@ -147,7 +147,7 @@ class NotoFragment : Fragment() {
 
         binding.rbNotoStar.setOnClickListener {  viewModel.toggleNotoStar() }
 
-        viewModel.noto.observe(viewLifecycleOwner) {
+        viewModel.note.observe(viewLifecycleOwner) {
             it?.let { noto ->
 
                 binding.etNotoTitle.setText(it.title)

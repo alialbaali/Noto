@@ -3,7 +3,7 @@ package com.noto.data.repository
 import com.noto.data.LabelRepositoryImpl
 import com.noto.data.source.fake.FakeLabelDao
 import com.noto.domain.model.Label
-import com.noto.domain.model.NotoColor
+import com.noto.domain.model.NoteColor
 import com.noto.domain.repository.LabelRepository
 import io.kotest.core.spec.Spec
 import io.kotest.core.spec.style.StringSpec

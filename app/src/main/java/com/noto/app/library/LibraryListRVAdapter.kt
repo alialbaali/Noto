@@ -41,7 +41,7 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
 
         val toLibrary = currentList.find { it.libraryPosition == toViewHolder.adapterPosition }!!
 
-        fromLibrary.libraryPosition = toLibrary.libraryPosition.also { toLibrary.libraryPosition = fromLibrary.libraryPosition }
+//        fromLibrary.libraryPosition = toLibrary.libraryPosition.also { toLibrary.libraryPosition = fromLibrary.libraryPosition }
 
         fromViewHolder.drag(fromViewHolder.library)
 

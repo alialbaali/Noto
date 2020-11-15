@@ -5,11 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "noto_labels")
-data class NotoLabel(
+data class NoteLabel(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "noto_label_id")
-    val NotoLabelId: Long = 0,
+    val NoteLabelId: Long = 0,
 
     @ColumnInfo(name = "id")
     val notoId: Long,
@@ -19,6 +19,6 @@ data class NotoLabel(
 
 )
 
-fun NotoLabel.toLabel(labelTitle: String, labelColor: NotoColor) = Label(labelId, labelTitle, labelColor)
+fun NoteLabel.toLabel(labelTitle: String, labelColor: NotoColor) = Label(labelId, labelTitle, labelColor)
 
-fun Label.toNotoLabel(notoId: Long) = NotoLabel(labelId = labelId, notoId =  notoId)
+fun Label.toNoteLabel(notoId: Long) = NoteLabel(labelId = labelId, notoId =  notoId)

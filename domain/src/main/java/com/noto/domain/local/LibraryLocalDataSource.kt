@@ -15,7 +15,7 @@ interface LibraryLocalDataSource {
 
     suspend fun deleteLibrary(library: Library)
 
-    suspend fun countLibraryNotos(libraryId: Long): Int
+    suspend fun countLibraryNotes(libraryId: Long): Int
 
     suspend fun updateLibraries(libraries: List<Library>)
 

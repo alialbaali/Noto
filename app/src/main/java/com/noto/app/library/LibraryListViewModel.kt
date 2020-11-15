@@ -33,7 +33,7 @@ class LibraryListViewModel(private val libraryRepository: LibraryRepository, pri
     }
 
     fun countNotos(libraryId: Long): Int = runBlocking {
-        libraryRepository.countLibraryNotos(libraryId)
+        libraryRepository.countLibraryNotes(libraryId)
     }
 
     fun setLayoutManager(value: LayoutManager) = viewModelScope.launch {

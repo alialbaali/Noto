@@ -1,9 +1,9 @@
 package com.noto.data.repository
 
-import com.noto.data.NotoRepositoryImpl
-import com.noto.data.source.fake.FakeNotoDao
+import com.noto.data.NoteRepositoryImpl
+import com.noto.data.source.fake.FakeNoteDao
 import com.noto.domain.model.Note
-import com.noto.domain.repository.NotoRepository
+import com.noto.domain.repository.NoteRepository
 import io.kotest.core.spec.Spec
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.booleans.shouldBeTrue
@@ -20,23 +20,23 @@ import java.time.ZonedDateTime
 
 private val notoRepositoryModule = module {
 
-    single { FakeNotoDao() }
+    single { FakeNoteDao() }
 
-    single<NotoRepository> { NotoRepositoryImpl(get<FakeNotoDao>()) }
+    single<NoteRepository> { NoteRepositoryImpl(get<FakeNoteDao>()) }
 
 }
 
 private const val LIBRARY_ID = 1L
 
-class NotoRepositoryTest : KoinTest, StringSpec() {
+class NoteRepositoryTest : KoinTest, StringSpec() {
 
-    private val notoRepository by inject<NotoRepository>()
+    private val notoRepository by inject<NoteRepository>()
 
-    private val notos by lazy { runBlocking { notoRepository.getNotosByLibraryId().single() } }
+    private val notos by lazy { runBlocking { notoRepository.getNotesByLibraryId().single() } }
 
     private val noto = Note(libraryId = LIBRARY_ID, title = "TITLE", body = "BODY", position = 0)
 
-    private val updatedNoto = noto.copy(title = "UPDATED TITLE", body = "UPDATED BODY", isArchived = true, reminderDate = ZonedDateTime.now())
+    private val updatedNote = noto.copy(title = "UPDATED TITLE", body = "UPDATED BODY", isArchived = true, reminderDate = ZonedDateTime.now())
 
     override fun beforeSpec(spec: Spec) {
         super.beforeSpec(spec)
@@ -52,16 +52,16 @@ class NotoRepositoryTest : KoinTest, StringSpec() {
 
         "get notos"{
 
-            val result = notoRepository.getNotosByLibraryId().single()
+            val result = notoRepository.getNotesByLibraryId().single()
 
             result shouldHaveSize 0
             result.shouldBeEmpty()
 
         }
 
-        "create noto"{
+        "create note"{
 
-            notoRepository.createNoto(noto)
+            notoRepository.createNote(noto)
 
             notos shouldContain noto
             notos shouldHaveSize 1
@@ -71,44 +71,44 @@ class NotoRepositoryTest : KoinTest, StringSpec() {
         }
 
 
-        "update noto" {
+        "update note" {
 
-            notoRepository.updateNoto(updatedNoto)
+            notoRepository.updateNote(updatedNote)
 
             val result = notos.find { it.id == noto.id }
 
-            notos shouldContain updatedNoto
+            notos shouldContain updatedNote
             notos shouldNotContain noto
 
             result shouldNotBe null
             result!!.isArchived.shouldBeTrue()
             result.reminderDate shouldNotBe null
-            result.title shouldBe updatedNoto.title
-            result.body shouldBe updatedNoto.body
+            result.title shouldBe updatedNote.title
+            result.body shouldBe updatedNote.body
 
         }
 
-        "get noto"{
+        "get note"{
 
-            val result = notoRepository.getNotoById(noto.id).single()
+            val result = notoRepository.getNoteById(noto.id).single()
 
-            result shouldBe updatedNoto
+            result shouldBe updatedNote
             result shouldNotBe noto
             result.isArchived.shouldBeTrue()
             result.reminderDate shouldNotBe null
-            result.title shouldBe updatedNoto.title
-            result.body shouldBe updatedNoto.body
+            result.title shouldBe updatedNote.title
+            result.body shouldBe updatedNote.body
 
         }
 
-        "delete noto"{
+        "delete note"{
 
-            notoRepository.deleteNoto(updatedNoto)
+            notoRepository.deleteNote(updatedNote)
 
             notos.shouldBeEmpty()
             notos shouldHaveSize 0
             notos shouldNotContain noto
-            notos shouldNotContain updatedNoto
+            notos shouldNotContain updatedNote
 
         }
 

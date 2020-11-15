@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.noto.domain.model.Label
 import com.noto.domain.model.Library
 import com.noto.domain.model.Note
-import com.noto.domain.model.NotoLabel
+import com.noto.domain.model.NoteLabel
 import com.noto.local.migration.Migration1To2
 
 private const val NOTO_DATABASE = "Noto Database"
@@ -19,10 +19,10 @@ private const val NOTO_DATABASE = "Noto Database"
     LocalDateConverter::class,
     ZonedDateTimeConverter::class
 )
-@Database(entities = [Note::class, Library::class, Label::class, NotoLabel::class], version = 2, exportSchema = false)
+@Database(entities = [Note::class, Library::class, Label::class, NoteLabel::class], version = 2, exportSchema = false)
 abstract class NotoDatabase : RoomDatabase() {
 
-    abstract val notoDao: NotoDao
+    abstract val notoDao: NoteDao
 
     abstract val libraryDao: LibraryDao
 

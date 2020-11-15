@@ -13,16 +13,16 @@ data class Library(
     val libraryId: Long = 0L,
 
     @ColumnInfo(name = "library_title")
-    var libraryTitle: String = "",
+    val libraryTitle: String = "",
 
     @ColumnInfo(name = "library_position")
-    var libraryPosition: Int,
+    val libraryPosition: Int,
 
     @ColumnInfo(name = "noto_color")
-    var notoColor: NotoColor = NotoColor.GRAY,
+    val notoColor: NotoColor = NotoColor.GRAY,
 
     @ColumnInfo(name = "noto_icon")
-    var notoIcon: NotoIcon = NotoIcon.BOOK,
+    val notoIcon: NotoIcon = NotoIcon.BOOK,
 
     @ColumnInfo(name = "library_creation_date")
     val libraryCreationDate: LocalDate = LocalDate.now()

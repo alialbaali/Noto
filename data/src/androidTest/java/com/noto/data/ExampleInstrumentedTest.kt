@@ -19,6 +19,6 @@ package com.noto.data
 //    fun useAppContext() {
 //        // Context of the app under test.
 //        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-//        assertEquals("com.alialbaali.noto.data.test", appContext.packageName)
+//        assertEquals("com.alialbaali.note.data.test", appContext.packageName)
 //    }
 //}

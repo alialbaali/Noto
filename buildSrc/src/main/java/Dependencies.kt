@@ -30,7 +30,7 @@ object Modules {
 }
 
 object App {
-    const val ID = "com.noto"
+    const val ID = "com.note"
     const val VersionName = "0.4.0"
     const val Name = "Noto"
     const val VersionCode = 8

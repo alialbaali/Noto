@@ -4,7 +4,7 @@ import android.app.Application
 import com.noto.app.label.LabelViewModel
 import com.noto.app.library.LibraryListViewModel
 import com.noto.app.library.LibraryViewModel
-import com.noto.app.noto.NotoViewModel
+import com.noto.app.note.NoteViewModel
 import com.noto.di.localDataSourceModule
 import com.noto.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
@@ -40,7 +40,7 @@ val appModule = module {
 
     viewModel { LibraryViewModel(get(), get(), get()) }
 
-    viewModel { NotoViewModel(get(), get()) }
+    viewModel { NoteViewModel(get(), get()) }
 
     viewModel { LabelViewModel(get()) }
 

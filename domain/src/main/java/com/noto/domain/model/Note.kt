@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import java.time.LocalDate
 import java.time.ZonedDateTime
 
-@Entity(tableName = "notos")
+@Entity(tableName = "notes")
 data class Note(
 
     @PrimaryKey(autoGenerate = true)
@@ -24,10 +24,10 @@ data class Note(
     val libraryId: Long,
 
     @ColumnInfo(name = "title")
-    var title: String = String(),
+    val title: String = String(),
 
     @ColumnInfo(name = "body")
-    var body: String = String(),
+    val body: String = String(),
 
     @ColumnInfo(name = "position")
     val position: Int,
@@ -36,12 +36,12 @@ data class Note(
     val creationDate: LocalDate = LocalDate.now(),
 
     @ColumnInfo(name = "is_starred")
-    var isStarred: Boolean = false,
+    val isStarred: Boolean = false,
 
     @ColumnInfo(name = "is_archived")
-    var isArchived: Boolean = false,
+    val isArchived: Boolean = false,
 
     @ColumnInfo(name = "reminder_date")
-    var reminderDate: ZonedDateTime? = null
+    val reminderDate: ZonedDateTime? = null
 
 )

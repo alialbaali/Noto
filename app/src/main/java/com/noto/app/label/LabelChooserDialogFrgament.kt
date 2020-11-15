@@ -13,7 +13,7 @@ import com.google.android.material.chip.Chip
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.FragmentDialogChooserLabelBinding
-import com.noto.app.noto.NotoViewModel
+import com.noto.app.note.NoteViewModel
 import com.noto.app.util.dp
 import com.noto.app.util.toResource
 import org.koin.android.viewmodel.ext.android.sharedViewModel
@@ -22,7 +22,7 @@ class LabelChooserDialogFragment : BaseBottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentDialogChooserLabelBinding
 
-    private val notoViewModel by sharedViewModel<NotoViewModel>()
+    private val notoViewModel by sharedViewModel<NoteViewModel>()
 
     private val labelViewModel by sharedViewModel<LabelViewModel>()
 

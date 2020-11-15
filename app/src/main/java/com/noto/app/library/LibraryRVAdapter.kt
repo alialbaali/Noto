@@ -98,9 +98,9 @@ class NotoItemViewHolder(
         binding.tvNotoBody.text = note.body
         binding.rbNotoStar.isChecked = note.isStarred
 
-//        if (noto.notoTitle.isBlank()) binding.tvNotoTitle.visibility = View.GONE
-//        if (noto.notoBody.isBlank()) binding.tvNotoBody.visibility = View.GONE
-//        if (noto.notoReminder != null) binding.ivNotoReminder.visibility = View.VISIBLE
+//        if (note.notoTitle.isBlank()) binding.tvNotoTitle.visibility = View.GONE
+//        if (note.notoBody.isBlank()) binding.tvNotoBody.visibility = View.GONE
+//        if (note.notoReminder != null) binding.ivNotoReminder.visibility = View.VISIBLE
     }
 
     fun drag(note: Note) {
