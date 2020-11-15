@@ -12,14 +12,14 @@ class FakeLibraryRepository : LibraryRepository {
 
     override fun getLibraries(): Flow<List<Library>> = flowOf(libraries)
 
-    override fun getLibraryById(libraryId: Long): Flow<Library> = flowOf(libraries.first { it.libraryId == libraryId })
+    override fun getLibraryById(libraryId: Long): Flow<Library> = flowOf(libraries.first { it.id == libraryId })
 
     override suspend fun createLibrary(library: Library) {
         libraries.add(library)
     }
 
     override suspend fun updateLibrary(library: Library) = libraries.replaceWith(library) {
-        it.libraryId == library.libraryId
+        it.id == library.id
     }
 
     override suspend fun deleteLibrary(library: Library) {

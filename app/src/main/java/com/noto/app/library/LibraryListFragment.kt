@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.LibraryItemTouchHelper
 import com.noto.app.R
-import com.noto.app.databinding.FragmentListLibraryBinding
+import com.noto.app.databinding.LibraryListFragmentBinding
 import com.noto.app.util.LayoutManager
 import com.noto.app.util.colorResource
 import com.noto.app.util.drawableResource
@@ -23,14 +23,14 @@ import timber.log.Timber
 
 class LibraryListFragment : BaseBottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentListLibraryBinding
+    private lateinit var binding: LibraryListFragmentBinding
 
     private val viewModel by viewModel<LibraryListViewModel>()
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentListLibraryBinding.inflate(inflater, container, false)
+        binding = LibraryListFragmentBinding.inflate(inflater, container, false)
 
         with(binding) {
             fab.setOnClickListener {
@@ -83,11 +83,11 @@ class LibraryListFragment : BaseBottomSheetDialogFragment() {
 
         val rvAdapter = LibraryListRVAdapter(object : LibraryItemClickListener {
 
-            override fun onClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryFragment(library.libraryId))
+            override fun onClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryFragment(library.id))
 
-            override fun onLongClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryDialogFragment(library.libraryId))
+            override fun onLongClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryDialogFragment(library.id))
 
-            override fun countLibraryNotos(library: Library): Int = viewModel.countNotos(library.libraryId)
+            override fun countLibraryNotos(library: Library): Int = viewModel.countNotos(library.id)
 
         })
 

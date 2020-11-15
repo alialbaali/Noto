@@ -10,6 +10,8 @@ import com.noto.domain.model.Library
 import com.noto.domain.model.Note
 import com.noto.domain.model.NoteLabel
 import com.noto.local.migration.Migration1To2
+import com.noto.local.migration.Migration2To3
+import com.noto.local.migration.Migration3To4
 
 private const val NOTO_DATABASE = "Noto Database"
 
@@ -19,7 +21,7 @@ private const val NOTO_DATABASE = "Noto Database"
     LocalDateConverter::class,
     ZonedDateTimeConverter::class
 )
-@Database(entities = [Note::class, Library::class, Label::class, NoteLabel::class], version = 2, exportSchema = false)
+@Database(entities = [Note::class, Library::class, Label::class, NoteLabel::class], version = 4, exportSchema = false)
 abstract class NotoDatabase : RoomDatabase() {
 
     abstract val notoDao: NoteDao
@@ -38,7 +40,7 @@ abstract class NotoDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext, NotoDatabase::class.java, NOTO_DATABASE)
-                .addMigrations(Migration1To2)
+                .addMigrations(Migration1To2, Migration2To3, Migration3To4)
                 .build()
     }
 }

@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
-import com.noto.app.databinding.FragmentArchiveBinding
+import com.noto.app.databinding.ArchiveFragmentBinding
 import com.noto.app.util.colorResource
 import com.noto.app.util.colorStateResource
 import com.noto.app.util.toResource
@@ -19,7 +19,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 
 class ArchiveFragment : Fragment() {
 
-    private lateinit var binding: FragmentArchiveBinding
+    private lateinit var binding: ArchiveFragmentBinding
 
     private val viewModel by viewModel<LibraryViewModel>()
 
@@ -28,7 +28,7 @@ class ArchiveFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentArchiveBinding.inflate(inflater, container, false)
+        binding = ArchiveFragmentBinding.inflate(inflater, container, false)
 
         viewModel.getArchivedNotes(args.libraryId)
         viewModel.getLibrary(args.libraryId)
@@ -67,12 +67,12 @@ class ArchiveFragment : Fragment() {
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
             if (args.libraryId != 0L) {
-                val color = colorResource(library.notoColor.toResource())
+                val color = colorResource(library.color.toResource())
                 binding.tb.navigationIcon?.mutate()?.setTint(color)
-                binding.ivLibraryIcon.imageTintList = colorStateResource(library.notoColor.toResource())
+                binding.ivLibraryIcon.imageTintList = colorStateResource(library.color.toResource())
                 binding.tvLibraryNotoCount.setTextColor(color)
                 binding.tvLibraryTitle.setTextColor(color)
-                binding.tvLibraryTitle.text = "${library.libraryTitle} ${getString(R.string.archived_notos)}"
+                binding.tvLibraryTitle.text = "${library.title} ${getString(R.string.archived_notos)}"
             }
         }
 

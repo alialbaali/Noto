@@ -7,21 +7,20 @@ import android.graphics.drawable.RippleDrawable
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.BaseItemTouchHelperListener
 import com.noto.app.R
-import com.noto.app.databinding.ItemLibraryBinding
+import com.noto.app.databinding.LibraryItemBinding
+import com.noto.app.library.LibraryListRVAdapter.LibraryItemViewHolder
 import com.noto.app.util.colorResource
 import com.noto.app.util.toResource
 import com.noto.domain.model.Library
 
 
-class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : ListAdapter<Library, LibraryListRVAdapter.LibraryItemViewHolder>(
-    NotoItemDiffCallback()
-), BaseItemTouchHelperListener {
+class LibraryListRVAdapter(private val listener: LibraryItemClickListener) :
+    ListAdapter<Library, LibraryItemViewHolder>(NotoItemDiffCallback()), BaseItemTouchHelperListener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryItemViewHolder {
         return LibraryItemViewHolder.create(parent, listener)
@@ -37,9 +36,9 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
         fromViewHolder as LibraryItemViewHolder
         toViewHolder as LibraryItemViewHolder
 
-        val fromLibrary = currentList.find { it.libraryPosition == fromViewHolder.adapterPosition }!!
+        val fromLibrary = currentList.find { it.position == fromViewHolder.adapterPosition }!!
 
-        val toLibrary = currentList.find { it.libraryPosition == toViewHolder.adapterPosition }!!
+        val toLibrary = currentList.find { it.position == toViewHolder.adapterPosition }!!
 
 //        fromLibrary.libraryPosition = toLibrary.libraryPosition.also { toLibrary.libraryPosition = fromLibrary.libraryPosition }
 
@@ -57,7 +56,10 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
 
 
     @SuppressLint("ClickableViewAccessibility")
-    class LibraryItemViewHolder(private val binding: ItemLibraryBinding, private val listener: LibraryItemClickListener) : RecyclerView.ViewHolder(binding.root) {
+    class LibraryItemViewHolder(
+        private val binding: LibraryItemBinding,
+        private val listener: LibraryItemClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         lateinit var library: Library
 
@@ -83,19 +85,22 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
         companion object {
 
             // Create ViewHolder Instance
-            fun create(parent: ViewGroup, listener: LibraryItemClickListener): LibraryItemViewHolder {
+            fun create(
+                parent: ViewGroup,
+                listener: LibraryItemClickListener
+            ): LibraryItemViewHolder {
 
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ItemLibraryBinding.inflate(layoutInflater, parent, false)
+                val binding = LibraryItemBinding.inflate(layoutInflater, parent, false)
 
                 return LibraryItemViewHolder(binding, listener)
             }
         }
 
         fun bind(library: Library) {
-            binding.tvLibraryTitle.text = library.libraryTitle
+            binding.tvLibraryTitle.text = library.title
 
-            val notoColor = binding.root.colorResource(library.notoColor.toResource())
+            val notoColor = binding.root.colorResource(library.color.toResource())
             val backgroundColor = binding.root.colorResource(R.color.colorBackground)
 
             val gradientDrawable = GradientDrawable(
@@ -121,7 +126,7 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
             binding.tvLibraryNotoCount.text = "$count".plus(if (count == 1) " Noto" else " Notos")
             binding.tvLibraryTitle.setTextColor(notoColor)
             binding.tvLibraryNotoCount.setTextColor(notoColor)
-            binding.ivLibraryNotoIcon.setImageResource(library.notoIcon.toResource())
+            binding.ivLibraryNotoIcon.setImageResource(library.icon.toResource())
             binding.ivLibraryNotoIcon.imageTintList = ColorStateList.valueOf(notoColor)
 
             setDefaultBackground()
@@ -143,7 +148,7 @@ class LibraryListRVAdapter(private val listener: LibraryItemClickListener) : Lis
 
     private class NotoItemDiffCallback() : DiffUtil.ItemCallback<Library>() {
 
-        override fun areItemsTheSame(oldItem: Library, newItem: Library): Boolean = oldItem.libraryId == newItem.libraryId
+        override fun areItemsTheSame(oldItem: Library, newItem: Library): Boolean = oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Library, newItem: Library): Boolean = oldItem == newItem
 

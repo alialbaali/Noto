@@ -18,7 +18,7 @@
         android:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/item_noto" />
+        tools:listitem="@layout/note_item" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/abl"
@@ -33,7 +33,7 @@
             style="@style/Style.CollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/shape_fragment_library"
+            android:background="@drawable/library_fragment_shape"
             app:contentScrim="@color/colorBackground"
             app:expandedTitleGravity="center_vertical"
             app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"

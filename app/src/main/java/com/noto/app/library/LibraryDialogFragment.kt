@@ -1,6 +1,5 @@
 package com.noto.app.library
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,14 +10,14 @@ import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.FragmentDialogLibraryBinding
+import com.noto.app.databinding.LibraryDialogFragmentBinding
 import com.noto.app.util.colorStateResource
 import com.noto.app.util.toResource
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class LibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentDialogLibraryBinding
+    private lateinit var binding: LibraryDialogFragmentBinding
 
     private val viewModel by sharedViewModel<LibraryViewModel>()
 
@@ -26,17 +25,17 @@ class LibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogLibraryBinding.inflate(inflater, container, false)
+        binding = LibraryDialogFragmentBinding.inflate(inflater, container, false)
 
         viewModel.getLibrary(args.libraryId)
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
             library?.let {
 
-                binding.vHead.backgroundTintList = colorStateResource(it.notoColor.toResource())
+                binding.vHead.backgroundTintList = colorStateResource(it.color.toResource())
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     listOf(binding.tvEditLibrary).forEach { tv ->
-                        tv.compoundDrawableTintList = colorStateResource(it.notoColor.toResource())
+                        tv.compoundDrawableTintList = colorStateResource(it.color.toResource())
                     }
                 }
 

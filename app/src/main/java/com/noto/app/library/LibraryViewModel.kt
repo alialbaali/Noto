@@ -41,7 +41,7 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
     }
 
     fun setLibraryTitle(title: String) {
-        _library.value = _library.value?.copy(libraryTitle = title)
+        _library.value = _library.value?.copy(title = title)
     }
 
     fun getNotes(libraryId: Long) = viewModelScope.launch {
@@ -75,16 +75,16 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
     }
 
     fun setNotoColor(notoColor: NotoColor) {
-        _library.value = _library.value?.copy(notoColor = notoColor)
+        _library.value = _library.value?.copy(color = notoColor)
     }
 
     fun setNotoIcon(notoIcon: NotoIcon) {
-        _library.value = _library.value?.copy(notoIcon = notoIcon)
+        _library.value = _library.value?.copy(icon = notoIcon)
     }
 
     fun postLibrary() = viewModelScope.launch {
         libraryRepository.getLibraries().collect { value ->
-            _library.postValue(Library(libraryPosition = value.count()))
+            _library.postValue(Library(position = value.count()))
         }
     }
 

@@ -7,29 +7,26 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.BaseItemTouchHelperListener
 import com.noto.app.R
-import com.noto.app.databinding.ItemNotoBinding
+import com.noto.app.databinding.NoteItemBinding
 import com.noto.domain.model.Note
 
 class LibraryRVAdapter(
     private val listener: NotoItemClickListener,
-) : ListAdapter<Note, NotoItemViewHolder>(
-    NoteItemDiffCallback()
-), BaseItemTouchHelperListener {
+) : ListAdapter<Note, NoteItemViewHolder>(NoteItemDiffCallback()), BaseItemTouchHelperListener {
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotoItemViewHolder {
-        return NotoItemViewHolder.create(parent, listener)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder {
+        return NoteItemViewHolder.create(parent, listener)
     }
 
-    override fun onBindViewHolder(holder: NotoItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
         val noto = getItem(position)
         holder.note = noto
         holder.bind(noto)
     }
 
     override fun onMoveViewHolder(fromViewHolder: RecyclerView.ViewHolder, toViewHolder: RecyclerView.ViewHolder) {
-        fromViewHolder as NotoItemViewHolder
-        toViewHolder as NotoItemViewHolder
+        fromViewHolder as NoteItemViewHolder
+        toViewHolder as NoteItemViewHolder
 
         val fromNoto = currentList.find { it.position == fromViewHolder.adapterPosition }!!
         val toNoto = currentList.find { it.position == fromViewHolder.adapterPosition }!!
@@ -46,16 +43,15 @@ class LibraryRVAdapter(
     }
 
     override fun onClearViewHolder(viewHolder: RecyclerView.ViewHolder) {
-        viewHolder as NotoItemViewHolder
+        viewHolder as NoteItemViewHolder
         viewHolder.clear(viewHolder.note)
 //        viewModel.updateSortMethod(SortMethod.Custom)
     }
 
 }
 
-// Note Item ViewHolder
-class NotoItemViewHolder(
-    private val binding: ItemNotoBinding,
+class NoteItemViewHolder(
+    private val binding: NoteItemBinding,
     private val listener: NotoItemClickListener,
 ) :
     RecyclerView.ViewHolder(binding.root) {
@@ -82,11 +78,12 @@ class NotoItemViewHolder(
         fun create(
             parent: ViewGroup,
             listener: NotoItemClickListener,
-        ): NotoItemViewHolder {
+        ): NoteItemViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = ItemNotoBinding.inflate(layoutInflater, parent, false)
+            val binding = NoteItemBinding.inflate(layoutInflater, parent, false)
 
-            return NotoItemViewHolder(
+
+            return NoteItemViewHolder(
                 binding, listener
             )
         }
@@ -112,7 +109,6 @@ class NotoItemViewHolder(
     }
 }
 
-// Note Item Difference Callback
 class NoteItemDiffCallback() : DiffUtil.ItemCallback<Note>() {
     override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
         return oldItem.id == newItem.id

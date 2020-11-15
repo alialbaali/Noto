@@ -10,7 +10,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.FragmentDialogLibraryNewBinding
+import com.noto.app.databinding.NewLibraryDialogFragmentBinding
 import com.noto.app.util.colorStateResource
 import com.noto.app.util.drawableResource
 import com.noto.app.util.toResource
@@ -20,7 +20,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class NewLibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentDialogLibraryNewBinding
+    private lateinit var binding: NewLibraryDialogFragmentBinding
 
     private val viewModel by sharedViewModel<LibraryViewModel>()
 
@@ -28,7 +28,7 @@ class NewLibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogLibraryNewBinding.inflate(inflater, container, false)
+        binding = NewLibraryDialogFragmentBinding.inflate(inflater, container, false)
         initNotoColors()
         initNotoIcons()
 
@@ -37,10 +37,10 @@ class NewLibraryDialogFragment : BaseBottomSheetDialogFragment() {
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
             library?.let {
-                binding.et.setText(it.libraryTitle)
-                binding.et.setSelection(it.libraryTitle.length)
-                binding.til.setEndIconTintList(colorStateResource(it.notoColor.toResource()))
-                binding.til.startIconDrawable = drawableResource(it.notoIcon.toResource())
+                binding.et.setText(it.title)
+                binding.et.setSelection(it.title.length)
+                binding.til.setEndIconTintList(colorStateResource(it.color.toResource()))
+                binding.til.startIconDrawable = drawableResource(it.icon.toResource())
             }
         }
 

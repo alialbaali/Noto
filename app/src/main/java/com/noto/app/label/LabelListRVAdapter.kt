@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.R
-import com.noto.app.databinding.ItemLabelBinding
-import com.noto.domain.model.Label
+import com.noto.app.databinding.LabelItemBinding
 import com.noto.app.util.toResource
+import com.noto.domain.model.Label
 
 class LabelListRVAdapter(private val labelItemListener: LabelItemListener) : ListAdapter<Label, LabelListRVAdapter.LabelItemViewHolder>(
     LabelItemDiffCallback()
@@ -27,7 +27,7 @@ class LabelListRVAdapter(private val labelItemListener: LabelItemListener) : Lis
         holder.bind(label)
     }
 
-    class LabelItemViewHolder(private val binding: ItemLabelBinding, labelItemListener: LabelItemListener) :
+    class LabelItemViewHolder(private val binding: LabelItemBinding, labelItemListener: LabelItemListener) :
         RecyclerView.ViewHolder(binding.root) {
 
         lateinit var label: Label
@@ -51,7 +51,7 @@ class LabelListRVAdapter(private val labelItemListener: LabelItemListener) : Lis
 
                 val layoutInflater = LayoutInflater.from(parent.context)
 
-                val binding = ItemLabelBinding.inflate(layoutInflater, parent, false)
+                val binding = LabelItemBinding.inflate(layoutInflater, parent, false)
 
                 return LabelItemViewHolder(binding, labelItemListener)
             }

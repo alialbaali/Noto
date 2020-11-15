@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/item_library" />
+        tools:listitem="@layout/library_item" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/abl"
@@ -29,7 +29,7 @@
             style="@style/Style.CollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/shape_fragment_library"
+            android:background="@drawable/library_fragment_shape"
             app:contentScrim="@color/colorBackground"
             app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"
             app:titleEnabled="false"
@@ -102,7 +102,7 @@
                 <!--                        android:layout_width="0dp"-->
                 <!--                        android:layout_height="wrap_content"-->
                 <!--                        android:layout_margin="@dimen/spacing_normal"-->
-                <!--                        android:background="@drawable/shape_item_library"-->
+                <!--                        android:background="@drawable/library_item_shape"-->
                 <!--                        android:elevation="@dimen/elevation_extra_small"-->
                 <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
                 <!--                        app:layout_constraintEnd_toStartOf="@id/cl_archived_notos"-->
@@ -160,7 +160,7 @@
                 <!--                        android:layout_width="0dp"-->
                 <!--                        android:layout_height="wrap_content"-->
                 <!--                        android:layout_margin="@dimen/spacing_normal"-->
-                <!--                        android:background="@drawable/shape_item_library"-->
+                <!--                        android:background="@drawable/library_item_shape"-->
                 <!--                        android:elevation="@dimen/elevation_extra_small"-->
                 <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
                 <!--                        app:layout_constraintEnd_toEndOf="parent"-->
@@ -227,7 +227,7 @@
         app:fabAnimationMode="scale"
         app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
-        app:menu="@menu/menu_library_list"
+        app:menu="@menu/library_list_menu"
         app:navigationIcon="@drawable/ic_round_menu_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

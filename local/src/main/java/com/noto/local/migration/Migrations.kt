@@ -29,3 +29,18 @@ object Migration2To3 : Migration(2, 3) {
     }
 
 }
+
+object Migration3To4 : Migration(3, 4) {
+
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.beginTransaction()
+        database.execSQL("ALTER TABLE libraries RENAME COLUMN library_id TO id")
+        database.execSQL("ALTER TABLE libraries RENAME COLUMN library_title TO title")
+        database.execSQL("ALTER TABLE libraries RENAME COLUMN library_position TO position")
+        database.execSQL("ALTER TABLE libraries RENAME COLUMN noto_color TO color")
+        database.execSQL("ALTER TABLE libraries RENAME COLUMN noto_icon TO icon")
+        database.execSQL("ALTER TABLE libraries RENAME COLUMN library_creation_date TO creation_date")
+        database.endTransaction()
+    }
+
+}

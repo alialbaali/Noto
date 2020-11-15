@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseBottomSheetDialogFragment
-import com.noto.app.databinding.FragmentDialogArchiveBinding
+import com.noto.app.databinding.ArchiveDialogFragmentBinding
 import com.noto.app.note.NoteViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ArchiveDialogFragment : BaseBottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentDialogArchiveBinding
+    private lateinit var binding: ArchiveDialogFragmentBinding
 
     private val viewModel by viewModel<NoteViewModel>()
 
@@ -20,7 +20,7 @@ class ArchiveDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogArchiveBinding.inflate(inflater, container, false)
+        binding = ArchiveDialogFragmentBinding.inflate(inflater, container, false)
 
         viewModel.getNoteById(args.notoId)
 

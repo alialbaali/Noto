@@ -6,7 +6,6 @@ import com.noto.domain.repository.LibraryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class LibraryRepositoryImpl(private val dataSource: LibraryLocalDataSource) : LibraryRepository {
 
@@ -15,11 +14,11 @@ class LibraryRepositoryImpl(private val dataSource: LibraryLocalDataSource) : Li
     override fun getLibraryById(libraryId: Long): Flow<Library> = dataSource.getLibrary(libraryId)
 
     override suspend fun createLibrary(library: Library) = withContext(Dispatchers.IO) {
-        dataSource.createLibrary(library.copy(libraryTitle = library.libraryTitle.trim()))
+        dataSource.createLibrary(library.copy(title = library.title.trim()))
     }
 
     override suspend fun updateLibrary(library: Library) = withContext(Dispatchers.IO) {
-        dataSource.updateLibrary(library.copy(libraryTitle = library.libraryTitle.trim()))
+        dataSource.updateLibrary(library.copy(title = library.title.trim()))
     }
 
     override suspend fun deleteLibrary(library: Library) = withContext(Dispatchers.IO) {

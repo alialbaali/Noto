@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.R
-import com.noto.app.databinding.FragmentNotoBinding
+import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.util.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import java.time.ZonedDateTime
@@ -27,13 +27,13 @@ const val NOTO_BODY = "noto_body"
 const val NOTO_COLOR = "noto_color"
 const val NOTO_ICON = "noto_icon"
 
-class NotoFragment : Fragment() {
+class NoteFragment : Fragment() {
 
-    private lateinit var binding: FragmentNotoBinding
+    private lateinit var binding: NoteFragmentBinding
 
     private val viewModel by sharedViewModel<NoteViewModel>()
 
-    private val args by navArgs<NotoFragmentArgs>()
+    private val args by navArgs<NoteFragmentArgs>()
 
     private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
@@ -42,15 +42,15 @@ class NotoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentNotoBinding.inflate(inflater, container, false).apply {
+        binding = NoteFragmentBinding.inflate(inflater, container, false).apply {
             fab.setOnClickListener {
-                findNavController().navigate(NotoFragmentDirections.actionNotoFragmentToReminderDialogFragment())
+                findNavController().navigate(NoteFragmentDirections.actionNotoFragmentToReminderDialogFragment())
             }
         }
 
         viewModel.getLibraryById(args.libraryId)
 
-        if (args.notoId == 0L) {
+        if (args.noteId == 0L) {
 
             viewModel.postNote(args.libraryId)
 
@@ -58,7 +58,7 @@ class NotoFragment : Fragment() {
             imm.showSoftInput(binding.etNotoBody, InputMethodManager.SHOW_IMPLICIT)
 
             requireActivity().onBackPressedDispatcher.addCallback(this) {
-                this@NotoFragment.findNavController().navigateUp()
+                this@NoteFragment.findNavController().navigateUp()
                 viewModel.createNote()
             }.isEnabled = true
 
@@ -70,10 +70,10 @@ class NotoFragment : Fragment() {
 
         } else {
 
-            viewModel.getNoteById(args.notoId)
+            viewModel.getNoteById(args.noteId)
 
             requireActivity().onBackPressedDispatcher.addCallback(this) {
-                this@NotoFragment.findNavController().navigateUp()
+                this@NoteFragment.findNavController().navigateUp()
                 viewModel.updateNote()
             }.isEnabled = true
 
@@ -93,7 +93,7 @@ class NotoFragment : Fragment() {
             navigationIcon?.mutate()?.setTint(colorResource(R.color.colorPrimary))
 
             setNavigationOnClickListener {
-                findNavController().navigate(NotoFragmentDirections.actionNotoFragmentToNotoDialogFragment(args.libraryId, args.notoId))
+                findNavController().navigate(NoteFragmentDirections.actionNotoFragmentToNotoDialogFragment(args.libraryId, args.noteId))
             }
 
             setOnMenuItemClickListener { menuItem ->
@@ -145,7 +145,7 @@ class NotoFragment : Fragment() {
             viewModel.setNotoBody(it.toString())
         }
 
-        binding.rbNotoStar.setOnClickListener {  viewModel.toggleNotoStar() }
+        binding.rbNotoStar.setOnClickListener { viewModel.toggleNotoStar() }
 
         viewModel.note.observe(viewLifecycleOwner) {
             it?.let { noto ->
@@ -173,13 +173,13 @@ class NotoFragment : Fragment() {
         }
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
-            val color = colorResource(library.notoColor.toResource())
+            val color = colorResource(library.color.toResource())
 
-            binding.tvLibraryTitle.text = library.libraryTitle
+            binding.tvLibraryTitle.text = library.title
             binding.tvLibraryTitle.setTextColor(color)
             binding.tvCreatedAt.setTextColor(color)
             binding.tb.navigationIcon?.mutate()?.setTint(color)
-            binding.fab.backgroundTintList = colorStateResource(library.notoColor.toResource())
+            binding.fab.backgroundTintList = colorStateResource(library.color.toResource())
         }
 
         return binding.root

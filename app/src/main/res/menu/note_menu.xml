@@ -19,7 +19,7 @@
     <!--                android:id="@+id/library"-->
     <!--                android:enabled="true"-->
     <!--                android:icon="@drawable/ic_bookshelf_24dp"-->
-    <!--                android:title="Change noto's library"-->
+    <!--                android:title="Change note's library"-->
     <!--                android:visible="true"-->
     <!--                app:showAsAction="never" />-->
 

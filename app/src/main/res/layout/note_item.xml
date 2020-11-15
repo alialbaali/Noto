@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacing_small"
-    android:background="@drawable/shape_item_noto">
+    android:background="@drawable/note_item_shape">
 
     <com.google.android.material.radiobutton.MaterialRadioButton
         android:id="@+id/rb_noto_star"

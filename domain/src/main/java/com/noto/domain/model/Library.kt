@@ -9,22 +9,22 @@ import java.time.LocalDate
 data class Library(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "library_id")
-    val libraryId: Long = 0L,
+    @ColumnInfo(name = "id")
+    val id: Long = 0L,
 
-    @ColumnInfo(name = "library_title")
-    val libraryTitle: String = "",
+    @ColumnInfo(name = "title")
+    val title: String = "",
 
-    @ColumnInfo(name = "library_position")
-    val libraryPosition: Int,
+    @ColumnInfo(name = "position")
+    val position: Int,
 
-    @ColumnInfo(name = "noto_color")
-    val notoColor: NotoColor = NotoColor.GRAY,
+    @ColumnInfo(name = "color")
+    val color: NotoColor = NotoColor.GRAY,
 
-    @ColumnInfo(name = "noto_icon")
-    val notoIcon: NotoIcon = NotoIcon.BOOK,
+    @ColumnInfo(name = "icon")
+    val icon: NotoIcon = NotoIcon.BOOK,
 
-    @ColumnInfo(name = "library_creation_date")
-    val libraryCreationDate: LocalDate = LocalDate.now()
+    @ColumnInfo(name = "creation_date")
+    val creationDate: LocalDate = LocalDate.now()
 
 )

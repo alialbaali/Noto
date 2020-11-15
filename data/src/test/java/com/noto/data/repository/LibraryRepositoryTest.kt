@@ -32,9 +32,9 @@ class LibraryRepositoryTest : KoinTest, StringSpec() {
 
     private val libraries by lazy { libraryRepository.getLibraries().run { runBlocking { single() } } }
 
-    private val library = Library(libraryTitle = "LIBRARY", notoColor = NotoColor.BLUE, notoIcon = NotoIcon.CODE, libraryPosition = 0)
+    private val library = Library(title = "LIBRARY", color = NotoColor.BLUE, icon = NotoIcon.CODE, position = 0)
 
-    private val updatedLibrary = library.copy(libraryTitle = "UPDATED LIBRARY", notoColor = NotoColor.GREEN, notoIcon = NotoIcon.HOME, libraryPosition = 4)
+    private val updatedLibrary = library.copy(title = "UPDATED LIBRARY", color = NotoColor.GREEN, icon = NotoIcon.HOME, position = 4)
 
     override fun beforeSpec(spec: Spec) {
         super.beforeSpec(spec)
@@ -72,27 +72,27 @@ class LibraryRepositoryTest : KoinTest, StringSpec() {
 
             libraryRepository.updateLibrary(updatedLibrary)
 
-            val result = libraries.find { it.libraryId == updatedLibrary.libraryId }
+            val result = libraries.find { it.id == updatedLibrary.id }
 
             libraries shouldContain updatedLibrary
             libraries shouldNotContain library
             libraries.first() shouldBe updatedLibrary
             result shouldNotBe null
-            result!!.libraryTitle shouldBe updatedLibrary.libraryTitle
-            result.notoColor shouldBe updatedLibrary.notoColor
-            result.notoIcon shouldBe updatedLibrary.notoIcon
+            result!!.title shouldBe updatedLibrary.title
+            result.color shouldBe updatedLibrary.color
+            result.icon shouldBe updatedLibrary.icon
 
         }
 
         "get library"{
 
-            val result = libraryRepository.getLibraryById(library.libraryId).single()
+            val result = libraryRepository.getLibraryById(library.id).single()
 
             result shouldBe  updatedLibrary
             result shouldNotBe library
-            result.libraryTitle shouldBe updatedLibrary.libraryTitle
-            result.notoColor shouldBe updatedLibrary.notoColor
-            result.notoIcon shouldBe updatedLibrary.notoIcon
+            result.title shouldBe updatedLibrary.title
+            result.color shouldBe updatedLibrary.color
+            result.icon shouldBe updatedLibrary.icon
 
         }
 

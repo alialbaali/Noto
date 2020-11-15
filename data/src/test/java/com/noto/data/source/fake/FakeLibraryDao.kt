@@ -12,14 +12,14 @@ class FakeLibraryDao : LibraryLocalDataSource {
 
     override fun getLibraries(): Flow<List<Library>> = flowOf(libraries)
 
-    override fun getLibrary(libraryId: Long): Flow<Library> = flowOf(libraries.first { library -> library.libraryId == libraryId })
+    override fun getLibrary(libraryId: Long): Flow<Library> = flowOf(libraries.first { library -> library.id == libraryId })
 
     override suspend fun createLibrary(library: Library) {
         libraries.add(library)
     }
 
     override suspend fun updateLibrary(library: Library) = libraries.replaceWith(library) {
-        it.libraryId == library.libraryId
+        it.id == library.id
     }
 
     override suspend fun deleteLibrary(library: Library) {

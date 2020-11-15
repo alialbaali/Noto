@@ -8,11 +8,10 @@ import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.view.animation.ScaleAnimation
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.observe
 import com.google.android.material.chip.Chip
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.FragmentDialogChooserLabelBinding
+import com.noto.app.databinding.LabelChooserDialogFragmentBinding
 import com.noto.app.note.NoteViewModel
 import com.noto.app.util.dp
 import com.noto.app.util.toResource
@@ -20,7 +19,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class LabelChooserDialogFragment : BaseBottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentDialogChooserLabelBinding
+    private lateinit var binding: LabelChooserDialogFragmentBinding
 
     private val notoViewModel by sharedViewModel<NoteViewModel>()
 
@@ -28,7 +27,7 @@ class LabelChooserDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogChooserLabelBinding.inflate(inflater, container, false)
+        binding = LabelChooserDialogFragmentBinding.inflate(inflater, container, false)
 
         val textColor = ResourcesCompat.getColor(resources, R.color.colorBackground, null)
 

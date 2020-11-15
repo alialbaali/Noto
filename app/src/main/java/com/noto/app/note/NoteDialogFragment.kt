@@ -17,7 +17,7 @@ import androidx.navigation.navOptions
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.FragmentDialogNotoBinding
+import com.noto.app.databinding.NoteDialogFragmentBinding
 import com.noto.app.util.colorStateResource
 import com.noto.app.util.drawableResource
 import com.noto.app.util.toResource
@@ -26,7 +26,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class NoteDialogFragment : BaseBottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentDialogNotoBinding
+    private lateinit var binding: NoteDialogFragmentBinding
 
     private val viewModel by sharedViewModel<NoteViewModel>()
 
@@ -36,25 +36,25 @@ class NoteDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogNotoBinding.inflate(inflater, container, false)
+        binding = NoteDialogFragmentBinding.inflate(inflater, container, false)
 
-        if (args.notoId != 0L) viewModel.getNoteById(args.notoId)
+        if (args.noteId != 0L) viewModel.getNoteById(args.noteId)
 
         viewModel.getLibraryById(args.libraryId)
 
-        viewModel.library.observe(viewLifecycleOwner, Observer { library ->
+        viewModel.library.observe(viewLifecycleOwner) { library ->
             library?.let {
 
-                binding.vHead.backgroundTintList = colorStateResource(it.notoColor.toResource())
+                binding.vHead.backgroundTintList = colorStateResource(it.color.toResource())
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     listOf(binding.tvCopyToClipboard, binding.tvShareNoto, binding.tvArchiveNoto, binding.tvRemindMe).forEach { tv ->
-                        tv.compoundDrawableTintList = colorStateResource(it.notoColor.toResource())
+                        tv.compoundDrawableTintList = colorStateResource(it.color.toResource())
                     }
                 }
 
             }
 
-        })
+        }
 
         viewModel.note.observe(viewLifecycleOwner, Observer { noto ->
             noto?.let {
@@ -79,12 +79,12 @@ class NoteDialogFragment : BaseBottomSheetDialogFragment() {
 
         binding.tvRemindMe.setOnClickListener {
             dismiss()
-            findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.notoId))
+            findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.noteId))
         }
 
         binding.tvCopyToClipboard.setOnClickListener { v ->
             dismiss()
-            val clipData = ClipData.newPlainText(viewModel.library.value?.libraryTitle, "${viewModel.note.value?.title}\n${viewModel.note.value?.body}")
+            val clipData = ClipData.newPlainText(viewModel.library.value?.title, "${viewModel.note.value?.title}\n${viewModel.note.value?.body}")
             clipboardManager.setPrimaryClip(clipData)
             v.toast(getString(R.string.copied_to_clipboard))
         }
@@ -120,7 +120,7 @@ class NoteDialogFragment : BaseBottomSheetDialogFragment() {
                     viewModel.deleteNoto()
                     dialogFragment.findNavController().navigate(
                         R.id.libraryFragment,
-                        bundleOf("library_id" to viewModel.library.value?.libraryId),
+                        bundleOf("library_id" to viewModel.library.value?.id),
                         navOptions { popUpTo(R.id.libraryFragment) { inclusive = true } })
                 }
             }.show(parentFragmentManager, null)

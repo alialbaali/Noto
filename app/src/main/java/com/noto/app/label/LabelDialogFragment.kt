@@ -11,7 +11,7 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.FragmentDialogLabelBinding
+import com.noto.app.databinding.LabelDialogFragmentBinding
 import com.noto.app.util.toResource
 import com.noto.domain.model.Label
 import com.noto.domain.model.NotoColor
@@ -19,7 +19,7 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class LabelDialogFragment : BaseBottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentDialogLabelBinding
+    private lateinit var binding: LabelDialogFragmentBinding
 
     private val viewModel by sharedViewModel<LabelViewModel>()
 
@@ -27,7 +27,7 @@ class LabelDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogLabelBinding.inflate(inflater, container, false)
+        binding = LabelDialogFragmentBinding.inflate(inflater, container, false)
 
         var labelColor = NotoColor.GRAY
 

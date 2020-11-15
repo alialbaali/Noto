@@ -10,14 +10,13 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
-import com.noto.app.databinding.FragmentListLabelBinding
+import com.noto.app.databinding.LabelListFragmentBinding
 import com.noto.domain.model.Label
-import com.noto.app.label.LabelListFragmentDirections
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 class LabelListFragment : Fragment() {
 
-    private lateinit var binding: FragmentListLabelBinding
+    private lateinit var binding: LabelListFragmentBinding
 
     private val viewModel by sharedViewModel<LabelViewModel>()
 
@@ -37,19 +36,22 @@ class LabelListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentListLabelBinding.inflate(layoutInflater, container, false)
+        binding = LabelListFragmentBinding.inflate(layoutInflater, container, false).apply {
 
-        binding.fab.imageTintList = ResourcesCompat.getColorStateList(resources, R.color.colorBackground, null)
+            fab.imageTintList = ResourcesCompat.getColorStateList(resources, R.color.colorBackground, null)
 
-        binding.rv.adapter = rvAdapter
+            rv.adapter = rvAdapter
 
-        binding.rv.layoutManager = rvLayoutManager
+            rv.layoutManager = rvLayoutManager
 
-        viewModel.labels.observe(viewLifecycleOwner) { rvAdapter.submitList(it) }
+            viewModel.labels.observe(viewLifecycleOwner) { rvAdapter.submitList(it) }
 
-        binding.fab.setOnClickListener { findNavController().navigate(LabelListFragmentDirections.actionLabelListFragmentToLabelDialogFragment()) }
+            fab.setOnClickListener { findNavController().navigate(LabelListFragmentDirections.actionLabelListFragmentToLabelDialogFragment()) }
 
-        binding.tb.setNavigationOnClickListener { findNavController().navigateUp() }
+            tb.setNavigationOnClickListener { findNavController().navigateUp() }
+
+        }
+
 
         return binding.root
     }

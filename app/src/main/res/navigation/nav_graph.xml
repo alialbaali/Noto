@@ -9,13 +9,13 @@
         android:name="library_id"
         app:argType="long" />
     <argument
-        android:name="noto_id"
+        android:name="note_id"
         app:argType="long" />
     <fragment
         android:id="@+id/labelListFragment"
         android:name="com.noto.app.label.LabelListFragment"
         android:label="LabelListFragment"
-        tools:layout="@layout/fragment_list_label">
+        tools:layout="@layout/label_list_fragment">
         <action
             android:id="@+id/action_labelListFragment_to_labelDialogFragment"
             app:destination="@id/labelDialogFragment"
@@ -108,13 +108,13 @@
     </dialog>
     <fragment
         android:id="@+id/notoFragment"
-        android:name="com.noto.app.noto.NotoFragment"
+        android:name="com.noto.app.note.NoteFragment"
         android:label="NotoFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
         <argument
-            android:name="noto_id"
+            android:name="note_id"
             android:defaultValue="0L"
             app:argType="long" />
         <action
@@ -138,10 +138,10 @@
     </fragment>
     <dialog
         android:id="@+id/reminderDialogFragment"
-        android:name="com.noto.app.noto.ReminderDialogFragment"
+        android:name="com.noto.app.note.ReminderDialogFragment"
         android:label="ReminderDialogFragment">
         <argument
-            android:name="noto_id"
+            android:name="note_id"
             android:defaultValue="0L"
             app:argType="long" />
     </dialog>
@@ -155,13 +155,13 @@
     </dialog>
     <dialog
         android:id="@+id/notoDialogFragment"
-        android:name="com.noto.app.noto.NotoDialogFragment"
+        android:name="com.noto.app.note.NoteDialogFragment"
         android:label="NotoDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
         <argument
-            android:name="noto_id"
+            android:name="note_id"
             app:argType="long" />
         <action
             android:id="@+id/action_notoDialogFragment_to_libraryFragment"

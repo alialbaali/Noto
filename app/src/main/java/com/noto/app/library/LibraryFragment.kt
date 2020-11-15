@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.noto.app.NotoItemTouchHelper
 import com.noto.app.R
-import com.noto.app.databinding.FragmentLibraryBinding
+import com.noto.app.databinding.LibraryFragmentBinding
 import com.noto.app.util.*
 import com.noto.domain.model.Note
 import com.noto.domain.model.NotoColor
@@ -27,7 +27,7 @@ import timber.log.Timber
 
 class LibraryFragment : Fragment() {
 
-    private lateinit var binding: FragmentLibraryBinding
+    private lateinit var binding: LibraryFragmentBinding
 
     private val viewModel by viewModel<LibraryViewModel>()
 
@@ -35,16 +35,16 @@ class LibraryFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentLibraryBinding.inflate(inflater, container, false)
+        binding = LibraryFragmentBinding.inflate(inflater, container, false)
 
         viewModel.getLibrary(args.libraryId)
         viewModel.getNotes(args.libraryId)
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
 
-            setLibraryColors(library.notoColor, library.notoIcon)
-            binding.tvLibraryTitle.text = library.libraryTitle
-            binding.tvPlaceHolder.text = library.libraryTitle
+            setLibraryColors(library.color, library.icon)
+            binding.tvLibraryTitle.text = library.title
+            binding.tvPlaceHolder.text = library.title
 
             val notosCount = viewModel.notos.value?.size ?: 0
             binding.tvLibraryNotoCount.text = notosCount.toString().plus(if (notosCount == 1) " Noto" else " Notos")

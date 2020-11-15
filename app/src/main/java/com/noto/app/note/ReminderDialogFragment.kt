@@ -12,7 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.noto.app.BaseBottomSheetDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.FragmentDialogReminderBinding
+import com.noto.app.databinding.ReminderDialogFragmentBinding
 import com.noto.app.receiver.AlarmReceiver
 import com.noto.app.util.drawableResource
 import com.noto.app.util.setAlarm
@@ -27,7 +27,7 @@ const val PENDING_INTENT_FLAGS = PendingIntent.FLAG_ONE_SHOT
 
 class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
-    private lateinit var binding: FragmentDialogReminderBinding
+    private lateinit var binding: ReminderDialogFragmentBinding
 
     private val viewModel by sharedViewModel<NoteViewModel>()
 
@@ -35,7 +35,7 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        binding = FragmentDialogReminderBinding.inflate(inflater, container, false)
+        binding = ReminderDialogFragmentBinding.inflate(inflater, container, false)
 
         binding.btnDone.setOnClickListener {
             dismiss()
@@ -91,8 +91,8 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
                     putExtra(NOTO_ID, noto.id.toInt())
                     putExtra(NOTO_TITLE, noto.title)
                     putExtra(NOTO_BODY, noto.body)
-                    putExtra(NOTO_COLOR, viewModel.library.value?.notoColor?.ordinal ?: 0)
-                    putExtra(NOTO_ICON, viewModel.library.value?.notoIcon?.ordinal ?: 0)
+                    putExtra(NOTO_COLOR, viewModel.library.value?.color?.ordinal ?: 0)
+                    putExtra(NOTO_ICON, viewModel.library.value?.icon?.ordinal ?: 0)
                 }
 
                 val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.id.toInt(), intent, PENDING_INTENT_FLAGS)

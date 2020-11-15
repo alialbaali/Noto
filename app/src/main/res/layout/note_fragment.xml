@@ -19,7 +19,7 @@
             style="@style/Style.CollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/shape_fragment_library"
+            android:background="@drawable/library_fragment_shape"
             app:contentScrim="@color/colorBackground"
             app:expandedTitleGravity="center_vertical"
             app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"
@@ -151,7 +151,7 @@
         app:fabAnimationMode="scale"
         app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
-        app:menu="@menu/menu_noto"
+        app:menu="@menu/note_menu"
         app:navigationIcon="@drawable/ic_round_menu_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
