@@ -14,8 +14,7 @@ import com.noto.app.databinding.FragmentArchiveBinding
 import com.noto.app.util.colorResource
 import com.noto.app.util.colorStateResource
 import com.noto.app.util.toResource
-import com.noto.domain.model.Noto
-import org.koin.android.ext.android.get
+import com.noto.domain.model.Note
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ArchiveFragment : Fragment() {
@@ -42,16 +41,16 @@ class ArchiveFragment : Fragment() {
 
             val rvAdapter = LibraryRVAdapter(object : NotoItemClickListener {
 
-                override fun onClick(noto: Noto) {
-                    findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(noto.notoId))
+                override fun onClick(note: Note) {
+                    findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(note.id))
                 }
 
-                override fun onLongClick(noto: Noto) {
-                    findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(noto.notoId))
+                override fun onLongClick(note: Note) {
+                    findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(note.id))
                 }
 
-                override fun toggleNotoStar(noto: Noto) {
-                    viewModel.toggleNotoStar(noto)
+                override fun toggleNotoStar(note: Note) {
+                    viewModel.toggleNotoStar(note)
                 }
 
             })

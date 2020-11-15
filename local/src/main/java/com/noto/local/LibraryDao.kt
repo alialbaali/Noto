@@ -23,7 +23,7 @@ interface LibraryDao : LibraryLocalDataSource {
     @Delete
     override suspend fun deleteLibrary(library: Library)
 
-    @Query("SELECT COUNT(*) FROM notos WHERE library_id = :libraryId AND noto_is_archived = 0")
+    @Query("SELECT COUNT(*) FROM notos WHERE library_id = :libraryId AND is_archived = 0")
     override suspend fun countLibraryNotos(libraryId: Long): Int
 
     @Update

@@ -21,7 +21,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.noto.app.R
-import com.noto.domain.model.Noto
+import com.noto.domain.model.Note
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
 
@@ -57,7 +57,7 @@ fun CollapsingToolbarLayout.setFontFamily() {
 
 fun AlarmManager.setAlarm(type: Int, timeInMills: Long, pendingIntent: PendingIntent) = AlarmManagerCompat.setExactAndAllowWhileIdle(this, type, timeInMills, pendingIntent)
 
-fun Noto.isValid(): Boolean = !(notoTitle.isBlank() && notoBody.isBlank())
+fun Note.isValid(): Boolean = !(title.isBlank() && body.isBlank())
 
 fun <T> MutableLiveData<T>.notifyObserver() {
     value = value

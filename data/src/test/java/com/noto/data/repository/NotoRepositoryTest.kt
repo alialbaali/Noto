@@ -2,7 +2,7 @@ package com.noto.data.repository
 
 import com.noto.data.NotoRepositoryImpl
 import com.noto.data.source.fake.FakeNotoDao
-import com.noto.domain.model.Noto
+import com.noto.domain.model.Note
 import com.noto.domain.repository.NotoRepository
 import io.kotest.core.spec.Spec
 import io.kotest.core.spec.style.StringSpec
@@ -34,9 +34,9 @@ class NotoRepositoryTest : KoinTest, StringSpec() {
 
     private val notos by lazy { runBlocking { notoRepository.getNotosByLibraryId().single() } }
 
-    private val noto = Noto(libraryId = LIBRARY_ID, notoTitle = "TITLE", notoBody = "BODY", notoPosition = 0)
+    private val noto = Note(libraryId = LIBRARY_ID, title = "TITLE", body = "BODY", position = 0)
 
-    private val updatedNoto = noto.copy(notoTitle = "UPDATED TITLE", notoBody = "UPDATED BODY", notoIsArchived = true, notoReminder = ZonedDateTime.now())
+    private val updatedNoto = noto.copy(title = "UPDATED TITLE", body = "UPDATED BODY", isArchived = true, reminderDate = ZonedDateTime.now())
 
     override fun beforeSpec(spec: Spec) {
         super.beforeSpec(spec)
@@ -75,29 +75,29 @@ class NotoRepositoryTest : KoinTest, StringSpec() {
 
             notoRepository.updateNoto(updatedNoto)
 
-            val result = notos.find { it.notoId == noto.notoId }
+            val result = notos.find { it.id == noto.id }
 
             notos shouldContain updatedNoto
             notos shouldNotContain noto
 
             result shouldNotBe null
-            result!!.notoIsArchived.shouldBeTrue()
-            result.notoReminder shouldNotBe null
-            result.notoTitle shouldBe updatedNoto.notoTitle
-            result.notoBody shouldBe updatedNoto.notoBody
+            result!!.isArchived.shouldBeTrue()
+            result.reminderDate shouldNotBe null
+            result.title shouldBe updatedNoto.title
+            result.body shouldBe updatedNoto.body
 
         }
 
         "get noto"{
 
-            val result = notoRepository.getNotoById(noto.notoId).single()
+            val result = notoRepository.getNotoById(noto.id).single()
 
             result shouldBe updatedNoto
             result shouldNotBe noto
-            result.notoIsArchived.shouldBeTrue()
-            result.notoReminder shouldNotBe null
-            result.notoTitle shouldBe updatedNoto.notoTitle
-            result.notoBody shouldBe updatedNoto.notoBody
+            result.isArchived.shouldBeTrue()
+            result.reminderDate shouldNotBe null
+            result.title shouldBe updatedNoto.title
+            result.body shouldBe updatedNoto.body
 
         }
 

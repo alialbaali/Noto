@@ -6,28 +6,16 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 object Migration1To2 : Migration(1, 2) {
 
     override fun migrate(database: SupportSQLiteDatabase) {
-//        database.execSQL(
-//            """
-//            ALTER TABLE notos
-//            ADD noto_is_archived INT NOT NULL DEFAULT 0
-//        """.trimIndent()
-//        )
-    }
-
-}
-
-object Migration2To3 : Migration(2, 3) {
-
-    override fun migrate(database: SupportSQLiteDatabase) {
-//        database.execSQL(
-//            """
-//            CREATE TABLE noto_labels (
-//            noto_id     INTEGER    NOT NULL,
-//            label_id    INTEGER    NOT NULL,
-//            PRIMARY KEY (noto_id, label_id)
-//            )
-//        """.trimIndent()
-//        )
+        database.beginTransaction()
+        database.execSQL("ALTER TABLE notos RENAME COLUMN noto_id TO id")
+        database.execSQL("ALTER TABLE notos RENAME COLUMN noto_title TO title")
+        database.execSQL("ALTER TABLE notos RENAME COLUMN noto_body TO body")
+        database.execSQL("ALTER TABLE notos RENAME COLUMN noto_is_archived TO is_archived")
+        database.execSQL("ALTER TABLE notos RENAME COLUMN noto_is_starred TO is_starred")
+        database.execSQL("ALTER TABLE notos RENAME COLUMN noto_position TO position")
+        database.execSQL("ALTER TABLE notos RENAME COLUMN noto_creation_date TO creation_date")
+        database.execSQL("ALTER TABLE notos RENAME COLUMN noto_reminder TO reminder_date")
+        database.endTransaction()
     }
 
 }

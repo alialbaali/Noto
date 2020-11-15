@@ -11,7 +11,7 @@ data class NotoLabel(
     @ColumnInfo(name = "noto_label_id")
     val NotoLabelId: Long = 0,
 
-    @ColumnInfo(name = "noto_id")
+    @ColumnInfo(name = "id")
     val notoId: Long,
 
     @ColumnInfo(name = "label_id")

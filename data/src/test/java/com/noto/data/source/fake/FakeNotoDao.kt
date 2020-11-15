@@ -1,7 +1,7 @@
 package com.noto.data.source.fake
 
 import com.noto.domain.local.NotoLocalDataSource
-import com.noto.domain.model.Noto
+import com.noto.domain.model.Note
 import com.noto.domain.model.NotoLabel
 import com.noto.domain.model.NotoWithLabels
 import com.noto.domain.replaceWith
@@ -10,33 +10,40 @@ import kotlinx.coroutines.flow.flowOf
 
 class FakeNotoDao : NotoLocalDataSource {
 
-    private val notos = mutableListOf<Noto>()
+    private val notos = mutableListOf<Note>()
 
-    override fun getNotos(): Flow<List<Noto>> = flowOf(notos)
-
-    override fun getNotoById(notoId: Long): Flow<Noto> = flowOf(notos.first { it.notoId == notoId })
-
-    override suspend fun createNoto(noto: Noto) {
-        notos.add(noto.copy(notoId = notos.size.toLong()))
+    fun getNotos(): Flow<List<Note>> = flowOf(notos)
+    override fun getNotosByLibraryId(libraryId: Long): Flow<List<Note>> {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun updateNoto(noto: Noto) = notos.replaceWith(noto) {
-        it.notoId == noto.notoId
+    override fun getArchivedNotosByLibraryId(libraryId: Long): Flow<List<Note>> {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun deleteNoto(noto: Noto) {
-        notos.remove(noto)
+    override fun getNotoById(notoId: Long): Flow<Note> = flowOf(notos.first { it.id == notoId })
+
+    override suspend fun createNoto(note: Note) {
+        notos.add(note.copy(id = notos.size.toLong()))
+    }
+
+    override suspend fun updateNoto(note: Note) = notos.replaceWith(note) {
+        it.id == note.id
+    }
+
+    override suspend fun deleteNoto(note: Note) {
+        notos.remove(note)
     }
 
     override fun getNotoWithLabels(notoId: Long): Flow<NotoWithLabels> {
         TODO("Not yet implemented")
     }
 
-    override fun createNotoWithLabels(noto: Noto, notoLabels: Set<NotoLabel>) {
+    override fun createNotoWithLabels(note: Note, notoLabels: Set<NotoLabel>) {
         TODO("Not yet implemented")
     }
 
-    override fun updateNotoWithLabels(noto: Noto, notoLabels: Set<NotoLabel>) {
+    override fun updateNotoWithLabels(note: Note, notoLabels: Set<NotoLabel>) {
         TODO("Not yet implemented")
     }
 

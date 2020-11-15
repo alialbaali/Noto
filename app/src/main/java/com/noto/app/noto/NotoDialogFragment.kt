@@ -60,11 +60,11 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
             noto?.let {
 
                 binding.tvArchiveNoto.compoundDrawablesRelative[0] =
-                    if (noto.notoIsArchived) drawableResource(R.drawable.ic_outline_unarchive_24)
+                    if (noto.isArchived) drawableResource(R.drawable.ic_outline_unarchive_24)
                     else drawableResource(R.drawable.archive_arrow_down_outline)
 
                 binding.tvRemindMe.compoundDrawablesRelative[0] =
-                    if (noto.notoReminder == null) drawableResource(R.drawable.bell_plus_outline)
+                    if (noto.reminderDate == null) drawableResource(R.drawable.bell_plus_outline)
                     else drawableResource(R.drawable.bell_ring_outline)
 
             }
@@ -73,7 +73,7 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
 
         binding.tvArchiveNoto.setOnClickListener {
             dismiss()
-            if (viewModel.noto.value?.notoIsArchived == true) viewModel.setArchived(false) else viewModel.setArchived(true)
+            if (viewModel.noto.value?.isArchived == true) viewModel.setArchived(false) else viewModel.setArchived(true)
             viewModel.updateNoto()
         }
 
@@ -84,7 +84,7 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
 
         binding.tvCopyToClipboard.setOnClickListener { v ->
             dismiss()
-            val clipData = ClipData.newPlainText(viewModel.library.value?.libraryTitle, "${viewModel.noto.value?.notoTitle}\n${viewModel.noto.value?.notoBody}")
+            val clipData = ClipData.newPlainText(viewModel.library.value?.libraryTitle, "${viewModel.noto.value?.title}\n${viewModel.noto.value?.body}")
             clipboardManager.setPrimaryClip(clipData)
             v.toast(getString(R.string.copied_to_clipboard))
         }
@@ -97,11 +97,11 @@ class NotoDialogFragment : BaseBottomSheetDialogFragment() {
 
             val intent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
-                putExtra(Intent.EXTRA_MIME_TYPES, noto?.notoTitle)
-                putExtra(Intent.EXTRA_MIME_TYPES, noto?.notoBody)
+                putExtra(Intent.EXTRA_MIME_TYPES, noto?.title)
+                putExtra(Intent.EXTRA_MIME_TYPES, noto?.body)
             }
 
-            val chooser = Intent.createChooser(intent, "${getString(R.string.share)} ${noto?.notoTitle} to")
+            val chooser = Intent.createChooser(intent, "${getString(R.string.share)} ${noto?.title} to")
 
             startActivity(chooser)
 

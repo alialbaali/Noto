@@ -4,7 +4,7 @@ import androidx.lifecycle.*
 import com.noto.app.util.LayoutManager
 import com.noto.domain.local.LocalStorage
 import com.noto.domain.model.Library
-import com.noto.domain.model.Noto
+import com.noto.domain.model.Note
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
 import com.noto.domain.repository.LibraryRepository
@@ -22,8 +22,8 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
     private val _library = MutableLiveData<Library>()
     val library: LiveData<Library> = _library.distinctUntilChanged()
 
-    private var _notos = MutableLiveData<List<Noto>>()
-    val notos: LiveData<List<Noto>> = _notos
+    private var _notos = MutableLiveData<List<Note>>()
+    val notos: LiveData<List<Note>> = _notos
 
     val searchTerm = MutableLiveData("")
 
@@ -88,8 +88,8 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
         }
     }
 
-    fun toggleNotoStar(noto: Noto) = viewModelScope.launch {
-        notoRepository.updateNoto(noto.copy(notoIsStarred = !noto.notoIsStarred))
+    fun toggleNotoStar(note: Note) = viewModelScope.launch {
+        notoRepository.updateNoto(note.copy(isStarred = !note.isStarred))
     }
 
 }

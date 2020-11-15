@@ -19,10 +19,9 @@ import com.noto.app.NotoItemTouchHelper
 import com.noto.app.R
 import com.noto.app.databinding.FragmentLibraryBinding
 import com.noto.app.util.*
-import com.noto.domain.model.Noto
+import com.noto.domain.model.Note
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
-import org.koin.android.ext.android.get
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -142,9 +141,9 @@ class LibraryFragment : Fragment() {
 
     private fun rv() = with(binding.rv) {
         val rvAdapter = LibraryRVAdapter(object : NotoItemClickListener {
-            override fun onClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(noto.libraryId, noto.notoId))
-            override fun onLongClick(noto: Noto) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(noto.libraryId, noto.notoId))
-            override fun toggleNotoStar(noto: Noto) { viewModel.toggleNotoStar(noto) }
+            override fun onClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
+            override fun onLongClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id))
+            override fun toggleNotoStar(note: Note) { viewModel.toggleNotoStar(note) }
         })
 
         adapter = rvAdapter
@@ -197,7 +196,7 @@ class LibraryFragment : Fragment() {
         viewModel.searchTerm.observe(viewLifecycleOwner) { searchTerm ->
             val notos = viewModel.notos.value
             if (searchTerm.isBlank()) rvAdapter.submitList(notos)
-            else rvAdapter.submitList(notos?.filter { it.notoTitle.contains(searchTerm) || it.notoBody.contains(searchTerm) })
+            else rvAdapter.submitList(notos?.filter { it.title.contains(searchTerm) || it.body.contains(searchTerm) })
         }
     }
 

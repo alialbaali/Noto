@@ -105,11 +105,11 @@ class NotoFragment : Fragment() {
 
                         val intent = Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"
-                            putExtra(Intent.EXTRA_SUBJECT, noto?.notoTitle)
-                            putExtra(Intent.EXTRA_TEXT, noto?.notoBody)
+                            putExtra(Intent.EXTRA_SUBJECT, noto?.title)
+                            putExtra(Intent.EXTRA_TEXT, noto?.body)
                         }
 
-                        val chooser = Intent.createChooser(intent, "${getString(R.string.share)} ${noto?.notoTitle} to")
+                        val chooser = Intent.createChooser(intent, "${getString(R.string.share)} ${noto?.title} to")
 
                         startActivity(chooser)
 
@@ -120,7 +120,7 @@ class NotoFragment : Fragment() {
 
                         menuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
 
-                        if (viewModel.noto.value?.notoIsArchived == true) {
+                        if (viewModel.noto.value?.isArchived == true) {
                             viewModel.setArchived(false)
                             binding.root.snackbar(getString(R.string.noto_unarchived))
                         } else {
@@ -150,20 +150,20 @@ class NotoFragment : Fragment() {
         viewModel.noto.observe(viewLifecycleOwner) {
             it?.let { noto ->
 
-                binding.etNotoTitle.setText(it.notoTitle)
-                binding.etNotoBody.setText(it.notoBody)
-                binding.etNotoTitle.setSelection(it.notoTitle.length)
-                binding.etNotoBody.setSelection(it.notoBody.length)
-                binding.rbNotoStar.isChecked = it.notoIsStarred
+                binding.etNotoTitle.setText(it.title)
+                binding.etNotoBody.setText(it.body)
+                binding.etNotoTitle.setSelection(it.title.length)
+                binding.etNotoBody.setSelection(it.body.length)
+                binding.rbNotoStar.isChecked = it.isStarred
 
 
-                if (noto.notoIsArchived) archiveMenuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
+                if (noto.isArchived) archiveMenuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
                 else archiveMenuItem.icon = drawableResource(R.drawable.archive_arrow_down_outline)
 
-                if (noto.notoReminder == null) binding.fab.setImageDrawable(drawableResource(R.drawable.bell_plus_outline))
+                if (noto.reminderDate == null) binding.fab.setImageDrawable(drawableResource(R.drawable.bell_plus_outline))
                 else binding.fab.setImageDrawable(drawableResource(R.drawable.bell_ring_outline))
 
-                noto.notoCreationDate.apply {
+                noto.creationDate.apply {
                     val dateFormat = if (year > ZonedDateTime.now().year) format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
                     else format(DateTimeFormatter.ofPattern("EEE, MMM d"))
 

@@ -9,7 +9,7 @@ import com.noto.app.util.isValid
 import com.noto.app.util.notifyObserver
 import com.noto.domain.model.Label
 import com.noto.domain.model.Library
-import com.noto.domain.model.Noto
+import com.noto.domain.model.Note
 import com.noto.domain.repository.LibraryRepository
 import com.noto.domain.repository.NotoRepository
 import kotlinx.coroutines.flow.collect
@@ -18,7 +18,7 @@ import java.time.ZonedDateTime
 
 class NotoViewModel(private val libraryRepository: LibraryRepository, private val notoRepository: NotoRepository) : ViewModel() {
 
-    private val _noto = MutableLiveData<Noto>()
+    private val _noto = MutableLiveData<Note>()
     val noto = _noto.asLiveData().distinctUntilChanged()
 
     private val _library = MutableLiveData<Library>()
@@ -51,7 +51,7 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
     fun postNoto(libraryId: Long) = viewModelScope.launch {
 
         notoRepository.getNotosByLibraryId(libraryId).collect { value ->
-            _noto.postValue(Noto(libraryId = libraryId, notoPosition = value.count()))
+            _noto.postValue(Note(libraryId = libraryId, position = value.count()))
         }
 
 //        _labels.postValue(mutableSetOf())
@@ -59,7 +59,7 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
     }
 
     fun setNotoReminder(zonedDateTime: ZonedDateTime?) {
-        _noto.value?.notoReminder = zonedDateTime
+        _noto.value?.reminderDate = zonedDateTime
         _noto.value = _noto.value
     }
 
@@ -72,7 +72,7 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
     }
 
     fun setArchived(value: Boolean) {
-        noto.value?.notoIsArchived = value
+        noto.value?.isArchived = value
     }
 
     fun deleteNoto() = viewModelScope.launch { notoRepository.deleteNoto(noto.value!!) }
@@ -84,15 +84,15 @@ class NotoViewModel(private val libraryRepository: LibraryRepository, private va
     fun notifyLabelsObserver() = _labels.notifyObserver()
 
     fun setNotoTitle(title: String) {
-        _noto.value = _noto.value?.copy(notoTitle = title)
+        _noto.value = _noto.value?.copy(title = title)
     }
 
     fun setNotoBody(body: String) {
-        _noto.value = _noto.value?.copy(notoBody = body)
+        _noto.value = _noto.value?.copy(body = body)
     }
 
     fun toggleNotoStar() {
-        _noto.value?.let { _noto.value = it.copy(notoIsStarred = !it.notoIsStarred) }
+        _noto.value?.let { _noto.value = it.copy(isStarred = !it.isStarred) }
     }
 
 }

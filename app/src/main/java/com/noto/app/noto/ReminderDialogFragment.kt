@@ -43,7 +43,7 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
         viewModel.noto.observe(viewLifecycleOwner) { noto ->
 
-            noto.notoReminder?.let { time ->
+            noto.reminderDate?.let { time ->
 
                 binding.til.endIconDrawable = drawableResource(R.drawable.bell_remove_outline)
 
@@ -56,7 +56,7 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
                 }
             }
 
-            if (noto.notoReminder == null) {
+            if (noto.reminderDate == null) {
                 binding.et.setText(getString(R.string.no_reminder))
                 binding.til.endIconDrawable = drawableResource(R.drawable.bell_plus_outline)
             }
@@ -65,11 +65,11 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
 
         binding.til.setEndIconOnClickListener {
-            if (viewModel.noto.value?.notoReminder == null) showDateTimeDialog() else {
+            if (viewModel.noto.value?.reminderDate == null) showDateTimeDialog() else {
                 viewModel.noto.value?.let { noto ->
 
                     val intent = Intent(requireContext(), AlarmReceiver::class.java)
-                    val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.notoId.toInt(), intent, PENDING_INTENT_FLAGS)
+                    val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.id.toInt(), intent, PENDING_INTENT_FLAGS)
 
                     alarmManager.cancel(pendingIntent)
 
@@ -88,14 +88,14 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
             viewModel.noto.value?.let { noto ->
 
                 val intent = Intent(requireContext(), AlarmReceiver::class.java).apply {
-                    putExtra(NOTO_ID, noto.notoId.toInt())
-                    putExtra(NOTO_TITLE, noto.notoTitle)
-                    putExtra(NOTO_BODY, noto.notoBody)
+                    putExtra(NOTO_ID, noto.id.toInt())
+                    putExtra(NOTO_TITLE, noto.title)
+                    putExtra(NOTO_BODY, noto.body)
                     putExtra(NOTO_COLOR, viewModel.library.value?.notoColor?.ordinal ?: 0)
                     putExtra(NOTO_ICON, viewModel.library.value?.notoIcon?.ordinal ?: 0)
                 }
 
-                val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.notoId.toInt(), intent, PENDING_INTENT_FLAGS)
+                val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.id.toInt(), intent, PENDING_INTENT_FLAGS)
 
                 val timeInMills = zonedDateTime.toInstant().toEpochMilli()
 

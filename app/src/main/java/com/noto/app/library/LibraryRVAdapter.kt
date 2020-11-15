@@ -8,12 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.BaseItemTouchHelperListener
 import com.noto.app.R
 import com.noto.app.databinding.ItemNotoBinding
-import com.noto.app.noto.NotoViewModel
-import com.noto.domain.model.Noto
+import com.noto.domain.model.Note
 
 class LibraryRVAdapter(
     private val listener: NotoItemClickListener,
-) : ListAdapter<Noto, NotoItemViewHolder>(
+) : ListAdapter<Note, NotoItemViewHolder>(
     NoteItemDiffCallback()
 ), BaseItemTouchHelperListener {
 
@@ -24,7 +23,7 @@ class LibraryRVAdapter(
 
     override fun onBindViewHolder(holder: NotoItemViewHolder, position: Int) {
         val noto = getItem(position)
-        holder.noto = noto
+        holder.note = noto
         holder.bind(noto)
     }
 
@@ -32,12 +31,12 @@ class LibraryRVAdapter(
         fromViewHolder as NotoItemViewHolder
         toViewHolder as NotoItemViewHolder
 
-        val fromNoto = currentList.find { it.notoPosition == fromViewHolder.adapterPosition }!!
-        val toNoto = currentList.find { it.notoPosition == fromViewHolder.adapterPosition }!!
+        val fromNoto = currentList.find { it.position == fromViewHolder.adapterPosition }!!
+        val toNoto = currentList.find { it.position == fromViewHolder.adapterPosition }!!
 
 //        fromNoto.notoPosition = toNoto.notoPosition.also { toNoto.notoPosition = fromNoto.notoPosition }
 
-        fromViewHolder.drag(fromViewHolder.noto)
+        fromViewHolder.drag(fromViewHolder.note)
 
         notifyItemMoved(fromViewHolder.adapterPosition, toViewHolder.adapterPosition)
     }
@@ -48,7 +47,7 @@ class LibraryRVAdapter(
 
     override fun onClearViewHolder(viewHolder: RecyclerView.ViewHolder) {
         viewHolder as NotoItemViewHolder
-        viewHolder.clear(viewHolder.noto)
+        viewHolder.clear(viewHolder.note)
 //        viewModel.updateSortMethod(SortMethod.Custom)
     }
 
@@ -61,20 +60,20 @@ class NotoItemViewHolder(
 ) :
     RecyclerView.ViewHolder(binding.root) {
 
-    lateinit var noto: Noto
+    lateinit var note: Note
 
     init {
         binding.root.setOnClickListener {
-            listener.onClick(noto)
+            listener.onClick(note)
         }
 
         binding.root.setOnLongClickListener {
-            listener.onLongClick(noto)
+            listener.onLongClick(note)
             true
         }
 
         binding.rbNotoStar.setOnClickListener {
-            listener.toggleNotoStar(noto)
+            listener.toggleNotoStar(note)
         }
     }
 
@@ -94,38 +93,38 @@ class NotoItemViewHolder(
     }
 
     // Bind note's values to the list item
-    fun bind(noto: Noto) {
-        binding.tvNotoTitle.text = noto.notoTitle
-        binding.tvNotoBody.text = noto.notoBody
-        binding.rbNotoStar.isChecked = noto.notoIsStarred
+    fun bind(note: Note) {
+        binding.tvNotoTitle.text = note.title
+        binding.tvNotoBody.text = note.body
+        binding.rbNotoStar.isChecked = note.isStarred
 
 //        if (noto.notoTitle.isBlank()) binding.tvNotoTitle.visibility = View.GONE
 //        if (noto.notoBody.isBlank()) binding.tvNotoBody.visibility = View.GONE
 //        if (noto.notoReminder != null) binding.ivNotoReminder.visibility = View.VISIBLE
     }
 
-    fun drag(noto: Noto) {
+    fun drag(note: Note) {
         binding.root.elevation = binding.root.resources.getDimension(R.dimen.elevation_normal)
     }
 
-    fun clear(noto: Noto) {
+    fun clear(note: Note) {
         binding.root.elevation = binding.root.resources.getDimension(R.dimen.elevation_extra_small)
     }
 }
 
 // Note Item Difference Callback
-class NoteItemDiffCallback() : DiffUtil.ItemCallback<Noto>() {
-    override fun areItemsTheSame(oldItem: Noto, newItem: Noto): Boolean {
-        return oldItem.notoId == newItem.notoId
+class NoteItemDiffCallback() : DiffUtil.ItemCallback<Note>() {
+    override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Noto, newItem: Noto): Boolean {
+    override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
         return oldItem == newItem
     }
 }
 
 interface NotoItemClickListener {
-    fun onClick(noto: Noto)
-    fun onLongClick(noto: Noto)
-    fun toggleNotoStar(noto: Noto)
+    fun onClick(note: Note)
+    fun onLongClick(note: Note)
+    fun toggleNotoStar(note: Note)
 }
