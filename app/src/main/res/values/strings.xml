@@ -15,36 +15,48 @@
     <string name="copy_to">Copy to</string>
     <string name="view">View</string>
     <string name="created_at">Created at</string>
+    <string name="confirmation_dialog">Please Confirm this action!</string>
+    <string name="alphabetically">Alphabetically</string>
+    <string name="creation_date">Creation Date</string>
+    <string name="desc">Descending</string>
+    <string name="asc">Ascending</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>
     <string name="library">Library</string>
     <string name="create_library">Create library</string>
     <string name="update_library">Update library</string>
+    <string name="new_library">New Library</string>
+    <string name="library_options">Library Options</string>
     <string name="edit_library">Edit library</string>
     <string name="library_title">Library title</string>
     <string name="delete_library">Delete library</string>
     <string name="empty_library">(Empty library)</string>
     <string name="delete_library_confirmation">Are you sure you want to delete this library?</string>
+    <string name="library_sorting">Library Sorting</string>
+    <string name="empty_title">Title can\'t be empty</string>
 
-    <!-- Noto -->
-    <string name="all_notos">All notos</string>
+    <!-- Note -->
+    <string name="all_notes">All notes</string>
     <string name="body">Body</string>
     <string name="title">Title</string>
-    <string name="delete_noto">Delete noto</string>
-    <string name="archive_noto">Archive noto</string>
-    <string name="unarchive_noto">Unarchive Noto</string>
-    <string name="notos">Notos</string>
-    <string name="noto_archived">Noto has been archived</string>
+    <string name="delete_note">Delete note</string>
+    <string name="archive_note">Archive note</string>
+    <string name="sorting">Sorting</string>
+    <string name="unarchive_note">Unarchive note</string>
+    <string name="notes">Notes</string>
+    <string name="note_archived">Note has been archived</string>
     <string name="no_reminder">No reminder setup</string>
-    <string name="noto_unarchived">Noto has been unarchived</string>
+    <string name="note_unarchived">Note has been unarchived</string>
     <string name="reminder">Reminder</string>
-    <string name="archived_notos">Archived notos</string>
-    <string name="copy_to_clipboard">Copy to Clipboard</string>
-    <string name="copied_to_clipboard">Copied to Clipboard</string>
-    <string name="delete_noto_confirmation">Are you sure you want to delete this noto?</string>
-    <string name="share_noto">Share Noto</string>
-    <string name="add_reminder">Add Reminder</string>
+    <string name="new_reminder">New Reminder</string>
+    <string name="archived_notes">Archived notes</string>
+    <string name="copy_to_clipboard">Copy to clipboard</string>
+    <string name="copied_to_clipboard">Copied to clipboard</string>
+    <string name="delete_note_confirmation">Are you sure you want to delete this note?</string>
+    <string name="share_note">Share note</string>
+    <string name="add_reminder">Add reminder</string>
+    <string name="note_options">Note Options</string>
 
     <!-- Label -->
     <string name="add_label">Add label</string>
