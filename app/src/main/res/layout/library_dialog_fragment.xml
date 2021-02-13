@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/cl"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:background="@drawable/dialog_shape"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll"
+    style="@style/BaseDialogFragment">
 
-    <View
-        android:id="@+id/v_head"
-        android:layout_width="30dp"
-        android:layout_height="2dp"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/spacing_normal"
-        android:background="@drawable/shape_view_head" />
+    <include layout="@layout/base_dialog_fragment" />
 
     <TextView
         android:id="@+id/tv_edit_library"
@@ -21,8 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/ripple"
-        android:drawableStart="@drawable/ic_outline_edit_24"
-        android:text="@string/edit_library" />
+        android:text="@string/edit_library"
+        app:drawableStartCompat="@drawable/ic_outline_edit_24" />
+
+    <TextView
+        android:id="@+id/tv_sorting"
+        style="@style/DialogItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple"
+        android:text="@string/sorting"
+        app:drawableStartCompat="@drawable/ic_sort" />
+
 
     <TextView
         android:id="@+id/tv_delete_library"
@@ -30,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/ripple"
-        android:drawableStart="@drawable/ic_delete_sweep_24px"
-        android:text="@string/delete_library" />
+        android:text="@string/delete_library"
+        app:drawableStartCompat="@drawable/ic_delete_sweep_24px" />
 
 </LinearLayout>

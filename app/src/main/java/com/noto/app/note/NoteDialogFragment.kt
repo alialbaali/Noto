@@ -10,23 +10,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navOptions
-import com.noto.app.BaseBottomSheetDialogFragment
+import com.noto.app.BaseDialogFragment
 import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
+import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
-import com.noto.app.util.colorStateResource
-import com.noto.app.util.drawableResource
-import com.noto.app.util.toResource
-import com.noto.app.util.toast
+import com.noto.app.util.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
-class NoteDialogFragment : BaseBottomSheetDialogFragment() {
-
-    private lateinit var binding: NoteDialogFragmentBinding
+class NoteDialogFragment : BaseDialogFragment() {
 
     private val viewModel by sharedViewModel<NoteViewModel>()
 
@@ -34,62 +29,67 @@ class NoteDialogFragment : BaseBottomSheetDialogFragment() {
 
     private val clipboardManager by lazy { requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = NoteDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+        val baseDialog = BaseDialogFragmentBinding.bind(root)
 
-        binding = NoteDialogFragmentBinding.inflate(inflater, container, false)
+        baseDialog.tvDialogTitle.text = stringResource(R.string.note_options)
 
         if (args.noteId != 0L) viewModel.getNoteById(args.noteId)
-
         viewModel.getLibraryById(args.libraryId)
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
             library?.let {
 
-                binding.vHead.backgroundTintList = colorStateResource(it.color.toResource())
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    listOf(binding.tvCopyToClipboard, binding.tvShareNoto, binding.tvArchiveNoto, binding.tvRemindMe).forEach { tv ->
-                        tv.compoundDrawableTintList = colorStateResource(it.color.toResource())
-                    }
-                }
+                baseDialog.tvDialogTitle.setTextColor(colorResource(it.color.toResource()))
+                baseDialog.vHead.backgroundTintList = colorStateResource(it.color.toResource())
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                    listOf(tvCopyToClipboard, tvShareNoto, tvArchiveNoto, tvRemindMe)
+                        .forEach { tv -> tv.compoundDrawableTintList = colorStateResource(it.color.toResource()) }
 
             }
 
         }
 
-        viewModel.note.observe(viewLifecycleOwner, Observer { noto ->
+        viewModel.note.observe(viewLifecycleOwner) { noto ->
             noto?.let {
 
-                binding.tvArchiveNoto.compoundDrawablesRelative[0] =
+                tvArchiveNoto.compoundDrawablesRelative[0] =
                     if (noto.isArchived) drawableResource(R.drawable.ic_outline_unarchive_24)
                     else drawableResource(R.drawable.archive_arrow_down_outline)
 
-                binding.tvRemindMe.compoundDrawablesRelative[0] =
+                tvRemindMe.compoundDrawablesRelative[0] =
                     if (noto.reminderDate == null) drawableResource(R.drawable.bell_plus_outline)
                     else drawableResource(R.drawable.bell_ring_outline)
 
             }
 
-        })
+        }
 
-        binding.tvArchiveNoto.setOnClickListener {
+
+        tvArchiveNoto.setOnClickListener {
             dismiss()
             if (viewModel.note.value?.isArchived == true) viewModel.setNotoArchived(false) else viewModel.setNotoArchived(true)
             viewModel.updateNote()
         }
 
-        binding.tvRemindMe.setOnClickListener {
+        tvRemindMe.setOnClickListener {
             dismiss()
             findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.noteId))
         }
 
-        binding.tvCopyToClipboard.setOnClickListener { v ->
+        tvCopyToClipboard.setOnClickListener { v ->
             dismiss()
             val clipData = ClipData.newPlainText(viewModel.library.value?.title, "${viewModel.note.value?.title}\n${viewModel.note.value?.body}")
             clipboardManager.setPrimaryClip(clipData)
             v.toast(getString(R.string.copied_to_clipboard))
         }
 
-        binding.tvShareNoto.setOnClickListener {
+        tvShareNoto.setOnClickListener {
 
             dismiss()
 
@@ -107,13 +107,13 @@ class NoteDialogFragment : BaseBottomSheetDialogFragment() {
 
         }
 
-        binding.tvDeleteNoto.setOnClickListener {
+        tvDeleteNoto.setOnClickListener {
             dismiss()
 
             ConfirmationDialogFragment { dialogFragment, dialogBinding ->
 
-                dialogBinding.btnConfirm.text = dialogFragment.getString(R.string.delete_noto)
-                dialogBinding.tvTitle.text = dialogFragment.getString(R.string.delete_noto_confirmation)
+                dialogBinding.btnConfirm.text = dialogFragment.getString(R.string.delete_note)
+                dialogBinding.tvTitle.text = dialogFragment.getString(R.string.delete_note_confirmation)
 
                 dialogBinding.btnConfirm.setOnClickListener {
                     dialogFragment.dismiss()
@@ -126,8 +126,6 @@ class NoteDialogFragment : BaseBottomSheetDialogFragment() {
             }.show(parentFragmentManager, null)
         }
 
-
-        return binding.root
     }
 
 }

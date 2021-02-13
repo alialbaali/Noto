@@ -4,18 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ConfirmationDialogFragmentBinding
+import com.noto.app.util.stringResource
+import com.noto.app.util.withBinding
 
-class ConfirmationDialogFragment(private val block: (dialogFragment: ConfirmationDialogFragment, dialogBinding: ConfirmationDialogFragmentBinding) -> Unit) : BaseBottomSheetDialogFragment() {
+class ConfirmationDialogFragment(
+    private val dialogTitle: String? = null,
+    private val block: (dialogFragment: ConfirmationDialogFragment, dialogBinding: ConfirmationDialogFragmentBinding) -> Unit
+) : BaseDialogFragment() {
 
-    private lateinit var binding: ConfirmationDialogFragmentBinding
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = ConfirmationDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = ConfirmationDialogFragmentBinding.inflate(inflater, container, false)
+        BaseDialogFragmentBinding.bind(root).apply {
+            tvDialogTitle.text = dialogTitle ?: stringResource(R.string.confirmation_dialog)
+        }
 
-        block(this, binding)
-        if (binding.tvSubtitle.text.isNullOrBlank()) binding.tvSubtitle.visibility = View.GONE
-        return binding.root
+        block(this@ConfirmationDialogFragment, this)
+
+        if (tvSubtitle.text.isNullOrBlank())
+            tvSubtitle.visibility = View.GONE
     }
-
 }

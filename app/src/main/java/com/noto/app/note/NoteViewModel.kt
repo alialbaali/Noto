@@ -82,11 +82,11 @@ class NoteViewModel(private val libraryRepository: LibraryRepository, private va
 
     fun notifyLabelsObserver() = _labels.notifyObserver()
 
-    fun setNotoTitle(title: String) {
+    fun setNoteTitle(title: String) {
         _note.value = _note.value?.copy(title = title)
     }
 
-    fun setNotoBody(body: String) {
+    fun setNoteBody(body: String) {
         _note.value = _note.value?.copy(body = body)
     }
 

@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:background="@drawable/dialog_shape">
+    style="@style/BaseDialogFragment">
 
-    <View
-        android:id="@+id/v_head"
-        android:layout_width="30dp"
-        android:layout_height="2dp"
-        android:layout_margin="@dimen/spacing_normal"
-        android:background="@drawable/shape_view_head"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <include layout="@layout/base_dialog_fragment" />
 
     <TextView
         android:id="@+id/tv_title"
@@ -56,8 +45,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_confirm"
-        style="@style/Style.Button"
-        android:layout_width="0dp"
+        style="@style/MaterialButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_margin="@dimen/spacing_normal"
@@ -66,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
-        tools:text="@string/delete_noto" />
+        tools:text="@string/delete_note" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

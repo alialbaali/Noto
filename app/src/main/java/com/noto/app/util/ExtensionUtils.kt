@@ -6,28 +6,45 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.GradientDrawable
 import android.util.TypedValue
 import android.view.View
+import android.view.WindowInsets
 import android.widget.Toast
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.FontRes
-import androidx.annotation.StringRes
+import androidx.annotation.*
 import androidx.core.app.AlarmManagerCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.noto.app.R
 import com.noto.domain.model.Note
 import com.noto.domain.model.NotoColor
 import com.noto.domain.model.NotoIcon
+import com.noto.domain.model.SortingMethod
 
 enum class LayoutManager {
     Linear, Grid
 }
+
+inline fun <T> Iterable<T>.sortByMethod(method: SortingMethod, crossinline selector: (T) -> Comparable<*>?): Iterable<T> {
+    return when (method) {
+        SortingMethod.Asc -> sortedWith(compareBy(selector))
+        SortingMethod.Desc -> sortedWith(compareByDescending(selector))
+    }
+}
+
+inline fun <T : ViewBinding> T.withBinding(crossinline block: T.() -> Unit): View {
+    block()
+    return root
+}
+
+fun View.showKeyboard() = ViewCompat.getWindowInsetsController(this)?.show(WindowInsets.Type.ime())
+fun View.hideKeyboard() = ViewCompat.getWindowInsetsController(this)?.hide(WindowInsets.Type.ime())
 
 fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
@@ -35,11 +52,14 @@ fun Fragment.colorStateResource(@ColorRes id: Int): ColorStateList? = ResourcesC
 fun Fragment.colorResource(@ColorRes id: Int): Int = ResourcesCompat.getColor(resources, id, null)
 fun Fragment.stringResource(@StringRes id: Int): String = getString(id)
 fun Fragment.drawableResource(@DrawableRes id: Int): Drawable? = ResourcesCompat.getDrawable(resources, id, null)
+fun Fragment.dimenResource(@DimenRes id: Int): Float = resources.getDimension(id)
+fun Fragment.fontResource(@FontRes id: Int): Typeface? = ResourcesCompat.getFont(requireContext(), id)
+
 fun View.colorStateResource(@ColorRes id: Int): ColorStateList? = ResourcesCompat.getColorStateList(resources, id, null)
 fun View.colorResource(@ColorRes id: Int): Int = ResourcesCompat.getColor(resources, id, null)
 fun View.stringResource(@StringRes id: Int): String = context.getString(id)
 fun View.drawableResource(@DrawableRes id: Int): Drawable? = ResourcesCompat.getDrawable(resources, id, null)
-fun Fragment.fontResource(@FontRes id: Int): Typeface? = ResourcesCompat.getFont(requireContext(), id)
+fun View.dimenResource(@DimenRes id: Int): Float = resources.getDimension(id)
 fun View.fontResource(@FontRes id: Int): Typeface? = ResourcesCompat.getFont(context!!, id)
 
 fun View.snackbar(message: String) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {

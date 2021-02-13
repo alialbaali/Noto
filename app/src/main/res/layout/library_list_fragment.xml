@@ -29,7 +29,6 @@
             style="@style/Style.CollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/library_fragment_shape"
             app:contentScrim="@color/colorBackground"
             app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"
             app:titleEnabled="false"
@@ -97,121 +96,6 @@
                     tools:text="7 Libraries"
                     tools:textColor="@color/colorPrimary" />
 
-                <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-                <!--                        android:id="@+id/cl_all_notos"-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_margin="@dimen/spacing_normal"-->
-                <!--                        android:background="@drawable/library_item_shape"-->
-                <!--                        android:elevation="@dimen/elevation_extra_small"-->
-                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                        app:layout_constraintEnd_toStartOf="@id/cl_archived_notos"-->
-                <!--                        app:layout_constraintStart_toStartOf="parent">-->
-
-                <!--                        <ImageView-->
-                <!--                            android:id="@+id/iv_all_notos"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_marginStart="@dimen/spacing_normal"-->
-                <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
-                <!--                            android:layout_marginEnd="@dimen/spacing_small"-->
-                <!--                            android:layout_marginBottom="@dimen/spacing_normal"-->
-                <!--                            android:src="@drawable/ic_round_border_all_24"-->
-                <!--                            android:tint="@color/colorAccentTeal"-->
-                <!--                            app:layout_constraintBottom_toTopOf="@id/tv_all_notos_count"-->
-                <!--                            app:layout_constraintEnd_toStartOf="@id/tv_all_notos"-->
-                <!--                            app:layout_constraintStart_toStartOf="parent"-->
-                <!--                            app:layout_constraintTop_toTopOf="parent" />-->
-
-                <!--                        <com.google.android.material.textview.MaterialTextView-->
-                <!--                            android:id="@+id/tv_all_notos"-->
-                <!--                            style="@style/TextView.LibraryTitle"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_marginStart="@dimen/spacing_small"-->
-                <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
-                <!--                            android:layout_marginEnd="@dimen/spacing_normal"-->
-                <!--                            android:text="@string/all_notos"-->
-                <!--                            android:textColor="@color/colorAccentTeal"-->
-                <!--                            app:layout_constraintBottom_toTopOf="@id/tv_all_notos_count"-->
-                <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                            app:layout_constraintStart_toEndOf="@+id/iv_all_notos"-->
-                <!--                            app:layout_constraintTop_toTopOf="parent"-->
-                <!--                            tools:text="All Notos" />-->
-
-                <!--                        <com.google.android.material.textview.MaterialTextView-->
-                <!--                            android:id="@+id/tv_all_notos_count"-->
-                <!--                            style="@style/TextView.LibraryNotoCount"-->
-                <!--                            android:layout_width="0dp"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_margin="@dimen/spacing_normal"-->
-                <!--                            android:gravity="center"-->
-                <!--                            android:textColor="@color/colorAccentTeal"-->
-                <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                            app:layout_constraintStart_toStartOf="parent"-->
-                <!--                            app:layout_constraintTop_toBottomOf="@+id/tv_all_notos"-->
-                <!--                            tools:text="3 Notos" />-->
-
-                <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-                <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-                <!--                        android:id="@+id/cl_archived_notos"-->
-                <!--                        android:layout_width="0dp"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_margin="@dimen/spacing_normal"-->
-                <!--                        android:background="@drawable/library_item_shape"-->
-                <!--                        android:elevation="@dimen/elevation_extra_small"-->
-                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                        app:layout_constraintStart_toEndOf="@+id/cl_all_notos">-->
-
-                <!--                        <ImageView-->
-                <!--                            android:id="@+id/iv_archived_notos"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_marginStart="@dimen/spacing_normal"-->
-                <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
-                <!--                            android:layout_marginEnd="@dimen/spacing_small"-->
-                <!--                            android:layout_marginBottom="@dimen/spacing_normal"-->
-                <!--                            android:src="@drawable/archive_outline"-->
-                <!--                            android:tint="@color/colorAccentTeal"-->
-                <!--                            app:layout_constraintBottom_toTopOf="@id/tv_archived_notos_count"-->
-                <!--                            app:layout_constraintEnd_toStartOf="@id/tv_archived_notos"-->
-                <!--                            app:layout_constraintStart_toStartOf="parent"-->
-                <!--                            app:layout_constraintTop_toTopOf="parent" />-->
-
-                <!--                        <com.google.android.material.textview.MaterialTextView-->
-                <!--                            android:id="@+id/tv_archived_notos"-->
-                <!--                            style="@style/TextView.LibraryTitle"-->
-                <!--                            android:layout_width="wrap_content"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_marginStart="@dimen/spacing_small"-->
-                <!--                            android:layout_marginTop="@dimen/spacing_normal"-->
-                <!--                            android:layout_marginEnd="@dimen/spacing_normal"-->
-                <!--                            android:text="@string/archived_notos"-->
-                <!--                            android:textColor="@color/colorAccentTeal"-->
-                <!--                            app:layout_constraintBottom_toTopOf="@id/tv_archived_notos_count"-->
-                <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                            app:layout_constraintStart_toEndOf="@+id/iv_archived_notos"-->
-                <!--                            app:layout_constraintTop_toTopOf="parent"-->
-                <!--                            tools:text="@string/archived_notos" />-->
-
-                <!--                        <com.google.android.material.textview.MaterialTextView-->
-                <!--                            android:id="@+id/tv_archived_notos_count"-->
-                <!--                            style="@style/TextView.LibraryNotoCount"-->
-                <!--                            android:layout_width="0dp"-->
-                <!--                            android:layout_height="wrap_content"-->
-                <!--                            android:layout_margin="@dimen/spacing_normal"-->
-                <!--                            android:gravity="center"-->
-                <!--                            android:textColor="@color/colorAccentTeal"-->
-                <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--                            app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                            app:layout_constraintStart_toStartOf="parent"-->
-                <!--                            app:layout_constraintTop_toBottomOf="@+id/tv_archived_notos"-->
-                <!--                            tools:text="3 Notos" />-->
-
-                <!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

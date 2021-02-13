@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cl"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
-    android:background="@drawable/dialog_shape">
+    android:id="@+id/ll"
+    style="@style/BaseDialogFragment">
+
+    <include layout="@layout/base_dialog_fragment" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til"
         style="@style/TextInputLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_normal"
         app:endIconDrawable="@drawable/bell_plus_outline"
         app:endIconMode="custom"
-        app:endIconTint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/btn_done"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:endIconTint="@color/colorPrimary">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et"
@@ -36,13 +31,10 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_done"
         style="@style/MaterialButton"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_normal"
         android:padding="@dimen/spacing_normal"
-        android:text="@string/done"
-        app:layout_constraintBottom_toBottomOf="@id/cl"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:text="@string/done" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -10,12 +10,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.noto.app.BaseBottomSheetDialogFragment
+import com.noto.app.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ReminderDialogFragmentBinding
 import com.noto.app.receiver.AlarmReceiver
 import com.noto.app.util.drawableResource
 import com.noto.app.util.setAlarm
+import com.noto.app.util.stringResource
+import com.noto.app.util.withBinding
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -25,19 +28,21 @@ import java.util.*
 
 const val PENDING_INTENT_FLAGS = PendingIntent.FLAG_ONE_SHOT
 
-class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
-
-    private lateinit var binding: ReminderDialogFragmentBinding
+class ReminderDialogFragment : BaseDialogFragment() {
 
     private val viewModel by sharedViewModel<NoteViewModel>()
 
     private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        binding = ReminderDialogFragmentBinding.inflate(inflater, container, false)
-
-        binding.btnDone.setOnClickListener {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = ReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+        BaseDialogFragmentBinding.bind(root).apply {
+            tvDialogTitle.text = stringResource(R.string.new_reminder)
+        }
+        btnDone.setOnClickListener {
             dismiss()
         }
 
@@ -45,26 +50,26 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
 
             noto.reminderDate?.let { time ->
 
-                binding.til.endIconDrawable = drawableResource(R.drawable.bell_remove_outline)
+                til.endIconDrawable = drawableResource(R.drawable.bell_remove_outline)
 
                 if (time.year > ZonedDateTime.now().year) {
                     val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm a"))
-                    binding.et.setText(format)
+                    et.setText(format)
                 } else {
                     val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM HH:mm a"))
-                    binding.et.setText(format)
+                    et.setText(format)
                 }
             }
 
             if (noto.reminderDate == null) {
-                binding.et.setText(getString(R.string.no_reminder))
-                binding.til.endIconDrawable = drawableResource(R.drawable.bell_plus_outline)
+                et.setText(getString(R.string.no_reminder))
+                til.endIconDrawable = drawableResource(R.drawable.bell_plus_outline)
             }
 
         }
 
 
-        binding.til.setEndIconOnClickListener {
+        til.setEndIconOnClickListener {
             if (viewModel.note.value?.reminderDate == null) showDateTimeDialog() else {
                 viewModel.note.value?.let { noto ->
 
@@ -77,8 +82,6 @@ class ReminderDialogFragment : BaseBottomSheetDialogFragment() {
                 }
             }
         }
-
-        return binding.root
     }
 
     private fun showDateTimeDialog() {

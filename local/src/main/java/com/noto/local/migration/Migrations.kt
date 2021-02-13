@@ -44,3 +44,14 @@ object Migration3To4 : Migration(3, 4) {
     }
 
 }
+
+object Migration4To5 : Migration(4, 5) {
+
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.beginTransaction()
+        database.execSQL("ALTER TABLE libraries ADD COLUMN sorting_method INTEGER NOT NULL DEFAULT 1")
+        database.execSQL("ALTER TABLE libraries ADD COLUMN sorting_type INTEGER NOT NULL DEFAULT 1")
+        database.endTransaction()
+    }
+
+}

@@ -185,5 +185,12 @@
         <action
             android:id="@+id/action_libraryDialogFragment_to_newLibraryDialogFragment"
             app:destination="@id/newLibraryDialogFragment" />
+        <action
+            android:id="@+id/action_libraryDialogFragment_to_sortingDialogFragment"
+            app:destination="@id/sortingDialogFragment" />
     </dialog>
+    <dialog
+        android:id="@+id/sortingDialogFragment"
+        android:name="com.noto.app.SortingDialogFragment"
+        android:label="SortingDialogFragment" />
 </navigation>

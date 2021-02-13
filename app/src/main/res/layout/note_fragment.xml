@@ -19,7 +19,6 @@
             style="@style/Style.CollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/library_fragment_shape"
             app:contentScrim="@color/colorBackground"
             app:expandedTitleGravity="center_vertical"
             app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"
@@ -70,7 +69,7 @@
                     app:layout_constraintEnd_toStartOf="@id/rb_noto_star"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tb"
-                    tools:text="@string/all_notos"
+                    tools:text="@string/all_notes"
                     tools:textColor="@color/colorAccentTeal" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton

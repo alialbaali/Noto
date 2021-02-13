@@ -5,32 +5,39 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import com.noto.app.BaseBottomSheetDialogFragment
+import com.noto.app.BaseDialogFragment
+import com.noto.app.R
 import com.noto.app.databinding.ArchiveDialogFragmentBinding
+import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.note.NoteViewModel
+import com.noto.app.util.stringResource
+import com.noto.app.util.withBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class ArchiveDialogFragment : BaseBottomSheetDialogFragment() {
-
-    private lateinit var binding: ArchiveDialogFragmentBinding
+class ArchiveDialogFragment : BaseDialogFragment() {
 
     private val viewModel by viewModel<NoteViewModel>()
 
     private val args by navArgs<ArchiveDialogFragmentArgs>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = ArchiveDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
-        binding = ArchiveDialogFragmentBinding.inflate(inflater, container, false)
+        BaseDialogFragmentBinding.bind(root).apply {
+            tvDialogTitle.text = stringResource(R.string.note_options)
+        }
 
         viewModel.getNoteById(args.notoId)
 
-        binding.tvUnarchiveNoto.setOnClickListener {
+        tvUnarchiveNoto.setOnClickListener {
             viewModel.setNotoArchived(false)
             viewModel.updateNote()
             dismiss()
         }
 
-        return binding.root
     }
 
 }

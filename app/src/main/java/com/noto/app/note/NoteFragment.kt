@@ -1,13 +1,11 @@
 package com.noto.app.note
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -19,7 +17,6 @@ import com.noto.app.util.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 const val NOTO_ID = "noto_id"
 const val NOTO_TITLE = "noto_title"
@@ -29,23 +26,19 @@ const val NOTO_ICON = "noto_icon"
 
 class NoteFragment : Fragment() {
 
-    private lateinit var binding: NoteFragmentBinding
-
     private val viewModel by sharedViewModel<NoteViewModel>()
 
     private val args by navArgs<NoteFragmentArgs>()
 
-    private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View? = NoteFragmentBinding.inflate(inflater, container, false).withBinding {
 
-        binding = NoteFragmentBinding.inflate(inflater, container, false).apply {
-            fab.setOnClickListener {
-                findNavController().navigate(NoteFragmentDirections.actionNotoFragmentToReminderDialogFragment())
-            }
+        fab.setOnClickListener {
+            findNavController()
+                .navigate(NoteFragmentDirections.actionNotoFragmentToReminderDialogFragment())
         }
 
         viewModel.getLibraryById(args.libraryId)
@@ -54,16 +47,16 @@ class NoteFragment : Fragment() {
 
             viewModel.postNote(args.libraryId)
 
-            binding.etNotoBody.requestFocus()
-            imm.showSoftInput(binding.etNotoBody, InputMethodManager.SHOW_IMPLICIT)
+            etNotoBody.requestFocus()
+//            etNotoBody.showKeyboard()
 
-            requireActivity().onBackPressedDispatcher.addCallback(this) {
-                this@NoteFragment.findNavController().navigateUp()
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                findNavController().navigateUp()
                 viewModel.createNote()
             }.isEnabled = true
 
-            binding.tb.setNavigationOnClickListener {
-                imm.hideSoftInputFromWindow(binding.etNotoBody.windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
+            tb.setNavigationOnClickListener {
+//                etNotoBody.hideKeyboard()
                 findNavController().navigateUp()
                 viewModel.createNote()
             }
@@ -72,23 +65,23 @@ class NoteFragment : Fragment() {
 
             viewModel.getNoteById(args.noteId)
 
-            requireActivity().onBackPressedDispatcher.addCallback(this) {
-                this@NoteFragment.findNavController().navigateUp()
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                findNavController().navigateUp()
                 viewModel.updateNote()
             }.isEnabled = true
 
 
-            binding.tb.setNavigationOnClickListener {
-                imm.hideSoftInputFromWindow(binding.etNotoBody.windowToken, InputMethodManager.HIDE_IMPLICIT_ONLY)
+            tb.setNavigationOnClickListener {
+//                etNotoBody.hideKeyboard()
                 findNavController().navigateUp()
                 viewModel.updateNote()
             }
 
         }
 
-        binding.nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+        nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
 
-        with(binding.bab) {
+        with(bab) {
 
             navigationIcon?.mutate()?.setTint(colorResource(R.color.colorPrimary))
 
@@ -101,31 +94,31 @@ class NoteFragment : Fragment() {
 
                     R.id.share_noto -> {
 
-                        val noto = viewModel.note.value
+                        val note = viewModel.note.value
 
                         val intent = Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"
-                            putExtra(Intent.EXTRA_SUBJECT, noto?.title)
-                            putExtra(Intent.EXTRA_TEXT, noto?.body)
+                            putExtra(Intent.EXTRA_SUBJECT, note?.title)
+                            putExtra(Intent.EXTRA_TEXT, note?.body)
                         }
 
-                        val chooser = Intent.createChooser(intent, "${getString(R.string.share)} ${noto?.title} to")
+                        val chooser = Intent.createChooser(intent, "${getString(R.string.share)} ${note?.title} to")
 
                         startActivity(chooser)
 
                         true
                     }
 
-                    R.id.archive_noto -> {
+                    R.id.archive_note -> {
 
                         menuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
 
                         if (viewModel.note.value?.isArchived == true) {
                             viewModel.setNotoArchived(false)
-                            binding.root.snackbar(getString(R.string.noto_unarchived))
+                            root.snackbar(getString(R.string.note_unarchived))
                         } else {
                             viewModel.setNotoArchived(true)
-                            binding.root.snackbar(getString(R.string.noto_archived))
+                            root.snackbar(getString(R.string.note_archived))
                         }
 
                         true
@@ -136,38 +129,38 @@ class NoteFragment : Fragment() {
             }
         }
 
-        val archiveMenuItem = binding.bab.menu.findItem(R.id.archive_noto)
+        val archiveMenuItem = bab.menu.findItem(R.id.archive_note)
 
-        binding.etNotoTitle.doAfterTextChanged {
-            viewModel.setNotoTitle(it.toString())
+        etNotoTitle.doAfterTextChanged {
+            viewModel.setNoteTitle(it.toString())
         }
-        binding.etNotoBody.doAfterTextChanged {
-            viewModel.setNotoBody(it.toString())
+        etNotoBody.doAfterTextChanged {
+            viewModel.setNoteBody(it.toString())
         }
 
-        binding.rbNotoStar.setOnClickListener { viewModel.toggleNotoStar() }
+        rbNotoStar.setOnClickListener { viewModel.toggleNotoStar() }
 
         viewModel.note.observe(viewLifecycleOwner) {
             it?.let { noto ->
 
-                binding.etNotoTitle.setText(it.title)
-                binding.etNotoBody.setText(it.body)
-                binding.etNotoTitle.setSelection(it.title.length)
-                binding.etNotoBody.setSelection(it.body.length)
-                binding.rbNotoStar.isChecked = it.isStarred
+                etNotoTitle.setText(it.title)
+                etNotoBody.setText(it.body)
+                etNotoTitle.setSelection(it.title.length)
+                etNotoBody.setSelection(it.body.length)
+                rbNotoStar.isChecked = it.isStarred
 
 
                 if (noto.isArchived) archiveMenuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
                 else archiveMenuItem.icon = drawableResource(R.drawable.archive_arrow_down_outline)
 
-                if (noto.reminderDate == null) binding.fab.setImageDrawable(drawableResource(R.drawable.bell_plus_outline))
-                else binding.fab.setImageDrawable(drawableResource(R.drawable.bell_ring_outline))
+                if (noto.reminderDate == null) fab.setImageDrawable(drawableResource(R.drawable.bell_plus_outline))
+                else fab.setImageDrawable(drawableResource(R.drawable.bell_ring_outline))
 
                 noto.creationDate.apply {
                     val dateFormat = if (year > ZonedDateTime.now().year) format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
                     else format(DateTimeFormatter.ofPattern("EEE, MMM d"))
 
-                    binding.tvCreatedAt.text = "${getString(R.string.created_at)} ${dateFormat.toUpperCase(Locale.getDefault())}"
+                    tvCreatedAt.text = "${getString(R.string.created_at)} ${dateFormat.toUpperCase()}"
                 }
             }
         }
@@ -175,15 +168,13 @@ class NoteFragment : Fragment() {
         viewModel.library.observe(viewLifecycleOwner) { library ->
             val color = colorResource(library.color.toResource())
 
-            binding.tvLibraryTitle.text = library.title
-            binding.tvLibraryTitle.setTextColor(color)
-            binding.tvCreatedAt.setTextColor(color)
-            binding.tb.navigationIcon?.mutate()?.setTint(color)
-            binding.fab.backgroundTintList = colorStateResource(library.color.toResource())
+            tvLibraryTitle.text = library.title
+            tvLibraryTitle.setTextColor(color)
+            tvCreatedAt.setTextColor(color)
+            tb.navigationIcon?.mutate()?.setTint(color)
+            fab.backgroundTintList = colorStateResource(library.color.toResource())
         }
 
-        return binding.root
     }
-
 
 }

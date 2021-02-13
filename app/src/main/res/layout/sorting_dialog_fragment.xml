@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll"
+    style="@style/BaseDialogFragment">
+
+    <include layout="@layout/base_dialog_fragment" />
+
+    <RadioGroup
+        android:id="@+id/rg_sorting_method"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:background="@drawable/rg_group"
+        android:orientation="horizontal">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rb_sorting_asc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rg_sorting"
+            android:button="@null"
+            android:padding="@dimen/spacing_normal"
+            android:text="@string/asc"
+            android:textColor="@color/rg_sorting"
+            app:fontFamily="@font/arima_madurai_bold" />
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rb_sorting_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rg_sorting"
+            android:button="@null"
+            android:checked="true"
+            android:padding="@dimen/spacing_normal"
+            android:text="@string/desc"
+            android:textColor="@color/rg_sorting"
+            app:fontFamily="@font/arima_madurai_bold" />
+
+    </RadioGroup>
+
+
+    <RadioButton
+        android:id="@+id/tv_alphabetically"
+        style="@style/DialogItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple"
+        android:button="@null"
+        android:checked="true"
+        android:text="@string/alphabetically"
+        app:drawableStartCompat="@drawable/ic_sort_alphabetically" />
+
+    <TextView
+        android:id="@+id/tv_creation_date"
+        style="@style/DialogItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple"
+        android:text="@string/creation_date"
+        app:drawableStartCompat="@drawable/ic_sort_creation_date" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_confirm"
+        style="@style/MaterialButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal"
+        android:padding="@dimen/spacing_normal"
+        android:text="@string/done" />
+
+
+</LinearLayout>

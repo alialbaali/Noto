@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <View
+        android:id="@+id/v_head"
+        android:layout_width="30dp"
+        android:layout_height="2dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:background="@drawable/shape_view_head" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_dialog_title"
+        style="@style/DialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Placeholder Options" />
+
+</merge>

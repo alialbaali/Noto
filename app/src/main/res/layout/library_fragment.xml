@@ -53,7 +53,7 @@
             android:fontFamily="@font/arima_madurai"
             android:gravity="center"
             android:maxLines="3"
-            android:text="@string/all_notos"
+            android:text="@string/all_notes"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             tools:textColor="@color/colorAccentTeal" />
@@ -89,7 +89,6 @@
             style="@style/Style.CollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/library_fragment_shape"
             app:contentScrim="@color/colorBackground"
             app:expandedTitleGravity="center_vertical"
             app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"
@@ -154,21 +153,19 @@
                     android:gravity="center"
                     android:maxLines="3"
                     android:textSize="24sp"
-                    app:layout_constraintBottom_toTopOf="@id/et_search"
+                    app:layout_constraintBottom_toTopOf="@id/til_search"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_library_icon"
-                    tools:text="@string/all_notos"
+                    tools:text="@string/all_notes"
                     tools:textColor="@color/colorAccentTeal" />
 
-                <EditText
-                    android:id="@+id/et_search"
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_search"
+                    style="@style/TextInputLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_normal"
-                    android:layout_marginTop="@dimen/spacing_extra_small"
-                    android:layout_marginEnd="@dimen/spacing_normal"
-                    android:layout_marginBottom="@dimen/spacing_small"
                     android:hint="@string/search"
                     android:inputType="text"
                     android:padding="@dimen/spacing_normal"
@@ -178,7 +175,14 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_library_title" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_library_title">
+
+                    <EditText
+                        android:id="@+id/et_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

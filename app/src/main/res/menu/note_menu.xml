@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/archive_noto"
-        android:contentDescription="@string/archive_noto"
+        android:id="@+id/archive_note"
+        android:contentDescription="@string/archive_note"
         android:icon="@drawable/archive_arrow_down_outline"
-        android:title="@string/archive_noto"
+        android:title="@string/archive_note"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/share_noto"
-        android:contentDescription="@string/share_noto"
+        android:contentDescription="@string/share_note"
         android:icon="@drawable/ic_outline_share_24"
-        android:title="@string/share_noto"
+        android:title="@string/share_note"
         app:showAsAction="ifRoom" />
     <!--            <item-->
     <!--                android:id="@+id/library"-->

@@ -14,69 +14,61 @@ import com.noto.app.databinding.ArchiveFragmentBinding
 import com.noto.app.util.colorResource
 import com.noto.app.util.colorStateResource
 import com.noto.app.util.toResource
+import com.noto.app.util.withBinding
 import com.noto.domain.model.Note
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ArchiveFragment : Fragment() {
 
-    private lateinit var binding: ArchiveFragmentBinding
-
     private val viewModel by viewModel<LibraryViewModel>()
 
     private val args by navArgs<ArchiveFragmentArgs>()
 
-    @SuppressLint("SetTextI18n")
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
-        binding = ArchiveFragmentBinding.inflate(inflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = ArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
 
         viewModel.getArchivedNotes(args.libraryId)
         viewModel.getLibrary(args.libraryId)
 
-        binding.tb.setNavigationOnClickListener {
+        tb.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
 
-        with(binding.rv) {
+        val rvAdapter = LibraryRVAdapter(object : NotoItemClickListener {
 
-            val rvAdapter = LibraryRVAdapter(object : NotoItemClickListener {
+            override fun onClick(note: Note) = findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(note.id))
 
-                override fun onClick(note: Note) {
-                    findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(note.id))
-                }
+            override fun onLongClick(note: Note) = findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(note.id))
 
-                override fun onLongClick(note: Note) {
-                    findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(note.id))
-                }
-
-                override fun toggleNotoStar(note: Note) {
-                    viewModel.toggleNoteStar(note)
-                }
-
-            })
-
-            binding.rv.adapter = rvAdapter
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-
-            viewModel.notos.observe(viewLifecycleOwner) { notos ->
-                binding.tvLibraryNotoCount.text = notos.size.toString().plus(if (notos.size == 1) " Archived Noto" else " Archived Notos")
-                rvAdapter.submitList(notos)
+            override fun toggleNotoStar(note: Note) {
+                viewModel.toggleNoteStar(note)
             }
 
+        })
+
+        rv.adapter = rvAdapter
+        rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        viewModel.notos.observe(viewLifecycleOwner) { notos ->
+            val notesCount = if (notos.size == 1) " Archived Noto" else " Archived Notos"
+            tvLibraryNotoCount.text = notos.size.toString().plus(notesCount)
+            rvAdapter.submitList(notos)
         }
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
             if (args.libraryId != 0L) {
                 val color = colorResource(library.color.toResource())
-                binding.tb.navigationIcon?.mutate()?.setTint(color)
-                binding.ivLibraryIcon.imageTintList = colorStateResource(library.color.toResource())
-                binding.tvLibraryNotoCount.setTextColor(color)
-                binding.tvLibraryTitle.setTextColor(color)
-                binding.tvLibraryTitle.text = "${library.title} ${getString(R.string.archived_notos)}"
+                tb.navigationIcon?.mutate()?.setTint(color)
+                ivLibraryIcon.imageTintList = colorStateResource(library.color.toResource())
+                tvLibraryNotoCount.setTextColor(color)
+                tvLibraryTitle.setTextColor(color)
+                tvLibraryTitle.text = "${library.title} ${getString(R.string.archived_notes)}"
             }
         }
 
-        return binding.root
     }
 
 }

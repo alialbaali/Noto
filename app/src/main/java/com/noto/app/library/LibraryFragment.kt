@@ -106,7 +106,7 @@ class LibraryFragment : Fragment() {
 
                 R.id.search -> {
 
-                    val searchEt = binding.etSearch
+                    val searchEt = binding.tilSearch
 
                     searchEt.isVisible = !searchEt.isVisible
 
@@ -140,11 +140,15 @@ class LibraryFragment : Fragment() {
     }
 
     private fun rv() = with(binding.rv) {
-        val rvAdapter = LibraryRVAdapter(object : NotoItemClickListener {
-            override fun onClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
-            override fun onLongClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id))
-            override fun toggleNotoStar(note: Note) { viewModel.toggleNoteStar(note) }
-        })
+        val rvAdapter = LibraryRVAdapter(
+            object : NotoItemClickListener {
+                override fun onClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
+                override fun onLongClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id))
+                override fun toggleNotoStar(note: Note) {
+                    viewModel.toggleNoteStar(note)
+                }
+            }
+        )
 
         adapter = rvAdapter
 
@@ -180,16 +184,18 @@ class LibraryFragment : Fragment() {
 
         val placeHolderItems = listOf(binding.tvLibraryNotoCount, binding.tvLibraryTitle, binding.ivLibraryIcon, binding.rv)
 
-        viewModel.notos.observe(viewLifecycleOwner) {
-            if (it.isEmpty()) {
-                placeHolderItems.forEach { it.visibility = View.GONE }
-                binding.llPlaceHolder.visibility = View.VISIBLE
-                val layoutParams = binding.ctb.layoutParams as AppBarLayout.LayoutParams
-                layoutParams.scrollFlags = 0
-            } else {
-                placeHolderItems.forEach { it.visibility = View.VISIBLE }
-                binding.llPlaceHolder.visibility = View.GONE
-                rvAdapter.submitList(it)
+        viewModel.notos.observe(viewLifecycleOwner) { notos ->
+            notos?.let {
+                if (notos.isEmpty()) {
+                    placeHolderItems.forEach { it.visibility = View.GONE }
+                    binding.llPlaceHolder.visibility = View.VISIBLE
+                    val layoutParams = binding.ctb.layoutParams as AppBarLayout.LayoutParams
+                    layoutParams.scrollFlags = 0
+                } else {
+                    placeHolderItems.forEach { it.visibility = View.VISIBLE }
+                    binding.llPlaceHolder.visibility = View.GONE
+                    rvAdapter.submitList(notos)
+                }
             }
         }
 

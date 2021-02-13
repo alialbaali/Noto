@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.noto.app.BaseBottomSheetDialogFragment
+import com.noto.app.BaseDialogFragment
 import com.noto.app.LibraryItemTouchHelper
 import com.noto.app.R
 import com.noto.app.databinding.LibraryListFragmentBinding
@@ -21,7 +21,7 @@ import com.noto.domain.model.Library
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
-class LibraryListFragment : BaseBottomSheetDialogFragment() {
+class LibraryListFragment : BaseDialogFragment() {
 
     private lateinit var binding: LibraryListFragmentBinding
 

@@ -9,7 +9,7 @@ import android.widget.RadioGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
-import com.noto.app.BaseBottomSheetDialogFragment
+import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.LabelDialogFragmentBinding
 import com.noto.app.util.toResource
@@ -17,7 +17,7 @@ import com.noto.domain.model.Label
 import com.noto.domain.model.NotoColor
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
-class LabelDialogFragment : BaseBottomSheetDialogFragment() {
+class LabelDialogFragment : BaseDialogFragment() {
 
     private lateinit var binding: LabelDialogFragmentBinding
 

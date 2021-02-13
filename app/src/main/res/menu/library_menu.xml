@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/archived_notos"
-        android:contentDescription="@string/archived_notos"
+        android:contentDescription="@string/archived_notes"
         android:icon="@drawable/archive_outline"
-        android:title="@string/archived_notos"
+        android:title="@string/archived_notes"
         app:showAsAction="ifRoom" />
 
     <item
@@ -21,6 +21,6 @@
         android:contentDescription="@string/search"
         android:icon="@drawable/ic_search_24dp"
         android:title="@string/search"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
 </menu>

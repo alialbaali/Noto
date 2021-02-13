@@ -25,6 +25,12 @@ data class Library(
     val icon: NotoIcon = NotoIcon.BOOK,
 
     @ColumnInfo(name = "creation_date")
-    val creationDate: LocalDate = LocalDate.now()
+    val creationDate: LocalDate = LocalDate.now(),
+
+    @ColumnInfo(name = "sorting_type")
+    val sortingType: SortingType = SortingType.CreationDate,
+
+    @ColumnInfo(name = "sorting_method")
+    val sortingMethod: SortingMethod = SortingMethod.Desc
 
 )

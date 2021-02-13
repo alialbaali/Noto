@@ -7,34 +7,42 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.noto.app.BaseBottomSheetDialogFragment
+import com.noto.app.BaseDialogFragment
 import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
+import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryDialogFragmentBinding
 import com.noto.app.util.colorStateResource
+import com.noto.app.util.stringResource
 import com.noto.app.util.toResource
+import com.noto.app.util.withBinding
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
-class LibraryDialogFragment : BaseBottomSheetDialogFragment() {
-
-    private lateinit var binding: LibraryDialogFragmentBinding
+class LibraryDialogFragment : BaseDialogFragment() {
 
     private val viewModel by sharedViewModel<LibraryViewModel>()
 
     private val args by navArgs<LibraryDialogFragmentArgs>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? = LibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
-        binding = LibraryDialogFragmentBinding.inflate(inflater, container, false)
+        val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
+            tvDialogTitle.text = stringResource(R.string.library_options)
+        }
 
         viewModel.getLibrary(args.libraryId)
 
         viewModel.library.observe(viewLifecycleOwner) { library ->
             library?.let {
 
-                binding.vHead.backgroundTintList = colorStateResource(it.color.toResource())
+                baseDialog.vHead.backgroundTintList = colorStateResource(it.color.toResource())
+                baseDialog.tvDialogTitle.setTextColor(colorStateResource(it.color.toResource()))
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    listOf(binding.tvEditLibrary).forEach { tv ->
+                    listOf(tvEditLibrary, tvSorting).forEach { tv ->
                         tv.compoundDrawableTintList = colorStateResource(it.color.toResource())
                     }
                 }
@@ -42,16 +50,15 @@ class LibraryDialogFragment : BaseBottomSheetDialogFragment() {
             }
         }
 
-        binding.tvEditLibrary.setOnClickListener {
+        tvEditLibrary.setOnClickListener {
             dismiss()
             findNavController().navigate(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToNewLibraryDialogFragment(args.libraryId))
         }
 
-        binding.tvDeleteLibrary.setOnClickListener {
+        tvDeleteLibrary.setOnClickListener {
             dismiss()
 
             ConfirmationDialogFragment { dialogFragment, dialogBinding ->
-
 
                 dialogBinding.btnConfirm.text = dialogFragment.getString(R.string.delete_library)
                 dialogBinding.tvTitle.text = dialogFragment.getString(R.string.delete_library_confirmation)
@@ -64,7 +71,11 @@ class LibraryDialogFragment : BaseBottomSheetDialogFragment() {
             }.show(parentFragmentManager, null)
         }
 
-        return binding.root
-    }
+        tvSorting.setOnClickListener {
+            dismiss()
 
+            findNavController()
+                .navigate(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToSortingDialogFragment())
+        }
+    }
 }

@@ -2,11 +2,9 @@ package com.noto.app.library
 
 import androidx.lifecycle.*
 import com.noto.app.util.LayoutManager
+import com.noto.app.util.sortByMethod
 import com.noto.domain.local.LocalStorage
-import com.noto.domain.model.Library
-import com.noto.domain.model.Note
-import com.noto.domain.model.NotoColor
-import com.noto.domain.model.NotoIcon
+import com.noto.domain.model.*
 import com.noto.domain.repository.LibraryRepository
 import com.noto.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.collect
@@ -82,6 +80,18 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
         _library.value = _library.value?.copy(icon = notoIcon)
     }
 
+    fun setSortingMethod(sortingMethod: SortingMethod) {
+        _library.value = _library.value?.copy(sortingMethod = sortingMethod)
+        println(sortingMethod)
+        sortNotes()
+    }
+
+    fun setSortingType(sortingType: SortingType) {
+        _library.value = _library.value?.copy(sortingType = sortingType)
+        println(sortingType)
+        sortNotes()
+    }
+
     fun postLibrary() = viewModelScope.launch {
         libraryRepository.getLibraries().collect { value ->
             _library.postValue(Library(position = value.count()))
@@ -90,6 +100,20 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
 
     fun toggleNoteStar(note: Note) = viewModelScope.launch {
         noteRepository.updateNote(note.copy(isStarred = !note.isStarred))
+    }
+
+    private fun sortNotes() {
+
+        val sortingType = when (library.value?.sortingType) {
+            SortingType.Alphabetically -> Note::title
+            SortingType.CreationDate -> Note::creationDate
+            else -> Note::creationDate
+        }
+
+        _notos.value = _notos.value
+            ?.sortByMethod(library.value?.sortingMethod ?: SortingMethod.Desc, sortingType)
+            ?.toList()
+
     }
 
 }

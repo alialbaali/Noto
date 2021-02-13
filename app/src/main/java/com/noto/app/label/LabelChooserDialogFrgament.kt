@@ -9,7 +9,7 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.ScaleAnimation
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.chip.Chip
-import com.noto.app.BaseBottomSheetDialogFragment
+import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.LabelChooserDialogFragmentBinding
 import com.noto.app.note.NoteViewModel
@@ -17,7 +17,7 @@ import com.noto.app.util.dp
 import com.noto.app.util.toResource
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
-class LabelChooserDialogFragment : BaseBottomSheetDialogFragment() {
+class LabelChooserDialogFragment : BaseDialogFragment() {
 
     private lateinit var binding: LabelChooserDialogFragmentBinding
 

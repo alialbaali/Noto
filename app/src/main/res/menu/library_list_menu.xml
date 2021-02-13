@@ -20,9 +20,9 @@
 
     <item
         android:id="@+id/archived_notos"
-        android:contentDescription="@string/archived_notos"
+        android:contentDescription="@string/archived_notes"
         android:icon="@drawable/archive_outline"
-        android:title="@string/archived_notos"
+        android:title="@string/archived_notes"
         app:showAsAction="always" />
 <!--    <item-->
 <!--        android:id="@+id/labels"-->
