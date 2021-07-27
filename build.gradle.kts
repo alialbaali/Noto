@@ -2,7 +2,7 @@ import java.net.URI
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath(Libraries.Gradle.Kotlin)
@@ -14,16 +14,10 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
-        maven { url= URI("https://jitpack.io") }
-    }
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().all {
-        kotlinOptions {
-            freeCompilerArgs = listOf("-Xallow-result-return-type")
-        }
+        mavenCentral()
     }
 }
 
-tasks.register("clean", Delete::class.java) {
+tasks.register("delete", Delete::class.java) {
     delete(rootProject.buildDir)
 }

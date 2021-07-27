@@ -13,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.BaseItemTouchHelperListener
 import com.noto.app.R
 import com.noto.app.databinding.LibraryItemBinding
+import com.noto.app.domain.model.Library
 import com.noto.app.library.LibraryListRVAdapter.LibraryItemViewHolder
 import com.noto.app.util.colorResource
 import com.noto.app.util.toResource
-import com.noto.domain.model.Library
 
 
 class LibraryListRVAdapter(private val listener: LibraryItemClickListener) :

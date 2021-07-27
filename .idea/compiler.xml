@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8">
-      <module name="Noto.app" target="11" />
-      <module name="Noto.buildSrc" target="11" />
-      <module name="Noto.data" target="11" />
-      <module name="Noto.di" target="11" />
-      <module name="Noto.local" target="11" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="11" />
   </component>
 </project>

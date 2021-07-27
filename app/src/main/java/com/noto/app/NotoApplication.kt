@@ -1,15 +1,15 @@
 package com.noto.app
 
 import android.app.Application
+import com.noto.app.di.localDataSourceModule
+import com.noto.app.di.repositoryModule
 import com.noto.app.label.LabelViewModel
 import com.noto.app.library.LibraryListViewModel
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.note.NoteViewModel
-import com.noto.di.localDataSourceModule
-import com.noto.di.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.android.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import org.koin.dsl.module

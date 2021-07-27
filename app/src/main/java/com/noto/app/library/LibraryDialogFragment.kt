@@ -16,7 +16,7 @@ import com.noto.app.util.colorStateResource
 import com.noto.app.util.stringResource
 import com.noto.app.util.toResource
 import com.noto.app.util.withBinding
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LibraryDialogFragment : BaseDialogFragment() {
 

@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.GradientDrawable
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowInsets
@@ -22,10 +21,10 @@ import androidx.viewbinding.ViewBinding
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.noto.app.R
-import com.noto.domain.model.Note
-import com.noto.domain.model.NotoColor
-import com.noto.domain.model.NotoIcon
-import com.noto.domain.model.SortingMethod
+import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.NotoIcon
+import com.noto.app.domain.model.SortingMethod
 
 enum class LayoutManager {
     Linear, Grid
@@ -119,4 +118,9 @@ fun NotoIcon.toResource(): Int = when (this) {
     NotoIcon.CHART -> R.drawable.ic_chart_24dp
     NotoIcon.CALENDAR -> R.drawable.ic_calendar_24dp
     NotoIcon.CODE -> R.drawable.ic_code_24dp
+}
+
+fun <T> MutableList<T>.replaceWith(value: T, predicate: (T) -> Boolean) {
+    val result = first(predicate)
+    this[indexOf(result)] = value
 }

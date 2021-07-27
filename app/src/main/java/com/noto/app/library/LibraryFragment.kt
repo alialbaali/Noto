@@ -18,11 +18,11 @@ import com.google.android.material.appbar.AppBarLayout
 import com.noto.app.NotoItemTouchHelper
 import com.noto.app.R
 import com.noto.app.databinding.LibraryFragmentBinding
+import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.NotoIcon
 import com.noto.app.util.*
-import com.noto.domain.model.Note
-import com.noto.domain.model.NotoColor
-import com.noto.domain.model.NotoIcon
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class LibraryFragment : Fragment() {

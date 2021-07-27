@@ -11,8 +11,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.LabelListFragmentBinding
-import com.noto.domain.model.Label
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import com.noto.app.domain.model.Label
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LabelListFragment : Fragment() {
 

@@ -19,7 +19,7 @@ import com.noto.app.util.drawableResource
 import com.noto.app.util.setAlarm
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime

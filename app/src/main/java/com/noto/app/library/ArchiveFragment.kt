@@ -1,6 +1,5 @@
 package com.noto.app.library
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +10,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.ArchiveFragmentBinding
+import com.noto.app.domain.model.Note
 import com.noto.app.util.colorResource
 import com.noto.app.util.colorStateResource
 import com.noto.app.util.toResource
 import com.noto.app.util.withBinding
-import com.noto.domain.model.Note
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ArchiveFragment : Fragment() {
 

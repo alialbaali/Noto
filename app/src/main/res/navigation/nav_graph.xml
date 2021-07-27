@@ -19,10 +19,10 @@
         <action
             android:id="@+id/action_labelListFragment_to_labelDialogFragment"
             app:destination="@id/labelDialogFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@anim/fragment_open_exit"
-            app:popExitAnim="@anim/nav_default_pop_enter_anim" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 
     <dialog
@@ -41,30 +41,30 @@
         <action
             android:id="@+id/action_libraryListFragment_to_libraryFragment"
             app:destination="@id/libraryFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@anim/fragment_open_enter"
-            app:popExitAnim="@anim/fragment_open_exit" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_libraryListFragment_to_newLibraryDialogFragment"
             app:destination="@id/newLibraryDialogFragment" />
         <action
             android:id="@+id/action_libraryListFragment_to_archiveFragment"
             app:destination="@id/archiveFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@anim/fragment_open_enter"
-            app:popExitAnim="@anim/fragment_open_exit" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_libraryListFragment_to_themeDialogFragment"
             app:destination="@id/themeDialogFragment" />
         <action
             android:id="@+id/action_libraryListFragment_to_labelListFragment"
             app:destination="@id/labelListFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@anim/fragment_open_enter"
-            app:popExitAnim="@anim/fragment_open_exit" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_libraryListFragment_to_libraryDialogFragment"
             app:destination="@id/libraryDialogFragment" />
@@ -76,20 +76,20 @@
         <action
             android:id="@+id/action_libraryFragment_to_notoFragment"
             app:destination="@id/notoFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@anim/fragment_open_enter"
-            app:popExitAnim="@anim/fragment_open_exit" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
         <argument
             android:name="library_id"
             app:argType="long" />
         <action
             android:id="@+id/action_libraryFragment_to_archiveFragment"
             app:destination="@id/archiveFragment"
-            app:enterAnim="@anim/fragment_open_enter"
-            app:exitAnim="@anim/fragment_open_exit"
-            app:popEnterAnim="@anim/fragment_open_enter"
-            app:popExitAnim="@anim/fragment_open_exit" />
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_libraryFragment_to_notoDialogFragment"
             app:destination="@id/notoDialogFragment" />
@@ -100,11 +100,11 @@
     <dialog
         android:id="@+id/newLibraryDialogFragment"
         android:name="com.noto.app.library.NewLibraryDialogFragment"
-        android:label="NewLibraryDialogFragment" >
+        android:label="NewLibraryDialogFragment">
         <argument
             android:name="library_id"
-            app:argType="long"
-            android:defaultValue="0L" />
+            android:defaultValue="0L"
+            app:argType="long" />
     </dialog>
     <fragment
         android:id="@+id/notoFragment"
@@ -177,11 +177,11 @@
     <dialog
         android:id="@+id/libraryDialogFragment"
         android:name="com.noto.app.library.LibraryDialogFragment"
-        android:label="LibraryDialogFragment" >
+        android:label="LibraryDialogFragment">
         <argument
             android:name="library_id"
-            app:argType="long"
-            android:defaultValue="0L" />
+            android:defaultValue="0L"
+            app:argType="long" />
         <action
             android:id="@+id/action_libraryDialogFragment_to_newLibraryDialogFragment"
             app:destination="@id/newLibraryDialogFragment" />

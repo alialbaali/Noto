@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.BaseItemTouchHelperListener
 import com.noto.app.R
 import com.noto.app.databinding.NoteItemBinding
-import com.noto.domain.model.Note
+import com.noto.app.domain.model.Note
 
 class LibraryRVAdapter(
     private val listener: NotoItemClickListener,

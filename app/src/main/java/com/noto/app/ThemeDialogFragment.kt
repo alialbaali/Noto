@@ -9,7 +9,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ThemeDialogFragmentBinding
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ThemeDialogFragment : BaseDialogFragment() {
 

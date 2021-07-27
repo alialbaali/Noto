@@ -12,7 +12,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.note.NoteViewModel
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ArchiveDialogFragment : BaseDialogFragment() {
 

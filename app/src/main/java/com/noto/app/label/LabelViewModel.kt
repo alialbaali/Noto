@@ -1,9 +1,9 @@
 package com.noto.app.label
 
 import androidx.lifecycle.*
+import com.noto.app.domain.model.Label
+import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.util.asLiveData
-import com.noto.domain.model.Label
-import com.noto.domain.repository.LabelRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 

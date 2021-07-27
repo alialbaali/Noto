@@ -13,10 +13,10 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
+import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.NotoIcon
 import com.noto.app.util.*
-import com.noto.domain.model.NotoColor
-import com.noto.domain.model.NotoIcon
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NewLibraryDialogFragment : BaseDialogFragment() {
 
@@ -126,7 +126,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                             it.setBackgroundColor(colorResource(R.color.colorOnSecondary))
                         }
                     }
-            viewModel.setNotoIcon(this)
+                viewModel.setNotoIcon(this)
             }
         }
     }

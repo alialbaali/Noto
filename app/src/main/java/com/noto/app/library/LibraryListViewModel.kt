@@ -5,8 +5,8 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.noto.app.util.LayoutManager
-import com.noto.domain.local.LocalStorage
-import com.noto.domain.repository.LibraryRepository
+import com.noto.app.domain.source.LocalStorage
+import com.noto.app.domain.repository.LibraryRepository
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart

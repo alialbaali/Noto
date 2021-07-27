@@ -8,8 +8,8 @@ import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.res.ResourcesCompat
-import com.noto.domain.model.NotoColor
-import com.noto.domain.model.NotoIcon
+import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.NotoIcon
 
 private const val CHANNEL_ID = "Noto Channel"
 private const val CHANNEL_NAME = "Noto"

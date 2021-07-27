@@ -5,8 +5,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.noto.app.note.*
-import com.noto.domain.model.NotoColor
-import com.noto.domain.model.NotoIcon
+import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.NotoIcon
 import com.noto.app.util.createChannel
 import com.noto.app.util.sendNotification
 

@@ -15,7 +15,7 @@ import com.noto.app.databinding.LabelChooserDialogFragmentBinding
 import com.noto.app.note.NoteViewModel
 import com.noto.app.util.dp
 import com.noto.app.util.toResource
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LabelChooserDialogFragment : BaseDialogFragment() {
 

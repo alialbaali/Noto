@@ -1,8 +1,7 @@
 package com.noto.app.repository.fake
 
 import com.noto.domain.model.Library
-import com.noto.domain.replaceWith
-import com.noto.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.LibraryRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 

@@ -7,15 +7,14 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.content.res.ResourcesCompat
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.LabelDialogFragmentBinding
+import com.noto.app.domain.model.Label
+import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.toResource
-import com.noto.domain.model.Label
-import com.noto.domain.model.NotoColor
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class LabelDialogFragment : BaseDialogFragment() {
 

@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.SortingDialogFragmentBinding
+import com.noto.app.domain.model.SortingMethod
+import com.noto.app.domain.model.SortingType
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.util.*
-import com.noto.domain.model.SortingMethod
-import com.noto.domain.model.SortingType
-import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 private const val RIGHT_DRAWABLE_INDEX = 2
 

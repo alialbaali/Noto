@@ -1,12 +1,12 @@
 package com.noto.app.library
 
 import androidx.lifecycle.*
+import com.noto.app.domain.model.*
+import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.LayoutManager
 import com.noto.app.util.sortByMethod
-import com.noto.domain.local.LocalStorage
-import com.noto.domain.model.*
-import com.noto.domain.repository.LibraryRepository
-import com.noto.domain.repository.NoteRepository
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map

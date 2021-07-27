@@ -14,11 +14,11 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.LibraryItemTouchHelper
 import com.noto.app.R
 import com.noto.app.databinding.LibraryListFragmentBinding
+import com.noto.app.domain.model.Library
 import com.noto.app.util.LayoutManager
 import com.noto.app.util.colorResource
 import com.noto.app.util.drawableResource
-import com.noto.domain.model.Library
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class LibraryListFragment : BaseDialogFragment() {
