@@ -4,29 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.noto.app.databinding.BaseDialogFragmentBinding
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.noto.app.databinding.ConfirmationDialogFragmentBinding
-import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
+import java.io.Serializable
 
-class ConfirmationDialogFragment(
-    private val dialogTitle: String? = null,
-    private val block: (dialogFragment: ConfirmationDialogFragment, dialogBinding: ConfirmationDialogFragmentBinding) -> Unit
-) : BaseDialogFragment() {
+class ConfirmationDialogFragment : BaseDialogFragment() {
+
+    private val args by navArgs<ConfirmationDialogFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = ConfirmationDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+    ): View = ConfirmationDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
-        BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = dialogTitle ?: stringResource(R.string.confirmation_dialog)
+        tvTitle.text = args.title
+        btnConfirm.text = args.btnText
+        btnConfirm.setOnClickListener {
+            dismiss()
+            args.clickListener.onClick()
+            findNavController().navigateUp()
         }
+        if (args.description.isNullOrBlank())
+            tvDescription.visibility = View.GONE
+        else
+            tvDescription.text = args.description
+    }
 
-        block(this@ConfirmationDialogFragment, this)
-
-        if (tvSubtitle.text.isNullOrBlank())
-            tvSubtitle.visibility = View.GONE
+    fun interface ConfirmationDialogClickListener : Serializable {
+        fun onClick()
     }
 }

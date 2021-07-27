@@ -9,10 +9,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.navOptions
 import com.noto.app.BaseDialogFragment
 import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
@@ -33,7 +31,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = NoteDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+    ): View = NoteDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         val baseDialog = BaseDialogFragmentBinding.bind(root)
 
         baseDialog.tvDialogTitle.text = stringResource(R.string.note_options)
@@ -110,22 +108,14 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvDeleteNoto.setOnClickListener {
             dismiss()
 
-            ConfirmationDialogFragment { dialogFragment, dialogBinding ->
+            val title = getString(R.string.delete_note_confirmation)
+            val btnText = getString(R.string.delete_note)
+            val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
+                viewModel.deleteNoto()
+            }
 
-                dialogBinding.btnConfirm.text = dialogFragment.getString(R.string.delete_note)
-                dialogBinding.tvTitle.text = dialogFragment.getString(R.string.delete_note_confirmation)
-
-                dialogBinding.btnConfirm.setOnClickListener {
-                    dialogFragment.dismiss()
-                    viewModel.deleteNoto()
-                    dialogFragment.findNavController().navigate(
-                        R.id.libraryFragment,
-                        bundleOf("library_id" to viewModel.library.value?.id),
-                        navOptions { popUpTo(R.id.libraryFragment) { inclusive = true } })
-                }
-            }.show(parentFragmentManager, null)
+            findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToConfirmationDialogFragment(title, null, btnText, clickListener))
         }
 
     }
-
 }

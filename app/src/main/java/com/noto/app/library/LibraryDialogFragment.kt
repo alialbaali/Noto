@@ -58,17 +58,20 @@ class LibraryDialogFragment : BaseDialogFragment() {
         tvDeleteLibrary.setOnClickListener {
             dismiss()
 
-            ConfirmationDialogFragment { dialogFragment, dialogBinding ->
+            val title = getString(R.string.delete_library_confirmation)
+            val btnText = getString(R.string.delete_library)
+            val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
+                viewModel.deleteLibrary()
+            }
 
-                dialogBinding.btnConfirm.text = dialogFragment.getString(R.string.delete_library)
-                dialogBinding.tvTitle.text = dialogFragment.getString(R.string.delete_library_confirmation)
-
-                dialogBinding.btnConfirm.setOnClickListener {
-                    dialogFragment.dismiss()
-                    viewModel.deleteLibrary()
-                    dialogFragment.findNavController().navigate(R.id.libraryListFragment)
-                }
-            }.show(parentFragmentManager, null)
+            findNavController().navigate(
+                LibraryDialogFragmentDirections.actionLibraryDialogFragmentToConfirmationDialogFragment(
+                    title,
+                    null,
+                    btnText,
+                    clickListener,
+                )
+            )
         }
 
         tvSorting.setOnClickListener {

@@ -169,6 +169,9 @@
         <action
             android:id="@+id/action_notoDialogFragment_to_reminderDialogFragment"
             app:destination="@id/reminderDialogFragment" />
+        <action
+            android:id="@+id/action_notoDialogFragment_to_confirmationDialogFragment"
+            app:destination="@id/confirmationDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"
@@ -188,9 +191,30 @@
         <action
             android:id="@+id/action_libraryDialogFragment_to_sortingDialogFragment"
             app:destination="@id/sortingDialogFragment" />
+        <action
+            android:id="@+id/action_libraryDialogFragment_to_confirmationDialogFragment"
+            app:destination="@id/confirmationDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/sortingDialogFragment"
         android:name="com.noto.app.SortingDialogFragment"
         android:label="SortingDialogFragment" />
+    <dialog
+        android:id="@+id/confirmationDialogFragment"
+        android:name="com.noto.app.ConfirmationDialogFragment"
+        android:label="ConfirmationDialogFragment" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="btn_text"
+            app:argType="string" />
+        <argument
+            android:name="click_listener"
+            app:argType="com.noto.app.ConfirmationDialogFragment$ConfirmationDialogClickListener" />
+    </dialog>
 </navigation>
