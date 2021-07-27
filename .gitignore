@@ -12,5 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
-*/idea
+.idea/*
 */build

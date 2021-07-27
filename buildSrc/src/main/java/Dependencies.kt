@@ -3,6 +3,10 @@ object Libraries {
         const val Koin = "org.koin:koin-android-viewmodel:${Versions.Koin}"
         const val JavaTime = "com.android.tools:desugar_jdk_libs:${Versions.JavaTime}"
         const val DataStore = "androidx.datastore:datastore-preferences:1.0.0-alpha02"
+        const val ROOM = "androidx.room:room-ktx:${Versions.ROOM}"
+        const val ROOM_COMMON = "androidx.room:room-common:${Versions.ROOM}"
+        const val ROOM_RUNTIME = "androidx.room:room-runtime:${Versions.ROOM}"
+        const val ROOM_COMPILER = "androidx.room:room-compiler:${Versions.ROOM}"
     }
     object Gradle {
         const val Kotlin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.Kotlin}"
@@ -15,11 +19,12 @@ object Libraries {
 }
 
 object Versions {
-    const val Kotlin = "1.4.10"
+    const val Kotlin = "1.5.20"
     const val JavaTime = "1.0.9"
     const val Navigation = "2.3.1"
-    const val GradleAndroid = "4.1.1"
+    const val GradleAndroid = "7.0.0-rc01"
     const val Koin = "2.1.6"
+    const val ROOM = "2.3.0"
 }
 
 object Modules {

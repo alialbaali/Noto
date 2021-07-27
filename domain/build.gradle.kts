@@ -4,9 +4,9 @@ plugins {
 }
 
 dependencies {
-    api(Kotlin.stdlib.jdk8)
     api(JakeWharton.timber)
-    api(AndroidX.Room.ktx)
+    api(AndroidX.Room.common)
+    api(KotlinX.Coroutines.core)
 }
 
 java {

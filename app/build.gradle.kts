@@ -1,4 +1,3 @@
-
 plugins {
     id(Plugins.AndroidApplication)
     kotlin(Plugins.KotlinAndroid)
@@ -7,15 +6,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion(App.CompileSDK)
-    buildToolsVersion(App.BuildTools)
+    compileSdk = App.CompileSDK
+    buildToolsVersion = App.BuildTools
     defaultConfig {
         applicationId = App.ID
-        minSdkVersion(App.MinSDK)
-        targetSdkVersion(App.TargetSDK)
+        minSdk = App.MinSDK
+        targetSdk = App.TargetSDK
         versionCode = App.VersionCode
         versionName = App.VersionName
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -45,7 +43,9 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     packagingOptions {
-        exclude("META-INF/kotlinx-coroutines-core.kotlin_module")
+    }
+    configurations {
+        implementation.get().exclude(mapOf("group" to "org.jetbrains", "module" to "annotations"))
     }
 }
 
@@ -73,3 +73,4 @@ dependencies {
     implementation(KotlinX.Coroutines.android)
     coreLibraryDesugaring(Libraries.Main.JavaTime)
 }
+

@@ -5,14 +5,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(App.CompileSDK)
-    buildToolsVersion(App.BuildTools)
+    compileSdk = App.CompileSDK
+    buildToolsVersion = App.BuildTools
     defaultConfig {
-        minSdkVersion(App.MinSDK)
-        targetSdkVersion(App.TargetSDK)
-        versionCode = App.VersionCode
-        versionName = App.VersionName
-
+        minSdk = App.MinSDK
+        targetSdk = App.TargetSDK
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -35,9 +32,11 @@ android {
 }
 
 dependencies {
-    implementation(project(Modules.Data))
+    implementation(project(Modules.Domain))
     api(AndroidX.Core.ktx)
-    api(AndroidX.Room.runtime)
-    kapt(AndroidX.Room.compiler)
+    api(Libraries.Main.ROOM_RUNTIME)
+    kapt(Libraries.Main.ROOM_COMPILER)
+    api(Libraries.Main.ROOM_COMMON)
+    api(Libraries.Main.ROOM)
     api(Libraries.Main.DataStore)
 }

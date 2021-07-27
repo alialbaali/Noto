@@ -4,14 +4,11 @@ plugins {
 }
 
 android {
-    compileSdkVersion(App.CompileSDK)
-    buildToolsVersion(App.BuildTools)
+    compileSdk = App.CompileSDK
+    buildToolsVersion = App.BuildTools
     defaultConfig {
-        minSdkVersion(App.MinSDK)
-        targetSdkVersion(App.TargetSDK)
-        versionCode = App.VersionCode
-        versionName = App.VersionName
-
+        minSdk = App.MinSDK
+        targetSdk = App.TargetSDK
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -43,7 +40,6 @@ dependencies {
     testImplementation(Testing.Kotest.property)
     testImplementation(Testing.Kotest.assertions.core)
     testImplementation(Testing.Kotest.Extensions.koin)
-
 }
 
 tasks.withType<Test> {
