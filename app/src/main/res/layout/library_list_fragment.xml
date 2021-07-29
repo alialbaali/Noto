@@ -121,7 +121,8 @@
         android:src="@drawable/ic_add_24dp"
         app:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@id/bab"
-        app:tint="@color/colorBackground" />
+        app:tint="@color/colorBackground"
+        android:contentDescription="@string/create_library" />
 
     <!--        <TextView-->
     <!--            android:id="@+id/tv_all_notos"-->
