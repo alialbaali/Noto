@@ -12,8 +12,10 @@ import com.noto.app.data.source.LocalStorageImpl
 import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.domain.source.LabelLocalDataSource
 import com.noto.app.domain.source.LibraryLocalDataSource
 import com.noto.app.domain.source.LocalStorage
+import com.noto.app.domain.source.NoteLocalDataSource
 import com.noto.app.label.LabelViewModel
 import com.noto.app.librarylist.LibraryListViewModel
 import com.noto.app.library.LibraryViewModel
@@ -52,9 +54,9 @@ val localDataSourceModule = module {
 
     single<LibraryLocalDataSource> { NotoDatabase.getInstance(androidContext()).libraryDao }
 
-    single<com.noto.app.domain.source.NoteLocalDataSource> { NotoDatabase.getInstance(androidContext()).noteDao }
+    single<NoteLocalDataSource> { NotoDatabase.getInstance(androidContext()).noteDao }
 
-    single<com.noto.app.domain.source.LabelLocalDataSource> { NotoDatabase.getInstance(androidContext()).labelDao }
+    single<LabelLocalDataSource> { NotoDatabase.getInstance(androidContext()).labelDao }
 
     single<DataStore<Preferences>> { androidContext().createDataStore(DataStoreName) }
 

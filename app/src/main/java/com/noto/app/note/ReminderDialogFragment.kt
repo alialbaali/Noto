@@ -80,7 +80,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
 
                     alarmManager.cancel(pendingIntent)
 
-                    viewModel.setNotoReminder(null)
+                    viewModel.setNoteReminder(null)
                 }
             }
         }
@@ -106,7 +106,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
 
                 alarmManager.setAlarm(AlarmManager.RTC_WAKEUP, timeInMills, pendingIntent)
 
-                viewModel.setNotoReminder(zonedDateTime)
+                viewModel.setNoteReminder(zonedDateTime)
             }
 
         }

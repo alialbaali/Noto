@@ -38,7 +38,6 @@ class NoteViewModel(
                 .launchIn(viewModelScope)
     }
 
-
     fun createOrUpdateNote(title: String, body: String, isStarred: Boolean) = viewModelScope.launch {
         val note = Note(
             noteId,
@@ -65,7 +64,7 @@ class NoteViewModel(
         }
     }
 
-    fun setNotoReminder(zonedDateTime: ZonedDateTime?) {
+    fun setNoteReminder(zonedDateTime: ZonedDateTime?) {
         viewModelScope.launch {
             noteRepository.updateNote(note.value.copy(reminderDate = zonedDateTime))
         }

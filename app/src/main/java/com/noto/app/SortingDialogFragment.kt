@@ -87,15 +87,14 @@ class SortingDialogFragment : BaseDialogFragment() {
             }
         }
 
-        rbSortingAsc.setOnClickListener { viewModel.setSortingMethod(SortingMethod.Asc) }
-        rbSortingDesc.setOnClickListener { viewModel.setSortingMethod(SortingMethod.Desc) }
-
-        tvAlphabetically.setOnClickListener { viewModel.setSortingType(SortingType.Alphabetically) }
-        tvCreationDate.setOnClickListener { viewModel.setSortingType(SortingType.CreationDate) }
+//        rbSortingAsc.setOnClickListener { viewModel.setSortingMethod(SortingMethod.Asc) }
+//        rbSortingDesc.setOnClickListener { viewModel.setSortingMethod(SortingMethod.Desc) }
+//
+//        tvAlphabetically.setOnClickListener { viewModel.setSortingType(SortingType.Alphabetically) }
+//        tvCreationDate.setOnClickListener { viewModel.setSortingType(SortingType.CreationDate) }
 
         btnConfirm.setOnClickListener {
             dismiss()
-            viewModel.updateLibrary()
         }
 
     }

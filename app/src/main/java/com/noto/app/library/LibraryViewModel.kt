@@ -52,14 +52,6 @@ class LibraryViewModel(
             .launchIn(viewModelScope)
     }
 
-    fun setLayoutManager(value: LayoutManager) = viewModelScope.launch {
-        storage.put(LAYOUT_MANAGER_KEY, value.toString())
-    }
-
-    fun deleteLibrary() = viewModelScope.launch {
-        libraryRepository.deleteLibrary(library.value)
-    }
-
     fun createOrUpdateLibrary(title: String, notoColor: NotoColor, notoIcon: NotoIcon) = viewModelScope.launch{
         val library = Library(
             libraryId,
@@ -75,38 +67,16 @@ class LibraryViewModel(
             libraryRepository.updateLibrary(library)
     }
 
-    fun createLibrary() = viewModelScope.launch {
-        libraryRepository.createLibrary(library.value)
+    fun deleteLibrary() = viewModelScope.launch {
+        libraryRepository.deleteLibrary(library.value)
     }
 
-    fun updateLibrary() = viewModelScope.launch {
-        libraryRepository.updateLibrary(library.value)
-    }
-
-    fun setSortingMethod(sortingMethod: SortingMethod) {
-        mutableLibrary.value = mutableLibrary.value.copy(sortingMethod = sortingMethod)
-        sortNotes()
-    }
-
-    fun setSortingType(sortingType: SortingType) {
-        mutableLibrary.value = mutableLibrary.value.copy(sortingType = sortingType)
-        sortNotes()
+    fun updateLayoutManager(value: LayoutManager) = viewModelScope.launch {
+        storage.put(LAYOUT_MANAGER_KEY, value.toString())
     }
 
     fun toggleNoteStar(note: Note) = viewModelScope.launch {
         noteRepository.updateNote(note.copy(isStarred = !note.isStarred))
-    }
-
-    private fun sortNotes() {
-
-        val sortingType = when (library.value?.sortingType) {
-            SortingType.Alphabetically -> Note::title
-            SortingType.CreationDate -> Note::creationDate
-        }
-
-        mutableNotes.value = mutableNotes.value
-            .sortByMethod(library.value.sortingMethod, sortingType)
-            .toList()
     }
 
 }

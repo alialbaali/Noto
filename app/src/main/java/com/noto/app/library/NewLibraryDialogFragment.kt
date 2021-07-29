@@ -53,14 +53,19 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             btnCreate.setOnClickListener {
                 val title = et.text.toString()
                 val color = binding.rgNotoColors.checkedRadioButtonId.let {
-                    NotoColor.values()[it]
+                    NotoColor.values().getOrElse(it) {
+                        viewModel.library.value.color
+                    }
                 }
                 val icon = binding.rgNotoIcons.checkedRadioButtonId.let {
-                    NotoIcon.values()[it]
+                    NotoIcon.values().getOrElse(it) {
+                        viewModel.library.value.icon
+                    }
                 }
 
-                if (title.isBlank()) til.error = stringResource(R.string.empty_title)
-                else {
+                if (title.isBlank()) {
+                    til.error = stringResource(R.string.empty_title)
+                } else {
                     dismiss()
                     viewModel.createOrUpdateLibrary(title, color, icon)
                 }

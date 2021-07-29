@@ -25,7 +25,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import timber.log.Timber
 
 class LibraryFragment : Fragment() {
 
@@ -47,7 +46,7 @@ class LibraryFragment : Fragment() {
                 binding.tvPlaceHolder.text = it.title
 
                 val notosCount = viewModel.notes.value.size
-                binding.tvLibraryNotoCount.text = notosCount.toString().plus(if (notosCount == 1) " Noto" else " Notos")
+                binding.tvLibraryNotoCount.text = notosCount.toString().plus(if (notosCount == 1) " Note" else " Notes")
 
             }
             .launchIn(lifecycleScope)
@@ -98,8 +97,8 @@ class LibraryFragment : Fragment() {
                 R.id.view -> {
 
                     when (viewModel.layoutManager.value) {
-                        LayoutManager.Linear -> viewModel.setLayoutManager(LayoutManager.Grid)
-                        LayoutManager.Grid -> viewModel.setLayoutManager(LayoutManager.Linear)
+                        LayoutManager.Linear -> viewModel.updateLayoutManager(LayoutManager.Grid)
+                        LayoutManager.Grid -> viewModel.updateLayoutManager(LayoutManager.Linear)
                     }
 
                     true
