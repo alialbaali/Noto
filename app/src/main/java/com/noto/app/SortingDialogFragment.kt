@@ -5,25 +5,29 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
+import androidx.lifecycle.lifecycleScope
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.SortingDialogFragmentBinding
 import com.noto.app.domain.model.SortingMethod
 import com.noto.app.domain.model.SortingType
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.parameter.parametersOf
 
 private const val RIGHT_DRAWABLE_INDEX = 2
 
 class SortingDialogFragment : BaseDialogFragment() {
 
-    val viewModel by sharedViewModel<LibraryViewModel>()
+    val viewModel by sharedViewModel<LibraryViewModel>() { parametersOf(0) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = SortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+    ): View = SortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
             tvDialogTitle.text = stringResource(R.string.library_sorting)
@@ -33,9 +37,8 @@ class SortingDialogFragment : BaseDialogFragment() {
             duration = 500
         }
 
-        viewModel.library.observe(viewLifecycleOwner) { library ->
-            library?.let {
-
+        viewModel.library
+            .onEach {
                 val resourceColor = colorResource(it.color.toResource())
                 val resourceColorState = colorStateResource(it.color.toResource())
 
@@ -50,7 +53,7 @@ class SortingDialogFragment : BaseDialogFragment() {
 
                 val selectedElevation = dimenResource(R.dimen.elevation_normal)
 
-                when (library.sortingMethod) {
+                when (it.sortingMethod) {
                     SortingMethod.Asc -> {
                         rbSortingAsc.isChecked = true
                         rbSortingAsc.elevation = selectedElevation
@@ -69,13 +72,13 @@ class SortingDialogFragment : BaseDialogFragment() {
                     }
                 }
 
-                when (library.sortingType) {
+                when (it.sortingType) {
                     SortingType.Alphabetically -> tvAlphabetically.compoundDrawables[RIGHT_DRAWABLE_INDEX] = drawableResource(R.drawable.ic_sort_checked)
                     SortingType.CreationDate -> tvCreationDate.compoundDrawables[RIGHT_DRAWABLE_INDEX] = drawableResource(R.drawable.ic_sort_checked)
-                }
 
+                }
             }
-        }
+            .launchIn(lifecycleScope)
 
         rgSortingMethod.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {

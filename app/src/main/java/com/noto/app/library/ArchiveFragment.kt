@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,8 @@ import com.noto.app.util.colorResource
 import com.noto.app.util.colorStateResource
 import com.noto.app.util.toResource
 import com.noto.app.util.withBinding
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ArchiveFragment : Fragment() {
@@ -28,9 +31,6 @@ class ArchiveFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = ArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
-
-        viewModel.getArchivedNotes(args.libraryId)
-        viewModel.getLibrary(args.libraryId)
 
         tb.setNavigationOnClickListener {
             findNavController().navigateUp()
@@ -51,22 +51,26 @@ class ArchiveFragment : Fragment() {
         rv.adapter = rvAdapter
         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        viewModel.notos.observe(viewLifecycleOwner) { notos ->
-            val notesCount = if (notos.size == 1) " Archived Noto" else " Archived Notos"
-            tvLibraryNotoCount.text = notos.size.toString().plus(notesCount)
-            rvAdapter.submitList(notos)
-        }
-
-        viewModel.library.observe(viewLifecycleOwner) { library ->
-            if (args.libraryId != 0L) {
-                val color = colorResource(library.color.toResource())
-                tb.navigationIcon?.mutate()?.setTint(color)
-                ivLibraryIcon.imageTintList = colorStateResource(library.color.toResource())
-                tvLibraryNotoCount.setTextColor(color)
-                tvLibraryTitle.setTextColor(color)
-                tvLibraryTitle.text = "${library.title} ${getString(R.string.archived_notes)}"
+        viewModel.notes
+            .onEach { it ->
+                val notesCount = if (it.size == 1) " Archived Noto" else " Archived Notos"
+                tvLibraryNotoCount.text = it.size.toString().plus(notesCount)
+                rvAdapter.submitList(it)
             }
-        }
+            .launchIn(lifecycleScope)
+
+        viewModel.library
+            .onEach {
+                if (args.libraryId != 0L) {
+                    val color = colorResource(it.color.toResource())
+                    tb.navigationIcon?.mutate()?.setTint(color)
+                    ivLibraryIcon.imageTintList = colorStateResource(it.color.toResource())
+                    tvLibraryNotoCount.setTextColor(color)
+                    tvLibraryTitle.setTextColor(color)
+                    tvLibraryTitle.text = "${it.title} ${getString(R.string.archived_notes)}"
+                }
+            }
+            .launchIn(lifecycleScope)
 
     }
 

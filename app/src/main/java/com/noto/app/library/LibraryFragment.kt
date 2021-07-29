@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -22,34 +23,36 @@ import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.NotoIcon
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 class LibraryFragment : Fragment() {
 
     private lateinit var binding: LibraryFragmentBinding
 
-    private val viewModel by viewModel<LibraryViewModel>()
+    private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<LibraryFragmentArgs>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         binding = LibraryFragmentBinding.inflate(inflater, container, false)
 
-        viewModel.getLibrary(args.libraryId)
-        viewModel.getNotes(args.libraryId)
+        viewModel.library
+            .onEach {
 
-        viewModel.library.observe(viewLifecycleOwner) { library ->
+                setLibraryColors(it.color, it.icon)
+                binding.tvLibraryTitle.text = it.title
+                binding.tvPlaceHolder.text = it.title
 
-            setLibraryColors(library.color, library.icon)
-            binding.tvLibraryTitle.text = library.title
-            binding.tvPlaceHolder.text = library.title
+                val notosCount = viewModel.notes.value.size
+                binding.tvLibraryNotoCount.text = notosCount.toString().plus(if (notosCount == 1) " Noto" else " Notos")
 
-            val notosCount = viewModel.notos.value?.size ?: 0
-            binding.tvLibraryNotoCount.text = notosCount.toString().plus(if (notosCount == 1) " Noto" else " Notos")
-
-        }
+            }
+            .launchIn(lifecycleScope)
 
         with(binding) {
             ctb.setFontFamily()
@@ -158,11 +161,9 @@ class LibraryFragment : Fragment() {
 
         val layoutManagerMenuItem = binding.bab.menu.findItem(R.id.view)
 
-        viewModel.layoutManager.observe(viewLifecycleOwner) { value ->
-            Timber.e("VALUE $value")
-            value?.let {
-
-                when (value) {
+        viewModel.layoutManager
+            .onEach { it ->
+                when (it) {
                     LayoutManager.Linear -> {
                         layoutManagerMenuItem.icon = drawableResource(R.drawable.view_dashboard_outline)
                         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -180,13 +181,13 @@ class LibraryFragment : Fragment() {
                 startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
 
             }
-        }
+            .launchIn(lifecycleScope)
 
         val placeHolderItems = listOf(binding.tvLibraryNotoCount, binding.tvLibraryTitle, binding.ivLibraryIcon, binding.rv)
 
-        viewModel.notos.observe(viewLifecycleOwner) { notos ->
-            notos?.let {
-                if (notos.isEmpty()) {
+        viewModel.notes
+            .onEach {
+                if (it.isEmpty()) {
                     placeHolderItems.forEach { it.visibility = View.GONE }
                     binding.llPlaceHolder.visibility = View.VISIBLE
                     val layoutParams = binding.ctb.layoutParams as AppBarLayout.LayoutParams
@@ -194,16 +195,16 @@ class LibraryFragment : Fragment() {
                 } else {
                     placeHolderItems.forEach { it.visibility = View.VISIBLE }
                     binding.llPlaceHolder.visibility = View.GONE
-                    rvAdapter.submitList(notos)
+                    rvAdapter.submitList(it)
                 }
             }
-        }
+            .launchIn(lifecycleScope)
 
-        viewModel.searchTerm.observe(viewLifecycleOwner) { searchTerm ->
-            val notos = viewModel.notos.value
-            if (searchTerm.isBlank()) rvAdapter.submitList(notos)
-            else rvAdapter.submitList(notos?.filter { it.title.contains(searchTerm) || it.body.contains(searchTerm) })
-        }
+//        viewModel.searchTerm.observe(viewLifecycleOwner) { searchTerm ->
+//            val notos = viewModel.notos.value
+//            if (searchTerm.isBlank()) rvAdapter.submitList(notos)
+//            else rvAdapter.submitList(notos?.filter { it.title.contains(searchTerm) || it.body.contains(searchTerm) })
+//        }
     }
 
 }

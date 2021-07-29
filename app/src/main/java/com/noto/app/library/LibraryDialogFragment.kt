@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
@@ -16,11 +17,14 @@ import com.noto.app.util.colorStateResource
 import com.noto.app.util.stringResource
 import com.noto.app.util.toResource
 import com.noto.app.util.withBinding
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.parameter.parametersOf
 
 class LibraryDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by sharedViewModel<LibraryViewModel>()
+    private val viewModel by sharedViewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<LibraryDialogFragmentArgs>()
 
@@ -28,17 +32,14 @@ class LibraryDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = LibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+    ): View = LibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
             tvDialogTitle.text = stringResource(R.string.library_options)
         }
 
-        viewModel.getLibrary(args.libraryId)
-
-        viewModel.library.observe(viewLifecycleOwner) { library ->
-            library?.let {
-
+        viewModel.library
+            .onEach {
                 baseDialog.vHead.backgroundTintList = colorStateResource(it.color.toResource())
                 baseDialog.tvDialogTitle.setTextColor(colorStateResource(it.color.toResource()))
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -46,9 +47,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
                         tv.compoundDrawableTintList = colorStateResource(it.color.toResource())
                     }
                 }
-
             }
-        }
+            .launchIn(lifecycleScope)
 
         tvEditLibrary.setOnClickListener {
             dismiss()

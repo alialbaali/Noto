@@ -1,18 +1,13 @@
 package com.noto.app
 
 import android.app.Application
+import com.noto.app.di.appModule
 import com.noto.app.di.localDataSourceModule
 import com.noto.app.di.repositoryModule
-import com.noto.app.label.LabelViewModel
-import com.noto.app.library.LibraryListViewModel
-import com.noto.app.library.LibraryViewModel
-import com.noto.app.note.NoteViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
-import org.koin.dsl.module
 import timber.log.Timber
 
 class NotoApplication : Application() {
@@ -32,18 +27,4 @@ class NotoApplication : Application() {
             )
         }
     }
-}
-
-val appModule = module {
-
-    viewModel { LibraryListViewModel(get(), get()) }
-
-    viewModel { LibraryViewModel(get(), get(), get()) }
-
-    viewModel { NoteViewModel(get(), get()) }
-
-    viewModel { LabelViewModel(get()) }
-
-    viewModel { MainViewModel(get()) }
-
 }

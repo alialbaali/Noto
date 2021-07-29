@@ -8,6 +8,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.view.children
 import androidx.core.widget.doAfterTextChanged
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
@@ -16,6 +17,8 @@ import com.noto.app.databinding.NewLibraryDialogFragmentBinding
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.NotoIcon
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class NewLibraryDialogFragment : BaseDialogFragment() {
@@ -41,14 +44,14 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             if (args.libraryId == 0L) viewModel.postLibrary()
             else btnCreate.text = getString(R.string.update_library)
 
-            viewModel.library.observe(viewLifecycleOwner) { library ->
-                library?.let {
+            viewModel.library
+                .onEach {
                     et.setText(it.title)
                     et.setSelection(it.title.length)
                     til.setEndIconTintList(colorStateResource(it.color.toResource()))
                     til.startIconDrawable = drawableResource(it.icon.toResource())
                 }
-            }
+                .launchIn(lifecycleScope)
 
             et.doAfterTextChanged { viewModel.setLibraryTitle(it.toString()) }
 

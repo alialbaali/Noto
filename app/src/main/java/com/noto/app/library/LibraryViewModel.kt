@@ -1,37 +1,50 @@
 package com.noto.app.library
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.LayoutManager
 import com.noto.app.util.sortByMethod
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 private const val LAYOUT_MANAGER_KEY = "Library_Layout_Manager"
 
-class LibraryViewModel(private val libraryRepository: LibraryRepository, private val noteRepository: NoteRepository, private val storage: LocalStorage) : ViewModel() {
+class LibraryViewModel(
+    private val libraryRepository: LibraryRepository,
+    private val noteRepository: NoteRepository,
+    private val storage: LocalStorage,
+    private val libraryId: Long,
+) : ViewModel() {
 
-    private val _library = MutableLiveData<Library>()
-    val library: LiveData<Library> = _library.distinctUntilChanged()
+    private val mutableLibrary = MutableStateFlow(Library(position = 0))
+    val library get() = mutableLibrary.asStateFlow()
 
-    private var _notos = MutableLiveData<List<Note>>()
-    val notos: LiveData<List<Note>> = _notos
+    private val mutableNotes = MutableStateFlow<List<Note>>(emptyList())
+    val notes get() = mutableNotes.asStateFlow()
 
-    val searchTerm = MutableLiveData("")
+    private val mutableLayoutManager = MutableStateFlow(LayoutManager.Linear)
+    val layoutManager get() = mutableLayoutManager.asStateFlow()
 
-    val layoutManager = liveData {
-        storage.get(LAYOUT_MANAGER_KEY)
-            .mapCatching { flow -> flow.map { LayoutManager.valueOf(it) } }
-            .getOrDefault(flowOf(LayoutManager.Linear))
-            .onStart { emit(LayoutManager.Linear) }
-            .asLiveData()
-            .let { emitSource(it) }
+    init {
+        libraryRepository.getLibraryById(libraryId)
+            .onEach { mutableLibrary.value = it }
+            .launchIn(viewModelScope)
+
+        noteRepository.getNotesByLibraryId(libraryId)
+            .onEach { mutableNotes.value = it }
+            .launchIn(viewModelScope)
+
+        viewModelScope.launch {
+            storage.get(LAYOUT_MANAGER_KEY)
+                .map { it.map { LayoutManager.valueOf(it) } }
+                .getOrElse { flowOf(LayoutManager.Linear) }
+                .onEach { mutableLayoutManager.value = it }
+                .launchIn(viewModelScope)
+        }
     }
 
     fun setLayoutManager(value: LayoutManager) = viewModelScope.launch {
@@ -39,62 +52,42 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
     }
 
     fun setLibraryTitle(title: String) {
-        _library.value = _library.value?.copy(title = title)
-    }
-
-    fun getNotes(libraryId: Long) = viewModelScope.launch {
-        noteRepository.getNotesByLibraryId(libraryId).collect { value ->
-            _notos.postValue(value)
-        }
-    }
-
-    fun getArchivedNotes(libraryId: Long) = viewModelScope.launch {
-        noteRepository.getArchivedNotesByLibraryId(libraryId).collect { value ->
-            _notos.postValue(value)
-        }
-    }
-
-    fun getLibrary(libraryId: Long) = viewModelScope.launch {
-        libraryRepository.getLibraryById(libraryId).collect { value ->
-            _library.postValue(value)
-        }
+        mutableLibrary.value = mutableLibrary.value.copy(title = title)
     }
 
     fun deleteLibrary() = viewModelScope.launch {
-        libraryRepository.deleteLibrary(library.value!!)
+        libraryRepository.deleteLibrary(library.value)
     }
 
     fun createLibrary() = viewModelScope.launch {
-        libraryRepository.createLibrary(library.value!!)
+        libraryRepository.createLibrary(library.value)
     }
 
     fun updateLibrary() = viewModelScope.launch {
-        libraryRepository.updateLibrary(library.value!!)
+        libraryRepository.updateLibrary(library.value)
     }
 
     fun setNotoColor(notoColor: NotoColor) {
-        _library.value = _library.value?.copy(color = notoColor)
+        mutableLibrary.value = mutableLibrary.value.copy(color = notoColor)
     }
 
     fun setNotoIcon(notoIcon: NotoIcon) {
-        _library.value = _library.value?.copy(icon = notoIcon)
+        mutableLibrary.value = mutableLibrary.value.copy(icon = notoIcon)
     }
 
     fun setSortingMethod(sortingMethod: SortingMethod) {
-        _library.value = _library.value?.copy(sortingMethod = sortingMethod)
-        println(sortingMethod)
+        mutableLibrary.value = mutableLibrary.value.copy(sortingMethod = sortingMethod)
         sortNotes()
     }
 
     fun setSortingType(sortingType: SortingType) {
-        _library.value = _library.value?.copy(sortingType = sortingType)
-        println(sortingType)
+        mutableLibrary.value = mutableLibrary.value.copy(sortingType = sortingType)
         sortNotes()
     }
 
     fun postLibrary() = viewModelScope.launch {
         libraryRepository.getLibraries().collect { value ->
-            _library.postValue(Library(position = value.count()))
+            mutableLibrary.value = Library(position = value.count())
         }
     }
 
@@ -110,10 +103,9 @@ class LibraryViewModel(private val libraryRepository: LibraryRepository, private
             else -> Note::creationDate
         }
 
-        _notos.value = _notos.value
-            ?.sortByMethod(library.value?.sortingMethod ?: SortingMethod.Desc, sortingType)
-            ?.toList()
-
+        mutableNotes.value = mutableNotes.value
+            .sortByMethod(library.value.sortingMethod, sortingType)
+            .toList()
     }
 
 }
