@@ -1,15 +1,12 @@
 package com.noto.app.library
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
-import com.noto.app.util.LayoutManager
-import com.noto.app.domain.source.LocalStorage
+import com.noto.app.domain.model.Library
 import com.noto.app.domain.repository.LibraryRepository
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
+import com.noto.app.domain.source.LocalStorage
+import com.noto.app.util.LayoutManager
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -17,19 +14,24 @@ private const val LAYOUT_MANAGER_KEY = "Library_List_Layout_Manager"
 
 class LibraryListViewModel(private val libraryRepository: LibraryRepository, private val storage: LocalStorage) : ViewModel() {
 
-    val libraries = liveData {
-        libraryRepository.getLibraries()
-            .asLiveData()
-            .let { emitSource(it) }
-    }
+    private val mutableLibraries = MutableStateFlow<List<Library>>(emptyList())
+    val libraries get() = mutableLibraries.asStateFlow()
 
-    val layoutManager = liveData {
-        storage.get(LAYOUT_MANAGER_KEY)
-            .mapCatching { flow -> flow.map { LayoutManager.valueOf(it) } }
-            .getOrDefault(flowOf(LayoutManager.Linear))
-            .onStart { emit(LayoutManager.Linear) }
-            .asLiveData()
-            .let { emitSource(it) }
+    private val mutableLayoutManager = MutableStateFlow(LayoutManager.Linear)
+    val layoutManager get() = mutableLayoutManager.asStateFlow()
+
+    init {
+        libraryRepository.getLibraries()
+            .onEach { mutableLibraries.value = it }
+            .launchIn(viewModelScope)
+
+        viewModelScope.launch {
+            storage.get(LAYOUT_MANAGER_KEY)
+                .map { it.map { LayoutManager.valueOf(it) } }
+                .getOrElse { flowOf(LayoutManager.Linear) }
+                .onEach { mutableLayoutManager.value = it }
+                .launchIn(viewModelScope)
+        }
     }
 
     fun countNotos(libraryId: Long): Int = runBlocking {

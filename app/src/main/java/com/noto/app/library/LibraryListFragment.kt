@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -18,6 +19,8 @@ import com.noto.app.domain.model.Library
 import com.noto.app.util.LayoutManager
 import com.noto.app.util.colorResource
 import com.noto.app.util.drawableResource
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -101,11 +104,9 @@ class LibraryListFragment : BaseDialogFragment() {
 
         val layoutManagerMenuItem = binding.bab.menu.findItem(R.id.view)
 
-        viewModel.layoutManager.observe(viewLifecycleOwner) { value ->
-            Timber.i("$value")
-            value?.let {
-
-                when (value) {
+        viewModel.layoutManager
+            .onEach {
+                when (it) {
                     LayoutManager.Linear -> {
                         layoutManagerMenuItem.icon = drawableResource(R.drawable.view_grid_outline)
                         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -115,22 +116,20 @@ class LibraryListFragment : BaseDialogFragment() {
                         layoutManager = GridLayoutManager(requireContext(), 2)
                     }
                 }
-
                 visibility = View.INVISIBLE
                 startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
 
                 visibility = View.VISIBLE
                 startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
-
             }
+            .launchIn(lifecycleScope)
 
-        }
+        viewModel.libraries
+            .onEach {
+                rvAdapter.submitList(it)
+                binding.tvLibraryNotoCount.text = "${it.size} ${getString(R.string.libraries)}"
+            }
+            .launchIn(lifecycleScope)
 
-        viewModel.libraries.observe(viewLifecycleOwner) {
-            rvAdapter.submitList(it)
-
-            binding.tvLibraryNotoCount.text = "${it.size} ${getString(R.string.libraries)}"
-
-        }
     }
 }
