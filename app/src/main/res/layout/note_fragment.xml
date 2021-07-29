@@ -66,14 +66,14 @@
                     android:maxLines="3"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/rb_noto_star"
+                    app:layout_constraintEnd_toStartOf="@id/rb_note_star"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tb"
                     tools:text="@string/all_notes"
                     tools:textColor="@color/colorAccentTeal" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_noto_star"
+                    android:id="@+id/rb_note_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/spacing_normal"
@@ -104,8 +104,8 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/et_noto_title"
-                style="@style/EditText.NotoTitle"
+                android:id="@+id/et_note_title"
+                style="@style/EditText.NoteTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_normal"
@@ -120,8 +120,8 @@
                 tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
 
             <EditText
-                android:id="@+id/et_noto_body"
-                style="@style/EditText.NotoBody"
+                android:id="@+id/et_note_body"
+                style="@style/EditText.NoteBody"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/spacing_normal"

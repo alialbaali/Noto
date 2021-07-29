@@ -22,11 +22,11 @@ class AlarmReceiver : BroadcastReceiver() {
 
         intent?.let {
 
-            val id = it.getIntExtra(NOTO_ID, 0)
-            val title = it.getStringExtra(NOTO_TITLE) ?: String()
-            val body = it.getStringExtra(NOTO_BODY) ?: String()
-            val notoColorOrdinal = it.getIntExtra(NOTO_COLOR, 0)
-            val notoIconOrdinal = it.getIntExtra(NOTO_ICON, 0)
+            val id = it.getIntExtra(NoteId, 0)
+            val title = it.getStringExtra(NoteTitle) ?: String()
+            val body = it.getStringExtra(NoteBody) ?: String()
+            val notoColorOrdinal = it.getIntExtra(NoteColor, 0)
+            val notoIconOrdinal = it.getIntExtra(NoteIcon, 0)
             val notoColor = NotoColor.values().first { it.ordinal == notoColorOrdinal }
             val notoIcon = NotoIcon.values().first { it.ordinal == notoIconOrdinal }
 

@@ -1,4 +1,4 @@
-package com.noto.app.library
+package com.noto.app.librarylist
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -32,7 +32,7 @@ class LibraryListFragment : BaseDialogFragment() {
         object : LibraryItemClickListener {
             override fun onClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryFragment(library.id))
             override fun onLongClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryDialogFragment(library.id))
-            override fun countLibraryNotos(library: Library): Int = viewModel.countNotos(library.id)
+            override fun countLibraryNotes(library: Library): Int = viewModel.countNotes(library.id)
         }
     }
 
@@ -54,10 +54,6 @@ class LibraryListFragment : BaseDialogFragment() {
         }
         binding.bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.archived_notos -> {
-                    findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToArchiveFragment())
-                    true
-                }
                 R.id.view -> {
                     when (viewModel.layoutManager.value) {
                         LayoutManager.Linear -> viewModel.setLayoutManager(LayoutManager.Grid)

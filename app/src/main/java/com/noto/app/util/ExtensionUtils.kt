@@ -2,18 +2,16 @@ package com.noto.app.util
 
 import android.app.AlarmManager
 import android.app.PendingIntent
-import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.util.TypedValue
+import android.os.IBinder
 import android.view.View
-import android.view.WindowInsets
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.*
 import androidx.core.app.AlarmManagerCompat
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -42,8 +40,11 @@ inline fun <T : ViewBinding> T.withBinding(crossinline block: T.() -> Unit): Vie
     return root
 }
 
-fun View.showKeyboard() = ViewCompat.getWindowInsetsController(this)?.show(WindowInsets.Type.ime())
-fun View.hideKeyboard() = ViewCompat.getWindowInsetsController(this)?.hide(WindowInsets.Type.ime())
+fun InputMethodManager.showKeyboard() = toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+fun InputMethodManager.hideKeyboard(windowToken: IBinder) = hideSoftInputFromWindow(windowToken, 0)
+
+//fun View.showKeyboard() = ViewCompat.getWindowInsetsController(this)?.show(WindowInsetsCompat.Type.ime())
+//fun View.hideKeyboard() = ViewCompat.getWindowInsetsController(this)?.hide(WindowInsetsCompat.Type.ime())
 
 fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
@@ -77,12 +78,6 @@ fun CollapsingToolbarLayout.setFontFamily() {
 fun AlarmManager.setAlarm(type: Int, timeInMills: Long, pendingIntent: PendingIntent) = AlarmManagerCompat.setExactAndAllowWhileIdle(this, type, timeInMills, pendingIntent)
 
 fun Note.isValid(): Boolean = !(title.isBlank() && body.isBlank())
-
-fun <T> MutableLiveData<T>.notifyObserver() {
-    value = value
-}
-
-fun Int.dp(context: Context): Float = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), context.resources.displayMetrics)
 
 fun NotoColor.toResource(): Int = when (this) {
     NotoColor.BLUE -> R.color.colorAccentBlue

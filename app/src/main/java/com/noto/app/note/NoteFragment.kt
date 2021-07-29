@@ -1,13 +1,14 @@
 package com.noto.app.note
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -17,22 +18,24 @@ import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-const val NOTO_ID = "noto_id"
-const val NOTO_TITLE = "noto_title"
-const val NOTO_BODY = "noto_body"
-const val NOTO_COLOR = "noto_color"
-const val NOTO_ICON = "noto_icon"
+const val NoteId = "noto_id"
+const val NoteTitle = "noto_title"
+const val NoteBody = "noto_body"
+const val NoteColor = "noto_color"
+const val NoteIcon = "noto_icon"
 
 class NoteFragment : Fragment() {
 
-    private val viewModel by sharedViewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
 
     private val args by navArgs<NoteFragmentArgs>()
+
+    private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,37 +49,26 @@ class NoteFragment : Fragment() {
         }
 
         if (args.noteId == 0L) {
+            etNoteBody.requestFocus()
+            imm.showKeyboard()
+        }
 
-            viewModel.postNote(args.libraryId)
+        val backCallback = {
+            findNavController().navigateUp()
+            viewModel.createOrUpdateNote(
+                etNoteTitle.text.toString(),
+                etNoteBody.text.toString(),
+                isStarred = rbNoteStar.isChecked
+            )
+            imm.hideKeyboard(etNoteBody.windowToken)
+        }
 
-            etNotoBody.requestFocus()
-//            etNotoBody.showKeyboard()
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            backCallback()
+        }.isEnabled = true
 
-            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-                findNavController().navigateUp()
-                viewModel.createNote()
-            }.isEnabled = true
-
-            tb.setNavigationOnClickListener {
-//                etNotoBody.hideKeyboard()
-                findNavController().navigateUp()
-                viewModel.createNote()
-            }
-
-        } else {
-
-            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-                findNavController().navigateUp()
-                viewModel.updateNote()
-            }.isEnabled = true
-
-
-            tb.setNavigationOnClickListener {
-//                etNotoBody.hideKeyboard()
-                findNavController().navigateUp()
-                viewModel.updateNote()
-            }
-
+        tb.setNavigationOnClickListener {
+            backCallback()
         }
 
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
@@ -91,39 +83,31 @@ class NoteFragment : Fragment() {
 
             setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
-
                     R.id.share_noto -> {
-
-                        val note = viewModel.note.value
-
                         val intent = Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"
-                            putExtra(Intent.EXTRA_SUBJECT, note?.title)
-                            putExtra(Intent.EXTRA_TEXT, note?.body)
+                            val content = """
+                                ${etNoteTitle.text}
+                                
+                                ${etNoteBody.text}
+                            """.trimIndent()
+                            putExtra(Intent.EXTRA_TEXT, content)
                         }
-
-                        val chooser = Intent.createChooser(intent, "${getString(R.string.share)} ${note?.title} to")
-
+                        val chooser = Intent.createChooser(intent, getString(R.string.share_note))
                         startActivity(chooser)
-
                         true
                     }
-
                     R.id.archive_note -> {
-
                         menuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
-
-                        if (viewModel.note.value?.isArchived == true) {
-                            viewModel.setNotoArchived(false)
+                        if (viewModel.note.value.isArchived) {
+                            viewModel.toggleNoteIsArchived()
                             root.snackbar(getString(R.string.note_unarchived))
                         } else {
-                            viewModel.setNotoArchived(true)
+                            viewModel.toggleNoteIsArchived()
                             root.snackbar(getString(R.string.note_archived))
                         }
-
                         true
                     }
-
                     else -> false
                 }
             }
@@ -131,23 +115,13 @@ class NoteFragment : Fragment() {
 
         val archiveMenuItem = bab.menu.findItem(R.id.archive_note)
 
-        etNotoTitle.doAfterTextChanged {
-            viewModel.setNoteTitle(it.toString())
-        }
-        etNotoBody.doAfterTextChanged {
-            viewModel.setNoteBody(it.toString())
-        }
-
-        rbNotoStar.setOnClickListener { viewModel.toggleNotoStar() }
-
         viewModel.note
             .onEach {
-                etNotoTitle.setText(it.title)
-                etNotoBody.setText(it.body)
-                etNotoTitle.setSelection(it.title.length)
-                etNotoBody.setSelection(it.body.length)
-                rbNotoStar.isChecked = it.isStarred
-
+                etNoteTitle.setText(it.title)
+                etNoteBody.setText(it.body)
+                etNoteTitle.setSelection(it.title.length)
+                etNoteBody.setSelection(it.body.length)
+                rbNoteStar.isChecked = it.isStarred
 
                 if (it.isArchived) archiveMenuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
                 else archiveMenuItem.icon = drawableResource(R.drawable.archive_arrow_down_outline)
@@ -159,7 +133,7 @@ class NoteFragment : Fragment() {
                     val dateFormat = if (year > ZonedDateTime.now().year) format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
                     else format(DateTimeFormatter.ofPattern("EEE, MMM d"))
 
-                    tvCreatedAt.text = "${getString(R.string.created_at)} ${dateFormat.toUpperCase()}"
+                    tvCreatedAt.text = "${getString(R.string.created_at)} ${dateFormat.uppercase()}"
                 }
             }
             .launchIn(lifecycleScope)

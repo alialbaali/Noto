@@ -15,7 +15,7 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LibraryLocalDataSource
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.label.LabelViewModel
-import com.noto.app.library.LibraryListViewModel
+import com.noto.app.librarylist.LibraryListViewModel
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.note.NoteViewModel
 import org.koin.android.ext.koin.androidContext
@@ -52,7 +52,7 @@ val localDataSourceModule = module {
 
     single<LibraryLocalDataSource> { NotoDatabase.getInstance(androidContext()).libraryDao }
 
-    single<com.noto.app.domain.source.NoteLocalDataSource> { NotoDatabase.getInstance(androidContext()).notoDao }
+    single<com.noto.app.domain.source.NoteLocalDataSource> { NotoDatabase.getInstance(androidContext()).noteDao }
 
     single<com.noto.app.domain.source.LabelLocalDataSource> { NotoDatabase.getInstance(androidContext()).labelDao }
 

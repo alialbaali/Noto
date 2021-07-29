@@ -136,7 +136,7 @@
         <item name="hintAnimationEnabled">true</item>
     </style>
 
-    <style name="EditText.NotoTitle" parent="Widget.AppCompat.EditText">
+    <style name="EditText.NoteTitle" parent="Widget.AppCompat.EditText">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:fontFamily">@font/arima_madurai_medium</item>
@@ -144,7 +144,7 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="EditText.NotoBody" parent="Widget.AppCompat.EditText">
+    <style name="EditText.NoteBody" parent="Widget.AppCompat.EditText">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:fontFamily">@font/arima_madurai</item>
         <item name="android:textSize">16sp</item>
@@ -153,14 +153,14 @@
     </style>
 
 
-    <style name="TextView.NotoTitle" parent="Widget.MaterialComponents.TextView">
+    <style name="TextView.NoteTitle" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/arima_madurai_medium</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:maxLines">3</item>
     </style>
 
-    <style name="TextView.NotoBody" parent="Widget.MaterialComponents.TextView">
+    <style name="TextView.NoteBody" parent="Widget.MaterialComponents.TextView">
         <item name="android:fontFamily">@font/arima_madurai_light</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingMultiplier">1.1</item>

@@ -28,7 +28,7 @@ private const val NOTO_DATABASE = "Noto Database"
 @Database(entities = [Note::class, Library::class, Label::class, NoteLabel::class], version = 5, exportSchema = false)
 abstract class NotoDatabase : RoomDatabase() {
 
-    abstract val notoDao: NoteDao
+    abstract val noteDao: NoteDao
 
     abstract val libraryDao: LibraryDao
 

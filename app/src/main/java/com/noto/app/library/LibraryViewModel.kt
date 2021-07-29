@@ -26,16 +26,24 @@ class LibraryViewModel(
     private val mutableNotes = MutableStateFlow<List<Note>>(emptyList())
     val notes get() = mutableNotes.asStateFlow()
 
+    private val mutableArchivedNotes = MutableStateFlow<List<Note>>(emptyList())
+    val archivedNotes get() = mutableArchivedNotes.asStateFlow()
+
     private val mutableLayoutManager = MutableStateFlow(LayoutManager.Linear)
     val layoutManager get() = mutableLayoutManager.asStateFlow()
 
     init {
-        libraryRepository.getLibraryById(libraryId)
-            .onEach { mutableLibrary.value = it }
-            .launchIn(viewModelScope)
+        if (libraryId != 0L)
+            libraryRepository.getLibraryById(libraryId)
+                .onEach { mutableLibrary.value = it }
+                .launchIn(viewModelScope)
 
         noteRepository.getNotesByLibraryId(libraryId)
             .onEach { mutableNotes.value = it }
+            .launchIn(viewModelScope)
+
+        noteRepository.getArchivedNotesByLibraryId(libraryId)
+            .onEach { mutableArchivedNotes.value = it }
             .launchIn(viewModelScope)
 
         storage.get(LAYOUT_MANAGER_KEY)

@@ -1,4 +1,4 @@
-package com.noto.app.library
+package com.noto.app.librarylist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -31,7 +31,7 @@ class LibraryListViewModel(private val libraryRepository: LibraryRepository, pri
             .launchIn(viewModelScope)
     }
 
-    fun countNotos(libraryId: Long): Int = runBlocking {
+    fun countNotes(libraryId: Long): Int = runBlocking {
         libraryRepository.countLibraryNotes(libraryId)
     }
 

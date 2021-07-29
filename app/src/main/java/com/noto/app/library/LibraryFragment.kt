@@ -12,11 +12,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.appbar.AppBarLayout
-import com.noto.app.NotoItemTouchHelper
 import com.noto.app.R
 import com.noto.app.databinding.LibraryFragmentBinding
 import com.noto.app.domain.model.Note
@@ -144,7 +142,7 @@ class LibraryFragment : Fragment() {
 
     private fun rv() = with(binding.rv) {
         val rvAdapter = LibraryAdapter(
-            object : NotoItemClickListener {
+            object : NoteItemClickListener {
                 override fun onClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
                 override fun onLongClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id))
                 override fun toggleNotoStar(note: Note) {
@@ -154,10 +152,6 @@ class LibraryFragment : Fragment() {
         )
 
         adapter = rvAdapter
-
-        NotoItemTouchHelper(rvAdapter).let {
-            ItemTouchHelper(it).attachToRecyclerView(this)
-        }
 
         val layoutManagerMenuItem = binding.bab.menu.findItem(R.id.view)
 

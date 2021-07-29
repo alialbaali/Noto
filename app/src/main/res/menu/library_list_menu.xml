@@ -2,15 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-    <!--            <item-->
-    <!--                android:id="@+id/sort"-->
-    <!--                android:enabled="true"-->
-    <!--                android:icon="@drawable/ic_sort_custom_24dp"-->
-    <!--                android:title="@string/sort_libraries"-->
-    <!--                android:visible="true"-->
-    <!--                app:showAsAction="ifRoom" />-->
-
     <item
         android:id="@+id/view"
         android:contentDescription="@string/view"
@@ -19,22 +10,10 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/archived_notos"
-        android:contentDescription="@string/archived_notes"
-        android:icon="@drawable/archive_outline"
-        android:title="@string/archived_notes"
-        app:showAsAction="always" />
-<!--    <item-->
-<!--        android:id="@+id/labels"-->
-<!--        android:icon="@drawable/ic_labels_24dp"-->
-<!--        android:title="@string/labels"-->
-<!--        android:visible="true"-->
-<!--        app:showAsAction="always" />-->
-
-    <item
         android:id="@+id/theme"
         android:icon="@drawable/theme"
         android:title="@string/theme"
         android:visible="true"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
+
 </menu>

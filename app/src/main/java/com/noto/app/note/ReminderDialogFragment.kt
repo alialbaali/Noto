@@ -93,11 +93,11 @@ class ReminderDialogFragment : BaseDialogFragment() {
             viewModel.note.value.also {
 
                 val intent = Intent(requireContext(), AlarmReceiver::class.java).apply {
-                    putExtra(NOTO_ID, it.id.toInt())
-                    putExtra(NOTO_TITLE, it.title)
-                    putExtra(NOTO_BODY, it.body)
-                    putExtra(NOTO_COLOR, viewModel.library.value?.color?.ordinal ?: 0)
-                    putExtra(NOTO_ICON, viewModel.library.value?.icon?.ordinal ?: 0)
+                    putExtra(NoteId, it.id.toInt())
+                    putExtra(NoteTitle, it.title)
+                    putExtra(NoteBody, it.body)
+                    putExtra(NoteColor, viewModel.library.value?.color?.ordinal ?: 0)
+                    putExtra(NoteIcon, viewModel.library.value?.icon?.ordinal ?: 0)
                 }
 
                 val pendingIntent = PendingIntent.getBroadcast(requireContext(), it.id.toInt(), intent, PENDING_INTENT_FLAGS)

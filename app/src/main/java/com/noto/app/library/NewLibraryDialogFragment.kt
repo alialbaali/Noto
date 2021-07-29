@@ -20,12 +20,13 @@ import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.parameter.parametersOf
 
 class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private lateinit var binding: NewLibraryDialogFragmentBinding
 
-    private val viewModel by sharedViewModel<LibraryViewModel>()
+    private val viewModel by sharedViewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<NewLibraryDialogFragmentArgs>()
 
@@ -53,7 +54,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 }
                 .launchIn(lifecycleScope)
 
-            et.doAfterTextChanged { viewModel.setLibraryTitle(it.toString()) }
+//            et.doAfterTextChanged { viewModel.setLibraryTitle(it.toString()) }
 
             btnCreate.setOnClickListener {
 

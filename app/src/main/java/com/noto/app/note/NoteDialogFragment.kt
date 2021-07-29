@@ -46,14 +46,14 @@ class NoteDialogFragment : BaseDialogFragment() {
                 baseDialog.vHead.backgroundTintList = colorStateResource(it.color.toResource())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    listOf(tvCopyToClipboard, tvShareNoto, tvArchiveNoto, tvRemindMe)
+                    listOf(tvCopyToClipboard, tvShareNote, tvArchiveNote, tvRemindMe)
                         .forEach { tv -> tv.compoundDrawableTintList = colorStateResource(it.color.toResource()) }
             }
             .launchIn(lifecycleScope)
 
         viewModel.note
             .onEach {
-                tvArchiveNoto.compoundDrawablesRelative[0] =
+                tvArchiveNote.compoundDrawablesRelative[0] =
                     if (it.isArchived) drawableResource(R.drawable.ic_outline_unarchive_24)
                     else drawableResource(R.drawable.archive_arrow_down_outline)
 
@@ -64,10 +64,9 @@ class NoteDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
 
 
-        tvArchiveNoto.setOnClickListener {
+        tvArchiveNote.setOnClickListener {
             dismiss()
-            if (viewModel.note.value.isArchived) viewModel.setNotoArchived(false) else viewModel.setNotoArchived(true)
-            viewModel.updateNote()
+            viewModel.toggleNoteIsArchived()
         }
 
         tvRemindMe.setOnClickListener {
@@ -82,7 +81,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             v.toast(getString(R.string.copied_to_clipboard))
         }
 
-        tvShareNoto.setOnClickListener {
+        tvShareNote.setOnClickListener {
 
             dismiss()
 
@@ -100,13 +99,13 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         }
 
-        tvDeleteNoto.setOnClickListener {
+        tvDeleteNote.setOnClickListener {
             dismiss()
 
             val title = getString(R.string.delete_note_confirmation)
             val btnText = getString(R.string.delete_note)
             val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
-                viewModel.deleteNoto()
+                viewModel.deleteNote()
             }
 
             findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToConfirmationDialogFragment(title, null, btnText, clickListener))

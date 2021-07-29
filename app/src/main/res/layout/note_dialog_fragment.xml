@@ -16,7 +16,7 @@
         app:drawableStartCompat="@drawable/bell_plus_outline" />
 
     <TextView
-        android:id="@+id/tv_archive_noto"
+        android:id="@+id/tv_archive_note"
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         app:drawableStartCompat="@drawable/content_copy" />
 
     <TextView
-        android:id="@+id/tv_share_noto"
+        android:id="@+id/tv_share_note"
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
 
 
     <TextView
-        android:id="@+id/tv_delete_noto"
+        android:id="@+id/tv_delete_note"
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

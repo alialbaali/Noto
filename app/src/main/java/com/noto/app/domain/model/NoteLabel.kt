@@ -12,7 +12,7 @@ data class NoteLabel(
     val NoteLabelId: Long = 0,
 
     @ColumnInfo(name = "id")
-    val notoId: Long,
+    val noteId: Long,
 
     @ColumnInfo(name = "label_id")
     val labelId: Long
@@ -21,4 +21,4 @@ data class NoteLabel(
 
 fun NoteLabel.toLabel(labelTitle: String, labelColor: NotoColor) = Label(labelId, labelTitle, labelColor)
 
-fun Label.toNoteLabel(notoId: Long) = NoteLabel(labelId = labelId, notoId =  notoId)
+fun Label.toNoteLabel(notoId: Long) = NoteLabel(labelId = labelId, noteId =  notoId)
