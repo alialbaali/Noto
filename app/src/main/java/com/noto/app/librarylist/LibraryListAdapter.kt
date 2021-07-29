@@ -24,9 +24,9 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
     }
 
     override fun onBindViewHolder(holderList: LibraryItemViewHolder, position: Int) {
-        val notoList = getItem(position)
-        holderList.library = notoList
-        holderList.bind(notoList)
+        val library = getItem(position)
+        holderList.library = library
+        holderList.bind(library)
     }
 
     class LibraryItemViewHolder(
@@ -79,7 +79,6 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
                 binding.root.outlineSpotShadowColor = notoColor
             }
 
-
             val rippleDrawable = RippleDrawable(ColorStateList.valueOf(notoColor), gradientDrawable, gradientDrawable)
 
             binding.root.background = rippleDrawable
@@ -98,10 +97,11 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
         override fun areItemsTheSame(oldItem: Library, newItem: Library): Boolean = oldItem.id == newItem.id
         override fun areContentsTheSame(oldItem: Library, newItem: Library): Boolean = oldItem == newItem
     }
+
+    interface LibraryItemClickListener {
+        fun onClick(library: Library)
+        fun onLongClick(library: Library)
+        fun countLibraryNotes(library: Library): Int
+    }
 }
 
-interface LibraryItemClickListener {
-    fun onClick(library: Library)
-    fun onLongClick(library: Library)
-    fun countLibraryNotes(library: Library): Int
-}

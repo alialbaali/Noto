@@ -35,7 +35,7 @@ class LibraryListViewModel(private val libraryRepository: LibraryRepository, pri
         libraryRepository.countLibraryNotes(libraryId)
     }
 
-    fun setLayoutManager(value: LayoutManager) = viewModelScope.launch {
+    fun updateLayoutManager(value: LayoutManager) = viewModelScope.launch {
         storage.put(LAYOUT_MANAGER_KEY, value.toString())
     }
 

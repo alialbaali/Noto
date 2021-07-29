@@ -1,6 +1,5 @@
 package com.noto.app.librarylist
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,17 +28,15 @@ class LibraryListFragment : BaseDialogFragment() {
     private val adapter by lazy { LibraryListAdapter(libraryItemClickListener) }
 
     private val libraryItemClickListener by lazy {
-        object : LibraryItemClickListener {
+        object : LibraryListAdapter.LibraryItemClickListener {
             override fun onClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryFragment(library.id))
             override fun onLongClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryDialogFragment(library.id))
             override fun countLibraryNotes(library: Library): Int = viewModel.countNotes(library.id)
         }
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = LibraryListFragmentBinding.inflate(inflater, container, false)
-
 
         setupListeners()
         collectState()
@@ -54,10 +51,10 @@ class LibraryListFragment : BaseDialogFragment() {
         }
         binding.bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.view -> {
+                R.id.layout_manager -> {
                     when (viewModel.layoutManager.value) {
-                        LayoutManager.Linear -> viewModel.setLayoutManager(LayoutManager.Grid)
-                        LayoutManager.Grid -> viewModel.setLayoutManager(LayoutManager.Linear)
+                        LayoutManager.Linear -> viewModel.updateLayoutManager(LayoutManager.Grid)
+                        LayoutManager.Grid -> viewModel.updateLayoutManager(LayoutManager.Linear)
                     }
                     true
                 }
@@ -71,7 +68,7 @@ class LibraryListFragment : BaseDialogFragment() {
     }
 
     private fun collectState() {
-        val layoutManagerMenuItem = binding.bab.menu.findItem(R.id.view)
+        val layoutManagerMenuItem = binding.bab.menu.findItem(R.id.layout_manager)
 
         viewModel.layoutManager
             .onEach {

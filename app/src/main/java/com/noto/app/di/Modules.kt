@@ -18,8 +18,8 @@ import com.noto.app.domain.source.LocalStorage
 import com.noto.app.domain.source.NoteLocalDataSource
 import com.noto.app.label.LabelViewModel
 import com.noto.app.librarylist.LibraryListViewModel
-import com.noto.app.library.LibraryViewModel
 import com.noto.app.note.NoteViewModel
+import com.noto.app.notelist.LibraryViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
