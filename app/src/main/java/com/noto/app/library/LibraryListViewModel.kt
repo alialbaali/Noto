@@ -25,13 +25,11 @@ class LibraryListViewModel(private val libraryRepository: LibraryRepository, pri
             .onEach { mutableLibraries.value = it }
             .launchIn(viewModelScope)
 
-        viewModelScope.launch {
-            storage.get(LAYOUT_MANAGER_KEY)
-                .map { it.map { LayoutManager.valueOf(it) } }
-                .getOrElse { flowOf(LayoutManager.Linear) }
-                .onEach { mutableLayoutManager.value = it }
-                .launchIn(viewModelScope)
-        }
+        storage.get(LAYOUT_MANAGER_KEY)
+            .map { it.map { LayoutManager.valueOf(it) } }
+            .getOrElse { flowOf(LayoutManager.Linear) }
+            .onEach { mutableLayoutManager.value = it }
+            .launchIn(viewModelScope)
     }
 
     fun countNotos(libraryId: Long): Int = runBlocking {

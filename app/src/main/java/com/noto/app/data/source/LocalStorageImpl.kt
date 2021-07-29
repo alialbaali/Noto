@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.mapNotNull
 
 class LocalStorageImpl(private val storage: DataStore<Preferences>) : LocalStorage {
 
-    override suspend fun get(key: String): Result<Flow<String>> = runCatching {
+    override fun get(key: String): Result<Flow<String>> = runCatching {
         storage.data
             .mapNotNull { preferences -> preferences[preferencesKey(key)] }
     }

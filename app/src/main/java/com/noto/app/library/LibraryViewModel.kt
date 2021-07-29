@@ -38,13 +38,11 @@ class LibraryViewModel(
             .onEach { mutableNotes.value = it }
             .launchIn(viewModelScope)
 
-        viewModelScope.launch {
-            storage.get(LAYOUT_MANAGER_KEY)
-                .map { it.map { LayoutManager.valueOf(it) } }
-                .getOrElse { flowOf(LayoutManager.Linear) }
-                .onEach { mutableLayoutManager.value = it }
-                .launchIn(viewModelScope)
-        }
+        storage.get(LAYOUT_MANAGER_KEY)
+            .map { it.map { LayoutManager.valueOf(it) } }
+            .getOrElse { flowOf(LayoutManager.Linear) }
+            .onEach { mutableLayoutManager.value = it }
+            .launchIn(viewModelScope)
     }
 
     fun setLayoutManager(value: LayoutManager) = viewModelScope.launch {
