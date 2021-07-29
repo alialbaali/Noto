@@ -5,21 +5,22 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.source.LocalStorage
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 private const val ThemeKey = "Theme"
 
 class MainViewModel(private val storage: LocalStorage) : ViewModel() {
 
-    val viewState = liveData {
+    private val mutableTheme = MutableStateFlow(Theme.System)
+    val theme get() = mutableTheme.asStateFlow()
+
+    init {
         storage.get(ThemeKey)
-            .mapCatching { flow -> flow.map { Theme.valueOf(it) } }
-            .getOrDefault(flowOf(Theme.SystemTheme))
-            .map { MainState(it) }
-            .asLiveData()
-            .let { emitSource(it) }
+            .map { it.map { Theme.valueOf(it) } }
+            .getOrElse { flowOf(Theme.System) }
+            .onEach { mutableTheme.value = it }
+            .launchIn(viewModelScope)
     }
 
     fun setTheme(value: Theme) = viewModelScope.launch {
@@ -28,10 +29,6 @@ class MainViewModel(private val storage: LocalStorage) : ViewModel() {
 
 }
 
-data class MainState(
-    val theme: Theme = Theme.SystemTheme
-)
-
 enum class Theme {
-    SystemTheme, LightTheme, DarkTheme
+    System, Light, Dark,
 }
