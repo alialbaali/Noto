@@ -1,4 +1,4 @@
-package com.noto.app.library
+package com.noto.app.librarylist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -15,6 +15,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.NotoIcon
+import com.noto.app.notelist.LibraryViewModel
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -29,53 +30,57 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private val args by navArgs<NewLibraryDialogFragmentArgs>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = NewLibraryDialogFragmentBinding.inflate(inflater, container, false)
 
-        binding.apply {
-            val baseDialog = BaseDialogFragmentBinding.bind(root)
-
+        BaseDialogFragmentBinding.bind(binding.root).apply {
             if (args.libraryId == 0L) {
-                baseDialog.tvDialogTitle.text = stringResource(R.string.new_library)
+                tvDialogTitle.text = stringResource(R.string.new_library)
             } else {
-                baseDialog.tvDialogTitle.text = stringResource(R.string.edit_library)
-                btnCreate.text = getString(R.string.update_library)
-            }
-
-            initNotoColors()
-            initNotoIcons()
-
-            viewModel.library
-                .onEach { et.setText(it.title) }
-                .launchIn(lifecycleScope)
-
-            btnCreate.setOnClickListener {
-                val title = et.text.toString()
-                val color = binding.rgNotoColors.checkedRadioButtonId.let {
-                    NotoColor.values().getOrElse(it) {
-                        viewModel.library.value.color
-                    }
-                }
-                val icon = binding.rgNotoIcons.checkedRadioButtonId.let {
-                    NotoIcon.values().getOrElse(it) {
-                        viewModel.library.value.icon
-                    }
-                }
-
-                if (title.isBlank()) {
-                    til.error = stringResource(R.string.empty_title)
-                } else {
-                    dismiss()
-                    viewModel.createOrUpdateLibrary(title, color, icon)
-                }
+                tvDialogTitle.text = stringResource(R.string.edit_library)
+                binding.btnCreate.text = getString(R.string.update_library)
             }
         }
+
+        setupNotoColors()
+        setupNotoIcons()
+        collectState()
+        setupListeners()
 
         return binding.root
     }
 
-    private fun initNotoColors() {
+    private fun collectState() {
+        viewModel.library
+            .onEach { binding.et.setText(it.title) }
+            .launchIn(lifecycleScope)
+    }
+
+    private fun setupListeners() {
+        binding.btnCreate.setOnClickListener {
+            val title = binding.et.text.toString()
+            val color = binding.rgNotoColors.checkedRadioButtonId.let {
+                NotoColor.values().getOrElse(it) {
+                    viewModel.library.value.color
+                }
+            }
+            val icon = binding.rgNotoIcons.checkedRadioButtonId.let {
+                NotoIcon.values().getOrElse(it) {
+                    viewModel.library.value.icon
+                }
+            }
+
+            if (title.isBlank()) {
+                binding.til.error = stringResource(R.string.empty_title)
+            } else {
+                dismiss()
+                viewModel.createOrUpdateLibrary(title, color, icon)
+            }
+        }
+
+    }
+
+    private fun setupNotoColors() {
         NotoColor.values().forEach { notoColor ->
             RadioButton(context).apply {
                 id = notoColor.ordinal
@@ -107,7 +112,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun initNotoIcons() {
+    private fun setupNotoIcons() {
         NotoIcon.values().forEach { notoIcon ->
             RadioButton(context).apply {
                 id = notoIcon.ordinal
