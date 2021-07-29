@@ -81,7 +81,7 @@ class LibraryListFragment : BaseDialogFragment() {
 
     private fun rv() = with(binding.rv) {
 
-        val rvAdapter = LibraryListRVAdapter(object : LibraryItemClickListener {
+        val rvAdapter = LibraryListAdapter(object : LibraryItemClickListener {
 
             override fun onClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryFragment(library.id))
 

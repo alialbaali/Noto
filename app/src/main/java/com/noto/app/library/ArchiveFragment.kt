@@ -36,7 +36,7 @@ class ArchiveFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        val rvAdapter = LibraryRVAdapter(object : NotoItemClickListener {
+        val rvAdapter = LibraryAdapter(object : NotoItemClickListener {
 
             override fun onClick(note: Note) = findNavController().navigate(ArchiveFragmentDirections.actionArchiveFragmentToArchiveDialogFragment(note.id))
 

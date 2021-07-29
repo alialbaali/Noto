@@ -140,7 +140,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun rv() = with(binding.rv) {
-        val rvAdapter = LibraryRVAdapter(
+        val rvAdapter = LibraryAdapter(
             object : NotoItemClickListener {
                 override fun onClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
                 override fun onLongClick(note: Note) = findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id))

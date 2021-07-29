@@ -20,7 +20,7 @@ object Versions {
     const val Kotlin = "1.5.20"
     const val JavaTime = "1.0.9"
     const val Navigation = "2.3.5"
-    const val Android = "7.0.0-rc01"
+    const val Android = "7.0.0"
     const val Koin = "3.1.2"
 }
 
@@ -29,7 +29,7 @@ object App {
     const val VersionCode = 9
     const val MinSDK = 21
     const val CompileSDK = 30
-    const val BuildTools = "30.0.2"
+    const val BuildTools = "31.0.0"
     const val TargetSDK = CompileSDK
 }
 

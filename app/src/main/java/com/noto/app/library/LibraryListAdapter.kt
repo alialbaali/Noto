@@ -14,13 +14,12 @@ import com.noto.app.BaseItemTouchHelperListener
 import com.noto.app.R
 import com.noto.app.databinding.LibraryItemBinding
 import com.noto.app.domain.model.Library
-import com.noto.app.library.LibraryListRVAdapter.LibraryItemViewHolder
+import com.noto.app.library.LibraryListAdapter.LibraryItemViewHolder
 import com.noto.app.util.colorResource
 import com.noto.app.util.toResource
 
 
-class LibraryListRVAdapter(private val listener: LibraryItemClickListener) :
-    ListAdapter<Library, LibraryItemViewHolder>(NotoItemDiffCallback()), BaseItemTouchHelperListener {
+class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListAdapter<Library, LibraryItemViewHolder>(NotoItemDiffCallback()), BaseItemTouchHelperListener {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryItemViewHolder {
         return LibraryItemViewHolder.create(parent, listener)
