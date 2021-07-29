@@ -9,12 +9,16 @@ import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.parameter.parametersOf
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
@@ -26,7 +30,7 @@ const val NOTO_ICON = "noto_icon"
 
 class NoteFragment : Fragment() {
 
-    private val viewModel by sharedViewModel<NoteViewModel>()
+    private val viewModel by sharedViewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
 
     private val args by navArgs<NoteFragmentArgs>()
 
@@ -34,14 +38,12 @@ class NoteFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = NoteFragmentBinding.inflate(inflater, container, false).withBinding {
+    ): View = NoteFragmentBinding.inflate(inflater, container, false).withBinding {
 
         fab.setOnClickListener {
             findNavController()
                 .navigate(NoteFragmentDirections.actionNotoFragmentToReminderDialogFragment())
         }
-
-        viewModel.getLibraryById(args.libraryId)
 
         if (args.noteId == 0L) {
 
@@ -62,8 +64,6 @@ class NoteFragment : Fragment() {
             }
 
         } else {
-
-            viewModel.getNoteById(args.noteId)
 
             requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
                 findNavController().navigateUp()
@@ -140,9 +140,8 @@ class NoteFragment : Fragment() {
 
         rbNotoStar.setOnClickListener { viewModel.toggleNotoStar() }
 
-        viewModel.note.observe(viewLifecycleOwner) {
-            it?.let { noto ->
-
+        viewModel.note
+            .onEach {
                 etNotoTitle.setText(it.title)
                 etNotoBody.setText(it.body)
                 etNotoTitle.setSelection(it.title.length)
@@ -150,30 +149,32 @@ class NoteFragment : Fragment() {
                 rbNotoStar.isChecked = it.isStarred
 
 
-                if (noto.isArchived) archiveMenuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
+                if (it.isArchived) archiveMenuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
                 else archiveMenuItem.icon = drawableResource(R.drawable.archive_arrow_down_outline)
 
-                if (noto.reminderDate == null) fab.setImageDrawable(drawableResource(R.drawable.bell_plus_outline))
+                if (it.reminderDate == null) fab.setImageDrawable(drawableResource(R.drawable.bell_plus_outline))
                 else fab.setImageDrawable(drawableResource(R.drawable.bell_ring_outline))
 
-                noto.creationDate.apply {
+                it.creationDate.apply {
                     val dateFormat = if (year > ZonedDateTime.now().year) format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
                     else format(DateTimeFormatter.ofPattern("EEE, MMM d"))
 
                     tvCreatedAt.text = "${getString(R.string.created_at)} ${dateFormat.toUpperCase()}"
                 }
             }
-        }
+            .launchIn(lifecycleScope)
 
-        viewModel.library.observe(viewLifecycleOwner) { library ->
-            val color = colorResource(library.color.toResource())
+        viewModel.library
+            .onEach {
+                val color = colorResource(it.color.toResource())
 
-            tvLibraryTitle.text = library.title
-            tvLibraryTitle.setTextColor(color)
-            tvCreatedAt.setTextColor(color)
-            tb.navigationIcon?.mutate()?.setTint(color)
-            fab.backgroundTintList = colorStateResource(library.color.toResource())
-        }
+                tvLibraryTitle.text = it.title
+                tvLibraryTitle.setTextColor(color)
+                tvCreatedAt.setTextColor(color)
+                tb.navigationIcon?.mutate()?.setTint(color)
+                fab.backgroundTintList = colorStateResource(it.color.toResource())
+            }
+            .launchIn(lifecycleScope)
 
     }
 

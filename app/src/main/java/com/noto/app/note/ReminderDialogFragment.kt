@@ -19,6 +19,7 @@ import com.noto.app.util.drawableResource
 import com.noto.app.util.setAlarm
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -46,9 +47,10 @@ class ReminderDialogFragment : BaseDialogFragment() {
             dismiss()
         }
 
-        viewModel.note.observe(viewLifecycleOwner) { noto ->
+        viewModel.note
+            .onEach{
 
-            noto.reminderDate?.let { time ->
+                it.reminderDate?.let { time ->
 
                 til.endIconDrawable = drawableResource(R.drawable.bell_remove_outline)
 
@@ -61,7 +63,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
                 }
             }
 
-            if (noto.reminderDate == null) {
+            if (it.reminderDate == null) {
                 et.setText(getString(R.string.no_reminder))
                 til.endIconDrawable = drawableResource(R.drawable.bell_plus_outline)
             }
@@ -88,17 +90,17 @@ class ReminderDialogFragment : BaseDialogFragment() {
 
         fun createAlarm(zonedDateTime: ZonedDateTime) {
 
-            viewModel.note.value?.let { noto ->
+            viewModel.note.value.also {
 
                 val intent = Intent(requireContext(), AlarmReceiver::class.java).apply {
-                    putExtra(NOTO_ID, noto.id.toInt())
-                    putExtra(NOTO_TITLE, noto.title)
-                    putExtra(NOTO_BODY, noto.body)
+                    putExtra(NOTO_ID, it.id.toInt())
+                    putExtra(NOTO_TITLE, it.title)
+                    putExtra(NOTO_BODY, it.body)
                     putExtra(NOTO_COLOR, viewModel.library.value?.color?.ordinal ?: 0)
                     putExtra(NOTO_ICON, viewModel.library.value?.icon?.ordinal ?: 0)
                 }
 
-                val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.id.toInt(), intent, PENDING_INTENT_FLAGS)
+                val pendingIntent = PendingIntent.getBroadcast(requireContext(), it.id.toInt(), intent, PENDING_INTENT_FLAGS)
 
                 val timeInMills = zonedDateTime.toInstant().toEpochMilli()
 

@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
@@ -17,11 +18,14 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.core.parameter.parametersOf
 
 class NoteDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by sharedViewModel<NoteViewModel>()
+    private val viewModel by sharedViewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
 
     private val args by navArgs<NoteDialogFragmentArgs>()
 
@@ -36,42 +40,33 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         baseDialog.tvDialogTitle.text = stringResource(R.string.note_options)
 
-        if (args.noteId != 0L) viewModel.getNoteById(args.noteId)
-        viewModel.getLibraryById(args.libraryId)
-
-        viewModel.library.observe(viewLifecycleOwner) { library ->
-            library?.let {
-
+        viewModel.library
+            .onEach {
                 baseDialog.tvDialogTitle.setTextColor(colorResource(it.color.toResource()))
                 baseDialog.vHead.backgroundTintList = colorStateResource(it.color.toResource())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
                     listOf(tvCopyToClipboard, tvShareNoto, tvArchiveNoto, tvRemindMe)
                         .forEach { tv -> tv.compoundDrawableTintList = colorStateResource(it.color.toResource()) }
-
             }
+            .launchIn(lifecycleScope)
 
-        }
-
-        viewModel.note.observe(viewLifecycleOwner) { noto ->
-            noto?.let {
-
+        viewModel.note
+            .onEach {
                 tvArchiveNoto.compoundDrawablesRelative[0] =
-                    if (noto.isArchived) drawableResource(R.drawable.ic_outline_unarchive_24)
+                    if (it.isArchived) drawableResource(R.drawable.ic_outline_unarchive_24)
                     else drawableResource(R.drawable.archive_arrow_down_outline)
 
                 tvRemindMe.compoundDrawablesRelative[0] =
-                    if (noto.reminderDate == null) drawableResource(R.drawable.bell_plus_outline)
+                    if (it.reminderDate == null) drawableResource(R.drawable.bell_plus_outline)
                     else drawableResource(R.drawable.bell_ring_outline)
-
             }
-
-        }
+            .launchIn(lifecycleScope)
 
 
         tvArchiveNoto.setOnClickListener {
             dismiss()
-            if (viewModel.note.value?.isArchived == true) viewModel.setNotoArchived(false) else viewModel.setNotoArchived(true)
+            if (viewModel.note.value.isArchived) viewModel.setNotoArchived(false) else viewModel.setNotoArchived(true)
             viewModel.updateNote()
         }
 

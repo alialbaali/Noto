@@ -65,11 +65,15 @@ class LibraryViewModel(
     }
 
     fun setNotoColor(notoColor: NotoColor) {
-        mutableLibrary.value = mutableLibrary.value.copy(color = notoColor)
+        viewModelScope.launch {
+            libraryRepository.updateLibrary(library.value.copy(color = notoColor))
+        }
     }
 
     fun setNotoIcon(notoIcon: NotoIcon) {
-        mutableLibrary.value = mutableLibrary.value.copy(icon = notoIcon)
+        viewModelScope.launch {
+            libraryRepository.updateLibrary(library.value.copy(icon = notoIcon))
+        }
     }
 
     fun setSortingMethod(sortingMethod: SortingMethod) {
@@ -97,7 +101,6 @@ class LibraryViewModel(
         val sortingType = when (library.value?.sortingType) {
             SortingType.Alphabetically -> Note::title
             SortingType.CreationDate -> Note::creationDate
-            else -> Note::creationDate
         }
 
         mutableNotes.value = mutableNotes.value

@@ -24,13 +24,11 @@ class ArchiveDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = ArchiveDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+    ): View = ArchiveDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         BaseDialogFragmentBinding.bind(root).apply {
             tvDialogTitle.text = stringResource(R.string.note_options)
         }
-
-        viewModel.getNoteById(args.notoId)
 
         tvUnarchiveNoto.setOnClickListener {
             viewModel.setNotoArchived(false)
