@@ -56,12 +56,23 @@ class LibraryViewModel(
         storage.put(LAYOUT_MANAGER_KEY, value.toString())
     }
 
-    fun setLibraryTitle(title: String) {
-        mutableLibrary.value = mutableLibrary.value.copy(title = title)
-    }
-
     fun deleteLibrary() = viewModelScope.launch {
         libraryRepository.deleteLibrary(library.value)
+    }
+
+    fun createOrUpdateLibrary(title: String, notoColor: NotoColor, notoIcon: NotoIcon) = viewModelScope.launch{
+        val library = Library(
+            libraryId,
+            title,
+            position = 0,
+            color = notoColor,
+            icon = notoIcon,
+        )
+
+        if (libraryId == 0L)
+            libraryRepository.createLibrary(library)
+        else
+            libraryRepository.updateLibrary(library)
     }
 
     fun createLibrary() = viewModelScope.launch {
@@ -72,18 +83,6 @@ class LibraryViewModel(
         libraryRepository.updateLibrary(library.value)
     }
 
-    fun setNotoColor(notoColor: NotoColor) {
-        viewModelScope.launch {
-            libraryRepository.updateLibrary(library.value.copy(color = notoColor))
-        }
-    }
-
-    fun setNotoIcon(notoIcon: NotoIcon) {
-        viewModelScope.launch {
-            libraryRepository.updateLibrary(library.value.copy(icon = notoIcon))
-        }
-    }
-
     fun setSortingMethod(sortingMethod: SortingMethod) {
         mutableLibrary.value = mutableLibrary.value.copy(sortingMethod = sortingMethod)
         sortNotes()
@@ -92,12 +91,6 @@ class LibraryViewModel(
     fun setSortingType(sortingType: SortingType) {
         mutableLibrary.value = mutableLibrary.value.copy(sortingType = sortingType)
         sortNotes()
-    }
-
-    fun postLibrary() = viewModelScope.launch {
-        libraryRepository.getLibraries().collect { value ->
-            mutableLibrary.value = Library(position = value.count())
-        }
     }
 
     fun toggleNoteStar(note: Note) = viewModelScope.launch {

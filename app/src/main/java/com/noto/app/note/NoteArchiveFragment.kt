@@ -55,7 +55,7 @@ class NoteArchiveFragment : Fragment() {
         rv.adapter = rvAdapter
         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        viewModel.notes
+        viewModel.archivedNotes
             .onEach {
                 val notesCount = if (it.size == 1) " Archived Noto" else " Archived Notos"
                 tvLibraryNotoCount.text = it.size.toString().plus(notesCount)

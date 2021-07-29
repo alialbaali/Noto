@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.view.children
-import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
@@ -19,14 +18,14 @@ import com.noto.app.domain.model.NotoIcon
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private lateinit var binding: NewLibraryDialogFragmentBinding
 
-    private val viewModel by sharedViewModel<LibraryViewModel> { parametersOf(args.libraryId) }
+    private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<NewLibraryDialogFragmentArgs>()
 
@@ -37,37 +36,35 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         binding.apply {
             val baseDialog = BaseDialogFragmentBinding.bind(root)
 
-            baseDialog.tvDialogTitle.text = stringResource(R.string.new_library)
+            if (args.libraryId == 0L) {
+                baseDialog.tvDialogTitle.text = stringResource(R.string.new_library)
+            } else {
+                baseDialog.tvDialogTitle.text = stringResource(R.string.edit_library)
+                btnCreate.text = getString(R.string.update_library)
+            }
 
             initNotoColors()
             initNotoIcons()
 
-            if (args.libraryId == 0L) viewModel.postLibrary()
-            else btnCreate.text = getString(R.string.update_library)
-
             viewModel.library
-                .onEach {
-                    et.setText(it.title)
-                    et.setSelection(it.title.length)
-                    til.setEndIconTintList(colorStateResource(it.color.toResource()))
-                    til.startIconDrawable = drawableResource(it.icon.toResource())
-                }
+                .onEach { et.setText(it.title) }
                 .launchIn(lifecycleScope)
 
-//            et.doAfterTextChanged { viewModel.setLibraryTitle(it.toString()) }
-
             btnCreate.setOnClickListener {
-
                 val title = et.text.toString()
+                val color = binding.rgNotoColors.checkedRadioButtonId.let {
+                    NotoColor.values()[it]
+                }
+                val icon = binding.rgNotoIcons.checkedRadioButtonId.let {
+                    NotoIcon.values()[it]
+                }
 
                 if (title.isBlank()) til.error = stringResource(R.string.empty_title)
                 else {
                     dismiss()
-                    if (args.libraryId == 0L) viewModel.createLibrary()
-                    else viewModel.updateLibrary()
+                    viewModel.createOrUpdateLibrary(title, color, icon)
                 }
             }
-
         }
 
         return binding.root
@@ -100,7 +97,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                             it.buttonTintList = colorStateResource(toResource())
                         }
                     }
-                viewModel.setNotoColor(this)
+                binding.til.setEndIconTintList(colorStateResource(toResource()))
             }
         }
     }
@@ -130,7 +127,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                             it.setBackgroundColor(colorResource(R.color.colorOnSecondary))
                         }
                     }
-                viewModel.setNotoIcon(this)
+                binding.til.startIconDrawable = drawableResource(toResource())
             }
         }
     }
