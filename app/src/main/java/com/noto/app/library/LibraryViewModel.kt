@@ -39,8 +39,7 @@ class LibraryViewModel(
             .launchIn(viewModelScope)
 
         storage.get(LAYOUT_MANAGER_KEY)
-            .map { it.map { LayoutManager.valueOf(it) } }
-            .getOrElse { flowOf(LayoutManager.Linear) }
+            .map { LayoutManager.valueOf(it) }
             .onEach { mutableLayoutManager.value = it }
             .launchIn(viewModelScope)
     }

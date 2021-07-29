@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalStorage {
 
-    fun get(key: String): Result<Flow<String>>
+    fun get(key: String): Flow<String>
 
     suspend fun put(key: String, value: String): Result<Unit>
 

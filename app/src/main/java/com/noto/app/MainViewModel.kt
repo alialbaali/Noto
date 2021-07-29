@@ -17,8 +17,7 @@ class MainViewModel(private val storage: LocalStorage) : ViewModel() {
 
     init {
         storage.get(ThemeKey)
-            .map { it.map { Theme.valueOf(it) } }
-            .getOrElse { flowOf(Theme.System) }
+            .map { Theme.valueOf(it) }
             .onEach { mutableTheme.value = it }
             .launchIn(viewModelScope)
     }
