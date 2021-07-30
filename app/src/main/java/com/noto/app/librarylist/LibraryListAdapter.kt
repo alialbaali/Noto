@@ -1,11 +1,9 @@
 package com.noto.app.librarylist
 
-import android.content.res.ColorStateList
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.RippleDrawable
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +12,7 @@ import com.noto.app.databinding.LibraryItemBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.librarylist.LibraryListAdapter.LibraryItemViewHolder
 import com.noto.app.util.colorResource
+import com.noto.app.util.drawableResource
 import com.noto.app.util.toResource
 
 
@@ -62,16 +61,9 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
 
         fun bind(library: Library) {
             binding.tvLibraryTitle.text = library.title
-
             val notoColor = binding.root.colorResource(library.color.toResource())
-            val backgroundColor = binding.root.colorResource(R.color.colorBackground)
-
-            val gradientDrawable = GradientDrawable(
-                GradientDrawable.Orientation.TL_BR,
-                intArrayOf(backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, backgroundColor, notoColor)
-            ).apply {
-                gradientType = GradientDrawable.LINEAR_GRADIENT
-                cornerRadius = 16f
+            binding.vColor.background = binding.root.drawableResource(R.drawable.view_color_shape)?.also {
+                DrawableCompat.setTint(it, notoColor)
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -79,17 +71,8 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
                 binding.root.outlineSpotShadowColor = notoColor
             }
 
-            val rippleDrawable = RippleDrawable(ColorStateList.valueOf(notoColor), gradientDrawable, gradientDrawable)
-
-            binding.root.background = rippleDrawable
-
             val count = listener.countLibraryNotes(library)
-
-            binding.tvLibraryNotoCount.text = "$count".plus(if (count == 1) " Note" else " Notes")
-            binding.tvLibraryTitle.setTextColor(notoColor)
-            binding.tvLibraryNotoCount.setTextColor(notoColor)
-            binding.ivLibraryNotoIcon.setImageResource(library.icon.toResource())
-            binding.ivLibraryNotoIcon.imageTintList = ColorStateList.valueOf(notoColor)
+            binding.tvLibraryNotesCount.text = "$count".plus(if (count == 1) " Note" else " Notes")
         }
     }
 

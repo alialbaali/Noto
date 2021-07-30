@@ -1,55 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/library_item_shape"
-    android:elevation="@dimen/elevation_extra_small"
     android:id="@+id/cl"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacing_small"
-    android:layout_width="match_parent">
+    android:background="@drawable/library_item_shape"
+    android:elevation="@dimen/elevation_normal">
 
-    <ImageView
-        android:id="@+id/iv_library_noto_icon"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_normal"
-        android:layout_marginEnd="@dimen/spacing_small"
-        android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_width="wrap_content"
-        android:src="@drawable/ic_list_24dp"
-        app:layout_constraintBottom_toTopOf="@id/tv_library_noto_count"
-        app:layout_constraintEnd_toStartOf="@id/tv_library_title"
+    <View
+        android:id="@+id/v_color"
+        android:layout_width="5dp"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/spacing_normal"
+        android:background="@drawable/view_color_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/colorPrimary" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
-        style="@style/TextView.LibraryTitle"
         android:id="@+id/tv_library_title"
+        style="@style/LibraryTitleTextView"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/spacing_normal"
         android:layout_marginStart="@dimen/spacing_small"
         android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_width="0dp"
-        app:layout_constraintBottom_toTopOf="@id/tv_library_noto_count"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_extra_small"
+        app:layout_constraintBottom_toTopOf="@id/tv_library_notes_count"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/iv_library_noto_icon"
+        app:layout_constraintStart_toEndOf="@+id/v_color"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Library" />
 
     <com.google.android.material.textview.MaterialTextView
-        style="@style/TextView.LibraryNotoCount"
-        android:gravity="start"
-        android:id="@+id/tv_library_noto_count"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
+        android:id="@+id/tv_library_notes_count"
+        style="@style/LibraryNotesCountTextView"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:layout_marginTop="@dimen/spacing_extra_small"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/v_color"
         app:layout_constraintTop_toBottomOf="@+id/tv_library_title"
-        tools:text="3 Notos" />
+        tools:text="3 Notes" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

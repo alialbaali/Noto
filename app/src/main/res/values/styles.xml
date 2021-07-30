@@ -118,16 +118,18 @@
         <item name="tint">@color/colorBackground</item>
     </style>
 
-    <style name="TextView.LibraryTitle" parent="Widget.MaterialComponents.TextView">
-        <item name="android:singleLine">true</item>
+    <style name="LibraryTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">18sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
     </style>
 
-    <style name="TextView.LibraryNotoCount" parent="Widget.MaterialComponents.TextView">
-        <item name="android:singleLine">true</item>
+    <style name="LibraryNotesCountTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorOnPrimary</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
     </style>
 
     <style name="TextInputLayout.NotoTitle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
