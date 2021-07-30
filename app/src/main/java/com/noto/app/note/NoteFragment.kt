@@ -133,7 +133,7 @@ class NoteFragment : Fragment() {
                     val dateFormat = if (year > ZonedDateTime.now().year) format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
                     else format(DateTimeFormatter.ofPattern("EEE, MMM d"))
 
-                    tvCreatedAt.text = "${getString(R.string.created_at)} ${dateFormat.uppercase()}"
+                    tvCreatedAt.text = "${getString(R.string.created_at)} $dateFormat"
                 }
             }
             .launchIn(lifecycleScope)

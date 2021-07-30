@@ -10,11 +10,13 @@
 
     <com.google.android.material.radiobutton.MaterialRadioButton
         android:id="@+id/rb_note_star"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_normal"
         android:background="@drawable/selector_star"
         android:button="@null"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/tv_note_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_note_title"

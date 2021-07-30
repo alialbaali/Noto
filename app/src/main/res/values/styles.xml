@@ -17,9 +17,31 @@
         <item name="fontFamily">@font/arima_madurai</item>
     </style>
 
-    <style name="Style.CollapsingToolbar" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
+    <style name="AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Primary">
+        <item name="android:background">@color/colorBackground</item>
+        <item name="liftOnScroll">true</item>
+        <item name="android:elevation">@dimen/elevation_normal</item>
+    </style>
+
+    <style name="CollapsingToolbar" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
         <item name="contentScrim">@color/colorSurface</item>
         <item name="layout_scrollFlags">scroll|snap|exitUntilCollapsed</item>
+    </style>
+
+    <style name="TitleTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:maxLines">3</item>
+        <item name="android:textSize">@dimen/size_huge</item>
+        <item name="android:fontFamily">@font/arima_madurai_medium</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="SubtitleTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">end</item>
+        <item name="android:textSize">@dimen/size_tiny</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:fontFamily">@font/arima_madurai_medium</item>
     </style>
 
     <style name="DialogAnimation">

@@ -93,7 +93,7 @@ class LibraryListFragment : BaseDialogFragment() {
         viewModel.libraries
             .onEach {
                 adapter.submitList(it)
-                binding.tvLibraryNotoCount.text = "${it.size} ${getString(R.string.libraries)}"
+                binding.tvLibraryNotesCount.text = "${it.size} ${getString(R.string.libraries)}"
             }
             .launchIn(lifecycleScope)
 

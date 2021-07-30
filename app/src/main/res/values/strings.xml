@@ -40,6 +40,7 @@
     <string name="all_notes">All notes</string>
     <string name="body">Body</string>
     <string name="title">Title</string>
+    <string name="create_note">Create note</string>
     <string name="delete_note">Delete note</string>
     <string name="archive_note">Archive note</string>
     <string name="sorting">Sorting</string>
