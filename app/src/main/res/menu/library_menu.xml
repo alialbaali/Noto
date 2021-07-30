@@ -10,7 +10,7 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/view"
+        android:id="@+id/layout_manager"
         android:contentDescription="@string/view"
         android:icon="@drawable/view_agenda_outline"
         android:title="@string/view"
