@@ -107,6 +107,7 @@
         <item name="hintAnimationEnabled">true</item>
         <item name="counterTextColor">@color/colorOnPrimary</item>
         <item name="hintTextColor">@color/colorOnPrimary</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
     </style>
 
     <style name="TextInputEditText">
