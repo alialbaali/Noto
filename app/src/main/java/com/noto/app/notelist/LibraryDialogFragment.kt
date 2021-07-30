@@ -46,7 +46,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
             .onEach {
                 baseDialog.vHead.backgroundTintList = colorStateResource(it.color.toResource())
                 baseDialog.tvDialogTitle.setTextColor(colorStateResource(it.color.toResource()))
-                tvEditLibrary.setCompoundDrawablesWithIntrinsicBounds(it.color.toResource(), 0, 0, 0)
+                tvEditLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_outline_edit_24, 0, 0, 0)
             }
             .launchIn(lifecycleScope)
     }

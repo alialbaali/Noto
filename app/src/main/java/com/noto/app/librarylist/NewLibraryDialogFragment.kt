@@ -52,7 +52,13 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private fun collectState() {
         viewModel.library
-            .onEach { binding.et.setText(it.title) }
+            .onEach {
+                binding.et.setText(it.title)
+                binding.til.setEndIconTintList(colorStateResource(it.color.toResource()))
+                binding.til.startIconDrawable = drawableResource(it.icon.toResource())
+                binding.rgNotoColors.check(it.color.ordinal)
+                binding.rgNotoIcons.check(it.icon.ordinal)
+            }
             .launchIn(lifecycleScope)
     }
 
