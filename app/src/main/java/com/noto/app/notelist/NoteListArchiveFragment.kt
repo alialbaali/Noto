@@ -64,7 +64,7 @@ class NoteListArchiveFragment : Fragment() {
         viewModel.archivedNotes
             .onEach {
                 val notesCount = if (it.size == 1) " Archived Noto" else " Archived Notos"
-                tvLibraryNotoCount.text = it.size.toString().plus(notesCount)
+                tvLibraryNotesCount.text = it.size.toString().plus(notesCount)
                 adapter.submitList(it)
             }
             .launchIn(lifecycleScope)
@@ -73,8 +73,7 @@ class NoteListArchiveFragment : Fragment() {
             .onEach {
                 val color = colorResource(it.color.toResource())
                 tb.navigationIcon?.mutate()?.setTint(color)
-                ivLibraryIcon.imageTintList = colorStateResource(it.color.toResource())
-                tvLibraryNotoCount.setTextColor(color)
+                tvLibraryNotesCount.setTextColor(color)
                 tvLibraryTitle.setTextColor(color)
                 tvLibraryTitle.text = "${it.title} ${getString(R.string.archived_notes)}"
             }

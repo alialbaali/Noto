@@ -19,7 +19,6 @@ import com.noto.app.R
 import com.noto.app.databinding.NoteListFragmentBinding
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
-import com.noto.app.domain.model.NotoIcon
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -59,11 +58,11 @@ class NoteListFragment : Fragment() {
     private fun NoteListFragmentBinding.collectState() {
         viewModel.library
             .onEach {
-                setLibraryColors(it.color, it.icon)
+                setLibraryColors(it.color)
                 tvLibraryTitle.text = it.title
                 tvPlaceHolder.text = it.title
                 val notosCount = viewModel.notes.value.size
-                tvLibraryNotoCount.text = notosCount.toString().plus(if (notosCount == 1) " Note" else " Notes")
+                tvLibraryNotesCount.text = notosCount.toString().plus(if (notosCount == 1) " Note" else " Notes")
             }
             .launchIn(lifecycleScope)
 
@@ -91,7 +90,7 @@ class NoteListFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        val placeHolderItems = listOf(tvLibraryNotoCount, tvLibraryTitle, ivLibraryIcon, rv)
+        val placeHolderItems = listOf(tvLibraryNotesCount, tvLibraryTitle, rv)
 
         viewModel.notes
             .onEach {
@@ -109,21 +108,17 @@ class NoteListFragment : Fragment() {
             .launchIn(lifecycleScope)
     }
 
-    private fun NoteListFragmentBinding.setLibraryColors(notoColor: NotoColor, notoIcon: NotoIcon) {
+    private fun NoteListFragmentBinding.setLibraryColors(notoColor: NotoColor) {
 
         val color = colorResource(notoColor.toResource())
         val colorStateList = colorStateResource(notoColor.toResource())
 
         tvLibraryTitle.setTextColor(color)
-        tvLibraryNotoCount.setTextColor(color)
+        tvLibraryNotesCount.setTextColor(color)
         tb.navigationIcon?.mutate()?.setTint(color)
-        ivLibraryIcon.setImageResource(notoIcon.toResource())
-        ivLibraryIcon.imageTintList = colorStateList
         fab.backgroundTintList = colorStateList
 
         tvPlaceHolder.setTextColor(color)
-        ivPlaceHolder.setImageResource(notoIcon.toResource())
-        ivPlaceHolder.imageTintList = colorStateList
     }
 
     private fun NoteListFragmentBinding.setupListeners() {

@@ -15,7 +15,6 @@
         android:paddingTop="@dimen/spacing_extra_small"
         android:paddingEnd="@dimen/spacing_small"
         android:visibility="visible"
-        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/note_item" />
 
@@ -29,7 +28,7 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/ctb"
-            style="@style/Style.CollapsingToolbar"
+            style="@style/CollapsingToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="@color/colorBackground"
@@ -38,78 +37,36 @@
             app:titleEnabled="false"
             tools:title="Notes">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_collapseMode="parallax">
-
-                <ImageView
-                    android:id="@+id/iv_library_icon"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
-                    android:layout_marginStart="@dimen/spacing_normal"
-                    android:layout_marginTop="@dimen/spacing_normal"
-                    android:layout_marginEnd="@dimen/spacing_normal"
-                    android:layout_marginBottom="@dimen/spacing_small"
-                    android:src="@drawable/archive_outline"
-                    android:tint="@color/colorPrimary"
-                    app:layout_constraintBottom_toTopOf="@+id/tv_library_title"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tb"
-                    tools:tint="@color/colorAccentTeal" />
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="parallax"
+                app:navigationIcon="@drawable/ic_back_24px">
 
                 <TextView
-                    android:id="@+id/tv_library_title"
-                    android:layout_width="0dp"
+                    android:id="@+id/tv_library_notes_count"
+                    style="@style/SubtitleTextView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/spacing_normal"
-                    android:layout_marginTop="@dimen/spacing_small"
-                    android:layout_marginEnd="@dimen/spacing_normal"
-                    android:layout_marginBottom="@dimen/spacing_normal"
-                    android:fontFamily="@font/arima_madurai_medium"
-                    android:gravity="center"
-                    android:maxLines="3"
-                    android:text="@string/archived_notes"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="24sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_library_icon"
+                    android:layout_margin="@dimen/spacing_normal"
+                    tools:text="7 Notes"
                     tools:textColor="@color/colorAccentTeal" />
 
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/tb"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toTopOf="@id/iv_library_icon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:navigationIcon="@drawable/ic_back_24px">
-
-                    <TextView
-                        android:id="@+id/tv_library_notes_count"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/spacing_normal"
-                        android:fontFamily="@font/arima_madurai"
-                        android:gravity="end"
-                        android:singleLine="true"
-                        android:textAllCaps="true"
-                        android:textColor="@color/colorOnPrimary"
-                        android:textSize="12sp"
-                        tools:text="7 Notos"
-                        tools:textColor="@color/colorAccentTeal" />
-
-                </com.google.android.material.appbar.MaterialToolbar>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
+            </com.google.android.material.appbar.MaterialToolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <TextView
+            android:id="@+id/tv_library_title"
+            style="@style/TitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:layout_marginVertical="@dimen/spacing_small"
+            tools:text="Archived notes"
+            tools:textColor="@color/colorAccentTeal" />
+
     </com.google.android.material.appbar.AppBarLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
