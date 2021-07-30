@@ -3,7 +3,7 @@ package com.noto.app.data.database.migration
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-object Migration1To2 : Migration(1, 2) {
+object RemoveNotoPrefix : Migration(1, 2) {
 
     override fun migrate(database: SupportSQLiteDatabase) {
         database.beginTransaction()
@@ -20,7 +20,7 @@ object Migration1To2 : Migration(1, 2) {
 
 }
 
-object Migration2To3 : Migration(2, 3) {
+object RenameNotosTableToNotes : Migration(2, 3) {
 
     override fun migrate(database: SupportSQLiteDatabase) {
         database.beginTransaction()
@@ -30,7 +30,7 @@ object Migration2To3 : Migration(2, 3) {
 
 }
 
-object Migration3To4 : Migration(3, 4) {
+object RemoveLibraryPrefix : Migration(3, 4) {
 
     override fun migrate(database: SupportSQLiteDatabase) {
         database.beginTransaction()
@@ -45,7 +45,7 @@ object Migration3To4 : Migration(3, 4) {
 
 }
 
-object Migration4To5 : Migration(4, 5) {
+object AddSortingColumns : Migration(4, 5) {
 
     override fun migrate(database: SupportSQLiteDatabase) {
         database.beginTransaction()
@@ -56,7 +56,7 @@ object Migration4To5 : Migration(4, 5) {
 
 }
 
-object Migration5To6 : Migration(5, 6) {
+object RemoveNotoIcon : Migration(5, 6) {
     override fun migrate(database: SupportSQLiteDatabase) {
         database.beginTransaction()
         database.execSQL("CREATE TABLE libraries_backup(id INTEGER NOT NULL PRIMARY KEY, title TEXT NOT NULL, position INTEGER NOT NULL, color INTEGER NOT NULL, creation_date TEXT NOT NULL, sorting_type INTEGER NOT NULL, sorting_method INTEGER NOT NULL);")

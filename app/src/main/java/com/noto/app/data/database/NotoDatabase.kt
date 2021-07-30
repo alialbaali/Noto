@@ -44,7 +44,13 @@ abstract class NotoDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(context.applicationContext, NotoDatabase::class.java, NOTO_DATABASE)
-                .addMigrations(Migration1To2, Migration2To3, Migration3To4, Migration4To5, Migration5To6)
+                .addMigrations(
+                    RemoveNotoPrefix,
+                    RenameNotosTableToNotes,
+                    RemoveLibraryPrefix,
+                    AddSortingColumns,
+                    RemoveNotoIcon,
+                )
                 .build()
     }
 }
