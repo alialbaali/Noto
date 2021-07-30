@@ -64,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
-        android:name="com.noto.app.library.LibraryFragment"
+        android:name="com.noto.app.notelist.NoteListFragment"
         android:label="LibraryFragment">
         <action
             android:id="@+id/action_libraryFragment_to_notoFragment"
@@ -92,7 +92,7 @@
     </fragment>
     <dialog
         android:id="@+id/newLibraryDialogFragment"
-        android:name="com.noto.app.library.NewLibraryDialogFragment"
+        android:name="com.noto.app.librarylist.NewLibraryDialogFragment"
         android:label="NewLibraryDialogFragment">
         <argument
             android:name="library_id"
@@ -119,7 +119,7 @@
     </fragment>
     <fragment
         android:id="@+id/archiveFragment"
-        android:name="com.noto.app.note.NoteArchiveFragment"
+        android:name="com.noto.app.notelist.NoteListArchiveFragment"
         android:label="ArchiveFragment">
         <argument
             android:name="library_id"
@@ -167,7 +167,7 @@
         android:label="ThemeDialogFragment" />
     <dialog
         android:id="@+id/libraryDialogFragment"
-        android:name="com.noto.app.library.LibraryDialogFragment"
+        android:name="com.noto.app.notelist.LibraryDialogFragment"
         android:label="LibraryDialogFragment">
         <argument
             android:name="library_id"

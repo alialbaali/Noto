@@ -19,7 +19,7 @@ import com.noto.app.domain.source.NoteLocalDataSource
 import com.noto.app.label.LabelViewModel
 import com.noto.app.librarylist.LibraryListViewModel
 import com.noto.app.note.NoteViewModel
-import com.noto.app.notelist.LibraryViewModel
+import com.noto.app.notelist.NoteListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -30,7 +30,7 @@ val appModule = module {
 
     viewModel { LibraryListViewModel(get(), get()) }
 
-    viewModel { LibraryViewModel(get(), get(), get(), it.get()) }
+    viewModel { NoteListViewModel(get(), get(), get(), it.get()) }
 
     viewModel { NoteViewModel(get(), get(), it[0], it[1]) }
 

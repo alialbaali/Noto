@@ -15,15 +15,14 @@
         android:text="@string/edit_library"
         app:drawableStartCompat="@drawable/ic_outline_edit_24" />
 
-    <TextView
-        android:id="@+id/tv_sorting"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
-        android:text="@string/sorting"
-        app:drawableStartCompat="@drawable/ic_sort" />
-
+<!--    <TextView-->
+<!--        android:id="@+id/tv_sorting"-->
+<!--        style="@style/DialogItem"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@drawable/ripple"-->
+<!--        android:text="@string/sorting"-->
+<!--        app:drawableStartCompat="@drawable/ic_sort" />-->
 
     <TextView
         android:id="@+id/tv_delete_library"

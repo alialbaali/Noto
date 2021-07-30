@@ -72,7 +72,6 @@
                     android:gravity="center"
                     android:maxLines="3"
                     android:text="@string/archived_notes"
-                    android:textAllCaps="true"
                     android:textColor="@color/colorPrimary"
                     android:textSize="24sp"
                     app:layout_constraintBottom_toBottomOf="parent"

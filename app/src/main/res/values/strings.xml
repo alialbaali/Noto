@@ -15,7 +15,7 @@
     <string name="copy_to">Copy to</string>
     <string name="view">View</string>
     <string name="created_at">Created at</string>
-    <string name="confirmation_dialog">Please Confirm this action!</string>
+    <string name="confirmation_dialog">Please confirm this action!</string>
     <string name="alphabetically">Alphabetically</string>
     <string name="creation_date">Creation Date</string>
     <string name="desc">Descending</string>
@@ -27,7 +27,7 @@
     <string name="create_library">Create library</string>
     <string name="update_library">Update library</string>
     <string name="new_library">New Library</string>
-    <string name="library_options">Library Options</string>
+    <string name="library_options">Library options</string>
     <string name="edit_library">Edit library</string>
     <string name="library_title">Library title</string>
     <string name="delete_library">Delete library</string>
@@ -56,7 +56,8 @@
     <string name="delete_note_confirmation">Are you sure you want to delete this note?</string>
     <string name="share_note">Share note to</string>
     <string name="add_reminder">Add reminder</string>
-    <string name="note_options">Note Options</string>
+    <string name="edit_reminder">Edit reminder</string>
+    <string name="note_options">Note options</string>
 
     <!-- Label -->
     <string name="add_label">Add label</string>

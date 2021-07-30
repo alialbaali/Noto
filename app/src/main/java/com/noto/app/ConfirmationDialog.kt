@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ConfirmationDialogFragmentBinding
+import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import java.io.Serializable
 
@@ -20,6 +22,9 @@ class ConfirmationDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View = ConfirmationDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
+        BaseDialogFragmentBinding.bind(root).apply {
+            tvDialogTitle.text = stringResource(R.string.confirmation_dialog)
+        }
         tvTitle.text = args.title
         btnConfirm.text = args.btnText
         btnConfirm.setOnClickListener {

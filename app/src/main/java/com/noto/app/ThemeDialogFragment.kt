@@ -40,18 +40,18 @@ class ThemeDialogFragment : BaseDialogFragment() {
 
         rbSystemTheme.setOnClickListener {
             dismiss()
-            viewModel.setTheme(Theme.System)
+            viewModel.updateTheme(Theme.System)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
 
         rbLightTheme.setOnClickListener {
             dismiss()
-            viewModel.setTheme(Theme.Light)
+            viewModel.updateTheme(Theme.Light)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
         rbDarkTheme.setOnClickListener {
             dismiss()
-            viewModel.setTheme(Theme.Dark)
+            viewModel.updateTheme(Theme.Dark)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }

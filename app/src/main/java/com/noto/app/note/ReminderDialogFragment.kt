@@ -48,27 +48,27 @@ class ReminderDialogFragment : BaseDialogFragment() {
         }
 
         viewModel.note
-            .onEach{
+            .onEach {
 
                 it.reminderDate?.let { time ->
 
-                til.endIconDrawable = drawableResource(R.drawable.bell_remove_outline)
+                    til.endIconDrawable = drawableResource(R.drawable.bell_remove_outline)
 
-                if (time.year > ZonedDateTime.now().year) {
-                    val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm a"))
-                    et.setText(format)
-                } else {
-                    val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM HH:mm a"))
-                    et.setText(format)
+                    if (time.year > ZonedDateTime.now().year) {
+                        val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm a"))
+                        et.setText(format)
+                    } else {
+                        val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM HH:mm a"))
+                        et.setText(format)
+                    }
                 }
-            }
 
-            if (it.reminderDate == null) {
-                et.setText(getString(R.string.no_reminder))
-                til.endIconDrawable = drawableResource(R.drawable.bell_plus_outline)
-            }
+                if (it.reminderDate == null) {
+                    et.setText(getString(R.string.no_reminder))
+                    til.endIconDrawable = drawableResource(R.drawable.bell_plus_outline)
+                }
 
-        }
+            }
 
 
         til.setEndIconOnClickListener {
@@ -96,8 +96,8 @@ class ReminderDialogFragment : BaseDialogFragment() {
                     putExtra(NoteId, it.id.toInt())
                     putExtra(NoteTitle, it.title)
                     putExtra(NoteBody, it.body)
-                    putExtra(NoteColor, viewModel.library.value?.color?.ordinal ?: 0)
-                    putExtra(NoteIcon, viewModel.library.value?.icon?.ordinal ?: 0)
+                    putExtra(NoteColor, viewModel.library.value.color.ordinal)
+                    putExtra(NoteIcon, viewModel.library.value.icon.ordinal)
                 }
 
                 val pendingIntent = PendingIntent.getBroadcast(requireContext(), it.id.toInt(), intent, PENDING_INTENT_FLAGS)
@@ -118,8 +118,8 @@ class ReminderDialogFragment : BaseDialogFragment() {
         val startHour = currentDateTime.get(Calendar.HOUR_OF_DAY)
         val startMinute = currentDateTime.get(Calendar.MINUTE)
 
-        DatePickerDialog(requireContext(), R.style.PickerDialog, DatePickerDialog.OnDateSetListener { datePicker, year, month, day ->
-            TimePickerDialog(requireContext(), R.style.PickerDialog, TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+        DatePickerDialog(requireContext(), R.style.PickerDialog, { datePicker, year, month, day ->
+            TimePickerDialog(requireContext(), R.style.PickerDialog, { _, hour, minute ->
 
                 val dateTime = LocalDateTime.of(year, month.plus(1), day, hour, minute)
                 val zonedDateTime = ZonedDateTime.of(dateTime, ZoneId.systemDefault())

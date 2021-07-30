@@ -22,7 +22,7 @@ class MainViewModel(private val storage: LocalStorage) : ViewModel() {
             .launchIn(viewModelScope)
     }
 
-    fun setTheme(value: Theme) = viewModelScope.launch {
+    fun updateTheme(value: Theme) = viewModelScope.launch {
         storage.put(ThemeKey, value.toString())
     }
 
