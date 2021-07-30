@@ -15,7 +15,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.NotoIcon
-import com.noto.app.notelist.LibraryViewModel
+import com.noto.app.notelist.NoteListViewModel
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -26,7 +26,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private lateinit var binding: NewLibraryDialogFragmentBinding
 
-    private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
+    private val viewModel by viewModel<NoteListViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<NewLibraryDialogFragmentArgs>()
 

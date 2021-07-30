@@ -1,6 +1,5 @@
-package com.noto.app.library
+package com.noto.app.notelist
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,12 +18,12 @@ import com.noto.app.util.toResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class LibraryDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by sharedViewModel<LibraryViewModel> { parametersOf(args.libraryId) }
+    private val viewModel by viewModel<NoteListViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<LibraryDialogFragmentArgs>()
 
@@ -38,18 +37,21 @@ class LibraryDialogFragment : BaseDialogFragment() {
             tvDialogTitle.text = stringResource(R.string.library_options)
         }
 
+        setupListeners()
+        collectState(baseDialog)
+    }
+
+    private fun LibraryDialogFragmentBinding.collectState(baseDialog: BaseDialogFragmentBinding) {
         viewModel.library
             .onEach {
                 baseDialog.vHead.backgroundTintList = colorStateResource(it.color.toResource())
                 baseDialog.tvDialogTitle.setTextColor(colorStateResource(it.color.toResource()))
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    listOf(tvEditLibrary, tvSorting).forEach { tv ->
-                        tv.compoundDrawableTintList = colorStateResource(it.color.toResource())
-                    }
-                }
+                tvEditLibrary.setCompoundDrawablesWithIntrinsicBounds(it.color.toResource(), 0, 0, 0)
             }
             .launchIn(lifecycleScope)
+    }
 
+    private fun LibraryDialogFragmentBinding.setupListeners() {
         tvEditLibrary.setOnClickListener {
             dismiss()
             findNavController().navigate(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToNewLibraryDialogFragment(args.libraryId))
@@ -72,13 +74,6 @@ class LibraryDialogFragment : BaseDialogFragment() {
                     clickListener,
                 )
             )
-        }
-
-        tvSorting.setOnClickListener {
-            dismiss()
-
-            findNavController()
-                .navigate(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToSortingDialogFragment())
         }
     }
 }
