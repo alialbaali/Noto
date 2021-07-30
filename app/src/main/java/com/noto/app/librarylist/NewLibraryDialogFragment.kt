@@ -1,9 +1,11 @@
 package com.noto.app.librarylist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.core.view.children
@@ -29,6 +31,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private val args by navArgs<NewLibraryDialogFragmentArgs>()
 
+    private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = NewLibraryDialogFragmentBinding.inflate(inflater, container, false)
 
@@ -40,6 +44,10 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 binding.btnCreate.text = getString(R.string.update_library)
             }
         }
+
+        binding.et.requestFocus()
+        binding.et.setSelection(binding.et.text?.length ?: 0)
+        imm.showKeyboard()
 
         setupNotoColors()
         collectState()
