@@ -107,23 +107,19 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_search"
             style="@style/TextInputLayout"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:layout_marginVertical="@dimen/spacing_small"
             android:hint="@string/search"
-            android:inputType="text"
-            android:padding="@dimen/spacing_normal"
-            android:singleLine="true"
-            android:textColor="@color/colorSecondary"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_library_title">
+            android:visibility="gone">
 
-            <EditText
+            <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_search"
+                style="@style/TextInputEditText"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
