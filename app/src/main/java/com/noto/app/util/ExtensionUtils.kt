@@ -43,29 +43,23 @@ inline fun <T : ViewBinding> T.withBinding(crossinline block: T.() -> Unit): Vie
 fun InputMethodManager.showKeyboard() = toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 fun InputMethodManager.hideKeyboard(windowToken: IBinder) = hideSoftInputFromWindow(windowToken, 0)
 
+fun Note.format(): String = """
+    $title
+    
+    $body
+""".trimIndent()
+
 //fun View.showKeyboard() = ViewCompat.getWindowInsetsController(this)?.show(WindowInsetsCompat.Type.ime())
 //fun View.hideKeyboard() = ViewCompat.getWindowInsetsController(this)?.hide(WindowInsetsCompat.Type.ime())
 
 fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
-fun Fragment.colorStateResource(@ColorRes id: Int): ColorStateList? = ResourcesCompat.getColorStateList(resources, id, null)
-fun Fragment.colorResource(@ColorRes id: Int): Int = ResourcesCompat.getColor(resources, id, null)
-fun Fragment.stringResource(@StringRes id: Int): String = getString(id)
-fun Fragment.drawableResource(@DrawableRes id: Int): Drawable? = ResourcesCompat.getDrawable(resources, id, null)
-fun Fragment.dimenResource(@DimenRes id: Int): Float = resources.getDimension(id)
-fun Fragment.fontResource(@FontRes id: Int): Typeface? = ResourcesCompat.getFont(requireContext(), id)
-
-fun View.colorStateResource(@ColorRes id: Int): ColorStateList? = ResourcesCompat.getColorStateList(resources, id, null)
-fun View.colorResource(@ColorRes id: Int): Int = ResourcesCompat.getColor(resources, id, null)
-fun View.stringResource(@StringRes id: Int): String = context.getString(id)
-fun View.drawableResource(@DrawableRes id: Int): Drawable? = ResourcesCompat.getDrawable(resources, id, null)
-fun View.dimenResource(@DimenRes id: Int): Float = resources.getDimension(id)
-fun View.fontResource(@FontRes id: Int): Typeface? = ResourcesCompat.getFont(context!!, id)
-
-fun View.snackbar(message: String) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
+fun View.snackbar(message: String, anchorView: View? = null) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
     animationMode = Snackbar.ANIMATION_MODE_SLIDE
     setBackgroundTint(colorResource(R.color.colorPrimary))
     setTextColor(colorResource(R.color.colorBackground))
+    setAnchorView(anchorView)
+    show()
 }
 
 fun View.toast(message: String) = Toast.makeText(context, message, Toast.LENGTH_SHORT)
