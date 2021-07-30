@@ -21,9 +21,6 @@ data class Library(
     @ColumnInfo(name = "color")
     val color: NotoColor = NotoColor.GRAY,
 
-    @ColumnInfo(name = "icon")
-    val icon: NotoIcon = NotoIcon.BOOK,
-
     @ColumnInfo(name = "creation_date")
     val creationDate: LocalDate = LocalDate.now(),
 

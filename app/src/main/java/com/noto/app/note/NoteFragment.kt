@@ -27,7 +27,6 @@ const val NoteId = "noto_id"
 const val NoteTitle = "noto_title"
 const val NoteBody = "noto_body"
 const val NoteColor = "noto_color"
-const val NoteIcon = "noto_icon"
 
 class NoteFragment : Fragment() {
 

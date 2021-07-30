@@ -97,7 +97,6 @@ class ReminderDialogFragment : BaseDialogFragment() {
                     putExtra(NoteTitle, it.title)
                     putExtra(NoteBody, it.body)
                     putExtra(NoteColor, viewModel.library.value.color.ordinal)
-                    putExtra(NoteIcon, viewModel.library.value.icon.ordinal)
                 }
 
                 val pendingIntent = PendingIntent.getBroadcast(requireContext(), it.id.toInt(), intent, PENDING_INTENT_FLAGS)

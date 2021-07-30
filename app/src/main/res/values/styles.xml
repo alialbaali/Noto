@@ -110,6 +110,7 @@
     </style>
 
     <style name="TextInputEditText">
+        <item name="android:padding">@dimen/spacing_normal</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:singleLine">true</item>
         <item name="android:cursorVisible">true</item>

@@ -55,3 +55,16 @@ object Migration4To5 : Migration(4, 5) {
     }
 
 }
+
+object Migration5To6 : Migration(5, 6) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.beginTransaction()
+        database.execSQL("CREATE TABLE libraries_backup(id INTEGER NOT NULL PRIMARY KEY, title TEXT NOT NULL, position INTEGER NOT NULL, color INTEGER NOT NULL, creation_date TEXT NOT NULL, sorting_type INTEGER NOT NULL, sorting_method INTEGER NOT NULL);")
+        database.execSQL("INSERT INTO libraries_backup SELECT id, title, position, color, creation_date, sorting_type, sorting_method FROM libraries;")
+        database.execSQL("DROP TABLE libraries;")
+        database.execSQL("CREATE TABLE libraries(id INTEGER NOT NULL PRIMARY KEY, title TEXT NOT NULL, position INTEGER NOT NULL, color INTEGER NOT NULL, creation_date TEXT NOT NULL, sorting_type INTEGER NOT NULL, sorting_method INTEGER NOT NULL);")
+        database.execSQL("INSERT INTO libraries SELECT id, title, position, color, creation_date, sorting_type, sorting_method FROM libraries_backup;")
+        database.execSQL("DROP TABLE libraries_backup;")
+        database.endTransaction()
+    }
+}

@@ -14,7 +14,6 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
 import com.noto.app.domain.model.NotoColor
-import com.noto.app.domain.model.NotoIcon
 import com.noto.app.notelist.NoteListViewModel
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -43,7 +42,6 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         }
 
         setupNotoColors()
-        setupNotoIcons()
         collectState()
         setupListeners()
 
@@ -54,10 +52,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         viewModel.library
             .onEach {
                 binding.et.setText(it.title)
-                binding.til.setEndIconTintList(colorStateResource(it.color.toResource()))
-                binding.til.startIconDrawable = drawableResource(it.icon.toResource())
                 binding.rgNotoColors.check(it.color.ordinal)
-                binding.rgNotoIcons.check(it.icon.ordinal)
             }
             .launchIn(lifecycleScope)
     }
@@ -70,17 +65,12 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                     viewModel.library.value.color
                 }
             }
-            val icon = binding.rgNotoIcons.checkedRadioButtonId.let {
-                NotoIcon.values().getOrElse(it) {
-                    viewModel.library.value.icon
-                }
-            }
 
             if (title.isBlank()) {
                 binding.til.error = stringResource(R.string.empty_title)
             } else {
                 dismiss()
-                viewModel.createOrUpdateLibrary(title, color, icon)
+                viewModel.createOrUpdateLibrary(title, color)
             }
         }
 
@@ -114,36 +104,6 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                         }
                     }
                 binding.til.setEndIconTintList(colorStateResource(toResource()))
-            }
-        }
-    }
-
-    private fun setupNotoIcons() {
-        NotoIcon.values().forEach { notoIcon ->
-            RadioButton(context).apply {
-                id = notoIcon.ordinal
-                buttonDrawable = drawableResource(notoIcon.toResource())
-                buttonTintList = colorStateResource(R.color.colorOnSecondary)
-                scaleX = 1.25F
-                scaleY = 1.25F
-                val layoutParams = RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT)
-                layoutParams.setMargins(48, 48, 48, 48)
-                this.layoutParams = layoutParams
-                binding.rgNotoIcons.addView(this)
-            }
-        }
-        binding.rgNotoIcons.setOnCheckedChangeListener { _, checkedId ->
-            NotoIcon.values()[checkedId].apply {
-                binding.rgNotoIcons.children
-                    .map { it as RadioButton }
-                    .onEach {
-                        if (it.id == checkedId) {
-                            it.setBackgroundColor(colorResource(R.color.colorPrimary))
-                        } else {
-                            it.setBackgroundColor(colorResource(R.color.colorOnSecondary))
-                        }
-                    }
-                binding.til.startIconDrawable = drawableResource(toResource())
             }
         }
     }

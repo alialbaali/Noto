@@ -21,7 +21,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.noto.app.R
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
-import com.noto.app.domain.model.NotoIcon
 import com.noto.app.domain.model.SortingMethod
 
 enum class LayoutManager {
@@ -86,27 +85,6 @@ fun NotoColor.toResource(): Int = when (this) {
     NotoColor.BROWN -> R.color.colorAccentBrown
     NotoColor.BLUE_GRAY -> R.color.colorAccentBlueGray
     NotoColor.TEAL -> R.color.colorAccentTeal
-}
-
-fun NotoIcon.toResource(): Int = when (this) {
-    NotoIcon.NOTEBOOK -> R.drawable.ic_notebook_24dp
-    NotoIcon.LIST -> R.drawable.ic_list_24dp
-    NotoIcon.FITNESS -> R.drawable.ic_fitness_24dp
-    NotoIcon.HOME -> R.drawable.ic_home_24dp
-    NotoIcon.BOOK -> R.drawable.ic_book_24dp
-    NotoIcon.SCHOOL -> R.drawable.ic_school_24dp
-    NotoIcon.WORK -> R.drawable.ic_work_24dp
-    NotoIcon.LAPTOP -> R.drawable.ic_laptop_24dp
-    NotoIcon.GROCERY -> R.drawable.ic_grocery_24dp
-    NotoIcon.SHOP -> R.drawable.ic_shop_24dp
-    NotoIcon.GAME -> R.drawable.ic_game_24dp
-    NotoIcon.TRAVEL -> R.drawable.ic_travel_24dp
-    NotoIcon.MUSIC -> R.drawable.ic_music_24dp
-    NotoIcon.IDEA -> R.drawable.ic_idea_24dp
-    NotoIcon.WRENCH -> R.drawable.ic_wrench_24dp
-    NotoIcon.CHART -> R.drawable.ic_chart_24dp
-    NotoIcon.CALENDAR -> R.drawable.ic_calendar_24dp
-    NotoIcon.CODE -> R.drawable.ic_code_24dp
 }
 
 fun <T> MutableList<T>.replaceWith(value: T, predicate: (T) -> Boolean) {

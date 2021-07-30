@@ -15,13 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_normal"
         android:layout_marginBottom="@dimen/spacing_small"
+        android:theme="@style/TextInputLayout"
         app:counterEnabled="true"
-        app:counterMaxLength="32"
-        app:endIconDrawable="@drawable/selector_dialog_rbtn_gray"
-        app:endIconMode="custom"
-        app:endIconTint="@color/colorAccentGray"
-        app:startIconDrawable="@drawable/ic_list_24dp"
-        app:startIconTint="@color/colorOnPrimary">
+        app:counterMaxLength="32">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et"
@@ -30,29 +26,12 @@
             android:layout_height="match_parent"
             android:hint="@string/library_title"
             android:inputType="text|textPersonName|textCapWords"
-            android:maxLength="32"
-            android:padding="@dimen/spacing_small" />
+            android:maxLength="32" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <HorizontalScrollView
         android:id="@+id/hsv_rg_noto_colors"
-        style="@style/HorizontalScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginBottom="@dimen/spacing_small">
-
-        <RadioGroup
-            android:id="@+id/rg_noto_icons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-
-    </HorizontalScrollView>
-
-    <HorizontalScrollView
-        android:id="@+id/hsv_rg_noto_icons"
         style="@style/HorizontalScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

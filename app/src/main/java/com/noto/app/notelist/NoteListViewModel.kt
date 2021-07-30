@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
-import com.noto.app.domain.model.NotoIcon
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
@@ -54,11 +53,10 @@ class NoteListViewModel(
             .launchIn(viewModelScope)
     }
 
-    fun createOrUpdateLibrary(title: String, notoColor: NotoColor, notoIcon: NotoIcon) = viewModelScope.launch {
+    fun createOrUpdateLibrary(title: String, notoColor: NotoColor) = viewModelScope.launch {
         val library = library.value.copy(
             title = title,
             color = notoColor,
-            icon = notoIcon,
         )
 
         if (libraryId == 0L)
