@@ -57,7 +57,6 @@ class NoteFragment : Fragment() {
             viewModel.createOrUpdateNote(
                 etNoteTitle.text.toString(),
                 etNoteBody.text.toString(),
-                isStarred = rbNoteStar.isChecked
             )
             imm.hideKeyboard(etNoteBody.windowToken)
         }
@@ -68,6 +67,10 @@ class NoteFragment : Fragment() {
 
         tb.setNavigationOnClickListener {
             backCallback()
+        }
+
+        rbNoteStar.setOnClickListener {
+            viewModel.toggleNoteIsStarred()
         }
 
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))

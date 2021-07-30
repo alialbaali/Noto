@@ -38,11 +38,10 @@ class NoteViewModel(
                 .launchIn(viewModelScope)
     }
 
-    fun createOrUpdateNote(title: String, body: String, isStarred: Boolean) = viewModelScope.launch {
+    fun createOrUpdateNote(title: String, body: String) = viewModelScope.launch {
         val note = note.value.copy(
             title = title,
             body = body,
-            isStarred = isStarred,
         )
         if (note.isValid())
             if (noteId == 0L)
@@ -55,16 +54,16 @@ class NoteViewModel(
 
     fun deleteNote() = viewModelScope.launch { noteRepository.deleteNote(note.value) }
 
-    fun toggleNoteIsArchived() {
-        viewModelScope.launch {
-            noteRepository.updateNote(note.value.copy(isArchived = !note.value.isArchived))
-        }
+    fun toggleNoteIsArchived() = viewModelScope.launch {
+        noteRepository.updateNote(note.value.copy(isArchived = !note.value.isArchived))
     }
 
-    fun setNoteReminder(zonedDateTime: ZonedDateTime?) {
-        viewModelScope.launch {
-            noteRepository.updateNote(note.value.copy(reminderDate = zonedDateTime))
-        }
+    fun toggleNoteIsStarred() = viewModelScope.launch {
+        noteRepository.updateNote(note.value.copy(isStarred = !note.value.isStarred))
+    }
+
+    fun setNoteReminder(zonedDateTime: ZonedDateTime?) = viewModelScope.launch {
+        noteRepository.updateNote(note.value.copy(reminderDate = zonedDateTime))
     }
 
 }
