@@ -24,7 +24,7 @@ class NoteViewModel(
     private val mutableLibrary = MutableStateFlow(Library(position = 0))
     val library get() = mutableLibrary.asStateFlow()
 
-    private val mutableNote = MutableStateFlow(Note(libraryId = libraryId, position = 0))
+    private val mutableNote = MutableStateFlow(Note(noteId, libraryId, position = 0))
     val note get() = mutableNote.asStateFlow()
 
     init {
@@ -39,13 +39,10 @@ class NoteViewModel(
     }
 
     fun createOrUpdateNote(title: String, body: String, isStarred: Boolean) = viewModelScope.launch {
-        val note = Note(
-            noteId,
-            libraryId,
-            title,
-            body,
+        val note = note.value.copy(
+            title = title,
+            body = body,
             isStarred = isStarred,
-            position = 0,
         )
         if (note.isValid())
             if (noteId == 0L)
