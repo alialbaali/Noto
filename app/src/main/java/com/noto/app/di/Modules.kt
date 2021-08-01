@@ -4,9 +4,9 @@ import androidx.datastore.DataStore
 import androidx.datastore.preferences.Preferences
 import androidx.datastore.preferences.createDataStore
 import com.noto.app.MainViewModel
-import com.noto.app.data.LabelRepositoryImpl
-import com.noto.app.data.LibraryRepositoryImpl
-import com.noto.app.data.NoteRepositoryImpl
+import com.noto.app.data.repository.LabelRepositoryImpl
+import com.noto.app.data.repository.LibraryRepositoryImpl
+import com.noto.app.data.repository.NoteRepositoryImpl
 import com.noto.app.data.database.NotoDatabase
 import com.noto.app.data.source.LocalStorageImpl
 import com.noto.app.domain.repository.LabelRepository

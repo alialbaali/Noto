@@ -1,4 +1,4 @@
-package com.noto.app.data
+package com.noto.app.data.repository
 
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Note

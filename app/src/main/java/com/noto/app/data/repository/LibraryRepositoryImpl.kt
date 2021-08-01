@@ -1,4 +1,4 @@
-package com.noto.app.data
+package com.noto.app.data.repository
 
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.repository.LibraryRepository
