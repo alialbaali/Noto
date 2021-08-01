@@ -4,7 +4,7 @@
         <item name="android:windowBackground">@color/colorBackground</item>
         <item name="android:statusBarColor">@color/colorBackground</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
-        <item name="android:colorPrimary">@color/colorBackground</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:navigationBarColor">@color/colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:colorControlActivated">@color/colorPrimary</item>

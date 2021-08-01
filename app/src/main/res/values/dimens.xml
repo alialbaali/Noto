@@ -7,6 +7,8 @@
     <dimen name="spacing_normal">16dp</dimen>
     <dimen name="spacing_large">24dp</dimen>
     <dimen name="spacing_extra_large">36dp</dimen>
+    <dimen name="spacing_huge">48dp</dimen>
+    <dimen name="spacing_extra_huge">60dp</dimen>
 
     <!-- Elevation -->
     <dimen name="elevation_no">0dp</dimen>
