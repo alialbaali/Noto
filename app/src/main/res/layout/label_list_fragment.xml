@@ -12,24 +12,12 @@
         android:layout_height="30dp"
         android:backgroundTint="@color/colorBackground">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ctb"
-            style="@style/CollapsingToolbar"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:collapsedTitleGravity="start"
-            app:expandedTitleGravity="center"
-            app:expandedTitleMargin="@dimen/spacing_normal"
-            app:title="Labels"
-            app:titleEnabled="true">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/tb"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="pin"
-                app:navigationIcon="@drawable/ic_back_24px" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:layout_collapseMode="pin"
+            app:navigationIcon="@drawable/ic_back_24px" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

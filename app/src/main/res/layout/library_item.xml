@@ -5,7 +5,8 @@
     android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_small"
+    android:layout_marginHorizontal="@dimen/spacing_normal"
+    android:layout_marginVertical="@dimen/spacing_small"
     android:background="@drawable/library_item_shape"
     android:elevation="@dimen/elevation_normal">
 

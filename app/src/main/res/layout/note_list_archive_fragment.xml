@@ -11,10 +11,6 @@
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/spacing_small"
-        android:paddingTop="@dimen/spacing_extra_small"
-        android:paddingEnd="@dimen/spacing_small"
-        android:visibility="visible"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/note_item" />
 

@@ -23,11 +23,6 @@
         <item name="android:elevation">@dimen/elevation_normal</item>
     </style>
 
-    <style name="CollapsingToolbar" parent="TextAppearance.Design.CollapsingToolbar.Expanded">
-        <item name="contentScrim">@color/colorSurface</item>
-        <item name="layout_scrollFlags">scroll|snap|exitUntilCollapsed</item>
-    </style>
-
     <style name="TitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:maxLines">3</item>
         <item name="android:textSize">@dimen/size_huge</item>
