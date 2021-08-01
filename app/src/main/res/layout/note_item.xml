@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/tv_note_title"
-        style="@style/TextView.NoteTitle"
+        style="@style/NoteTitleTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
@@ -40,7 +40,7 @@
 
     <TextView
         android:id="@+id/tv_note_body"
-        style="@style/TextView.NoteBody"
+        style="@style/NoteBodyTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
