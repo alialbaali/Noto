@@ -1,20 +1,22 @@
 package com.noto.app.notelist
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
+import android.view.inputmethod.InputMethodManager
+import androidx.activity.addCallback
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.google.android.material.appbar.AppBarLayout
 import com.noto.app.R
 import com.noto.app.databinding.NoteListFragmentBinding
 import com.noto.app.domain.model.Note
@@ -42,6 +44,8 @@ class NoteListFragment : Fragment() {
             }
         }
     }
+
+    private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteListFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -145,25 +149,46 @@ class NoteListFragment : Fragment() {
                 R.id.search -> {
                     val searchEt = tilSearch
                     searchEt.isVisible = !searchEt.isVisible
-                    val rvAnimation: Animation
-                    if (searchEt.isVisible) {
-                        rvAnimation = TranslateAnimation(0F, 0F, -50F, 0F).apply {
-                            duration = 250
-                        }
-                        rv.startAnimation(rvAnimation)
-                        searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
-                    } else {
-                        rvAnimation = TranslateAnimation(0F, 0F, 50F, 0F).apply {
-                            duration = 250
-                        }
-                        rv.startAnimation(rvAnimation)
-                        searchEt.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
-                    }
+                    if (searchEt.isVisible)
+                        enableSearch()
+                    else
+                        disableSearch()
                     true
                 }
                 else -> false
             }
         }
+
+        etSearch.doAfterTextChanged {
+            viewModel.searchNotes(it.toString())
+        }
+
+    }
+
+    private fun NoteListFragmentBinding.enableSearch() {
+        val rvAnimation = TranslateAnimation(0F, 0F, -50F, 0F).apply {
+            duration = 250
+        }
+        rv.startAnimation(rvAnimation)
+        tilSearch.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
+        etSearch.requestFocus()
+        imm.showKeyboard()
+
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner) {
+                disableSearch()
+                if (isEnabled) isEnabled = false
+            }
+    }
+
+    private fun NoteListFragmentBinding.disableSearch() {
+        val rvAnimation = TranslateAnimation(0F, 0F, 50F, 0F).apply {
+            duration = 250
+        }
+        tilSearch.isVisible = false
+        rv.startAnimation(rvAnimation)
+        tilSearch.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+        imm.hideKeyboard(etSearch.windowToken)
     }
 
     private fun NoteListFragmentBinding.setupRV() {

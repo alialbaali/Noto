@@ -77,4 +77,15 @@ class NoteListViewModel(
         noteRepository.updateNote(note.copy(isStarred = !note.isStarred))
     }
 
+    fun searchNotes(term: String) = viewModelScope.launch {
+        val currentNotes = noteRepository.getNotesByLibraryId(libraryId)
+            .first()
+
+        mutableNotes.value = if (term.isBlank())
+            currentNotes
+        else
+            currentNotes
+                .filter { it.title.contains(term, ignoreCase = true) || it.body.contains(term, ignoreCase = true) }
+    }
+
 }
