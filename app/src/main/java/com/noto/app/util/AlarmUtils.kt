@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import androidx.core.app.AlarmManagerCompat
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.receiver.AlarmReceiver
 
@@ -20,7 +21,7 @@ fun AlarmManager.createAlarm(context: Context, noteId: Long, notoColor: NotoColo
 
     val pendingIntent = PendingIntent.getBroadcast(context, noteId.toInt(), intent, PENDING_INTENT_FLAGS)
 
-    setAlarm(AlarmManager.RTC_WAKEUP, epochMilliseconds, pendingIntent)
+    AlarmManagerCompat.setExactAndAllowWhileIdle(this, AlarmManager.RTC_WAKEUP, epochMilliseconds, pendingIntent)
 }
 
 fun AlarmManager.cancelAlarm(context: Context, noteId: Long) {

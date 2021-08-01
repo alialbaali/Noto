@@ -101,11 +101,14 @@ class NoteDialogFragment : BaseDialogFragment() {
             findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.libraryId, args.noteId))
         }
 
-        tvCopyToClipboard.setOnClickListener { v ->
+        tvCopyToClipboard.setOnClickListener {
             dismiss()
             val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
             clipboardManager.setPrimaryClip(clipData)
-            v.toast(getString(R.string.copied_to_clipboard))
+            val parentView = requireParentFragment()
+                .requireView()
+            val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
+            parentView.snackbar(getString(R.string.copied_to_clipboard), anchorView = parentAnchorView)
         }
 
         tvShareNote.setOnClickListener {

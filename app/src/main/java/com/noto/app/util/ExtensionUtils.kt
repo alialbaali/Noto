@@ -1,18 +1,9 @@
 package com.noto.app.util
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.res.ColorStateList
-import android.graphics.Typeface
-import android.graphics.drawable.Drawable
 import android.os.IBinder
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
-import androidx.annotation.*
-import androidx.core.app.AlarmManagerCompat
-import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.viewbinding.ViewBinding
@@ -61,14 +52,10 @@ fun View.snackbar(message: String, anchorView: View? = null) = Snackbar.make(thi
     show()
 }
 
-fun View.toast(message: String) = Toast.makeText(context, message, Toast.LENGTH_SHORT)
-
 fun CollapsingToolbarLayout.setFontFamily() {
     setCollapsedTitleTypeface(fontResource(R.font.arima_madurai_bold))
     setExpandedTitleTypeface(fontResource(R.font.arima_madurai_medium))
 }
-
-fun AlarmManager.setAlarm(type: Int, timeInMills: Long, pendingIntent: PendingIntent) = AlarmManagerCompat.setExactAndAllowWhileIdle(this, type, timeInMills, pendingIntent)
 
 fun Note.isValid(): Boolean = !(title.isBlank() && body.isBlank())
 
