@@ -5,7 +5,7 @@
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="80">](https://play.google.com/store/apps/details?id=com.noto)
 
 ## Motivation
-The app is a part of my [Portfolio](https://alialbaali.com) projects. It showcases my skills regarding developing Android Apps.
+The app is a part of my [Portfolio](https://alialbaali.com) projects. It showcases my skills regarding developing Android apps.
 
 ## Screenshots
 ![Alt text](https://lh3.googleusercontent.com/gZEnPNJ8S5OCvD13L_6p53LAgsJVS1Lx_Zypzf9aQ4JTuNoZjSyZbHFaZlSddybJq7w=w720-h310 "Screenshot")
@@ -20,7 +20,7 @@ The app is a part of my [Portfolio](https://alialbaali.com) projects. It showcas
 
 ## Features
 
-* Organize your notes into libraries with different colors and icons
+* Organize your notes into libraries with different colors
 * Create and manage your notes easily
 * Dark Mode
 * Ad-Free
@@ -30,60 +30,19 @@ The app is a part of my [Portfolio](https://alialbaali.com) projects. It showcas
 * Auto Save
 * Minimal Design
 
-## Libraries
-
-* Kotlin
-* Android Architecture Components(LiveData, ViewModel, etc...)
-* Data Binding
-* Room (DB)
-* Koin (DI)
-
 ## Architecture
 
-> The app uses Clean Architecture with MVVM. It's splitted into 3 Main Layers. 
+The app uses Clean Architecture with MVVM design pattern and it's divided into 3 Main Layers.
 
 #### Domain
-###### Contains all the Business Logic. It's splitted into 3 packages.
+Contains model, repository and DAO interfaces.
 
-* ##### Intreactor
-    Contains Use Cases for each action that can be triggered and used directly through ViewModels in the `Presentation` Layer.
-
-* ##### Model
-    Contains app Models.
-
-* ##### Repository 
-    Contains repositories interfaces which are used by the Use Cases and implemented in the `Data` Layer. 
-    
 #### Data
-######  Contains repositories implementations and Data Sources interfaces. It's splitted into 2 pacakges. 
+Contains database and repository and DAO implementations.
 
-* ##### Local
-    Contains interfaces to preform actions locally and implementend in the Local Module.
+#### Presentation (the rest of the app)
+Contains all the UI logic.
 
-#### Presentation (app)
-######  Contains all the UI Logic.
-
-#### DI (Dependency Injection)
-###### Contains Koin DI modules.
-
-#### BuildSrc
-###### Contains Gradle dependencies and app configuration.
-
-## Requirements
-
-* JDK 1.8
-* [Android SDK](https://developer.android.com/studio/index.html)
-* Android L (API 21)
-* Latest Android SDK Tools and build tools.
-
-## Running
-
-```
-./gradlew
-```
-
-## Tests
-Tests will be added soon!
 
 ## License
 Noto is distributed under the terms of the Apache License (Version 2.0). See [License](LICENSE.md) for details.
