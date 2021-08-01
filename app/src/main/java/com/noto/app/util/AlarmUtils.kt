@@ -5,20 +5,18 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.AlarmManagerCompat
-import com.noto.app.domain.model.NotoColor
 import com.noto.app.receiver.AlarmReceiver
 
 const val NoteId = "noto_id"
 const val NoteColor = "noto_color"
-const val LibraryName = "library_name"
+const val LibraryId = "library_id"
 private const val PENDING_INTENT_FLAGS = PendingIntent.FLAG_UPDATE_CURRENT
 
-fun AlarmManager.createAlarm(context: Context, noteId: Long, libraryName: String, notoColor: NotoColor, epochMilliseconds: Long) {
+fun AlarmManager.createAlarm(context: Context, libraryId: Long, noteId: Long, epochMilliseconds: Long) {
 
     val intent = Intent(context, AlarmReceiver::class.java).apply {
+        putExtra(LibraryId, libraryId)
         putExtra(NoteId, noteId)
-        putExtra(LibraryName, libraryName)
-        putExtra(NoteColor, notoColor.ordinal)
     }
 
     val pendingIntent = PendingIntent.getBroadcast(context, noteId.toInt(), intent, PENDING_INTENT_FLAGS)

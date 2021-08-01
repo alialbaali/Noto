@@ -5,20 +5,19 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
-import android.graphics.Color
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
 import com.noto.app.R
+import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.NotoColor
 
 private const val CHANNEL_ID = "Noto Channel"
-private const val CHANNEL_NAME = "Noto"
+private const val CHANNEL_NAME = "Reminders"
 
-fun NotificationManager.createNotification(context: Context, note: Note, libraryName: String, notoColor: NotoColor) {
+fun NotificationManager.createNotification(context: Context, library: Library, note: Note) {
 
     val pendingIntent = context.createNotificationPendingIntent(note.id, note.libraryId)
 
@@ -29,16 +28,18 @@ fun NotificationManager.createNotification(context: Context, note: Note, library
         .setContentTitle(note.title)
         .setContentText(note.body)
         .setContentIntent(pendingIntent)
-        .setSubText(libraryName)
+        .setSubText(library.title)
         .setStyle(style)
-        .setColor(ResourcesCompat.getColor(context.resources, notoColor.toResource(), null))
+        .setColor(ResourcesCompat.getColor(context.resources, library.color.toResource(), null))
         .setCategory(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Notification.CATEGORY_REMINDER else null)
         .setSmallIcon(R.mipmap.ic_launcher_round)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setAutoCancel(true)
+        .setGroup(library.title)
+        .setGroupSummary(true)
         .build()
 
-    notify(libraryName, note.id.toInt(), notification)
+    notify(library.title, note.id.toInt(), notification)
 }
 
 private fun Context.createNotificationPendingIntent(noteId: Long, libraryId: Long): PendingIntent {
@@ -52,10 +53,9 @@ private fun Context.createNotificationPendingIntent(noteId: Long, libraryId: Lon
 
 fun NotificationManager.createNotificationChannel() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val notificationChannel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH)
-        notificationChannel.enableVibration(true)
-        notificationChannel.lightColor = Color.RED
-        notificationChannel.description = "Reminders"
+        val notificationChannel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH).apply {
+            enableVibration(true)
+        }
         createNotificationChannel(notificationChannel)
     }
 }
