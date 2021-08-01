@@ -52,11 +52,6 @@ fun View.snackbar(message: String, anchorView: View? = null) = Snackbar.make(thi
     show()
 }
 
-fun CollapsingToolbarLayout.setFontFamily() {
-    setCollapsedTitleTypeface(fontResource(R.font.arima_madurai_bold))
-    setExpandedTitleTypeface(fontResource(R.font.arima_madurai_medium))
-}
-
 fun Note.isValid(): Boolean = !(title.isBlank() && body.isBlank())
 
 fun NotoColor.toResource(): Int = when (this) {

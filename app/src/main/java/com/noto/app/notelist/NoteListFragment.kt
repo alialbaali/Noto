@@ -48,12 +48,7 @@ class NoteListFragment : Fragment() {
             collectState()
             setupListeners()
             setupRV()
-            setupUI()
         }
-
-    private fun NoteListFragmentBinding.setupUI() {
-        ctb.setFontFamily()
-    }
 
     private fun NoteListFragmentBinding.collectState() {
         viewModel.library
@@ -97,8 +92,6 @@ class NoteListFragment : Fragment() {
                 if (it.isEmpty()) {
                     placeHolderItems.forEach { it.visibility = View.GONE }
                     llPlaceHolder.visibility = View.VISIBLE
-                    val layoutParams = ctb.layoutParams as AppBarLayout.LayoutParams
-                    layoutParams.scrollFlags = 0
                 } else {
                     placeHolderItems.forEach { it.visibility = View.VISIBLE }
                     llPlaceHolder.visibility = View.GONE

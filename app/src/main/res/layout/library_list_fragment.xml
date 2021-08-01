@@ -19,50 +19,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ctb"
-            style="@style/CollapsingToolbar"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="@color/colorBackground"
-            app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"
-            app:titleEnabled="false"
-            tools:title="Notes">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/tb"
+            <LinearLayout
+                android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_collapseMode="parallax">
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/ll"
+                <TextView
+                    android:id="@+id/tv_library_title"
+                    style="@style/TitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/libraries"
+                    tools:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/tv_library_notes_count"
+                    style="@style/SubtitleTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    tools:text="7 Libraries"
+                    tools:textColor="@color/colorPrimary" />
+            </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_library_title"
-                        style="@style/TitleTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/libraries"
-                        tools:textColor="@color/colorPrimary" />
-
-                    <TextView
-                        android:id="@+id/tv_library_notes_count"
-                        style="@style/SubtitleTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginEnd="@dimen/spacing_normal"
-                        tools:text="7 Libraries"
-                        tools:textColor="@color/colorPrimary" />
-                </LinearLayout>
-
-            </com.google.android.material.appbar.MaterialToolbar>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar

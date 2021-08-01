@@ -12,74 +12,59 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ctb"
-            style="@style/CollapsingToolbar"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="@color/colorBackground"
-            app:expandedTitleGravity="center_vertical"
-            app:layout_scrollFlags="enterAlwaysCollapsed|scroll|snap"
-            app:titleEnabled="false"
-            tools:title="Notes">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_collapseMode="parallax">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/tb"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:navigationIcon="@drawable/ic_back_24px">
-
-                    <TextView
-                        android:id="@+id/tv_created_at"
-                        style="@style/SubtitleTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/spacing_normal"
-                        tools:text="Created at"
-                        tools:textColor="@color/colorAccentTeal" />
-                </com.google.android.material.appbar.MaterialToolbar>
-
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:navigationIcon="@drawable/ic_back_24px">
 
                 <TextView
-                    android:id="@+id/tv_library_title"
-                    style="@style/TitleTextView"
-                    android:layout_width="0dp"
+                    android:id="@+id/tv_created_at"
+                    style="@style/SubtitleTextView"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/spacing_normal"
-                    android:layout_marginVertical="@dimen/spacing_small"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/rb_note_star"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tb"
-                    tools:text="@string/all_notes"
+                    android:layout_marginEnd="@dimen/spacing_normal"
+                    tools:text="Created at"
                     tools:textColor="@color/colorAccentTeal" />
+            </com.google.android.material.appbar.MaterialToolbar>
 
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_note_star"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/spacing_normal"
-                    android:background="@drawable/selector_star"
-                    android:button="@null"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/tv_library_title"
-                    app:layout_constraintTop_toBottomOf="@+id/tb" />
+            <TextView
+                android:id="@+id/tv_library_title"
+                style="@style/TitleTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginVertical="@dimen/spacing_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/rb_note_star"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tb"
+                tools:text="@string/all_notes"
+                tools:textColor="@color/colorAccentTeal" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_note_star"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_normal"
+                android:background="@drawable/selector_star"
+                android:button="@null"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_library_title"
+                app:layout_constraintTop_toBottomOf="@+id/tb" />
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
