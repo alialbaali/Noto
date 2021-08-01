@@ -5,25 +5,23 @@ import android.app.DatePickerDialog
 import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
-import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ReminderDialogFragmentBinding
-import com.noto.app.receiver.AlarmReceiver
-import com.noto.app.util.drawableResource
-import com.noto.app.util.setAlarm
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.onEach
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
+import kotlinx.datetime.*
+import kotlinx.datetime.TimeZone
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -31,7 +29,9 @@ const val PENDING_INTENT_FLAGS = PendingIntent.FLAG_ONE_SHOT
 
 class ReminderDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by sharedViewModel<NoteViewModel>()
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
+
+    private val args by navArgs<ReminderDialogFragmentArgs>()
 
     private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
@@ -39,7 +39,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = ReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+    ): View = ReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         BaseDialogFragmentBinding.bind(root).apply {
             tvDialogTitle.text = stringResource(R.string.new_reminder)
         }
@@ -49,66 +49,45 @@ class ReminderDialogFragment : BaseDialogFragment() {
 
         viewModel.note
             .onEach {
+                val timeZone = TimeZone.currentSystemDefault()
 
-                it.reminderDate?.let { time ->
+                it.reminderDate
+                    ?.toLocalDateTime(timeZone)
+                    ?.toJavaLocalDateTime()
+                    ?.also { time ->
+                        til.endIconDrawable = drawableResource(R.drawable.bell_remove_outline)
 
-                    til.endIconDrawable = drawableResource(R.drawable.bell_remove_outline)
+                        val currentDateTime = Clock.System
+                            .now()
+                            .toLocalDateTime(timeZone)
+                            .toJavaLocalDateTime()
 
-                    if (time.year > ZonedDateTime.now().year) {
-                        val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm a"))
-                        et.setText(format)
-                    } else {
-                        val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM HH:mm a"))
-                        et.setText(format)
+                        if (time.year > currentDateTime.year) {
+                            val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm a"))
+                            et.setText(format)
+                        } else {
+                            val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM HH:mm a"))
+                            et.setText(format)
+                        }
                     }
-                }
 
                 if (it.reminderDate == null) {
                     et.setText(getString(R.string.no_reminder))
                     til.endIconDrawable = drawableResource(R.drawable.bell_plus_outline)
                 }
-
             }
 
-
         til.setEndIconOnClickListener {
-            if (viewModel.note.value?.reminderDate == null) showDateTimeDialog() else {
-                viewModel.note.value?.let { noto ->
-
-                    val intent = Intent(requireContext(), AlarmReceiver::class.java)
-                    val pendingIntent = PendingIntent.getBroadcast(requireContext(), noto.id.toInt(), intent, PENDING_INTENT_FLAGS)
-
-                    alarmManager.cancel(pendingIntent)
-
-                    viewModel.setNoteReminder(null)
-                }
+            if (viewModel.note.value.reminderDate == null) {
+                showDateTimeDialog()
+            } else {
+                alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id.toInt())
+                viewModel.setNoteReminder(null)
             }
         }
     }
 
     private fun showDateTimeDialog() {
-
-        fun createAlarm(zonedDateTime: ZonedDateTime) {
-
-            viewModel.note.value.also {
-
-                val intent = Intent(requireContext(), AlarmReceiver::class.java).apply {
-                    putExtra(NoteId, it.id.toInt())
-                    putExtra(NoteTitle, it.title)
-                    putExtra(NoteBody, it.body)
-                    putExtra(NoteColor, viewModel.library.value.color.ordinal)
-                }
-
-                val pendingIntent = PendingIntent.getBroadcast(requireContext(), it.id.toInt(), intent, PENDING_INTENT_FLAGS)
-
-                val timeInMills = zonedDateTime.toInstant().toEpochMilli()
-
-                alarmManager.setAlarm(AlarmManager.RTC_WAKEUP, timeInMills, pendingIntent)
-
-                viewModel.setNoteReminder(zonedDateTime)
-            }
-
-        }
 
         val currentDateTime = Calendar.getInstance()
         val startYear = currentDateTime.get(Calendar.YEAR)
@@ -117,18 +96,34 @@ class ReminderDialogFragment : BaseDialogFragment() {
         val startHour = currentDateTime.get(Calendar.HOUR_OF_DAY)
         val startMinute = currentDateTime.get(Calendar.MINUTE)
 
-        DatePickerDialog(requireContext(), R.style.PickerDialog, { datePicker, year, month, day ->
-            TimePickerDialog(requireContext(), R.style.PickerDialog, { _, hour, minute ->
+        val isDarkMode = resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
-                val dateTime = LocalDateTime.of(year, month.plus(1), day, hour, minute)
-                val zonedDateTime = ZonedDateTime.of(dateTime, ZoneId.systemDefault())
+        val theme = if (isDarkMode) android.R.style.Theme_DeviceDefault_Dialog
+        else android.R.style.Theme_DeviceDefault_Light_Dialog
 
-                createAlarm(zonedDateTime)
+        val is24HourFormat = DateFormat.is24HourFormat(requireContext())
 
-            }, startHour, startMinute, false).show()
-        }, startYear, startMonth, startDay).show()
+        DatePickerDialog(requireContext(), theme, { _, year, month, day ->
+            TimePickerDialog(requireContext(), theme, { _, hour, minute ->
 
+                LocalDateTime(year, month, day, hour, minute)
+                    .toInstant(TimeZone.currentSystemDefault())
+                    .also { viewModel.setNoteReminder(it) }
+                    .toEpochMilliseconds()
+                    .also {
+                        val note = viewModel.note.value
+                        val notoColor = viewModel.library.value.color
+                        alarmManager.createAlarm(requireContext(), note, notoColor, it)
+                    }
 
+            }, startHour, startMinute, is24HourFormat).show()
+        }, startYear, startMonth, startDay)
+            .apply {
+                datePicker.minDate = Clock.System
+                    .now()
+                    .toEpochMilliseconds()
+                    .minus(1000)
+            }
+            .show()
     }
-
 }

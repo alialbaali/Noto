@@ -30,10 +30,11 @@
         <entry key="app/src/main/res/menu/library_list_menu.xml" value="0.3421875" />
         <entry key="app/src/main/res/menu/library_menu.xml" value="0.3421875" />
         <entry key="app/src/main/res/menu/note_menu.xml" value="0.3421875" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.35833333333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15_PREVIEW" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

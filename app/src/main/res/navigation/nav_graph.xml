@@ -137,6 +137,9 @@
         android:name="com.noto.app.note.ReminderDialogFragment"
         android:label="ReminderDialogFragment">
         <argument
+            android:name="library_id"
+            app:argType="long" />
+        <argument
             android:name="note_id"
             android:defaultValue="0L"
             app:argType="long" />

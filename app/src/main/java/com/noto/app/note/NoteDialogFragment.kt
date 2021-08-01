@@ -98,7 +98,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvRemindMe.setOnClickListener {
             dismiss()
-            findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.noteId))
+            findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.libraryId, args.noteId))
         }
 
         tvCopyToClipboard.setOnClickListener { v ->

@@ -209,19 +209,4 @@
         <item name="hintTextColor">@color/colorOnPrimary</item>
     </style>
 
-    <style name="PickerDialog" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:colorPrimaryDark">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="android:colorAccent">@color/colorPrimary</item>
-        <item name="colorAccent">@color/colorPrimary</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-        <item name="buttonStyle">@style/buttonStyle</item>
-    </style>
-
-    <style name="buttonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:textColor">@color/colorPrimary</item>
-    </style>
-
 </resources>

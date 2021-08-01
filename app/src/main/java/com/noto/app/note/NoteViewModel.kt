@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.time.ZonedDateTime
+import kotlinx.datetime.Instant
 
 class NoteViewModel(
     private val libraryRepository: LibraryRepository,
@@ -62,8 +62,8 @@ class NoteViewModel(
         noteRepository.updateNote(note.value.copy(isStarred = !note.value.isStarred))
     }
 
-    fun setNoteReminder(zonedDateTime: ZonedDateTime?) = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(reminderDate = zonedDateTime))
+    fun setNoteReminder(instant: Instant?) = viewModelScope.launch {
+        noteRepository.updateNote(note.value.copy(reminderDate = instant))
     }
 
 }

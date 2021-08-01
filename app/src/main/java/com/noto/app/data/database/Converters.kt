@@ -5,7 +5,7 @@ import androidx.room.TypeConverter
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.SortingMethod
 import com.noto.app.domain.model.SortingType
-import java.time.LocalDate
+import kotlinx.datetime.Instant
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
@@ -22,32 +22,15 @@ object NotoColorConverter {
 }
 
 @SuppressLint("NewApi")
-object LocalDateConverter {
-
-    private val localDateFormatter = DateTimeFormatter.ISO_DATE
+object InstantConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toString(localDate: LocalDate?): String? = localDate?.format(localDateFormatter)
+    fun toString(instant: Instant?): String? = instant?.toString()
 
     @TypeConverter
     @JvmStatic
-    fun toDate(value: String?): LocalDate? = if (value == null) null else LocalDate.parse(value)
-
-}
-
-@SuppressLint("NewApi")
-object ZonedDateTimeConverter {
-
-    private val zoneDateTimeFormatter = DateTimeFormatter.ISO_ZONED_DATE_TIME
-
-    @TypeConverter
-    @JvmStatic
-    fun toString(zonedDateTime: ZonedDateTime?): String? = zonedDateTime?.format(zoneDateTimeFormatter)
-
-    @TypeConverter
-    @JvmStatic
-    fun toDate(value: String?): ZonedDateTime? = if (value == null) null else ZonedDateTime.parse(value)
+    fun toDate(value: String?): Instant? = value?.let { Instant.parse(it) }
 
 }
 

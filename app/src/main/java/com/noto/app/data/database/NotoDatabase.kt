@@ -18,8 +18,7 @@ private const val NOTO_DATABASE = "Noto Database"
 
 @TypeConverters(
     NotoColorConverter::class,
-    LocalDateConverter::class,
-    ZonedDateTimeConverter::class,
+    InstantConverter::class,
     SortingMethodConverter::class,
     SortingTypeConverter::class,
 )

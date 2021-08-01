@@ -1,5 +1,6 @@
 package com.noto.app.note
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -18,9 +19,12 @@ import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toJavaLocalDateTime
+import kotlinx.datetime.toLocalDateTime
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 const val NoteId = "noto_id"
@@ -36,6 +40,7 @@ class NoteFragment : Fragment() {
 
     private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,7 +49,7 @@ class NoteFragment : Fragment() {
 
         fab.setOnClickListener {
             findNavController()
-                .navigate(NoteFragmentDirections.actionNotoFragmentToReminderDialogFragment())
+                .navigate(NoteFragmentDirections.actionNotoFragmentToReminderDialogFragment(args.libraryId, args.noteId))
         }
 
         if (args.noteId == 0L) {
@@ -131,12 +136,21 @@ class NoteFragment : Fragment() {
                 if (it.reminderDate == null) fab.setImageDrawable(drawableResource(R.drawable.bell_plus_outline))
                 else fab.setImageDrawable(drawableResource(R.drawable.bell_ring_outline))
 
-                it.creationDate.apply {
-                    val dateFormat = if (year > ZonedDateTime.now().year) format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
-                    else format(DateTimeFormatter.ofPattern("EEE, MMM d"))
+                val timeZone = TimeZone.currentSystemDefault()
+                it.creationDate
+                    .toLocalDateTime(timeZone)
+                    .toJavaLocalDateTime()
+                    .apply {
+                        val currentDateTime = Clock.System
+                            .now()
+                            .toLocalDateTime(timeZone)
+                            .toJavaLocalDateTime()
 
-                    tvCreatedAt.text = "${getString(R.string.created_at)} $dateFormat"
-                }
+                        val dateFormat = if (year > currentDateTime.year) format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
+                        else format(DateTimeFormatter.ofPattern("EEE, MMM d"))
+
+                        tvCreatedAt.text = "${getString(R.string.created_at)} $dateFormat"
+                    }
             }
             .launchIn(lifecycleScope)
 
