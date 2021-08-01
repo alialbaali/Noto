@@ -18,14 +18,19 @@ import com.noto.app.domain.model.NotoColor
 private const val CHANNEL_ID = "Noto Channel"
 private const val CHANNEL_NAME = "Noto"
 
-fun NotificationManager.createNotification(context: Context, note: Note, notoColor: NotoColor) {
+fun NotificationManager.createNotification(context: Context, note: Note, libraryName: String, notoColor: NotoColor) {
 
     val pendingIntent = context.createNotificationPendingIntent(note.id, note.libraryId)
+
+    val style = NotificationCompat.BigTextStyle()
+        .bigText(note.body)
 
     val notification = NotificationCompat.Builder(context, CHANNEL_ID)
         .setContentTitle(note.title)
         .setContentText(note.body)
         .setContentIntent(pendingIntent)
+        .setSubText(libraryName)
+        .setStyle(style)
         .setColor(ResourcesCompat.getColor(context.resources, notoColor.toResource(), null))
         .setCategory(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Notification.CATEGORY_REMINDER else null)
         .setSmallIcon(R.mipmap.ic_launcher_round)
@@ -33,7 +38,7 @@ fun NotificationManager.createNotification(context: Context, note: Note, notoCol
         .setAutoCancel(true)
         .build()
 
-    notify(note.libraryId.toString(), note.id.toInt(), notification)
+    notify(libraryName, note.id.toInt(), notification)
 }
 
 private fun Context.createNotificationPendingIntent(noteId: Long, libraryId: Long): PendingIntent {

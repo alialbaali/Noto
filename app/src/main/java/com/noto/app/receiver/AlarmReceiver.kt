@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.util.LibraryName
 import com.noto.app.util.NoteColor
 import com.noto.app.util.NoteId
 import com.noto.app.util.createNotification
@@ -24,15 +25,16 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
         intent?.let {
 
-            val id = it.getLongExtra(NoteId, 0)
+            val noteId = it.getLongExtra(NoteId, 0)
+            val libraryName = it.getStringExtra(LibraryName)!!
             val notoColorOrdinal = it.getIntExtra(NoteColor, 0)
             val notoColor = NotoColor.values().first { it.ordinal == notoColorOrdinal }
 
             runBlocking {
-                noteRepository.getNoteById(id)
+                noteRepository.getNoteById(noteId)
                     .firstOrNull()
                     ?.let { note ->
-                        notificationManager.createNotification(context, note, notoColor)
+                        notificationManager.createNotification(context, note, libraryName, notoColor)
                         noteRepository.updateNote(note.copy(reminderDate = null))
                     }
             }

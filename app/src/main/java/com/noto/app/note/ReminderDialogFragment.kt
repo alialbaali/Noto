@@ -125,8 +125,8 @@ class ReminderDialogFragment : BaseDialogFragment() {
                     .toEpochMilliseconds()
                     .also {
                         val note = viewModel.note.value
-                        val notoColor = viewModel.library.value.color
-                        alarmManager.createAlarm(requireContext(), note.id, notoColor, it)
+                        val library = viewModel.library.value
+                        alarmManager.createAlarm(requireContext(), note.id, library.title, library.color, it)
                     }
 
             }, startHour, startMinute, is24HourFormat).show()
