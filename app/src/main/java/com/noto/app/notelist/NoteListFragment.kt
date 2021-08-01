@@ -67,11 +67,11 @@ class NoteListFragment : Fragment() {
             .onEach {
                 when (it) {
                     LayoutManager.Linear -> {
-                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_dashboard_outline)
+                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.view_dashboard_outline)
                         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     }
                     LayoutManager.Grid -> {
-                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_agenda_outline)
+                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.view_agenda_outline)
                         rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                     }
                 }
@@ -103,8 +103,8 @@ class NoteListFragment : Fragment() {
 
     private fun NoteListFragmentBinding.setLibraryColors(notoColor: NotoColor) {
 
-        val color = colorResource(notoColor.toResource())
-        val colorStateList = colorStateResource(notoColor.toResource())
+        val color = resources.colorResource(notoColor.toResource())
+        val colorStateList = resources.colorStateResource(notoColor.toResource())
 
         tvLibraryTitle.setTextColor(color)
         tvLibraryNotesCount.setTextColor(color)

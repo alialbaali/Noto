@@ -25,7 +25,7 @@ class ThemeDialogFragment : BaseDialogFragment() {
     ): View? = ThemeDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = stringResource(R.string.theme)
+            tvDialogTitle.text = resources.stringResource(R.string.theme)
         }
 
         viewModel.theme

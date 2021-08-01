@@ -61,8 +61,8 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
 
         fun bind(library: Library) {
             binding.tvLibraryTitle.text = library.title
-            val notoColor = binding.root.colorResource(library.color.toResource())
-            binding.vColor.background = binding.root.drawableResource(R.drawable.view_color_shape)?.also {
+            val notoColor = binding.root.resources.colorResource(library.color.toResource())
+            binding.vColor.background = binding.root.resources.drawableResource(R.drawable.view_color_shape)?.also {
                 DrawableCompat.setTint(it, notoColor)
             }
 

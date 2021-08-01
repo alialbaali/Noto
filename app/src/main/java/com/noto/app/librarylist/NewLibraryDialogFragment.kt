@@ -38,10 +38,10 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
         BaseDialogFragmentBinding.bind(binding.root).apply {
             if (args.libraryId == 0L) {
-                tvDialogTitle.text = stringResource(R.string.new_library)
+                tvDialogTitle.text = resources.stringResource(R.string.new_library)
             } else {
-                tvDialogTitle.text = stringResource(R.string.edit_library)
-                binding.btnCreate.text = getString(R.string.update_library)
+                tvDialogTitle.text = resources.stringResource(R.string.edit_library)
+                binding.btnCreate.text = resources.stringResource(R.string.update_library)
             }
         }
 
@@ -75,7 +75,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             }
 
             if (title.isBlank()) {
-                binding.til.error = stringResource(R.string.empty_title)
+                binding.til.error = resources.stringResource(R.string.empty_title)
             } else {
                 dismiss()
                 viewModel.createOrUpdateLibrary(title, color)
@@ -88,8 +88,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         NotoColor.values().forEach { notoColor ->
             RadioButton(context).apply {
                 id = notoColor.ordinal
-                buttonDrawable = drawableResource(R.drawable.selector_dialog_rbtn_gray)
-                buttonTintList = colorStateResource(notoColor.toResource())
+                buttonDrawable = resources.drawableResource(R.drawable.selector_dialog_rbtn_gray)
+                buttonTintList = resources.colorStateResource(notoColor.toResource())
                 scaleX = 1.25F
                 scaleY = 1.25F
                 val layoutParams = RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT)
@@ -104,14 +104,14 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                     .map { it as RadioButton }
                     .onEach {
                         if (it.id == checkedId) {
-                            it.buttonDrawable = drawableResource(R.drawable.ic_sort_checked)
-                            it.buttonTintList = colorStateResource(toResource())
+                            it.buttonDrawable = resources.drawableResource(R.drawable.ic_sort_checked)
+                            it.buttonTintList = resources.colorStateResource(toResource())
                         } else {
-                            it.buttonDrawable = drawableResource(R.drawable.selector_dialog_rbtn_gray)
-                            it.buttonTintList = colorStateResource(toResource())
+                            it.buttonDrawable = resources.drawableResource(R.drawable.selector_dialog_rbtn_gray)
+                            it.buttonTintList = resources.colorStateResource(toResource())
                         }
                     }
-                binding.til.setEndIconTintList(colorStateResource(toResource()))
+                binding.til.setEndIconTintList(resources.colorStateResource(toResource()))
             }
         }
     }

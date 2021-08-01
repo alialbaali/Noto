@@ -46,8 +46,8 @@ fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
 fun View.snackbar(message: String, anchorView: View? = null) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
     animationMode = Snackbar.ANIMATION_MODE_SLIDE
-    setBackgroundTint(colorResource(R.color.colorPrimary))
-    setTextColor(colorResource(R.color.colorBackground))
+    setBackgroundTint(resources.colorResource(R.color.colorPrimary))
+    setTextColor(resources.colorResource(R.color.colorBackground))
     setAnchorView(anchorView)
     show()
 }

@@ -38,7 +38,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View = NoteDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = stringResource(R.string.note_options)
+            tvDialogTitle.text = resources.stringResource(R.string.note_options)
         }
         setupListeners()
         collectState(baseDialog)
@@ -47,12 +47,12 @@ class NoteDialogFragment : BaseDialogFragment() {
     private fun NoteDialogFragmentBinding.collectState(baseDialog: BaseDialogFragmentBinding) {
         viewModel.library
             .onEach {
-                baseDialog.tvDialogTitle.setTextColor(colorResource(it.color.toResource()))
-                baseDialog.vHead.backgroundTintList = colorStateResource(it.color.toResource())
+                baseDialog.tvDialogTitle.setTextColor(resources.colorResource(it.color.toResource()))
+                baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
                     listOf(tvCopyToClipboard, tvShareNote, tvArchiveNote, tvRemindMe)
-                        .forEach { tv -> tv.compoundDrawableTintList = colorStateResource(it.color.toResource()) }
+                        .forEach { tv -> tv.compoundDrawableTintList = resources.colorStateResource(it.color.toResource()) }
             }
             .launchIn(lifecycleScope)
 
@@ -60,18 +60,18 @@ class NoteDialogFragment : BaseDialogFragment() {
             .onEach {
                 if (it.isArchived) {
                     tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_outline_unarchive_24, 0, 0, 0)
-                    tvArchiveNote.text = stringResource(R.string.unarchive_note)
+                    tvArchiveNote.text = resources.stringResource(R.string.unarchive_note)
                 } else {
-                    tvArchiveNote.text = stringResource(R.string.archive_note)
+                    tvArchiveNote.text = resources.stringResource(R.string.archive_note)
                     tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.archive_arrow_down_outline, 0, 0, 0)
                 }
 
                 if (it.reminderDate == null) {
                     tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bell_plus_outline, 0, 0, 0)
-                    tvRemindMe.text = stringResource(R.string.add_reminder)
+                    tvRemindMe.text = resources.stringResource(R.string.add_reminder)
                 } else {
                     tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bell_ring_outline, 0, 0, 0)
-                    tvRemindMe.text = stringResource(R.string.edit_reminder)
+                    tvRemindMe.text = resources.stringResource(R.string.edit_reminder)
                 }
             }
             .launchIn(lifecycleScope)
@@ -92,7 +92,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 .requireView()
                 .apply {
                     val anchorView = findViewById<FloatingActionButton>(R.id.fab)
-                    snackbar(stringResource(resource), anchorView)
+                    snackbar(resources.stringResource(resource), anchorView)
                 }
         }
 

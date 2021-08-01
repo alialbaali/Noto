@@ -30,7 +30,7 @@ class SortingDialogFragment : BaseDialogFragment() {
     ): View = SortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = stringResource(R.string.library_sorting)
+            tvDialogTitle.text = resources.stringResource(R.string.library_sorting)
         }
 
         val showAnim = AlphaAnimation(0F, 1F).apply {
@@ -39,11 +39,11 @@ class SortingDialogFragment : BaseDialogFragment() {
 
         viewModel.library
             .onEach {
-                val resourceColor = colorResource(it.color.toResource())
-                val resourceColorState = colorStateResource(it.color.toResource())
+                val resourceColor = resources.colorResource(it.color.toResource())
+                val resourceColorState = resources.colorStateResource(it.color.toResource())
 
                 baseDialog.tvDialogTitle.setTextColor(resourceColor)
-                baseDialog.vHead.backgroundTintList = colorStateResource(it.color.toResource())
+                baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
                 listOf(tvAlphabetically, tvCreationDate)
                     .onEach {
                         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -51,7 +51,7 @@ class SortingDialogFragment : BaseDialogFragment() {
                         }
                     }
 
-                val selectedElevation = dimenResource(R.dimen.elevation_normal)
+                val selectedElevation = resources.dimenResource(R.dimen.elevation_normal)
 
                 when (it.sortingMethod) {
                     SortingMethod.Asc -> {
@@ -59,7 +59,7 @@ class SortingDialogFragment : BaseDialogFragment() {
                         rbSortingAsc.elevation = selectedElevation
                         rbSortingAsc.backgroundTintList = resourceColorState
 
-                        rbSortingDesc.backgroundTintList = colorStateResource(R.color.colorSurface)
+                        rbSortingDesc.backgroundTintList = resources.colorStateResource(R.color.colorSurface)
                         rbSortingDesc.elevation = 0F
                     }
                     SortingMethod.Desc -> {
@@ -67,14 +67,14 @@ class SortingDialogFragment : BaseDialogFragment() {
                         rbSortingDesc.elevation = selectedElevation
                         rbSortingDesc.backgroundTintList = resourceColorState
 
-                        rbSortingAsc.backgroundTintList = colorStateResource(R.color.colorSurface)
+                        rbSortingAsc.backgroundTintList = resources.colorStateResource(R.color.colorSurface)
                         rbSortingAsc.elevation = 0F
                     }
                 }
 
                 when (it.sortingType) {
-                    SortingType.Alphabetically -> tvAlphabetically.compoundDrawables[RIGHT_DRAWABLE_INDEX] = drawableResource(R.drawable.ic_sort_checked)
-                    SortingType.CreationDate -> tvCreationDate.compoundDrawables[RIGHT_DRAWABLE_INDEX] = drawableResource(R.drawable.ic_sort_checked)
+                    SortingType.Alphabetically -> tvAlphabetically.compoundDrawables[RIGHT_DRAWABLE_INDEX] = resources.drawableResource(R.drawable.ic_sort_checked)
+                    SortingType.CreationDate -> tvCreationDate.compoundDrawables[RIGHT_DRAWABLE_INDEX] = resources.drawableResource(R.drawable.ic_sort_checked)
 
                 }
             }

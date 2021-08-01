@@ -23,7 +23,7 @@ class ConfirmationDialogFragment : BaseDialogFragment() {
     ): View = ConfirmationDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = stringResource(R.string.confirmation_dialog)
+            tvDialogTitle.text = resources.stringResource(R.string.confirmation_dialog)
         }
         tvTitle.text = args.title
         btnConfirm.text = args.btnText

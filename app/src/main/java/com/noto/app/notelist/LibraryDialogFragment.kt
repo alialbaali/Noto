@@ -34,7 +34,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
     ): View = LibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = stringResource(R.string.library_options)
+            tvDialogTitle.text = resources.stringResource(R.string.library_options)
         }
 
         setupListeners()
@@ -44,8 +44,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
     private fun LibraryDialogFragmentBinding.collectState(baseDialog: BaseDialogFragmentBinding) {
         viewModel.library
             .onEach {
-                baseDialog.vHead.backgroundTintList = colorStateResource(it.color.toResource())
-                baseDialog.tvDialogTitle.setTextColor(colorStateResource(it.color.toResource()))
+                baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
+                baseDialog.tvDialogTitle.setTextColor(resources.colorStateResource(it.color.toResource()))
                 tvEditLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_outline_edit_24, 0, 0, 0)
             }
             .launchIn(lifecycleScope)

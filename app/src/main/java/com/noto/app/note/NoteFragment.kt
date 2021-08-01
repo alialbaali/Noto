@@ -78,7 +78,7 @@ class NoteFragment : Fragment() {
 
         with(bab) {
 
-            navigationIcon?.mutate()?.setTint(colorResource(R.color.colorPrimary))
+            navigationIcon?.mutate()?.setTint(resources.colorResource(R.color.colorPrimary))
 
             setNavigationOnClickListener {
                 findNavController().navigate(NoteFragmentDirections.actionNotoFragmentToNotoDialogFragment(args.libraryId, args.noteId))
@@ -101,7 +101,7 @@ class NoteFragment : Fragment() {
                         true
                     }
                     R.id.archive_note -> {
-                        menuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
+                        menuItem.icon = resources.drawableResource(R.drawable.ic_outline_unarchive_24)
                         if (viewModel.note.value.isArchived) {
                             viewModel.toggleNoteIsArchived()
                             root.snackbar(getString(R.string.note_unarchived))
@@ -126,11 +126,11 @@ class NoteFragment : Fragment() {
                 etNoteBody.setSelection(it.body.length)
                 rbNoteStar.isChecked = it.isStarred
 
-                if (it.isArchived) archiveMenuItem.icon = drawableResource(R.drawable.ic_outline_unarchive_24)
-                else archiveMenuItem.icon = drawableResource(R.drawable.archive_arrow_down_outline)
+                if (it.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_outline_unarchive_24)
+                else archiveMenuItem.icon = resources.drawableResource(R.drawable.archive_arrow_down_outline)
 
-                if (it.reminderDate == null) fab.setImageDrawable(drawableResource(R.drawable.bell_plus_outline))
-                else fab.setImageDrawable(drawableResource(R.drawable.bell_ring_outline))
+                if (it.reminderDate == null) fab.setImageDrawable(resources.drawableResource(R.drawable.bell_plus_outline))
+                else fab.setImageDrawable(resources.drawableResource(R.drawable.bell_ring_outline))
 
                 val timeZone = TimeZone.currentSystemDefault()
                 it.creationDate
@@ -152,13 +152,13 @@ class NoteFragment : Fragment() {
 
         viewModel.library
             .onEach {
-                val color = colorResource(it.color.toResource())
+                val color = resources.colorResource(it.color.toResource())
 
                 tvLibraryTitle.text = it.title
                 tvLibraryTitle.setTextColor(color)
                 tvCreatedAt.setTextColor(color)
                 tb.navigationIcon?.mutate()?.setTint(color)
-                fab.backgroundTintList = colorStateResource(it.color.toResource())
+                fab.backgroundTintList = resources.colorStateResource(it.color.toResource())
             }
             .launchIn(lifecycleScope)
 

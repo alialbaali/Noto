@@ -74,11 +74,11 @@ class LibraryListFragment : BaseDialogFragment() {
             .onEach {
                 when (it) {
                     LayoutManager.Linear -> {
-                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_grid_outline)
+                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.view_grid_outline)
                         binding.rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     }
                     LayoutManager.Grid -> {
-                        layoutManagerMenuItem.icon = drawableResource(R.drawable.view_agenda_outline)
+                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.view_agenda_outline)
                         binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
                     }
                 }

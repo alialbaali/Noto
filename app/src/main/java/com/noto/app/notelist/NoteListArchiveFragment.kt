@@ -13,7 +13,6 @@ import com.noto.app.R
 import com.noto.app.databinding.NoteListArchiveFragmentBinding
 import com.noto.app.domain.model.Note
 import com.noto.app.util.colorResource
-import com.noto.app.util.colorStateResource
 import com.noto.app.util.toResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -71,7 +70,7 @@ class NoteListArchiveFragment : Fragment() {
 
         viewModel.library
             .onEach {
-                val color = colorResource(it.color.toResource())
+                val color = resources.colorResource(it.color.toResource())
                 tb.navigationIcon?.mutate()?.setTint(color)
                 tvLibraryNotesCount.setTextColor(color)
                 tvLibraryTitle.setTextColor(color)

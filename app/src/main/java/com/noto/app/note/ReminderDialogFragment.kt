@@ -40,7 +40,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View = ReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = stringResource(R.string.new_reminder)
+            tvDialogTitle.text = resources.stringResource(R.string.new_reminder)
         }
         btnDone.setOnClickListener {
             dismiss()
@@ -54,7 +54,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
                     ?.toLocalDateTime(timeZone)
                     ?.toJavaLocalDateTime()
                     ?.also { time ->
-                        til.endIconDrawable = drawableResource(R.drawable.bell_remove_outline)
+                        til.endIconDrawable = resources.drawableResource(R.drawable.bell_remove_outline)
 
                         val currentDateTime = Clock.System
                             .now()
@@ -85,7 +85,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
 
                 if (it.reminderDate == null) {
                     et.setText(getString(R.string.no_reminder))
-                    til.endIconDrawable = drawableResource(R.drawable.bell_plus_outline)
+                    til.endIconDrawable = resources.drawableResource(R.drawable.bell_plus_outline)
                 }
             }
             .launchIn(lifecycleScope)
