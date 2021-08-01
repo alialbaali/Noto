@@ -73,7 +73,7 @@ dependencies {
     kapt("androidx.room:room-compiler:2.3.0")
     implementation(Libraries.Main.DataStore)
     implementation(Libraries.Main.Koin)
-
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
     testImplementation(KotlinX.coroutines.test)
 //    testImplementation(Libraries.Testing.KoinTest)
     testImplementation(Testing.Kotest.Runner.junit4)

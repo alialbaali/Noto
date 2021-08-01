@@ -3,7 +3,8 @@ package com.noto.app.domain.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.time.LocalDate
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 
 @Entity(tableName = "libraries")
 data class Library(
@@ -22,7 +23,7 @@ data class Library(
     val color: NotoColor = NotoColor.GRAY,
 
     @ColumnInfo(name = "creation_date")
-    val creationDate: LocalDate = LocalDate.now(),
+    val creationDate: Instant = Clock.System.now(),
 
     @ColumnInfo(name = "sorting_type")
     val sortingType: SortingType = SortingType.CreationDate,

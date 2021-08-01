@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import java.time.LocalDate
-import java.time.ZonedDateTime
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 
 @Entity(
     tableName = "notes",
@@ -35,7 +35,7 @@ data class Note(
     val position: Int,
 
     @ColumnInfo(name = "creation_date")
-    val creationDate: LocalDate = LocalDate.now(),
+    val creationDate: Instant = Clock.System.now(),
 
     @ColumnInfo(name = "is_starred")
     val isStarred: Boolean = false,
@@ -44,6 +44,6 @@ data class Note(
     val isArchived: Boolean = false,
 
     @ColumnInfo(name = "reminder_date")
-    val reminderDate: ZonedDateTime? = null
+    val reminderDate: Instant? = null
 
 )
