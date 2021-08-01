@@ -5,13 +5,18 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.noto.app.domain.model.NotoColor
-import com.noto.app.note.NoteBody
-import com.noto.app.note.NoteColor
-import com.noto.app.note.NoteId
-import com.noto.app.note.NoteTitle
+import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.util.NoteColor
+import com.noto.app.util.NoteId
 import com.noto.app.util.createNotification
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.runBlocking
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class AlarmReceiver : BroadcastReceiver() {
+class AlarmReceiver : BroadcastReceiver(), KoinComponent {
+
+    private val noteRepository by inject<NoteRepository>()
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
@@ -19,13 +24,18 @@ class AlarmReceiver : BroadcastReceiver() {
 
         intent?.let {
 
-            val id = it.getIntExtra(NoteId, 0)
-            val title = it.getStringExtra(NoteTitle) ?: String()
-            val body = it.getStringExtra(NoteBody) ?: String()
+            val id = it.getLongExtra(NoteId, 0)
             val notoColorOrdinal = it.getIntExtra(NoteColor, 0)
             val notoColor = NotoColor.values().first { it.ordinal == notoColorOrdinal }
 
-            notificationManager.createNotification(context, id, title, body, notoColor)
+            runBlocking {
+                noteRepository.getNoteById(id)
+                    .firstOrNull()
+                    ?.let { note ->
+                        notificationManager.createNotification(context, note, notoColor)
+                        noteRepository.updateNote(note.copy(reminderDate = null))
+                    }
+            }
         }
     }
 }

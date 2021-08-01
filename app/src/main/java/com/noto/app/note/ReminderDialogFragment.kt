@@ -2,7 +2,6 @@ package com.noto.app.note
 
 import android.app.AlarmManager
 import android.app.DatePickerDialog
-import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.res.Configuration
@@ -11,12 +10,14 @@ import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ReminderDialogFragmentBinding
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.datetime.*
 import kotlinx.datetime.TimeZone
@@ -24,8 +25,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 import java.time.format.DateTimeFormatter
 import java.util.*
-
-const val PENDING_INTENT_FLAGS = PendingIntent.FLAG_ONE_SHOT
 
 class ReminderDialogFragment : BaseDialogFragment() {
 
@@ -60,14 +59,27 @@ class ReminderDialogFragment : BaseDialogFragment() {
                         val currentDateTime = Clock.System
                             .now()
                             .toLocalDateTime(timeZone)
-                            .toJavaLocalDateTime()
+
+                        val is24HourFormat = DateFormat.is24HourFormat(requireContext())
 
                         if (time.year > currentDateTime.year) {
-                            val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM yyyy HH:mm a"))
-                            et.setText(format)
+
+                            val format = if (is24HourFormat)
+                                "EEE, d MMM yyyy HH:mm"
+                            else
+                                "EEE, d MMM yyyy h:mm a"
+
+                            val dateTime = time.format(DateTimeFormatter.ofPattern(format))
+                            et.setText(dateTime)
                         } else {
-                            val format = time.format(DateTimeFormatter.ofPattern("EEE, d MMM HH:mm a"))
-                            et.setText(format)
+
+                            val format = if (is24HourFormat)
+                                "EEE, d MMM HH:mm"
+                            else
+                                "EEE, d MMM h:mm a"
+
+                            val dateTime = time.format(DateTimeFormatter.ofPattern(format))
+                            et.setText(dateTime)
                         }
                     }
 
@@ -76,12 +88,13 @@ class ReminderDialogFragment : BaseDialogFragment() {
                     til.endIconDrawable = drawableResource(R.drawable.bell_plus_outline)
                 }
             }
+            .launchIn(lifecycleScope)
 
         til.setEndIconOnClickListener {
             if (viewModel.note.value.reminderDate == null) {
                 showDateTimeDialog()
             } else {
-                alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id.toInt())
+                alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id)
                 viewModel.setNoteReminder(null)
             }
         }
@@ -106,14 +119,14 @@ class ReminderDialogFragment : BaseDialogFragment() {
         DatePickerDialog(requireContext(), theme, { _, year, month, day ->
             TimePickerDialog(requireContext(), theme, { _, hour, minute ->
 
-                LocalDateTime(year, month, day, hour, minute)
+                LocalDateTime(year, month + 1, day, hour, minute)
                     .toInstant(TimeZone.currentSystemDefault())
                     .also { viewModel.setNoteReminder(it) }
                     .toEpochMilliseconds()
                     .also {
                         val note = viewModel.note.value
                         val notoColor = viewModel.library.value.color
-                        alarmManager.createAlarm(requireContext(), note, notoColor, it)
+                        alarmManager.createAlarm(requireContext(), note.id, notoColor, it)
                     }
 
             }, startHour, startMinute, is24HourFormat).show()
