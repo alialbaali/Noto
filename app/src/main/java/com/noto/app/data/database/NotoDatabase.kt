@@ -23,7 +23,10 @@ private const val NOTO_DATABASE = "Noto Database"
     SortingMethodConverter::class,
     SortingTypeConverter::class,
 )
-@Database(entities = [Note::class, Library::class, Label::class, NoteLabel::class], version = 6, exportSchema = false)
+@Database(
+    entities = [Note::class, Library::class, Label::class, NoteLabel::class],
+    version = 6,
+)
 abstract class NotoDatabase : RoomDatabase() {
 
     abstract val noteDao: NoteDao

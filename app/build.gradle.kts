@@ -9,11 +9,17 @@ android {
     compileSdk = App.CompileSDK
     buildToolsVersion = App.BuildTools
     defaultConfig {
+        applicationId = App.ID
         minSdk = App.MinSDK
         targetSdk = App.TargetSDK
         versionCode = App.VersionCode
         versionName = App.VersionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        kapt {
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
     buildTypes {
         getByName("release") {

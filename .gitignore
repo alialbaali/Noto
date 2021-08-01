@@ -14,3 +14,5 @@
 .cxx
 .idea/*
 */build
+*/release
+*/schemas
