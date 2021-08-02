@@ -21,6 +21,11 @@
     <string name="desc">Descending</string>
     <string name="asc">Ascending</string>
     <string name="settings">Settings</string>
+    <string name="view_code">View code on Github</string>
+    <string name="share_with_others">Share with others</string>
+    <string name="share_with">Share with</string>
+    <string name="invite_text">Check out Noto!</string>
+    <string name="version">Version</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>

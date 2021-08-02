@@ -24,11 +24,11 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/tb"
+            style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_round_back_24"
-            app:title="@string/archived_notes"
-            app:titleTextAppearance="@style/ToolbarTitleTextAppearance">
+            app:title="@string/archived_notes">
 
             <TextView
                 android:id="@+id/tv_library_notes_count"

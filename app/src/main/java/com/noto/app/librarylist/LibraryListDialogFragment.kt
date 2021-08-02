@@ -28,6 +28,7 @@ class LibraryListDialogFragment : BaseDialogFragment() {
 
         binding.tvSettings.setOnClickListener {
             dismiss()
+            findNavController().navigate(LibraryListDialogFragmentDirections.actionLibraryListDialogFragmentToSettingsFragment())
         }
 
         return binding.root

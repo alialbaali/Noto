@@ -23,18 +23,12 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/tb"
+            style="@style/Toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            app:title="@string/libraries">
 
-            <TextView
-                android:id="@+id/tv_library_title"
-                style="@style/ToolbarTitleTextAppearance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/libraries"
-                tools:textColor="@color/colorPrimary" />
-
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_library_notes_count"
                 style="@style/SubtitleTextView"
                 android:layout_width="wrap_content"

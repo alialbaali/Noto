@@ -28,7 +28,12 @@
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/size_large</item>
         <item name="fontFamily">@font/arima_madurai_bold</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
+    </style>
+
+    <style name="Toolbar" parent="Widget.MaterialComponents.TextView">
+        <item name="titleTextAppearance">@style/ToolbarTitleTextAppearance</item>
+        <item name="titleTextColor">@color/colorPrimary</item>
     </style>
 
     <style name="SubtitleTextView" parent="Widget.MaterialComponents.TextView">
@@ -73,7 +78,7 @@
 
     <style name="DialogItem" parent="Widget.AppCompat.TextView">
         <item name="android:fontFamily">@font/arima_madurai</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:singleLine">true</item>
         <item name="android:background">@drawable/dialog_item_shape</item>

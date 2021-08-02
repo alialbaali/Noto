@@ -169,7 +169,7 @@
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"
-        android:name="com.noto.app.ThemeDialogFragment"
+        android:name="com.noto.app.settings.ThemeDialogFragment"
         android:label="ThemeDialogFragment" />
     <dialog
         android:id="@+id/libraryDialogFragment"
@@ -196,7 +196,7 @@
     <dialog
         android:id="@+id/confirmationDialogFragment"
         android:name="com.noto.app.ConfirmationDialogFragment"
-        android:label="ConfirmationDialogFragment" >
+        android:label="ConfirmationDialogFragment">
         <argument
             android:name="title"
             app:argType="string" />
@@ -214,9 +214,20 @@
     <dialog
         android:id="@+id/libraryListDialogFragment"
         android:name="com.noto.app.librarylist.LibraryListDialogFragment"
-        android:label="LibraryListDialogFragment" >
+        android:label="LibraryListDialogFragment">
         <action
             android:id="@+id/action_libraryListDialogFragment_to_themeDialogFragment"
             app:destination="@id/themeDialogFragment" />
+        <action
+            android:id="@+id/action_libraryListDialogFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </dialog>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.noto.app.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>
