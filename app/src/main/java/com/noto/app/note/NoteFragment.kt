@@ -17,6 +17,8 @@ import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.filterNot
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.datetime.Clock
@@ -115,6 +117,7 @@ class NoteFragment : Fragment() {
         val archiveMenuItem = bab.menu.findItem(R.id.archive_note)
 
         viewModel.note
+            .filterNotNull()
             .onEach {
                 etNoteTitle.setText(it.title)
                 etNoteBody.setText(it.body)

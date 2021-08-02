@@ -22,6 +22,7 @@ import com.noto.app.databinding.NoteListFragmentBinding
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -53,6 +54,7 @@ class NoteListFragment : Fragment() {
 
     private fun NoteListFragmentBinding.collectState() {
         viewModel.library
+            .filterNotNull()
             .onEach {
                 setLibraryColors(it.color)
                 tb.title = it.title

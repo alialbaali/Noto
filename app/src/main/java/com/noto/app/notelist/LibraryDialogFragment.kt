@@ -7,15 +7,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.noto.app.BaseDialogFragment
 import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryDialogFragmentBinding
-import com.noto.app.util.colorStateResource
-import com.noto.app.util.stringResource
-import com.noto.app.util.toResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -58,11 +56,14 @@ class LibraryDialogFragment : BaseDialogFragment() {
         }
 
         tvDeleteLibrary.setOnClickListener {
-            dismiss()
-
-            val title = getString(R.string.delete_library_confirmation)
-            val btnText = getString(R.string.delete_library)
+            val title = resources.stringResource(R.string.delete_library_confirmation)
+            val btnText = resources.stringResource(R.string.delete_library)
             val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
+                val parentView = requireParentFragment().requireView()
+                val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
+                parentView.snackbar(resources.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
+                findNavController().popBackStack(R.id.libraryListFragment, false)
+                dismiss()
                 viewModel.deleteLibrary()
             }
 

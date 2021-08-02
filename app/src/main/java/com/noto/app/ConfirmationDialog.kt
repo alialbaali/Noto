@@ -25,13 +25,14 @@ class ConfirmationDialogFragment : BaseDialogFragment() {
         BaseDialogFragmentBinding.bind(root).apply {
             tvDialogTitle.text = resources.stringResource(R.string.confirmation_dialog)
         }
+
         tvTitle.text = args.title
         btnConfirm.text = args.btnText
         btnConfirm.setOnClickListener {
             dismiss()
             args.clickListener.onClick()
-            findNavController().navigateUp()
         }
+
         if (args.description.isNullOrBlank())
             tvDescription.visibility = View.GONE
         else
