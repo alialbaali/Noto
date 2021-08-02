@@ -8,7 +8,6 @@ import androidx.core.app.AlarmManagerCompat
 import com.noto.app.receiver.AlarmReceiver
 
 const val NoteId = "noto_id"
-const val NoteColor = "noto_color"
 const val LibraryId = "library_id"
 private const val PENDING_INTENT_FLAGS = PendingIntent.FLAG_UPDATE_CURRENT
 

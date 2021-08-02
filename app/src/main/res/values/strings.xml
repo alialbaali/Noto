@@ -57,6 +57,7 @@
     <string name="unarchive_note">Unarchive note</string>
     <string name="notes">Notes</string>
     <string name="note">Note</string>
+    <string name="no_note_matches_search_term">There\'s no note that matches the search term.</string>
     <string name="note_archived">Note has been archived.</string>
     <string name="no_reminder">No reminder setup</string>
     <string name="note_unarchived">Note has been unarchived.</string>

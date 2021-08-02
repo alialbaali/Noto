@@ -91,6 +91,10 @@ class NoteListFragment : Fragment() {
             .onEach {
                 tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
                 if (it.isEmpty()) {
+
+                    if (tilSearch.isVisible)
+                        tvPlaceHolder.text = resources.stringResource(R.string.no_note_matches_search_term)
+
                     layoutItems.forEach { it.visibility = View.GONE }
                     tvPlaceHolder.visibility = View.VISIBLE
                 } else {
