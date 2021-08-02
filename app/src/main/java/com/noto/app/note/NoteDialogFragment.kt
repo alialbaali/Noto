@@ -51,7 +51,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    listOf(tvCopyToClipboard, tvShareNote, tvArchiveNote, tvStarNote, tvRemindMe)
+                    listOf(tvCopyToClipboard, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe)
                         .forEach { tv -> tv.compoundDrawableTintList = resources.colorStateResource(it.color.toResource()) }
             }
             .launchIn(lifecycleScope)
@@ -105,6 +105,12 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvRemindMe.setOnClickListener {
             dismiss()
             findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.libraryId, args.noteId))
+        }
+
+        tvDuplicateNote.setOnClickListener {
+            dismiss()
+            viewModel.duplicateNote()
+            parentView.snackbar(resources.stringResource(R.string.note_is_duplicated), parentAnchorView)
         }
 
         tvStarNote.setOnClickListener {

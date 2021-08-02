@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/drawable/ic_add_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_arrow_bottom_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_back_24px.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/ic_baseline_control_point_duplicate_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_bell_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_bookshelf_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_calendar_24dp.xml" value="0.29322916666666665" />
@@ -46,6 +47,7 @@
         <entry key="app/src/main/res/drawable/ic_unchecked_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_work_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/library_item_shape.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/ripple.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/selector_dialog_rbtn_gray.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/selector_star.xml" value="0.3528205128205128" />
         <entry key="app/src/main/res/drawable/shape_view_head.xml" value="0.35833333333333334" />

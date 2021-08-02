@@ -47,6 +47,7 @@
     <string name="create_note">Create note</string>
     <string name="delete_note">Delete note</string>
     <string name="archive_note">Archive note</string>
+    <string name="duplicate_note">Duplicate note</string>
     <string name="sorting">Sorting</string>
     <string name="unarchive_note">Unarchive note</string>
     <string name="notes">Notes</string>
@@ -69,6 +70,7 @@
     <string name="edit_reminder">Edit reminder</string>
     <string name="note_options">Note options</string>
     <string name="note_is_deleted">Note has been deleted</string>
+    <string name="note_is_duplicated">Note has been duplicated</string>
 
     <!-- Label -->
     <string name="add_label">Add label</string>

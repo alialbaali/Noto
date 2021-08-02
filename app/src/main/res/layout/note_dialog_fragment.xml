@@ -34,6 +34,15 @@
         app:drawableStartCompat="@drawable/archive_arrow_down_outline" />
 
     <TextView
+        android:id="@+id/tv_duplicate_note"
+        style="@style/DialogItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple"
+        android:text="@string/duplicate_note"
+        app:drawableStartCompat="@drawable/ic_baseline_control_point_duplicate_24" />
+
+    <TextView
         android:id="@+id/tv_copy_to_clipboard"
         style="@style/DialogItem"
         android:layout_width="match_parent"
