@@ -46,6 +46,17 @@
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_place_holder"
+        style="@style/PlaceholderTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing_normal"
+        android:text="@string/no_libraries"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
         android:layout_width="match_parent"

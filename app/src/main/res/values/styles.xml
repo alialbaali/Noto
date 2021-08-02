@@ -215,4 +215,11 @@
         <item name="hintTextColor">@color/colorOnPrimary</item>
     </style>
 
+    <style name="PlaceholderTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">@dimen/size_extra_huge</item>
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="fontFamily">@font/arima_madurai_medium</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

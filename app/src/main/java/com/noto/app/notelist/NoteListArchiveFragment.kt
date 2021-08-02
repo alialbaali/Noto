@@ -55,10 +55,19 @@ class NoteListArchiveFragment : Fragment() {
     }
 
     private fun NoteListArchiveFragmentBinding.collectState() {
+        val layoutItems = listOf(tvLibraryNotesCount, rv)
+
         viewModel.archivedNotes
             .onEach {
-                tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
-                adapter.submitList(it)
+                if (it.isEmpty()) {
+                    layoutItems.forEach { it.visibility = View.GONE }
+                    tvPlaceHolder.visibility = View.VISIBLE
+                } else {
+                    tvPlaceHolder.visibility = View.GONE
+                    layoutItems.forEach { it.visibility = View.VISIBLE }
+                    adapter.submitList(it)
+                    tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
+                }
             }
             .launchIn(lifecycleScope)
 

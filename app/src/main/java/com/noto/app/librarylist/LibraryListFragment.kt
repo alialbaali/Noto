@@ -92,10 +92,19 @@ class LibraryListFragment : BaseDialogFragment() {
             }
             .launchIn(lifecycleScope)
 
+        val layoutItems = listOf(binding.tvLibraryNotesCount, binding.rv)
+
         viewModel.libraries
             .onEach {
-                adapter.submitList(it)
-                binding.tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.library), resources.stringResource(R.string.libraries))
+                if (it.isEmpty()) {
+                    layoutItems.forEach { it.visibility = View.GONE }
+                    binding.tvPlaceHolder.visibility = View.VISIBLE
+                } else {
+                    layoutItems.forEach { it.visibility = View.VISIBLE }
+                    binding.tvPlaceHolder.visibility = View.GONE
+                    adapter.submitList(it)
+                    binding.tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.library), resources.stringResource(R.string.libraries))
+                }
             }
             .launchIn(lifecycleScope)
 

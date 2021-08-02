@@ -36,9 +36,12 @@
     <string name="library_sorting">Library Sorting</string>
     <string name="empty_title">Title can\'t be empty</string>
     <string name="library_is_deleted">Library has been deleted</string>
+    <string name="library_is_empty">Library is empty</string>
+    <string name="no_libraries">No libraries. Try creating a library by clicking the + icon</string>
 
     <!-- Note -->
     <string name="all_notes">All notes</string>
+    <string name="archive_is_empty">Archive is empty</string>
     <string name="body">Body</string>
     <string name="title">Title</string>
     <string name="create_note">Create note</string>

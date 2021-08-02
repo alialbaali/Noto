@@ -58,7 +58,6 @@ class NoteListFragment : Fragment() {
             .onEach {
                 setLibraryColors(it.color)
                 tb.title = it.title
-                tvPlaceHolder.text = it.title
             }
             .launchIn(lifecycleScope)
 
@@ -86,17 +85,17 @@ class NoteListFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        val placeHolderItems = listOf(tvLibraryNotesCount, rv)
+        val layoutItems = listOf(tvLibraryNotesCount, rv)
 
         viewModel.notes
             .onEach {
                 tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
                 if (it.isEmpty()) {
-                    placeHolderItems.forEach { it.visibility = View.GONE }
-                    llPlaceHolder.visibility = View.VISIBLE
+                    layoutItems.forEach { it.visibility = View.GONE }
+                    tvPlaceHolder.visibility = View.VISIBLE
                 } else {
-                    placeHolderItems.forEach { it.visibility = View.VISIBLE }
-                    llPlaceHolder.visibility = View.GONE
+                    layoutItems.forEach { it.visibility = View.VISIBLE }
+                    tvPlaceHolder.visibility = View.GONE
                     adapter.submitList(it)
                 }
             }
@@ -112,8 +111,6 @@ class NoteListFragment : Fragment() {
         tvLibraryNotesCount.setTextColor(color)
         tb.navigationIcon?.mutate()?.setTint(color)
         fab.backgroundTintList = colorStateList
-
-        tvPlaceHolder.setTextColor(color)
     }
 
     private fun NoteListFragmentBinding.setupListeners() {
