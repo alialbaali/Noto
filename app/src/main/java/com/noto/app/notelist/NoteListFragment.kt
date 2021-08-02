@@ -58,7 +58,7 @@ class NoteListFragment : Fragment() {
         viewModel.library
             .onEach {
                 setLibraryColors(it.color)
-                tvLibraryTitle.text = it.title
+                tb.title = it.title
                 tvPlaceHolder.text = it.title
                 val notosCount = viewModel.notes.value.size
                 tvLibraryNotesCount.text = notosCount.toString().plus(if (notosCount == 1) " Note" else " Notes")
@@ -89,7 +89,7 @@ class NoteListFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        val placeHolderItems = listOf(tvLibraryNotesCount, tvLibraryTitle, rv)
+        val placeHolderItems = listOf(tvLibraryNotesCount, rv)
 
         viewModel.notes
             .onEach {
@@ -110,7 +110,7 @@ class NoteListFragment : Fragment() {
         val color = resources.colorResource(notoColor.toResource())
         val colorStateList = resources.colorStateResource(notoColor.toResource())
 
-        tvLibraryTitle.setTextColor(color)
+        tb.setTitleTextColor(color)
         tvLibraryNotesCount.setTextColor(color)
         tb.navigationIcon?.mutate()?.setTint(color)
         fab.backgroundTintList = colorStateList

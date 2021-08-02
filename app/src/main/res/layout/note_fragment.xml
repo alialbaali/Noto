@@ -12,59 +12,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/tb"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:navigationIcon="@drawable/ic_back_24px">
-
-                <TextView
-                    android:id="@+id/tv_created_at"
-                    style="@style/SubtitleTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/spacing_normal"
-                    tools:text="Created at"
-                    tools:textColor="@color/colorAccentTeal" />
-            </com.google.android.material.appbar.MaterialToolbar>
+            android:layout_height="wrap_content"
+            app:navigationIcon="@drawable/ic_back_24px"
+            app:titleTextAppearance="@style/TitleTextView"
+            tools:title="Note">
 
             <TextView
-                android:id="@+id/tv_library_title"
-                style="@style/TitleTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginVertical="@dimen/spacing_small"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/rb_note_star"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tb"
-                tools:text="@string/all_notes"
-                tools:textColor="@color/colorAccentTeal" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_note_star"
+                android:id="@+id/tv_created_at"
+                style="@style/SubtitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_normal"
-                android:background="@drawable/selector_star"
-                android:button="@null"
-                android:minWidth="0dp"
-                android:minHeight="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_library_title"
-                app:layout_constraintTop_toBottomOf="@+id/tb" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginEnd="@dimen/spacing_normal"
+                tools:text="Created at"
+                tools:textColor="@color/colorAccentTeal" />
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView

@@ -37,7 +37,6 @@
                 style="@style/SubtitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/spacing_normal"
                 tools:text="7 Libraries"
                 tools:textColor="@color/colorPrimary" />

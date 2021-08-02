@@ -70,10 +70,6 @@ class NoteFragment : Fragment() {
             backCallback()
         }
 
-        rbNoteStar.setOnClickListener {
-            viewModel.toggleNoteIsStarred()
-        }
-
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
 
         with(bab) {
@@ -124,7 +120,6 @@ class NoteFragment : Fragment() {
                 etNoteBody.setText(it.body)
                 etNoteTitle.setSelection(it.title.length)
                 etNoteBody.setSelection(it.body.length)
-                rbNoteStar.isChecked = it.isStarred
 
                 if (it.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_outline_unarchive_24)
                 else archiveMenuItem.icon = resources.drawableResource(R.drawable.archive_arrow_down_outline)
@@ -154,14 +149,12 @@ class NoteFragment : Fragment() {
             .onEach {
                 val color = resources.colorResource(it.color.toResource())
 
-                tvLibraryTitle.text = it.title
-                tvLibraryTitle.setTextColor(color)
+                tb.title = it.title
+                tb.setTitleTextColor(color)
                 tvCreatedAt.setTextColor(color)
                 tb.navigationIcon?.mutate()?.setTint(color)
                 fab.backgroundTintList = resources.colorStateResource(it.color.toResource())
             }
             .launchIn(lifecycleScope)
-
     }
-
 }

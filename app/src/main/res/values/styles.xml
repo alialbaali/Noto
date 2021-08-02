@@ -21,10 +21,11 @@
         <item name="android:background">@color/colorBackground</item>
         <item name="liftOnScroll">true</item>
         <item name="android:elevation">@dimen/elevation_normal</item>
+        <item name="android:animateLayoutChanges">true</item>
     </style>
 
     <style name="TitleTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:maxLines">3</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/size_huge</item>
         <item name="android:fontFamily">@font/arima_madurai_medium</item>
         <item name="android:textColor">@color/colorPrimary</item>
@@ -37,6 +38,7 @@
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:fontFamily">@font/arima_madurai_medium</item>
+        <item name="android:layout_gravity">end</item>
     </style>
 
     <style name="DialogAnimation">
@@ -139,14 +141,21 @@
 
     <style name="LibraryTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/size_small</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
 
     <style name="LibraryNotesCountTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorOnPrimary</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/size_tiny</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="LibraryCreationDateTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="android:textSize">@dimen/size_tiny</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>

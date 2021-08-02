@@ -73,8 +73,8 @@ class NoteListArchiveFragment : Fragment() {
                 val color = resources.colorResource(it.color.toResource())
                 tb.navigationIcon?.mutate()?.setTint(color)
                 tvLibraryNotesCount.setTextColor(color)
-                tvLibraryTitle.setTextColor(color)
-                tvLibraryTitle.text = "${it.title} ${getString(R.string.archived_notes)}"
+                tb.title = "${it.title} ${getString(R.string.archived_notes)}"
+                tb.setTitleTextColor(color)
             }
             .launchIn(lifecycleScope)
     }
