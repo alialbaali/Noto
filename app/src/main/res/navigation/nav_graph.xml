@@ -158,14 +158,14 @@
             android:name="note_id"
             app:argType="long" />
         <action
-            android:id="@+id/action_notoDialogFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment" />
-        <action
             android:id="@+id/action_notoDialogFragment_to_reminderDialogFragment"
             app:destination="@id/reminderDialogFragment" />
         <action
             android:id="@+id/action_notoDialogFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />
+        <argument
+            android:name="destination"
+            app:argType="reference" />
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"

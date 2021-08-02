@@ -79,7 +79,7 @@ class NoteFragment : Fragment() {
             navigationIcon?.mutate()?.setTint(resources.colorResource(R.color.colorPrimary))
 
             setNavigationOnClickListener {
-                findNavController().navigate(NoteFragmentDirections.actionNotoFragmentToNotoDialogFragment(args.libraryId, args.noteId))
+                findNavController().navigate(NoteFragmentDirections.actionNotoFragmentToNotoDialogFragment(args.libraryId, args.noteId, R.id.libraryFragment))
             }
 
             setOnMenuItemClickListener { menuItem ->

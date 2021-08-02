@@ -39,7 +39,7 @@ class NoteListFragment : Fragment() {
     private val noteItemClickListener by lazy {
         object : NoteListAdapter.NoteItemClickListener {
             override fun onClick(note: Note) = findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
-            override fun onLongClick(note: Note) = findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id))
+            override fun onLongClick(note: Note) = findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id, R.id.libraryFragment))
         }
     }
 

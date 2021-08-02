@@ -145,7 +145,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             val btnText = resources.stringResource(R.string.delete_note)
             val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
                 parentView.snackbar(resources.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
-                findNavController().popBackStack(R.id.libraryFragment, false)
+                findNavController().popBackStack(args.destination, false)
                 dismiss()
                 viewModel.deleteNote()
             }
