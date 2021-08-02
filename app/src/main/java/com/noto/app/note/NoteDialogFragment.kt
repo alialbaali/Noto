@@ -1,5 +1,6 @@
 package com.noto.app.note
 
+import android.app.AlarmManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -31,6 +32,8 @@ class NoteDialogFragment : BaseDialogFragment() {
     private val args by navArgs<NoteDialogFragmentArgs>()
 
     private val clipboardManager by lazy { requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
+
+    private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -147,6 +150,8 @@ class NoteDialogFragment : BaseDialogFragment() {
                 parentView.snackbar(resources.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
                 findNavController().popBackStack(args.destination, false)
                 dismiss()
+                if (viewModel.note.value.reminderDate != null)
+                    alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id)
                 viewModel.deleteNote()
             }
 
