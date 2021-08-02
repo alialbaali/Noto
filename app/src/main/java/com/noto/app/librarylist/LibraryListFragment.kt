@@ -53,7 +53,7 @@ class LibraryListFragment : BaseDialogFragment() {
         }
 
         binding.bab.setNavigationOnClickListener {
-
+            findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryListDialogFragment())
         }
 
         binding.bab.setOnMenuItemClickListener { menuItem ->

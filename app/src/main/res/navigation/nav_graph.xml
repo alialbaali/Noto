@@ -61,6 +61,9 @@
         <action
             android:id="@+id/action_libraryListFragment_to_libraryDialogFragment"
             app:destination="@id/libraryDialogFragment" />
+        <action
+            android:id="@+id/action_libraryListFragment_to_libraryListDialogFragment"
+            app:destination="@id/libraryListDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
@@ -207,5 +210,13 @@
         <argument
             android:name="click_listener"
             app:argType="com.noto.app.ConfirmationDialogFragment$ConfirmationDialogClickListener" />
+    </dialog>
+    <dialog
+        android:id="@+id/libraryListDialogFragment"
+        android:name="com.noto.app.librarylist.LibraryListDialogFragment"
+        android:label="LibraryListDialogFragment" >
+        <action
+            android:id="@+id/action_libraryListDialogFragment_to_themeDialogFragment"
+            app:destination="@id/themeDialogFragment" />
     </dialog>
 </navigation>

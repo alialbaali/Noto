@@ -17,7 +17,7 @@ class LibraryListViewModel(private val libraryRepository: LibraryRepository, pri
     private val mutableLibraries = MutableStateFlow<List<Library>>(emptyList())
     val libraries get() = mutableLibraries.asStateFlow()
 
-    private val mutableLayoutManager = MutableStateFlow(LayoutManager.Linear)
+    private val mutableLayoutManager = MutableStateFlow(LayoutManager.Grid)
     val layoutManager get() = mutableLayoutManager.asStateFlow()
 
     init {

@@ -67,7 +67,7 @@ class NoteViewModel(
     }
 
     fun duplicateNote() = viewModelScope.launch {
-        noteRepository.createNote(note.value.copy(id = 0))
+        noteRepository.createNote(note.value.copy(id = 0, reminderDate = null))
     }
 
 }
