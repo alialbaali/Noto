@@ -134,7 +134,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             dismiss()
             val intent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
-                putExtra(Intent.EXTRA_MIME_TYPES, viewModel.note.value.format())
+                putExtra(Intent.EXTRA_TEXT, viewModel.note.value.format())
             }
             val chooser = Intent.createChooser(intent, getString(R.string.share_note))
             startActivity(chooser)
