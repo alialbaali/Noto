@@ -24,31 +24,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/ll"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/tv_library_title"
+                style="@style/TitleTextView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="@string/libraries"
+                tools:textColor="@color/colorPrimary" />
 
-                <TextView
-                    android:id="@+id/tv_library_title"
-                    style="@style/TitleTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/libraries"
-                    tools:textColor="@color/colorPrimary" />
-
-                <TextView
-                    android:id="@+id/tv_library_notes_count"
-                    style="@style/SubtitleTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/spacing_normal"
-                    tools:text="7 Libraries"
-                    tools:textColor="@color/colorPrimary" />
-            </LinearLayout>
+            <TextView
+                android:id="@+id/tv_library_notes_count"
+                style="@style/SubtitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                tools:text="7 Libraries"
+                tools:textColor="@color/colorPrimary" />
 
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
