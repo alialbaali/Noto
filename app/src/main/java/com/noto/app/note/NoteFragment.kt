@@ -19,13 +19,8 @@ import com.noto.app.util.*
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toJavaLocalDateTime
-import kotlinx.datetime.toLocalDateTime
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.time.format.DateTimeFormatter
 
 
 class NoteFragment : Fragment() {
@@ -110,28 +105,13 @@ class NoteFragment : Fragment() {
                 etNoteBody.setText(it.body)
                 etNoteTitle.setSelection(it.title.length)
                 etNoteBody.setSelection(it.body.length)
+                tvCreatedAt.text = "${getString(R.string.created_at)} ${it.formatCreationDate()}"
 
                 if (it.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
                 else archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_archive_24)
 
                 if (it.reminderDate == null) fab.setImageDrawable(resources.drawableResource(R.drawable.ic_round_notification_add_24))
                 else fab.setImageDrawable(resources.drawableResource(R.drawable.ic_round_edit_notifications_24))
-
-                val timeZone = TimeZone.currentSystemDefault()
-                it.creationDate
-                    .toLocalDateTime(timeZone)
-                    .toJavaLocalDateTime()
-                    .apply {
-                        val currentDateTime = Clock.System
-                            .now()
-                            .toLocalDateTime(timeZone)
-                            .toJavaLocalDateTime()
-
-                        val dateFormat = if (year > currentDateTime.year) format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
-                        else format(DateTimeFormatter.ofPattern("EEE, MMM d"))
-
-                        tvCreatedAt.text = "${getString(R.string.created_at)} $dateFormat"
-                    }
             }
             .launchIn(lifecycleScope)
 

@@ -116,6 +116,8 @@
         <entry key="app/src/main/res/layout/note_item.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_list_archive_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_list_fragment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/note_read_mode_fragment.xml" value="0.3421875" />
+        <entry key="app/src/main/res/layout/read_mode_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/reminder_dialog_fragment.xml" value="0.18645833333333334" />
         <entry key="app/src/main/res/layout/settings_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/sorting_dialog_fragment.xml" value="0.18645833333333334" />

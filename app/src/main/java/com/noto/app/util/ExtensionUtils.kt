@@ -13,6 +13,11 @@ import com.noto.app.R
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.SortingMethod
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toJavaLocalDateTime
+import kotlinx.datetime.toLocalDateTime
+import java.time.format.DateTimeFormatter
 
 enum class LayoutManager {
     Linear, Grid
@@ -25,6 +30,23 @@ inline fun <T> Iterable<T>.sortByMethod(method: SortingMethod, crossinline selec
     }
 }
 
+fun Note.formatCreationDate(): String {
+    val timeZone = TimeZone.currentSystemDefault()
+    return creationDate
+        .toLocalDateTime(timeZone)
+        .toJavaLocalDateTime()
+        .let {
+            val currentDateTime = Clock.System
+                .now()
+                .toLocalDateTime(timeZone)
+                .toJavaLocalDateTime()
+
+            if (it.year > currentDateTime.year)
+                it.format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
+            else
+                it.format(DateTimeFormatter.ofPattern("EEE, MMM d"))
+        }
+}
 
 fun Fragment.launchShareNoteIntent(note: Note) {
     val intent = note.createShareIntent()

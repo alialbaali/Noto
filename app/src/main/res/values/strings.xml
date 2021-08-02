@@ -70,6 +70,7 @@
     <string name="share_note" tools:ignore="TypographyEllipsis">Share note with...</string>
     <string name="add_reminder">Add reminder</string>
     <string name="star_note">Star note</string>
+    <string name="open_in_reading_mode">Open in reading mode</string>
     <string name="un_star_note">Un-star note</string>
     <string name="note_is_starred">Note has been starred.</string>
     <string name="note_is_un_starred">Note has been un-starred.</string>

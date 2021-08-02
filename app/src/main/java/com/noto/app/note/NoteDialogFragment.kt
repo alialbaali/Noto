@@ -53,7 +53,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    listOf(tvCopyToClipboard, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote)
+                    listOf(tvCopyToClipboard, tvOpenInReadingMode, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote)
                         .forEach { tv -> tv.compoundDrawableTintList = resources.colorStateResource(it.color.toResource()) }
             }
             .launchIn(lifecycleScope)
@@ -107,6 +107,11 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvRemindMe.setOnClickListener {
             dismiss()
             findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.libraryId, args.noteId))
+        }
+
+        tvOpenInReadingMode.setOnClickListener {
+            dismiss()
+            findNavController().navigate(NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReadingModeFragment(args.libraryId, args.noteId))
         }
 
         tvDuplicateNote.setOnClickListener {
