@@ -2,6 +2,7 @@ object Libraries {
     object Main {
         const val Koin = "io.insert-koin:koin-android:${Versions.Koin}"
         const val DataStore = "androidx.datastore:datastore-preferences:1.0.0-alpha02"
+        const val JavaTime = "com.android.tools:desugar_jdk_libs:${Versions.JavaTime}"
     }
 
     object Gradle {
@@ -16,6 +17,7 @@ object Libraries {
 }
 
 object Versions {
+    const val JavaTime = "1.0.9"
     const val Kotlin = "1.5.20"
     const val Navigation = "2.3.5"
     const val Android = "7.0.0"

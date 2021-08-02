@@ -51,6 +51,7 @@ android {
     }
 
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -95,6 +96,7 @@ dependencies {
     testImplementation(Testing.Kotest.property)
     testImplementation(Testing.Kotest.assertions.core)
 //    testImplementation(Testing.Kotest.Extensions.koin)
+    coreLibraryDesugaring(Libraries.Main.JavaTime)
 }
 
 tasks.withType<Test> {
