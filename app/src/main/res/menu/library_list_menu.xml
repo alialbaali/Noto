@@ -5,13 +5,13 @@
     <item
         android:id="@+id/layout_manager"
         android:contentDescription="@string/view"
-        android:icon="@drawable/view_agenda_outline"
+        android:icon="@drawable/ic_round_view_agenda_24"
         android:title="@string/view"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/theme"
-        android:icon="@drawable/theme"
+        android:icon="@drawable/ic_round_theme_24"
         android:title="@string/theme"
         android:visible="true"
         app:showAsAction="ifRoom" />

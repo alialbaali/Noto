@@ -15,7 +15,7 @@
         android:layout_width="5dp"
         android:layout_height="0dp"
         android:layout_margin="@dimen/spacing_normal"
-        android:background="@drawable/view_color_shape"
+        android:background="@drawable/color_view_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

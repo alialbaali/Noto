@@ -11,13 +11,13 @@
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
+        android:background="@drawable/dialog_item_shape"
         android:text="@string/edit_library"
-        app:drawableStartCompat="@drawable/ic_outline_edit_24" />
+        app:drawableStartCompat="@drawable/ic_round_edit_24" />
 
 <!--    <TextView-->
 <!--        android:id="@+id/tv_sorting"-->
-<!--        style="@style/DialogItem"-->
+<!--        style="@style/dialog_item_shape"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
 <!--        android:background="@drawable/ripple"-->
@@ -29,8 +29,8 @@
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
+        android:background="@drawable/dialog_item_shape"
         android:text="@string/delete_library"
-        app:drawableStartCompat="@drawable/ic_delete_sweep_24px" />
+        app:drawableStartCompat="@drawable/ic_round_delete_sweep_24" />
 
 </LinearLayout>

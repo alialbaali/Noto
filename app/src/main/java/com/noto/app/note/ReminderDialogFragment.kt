@@ -54,7 +54,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
                     ?.toLocalDateTime(timeZone)
                     ?.toJavaLocalDateTime()
                     ?.also { time ->
-                        til.endIconDrawable = resources.drawableResource(R.drawable.bell_remove_outline)
+                        til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_cancel_24)
 
                         val currentDateTime = Clock.System
                             .now()
@@ -85,7 +85,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
 
                 if (it.reminderDate == null) {
                     et.setText(getString(R.string.no_reminder))
-                    til.endIconDrawable = resources.drawableResource(R.drawable.bell_plus_outline)
+                    til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_notification_add_24)
                 }
             }
             .launchIn(lifecycleScope)

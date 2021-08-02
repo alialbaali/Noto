@@ -51,6 +51,11 @@ class LibraryListFragment : BaseDialogFragment() {
         binding.fab.setOnClickListener {
             findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToNewLibraryDialogFragment())
         }
+
+        binding.bab.setNavigationOnClickListener {
+
+        }
+
         binding.bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.layout_manager -> {
@@ -76,11 +81,11 @@ class LibraryListFragment : BaseDialogFragment() {
             .onEach {
                 when (it) {
                     LayoutManager.Linear -> {
-                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.view_grid_outline)
+                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_grid_24)
                         binding.rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     }
                     LayoutManager.Grid -> {
-                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.view_agenda_outline)
+                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_agenda_24)
                         binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
                     }
                 }

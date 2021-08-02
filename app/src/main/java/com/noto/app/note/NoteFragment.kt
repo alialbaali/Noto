@@ -99,7 +99,7 @@ class NoteFragment : Fragment() {
                         true
                     }
                     R.id.archive_note -> {
-                        menuItem.icon = resources.drawableResource(R.drawable.ic_outline_unarchive_24)
+                        menuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
                         if (viewModel.note.value.isArchived) {
                             viewModel.toggleNoteIsArchived()
                             root.snackbar(getString(R.string.note_unarchived))
@@ -124,11 +124,11 @@ class NoteFragment : Fragment() {
                 etNoteTitle.setSelection(it.title.length)
                 etNoteBody.setSelection(it.body.length)
 
-                if (it.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_outline_unarchive_24)
-                else archiveMenuItem.icon = resources.drawableResource(R.drawable.archive_arrow_down_outline)
+                if (it.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
+                else archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_archive_24)
 
-                if (it.reminderDate == null) fab.setImageDrawable(resources.drawableResource(R.drawable.bell_plus_outline))
-                else fab.setImageDrawable(resources.drawableResource(R.drawable.bell_ring_outline))
+                if (it.reminderDate == null) fab.setImageDrawable(resources.drawableResource(R.drawable.ic_round_notification_add_24))
+                else fab.setImageDrawable(resources.drawableResource(R.drawable.ic_round_edit_notifications_24))
 
                 val timeZone = TimeZone.currentSystemDefault()
                 it.creationDate

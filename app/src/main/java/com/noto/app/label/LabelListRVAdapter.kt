@@ -34,7 +34,7 @@ class LabelListRVAdapter(private val labelItemListener: LabelItemListener) : Lis
 
         private val resources = binding.root.resources
 
-        private val drawable = resources.getDrawable(R.drawable.ripple, null)
+        private val drawable = resources.getDrawable(R.drawable.dialog_item_shape, null)
 
         private val rippleDrawable by lazy {
             RippleDrawable(ColorStateList.valueOf(resources.getColor(label.labelColor.toResource())), drawable, drawable)

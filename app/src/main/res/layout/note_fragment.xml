@@ -16,7 +16,7 @@
             android:id="@+id/tb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/ic_back_24px"
+            app:navigationIcon="@drawable/ic_round_back_24"
             app:titleTextAppearance="@style/ToolbarTitleTextAppearance"
             tools:title="Note">
 
@@ -100,6 +100,6 @@
         app:backgroundTint="@color/colorAccentTeal"
         app:layout_anchor="@id/bab"
         app:tint="@color/colorBackground"
-        tools:src="@drawable/bell_plus_outline" />
+        tools:src="@drawable/ic_round_notification_add_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

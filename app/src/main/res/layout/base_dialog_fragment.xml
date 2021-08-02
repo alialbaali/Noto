@@ -8,7 +8,7 @@
         android:layout_height="2dp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/spacing_normal"
-        android:background="@drawable/shape_view_head" />
+        android:background="@drawable/head_view_shape" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_dialog_title"

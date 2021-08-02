@@ -67,7 +67,8 @@
         app:fabAnimationMode="scale"
         app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
-        app:menu="@menu/library_list_menu" />
+        app:menu="@menu/library_list_menu"
+        app:navigationIcon="@drawable/ic_round_menu_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -75,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_normal"
         android:contentDescription="@string/create_library"
-        android:src="@drawable/ic_add_24dp"
+        android:src="@drawable/ic_round_add_24"
         app:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@id/bab"
         app:tint="@color/colorBackground" />

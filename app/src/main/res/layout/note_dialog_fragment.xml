@@ -11,54 +11,54 @@
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
+        android:background="@drawable/dialog_item_shape"
         android:text="@string/add_reminder"
-        app:drawableStartCompat="@drawable/bell_plus_outline" />
+        app:drawableStartCompat="@drawable/ic_round_notification_add_24" />
 
     <TextView
         android:id="@+id/tv_star_note"
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
+        android:background="@drawable/dialog_item_shape"
         android:text="@string/star_note"
-        app:drawableStartCompat="@drawable/ic_star_unchecked_24dp" />
+        app:drawableStartCompat="@drawable/ic_round_star_border_24" />
 
     <TextView
         android:id="@+id/tv_archive_note"
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
+        android:background="@drawable/dialog_item_shape"
         android:text="@string/archive_note"
-        app:drawableStartCompat="@drawable/archive_arrow_down_outline" />
+        app:drawableStartCompat="@drawable/ic_round_archive_24" />
 
     <TextView
         android:id="@+id/tv_duplicate_note"
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
+        android:background="@drawable/dialog_item_shape"
         android:text="@string/duplicate_note"
-        app:drawableStartCompat="@drawable/ic_baseline_control_point_duplicate_24" />
+        app:drawableStartCompat="@drawable/ic_round_control_point_duplicate_24" />
 
     <TextView
         android:id="@+id/tv_copy_to_clipboard"
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
+        android:background="@drawable/dialog_item_shape"
         android:text="@string/copy_to_clipboard"
-        app:drawableStartCompat="@drawable/content_copy" />
+        app:drawableStartCompat="@drawable/ic_round_copy_24" />
 
     <TextView
         android:id="@+id/tv_share_note"
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
+        android:background="@drawable/dialog_item_shape"
         android:text="@string/share_note"
-        app:drawableStartCompat="@drawable/ic_outline_share_24" />
+        app:drawableStartCompat="@drawable/ic_round_share_24" />
 
 
     <TextView
@@ -66,8 +66,8 @@
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
+        android:background="@drawable/dialog_item_shape"
         android:text="@string/delete_note"
-        app:drawableStartCompat="@drawable/ic_delete_24px" />
+        app:drawableStartCompat="@drawable/ic_round_delete_24" />
 
 </LinearLayout>

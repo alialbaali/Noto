@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_normal"
-        app:endIconDrawable="@drawable/bell_plus_outline"
+        app:endIconDrawable="@drawable/ic_round_notification_add_24"
         app:endIconMode="custom"
         app:endIconTint="@color/colorPrimary">
 

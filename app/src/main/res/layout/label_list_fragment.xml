@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_collapseMode="pin"
-            app:navigationIcon="@drawable/ic_back_24px" />
+            app:navigationIcon="@drawable/ic_round_back_24" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -34,6 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/spacing_normal"
-        android:src="@drawable/ic_add_24dp" />
+        android:src="@drawable/ic_round_add_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

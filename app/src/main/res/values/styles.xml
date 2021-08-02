@@ -76,7 +76,7 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:singleLine">true</item>
-        <item name="android:background">@drawable/ripple</item>
+        <item name="android:background">@drawable/dialog_item_shape</item>
         <item name="android:padding">@dimen/spacing_normal</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
@@ -129,7 +129,7 @@
     </style>
 
     <style name="HorizontalScrollView">
-        <item name="android:background">@drawable/shape_dialog_rg</item>
+        <item name="android:background">@drawable/radio_group_colors_shape</item>
         <item name="android:padding">@dimen/spacing_extra_small</item>
         <item name="android:scrollbars">none</item>
     </style>

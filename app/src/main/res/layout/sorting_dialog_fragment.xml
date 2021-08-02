@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/spacing_normal"
-        android:background="@drawable/rg_group"
+        android:background="@drawable/radio_group_sorting_shae"
         android:orientation="horizontal">
 
         <com.google.android.material.radiobutton.MaterialRadioButton
@@ -46,20 +46,18 @@
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
+        android:background="@drawable/dialog_item_shape"
         android:button="@null"
         android:checked="true"
-        android:text="@string/alphabetically"
-        app:drawableStartCompat="@drawable/ic_sort_alphabetically" />
+        android:text="@string/alphabetically" />
 
     <TextView
         android:id="@+id/tv_creation_date"
         style="@style/DialogItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/ripple"
-        android:text="@string/creation_date"
-        app:drawableStartCompat="@drawable/ic_sort_creation_date" />
+        android:background="@drawable/dialog_item_shape"
+        android:text="@string/creation_date" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_confirm"

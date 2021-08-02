@@ -20,6 +20,7 @@
     <string name="creation_date">Creation Date</string>
     <string name="desc">Descending</string>
     <string name="asc">Ascending</string>
+    <string name="settings">Settings</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>
@@ -83,8 +84,9 @@
 
     <!-- Theme -->
     <string name="theme">Theme</string>
-    <string name="system_theme">System Theme</string>
-    <string name="light_theme">Light Theme</string>
-    <string name="dark_theme">Dark Theme</string>
+    <string name="change_theme">Change theme</string>
+    <string name="system_theme">System theme</string>
+    <string name="light_theme">Light theme</string>
+    <string name="dark_theme">Dark theme</string>
 
 </resources>

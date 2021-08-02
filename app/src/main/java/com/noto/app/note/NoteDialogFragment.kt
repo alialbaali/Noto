@@ -51,7 +51,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    listOf(tvCopyToClipboard, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe)
+                    listOf(tvCopyToClipboard, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote)
                         .forEach { tv -> tv.compoundDrawableTintList = resources.colorStateResource(it.color.toResource()) }
             }
             .launchIn(lifecycleScope)
@@ -60,26 +60,26 @@ class NoteDialogFragment : BaseDialogFragment() {
             .onEach {
 
                 if (it.isStarred) {
-                    tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_star_checked_24dp, 0, 0, 0)
+                    tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_star_24, 0, 0, 0)
                     tvStarNote.text = resources.stringResource(R.string.un_star_note)
                 } else {
-                    tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_star_unchecked_24dp, 0, 0, 0)
+                    tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_star_border_24, 0, 0, 0)
                     tvStarNote.text = resources.stringResource(R.string.star_note)
                 }
 
                 if (it.isArchived) {
-                    tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_outline_unarchive_24, 0, 0, 0)
+                    tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
                     tvArchiveNote.text = resources.stringResource(R.string.unarchive_note)
                 } else {
                     tvArchiveNote.text = resources.stringResource(R.string.archive_note)
-                    tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.archive_arrow_down_outline, 0, 0, 0)
+                    tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
                 }
 
                 if (it.reminderDate == null) {
-                    tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bell_plus_outline, 0, 0, 0)
+                    tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_notification_add_24, 0, 0, 0)
                     tvRemindMe.text = resources.stringResource(R.string.add_reminder)
                 } else {
-                    tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.bell_ring_outline, 0, 0, 0)
+                    tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_edit_notifications_24, 0, 0, 0)
                     tvRemindMe.text = resources.stringResource(R.string.edit_reminder)
                 }
             }

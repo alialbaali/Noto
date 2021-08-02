@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/star_note"
-        android:src="@drawable/ic_star_checked_24dp"
+        android:src="@drawable/ic_round_star_24"
         app:layout_constraintBottom_toBottomOf="@+id/tv_note_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_note_title"

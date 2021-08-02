@@ -67,11 +67,11 @@ class NoteListFragment : Fragment() {
             .onEach {
                 when (it) {
                     LayoutManager.Linear -> {
-                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.view_dashboard_outline)
+                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_dashboard_24)
                         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     }
                     LayoutManager.Grid -> {
-                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.view_agenda_outline)
+                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_agenda_24)
                         rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                     }
                 }

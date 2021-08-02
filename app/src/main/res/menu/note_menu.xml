@@ -5,14 +5,14 @@
     <item
         android:id="@+id/archive_note"
         android:contentDescription="@string/archive_note"
-        android:icon="@drawable/archive_arrow_down_outline"
+        android:icon="@drawable/ic_round_archive_24"
         android:title="@string/archive_note"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/share_noto"
         android:contentDescription="@string/share_note"
-        android:icon="@drawable/ic_outline_share_24"
+        android:icon="@drawable/ic_round_share_24"
         android:title="@string/share_note"
         app:showAsAction="ifRoom" />
     <!--            <item-->
