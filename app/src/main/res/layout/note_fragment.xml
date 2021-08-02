@@ -43,7 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/spacing_extra_huge">
+            android:paddingBottom="@dimen/padding_bottom">
 
             <EditText
                 android:id="@+id/et_note_title"

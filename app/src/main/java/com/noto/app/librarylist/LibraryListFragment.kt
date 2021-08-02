@@ -15,6 +15,8 @@ import com.noto.app.databinding.LibraryListFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.util.LayoutManager
 import com.noto.app.util.drawableResource
+import com.noto.app.util.stringResource
+import com.noto.app.util.toCountText
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -93,7 +95,7 @@ class LibraryListFragment : BaseDialogFragment() {
         viewModel.libraries
             .onEach {
                 adapter.submitList(it)
-                binding.tvLibraryNotesCount.text = "${it.size} ${getString(R.string.libraries)}"
+                binding.tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.library), resources.stringResource(R.string.libraries))
             }
             .launchIn(lifecycleScope)
 

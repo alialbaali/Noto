@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.NoteListArchiveFragmentBinding
 import com.noto.app.domain.model.Note
-import com.noto.app.util.colorResource
-import com.noto.app.util.toResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -59,8 +57,7 @@ class NoteListArchiveFragment : Fragment() {
     private fun NoteListArchiveFragmentBinding.collectState() {
         viewModel.archivedNotes
             .onEach {
-                val notesCount = if (it.size == 1) " Note" else " Notes"
-                tvLibraryNotesCount.text = it.size.toString().plus(notesCount)
+                tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
                 adapter.submitList(it)
             }
             .launchIn(lifecycleScope)

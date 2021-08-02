@@ -42,6 +42,8 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
     notify(library.title, note.id.toInt(), notification)
 }
 
+fun Int.toCountText(single: String, plural: String) = if (this == 1) "$this ${single.lowercase()}" else "$this ${plural.lowercase()}"
+
 private fun Context.createNotificationPendingIntent(noteId: Long, libraryId: Long): PendingIntent {
     val args = bundleOf("library_id" to libraryId, "note_id" to noteId)
     return NavDeepLinkBuilder(this)

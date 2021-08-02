@@ -57,8 +57,6 @@ class NoteListFragment : Fragment() {
                 setLibraryColors(it.color)
                 tb.title = it.title
                 tvPlaceHolder.text = it.title
-                val notosCount = viewModel.notes.value.size
-                tvLibraryNotesCount.text = notosCount.toString().plus(if (notosCount == 1) " Note" else " Notes")
             }
             .launchIn(lifecycleScope)
 
@@ -90,6 +88,7 @@ class NoteListFragment : Fragment() {
 
         viewModel.notes
             .onEach {
+                tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
                 if (it.isEmpty()) {
                     placeHolderItems.forEach { it.visibility = View.GONE }
                     llPlaceHolder.visibility = View.VISIBLE

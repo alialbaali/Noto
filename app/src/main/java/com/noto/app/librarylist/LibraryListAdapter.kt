@@ -73,6 +73,8 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
 
             val count = listener.countLibraryNotes(library)
             binding.tvLibraryNotesCount.text = "$count".plus(if (count == 1) " Note" else " Notes")
+            binding.tvLibraryTitle.setTextColor(notoColor)
+            binding.tvLibraryNotesCount.setTextColor(notoColor)
         }
     }
 
