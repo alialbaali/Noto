@@ -1,3 +1,5 @@
+import java.util.*
+
 plugins {
     id(Plugins.AndroidApplication)
     kotlin(Plugins.KotlinAndroid)
@@ -8,6 +10,17 @@ plugins {
 android {
     compileSdk = App.CompileSDK
     buildToolsVersion = App.BuildTools
+    signingConfigs {
+        create("release") {
+            val properties = Properties().apply {
+                load(project.rootProject.file("local.properties").inputStream())
+            }
+            storeFile = file(properties["store.file"] as String)
+            storePassword = properties["store.password"] as String
+            keyAlias = properties["key.alias"] as String
+            keyPassword = properties["key.password"] as String
+        }
+    }
     defaultConfig {
         applicationId = App.ID
         minSdk = App.MinSDK
@@ -23,8 +36,9 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            isMinifyEnabled = false
+            isShrinkResources = false
+            signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -37,7 +51,6 @@ android {
     }
 
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
@@ -82,8 +95,6 @@ dependencies {
     testImplementation(Testing.Kotest.property)
     testImplementation(Testing.Kotest.assertions.core)
 //    testImplementation(Testing.Kotest.Extensions.koin)
-
-    coreLibraryDesugaring(Libraries.Main.JavaTime)
 }
 
 tasks.withType<Test> {
