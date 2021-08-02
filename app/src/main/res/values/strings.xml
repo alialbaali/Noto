@@ -57,6 +57,10 @@
     <string name="delete_note_confirmation">Are you sure you want to delete this note?</string>
     <string name="share_note">Share note to</string>
     <string name="add_reminder">Add reminder</string>
+    <string name="star_note">Star note</string>
+    <string name="un_star_note">Un-star note</string>
+    <string name="note_is_starred">Note has been starred</string>
+    <string name="note_is_un_starred">Note has been un-starred</string>
     <string name="edit_reminder">Edit reminder</string>
     <string name="note_options">Note options</string>
 

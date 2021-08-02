@@ -24,10 +24,10 @@
         <item name="android:animateLayoutChanges">true</item>
     </style>
 
-    <style name="TitleTextView" parent="Widget.MaterialComponents.TextView">
+    <style name="ToolbarTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:maxLines">1</item>
-        <item name="android:textSize">@dimen/size_huge</item>
-        <item name="android:fontFamily">@font/arima_madurai_medium</item>
+        <item name="android:textSize">@dimen/size_large</item>
+        <item name="fontFamily">@font/arima_madurai_bold</item>
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
@@ -143,6 +143,7 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:ellipsize">end</item>
+        <item name="fontFamily">@font/arima_madurai_medium</item>
         <item name="android:maxLines">1</item>
     </style>
 
@@ -166,17 +167,16 @@
         <item name="hintAnimationEnabled">true</item>
     </style>
 
-    <style name="EditText.NoteTitle" parent="Widget.AppCompat.EditText">
+    <style name="NoteTitle.EditText" parent="Widget.AppCompat.EditText">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/colorSecondary</item>
-        <item name="android:fontFamily">@font/arima_madurai_medium</item>
+        <item name="fontFamily">@font/arima_madurai_medium</item>
         <item name="android:textColorHint">@color/colorOnSecondary</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="EditText.NoteBody" parent="Widget.AppCompat.EditText">
+    <style name="NoteBody.EditText" parent="Widget.AppCompat.EditText">
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:fontFamily">@font/arima_madurai</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
@@ -184,7 +184,7 @@
 
 
     <style name="NoteTitleTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:fontFamily">@font/arima_madurai_medium</item>
+        <item name="fontFamily">@font/arima_madurai_medium</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:maxLines">3</item>

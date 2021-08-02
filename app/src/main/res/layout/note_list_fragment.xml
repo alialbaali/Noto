@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_back_24px"
             app:title="@string/all_notes"
-            app:titleTextAppearance="@style/TitleTextView">
+            app:titleTextAppearance="@style/ToolbarTitleTextAppearance">
 
             <TextView
                 android:id="@+id/tv_library_notes_count"

@@ -2,6 +2,7 @@ package com.noto.app.notelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -36,9 +37,6 @@ class NoteListAdapter(private val listener: NoteItemClickListener) : ListAdapter
                 listener.onLongClick(note)
                 true
             }
-            binding.rbNoteStar.setOnClickListener {
-                listener.toggleNotoStar(note)
-            }
         }
 
         companion object {
@@ -57,7 +55,7 @@ class NoteListAdapter(private val listener: NoteItemClickListener) : ListAdapter
         fun bind(note: Note) {
             binding.tvNoteTitle.text = note.title
             binding.tvNoteBody.text = note.body
-            binding.rbNoteStar.isChecked = note.isStarred
+            binding.rbNoteStar.isVisible = note.isStarred
         }
 
     }
@@ -70,7 +68,6 @@ class NoteListAdapter(private val listener: NoteItemClickListener) : ListAdapter
     interface NoteItemClickListener {
         fun onClick(note: Note)
         fun onLongClick(note: Note)
-        fun toggleNotoStar(note: Note)
     }
 }
 

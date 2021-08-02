@@ -51,13 +51,22 @@ class NoteDialogFragment : BaseDialogFragment() {
                 baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    listOf(tvCopyToClipboard, tvShareNote, tvArchiveNote, tvRemindMe)
+                    listOf(tvCopyToClipboard, tvShareNote, tvArchiveNote, tvStarNote, tvRemindMe)
                         .forEach { tv -> tv.compoundDrawableTintList = resources.colorStateResource(it.color.toResource()) }
             }
             .launchIn(lifecycleScope)
 
         viewModel.note
             .onEach {
+
+                if (it.isStarred) {
+                    tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_star_checked_24dp, 0, 0, 0)
+                    tvStarNote.text = resources.stringResource(R.string.un_star_note)
+                } else {
+                    tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_star_unchecked_24dp, 0, 0, 0)
+                    tvStarNote.text = resources.stringResource(R.string.star_note)
+                }
+
                 if (it.isArchived) {
                     tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_outline_unarchive_24, 0, 0, 0)
                     tvArchiveNote.text = resources.stringResource(R.string.unarchive_note)
@@ -78,6 +87,8 @@ class NoteDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteDialogFragmentBinding.setupListeners() {
+        val parentView = requireParentFragment().requireView()
+        val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
 
         tvArchiveNote.setOnClickListener {
             dismiss()
@@ -88,12 +99,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             else
                 R.string.note_archived
 
-            requireParentFragment()
-                .requireView()
-                .apply {
-                    val anchorView = findViewById<FloatingActionButton>(R.id.fab)
-                    snackbar(resources.stringResource(resource), anchorView)
-                }
+            parentView.snackbar(resources.stringResource(resource), parentAnchorView)
         }
 
         tvRemindMe.setOnClickListener {
@@ -101,13 +107,20 @@ class NoteDialogFragment : BaseDialogFragment() {
             findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.libraryId, args.noteId))
         }
 
+        tvStarNote.setOnClickListener {
+            dismiss()
+            viewModel.toggleNoteIsStarred()
+            val resource = if (viewModel.note.value.isStarred)
+                R.string.note_is_un_starred
+            else
+                R.string.note_is_starred
+            parentView.snackbar(resources.stringResource(resource), parentAnchorView)
+        }
+
         tvCopyToClipboard.setOnClickListener {
             dismiss()
             val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
             clipboardManager.setPrimaryClip(clipData)
-            val parentView = requireParentFragment()
-                .requireView()
-            val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
             parentView.snackbar(getString(R.string.copied_to_clipboard), anchorView = parentAnchorView)
         }
 

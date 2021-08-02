@@ -16,6 +16,15 @@
         app:drawableStartCompat="@drawable/bell_plus_outline" />
 
     <TextView
+        android:id="@+id/tv_star_note"
+        style="@style/DialogItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ripple"
+        android:text="@string/star_note"
+        app:drawableStartCompat="@drawable/ic_star_unchecked_24dp" />
+
+    <TextView
         android:id="@+id/tv_archive_note"
         style="@style/DialogItem"
         android:layout_width="match_parent"

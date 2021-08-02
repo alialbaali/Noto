@@ -32,9 +32,6 @@ class NoteListArchiveFragment : Fragment() {
         object : NoteListAdapter.NoteItemClickListener {
             override fun onClick(note: Note) = findNavController().navigate(NoteListArchiveFragmentDirections.actionArchiveFragmentToNotoFragment(args.libraryId, note.id))
             override fun onLongClick(note: Note) = findNavController().navigate(NoteListArchiveFragmentDirections.actionArchiveFragmentToNotoDialogFragment(args.libraryId, note.id))
-            override fun toggleNotoStar(note: Note) {
-                viewModel.toggleNoteStar(note)
-            }
         }
     }
 
@@ -62,7 +59,7 @@ class NoteListArchiveFragment : Fragment() {
     private fun NoteListArchiveFragmentBinding.collectState() {
         viewModel.archivedNotes
             .onEach {
-                val notesCount = if (it.size == 1) " Archived Noto" else " Archived Notos"
+                val notesCount = if (it.size == 1) " Note" else " Notes"
                 tvLibraryNotesCount.text = it.size.toString().plus(notesCount)
                 adapter.submitList(it)
             }
@@ -73,7 +70,7 @@ class NoteListArchiveFragment : Fragment() {
                 val color = resources.colorResource(it.color.toResource())
                 tb.navigationIcon?.mutate()?.setTint(color)
                 tvLibraryNotesCount.setTextColor(color)
-                tb.title = "${it.title} ${getString(R.string.archived_notes)}"
+                tb.title = "${it.title} ${getString(R.string.archived_notes).replaceFirstChar { it.lowercase() }}"
                 tb.setTitleTextColor(color)
             }
             .launchIn(lifecycleScope)

@@ -39,9 +39,6 @@ class NoteListFragment : Fragment() {
         object : NoteListAdapter.NoteItemClickListener {
             override fun onClick(note: Note) = findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
             override fun onLongClick(note: Note) = findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id))
-            override fun toggleNotoStar(note: Note) {
-                viewModel.toggleNoteStar(note)
-            }
         }
     }
 
@@ -170,7 +167,6 @@ class NoteListFragment : Fragment() {
             duration = 250
         }
         rv.startAnimation(rvAnimation)
-        tilSearch.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
         etSearch.requestFocus()
         imm.showKeyboard()
 
@@ -187,7 +183,6 @@ class NoteListFragment : Fragment() {
         }
         tilSearch.isVisible = false
         rv.startAnimation(rvAnimation)
-        tilSearch.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
         imm.hideKeyboard(etSearch.windowToken)
     }
 
