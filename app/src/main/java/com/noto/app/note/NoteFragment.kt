@@ -32,7 +32,7 @@ import java.time.format.DateTimeFormatter
 
 class NoteFragment : Fragment() {
 
-    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId, args.body) }
 
     private val args by navArgs<NoteFragmentArgs>()
 
@@ -56,6 +56,8 @@ class NoteFragment : Fragment() {
         }
 
         val backCallback = {
+            if (args.body != null)
+                findNavController().popBackStack(R.id.libraryListFragment, false)
             findNavController().navigateUp()
             viewModel.createOrUpdateNote(
                 etNoteTitle.text.toString(),

@@ -127,7 +127,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             dismiss()
             val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
             clipboardManager.setPrimaryClip(clipData)
-            parentView.snackbar(getString(R.string.copied_to_clipboard), anchorView = parentAnchorView)
+            parentView.snackbar(getString(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
         }
 
         tvShareNote.setOnClickListener {

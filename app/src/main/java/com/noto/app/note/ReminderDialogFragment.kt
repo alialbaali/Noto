@@ -40,7 +40,11 @@ class ReminderDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View = ReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.new_reminder)
+            tvDialogTitle.text =
+                if (viewModel.note.value.reminderDate == null)
+                    resources.stringResource(R.string.new_reminder)
+                else
+                    resources.stringResource(R.string.edit_reminder)
         }
         btnDone.setOnClickListener {
             dismiss()

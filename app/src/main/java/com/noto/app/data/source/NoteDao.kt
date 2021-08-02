@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface NoteDao : NoteLocalDataSource {
 
-    @Query("SELECT * FROM notes WHERE library_id = :libraryId AND is_archived = 0")
+    @Query("SELECT * FROM notes WHERE library_id = :libraryId AND is_archived = 0 ORDER BY id DESC")
     override fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>>
 
     @Query("SELECT * FROM notes WHERE library_id = :libraryId AND is_archived = 1")

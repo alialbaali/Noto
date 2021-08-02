@@ -4,10 +4,10 @@ import androidx.datastore.DataStore
 import androidx.datastore.preferences.Preferences
 import androidx.datastore.preferences.createDataStore
 import com.noto.app.MainViewModel
+import com.noto.app.data.database.NotoDatabase
 import com.noto.app.data.repository.LabelRepositoryImpl
 import com.noto.app.data.repository.LibraryRepositoryImpl
 import com.noto.app.data.repository.NoteRepositoryImpl
-import com.noto.app.data.database.NotoDatabase
 import com.noto.app.data.source.LocalStorageImpl
 import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.repository.LibraryRepository
@@ -32,7 +32,7 @@ val appModule = module {
 
     viewModel { NoteListViewModel(get(), get(), get(), it.get()) }
 
-    viewModel { NoteViewModel(get(), get(), it[0], it[1]) }
+    viewModel { NoteViewModel(get(), get(), it[0], it[1], it.getOrNull()) }
 
     viewModel { LabelViewModel(get()) }
 

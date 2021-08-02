@@ -64,6 +64,19 @@
         <action
             android:id="@+id/action_libraryListFragment_to_libraryListDialogFragment"
             app:destination="@id/libraryListDialogFragment" />
+        <argument
+            android:name="content"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_libraryListFragment_to_noteFragment"
+            app:destination="@id/noteFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
+            />
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
@@ -119,6 +132,11 @@
         <action
             android:id="@+id/action_notoFragment_to_notoDialogFragment"
             app:destination="@id/noteDialogFragment" />
+        <argument
+            android:name="body"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/archiveFragment"

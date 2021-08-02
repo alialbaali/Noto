@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.BaseDialogFragment
@@ -27,11 +28,19 @@ class LibraryListFragment : BaseDialogFragment() {
 
     private val viewModel by viewModel<LibraryListViewModel>()
 
+    private val args by navArgs<LibraryListFragmentArgs>()
+
     private val adapter by lazy { LibraryListAdapter(libraryItemClickListener) }
 
     private val libraryItemClickListener by lazy {
         object : LibraryListAdapter.LibraryItemClickListener {
-            override fun onClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryFragment(library.id))
+            override fun onClick(library: Library) {
+                if (args.content == null)
+                    findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryFragment(library.id))
+                else
+                    findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToNoteFragment(library.id, body = args.content))
+            }
+
             override fun onLongClick(library: Library) = findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryDialogFragment(library.id))
             override fun countLibraryNotes(library: Library): Int = viewModel.countNotes(library.id)
         }

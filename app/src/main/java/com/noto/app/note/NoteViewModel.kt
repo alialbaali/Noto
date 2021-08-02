@@ -19,12 +19,13 @@ class NoteViewModel(
     private val noteRepository: NoteRepository,
     private val libraryId: Long,
     private val noteId: Long,
+    private val body: String?,
 ) : ViewModel() {
 
     private val mutableLibrary = MutableStateFlow(Library(position = 0))
     val library get() = mutableLibrary.asStateFlow()
 
-    private val mutableNote = MutableStateFlow(Note(noteId, libraryId, position = 0))
+    private val mutableNote = MutableStateFlow(Note(noteId, libraryId, position = 0, body = body ?: ""))
     val note get() = mutableNote.asStateFlow()
 
     init {

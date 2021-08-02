@@ -2,11 +2,14 @@ package com.noto.app
 
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.noto.app.databinding.MainActivityBinding
 import com.noto.app.util.createNotificationChannel
 import kotlinx.coroutines.flow.launchIn
@@ -29,6 +32,23 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
             .apply { setContentView(root) }
 
+        collectState()
+        setupUI()
+        handleIntentContent()
+
+    }
+
+    private fun handleIntentContent() {
+        if (intent?.action == Intent.ACTION_SEND) {
+            intent.getStringExtra(Intent.EXTRA_TEXT)
+                ?.let {
+                    findNavController(R.id.nav_host_fragment)
+                        .navigate(R.id.libraryListFragment, bundleOf("content" to it))
+                }
+        }
+    }
+
+    private fun collectState() {
         viewModel.theme
             .onEach {
                 when (it) {
@@ -38,12 +58,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             .launchIn(lifecycleScope)
+    }
 
+    private fun setupUI() {
         when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> {
                 window.decorView.systemUiVisibility = 0
             }
         }
-
     }
 }
