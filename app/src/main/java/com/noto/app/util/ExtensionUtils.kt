@@ -1,13 +1,13 @@
 package com.noto.app.util
 
+import android.content.Intent
 import android.os.IBinder
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.noto.app.R
 import com.noto.app.domain.model.Note
@@ -23,6 +23,18 @@ inline fun <T> Iterable<T>.sortByMethod(method: SortingMethod, crossinline selec
         SortingMethod.Asc -> sortedWith(compareBy(selector))
         SortingMethod.Desc -> sortedWith(compareByDescending(selector))
     }
+}
+
+
+fun Fragment.launchShareNoteIntent(note: Note) {
+    val intent = note.createShareIntent()
+    val chooser = Intent.createChooser(intent, resources.stringResource(R.string.share_note))
+    startActivity(chooser)
+}
+
+private fun Note.createShareIntent() = Intent(Intent.ACTION_SEND).apply {
+    type = "text/plain"
+    putExtra(Intent.EXTRA_TEXT, format())
 }
 
 inline fun <T : ViewBinding> T.withBinding(crossinline block: T.() -> Unit): View {

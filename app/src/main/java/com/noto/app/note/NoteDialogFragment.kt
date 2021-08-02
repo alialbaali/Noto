@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -135,12 +134,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvShareNote.setOnClickListener {
             dismiss()
-            val intent = Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, viewModel.note.value.format())
-            }
-            val chooser = Intent.createChooser(intent, getString(R.string.share_note))
-            startActivity(chooser)
+            launchShareNoteIntent(viewModel.note.value)
         }
 
         tvDeleteNote.setOnClickListener {

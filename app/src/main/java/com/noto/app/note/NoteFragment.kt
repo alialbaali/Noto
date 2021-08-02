@@ -2,7 +2,6 @@ package com.noto.app.note
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,6 @@ import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.filterNot
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -78,8 +76,6 @@ class NoteFragment : Fragment() {
 
         with(bab) {
 
-            navigationIcon?.mutate()?.setTint(resources.colorResource(R.color.colorPrimary))
-
             setNavigationOnClickListener {
                 findNavController().navigate(NoteFragmentDirections.actionNotoFragmentToNotoDialogFragment(args.libraryId, args.noteId, R.id.libraryFragment))
             }
@@ -87,27 +83,16 @@ class NoteFragment : Fragment() {
             setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
                     R.id.share_noto -> {
-                        val intent = Intent(Intent.ACTION_SEND).apply {
-                            type = "text/plain"
-                            val content = """
-                                ${etNoteTitle.text}
-                                
-                                ${etNoteBody.text}
-                            """.trimIndent()
-                            putExtra(Intent.EXTRA_TEXT, content)
-                        }
-                        val chooser = Intent.createChooser(intent, getString(R.string.share_note))
-                        startActivity(chooser)
+                        launchShareNoteIntent(viewModel.note.value)
                         true
                     }
                     R.id.archive_note -> {
-                        menuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
                         if (viewModel.note.value.isArchived) {
                             viewModel.toggleNoteIsArchived()
-                            root.snackbar(getString(R.string.note_unarchived))
+                            root.snackbar(getString(R.string.note_unarchived), anchorView = fab)
                         } else {
                             viewModel.toggleNoteIsArchived()
-                            root.snackbar(getString(R.string.note_archived))
+                            root.snackbar(getString(R.string.note_archived), anchorView = fab)
                         }
                         true
                     }
