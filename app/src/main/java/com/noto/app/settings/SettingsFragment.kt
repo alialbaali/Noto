@@ -13,7 +13,7 @@ import com.noto.app.R
 import com.noto.app.databinding.SettingsFragmentBinding
 import com.noto.app.util.stringResource
 
-private const val GooglePlayUrl = "https://play.google.com/store/apps/details?id=com.noto"
+private const val PlayStoreUrl = "https://play.google.com/store/apps/details?id=com.noto"
 private const val GithubUrl = "https://github.com/alialbaali/Noto"
 
 class SettingsFragment : Fragment() {
@@ -49,7 +49,7 @@ class SettingsFragment : Fragment() {
                 type = "text/plain"
                 putExtra(
                     Intent.EXTRA_TEXT,
-                    "${resources.stringResource(R.string.invite_text)} $GooglePlayUrl"
+                    "${resources.stringResource(R.string.invite_text)} $PlayStoreUrl"
                 )
             }
 
@@ -61,6 +61,12 @@ class SettingsFragment : Fragment() {
         binding.tvViewCode.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubUrl))
             startActivity(intent)
+        }
+
+        binding.tvRateApp.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(PlayStoreUrl))
+            val chooser = Intent.createChooser(intent, resources.stringResource(R.string.open_with))
+            startActivity(chooser)
         }
     }
 
