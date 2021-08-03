@@ -13,8 +13,8 @@
         <item name="android:colorControlNormal">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorOnPrimary</item>
         <item name="hintTextColor">@color/colorOnPrimary</item>
-        <item name="android:fontFamily">@font/arima_madurai</item>
-        <item name="fontFamily">@font/arima_madurai</item>
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
     </style>
 
     <style name="AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Primary">
@@ -24,16 +24,16 @@
         <item name="android:animateLayoutChanges">true</item>
     </style>
 
-    <style name="ToolbarTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
-        <item name="android:maxLines">1</item>
-        <item name="android:textSize">@dimen/size_large</item>
-        <item name="fontFamily">@font/arima_madurai_bold</item>
-        <item name="android:textColorPrimary">@color/colorPrimary</item>
-    </style>
-
     <style name="Toolbar" parent="Widget.MaterialComponents.TextView">
         <item name="titleTextAppearance">@style/ToolbarTitleTextAppearance</item>
         <item name="titleTextColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="ToolbarTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">@dimen/size_large</item>
+        <item name="fontFamily">@font/nunito_extrabold</item>
+        <item name="android:textColorPrimary">@color/colorPrimary</item>
     </style>
 
     <style name="SubtitleTextView" parent="Widget.MaterialComponents.TextView">
@@ -42,7 +42,6 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:fontFamily">@font/arima_madurai_medium</item>
         <item name="android:layout_gravity">end</item>
     </style>
 
@@ -69,15 +68,15 @@
     </style>
 
     <style name="DialogTitle" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/arima_madurai_bold</item>
+        <item name="fontFamily">@font/nunito_extrabold</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/size_large</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/spacing_normal</item>
     </style>
 
-    <style name="DialogItem" parent="Widget.AppCompat.TextView">
-        <item name="android:fontFamily">@font/arima_madurai</item>
+    <style name="DialogItem" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:singleLine">true</item>
@@ -125,7 +124,7 @@
         <item name="android:textColor">@color/colorBackground</item>
         <item name="android:textSize">20sp</item>
         <item name="cornerRadius">@dimen/spacing_small</item>
-        <item name="fontFamily">@font/arima_madurai_bold</item>
+        <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
     <style name="MaterialButtonSecondary" parent="MaterialButton">
@@ -148,18 +147,11 @@
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:ellipsize">end</item>
-        <item name="fontFamily">@font/arima_madurai_medium</item>
+        <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:maxLines">1</item>
     </style>
 
     <style name="LibraryNotesCountTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorOnPrimary</item>
-        <item name="android:textSize">@dimen/size_tiny</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
-    </style>
-
-    <style name="LibraryCreationDateTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorOnPrimary</item>
         <item name="android:textSize">@dimen/size_tiny</item>
         <item name="android:ellipsize">end</item>
@@ -172,24 +164,24 @@
         <item name="hintAnimationEnabled">true</item>
     </style>
 
-    <style name="NoteTitle.EditText" parent="Widget.AppCompat.EditText">
+    <style name="NoteTitleEditText" parent="Widget.AppCompat.EditText">
+        <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/colorSecondary</item>
-        <item name="fontFamily">@font/arima_madurai_medium</item>
         <item name="android:textColorHint">@color/colorOnSecondary</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="NoteBody.EditText" parent="Widget.AppCompat.EditText">
+    <style name="NoteBodyEditText" parent="Widget.AppCompat.EditText">
+        <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
     </style>
 
-
     <style name="NoteTitleTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/arima_madurai_medium</item>
+        <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:maxLines">3</item>
@@ -197,7 +189,7 @@
     </style>
 
     <style name="NoteBodyTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:fontFamily">@font/arima_madurai_light</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
         <item name="android:textColor">@color/colorSecondary</item>
@@ -223,7 +215,7 @@
     <style name="PlaceholderTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_extra_huge</item>
         <item name="android:textColor">@color/colorOnPrimary</item>
-        <item name="fontFamily">@font/arima_madurai_medium</item>
+        <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:gravity">center</item>
     </style>
 

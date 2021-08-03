@@ -23,8 +23,7 @@
             android:button="@null"
             android:padding="@dimen/spacing_normal"
             android:text="@string/asc"
-            android:textColor="@color/rg_sorting"
-            app:fontFamily="@font/arima_madurai_bold" />
+            android:textColor="@color/rg_sorting" />
 
         <com.google.android.material.radiobutton.MaterialRadioButton
             android:id="@+id/rb_sorting_desc"
@@ -36,7 +35,7 @@
             android:padding="@dimen/spacing_normal"
             android:text="@string/desc"
             android:textColor="@color/rg_sorting"
-            app:fontFamily="@font/arima_madurai_bold" />
+            app:fontFamily="@font/nunito_extrabold_italic" />
 
     </RadioGroup>
 

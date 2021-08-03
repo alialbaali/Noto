@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
-        <item>@font/arima_madurai</item>
-        <item>@font/arima_madurai_bold</item>
-        <item>@font/arima_madurai_light</item>
-        <item>@font/arima_madurai_medium</item>
+        <item>@font/nunito</item>
+        <item>@font/nunito_bold</item>
+        <item>@font/nunito_bold_italic</item>
+        <item>@font/nunito_extrabold</item>
+        <item>@font/nunito_extrabold_italic</item>
+        <item>@font/nunito_italic</item>
+        <item>@font/nunito_light</item>
+        <item>@font/nunito_light_italic</item>
+        <item>@font/nunito_semibold</item>
+        <item>@font/nunito_semibold_italic</item>
     </array>
 </resources>

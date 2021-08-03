@@ -42,12 +42,11 @@
             android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/padding_bottom">
+            android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/et_note_title"
-                style="@style/NoteTitle.EditText"
+                style="@style/NoteTitleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_normal"
@@ -58,7 +57,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/et_note_body"
-                style="@style/NoteBody.EditText"
+                style="@style/NoteBodyEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/spacing_normal"
