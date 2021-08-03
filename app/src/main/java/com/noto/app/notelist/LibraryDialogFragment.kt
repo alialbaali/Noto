@@ -1,5 +1,7 @@
 package com.noto.app.notelist
 
+import android.app.AlarmManager
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +26,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
     private val viewModel by viewModel<NoteListViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<LibraryDialogFragmentArgs>()
+
+    private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,6 +67,9 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 parentView.snackbar(resources.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
                 findNavController().popBackStack(R.id.libraryListFragment, false)
                 dismiss()
+                viewModel.notes.value
+                    .filter { it.reminderDate != null }
+                    .forEach { alarmManager.cancelAlarm(requireContext(), it.id) }
                 viewModel.deleteLibrary()
             }
 

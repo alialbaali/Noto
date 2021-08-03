@@ -9,7 +9,6 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.util.LibraryId
 import com.noto.app.util.NoteId
 import com.noto.app.util.createNotification
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent
@@ -31,14 +30,14 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
             runBlocking {
                 val library = libraryRepository.getLibraryById(libraryId)
-                    .first()
-
-                noteRepository.getNoteById(noteId)
                     .firstOrNull()
-                    ?.let { note ->
-                        notificationManager.createNotification(context, library, note)
-                        noteRepository.updateNote(note.copy(reminderDate = null))
-                    }
+                val note = noteRepository.getNoteById(noteId)
+                    .firstOrNull()
+
+                if (note != null && library != null) {
+                    notificationManager.createNotification(context, library, note)
+                    noteRepository.updateNote(note.copy(reminderDate = null))
+                }
             }
         }
     }
