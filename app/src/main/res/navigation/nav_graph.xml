@@ -190,6 +190,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_noteDialogFragment_to_selectLibraryDialogFragment"
+            app:destination="@id/selectLibraryDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"
@@ -265,4 +268,15 @@
             android:name="note_id"
             app:argType="long" />
     </fragment>
+    <dialog
+        android:id="@+id/selectLibraryDialogFragment"
+        android:name="com.noto.app.notelist.SelectLibraryDialogFragment"
+        android:label="SelectLibraryDialogFragment" >
+        <argument
+            android:name="select_library_item_click_listener"
+            app:argType="com.noto.app.notelist.SelectLibraryDialogFragment$SelectLibraryItemClickListener" />
+        <argument
+            android:name="library_id"
+            app:argType="long" />
+    </dialog>
 </navigation>

@@ -67,6 +67,10 @@ class NoteViewModel(
         noteRepository.updateNote(note.value.copy(reminderDate = instant))
     }
 
+    fun moveNote(libraryId: Long) = viewModelScope.launch {
+        noteRepository.updateNote(note.value.copy(libraryId = libraryId))
+    }
+
     fun duplicateNote() = viewModelScope.launch {
         noteRepository.createNote(note.value.copy(id = 0, reminderDate = null))
     }

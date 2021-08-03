@@ -21,7 +21,7 @@ private const val RIGHT_DRAWABLE_INDEX = 2
 
 class SortingDialogFragment : BaseDialogFragment() {
 
-    val viewModel by sharedViewModel<NoteListViewModel>() { parametersOf(0) }
+    val viewModel by sharedViewModel<NoteListViewModel> { parametersOf(0) }
 
     override fun onCreateView(
         inflater: LayoutInflater,

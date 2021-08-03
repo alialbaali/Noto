@@ -8,10 +8,14 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.databinding.NoteReadingModeFragmentBinding
-import com.noto.app.util.*
+import com.noto.app.util.colorResource
+import com.noto.app.util.formatCreationDate
+import com.noto.app.util.stringResource
+import com.noto.app.util.toResource
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -31,6 +35,10 @@ class NoteReadingModeFragment : Fragment() {
         binding = NoteReadingModeFragmentBinding.inflate(inflater, container, false)
 
         binding.nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+
+        binding.tb.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
         viewModel.note
             .filterNotNull()

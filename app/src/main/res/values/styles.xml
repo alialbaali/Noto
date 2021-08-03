@@ -25,6 +25,7 @@
     </style>
 
     <style name="Toolbar" parent="Widget.MaterialComponents.TextView">
+        <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="titleTextAppearance">@style/ToolbarTitleTextAppearance</item>
         <item name="titleTextColor">@color/colorPrimary</item>
     </style>
@@ -176,6 +177,7 @@
         <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:gravity">top</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
     </style>

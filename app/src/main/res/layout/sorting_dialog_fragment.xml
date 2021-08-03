@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ll"
     style="@style/BaseDialogFragment">
 
@@ -34,8 +33,7 @@
             android:checked="true"
             android:padding="@dimen/spacing_normal"
             android:text="@string/desc"
-            android:textColor="@color/rg_sorting"
-            app:fontFamily="@font/nunito_extrabold_italic" />
+            android:textColor="@color/rg_sorting" />
 
     </RadioGroup>
 

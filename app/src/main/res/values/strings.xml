@@ -45,6 +45,7 @@
     <string name="library_is_deleted">Library has been deleted.</string>
     <string name="library_is_empty">Library is empty.</string>
     <string name="no_libraries">No libraries. Try creating a library by clicking the + icon.</string>
+    <string name="select_library">Select library</string>
 
     <!-- Note -->
     <string name="all_notes">All notes</string>
@@ -80,6 +81,8 @@
     <string name="note_options">Note options</string>
     <string name="note_is_deleted">Note has been deleted.</string>
     <string name="note_is_duplicated">Note has been duplicated.</string>
+    <string name="move_note">Move note to…</string>
+    <string name="note_is_moved">Note has been moved.</string>
 
     <!-- Label -->
     <string name="add_label">Add label</string>

@@ -14,6 +14,7 @@ import com.noto.app.librarylist.LibraryListAdapter.LibraryItemViewHolder
 import com.noto.app.util.colorResource
 import com.noto.app.util.drawableResource
 import com.noto.app.util.toResource
+import java.io.Serializable
 
 
 class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListAdapter<Library, LibraryItemViewHolder>(LibraryItemDiffCallback()) {
@@ -83,7 +84,7 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
         override fun areContentsTheSame(oldItem: Library, newItem: Library): Boolean = oldItem == newItem
     }
 
-    interface LibraryItemClickListener {
+    interface LibraryItemClickListener : Serializable {
         fun onClick(library: Library)
         fun onLongClick(library: Library)
         fun countLibraryNotes(library: Library): Int

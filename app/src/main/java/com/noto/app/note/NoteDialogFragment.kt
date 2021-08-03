@@ -18,6 +18,7 @@ import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
+import com.noto.app.notelist.SelectLibraryDialogFragment
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -53,7 +54,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    listOf(tvCopyToClipboard, tvOpenInReadingMode, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote)
+                    listOf(tvCopyToClipboard, tvOpenInReadingMode, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote)
                         .forEach { tv -> tv.compoundDrawableTintList = resources.colorStateResource(it.color.toResource()) }
             }
             .launchIn(lifecycleScope)
@@ -135,6 +136,16 @@ class NoteDialogFragment : BaseDialogFragment() {
             val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
             clipboardManager.setPrimaryClip(clipData)
             parentView.snackbar(getString(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
+        }
+
+        tvMoveNote.setOnClickListener {
+            val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
+                parentView.snackbar(resources.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
+                findNavController().popBackStack(args.destination, false)
+                dismiss()
+                viewModel.moveNote(it)
+            }
+            findNavController().navigate(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(selectLibraryItemClickListener, args.libraryId))
         }
 
         tvShareNote.setOnClickListener {
