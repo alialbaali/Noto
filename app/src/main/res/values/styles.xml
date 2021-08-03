@@ -38,17 +38,12 @@
     </style>
 
     <style name="SubtitleTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:gravity">end</item>
         <item name="android:textSize">@dimen/size_tiny</item>
+        <item name="fontFamily">@font/nunito_semibold_italic</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:layout_gravity">end</item>
-    </style>
-
-    <style name="DialogAnimation">
-        <item name="android:windowEnterAnimation">@anim/slide_up</item>
-        <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
@@ -159,7 +154,7 @@
         <item name="android:maxLines">1</item>
     </style>
 
-    <style name="TextInputLayout.NotoTitle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="NoteTitleTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="boxBackgroundMode">none</item>
         <item name="hintEnabled">true</item>
         <item name="hintAnimationEnabled">true</item>
@@ -167,7 +162,7 @@
 
     <style name="NoteTitleEditText" parent="Widget.AppCompat.EditText">
         <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:textColorHint">@color/colorOnSecondary</item>
         <item name="android:background">@android:color/transparent</item>
@@ -176,7 +171,7 @@
     <style name="NoteBodyEditText" parent="Widget.AppCompat.EditText">
         <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:gravity">top</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
@@ -184,7 +179,7 @@
 
     <style name="NoteTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:maxLines">3</item>
         <item name="android:ellipsize">end</item>
@@ -192,7 +187,7 @@
 
     <style name="NoteBodyTextView" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_semibold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:maxLines">5</item>

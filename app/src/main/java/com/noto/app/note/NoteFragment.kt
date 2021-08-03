@@ -59,9 +59,10 @@ class NoteFragment : Fragment() {
             imm.hideKeyboard(etNoteBody.windowToken)
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            backCallback()
-        }.isEnabled = true
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner) { backCallback() }
+            .isEnabled = true
 
         tb.setNavigationOnClickListener {
             backCallback()
@@ -105,7 +106,7 @@ class NoteFragment : Fragment() {
                 etNoteBody.setText(it.body)
                 etNoteTitle.setSelection(it.title.length)
                 etNoteBody.setSelection(it.body.length)
-                tvCreatedAt.text = "${getString(R.string.created_at)} ${it.formatCreationDate()}"
+                tvCreatedAt.text = "${getString(R.string.created)} ${it.formatCreationDate()}"
 
                 if (it.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
                 else archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_archive_24)

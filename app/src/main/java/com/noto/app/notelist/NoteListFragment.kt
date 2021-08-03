@@ -139,8 +139,14 @@ class NoteListFragment : Fragment() {
 
                 R.id.layout_manager -> {
                     when (viewModel.layoutManager.value) {
-                        LayoutManager.Linear -> viewModel.updateLayoutManager(LayoutManager.Grid)
-                        LayoutManager.Grid -> viewModel.updateLayoutManager(LayoutManager.Linear)
+                        LayoutManager.Linear -> {
+                            viewModel.updateLayoutManager(LayoutManager.Grid)
+                            root.snackbar(getString(R.string.layout_is_staggered_mode), anchorView = fab)
+                        }
+                        LayoutManager.Grid -> {
+                            viewModel.updateLayoutManager(LayoutManager.Linear)
+                            root.snackbar(getString(R.string.layout_is_list_mode), anchorView = fab)
+                        }
                     }
                     true
                 }

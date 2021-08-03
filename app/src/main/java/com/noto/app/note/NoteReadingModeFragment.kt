@@ -45,7 +45,7 @@ class NoteReadingModeFragment : Fragment() {
             .onEach {
                 binding.etNoteTitle.text = it.title
                 binding.etNoteBody.text = it.body
-                binding.tvCreatedAt.text = "${resources.stringResource(R.string.created_at)} ${it.formatCreationDate()}"
+                binding.tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${it.formatCreationDate()}"
             }
             .launchIn(lifecycleScope)
 

@@ -14,7 +14,7 @@
     <string name="share">Share</string>
     <string name="copy_to">Copy to</string>
     <string name="view">View</string>
-    <string name="created_at">Created at</string>
+    <string name="created">Created</string>
     <string name="confirmation_dialog">Please confirm this action!</string>
     <string name="alphabetically">Alphabetically</string>
     <string name="creation_date">Creation Date</string>
@@ -28,12 +28,14 @@
     <string name="open_with">Open with</string>
     <string name="invite_text">Check out Noto!</string>
     <string name="version">Version</string>
+    <string name="layout_is_list_mode">Layout has been set to list mode.</string>
+    <string name="layout_is_grid_mode">Layout has been set to grid mode.</string>
+    <string name="layout_is_staggered_mode">Layout has been set to staggered mode.</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>
     <string name="library">Library</string>
     <string name="create_library">Create library</string>
-    <string name="update_library">Update library</string>
     <string name="new_library">New Library</string>
     <string name="library_options">Library options</string>
     <string name="edit_library">Edit library</string>

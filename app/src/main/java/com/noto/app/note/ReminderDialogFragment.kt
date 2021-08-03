@@ -39,57 +39,52 @@ class ReminderDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = ReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text =
-                if (viewModel.note.value.reminderDate == null)
-                    resources.stringResource(R.string.new_reminder)
-                else
-                    resources.stringResource(R.string.edit_reminder)
+        val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
+            tvDialogTitle.text = resources.stringResource(R.string.new_reminder)
         }
         btnDone.setOnClickListener {
             dismiss()
         }
-
         viewModel.note
             .onEach {
-                val timeZone = TimeZone.currentSystemDefault()
-
-                it.reminderDate
-                    ?.toLocalDateTime(timeZone)
-                    ?.toJavaLocalDateTime()
-                    ?.also { time ->
-                        til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_cancel_24)
-
-                        val currentDateTime = Clock.System
-                            .now()
-                            .toLocalDateTime(timeZone)
-
-                        val is24HourFormat = DateFormat.is24HourFormat(requireContext())
-
-                        if (time.year > currentDateTime.year) {
-
-                            val format = if (is24HourFormat)
-                                "EEE, d MMM yyyy HH:mm"
-                            else
-                                "EEE, d MMM yyyy h:mm a"
-
-                            val dateTime = time.format(DateTimeFormatter.ofPattern(format))
-                            et.setText(dateTime)
-                        } else {
-
-                            val format = if (is24HourFormat)
-                                "EEE, d MMM HH:mm"
-                            else
-                                "EEE, d MMM h:mm a"
-
-                            val dateTime = time.format(DateTimeFormatter.ofPattern(format))
-                            et.setText(dateTime)
-                        }
-                    }
-
                 if (it.reminderDate == null) {
                     et.setText(getString(R.string.no_reminder))
                     til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_notification_add_24)
+                } else {
+                    val timeZone = TimeZone.currentSystemDefault()
+                    til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_cancel_24)
+                    baseDialog.tvDialogTitle.text = resources.stringResource(R.string.edit_reminder)
+                    it.reminderDate
+                        .toLocalDateTime(timeZone)
+                        .toJavaLocalDateTime()
+                        .also { time ->
+
+                            val currentDateTime = Clock.System
+                                .now()
+                                .toLocalDateTime(timeZone)
+
+                            val is24HourFormat = DateFormat.is24HourFormat(requireContext())
+
+                            if (time.year > currentDateTime.year) {
+
+                                val format = if (is24HourFormat)
+                                    "EEE, d MMM yyyy HH:mm"
+                                else
+                                    "EEE, d MMM yyyy h:mm a"
+
+                                val dateTime = time.format(DateTimeFormatter.ofPattern(format))
+                                et.setText(dateTime)
+                            } else {
+
+                                val format = if (is24HourFormat)
+                                    "EEE, d MMM HH:mm"
+                                else
+                                    "EEE, d MMM h:mm a"
+
+                                val dateTime = time.format(DateTimeFormatter.ofPattern(format))
+                                et.setText(dateTime)
+                            }
+                        }
                 }
             }
             .launchIn(lifecycleScope)

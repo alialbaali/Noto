@@ -14,10 +14,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.LibraryListFragmentBinding
 import com.noto.app.domain.model.Library
-import com.noto.app.util.LayoutManager
-import com.noto.app.util.drawableResource
-import com.noto.app.util.stringResource
-import com.noto.app.util.toCountText
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -69,8 +66,14 @@ class LibraryListFragment : BaseDialogFragment() {
             when (menuItem.itemId) {
                 R.id.layout_manager -> {
                     when (viewModel.layoutManager.value) {
-                        LayoutManager.Linear -> viewModel.updateLayoutManager(LayoutManager.Grid)
-                        LayoutManager.Grid -> viewModel.updateLayoutManager(LayoutManager.Linear)
+                        LayoutManager.Linear -> {
+                            viewModel.updateLayoutManager(LayoutManager.Grid)
+                            binding.root.snackbar(getString(R.string.layout_is_grid_mode), anchorView = binding.fab)
+                        }
+                        LayoutManager.Grid -> {
+                            viewModel.updateLayoutManager(LayoutManager.Linear)
+                            binding.root.snackbar(getString(R.string.layout_is_list_mode), anchorView = binding.fab)
+                        }
                     }
                     true
                 }

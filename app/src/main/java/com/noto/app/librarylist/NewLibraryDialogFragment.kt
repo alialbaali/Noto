@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.activity.addCallback
 import androidx.core.view.children
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -41,13 +42,16 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 tvDialogTitle.text = resources.stringResource(R.string.new_library)
             } else {
                 tvDialogTitle.text = resources.stringResource(R.string.edit_library)
-                binding.btnCreate.text = resources.stringResource(R.string.update_library)
+                binding.btnCreate.text = resources.stringResource(R.string.done)
             }
         }
 
         binding.et.requestFocus()
-        binding.et.setSelection(binding.et.text?.length ?: 0)
         imm.showKeyboard()
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner) { imm.hideKeyboard(binding.et.windowToken) }
+            .isEnabled = true
 
         setupNotoColors()
         collectState()
@@ -60,6 +64,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         viewModel.library
             .onEach {
                 binding.et.setText(it.title)
+                binding.et.setSelection(it.title.length)
                 binding.rgNotoColors.check(it.color.ordinal)
             }
             .launchIn(lifecycleScope)
@@ -77,6 +82,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             if (title.isBlank()) {
                 binding.til.error = resources.stringResource(R.string.empty_title)
             } else {
+                imm.hideKeyboard(binding.et.windowToken)
                 dismiss()
                 viewModel.createOrUpdateLibrary(title, color)
             }
