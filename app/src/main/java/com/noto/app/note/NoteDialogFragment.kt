@@ -54,7 +54,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    listOf(tvCopyToClipboard, tvOpenInReadingMode, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote)
+                    listOf(tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote)
                         .forEach { tv -> tv.compoundDrawableTintList = resources.colorStateResource(it.color.toResource()) }
             }
             .launchIn(lifecycleScope)
@@ -136,6 +136,16 @@ class NoteDialogFragment : BaseDialogFragment() {
             val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
             clipboardManager.setPrimaryClip(clipData)
             parentView.snackbar(getString(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
+        }
+
+        tvCopyNote.setOnClickListener {
+            val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
+                parentView.snackbar(resources.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
+                findNavController().popBackStack(args.destination, false)
+                dismiss()
+                viewModel.copyNote(it)
+            }
+            findNavController().navigate(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(selectLibraryItemClickListener, args.libraryId))
         }
 
         tvMoveNote.setOnClickListener {
