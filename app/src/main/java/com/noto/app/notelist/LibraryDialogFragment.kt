@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -46,8 +47,11 @@ class LibraryDialogFragment : BaseDialogFragment() {
     private fun LibraryDialogFragmentBinding.collectState(baseDialog: BaseDialogFragmentBinding) {
         viewModel.library
             .onEach {
-                baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
-                baseDialog.tvDialogTitle.setTextColor(resources.colorStateResource(it.color.toResource()))
+                val resource = resources.colorStateResource(it.color.toResource())
+                baseDialog.vHead.backgroundTintList = resource
+                baseDialog.tvDialogTitle.setTextColor(resource)
+                TextViewCompat.setCompoundDrawableTintList(tvEditLibrary, resource)
+                TextViewCompat.setCompoundDrawableTintList(tvDeleteLibrary, resource)
             }
             .launchIn(lifecycleScope)
     }

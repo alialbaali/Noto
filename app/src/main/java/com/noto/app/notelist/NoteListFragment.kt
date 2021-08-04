@@ -1,6 +1,7 @@
 package com.noto.app.notelist
 
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
+import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -65,6 +67,8 @@ class NoteListFragment : Fragment() {
 
         viewModel.layoutManager
             .onEach {
+                val color = viewModel.library.value.color.toResource()
+                val resource = resources.colorResource(color)
                 when (it) {
                     LayoutManager.Linear -> {
                         layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_dashboard_24)
@@ -75,13 +79,13 @@ class NoteListFragment : Fragment() {
                         rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
                     }
                 }
+                layoutManagerMenuItem.icon?.mutate()?.setTint(resource)
 
                 rv.visibility = View.INVISIBLE
                 rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
 
                 rv.visibility = View.VISIBLE
                 rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
-
             }
             .launchIn(lifecycleScope)
 
@@ -114,7 +118,13 @@ class NoteListFragment : Fragment() {
         tb.setTitleTextColor(color)
         tvLibraryNotesCount.setTextColor(color)
         tb.navigationIcon?.mutate()?.setTint(color)
+        bab.navigationIcon?.mutate()?.setTint(color)
         fab.backgroundTintList = colorStateList
+        bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            fab.outlineAmbientShadowColor = color
+            fab.outlineSpotShadowColor = color
+        }
     }
 
     private fun NoteListFragmentBinding.setupListeners() {

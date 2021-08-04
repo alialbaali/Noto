@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -55,7 +56,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
                     listOf(tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote)
-                        .forEach { tv -> tv.compoundDrawableTintList = resources.colorStateResource(it.color.toResource()) }
+                        .forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, resources.colorStateResource(it.color.toResource())) }
             }
             .launchIn(lifecycleScope)
 

@@ -2,6 +2,7 @@ package com.noto.app.note
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -111,6 +113,10 @@ class NoteFragment : Fragment() {
                 if (it.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
                 else archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_archive_24)
 
+                val color = viewModel.library.value.color.toResource()
+                val resource = resources.colorResource(color)
+                archiveMenuItem.icon?.mutate()?.setTint(resource)
+
                 if (it.reminderDate == null) fab.setImageDrawable(resources.drawableResource(R.drawable.ic_round_notification_add_24))
                 else fab.setImageDrawable(resources.drawableResource(R.drawable.ic_round_edit_notifications_24))
             }
@@ -125,6 +131,12 @@ class NoteFragment : Fragment() {
                 tvCreatedAt.setTextColor(color)
                 tb.navigationIcon?.mutate()?.setTint(color)
                 fab.backgroundTintList = resources.colorStateResource(it.color.toResource())
+                bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
+                bab.navigationIcon?.mutate()?.setTint(color)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    fab.outlineAmbientShadowColor = color
+                    fab.outlineSpotShadowColor = color
+                }
             }
             .launchIn(lifecycleScope)
     }

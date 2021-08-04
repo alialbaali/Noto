@@ -3,6 +3,7 @@ package com.noto.app.librarylist
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,9 +12,7 @@ import com.noto.app.R
 import com.noto.app.databinding.LibraryItemBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.librarylist.LibraryListAdapter.LibraryItemViewHolder
-import com.noto.app.util.colorResource
-import com.noto.app.util.drawableResource
-import com.noto.app.util.toResource
+import com.noto.app.util.*
 import java.io.Serializable
 
 
@@ -62,8 +61,9 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
 
         fun bind(library: Library) {
             binding.tvLibraryTitle.text = library.title
-            val notoColor = binding.root.resources.colorResource(library.color.toResource())
-            binding.vColor.background = binding.root.resources.drawableResource(R.drawable.color_view_shape)?.also {
+            val resources = binding.root.resources
+            val notoColor = resources.colorResource(library.color.toResource())
+            binding.vColor.background = resources.drawableResource(R.drawable.color_view_shape)?.also {
                 DrawableCompat.setTint(it, notoColor)
             }
 
@@ -73,7 +73,7 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
             }
 
             val count = listener.countLibraryNotes(library)
-            binding.tvLibraryNotesCount.text = "$count".plus(if (count == 1) " Note" else " Notes")
+            binding.tvLibraryNotesCount.text = count.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
             binding.tvLibraryTitle.setTextColor(notoColor)
             binding.tvLibraryNotesCount.setTextColor(notoColor)
         }
