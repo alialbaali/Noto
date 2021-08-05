@@ -1,40 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ll"
-    style="@style/BaseDialogFragment">
+    style="@style/BaseDialogFragmentNestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <include layout="@layout/base_dialog_fragment" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til"
-        style="@style/TextInputLayout"
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
-        app:endIconDrawable="@drawable/ic_round_notification_add_24"
-        app:endIconMode="custom"
-        app:endIconTint="@color/colorPrimary">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et"
-            style="@style/TextInputEditText"
+        <include layout="@layout/base_dialog_fragment" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til"
+            style="@style/TextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:enabled="false"
-            android:hint="@string/reminder"
-            android:inputType="text|textPersonName|textCapWords" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            app:endIconDrawable="@drawable/ic_round_notification_add_24"
+            app:endIconMode="custom"
+            app:endIconTint="@color/colorPrimary">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:enabled="false"
+                android:hint="@string/reminder"
+                android:inputType="text|textPersonName|textCapWords" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_done"
-        style="@style/MaterialButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
-        android:padding="@dimen/spacing_normal"
-        android:text="@string/done" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_done"
+            style="@style/MaterialButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:padding="@dimen/spacing_normal"
+            android:text="@string/done" />
 
-</LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,99 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ll"
-    style="@style/BaseDialogFragment">
+    style="@style/BaseDialogFragmentNestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <include layout="@layout/base_dialog_fragment" />
-
-    <TextView
-        android:id="@+id/tv_remind_me"
-        style="@style/DialogItem"
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/add_reminder"
-        app:drawableStartCompat="@drawable/ic_round_notification_add_24" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/base_dialog_fragment" />
 
-    <TextView
-        android:id="@+id/tv_open_in_reading_mode"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/open_in_reading_mode"
-        app:drawableStartCompat="@drawable/ic_round_reading_mode_24" />
+        <TextView
+            android:id="@+id/tv_remind_me"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/add_reminder"
+            app:drawableStartCompat="@drawable/ic_round_notification_add_24" />
 
-    <TextView
-        android:id="@+id/tv_star_note"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/star_note"
-        app:drawableStartCompat="@drawable/ic_round_star_border_24" />
+        <TextView
+            android:id="@+id/tv_open_in_reading_mode"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/open_in_reading_mode"
+            app:drawableStartCompat="@drawable/ic_round_reading_mode_24" />
 
-    <TextView
-        android:id="@+id/tv_archive_note"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/archive_note"
-        app:drawableStartCompat="@drawable/ic_round_archive_24" />
+        <TextView
+            android:id="@+id/tv_star_note"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/star_note"
+            app:drawableStartCompat="@drawable/ic_round_star_border_24" />
 
-    <TextView
-        android:id="@+id/tv_duplicate_note"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/duplicate_note"
-        app:drawableStartCompat="@drawable/ic_round_control_point_duplicate_24" />
+        <TextView
+            android:id="@+id/tv_archive_note"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/archive_note"
+            app:drawableStartCompat="@drawable/ic_round_archive_24" />
 
-    <TextView
-        android:id="@+id/tv_copy_to_clipboard"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/copy_to_clipboard"
-        app:drawableStartCompat="@drawable/ic_round_copy_24" />
+        <TextView
+            android:id="@+id/tv_duplicate_note"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/duplicate_note"
+            app:drawableStartCompat="@drawable/ic_round_control_point_duplicate_24" />
 
-    <TextView
-        android:id="@+id/tv_copy_note"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/copy_note_to"
-        app:drawableStartCompat="@drawable/ic_round_file_copy_24" />
+        <TextView
+            android:id="@+id/tv_copy_to_clipboard"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/copy_to_clipboard"
+            app:drawableStartCompat="@drawable/ic_round_copy_24" />
 
-    <TextView
-        android:id="@+id/tv_move_note"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/move_note"
-        app:drawableStartCompat="@drawable/ic_round_move_24" />
+        <TextView
+            android:id="@+id/tv_copy_note"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/copy_note_to"
+            app:drawableStartCompat="@drawable/ic_round_file_copy_24" />
 
-    <TextView
-        android:id="@+id/tv_share_note"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/share_note"
-        app:drawableStartCompat="@drawable/ic_round_share_24" />
+        <TextView
+            android:id="@+id/tv_move_note"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/move_note"
+            app:drawableStartCompat="@drawable/ic_round_move_24" />
 
-    <TextView
-        android:id="@+id/tv_delete_note"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/delete_note"
-        app:drawableStartCompat="@drawable/ic_round_delete_24" />
+        <TextView
+            android:id="@+id/tv_share_note"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/share_note"
+            app:drawableStartCompat="@drawable/ic_round_share_24" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_delete_note"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/delete_note"
+            app:drawableStartCompat="@drawable/ic_round_delete_24" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

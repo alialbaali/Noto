@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ll"
-    style="@style/BaseDialogFragment">
+    style="@style/BaseDialogFragmentNestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <include layout="@layout/base_dialog_fragment" />
-
-    <TextView
-        android:id="@+id/tv_edit_library"
-        style="@style/DialogItem"
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/edit_library"
-        app:drawableStartCompat="@drawable/ic_round_edit_24" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-<!--    <TextView-->
-<!--        android:id="@+id/tv_sorting"-->
-<!--        style="@style/dialog_item_shape"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@drawable/ripple"-->
-<!--        android:text="@string/sorting"-->
-<!--        app:drawableStartCompat="@drawable/ic_sort" />-->
+        <include layout="@layout/base_dialog_fragment" />
 
-    <TextView
-        android:id="@+id/tv_delete_library"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/delete_library"
-        app:drawableStartCompat="@drawable/ic_round_delete_sweep_24" />
+        <TextView
+            android:id="@+id/tv_edit_library"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/edit_library"
+            app:drawableStartCompat="@drawable/ic_round_edit_24" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_delete_library"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/delete_library"
+            app:drawableStartCompat="@drawable/ic_round_delete_sweep_24" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll"
-    style="@style/BaseDialogFragment">
+    style="@style/BaseDialogFragmentNestedScrollView">
 
     <include layout="@layout/base_dialog_fragment" />
 

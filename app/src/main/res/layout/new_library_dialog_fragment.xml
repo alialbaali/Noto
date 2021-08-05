@@ -1,59 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ll"
-    style="@style/BaseDialogFragment"
-    android:paddingStart="@dimen/spacing_normal"
-    android:paddingEnd="@dimen/spacing_normal">
+    style="@style/BaseDialogFragmentNestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/spacing_normal">
 
-    <include layout="@layout/base_dialog_fragment" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til"
-        style="@style/TextInputLayout"
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_marginBottom="@dimen/spacing_small"
-        android:theme="@style/TextInputLayout"
-        app:counterEnabled="true"
-        app:counterMaxLength="32">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et"
-            style="@style/TextInputEditText"
+        <include layout="@layout/base_dialog_fragment" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til"
+            style="@style/TextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/library_title"
-            android:inputType="text|textPersonName|textCapWords"
-            android:maxLength="32" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <HorizontalScrollView
-        android:id="@+id/hsv_rg_noto_colors"
-        style="@style/HorizontalScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
-        android:layout_marginBottom="@dimen/spacing_small">
-
-        <RadioGroup
-            android:id="@+id/rg_noto_colors"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" />
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:theme="@style/TextInputLayout"
+            app:counterEnabled="true"
+            app:counterMaxLength="32">
 
-    </HorizontalScrollView>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/library_title"
+                android:inputType="text|textPersonName|textCapWords"
+                android:maxLength="32" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_create"
-        style="@style/MaterialButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_marginBottom="@dimen/spacing_normal"
-        android:padding="@dimen/spacing_normal"
-        android:text="@string/create_library" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</LinearLayout>
+        <HorizontalScrollView
+            android:id="@+id/hsv_rg_noto_colors"
+            style="@style/HorizontalScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_small">
+
+            <RadioGroup
+                android:id="@+id/rg_noto_colors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+        </HorizontalScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_create"
+            style="@style/MaterialButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:padding="@dimen/spacing_normal"
+            android:text="@string/create_library" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

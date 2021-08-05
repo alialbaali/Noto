@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/ll"
-    style="@style/BaseDialogFragment">
+    style="@style/BaseDialogFragmentNestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <include layout="@layout/base_dialog_fragment" />
-
-    <TextView
-        android:id="@+id/tv_change_theme"
-        style="@style/DialogItem"
+    <LinearLayout
+        android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/change_theme"
-        app:drawableStartCompat="@drawable/ic_round_theme_24" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_settings"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/settings"
-        app:drawableStartCompat="@drawable/ic_round_settings_24" />
+        <include layout="@layout/base_dialog_fragment" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_change_theme"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/change_theme"
+            app:drawableStartCompat="@drawable/ic_round_theme_24" />
+
+        <TextView
+            android:id="@+id/tv_settings"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/settings"
+            app:drawableStartCompat="@drawable/ic_round_settings_24" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

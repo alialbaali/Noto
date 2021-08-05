@@ -1,69 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll"
-    style="@style/BaseDialogFragment">
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/BaseDialogFragmentNestedScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <include layout="@layout/base_dialog_fragment" />
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <RadioGroup
-        android:id="@+id/rg_sorting_method"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/spacing_normal"
-        android:background="@drawable/radio_group_sorting_shae"
-        android:orientation="horizontal">
+        <include layout="@layout/base_dialog_fragment" />
 
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/rb_sorting_asc"
+        <RadioGroup
+            android:id="@+id/rg_sorting_method"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:background="@drawable/radio_group_sorting_shae"
+            android:orientation="horizontal">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_sorting_asc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rg_sorting"
+                android:button="@null"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/asc"
+                android:textColor="@color/rg_sorting" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_sorting_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rg_sorting"
+                android:button="@null"
+                android:checked="true"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/desc"
+                android:textColor="@color/rg_sorting" />
+
+        </RadioGroup>
+
+
+        <RadioButton
+            android:id="@+id/tv_alphabetically"
+            style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rg_sorting"
-            android:button="@null"
-            android:padding="@dimen/spacing_normal"
-            android:text="@string/asc"
-            android:textColor="@color/rg_sorting" />
-
-        <com.google.android.material.radiobutton.MaterialRadioButton
-            android:id="@+id/rb_sorting_desc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/rg_sorting"
+            android:background="@drawable/dialog_item_shape"
             android:button="@null"
             android:checked="true"
+            android:text="@string/alphabetically" />
+
+        <TextView
+            android:id="@+id/tv_creation_date"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/creation_date" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_confirm"
+            style="@style/MaterialButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
             android:padding="@dimen/spacing_normal"
-            android:text="@string/desc"
-            android:textColor="@color/rg_sorting" />
-
-    </RadioGroup>
+            android:text="@string/done" />
 
 
-    <RadioButton
-        android:id="@+id/tv_alphabetically"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:button="@null"
-        android:checked="true"
-        android:text="@string/alphabetically" />
-
-    <TextView
-        android:id="@+id/tv_creation_date"
-        style="@style/DialogItem"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/dialog_item_shape"
-        android:text="@string/creation_date" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_confirm"
-        style="@style/MaterialButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
-        android:padding="@dimen/spacing_normal"
-        android:text="@string/done" />
-
-
-</LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
