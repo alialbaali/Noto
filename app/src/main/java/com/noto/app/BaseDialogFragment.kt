@@ -12,7 +12,10 @@ open class BaseDialogFragment : BottomSheetDialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return super.onCreateDialog(savedInstanceState).apply {
-            (this as BottomSheetDialog).behavior.state = BottomSheetBehavior.STATE_EXPANDED
+            (this as BottomSheetDialog).apply {
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                behavior.skipCollapsed = true
+            }
         }
     }
 }
