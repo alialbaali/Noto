@@ -33,10 +33,17 @@ class NoteListViewModel(
     private val mutableLayoutManager = MutableStateFlow(LayoutManager.Linear)
     val layoutManager get() = mutableLayoutManager.asStateFlow()
 
+    private val mutableNotoColors = MutableStateFlow(NotoColor.values().associateWith { it == library.value.color }.toList())
+    val notoColors get() = mutableNotoColors.asStateFlow()
+
     init {
         if (libraryId != 0L)
             libraryRepository.getLibraryById(libraryId)
-                .onEach { mutableLibrary.value = it }
+                .onEach {
+                    mutableLibrary.value = it
+                    mutableNotoColors.value = mutableNotoColors.value
+                        .mapTrueIfSameColor(it.color)
+                }
                 .launchIn(viewModelScope)
 
         noteRepository.getNotesByLibraryId(libraryId)
@@ -53,10 +60,12 @@ class NoteListViewModel(
             .launchIn(viewModelScope)
     }
 
-    fun createOrUpdateLibrary(title: String, notoColor: NotoColor) = viewModelScope.launch {
+    fun createOrUpdateLibrary(title: String) = viewModelScope.launch {
+        val color = notoColors.value.first { it.second }.first
+
         val library = library.value.copy(
             title = title,
-            color = notoColor,
+            color = color,
         )
 
         if (libraryId == 0L)
@@ -73,10 +82,6 @@ class NoteListViewModel(
         storage.put(LAYOUT_MANAGER_KEY, value.toString())
     }
 
-    fun toggleNoteStar(note: Note) = viewModelScope.launch {
-        noteRepository.updateNote(note.copy(isStarred = !note.isStarred))
-    }
-
     fun searchNotes(term: String) = viewModelScope.launch {
         val currentNotes = noteRepository.getNotesByLibraryId(libraryId)
             .first()
@@ -88,4 +93,10 @@ class NoteListViewModel(
                 .filter { it.title.contains(term, ignoreCase = true) || it.body.contains(term, ignoreCase = true) }
     }
 
+    fun selectNotoColor(notoColor: NotoColor) {
+        mutableNotoColors.value = mutableNotoColors.value
+            .mapTrueIfSameColor(notoColor)
+    }
+
+    private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }
 }

@@ -73,8 +73,8 @@ class SortingDialogFragment : BaseDialogFragment() {
                 }
 
                 when (it.sortingType) {
-                    SortingType.Alphabetically -> tvAlphabetically.compoundDrawables[RIGHT_DRAWABLE_INDEX] = resources.drawableResource(R.drawable.ic_sort_checked)
-                    SortingType.CreationDate -> tvCreationDate.compoundDrawables[RIGHT_DRAWABLE_INDEX] = resources.drawableResource(R.drawable.ic_sort_checked)
+                    SortingType.Alphabetically -> tvAlphabetically.compoundDrawables[RIGHT_DRAWABLE_INDEX] = resources.drawableResource(R.drawable.ic_round_check_circle_24)
+                    SortingType.CreationDate -> tvCreationDate.compoundDrawables[RIGHT_DRAWABLE_INDEX] = resources.drawableResource(R.drawable.ic_round_check_circle_24)
 
                 }
             }

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/ic_sort_checked" android:state_checked="true" />
-    <item android:drawable="@drawable/unchecked_color" android:state_checked="false" />
-</selector>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/colorSurface">
+    <item>
+        <selector>
+            <item
+                android:drawable="@drawable/ic_round_check_circle_24"
+                android:state_checked="true" />
+            <item
+                android:drawable="@drawable/ic_round_circle_24"
+                android:state_checked="false" />
+        </selector>
+    </item>
+</ripple>
