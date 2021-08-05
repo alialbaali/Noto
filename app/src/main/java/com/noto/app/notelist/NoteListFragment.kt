@@ -1,6 +1,7 @@
 package com.noto.app.notelist
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -121,6 +122,8 @@ class NoteListFragment : Fragment() {
         bab.navigationIcon?.mutate()?.setTint(color)
         fab.backgroundTintList = colorStateList
         bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
+        tilSearch.boxStrokeColor = color
+        tilSearch.hintTextColor = colorStateList
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             fab.outlineAmbientShadowColor = color
             fab.outlineSpotShadowColor = color
