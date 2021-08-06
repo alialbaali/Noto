@@ -1,8 +1,8 @@
 package com.noto.app.domain.model
 
 enum class NotoColor {
-    GRAY, BLUE, PINK, CYAN, PURPLE, RED,
-    YELLOW, ORANGE, GREEN, BROWN, BLUE_GRAY, TEAL,
+    Gray, Blue, Pink, Cyan, Purple, Red,
+    Yellow, Orange, Green, Brown, BlueGray, Teal,
 }
 
 enum class SortingMethod { Asc, Desc, }
