@@ -20,7 +20,7 @@ data class Library(
     val position: Int,
 
     @ColumnInfo(name = "color")
-    val color: NotoColor = NotoColor.GRAY,
+    val color: NotoColor = NotoColor.Gray,
 
     @ColumnInfo(name = "creation_date")
     val creationDate: Instant = Clock.System.now(),

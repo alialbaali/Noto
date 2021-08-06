@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/BaseDialogFragmentNestedScrollView"
+    style="@style/BaseDialogFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/dialog_item_shape"
-            android:text="@string/open_in_reading_mode"
+            android:text="@string/open_note_in_reading_mode"
             app:drawableStartCompat="@drawable/ic_round_reading_mode_24" />
 
         <TextView
@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/dialog_item_shape"
-            android:text="@string/copy_to_clipboard"
+            android:text="@string/copy_note_to_clipboard"
             app:drawableStartCompat="@drawable/ic_round_copy_24" />
 
         <TextView
@@ -92,6 +92,15 @@
             android:background="@drawable/dialog_item_shape"
             android:text="@string/share_note"
             app:drawableStartCompat="@drawable/ic_round_share_24" />
+
+        <TextView
+            android:id="@+id/tv_export_note"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/export_note"
+            app:drawableStartCompat="@drawable/ic_round_file_upload_24" />
 
         <TextView
             android:id="@+id/tv_delete_note"

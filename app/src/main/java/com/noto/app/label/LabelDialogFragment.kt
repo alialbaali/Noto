@@ -28,7 +28,7 @@ class LabelDialogFragment : BaseDialogFragment() {
 
         binding = LabelDialogFragmentBinding.inflate(inflater, container, false)
 
-        var labelColor = NotoColor.GRAY
+        var labelColor = NotoColor.Gray
 
         if (args.labelId == 0L) {
 

@@ -72,6 +72,7 @@ fun Note.format(): String = """
     
     $body
 """.trimIndent()
+    .trim()
 
 //fun View.showKeyboard() = ViewCompat.getWindowInsetsController(this)?.show(WindowInsetsCompat.Type.ime())
 //fun View.hideKeyboard() = ViewCompat.getWindowInsetsController(this)?.hide(WindowInsetsCompat.Type.ime())
@@ -89,18 +90,18 @@ fun View.snackbar(message: String, anchorView: View? = null) = Snackbar.make(thi
 fun Note.isValid(): Boolean = !(title.isBlank() && body.isBlank())
 
 fun NotoColor.toResource(): Int = when (this) {
-    NotoColor.BLUE -> R.color.colorAccentBlue
-    NotoColor.GRAY -> R.color.colorAccentGray
-    NotoColor.PINK -> R.color.colorAccentPink
-    NotoColor.CYAN -> R.color.colorAccentCyan
-    NotoColor.PURPLE -> R.color.colorAccentPurple
-    NotoColor.RED -> R.color.colorAccentRed
-    NotoColor.YELLOW -> R.color.colorAccentYellow
-    NotoColor.ORANGE -> R.color.colorAccentOrange
-    NotoColor.GREEN -> R.color.colorAccentGreen
-    NotoColor.BROWN -> R.color.colorAccentBrown
-    NotoColor.BLUE_GRAY -> R.color.colorAccentBlueGray
-    NotoColor.TEAL -> R.color.colorAccentTeal
+    NotoColor.Blue -> R.color.colorAccentBlue
+    NotoColor.Gray -> R.color.colorAccentGray
+    NotoColor.Pink -> R.color.colorAccentPink
+    NotoColor.Cyan -> R.color.colorAccentCyan
+    NotoColor.Purple -> R.color.colorAccentPurple
+    NotoColor.Red -> R.color.colorAccentRed
+    NotoColor.Yellow -> R.color.colorAccentYellow
+    NotoColor.Orange -> R.color.colorAccentOrange
+    NotoColor.Green -> R.color.colorAccentGreen
+    NotoColor.Brown -> R.color.colorAccentBrown
+    NotoColor.BlueGray -> R.color.colorAccentBlueGray
+    NotoColor.Teal -> R.color.colorAccentTeal
 }
 
 fun <T> MutableList<T>.replaceWith(value: T, predicate: (T) -> Boolean) {

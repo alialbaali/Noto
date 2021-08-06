@@ -1,15 +1,18 @@
 package com.noto.app.note
 
+import android.app.Activity
 import android.app.AlarmManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.TextViewCompat
+import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -25,6 +28,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+
+private const val SelectDirectoryRequestCode = 1
 
 class NoteDialogFragment : BaseDialogFragment() {
 
@@ -55,8 +60,10 @@ class NoteDialogFragment : BaseDialogFragment() {
                 baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    listOf(tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote, tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote)
-                        .forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, resources.colorStateResource(it.color.toResource())) }
+                    listOf(
+                        tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
+                        tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote, tvExportNote,
+                    ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, resources.colorStateResource(it.color.toResource())) }
             }
             .launchIn(lifecycleScope)
 
@@ -164,6 +171,11 @@ class NoteDialogFragment : BaseDialogFragment() {
             launchShareNoteIntent(viewModel.note.value)
         }
 
+        tvExportNote.setOnClickListener {
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+            startActivityForResult(intent, SelectDirectoryRequestCode)
+        }
+
         tvDeleteNote.setOnClickListener {
             val title = resources.stringResource(R.string.delete_note_confirmation)
             val btnText = resources.stringResource(R.string.delete_note)
@@ -185,6 +197,24 @@ class NoteDialogFragment : BaseDialogFragment() {
                 )
             )
         }
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
+            data?.data?.let { uri ->
+                val fileName = viewModel.note.value.title.ifBlank { viewModel.note.value.body }
+                DocumentFile.fromTreeUri(requireContext(), uri)
+                    ?.createFile("text/plain", fileName)
+                    ?.uri
+                    ?.let { documentUri ->
+                        val noteContent = viewModel.note.value.format()
+                        requireContext()
+                            .contentResolver
+                            .openOutputStream(documentUri, "w")
+                            ?.use { it.write(noteContent.toByteArray()) }
+                    }
+                findNavController().navigateUp()
+            }
+        }
     }
 }

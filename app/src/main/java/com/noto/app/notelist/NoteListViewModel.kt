@@ -2,9 +2,7 @@ package com.noto.app.notelist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
@@ -96,6 +94,18 @@ class NoteListViewModel(
     fun selectNotoColor(notoColor: NotoColor) {
         mutableNotoColors.value = mutableNotoColors.value
             .mapTrueIfSameColor(notoColor)
+    }
+
+    fun updateSortingType(sortingType: SortingType) {
+        viewModelScope.launch {
+            libraryRepository.updateLibrary(library.value.copy(sortingType = sortingType))
+        }
+    }
+
+    fun updateSortingMethod(sortingMethod: SortingMethod) {
+        viewModelScope.launch {
+            libraryRepository.updateLibrary(library.value.copy(sortingMethod = sortingMethod))
+        }
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }
