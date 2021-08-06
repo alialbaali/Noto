@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -46,6 +47,8 @@ class NoteReadingModeFragment : Fragment() {
                 binding.etNoteTitle.text = it.title
                 binding.etNoteBody.text = it.body
                 binding.tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${it.formatCreationDate()}"
+                binding.etNoteTitle.isVisible = it.title.isNotBlank()
+                binding.etNoteBody.isVisible = it.body.isNotBlank()
             }
             .launchIn(lifecycleScope)
 
