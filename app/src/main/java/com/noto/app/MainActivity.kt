@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.noto.app.databinding.MainActivityBinding
+import com.noto.app.notelist.SelectLibraryDialogFragment
 import com.noto.app.util.createNotificationChannel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -41,9 +42,14 @@ class MainActivity : AppCompatActivity() {
     private fun handleIntentContent() {
         if (intent?.action == Intent.ACTION_SEND) {
             intent.getStringExtra(Intent.EXTRA_TEXT)
-                ?.let {
-                    findNavController(R.id.nav_host_fragment)
-                        .navigate(R.id.libraryListFragment, bundleOf("content" to it))
+                ?.let { content ->
+                    val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
+                        val args = bundleOf("library_id" to it, "body" to content)
+                        findNavController(R.id.nav_host_fragment).navigate(R.id.noteFragment, args)
+                    }
+
+                    val args = bundleOf("library_id" to 0L, "select_library_item_click_listener" to selectLibraryItemClickListener)
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.selectLibraryDialogFragment, args)
                 }
         }
     }

@@ -64,11 +64,6 @@
         <action
             android:id="@+id/action_libraryListFragment_to_libraryListDialogFragment"
             app:destination="@id/libraryListDialogFragment" />
-        <argument
-            android:name="content"
-            android:defaultValue="@null"
-            app:argType="string"
-            app:nullable="true" />
         <action
             android:id="@+id/action_libraryListFragment_to_noteFragment"
             app:destination="@id/noteFragment"
