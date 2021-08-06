@@ -56,6 +56,8 @@ class NoteListAdapter(private val listener: NoteItemClickListener) : ListAdapter
             binding.tvNoteTitle.text = note.title
             binding.tvNoteBody.text = note.body
             binding.rbNoteStar.isVisible = note.isStarred
+            binding.tvNoteTitle.isVisible = note.title.isNotBlank()
+            binding.tvNoteBody.isVisible = note.body.isNotBlank()
         }
 
     }
