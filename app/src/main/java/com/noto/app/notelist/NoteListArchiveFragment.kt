@@ -9,6 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.NoteListArchiveFragmentBinding
 import com.noto.app.domain.model.Note
@@ -79,6 +80,15 @@ class NoteListArchiveFragment : Fragment() {
                 tvLibraryNotesCount.setTextColor(color)
                 tb.title = "${it.title} ${getString(R.string.archived_notes).replaceFirstChar { it.lowercase() }}"
                 tb.setTitleTextColor(color)
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.layoutManager
+            .onEach {
+                when (it) {
+                    LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                }
             }
             .launchIn(lifecycleScope)
     }
