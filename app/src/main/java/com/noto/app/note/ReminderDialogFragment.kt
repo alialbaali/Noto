@@ -86,6 +86,19 @@ class ReminderDialogFragment : BaseDialogFragment() {
                             }
                         }
                 }
+                til.endIconDrawable?.setTint(resources.colorResource(viewModel.library.value.color.toResource()))
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.library
+            .onEach {
+                val colorStateList = resources.colorStateResource(it.color.toResource())
+                val color = resources.colorResource(it.color.toResource())
+                baseDialog.vHead.backgroundTintList = colorStateList
+                baseDialog.tvDialogTitle.setTextColor(color)
+                til.boxStrokeColor
+                et.setTextColor(color)
+                til.endIconDrawable?.setTint(color)
             }
             .launchIn(lifecycleScope)
 

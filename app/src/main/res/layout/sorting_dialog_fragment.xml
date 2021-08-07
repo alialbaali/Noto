@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/BaseDialogFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -44,24 +45,23 @@
 
         </RadioGroup>
 
-
-        <RadioButton
+        <TextView
             android:id="@+id/tv_alphabetically"
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:button="@null"
             android:checked="true"
-            android:text="@string/alphabetically" />
+            android:text="@string/alphabetically"
+            app:drawableStartCompat="@drawable/rb_sorting_type" />
 
         <TextView
             android:id="@+id/tv_creation_date"
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
-            android:text="@string/creation_date" />
+            android:text="@string/creation_date"
+            app:drawableStartCompat="@drawable/rb_sorting_type" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_confirm"
@@ -71,7 +71,6 @@
             android:layout_margin="@dimen/spacing_normal"
             android:padding="@dimen/spacing_normal"
             android:text="@string/done" />
-
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
