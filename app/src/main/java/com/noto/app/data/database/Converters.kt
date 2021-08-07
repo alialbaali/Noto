@@ -17,8 +17,7 @@ object NotoColorConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): NotoColor =
-        NotoColor.values().first { notebookColor -> notebookColor.ordinal == ordinal }
+    fun toEnum(ordinal: Int): NotoColor = NotoColor.values().first { notebookColor -> notebookColor.ordinal == ordinal }
 }
 
 @SuppressLint("NewApi")

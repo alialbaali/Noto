@@ -8,3 +8,5 @@ enum class NotoColor {
 enum class SortingMethod { Asc, Desc, }
 
 enum class SortingType { Alphabetically, CreationDate, }
+
+enum class Theme { System, Light, Dark, }

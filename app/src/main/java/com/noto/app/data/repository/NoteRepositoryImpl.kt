@@ -20,11 +20,11 @@ class NoteRepositoryImpl(private val dataSource: NoteLocalDataSource) : NoteRepo
     override fun getNoteById(notoId: Long): Flow<Note> = dataSource.getNoteById(notoId)
 
     override suspend fun createNote(note: Note) = withContext(Dispatchers.IO) {
-        dataSource.createNote(note.copy(title = note.title.trim(), body = note.body.trim()))
+        dataSource.createNote(note.copy(title = note.title, body = note.body))
     }
 
     override suspend fun updateNote(note: Note) = withContext(Dispatchers.IO) {
-        dataSource.updateNote(note.copy(title = note.title.trim(), body = note.body.trim()))
+        dataSource.updateNote(note.copy(title = note.title, body = note.body))
     }
 
     override suspend fun deleteNote(note: Note) = withContext(Dispatchers.IO) {

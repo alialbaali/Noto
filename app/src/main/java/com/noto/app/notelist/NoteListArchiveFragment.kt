@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.NoteListArchiveFragmentBinding
+import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -25,25 +26,31 @@ class NoteListArchiveFragment : Fragment() {
 
     private val args by navArgs<NoteListArchiveFragmentArgs>()
 
-    private val adapter by lazy { NoteListAdapter(noteItemClickListener) }
-
     private val noteItemClickListener by lazy {
         object : NoteListAdapter.NoteItemClickListener {
-            override fun onClick(note: Note) = findNavController().navigate(NoteListArchiveFragmentDirections.actionArchiveFragmentToNotoFragment(args.libraryId, note.id))
+            override fun onClick(note: Note) = findNavController()
+                .navigate(NoteListArchiveFragmentDirections.actionArchiveFragmentToNotoFragment(args.libraryId, note.id))
+
             override fun onLongClick(note: Note) =
-                findNavController().navigate(NoteListArchiveFragmentDirections.actionArchiveFragmentToNotoDialogFragment(args.libraryId, note.id, R.id.archiveFragment))
+                findNavController()
+                    .navigate(
+                        NoteListArchiveFragmentDirections.actionArchiveFragmentToNotoDialogFragment(
+                            args.libraryId,
+                            note.id,
+                            R.id.archiveFragment
+                        )
+                    )
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = NoteListArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
-        setupListeners()
-        setupRV()
-        collectState()
-    }
+    private val adapter = NoteListAdapter(noteItemClickListener)
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        NoteListArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
+            setupListeners()
+            setupRV()
+            setupState()
+        }
 
     private fun NoteListArchiveFragmentBinding.setupListeners() {
         tb.setNavigationOnClickListener {
@@ -56,40 +63,47 @@ class NoteListArchiveFragment : Fragment() {
         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
-    private fun NoteListArchiveFragmentBinding.collectState() {
+    private fun NoteListArchiveFragmentBinding.setupState() {
         val layoutItems = listOf(tvLibraryNotesCount, rv)
 
         viewModel.archivedNotes
-            .onEach {
-                if (it.isEmpty()) {
-                    layoutItems.forEach { it.visibility = View.GONE }
-                    tvPlaceHolder.visibility = View.VISIBLE
-                } else {
-                    tvPlaceHolder.visibility = View.GONE
-                    layoutItems.forEach { it.visibility = View.VISIBLE }
-                    adapter.submitList(it)
-                    tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
-                }
-            }
+            .onEach { archivedNotes -> setupArchivedNotes(archivedNotes, layoutItems) }
             .launchIn(lifecycleScope)
 
         viewModel.library
-            .onEach {
-                val color = resources.colorResource(it.color.toResource())
-                tb.navigationIcon?.mutate()?.setTint(color)
-                tvLibraryNotesCount.setTextColor(color)
-                tb.title = "${it.title} ${getString(R.string.archived_notes).replaceFirstChar { it.lowercase() }}"
-                tb.setTitleTextColor(color)
-            }
+            .onEach { library -> setupLibrary(library) }
             .launchIn(lifecycleScope)
 
         viewModel.layoutManager
-            .onEach {
-                when (it) {
-                    LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                    LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                }
-            }
+            .onEach { layoutManager -> setupLayoutManger(layoutManager) }
             .launchIn(lifecycleScope)
+    }
+
+    private fun NoteListArchiveFragmentBinding.setupLayoutManger(layoutManager: LayoutManager) = when (layoutManager) {
+        LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    }
+
+    private fun NoteListArchiveFragmentBinding.setupLibrary(library: Library) {
+        val color = resources.colorResource(library.color.toResource())
+        tb.navigationIcon?.mutate()?.setTint(color)
+        tvLibraryNotesCount.setTextColor(color)
+        tb.title = "${library.title} ${getString(R.string.archived_notes).replaceFirstChar { it.lowercase() }}"
+        tb.setTitleTextColor(color)
+    }
+
+    private fun NoteListArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Note>, layoutItems: List<View>) {
+        if (archivedNotes.isEmpty()) {
+            layoutItems.forEach { it.visibility = View.GONE }
+            tvPlaceHolder.visibility = View.VISIBLE
+        } else {
+            tvPlaceHolder.visibility = View.GONE
+            layoutItems.forEach { it.visibility = View.VISIBLE }
+            adapter.submitList(archivedNotes)
+            tvLibraryNotesCount.text = archivedNotes.size.toCountText(
+                resources.stringResource(R.string.note),
+                resources.stringResource(R.string.notes)
+            )
+        }
     }
 }

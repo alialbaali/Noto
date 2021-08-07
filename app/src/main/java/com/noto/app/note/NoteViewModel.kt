@@ -7,10 +7,7 @@ import com.noto.app.domain.model.Note
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.util.isValid
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
 
@@ -22,17 +19,13 @@ class NoteViewModel(
     private val body: String?,
 ) : ViewModel() {
 
-    private val mutableLibrary = MutableStateFlow(Library(position = 0))
-    val library get() = mutableLibrary.asStateFlow()
+    val library = libraryRepository.getLibraryById(libraryId)
+        .stateIn(viewModelScope, SharingStarted.Lazily, Library(position = 0))
 
     private val mutableNote = MutableStateFlow(Note(noteId, libraryId, position = 0, body = body ?: ""))
     val note get() = mutableNote.asStateFlow()
 
     init {
-        libraryRepository.getLibraryById(libraryId)
-            .onEach { mutableLibrary.value = it }
-            .launchIn(viewModelScope)
-
         if (noteId != 0L)
             noteRepository.getNoteById(noteId)
                 .onEach { mutableNote.value = it }
@@ -41,8 +34,8 @@ class NoteViewModel(
 
     fun createOrUpdateNote(title: String, body: String) = viewModelScope.launch {
         val note = note.value.copy(
-            title = title,
-            body = body,
+            title = title.trim(),
+            body = body.trim(),
         )
         if (note.isValid())
             if (noteId == 0L)
@@ -72,11 +65,10 @@ class NoteViewModel(
     }
 
     fun copyNote(libraryId: Long) = viewModelScope.launch {
-        noteRepository.createNote(note.value.copy(id = 0,libraryId = libraryId))
+        noteRepository.createNote(note.value.copy(id = 0, libraryId = libraryId))
     }
 
     fun duplicateNote() = viewModelScope.launch {
         noteRepository.createNote(note.value.copy(id = 0, reminderDate = null))
     }
-
 }

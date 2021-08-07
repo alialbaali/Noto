@@ -10,27 +10,28 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryListDialogFragmentBinding
 import com.noto.app.util.stringResource
+import com.noto.app.util.withBinding
 
 class LibraryListDialogFragment : BaseDialogFragment() {
 
-    private lateinit var binding: LibraryListDialogFragmentBinding
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = LibraryListDialogFragmentBinding.inflate(inflater, container, false)
-        BaseDialogFragmentBinding.bind(binding.root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.app_name)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        LibraryListDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+            setupBaseDialogFragment()
+            setupListeners()
         }
 
-        binding.tvChangeTheme.setOnClickListener {
-            dismiss()
+    private fun LibraryListDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
+        tvDialogTitle.text = resources.stringResource(R.string.app_name)
+    }
+
+    private fun LibraryListDialogFragmentBinding.setupListeners() {
+        tvChangeTheme.setOnClickListener {
             findNavController().navigate(LibraryListDialogFragmentDirections.actionLibraryListDialogFragmentToThemeDialogFragment())
         }
 
-        binding.tvSettings.setOnClickListener {
+        tvSettings.setOnClickListener {
             dismiss()
             findNavController().navigate(LibraryListDialogFragmentDirections.actionLibraryListDialogFragmentToSettingsFragment())
         }
-
-        return binding.root
     }
 }

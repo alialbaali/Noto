@@ -17,6 +17,7 @@ import com.noto.app.librarylist.LibraryListAdapter
 import com.noto.app.librarylist.LibraryListViewModel
 import com.noto.app.util.LayoutManager
 import com.noto.app.util.stringResource
+import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -25,9 +26,7 @@ import java.io.Serializable
 
 class SelectLibraryDialogFragment : BaseDialogFragment() {
 
-    private lateinit var binding: SelectLibraryDialogFragmentBinding
-
-    private val adapter by lazy { LibraryListAdapter(libraryItemClickListener) }
+    private val viewModel by viewModel<LibraryListViewModel>()
 
     private val args by navArgs<SelectLibraryDialogFragmentArgs>()
 
@@ -46,45 +45,50 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private val viewModel by viewModel<LibraryListViewModel>()
+    private val adapter = LibraryListAdapter(libraryItemClickListener)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = SelectLibraryDialogFragmentBinding.inflate(inflater, container, false)
-
-        BaseDialogFragmentBinding.bind(binding.root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.select_library)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        SelectLibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+            setupBaseDialogFragment()
+            setupState()
         }
 
-        binding.rv.adapter = adapter
+    private fun SelectLibraryDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
+        tvDialogTitle.text = resources.stringResource(R.string.select_library)
+    }
+
+    private fun SelectLibraryDialogFragmentBinding.setupState() {
+        rv.adapter = adapter
 
         viewModel.libraries
-            .map { it.filter { it.id != args.libraryId } }
-            .onEach {
-                if (it.isEmpty()) {
-                    binding.tvPlaceHolder.visibility = View.VISIBLE
-                    binding.rv.visibility = View.GONE
-                } else {
-                    binding.tvPlaceHolder.visibility = View.GONE
-                    binding.rv.visibility = View.VISIBLE
-                    adapter.submitList(it)
-                }
-            }
+            .map { libraries -> libraries.filter { library -> library.id != args.libraryId } }
+            .onEach { libraries -> setupLibraries(libraries) }
             .launchIn(lifecycleScope)
 
         viewModel.layoutManager
-            .onEach {
-                when (it) {
-                    LayoutManager.Linear -> binding.rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                    LayoutManager.Grid -> binding.rv.layoutManager = GridLayoutManager(requireContext(), 2)
-                }
-            }
+            .onEach { layoutManager -> setupLayoutManager(layoutManager) }
             .launchIn(lifecycleScope)
+    }
 
-        return binding.root
+    private fun SelectLibraryDialogFragmentBinding.setupLibraries(libraries: List<Library>) {
+        if (libraries.isEmpty()) {
+            tvPlaceHolder.visibility = View.VISIBLE
+            rv.visibility = View.GONE
+        } else {
+            tvPlaceHolder.visibility = View.GONE
+            rv.visibility = View.VISIBLE
+            adapter.submitList(libraries)
+        }
+    }
+
+    private fun SelectLibraryDialogFragmentBinding.setupLayoutManager(layoutManager: LayoutManager) {
+        when (layoutManager) {
+            LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            LayoutManager.Grid -> rv.layoutManager = GridLayoutManager(requireContext(), 2)
+        }
     }
 
     fun interface SelectLibraryItemClickListener : Serializable {
         fun onClick(libraryId: Long)
     }
-
 }

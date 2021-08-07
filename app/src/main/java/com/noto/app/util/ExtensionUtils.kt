@@ -64,7 +64,7 @@ inline fun <T : ViewBinding> T.withBinding(crossinline block: T.() -> Unit): Vie
     return root
 }
 
-fun InputMethodManager.showKeyboard() = toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+fun InputMethodManager.showKeyboard() = toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY)
 fun InputMethodManager.hideKeyboard(windowToken: IBinder) = hideSoftInputFromWindow(windowToken, 0)
 
 fun Note.format(): String = """

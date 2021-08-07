@@ -1,33 +1,23 @@
 package com.noto.app
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.noto.app.domain.model.Theme
 import com.noto.app.domain.source.LocalStorage
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 private const val ThemeKey = "Theme"
 
 class MainViewModel(private val storage: LocalStorage) : ViewModel() {
 
-    private val mutableTheme = MutableStateFlow(Theme.System)
-    val theme get() = mutableTheme.asStateFlow()
-
-    init {
-        storage.get(ThemeKey)
-            .map { Theme.valueOf(it) }
-            .onEach { mutableTheme.value = it }
-            .launchIn(viewModelScope)
-    }
+    val theme = storage.get(ThemeKey)
+        .map { Theme.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, Theme.System)
 
     fun updateTheme(value: Theme) = viewModelScope.launch {
         storage.put(ThemeKey, value.toString())
     }
-
-}
-
-enum class Theme {
-    System, Light, Dark,
 }

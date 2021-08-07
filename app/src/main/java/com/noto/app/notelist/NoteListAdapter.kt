@@ -11,9 +11,7 @@ import com.noto.app.domain.model.Note
 
 class NoteListAdapter(private val listener: NoteItemClickListener) : ListAdapter<Note, NoteListAdapter.NoteItemViewHolder>(NoteItemDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder {
-        return NoteItemViewHolder.create(parent, listener)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteItemViewHolder = NoteItemViewHolder.create(parent, listener)
 
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
         val note = getItem(position)
@@ -24,8 +22,7 @@ class NoteListAdapter(private val listener: NoteItemClickListener) : ListAdapter
     class NoteItemViewHolder(
         private val binding: NoteItemBinding,
         private val listener: NoteItemClickListener,
-    ) :
-        RecyclerView.ViewHolder(binding.root) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         lateinit var note: Note
 
@@ -40,14 +37,9 @@ class NoteListAdapter(private val listener: NoteItemClickListener) : ListAdapter
         }
 
         companion object {
-
-            fun create(
-                parent: ViewGroup,
-                listener: NoteItemClickListener,
-            ): NoteItemViewHolder {
+            fun create(parent: ViewGroup, listener: NoteItemClickListener): NoteItemViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = NoteItemBinding.inflate(layoutInflater, parent, false)
-
                 return NoteItemViewHolder(binding, listener)
             }
         }
@@ -59,7 +51,6 @@ class NoteListAdapter(private val listener: NoteItemClickListener) : ListAdapter
             binding.tvNoteTitle.isVisible = note.title.isNotBlank()
             binding.tvNoteBody.isVisible = note.body.isNotBlank()
         }
-
     }
 
     class NoteItemDiffCallback : DiffUtil.ItemCallback<Note>() {

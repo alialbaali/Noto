@@ -22,6 +22,8 @@ import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
+import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Note
 import com.noto.app.notelist.SelectLibraryDialogFragment
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -46,54 +48,22 @@ class NoteDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = NoteDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.note_options)
-        }
+        val baseDialog = setupBaseDialogFragment()
         setupListeners()
-        collectState(baseDialog)
+        setupState(baseDialog)
     }
 
-    private fun NoteDialogFragmentBinding.collectState(baseDialog: BaseDialogFragmentBinding) {
-        viewModel.library
-            .onEach {
-                baseDialog.tvDialogTitle.setTextColor(resources.colorResource(it.color.toResource()))
-                baseDialog.vHead.backgroundTintList = resources.colorStateResource(it.color.toResource())
+    private fun NoteDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
+        tvDialogTitle.text = resources.stringResource(R.string.note_options)
+    }
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-                    listOf(
-                        tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
-                        tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote, tvExportNote,
-                    ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, resources.colorStateResource(it.color.toResource())) }
-            }
+    private fun NoteDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
+        viewModel.library
+            .onEach { library -> setupLibrary(library, baseDialogFragment) }
             .launchIn(lifecycleScope)
 
         viewModel.note
-            .onEach {
-
-                if (it.isStarred) {
-                    tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_star_24, 0, 0, 0)
-                    tvStarNote.text = resources.stringResource(R.string.un_star_note)
-                } else {
-                    tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_star_border_24, 0, 0, 0)
-                    tvStarNote.text = resources.stringResource(R.string.star_note)
-                }
-
-                if (it.isArchived) {
-                    tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
-                    tvArchiveNote.text = resources.stringResource(R.string.unarchive_note)
-                } else {
-                    tvArchiveNote.text = resources.stringResource(R.string.archive_note)
-                    tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
-                }
-
-                if (it.reminderDate == null) {
-                    tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_notification_add_24, 0, 0, 0)
-                    tvRemindMe.text = resources.stringResource(R.string.add_reminder)
-                } else {
-                    tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_edit_notifications_24, 0, 0, 0)
-                    tvRemindMe.text = resources.stringResource(R.string.edit_reminder)
-                }
-            }
+            .onEach { note -> setupNote(note) }
             .launchIn(lifecycleScope)
     }
 
@@ -153,7 +123,12 @@ class NoteDialogFragment : BaseDialogFragment() {
                 dismiss()
                 viewModel.copyNote(it)
             }
-            findNavController().navigate(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(selectLibraryItemClickListener, args.libraryId))
+            findNavController().navigate(
+                NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(
+                    selectLibraryItemClickListener,
+                    args.libraryId
+                )
+            )
         }
 
         tvMoveNote.setOnClickListener {
@@ -163,7 +138,12 @@ class NoteDialogFragment : BaseDialogFragment() {
                 dismiss()
                 viewModel.moveNote(it)
             }
-            findNavController().navigate(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(selectLibraryItemClickListener, args.libraryId))
+            findNavController().navigate(
+                NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(
+                    selectLibraryItemClickListener,
+                    args.libraryId
+                )
+            )
         }
 
         tvShareNote.setOnClickListener {
@@ -217,4 +197,43 @@ class NoteDialogFragment : BaseDialogFragment() {
             }
         }
     }
+
+    private fun NoteDialogFragmentBinding.setupNote(note: Note) {
+
+        if (note.isStarred) {
+            tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_star_24, 0, 0, 0)
+            tvStarNote.text = resources.stringResource(R.string.un_star_note)
+        } else {
+            tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_star_border_24, 0, 0, 0)
+            tvStarNote.text = resources.stringResource(R.string.star_note)
+        }
+
+        if (note.isArchived) {
+            tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
+            tvArchiveNote.text = resources.stringResource(R.string.unarchive_note)
+        } else {
+            tvArchiveNote.text = resources.stringResource(R.string.archive_note)
+            tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
+        }
+
+        if (note.reminderDate == null) {
+            tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_notification_add_24, 0, 0, 0)
+            tvRemindMe.text = resources.stringResource(R.string.add_reminder)
+        } else {
+            tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_edit_notifications_24, 0, 0, 0)
+            tvRemindMe.text = resources.stringResource(R.string.edit_reminder)
+        }
+    }
+
+    private fun NoteDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
+        baseDialogFragment.tvDialogTitle.setTextColor(resources.colorResource(library.color.toResource()))
+        baseDialogFragment.vHead.backgroundTintList = resources.colorStateResource(library.color.toResource())
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            listOf(
+                tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
+                tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote, tvExportNote,
+            ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, resources.colorStateResource(library.color.toResource())) }
+    }
+
 }

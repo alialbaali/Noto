@@ -1,10 +1,10 @@
 package com.noto.app.notelist
 
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
@@ -37,97 +37,46 @@ class NoteListFragment : Fragment() {
 
     private val args by navArgs<NoteListFragmentArgs>()
 
-    private val adapter by lazy { NoteListAdapter(noteItemClickListener) }
-
     private val noteItemClickListener by lazy {
         object : NoteListAdapter.NoteItemClickListener {
-            override fun onClick(note: Note) = findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
-            override fun onLongClick(note: Note) = findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id, R.id.libraryFragment))
+            override fun onClick(note: Note) = findNavController()
+                .navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
+
+            override fun onLongClick(note: Note) = findNavController()
+                .navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id, R.id.libraryFragment))
         }
     }
+
+    private val adapter = NoteListAdapter(noteItemClickListener)
 
     private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteListFragmentBinding.inflate(inflater, container, false).withBinding {
-            collectState()
+            setupState()
             setupListeners()
-            setupRV()
         }
 
-    private fun NoteListFragmentBinding.collectState() {
+    private fun NoteListFragmentBinding.setupState() {
+        val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
+        val layoutItems = listOf(tvLibraryNotesCount, rv)
+        rv.adapter = adapter
+
         viewModel.library
             .filterNotNull()
-            .onEach {
-                setLibraryColors(it.color)
-                tb.title = it.title
+            .onEach { library ->
+                setupLibraryColors(library.color)
+                tb.title = library.title
             }
             .launchIn(lifecycleScope)
-
-        val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
 
         viewModel.layoutManager
-            .onEach {
-                val color = viewModel.library.value.color.toResource()
-                val resource = resources.colorResource(color)
-                when (it) {
-                    LayoutManager.Linear -> {
-                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_dashboard_24)
-                        rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                    }
-                    LayoutManager.Grid -> {
-                        layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_agenda_24)
-                        rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                    }
-                }
-                layoutManagerMenuItem.icon?.mutate()?.setTint(resource)
-
-                rv.visibility = View.INVISIBLE
-                rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
-
-                rv.visibility = View.VISIBLE
-                rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
-            }
+            .onEach { layoutManager -> setupLayoutManager(layoutManager, layoutManagerMenuItem) }
             .launchIn(lifecycleScope)
-
-        val layoutItems = listOf(tvLibraryNotesCount, rv)
 
         viewModel.notes
-            .onEach {
-                tvLibraryNotesCount.text = it.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
-                if (it.isEmpty()) {
-
-                    if (tilSearch.isVisible)
-                        tvPlaceHolder.text = resources.stringResource(R.string.no_note_matches_search_term)
-
-                    layoutItems.forEach { it.visibility = View.GONE }
-                    tvPlaceHolder.visibility = View.VISIBLE
-                } else {
-                    layoutItems.forEach { it.visibility = View.VISIBLE }
-                    tvPlaceHolder.visibility = View.GONE
-                    adapter.submitList(it)
-                }
-            }
+            .onEach { notes -> setupNotes(notes, layoutItems) }
             .launchIn(lifecycleScope)
-    }
-
-    private fun NoteListFragmentBinding.setLibraryColors(notoColor: NotoColor) {
-
-        val color = resources.colorResource(notoColor.toResource())
-        val colorStateList = resources.colorStateResource(notoColor.toResource())
-
-        tb.setTitleTextColor(color)
-        tvLibraryNotesCount.setTextColor(color)
-        tb.navigationIcon?.mutate()?.setTint(color)
-        bab.navigationIcon?.mutate()?.setTint(color)
-        fab.backgroundTintList = colorStateList
-        bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
-        tilSearch.boxStrokeColor = color
-        tilSearch.hintTextColor = colorStateList
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            fab.outlineAmbientShadowColor = color
-            fab.outlineSpotShadowColor = color
-        }
     }
 
     private fun NoteListFragmentBinding.setupListeners() {
@@ -145,34 +94,9 @@ class NoteListFragment : Fragment() {
 
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.archived_notos -> {
-                    findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToArchiveFragment(args.libraryId))
-                    true
-                }
-
-                R.id.layout_manager -> {
-                    when (viewModel.layoutManager.value) {
-                        LayoutManager.Linear -> {
-                            viewModel.updateLayoutManager(LayoutManager.Grid)
-                            root.snackbar(getString(R.string.layout_is_staggered_mode), anchorView = fab)
-                        }
-                        LayoutManager.Grid -> {
-                            viewModel.updateLayoutManager(LayoutManager.Linear)
-                            root.snackbar(getString(R.string.layout_is_list_mode), anchorView = fab)
-                        }
-                    }
-                    true
-                }
-
-                R.id.search -> {
-                    val searchEt = tilSearch
-                    searchEt.isVisible = !searchEt.isVisible
-                    if (searchEt.isVisible)
-                        enableSearch()
-                    else
-                        disableSearch()
-                    true
-                }
+                R.id.archived_notos -> setupArchivedNotesMenuItem()
+                R.id.layout_manager -> setupLayoutManagerMenuItem()
+                R.id.search -> setupSearchMenuItem()
                 else -> false
             }
         }
@@ -180,7 +104,6 @@ class NoteListFragment : Fragment() {
         etSearch.doAfterTextChanged {
             viewModel.searchNotes(it.toString())
         }
-
     }
 
     private fun NoteListFragmentBinding.enableSearch() {
@@ -207,8 +130,87 @@ class NoteListFragment : Fragment() {
         imm.hideKeyboard(etSearch.windowToken)
     }
 
-    private fun NoteListFragmentBinding.setupRV() {
-        rv.adapter = adapter
+    private fun NoteListFragmentBinding.setupLayoutManager(layoutManager: LayoutManager, layoutManagerMenuItem: MenuItem) {
+        val color = viewModel.library.value.color.toResource()
+        val resource = resources.colorResource(color)
+        when (layoutManager) {
+            LayoutManager.Linear -> {
+                layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_dashboard_24)
+                rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            }
+            LayoutManager.Grid -> {
+                layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_agenda_24)
+                rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            }
+        }
+        layoutManagerMenuItem.icon?.mutate()?.setTint(resource)
+
+        rv.visibility = View.INVISIBLE
+        rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
+
+        rv.visibility = View.VISIBLE
+        rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
+    private fun NoteListFragmentBinding.setupNotes(notes: List<Note>, layoutItems: List<View>) {
+        tvLibraryNotesCount.text = notes.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
+        if (notes.isEmpty()) {
+            if (tilSearch.isVisible)
+                tvPlaceHolder.text = resources.stringResource(R.string.no_note_matches_search_term)
+            layoutItems.forEach { it.visibility = View.GONE }
+            tvPlaceHolder.visibility = View.VISIBLE
+        } else {
+            layoutItems.forEach { it.visibility = View.VISIBLE }
+            tvPlaceHolder.visibility = View.GONE
+            adapter.submitList(notes)
+        }
+    }
+
+    private fun NoteListFragmentBinding.setupArchivedNotesMenuItem(): Boolean {
+        findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToArchiveFragment(args.libraryId))
+        return true
+    }
+
+    private fun NoteListFragmentBinding.setupLayoutManagerMenuItem(): Boolean {
+        when (viewModel.layoutManager.value) {
+            LayoutManager.Linear -> {
+                viewModel.updateLayoutManager(LayoutManager.Grid)
+                root.snackbar(getString(R.string.layout_is_staggered_mode), anchorView = fab)
+            }
+            LayoutManager.Grid -> {
+                viewModel.updateLayoutManager(LayoutManager.Linear)
+                root.snackbar(getString(R.string.layout_is_list_mode), anchorView = fab)
+            }
+        }
+        return true
+    }
+
+    private fun NoteListFragmentBinding.setupSearchMenuItem(): Boolean {
+        val searchEt = tilSearch
+        searchEt.isVisible = !searchEt.isVisible
+        if (searchEt.isVisible)
+            enableSearch()
+        else
+            disableSearch()
+        return true
+    }
+
+    private fun NoteListFragmentBinding.setupLibraryColors(notoColor: NotoColor) {
+
+        val color = resources.colorResource(notoColor.toResource())
+        val colorStateList = resources.colorStateResource(notoColor.toResource())
+
+        tb.setTitleTextColor(color)
+        tvLibraryNotesCount.setTextColor(color)
+        tb.navigationIcon?.mutate()?.setTint(color)
+        bab.navigationIcon?.mutate()?.setTint(color)
+        fab.backgroundTintList = colorStateList
+        bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
+        tilSearch.boxStrokeColor = color
+        tilSearch.hintTextColor = colorStateList
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            fab.outlineAmbientShadowColor = color
+            fab.outlineSpotShadowColor = color
+        }
+    }
 }

@@ -11,15 +11,15 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.noto.app.databinding.MainActivityBinding
+import com.noto.app.domain.model.Theme
 import com.noto.app.notelist.SelectLibraryDialogFragment
 import com.noto.app.util.createNotificationChannel
+import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var binding: MainActivityBinding
 
     private val viewModel by viewModel<MainViewModel>()
 
@@ -29,17 +29,14 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         notificationManager.createNotificationChannel()
-
-        binding = MainActivityBinding.inflate(layoutInflater)
-            .apply { setContentView(root) }
-
-        collectState()
-        setupUI()
-        handleIntentContent()
-
+        MainActivityBinding.inflate(layoutInflater).withBinding {
+            setContentView(root)
+            setupState()
+            handleIntentContent()
+        }
     }
 
-    private fun handleIntentContent() {
+    private fun MainActivityBinding.handleIntentContent() {
         if (intent?.action == Intent.ACTION_SEND) {
             intent.getStringExtra(Intent.EXTRA_TEXT)
                 ?.let { content ->
@@ -54,23 +51,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun collectState() {
-        viewModel.theme
-            .onEach {
-                when (it) {
-                    Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-                    Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    Theme.Dark -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                }
-            }
-            .launchIn(lifecycleScope)
-    }
-
-    private fun setupUI() {
+    private fun MainActivityBinding.setupState() {
         when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> {
                 window.decorView.systemUiVisibility = 0
             }
+        }
+
+        viewModel.theme
+            .onEach { theme -> setupTheme(theme) }
+            .launchIn(lifecycleScope)
+    }
+
+    private fun MainActivityBinding.setupTheme(theme: Theme) {
+        when (theme) {
+            Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            Theme.Dark -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }
 }

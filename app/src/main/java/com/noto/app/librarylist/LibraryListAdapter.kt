@@ -3,8 +3,6 @@ package com.noto.app.librarylist
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.graphics.ColorUtils
-import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,15 +10,16 @@ import com.noto.app.R
 import com.noto.app.databinding.LibraryItemBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.librarylist.LibraryListAdapter.LibraryItemViewHolder
-import com.noto.app.util.*
+import com.noto.app.util.colorResource
+import com.noto.app.util.stringResource
+import com.noto.app.util.toCountText
+import com.noto.app.util.toResource
 import java.io.Serializable
 
 
 class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListAdapter<Library, LibraryItemViewHolder>(LibraryItemDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryItemViewHolder {
-        return LibraryItemViewHolder.create(parent, listener)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LibraryItemViewHolder = LibraryItemViewHolder.create(parent, listener)
 
     override fun onBindViewHolder(holderList: LibraryItemViewHolder, position: Int) {
         val library = getItem(position)
@@ -46,15 +45,9 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
         }
 
         companion object {
-
-            fun create(
-                parent: ViewGroup,
-                listener: LibraryItemClickListener
-            ): LibraryItemViewHolder {
-
+            fun create(parent: ViewGroup, listener: LibraryItemClickListener): LibraryItemViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = LibraryItemBinding.inflate(layoutInflater, parent, false)
-
                 return LibraryItemViewHolder(binding, listener)
             }
         }
@@ -62,20 +55,20 @@ class LibraryListAdapter(private val listener: LibraryItemClickListener) : ListA
         fun bind(library: Library) {
             binding.tvLibraryTitle.text = library.title
             val resources = binding.root.resources
-            val notoColor = resources.colorResource(library.color.toResource())
-            binding.vColor.background = resources.drawableResource(R.drawable.color_view_shape)?.also {
-                DrawableCompat.setTint(it, notoColor)
-            }
+            library.setupColors()
+            val count = listener.countLibraryNotes(library)
+            binding.tvLibraryNotesCount.text = count.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
+        }
 
+        private fun Library.setupColors() {
+            val notoColor = binding.root.resources.colorResource(color.toResource())
+            binding.vColor.background.setTint(notoColor)
+            binding.tvLibraryTitle.setTextColor(notoColor)
+            binding.tvLibraryNotesCount.setTextColor(notoColor)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 binding.root.outlineAmbientShadowColor = notoColor
                 binding.root.outlineSpotShadowColor = notoColor
             }
-
-            val count = listener.countLibraryNotes(library)
-            binding.tvLibraryNotesCount.text = count.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
-            binding.tvLibraryTitle.setTextColor(notoColor)
-            binding.tvLibraryNotesCount.setTextColor(notoColor)
         }
     }
 

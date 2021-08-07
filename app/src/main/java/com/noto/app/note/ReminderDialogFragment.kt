@@ -16,6 +16,8 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ReminderDialogFragmentBinding
+import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Note
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -34,83 +36,12 @@ class ReminderDialogFragment : BaseDialogFragment() {
 
     private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View = ReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.new_reminder)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        ReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+            val baseDialogFragment = setupBaseDialogFragment()
+            setupState(baseDialogFragment)
+            setupListeners()
         }
-        btnDone.setOnClickListener {
-            dismiss()
-        }
-        viewModel.note
-            .onEach {
-                if (it.reminderDate == null) {
-                    et.setText(getString(R.string.no_reminder))
-                    til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_notification_add_24)
-                } else {
-                    val timeZone = TimeZone.currentSystemDefault()
-                    til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_cancel_24)
-                    baseDialog.tvDialogTitle.text = resources.stringResource(R.string.edit_reminder)
-                    it.reminderDate
-                        .toLocalDateTime(timeZone)
-                        .toJavaLocalDateTime()
-                        .also { time ->
-
-                            val currentDateTime = Clock.System
-                                .now()
-                                .toLocalDateTime(timeZone)
-
-                            val is24HourFormat = DateFormat.is24HourFormat(requireContext())
-
-                            if (time.year > currentDateTime.year) {
-
-                                val format = if (is24HourFormat)
-                                    "EEE, d MMM yyyy HH:mm"
-                                else
-                                    "EEE, d MMM yyyy h:mm a"
-
-                                val dateTime = time.format(DateTimeFormatter.ofPattern(format))
-                                et.setText(dateTime)
-                            } else {
-
-                                val format = if (is24HourFormat)
-                                    "EEE, d MMM HH:mm"
-                                else
-                                    "EEE, d MMM h:mm a"
-
-                                val dateTime = time.format(DateTimeFormatter.ofPattern(format))
-                                et.setText(dateTime)
-                            }
-                        }
-                }
-                til.endIconDrawable?.setTint(resources.colorResource(viewModel.library.value.color.toResource()))
-            }
-            .launchIn(lifecycleScope)
-
-        viewModel.library
-            .onEach {
-                val colorStateList = resources.colorStateResource(it.color.toResource())
-                val color = resources.colorResource(it.color.toResource())
-                baseDialog.vHead.backgroundTintList = colorStateList
-                baseDialog.tvDialogTitle.setTextColor(color)
-                til.boxStrokeColor
-                et.setTextColor(color)
-                til.endIconDrawable?.setTint(color)
-            }
-            .launchIn(lifecycleScope)
-
-        til.setEndIconOnClickListener {
-            if (viewModel.note.value.reminderDate == null) {
-                showDateTimeDialog()
-            } else {
-                alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id)
-                viewModel.setNoteReminder(null)
-            }
-        }
-    }
 
     private fun showDateTimeDialog() {
 
@@ -149,5 +80,89 @@ class ReminderDialogFragment : BaseDialogFragment() {
                     .minus(1000)
             }
             .show()
+    }
+
+    private fun ReminderDialogFragmentBinding.setupListeners() {
+        btnDone.setOnClickListener {
+            dismiss()
+        }
+
+        til.setEndIconOnClickListener {
+            if (viewModel.note.value.reminderDate == null) {
+                showDateTimeDialog()
+            } else {
+                alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id)
+                viewModel.setNoteReminder(null)
+            }
+        }
+    }
+
+    private fun ReminderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
+        viewModel.note
+            .onEach { note ->
+                setupNote(note, baseDialogFragment)
+                til.endIconDrawable?.setTint(resources.colorResource(viewModel.library.value.color.toResource()))
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.library
+            .onEach { library -> setupLibrary(library, baseDialogFragment) }
+            .launchIn(lifecycleScope)
+    }
+
+    private fun ReminderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
+        tvDialogTitle.text = resources.stringResource(R.string.new_reminder)
+    }
+
+    private fun ReminderDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
+        val colorStateList = resources.colorStateResource(library.color.toResource())
+        val color = resources.colorResource(library.color.toResource())
+        baseDialogFragment.vHead.backgroundTintList = colorStateList
+        baseDialogFragment.tvDialogTitle.setTextColor(color)
+        til.boxStrokeColor
+        et.setTextColor(color)
+        til.endIconDrawable?.setTint(color)
+    }
+
+    private fun ReminderDialogFragmentBinding.setupNote(note: Note, baseDialogFragment: BaseDialogFragmentBinding) {
+        if (note.reminderDate == null) {
+            et.setText(getString(R.string.no_reminder))
+            til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_notification_add_24)
+        } else {
+            val timeZone = TimeZone.currentSystemDefault()
+            til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_cancel_24)
+            baseDialogFragment.tvDialogTitle.text = resources.stringResource(R.string.edit_reminder)
+            note.reminderDate
+                .toLocalDateTime(timeZone)
+                .toJavaLocalDateTime()
+                .also { time ->
+
+                    val currentDateTime = Clock.System
+                        .now()
+                        .toLocalDateTime(timeZone)
+
+                    val is24HourFormat = DateFormat.is24HourFormat(requireContext())
+
+                    if (time.year > currentDateTime.year) {
+
+                        val format = if (is24HourFormat)
+                            "EEE, d MMM yyyy HH:mm"
+                        else
+                            "EEE, d MMM yyyy h:mm a"
+
+                        val dateTime = time.format(DateTimeFormatter.ofPattern(format))
+                        et.setText(dateTime)
+                    } else {
+
+                        val format = if (is24HourFormat)
+                            "EEE, d MMM HH:mm"
+                        else
+                            "EEE, d MMM h:mm a"
+
+                        val dateTime = time.format(DateTimeFormatter.ofPattern(format))
+                        et.setText(dateTime)
+                    }
+                }
+        }
     }
 }

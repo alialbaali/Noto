@@ -10,11 +10,11 @@ import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.colorStateResource
 import com.noto.app.util.toResource
 
-class NotoColorListAdapter(private val listener: NotoColorClickListener) : ListAdapter<Pair<NotoColor, Boolean>, NotoColorListAdapter.NotoColorItemViewHolder>(NotoColorItemDiffCallback()) {
+class NotoColorListAdapter(
+    private val listener: NotoColorClickListener
+) : ListAdapter<Pair<NotoColor, Boolean>, NotoColorListAdapter.NotoColorItemViewHolder>(NotoColorItemDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotoColorItemViewHolder {
-        return NotoColorItemViewHolder.create(parent, listener)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotoColorItemViewHolder = NotoColorItemViewHolder.create(parent, listener)
 
     override fun onBindViewHolder(holder: NotoColorItemViewHolder, position: Int) {
         val pair = getItem(position)
@@ -22,7 +22,8 @@ class NotoColorListAdapter(private val listener: NotoColorClickListener) : ListA
         holder.bind(pair)
     }
 
-    class NotoColorItemViewHolder( val binding: NotoColorItemBinding, private val listener: NotoColorClickListener) : RecyclerView.ViewHolder(binding.root) {
+    class NotoColorItemViewHolder(val binding: NotoColorItemBinding, private val listener: NotoColorClickListener) :
+        RecyclerView.ViewHolder(binding.root) {
 
         lateinit var pair: Pair<NotoColor, Boolean>
 
@@ -34,10 +35,8 @@ class NotoColorListAdapter(private val listener: NotoColorClickListener) : ListA
 
         companion object {
             fun create(parent: ViewGroup, listener: NotoColorClickListener): NotoColorItemViewHolder {
-
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = NotoColorItemBinding.inflate(layoutInflater, parent, false)
-
                 return NotoColorItemViewHolder(binding, listener)
             }
         }
@@ -56,5 +55,4 @@ class NotoColorListAdapter(private val listener: NotoColorClickListener) : ListA
     fun interface NotoColorClickListener {
         fun onClick(notoColor: NotoColor)
     }
-
 }

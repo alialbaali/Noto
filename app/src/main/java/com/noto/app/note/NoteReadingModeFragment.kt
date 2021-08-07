@@ -13,10 +13,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.databinding.NoteReadingModeFragmentBinding
-import com.noto.app.util.colorResource
-import com.noto.app.util.formatCreationDate
-import com.noto.app.util.stringResource
-import com.noto.app.util.toResource
+import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Note
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -25,44 +24,49 @@ import org.koin.core.parameter.parametersOf
 
 class NoteReadingModeFragment : Fragment() {
 
-    private lateinit var binding: NoteReadingModeFragmentBinding
-
     private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
 
     private val args by navArgs<NoteReadingModeFragmentArgs>()
 
     @SuppressLint("SetTextI18n")
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = NoteReadingModeFragmentBinding.inflate(inflater, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
+        NoteReadingModeFragmentBinding.inflate(inflater, container, false).withBinding {
+            setupState()
+            setupListeners()
+        }
 
-        binding.nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
-
-        binding.tb.setNavigationOnClickListener {
+    private fun NoteReadingModeFragmentBinding.setupListeners() {
+        tb.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    private fun NoteReadingModeFragmentBinding.setupState() {
+        nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
 
         viewModel.note
             .filterNotNull()
-            .onEach {
-                binding.etNoteTitle.text = it.title
-                binding.etNoteBody.text = it.body
-                binding.tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${it.formatCreationDate()}"
-                binding.etNoteTitle.isVisible = it.title.isNotBlank()
-                binding.etNoteBody.isVisible = it.body.isNotBlank()
-            }
+            .onEach { note -> setupNote(note) }
             .launchIn(lifecycleScope)
 
         viewModel.library
-            .onEach {
-                val color = resources.colorResource(it.color.toResource())
-
-                binding.tb.title = it.title
-                binding.tb.setTitleTextColor(color)
-                binding.tvCreatedAt.setTextColor(color)
-                binding.tb.navigationIcon?.mutate()?.setTint(color)
-            }
+            .onEach { library -> setupLibrary(library) }
             .launchIn(lifecycleScope)
-        return binding.root
     }
 
+    private fun NoteReadingModeFragmentBinding.setupNote(note: Note) {
+        etNoteTitle.text = note.title
+        etNoteBody.text = note.body
+        tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
+        etNoteTitle.isVisible = note.title.isNotBlank()
+        etNoteBody.isVisible = note.body.isNotBlank()
+    }
+
+    private fun NoteReadingModeFragmentBinding.setupLibrary(library: Library) {
+        val color = resources.colorResource(library.color.toResource())
+        tb.title = library.title
+        tb.setTitleTextColor(color)
+        tvCreatedAt.setTextColor(color)
+        tb.navigationIcon?.mutate()?.setTint(color)
+    }
 }

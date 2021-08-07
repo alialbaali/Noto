@@ -10,7 +10,7 @@ import com.noto.app.util.LayoutManager
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-private const val LAYOUT_MANAGER_KEY = "Library_Layout_Manager"
+private const val LayoutManagerKey = "Library_Layout_Manager"
 
 class NoteListViewModel(
     private val libraryRepository: LibraryRepository,
@@ -25,11 +25,12 @@ class NoteListViewModel(
     private val mutableNotes = MutableStateFlow<List<Note>>(emptyList())
     val notes get() = mutableNotes.asStateFlow()
 
-    private val mutableArchivedNotes = MutableStateFlow<List<Note>>(emptyList())
-    val archivedNotes get() = mutableArchivedNotes.asStateFlow()
+    val archivedNotes = noteRepository.getArchivedNotesByLibraryId(libraryId)
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    private val mutableLayoutManager = MutableStateFlow(LayoutManager.Linear)
-    val layoutManager get() = mutableLayoutManager.asStateFlow()
+    val layoutManager = storage.get(LayoutManagerKey)
+        .map { LayoutManager.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, LayoutManager.Linear)
 
     private val mutableNotoColors = MutableStateFlow(NotoColor.values().associateWith { it == library.value.color }.toList())
     val notoColors get() = mutableNotoColors.asStateFlow()
@@ -47,22 +48,13 @@ class NoteListViewModel(
         noteRepository.getNotesByLibraryId(libraryId)
             .onEach { mutableNotes.value = it }
             .launchIn(viewModelScope)
-
-        noteRepository.getArchivedNotesByLibraryId(libraryId)
-            .onEach { mutableArchivedNotes.value = it }
-            .launchIn(viewModelScope)
-
-        storage.get(LAYOUT_MANAGER_KEY)
-            .map { LayoutManager.valueOf(it) }
-            .onEach { mutableLayoutManager.value = it }
-            .launchIn(viewModelScope)
     }
 
     fun createOrUpdateLibrary(title: String) = viewModelScope.launch {
         val color = notoColors.value.first { it.second }.first
 
         val library = library.value.copy(
-            title = title,
+            title = title.trim(),
             color = color,
         )
 
@@ -77,7 +69,7 @@ class NoteListViewModel(
     }
 
     fun updateLayoutManager(value: LayoutManager) = viewModelScope.launch {
-        storage.put(LAYOUT_MANAGER_KEY, value.toString())
+        storage.put(LayoutManagerKey, value.toString())
     }
 
     fun searchNotes(term: String) = viewModelScope.launch {
