@@ -124,8 +124,8 @@
             android:defaultValue="0L"
             app:argType="long" />
         <action
-            android:id="@+id/action_notoFragment_to_reminderDialogFragment"
-            app:destination="@id/reminderDialogFragment" />
+            android:id="@+id/action_notoFragment_to_noteReminderDialogFragment"
+            app:destination="@id/noteReminderDialogFragment" />
         <action
             android:id="@+id/action_notoFragment_to_notoDialogFragment"
             app:destination="@id/noteDialogFragment" />
@@ -151,9 +151,9 @@
             app:destination="@id/noteFragment" />
     </fragment>
     <dialog
-        android:id="@+id/reminderDialogFragment"
-        android:name="com.noto.app.note.ReminderDialogFragment"
-        android:label="ReminderDialogFragment">
+        android:id="@+id/noteReminderDialogFragment"
+        android:name="com.noto.app.note.NoteReminderDialogFragment"
+        android:label="NoteReminderDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
@@ -173,8 +173,8 @@
             android:name="note_id"
             app:argType="long" />
         <action
-            android:id="@+id/action_notoDialogFragment_to_reminderDialogFragment"
-            app:destination="@id/reminderDialogFragment" />
+            android:id="@+id/action_notoDialogFragment_to_noteReminderDialogFragment"
+            app:destination="@id/noteReminderDialogFragment" />
         <action
             android:id="@+id/action_notoDialogFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />

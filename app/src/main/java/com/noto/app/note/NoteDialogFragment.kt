@@ -85,7 +85,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvRemindMe.setOnClickListener {
             dismiss()
-            findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToReminderDialogFragment(args.libraryId, args.noteId))
+            findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToNoteReminderDialogFragment(args.libraryId, args.noteId))
         }
 
         tvOpenInReadingMode.setOnClickListener {

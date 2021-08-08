@@ -12,7 +12,7 @@ import com.noto.app.databinding.LibraryListDialogFragmentBinding
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 
-class LibraryListDialogFragment : BaseDialogFragment() {
+class MainDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryListDialogFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -26,6 +26,7 @@ class LibraryListDialogFragment : BaseDialogFragment() {
 
     private fun LibraryListDialogFragmentBinding.setupListeners() {
         tvChangeTheme.setOnClickListener {
+            dismiss()
             findNavController().navigate(LibraryListDialogFragmentDirections.actionLibraryListDialogFragmentToThemeDialogFragment())
         }
 

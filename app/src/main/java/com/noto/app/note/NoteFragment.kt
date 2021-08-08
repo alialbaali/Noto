@@ -64,7 +64,7 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupListeners() {
         fab.setOnClickListener {
             findNavController()
-                .navigate(NoteFragmentDirections.actionNotoFragmentToReminderDialogFragment(args.libraryId, args.noteId))
+                .navigate(NoteFragmentDirections.actionNotoFragmentToNoteReminderDialogFragment(args.libraryId, args.noteId))
         }
 
         val backCallback = {

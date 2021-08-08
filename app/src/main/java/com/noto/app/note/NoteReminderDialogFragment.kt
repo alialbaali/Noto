@@ -15,7 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
-import com.noto.app.databinding.ReminderDialogFragmentBinding
+import com.noto.app.databinding.NoteReminderDialogFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
@@ -28,16 +28,16 @@ import org.koin.core.parameter.parametersOf
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class ReminderDialogFragment : BaseDialogFragment() {
+class NoteReminderDialogFragment : BaseDialogFragment() {
 
     private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
 
-    private val args by navArgs<ReminderDialogFragmentArgs>()
+    private val args by navArgs<NoteReminderDialogFragmentArgs>()
 
     private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        ReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+        NoteReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
             val baseDialogFragment = setupBaseDialogFragment()
             setupState(baseDialogFragment)
             setupListeners()
@@ -82,7 +82,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
             .show()
     }
 
-    private fun ReminderDialogFragmentBinding.setupListeners() {
+    private fun NoteReminderDialogFragmentBinding.setupListeners() {
         btnDone.setOnClickListener {
             dismiss()
         }
@@ -97,7 +97,7 @@ class ReminderDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun ReminderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteReminderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         viewModel.note
             .onEach { note ->
                 setupNote(note, baseDialogFragment)
@@ -110,21 +110,21 @@ class ReminderDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
     }
 
-    private fun ReminderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
+    private fun NoteReminderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
         tvDialogTitle.text = resources.stringResource(R.string.new_reminder)
     }
 
-    private fun ReminderDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteReminderDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
         val colorStateList = resources.colorStateResource(library.color.toResource())
         val color = resources.colorResource(library.color.toResource())
         baseDialogFragment.vHead.backgroundTintList = colorStateList
         baseDialogFragment.tvDialogTitle.setTextColor(color)
-        til.boxStrokeColor
+        til.boxStrokeColor = color
         et.setTextColor(color)
         til.endIconDrawable?.setTint(color)
     }
 
-    private fun ReminderDialogFragmentBinding.setupNote(note: Note, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteReminderDialogFragmentBinding.setupNote(note: Note, baseDialogFragment: BaseDialogFragmentBinding) {
         if (note.reminderDate == null) {
             et.setText(getString(R.string.no_reminder))
             til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_notification_add_24)
