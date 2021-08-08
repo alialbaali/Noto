@@ -69,7 +69,7 @@ class NoteFragment : Fragment() {
 
         val backCallback = {
             if (args.body != null)
-                findNavController().popBackStack(R.id.libraryListFragment, false)
+                findNavController().popBackStack(R.id.mainFragment, false)
             findNavController().navigateUp()
             viewModel.createOrUpdateNote(
                 etNoteTitle.text.toString(),

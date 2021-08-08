@@ -1,4 +1,4 @@
-package com.noto.app.librarylist
+package com.noto.app.main
 
 import android.content.Context
 import android.os.Bundle

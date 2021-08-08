@@ -1,4 +1,4 @@
-package com.noto.app.librarylist
+package com.noto.app.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +13,7 @@ import kotlinx.coroutines.runBlocking
 
 private const val LayoutManagerKey = "Library_List_Layout_Manager"
 
-class LibraryListViewModel(private val libraryRepository: LibraryRepository, private val storage: LocalStorage) : ViewModel() {
+class MainViewModel(private val libraryRepository: LibraryRepository, private val storage: LocalStorage) : ViewModel() {
 
     val libraries = libraryRepository.getLibraries()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())

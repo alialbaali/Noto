@@ -1,4 +1,4 @@
-package com.noto.app.librarylist
+package com.noto.app.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.noto.app.databinding.LibraryListDialogFragmentBinding
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 
-class LibraryListDialogFragment : BaseDialogFragment() {
+class MainDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryListDialogFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -27,12 +27,12 @@ class LibraryListDialogFragment : BaseDialogFragment() {
     private fun LibraryListDialogFragmentBinding.setupListeners() {
         tvChangeTheme.setOnClickListener {
             dismiss()
-            findNavController().navigate(LibraryListDialogFragmentDirections.actionLibraryListDialogFragmentToThemeDialogFragment())
+            findNavController().navigate(MainDialogFragmentDirections.actionMainDialogFragmentToThemeDialogFragment())
         }
 
         tvSettings.setOnClickListener {
             dismiss()
-            findNavController().navigate(LibraryListDialogFragmentDirections.actionLibraryListDialogFragmentToSettingsFragment())
+            findNavController().navigate(MainDialogFragmentDirections.actionMainDialogFragmentToSettingsFragment())
         }
     }
 }

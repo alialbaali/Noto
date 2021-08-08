@@ -3,7 +3,7 @@ package com.noto.app.di
 import androidx.datastore.DataStore
 import androidx.datastore.preferences.Preferences
 import androidx.datastore.preferences.createDataStore
-import com.noto.app.MainViewModel
+import com.noto.app.AppViewModel
 import com.noto.app.data.database.NotoDatabase
 import com.noto.app.data.repository.LabelRepositoryImpl
 import com.noto.app.data.repository.LibraryRepositoryImpl
@@ -17,7 +17,7 @@ import com.noto.app.domain.source.LibraryLocalDataSource
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.domain.source.NoteLocalDataSource
 import com.noto.app.label.LabelViewModel
-import com.noto.app.librarylist.LibraryListViewModel
+import com.noto.app.main.MainViewModel
 import com.noto.app.note.NoteViewModel
 import com.noto.app.notelist.NoteListViewModel
 import org.koin.android.ext.koin.androidContext
@@ -28,7 +28,7 @@ private const val DataStoreName = "Noto Data Store"
 
 val appModule = module {
 
-    viewModel { LibraryListViewModel(get(), get()) }
+    viewModel { MainViewModel(get(), get()) }
 
     viewModel { NoteListViewModel(get(), get(), get(), it.get()) }
 
@@ -36,7 +36,7 @@ val appModule = module {
 
     viewModel { LabelViewModel(get()) }
 
-    viewModel { MainViewModel(get()) }
+    viewModel { AppViewModel(get()) }
 
 }
 

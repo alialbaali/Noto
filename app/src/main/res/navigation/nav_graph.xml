@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     android:label="SignInGraph"
-    app:startDestination="@id/libraryListFragment">
+    app:startDestination="@id/mainFragment">
     <argument
         android:name="library_id"
         app:argType="long" />
@@ -35,37 +35,37 @@
             app:argType="long" />
     </dialog>
     <fragment
-        android:id="@+id/libraryListFragment"
-        android:name="com.noto.app.librarylist.LibraryListFragment"
-        android:label="LibraryListFragment">
+        android:id="@+id/mainFragment"
+        android:name="com.noto.app.main.MainFragment"
+        android:label="MainFragment">
         <action
-            android:id="@+id/action_libraryListFragment_to_libraryFragment"
+            android:id="@+id/action_mainFragment_to_libraryFragment"
             app:destination="@id/libraryFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
         <action
-            android:id="@+id/action_libraryListFragment_to_newLibraryDialogFragment"
+            android:id="@+id/action_mainFragment_to_newLibraryDialogFragment"
             app:destination="@id/newLibraryDialogFragment" />
         <action
-            android:id="@+id/action_libraryListFragment_to_themeDialogFragment"
+            android:id="@+id/action_mainFragment_to_themeDialogFragment"
             app:destination="@id/themeDialogFragment" />
         <action
-            android:id="@+id/action_libraryListFragment_to_labelListFragment"
+            android:id="@+id/action_mainFragment_to_labelListFragment"
             app:destination="@id/labelListFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
         <action
-            android:id="@+id/action_libraryListFragment_to_libraryDialogFragment"
+            android:id="@+id/action_mainFragment_to_libraryDialogFragment"
             app:destination="@id/libraryDialogFragment" />
         <action
-            android:id="@+id/action_libraryListFragment_to_libraryListDialogFragment"
-            app:destination="@id/libraryListDialogFragment" />
+            android:id="@+id/action_mainFragment_to_mainDialogFragment"
+            app:destination="@id/mainDialogFragment" />
         <action
-            android:id="@+id/action_libraryListFragment_to_noteFragment"
+            android:id="@+id/action_mainFragment_to_noteFragment"
             app:destination="@id/noteFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
@@ -105,7 +105,7 @@
     </fragment>
     <dialog
         android:id="@+id/newLibraryDialogFragment"
-        android:name="com.noto.app.librarylist.NewLibraryDialogFragment"
+        android:name="com.noto.app.main.NewLibraryDialogFragment"
         android:label="NewLibraryDialogFragment">
         <argument
             android:name="library_id"
@@ -238,14 +238,14 @@
             app:argType="com.noto.app.ConfirmationDialogFragment$ConfirmationDialogClickListener" />
     </dialog>
     <dialog
-        android:id="@+id/libraryListDialogFragment"
-        android:name="com.noto.app.librarylist.LibraryListDialogFragment"
-        android:label="LibraryListDialogFragment">
+        android:id="@+id/mainDialogFragment"
+        android:name="com.noto.app.main.MainDialogFragment"
+        android:label="MainDialogFragment">
         <action
-            android:id="@+id/action_libraryListDialogFragment_to_themeDialogFragment"
+            android:id="@+id/action_mainDialogFragment_to_themeDialogFragment"
             app:destination="@id/themeDialogFragment" />
         <action
-            android:id="@+id/action_libraryListDialogFragment_to_settingsFragment"
+            android:id="@+id/action_mainDialogFragment_to_settingsFragment"
             app:destination="@id/settingsFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"

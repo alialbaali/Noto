@@ -1,4 +1,4 @@
-package com.noto.app.librarylist
+package com.noto.app.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,23 +12,23 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
-import com.noto.app.databinding.LibraryListFragmentBinding
+import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LibraryListFragment : Fragment() {
+class MainFragment : Fragment() {
 
-    private val viewModel by viewModel<LibraryListViewModel>()
+    private val viewModel by viewModel<MainViewModel>()
 
     private val libraryItemClickListener = object : LibraryListAdapter.LibraryItemClickListener {
         override fun onClick(library: Library) = findNavController()
-            .navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryFragment(library.id))
+            .navigate(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
 
         override fun onLongClick(library: Library) = findNavController()
-            .navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryDialogFragment(library.id))
+            .navigate(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(library.id))
 
         override fun countLibraryNotes(library: Library): Int = viewModel.countNotes(library.id)
     }
@@ -36,18 +36,18 @@ class LibraryListFragment : Fragment() {
     private val adapter = LibraryListAdapter(libraryItemClickListener)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        LibraryListFragmentBinding.inflate(inflater, container, false).withBinding {
+        MainFragmentBinding.inflate(inflater, container, false).withBinding {
             setupListeners()
             setupState()
         }
 
-    private fun LibraryListFragmentBinding.setupListeners() {
+    private fun MainFragmentBinding.setupListeners() {
         fab.setOnClickListener {
-            findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToNewLibraryDialogFragment())
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToNewLibraryDialogFragment())
         }
 
         bab.setNavigationOnClickListener {
-            findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToLibraryListDialogFragment())
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToMainDialogFragment())
         }
 
         bab.setOnMenuItemClickListener { menuItem ->
@@ -59,7 +59,7 @@ class LibraryListFragment : Fragment() {
         }
     }
 
-    private fun LibraryListFragmentBinding.setupState() {
+    private fun MainFragmentBinding.setupState() {
         rv.adapter = adapter
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
         val layoutItems = listOf(tvLibrariesCount, rv)
@@ -73,7 +73,7 @@ class LibraryListFragment : Fragment() {
             .launchIn(lifecycleScope)
     }
 
-    private fun LibraryListFragmentBinding.setupLayoutManager(layoutManager: LayoutManager, layoutManagerMenuItem: MenuItem) {
+    private fun MainFragmentBinding.setupLayoutManager(layoutManager: LayoutManager, layoutManagerMenuItem: MenuItem) {
         when (layoutManager) {
             LayoutManager.Linear -> {
                 layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_grid_24)
@@ -91,7 +91,7 @@ class LibraryListFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun LibraryListFragmentBinding.setupLibraries(libraries: List<Library>, layoutItems: List<View>) {
+    private fun MainFragmentBinding.setupLibraries(libraries: List<Library>, layoutItems: List<View>) {
         if (libraries.isEmpty()) {
             layoutItems.forEach { it.visibility = View.GONE }
             tvPlaceHolder.visibility = View.VISIBLE
@@ -106,7 +106,7 @@ class LibraryListFragment : Fragment() {
         }
     }
 
-    private fun LibraryListFragmentBinding.setupLayoutMangerMenuItem(): Boolean {
+    private fun MainFragmentBinding.setupLayoutMangerMenuItem(): Boolean {
         when (viewModel.layoutManager.value) {
             LayoutManager.Linear -> {
                 viewModel.updateLayoutManager(LayoutManager.Grid)
@@ -126,8 +126,8 @@ class LibraryListFragment : Fragment() {
         return true
     }
 
-    private fun LibraryListFragmentBinding.setupThemeMenuItem(): Boolean {
-        findNavController().navigate(LibraryListFragmentDirections.actionLibraryListFragmentToThemeDialogFragment())
+    private fun MainFragmentBinding.setupThemeMenuItem(): Boolean {
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToThemeDialogFragment())
         return true
     }
 

@@ -1,4 +1,4 @@
-package com.noto.app.librarylist
+package com.noto.app.main
 
 import android.os.Build
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.R
 import com.noto.app.databinding.LibraryItemBinding
 import com.noto.app.domain.model.Library
-import com.noto.app.librarylist.LibraryListAdapter.LibraryItemViewHolder
+import com.noto.app.main.LibraryListAdapter.LibraryItemViewHolder
 import com.noto.app.util.colorResource
 import com.noto.app.util.stringResource
 import com.noto.app.util.toCountText

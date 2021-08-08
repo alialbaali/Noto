@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/SplashScreenTheme"
         tools:targetApi="m">
-        <activity android:name=".MainActivity">
+        <activity android:name=".AppActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

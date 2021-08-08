@@ -82,7 +82,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
         val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
         parentView.snackbar(resources.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
 
-        findNavController().popBackStack(R.id.libraryListFragment, false)
+        findNavController().popBackStack(R.id.mainFragment, false)
         dismiss()
 
         viewModel.notes.value

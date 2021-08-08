@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.BaseDialogFragment
-import com.noto.app.MainViewModel
+import com.noto.app.AppViewModel
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ThemeDialogFragmentBinding
@@ -20,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ThemeDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by sharedViewModel<MainViewModel>()
+    private val viewModel by sharedViewModel<AppViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

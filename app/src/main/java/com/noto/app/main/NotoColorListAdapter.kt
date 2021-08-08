@@ -1,4 +1,4 @@
-package com.noto.app.librarylist
+package com.noto.app.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
