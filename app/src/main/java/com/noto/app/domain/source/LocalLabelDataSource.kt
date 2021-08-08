@@ -3,7 +3,7 @@ package com.noto.app.domain.source
 import com.noto.app.domain.model.Label
 import kotlinx.coroutines.flow.Flow
 
-interface LabelLocalDataSource {
+interface LocalLabelDataSource {
 
     fun getLabels(): Flow<List<Label>>
 
@@ -14,5 +14,4 @@ interface LabelLocalDataSource {
     suspend fun updateLabel(label: Label)
 
     suspend fun deleteLabel(label: Label)
-
 }

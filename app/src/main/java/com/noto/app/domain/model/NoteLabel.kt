@@ -9,16 +9,15 @@ data class NoteLabel(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "noto_label_id")
-    val NoteLabelId: Long = 0,
+    val noteLabelId: Long = 0,
 
     @ColumnInfo(name = "id")
     val noteId: Long,
 
     @ColumnInfo(name = "label_id")
     val labelId: Long
-
 )
 
 fun NoteLabel.toLabel(labelTitle: String, labelColor: NotoColor) = Label(labelId, labelTitle, labelColor)
 
-fun Label.toNoteLabel(notoId: Long) = NoteLabel(labelId = labelId, noteId =  notoId)
+fun Label.toNoteLabel(notoId: Long) = NoteLabel(labelId = labelId, noteId = notoId)

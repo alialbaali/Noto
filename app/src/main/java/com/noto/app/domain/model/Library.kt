@@ -30,5 +30,4 @@ data class Library(
 
     @ColumnInfo(name = "sorting_method")
     val sortingMethod: SortingMethod = SortingMethod.Desc
-
 )

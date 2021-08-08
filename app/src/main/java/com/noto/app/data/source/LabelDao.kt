@@ -2,11 +2,11 @@ package com.noto.app.data.source
 
 import androidx.room.*
 import com.noto.app.domain.model.Label
-import com.noto.app.domain.source.LabelLocalDataSource
+import com.noto.app.domain.source.LocalLabelDataSource
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface LabelDao : LabelLocalDataSource {
+interface LabelDao : LocalLabelDataSource {
 
     @Query("SELECT * FROM labels")
     override fun getLabels(): Flow<List<Label>>
@@ -22,5 +22,4 @@ interface LabelDao : LabelLocalDataSource {
 
     @Delete
     override suspend fun deleteLabel(label: Label)
-
 }

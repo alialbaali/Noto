@@ -45,5 +45,4 @@ data class Note(
 
     @ColumnInfo(name = "reminder_date")
     val reminderDate: Instant? = null
-
 )

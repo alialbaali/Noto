@@ -1,8 +1,6 @@
 package com.noto.app.domain.repository
 
-import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.NoteWithLabels
 import kotlinx.coroutines.flow.Flow
 
 interface NoteRepository {
@@ -18,13 +16,4 @@ interface NoteRepository {
     suspend fun updateNote(note: Note)
 
     suspend fun deleteNote(note: Note)
-
-    suspend fun getNoteWithLabels(notoId: Long): Flow<Result<NoteWithLabels>>
-
-    suspend fun createNoteWithLabels(note: Note, labels: Set<Label>)
-
-    suspend fun updateNoteWithLabels(note: Note, labels: Set<Label>)
-
-    suspend fun deleteNoteWithLabels(notoId: Long)
-
 }

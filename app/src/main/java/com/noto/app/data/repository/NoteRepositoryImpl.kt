@@ -1,17 +1,13 @@
 package com.noto.app.data.repository
 
-import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.NoteWithLabels
-import com.noto.app.domain.model.toNoteLabel
 import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.NoteLocalDataSource
+import com.noto.app.domain.source.LocalNoteDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
-class NoteRepositoryImpl(private val dataSource: NoteLocalDataSource) : NoteRepository {
+class NoteRepositoryImpl(private val dataSource: LocalNoteDataSource) : NoteRepository {
 
     override fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getNotesByLibraryId(libraryId)
 
@@ -30,21 +26,4 @@ class NoteRepositoryImpl(private val dataSource: NoteLocalDataSource) : NoteRepo
     override suspend fun deleteNote(note: Note) = withContext(Dispatchers.IO) {
         dataSource.deleteNote(note)
     }
-
-    override suspend fun getNoteWithLabels(notoId: Long): Flow<Result<NoteWithLabels>> = dataSource.getNoteWithLabels(notoId).map { Result.success(it) }
-
-    override suspend fun createNoteWithLabels(note: Note, labels: Set<Label>) = withContext(Dispatchers.IO) {
-        val notoLabels = labels.map { it.toNoteLabel(note.id) }.toSet()
-        dataSource.createNoteWithLabels(note, notoLabels)
-    }
-
-    override suspend fun updateNoteWithLabels(note: Note, labels: Set<Label>) = withContext(Dispatchers.IO) {
-        val notoLabels = labels.map { it.toNoteLabel(note.id) }.toSet()
-        dataSource.updateNoteWithLabels(note, notoLabels)
-    }
-
-    override suspend fun deleteNoteWithLabels(notoId: Long) = withContext(Dispatchers.IO) {
-        dataSource.deleteNoteWithLabels(notoId)
-    }
-
 }

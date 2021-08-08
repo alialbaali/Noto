@@ -16,5 +16,4 @@ data class Label(
 
     @ColumnInfo(name = "label_noto_color")
     val labelColor: NotoColor
-
 )

@@ -22,5 +22,4 @@ class LocalStorageImpl(private val storage: DataStore<Preferences>) : LocalStora
     override suspend fun clear(): Result<Unit> = runCatching {
         storage.edit { preferences -> preferences.clear() }
     }
-
 }

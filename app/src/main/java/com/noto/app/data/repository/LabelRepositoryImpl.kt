@@ -2,12 +2,12 @@ package com.noto.app.data.repository
 
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.repository.LabelRepository
-import com.noto.app.domain.source.LabelLocalDataSource
+import com.noto.app.domain.source.LocalLabelDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-class LabelRepositoryImpl(private val dataSource: LabelLocalDataSource) : LabelRepository {
+class LabelRepositoryImpl(private val dataSource: LocalLabelDataSource) : LabelRepository {
 
     override fun getLabels(): Flow<List<Label>> = dataSource.getLabels()
 
@@ -24,5 +24,4 @@ class LabelRepositoryImpl(private val dataSource: LabelLocalDataSource) : LabelR
     override suspend fun deleteLabel(label: Label) = withContext(Dispatchers.IO) {
         dataSource.deleteLabel(label)
     }
-
 }

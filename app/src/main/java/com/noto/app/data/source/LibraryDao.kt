@@ -2,11 +2,11 @@ package com.noto.app.data.source
 
 import androidx.room.*
 import com.noto.app.domain.model.Library
-import com.noto.app.domain.source.LibraryLocalDataSource
+import com.noto.app.domain.source.LocalLibraryDataSource
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface LibraryDao : LibraryLocalDataSource {
+interface LibraryDao : LocalLibraryDataSource {
 
     @Query("SELECT * FROM libraries ORDER BY id DESC")
     override fun getLibraries(): Flow<List<Library>>
@@ -25,8 +25,4 @@ interface LibraryDao : LibraryLocalDataSource {
 
     @Query("SELECT COUNT(*) FROM notes WHERE library_id = :libraryId AND is_archived = 0")
     override suspend fun countLibraryNotes(libraryId: Long): Int
-
-    @Update
-    override suspend fun updateLibraries(libraries: List<Library>)
-
 }

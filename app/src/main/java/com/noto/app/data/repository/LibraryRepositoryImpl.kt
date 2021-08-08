@@ -2,12 +2,12 @@ package com.noto.app.data.repository
 
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.repository.LibraryRepository
-import com.noto.app.domain.source.LibraryLocalDataSource
+import com.noto.app.domain.source.LocalLibraryDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-class LibraryRepositoryImpl(private val dataSource: LibraryLocalDataSource) : LibraryRepository {
+class LibraryRepositoryImpl(private val dataSource: LocalLibraryDataSource) : LibraryRepository {
 
     override fun getLibraries(): Flow<List<Library>> = dataSource.getLibraries()
 
@@ -28,9 +28,4 @@ class LibraryRepositoryImpl(private val dataSource: LibraryLocalDataSource) : Li
     override suspend fun countLibraryNotes(libraryId: Long): Int = withContext(Dispatchers.IO) {
         dataSource.countLibraryNotes(libraryId)
     }
-
-    override suspend fun updateLibraries(libraries: List<Library>) = withContext(Dispatchers.IO) {
-        dataSource.updateLibraries(libraries)
-    }
-
 }

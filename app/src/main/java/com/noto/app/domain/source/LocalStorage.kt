@@ -11,5 +11,4 @@ interface LocalStorage {
     suspend fun remove(key: String): Result<Unit>
 
     suspend fun clear(): Result<Unit>
-
 }

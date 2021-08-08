@@ -1,11 +1,9 @@
 package com.noto.app.domain.source
 
 import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.NoteLabel
-import com.noto.app.domain.model.NoteWithLabels
 import kotlinx.coroutines.flow.Flow
 
-interface NoteLocalDataSource {
+interface LocalNoteDataSource {
 
     fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>>
 
@@ -18,13 +16,4 @@ interface NoteLocalDataSource {
     suspend fun updateNote(note: Note)
 
     suspend fun deleteNote(note: Note)
-
-    fun getNoteWithLabels(notoId: Long): Flow<NoteWithLabels>
-
-    fun createNoteWithLabels(note: Note, notoLabels: Set<NoteLabel>)
-
-    fun updateNoteWithLabels(note: Note, notoLabels: Set<NoteLabel>)
-
-    fun deleteNoteWithLabels(notoId: Long)
-
 }
