@@ -13,6 +13,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.noto.app.R
+import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.SortingMethod
@@ -33,8 +34,8 @@ inline fun <T> Iterable<T>.sortByMethod(method: SortingMethod, crossinline selec
     }
 }
 
-val Uri.validPath
-    get() = path?.substringAfterLast(':')
+val Uri.directoryPath
+    get() = path?.substringAfterLast(':')?.substringBeforeLast('/')
 
 fun Note.formatCreationDate(): String {
     val timeZone = TimeZone.currentSystemDefault()
@@ -115,12 +116,14 @@ fun <T> MutableList<T>.replaceWith(value: T, predicate: (T) -> Boolean) {
     this[indexOf(result)] = value
 }
 
-fun Context.exportNote(uri: Uri, note: Note) {
+fun Context.exportNote(uri: Uri, library: Library, note: Note): Uri? {
     val fileName = note.title.ifBlank { note.body }
-    DocumentFile.fromTreeUri(this, uri)
+    return DocumentFile.fromTreeUri(this, uri)
+        ?.let { it.findFile("Noto") ?: it.createDirectory("Noto") }
+        ?.let { it.findFile(library.title) ?: it.createDirectory(library.title) }
         ?.createFile("text/plain", fileName)
         ?.uri
-        ?.let { documentUri ->
+        ?.also { documentUri ->
             val noteContent = note.format()
             contentResolver
                 .openOutputStream(documentUri, "w")

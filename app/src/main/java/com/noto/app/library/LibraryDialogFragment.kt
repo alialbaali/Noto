@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlarmManager
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -104,12 +105,13 @@ class LibraryDialogFragment : BaseDialogFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
+                var documentUri: Uri? = Uri.EMPTY
                 viewModel.notes.value.forEach { note ->
-                    requireContext().exportNote(uri, note)
+                    documentUri = requireContext().exportNote(uri, viewModel.library.value, note)
                 }
                 val parentView = requireParentFragment().requireView()
                 val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
-                val message = resources.stringResource(R.string.library_is_exported) + " ${uri.validPath}."
+                val message = resources.stringResource(R.string.library_is_exported) + " ${documentUri?.directoryPath}."
                 parentView.snackbar(message, parentAnchorView)
                 findNavController().navigateUp()
             }

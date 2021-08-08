@@ -186,10 +186,10 @@ class NoteDialogFragment : BaseDialogFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
-                requireContext().exportNote(uri, viewModel.note.value)
+                val documentUri = requireContext().exportNote(uri, viewModel.library.value, viewModel.note.value)
                 val parentView = requireParentFragment().requireView()
                 val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
-                val message = resources.stringResource(R.string.note_is_exported) + " ${uri.validPath}."
+                val message = resources.stringResource(R.string.note_is_exported) + " ${documentUri?.directoryPath}."
                 parentView.snackbar(message, parentAnchorView)
                 findNavController().navigateUp()
             }
