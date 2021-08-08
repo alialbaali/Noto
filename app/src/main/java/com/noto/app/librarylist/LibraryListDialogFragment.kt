@@ -12,7 +12,7 @@ import com.noto.app.databinding.LibraryListDialogFragmentBinding
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 
-class MainDialogFragment : BaseDialogFragment() {
+class LibraryListDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryListDialogFragmentBinding.inflate(inflater, container, false).withBinding {
