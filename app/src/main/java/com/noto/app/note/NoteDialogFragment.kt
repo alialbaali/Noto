@@ -12,7 +12,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.TextViewCompat
-import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -187,17 +186,11 @@ class NoteDialogFragment : BaseDialogFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
-                val fileName = viewModel.note.value.title.ifBlank { viewModel.note.value.body }
-                DocumentFile.fromTreeUri(requireContext(), uri)
-                    ?.createFile("text/plain", fileName)
-                    ?.uri
-                    ?.let { documentUri ->
-                        val noteContent = viewModel.note.value.format()
-                        requireContext()
-                            .contentResolver
-                            .openOutputStream(documentUri, "w")
-                            ?.use { it.write(noteContent.toByteArray()) }
-                    }
+                requireContext().exportNote(uri, viewModel.note.value)
+                val parentView = requireParentFragment().requireView()
+                val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
+                val message = resources.stringResource(R.string.note_is_exported) + " ${uri.validPath}."
+                parentView.snackbar(message, parentAnchorView)
                 findNavController().navigateUp()
             }
         }
@@ -223,10 +216,10 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         if (note.reminderDate == null) {
             tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_notification_add_24, 0, 0, 0)
-            tvRemindMe.text = resources.stringResource(R.string.add_reminder)
+            tvRemindMe.text = resources.stringResource(R.string.add_note_reminder)
         } else {
             tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_edit_notifications_24, 0, 0, 0)
-            tvRemindMe.text = resources.stringResource(R.string.edit_reminder)
+            tvRemindMe.text = resources.stringResource(R.string.edit_note_reminder)
         }
     }
 

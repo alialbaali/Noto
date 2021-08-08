@@ -1,9 +1,12 @@
 package com.noto.app.util
 
+import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.IBinder
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,6 +32,9 @@ inline fun <T> Iterable<T>.sortByMethod(method: SortingMethod, crossinline selec
         SortingMethod.Desc -> sortedWith(compareByDescending(selector))
     }
 }
+
+val Uri.validPath
+    get() = path?.substringAfterLast(':')
 
 fun Note.formatCreationDate(): String {
     val timeZone = TimeZone.currentSystemDefault()
@@ -107,4 +113,17 @@ fun NotoColor.toResource(): Int = when (this) {
 fun <T> MutableList<T>.replaceWith(value: T, predicate: (T) -> Boolean) {
     val result = first(predicate)
     this[indexOf(result)] = value
+}
+
+fun Context.exportNote(uri: Uri, note: Note) {
+    val fileName = note.title.ifBlank { note.body }
+    DocumentFile.fromTreeUri(this, uri)
+        ?.createFile("text/plain", fileName)
+        ?.uri
+        ?.let { documentUri ->
+            val noteContent = note.format()
+            contentResolver
+                .openOutputStream(documentUri, "w")
+                ?.use { it.write(noteContent.toByteArray()) }
+        }
 }

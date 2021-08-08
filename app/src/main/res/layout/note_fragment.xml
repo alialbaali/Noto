@@ -96,7 +96,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/add_reminder"
+        android:contentDescription="@string/add_note_reminder"
         app:backgroundTint="@color/colorAccentTeal"
         app:layout_anchor="@id/bab"
         app:tint="@color/colorBackground"

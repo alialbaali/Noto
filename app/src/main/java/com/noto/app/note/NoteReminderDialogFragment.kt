@@ -111,7 +111,7 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteReminderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.new_reminder)
+        tvDialogTitle.text = resources.stringResource(R.string.new_note_reminder)
     }
 
     private fun NoteReminderDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
@@ -126,12 +126,12 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
 
     private fun NoteReminderDialogFragmentBinding.setupNote(note: Note, baseDialogFragment: BaseDialogFragmentBinding) {
         if (note.reminderDate == null) {
-            et.setText(getString(R.string.no_reminder))
+            et.setText(getString(R.string.no_note_reminder))
             til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_notification_add_24)
         } else {
             val timeZone = TimeZone.currentSystemDefault()
             til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_cancel_24)
-            baseDialogFragment.tvDialogTitle.text = resources.stringResource(R.string.edit_reminder)
+            baseDialogFragment.tvDialogTitle.text = resources.stringResource(R.string.edit_note_reminder)
             note.reminderDate
                 .toLocalDateTime(timeZone)
                 .toJavaLocalDateTime()
