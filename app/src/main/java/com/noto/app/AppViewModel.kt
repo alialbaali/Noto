@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 private const val ThemeKey = "Theme"
 
-class MainViewModel(private val storage: LocalStorage) : ViewModel() {
+class AppViewModel(private val storage: LocalStorage) : ViewModel() {
 
     val theme = storage.get(ThemeKey)
         .map { Theme.valueOf(it) }
