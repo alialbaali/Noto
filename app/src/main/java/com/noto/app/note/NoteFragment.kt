@@ -1,5 +1,6 @@
 package com.noto.app.note
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -70,6 +71,7 @@ class NoteFragment : Fragment() {
         val backCallback = {
             if (args.body != null)
                 findNavController().popBackStack(R.id.mainFragment, false)
+
             findNavController().navigateUp()
             viewModel.createOrUpdateNote(
                 etNoteTitle.text.toString(),
@@ -124,6 +126,7 @@ class NoteFragment : Fragment() {
         tb.title = library.title
         tb.setTitleTextColor(color)
         tvCreatedAt.setTextColor(color)
+        tvWordCount.setTextColor(color)
         tb.navigationIcon?.mutate()?.setTint(color)
         fab.backgroundTintList = resources.colorStateResource(library.color.toResource())
         bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
@@ -134,12 +137,18 @@ class NoteFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun NoteFragmentBinding.setupNote(note: Note, archiveMenuItem: MenuItem) {
         etNoteTitle.setText(note.title)
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
-        tvCreatedAt.text = "${getString(R.string.created)} ${note.formatCreationDate()}"
+        tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
+        tvWordCount.text = if (note.body.isBlank())
+            "0 ${resources.stringResource(R.string.words)}"
+        else note.body.split("\\s+".toRegex())
+            .size
+            .toCountText(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
 
         if (note.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
         else archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_archive_24)

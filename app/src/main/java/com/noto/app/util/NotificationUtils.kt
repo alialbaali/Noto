@@ -7,7 +7,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
 import com.noto.app.R
@@ -30,7 +29,8 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
         .setContentIntent(pendingIntent)
         .setSubText(library.title)
         .setStyle(style)
-        .setColor(ResourcesCompat.getColor(context.resources, library.color.toResource(), null))
+        .setColor(context.resources.colorResource(library.color.toResource()))
+        .setColorized(true)
         .setCategory(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Notification.CATEGORY_REMINDER else null)
         .setSmallIcon(R.mipmap.ic_launcher_round)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
@@ -41,8 +41,6 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
 
     notify(library.title, note.id.toInt(), notification)
 }
-
-fun Int.toCountText(single: String, plural: String) = if (this == 1) "$this ${single.lowercase()}" else "$this ${plural.lowercase()}"
 
 private fun Context.createNotificationPendingIntent(noteId: Long, libraryId: Long): PendingIntent {
     val args = bundleOf("library_id" to libraryId, "note_id" to noteId)

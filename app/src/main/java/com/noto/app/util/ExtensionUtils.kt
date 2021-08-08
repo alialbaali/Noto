@@ -96,6 +96,8 @@ fun View.snackbar(message: String, anchorView: View? = null) = Snackbar.make(thi
 
 fun Note.isValid(): Boolean = !(title.isBlank() && body.isBlank())
 
+fun Int.toCountText(single: String, plural: String) = if (this == 1) "$this ${single.lowercase()}" else "$this ${plural.lowercase()}"
+
 fun NotoColor.toResource(): Int = when (this) {
     NotoColor.Blue -> R.color.colorAccentBlue
     NotoColor.Gray -> R.color.colorAccentGray
