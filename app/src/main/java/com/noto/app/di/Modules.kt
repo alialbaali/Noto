@@ -19,7 +19,7 @@ import com.noto.app.domain.source.NoteLocalDataSource
 import com.noto.app.label.LabelViewModel
 import com.noto.app.main.MainViewModel
 import com.noto.app.note.NoteViewModel
-import com.noto.app.notelist.NoteListViewModel
+import com.noto.app.library.NoteListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module

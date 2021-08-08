@@ -1,4 +1,4 @@
-package com.noto.app.notelist
+package com.noto.app.library
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
-import com.noto.app.databinding.NoteListArchiveFragmentBinding
+import com.noto.app.databinding.LibraryArchiveFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
@@ -20,24 +20,24 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class NoteListArchiveFragment : Fragment() {
+class LibraryArchiveFragment : Fragment() {
 
     private val viewModel by viewModel<NoteListViewModel> { parametersOf(args.libraryId) }
 
-    private val args by navArgs<NoteListArchiveFragmentArgs>()
+    private val args by navArgs<LibraryArchiveFragmentArgs>()
 
     private val noteItemClickListener by lazy {
         object : NoteListAdapter.NoteItemClickListener {
             override fun onClick(note: Note) = findNavController()
-                .navigate(NoteListArchiveFragmentDirections.actionArchiveFragmentToNotoFragment(args.libraryId, note.id))
+                .navigate(LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(args.libraryId, note.id))
 
             override fun onLongClick(note: Note) =
                 findNavController()
                     .navigate(
-                        NoteListArchiveFragmentDirections.actionArchiveFragmentToNotoDialogFragment(
+                        LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
                             args.libraryId,
                             note.id,
-                            R.id.archiveFragment
+                            R.id.libraryArchiveFragment
                         )
                     )
         }
@@ -46,24 +46,24 @@ class NoteListArchiveFragment : Fragment() {
     private val adapter = NoteListAdapter(noteItemClickListener)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        NoteListArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
+        LibraryArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
             setupListeners()
             setupRV()
             setupState()
         }
 
-    private fun NoteListArchiveFragmentBinding.setupListeners() {
+    private fun LibraryArchiveFragmentBinding.setupListeners() {
         tb.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
     }
 
-    private fun NoteListArchiveFragmentBinding.setupRV() {
+    private fun LibraryArchiveFragmentBinding.setupRV() {
         rv.adapter = adapter
         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
-    private fun NoteListArchiveFragmentBinding.setupState() {
+    private fun LibraryArchiveFragmentBinding.setupState() {
         val layoutItems = listOf(tvLibraryNotesCount, rv)
 
         viewModel.archivedNotes
@@ -79,12 +79,12 @@ class NoteListArchiveFragment : Fragment() {
             .launchIn(lifecycleScope)
     }
 
-    private fun NoteListArchiveFragmentBinding.setupLayoutManger(layoutManager: LayoutManager) = when (layoutManager) {
+    private fun LibraryArchiveFragmentBinding.setupLayoutManger(layoutManager: LayoutManager) = when (layoutManager) {
         LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
     }
 
-    private fun NoteListArchiveFragmentBinding.setupLibrary(library: Library) {
+    private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library) {
         val color = resources.colorResource(library.color.toResource())
         tb.navigationIcon?.mutate()?.setTint(color)
         tvLibraryNotesCount.setTextColor(color)
@@ -92,7 +92,7 @@ class NoteListArchiveFragment : Fragment() {
         tb.setTitleTextColor(color)
     }
 
-    private fun NoteListArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Note>, layoutItems: List<View>) {
+    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Note>, layoutItems: List<View>) {
         if (archivedNotes.isEmpty()) {
             layoutItems.forEach { it.visibility = View.GONE }
             tvPlaceHolder.visibility = View.VISIBLE

@@ -24,7 +24,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
-import com.noto.app.notelist.SelectLibraryDialogFragment
+import com.noto.app.library.SelectLibraryDialogFragment
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -85,7 +85,12 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvRemindMe.setOnClickListener {
             dismiss()
-            findNavController().navigate(NoteDialogFragmentDirections.actionNotoDialogFragmentToNoteReminderDialogFragment(args.libraryId, args.noteId))
+            findNavController().navigate(
+                NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReminderDialogFragment(
+                    args.libraryId,
+                    args.noteId
+                )
+            )
         }
 
         tvOpenInReadingMode.setOnClickListener {
@@ -169,7 +174,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             }
 
             findNavController().navigate(
-                NoteDialogFragmentDirections.actionNotoDialogFragmentToConfirmationDialogFragment(
+                NoteDialogFragmentDirections.actionNoteDialogFragmentToConfirmationDialogFragment(
                     title,
                     null,
                     btnText,

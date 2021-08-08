@@ -1,4 +1,4 @@
-package com.noto.app.notelist
+package com.noto.app.library
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

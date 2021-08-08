@@ -1,4 +1,4 @@
-package com.noto.app.notelist
+package com.noto.app.library
 
 import android.content.Context
 import android.os.Build
@@ -21,7 +21,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
-import com.noto.app.databinding.NoteListFragmentBinding
+import com.noto.app.databinding.LibraryFragmentBinding
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
@@ -31,19 +31,19 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class NoteListFragment : Fragment() {
+class LibraryFragment : Fragment() {
 
     private val viewModel by viewModel<NoteListViewModel> { parametersOf(args.libraryId) }
 
-    private val args by navArgs<NoteListFragmentArgs>()
+    private val args by navArgs<LibraryFragmentArgs>()
 
     private val noteItemClickListener by lazy {
         object : NoteListAdapter.NoteItemClickListener {
             override fun onClick(note: Note) = findNavController()
-                .navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoFragment(note.libraryId, note.id))
+                .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(note.libraryId, note.id))
 
             override fun onLongClick(note: Note) = findNavController()
-                .navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoDialogFragment(note.libraryId, note.id, R.id.libraryFragment))
+                .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(note.libraryId, note.id, R.id.libraryFragment))
         }
     }
 
@@ -52,12 +52,12 @@ class NoteListFragment : Fragment() {
     private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        NoteListFragmentBinding.inflate(inflater, container, false).withBinding {
+        LibraryFragmentBinding.inflate(inflater, container, false).withBinding {
             setupState()
             setupListeners()
         }
 
-    private fun NoteListFragmentBinding.setupState() {
+    private fun LibraryFragmentBinding.setupState() {
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
         val layoutItems = listOf(tvLibraryNotesCount, rv)
         rv.adapter = adapter
@@ -79,17 +79,17 @@ class NoteListFragment : Fragment() {
             .launchIn(lifecycleScope)
     }
 
-    private fun NoteListFragmentBinding.setupListeners() {
+    private fun LibraryFragmentBinding.setupListeners() {
 
         fab.setOnClickListener {
-            findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToNotoFragment(args.libraryId))
+            findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(args.libraryId))
         }
         tb.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
 
         bab.setNavigationOnClickListener {
-            findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
+            findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
         }
 
         bab.setOnMenuItemClickListener { menuItem ->
@@ -106,7 +106,7 @@ class NoteListFragment : Fragment() {
         }
     }
 
-    private fun NoteListFragmentBinding.enableSearch() {
+    private fun LibraryFragmentBinding.enableSearch() {
         val rvAnimation = TranslateAnimation(0F, 0F, -50F, 0F).apply {
             duration = 250
         }
@@ -121,7 +121,7 @@ class NoteListFragment : Fragment() {
             }
     }
 
-    private fun NoteListFragmentBinding.disableSearch() {
+    private fun LibraryFragmentBinding.disableSearch() {
         val rvAnimation = TranslateAnimation(0F, 0F, 50F, 0F).apply {
             duration = 250
         }
@@ -130,7 +130,7 @@ class NoteListFragment : Fragment() {
         imm.hideKeyboard(etSearch.windowToken)
     }
 
-    private fun NoteListFragmentBinding.setupLayoutManager(layoutManager: LayoutManager, layoutManagerMenuItem: MenuItem) {
+    private fun LibraryFragmentBinding.setupLayoutManager(layoutManager: LayoutManager, layoutManagerMenuItem: MenuItem) {
         val color = viewModel.library.value.color.toResource()
         val resource = resources.colorResource(color)
         when (layoutManager) {
@@ -152,7 +152,7 @@ class NoteListFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun NoteListFragmentBinding.setupNotes(notes: List<Note>, layoutItems: List<View>) {
+    private fun LibraryFragmentBinding.setupNotes(notes: List<Note>, layoutItems: List<View>) {
         tvLibraryNotesCount.text = notes.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
         if (notes.isEmpty()) {
             if (tilSearch.isVisible)
@@ -166,12 +166,12 @@ class NoteListFragment : Fragment() {
         }
     }
 
-    private fun NoteListFragmentBinding.setupArchivedNotesMenuItem(): Boolean {
-        findNavController().navigate(NoteListFragmentDirections.actionLibraryFragmentToArchiveFragment(args.libraryId))
+    private fun LibraryFragmentBinding.setupArchivedNotesMenuItem(): Boolean {
+        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToLibraryArchiveFragment(args.libraryId))
         return true
     }
 
-    private fun NoteListFragmentBinding.setupLayoutManagerMenuItem(): Boolean {
+    private fun LibraryFragmentBinding.setupLayoutManagerMenuItem(): Boolean {
         when (viewModel.layoutManager.value) {
             LayoutManager.Linear -> {
                 viewModel.updateLayoutManager(LayoutManager.Grid)
@@ -185,7 +185,7 @@ class NoteListFragment : Fragment() {
         return true
     }
 
-    private fun NoteListFragmentBinding.setupSearchMenuItem(): Boolean {
+    private fun LibraryFragmentBinding.setupSearchMenuItem(): Boolean {
         val searchEt = tilSearch
         searchEt.isVisible = !searchEt.isVisible
         if (searchEt.isVisible)
@@ -195,7 +195,7 @@ class NoteListFragment : Fragment() {
         return true
     }
 
-    private fun NoteListFragmentBinding.setupLibraryColors(notoColor: NotoColor) {
+    private fun LibraryFragmentBinding.setupLibraryColors(notoColor: NotoColor) {
 
         val color = resources.colorResource(notoColor.toResource())
         val colorStateList = resources.colorStateResource(notoColor.toResource())

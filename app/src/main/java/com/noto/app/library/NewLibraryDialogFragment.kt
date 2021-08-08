@@ -1,4 +1,4 @@
-package com.noto.app.main
+package com.noto.app.library
 
 import android.content.Context
 import android.os.Bundle
@@ -14,7 +14,6 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
 import com.noto.app.domain.model.Library
-import com.noto.app.notelist.NoteListViewModel
 import com.noto.app.util.hideKeyboard
 import com.noto.app.util.showKeyboard
 import com.noto.app.util.stringResource

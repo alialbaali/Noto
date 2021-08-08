@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.Theme
-import com.noto.app.notelist.SelectLibraryDialogFragment
+import com.noto.app.library.SelectLibraryDialogFragment
 import com.noto.app.util.createNotificationChannel
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn

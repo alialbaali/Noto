@@ -1,4 +1,4 @@
-package com.noto.app.notelist
+package com.noto.app.library
 
 import android.app.AlarmManager
 import android.content.Context

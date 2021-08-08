@@ -1,6 +1,6 @@
 package com.noto.app.libraryList
 
-import com.noto.app.librarylist.LibraryListViewModel
+import com.noto.app.main.MainViewModel
 import com.noto.app.repository.fake.FakeLibraryRepository
 import com.noto.app.domain.repository.LibraryRepository
 import org.koin.android.viewmodel.dsl.viewModel
@@ -12,7 +12,7 @@ val libraryListModule = module {
 
 //    single<SharedPreferences> { mockkClass(SharedPreferences::class) }
 
-    viewModel { LibraryListViewModel(get(), get()) }
+    viewModel { MainViewModel(get(), get()) }
 
 }
 

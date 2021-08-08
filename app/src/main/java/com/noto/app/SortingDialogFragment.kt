@@ -12,7 +12,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.SortingDialogFragmentBinding
 import com.noto.app.domain.model.SortingMethod
 import com.noto.app.domain.model.SortingType
-import com.noto.app.notelist.NoteListViewModel
+import com.noto.app.library.NoteListViewModel
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
