@@ -99,10 +99,7 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
 
     private fun NoteReminderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         viewModel.note
-            .onEach { note ->
-                setupNote(note, baseDialogFragment)
-                til.endIconDrawable?.setTint(resources.colorResource(viewModel.library.value.color.toResource()))
-            }
+            .onEach { note -> setupNote(note, baseDialogFragment) }
             .launchIn(lifecycleScope)
 
         viewModel.library
@@ -115,19 +112,17 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteReminderDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
-        val colorStateList = resources.colorStateResource(library.color.toResource())
         val color = resources.colorResource(library.color.toResource())
-        baseDialogFragment.vHead.backgroundTintList = colorStateList
+        baseDialogFragment.vHead.background.setTint(color)
         baseDialogFragment.tvDialogTitle.setTextColor(color)
         til.boxStrokeColor = color
-        et.setTextColor(color)
-        til.endIconDrawable?.setTint(color)
     }
 
     private fun NoteReminderDialogFragmentBinding.setupNote(note: Note, baseDialogFragment: BaseDialogFragmentBinding) {
         if (note.reminderDate == null) {
             et.setText(getString(R.string.no_note_reminder))
             til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_notification_add_24)
+            baseDialogFragment.tvDialogTitle.text = resources.stringResource(R.string.new_note_reminder)
         } else {
             val timeZone = TimeZone.currentSystemDefault()
             til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_cancel_24)

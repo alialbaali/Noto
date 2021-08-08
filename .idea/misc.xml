@@ -147,6 +147,7 @@
         <entry key="app/src/main/res/layout/note_list_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/note_read_mode_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_reading_mode_fragment.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/note_reminder_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/noto_color_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/rb_shape.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/read_mode_fragment.xml" value="0.3421875" />

@@ -14,10 +14,7 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
 import com.noto.app.domain.model.Library
-import com.noto.app.util.hideKeyboard
-import com.noto.app.util.showKeyboard
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,8 +36,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NewLibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-            setupBaseDialogFragment()
-            setupState()
+            val baseDialogFragment = setupBaseDialogFragment()
+            setupState(baseDialogFragment)
             setupListeners()
             setupRV()
         }
@@ -59,12 +56,12 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
     }
 
-    private fun NewLibraryDialogFragmentBinding.setupState() {
+    private fun NewLibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         et.requestFocus()
         imm.showKeyboard()
 
         viewModel.library
-            .onEach { library -> setupLibrary(library) }
+            .onEach { library -> setupLibrary(library, baseDialogFragment) }
             .launchIn(lifecycleScope)
 
         viewModel.notoColors
@@ -85,10 +82,13 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun NewLibraryDialogFragmentBinding.setupLibrary(library: Library) {
+    private fun NewLibraryDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
         et.setText(library.title)
         et.setSelection(library.title.length)
         rv.smoothScrollToPosition(library.color.ordinal)
+        val color = resources.colorResource(library.color.toResource())
+        baseDialogFragment.tvDialogTitle.setTextColor(color)
+        baseDialogFragment.vHead.background.setTint(color)
     }
 
 }
