@@ -162,7 +162,7 @@
 
     <style name="NoteTitleEditText" parent="Widget.AppCompat.EditText">
         <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:textSize">@dimen/size_normal</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:textColorHint">@color/colorOnSecondary</item>
         <item name="android:background">@android:color/transparent</item>
@@ -187,7 +187,7 @@
 
     <style name="NoteBodyTextView" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_semibold</item>
-        <item name="android:textSize">@dimen/size_extra_small</item>
+        <item name="android:textSize">@dimen/size_tiny</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:maxLines">5</item>
