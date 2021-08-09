@@ -3,25 +3,29 @@ package com.noto.app.data.repository
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.source.LocalLabelDataSource
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
-class LabelRepositoryImpl(private val dataSource: LocalLabelDataSource) : LabelRepository {
+class LabelRepositoryImpl(
+    private val dataSource: LocalLabelDataSource,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+) : LabelRepository {
 
     override fun getLabels(): Flow<List<Label>> = dataSource.getLabels()
 
     override fun getLabel(labelId: Long): Flow<Label> = dataSource.getLabel(labelId)
 
-    override suspend fun createLabel(label: Label) = withContext(Dispatchers.IO) {
+    override suspend fun createLabel(label: Label) = withContext(dispatcher) {
         dataSource.createLabel(label.copy(labelTitle = label.labelTitle.trim()))
     }
 
-    override suspend fun updateLabel(label: Label) = withContext(Dispatchers.IO) {
+    override suspend fun updateLabel(label: Label) = withContext(dispatcher) {
         dataSource.updateLabel(label.copy(labelTitle = label.labelTitle.trim()))
     }
 
-    override suspend fun deleteLabel(label: Label) = withContext(Dispatchers.IO) {
+    override suspend fun deleteLabel(label: Label) = withContext(dispatcher) {
         dataSource.deleteLabel(label)
     }
 }
