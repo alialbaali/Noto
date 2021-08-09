@@ -59,6 +59,11 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    testOptions {
+        unitTests.all {
+            it.useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
@@ -88,14 +93,11 @@ dependencies {
     implementation(Libraries.Main.DataStore)
     implementation(Libraries.Main.Koin)
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.21")
     testImplementation(KotlinX.coroutines.test)
-//    testImplementation(Libraries.Testing.KoinTest)
-    testImplementation(Testing.Kotest.Runner.junit4)
-//    testImplementation(Testing.Kotest.core)
-    testImplementation(Testing.junit4)
-    testImplementation(Testing.Kotest.property)
-    testImplementation(Testing.Kotest.assertions.core)
-//    testImplementation(Testing.Kotest.Extensions.koin)
+    testImplementation("io.kotest:kotest-runner-junit5:4.6.1")
+    testImplementation("io.kotest:kotest-assertions-core:4.6.1")
+    testImplementation(Libraries.Testing.KoinTest)
     coreLibraryDesugaring(Libraries.Main.JavaTime)
 }
 

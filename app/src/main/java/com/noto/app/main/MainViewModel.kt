@@ -3,6 +3,7 @@ package com.noto.app.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.LayoutManager
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,7 +14,11 @@ import kotlinx.coroutines.runBlocking
 
 private const val LayoutManagerKey = "Library_List_Layout_Manager"
 
-class MainViewModel(private val libraryRepository: LibraryRepository, private val storage: LocalStorage) : ViewModel() {
+class MainViewModel(
+    private val libraryRepository: LibraryRepository,
+    private val noteRepository: NoteRepository,
+    private val storage: LocalStorage,
+) : ViewModel() {
 
     val libraries = libraryRepository.getLibraries()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
@@ -23,7 +28,7 @@ class MainViewModel(private val libraryRepository: LibraryRepository, private va
         .stateIn(viewModelScope, SharingStarted.Lazily, LayoutManager.Grid)
 
     fun countNotes(libraryId: Long): Int = runBlocking {
-        libraryRepository.countLibraryNotes(libraryId)
+        noteRepository.countLibraryNotes(libraryId)
     }
 
     fun updateLayoutManager(value: LayoutManager) = viewModelScope.launch {

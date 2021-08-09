@@ -28,7 +28,7 @@ private const val DataStoreName = "Noto Data Store"
 
 val appModule = module {
 
-    viewModel { MainViewModel(get(), get()) }
+    viewModel { MainViewModel(get(), get(), get()) }
 
     viewModel { NoteListViewModel(get(), get(), get(), it.get()) }
 

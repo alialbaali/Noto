@@ -12,7 +12,7 @@ object Libraries {
     }
 
     object Testing {
-        const val KoinTest = "org.koin:koin-test:${Versions.Koin}"
+        const val KoinTest = "io.insert-koin:koin-test:${Versions.Koin}"
     }
 }
 

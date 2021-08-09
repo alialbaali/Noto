@@ -9,11 +9,13 @@ interface NoteRepository {
 
     fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>>
 
-    fun getNoteById(notoId: Long): Flow<Note>
+    fun getNoteById(noteId: Long): Flow<Note>
 
     suspend fun createNote(note: Note)
 
     suspend fun updateNote(note: Note)
 
     suspend fun deleteNote(note: Note)
+
+    suspend fun countLibraryNotes(libraryId: Long): Int
 }

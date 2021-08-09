@@ -13,7 +13,7 @@ class NoteRepositoryImpl(private val dataSource: LocalNoteDataSource) : NoteRepo
 
     override fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getArchivedNotesByLibraryId(libraryId)
 
-    override fun getNoteById(notoId: Long): Flow<Note> = dataSource.getNoteById(notoId)
+    override fun getNoteById(noteId: Long): Flow<Note> = dataSource.getNoteById(noteId)
 
     override suspend fun createNote(note: Note) = withContext(Dispatchers.IO) {
         dataSource.createNote(note.copy(title = note.title, body = note.body))
@@ -25,5 +25,9 @@ class NoteRepositoryImpl(private val dataSource: LocalNoteDataSource) : NoteRepo
 
     override suspend fun deleteNote(note: Note) = withContext(Dispatchers.IO) {
         dataSource.deleteNote(note)
+    }
+
+    override suspend fun countLibraryNotes(libraryId: Long): Int = withContext(Dispatchers.IO) {
+        dataSource.countLibraryNotes(libraryId)
     }
 }
