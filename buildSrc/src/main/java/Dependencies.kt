@@ -13,6 +13,7 @@ object Libraries {
 
     object Testing {
         const val KoinTest = "io.insert-koin:koin-test:${Versions.Koin}"
+        const val KoinTestJunit = "io.insert-koin:koin-test-junit4:${Versions.Koin}"
     }
 }
 

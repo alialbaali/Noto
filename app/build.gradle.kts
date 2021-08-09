@@ -60,9 +60,16 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     testOptions {
+        unitTests.isReturnDefaultValues = true
         unitTests.all {
             it.useJUnitPlatform()
         }
+    }
+    packagingOptions {
+        resources.excludes.add("META-INF/AL2.0")
+        resources.excludes.add("META-INF/LGPL2.1")
+        resources.excludes.add("META-INF/LICENSE.md")
+        resources.excludes.add("META-INF/LICENSE-notice.md")
     }
 }
 
@@ -94,10 +101,37 @@ dependencies {
     implementation(Libraries.Main.Koin)
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.21")
-    testImplementation(KotlinX.coroutines.test)
-    testImplementation("io.kotest:kotest-runner-junit5:4.6.1")
-    testImplementation("io.kotest:kotest-assertions-core:4.6.1")
+
+    testImplementation(Testing.Kotest.Runner.junit5)
+    testImplementation(Testing.Kotest.Assertions.core)
+
     testImplementation(Libraries.Testing.KoinTest)
+    testImplementation(Testing.junit4)
+    testImplementation(Testing.robolectric)
+
+    testImplementation(AndroidX.Test.coreKtx)
+    testImplementation(AndroidX.Test.runner)
+    testImplementation(AndroidX.Test.rules)
+    testImplementation(AndroidX.Test.Ext.junitKtx)
+    testImplementation(AndroidX.ArchCore.testing)
+    testImplementation(AndroidX.Test.Espresso.core)
+    testImplementation(KotlinX.coroutines.test)
+
+    androidTestImplementation(KotlinX.coroutines.test)
+    androidTestImplementation(Kotlin.Test.junit)
+    androidTestImplementation(Kotlin.Test.common)
+    androidTestImplementation(Kotlin.Test.testng)
+
+    androidTestImplementation(Testing.junit4)
+    androidTestImplementation(Testing.robolectric)
+
+    androidTestImplementation(AndroidX.Test.coreKtx)
+    androidTestImplementation(AndroidX.Test.runner)
+    androidTestImplementation(AndroidX.Test.rules)
+    androidTestImplementation(AndroidX.Test.Ext.junitKtx)
+    androidTestImplementation(AndroidX.ArchCore.testing)
+    androidTestImplementation(AndroidX.Test.Espresso.core)
+
     coreLibraryDesugaring(Libraries.Main.JavaTime)
 }
 
