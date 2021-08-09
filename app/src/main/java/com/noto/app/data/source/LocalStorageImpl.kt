@@ -11,15 +11,16 @@ class LocalStorageImpl(private val storage: DataStore<Preferences>) : LocalStora
     override fun get(key: String): Flow<String> = storage.data
         .mapNotNull { preferences -> preferences[preferencesKey(key)] }
 
-    override suspend fun put(key: String, value: String): Result<Unit> = runCatching {
+    override suspend fun put(key: String, value: String) {
         storage.edit { preferences -> preferences[preferencesKey(key)] = value }
     }
 
-    override suspend fun remove(key: String): Result<Unit> = runCatching {
+    override suspend fun remove(key: String) {
         storage.edit { preferences -> preferences.remove(preferencesKey(key)) }
     }
 
-    override suspend fun clear(): Result<Unit> = runCatching {
+
+    override suspend fun clear() {
         storage.edit { preferences -> preferences.clear() }
     }
 }

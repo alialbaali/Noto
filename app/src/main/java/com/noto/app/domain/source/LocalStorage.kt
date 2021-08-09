@@ -6,9 +6,9 @@ interface LocalStorage {
 
     fun get(key: String): Flow<String>
 
-    suspend fun put(key: String, value: String): Result<Unit>
+    suspend fun put(key: String, value: String)
 
-    suspend fun remove(key: String): Result<Unit>
+    suspend fun remove(key: String)
 
-    suspend fun clear(): Result<Unit>
+    suspend fun clear()
 }
