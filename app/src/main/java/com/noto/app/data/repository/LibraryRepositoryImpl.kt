@@ -18,11 +18,11 @@ class LibraryRepositoryImpl(
     override fun getLibraryById(libraryId: Long): Flow<Library> = dataSource.getLibrary(libraryId)
 
     override suspend fun createLibrary(library: Library) = withContext(dispatcher) {
-        dataSource.createLibrary(library.copy(title = library.title))
+        dataSource.createLibrary(library)
     }
 
     override suspend fun updateLibrary(library: Library) = withContext(dispatcher) {
-        dataSource.updateLibrary(library.copy(title = library.title))
+        dataSource.updateLibrary(library)
     }
 
     override suspend fun deleteLibrary(library: Library) = withContext(dispatcher) {
