@@ -33,7 +33,7 @@ import org.koin.core.parameter.parametersOf
 
 class LibraryFragment : Fragment() {
 
-    private val viewModel by viewModel<NoteListViewModel> { parametersOf(args.libraryId) }
+    private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<LibraryFragmentArgs>()
 

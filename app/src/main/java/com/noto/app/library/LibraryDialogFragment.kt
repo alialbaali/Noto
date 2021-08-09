@@ -30,7 +30,7 @@ private const val SelectDirectoryRequestCode = 1
 
 class LibraryDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by viewModel<NoteListViewModel> { parametersOf(args.libraryId) }
+    private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<LibraryDialogFragmentArgs>()
 

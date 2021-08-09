@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 private const val LayoutManagerKey = "Library_Layout_Manager"
 
-class NoteListViewModel(
+class LibraryViewModel(
     private val libraryRepository: LibraryRepository,
     private val noteRepository: NoteRepository,
     private val storage: LocalStorage,

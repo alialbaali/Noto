@@ -12,7 +12,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.SortingDialogFragmentBinding
 import com.noto.app.domain.model.SortingMethod
 import com.noto.app.domain.model.SortingType
-import com.noto.app.library.NoteListViewModel
+import com.noto.app.library.LibraryViewModel
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -23,7 +23,7 @@ private const val RIGHT_DRAWABLE_INDEX = 2
 
 class SortingDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by viewModel<NoteListViewModel> { parametersOf(args.libraryId) }
+    private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<SortingDialogFragmentArgs>()
 
