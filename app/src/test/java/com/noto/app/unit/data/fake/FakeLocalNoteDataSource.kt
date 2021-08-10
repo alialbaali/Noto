@@ -32,7 +32,9 @@ class FakeLocalNoteDataSource : LocalNoteDataSource {
         notes.value.remove(note)
     }
 
-    override suspend fun countLibraryNotes(libraryId: Long): Int = notes
+    override suspend fun countNotesByLibraryId(libraryId: Long): Int = notes
         .map { it.count { it.libraryId == libraryId && !it.isArchived } }
         .first()
+
+    override suspend fun clearNotes() = notes.value.clear()
 }

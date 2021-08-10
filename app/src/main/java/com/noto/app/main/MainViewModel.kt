@@ -28,7 +28,7 @@ class MainViewModel(
         .stateIn(viewModelScope, SharingStarted.Lazily, LayoutManager.Grid)
 
     fun countNotes(libraryId: Long): Int = runBlocking {
-        noteRepository.countLibraryNotes(libraryId)
+        noteRepository.countNotesByLibraryId(libraryId)
     }
 
     fun updateLayoutManager(value: LayoutManager) = viewModelScope.launch {

@@ -14,4 +14,6 @@ interface LibraryRepository {
     suspend fun updateLibrary(library: Library)
 
     suspend fun deleteLibrary(library: Library)
+
+    suspend fun clearLibraries()
 }

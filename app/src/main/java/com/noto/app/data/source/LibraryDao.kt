@@ -12,7 +12,7 @@ interface LibraryDao : LocalLibraryDataSource {
     override fun getLibraries(): Flow<List<Library>>
 
     @Query("SELECT * FROM libraries WHERE id = :libraryId")
-    override fun getLibrary(libraryId: Long): Flow<Library>
+    override fun getLibraryById(libraryId: Long): Flow<Library>
 
     @Insert
     override suspend fun createLibrary(library: Library)
@@ -22,4 +22,7 @@ interface LibraryDao : LocalLibraryDataSource {
 
     @Delete
     override suspend fun deleteLibrary(library: Library)
+
+    @Query("DELETE FROM libraries")
+    override suspend fun clearLibraries()
 }

@@ -31,7 +31,9 @@ class NoteRepositoryImpl(
         dataSource.deleteNote(note)
     }
 
-    override suspend fun countLibraryNotes(libraryId: Long): Int = withContext(dispatcher) {
-        dataSource.countLibraryNotes(libraryId)
+    override suspend fun countNotesByLibraryId(libraryId: Long): Int = withContext(dispatcher) {
+        dataSource.countNotesByLibraryId(libraryId)
     }
+
+    override suspend fun clearNotes() = dataSource.clearNotes()
 }

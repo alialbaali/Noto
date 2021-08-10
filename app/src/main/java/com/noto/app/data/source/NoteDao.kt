@@ -27,5 +27,8 @@ interface NoteDao : LocalNoteDataSource {
     override suspend fun deleteNote(note: Note)
 
     @Query("SELECT COUNT(*) FROM notes WHERE library_id = :libraryId AND is_archived = 0")
-    override suspend fun countLibraryNotes(libraryId: Long): Int
+    override suspend fun countNotesByLibraryId(libraryId: Long): Int
+
+    @Query("DELETE FROM notes")
+    override suspend fun clearNotes()
 }

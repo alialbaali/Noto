@@ -19,7 +19,6 @@ class LocalStorageImpl(private val storage: DataStore<Preferences>) : LocalStora
         storage.edit { preferences -> preferences.remove(preferencesKey(key)) }
     }
 
-
     override suspend fun clear() {
         storage.edit { preferences -> preferences.clear() }
     }

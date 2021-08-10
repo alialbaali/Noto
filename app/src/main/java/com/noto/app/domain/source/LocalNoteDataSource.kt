@@ -17,5 +17,7 @@ interface LocalNoteDataSource {
 
     suspend fun deleteNote(note: Note)
 
-    suspend fun countLibraryNotes(libraryId: Long): Int
+    suspend fun countNotesByLibraryId(libraryId: Long): Int
+
+    suspend fun clearNotes()
 }

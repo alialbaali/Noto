@@ -125,7 +125,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
                 val note = Note(id = it.toLong(), libraryId = 1, title = "Title $it", "Body $it", position = 0)
                 repository.createNote(note)
             }
-            repository.countLibraryNotes(libraryId = 1) shouldBeExactly 5
+            repository.countNotesByLibraryId(libraryId = 1) shouldBeExactly 5
         }
     }
 }

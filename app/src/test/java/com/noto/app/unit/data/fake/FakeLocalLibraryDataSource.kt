@@ -11,7 +11,7 @@ class FakeLocalLibraryDataSource : LocalLibraryDataSource {
 
     override fun getLibraries(): Flow<List<Library>> = libraries
 
-    override fun getLibrary(libraryId: Long): Flow<Library> = libraries
+    override fun getLibraryById(libraryId: Long): Flow<Library> = libraries
         .map { it.first { it.id == libraryId } }
 
     override suspend fun createLibrary(library: Library) {
@@ -26,4 +26,6 @@ class FakeLocalLibraryDataSource : LocalLibraryDataSource {
     override suspend fun deleteLibrary(library: Library) {
         libraries.value.remove(library)
     }
+
+    override suspend fun clearLibraries() = libraries.value.clear()
 }
