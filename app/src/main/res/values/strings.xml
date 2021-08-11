@@ -10,6 +10,7 @@
     <string name="search">Search</string>
     <string name="repeat">Repeat</string>
     <string name="more">More</string>
+    <string name="back">Back</string>
     <string name="share_to">Share to</string>
     <string name="share">Share</string>
     <string name="copy_to">Copy to</string>
@@ -68,7 +69,7 @@
     <string name="notes">Notes</string>
     <string name="note">Note</string>
     <string name="no_note_matches_search_term">There\'s no note that matches the search term.</string>
-    <string name="note_archived">Note has been archived.</string>
+    <string name="note_is_archived">Note has been archived.</string>
     <string name="no_note_reminder">No note reminder is setup.</string>
     <string name="note_unarchived">Note has been unarchived.</string>
     <string name="reminder">Reminder</string>

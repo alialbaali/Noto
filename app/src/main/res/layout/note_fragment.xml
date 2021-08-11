@@ -17,6 +17,7 @@
             style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:navigationContentDescription="@string/back"
             app:navigationIcon="@drawable/ic_round_back_24"
             tools:title="Note">
 
@@ -105,6 +106,7 @@
         app:fabAnimationMode="scale"
         app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
+        app:navigationContentDescription="@string/more"
         app:menu="@menu/note_menu"
         app:navigationIcon="@drawable/ic_round_menu_24" />
 

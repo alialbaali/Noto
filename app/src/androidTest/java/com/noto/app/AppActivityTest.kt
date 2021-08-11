@@ -8,8 +8,8 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.contrib.RecyclerViewActions.*
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
+import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -20,6 +20,7 @@ import com.noto.app.domain.source.LocalStorage
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.library.NotoColorListAdapter
 import com.noto.app.main.LibraryListAdapter
+import com.noto.app.note.NoteViewModel
 import com.noto.app.util.LayoutManager
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -40,14 +41,16 @@ class AppActivityTest : KoinTest {
     var activityScenarioRule = activityScenarioRule<AppActivity>()
 
     private lateinit var navController: NavHostController
-    private lateinit var viewModel: LibraryViewModel
+    private lateinit var libraryViewModel: LibraryViewModel
+    private lateinit var noteViewModel: NoteViewModel
     private lateinit var libraryRepository: LibraryRepository
     private lateinit var noteRepository: NoteRepository
     private lateinit var localStorage: LocalStorage
 
     @Before
     fun setup() {
-        viewModel = get { parametersOf(0L) }
+        libraryViewModel = get { parametersOf(0L) }
+        noteViewModel = get { parametersOf(59L, 0L) }
         libraryRepository = get()
         noteRepository = get()
         localStorage = get()
@@ -75,7 +78,7 @@ class AppActivityTest : KoinTest {
 
     @Test
     fun create_new_library_should_display_library() {
-        viewModel.createOrUpdateLibrary("Work")
+        libraryViewModel.createOrUpdateLibrary("Work")
 
         shortTimeDelay()
 
@@ -103,7 +106,7 @@ class AppActivityTest : KoinTest {
 
     @Test
     fun navigate_to_empty_library_by_clicking_library_item() {
-        viewModel.createOrUpdateLibrary("Work")
+        libraryViewModel.createOrUpdateLibrary("Work")
 
         shortTimeDelay()
 
@@ -172,7 +175,7 @@ class AppActivityTest : KoinTest {
 
     @Test
     fun navigate_to_library_dialog_fragment() {
-        viewModel.createOrUpdateLibrary("Work")
+        libraryViewModel.createOrUpdateLibrary("Work")
 
         shortTimeDelay()
 
@@ -189,7 +192,7 @@ class AppActivityTest : KoinTest {
         onView(withContentDescription(R.string.view))
             .perform(click())
 
-        assertTrue { viewModel.layoutManager.value == LayoutManager.Linear }
+        assertTrue { libraryViewModel.layoutManager.value == LayoutManager.Linear }
     }
 
     @Test
@@ -229,6 +232,173 @@ class AppActivityTest : KoinTest {
         onView(withId(R.id.et))
             .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun edit_library() {
+        libraryViewModel.createOrUpdateLibrary("Work")
+
+        onView(withId(R.id.rv))
+            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, longClick()))
+
+        onView(withId(R.id.tv_edit_library))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        onView(withId(R.id.et))
+            .perform(clearText())
+            .perform(typeText("Code"))
+
+        onView(withId(R.id.btn_create))
+            .perform(click())
+
+        onView(withId(R.id.rv))
+            .check(matches(withChild(hasDescendant(withText("Code")))))
+    }
+
+    @Test
+    fun delete_library() {
+        libraryViewModel.createOrUpdateLibrary("Work")
+
+        onView(withId(R.id.rv))
+            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, longClick()))
+
+        onView(withId(R.id.tv_delete_library))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        onView(withId(R.id.btn_confirm))
+            .perform(click())
+
+        onView(withId(R.id.rv))
+            .check(matches(hasChildCount(1)))
+    }
+
+    @Test
+    fun create_note() {
+        createNote()
+
+        navigateBack()
+
+        onView(withId(R.id.rv))
+            .check(matches(hasChildCount(1)))
+            .check(matches(hasDescendant(withText("Title"))))
+            .check(matches(hasDescendant(withText("Body"))))
+    }
+
+    @Test
+    fun delete_note() {
+        createNote()
+
+        hideKeyboard()
+
+        onView(withContentDescription(R.string.more))
+            .perform(click())
+
+        onView(withId(R.id.tv_delete_note))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        onView(withId(R.id.btn_confirm))
+            .perform(click())
+
+        onView(withId(R.id.snackbar_text))
+            .check(matches(withText(R.string.note_is_deleted)))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.rv))
+            .check(matches(hasChildCount(0)))
+    }
+
+    @Test
+    fun duplicate_note() {
+        createNote()
+
+        navigateBack()
+
+        onView(withId(R.id.rv))
+            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, longClick()))
+
+        onView(withId(R.id.tv_duplicate_note))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        onView(withId(R.id.snackbar_text))
+            .check(matches(withText(R.string.note_is_duplicated)))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.rv))
+            .check(matches(hasChildCount(2)))
+    }
+
+    @Test
+    fun star_note() {
+        createNote()
+
+        navigateBack()
+
+        onView(withId(R.id.rv))
+            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, longClick()))
+
+        onView(withId(R.id.tv_star_note))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        onView(withId(R.id.snackbar_text))
+            .check(matches(withText(R.string.note_is_starred)))
+            .check(matches(isDisplayed()))
+
+        onView(withId(R.id.rv))
+            .check(matches(withChild(hasDescendant(withContentDescription(R.string.star_note)))))
+    }
+
+    @Test
+    fun archive_note() {
+        createNote()
+
+        navigateBack()
+
+        onView(withId(R.id.rv))
+            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, longClick()))
+
+        onView(withId(R.id.tv_archive_note))
+            .check(matches(isDisplayed()))
+            .perform(click())
+
+        onView(withId(R.id.snackbar_text))
+            .check(matches(withText(R.string.note_is_archived)))
+            .check(matches(isDisplayed()))
+
+        onView(withContentDescription(R.string.archived_notes))
+            .perform(click())
+
+        onView(withId(R.id.rv))
+            .check(matches(hasChildCount(1)))
+    }
+
+    private fun createNote() {
+        libraryViewModel.createOrUpdateLibrary("Work")
+
+        onView(withId(R.id.rv))
+            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, click()))
+
+        onView(withId(R.id.rv))
+            .check(matches(hasChildCount(0)))
+
+        onView(withId(R.id.fab))
+            .perform(click())
+
+        onView(withId(R.id.et_note_title))
+            .perform(typeText("Title"))
+
+        onView(withId(R.id.et_note_body))
+            .perform(typeText("Body"))
+    }
+
+    private fun navigateBack() = onView(withContentDescription(R.string.back))
+        .perform(click())
+
+    private fun hideKeyboard() = onView(isRoot())
+        .perform(closeSoftKeyboard())
 
     private fun shortTimeDelay(timeMillis: Long = 50) = runBlocking {
         delay(timeMillis)

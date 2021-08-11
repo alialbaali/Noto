@@ -77,7 +77,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             val resource = if (viewModel.note.value.isArchived)
                 R.string.note_unarchived
             else
-                R.string.note_archived
+                R.string.note_is_archived
 
             parentView.snackbar(resources.stringResource(resource), parentAnchorView)
         }

@@ -111,7 +111,7 @@ class NoteFragment : Fragment() {
                         root.snackbar(getString(R.string.note_unarchived), anchorView = fab)
                     } else {
                         viewModel.toggleNoteIsArchived()
-                        root.snackbar(getString(R.string.note_archived), anchorView = fab)
+                        root.snackbar(getString(R.string.note_is_archived), anchorView = fab)
                     }
                     true
                 }

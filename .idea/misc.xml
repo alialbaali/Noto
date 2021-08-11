@@ -143,8 +143,8 @@
         <entry key="app/src/main/res/layout/new_library_dialog_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/note_archive_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_dialog_fragment.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/note_fragment.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/note_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/note_fragment.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/note_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/note_list_archive_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_list_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/note_read_mode_fragment.xml" value="0.3421875" />
@@ -162,6 +162,7 @@
         <entry key="app/src/main/res/menu/bottom_nav_bar_menu.xml" value="0.2675925925925926" />
         <entry key="app/src/main/res/menu/library_list_menu.xml" value="0.3421875" />
         <entry key="app/src/main/res/menu/library_menu.xml" value="0.3421875" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/menu/note_menu.xml" value="0.3421875" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.35833333333333334" />
       </map>
