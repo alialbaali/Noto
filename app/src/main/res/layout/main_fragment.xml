@@ -61,7 +61,7 @@
         app:fabAnimationMode="scale"
         app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
-        app:menu="@menu/library_list_menu"
+        app:menu="@menu/main_menu"
         app:navigationContentDescription="@string/more"
         app:navigationIcon="@drawable/ic_round_menu_24" />
 
