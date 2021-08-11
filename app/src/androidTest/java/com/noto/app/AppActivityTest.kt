@@ -9,6 +9,7 @@ import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.contrib.RecyclerViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -107,7 +108,7 @@ class AppActivityTest : KoinTest {
         shortTimeDelay()
 
         onView(withId(R.id.rv))
-            .perform(RecyclerViewActions.actionOnItem<LibraryListAdapter.LibraryItemViewHolder>(hasDescendant(withText("Work")), click()))
+            .perform(actionOnItem<LibraryListAdapter.LibraryItemViewHolder>(hasDescendant(withText("Work")), click()))
 
         onView(withId(R.id.tv_place_holder))
             .check(matches(withText(R.string.library_is_empty)))
@@ -176,7 +177,7 @@ class AppActivityTest : KoinTest {
         shortTimeDelay()
 
         onView(withId(R.id.rv))
-            .perform(RecyclerViewActions.actionOnItem<LibraryListAdapter.LibraryItemViewHolder>(hasDescendant(withText("Work")), longClick()))
+            .perform(actionOnItem<LibraryListAdapter.LibraryItemViewHolder>(hasDescendant(withText("Work")), longClick()))
 
         onView(withId(R.id.ll))
             .check(matches(withChild(withId(R.id.tv_edit_library))))
@@ -200,7 +201,7 @@ class AppActivityTest : KoinTest {
             .perform(typeText("Work"))
 
         onView(withId(R.id.rv))
-            .perform(RecyclerViewActions.actionOnItemAtPosition<NotoColorListAdapter.NotoColorItemViewHolder>(10, click()))
+            .perform(actionOnItemAtPosition<NotoColorListAdapter.NotoColorItemViewHolder>(10, click()))
 
         onView(withId(R.id.btn_create))
             .perform(click())
