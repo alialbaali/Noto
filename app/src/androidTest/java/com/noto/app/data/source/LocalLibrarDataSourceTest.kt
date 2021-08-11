@@ -45,10 +45,10 @@ class LocalLibraryDataSourceTest : KoinTest {
 
     @Test
     fun get_all_libraries_should_return_an_empty_list() = runBlockingTest {
-        val libraries = source.getLibraries()
+        val dbLibraries = source.getLibraries()
             .first()
 
-        assertTrue { libraries.isEmpty() }
+        assertTrue { dbLibraries.isEmpty() }
     }
 
     @Test
@@ -56,10 +56,10 @@ class LocalLibraryDataSourceTest : KoinTest {
         val library = createLibrary()
         source.createLibrary(library)
 
-        val libraries = source.getLibraries()
+        val dbLibraries = source.getLibraries()
             .first()
 
-        assertContains(libraries, library.copy(id = 1))
+        assertContains(dbLibraries, library.copy(id = 7))
     }
 
     @Test
@@ -67,10 +67,10 @@ class LocalLibraryDataSourceTest : KoinTest {
         val library = createLibrary()
         source.createLibrary(library)
 
-        val dbLibrary = source.getLibraryById(libraryId = 1)
+        val dbLibrary = source.getLibraryById(libraryId = 9)
             .first()
 
-        assertEquals(library.copy(id = 1), dbLibrary)
+        assertEquals(library.copy(id = 9), dbLibrary)
     }
 
     @Test
@@ -78,16 +78,13 @@ class LocalLibraryDataSourceTest : KoinTest {
         val library = createLibrary()
         source.createLibrary(library)
 
-        val dbLibrary = source.getLibraryById(1)
-            .first()
-            .copy(title = "Code")
+        val updatedLibrary = library.copy(id = 8, title = "Code")
+        source.updateLibrary(updatedLibrary)
 
-        source.updateLibrary(dbLibrary)
-
-        val updatedDbLibrary = source.getLibraryById(1)
+        val dbLibrary = source.getLibraryById(8)
             .first()
 
-        assertEquals(dbLibrary, updatedDbLibrary)
+        assertEquals(updatedLibrary, dbLibrary)
     }
 
     @Test
@@ -95,17 +92,17 @@ class LocalLibraryDataSourceTest : KoinTest {
         val library = createLibrary()
         source.createLibrary(library)
 
-        val libraries = source.getLibraries()
-            .first()
-
-        assertContains(libraries, library.copy(id = 1))
-
-        source.deleteLibrary(library.copy(id = 1))
-
         val dbLibraries = source.getLibraries()
             .first()
 
-        assertTrue { dbLibraries.isEmpty() }
+        assertContains(dbLibraries, library.copy(id = 6))
+
+        source.deleteLibrary(library.copy(id = 6))
+
+        val updatedDbLibraries = source.getLibraries()
+            .first()
+
+        assertTrue { updatedDbLibraries.isEmpty() }
     }
 
     @Test
@@ -115,17 +112,17 @@ class LocalLibraryDataSourceTest : KoinTest {
             source.createLibrary(library)
         }
 
-        val libraries = source.getLibraries()
-            .first()
-
-        assertTrue { libraries.count() == 5 }
-
-        source.clearLibraries()
-
         val dbLibraries = source.getLibraries()
             .first()
 
-        assertTrue { dbLibraries.isEmpty() }
+        assertTrue { dbLibraries.count() == 5 }
+
+        source.clearLibraries()
+
+        val updatedDbLibraries = source.getLibraries()
+            .first()
+
+        assertTrue { updatedDbLibraries.isEmpty() }
     }
 
     private fun createLibrary(title: String = "Work") = Library(title = title, position = 0)
