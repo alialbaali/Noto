@@ -120,17 +120,20 @@ dependencies {
     androidTestImplementation(KotlinX.coroutines.test)
     androidTestImplementation(Kotlin.Test.junit)
     androidTestImplementation(Kotlin.Test.common)
-    androidTestImplementation(Kotlin.Test.testng)
 
+    androidTestImplementation(Libraries.Testing.KoinTest)
     androidTestImplementation(Testing.junit4)
-    androidTestImplementation(Testing.robolectric)
+//    androidTestImplementation(Testing.robolectric)
 
     androidTestImplementation(AndroidX.Test.coreKtx)
     androidTestImplementation(AndroidX.Test.runner)
     androidTestImplementation(AndroidX.Test.rules)
+    androidTestImplementation(AndroidX.fragmentTesting)
     androidTestImplementation(AndroidX.Test.Ext.junitKtx)
     androidTestImplementation(AndroidX.ArchCore.testing)
     androidTestImplementation(AndroidX.Test.Espresso.core)
+    androidTestImplementation(AndroidX.Test.Espresso.contrib)
+    androidTestImplementation("androidx.navigation:navigation-testing:2.3.5")
 
     coreLibraryDesugaring(Libraries.Main.JavaTime)
 }
