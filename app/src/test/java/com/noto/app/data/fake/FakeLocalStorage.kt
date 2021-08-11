@@ -1,4 +1,4 @@
-package com.noto.app.unit.data.fake
+package com.noto.app.data.fake
 
 import com.noto.app.domain.source.LocalStorage
 import kotlinx.coroutines.flow.Flow

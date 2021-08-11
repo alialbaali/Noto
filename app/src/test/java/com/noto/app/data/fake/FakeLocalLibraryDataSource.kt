@@ -1,4 +1,4 @@
-package com.noto.app.unit.data.fake
+package com.noto.app.data.fake
 
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.source.LocalLibraryDataSource

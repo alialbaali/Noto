@@ -1,4 +1,4 @@
-package com.noto.app.unit.data.repository
+package com.noto.app.data.repository
 
 import com.noto.app.di.repositoryModule
 import com.noto.app.domain.model.Note

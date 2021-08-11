@@ -1,4 +1,4 @@
-package com.noto.app.unit
+package com.noto.app.viewModel
 
 import com.noto.app.AppViewModel
 import com.noto.app.di.appModule
