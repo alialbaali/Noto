@@ -11,15 +11,16 @@ The app is a part of my [Portfolio](https://alialbaali.com) projects. It showcas
 ## Screenshots
 
 <p float="left">
-<img src="Noto/Frame%201.png" height="500"  alt="screenshot"/>
-<img src="Noto/Frame%202.png" height="500"  alt="screenshot"/>
-<img src="Noto/Frame%203.png" height="500"  alt="screenshot"/>
-<img src="Noto/Frame%204.png" height="500"  alt="screenshot"/>
-<img src="Noto/Frame%205.png" height="500"  alt="screenshot"/>
-<img src="Noto/Frame%206.png" height="500"  alt="screenshot"/>
-<img src="Noto/Frame%207.png" height="500"  alt="screenshot"/>
-<img src="Noto/Frame%208.png" height="500"  alt="screenshot"/>
+<img src="Noto/Frame%201.png" height="400"  alt="screenshot"/>
+<img src="Noto/Frame%202.png" height="400"  alt="screenshot"/>
+<img src="Noto/Frame%203.png" height="400"  alt="screenshot"/>
+<img src="Noto/Frame%204.png" height="400"  alt="screenshot"/>
+<img src="Noto/Frame%205.png" height="400"  alt="screenshot"/>
+<img src="Noto/Frame%206.png" height="400"  alt="screenshot"/>
+<img src="Noto/Frame%207.png" height="400"  alt="screenshot"/>
+<img src="Noto/Frame%208.png" height="400"  alt="screenshot"/>
 </p>
+
 ## Features
 
 * Minimal and simple design
