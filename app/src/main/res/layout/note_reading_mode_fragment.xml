@@ -20,14 +20,30 @@
             app:navigationIcon="@drawable/ic_round_back_24"
             tools:title="Note">
 
-            <TextView
-                android:id="@+id/tv_created_at"
-                style="@style/SubtitleTextView"
+            <LinearLayout
+                android:id="@+id/ll_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="end"
                 android:layout_marginEnd="@dimen/spacing_normal"
-                tools:text="Created at"
-                tools:textColor="@color/colorAccentTeal" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_created_at"
+                    style="@style/SubtitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Created Tue, Aug 8"
+                    tools:textColor="@color/colorAccentTeal" />
+
+                <TextView
+                    android:id="@+id/tv_word_count"
+                    style="@style/SubtitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="30 words"
+                    tools:textColor="@color/colorAccentTeal" />
+            </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 

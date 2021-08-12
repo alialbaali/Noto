@@ -54,10 +54,12 @@ class NoteReadingModeFragment : Fragment() {
             .launchIn(lifecycleScope)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun NoteReadingModeFragmentBinding.setupNote(note: Note) {
         etNoteTitle.text = note.title
         etNoteBody.text = note.body
         tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
+        tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
         etNoteTitle.isVisible = note.title.isNotBlank()
         etNoteBody.isVisible = note.body.isNotBlank()
     }
@@ -67,6 +69,7 @@ class NoteReadingModeFragment : Fragment() {
         tb.title = library.title
         tb.setTitleTextColor(color)
         tvCreatedAt.setTextColor(color)
+        tvWordCount.setTextColor(color)
         tb.navigationIcon?.mutate()?.setTint(color)
     }
 }

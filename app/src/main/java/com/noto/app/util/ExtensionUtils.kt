@@ -34,6 +34,12 @@ inline fun <T> Iterable<T>.sortByMethod(method: SortingMethod, crossinline selec
     }
 }
 
+fun Note.countWords(single: String, plural: String) = if (body.isBlank())
+    "0 $plural".lowercase()
+else body.split("\\s+".toRegex())
+    .size
+    .toCountText(single, plural)
+
 val Uri.directoryPath
     get() = path?.substringAfterLast(':')?.substringBeforeLast('/')
 

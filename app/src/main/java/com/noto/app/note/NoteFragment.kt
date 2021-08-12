@@ -144,11 +144,7 @@ class NoteFragment : Fragment() {
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
         tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
-        tvWordCount.text = if (note.body.isBlank())
-            "0 ${resources.stringResource(R.string.words)}"
-        else note.body.split("\\s+".toRegex())
-            .size
-            .toCountText(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
+        tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
 
         if (note.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
         else archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_archive_24)
