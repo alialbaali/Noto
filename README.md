@@ -5,44 +5,57 @@
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="80">](https://play.google.com/store/apps/details?id=com.noto)
 
 ## Motivation
+
 The app is a part of my [Portfolio](https://alialbaali.com) projects. It showcases my skills regarding developing Android apps.
 
 ## Screenshots
-![Alt text](https://lh3.googleusercontent.com/gZEnPNJ8S5OCvD13L_6p53LAgsJVS1Lx_Zypzf9aQ4JTuNoZjSyZbHFaZlSddybJq7w=w720-h310 "Screenshot")
-![Alt text](https://lh3.googleusercontent.com/P6SrNqnnjOSgSQMWIMvbLB1-2b7sE7LLELDgJIPKiXNd45dQy2OGbSvrZ35pVabxUgY=w720-h310 "Screenshot")
-![Alt text](https://lh3.googleusercontent.com/lVdn68iYeecY47f82RZWzTwSxXDoBgnX6ku0dnjDsrm6_Z6-fmoDWaev_h1hUL4OQBtR=w720-h310 "Screenshot")
-![Alt text](https://lh3.googleusercontent.com/lo7bvJJF7_QulrJGXQdACHRhbzcPXfRvYp-MMcscjPIFvHtqNECeiS2yut6_gpfCSaU=w720-h310 "Screenshot")
 
-![Alt text](https://lh3.googleusercontent.com/RMe53Fkb5iH93OE9CZZxVXuTocwwo7VeP2S3onHENMNHm_dKGNvgyUisqaQcidpHoQ=w720-h310 "Screenshot")
-![Alt text](https://lh3.googleusercontent.com/BxuV0mE-oybSzwigqtEapss83Y3vHaoWE30tC_Q0zgNkNlFUYBn3ioCRXc3NuwIRzkIs=w720-h310 "Screenshot")
-![Alt text](https://lh3.googleusercontent.com/kVKqHaJtOq1eMnWDBwXnZ70b43z1OelkHsglfL0zNfusD9RXRtzUegXpGHP2-iQ3Zw=w720-h310 "Screenshot")
-![Alt text](https://lh3.googleusercontent.com/RZtXvv4lm2cwE86_TH_pc8WYrt0FHd_H0qgAtDz2XiZK_O7HIR5fuRozhZdN0P2lZuFi=w720-h310 "Screenshot")
+![Alt text](Noto/Frame%201.png)
+![Alt text](Noto/Frame%202.png)
+![Alt text](Noto/Frame%203.png)
+![Alt text](Noto/Frame%204.png)
+![Alt text](Noto/Frame%205.png)
+![Alt text](Noto/Frame%206.png)
+![Alt text](Noto/Frame%207.png)
+![Alt text](Noto/Frame%208.png)
 
 ## Features
 
-* Organize your notes into libraries with different colors
-* Create and manage your notes easily
-* Dark Mode
-* Ad-Free
-* Archive Notes 
-* List and Grid layout modes
+* Minimal and simple design
+* Group notes using libraries.
+* List and grid layout modes
 * Reminders
-* Auto Save
-* Minimal Design
+* Auto save
+* Reading mode
+* Each library has notes archive.
+* Duplicating notes within the same library
+* Moving notes to different libraries
+* Coping notes to different libraries
+* Notes word-count
+* Starred notes
+* Export notes and libraries
+* Dark mode
+* Support for devices with API 21 (Lollipop) and up
+* No permissions are required
+* All data stored locally on the device
+* Ad-Free
 
 ## Architecture
 
-The app uses Clean Architecture with MVVM design pattern and it's divided into 3 Main Layers.
+The app uses Clean Architecture with MVVM design pattern and it's divided into 3 main layers.
 
 #### Domain
-Contains model, repository and DAO interfaces.
+
+Contains model, repository and data sources interfaces.
 
 #### Data
+
 Contains database and repository and DAO implementations.
 
 #### Presentation (the rest of the app)
+
 Contains all the UI logic.
 
-
 ## License
+
 Noto is distributed under the terms of the Apache License (Version 2.0). See [License](LICENSE.md) for details.
