@@ -10,14 +10,14 @@ The app is a part of my [Portfolio](https://alialbaali.com) projects. It showcas
 
 ## Screenshots
 
-![Alt text](Noto/Frame%201.png)
-![Alt text](Noto/Frame%202.png)
-![Alt text](Noto/Frame%203.png)
-![Alt text](Noto/Frame%204.png)
-![Alt text](Noto/Frame%205.png)
-![Alt text](Noto/Frame%206.png)
-![Alt text](Noto/Frame%207.png)
-![Alt text](Noto/Frame%208.png)
+<img src="Noto/Frame%201.png" height="100"  alt="screenshot"/>
+<img src="Noto/Frame%202.png" height="100"  alt="screenshot"/>
+<img src="Noto/Frame%203.png" height="100"  alt="screenshot"/>
+<img src="Noto/Frame%204.png" height="100"  alt="screenshot"/>
+<img src="Noto/Frame%205.png" height="100"  alt="screenshot"/>
+<img src="Noto/Frame%206.png" height="100"  alt="screenshot"/>
+<img src="Noto/Frame%207.png" height="100"  alt="screenshot"/>
+<img src="Noto/Frame%208.png" height="100"  alt="screenshot"/>
 
 ## Features
 
