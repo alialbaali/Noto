@@ -38,6 +38,7 @@ class LibraryViewModel(
     init {
         if (libraryId != 0L)
             libraryRepository.getLibraryById(libraryId)
+                .filterNotNull()
                 .onEach {
                     mutableLibrary.value = it
                     mutableNotoColors.value = mutableNotoColors.value
