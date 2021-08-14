@@ -11,7 +11,7 @@ interface NoteDao : LocalNoteDataSource {
     @Query("SELECT * FROM notes WHERE library_id = :libraryId AND is_archived = 0 ORDER BY id DESC")
     override fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>>
 
-    @Query("SELECT * FROM notes WHERE library_id = :libraryId AND is_archived = 1")
+    @Query("SELECT * FROM notes WHERE library_id = :libraryId AND is_archived = 1 ORDER BY id DESC")
     override fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>>
 
     @Query("SELECT * FROM notes WHERE id = :noteId")
