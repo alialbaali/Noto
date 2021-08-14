@@ -1,6 +1,7 @@
 package com.noto.app.note
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -71,5 +72,8 @@ class NoteReadingModeFragment : Fragment() {
         tvCreatedAt.setTextColor(color)
         tvWordCount.setTextColor(color)
         tb.navigationIcon?.mutate()?.setTint(color)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            nsv.verticalScrollbarThumbDrawable?.mutate()?.setTint(color)
+        }
     }
 }
