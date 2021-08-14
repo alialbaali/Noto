@@ -148,7 +148,11 @@
             app:destination="@id/noteDialogFragment" />
         <action
             android:id="@+id/action_libraryArchiveFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
+            app:destination="@id/noteFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <dialog
         android:id="@+id/noteReminderDialogFragment"
@@ -214,7 +218,7 @@
     <dialog
         android:id="@+id/sortingDialogFragment"
         android:name="com.noto.app.SortingDialogFragment"
-        android:label="SortingDialogFragment" >
+        android:label="SortingDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
@@ -270,7 +274,7 @@
     <dialog
         android:id="@+id/selectLibraryDialogFragment"
         android:name="com.noto.app.library.SelectLibraryDialogFragment"
-        android:label="SelectLibraryDialogFragment" >
+        android:label="SelectLibraryDialogFragment">
         <argument
             android:name="select_library_item_click_listener"
             app:argType="com.noto.app.library.SelectLibraryDialogFragment$SelectLibraryItemClickListener" />
