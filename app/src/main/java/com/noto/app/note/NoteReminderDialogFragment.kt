@@ -57,11 +57,12 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
         val theme = if (isDarkMode) android.R.style.Theme_DeviceDefault_Dialog
         else android.R.style.Theme_DeviceDefault_Light_Dialog
 
+        val buttonTextColor = resources.colorResource(R.color.colorPrimary)
+
         val is24HourFormat = DateFormat.is24HourFormat(requireContext())
 
         DatePickerDialog(requireContext(), theme, { _, year, month, day ->
             TimePickerDialog(requireContext(), theme, { _, hour, minute ->
-
                 LocalDateTime(year, month + 1, day, hour, minute)
                     .toInstant(TimeZone.currentSystemDefault())
                     .also { viewModel.setNoteReminder(it) }
@@ -70,16 +71,24 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
                         val note = viewModel.note.value
                         alarmManager.createAlarm(requireContext(), note.libraryId, note.id, it)
                     }
-
-            }, startHour, startMinute, is24HourFormat).show()
+            }, startHour, startMinute, is24HourFormat)
+                .apply {
+                    show()
+                    getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(buttonTextColor)
+                    getButton(DatePickerDialog.BUTTON_NEUTRAL).setTextColor(buttonTextColor)
+                    getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(buttonTextColor)
+                }
         }, startYear, startMonth, startDay)
             .apply {
                 datePicker.minDate = Clock.System
                     .now()
                     .toEpochMilliseconds()
                     .minus(1000)
+                show()
+                getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(buttonTextColor)
+                getButton(DatePickerDialog.BUTTON_NEUTRAL).setTextColor(buttonTextColor)
+                getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(buttonTextColor)
             }
-            .show()
     }
 
     private fun NoteReminderDialogFragmentBinding.setupListeners() {
