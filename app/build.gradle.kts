@@ -36,8 +36,8 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
-            isShrinkResources = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -59,12 +59,14 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
     testOptions {
         unitTests.isReturnDefaultValues = true
         unitTests.all {
             it.useJUnitPlatform()
         }
     }
+
     packagingOptions {
         resources.excludes.add("META-INF/AL2.0")
         resources.excludes.add("META-INF/LGPL2.1")
