@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.Theme
 import com.noto.app.library.SelectLibraryDialogFragment
@@ -24,6 +24,11 @@ class AppActivity : AppCompatActivity() {
     private val viewModel by viewModel<AppViewModel>()
 
     private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
+
+    private val navController by lazy {
+        (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
+            .navController
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
@@ -42,11 +47,11 @@ class AppActivity : AppCompatActivity() {
                 ?.let { content ->
                     val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
                         val args = bundleOf("library_id" to it, "body" to content)
-                        findNavController(R.id.nav_host_fragment).navigate(R.id.noteFragment, args)
+                        navController.navigate(R.id.noteFragment, args)
                     }
 
                     val args = bundleOf("library_id" to 0L, "select_library_item_click_listener" to selectLibraryItemClickListener)
-                    findNavController(R.id.nav_host_fragment).navigate(R.id.selectLibraryDialogFragment, args)
+                    navController.navigate(R.id.selectLibraryDialogFragment, args)
                 }
         }
     }
