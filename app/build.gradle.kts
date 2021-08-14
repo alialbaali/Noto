@@ -44,6 +44,11 @@ android {
                 "proguard-rules.pro"
             )
         }
+        getByName("debug") {
+            versionNameSuffix = "-debug"
+            applicationIdSuffix = ".debug"
+            isDebuggable = true
+        }
     }
 
     buildFeatures {
