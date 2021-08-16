@@ -2,6 +2,7 @@ package com.noto.app.library
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.TooltipCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -22,8 +23,10 @@ class NotoColorListAdapter(
         holder.bind(pair)
     }
 
-    class NotoColorItemViewHolder(val binding: NotoColorItemBinding, private val listener: NotoColorClickListener) :
-        RecyclerView.ViewHolder(binding.root) {
+    class NotoColorItemViewHolder(
+        private val binding: NotoColorItemBinding,
+        private val listener: NotoColorClickListener
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         lateinit var pair: Pair<NotoColor, Boolean>
 
@@ -44,6 +47,7 @@ class NotoColorListAdapter(
         fun bind(pair: Pair<NotoColor, Boolean>) {
             binding.rb.backgroundTintList = binding.root.resources.colorStateResource(pair.first.toResource())
             binding.rb.isChecked = pair.second
+            TooltipCompat.setTooltipText(binding.rb, pair.first.name)
         }
     }
 
