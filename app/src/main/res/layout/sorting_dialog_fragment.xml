@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/BaseDialogFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -13,55 +12,65 @@
 
         <include layout="@layout/base_dialog_fragment" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_sorting_order"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/sorting_method" />
+
         <RadioGroup
             android:id="@+id/rg_sorting_method"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/spacing_normal"
-            android:background="@drawable/radio_group_sorting_shae"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_sorting_asc"
+                style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rg_sorting"
-                android:button="@null"
-                android:padding="@dimen/spacing_normal"
-                android:text="@string/asc"
-                android:textColor="@color/rg_sorting" />
+                android:checked="true"
+                android:text="@string/asc" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_sorting_desc"
+                style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/rg_sorting"
-                android:button="@null"
-                android:checked="true"
-                android:padding="@dimen/spacing_normal"
-                android:text="@string/desc"
-                android:textColor="@color/rg_sorting" />
+                android:text="@string/desc" />
 
         </RadioGroup>
 
-        <TextView
-            android:id="@+id/tv_alphabetically"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_sorting_type"
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:button="@null"
-            android:checked="true"
-            android:text="@string/alphabetically"
-            app:drawableStartCompat="@drawable/rb_sorting_type" />
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/sorting_type" />
 
-        <TextView
-            android:id="@+id/tv_creation_date"
-            style="@style/DialogItem"
+        <RadioGroup
+            android:id="@+id/rg_sorting_type"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/creation_date"
-            app:drawableStartCompat="@drawable/rb_sorting_type" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_alphabetically"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/alphabetically" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_creation_date"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/creation_date" />
+
+        </RadioGroup>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_confirm"
