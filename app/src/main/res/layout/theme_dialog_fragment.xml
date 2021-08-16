@@ -19,30 +19,24 @@
 
             <RadioButton
                 android:id="@+id/rb_system_theme"
-                style="@style/DialogThemeRadioButton"
+                style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
                 android:checked="true"
                 android:text="@string/system_theme" />
 
             <RadioButton
                 android:id="@+id/rb_light_theme"
-                style="@style/DialogThemeRadioButton"
+                style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
                 android:text="@string/light_theme" />
 
             <RadioButton
                 android:id="@+id/rb_dark_theme"
-                style="@style/DialogThemeRadioButton"
+                style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
                 android:text="@string/dark_theme" />
 
         </RadioGroup>
