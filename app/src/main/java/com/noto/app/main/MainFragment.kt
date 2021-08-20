@@ -18,9 +18,7 @@ import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.LibraryListSorting
 import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : Fragment() {
@@ -60,7 +58,10 @@ class MainFragment : Fragment() {
         val layoutItems = listOf(tvLibrariesCount, rv)
 
         viewModel.state
-            .onEach { state -> setupLibraries(state.libraries, state.sortingOrder, state.sorting, layoutItems) }
+            .onEach { state ->
+                setupLibraries(state.libraries, state.sortingOrder, state.sorting, layoutItems)
+                setupItemTouchHelper(state.layoutManager)
+            }
             .distinctUntilChangedBy { it.layoutManager }
             .onEach { state -> setupLayoutManager(state.layoutManager, layoutManagerMenuItem) }
             .launchIn(lifecycleScope)
@@ -82,17 +83,6 @@ class MainFragment : Fragment() {
 
         rv.visibility = View.VISIBLE
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
-
-        if (this@MainFragment::epoxyController.isInitialized) {
-            val itemTouchHelperCallback = LibraryItemTouchHelperCallback(epoxyController, layoutManager) { _, viewHolder, target ->
-                val viewHolderModel = viewHolder.model as LibraryItem
-                val targetModel = target.model as LibraryItem
-                viewModel.updateLibraryPosition(viewHolderModel.library, viewHolder.bindingAdapterPosition)
-                viewModel.updateLibraryPosition(targetModel.library, target.bindingAdapterPosition)
-            }
-            itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
-                .apply { attachToRecyclerView(rv) }
-        }
     }
 
     private fun MainFragmentBinding.setupLibraries(
@@ -174,6 +164,20 @@ class MainFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun MainFragmentBinding.setupItemTouchHelper(layoutManager: LayoutManager) {
+        if (this@MainFragment::epoxyController.isInitialized) {
+            val itemTouchHelperCallback = LibraryItemTouchHelperCallback(epoxyController, layoutManager) {
+                rv.forEach { view ->
+                    val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
+                    val model = viewHolder.model as? LibraryItem
+                    if (model != null) viewModel.updateLibraryPosition(model.library, viewHolder.bindingAdapterPosition)
+                }
+            }
+            itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+                .apply { attachToRecyclerView(rv) }
         }
     }
 
