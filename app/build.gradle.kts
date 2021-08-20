@@ -78,6 +78,9 @@ android {
         resources.excludes.add("META-INF/LICENSE.md")
         resources.excludes.add("META-INF/LICENSE-notice.md")
     }
+    kapt {
+        correctErrorTypes = true
+    }
 }
 
 dependencies {
@@ -101,11 +104,13 @@ dependencies {
     implementation(AndroidX.Work.runtimeKtx)
     implementation(KotlinX.Coroutines.core)
     implementation(KotlinX.Coroutines.android)
+    implementation(Libraries.Main.DataStore)
+    implementation(Libraries.Main.Koin)
+    implementation(Libraries.Main.Epoxy)
+    kapt(Libraries.Main.EpoxyProcessor)
     implementation("androidx.room:room-runtime:2.3.0")
     implementation("androidx.room:room-ktx:2.3.0")
     kapt("androidx.room:room-compiler:2.3.0")
-    implementation(Libraries.Main.DataStore)
-    implementation(Libraries.Main.Koin)
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.21")
 
@@ -130,7 +135,6 @@ dependencies {
 
     androidTestImplementation(Libraries.Testing.KoinTest)
     androidTestImplementation(Testing.junit4)
-//    androidTestImplementation(Testing.robolectric)
 
     androidTestImplementation(AndroidX.Test.coreKtx)
     androidTestImplementation(AndroidX.Test.runner)
