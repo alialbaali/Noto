@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="@dimen/spacing_normal"
+    android:layout_marginVertical="@dimen/spacing_small"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_sorting"
+        android:clickable="true"
+        android:focusable="true"
+        android:textSize="@dimen/size_extra_small"
+        android:paddingVertical="@dimen/spacing_small"
+        android:paddingHorizontal="@dimen/spacing_normal"
+        android:background="@drawable/sorting_item_shape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        app:fontFamily="@font/nunito_bold"
+        tools:text="Sorting" />
+
+</LinearLayout>
