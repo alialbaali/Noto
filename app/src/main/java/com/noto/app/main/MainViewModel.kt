@@ -32,7 +32,7 @@ class MainViewModel(
             libraryRepository.getLibraries()
                 .filterNotNull(),
             storage.getOrNull(LayoutManagerKey)
-                .onEach { if (it == null) updateLayoutManager(LayoutManager.Linear) }
+                .onEach { if (it == null) updateLayoutManager(LayoutManager.Grid) }
                 .filterNotNull()
                 .map { LayoutManager.valueOf(it) },
             storage.getOrNull(LibraryListSortingKey)
@@ -83,7 +83,7 @@ class MainViewModel(
 
     data class State(
         val libraries: List<Library> = emptyList(),
-        val layoutManager: LayoutManager = LayoutManager.Linear,
+        val layoutManager: LayoutManager = LayoutManager.Grid,
         val sorting: LibraryListSorting = LibraryListSorting.CreationDate,
         val sortingOrder: SortingOrder = SortingOrder.Descending,
     )

@@ -14,12 +14,12 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.library.NotoColorListAdapter
-import com.noto.app.main.LibraryListAdapter
 import com.noto.app.note.NoteViewModel
 import com.noto.app.util.LayoutManager
 import kotlinx.coroutines.delay
@@ -86,7 +86,7 @@ class AppActivityTest : KoinTest {
             .check(matches(withEffectiveVisibility(Visibility.GONE)))
 
         onView(withId(R.id.rv))
-            .check(matches(hasChildCount(1)))
+            .check(matches(hasChildCount(2)))
             .check(matches(withChild(hasDescendant(withText("Work")))))
             .check(matches(isDisplayed()))
     }
@@ -111,7 +111,7 @@ class AppActivityTest : KoinTest {
         shortTimeDelay()
 
         onView(withId(R.id.rv))
-            .perform(actionOnItem<LibraryListAdapter.LibraryItemViewHolder>(hasDescendant(withText("Work")), click()))
+            .perform(actionOnItem<EpoxyViewHolder>(hasDescendant(withText("Work")), click()))
 
         onView(withId(R.id.tv_place_holder))
             .check(matches(withText(R.string.library_is_empty)))
@@ -180,7 +180,7 @@ class AppActivityTest : KoinTest {
         shortTimeDelay()
 
         onView(withId(R.id.rv))
-            .perform(actionOnItem<LibraryListAdapter.LibraryItemViewHolder>(hasDescendant(withText("Work")), longClick()))
+            .perform(actionOnItem<EpoxyViewHolder>(hasDescendant(withText("Work")), longClick()))
 
         onView(withId(R.id.ll))
             .check(matches(withChild(withId(R.id.tv_edit_library))))
@@ -213,7 +213,7 @@ class AppActivityTest : KoinTest {
             .check(doesNotExist())
 
         onView(withId(R.id.rv))
-            .check(matches(hasChildCount(1)))
+            .check(matches(hasChildCount(2)))
             .check(matches(withChild(hasDescendant(withText("Work")))))
             .check(matches(isDisplayed()))
     }
@@ -238,7 +238,7 @@ class AppActivityTest : KoinTest {
         libraryViewModel.createOrUpdateLibrary("Work")
 
         onView(withId(R.id.rv))
-            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, longClick()))
+            .perform(actionOnItem<EpoxyViewHolder>(hasDescendant(withText("Work")), longClick()))
 
         onView(withId(R.id.tv_edit_library))
             .check(matches(isDisplayed()))
@@ -260,7 +260,7 @@ class AppActivityTest : KoinTest {
         libraryViewModel.createOrUpdateLibrary("Work")
 
         onView(withId(R.id.rv))
-            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, longClick()))
+            .perform(actionOnItem<EpoxyViewHolder>(hasDescendant(withText("Work")), longClick()))
 
         onView(withId(R.id.tv_delete_library))
             .check(matches(isDisplayed()))
@@ -270,7 +270,7 @@ class AppActivityTest : KoinTest {
             .perform(click())
 
         onView(withId(R.id.rv))
-            .check(matches(hasChildCount(1)))
+            .check(matches(hasChildCount(2)))
     }
 
     @Test
@@ -316,7 +316,7 @@ class AppActivityTest : KoinTest {
         navigateBack()
 
         onView(withId(R.id.rv))
-            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, longClick()))
+            .perform(actionOnItemAtPosition<EpoxyViewHolder>(0, longClick()))
 
         onView(withId(R.id.tv_duplicate_note))
             .check(matches(isDisplayed()))
@@ -337,7 +337,7 @@ class AppActivityTest : KoinTest {
         navigateBack()
 
         onView(withId(R.id.rv))
-            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, longClick()))
+            .perform(actionOnItemAtPosition<EpoxyViewHolder>(0, longClick()))
 
         onView(withId(R.id.tv_star_note))
             .check(matches(isDisplayed()))
@@ -358,7 +358,7 @@ class AppActivityTest : KoinTest {
         navigateBack()
 
         onView(withId(R.id.rv))
-            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, longClick()))
+            .perform(actionOnItemAtPosition<EpoxyViewHolder>(0, longClick()))
 
         onView(withId(R.id.tv_archive_note))
             .check(matches(isDisplayed()))
@@ -379,7 +379,7 @@ class AppActivityTest : KoinTest {
         libraryViewModel.createOrUpdateLibrary("Work")
 
         onView(withId(R.id.rv))
-            .perform(actionOnItemAtPosition<LibraryListAdapter.LibraryItemViewHolder>(0, click()))
+            .perform(actionOnItemAtPosition<EpoxyViewHolder>(1, click()))
 
         onView(withId(R.id.rv))
             .check(matches(hasChildCount(0)))

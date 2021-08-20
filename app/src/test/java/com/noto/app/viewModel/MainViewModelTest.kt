@@ -11,7 +11,10 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.ints.shouldBeExactly
 import io.kotest.matchers.shouldBe
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.take
 import org.koin.core.component.get
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
@@ -40,19 +43,22 @@ class MainViewModelTest : StringSpec(), KoinTest {
         }
 
         "get libraries should return an empty list" {
-            viewModel.libraries
+            viewModel.state
+                .map { it.libraries }
                 .first()
                 .shouldBeEmpty()
         }
 
         "get layout manager should return grid by default" {
-            viewModel.layoutManager
+            viewModel.state
+                .map { it.layoutManager }
                 .first() shouldBe LayoutManager.Grid
         }
 
         "update layout manager to linear" {
             viewModel.updateLayoutManager(LayoutManager.Linear)
-            viewModel.layoutManager
+            viewModel.state
+                .map { it.layoutManager }
                 .first() shouldBe LayoutManager.Linear
         }
 
