@@ -1,20 +1,21 @@
 package com.noto.app.main
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.LibraryListSorting
+import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,18 +23,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainFragment : Fragment() {
 
     private val viewModel by viewModel<MainViewModel>()
-
-    private val libraryItemClickListener = object : LibraryListAdapter.LibraryItemClickListener {
-        override fun onClick(library: Library) = findNavController()
-            .navigate(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
-
-        override fun onLongClick(library: Library) = findNavController()
-            .navigate(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(library.id))
-
-        override fun countLibraryNotes(library: Library): Int = viewModel.countNotes(library.id)
-    }
-
-    private val adapter = LibraryListAdapter(libraryItemClickListener)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         MainFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -60,16 +49,13 @@ class MainFragment : Fragment() {
     }
 
     private fun MainFragmentBinding.setupState() {
-        rv.adapter = adapter
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
         val layoutItems = listOf(tvLibrariesCount, rv)
 
-        viewModel.layoutManager
-            .onEach { layoutManager -> setupLayoutManager(layoutManager, layoutManagerMenuItem) }
-            .launchIn(lifecycleScope)
-
-        viewModel.libraries
-            .onEach { libraries -> setupLibraries(libraries, layoutItems) }
+        viewModel.state
+            .onEach { state -> setupLibraries(state.libraries, state.layoutManager, state.sortingOrder, state.sorting, layoutItems) }
+            .distinctUntilChangedBy { it.layoutManager }
+            .onEach { state -> setupLayoutManager(state.layoutManager, layoutManagerMenuItem) }
             .launchIn(lifecycleScope)
     }
 
@@ -81,7 +67,7 @@ class MainFragment : Fragment() {
             }
             LayoutManager.Grid -> {
                 layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_agenda_24)
-                rv.layoutManager = GridLayoutManager(requireContext(), 2)
+                rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             }
         }
         rv.visibility = View.INVISIBLE
@@ -91,14 +77,20 @@ class MainFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun MainFragmentBinding.setupLibraries(libraries: List<Library>, layoutItems: List<View>) {
+    private fun MainFragmentBinding.setupLibraries(
+        libraries: List<Library>,
+        layoutManager: LayoutManager,
+        sortingOrder: SortingOrder,
+        sorting: LibraryListSorting,
+        layoutItems: List<View>,
+    ) {
         if (libraries.isEmpty()) {
             layoutItems.forEach { it.visibility = View.GONE }
             tvPlaceHolder.visibility = View.VISIBLE
         } else {
             layoutItems.forEach { it.visibility = View.VISIBLE }
             tvPlaceHolder.visibility = View.GONE
-            adapter.submitList(libraries)
+            setupModels(libraries, layoutManager, sorting, sortingOrder)
             tvLibrariesCount.text = libraries.size.toCountText(
                 resources.stringResource(R.string.library),
                 resources.stringResource(R.string.libraries)
@@ -107,7 +99,7 @@ class MainFragment : Fragment() {
     }
 
     private fun MainFragmentBinding.setupLayoutMangerMenuItem(): Boolean {
-        when (viewModel.layoutManager.value) {
+        when (viewModel.state.value.layoutManager) {
             LayoutManager.Linear -> {
                 viewModel.updateLayoutManager(LayoutManager.Grid)
                 root.snackbar(
@@ -124,6 +116,57 @@ class MainFragment : Fragment() {
             }
         }
         return true
+    }
+
+    private fun MainFragmentBinding.setupModels(
+        libraries: List<Library>,
+        layoutManager: LayoutManager,
+        sorting: LibraryListSorting,
+        sortingOrder: SortingOrder
+    ) {
+        rv.withModels {
+            val itemTouchHelperCallback = LibraryItemTouchHelperCallback(this, layoutManager) { _, viewHolder, target ->
+                val viewHolderModel = viewHolder.model as LibraryItem
+                val targetModel = target.model as LibraryItem
+                viewModel.updateLibraryPosition(viewHolderModel.library, viewHolder.bindingAdapterPosition)
+                viewModel.updateLibraryPosition(targetModel.library, target.bindingAdapterPosition)
+            }
+            val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback).apply {
+                attachToRecyclerView(rv)
+            }
+
+            libraryListSortingItem {
+                id(0)
+                sorting(sorting)
+                sortingOrder(sortingOrder)
+                onClickListener { _ ->
+                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
+                }
+            }
+
+            libraries.forEach { library ->
+                libraryItem {
+                    id(library.id)
+                    library(library)
+                    notesCount(viewModel.countNotes(library.id))
+                    isManualSorting(sorting == LibraryListSorting.Manually)
+                    onClickListener { _ ->
+                        findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
+                    }
+                    onLongClickListener { _ ->
+                        findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(library.id))
+                        true
+                    }
+                    onDragHandleTouchListener { view, event ->
+                        if (event.action == MotionEvent.ACTION_DOWN)
+                            rv.findContainingViewHolder(view)?.let { viewHolder ->
+                                itemTouchHelper.startDrag(viewHolder)
+                            }
+                        view.performClick()
+                    }
+                }
+            }
+        }
     }
 
     private fun MainFragmentBinding.setupThemeMenuItem(): Boolean {

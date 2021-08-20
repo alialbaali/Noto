@@ -27,7 +27,7 @@ class MainDialogFragment : BaseDialogFragment() {
     private fun MainDialogFragmentBinding.setupListeners() {
         tvChangeLibrarySorting.setOnClickListener {
             dismiss()
-            findNavController().navigate(MainDialogFragmentDirections.actionMainDialogFragmentToLibrarySortingDialogFragment())
+            findNavController().navigate(MainDialogFragmentDirections.actionMainDialogFragmentToLibraryListSortingDialogFragment())
         }
 
         tvChangeTheme.setOnClickListener {

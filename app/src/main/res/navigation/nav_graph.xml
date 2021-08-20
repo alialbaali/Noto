@@ -71,6 +71,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_mainFragment_to_libraryListSortingDialogFragment"
+            app:destination="@id/libraryListSortingDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
@@ -99,9 +102,6 @@
         <action
             android:id="@+id/action_libraryFragment_to_libraryDialogFragment"
             app:destination="@id/libraryDialogFragment" />
-        <action
-            android:id="@+id/action_libraryFragment_to_sortingDialogFragment"
-            app:destination="@id/sortingDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/newLibraryDialogFragment"
@@ -216,14 +216,6 @@
             app:destination="@id/confirmationDialogFragment" />
     </dialog>
     <dialog
-        android:id="@+id/sortingDialogFragment"
-        android:name="com.noto.app.SortingDialogFragment"
-        android:label="SortingDialogFragment">
-        <argument
-            android:name="library_id"
-            app:argType="long" />
-    </dialog>
-    <dialog
         android:id="@+id/confirmationDialogFragment"
         android:name="com.noto.app.ConfirmationDialogFragment"
         android:label="ConfirmationDialogFragment">
@@ -255,6 +247,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_mainDialogFragment_to_libraryListSortingDialogFragment"
+            app:destination="@id/libraryListSortingDialogFragment" />
     </dialog>
     <fragment
         android:id="@+id/settingsFragment"
@@ -282,4 +277,8 @@
             android:name="library_id"
             app:argType="long" />
     </dialog>
+    <dialog
+        android:id="@+id/libraryListSortingDialogFragment"
+        android:name="com.noto.app.main.LibraryListSortingDialogFragment"
+        android:label="LibraryListSortingDialogFragment" />
 </navigation>
