@@ -3,12 +3,15 @@ package com.noto.app.main
 import android.os.Bundle
 import android.view.*
 import android.view.animation.AnimationUtils
+import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.R
 import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Library
@@ -23,6 +26,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainFragment : Fragment() {
 
     private val viewModel by viewModel<MainViewModel>()
+
+    private lateinit var epoxyController: EpoxyController
+
+    private lateinit var itemTouchHelper: ItemTouchHelper
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         MainFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -53,7 +60,7 @@ class MainFragment : Fragment() {
         val layoutItems = listOf(tvLibrariesCount, rv)
 
         viewModel.state
-            .onEach { state -> setupLibraries(state.libraries, state.layoutManager, state.sortingOrder, state.sorting, layoutItems) }
+            .onEach { state -> setupLibraries(state.libraries, state.sortingOrder, state.sorting, layoutItems) }
             .distinctUntilChangedBy { it.layoutManager }
             .onEach { state -> setupLayoutManager(state.layoutManager, layoutManagerMenuItem) }
             .launchIn(lifecycleScope)
@@ -75,11 +82,21 @@ class MainFragment : Fragment() {
 
         rv.visibility = View.VISIBLE
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+
+        if (this@MainFragment::epoxyController.isInitialized) {
+            val itemTouchHelperCallback = LibraryItemTouchHelperCallback(epoxyController, layoutManager) { _, viewHolder, target ->
+                val viewHolderModel = viewHolder.model as LibraryItem
+                val targetModel = target.model as LibraryItem
+                viewModel.updateLibraryPosition(viewHolderModel.library, viewHolder.bindingAdapterPosition)
+                viewModel.updateLibraryPosition(targetModel.library, target.bindingAdapterPosition)
+            }
+            itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+                .apply { attachToRecyclerView(rv) }
+        }
     }
 
     private fun MainFragmentBinding.setupLibraries(
         libraries: List<Library>,
-        layoutManager: LayoutManager,
         sortingOrder: SortingOrder,
         sorting: LibraryListSorting,
         layoutItems: List<View>,
@@ -90,7 +107,7 @@ class MainFragment : Fragment() {
         } else {
             layoutItems.forEach { it.visibility = View.VISIBLE }
             tvPlaceHolder.visibility = View.GONE
-            setupModels(libraries, layoutManager, sorting, sortingOrder)
+            setupModels(libraries, sorting, sortingOrder)
             tvLibrariesCount.text = libraries.size.toCountText(
                 resources.stringResource(R.string.library),
                 resources.stringResource(R.string.libraries)
@@ -120,20 +137,11 @@ class MainFragment : Fragment() {
 
     private fun MainFragmentBinding.setupModels(
         libraries: List<Library>,
-        layoutManager: LayoutManager,
         sorting: LibraryListSorting,
         sortingOrder: SortingOrder
     ) {
         rv.withModels {
-            val itemTouchHelperCallback = LibraryItemTouchHelperCallback(this, layoutManager) { _, viewHolder, target ->
-                val viewHolderModel = viewHolder.model as LibraryItem
-                val targetModel = target.model as LibraryItem
-                viewModel.updateLibraryPosition(viewHolderModel.library, viewHolder.bindingAdapterPosition)
-                viewModel.updateLibraryPosition(targetModel.library, target.bindingAdapterPosition)
-            }
-            val itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback).apply {
-                attachToRecyclerView(rv)
-            }
+            epoxyController = this
 
             libraryListSortingItem {
                 id(0)
