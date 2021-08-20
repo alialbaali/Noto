@@ -13,47 +13,32 @@
         <include layout="@layout/base_dialog_fragment" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_sorting_order"
+            android:id="@+id/tv_sorting_by"
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/dialog_item_shape"
-            android:text="@string/sorting_method" />
+            android:clickable="false"
+            android:text="@string/sorting_by" />
 
         <RadioGroup
-            android:id="@+id/rg_sorting_method"
+            android:id="@+id/rg_sorting_by"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_sorting_asc"
+                android:id="@+id/rb_manually"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/asc" />
+                android:text="@string/manually" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_sorting_desc"
+                android:id="@+id/rb_creation_date"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/desc" />
-
-        </RadioGroup>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_sorting_type"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
-            android:text="@string/sorting_type" />
-
-        <RadioGroup
-            android:id="@+id/rg_sorting_type"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:text="@string/creation_date" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_alphabetically"
@@ -63,17 +48,41 @@
                 android:checked="true"
                 android:text="@string/alphabetically" />
 
+        </RadioGroup>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_sorting_order"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:clickable="false"
+            android:text="@string/sorting_order" />
+
+        <RadioGroup
+            android:id="@+id/rg_sorting_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_creation_date"
+                android:id="@+id/rb_sorting_asc"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/creation_date" />
+                android:checked="true"
+                android:text="@string/ascending" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_sorting_desc"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/descending" />
 
         </RadioGroup>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_confirm"
+            android:id="@+id/btn_done"
             style="@style/MaterialButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
