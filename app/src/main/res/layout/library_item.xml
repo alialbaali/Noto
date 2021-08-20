@@ -42,14 +42,26 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginTop="@dimen/spacing_extra_small"
-        android:layout_marginEnd="@dimen/spacing_normal"
         android:layout_marginBottom="@dimen/spacing_normal"
         android:gravity="start"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/ib_drag"
         app:layout_constraintStart_toEndOf="@id/v_color"
         app:layout_constraintTop_toBottomOf="@+id/tv_library_title"
         tools:text="3 Notes" />
+
+    <ImageButton
+        android:id="@+id/ib_drag"
+        android:src="@drawable/ic_round_drag_handle_24"
+        android:background="@android:color/transparent"
+        android:paddingHorizontal="@dimen/spacing_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/drag"
+        app:layout_constraintBottom_toBottomOf="@id/tv_library_notes_count"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_library_notes_count"
+        app:layout_constraintTop_toTopOf="@id/tv_library_notes_count" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
