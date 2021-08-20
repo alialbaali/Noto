@@ -3,6 +3,8 @@ object Libraries {
         const val Koin = "io.insert-koin:koin-android:${Versions.Koin}"
         const val DataStore = "androidx.datastore:datastore-preferences:1.0.0-alpha02"
         const val JavaTime = "com.android.tools:desugar_jdk_libs:${Versions.JavaTime}"
+        const val Epoxy = "com.airbnb.android:epoxy:${Versions.Epoxy}"
+        const val EpoxyProcessor = "com.airbnb.android:epoxy-processor:${Versions.Epoxy}"
     }
 
     object Gradle {
@@ -13,7 +15,6 @@ object Libraries {
 
     object Testing {
         const val KoinTest = "io.insert-koin:koin-test:${Versions.Koin}"
-        const val KoinTestJunit = "io.insert-koin:koin-test-junit4:${Versions.Koin}"
     }
 }
 
@@ -23,6 +24,7 @@ object Versions {
     const val Navigation = "2.3.5"
     const val Android = "7.0.0"
     const val Koin = "3.1.2"
+    const val Epoxy = "4.6.2"
 }
 
 object App {
