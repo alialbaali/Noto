@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LibraryDao : LocalLibraryDataSource {
 
-    @Query("SELECT * FROM libraries ORDER BY id DESC")
+    @Query("SELECT * FROM libraries")
     override fun getLibraries(): Flow<List<Library>>
 
     @Query("SELECT * FROM libraries WHERE id = :libraryId")
