@@ -16,7 +16,7 @@ import com.noto.app.R
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
-import com.noto.app.domain.model.SortingMethod
+import com.noto.app.domain.model.SortingOrder
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toJavaLocalDateTime
@@ -27,11 +27,9 @@ enum class LayoutManager {
     Linear, Grid
 }
 
-inline fun <T> Iterable<T>.sortByMethod(method: SortingMethod, crossinline selector: (T) -> Comparable<*>?): Iterable<T> {
-    return when (method) {
-        SortingMethod.Asc -> sortedWith(compareBy(selector))
-        SortingMethod.Desc -> sortedWith(compareByDescending(selector))
-    }
+inline fun <T> List<T>.sortByOrder(sortingOrder: SortingOrder, crossinline selector: (T) -> Comparable<*>?): List<T> = when (sortingOrder) {
+    SortingOrder.Ascending -> sortedWith(compareBy(selector))
+    SortingOrder.Descending -> sortedWith(compareByDescending(selector))
 }
 
 fun Note.countWords(single: String, plural: String) = if (body.isBlank())
