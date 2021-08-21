@@ -5,8 +5,7 @@
     android:id="@+id/cl"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/spacing_normal"
-    android:layout_marginVertical="@dimen/spacing_small"
+    android:layout_margin="@dimen/spacing_small"
     android:background="@drawable/note_item_shape"
     android:padding="@dimen/spacing_normal">
 
