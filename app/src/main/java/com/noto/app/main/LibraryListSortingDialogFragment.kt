@@ -40,16 +40,16 @@ class LibraryListSortingDialogFragment : BaseDialogFragment() {
                     SortingOrder.Descending -> rbSortingDesc.isChecked = true
                 }
                 when (state.sorting) {
-                    LibraryListSorting.Alphabetically -> {
-                        rbAlphabetically.isChecked = true
+                    LibraryListSorting.Alphabetical -> {
+                        rbAlphabetical.isChecked = true
                         enableSortingOrder()
                     }
                     LibraryListSorting.CreationDate -> {
                         rbCreationDate.isChecked = true
                         enableSortingOrder()
                     }
-                    LibraryListSorting.Manually -> {
-                        rbManually.isChecked = true
+                    LibraryListSorting.Manual -> {
+                        rbManual.isChecked = true
                         disableSortingOrder()
                     }
                 }
@@ -58,9 +58,9 @@ class LibraryListSortingDialogFragment : BaseDialogFragment() {
 
         rbSortingAsc.setOnClickListener { viewModel.updateSortingOrder(SortingOrder.Ascending) }
         rbSortingDesc.setOnClickListener { viewModel.updateSortingOrder(SortingOrder.Descending) }
-        rbManually.setOnClickListener { viewModel.updateSorting(LibraryListSorting.Manually) }
+        rbManual.setOnClickListener { viewModel.updateSorting(LibraryListSorting.Manual) }
         rbCreationDate.setOnClickListener { viewModel.updateSorting(LibraryListSorting.CreationDate) }
-        rbAlphabetically.setOnClickListener { viewModel.updateSorting(LibraryListSorting.Alphabetically) }
+        rbAlphabetical.setOnClickListener { viewModel.updateSorting(LibraryListSorting.Alphabetical) }
 
         btnDone.setOnClickListener {
             dismiss()

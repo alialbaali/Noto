@@ -5,7 +5,7 @@ enum class NotoColor {
     Yellow, Orange, Green, Brown, BlueGray, Teal,
 }
 
-enum class LibraryListSorting { Manually, CreationDate, Alphabetically, }
+enum class LibraryListSorting { Manual, CreationDate, Alphabetical, }
 
 enum class SortingOrder { Ascending, Descending, }
 

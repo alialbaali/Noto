@@ -47,9 +47,9 @@ class MainViewModel(
             State(
                 libraries.sortByOrder(sortingOrder) {
                     when (sorting) {
-                        LibraryListSorting.Manually -> it.position
+                        LibraryListSorting.Manual -> it.position
                         LibraryListSorting.CreationDate -> it.creationDate
-                        LibraryListSorting.Alphabetically -> it.title
+                        LibraryListSorting.Alphabetical -> it.title
                     }
                 },
                 layoutManager,

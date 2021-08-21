@@ -136,7 +136,6 @@ class MainFragment : Fragment() {
             libraryListSortingItem {
                 id(0)
                 sorting(sorting)
-                sortingOrder(sortingOrder)
                 onClickListener { _ ->
                     findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
                 }
@@ -147,7 +146,7 @@ class MainFragment : Fragment() {
                     id(library.id)
                     library(library)
                     notesCount(viewModel.countNotes(library.id))
-                    isManualSorting(sorting == LibraryListSorting.Manually)
+                    isManualSorting(sorting == LibraryListSorting.Manual)
                     onClickListener { _ ->
                         findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
                     }

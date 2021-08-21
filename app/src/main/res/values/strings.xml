@@ -19,9 +19,9 @@
     <string name="words">Words</string>
     <string name="word">Word</string>
     <string name="confirmation_dialog">Please confirm this action!</string>
-    <string name="alphabetically">Alphabetically</string>
+    <string name="alphabetical">Alphabetical</string>
     <string name="creation_date">Creation date</string>
-    <string name="manually">Manually</string>
+    <string name="manual">Manual</string>
     <string name="descending">Descending</string>
     <string name="ascending">Ascending</string>
     <string name="settings">Settings</string>
@@ -68,7 +68,6 @@
     <string name="duplicate_note">Duplicate note</string>
     <string name="sorting">Sorting</string>
     <string name="sorting_order">Sorting order</string>
-    <string name="sorting_by">Sorting by</string>
     <string name="save_to_noto">Save to Noto</string>
     <string name="unarchive_note">Unarchive note</string>
     <string name="notes">Notes</string>

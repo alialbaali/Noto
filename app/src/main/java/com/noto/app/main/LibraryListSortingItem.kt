@@ -21,32 +21,16 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
     lateinit var sorting: LibraryListSorting
 
     @EpoxyAttribute
-    lateinit var sortingOrder: SortingOrder
-
-    @EpoxyAttribute
     lateinit var onClickListener: View.OnClickListener
 
     @SuppressLint("SetTextI18n")
     override fun bind(holder: Holder) {
         val resources = holder.binding.root.resources
-        val ascendingText = resources.stringResource(R.string.ascending)
-        val descendingText = resources.stringResource(R.string.descending)
+        val sortingText = resources.stringResource(R.string.sorting).lowercase()
         holder.binding.tvSorting.text = when (sorting) {
-            LibraryListSorting.Manually -> resources.stringResource(R.string.manually)
-            LibraryListSorting.CreationDate -> {
-                val text = resources.stringResource(R.string.creation_date)
-                when (sortingOrder) {
-                    SortingOrder.Ascending -> "$text - $ascendingText"
-                    SortingOrder.Descending -> "$text - $descendingText"
-                }
-            }
-            LibraryListSorting.Alphabetically -> {
-                val text = resources.stringResource(R.string.alphabetically)
-                when (sortingOrder) {
-                    SortingOrder.Ascending -> "$text - $ascendingText"
-                    SortingOrder.Descending -> "$text - $descendingText"
-                }
-            }
+            LibraryListSorting.Manual -> "${resources.stringResource(R.string.manual)} $sortingText"
+            LibraryListSorting.CreationDate -> "${resources.stringResource(R.string.creation_date)} $sortingText"
+            LibraryListSorting.Alphabetical -> "${resources.stringResource(R.string.alphabetical)} $sortingText"
         }
         holder.binding.tvSorting.setOnClickListener(onClickListener)
         holder.binding.root.rootView.layoutParams.also {
