@@ -22,6 +22,7 @@ import com.noto.app.library.LibraryViewModel
 import com.noto.app.library.NotoColorListAdapter
 import com.noto.app.note.NoteViewModel
 import com.noto.app.util.LayoutManager
+import com.noto.app.util.getArchiveText
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -368,7 +369,7 @@ class AppActivityTest : KoinTest {
             .check(matches(withText(R.string.note_is_archived)))
             .check(matches(isDisplayed()))
 
-        onView(withContentDescription(R.string.archived_notes))
+        onView(withContentDescription(libraryViewModel.library.value.getArchiveText("Archive")))
             .perform(click())
 
         onView(withId(R.id.rv))

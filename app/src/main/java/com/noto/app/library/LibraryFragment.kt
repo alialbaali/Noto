@@ -59,6 +59,7 @@ class LibraryFragment : Fragment() {
 
     private fun LibraryFragmentBinding.setupState() {
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
+        val archiveMenuItem = bab.menu.findItem(R.id.archive)
         val layoutItems = listOf(tvLibraryNotesCount, rv)
         rv.adapter = adapter
 
@@ -68,6 +69,11 @@ class LibraryFragment : Fragment() {
                 setupLibraryColors(library.color)
                 setupLayoutManager(library.layoutManager, layoutManagerMenuItem)
                 tb.title = library.title
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val text = library.getArchiveText(resources.stringResource(R.string.archive))
+                    archiveMenuItem.contentDescription = text
+                    archiveMenuItem.tooltipText = text
+                }
             }
             .launchIn(lifecycleScope)
 
@@ -91,7 +97,7 @@ class LibraryFragment : Fragment() {
 
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.archived_notos -> setupArchivedNotesMenuItem()
+                R.id.archive -> setupArchivedNotesMenuItem()
                 R.id.layout_manager -> setupLayoutManagerMenuItem()
                 R.id.search -> setupSearchMenuItem()
                 else -> false

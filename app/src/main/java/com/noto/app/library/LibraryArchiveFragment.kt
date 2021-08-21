@@ -87,7 +87,7 @@ class LibraryArchiveFragment : Fragment() {
         val color = resources.colorResource(library.color.toResource())
         tb.navigationIcon?.mutate()?.setTint(color)
         tvLibraryNotesCount.setTextColor(color)
-        tb.title = "${library.title} ${getString(R.string.archived_notes).replaceFirstChar { it.lowercase() }}"
+        tb.title = library.getArchiveText(resources.stringResource(R.string.archive))
         tb.setTitleTextColor(color)
     }
 

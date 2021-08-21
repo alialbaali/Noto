@@ -78,7 +78,7 @@
     <string name="note_unarchived">Note has been unarchived.</string>
     <string name="reminder">Reminder</string>
     <string name="new_note_reminder">New note reminder</string>
-    <string name="archived_notes">Archived notes</string>
+    <string name="archive">Archive</string>
     <string name="copy_note_to_clipboard">Copy note to clipboard</string>
     <string name="copy_note_to">Copy note to…</string>
     <string name="note_is_copied">Note has been copied.</string>

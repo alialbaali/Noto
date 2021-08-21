@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_round_back_24"
-            app:title="@string/archived_notes">
+            app:title="@string/archive">
 
             <TextView
                 android:id="@+id/tv_library_notes_count"

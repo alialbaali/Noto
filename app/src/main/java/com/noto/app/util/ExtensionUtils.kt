@@ -32,6 +32,8 @@ inline fun <T> List<T>.sortByOrder(sortingOrder: SortingOrder, crossinline selec
     SortingOrder.Descending -> sortedWith(compareByDescending(selector))
 }
 
+fun Library.getArchiveText(archiveText: String) = "$title ${archiveText.lowercase()}"
+
 fun Note.countWords(single: String, plural: String) = if (body.isBlank())
     "0 $plural".lowercase()
 else body.split("\\s+".toRegex())
