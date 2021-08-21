@@ -1,10 +1,7 @@
 package com.noto.app.data.database
 
 import android.content.Context
-import androidx.room.Database
-import androidx.room.Room
-import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.noto.app.data.database.migration.*
 import com.noto.app.data.source.LabelDao
 import com.noto.app.data.source.LibraryDao
@@ -21,10 +18,12 @@ private const val NOTO_DATABASE = "Noto Database"
     InstantConverter::class,
     SortingMethodConverter::class,
     SortingTypeConverter::class,
+    LayoutManagerConvertor::class,
 )
 @Database(
     entities = [Note::class, Library::class, Label::class, NoteLabel::class],
-    version = 6,
+    version = 7,
+    autoMigrations = [AutoMigration(from = 6, to = 7)],
 )
 abstract class NotoDatabase : RoomDatabase() {
 

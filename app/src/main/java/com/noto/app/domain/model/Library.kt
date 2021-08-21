@@ -3,6 +3,7 @@ package com.noto.app.domain.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.noto.app.util.LayoutManager
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
@@ -29,5 +30,8 @@ data class Library(
     val sortingType: SortingType = SortingType.CreationDate,
 
     @ColumnInfo(name = "sorting_method")
-    val sortingMethod: SortingMethod = SortingMethod.Desc
+    val sortingMethod: SortingMethod = SortingMethod.Desc,
+
+    @ColumnInfo(name = "layout_manager", defaultValue = "0")
+    val layoutManager: LayoutManager = LayoutManager.Linear,
 )

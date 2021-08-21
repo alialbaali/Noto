@@ -5,9 +5,8 @@ import androidx.room.TypeConverter
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.SortingMethod
 import com.noto.app.domain.model.SortingType
+import com.noto.app.util.LayoutManager
 import kotlinx.datetime.Instant
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 
 object NotoColorConverter {
 
@@ -54,5 +53,17 @@ object SortingTypeConverter {
     @TypeConverter
     @JvmStatic
     fun toEnum(ordinal: Int): SortingType = SortingType.values().first { sortingType -> sortingType.ordinal == ordinal }
+
+}
+
+object LayoutManagerConvertor {
+
+    @TypeConverter
+    @JvmStatic
+    fun toOrdinal(layoutManager: LayoutManager): Int = layoutManager.ordinal
+
+    @TypeConverter
+    @JvmStatic
+    fun toEnum(ordinal: Int): LayoutManager = LayoutManager.values().first { layoutManager -> layoutManager.ordinal == ordinal }
 
 }
