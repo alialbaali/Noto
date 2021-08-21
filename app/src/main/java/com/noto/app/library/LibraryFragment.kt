@@ -66,12 +66,9 @@ class LibraryFragment : Fragment() {
             .filterNotNull()
             .onEach { library ->
                 setupLibraryColors(library.color)
+                setupLayoutManager(library.layoutManager, layoutManagerMenuItem)
                 tb.title = library.title
             }
-            .launchIn(lifecycleScope)
-
-        viewModel.layoutManager
-            .onEach { layoutManager -> setupLayoutManager(layoutManager, layoutManagerMenuItem) }
             .launchIn(lifecycleScope)
 
         viewModel.notes
@@ -172,7 +169,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupLayoutManagerMenuItem(): Boolean {
-        when (viewModel.layoutManager.value) {
+        when (viewModel.library.value.layoutManager) {
             LayoutManager.Linear -> {
                 viewModel.updateLayoutManager(LayoutManager.Grid)
                 root.snackbar(getString(R.string.layout_is_staggered_mode), anchorView = fab)

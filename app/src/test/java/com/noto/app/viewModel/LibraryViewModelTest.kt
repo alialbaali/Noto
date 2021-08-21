@@ -22,6 +22,7 @@ import io.kotest.matchers.string.shouldBeBlank
 import io.kotest.matchers.string.shouldBeEqualIgnoringCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.core.parameter.parametersOf
@@ -99,13 +100,15 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
         }
 
         "get layout manager should return linear by default" {
-            viewModel.layoutManager
+            viewModel.library
+                .map { it.layoutManager }
                 .first() shouldBe LayoutManager.Linear
         }
 
         "update layout manager to grid" {
             viewModel.updateLayoutManager(LayoutManager.Grid)
-            viewModel.layoutManager
+            viewModel.library
+                .map { it.layoutManager }
                 .first() shouldBe LayoutManager.Grid
         }
 

@@ -71,11 +71,10 @@ class LibraryArchiveFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         viewModel.library
-            .onEach { library -> setupLibrary(library) }
-            .launchIn(lifecycleScope)
-
-        viewModel.layoutManager
-            .onEach { layoutManager -> setupLayoutManger(layoutManager) }
+            .onEach { library ->
+                setupLibrary(library)
+                setupLayoutManger(library.layoutManager)
+            }
             .launchIn(lifecycleScope)
     }
 

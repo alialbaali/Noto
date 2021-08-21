@@ -10,8 +10,6 @@ import com.noto.app.util.LayoutManager
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-private const val LayoutManagerKey = "Library_Layout_Manager"
-
 class LibraryViewModel(
     private val libraryRepository: LibraryRepository,
     private val noteRepository: NoteRepository,
@@ -27,10 +25,6 @@ class LibraryViewModel(
 
     val archivedNotes = noteRepository.getArchivedNotesByLibraryId(libraryId)
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
-
-    val layoutManager = storage.get(LayoutManagerKey)
-        .map { LayoutManager.valueOf(it) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, LayoutManager.Linear)
 
     private val mutableNotoColors = MutableStateFlow(NotoColor.values().associateWith { it == library.value.color }.toList())
     val notoColors get() = mutableNotoColors.asStateFlow()
@@ -70,7 +64,7 @@ class LibraryViewModel(
     }
 
     fun updateLayoutManager(value: LayoutManager) = viewModelScope.launch {
-        storage.put(LayoutManagerKey, value.toString())
+        libraryRepository.updateLibrary(library.value.copy(layoutManager = value))
     }
 
     fun searchNotes(term: String) = viewModelScope.launch {

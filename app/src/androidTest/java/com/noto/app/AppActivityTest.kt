@@ -192,7 +192,7 @@ class AppActivityTest : KoinTest {
         onView(withContentDescription(R.string.view))
             .perform(click())
 
-        assertTrue { libraryViewModel.layoutManager.value == LayoutManager.Linear }
+        assertTrue { libraryViewModel.library.value.layoutManager == LayoutManager.Linear }
     }
 
     @Test
