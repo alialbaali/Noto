@@ -38,18 +38,6 @@ class LibraryFragment : Fragment() {
 
     private val args by navArgs<LibraryFragmentArgs>()
 
-    private val noteItemClickListener by lazy {
-        object : NoteListAdapter.NoteItemClickListener {
-            override fun onClick(note: Note) = findNavController()
-                .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(note.libraryId, note.id))
-
-            override fun onLongClick(note: Note) = findNavController()
-                .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(note.libraryId, note.id, R.id.libraryFragment))
-        }
-    }
-
-    private val adapter = NoteListAdapter(noteItemClickListener)
-
     private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
@@ -62,7 +50,6 @@ class LibraryFragment : Fragment() {
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
         val layoutItems = listOf(tvLibraryNotesCount, rv)
-        rv.adapter = adapter
 
         viewModel.library
             .filterNotNull()
@@ -166,7 +153,29 @@ class LibraryFragment : Fragment() {
         } else {
             layoutItems.forEach { it.visibility = View.VISIBLE }
             tvPlaceHolder.visibility = View.GONE
-            adapter.submitList(notes)
+            rv.withModels {
+                notes.forEach { note ->
+                    noteItem {
+                        id(note.id)
+                        note(note)
+                        onClickListener { _ ->
+                            findNavController()
+                                .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(note.libraryId, note.id))
+                        }
+                        onLongClickListener { _ ->
+                            findNavController()
+                                .navigate(
+                                    LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
+                                        note.libraryId,
+                                        note.id,
+                                        R.id.libraryFragment
+                                    )
+                                )
+                            true
+                        }
+                    }
+                }
+            }
         }
     }
 

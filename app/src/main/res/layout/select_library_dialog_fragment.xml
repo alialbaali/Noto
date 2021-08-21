@@ -10,6 +10,7 @@
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
+        android:paddingHorizontal="@dimen/spacing_small"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/library_item" />

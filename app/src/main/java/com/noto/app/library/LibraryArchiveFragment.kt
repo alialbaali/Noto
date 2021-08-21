@@ -27,29 +27,9 @@ class LibraryArchiveFragment : Fragment() {
 
     private val args by navArgs<LibraryArchiveFragmentArgs>()
 
-    private val noteItemClickListener by lazy {
-        object : NoteListAdapter.NoteItemClickListener {
-            override fun onClick(note: Note) = findNavController()
-                .navigate(LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(args.libraryId, note.id))
-
-            override fun onLongClick(note: Note) =
-                findNavController()
-                    .navigate(
-                        LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
-                            args.libraryId,
-                            note.id,
-                            R.id.libraryArchiveFragment
-                        )
-                    )
-        }
-    }
-
-    private val adapter = NoteListAdapter(noteItemClickListener)
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
             setupListeners()
-            setupRV()
             setupState()
         }
 
@@ -57,11 +37,6 @@ class LibraryArchiveFragment : Fragment() {
         tb.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-    }
-
-    private fun LibraryArchiveFragmentBinding.setupRV() {
-        rv.adapter = adapter
-        rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
     private fun LibraryArchiveFragmentBinding.setupState() {
@@ -99,7 +74,34 @@ class LibraryArchiveFragment : Fragment() {
         } else {
             tvPlaceHolder.visibility = View.GONE
             layoutItems.forEach { it.visibility = View.VISIBLE }
-            adapter.submitList(archivedNotes)
+            rv.withModels {
+                archivedNotes.forEach { archivedNote ->
+                    noteItem {
+                        id(archivedNote.id)
+                        note(archivedNote)
+                        onClickListener { _ ->
+                            findNavController()
+                                .navigate(
+                                    LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
+                                        archivedNote.libraryId,
+                                        archivedNote.id
+                                    )
+                                )
+                        }
+                        onLongClickListener { _ ->
+                            findNavController()
+                                .navigate(
+                                    LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
+                                        archivedNote.libraryId,
+                                        archivedNote.id,
+                                        R.id.libraryArchiveFragment
+                                    )
+                                )
+                            true
+                        }
+                    }
+                }
+            }
             tvLibraryNotesCount.text = archivedNotes.size.toCountText(
                 resources.stringResource(R.string.note),
                 resources.stringResource(R.string.notes)
