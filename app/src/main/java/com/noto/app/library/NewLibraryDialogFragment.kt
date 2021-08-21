@@ -14,6 +14,7 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
 import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -28,18 +29,11 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
-    private val listener = NotoColorListAdapter.NotoColorClickListener {
-        viewModel.selectNotoColor(it)
-    }
-
-    private val adapter = NotoColorListAdapter(listener)
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NewLibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
             val baseDialogFragment = setupBaseDialogFragment()
             setupState(baseDialogFragment)
             setupListeners()
-            setupRV()
         }
 
     private fun NewLibraryDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
@@ -51,12 +45,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun NewLibraryDialogFragmentBinding.setupRV() {
-        rv.adapter = adapter
-        rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-    }
-
     private fun NewLibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
+        rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         et.requestFocus()
         imm.showKeyboard()
 
@@ -65,7 +55,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
 
         viewModel.notoColors
-            .onEach { notoColors -> adapter.submitList(notoColors) }
+            .onEach { pairs -> setupNotoColors(pairs) }
             .launchIn(lifecycleScope)
     }
 
@@ -91,4 +81,18 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         baseDialogFragment.vHead.background.setTint(color)
     }
 
+    private fun NewLibraryDialogFragmentBinding.setupNotoColors(pairs: List<Pair<NotoColor, Boolean>>) {
+        rv.withModels {
+            pairs.forEach { pair ->
+                notoColorItem {
+                    id(pair.first.ordinal)
+                    notoColor(pair.first)
+                    isChecked(pair.second)
+                    onClickListener { _ ->
+                        viewModel.selectNotoColor(pair.first)
+                    }
+                }
+            }
+        }
+    }
 }
