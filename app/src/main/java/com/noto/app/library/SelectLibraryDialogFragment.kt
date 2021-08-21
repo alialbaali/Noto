@@ -16,7 +16,7 @@ import com.noto.app.databinding.SelectLibraryDialogFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.main.MainViewModel
 import com.noto.app.main.libraryItem
-import com.noto.app.util.LayoutManager
+import com.noto.app.domain.model.LayoutManager
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn

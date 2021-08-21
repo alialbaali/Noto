@@ -3,7 +3,6 @@ package com.noto.app.domain.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.noto.app.util.LayoutManager
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 

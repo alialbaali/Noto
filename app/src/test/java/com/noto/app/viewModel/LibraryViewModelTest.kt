@@ -9,7 +9,7 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.fakeLocalDataSourceModule
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.testRepositoryModule
-import com.noto.app.util.LayoutManager
+import com.noto.app.domain.model.LayoutManager
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.collections.shouldBeEmpty

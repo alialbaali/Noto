@@ -8,7 +8,7 @@ import com.noto.app.domain.model.SortingOrder
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
-import com.noto.app.util.LayoutManager
+import com.noto.app.domain.model.LayoutManager
 import com.noto.app.util.sortByOrder
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

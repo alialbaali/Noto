@@ -14,6 +14,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.R
 import com.noto.app.databinding.MainFragmentBinding
+import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.LibraryListSorting
 import com.noto.app.domain.model.SortingOrder

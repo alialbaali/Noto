@@ -21,7 +21,7 @@ import com.noto.app.domain.source.LocalStorage
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.library.NotoColorListAdapter
 import com.noto.app.note.NoteViewModel
-import com.noto.app.util.LayoutManager
+import com.noto.app.domain.model.LayoutManager
 import com.noto.app.util.getArchiveText
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

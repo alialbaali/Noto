@@ -5,7 +5,7 @@ import androidx.room.TypeConverter
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.SortingMethod
 import com.noto.app.domain.model.SortingType
-import com.noto.app.util.LayoutManager
+import com.noto.app.domain.model.LayoutManager
 import kotlinx.datetime.Instant
 
 object NotoColorConverter {

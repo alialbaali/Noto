@@ -6,15 +6,13 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.fakeLocalDataSourceModule
 import com.noto.app.main.MainViewModel
 import com.noto.app.testRepositoryModule
-import com.noto.app.util.LayoutManager
+import com.noto.app.domain.model.LayoutManager
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.ints.shouldBeExactly
 import io.kotest.matchers.shouldBe
-import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.take
 import org.koin.core.component.get
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin

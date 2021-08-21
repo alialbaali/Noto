@@ -23,10 +23,6 @@ import kotlinx.datetime.toJavaLocalDateTime
 import kotlinx.datetime.toLocalDateTime
 import java.time.format.DateTimeFormatter
 
-enum class LayoutManager {
-    Linear, Grid
-}
-
 inline fun <T> List<T>.sortByOrder(sortingOrder: SortingOrder, crossinline selector: (T) -> Comparable<*>?): List<T> = when (sortingOrder) {
     SortingOrder.Ascending -> sortedWith(compareBy(selector))
     SortingOrder.Descending -> sortedWith(compareByDescending(selector))

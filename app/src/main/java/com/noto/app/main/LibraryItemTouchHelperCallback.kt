@@ -4,7 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyModelTouchCallback
-import com.noto.app.util.LayoutManager
+import com.noto.app.domain.model.LayoutManager
 
 class LibraryItemTouchHelperCallback(
     epoxyController: EpoxyController,
