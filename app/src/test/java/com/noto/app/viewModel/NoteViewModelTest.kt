@@ -21,6 +21,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldBeBlank
 import io.kotest.matchers.string.shouldBeEqualIgnoringCase
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Clock
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
@@ -52,7 +53,8 @@ class NoteViewModelTest : StringSpec(), KoinTest {
         }
 
         "get library should return library with matching id" {
-            val library = viewModel.library
+            val library = viewModel.state
+                .map { it.library }
                 .first()
             library.id shouldBeExactly 1
             library.title shouldBeEqualIgnoringCase "Work"
@@ -60,14 +62,16 @@ class NoteViewModelTest : StringSpec(), KoinTest {
 
         "get note should return a default note when note id is 0" {
             viewModel = get { parametersOf(1L, 0L) }
-            val note = viewModel.note
+            val note = viewModel.state
+                .map { it.note }
                 .first()
             note.id shouldBeExactly 0L
             note.title.shouldBeBlank()
         }
 
         "get note should return a note with matching id" {
-            val note = viewModel.note
+            val note = viewModel.state
+                .map { it.note }
                 .first()
             note.id shouldBeExactly 1L
             note.title shouldBeEqualIgnoringCase "Title"

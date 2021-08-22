@@ -19,21 +19,22 @@ class NoteViewModel(
     private val body: String?,
 ) : ViewModel() {
 
-    val library = libraryRepository.getLibraryById(libraryId)
-        .stateIn(viewModelScope, SharingStarted.Lazily, Library(position = 0))
-
-    private val mutableNote = MutableStateFlow(Note(noteId, libraryId, position = 0, body = body ?: ""))
-    val note get() = mutableNote.asStateFlow()
+    private val mutableState = MutableStateFlow(State(Library(position = 0), Note(noteId, libraryId, position = 0, body = body ?: "")))
+    val state get() = mutableState.asStateFlow()
 
     init {
-        if (noteId != 0L)
+        combine(
+            libraryRepository.getLibraryById(libraryId)
+                .filterNotNull(),
             noteRepository.getNoteById(noteId)
-                .onEach { mutableNote.value = it }
-                .launchIn(viewModelScope)
+                .onStart { emit(Note(noteId, libraryId, position = 0, body = body ?: "")) }
+                .filterNotNull(),
+        ) { library, note -> mutableState.value = State(library, note) }
+            .launchIn(viewModelScope)
     }
 
     fun createOrUpdateNote(title: String, body: String) = viewModelScope.launch {
-        val note = note.value.copy(
+        val note = state.value.note.copy(
             title = title.trim(),
             body = body.trim(),
         )
@@ -46,29 +47,36 @@ class NoteViewModel(
             noteRepository.deleteNote(note)
     }
 
-    fun deleteNote() = viewModelScope.launch { noteRepository.deleteNote(note.value) }
+    fun deleteNote() = viewModelScope.launch {
+        noteRepository.deleteNote(state.value.note)
+    }
 
     fun toggleNoteIsArchived() = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(isArchived = !note.value.isArchived))
+        noteRepository.updateNote(state.value.note.copy(isArchived = !state.value.note.isArchived))
     }
 
     fun toggleNoteIsStarred() = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(isStarred = !note.value.isStarred))
+        noteRepository.updateNote(state.value.note.copy(isStarred = !state.value.note.isStarred))
     }
 
     fun setNoteReminder(instant: Instant?) = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(reminderDate = instant))
+        noteRepository.updateNote(state.value.note.copy(reminderDate = instant))
     }
 
     fun moveNote(libraryId: Long) = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(libraryId = libraryId))
+        noteRepository.updateNote(state.value.note.copy(libraryId = libraryId))
     }
 
     fun copyNote(libraryId: Long) = viewModelScope.launch {
-        noteRepository.createNote(note.value.copy(id = 0, libraryId = libraryId))
+        noteRepository.createNote(state.value.note.copy(id = 0, libraryId = libraryId))
     }
 
     fun duplicateNote() = viewModelScope.launch {
-        noteRepository.createNote(note.value.copy(id = 0, reminderDate = null))
+        noteRepository.createNote(state.value.note.copy(id = 0, reminderDate = null))
     }
+
+    data class State(
+        val library: Library,
+        val note: Note,
+    )
 }

@@ -57,12 +57,11 @@ class NoteDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        viewModel.library
-            .onEach { library -> setupLibrary(library, baseDialogFragment) }
-            .launchIn(lifecycleScope)
-
-        viewModel.note
-            .onEach { note -> setupNote(note) }
+        viewModel.state
+            .onEach { state ->
+                setupLibrary(state.library, baseDialogFragment)
+                setupNote(state.note)
+            }
             .launchIn(lifecycleScope)
     }
 
@@ -74,7 +73,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             dismiss()
             viewModel.toggleNoteIsArchived()
 
-            val resource = if (viewModel.note.value.isArchived)
+            val resource = if (viewModel.state.value.note.isArchived)
                 R.string.note_unarchived
             else
                 R.string.note_is_archived
@@ -106,7 +105,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvStarNote.setOnClickListener {
             dismiss()
             viewModel.toggleNoteIsStarred()
-            val resource = if (viewModel.note.value.isStarred)
+            val resource = if (viewModel.state.value.note.isStarred)
                 R.string.note_is_un_starred
             else
                 R.string.note_is_starred
@@ -115,7 +114,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvCopyToClipboard.setOnClickListener {
             dismiss()
-            val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
+            val clipData = ClipData.newPlainText(viewModel.state.value.library.title, viewModel.state.value.note.format())
             clipboardManager.setPrimaryClip(clipData)
             parentView.snackbar(getString(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
         }
@@ -152,7 +151,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvShareNote.setOnClickListener {
             dismiss()
-            launchShareNoteIntent(viewModel.note.value)
+            launchShareNoteIntent(viewModel.state.value.note)
         }
 
         tvExportNote.setOnClickListener {
@@ -167,8 +166,8 @@ class NoteDialogFragment : BaseDialogFragment() {
                 parentView.snackbar(resources.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
                 findNavController().popBackStack(args.destination, false)
                 dismiss()
-                if (viewModel.note.value.reminderDate != null)
-                    alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id)
+                if (viewModel.state.value.note.reminderDate != null)
+                    alarmManager.cancelAlarm(requireContext(), viewModel.state.value.note.id)
                 viewModel.deleteNote()
             }
 
@@ -186,7 +185,7 @@ class NoteDialogFragment : BaseDialogFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
-                val documentUri = requireContext().exportNote(uri, viewModel.library.value, viewModel.note.value)
+                val documentUri = requireContext().exportNote(uri, viewModel.state.value.library, viewModel.state.value.note)
                 val parentView = requireParentFragment().requireView()
                 val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
                 val message = resources.stringResource(R.string.note_is_exported) + " ${documentUri?.directoryPath}."

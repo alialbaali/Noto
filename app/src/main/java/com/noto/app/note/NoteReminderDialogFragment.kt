@@ -68,7 +68,7 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
                     .also { viewModel.setNoteReminder(it) }
                     .toEpochMilliseconds()
                     .also {
-                        val note = viewModel.note.value
+                        val note = viewModel.state.value.note
                         alarmManager.createAlarm(requireContext(), note.libraryId, note.id, it)
                     }
             }, startHour, startMinute, is24HourFormat)
@@ -97,22 +97,21 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
         }
 
         til.setEndIconOnClickListener {
-            if (viewModel.note.value.reminderDate == null) {
+            if (viewModel.state.value.note.reminderDate == null) {
                 showDateTimeDialog()
             } else {
-                alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id)
+                alarmManager.cancelAlarm(requireContext(), viewModel.state.value.note.id)
                 viewModel.setNoteReminder(null)
             }
         }
     }
 
     private fun NoteReminderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        viewModel.note
-            .onEach { note -> setupNote(note, baseDialogFragment) }
-            .launchIn(lifecycleScope)
-
-        viewModel.library
-            .onEach { library -> setupLibrary(library, baseDialogFragment) }
+        viewModel.state
+            .onEach { state ->
+                setupLibrary(state.library, baseDialogFragment)
+                setupNote(state.note, baseDialogFragment)
+            }
             .launchIn(lifecycleScope)
     }
 

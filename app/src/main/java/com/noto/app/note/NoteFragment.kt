@@ -21,7 +21,7 @@ import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -52,13 +52,11 @@ class NoteFragment : Fragment() {
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
         val archiveMenuItem = bab.menu.findItem(R.id.archive_note)
 
-        viewModel.note
-            .filterNotNull()
-            .onEach { note -> setupNote(note, archiveMenuItem) }
-            .launchIn(lifecycleScope)
-
-        viewModel.library
-            .onEach { library -> setupLibrary(library) }
+        viewModel.state
+            .onEach { state ->
+                setupLibrary(state.library)
+                setupNote(state.note, archiveMenuItem)
+            }
             .launchIn(lifecycleScope)
     }
 
@@ -102,11 +100,11 @@ class NoteFragment : Fragment() {
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.share_noto -> {
-                    launchShareNoteIntent(viewModel.note.value)
+                    launchShareNoteIntent(viewModel.state.value.note)
                     true
                 }
                 R.id.archive_note -> {
-                    if (viewModel.note.value.isArchived) {
+                    if (viewModel.state.value.note.isArchived) {
                         viewModel.toggleNoteIsArchived()
                         root.snackbar(getString(R.string.note_unarchived), anchorView = fab)
                     } else {
@@ -149,7 +147,7 @@ class NoteFragment : Fragment() {
         if (note.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
         else archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_archive_24)
 
-        val color = viewModel.library.value.color.toResource()
+        val color = viewModel.state.value.library.color.toResource()
         val resource = resources.colorResource(color)
         archiveMenuItem.icon?.mutate()?.setTint(resource)
 

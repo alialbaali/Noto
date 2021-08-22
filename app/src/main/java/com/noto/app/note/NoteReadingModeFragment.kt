@@ -45,13 +45,11 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupState() {
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
 
-        viewModel.note
-            .filterNotNull()
-            .onEach { note -> setupNote(note) }
-            .launchIn(lifecycleScope)
-
-        viewModel.library
-            .onEach { library -> setupLibrary(library) }
+        viewModel.state
+            .onEach { state ->
+                setupLibrary(state.library)
+                setupNote(state.note)
+            }
             .launchIn(lifecycleScope)
     }
 
