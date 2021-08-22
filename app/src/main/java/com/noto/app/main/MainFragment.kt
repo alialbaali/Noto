@@ -137,6 +137,7 @@ class MainFragment : Fragment() {
             libraryListSortingItem {
                 id(0)
                 sorting(sorting)
+                sortingOrder(sortingOrder)
                 onClickListener { _ ->
                     findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
                 }

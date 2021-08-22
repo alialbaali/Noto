@@ -21,6 +21,9 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
     lateinit var sorting: LibraryListSorting
 
     @EpoxyAttribute
+    lateinit var sortingOrder: SortingOrder
+
+    @EpoxyAttribute
     lateinit var onClickListener: View.OnClickListener
 
     @SuppressLint("SetTextI18n")
@@ -37,6 +40,14 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
             if (it != null && it is StaggeredGridLayoutManager.LayoutParams)
                 it.isFullSpan = true
         }
+        val arrowDrawable = when (sortingOrder) {
+            SortingOrder.Ascending -> R.drawable.ic_round_arrow_up_24
+            SortingOrder.Descending -> R.drawable.ic_round_arrow_down_24
+        }
+        if (sorting == LibraryListSorting.Manual)
+            holder.binding.tvSorting.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+        else
+            holder.binding.tvSorting.setCompoundDrawablesWithIntrinsicBounds(arrowDrawable, 0, 0, 0)
     }
 
     class Holder : EpoxyHolder() {
