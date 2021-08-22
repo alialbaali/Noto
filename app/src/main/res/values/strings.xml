@@ -26,6 +26,7 @@
     <string name="ascending">Ascending</string>
     <string name="settings">Settings</string>
     <string name="view_code">View code on Github</string>
+    <string name="change_notes_font">Change notes font</string>
     <string name="share_with_others">Share with others</string>
     <string name="rate_app_on_play_store">Rate app on Play Store</string>
     <string name="share_with">Share with</string>
@@ -35,6 +36,10 @@
     <string name="layout_is_list_mode">Layout has been set to list mode.</string>
     <string name="layout_is_grid_mode">Layout has been set to grid mode.</string>
     <string name="layout_is_staggered_mode">Layout has been set to staggered mode.</string>
+    <string name="drag">Drag</string>
+    <string name="nunito">Nunito (default)</string>
+    <string name="monospace">Monospace</string>
+    <string name="font">Font</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>
@@ -116,6 +121,5 @@
     <string name="system_theme">System theme</string>
     <string name="light_theme">Light theme</string>
     <string name="dark_theme">Dark theme</string>
-    <string name="drag">Drag</string>
 
 </resources>
