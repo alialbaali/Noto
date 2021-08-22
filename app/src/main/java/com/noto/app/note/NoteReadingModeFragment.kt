@@ -1,6 +1,7 @@
 package com.noto.app.note
 
 import android.annotation.SuppressLint
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,10 +15,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.databinding.NoteReadingModeFragmentBinding
+import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -48,19 +49,23 @@ class NoteReadingModeFragment : Fragment() {
         viewModel.state
             .onEach { state ->
                 setupLibrary(state.library)
-                setupNote(state.note)
+                setupNote(state.note, state.font)
             }
             .launchIn(lifecycleScope)
     }
 
     @SuppressLint("SetTextI18n")
-    private fun NoteReadingModeFragmentBinding.setupNote(note: Note) {
-        etNoteTitle.text = note.title
-        etNoteBody.text = note.body
+    private fun NoteReadingModeFragmentBinding.setupNote(note: Note, font: Font) {
+        tvNoteTitle.text = note.title
+        tvNoteBody.text = note.body
         tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
         tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
-        etNoteTitle.isVisible = note.title.isNotBlank()
-        etNoteBody.isVisible = note.body.isNotBlank()
+        tvNoteTitle.isVisible = note.title.isNotBlank()
+        tvNoteBody.isVisible = note.body.isNotBlank()
+        if (font == Font.Monospace) {
+            tvNoteTitle.typeface = Typeface.MONOSPACE
+            tvNoteBody.typeface = Typeface.MONOSPACE
+        }
     }
 
     private fun NoteReadingModeFragmentBinding.setupLibrary(library: Library) {

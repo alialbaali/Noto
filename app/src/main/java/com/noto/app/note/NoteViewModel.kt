@@ -2,10 +2,13 @@ package com.noto.app.note
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.domain.source.LocalStorage
+import com.noto.app.util.Constants
 import com.noto.app.util.isValid
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -14,6 +17,7 @@ import kotlinx.datetime.Instant
 class NoteViewModel(
     private val libraryRepository: LibraryRepository,
     private val noteRepository: NoteRepository,
+    private val storage: LocalStorage,
     private val libraryId: Long,
     private val noteId: Long,
     private val body: String?,
@@ -29,7 +33,10 @@ class NoteViewModel(
             noteRepository.getNoteById(noteId)
                 .onStart { emit(Note(noteId, libraryId, position = 0, body = body ?: "")) }
                 .filterNotNull(),
-        ) { library, note -> mutableState.value = State(library, note) }
+            storage.get(Constants.FontKey)
+                .filterNotNull()
+                .map { Font.valueOf(it) },
+        ) { library, note, font -> mutableState.value = State(library, note, font) }
             .launchIn(viewModelScope)
     }
 
@@ -78,5 +85,6 @@ class NoteViewModel(
     data class State(
         val library: Library,
         val note: Note,
+        val font: Font = Font.Nunito,
     )
 }

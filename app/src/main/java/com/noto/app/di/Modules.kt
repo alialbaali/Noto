@@ -32,7 +32,7 @@ val appModule = module {
 
     viewModel { LibraryViewModel(get(), get(), get(), it.get()) }
 
-    viewModel { NoteViewModel(get(), get(), it[0], it[1], it.getOrNull()) }
+    viewModel { NoteViewModel(get(), get(), get(), it[0], it[1], it.getOrNull()) }
 
     viewModel { LabelViewModel(get()) }
 

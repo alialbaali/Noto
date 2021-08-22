@@ -2,6 +2,7 @@ package com.noto.app.note
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,10 +19,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
+import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -55,7 +56,7 @@ class NoteFragment : Fragment() {
         viewModel.state
             .onEach { state ->
                 setupLibrary(state.library)
-                setupNote(state.note, archiveMenuItem)
+                setupNote(state.note, state.font, archiveMenuItem)
             }
             .launchIn(lifecycleScope)
     }
@@ -136,13 +137,17 @@ class NoteFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun NoteFragmentBinding.setupNote(note: Note, archiveMenuItem: MenuItem) {
+    private fun NoteFragmentBinding.setupNote(note: Note, font: Font, archiveMenuItem: MenuItem) {
         etNoteTitle.setText(note.title)
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
         tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
         tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
+        if (font == Font.Monospace) {
+            etNoteTitle.typeface = Typeface.MONOSPACE
+            etNoteBody.typeface = Typeface.MONOSPACE
+        }
 
         if (note.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
         else archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_archive_24)
