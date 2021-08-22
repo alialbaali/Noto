@@ -2,8 +2,7 @@ package com.noto.app
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.Theme
+import com.noto.app.domain.model.*
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
 import kotlinx.coroutines.flow.*
@@ -15,13 +14,13 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
     val state get() = mutableState.asStateFlow()
 
     init {
+        createDefaultConstants()
+
         combine(
-            storage.getOrNull(Constants.ThemeKey)
-                .onEach { if (it == null) updateTheme(Theme.System) }
+            storage.get(Constants.ThemeKey)
                 .filterNotNull()
                 .map { Theme.valueOf(it) },
-            storage.getOrNull(Constants.FontKey)
-                .onEach { if (it == null) updateFont(Font.Nunito) }
+            storage.get(Constants.FontKey)
                 .filterNotNull()
                 .map { Font.valueOf(it) },
         ) { theme, font -> mutableState.value = State(theme, font) }
@@ -34,6 +33,37 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
 
     fun updateFont(value: Font) = viewModelScope.launch {
         storage.put(Constants.FontKey, value.toString())
+    }
+
+    private fun createDefaultConstants() = viewModelScope.launch {
+        launch {
+            storage.getOrNull(Constants.ThemeKey)
+                .firstOrNull()
+                .also { if (it == null) storage.put(Constants.ThemeKey, Theme.System.toString()) }
+        }
+
+        launch {
+            storage.getOrNull(Constants.FontKey)
+                .firstOrNull()
+                .also { if (it == null) storage.put(Constants.FontKey, Font.Nunito.toString()) }
+        }
+
+        launch {
+            storage.getOrNull(Constants.LibraryListSortingKey)
+                .firstOrNull()
+                .also { if (it == null) storage.put(Constants.LibraryListSortingKey, LibraryListSorting.CreationDate.toString()) }
+        }
+
+        launch {
+            storage.getOrNull(Constants.LibraryListSortingOrderKey)
+                .firstOrNull()
+                .also { if (it == null) storage.put(Constants.LibraryListSortingOrderKey, SortingOrder.Descending.toString()) }
+        }
+        launch {
+            storage.getOrNull(Constants.LibraryListLayoutManagerKey)
+                .firstOrNull()
+                .also { if (it == null) storage.put(Constants.LibraryListLayoutManagerKey, LayoutManager.Grid.toString()) }
+        }
     }
 
     data class State(
