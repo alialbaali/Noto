@@ -9,7 +9,9 @@ import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
+import com.noto.app.util.firstLineOrEmpty
 import com.noto.app.util.isValid
+import com.noto.app.util.takeAfterFirstLineOrEmpty
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
@@ -23,7 +25,8 @@ class NoteViewModel(
     private val body: String?,
 ) : ViewModel() {
 
-    private val mutableState = MutableStateFlow(State(Library(position = 0), Note(noteId, libraryId, position = 0, body = body ?: "")))
+    private val mutableState = MutableStateFlow(State(Library(position = 0), Note(libraryId = libraryId, position = 0)))
+
     val state get() = mutableState.asStateFlow()
 
     init {
@@ -31,7 +34,7 @@ class NoteViewModel(
             libraryRepository.getLibraryById(libraryId)
                 .filterNotNull(),
             noteRepository.getNoteById(noteId)
-                .onStart { emit(Note(noteId, libraryId, position = 0, body = body ?: "")) }
+                .onStart { emit(Note(noteId, libraryId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
                 .filterNotNull(),
             storage.get(Constants.FontKey)
                 .filterNotNull()

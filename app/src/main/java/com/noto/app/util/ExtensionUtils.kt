@@ -28,6 +28,10 @@ inline fun <T> List<T>.sortByOrder(sortingOrder: SortingOrder, crossinline selec
     SortingOrder.Descending -> sortedWith(compareByDescending(selector))
 }
 
+fun String?.firstLineOrEmpty() = this?.lines()?.firstOrNull() ?: ""
+
+fun String?.takeAfterFirstLineOrEmpty() = this?.lines()?.drop(1)?.joinToString("\n") ?: ""
+
 fun Library.getArchiveText(archiveText: String) = "$title ${archiveText.lowercase()}"
 
 fun Note.countWords(single: String, plural: String) = if (body.isBlank())
