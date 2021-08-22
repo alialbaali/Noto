@@ -62,9 +62,16 @@ class NoteReadingModeFragment : Fragment() {
         tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
         tvNoteTitle.isVisible = note.title.isNotBlank()
         tvNoteBody.isVisible = note.body.isNotBlank()
-        if (font == Font.Monospace) {
-            tvNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
-            tvNoteBody.typeface = Typeface.MONOSPACE
+
+        when (font) {
+            Font.Nunito -> {
+                tvNoteTitle.typeface = resources.fontResource(requireContext(), R.font.nunito_bold)
+                tvNoteBody.typeface = resources.fontResource(requireContext(), R.font.nunito_semibold)
+            }
+            Font.Monospace -> {
+                tvNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+                tvNoteBody.typeface = Typeface.MONOSPACE
+            }
         }
     }
 

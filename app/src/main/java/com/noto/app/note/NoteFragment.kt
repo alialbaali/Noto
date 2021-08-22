@@ -144,9 +144,16 @@ class NoteFragment : Fragment() {
         etNoteBody.setSelection(note.body.length)
         tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
         tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
-        if (font == Font.Monospace) {
-            etNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
-            etNoteBody.typeface = Typeface.MONOSPACE
+
+        when (font) {
+            Font.Nunito -> {
+                etNoteTitle.typeface = resources.fontResource(requireContext(), R.font.nunito_bold)
+                etNoteBody.typeface = resources.fontResource(requireContext(), R.font.nunito_semibold)
+            }
+            Font.Monospace -> {
+                etNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+                etNoteBody.typeface = Typeface.MONOSPACE
+            }
         }
 
         if (note.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
