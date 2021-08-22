@@ -38,7 +38,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         holder.binding.root.setOnClickListener(onClickListener)
         holder.binding.root.setOnLongClickListener(onLongClickListener)
         if (font == Font.Monospace) {
-            holder.binding.tvNoteTitle.typeface = Typeface.MONOSPACE
+            holder.binding.tvNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
             holder.binding.tvNoteBody.typeface = Typeface.MONOSPACE
         }
     }

@@ -63,7 +63,7 @@ class NoteReadingModeFragment : Fragment() {
         tvNoteTitle.isVisible = note.title.isNotBlank()
         tvNoteBody.isVisible = note.body.isNotBlank()
         if (font == Font.Monospace) {
-            tvNoteTitle.typeface = Typeface.MONOSPACE
+            tvNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
             tvNoteBody.typeface = Typeface.MONOSPACE
         }
     }

@@ -145,7 +145,7 @@ class NoteFragment : Fragment() {
         tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
         tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
         if (font == Font.Monospace) {
-            etNoteTitle.typeface = Typeface.MONOSPACE
+            etNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
             etNoteBody.typeface = Typeface.MONOSPACE
         }
 
