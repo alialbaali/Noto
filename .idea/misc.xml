@@ -68,6 +68,7 @@
         <entry key="app/src/main/res/drawable/ic_round_file_upload_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_folder_download_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_folder_upload_24.xml" value="0.22631578947368422" />
+        <entry key="app/src/main/res/drawable/ic_round_font_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_font_download_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_import_export_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_inbox_24.xml" value="0.35833333333333334" />
@@ -148,7 +149,7 @@
         <entry key="app/src/main/res/layout/label_dialog_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/label_item.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/label_list_fragment.xml" value="0.3421875" />
-        <entry key="app/src/main/res/layout/library_archive_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/library_archive_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/library_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/library_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/library_item.xml" value="0.22" />
@@ -158,7 +159,7 @@
         <entry key="app/src/main/res/layout/library_list_sorting_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/main_dialog_fragment.xml" value="0.21611842105263157" />
-        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.21400651465798046" />
+        <entry key="app/src/main/res/layout/main_fragment.xml" value="0.20454545454545456" />
         <entry key="app/src/main/res/layout/new_library_dialog_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/note_archive_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_dialog_fragment.xml" value="0.2" />

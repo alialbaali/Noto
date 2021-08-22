@@ -63,8 +63,8 @@ class AppActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.theme
-            .onEach { theme -> setupTheme(theme) }
+        viewModel.state
+            .onEach { state -> setupTheme(state.theme) }
             .launchIn(lifecycleScope)
     }
 

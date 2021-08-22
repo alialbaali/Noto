@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
-import com.noto.app.BaseDialogFragment
 import com.noto.app.AppViewModel
+import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ThemeDialogFragmentBinding
@@ -16,11 +16,11 @@ import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThemeDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by sharedViewModel<AppViewModel>()
+    private val viewModel by viewModel<AppViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,8 +33,8 @@ class ThemeDialogFragment : BaseDialogFragment() {
     }
 
     private fun ThemeDialogFragmentBinding.setupState() {
-        viewModel.theme
-            .onEach { theme -> setupTheme(theme) }
+        viewModel.state
+            .onEach { state -> setupTheme(state.theme) }
             .launchIn(lifecycleScope)
     }
 

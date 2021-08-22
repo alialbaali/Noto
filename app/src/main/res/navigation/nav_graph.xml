@@ -254,7 +254,11 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.noto.app.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_fontDialogFragment"
+            app:destination="@id/fontDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"
         android:name="com.noto.app.note.NoteReadingModeFragment"
@@ -281,4 +285,8 @@
         android:id="@+id/libraryListSortingDialogFragment"
         android:name="com.noto.app.main.LibraryListSortingDialogFragment"
         android:label="LibraryListSortingDialogFragment" />
+    <dialog
+        android:id="@+id/fontDialogFragment"
+        android:name="com.noto.app.settings.FontDialogFragment"
+        android:label="FontDialogFragment" />
 </navigation>

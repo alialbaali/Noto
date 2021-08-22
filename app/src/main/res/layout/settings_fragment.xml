@@ -30,6 +30,14 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_change_notes_font"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_round_font_24"
+            android:text="@string/change_notes_font" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_view_code"
             style="@style/DialogItem"
             android:layout_width="match_parent"

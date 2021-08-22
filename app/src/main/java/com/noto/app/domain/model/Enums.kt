@@ -16,3 +16,5 @@ enum class SortingType { Alphabetically, CreationDate, Manual, }
 enum class Theme { System, Light, Dark, }
 
 enum class LayoutManager { Linear, Grid }
+
+enum class Font { Nunito, Monospace, }

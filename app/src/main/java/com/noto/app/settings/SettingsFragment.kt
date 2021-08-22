@@ -40,6 +40,10 @@ class SettingsFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        tvChangeNotesFont.setOnClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToFontDialogFragment())
+        }
+
         tvShareWithOthers.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
