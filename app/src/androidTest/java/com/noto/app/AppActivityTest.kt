@@ -19,7 +19,6 @@ import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.library.LibraryViewModel
-import com.noto.app.library.NotoColorListAdapter
 import com.noto.app.note.NoteViewModel
 import com.noto.app.domain.model.LayoutManager
 import com.noto.app.util.getArchiveText
@@ -205,7 +204,7 @@ class AppActivityTest : KoinTest {
             .perform(typeText("Work"))
 
         onView(withId(R.id.rv))
-            .perform(actionOnItemAtPosition<NotoColorListAdapter.NotoColorItemViewHolder>(10, click()))
+            .perform(actionOnItemAtPosition<EpoxyViewHolder>(10, click()))
 
         onView(withId(R.id.btn_create))
             .perform(click())

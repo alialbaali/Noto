@@ -1,6 +1,7 @@
 package com.noto.app.viewModel
 
 import com.noto.app.di.appModule
+import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
@@ -9,7 +10,6 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.fakeLocalDataSourceModule
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.testRepositoryModule
-import com.noto.app.domain.model.LayoutManager
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.collections.shouldBeEmpty
@@ -61,14 +61,16 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
 
         "get library should return new entity when id is 0" {
             viewModel = get { parametersOf(0L) }
-            val library = viewModel.library
+            val library = viewModel.state
+                .map { it.library }
                 .first()
             library.id shouldBeExactly 0L
             library.title.shouldBeBlank()
         }
 
         "create library should insert new library with provided id" {
-            val library = viewModel.library
+            val library = viewModel.state
+                .map { it.library }
                 .first()
             library.id shouldBeExactly 1L
             library.title shouldBeEqualIgnoringCase "Work"
@@ -100,27 +102,29 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
         }
 
         "get layout manager should return linear by default" {
-            viewModel.library
-                .map { it.layoutManager }
+            viewModel.state
+                .map { it.library.layoutManager }
                 .first() shouldBe LayoutManager.Linear
         }
 
         "update layout manager to grid" {
             viewModel.updateLayoutManager(LayoutManager.Grid)
-            viewModel.library
-                .map { it.layoutManager }
+            viewModel.state
+                .map { it.library.layoutManager }
                 .first() shouldBe LayoutManager.Grid
         }
 
         "get notes should return an empty list when library id is 0" {
             viewModel = get { parametersOf(0L) }
-            viewModel.notes
+            viewModel.state
+                .map { it.notes }
                 .first()
                 .shouldBeEmpty()
         }
 
         "get notes should return a non-empty list after inserting some elements" {
-            viewModel.notes
+            viewModel.state
+                .map { it.notes }
                 .first()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(3)
@@ -128,13 +132,15 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
 
         "get archived notes should return an empty list when library id is 0" {
             viewModel = get { parametersOf(0L) }
-            viewModel.archivedNotes
+            viewModel.state
+                .map { it.archivedNotes }
                 .first()
                 .shouldBeEmpty()
         }
 
         "get archived notes should return a non-empty list after inserting some elements" {
-            viewModel.archivedNotes
+            viewModel.state
+                .map { it.archivedNotes }
                 .first()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(5)
@@ -142,7 +148,8 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
 
         "search notes should return a non-empty list when search term is blank" {
             viewModel.searchNotes("")
-            viewModel.notes
+            viewModel.state
+                .map { it.notes }
                 .first()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(3)
@@ -150,7 +157,8 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
 
         "search notes should return notes with matching title" {
             viewModel.searchNotes("Title 1")
-            viewModel.notes
+            viewModel.state
+                .map { it.notes }
                 .first()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(1)
@@ -158,7 +166,8 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
 
         "search notes should return notes with matching body" {
             viewModel.searchNotes("Body 2")
-            viewModel.notes
+            viewModel.state
+                .map { it.notes }
                 .first()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(1)

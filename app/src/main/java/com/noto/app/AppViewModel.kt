@@ -16,9 +16,13 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
 
     init {
         combine(
-            storage.get(Constants.ThemeKey)
+            storage.getOrNull(Constants.ThemeKey)
+                .onEach { if (it == null) updateTheme(Theme.System) }
+                .filterNotNull()
                 .map { Theme.valueOf(it) },
-            storage.get(Constants.FontKey)
+            storage.getOrNull(Constants.FontKey)
+                .onEach { if (it == null) updateFont(Font.Nunito) }
+                .filterNotNull()
                 .map { Font.valueOf(it) },
         ) { theme, font -> mutableState.value = State(theme, font) }
             .launchIn(viewModelScope)

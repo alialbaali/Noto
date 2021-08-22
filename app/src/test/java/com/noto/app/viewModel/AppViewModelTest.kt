@@ -7,6 +7,7 @@ import com.noto.app.fakeLocalDataSourceModule
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.test.KoinTest
@@ -29,13 +30,15 @@ class AppViewModelTest : StringSpec(), KoinTest {
         }
 
         "get theme should return system theme by default" {
-            viewModel.theme
+            viewModel.state
+                .map { it.theme }
                 .first() shouldBe Theme.System
         }
 
         "update theme should set theme with the provided value" {
             viewModel.updateTheme(Theme.Light)
-            viewModel.theme
+            viewModel.state
+                .map { it.theme }
                 .first() shouldBe Theme.Light
         }
     }

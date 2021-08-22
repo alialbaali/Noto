@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.LibraryArchiveFragmentBinding
+import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -42,15 +44,13 @@ class LibraryArchiveFragment : Fragment() {
     private fun LibraryArchiveFragmentBinding.setupState() {
         val layoutItems = listOf(tvLibraryNotesCount, rv)
 
-        viewModel.archivedNotes
-            .onEach { archivedNotes -> setupArchivedNotes(archivedNotes, layoutItems) }
-            .launchIn(lifecycleScope)
-
-        viewModel.library
-            .onEach { library ->
-                setupLibrary(library)
-                setupLayoutManger(library.layoutManager)
+        viewModel.state
+            .onEach { state ->
+                setupLibrary(state.library)
+                setupArchivedNotes(state.archivedNotes, state.font, layoutItems)
             }
+            .distinctUntilChangedBy { state -> state.library.layoutManager }
+            .onEach { state -> setupLayoutManger(state.library.layoutManager) }
             .launchIn(lifecycleScope)
     }
 
@@ -67,7 +67,7 @@ class LibraryArchiveFragment : Fragment() {
         tb.setTitleTextColor(color)
     }
 
-    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Note>, layoutItems: List<View>) {
+    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Note>, font: Font, layoutItems: List<View>) {
         if (archivedNotes.isEmpty()) {
             layoutItems.forEach { it.visibility = View.GONE }
             tvPlaceHolder.visibility = View.VISIBLE
@@ -79,6 +79,7 @@ class LibraryArchiveFragment : Fragment() {
                     noteItem {
                         id(archivedNote.id)
                         note(archivedNote)
+                        font(font)
                         onClickListener { _ ->
                             findNavController()
                                 .navigate(

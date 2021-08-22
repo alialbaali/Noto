@@ -48,8 +48,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun LibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        viewModel.library
-            .onEach { library -> setupLibrary(library, baseDialogFragment) }
+        viewModel.state
+            .onEach { state -> setupLibrary(state.library, baseDialogFragment) }
             .launchIn(lifecycleScope)
     }
 
@@ -95,7 +95,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
         findNavController().popBackStack(R.id.mainFragment, false)
         dismiss()
 
-        viewModel.notes.value
+        viewModel.state.value.notes
             .filter { note -> note.reminderDate != null }
             .forEach { note -> alarmManager.cancelAlarm(requireContext(), note.id) }
 
@@ -106,8 +106,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
         if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
                 var documentUri: Uri? = Uri.EMPTY
-                viewModel.notes.value.forEach { note ->
-                    documentUri = requireContext().exportNote(uri, viewModel.library.value, note)
+                viewModel.state.value.notes.forEach { note ->
+                    documentUri = requireContext().exportNote(uri, viewModel.state.value.library, note)
                 }
                 val parentView = requireParentFragment().requireView()
                 val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)

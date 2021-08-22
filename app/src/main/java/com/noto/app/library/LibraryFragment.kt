@@ -22,11 +22,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.LibraryFragmentBinding
+import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -51,22 +52,19 @@ class LibraryFragment : Fragment() {
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
         val layoutItems = listOf(tvLibraryNotesCount, rv)
 
-        viewModel.library
-            .filterNotNull()
-            .onEach { library ->
-                setupLibraryColors(library.color)
-                setupLayoutManager(library.layoutManager, layoutManagerMenuItem)
-                tb.title = library.title
+        viewModel.state
+            .onEach { state ->
+                setupLibraryColors(state.library.color)
+                setupNotes(state.notes, state.font, layoutItems)
+                tb.title = state.library.title
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val text = library.getArchiveText(resources.stringResource(R.string.archive))
+                    val text = state.library.getArchiveText(resources.stringResource(R.string.archive))
                     archiveMenuItem.contentDescription = text
                     archiveMenuItem.tooltipText = text
                 }
             }
-            .launchIn(lifecycleScope)
-
-        viewModel.notes
-            .onEach { notes -> setupNotes(notes, layoutItems) }
+            .distinctUntilChangedBy { state -> state.library.layoutManager }
+            .onEach { state -> setupLayoutManager(state.library.layoutManager, layoutManagerMenuItem) }
             .launchIn(lifecycleScope)
     }
 
@@ -122,7 +120,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupLayoutManager(layoutManager: LayoutManager, layoutManagerMenuItem: MenuItem) {
-        val color = viewModel.library.value.color.toResource()
+        val color = viewModel.state.value.library.color.toResource()
         val resource = resources.colorResource(color)
         when (layoutManager) {
             LayoutManager.Linear -> {
@@ -143,7 +141,7 @@ class LibraryFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun LibraryFragmentBinding.setupNotes(notes: List<Note>, layoutItems: List<View>) {
+    private fun LibraryFragmentBinding.setupNotes(notes: List<Note>, font: Font, layoutItems: List<View>) {
         tvLibraryNotesCount.text = notes.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
         if (notes.isEmpty()) {
             if (tilSearch.isVisible)
@@ -158,6 +156,7 @@ class LibraryFragment : Fragment() {
                     noteItem {
                         id(note.id)
                         note(note)
+                        font(font)
                         onClickListener { _ ->
                             findNavController()
                                 .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(note.libraryId, note.id))
@@ -185,7 +184,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupLayoutManagerMenuItem(): Boolean {
-        when (viewModel.library.value.layoutManager) {
+        when (viewModel.state.value.library.layoutManager) {
             LayoutManager.Linear -> {
                 viewModel.updateLayoutManager(LayoutManager.Grid)
                 root.snackbar(getString(R.string.layout_is_staggered_mode), anchorView = fab)

@@ -50,8 +50,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         et.requestFocus()
         imm.showKeyboard()
 
-        viewModel.library
-            .onEach { library -> setupLibrary(library, baseDialogFragment) }
+        viewModel.state
+            .onEach { state -> setupLibrary(state.library, baseDialogFragment) }
             .launchIn(lifecycleScope)
 
         viewModel.notoColors

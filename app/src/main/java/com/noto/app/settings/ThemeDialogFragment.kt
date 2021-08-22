@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.AppViewModel
 import com.noto.app.BaseDialogFragment
@@ -42,18 +41,16 @@ class ThemeDialogFragment : BaseDialogFragment() {
         rbSystemTheme.setOnClickListener {
             dismiss()
             viewModel.updateTheme(Theme.System)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
 
         rbLightTheme.setOnClickListener {
             dismiss()
             viewModel.updateTheme(Theme.Light)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+
         rbDarkTheme.setOnClickListener {
             dismiss()
             viewModel.updateTheme(Theme.Dark)
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }
     }
 

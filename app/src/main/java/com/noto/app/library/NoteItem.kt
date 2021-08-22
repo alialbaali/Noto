@@ -1,6 +1,7 @@
 package com.noto.app.library
 
 import android.annotation.SuppressLint
+import android.graphics.Typeface
 import android.view.View
 import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyAttribute
@@ -9,6 +10,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.noto.app.R
 import com.noto.app.databinding.NoteItemBinding
+import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
 
 @SuppressLint("NonConstantResourceId")
@@ -16,6 +18,9 @@ import com.noto.app.domain.model.Note
 abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute
     lateinit var note: Note
+
+    @EpoxyAttribute
+    lateinit var font: Font
 
     @EpoxyAttribute
     lateinit var onClickListener: View.OnClickListener
@@ -31,6 +36,10 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         holder.binding.tvNoteBody.isVisible = note.body.isNotBlank()
         holder.binding.root.setOnClickListener(onClickListener)
         holder.binding.root.setOnLongClickListener(onLongClickListener)
+        if (font == Font.Monospace) {
+            holder.binding.tvNoteTitle.typeface = Typeface.MONOSPACE
+            holder.binding.tvNoteBody.typeface = Typeface.MONOSPACE
+        }
     }
 
     class Holder : EpoxyHolder() {
