@@ -6,7 +6,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -226,11 +225,10 @@ class NoteDialogFragment : BaseDialogFragment() {
         baseDialogFragment.tvDialogTitle.setTextColor(resources.colorResource(library.color.toResource()))
         baseDialogFragment.vHead.backgroundTintList = resources.colorStateResource(library.color.toResource())
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-            listOf(
-                tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
-                tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote, tvExportNote,
-            ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, resources.colorStateResource(library.color.toResource())) }
+        listOf(
+            tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
+            tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote, tvExportNote,
+        ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, resources.colorStateResource(library.color.toResource())) }
     }
 
 }
