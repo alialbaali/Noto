@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.noto.app.databinding.AppActivityBinding
@@ -59,7 +60,10 @@ class AppActivity : AppCompatActivity() {
     private fun AppActivityBinding.setupState() {
         when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> {
-                window.decorView.systemUiVisibility = 0
+                WindowInsetsControllerCompat(window, root).apply {
+                    isAppearanceLightNavigationBars = false
+                    isAppearanceLightStatusBars = false
+                }
             }
         }
 
