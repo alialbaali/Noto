@@ -188,8 +188,8 @@ class NoteFragment : Fragment() {
 
             val shortcut = ShortcutInfoCompat.Builder(requireContext(), note.id.toString())
                 .setIntent(intent)
-                .setShortLabel(label.take(10))
-                .setLongLabel(label.take(25))
+                .setShortLabel(label)
+                .setLongLabel(label)
                 .setIcon(IconCompat.createWithResource(requireContext(), R.mipmap.ic_note))
                 .build()
 
