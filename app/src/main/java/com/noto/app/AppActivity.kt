@@ -45,18 +45,22 @@ class AppActivity : AppCompatActivity() {
     }
 
     private fun AppActivityBinding.handleIntentContent() {
-        if (intent?.action == Intent.ACTION_SEND) {
-            intent.getStringExtra(Intent.EXTRA_TEXT)
-                ?.let { content ->
-                    val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
-                        val args = bundleOf("library_id" to it, "body" to content)
-                        navController.navigate(R.id.noteFragment, args)
-                    }
-
-                    val args = bundleOf("library_id" to 0L, "select_library_item_click_listener" to selectLibraryItemClickListener)
-                    navController.navigate(R.id.selectLibraryDialogFragment, args)
-                }
+        when (intent?.action) {
+            Intent.ACTION_SEND -> intent.getStringExtra(Intent.EXTRA_TEXT)
+                ?.let { content -> showSelectLibraryDialog(content) }
+            Intent.ACTION_INSERT -> navController.navigate(R.id.newLibraryDialogFragment)
+            Intent.ACTION_CREATE_DOCUMENT -> showSelectLibraryDialog(null)
         }
+    }
+
+    private fun AppActivityBinding.showSelectLibraryDialog(content: String?) {
+        val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
+            val args = bundleOf("library_id" to it, "body" to content)
+            navController.navigate(R.id.noteFragment, args)
+        }
+
+        val args = bundleOf("library_id" to 0L, "select_library_item_click_listener" to selectLibraryItemClickListener)
+        navController.navigate(R.id.selectLibraryDialogFragment, args)
     }
 
     private fun AppActivityBinding.setupState() {

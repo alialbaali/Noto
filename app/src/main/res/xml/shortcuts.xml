@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <shortcut
+        android:shortcutId="create_note"
+        android:enabled="true"
+        android:icon="@drawable/ic_round_edit_24"
+        android:shortcutShortLabel="@string/create_note"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.CREATE_DOCUMENT"
+            android:targetPackage="com.noto"
+            android:targetClass="com.noto.app.AppActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="create_library"
+        android:enabled="true"
+        android:icon="@drawable/ic_round_add_circle_24"
+        android:shortcutShortLabel="@string/create_library"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="android.intent.action.INSERT"
+            android:targetPackage="com.noto"
+            android:targetClass="com.noto.app.AppActivity" />
+    </shortcut>
+</shortcuts>
