@@ -15,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.Theme
 import com.noto.app.library.SelectLibraryDialogFragment
+import com.noto.app.util.Constants
 import com.noto.app.util.colorResource
 import com.noto.app.util.createNotificationChannel
 import com.noto.app.util.withBinding
@@ -50,16 +51,22 @@ class AppActivity : AppCompatActivity() {
                 ?.let { content -> showSelectLibraryDialog(content) }
             Intent.ACTION_INSERT -> navController.navigate(R.id.newLibraryDialogFragment)
             Intent.ACTION_CREATE_DOCUMENT -> showSelectLibraryDialog(null)
+            Intent.ACTION_EDIT -> {
+                val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
+                val noteId = intent.getLongExtra(Constants.NoteId, 0)
+                val args = bundleOf(Constants.LibraryId to libraryId, Constants.NoteId to noteId)
+                navController.navigate(R.id.noteFragment, args)
+            }
         }
     }
 
     private fun AppActivityBinding.showSelectLibraryDialog(content: String?) {
         val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
-            val args = bundleOf("library_id" to it, "body" to content)
+            val args = bundleOf(Constants.LibraryId to it, Constants.Body to content)
             navController.navigate(R.id.noteFragment, args)
         }
 
-        val args = bundleOf("library_id" to 0L, "select_library_item_click_listener" to selectLibraryItemClickListener)
+        val args = bundleOf(Constants.LibraryId to 0L, Constants.SelectedLibraryItemClickListener to selectLibraryItemClickListener)
         navController.navigate(R.id.selectLibraryDialogFragment, args)
     }
 

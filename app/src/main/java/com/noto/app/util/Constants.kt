@@ -8,4 +8,6 @@ object Constants {
     const val LibraryListSortingOrderKey = "Library_List_Sorting_Order"
     const val LibraryId = "library_id"
     const val NoteId = "note_id"
+    const val Body = "body"
+    const val SelectedLibraryItemClickListener = "select_library_item_click_listener"
 }

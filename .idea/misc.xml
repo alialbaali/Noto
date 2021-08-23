@@ -54,6 +54,7 @@
         <entry key="app/src/main/res/drawable/ic_round_arrow_back_ios_new_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_down_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_arrow_up_24.xml" value="0.22631578947368422" />
+        <entry key="app/src/main/res/drawable/ic_round_article_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_back_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_border_all_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_cancel_24.xml" value="0.20260416666666667" />
@@ -79,6 +80,8 @@
         <entry key="app/src/main/res/drawable/ic_round_inventory_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_menu_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_move_24.xml" value="0.22631578947368422" />
+        <entry key="app/src/main/res/drawable/ic_round_note_24.xml" value="0.22631578947368422" />
+        <entry key="app/src/main/res/drawable/ic_round_note_alt_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_notification_add_24.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/drawable/ic_round_person_outline_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_reading_mode_24.xml" value="0.22631578947368422" />

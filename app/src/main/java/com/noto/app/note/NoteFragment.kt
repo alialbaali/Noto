@@ -2,6 +2,7 @@ package com.noto.app.note
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -12,11 +13,15 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.domain.model.Font
@@ -165,6 +170,28 @@ class NoteFragment : Fragment() {
 
         if (note.reminderDate == null) fab.setImageDrawable(resources.drawableResource(R.drawable.ic_round_notification_add_24))
         else fab.setImageDrawable(resources.drawableResource(R.drawable.ic_round_edit_notifications_24))
+
+        setupShortcut(note)
+    }
+
+    private fun NoteFragmentBinding.setupShortcut(note: Note) {
+        if (note.id != 0L && note.isValid()) {
+            val intent = Intent(Intent.ACTION_EDIT, null, requireContext(), AppActivity::class.java).apply {
+                putExtra(Constants.LibraryId, note.libraryId)
+                putExtra(Constants.NoteId, note.id)
+            }
+
+            val label = note.title.ifBlank { note.body }
+
+            val shortcut = ShortcutInfoCompat.Builder(requireContext(), note.id.toString())
+                .setIntent(intent)
+                .setShortLabel(label.take(10))
+                .setLongLabel(label.take(25))
+                .setIcon(IconCompat.createWithResource(requireContext(), R.drawable.ic_round_note_24))
+                .build()
+
+            ShortcutManagerCompat.pushDynamicShortcut(requireContext(), shortcut)
+        }
     }
 
 }
