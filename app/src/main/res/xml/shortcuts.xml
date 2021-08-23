@@ -4,7 +4,7 @@
     <shortcut
         android:shortcutId="create_note"
         android:enabled="true"
-        android:icon="@drawable/ic_round_edit_24"
+        android:icon="@mipmap/ic_create_note"
         android:shortcutShortLabel="@string/create_note"
         tools:targetApi="n_mr1">
         <intent
@@ -15,7 +15,7 @@
     <shortcut
         android:shortcutId="create_library"
         android:enabled="true"
-        android:icon="@drawable/ic_round_add_circle_24"
+        android:icon="@mipmap/ic_create_library"
         android:shortcutShortLabel="@string/create_library"
         tools:targetApi="n_mr1">
         <intent

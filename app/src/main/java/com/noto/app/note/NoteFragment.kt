@@ -1,8 +1,11 @@
 package com.noto.app.note
 
 import android.annotation.SuppressLint
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -187,7 +190,7 @@ class NoteFragment : Fragment() {
                 .setIntent(intent)
                 .setShortLabel(label.take(10))
                 .setLongLabel(label.take(25))
-                .setIcon(IconCompat.createWithResource(requireContext(), R.drawable.ic_round_note_24))
+                .setIcon(IconCompat.createWithResource(requireContext(), R.mipmap.ic_note))
                 .build()
 
             ShortcutManagerCompat.pushDynamicShortcut(requireContext(), shortcut)
