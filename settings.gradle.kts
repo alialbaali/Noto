@@ -1,4 +1,4 @@
-rootProject.name = "Noto"
+rootProject.name = "Screenshots"
 include("app")
 
 plugins {
