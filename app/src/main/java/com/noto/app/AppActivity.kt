@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.Theme
 import com.noto.app.library.SelectLibraryDialogFragment
+import com.noto.app.util.colorResource
 import com.noto.app.util.createNotificationChannel
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -58,6 +60,11 @@ class AppActivity : AppCompatActivity() {
     }
 
     private fun AppActivityBinding.setupState() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            window.statusBarColor = resources.colorResource(android.R.color.black)
+            window.navigationBarColor = resources.colorResource(android.R.color.black)
+        }
+
         when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
             Configuration.UI_MODE_NIGHT_YES -> {
                 WindowInsetsControllerCompat(window, root).apply {
