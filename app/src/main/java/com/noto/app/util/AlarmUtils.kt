@@ -7,15 +7,13 @@ import android.content.Intent
 import androidx.core.app.AlarmManagerCompat
 import com.noto.app.receiver.AlarmReceiver
 
-const val NoteId = "noto_id"
-const val LibraryId = "library_id"
 private const val PENDING_INTENT_FLAGS = PendingIntent.FLAG_UPDATE_CURRENT
 
 fun AlarmManager.createAlarm(context: Context, libraryId: Long, noteId: Long, epochMilliseconds: Long) {
 
     val intent = Intent(context, AlarmReceiver::class.java).apply {
-        putExtra(LibraryId, libraryId)
-        putExtra(NoteId, noteId)
+        putExtra(Constants.LibraryId, libraryId)
+        putExtra(Constants.NoteId, noteId)
     }
 
     val pendingIntent = PendingIntent.getBroadcast(context, noteId.toInt(), intent, PENDING_INTENT_FLAGS)

@@ -6,4 +6,6 @@ object Constants {
     const val LibraryListLayoutManagerKey = "Library_List_Layout_Manager"
     const val LibraryListSortingKey = "Library_List_Sorting"
     const val LibraryListSortingOrderKey = "Library_List_Sorting_Order"
+    const val LibraryId = "library_id"
+    const val NoteId = "note_id"
 }

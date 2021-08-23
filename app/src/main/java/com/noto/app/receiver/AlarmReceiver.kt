@@ -6,8 +6,7 @@ import android.content.Context
 import android.content.Intent
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.util.LibraryId
-import com.noto.app.util.NoteId
+import com.noto.app.util.Constants
 import com.noto.app.util.createNotification
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
@@ -25,8 +24,8 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
         intent?.let {
 
-            val noteId = it.getLongExtra(NoteId, 0)
-            val libraryId = it.getLongExtra(LibraryId, 0)
+            val libraryId = it.getLongExtra(Constants.LibraryId, 0)
+            val noteId = it.getLongExtra(Constants.NoteId, 0)
 
             runBlocking {
                 val library = libraryRepository.getLibraryById(libraryId)
