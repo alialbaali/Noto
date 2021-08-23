@@ -8,7 +8,7 @@
         android:shortcutShortLabel="@string/create_note"
         tools:targetApi="n_mr1">
         <intent
-            android:action="android.intent.action.CREATE_DOCUMENT"
+            android:action="com.noto.intent.action.CREATE_NOTE"
             android:targetPackage="com.noto"
             android:targetClass="com.noto.app.AppActivity" />
     </shortcut>
@@ -19,7 +19,7 @@
         android:shortcutShortLabel="@string/create_library"
         tools:targetApi="n_mr1">
         <intent
-            android:action="android.intent.action.INSERT"
+            android:action="com.noto.intent.action.CREATE_LIBRARY"
             android:targetPackage="com.noto"
             android:targetClass="com.noto.app.AppActivity" />
     </shortcut>

@@ -10,4 +10,9 @@ object Constants {
     const val NoteId = "note_id"
     const val Body = "body"
     const val SelectedLibraryItemClickListener = "select_library_item_click_listener"
+
+    object Intent {
+        const val ActionCreateLibrary = "com.noto.intent.action.CREATE_LIBRARY"
+        const val ActionCreateNote = "com.noto.intent.action.CREATE_NOTE"
+    }
 }
