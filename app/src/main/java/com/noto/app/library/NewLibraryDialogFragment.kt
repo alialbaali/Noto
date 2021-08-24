@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -67,6 +68,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             } else {
                 imm.hideKeyboard(et.windowToken)
                 dismiss()
+                updatePinnedShortcut(title)
                 viewModel.createOrUpdateLibrary(title)
             }
         }
@@ -94,5 +96,12 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 }
             }
         }
+    }
+    private fun NewLibraryDialogFragmentBinding.updatePinnedShortcut(title: String) {
+        val library = viewModel.state.value.library.copy(
+            title = title,
+            color = viewModel.notoColors.value.first { it.second }.first
+        )
+        ShortcutManagerCompat.updateShortcuts(requireContext(), listOf(requireContext().createPinnedShortcut(library)))
     }
 }

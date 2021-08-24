@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -25,6 +26,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+
 
 private const val SelectDirectoryRequestCode = 1
 
@@ -64,6 +66,12 @@ class LibraryDialogFragment : BaseDialogFragment() {
             findNavController().navigate(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToNewLibraryDialogFragment(args.libraryId))
         }
 
+        tvNewNoteShortcut.setOnClickListener {
+            dismiss()
+            if (ShortcutManagerCompat.isRequestPinShortcutSupported(requireContext()))
+                ShortcutManagerCompat.requestPinShortcut(requireContext(), requireContext().createPinnedShortcut(viewModel.state.value.library), null)
+        }
+
         tvDeleteLibrary.setOnClickListener {
             val title = resources.stringResource(R.string.delete_library_confirmation)
             val btnText = resources.stringResource(R.string.delete_library)
@@ -84,7 +92,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
         val resource = resources.colorStateResource(library.color.toResource())
         baseDialogFragment.vHead.backgroundTintList = resource
         baseDialogFragment.tvDialogTitle.setTextColor(resource)
-        listOf(tvEditLibrary, tvExportLibrary, tvDeleteLibrary).forEach { TextViewCompat.setCompoundDrawableTintList(it, resource) }
+        listOf(tvEditLibrary, tvNewNoteShortcut, tvExportLibrary, tvDeleteLibrary)
+            .forEach { TextViewCompat.setCompoundDrawableTintList(it, resource) }
     }
 
     private fun setupConfirmationDialogClickListener() = ConfirmationDialogFragment.ConfirmationDialogClickListener {

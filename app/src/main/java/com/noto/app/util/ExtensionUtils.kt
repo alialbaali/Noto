@@ -6,12 +6,17 @@ import android.net.Uri
 import android.os.IBinder
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.graphics.applyCanvas
+import androidx.core.graphics.drawable.IconCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
+import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
@@ -139,4 +144,31 @@ fun Context.exportNote(uri: Uri, library: Library, note: Note): Uri? {
                 .openOutputStream(documentUri, "w")
                 ?.use { it.write(noteContent.toByteArray()) }
         }
+}
+
+fun Context.createPinnedShortcut(library: Library): ShortcutInfoCompat {
+    val intent = Intent(Intent.ACTION_CREATE_DOCUMENT, null, this, AppActivity::class.java).apply {
+        putExtra(Constants.LibraryId, library.id)
+    }
+
+    val resourceId = library.color.toResource()
+
+    val bitmap = resources.drawableResource(R.mipmap.ic_create_note)
+        ?.toBitmap()
+        ?.applyCanvas {
+            drawColor(resources.colorResource(android.R.color.white))
+            resources.drawableResource(R.drawable.ic_round_edit_24)?.mutate()?.let { drawable ->
+                val spacing = 32
+                drawable.setTint(resources.colorResource(resourceId))
+                drawable.setBounds(spacing, spacing, width - spacing, height - spacing)
+                drawable.draw(this)
+            }
+        }
+
+    return ShortcutInfoCompat.Builder(this, library.id.toString())
+        .setIntent(intent)
+        .setShortLabel(library.title)
+        .setLongLabel(library.title)
+        .setIcon(IconCompat.createWithBitmap(bitmap))
+        .build()
 }
