@@ -152,8 +152,8 @@ class NoteFragment : Fragment() {
 
         when (font) {
             Font.Nunito -> {
-                etNoteTitle.typeface = resources.fontResource(requireContext(), R.font.nunito_bold)
-                etNoteBody.typeface = resources.fontResource(requireContext(), R.font.nunito_semibold)
+                etNoteTitle.typeface = requireContext().tryLoadingFontResource(R.font.nunito_bold)
+                etNoteBody.typeface = requireContext().tryLoadingFontResource(R.font.nunito_semibold)
             }
             Font.Monospace -> {
                 etNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)

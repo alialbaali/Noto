@@ -12,8 +12,8 @@ import com.noto.app.R
 import com.noto.app.databinding.NoteItemBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
-import com.noto.app.util.fontResource
 import com.noto.app.util.takeLines
+import com.noto.app.util.tryLoadingFontResource
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass(layout = R.layout.note_item)
@@ -40,12 +40,11 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         holder.binding.root.setOnLongClickListener(onLongClickListener)
 
         val context = holder.binding.root.context
-        val resources = holder.binding.root.resources
 
         when (font) {
             Font.Nunito -> {
-                holder.binding.tvNoteTitle.typeface = resources.fontResource(context, R.font.nunito_bold)
-                holder.binding.tvNoteBody.typeface = resources.fontResource(context, R.font.nunito_semibold)
+                holder.binding.tvNoteTitle.typeface = context.tryLoadingFontResource(R.font.nunito_bold)
+                holder.binding.tvNoteBody.typeface = context.tryLoadingFontResource(R.font.nunito_semibold)
             }
             Font.Monospace -> {
                 holder.binding.tvNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)

@@ -13,3 +13,9 @@ fun Resources.stringResource(@StringRes id: Int): String = getString(id)
 fun Resources.drawableResource(@DrawableRes id: Int): Drawable? = ResourcesCompat.getDrawable(this, id, null)
 fun Resources.dimenResource(@DimenRes id: Int): Float = getDimension(id)
 fun Resources.fontResource(context: Context, @FontRes id: Int) = ResourcesCompat.getFont(context, id)
+
+fun Context.tryLoadingFontResource(@FontRes id: Int) = try {
+    resources.fontResource(this, id)
+} catch (exception: Throwable) {
+    null
+}

@@ -65,8 +65,8 @@ class NoteReadingModeFragment : Fragment() {
 
         when (font) {
             Font.Nunito -> {
-                tvNoteTitle.typeface = resources.fontResource(requireContext(), R.font.nunito_bold)
-                tvNoteBody.typeface = resources.fontResource(requireContext(), R.font.nunito_semibold)
+                tvNoteTitle.typeface = requireContext().tryLoadingFontResource(R.font.nunito_bold)
+                tvNoteBody.typeface = requireContext().tryLoadingFontResource(R.font.nunito_semibold)
             }
             Font.Monospace -> {
                 tvNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
