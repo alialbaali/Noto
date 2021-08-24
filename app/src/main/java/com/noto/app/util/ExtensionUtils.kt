@@ -4,14 +4,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.IBinder
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.graphics.applyCanvas
+import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.IconCompat
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.documentfile.provider.DocumentFile
@@ -154,17 +151,17 @@ fun Context.createPinnedShortcut(library: Library): ShortcutInfoCompat {
 
     val resourceId = library.color.toResource()
 
-    val bitmap = resources.drawableResource(R.mipmap.ic_create_note)
-        ?.toBitmap()
-        ?.applyCanvas {
-            drawColor(resources.colorResource(android.R.color.white))
-            resources.drawableResource(R.drawable.ic_round_edit_24)?.mutate()?.let { drawable ->
-                val spacing = 32
-                drawable.setTint(resources.colorResource(resourceId))
-                drawable.setBounds(spacing, spacing, width - spacing, height - spacing)
-                drawable.draw(this)
-            }
+    val size = 512
+
+    val bitmap = createBitmap(size, size).applyCanvas {
+        drawColor(resources.colorResource(android.R.color.white))
+        resources.drawableResource(R.drawable.ic_round_edit_24)?.mutate()?.let { drawable ->
+            drawable.setTint(resources.colorResource(resourceId))
+            val spacing = 128
+            drawable.setBounds(spacing, spacing, width - spacing, height - spacing)
+            drawable.draw(this)
         }
+    }
 
     return ShortcutInfoCompat.Builder(this, library.id.toString())
         .setIntent(intent)
