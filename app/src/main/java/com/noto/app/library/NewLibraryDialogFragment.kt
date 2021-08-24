@@ -49,7 +49,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
     private fun NewLibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         et.requestFocus()
-        imm.showKeyboard()
+        requireActivity().showKeyboard(root)
 
         viewModel.state
             .onEach { state -> setupLibrary(state.library, baseDialogFragment) }
@@ -66,7 +66,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             if (title.isBlank()) {
                 til.error = resources.stringResource(R.string.empty_title)
             } else {
-                imm.hideKeyboard(et.windowToken)
+                requireActivity().hideKeyboard(root)
                 dismiss()
                 updatePinnedShortcut(title)
                 viewModel.createOrUpdateLibrary(title)

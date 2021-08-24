@@ -1,11 +1,8 @@
 package com.noto.app.note
 
 import android.annotation.SuppressLint
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
@@ -55,7 +52,7 @@ class NoteFragment : Fragment() {
 
         if (args.noteId == 0L) {
             etNoteBody.requestFocus()
-            imm.showKeyboard()
+            requireActivity().showKeyboard(root)
         }
 
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
@@ -84,7 +81,7 @@ class NoteFragment : Fragment() {
                 etNoteTitle.text.toString(),
                 etNoteBody.text.toString(),
             )
-            imm.hideKeyboard(etNoteBody.windowToken)
+            requireActivity().hideKeyboard(root)
         }
 
         requireActivity()

@@ -101,7 +101,7 @@ class LibraryFragment : Fragment() {
         }
         rv.startAnimation(rvAnimation)
         etSearch.requestFocus()
-        imm.showKeyboard()
+        requireActivity().showKeyboard(root)
 
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner) {
@@ -116,7 +116,7 @@ class LibraryFragment : Fragment() {
         }
         tilSearch.isVisible = false
         rv.startAnimation(rvAnimation)
-        imm.hideKeyboard(etSearch.windowToken)
+        requireActivity().hideKeyboard(root)
     }
 
     private fun LibraryFragmentBinding.setupLayoutManager(layoutManager: LayoutManager, layoutManagerMenuItem: MenuItem) {

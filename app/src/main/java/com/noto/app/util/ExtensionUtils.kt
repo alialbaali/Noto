@@ -1,5 +1,6 @@
 package com.noto.app.util
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -10,6 +11,9 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -84,9 +88,6 @@ inline fun <T : ViewBinding> T.withBinding(crossinline block: T.() -> Unit): Vie
     return root
 }
 
-fun InputMethodManager.showKeyboard() = toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY)
-fun InputMethodManager.hideKeyboard(windowToken: IBinder) = hideSoftInputFromWindow(windowToken, 0)
-
 fun Note.format(): String = """
     $title
     
@@ -94,8 +95,8 @@ fun Note.format(): String = """
 """.trimIndent()
     .trim()
 
-//fun View.showKeyboard() = ViewCompat.getWindowInsetsController(this)?.show(WindowInsetsCompat.Type.ime())
-//fun View.hideKeyboard() = ViewCompat.getWindowInsetsController(this)?.hide(WindowInsetsCompat.Type.ime())
+fun Activity.showKeyboard(view: View) = WindowInsetsControllerCompat(window, view).show(WindowInsetsCompat.Type.ime())
+fun Activity.hideKeyboard(view: View) = WindowInsetsControllerCompat(window, view).hide(WindowInsetsCompat.Type.ime())
 
 fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
 
