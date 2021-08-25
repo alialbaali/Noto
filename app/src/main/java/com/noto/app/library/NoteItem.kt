@@ -1,7 +1,6 @@
 package com.noto.app.library
 
 import android.annotation.SuppressLint
-import android.graphics.Typeface
 import android.view.View
 import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyAttribute
@@ -12,8 +11,9 @@ import com.noto.app.R
 import com.noto.app.databinding.NoteItemBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
+import com.noto.app.util.setBoldFont
+import com.noto.app.util.setSemiboldFont
 import com.noto.app.util.takeLines
-import com.noto.app.util.tryLoadingFontResource
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass(layout = R.layout.note_item)
@@ -38,19 +38,8 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         holder.binding.tvNoteBody.isVisible = note.body.isNotBlank()
         holder.binding.root.setOnClickListener(onClickListener)
         holder.binding.root.setOnLongClickListener(onLongClickListener)
-
-        val context = holder.binding.root.context
-
-        when (font) {
-            Font.Nunito -> {
-                holder.binding.tvNoteTitle.typeface = context.tryLoadingFontResource(R.font.nunito_bold)
-                holder.binding.tvNoteBody.typeface = context.tryLoadingFontResource(R.font.nunito_semibold)
-            }
-            Font.Monospace -> {
-                holder.binding.tvNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
-                holder.binding.tvNoteBody.typeface = Typeface.MONOSPACE
-            }
-        }
+        holder.binding.tvNoteTitle.setBoldFont(font)
+        holder.binding.tvNoteBody.setSemiboldFont(font)
     }
 
     class Holder : EpoxyHolder() {

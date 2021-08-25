@@ -3,8 +3,10 @@ package com.noto.app.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.view.View
+import android.widget.TextView
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
@@ -19,10 +21,7 @@ import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.noto.app.AppActivity
 import com.noto.app.R
-import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.NotoColor
-import com.noto.app.domain.model.SortingOrder
+import com.noto.app.domain.model.*
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toJavaLocalDateTime
@@ -169,4 +168,18 @@ fun Context.createPinnedShortcut(library: Library): ShortcutInfoCompat {
         .setLongLabel(library.title)
         .setIcon(IconCompat.createWithBitmap(bitmap))
         .build()
+}
+
+fun TextView.setBoldFont(font: Font) {
+    when (font) {
+        Font.Nunito -> context?.tryLoadingFontResource(R.font.nunito_bold)?.let { typeface = it }
+        Font.Monospace -> setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
+    }
+}
+
+fun TextView.setSemiboldFont(font: Font) {
+    when (font) {
+        Font.Nunito -> context?.tryLoadingFontResource(R.font.nunito_semibold)?.let { typeface = it }
+        Font.Monospace -> typeface = Typeface.MONOSPACE
+    }
 }

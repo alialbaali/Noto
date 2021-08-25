@@ -1,7 +1,6 @@
 package com.noto.app.note
 
 import android.annotation.SuppressLint
-import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -62,17 +61,8 @@ class NoteReadingModeFragment : Fragment() {
         tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
         tvNoteTitle.isVisible = note.title.isNotBlank()
         tvNoteBody.isVisible = note.body.isNotBlank()
-
-        when (font) {
-            Font.Nunito -> {
-                tvNoteTitle.typeface = requireContext().tryLoadingFontResource(R.font.nunito_bold)
-                tvNoteBody.typeface = requireContext().tryLoadingFontResource(R.font.nunito_semibold)
-            }
-            Font.Monospace -> {
-                tvNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
-                tvNoteBody.typeface = Typeface.MONOSPACE
-            }
-        }
+        tvNoteTitle.setBoldFont(font)
+        tvNoteBody.setSemiboldFont(font)
     }
 
     private fun NoteReadingModeFragmentBinding.setupLibrary(library: Library) {

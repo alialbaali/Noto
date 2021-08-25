@@ -3,7 +3,6 @@ package com.noto.app.note
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -147,19 +146,10 @@ class NoteFragment : Fragment() {
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
+        etNoteTitle.setBoldFont(font)
+        etNoteBody.setSemiboldFont(font)
         tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
         tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
-
-        when (font) {
-            Font.Nunito -> {
-                etNoteTitle.typeface = requireContext().tryLoadingFontResource(R.font.nunito_bold)
-                etNoteBody.typeface = requireContext().tryLoadingFontResource(R.font.nunito_semibold)
-            }
-            Font.Monospace -> {
-                etNoteTitle.setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
-                etNoteBody.typeface = Typeface.MONOSPACE
-            }
-        }
 
         if (note.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
         else archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_archive_24)
