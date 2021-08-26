@@ -144,9 +144,7 @@
     <style name="LibraryTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/size_small</item>
-        <item name="android:ellipsize">end</item>
         <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:maxLines">1</item>
     </style>
 
     <style name="LibraryNotesCountTextView" parent="Widget.MaterialComponents.TextView">
