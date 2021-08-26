@@ -112,7 +112,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.4.0-alpha04")
     kapt("androidx.room:room-compiler:2.4.0-alpha04")
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.21")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.30")
 
     testImplementation(Testing.Kotest.Runner.junit5)
     testImplementation(Testing.Kotest.Assertions.core)
