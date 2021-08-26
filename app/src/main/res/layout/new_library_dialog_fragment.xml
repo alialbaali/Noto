@@ -20,11 +20,9 @@
             style="@style/TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginVertical="@dimen/spacing_extra_small"
             android:theme="@style/TextInputLayout"
-            app:counterEnabled="true"
-            app:counterMaxLength="32">
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et"
@@ -32,14 +30,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/library_title"
-                android:inputType="text|textPersonName|textCapWords"
-                android:maxLength="32" />
+                android:inputType="text|textAutoCorrect|textCapSentences" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.airbnb.epoxy.EpoxyRecyclerView
             android:id="@+id/rv"
+            android:background="@drawable/generic_shape"
             android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/spacing_extra_small"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             tools:listitem="@layout/noto_color_item" />

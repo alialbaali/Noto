@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="@dimen/spacing_normal"
-        android:src="@drawable/selector_dialog_rbtn_gray"
+        android:src="@drawable/noto_color_item_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/tv_label_title"
         app:layout_constraintStart_toStartOf="parent"

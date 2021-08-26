@@ -4,5 +4,5 @@
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:layout_margin="@dimen/spacing_small"
-    android:background="@drawable/selector_dialog_rbtn_gray"
+    android:background="@drawable/noto_color_item_shape"
     android:button="@null" />

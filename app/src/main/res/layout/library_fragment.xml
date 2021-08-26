@@ -48,15 +48,16 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_normal"
             android:layout_marginVertical="@dimen/spacing_small"
-            android:hint="@string/search"
-            android:visibility="gone">
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_search"
                 style="@style/TextInputEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:inputType="text" />
+                android:hint="@string/search"
+                android:inputType="text|textCapSentences|textAutoCorrect" />
 
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.appbar.AppBarLayout>

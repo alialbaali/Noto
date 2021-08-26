@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_small"
-            app:startIconDrawable="@drawable/selector_dialog_rbtn_gray"
+            app:startIconDrawable="@drawable/noto_color_item_shape"
             app:startIconTint="@color/colorAccentGray">
 
             <com.google.android.material.textfield.TextInputEditText

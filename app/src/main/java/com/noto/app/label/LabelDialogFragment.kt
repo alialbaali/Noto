@@ -106,7 +106,7 @@ class LabelDialogFragment : BaseDialogFragment() {
 
             radBtn.id = notoColor.ordinal
 
-            radBtn.buttonDrawable = ResourcesCompat.getDrawable(resources, R.drawable.selector_dialog_rbtn_gray, null)
+            radBtn.buttonDrawable = ResourcesCompat.getDrawable(resources, R.drawable.noto_color_item_shape, null)
 
             radBtn.buttonTintList = ResourcesCompat.getColorStateList(resources, notoColor.toResource(), null)
 

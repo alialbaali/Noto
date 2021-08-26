@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
+import androidx.core.graphics.ColorUtils
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
@@ -218,8 +219,9 @@ class LibraryFragment : Fragment() {
         bab.navigationIcon?.mutate()?.setTint(color)
         fab.backgroundTintList = colorStateList
         bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
-        tilSearch.boxStrokeColor = color
-        tilSearch.hintTextColor = colorStateList
+        tilSearch.boxBackgroundColor = ColorUtils.setAlphaComponent(color, 25)
+        etSearch.setHintTextColor(colorStateList)
+        etSearch.setTextColor(colorStateList)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             fab.outlineAmbientShadowColor = color
             fab.outlineSpotShadowColor = color

@@ -48,6 +48,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private fun NewLibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rv.clipToOutline = true
         et.requestFocus()
         requireActivity().showKeyboard(root)
 
@@ -79,8 +80,10 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         et.setSelection(library.title.length)
         rv.smoothScrollToPosition(library.color.ordinal)
         val color = resources.colorResource(library.color.toResource())
-        baseDialogFragment.tvDialogTitle.setTextColor(color)
-        baseDialogFragment.vHead.background.setTint(color)
+        if (library.id != 0L) {
+            baseDialogFragment.tvDialogTitle.setTextColor(color)
+            baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+        }
     }
 
     private fun NewLibraryDialogFragmentBinding.setupNotoColors(pairs: List<Pair<NotoColor, Boolean>>) {
@@ -97,6 +100,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             }
         }
     }
+
     private fun NewLibraryDialogFragmentBinding.updatePinnedShortcut(title: String) {
         val library = viewModel.state.value.library.copy(
             title = title,

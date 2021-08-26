@@ -93,27 +93,19 @@
     </style>
 
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxBackgroundColor">@color/colorBackground</item>
-        <item name="boxStrokeColor">@color/colorPrimary</item>
-        <item name="boxStrokeWidth">1dp</item>
-        <item name="boxStrokeWidthFocused">1dp</item>
+        <item name="boxBackgroundColor">@color/colorSurface</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/spacing_small</item>
         <item name="boxCornerRadiusBottomStart">@dimen/spacing_small</item>
         <item name="boxCornerRadiusTopEnd">@dimen/spacing_small</item>
         <item name="boxCornerRadiusTopStart">@dimen/spacing_small</item>
-        <item name="errorEnabled">true</item>
-        <item name="hintEnabled">true</item>
-        <item name="hintAnimationEnabled">true</item>
-        <item name="counterTextColor">@color/colorOnPrimary</item>
-        <item name="hintTextColor">@color/colorOnPrimary</item>
-        <item name="android:textColorHint">@color/colorPrimary</item>
+        <item name="hintEnabled">false</item>
+        <item name="android:textColorHint">@color/colorOnPrimary</item>
     </style>
 
     <style name="TextInputEditText">
-        <item name="android:padding">@dimen/spacing_normal</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:cursorVisible">true</item>
     </style>
 
     <style name="MaterialButton" parent="Widget.MaterialComponents.Button">
@@ -131,7 +123,7 @@
     </style>
 
     <style name="HorizontalScrollView">
-        <item name="android:background">@drawable/radio_group_colors_shape</item>
+        <item name="android:background">@drawable/generic_shape</item>
         <item name="android:padding">@dimen/spacing_extra_small</item>
         <item name="android:scrollbars">none</item>
     </style>
