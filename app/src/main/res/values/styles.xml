@@ -83,9 +83,16 @@
         <item name="android:drawablePadding">@dimen/spacing_normal</item>
     </style>
 
+    <style name="DialogSectionItem" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:textSize">@dimen/size_normal</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
     <style name="DialogRadioButtonItem" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:buttonTint">@color/colorPrimary</item>
         <item name="android:padding">@dimen/spacing_normal</item>

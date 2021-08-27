@@ -49,8 +49,10 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
     private fun NewLibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         rv.clipToOutline = true
-        et.requestFocus()
-        requireActivity().showKeyboard(root)
+        if (args.libraryId == 0L) {
+            et.requestFocus()
+            requireActivity().showKeyboard(root)
+        }
 
         viewModel.state
             .onEach { state -> setupLibrary(state.library, baseDialogFragment) }
@@ -65,6 +67,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         btnCreate.setOnClickListener {
             val title = et.text.toString()
             if (title.isBlank()) {
+                til.isErrorEnabled = true
                 til.error = resources.stringResource(R.string.empty_title)
             } else {
                 requireActivity().hideKeyboard(root)
@@ -79,10 +82,16 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         et.setText(library.title)
         et.setSelection(library.title.length)
         rv.smoothScrollToPosition(library.color.ordinal)
-        val color = resources.colorResource(library.color.toResource())
         if (library.id != 0L) {
+            val color = resources.colorResource(library.color.toResource())
+            val colorStateList = resources.colorStateResource(library.color.toResource())
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+            if (colorStateList != null) {
+                sNotePreviewSize.trackActiveTintList = colorStateList
+                sNotePreviewSize.thumbTintList = colorStateList
+                sNotePreviewSize.tickInactiveTintList = colorStateList
+            }
         }
     }
 

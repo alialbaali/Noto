@@ -14,11 +14,10 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_sorting"
-            style="@style/DialogItem"
+            style="@style/DialogSectionItem"
+            android:padding="@dimen/spacing_normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
-            android:clickable="false"
             android:text="@string/sorting" />
 
         <RadioGroup
@@ -52,11 +51,10 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_sorting_order"
-            style="@style/DialogItem"
+            style="@style/DialogSectionItem"
+            android:padding="@dimen/spacing_normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
-            android:clickable="false"
             android:text="@string/sorting_order" />
 
         <RadioGroup
@@ -87,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
-            android:padding="@dimen/spacing_normal"
+            android:paddingVertical="@dimen/spacing_normal"
             android:text="@string/done" />
 
     </LinearLayout>

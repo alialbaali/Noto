@@ -15,14 +15,21 @@
 
         <include layout="@layout/base_dialog_fragment" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_library_title"
+            style="@style/DialogSectionItem"
+            android:textSize="@dimen/size_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:text="@string/library_title" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til"
             style="@style/TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_extra_small"
-            android:theme="@style/TextInputLayout"
-            app:errorEnabled="true">
+            android:theme="@style/TextInputLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et"
@@ -34,22 +41,58 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_library_color"
+            style="@style/DialogSectionItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_small"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:text="@string/library_color" />
+
         <com.airbnb.epoxy.EpoxyRecyclerView
             android:id="@+id/rv"
             android:background="@drawable/generic_shape"
             android:layout_width="match_parent"
-            android:layout_marginBottom="@dimen/spacing_extra_small"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             tools:listitem="@layout/noto_color_item" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_note_max_lines"
+            style="@style/DialogSectionItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_small"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:text="@string/note_preview_size" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/s_note_preview_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:valueFrom="0"
+            android:valueTo="30"
+            android:value="15"
+            android:stepSize="1"
+            android:contentDescription="@string/note_preview_size"
+            app:haloColor="@color/colorSurface"
+            app:thumbColor="@color/colorPrimary"
+            app:thumbRadius="12dp"
+            app:thumbStrokeWidth="0dp"
+            app:thumbStrokeColor="@color/colorPrimary"
+            app:tickColorActive="@color/colorBackground"
+            app:tickColorInactive="@color/colorPrimary"
+            app:trackColorActive="@color/colorPrimary"
+            app:trackColorInactive="@color/colorSurface"
+            app:trackHeight="@dimen/spacing_normal" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_create"
             style="@style/MaterialButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginVertical="@dimen/spacing_normal"
             android:padding="@dimen/spacing_normal"
             android:text="@string/create_library" />
 
