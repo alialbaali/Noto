@@ -73,7 +73,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 requireActivity().hideKeyboard(root)
                 dismiss()
                 updatePinnedShortcut(title)
-                viewModel.createOrUpdateLibrary(title)
+                viewModel.createOrUpdateLibrary(title, sNotePreviewSize.value.toInt())
             }
         }
     }
@@ -88,6 +88,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
             if (colorStateList != null) {
+                sNotePreviewSize.value = library.notePreviewSize.toFloat()
                 sNotePreviewSize.trackActiveTintList = colorStateList
                 sNotePreviewSize.thumbTintList = colorStateList
                 sNotePreviewSize.tickInactiveTintList = colorStateList

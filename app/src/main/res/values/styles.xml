@@ -183,7 +183,6 @@
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">@color/colorSecondary</item>
-        <item name="android:maxLines">3</item>
         <item name="android:ellipsize">end</item>
     </style>
 
@@ -192,7 +191,6 @@
         <item name="android:textSize">@dimen/size_tiny</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
         <item name="android:textColor">@color/colorSecondary</item>
-        <item name="android:maxLines">5</item>
         <item name="android:ellipsize">end</item>
     </style>
 

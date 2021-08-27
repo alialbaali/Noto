@@ -56,7 +56,7 @@ class LibraryFragment : Fragment() {
         viewModel.state
             .onEach { state ->
                 setupLibraryColors(state.library.color)
-                setupNotes(state.notes, state.font, layoutItems)
+                setupNotes(state.notes, state.font, state.library.notePreviewSize, layoutItems)
                 tb.title = state.library.title
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     val text = state.library.getArchiveText(resources.stringResource(R.string.archive))
@@ -142,7 +142,7 @@ class LibraryFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun LibraryFragmentBinding.setupNotes(notes: List<Note>, font: Font, layoutItems: List<View>) {
+    private fun LibraryFragmentBinding.setupNotes(notes: List<Note>, font: Font, previewSize: Int, layoutItems: List<View>) {
         tvLibraryNotesCount.text = notes.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
         if (notes.isEmpty()) {
             if (tilSearch.isVisible)
@@ -158,6 +158,7 @@ class LibraryFragment : Fragment() {
                         id(note.id)
                         note(note)
                         font(font)
+                        previewSize(previewSize)
                         onClickListener { _ ->
                             findNavController()
                                 .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(note.libraryId, note.id))

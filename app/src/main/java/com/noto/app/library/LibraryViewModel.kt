@@ -42,12 +42,13 @@ class LibraryViewModel(
             .launchIn(viewModelScope)
     }
 
-    fun createOrUpdateLibrary(title: String) = viewModelScope.launch {
+    fun createOrUpdateLibrary(title: String, notePreviewSize: Int) = viewModelScope.launch {
         val color = notoColors.value.first { it.second }.first
 
         val library = state.value.library.copy(
             title = title.trim(),
             color = color,
+            notePreviewSize = notePreviewSize,
         )
 
         if (libraryId == 0L)

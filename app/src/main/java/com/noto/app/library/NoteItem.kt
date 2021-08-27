@@ -25,21 +25,31 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     lateinit var font: Font
 
     @EpoxyAttribute
+    var previewSize: Int = 0
+
+    @EpoxyAttribute
     lateinit var onClickListener: View.OnClickListener
 
     @EpoxyAttribute
     lateinit var onLongClickListener: View.OnLongClickListener
 
     override fun bind(holder: Holder) {
-        holder.binding.tvNoteTitle.text = note.title.takeLines(3)
-        holder.binding.tvNoteBody.text = note.body.takeLines(5)
+        holder.binding.tvNoteTitle.text = note.title
         holder.binding.rbNoteStar.isVisible = note.isStarred
         holder.binding.tvNoteTitle.isVisible = note.title.isNotBlank()
-        holder.binding.tvNoteBody.isVisible = note.body.isNotBlank()
         holder.binding.root.setOnClickListener(onClickListener)
         holder.binding.root.setOnLongClickListener(onLongClickListener)
         holder.binding.tvNoteTitle.setBoldFont(font)
         holder.binding.tvNoteBody.setSemiboldFont(font)
+        if (note.title.isBlank()) {
+            holder.binding.tvNoteBody.text = note.body.takeLines(1)
+            holder.binding.tvNoteBody.maxLines = 1
+            holder.binding.tvNoteBody.isVisible = true
+        } else {
+            holder.binding.tvNoteBody.text = note.body.takeLines(previewSize)
+            holder.binding.tvNoteBody.maxLines = previewSize
+            holder.binding.tvNoteBody.isVisible = previewSize != 0
+        }
     }
 
     class Holder : EpoxyHolder() {

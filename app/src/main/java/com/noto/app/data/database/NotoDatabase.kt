@@ -2,7 +2,6 @@ package com.noto.app.data.database
 
 import android.content.Context
 import androidx.room.*
-import com.noto.app.data.database.migration.*
 import com.noto.app.data.source.LabelDao
 import com.noto.app.data.source.LibraryDao
 import com.noto.app.data.source.NoteDao
@@ -22,8 +21,11 @@ private const val NOTO_DATABASE = "Noto Database"
 )
 @Database(
     entities = [Note::class, Library::class, Label::class, NoteLabel::class],
-    version = 7,
-    autoMigrations = [AutoMigration(from = 6, to = 7)],
+    version = 8,
+    autoMigrations = [
+        AutoMigration(from = 6, to = 7),
+        AutoMigration(from = 7, to = 8),
+    ],
 )
 abstract class NotoDatabase : RoomDatabase() {
 

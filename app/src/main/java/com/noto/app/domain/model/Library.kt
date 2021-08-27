@@ -33,4 +33,7 @@ data class Library(
 
     @ColumnInfo(name = "layout_manager", defaultValue = "0")
     val layoutManager: LayoutManager = LayoutManager.Linear,
+
+    @ColumnInfo(name = "note_preview_size", defaultValue = "15")
+    val notePreviewSize: Int = 15,
 )
