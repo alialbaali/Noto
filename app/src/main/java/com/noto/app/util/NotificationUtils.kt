@@ -21,11 +21,11 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
     val pendingIntent = context.createNotificationPendingIntent(note.id, note.libraryId)
 
     val style = NotificationCompat.BigTextStyle()
-        .bigText(note.body)
+        .bigText(note.body.ifBlank { note.title })
 
     val notification = NotificationCompat.Builder(context, CHANNEL_ID)
-        .setContentTitle(note.title)
-        .setContentText(note.body)
+        .setContentTitle(note.title.ifBlank { note.body })
+        .setContentText(note.body.ifBlank { note.title })
         .setContentIntent(pendingIntent)
         .setSubText(library.title)
         .setStyle(style)
