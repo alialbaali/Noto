@@ -41,7 +41,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         holder.binding.root.setOnLongClickListener(onLongClickListener)
         holder.binding.tvNoteTitle.setBoldFont(font)
         holder.binding.tvNoteBody.setSemiboldFont(font)
-        if (note.title.isBlank()) {
+        if (note.title.isBlank() && previewSize == 0) {
             holder.binding.tvNoteBody.text = note.body.takeLines(1)
             holder.binding.tvNoteBody.maxLines = 1
             holder.binding.tvNoteBody.isVisible = true
