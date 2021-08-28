@@ -216,4 +216,14 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="SliderLabel" parent="Widget.MaterialComponents.Tooltip">
+        <item name="android:textAppearance">@style/SliderLabelTextAppearance</item>
+    </style>
+
+    <style name="SliderLabelTextAppearance" parent="TextAppearance.MaterialComponents.Tooltip">
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/size_small</item>
+    </style>
+
 </resources>
