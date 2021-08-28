@@ -30,7 +30,7 @@ class LibraryListSortingDialogFragment : BaseDialogFragment() {
     ): View = LibraryListSortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.library_sorting)
+            tvDialogTitle.text = resources.stringResource(R.string.libraries_sorting)
         }
 
         viewModel.state

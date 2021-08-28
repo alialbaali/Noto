@@ -56,6 +56,7 @@
     <string name="delete_library">Delete library</string>
     <string name="delete_library_confirmation">Are you sure you want to delete this library?</string>
     <string name="library_sorting">Library sorting</string>
+    <string name="libraries_sorting">Libraries sorting</string>
     <string name="change_libraries_sorting">Change libraries sorting</string>
     <string name="empty_title">Title can\'t be empty.</string>
     <string name="library_is_deleted">Library has been deleted.</string>
