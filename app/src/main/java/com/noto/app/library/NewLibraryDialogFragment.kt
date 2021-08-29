@@ -1,11 +1,9 @@
 package com.noto.app.library
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -27,8 +25,6 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
     private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<NewLibraryDialogFragmentArgs>()
-
-    private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NewLibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {

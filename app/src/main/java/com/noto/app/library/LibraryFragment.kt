@@ -1,6 +1,5 @@
 package com.noto.app.library
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.addCallback
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.forEach
@@ -39,8 +37,6 @@ class LibraryFragment : Fragment() {
     private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<LibraryFragmentArgs>()
-
-    private val imm by lazy { requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryFragmentBinding.inflate(inflater, container, false).withBinding {
