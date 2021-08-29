@@ -218,12 +218,19 @@
 
     <style name="SliderLabel" parent="Widget.MaterialComponents.Tooltip">
         <item name="android:textAppearance">@style/SliderLabelTextAppearance</item>
+        <item name="shapeAppearance">@style/SliderLabelShapeAppearance</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
     </style>
 
     <style name="SliderLabelTextAppearance" parent="TextAppearance.MaterialComponents.Tooltip">
         <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorBackground</item>
         <item name="android:textSize">@dimen/size_small</item>
+    </style>
+
+    <style name="SliderLabelShapeAppearance" parent="ShapeAppearance.MaterialComponents.Tooltip">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/spacing_small</item>
     </style>
 
 </resources>

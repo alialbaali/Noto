@@ -180,8 +180,16 @@ class NoteFragment : Fragment() {
                 .setIcon(IconCompat.createWithResource(requireContext(), R.mipmap.ic_note))
                 .build()
 
-            ShortcutManagerCompat.pushDynamicShortcut(requireContext(), shortcut)
+            ShortcutManagerCompat.getDynamicShortcuts(requireContext()).also { shortcuts ->
+                val maxShortcutsCount = ShortcutManagerCompat.getMaxShortcutCountPerActivity(requireContext())
+                if (shortcuts.count() == maxShortcutsCount) {
+                    shortcuts.removeLastOrNull()
+                    shortcuts.add(0, shortcut)
+                    ShortcutManagerCompat.setDynamicShortcuts(requireContext(), shortcuts)
+                } else {
+                    ShortcutManagerCompat.pushDynamicShortcut(requireContext(), shortcut)
+                }
+            }
         }
     }
-
 }

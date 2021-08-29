@@ -48,7 +48,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         } else {
             holder.binding.tvNoteBody.text = note.body.takeLines(previewSize)
             holder.binding.tvNoteBody.maxLines = previewSize
-            holder.binding.tvNoteBody.isVisible = previewSize != 0
+            holder.binding.tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
         }
     }
 
