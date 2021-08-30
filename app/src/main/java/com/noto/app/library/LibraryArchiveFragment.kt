@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -54,9 +55,13 @@ class LibraryArchiveFragment : Fragment() {
             .launchIn(lifecycleScope)
     }
 
-    private fun LibraryArchiveFragmentBinding.setupLayoutManger(layoutManager: LayoutManager) = when (layoutManager) {
-        LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    private fun LibraryArchiveFragmentBinding.setupLayoutManger(layoutManager: LayoutManager) {
+        when (layoutManager) {
+            LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        }
+        rv.visibility = View.VISIBLE
+        rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
     private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library) {
