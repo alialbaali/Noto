@@ -61,6 +61,10 @@ class LibraryViewModel(
         libraryRepository.deleteLibrary(state.value.library)
     }
 
+    fun toggleLibraryIsArchived() = viewModelScope.launch {
+        libraryRepository.updateLibrary(state.value.library.copy(isArchived = !state.value.library.isArchived))
+    }
+
     fun updateLayoutManager(value: LayoutManager) = viewModelScope.launch {
         libraryRepository.updateLibrary(state.value.library.copy(layoutManager = value))
     }

@@ -74,6 +74,13 @@
         <action
             android:id="@+id/action_mainFragment_to_libraryListSortingDialogFragment"
             app:destination="@id/libraryListSortingDialogFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_mainArchiveFragment"
+            app:destination="@id/mainArchiveFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/libraryFragment"
@@ -250,11 +257,18 @@
         <action
             android:id="@+id/action_mainDialogFragment_to_libraryListSortingDialogFragment"
             app:destination="@id/libraryListSortingDialogFragment" />
+        <action
+            android:id="@+id/action_mainDialogFragment_to_mainArchiveFragment"
+            app:destination="@id/mainArchiveFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </dialog>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.noto.app.settings.SettingsFragment"
-        android:label="SettingsFragment" >
+        android:label="SettingsFragment">
         <action
             android:id="@+id/action_settingsFragment_to_fontDialogFragment"
             app:destination="@id/fontDialogFragment" />
@@ -289,4 +303,15 @@
         android:id="@+id/fontDialogFragment"
         android:name="com.noto.app.settings.FontDialogFragment"
         android:label="FontDialogFragment" />
+    <fragment
+        android:id="@+id/mainArchiveFragment"
+        android:name="com.noto.app.main.MainArchiveFragment"
+        android:label="MainArchiveFragment" >
+        <action
+            android:id="@+id/action_mainArchiveFragment_to_libraryDialogFragment"
+            app:destination="@id/libraryDialogFragment" />
+        <action
+            android:id="@+id/action_mainArchiveFragment_to_libraryFragment"
+            app:destination="@id/libraryFragment" />
+    </fragment>
 </navigation>

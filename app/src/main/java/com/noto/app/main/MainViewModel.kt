@@ -28,6 +28,8 @@ class MainViewModel(
         combine(
             libraryRepository.getLibraries()
                 .filterNotNull(),
+            libraryRepository.getArchivedLibraries()
+                .filterNotNull(),
             storage.get(Constants.LibraryListLayoutManagerKey)
                 .filterNotNull()
                 .map { LayoutManager.valueOf(it) },
@@ -37,21 +39,14 @@ class MainViewModel(
             storage.get(Constants.LibraryListSortingOrderKey)
                 .filterNotNull()
                 .map { SortingOrder.valueOf(it) },
-        ) { libraries, layoutManager, sorting, sortingOrder ->
-            State(
-                libraries.sortByOrder(sortingOrder) {
-                    when (sorting) {
-                        LibraryListSorting.Manual -> it.position
-                        LibraryListSorting.CreationDate -> it.creationDate
-                        LibraryListSorting.Alphabetical -> it.title
-                    }
-                },
+        ) { libraries, archivedLibraries, layoutManager, sorting, sortingOrder ->
+            mutableState.value = State(
+                libraries.sorted(sorting, sortingOrder),
+                archivedLibraries.sorted(sorting, sortingOrder),
                 layoutManager,
                 sorting,
                 sortingOrder,
             )
-        }.onEach {
-            mutableState.value = it
         }.launchIn(viewModelScope)
     }
 
@@ -75,8 +70,17 @@ class MainViewModel(
         libraryRepository.updateLibrary(library.copy(position = position))
     }
 
+    private fun List<Library>.sorted(sorting: LibraryListSorting, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { library ->
+        when (sorting) {
+            LibraryListSorting.Manual -> library.position
+            LibraryListSorting.CreationDate -> library.creationDate
+            LibraryListSorting.Alphabetical -> library.title
+        }
+    }
+
     data class State(
         val libraries: List<Library> = emptyList(),
+        val archivedLibraries: List<Library> = emptyList(),
         val layoutManager: LayoutManager = LayoutManager.Grid,
         val sorting: LibraryListSorting = LibraryListSorting.CreationDate,
         val sortingOrder: SortingOrder = SortingOrder.Descending,

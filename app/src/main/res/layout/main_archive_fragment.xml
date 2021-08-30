@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cool"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/spacing_small"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/library_item" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:elevation="0dp"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationContentDescription="@string/back"
+            app:navigationIcon="@drawable/ic_round_back_24"
+            app:title="@string/libraries_archive">
+
+            <TextView
+                android:id="@+id/tv_libraries_count"
+                style="@style/SubtitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_normal"
+                tools:text="7 libraries"
+                tools:textColor="@color/colorAccentTeal" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_place_holder"
+        style="@style/PlaceholderTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing_normal"
+        android:text="@string/archive_is_empty"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

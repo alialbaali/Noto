@@ -7,6 +7,8 @@ interface LocalLibraryDataSource {
 
     fun getLibraries(): Flow<List<Library>>
 
+    fun getArchivedLibraries(): Flow<List<Library>>
+
     fun getLibraryById(libraryId: Long): Flow<Library>
 
     suspend fun createLibrary(library: Library)

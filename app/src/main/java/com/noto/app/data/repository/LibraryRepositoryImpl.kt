@@ -15,6 +15,8 @@ class LibraryRepositoryImpl(
 
     override fun getLibraries(): Flow<List<Library>> = dataSource.getLibraries()
 
+    override fun getArchivedLibraries(): Flow<List<Library>> = dataSource.getArchivedLibraries()
+
     override fun getLibraryById(libraryId: Long): Flow<Library> = dataSource.getLibraryById(libraryId)
 
     override suspend fun createLibrary(library: Library) = withContext(dispatcher) {

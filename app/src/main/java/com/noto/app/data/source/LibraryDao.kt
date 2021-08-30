@@ -8,8 +8,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LibraryDao : LocalLibraryDataSource {
 
-    @Query("SELECT * FROM libraries")
+    @Query("SELECT * FROM libraries WHERE is_archived = 0")
     override fun getLibraries(): Flow<List<Library>>
+
+    @Query("SELECT * FROM libraries WHERE is_archived = 1")
+    override fun getArchivedLibraries(): Flow<List<Library>>
 
     @Query("SELECT * FROM libraries WHERE id = :libraryId")
     override fun getLibraryById(libraryId: Long): Flow<Library>
