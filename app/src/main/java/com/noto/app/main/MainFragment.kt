@@ -48,7 +48,7 @@ class MainFragment : Fragment() {
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.layout_manager -> setupLayoutMangerMenuItem()
-                R.id.theme -> setupThemeMenuItem()
+                R.id.libraries_archive -> setupLibrariesArchiveMenuItem()
                 else -> false
             }
         }
@@ -182,8 +182,8 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun MainFragmentBinding.setupThemeMenuItem(): Boolean {
-        findNavController().navigate(MainFragmentDirections.actionMainFragmentToThemeDialogFragment())
+    private fun MainFragmentBinding.setupLibrariesArchiveMenuItem(): Boolean {
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToMainArchiveFragment())
         return true
     }
 

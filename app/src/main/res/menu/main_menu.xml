@@ -10,9 +10,9 @@
         app:showAsAction="always" />
 
     <item
-        android:id="@+id/theme"
-        android:icon="@drawable/ic_round_theme_24"
-        android:title="@string/theme"
+        android:id="@+id/libraries_archive"
+        android:icon="@drawable/ic_round_inventory_24"
+        android:title="@string/libraries_archive"
         android:visible="true"
         app:showAsAction="ifRoom" />
 

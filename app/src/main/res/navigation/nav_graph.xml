@@ -49,9 +49,6 @@
             android:id="@+id/action_mainFragment_to_newLibraryDialogFragment"
             app:destination="@id/newLibraryDialogFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_themeDialogFragment"
-            app:destination="@id/themeDialogFragment" />
-        <action
             android:id="@+id/action_mainFragment_to_labelListFragment"
             app:destination="@id/labelListFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
