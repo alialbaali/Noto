@@ -109,6 +109,8 @@
         <item name="boxCornerRadiusTopStart">@dimen/spacing_small</item>
         <item name="hintEnabled">false</item>
         <item name="android:textColorHint">@color/colorOnPrimary</item>
+        <item name="android:textColorHighlight">@color/colorOnSecondary</item>
+        <item name="android:colorControlActivated">@color/colorPrimary</item>
     </style>
 
     <style name="TextInputEditText">
