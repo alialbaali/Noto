@@ -306,12 +306,16 @@
     <fragment
         android:id="@+id/mainArchiveFragment"
         android:name="com.noto.app.main.MainArchiveFragment"
-        android:label="MainArchiveFragment" >
+        android:label="MainArchiveFragment">
         <action
             android:id="@+id/action_mainArchiveFragment_to_libraryDialogFragment"
             app:destination="@id/libraryDialogFragment" />
         <action
             android:id="@+id/action_mainArchiveFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment" />
+            app:destination="@id/libraryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
 </navigation>
