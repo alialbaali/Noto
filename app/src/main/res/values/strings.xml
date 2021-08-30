@@ -47,6 +47,7 @@
     <string name="new_library">New Library</string>
     <string name="library_options">Library options</string>
     <string name="edit_library">Edit library</string>
+    <string name="archive_library">Archive library</string>
     <string name="add_new_note_shortcut">Add new note shortcut</string>
     <string name="export_library">Export library to…</string>
     <string name="library_is_exported">Library has been exported to</string>

@@ -28,6 +28,7 @@
             style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:navigationContentDescription="@string/back"
             app:navigationIcon="@drawable/ic_round_back_24"
             app:title="@string/archive">
 
