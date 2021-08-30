@@ -21,10 +21,11 @@ private const val NOTO_DATABASE = "Noto Database"
 )
 @Database(
     entities = [Note::class, Library::class, Label::class, NoteLabel::class],
-    version = 8,
+    version = 9,
     autoMigrations = [
         AutoMigration(from = 6, to = 7),
         AutoMigration(from = 7, to = 8),
+        AutoMigration(from = 8, to = 9),
     ],
 )
 abstract class NotoDatabase : RoomDatabase() {

@@ -36,4 +36,7 @@ data class Library(
 
     @ColumnInfo(name = "note_preview_size", defaultValue = "15")
     val notePreviewSize: Int = 15,
+
+    @ColumnInfo(name = "is_archived", defaultValue = "0")
+    val isArchived: Boolean = false,
 )
