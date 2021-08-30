@@ -14,6 +14,15 @@
         <include layout="@layout/base_dialog_fragment" />
 
         <TextView
+            android:id="@+id/tv_libraries_archive"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/libraries_archive"
+            app:drawableStartCompat="@drawable/ic_round_inventory_24" />
+
+        <TextView
             android:id="@+id/tv_change_library_sorting"
             style="@style/DialogItem"
             android:layout_width="match_parent"

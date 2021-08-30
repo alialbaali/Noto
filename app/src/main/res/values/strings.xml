@@ -39,6 +39,7 @@
     <string name="nunito">Nunito (default)</string>
     <string name="monospace">Monospace</string>
     <string name="font">Font</string>
+    <string name="libraries_archive">Libraries archive</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>
@@ -48,6 +49,7 @@
     <string name="library_options">Library options</string>
     <string name="edit_library">Edit library</string>
     <string name="archive_library">Archive library</string>
+    <string name="unarchive_library">Unarchive library</string>
     <string name="add_new_note_shortcut">Add new note shortcut</string>
     <string name="export_library">Export library to…</string>
     <string name="library_is_exported">Library has been exported to</string>
@@ -61,6 +63,8 @@
     <string name="empty_title">Title can\'t be empty.</string>
     <string name="library_is_deleted">Library has been deleted.</string>
     <string name="library_is_empty">Library is empty.</string>
+    <string name="library_is_archived">Library has been archived.</string>
+    <string name="library_is_unarchived">Library has been unarchived.</string>
     <string name="no_libraries">No libraries. Try creating a library by clicking the + icon.</string>
     <string name="select_library">Select library</string>
 
@@ -82,7 +86,7 @@
     <string name="no_note_matches_search_term">There\'s no note that matches the search term.</string>
     <string name="note_is_archived">Note has been archived.</string>
     <string name="no_note_reminder">No note reminder is setup.</string>
-    <string name="note_unarchived">Note has been unarchived.</string>
+    <string name="note_is_unarchived">Note has been unarchived.</string>
     <string name="reminder">Reminder</string>
     <string name="new_note_reminder">New note reminder</string>
     <string name="archive">Archive</string>

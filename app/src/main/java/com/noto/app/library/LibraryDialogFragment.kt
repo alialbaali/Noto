@@ -56,6 +56,9 @@ class LibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun LibraryDialogFragmentBinding.setupListeners() {
+        val parentView = requireParentFragment().requireView()
+        val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
+
         tvExportLibrary.setOnClickListener {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
             startActivityForResult(intent, SelectDirectoryRequestCode)
@@ -70,6 +73,18 @@ class LibraryDialogFragment : BaseDialogFragment() {
             dismiss()
             if (ShortcutManagerCompat.isRequestPinShortcutSupported(requireContext()))
                 ShortcutManagerCompat.requestPinShortcut(requireContext(), requireContext().createPinnedShortcut(viewModel.state.value.library), null)
+        }
+
+        tvArchiveLibrary.setOnClickListener {
+            dismiss()
+            viewModel.toggleLibraryIsArchived()
+
+            val resource = if (viewModel.state.value.library.isArchived)
+                R.string.library_is_unarchived
+            else
+                R.string.library_is_archived
+
+            parentView.snackbar(resources.stringResource(resource), parentAnchorView)
         }
 
         tvDeleteLibrary.setOnClickListener {
@@ -92,8 +107,16 @@ class LibraryDialogFragment : BaseDialogFragment() {
         val resource = resources.colorStateResource(library.color.toResource())
         baseDialogFragment.vHead.backgroundTintList = resource
         baseDialogFragment.tvDialogTitle.setTextColor(resource)
-        listOf(tvEditLibrary, tvNewNoteShortcut, tvExportLibrary, tvDeleteLibrary)
+        listOf(tvEditLibrary, tvArchiveLibrary, tvNewNoteShortcut, tvExportLibrary, tvDeleteLibrary)
             .forEach { TextViewCompat.setCompoundDrawableTintList(it, resource) }
+
+        if (library.isArchived) {
+            tvArchiveLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
+            tvArchiveLibrary.text = resources.stringResource(R.string.unarchive_library)
+        } else {
+            tvArchiveLibrary.text = resources.stringResource(R.string.archive_library)
+            tvArchiveLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
+        }
     }
 
     private fun setupConfirmationDialogClickListener() = ConfirmationDialogFragment.ConfirmationDialogClickListener {

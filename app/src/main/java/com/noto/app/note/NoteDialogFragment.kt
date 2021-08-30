@@ -73,7 +73,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             viewModel.toggleNoteIsArchived()
 
             val resource = if (viewModel.state.value.note.isArchived)
-                R.string.note_unarchived
+                R.string.note_is_unarchived
             else
                 R.string.note_is_archived
 
