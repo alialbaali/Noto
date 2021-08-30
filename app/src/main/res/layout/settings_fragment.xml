@@ -30,49 +30,67 @@
         android:orientation="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_change_theme"
-            style="@style/DialogItem"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:layout_marginVertical="@dimen/spacing_small"
+            android:background="@drawable/generic_shape"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_round_theme_24"
-            android:text="@string/change_theme" />
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_change_notes_font"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_round_font_24"
-            android:text="@string/change_notes_font" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_change_theme"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_theme_24"
+                android:text="@string/change_theme" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_view_code"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_round_code_24"
-            android:text="@string/view_code" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_change_notes_font"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_font_24"
+                android:text="@string/change_notes_font" />
+        </LinearLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_share_with_others"
-            style="@style/DialogItem"
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:layout_marginVertical="@dimen/spacing_small"
+            android:background="@drawable/generic_shape"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_round_share_24"
-            android:text="@string/share_with_others" />
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_rate_app"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_round_star_rate_24"
-            android:text="@string/rate_app_on_play_store" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_view_code"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_code_24"
+                android:text="@string/view_code" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_share_with_others"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_share_24"
+                android:text="@string/share_app_with_others" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_rate_app"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_star_rate_24"
+                android:text="@string/rate_app_on_play_store" />
+        </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_version"
-            style="@style/DialogItem"
+            style="@style/SettingsItem"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="bottom"
