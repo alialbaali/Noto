@@ -35,7 +35,6 @@
     <string name="version">Version</string>
     <string name="layout_is_list_mode">Layout has been set to list mode.</string>
     <string name="layout_is_grid_mode">Layout has been set to grid mode.</string>
-    <string name="layout_is_staggered_mode">Layout has been set to staggered mode.</string>
     <string name="drag">Drag</string>
     <string name="nunito">Nunito (default)</string>
     <string name="monospace">Monospace</string>

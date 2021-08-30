@@ -121,7 +121,7 @@ class LibraryFragment : Fragment() {
         val resource = resources.colorResource(color)
         when (layoutManager) {
             LayoutManager.Linear -> {
-                layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_dashboard_24)
+                layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_grid_24)
                 rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }
             LayoutManager.Grid -> {
@@ -185,7 +185,7 @@ class LibraryFragment : Fragment() {
         when (viewModel.state.value.library.layoutManager) {
             LayoutManager.Linear -> {
                 viewModel.updateLayoutManager(LayoutManager.Grid)
-                root.snackbar(getString(R.string.layout_is_staggered_mode), anchorView = fab)
+                root.snackbar(getString(R.string.layout_is_grid_mode), anchorView = fab)
             }
             LayoutManager.Grid -> {
                 viewModel.updateLayoutManager(LayoutManager.Linear)
