@@ -40,6 +40,10 @@ class SettingsFragment : Fragment() {
             findNavController().navigateUp()
         }
 
+        tvChangeTheme.setOnClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToThemeDialogFragment())
+        }
+
         tvChangeNotesFont.setOnClickListener {
             findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToFontDialogFragment())
         }

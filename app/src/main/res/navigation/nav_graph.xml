@@ -269,6 +269,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_fontDialogFragment"
             app:destination="@id/fontDialogFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_themeDialogFragment"
+            app:destination="@id/themeDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"

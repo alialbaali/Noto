@@ -31,6 +31,14 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_change_theme"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_round_theme_24"
+            android:text="@string/change_theme" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_change_notes_font"
             style="@style/DialogItem"
             android:layout_width="match_parent"
