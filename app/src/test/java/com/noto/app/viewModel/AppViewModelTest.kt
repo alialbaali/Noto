@@ -1,7 +1,7 @@
 package com.noto.app.viewModel
 
 import com.noto.app.AppViewModel
-import com.noto.app.di.appModule
+import com.noto.app.util.appModule
 import com.noto.app.domain.model.Theme
 import com.noto.app.fakeLocalDataSourceModule
 import io.kotest.core.spec.style.StringSpec

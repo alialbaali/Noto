@@ -1,9 +1,9 @@
 package com.noto.app
 
 import android.app.Application
-import com.noto.app.di.appModule
-import com.noto.app.di.localDataSourceModule
-import com.noto.app.di.repositoryModule
+import com.noto.app.util.appModule
+import com.noto.app.util.localDataSourceModule
+import com.noto.app.util.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

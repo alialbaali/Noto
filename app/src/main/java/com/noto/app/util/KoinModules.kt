@@ -1,4 +1,4 @@
-package com.noto.app.di
+package com.noto.app.util
 
 import androidx.datastore.DataStore
 import androidx.datastore.preferences.Preferences

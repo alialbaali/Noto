@@ -3,7 +3,7 @@ package com.noto.app.data.source
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import com.noto.app.di.localDataSourceModule
+import com.noto.app.util.localDataSourceModule
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.source.LocalLibraryDataSource
 import com.noto.app.inMemoryDatabaseModule
