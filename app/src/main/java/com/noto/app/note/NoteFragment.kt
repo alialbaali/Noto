@@ -112,7 +112,7 @@ class NoteFragment : Fragment() {
 
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.share_noto -> {
+                R.id.share_note -> {
                     launchShareNoteIntent(viewModel.state.value.note)
                     true
                 }
