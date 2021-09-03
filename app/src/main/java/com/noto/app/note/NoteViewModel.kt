@@ -26,7 +26,6 @@ class NoteViewModel(
 ) : ViewModel() {
 
     private val mutableState = MutableStateFlow(State(Library(position = 0), Note(libraryId = libraryId, position = 0)))
-
     val state get() = mutableState.asStateFlow()
 
     init {
@@ -53,8 +52,6 @@ class NoteViewModel(
                 noteRepository.createNote(note)
             else
                 noteRepository.updateNote(note)
-        else
-            noteRepository.deleteNote(note)
     }
 
     fun deleteNote() = viewModelScope.launch {
