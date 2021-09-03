@@ -91,6 +91,9 @@
         <entry key="app/src/main/res/drawable/ic_round_note_alt_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_notification_add_24.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/drawable/ic_round_person_outline_24.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/ic_round_pin_24.xml" value="0.22664473684210526" />
+        <entry key="app/src/main/res/drawable/ic_round_pin_off_24.xml" value="0.22664473684210526" />
+        <entry key="app/src/main/res/drawable/ic_round_pinned_24.xml" value="0.22664473684210526" />
         <entry key="app/src/main/res/drawable/ic_round_reading_mode_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_search_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_settings_24.xml" value="0.35833333333333334" />
@@ -116,6 +119,7 @@
         <entry key="app/src/main/res/drawable/ic_work_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/library_item_shape.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/note_item_shape.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/noto_color_item_shape.xml" value="0.22664473684210526" />
         <entry key="app/src/main/res/drawable/noto_color_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/noto_colors_background_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/radio_button_not_selected_shape.xml" value="0.22631578947368422" />
@@ -140,6 +144,9 @@
         <entry key="app/src/main/res/drawable/sorting_checked.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/sorting_item_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/switch_thumb_selector.xml" value="0.22664473684210526" />
+        <entry key="app/src/main/res/drawable/switch_track_selector.xml" value="0.22664473684210526" />
+        <entry key="app/src/main/res/drawable/switch_track_shape.xml" value="0.22664473684210526" />
         <entry key="app/src/main/res/drawable/text_input_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/theme.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/unchecked_color.xml" value="0.35833333333333334" />
@@ -199,6 +206,8 @@
         <entry key="app/src/main/res/layout/sorting_dialog_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/sorting_header_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/sorting_item.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/stick_header_item.xml" value="0.21644736842105264" />
+        <entry key="app/src/main/res/layout/sticky_header_item.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/test.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/theme_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/menu/bottom_nav_bar_menu.xml" value="0.2675925925925926" />

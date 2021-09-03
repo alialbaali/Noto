@@ -48,8 +48,12 @@ class NoteViewModel(
             body = body.trim(),
         )
         if (note.isValid())
-            if (noteId == 0L)
-                noteRepository.createNote(note)
+            if (note.id == 0L)
+                noteRepository.createNote(note).also { id ->
+                    noteRepository.getNoteById(id)
+                        .onEach { createdNote -> mutableState.value = state.value.copy(note = createdNote) }
+                        .launchIn(viewModelScope)
+                }
             else
                 noteRepository.updateNote(note)
     }

@@ -65,8 +65,13 @@
     <string name="library_is_empty">Library is empty.</string>
     <string name="library_is_archived">Library has been archived.</string>
     <string name="library_is_unarchived">Library has been unarchived.</string>
+    <string name="library_is_pinned">Library has been pinned.</string>
+    <string name="library_is_unpinned">Library has been unpinned.</string>
     <string name="no_libraries">No libraries. Try creating a library by clicking the + icon.</string>
     <string name="select_library">Select library</string>
+    <string name="pinned">Pinned</string>
+    <string name="pin_library">Pin library</string>
+    <string name="unpin_library">Unpin library</string>
 
     <!-- Note -->
     <string name="all_notes">All notes</string>
@@ -111,6 +116,8 @@
     <string name="move_note">Move note to…</string>
     <string name="note_is_moved">Note has been moved.</string>
     <string name="note_preview_size">Note preview size</string>
+    <string name="show_libraries_creation_date">Show libraries creation date</string>
+    <string name="show_libraries_notes_count">Show libraries notes count</string>
 
     <!-- Label -->
     <string name="add_label">Add label</string>

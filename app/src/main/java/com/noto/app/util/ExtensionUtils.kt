@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.graphics.applyCanvas
@@ -13,6 +14,7 @@ import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -22,6 +24,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.onStart
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toJavaLocalDateTime
@@ -182,4 +189,16 @@ fun TextView.setSemiboldFont(font: Font) {
         Font.Nunito -> context?.tryLoadingFontResource(R.font.nunito_semibold)?.let { typeface = it }
         Font.Monospace -> typeface = Typeface.MONOSPACE
     }
+}
+
+@OptIn(ExperimentalCoroutinesApi::class)
+fun EditText.textAsFlow(): Flow<CharSequence?> {
+    return callbackFlow {
+        val listener = doOnTextChanged { text, start, before, count ->
+            if (before <= count)
+                trySend(text)
+        }
+        addTextChangedListener(listener)
+        awaitClose { removeTextChangedListener(listener) }
+    }.onStart { emit(text) }
 }

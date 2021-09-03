@@ -19,33 +19,8 @@
             android:layout_height="wrap_content"
             app:navigationContentDescription="@string/back"
             app:navigationIcon="@drawable/ic_round_back_24"
-            tools:title="Note">
+            tools:title="Note" />
 
-            <LinearLayout
-                android:id="@+id/ll_subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_created_at"
-                    style="@style/SubtitleTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Created Tue, Aug 8"
-                    tools:textColor="@color/colorAccentTeal" />
-
-                <TextView
-                    android:id="@+id/tv_word_count"
-                    style="@style/SubtitleTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="30 words"
-                    tools:textColor="@color/colorAccentTeal" />
-            </LinearLayout>
-        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -62,15 +37,42 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/padding_bottom">
 
+            <LinearLayout
+                android:id="@+id/note_info"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_created_at"
+                    style="@style/SubtitleTextView"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    tools:text="Created Tue, Aug 8" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_word_count"
+                    style="@style/SubtitleTextView"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:layout_marginStart="@dimen/spacing_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="30 words" />
+            </LinearLayout>
+
             <EditText
                 android:id="@+id/et_note_title"
                 style="@style/NoteTitleEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_normal"
-                android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginEnd="@dimen/spacing_normal"
-                android:layout_marginBottom="@dimen/spacing_small"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginVertical="@dimen/spacing_small"
                 android:autofillHints="@string/title"
                 android:hint="@string/title"
                 android:inputType="text|textCapSentences|textMultiLine"
@@ -81,9 +83,8 @@
                 style="@style/NoteBodyEditText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/spacing_normal"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
                 android:layout_marginTop="@dimen/spacing_small"
-                android:layout_marginEnd="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_normal"
                 android:autofillHints="@string/body"
                 android:focusable="true"
@@ -106,8 +107,8 @@
         app:fabAnimationMode="scale"
         app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
-        app:navigationContentDescription="@string/more"
         app:menu="@menu/note_menu"
+        app:navigationContentDescription="@string/more"
         app:navigationIcon="@drawable/ic_round_menu_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

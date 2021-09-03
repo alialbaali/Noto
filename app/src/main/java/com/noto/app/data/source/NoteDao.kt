@@ -18,7 +18,7 @@ interface NoteDao : LocalNoteDataSource {
     override fun getNoteById(noteId: Long): Flow<Note>
 
     @Insert
-    override suspend fun createNote(note: Note)
+    override suspend fun createNote(note: Note): Long
 
     @Update
     override suspend fun updateNote(note: Note)

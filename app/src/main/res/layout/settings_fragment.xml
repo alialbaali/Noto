@@ -63,6 +63,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/tv_show_libraries_creation_date"
+                style="@style/SettingsItem"
+                android:drawableStart="@drawable/ic_round_count_24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/show_libraries_creation_date"
+                app:thumbTint="@drawable/switch_thumb_selector"
+                app:trackTint="@color/colorOnSecondary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:layout_marginVertical="@dimen/spacing_small"
+            android:background="@drawable/generic_shape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_view_code"
                 style="@style/SettingsItem"

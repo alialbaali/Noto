@@ -25,11 +25,12 @@ import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+private const val DebounceTimeoutMillis = 250L
 
 class NoteFragment : Fragment() {
 
@@ -43,6 +44,7 @@ class NoteFragment : Fragment() {
             setupListeners()
         }
 
+    @OptIn(FlowPreview::class)
     private fun NoteFragmentBinding.setupState() {
 
         if (args.noteId == 0L) {
@@ -56,15 +58,27 @@ class NoteFragment : Fragment() {
         viewModel.state
             .onEach { state ->
                 setupLibrary(state.library)
-                setupNote(state.note, state.font, archiveMenuItem)
+                tvWordCount.text = state.note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
             }
+            .distinctUntilChangedBy { it.note.title != etNoteTitle.text.toString() || it.note.body != etNoteBody.text.toString() }
+            .onEach { state -> setupNote(state.note, state.font, archiveMenuItem) }
+            .launchIn(lifecycleScope)
+
+        combine(
+            etNoteTitle.textAsFlow()
+                .filterNotNull(),
+            etNoteBody.textAsFlow()
+                .filterNotNull(),
+        ) { title, body -> title to body }
+            .debounce(DebounceTimeoutMillis)
+            .onEach { (title, body) -> viewModel.createOrUpdateNote(title.toString(), body.toString()) }
             .launchIn(lifecycleScope)
     }
 
     private fun NoteFragmentBinding.setupListeners() {
         fab.setOnClickListener {
             findNavController()
-                .navigate(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.libraryId, args.noteId))
+                .navigate(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.libraryId, viewModel.state.value.note.id))
         }
 
         val backCallback = {
@@ -92,7 +106,7 @@ class NoteFragment : Fragment() {
             findNavController().navigate(
                 NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
                     args.libraryId,
-                    args.noteId,
+                    viewModel.state.value.note.id,
                     R.id.libraryFragment
                 )
             )
@@ -145,17 +159,22 @@ class NoteFragment : Fragment() {
         etNoteTitle.setBoldFont(font)
         etNoteBody.setSemiboldFont(font)
         tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
-        tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
 
-        if (note.isArchived) archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_unarchive_24)
-        else archiveMenuItem.icon = resources.drawableResource(R.drawable.ic_round_archive_24)
+        archiveMenuItem.icon = if (note.isArchived)
+            resources.drawableResource(R.drawable.ic_round_unarchive_24)
+        else
+            resources.drawableResource(R.drawable.ic_round_archive_24)
 
         val color = viewModel.state.value.library.color.toResource()
         val resource = resources.colorResource(color)
         archiveMenuItem.icon?.mutate()?.setTint(resource)
 
-        if (note.reminderDate == null) fab.setImageDrawable(resources.drawableResource(R.drawable.ic_round_notification_add_24))
-        else fab.setImageDrawable(resources.drawableResource(R.drawable.ic_round_edit_notifications_24))
+        fab.setImageDrawable(
+            if (note.reminderDate == null)
+                resources.drawableResource(R.drawable.ic_round_notification_add_24)
+            else
+                resources.drawableResource(R.drawable.ic_round_edit_notifications_24)
+        )
 
         setupShortcut(note)
     }
