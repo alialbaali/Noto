@@ -65,6 +65,10 @@ class LibraryViewModel(
         libraryRepository.updateLibrary(state.value.library.copy(isArchived = !state.value.library.isArchived))
     }
 
+    fun toggleLibraryIsPinned() = viewModelScope.launch {
+        libraryRepository.updateLibrary(state.value.library.copy(isPinned = !state.value.library.isPinned))
+    }
+
     fun updateLayoutManager(value: LayoutManager) = viewModelScope.launch {
         libraryRepository.updateLibrary(state.value.library.copy(layoutManager = value))
     }

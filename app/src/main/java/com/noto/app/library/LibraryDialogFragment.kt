@@ -87,6 +87,18 @@ class LibraryDialogFragment : BaseDialogFragment() {
             parentView.snackbar(resources.stringResource(resource), parentAnchorView)
         }
 
+        tvPinLibrary.setOnClickListener {
+            dismiss()
+            viewModel.toggleLibraryIsPinned()
+
+            val resource = if (viewModel.state.value.library.isPinned)
+                R.string.library_is_unpinned
+            else
+                R.string.library_is_pinned
+
+            parentView.snackbar(resources.stringResource(resource), parentAnchorView)
+        }
+
         tvDeleteLibrary.setOnClickListener {
             val title = resources.stringResource(R.string.delete_library_confirmation)
             val btnText = resources.stringResource(R.string.delete_library)
@@ -107,7 +119,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
         val resource = resources.colorStateResource(library.color.toResource())
         baseDialogFragment.vHead.backgroundTintList = resource
         baseDialogFragment.tvDialogTitle.setTextColor(resource)
-        listOf(tvEditLibrary, tvArchiveLibrary, tvNewNoteShortcut, tvExportLibrary, tvDeleteLibrary)
+        listOf(tvEditLibrary, tvArchiveLibrary, tvPinLibrary, tvNewNoteShortcut, tvExportLibrary, tvDeleteLibrary)
             .forEach { TextViewCompat.setCompoundDrawableTintList(it, resource) }
 
         if (library.isArchived) {
@@ -116,6 +128,14 @@ class LibraryDialogFragment : BaseDialogFragment() {
         } else {
             tvArchiveLibrary.text = resources.stringResource(R.string.archive_library)
             tvArchiveLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
+        }
+
+        if (library.isPinned) {
+            tvPinLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
+            tvPinLibrary.text = resources.stringResource(R.string.unpin_library)
+        } else {
+            tvPinLibrary.text = resources.stringResource(R.string.pin_library)
+            tvPinLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
         }
     }
 
