@@ -21,11 +21,12 @@ import com.noto.app.domain.model.Note
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.datetime.*
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class NoteReminderDialogFragment : BaseDialogFragment() {
@@ -132,40 +133,9 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
             til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_notification_add_24)
             baseDialogFragment.tvDialogTitle.text = resources.stringResource(R.string.new_note_reminder)
         } else {
-            val timeZone = TimeZone.currentSystemDefault()
             til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_cancel_24)
             baseDialogFragment.tvDialogTitle.text = resources.stringResource(R.string.edit_note_reminder)
-            note.reminderDate
-                .toLocalDateTime(timeZone)
-                .toJavaLocalDateTime()
-                .also { time ->
-
-                    val currentDateTime = Clock.System
-                        .now()
-                        .toLocalDateTime(timeZone)
-
-                    val is24HourFormat = DateFormat.is24HourFormat(requireContext())
-
-                    if (time.year > currentDateTime.year) {
-
-                        val format = if (is24HourFormat)
-                            "EEE, d MMM yyyy HH:mm"
-                        else
-                            "EEE, d MMM yyyy h:mm a"
-
-                        val dateTime = time.format(DateTimeFormatter.ofPattern(format))
-                        et.setText(dateTime)
-                    } else {
-
-                        val format = if (is24HourFormat)
-                            "EEE, d MMM HH:mm"
-                        else
-                            "EEE, d MMM h:mm a"
-
-                        val dateTime = time.format(DateTimeFormatter.ofPattern(format))
-                        et.setText(dateTime)
-                    }
-                }
+            et.setText(note.reminderDate.format(requireContext()))
         }
     }
 }

@@ -29,11 +29,6 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onStart
-import kotlinx.datetime.Clock
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toJavaLocalDateTime
-import kotlinx.datetime.toLocalDateTime
-import java.time.format.DateTimeFormatter
 
 inline fun <T> List<T>.sortByOrder(sortingOrder: SortingOrder, crossinline selector: (T) -> Comparable<*>?): List<T> = when (sortingOrder) {
     SortingOrder.Ascending -> sortedWith(compareBy(selector))
@@ -56,24 +51,6 @@ else body.split("\\s+".toRegex())
 
 val Uri.directoryPath
     get() = path?.substringAfterLast(':')?.substringBeforeLast('/')
-
-fun Note.formatCreationDate(): String {
-    val timeZone = TimeZone.currentSystemDefault()
-    return creationDate
-        .toLocalDateTime(timeZone)
-        .toJavaLocalDateTime()
-        .let {
-            val currentDateTime = Clock.System
-                .now()
-                .toLocalDateTime(timeZone)
-                .toJavaLocalDateTime()
-
-            if (it.year > currentDateTime.year)
-                it.format(DateTimeFormatter.ofPattern("EEE, MMM d yyyy"))
-            else
-                it.format(DateTimeFormatter.ofPattern("EEE, MMM d"))
-        }
-}
 
 fun Fragment.launchShareNoteIntent(note: Note) {
     val intent = note.createShareIntent()

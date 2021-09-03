@@ -57,7 +57,7 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupNote(note: Note, font: Font) {
         tvNoteTitle.text = note.title
         tvNoteBody.text = note.body
-        tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
+        tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.creationDate.format(requireContext())}"
         tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
         tvNoteTitle.isVisible = note.title.isNotBlank()
         tvNoteBody.isVisible = note.body.isNotBlank()

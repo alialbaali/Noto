@@ -151,7 +151,7 @@ class NoteFragment : Fragment() {
         etNoteBody.setSelection(note.body.length)
         etNoteTitle.setBoldFont(font)
         etNoteBody.setSemiboldFont(font)
-        tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
+        tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.creationDate.format(requireContext())}"
         fab.setImageDrawable(
             if (note.reminderDate == null)
                 resources.drawableResource(R.drawable.ic_round_notification_add_24)
