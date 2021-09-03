@@ -141,6 +141,10 @@ class NoteFragment : Fragment() {
             fab.outlineAmbientShadowColor = color
             fab.outlineSpotShadowColor = color
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            etNoteTitle.textCursorDrawable?.mutate()?.setTint(color)
+            etNoteBody.textCursorDrawable?.mutate()?.setTint(color)
+        }
     }
 
     @SuppressLint("SetTextI18n")
