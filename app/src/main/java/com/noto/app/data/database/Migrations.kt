@@ -1,4 +1,4 @@
-package com.noto.app.data.database.migration
+package com.noto.app.data.database
 
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
