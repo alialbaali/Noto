@@ -48,7 +48,9 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
         holder.binding.vColor.background.setTint(color)
         holder.binding.tvLibraryTitle.setTextColor(color)
         holder.binding.tvLibraryNotesCount.setTextColor(color)
-        holder.binding.ibDrag.drawable?.setTint(color)
+        holder.binding.ibDrag.drawable?.mutate()?.setTint(color)
+        holder.binding.ivPin.drawable?.mutate()?.setTint(color)
+        holder.binding.ivPin.isVisible = library.isPinned
         holder.binding.ibDrag.setOnTouchListener(onDragHandleTouchListener)
         holder.binding.root.setOnClickListener(onClickListener)
         holder.binding.root.setOnLongClickListener(onLongClickListener)

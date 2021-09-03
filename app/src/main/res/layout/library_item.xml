@@ -26,13 +26,26 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginTop="@dimen/spacing_normal"
-        android:layout_marginEnd="@dimen/spacing_normal"
         android:layout_marginBottom="@dimen/spacing_extra_small"
         app:layout_constraintBottom_toTopOf="@id/tv_library_notes_count"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/iv_pin"
         app:layout_constraintStart_toEndOf="@+id/v_color"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Library" />
+
+    <ImageButton
+        android:id="@+id/iv_pin"
+        android:src="@drawable/ic_round_pin_24"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/pinned"
+        android:paddingHorizontal="@dimen/spacing_normal"
+        app:layout_constraintBottom_toBottomOf="@id/tv_library_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_library_title"
+        app:layout_constraintTop_toTopOf="@id/tv_library_title"
+        app:layout_constraintVertical_bias="0" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_library_notes_count"
@@ -61,6 +74,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_library_notes_count"
         app:layout_constraintTop_toTopOf="@id/tv_library_notes_count" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
