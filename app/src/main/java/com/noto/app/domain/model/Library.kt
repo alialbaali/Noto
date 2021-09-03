@@ -39,4 +39,7 @@ data class Library(
 
     @ColumnInfo(name = "is_archived", defaultValue = "0")
     val isArchived: Boolean = false,
+
+    @ColumnInfo(name = "is_pinned", defaultValue = "0")
+    val isPinned: Boolean = false,
 )
