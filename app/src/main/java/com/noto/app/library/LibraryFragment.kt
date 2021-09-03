@@ -100,11 +100,12 @@ class LibraryFragment : Fragment() {
         etSearch.requestFocus()
         requireActivity().showKeyboard(root)
 
-        requireActivity().onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner) {
-                disableSearch()
-                if (isEnabled) isEnabled = false
-            }
+        if (!requireActivity().onBackPressedDispatcher.hasEnabledCallbacks())
+            requireActivity().onBackPressedDispatcher
+                .addCallback(viewLifecycleOwner) {
+                    disableSearch()
+                    if (isEnabled) isEnabled = false
+                }
     }
 
     private fun LibraryFragmentBinding.disableSearch() {
