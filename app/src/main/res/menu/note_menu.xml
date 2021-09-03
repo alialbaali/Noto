@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/archive_note"
-        android:contentDescription="@string/archive_note"
-        android:icon="@drawable/ic_round_archive_24"
-        android:title="@string/archive_note"
+        android:id="@+id/reading_mode"
+        android:contentDescription="@string/open_note_in_reading_mode"
+        android:icon="@drawable/ic_round_reading_mode_24"
+        android:title="@string/open_note_in_reading_mode"
         app:showAsAction="ifRoom" />
 
     <item
@@ -15,12 +15,4 @@
         android:icon="@drawable/ic_round_share_24"
         android:title="@string/share_note"
         app:showAsAction="ifRoom" />
-    <!--            <item-->
-    <!--                android:id="@+id/library"-->
-    <!--                android:enabled="true"-->
-    <!--                android:icon="@drawable/ic_bookshelf_24dp"-->
-    <!--                android:title="Change note's library"-->
-    <!--                android:visible="true"-->
-    <!--                app:showAsAction="never" />-->
-
 </menu>

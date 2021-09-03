@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
@@ -53,7 +52,6 @@ class NoteFragment : Fragment() {
         }
 
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
-        val archiveMenuItem = bab.menu.findItem(R.id.archive_note)
 
         viewModel.state
             .onEach { state ->
@@ -61,7 +59,7 @@ class NoteFragment : Fragment() {
                 tvWordCount.text = state.note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
             }
             .distinctUntilChangedBy { it.note.title != etNoteTitle.text.toString() || it.note.body != etNoteBody.text.toString() }
-            .onEach { state -> setupNote(state.note, state.font, archiveMenuItem) }
+            .onEach { state -> setupNote(state.note, state.font) }
             .launchIn(lifecycleScope)
 
         combine(
@@ -118,14 +116,9 @@ class NoteFragment : Fragment() {
                     launchShareNoteIntent(viewModel.state.value.note)
                     true
                 }
-                R.id.archive_note -> {
-                    if (viewModel.state.value.note.isArchived) {
-                        viewModel.toggleNoteIsArchived()
-                        root.snackbar(getString(R.string.note_is_unarchived), anchorView = fab)
-                    } else {
-                        viewModel.toggleNoteIsArchived()
-                        root.snackbar(getString(R.string.note_is_archived), anchorView = fab)
-                    }
+                R.id.reading_mode -> {
+                    findNavController()
+                        .navigate(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.libraryId, viewModel.state.value.note.id))
                     true
                 }
                 else -> false
@@ -151,7 +144,7 @@ class NoteFragment : Fragment() {
     }
 
     @SuppressLint("SetTextI18n")
-    private fun NoteFragmentBinding.setupNote(note: Note, font: Font, archiveMenuItem: MenuItem) {
+    private fun NoteFragmentBinding.setupNote(note: Note, font: Font) {
         etNoteTitle.setText(note.title)
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
@@ -159,16 +152,6 @@ class NoteFragment : Fragment() {
         etNoteTitle.setBoldFont(font)
         etNoteBody.setSemiboldFont(font)
         tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.formatCreationDate()}"
-
-        archiveMenuItem.icon = if (note.isArchived)
-            resources.drawableResource(R.drawable.ic_round_unarchive_24)
-        else
-            resources.drawableResource(R.drawable.ic_round_archive_24)
-
-        val color = viewModel.state.value.library.color.toResource()
-        val resource = resources.colorResource(color)
-        archiveMenuItem.icon?.mutate()?.setTint(resource)
-
         fab.setImageDrawable(
             if (note.reminderDate == null)
                 resources.drawableResource(R.drawable.ic_round_notification_add_24)
