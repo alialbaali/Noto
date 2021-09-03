@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/pinned"
-        android:paddingHorizontal="@dimen/spacing_normal"
+        android:paddingEnd="@dimen/spacing_normal"
         app:layout_constraintBottom_toBottomOf="@id/tv_library_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_library_title"
