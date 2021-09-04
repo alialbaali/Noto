@@ -94,10 +94,14 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 sNotePreviewSize.trackActiveTintList = colorStateList
                 sNotePreviewSize.thumbTintList = colorStateList
                 sNotePreviewSize.tickInactiveTintList = colorStateList
-                swShowNoteCreationDate.thumbTintList = colorStateList
+                swShowNoteCreationDate.thumbTintList = ColorStateList(state, intArrayOf(color, resources.colorResource(R.color.colorSurface)))
                 swShowNoteCreationDate.trackTintList = ColorStateList(state, intArrayOf(color, resources.colorResource(R.color.colorSurface)))
             }
         } else {
+            swShowNoteCreationDate.thumbTintList = ColorStateList(
+                state,
+                intArrayOf(resources.colorResource(R.color.colorPrimary), resources.colorResource(R.color.colorSurface))
+            )
             swShowNoteCreationDate.trackTintList = ColorStateList(
                 state,
                 intArrayOf(resources.colorResource(R.color.colorPrimary), resources.colorResource(R.color.colorSurface))
