@@ -2,7 +2,6 @@ package com.noto.app.main
 
 import android.annotation.SuppressLint
 import android.view.View
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
@@ -11,6 +10,7 @@ import com.noto.app.R
 import com.noto.app.databinding.LibraryListSortingItemBinding
 import com.noto.app.domain.model.LibraryListSorting
 import com.noto.app.domain.model.SortingOrder
+import com.noto.app.util.setFullSpan
 import com.noto.app.util.stringResource
 
 @SuppressLint("NonConstantResourceId")
@@ -36,10 +36,7 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
             LibraryListSorting.Alphabetical -> "${resources.stringResource(R.string.alphabetical)} $sortingText"
         }
         holder.binding.tvSorting.setOnClickListener(onClickListener)
-        holder.binding.root.rootView.layoutParams.also {
-            if (it != null && it is StaggeredGridLayoutManager.LayoutParams)
-                it.isFullSpan = true
-        }
+        holder.binding.root.rootView.setFullSpan()
         val arrowDrawable = when (sortingOrder) {
             SortingOrder.Ascending -> R.drawable.ic_round_arrow_up_24
             SortingOrder.Descending -> R.drawable.ic_round_arrow_down_24

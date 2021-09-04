@@ -2,7 +2,6 @@ package com.noto.app.util
 
 import android.annotation.SuppressLint
 import android.view.View
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
@@ -19,10 +18,7 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
 
     override fun bind(holder: Holder) {
         holder.binding.tvTitle.text = title
-        holder.binding.root.rootView.layoutParams.also {
-            if (it != null && it is StaggeredGridLayoutManager.LayoutParams)
-                it.isFullSpan = true
-        }
+        holder.binding.root.rootView.setFullSpan()
     }
 
     class Holder : EpoxyHolder() {

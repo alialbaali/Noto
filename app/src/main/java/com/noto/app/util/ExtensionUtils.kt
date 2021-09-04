@@ -19,6 +19,7 @@ import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.noto.app.AppActivity
@@ -178,4 +179,9 @@ fun EditText.textAsFlow(): Flow<CharSequence?> {
         addTextChangedListener(listener)
         awaitClose { removeTextChangedListener(listener) }
     }.onStart { emit(text) }
+}
+
+fun View.setFullSpan() {
+    if (this is StaggeredGridLayoutManager.LayoutParams)
+        isFullSpan = true
 }
