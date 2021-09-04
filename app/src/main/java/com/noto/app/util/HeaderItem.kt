@@ -1,4 +1,4 @@
-package com.noto.app.main
+package com.noto.app.util
 
 import android.annotation.SuppressLint
 import android.view.View
