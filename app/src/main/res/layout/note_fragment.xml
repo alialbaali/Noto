@@ -51,15 +51,13 @@
                     android:id="@+id/tv_created_at"
                     style="@style/SubtitleTextView"
                     android:layout_marginEnd="@dimen/spacing_small"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Created Tue, Aug 8" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_word_count"
                     style="@style/SubtitleTextView"
-                    android:layout_weight="1"
                     android:gravity="end"
                     android:layout_marginStart="@dimen/spacing_small"
                     android:layout_width="match_parent"
