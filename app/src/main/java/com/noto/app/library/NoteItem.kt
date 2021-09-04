@@ -35,7 +35,6 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
 
     override fun bind(holder: Holder) {
         holder.binding.tvNoteTitle.text = note.title
-        holder.binding.rbNoteStar.isVisible = note.isStarred
         holder.binding.tvNoteTitle.isVisible = note.title.isNotBlank()
         holder.binding.root.setOnClickListener(onClickListener)
         holder.binding.root.setOnLongClickListener(onLongClickListener)

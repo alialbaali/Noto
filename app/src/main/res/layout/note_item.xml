@@ -1,48 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cl"
+    android:id="@+id/ll"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacing_small"
     android:background="@drawable/note_item_shape"
     android:padding="@dimen/spacing_normal">
 
-    <ImageView
-        android:id="@+id/rb_note_star"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/star_note"
-        android:src="@drawable/ic_round_star_24"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_note_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0" />
-
     <TextView
         android:id="@+id/tv_note_title"
         style="@style/NoteTitleTextView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_extra_small"
-        app:layout_constraintBottom_toTopOf="@id/tv_note_body"
-        app:layout_constraintEnd_toStartOf="@id/rb_note_star"
-        app:layout_constraintStart_toStartOf="@id/cl"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
+        tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry" />
 
     <TextView
         android:id="@+id/tv_note_body"
         style="@style/NoteBodyTextView"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_extra_small"
-        app:layout_constraintBottom_toBottomOf="@id/cl"
-        app:layout_constraintBottom_toTopOf="@id/tv_note_title"
-        app:layout_constraintEnd_toStartOf="@+id/rb_note_star"
-        app:layout_constraintStart_toStartOf="@id/cl"
-        app:layout_constraintTop_toBottomOf="@id/tv_note_title"
-        tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry" />
+</LinearLayout>

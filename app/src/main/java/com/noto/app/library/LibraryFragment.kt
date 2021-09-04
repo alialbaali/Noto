@@ -150,29 +150,48 @@ class LibraryFragment : Fragment() {
             layoutItems.forEach { it.visibility = View.VISIBLE }
             tvPlaceHolder.visibility = View.GONE
             rv.withModels {
-                notes.forEach { note ->
-                    noteItem {
-                        id(note.id)
-                        note(note)
-                        font(font)
-                        previewSize(previewSize)
-                        onClickListener { _ ->
-                            findNavController()
-                                .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(note.libraryId, note.id))
-                        }
-                        onLongClickListener { _ ->
-                            findNavController()
-                                .navigate(
-                                    LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
-                                        note.libraryId,
-                                        note.id,
-                                        R.id.libraryFragment
+                val items = { items: List<Note> ->
+                    items.forEach { note ->
+                        noteItem {
+                            id(note.id)
+                            note(note)
+                            font(font)
+                            previewSize(previewSize)
+                            onClickListener { _ ->
+                                findNavController()
+                                    .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(note.libraryId, note.id))
+                            }
+                            onLongClickListener { _ ->
+                                findNavController()
+                                    .navigate(
+                                        LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
+                                            note.libraryId,
+                                            note.id,
+                                            R.id.libraryFragment
+                                        )
                                     )
-                                )
-                            true
+                                true
+                            }
                         }
                     }
                 }
+
+                with(notes.filter { it.isStarred }) {
+                    if (isNotEmpty()) {
+                        headerItem {
+                            id("starred")
+                            title(resources.stringResource(R.string.starred))
+                        }
+                        items(this)
+                        headerItem {
+                            id("notes")
+                            title(resources.stringResource(R.string.notes))
+                        }
+                    }
+                }
+
+                items(notes.filterNot { it.isStarred })
+
             }
         }
     }

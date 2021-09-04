@@ -74,6 +74,7 @@
     <string name="unpin_library">Unpin library</string>
 
     <!-- Note -->
+    <string name="starred">Starred</string>
     <string name="all_notes">All notes</string>
     <string name="archive_is_empty">Archive is empty.</string>
     <string name="body">Body</string>
