@@ -1,5 +1,6 @@
 package com.noto.app.library
 
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -69,7 +70,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 requireActivity().hideKeyboard(root)
                 dismiss()
                 updatePinnedShortcut(title)
-                viewModel.createOrUpdateLibrary(title, sNotePreviewSize.value.toInt())
+                viewModel.createOrUpdateLibrary(title, sNotePreviewSize.value.toInt(), swShowNoteCreationDate.isChecked)
             }
         }
     }
@@ -78,6 +79,11 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         et.setText(library.title)
         et.setSelection(library.title.length)
         rv.smoothScrollToPosition(library.color.ordinal)
+        val state = arrayOf(
+            intArrayOf(android.R.attr.state_checked),
+            intArrayOf(-android.R.attr.state_checked),
+        )
+        swShowNoteCreationDate.isChecked = library.isShowNoteCreationDate
         if (library.id != 0L) {
             val color = resources.colorResource(library.color.toResource())
             val colorStateList = resources.colorStateResource(library.color.toResource())
@@ -88,7 +94,14 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 sNotePreviewSize.trackActiveTintList = colorStateList
                 sNotePreviewSize.thumbTintList = colorStateList
                 sNotePreviewSize.tickInactiveTintList = colorStateList
+                swShowNoteCreationDate.thumbTintList = colorStateList
+                swShowNoteCreationDate.trackTintList = ColorStateList(state, intArrayOf(color, resources.colorResource(R.color.colorSurface)))
             }
+        } else {
+            swShowNoteCreationDate.trackTintList = ColorStateList(
+                state,
+                intArrayOf(resources.colorResource(R.color.colorPrimary), resources.colorResource(R.color.colorSurface))
+            )
         }
     }
 
