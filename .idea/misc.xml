@@ -171,10 +171,11 @@
         <entry key="app/src/main/res/layout/base_dialog_fragment.xml" value="0.18" />
         <entry key="app/src/main/res/layout/confirmation_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/font_dialog_fragment.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/header_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/label_chooser_dialog_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/label_dialog_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/label_item.xml" value="0.3421875" />
-        <entry key="app/src/main/res/layout/label_list_fragment.xml" value="0.3421875" />
+        <entry key="app/src/main/res/layout/label_list_fragment.xml" value="0.18" />
         <entry key="app/src/main/res/layout/library_archive_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/library_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/library_fragment.xml" value="0.21611842105263157" />

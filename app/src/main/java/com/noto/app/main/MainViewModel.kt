@@ -76,7 +76,7 @@ class MainViewModel(
             LibraryListSorting.CreationDate -> library.creationDate
             LibraryListSorting.Alphabetical -> library.title
         }
-    }.sortedByDescending { it.isPinned }
+    }
 
     data class State(
         val libraries: List<Library> = emptyList(),

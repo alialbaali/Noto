@@ -143,28 +143,49 @@ class MainFragment : Fragment() {
                 }
             }
 
-            libraries.forEach { library ->
-                libraryItem {
-                    id(library.id)
-                    library(library)
-                    notesCount(viewModel.countNotes(library.id))
-                    isManualSorting(sorting == LibraryListSorting.Manual)
-                    onClickListener { _ ->
-                        findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
-                    }
-                    onLongClickListener { _ ->
-                        findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(library.id))
-                        true
-                    }
-                    onDragHandleTouchListener { view, event ->
-                        if (event.action == MotionEvent.ACTION_DOWN)
-                            rv.findContainingViewHolder(view)?.let { viewHolder ->
-                                itemTouchHelper.startDrag(viewHolder)
-                            }
-                        view.performClick()
+            val items = { items: List<Library> ->
+                items.forEach { library ->
+                    libraryItem {
+                        id(library.id)
+                        library(library)
+                        notesCount(viewModel.countNotes(library.id))
+                        isManualSorting(sorting == LibraryListSorting.Manual)
+                        onClickListener { _ ->
+                            findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
+                        }
+                        onLongClickListener { _ ->
+                            findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(library.id))
+                            true
+                        }
+                        onDragHandleTouchListener { view, event ->
+                            if (event.action == MotionEvent.ACTION_DOWN)
+                                rv.findContainingViewHolder(view)?.let { viewHolder ->
+                                    itemTouchHelper.startDrag(viewHolder)
+                                }
+                            view.performClick()
+                        }
                     }
                 }
             }
+
+            with(libraries.filter { it.isPinned }) {
+                if (isNotEmpty()) {
+                    tb.title = resources.stringResource(R.string.app_name)
+                    headerItem {
+                        id("pinned")
+                        title(resources.stringResource(R.string.pinned))
+                    }
+                    items(this)
+                    headerItem {
+                        id("libraries")
+                        title(resources.stringResource(R.string.libraries))
+                    }
+                } else {
+                    tb.title = resources.stringResource(R.string.libraries)
+                }
+            }
+
+            items(libraries.filterNot { it.isPinned })
         }
     }
 
