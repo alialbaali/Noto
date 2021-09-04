@@ -42,4 +42,7 @@ data class Library(
 
     @ColumnInfo(name = "is_pinned", defaultValue = "0")
     val isPinned: Boolean = false,
+
+    @ColumnInfo(name = "is_show_note_creation_date", defaultValue = "0")
+    val isShowNoteCreationDate: Boolean = false,
 )
