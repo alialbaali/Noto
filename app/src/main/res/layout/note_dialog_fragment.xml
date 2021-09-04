@@ -32,15 +32,6 @@
             app:drawableStartCompat="@drawable/ic_round_reading_mode_24" />
 
         <TextView
-            android:id="@+id/tv_star_note"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
-            android:text="@string/star_note"
-            app:drawableStartCompat="@drawable/ic_round_star_border_24" />
-
-        <TextView
             android:id="@+id/tv_archive_note"
             style="@style/DialogItem"
             android:layout_width="match_parent"
@@ -48,6 +39,15 @@
             android:background="@drawable/dialog_item_shape"
             android:text="@string/archive_note"
             app:drawableStartCompat="@drawable/ic_round_archive_24" />
+
+        <TextView
+            android:id="@+id/tv_star_note"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/star_note"
+            app:drawableStartCompat="@drawable/ic_round_star_border_24" />
 
         <TextView
             android:id="@+id/tv_duplicate_note"
