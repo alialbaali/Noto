@@ -138,11 +138,6 @@
         <item name="android:scrollbars">none</item>
     </style>
 
-    <style name="FAB" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="android:backgroundTint">@color/colorPrimary</item>
-        <item name="tint">@color/colorBackground</item>
-    </style>
-
     <style name="LibraryTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/size_small</item>
@@ -154,12 +149,6 @@
         <item name="android:textSize">@dimen/size_tiny</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
-    </style>
-
-    <style name="NoteTitleTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
-        <item name="boxBackgroundMode">none</item>
-        <item name="hintEnabled">true</item>
-        <item name="hintAnimationEnabled">true</item>
     </style>
 
     <style name="NoteTitleEditText" parent="Widget.AppCompat.EditText">
