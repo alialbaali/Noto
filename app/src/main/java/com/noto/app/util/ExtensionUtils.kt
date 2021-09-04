@@ -182,6 +182,6 @@ fun EditText.textAsFlow(): Flow<CharSequence?> {
 }
 
 fun View.setFullSpan() {
-    if (this is StaggeredGridLayoutManager.LayoutParams)
-        isFullSpan = true
+    if (layoutParams != null && layoutParams is StaggeredGridLayoutManager.LayoutParams)
+        (layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
 }
