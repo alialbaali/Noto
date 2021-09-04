@@ -58,7 +58,7 @@ class NoteFragment : Fragment() {
                 setupLibrary(state.library)
                 tvWordCount.text = state.note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
             }
-            .distinctUntilChangedBy { it.note.title != etNoteTitle.text.toString() || it.note.body != etNoteBody.text.toString() }
+            .distinctUntilChangedBy { it.note.title == etNoteTitle.text.toString() || it.note.body == etNoteBody.text.toString() }
             .onEach { state -> setupNote(state.note, state.font) }
             .launchIn(lifecycleScope)
 
