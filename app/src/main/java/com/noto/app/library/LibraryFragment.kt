@@ -174,22 +174,25 @@ class LibraryFragment : Fragment() {
                     }
                 }
 
-                with(notes.filter { it.isStarred }) {
-                    if (isNotEmpty()) {
-                        headerItem {
-                            id("starred")
-                            title(resources.stringResource(R.string.starred))
-                        }
-                        items(this)
+                val starredNotes = notes.filter { it.isStarred }
+                val notStarredNotes = notes.filterNot { it.isStarred }
+
+                if (starredNotes.isNotEmpty()) {
+                    headerItem {
+                        id("starred")
+                        title(resources.stringResource(R.string.starred))
+                    }
+
+                    items(starredNotes)
+
+                    if (notStarredNotes.isNotEmpty())
                         headerItem {
                             id("notes")
                             title(resources.stringResource(R.string.notes))
                         }
-                    }
                 }
 
-                items(notes.filterNot { it.isStarred })
-
+                items(notStarredNotes)
             }
         }
     }

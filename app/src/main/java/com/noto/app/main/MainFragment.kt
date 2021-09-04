@@ -168,24 +168,29 @@ class MainFragment : Fragment() {
                 }
             }
 
-            with(libraries.filter { it.isPinned }) {
-                if (isNotEmpty()) {
-                    tb.title = resources.stringResource(R.string.app_name)
-                    headerItem {
-                        id("pinned")
-                        title(resources.stringResource(R.string.pinned))
-                    }
-                    items(this)
+            val pinnedLibraries = libraries.filter { it.isPinned }
+            val notPinnedLibraries = libraries.filterNot { it.isPinned }
+
+            if (pinnedLibraries.isNotEmpty()) {
+                tb.title = resources.stringResource(R.string.app_name)
+
+                headerItem {
+                    id("pinned")
+                    title(resources.stringResource(R.string.pinned))
+                }
+
+                items(pinnedLibraries)
+
+                if (notPinnedLibraries.isNotEmpty())
                     headerItem {
                         id("libraries")
                         title(resources.stringResource(R.string.libraries))
                     }
-                } else {
-                    tb.title = resources.stringResource(R.string.libraries)
-                }
+            } else {
+                tb.title = resources.stringResource(R.string.libraries)
             }
 
-            items(libraries.filterNot { it.isPinned })
+            items(notPinnedLibraries)
         }
     }
 
