@@ -89,6 +89,17 @@
             app:trackColorInactive="@color/colorSurface"
             app:trackHeight="@dimen/spacing_normal" />
 
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/sw_show_note_creation_date"
+            style="@style/DialogSectionItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_small"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:text="@string/show_note_creation_date"
+            app:thumbTint="@color/colorPrimary"
+            app:trackTint="@color/colorSurface" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_create"
             style="@style/MaterialButton"
@@ -97,6 +108,5 @@
             android:layout_marginVertical="@dimen/spacing_normal"
             android:padding="@dimen/spacing_normal"
             android:text="@string/create_library" />
-
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

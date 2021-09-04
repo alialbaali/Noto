@@ -11,9 +11,7 @@ import com.noto.app.R
 import com.noto.app.databinding.NoteItemBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
-import com.noto.app.util.setBoldFont
-import com.noto.app.util.setSemiboldFont
-import com.noto.app.util.takeLines
+import com.noto.app.util.*
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass(layout = R.layout.note_item)
@@ -28,13 +26,23 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     var previewSize: Int = 0
 
     @EpoxyAttribute
+    open var isShowCreationDate: Boolean = false
+
+    @EpoxyAttribute
     lateinit var onClickListener: View.OnClickListener
 
     @EpoxyAttribute
     lateinit var onLongClickListener: View.OnLongClickListener
 
+    @SuppressLint("SetTextI18n")
     override fun bind(holder: Holder) {
         holder.binding.tvNoteTitle.text = note.title
+        if (isShowCreationDate) {
+            val createdText = holder.binding.root.resources.stringResource(R.string.created)
+            val formattedCreationDate = note.creationDate.format(holder.binding.root.context)
+            holder.binding.tvCreationDate.text = "$createdText $formattedCreationDate"
+        }
+        holder.binding.tvCreationDate.isVisible = isShowCreationDate
         holder.binding.tvNoteTitle.isVisible = note.title.isNotBlank()
         holder.binding.root.setOnClickListener(onClickListener)
         holder.binding.root.setOnLongClickListener(onLongClickListener)

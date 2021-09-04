@@ -21,10 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.LibraryFragmentBinding
-import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.LayoutManager
-import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.*
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
@@ -52,7 +49,7 @@ class LibraryFragment : Fragment() {
         viewModel.state
             .onEach { state ->
                 setupLibraryColors(state.library.color)
-                setupNotes(state.notes, state.font, state.library.notePreviewSize, layoutItems)
+                setupNotes(state.notes, state.font, state.library, layoutItems)
                 tb.title = state.library.title
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     val text = state.library.getArchiveText(resources.stringResource(R.string.archive))
@@ -139,7 +136,7 @@ class LibraryFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun LibraryFragmentBinding.setupNotes(notes: List<Note>, font: Font, previewSize: Int, layoutItems: List<View>) {
+    private fun LibraryFragmentBinding.setupNotes(notes: List<Note>, font: Font, library: Library, layoutItems: List<View>) {
         tvLibraryNotesCount.text = notes.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
         if (notes.isEmpty()) {
             if (tilSearch.isVisible)
@@ -156,7 +153,8 @@ class LibraryFragment : Fragment() {
                             id(note.id)
                             note(note)
                             font(font)
-                            previewSize(previewSize)
+                            previewSize(library.notePreviewSize)
+                            isShowCreationDate(library.isShowNoteCreationDate)
                             onClickListener { _ ->
                                 findNavController()
                                     .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(note.libraryId, note.id))

@@ -185,6 +185,12 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="NoteCreationDateTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/colorOnSecondary</item>
+        <item name="android:textSize">@dimen/size_tiny</item>
+        <item name="fontFamily">@font/nunito_semibold_italic</item>
+    </style>
+
     <style name="SplashScreenTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:statusBarColor">@color/colorBackground</item>
