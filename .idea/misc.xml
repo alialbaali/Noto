@@ -19,6 +19,7 @@
         <entry key="app/src/main/res/drawable/bell_plus_outline.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/bell_remove_outline.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/bell_ring_outline.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/button_text_color.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/checked_color.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/color_view_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/content_copy.xml" value="0.35833333333333334" />
@@ -118,7 +119,7 @@
         <entry key="app/src/main/res/drawable/ic_unchecked_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_work_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/library_item_shape.xml" value="0.33" />
-        <entry key="app/src/main/res/drawable/note_item_shape.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/note_item_shape.xml" value="0.2" />
         <entry key="app/src/main/res/drawable/noto_color_item_shape.xml" value="0.22664473684210526" />
         <entry key="app/src/main/res/drawable/noto_color_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/noto_colors_background_shape.xml" value="0.22631578947368422" />
@@ -151,6 +152,7 @@
         <entry key="app/src/main/res/drawable/switch_track_shape.xml" value="0.22664473684210526" />
         <entry key="app/src/main/res/drawable/text_input_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/theme.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/toggle_button_shape.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/unchecked_color.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/unchecked_color_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/view_agenda_outline.xml" value="0.20260416666666667" />
