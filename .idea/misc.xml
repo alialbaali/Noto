@@ -118,6 +118,7 @@
         <entry key="app/src/main/res/drawable/ic_style_24px.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_unchecked_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_work_24dp.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/item_ripple_background.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/library_item_shape.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/note_item_shape.xml" value="0.2" />
         <entry key="app/src/main/res/drawable/noto_color_item_shape.xml" value="0.22664473684210526" />

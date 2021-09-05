@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.ColorUtils
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -84,6 +85,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             intArrayOf(-android.R.attr.state_checked),
         )
         swShowNoteCreationDate.isChecked = library.isShowNoteCreationDate
+        val switchOffColor = ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorOnSecondary), 128)
         if (library.id != 0L) {
             val color = resources.colorResource(library.color.toResource())
             val colorStateList = resources.colorStateResource(library.color.toResource())
@@ -94,17 +96,35 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 sNotePreviewSize.trackActiveTintList = colorStateList
                 sNotePreviewSize.thumbTintList = colorStateList
                 sNotePreviewSize.tickInactiveTintList = colorStateList
-                swShowNoteCreationDate.thumbTintList = ColorStateList(state, intArrayOf(color, resources.colorResource(R.color.colorSurface)))
-                swShowNoteCreationDate.trackTintList = ColorStateList(state, intArrayOf(color, resources.colorResource(R.color.colorSurface)))
+                swShowNoteCreationDate.thumbTintList = ColorStateList(
+                    state,
+                    intArrayOf(
+                        color,
+                        resources.colorResource(R.color.colorSurface)
+                    )
+                )
+                swShowNoteCreationDate.trackTintList = ColorStateList(
+                    state,
+                    intArrayOf(
+                        ColorUtils.setAlphaComponent(color, 128),
+                        switchOffColor,
+                    )
+                )
             }
         } else {
             swShowNoteCreationDate.thumbTintList = ColorStateList(
                 state,
-                intArrayOf(resources.colorResource(R.color.colorPrimary), resources.colorResource(R.color.colorSurface))
+                intArrayOf(
+                    resources.colorResource(R.color.colorPrimary),
+                    resources.colorResource(R.color.colorSurface),
+                )
             )
             swShowNoteCreationDate.trackTintList = ColorStateList(
                 state,
-                intArrayOf(resources.colorResource(R.color.colorPrimary), resources.colorResource(R.color.colorSurface))
+                intArrayOf(
+                    ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorPrimary), 128),
+                    switchOffColor,
+                )
             )
         }
     }
