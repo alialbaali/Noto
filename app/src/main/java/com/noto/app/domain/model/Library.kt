@@ -45,4 +45,7 @@ data class Library(
 
     @ColumnInfo(name = "is_show_note_creation_date", defaultValue = "0")
     val isShowNoteCreationDate: Boolean = false,
+
+    @ColumnInfo(name = "is_set_new_note_cursor_on_title", defaultValue = "0")
+    val isSetNewNoteCursorOnTitle: Boolean = false,
 )
