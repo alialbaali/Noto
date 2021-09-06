@@ -71,7 +71,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 requireActivity().hideKeyboard(root)
                 dismiss()
                 updatePinnedShortcut(title)
-                viewModel.createOrUpdateLibrary(title, sNotePreviewSize.value.toInt(), swShowNoteCreationDate.isChecked)
+                viewModel.createOrUpdateLibrary(title, sNotePreviewSize.value.toInt(), swShowNoteCreationDate.isChecked, swSetNewNoteCursor.isChecked)
             }
         }
     }
@@ -85,6 +85,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             intArrayOf(-android.R.attr.state_checked),
         )
         swShowNoteCreationDate.isChecked = library.isShowNoteCreationDate
+        swSetNewNoteCursor.isChecked = library.isSetNewNoteCursorOnTitle
         val switchOffColor = ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorOnSecondary), 128)
         if (library.id != 0L) {
             val color = resources.colorResource(library.color.toResource())
@@ -96,36 +97,26 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 sNotePreviewSize.trackActiveTintList = colorStateList
                 sNotePreviewSize.thumbTintList = colorStateList
                 sNotePreviewSize.tickInactiveTintList = colorStateList
-                swShowNoteCreationDate.thumbTintList = ColorStateList(
-                    state,
-                    intArrayOf(
-                        color,
-                        resources.colorResource(R.color.colorSurface)
-                    )
-                )
-                swShowNoteCreationDate.trackTintList = ColorStateList(
-                    state,
-                    intArrayOf(
-                        ColorUtils.setAlphaComponent(color, 128),
-                        switchOffColor,
-                    )
-                )
+                val switchThumbTintList = ColorStateList(state, intArrayOf(color, resources.colorResource(R.color.colorSurface)))
+                val switchTrackTintList = ColorStateList(state, intArrayOf(ColorUtils.setAlphaComponent(color, 128), switchOffColor))
+                swShowNoteCreationDate.thumbTintList = switchThumbTintList
+                swShowNoteCreationDate.trackTintList = switchTrackTintList
+                swSetNewNoteCursor.thumbTintList = switchThumbTintList
+                swSetNewNoteCursor.trackTintList = switchTrackTintList
             }
         } else {
-            swShowNoteCreationDate.thumbTintList = ColorStateList(
+            val switchThumbTintList = ColorStateList(
                 state,
-                intArrayOf(
-                    resources.colorResource(R.color.colorPrimary),
-                    resources.colorResource(R.color.colorSurface),
-                )
+                intArrayOf(resources.colorResource(R.color.colorPrimary), resources.colorResource(R.color.colorSurface))
             )
-            swShowNoteCreationDate.trackTintList = ColorStateList(
+            val switchTrackTintList = ColorStateList(
                 state,
-                intArrayOf(
-                    ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorPrimary), 128),
-                    switchOffColor,
-                )
+                intArrayOf(ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorPrimary), 128), switchOffColor)
             )
+            swShowNoteCreationDate.thumbTintList = switchThumbTintList
+            swShowNoteCreationDate.trackTintList = switchTrackTintList
+            swSetNewNoteCursor.thumbTintList = switchThumbTintList
+            swSetNewNoteCursor.trackTintList = switchTrackTintList
         }
     }
 

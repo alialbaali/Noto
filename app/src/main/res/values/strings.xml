@@ -40,6 +40,7 @@
     <string name="monospace">Monospace</string>
     <string name="font">Font</string>
     <string name="libraries_archive">Libraries archive</string>
+    <string name="set_new_note_cursor_on_title">Set new note cursor on title</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>

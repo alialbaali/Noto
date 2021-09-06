@@ -45,12 +45,6 @@ class NoteFragment : Fragment() {
 
     @OptIn(FlowPreview::class)
     private fun NoteFragmentBinding.setupState() {
-
-        if (args.noteId == 0L) {
-            etNoteBody.requestFocus()
-            requireActivity().showKeyboard(root)
-        }
-
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
 
         viewModel.state
@@ -144,6 +138,13 @@ class NoteFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             etNoteTitle.textCursorDrawable?.mutate()?.setTint(color)
             etNoteBody.textCursorDrawable?.mutate()?.setTint(color)
+        }
+        if (args.noteId == 0L) {
+            requireActivity().showKeyboard(root)
+            if (library.isSetNewNoteCursorOnTitle)
+                etNoteTitle.requestFocus()
+            else
+                etNoteBody.requestFocus()
         }
     }
 
