@@ -108,12 +108,12 @@ class NoteViewModelTest : StringSpec(), KoinTest {
         "toggle note is starred should set note starred property to true" {
             noteRepository.getNoteById(noteId = 1)
                 .first()
-                .isStarred
+                .isPinned
                 .shouldBeFalse()
-            viewModel.toggleNoteIsStarred()
+            viewModel.toggleNoteIsPinned()
             noteRepository.getNoteById(noteId = 1)
                 .first()
-                .isStarred
+                .isPinned
                 .shouldBeTrue()
         }
 

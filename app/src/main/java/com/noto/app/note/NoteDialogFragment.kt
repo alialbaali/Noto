@@ -101,13 +101,13 @@ class NoteDialogFragment : BaseDialogFragment() {
             parentView.snackbar(resources.stringResource(R.string.note_is_duplicated), parentAnchorView)
         }
 
-        tvStarNote.setOnClickListener {
+        tvPinNote.setOnClickListener {
             dismiss()
-            viewModel.toggleNoteIsStarred()
-            val resource = if (viewModel.state.value.note.isStarred)
-                R.string.note_is_un_starred
+            viewModel.toggleNoteIsPinned()
+            val resource = if (viewModel.state.value.note.isPinned)
+                R.string.note_is_unpinned
             else
-                R.string.note_is_starred
+                R.string.note_is_pinned
             parentView.snackbar(resources.stringResource(resource), parentAnchorView)
         }
 
@@ -196,12 +196,12 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private fun NoteDialogFragmentBinding.setupNote(note: Note) {
 
-        if (note.isStarred) {
-            tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_star_24, 0, 0, 0)
-            tvStarNote.text = resources.stringResource(R.string.un_star_note)
+        if (note.isPinned) {
+            tvPinNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
+            tvPinNote.text = resources.stringResource(R.string.unpin_note)
         } else {
-            tvStarNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_star_border_24, 0, 0, 0)
-            tvStarNote.text = resources.stringResource(R.string.star_note)
+            tvPinNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
+            tvPinNote.text = resources.stringResource(R.string.pin_note)
         }
 
         if (note.isArchived) {
@@ -227,7 +227,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         listOf(
             tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
-            tvDuplicateNote, tvStarNote, tvRemindMe, tvDeleteNote, tvMoveNote, tvExportNote,
+            tvDuplicateNote, tvPinNote, tvRemindMe, tvDeleteNote, tvMoveNote, tvExportNote,
         ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, resources.colorStateResource(library.color.toResource())) }
     }
 

@@ -67,8 +67,8 @@ class NoteViewModel(
         noteRepository.updateNote(state.value.note.copy(isArchived = !state.value.note.isArchived))
     }
 
-    fun toggleNoteIsStarred() = viewModelScope.launch {
-        noteRepository.updateNote(state.value.note.copy(isStarred = !state.value.note.isStarred))
+    fun toggleNoteIsPinned() = viewModelScope.launch {
+        noteRepository.updateNote(state.value.note.copy(isPinned = !state.value.note.isPinned))
     }
 
     fun setNoteReminder(instant: Instant?) = viewModelScope.launch {

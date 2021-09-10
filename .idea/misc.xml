@@ -197,9 +197,11 @@
         <entry key="app/src/main/res/layout/note_archive_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/note_fragment.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/note_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/note_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/note_list_archive_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_list_fragment.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/note_list_sorting_dialog_fragment.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/note_list_sorting_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/note_read_mode_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_reading_mode_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/note_reminder_dialog_fragment.xml" value="0.21611842105263157" />

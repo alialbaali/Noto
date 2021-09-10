@@ -1,6 +1,7 @@
 package com.noto.app.data.database
 
 import androidx.room.DeleteColumn
+import androidx.room.RenameColumn
 import androidx.room.migration.AutoMigrationSpec
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
@@ -11,6 +12,9 @@ object Migrations {
 
     @DeleteColumn(tableName = "libraries", columnName = "sorting_method")
     class DeleteSortingMethodColumn : AutoMigrationSpec
+
+    @RenameColumn(tableName = "notes", fromColumnName = "is_starred", toColumnName = "is_pinned")
+    class RenameIsStarredColumn : AutoMigrationSpec
 }
 
 object RemoveNotoPrefix : Migration(1, 2) {

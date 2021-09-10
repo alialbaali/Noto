@@ -54,6 +54,7 @@ class LibraryFragment : Fragment() {
             .onEach { state ->
                 setupLibraryColors(state.library.color)
                 setupNotes(state.notes, state.font, state.library, layoutItems)
+                setupItemTouchHelper(state.library.layoutManager)
                 tb.title = state.library.title
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     val text = state.library.getArchiveText(resources.stringResource(R.string.archive))
@@ -62,10 +63,7 @@ class LibraryFragment : Fragment() {
                 }
             }
             .distinctUntilChangedBy { state -> state.library.layoutManager }
-            .onEach { state ->
-                setupItemTouchHelper(state.library.layoutManager)
-                setupLayoutManager(state.library.layoutManager, layoutManagerMenuItem)
-            }
+            .onEach { state -> setupLayoutManager(state.library.layoutManager, layoutManagerMenuItem) }
             .launchIn(lifecycleScope)
     }
 
@@ -200,25 +198,25 @@ class LibraryFragment : Fragment() {
                     }
                 }
 
-                val starredNotes = notes.filter { it.isStarred }
-                val notStarredNotes = notes.filterNot { it.isStarred }
+                val pinnedNotes = notes.filter { it.isPinned }
+                val notPinnedNotes = notes.filterNot { it.isPinned }
 
-                if (starredNotes.isNotEmpty()) {
+                if (pinnedNotes.isNotEmpty()) {
                     headerItem {
-                        id("starred")
-                        title(resources.stringResource(R.string.starred))
+                        id("pinned")
+                        title(resources.stringResource(R.string.pinned))
                     }
 
-                    items(starredNotes)
+                    items(pinnedNotes)
 
-                    if (notStarredNotes.isNotEmpty())
+                    if (notPinnedNotes.isNotEmpty())
                         headerItem {
                             id("notes")
                             title(resources.stringResource(R.string.notes))
                         }
                 }
 
-                items(notStarredNotes)
+                items(notPinnedNotes)
             }
         }
     }

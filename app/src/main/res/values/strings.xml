@@ -75,7 +75,6 @@
     <string name="unpin_library">Unpin library</string>
 
     <!-- Note -->
-    <string name="starred">Starred</string>
     <string name="notes_sorting">Notes sorting</string>
     <string name="all_notes">All notes</string>
     <string name="archive_is_empty">Archive is empty.</string>
@@ -93,6 +92,8 @@
     <string name="note">Note</string>
     <string name="no_note_matches_search_term">There\'s no note that matches the search term.</string>
     <string name="note_is_archived">Note has been archived.</string>
+    <string name="note_is_pinned">Note has been pinned.</string>
+    <string name="note_is_unpinned">Note has been unpinned.</string>
     <string name="no_note_reminder">No note reminder is setup.</string>
     <string name="note_is_unarchived">Note has been unarchived.</string>
     <string name="reminder">Reminder</string>
@@ -107,11 +108,9 @@
     <string name="export_note">Export note to…</string>
     <string name="note_is_exported">Note has been exported to</string>
     <string name="add_note_reminder">Add note reminder</string>
-    <string name="star_note">Star note</string>
+    <string name="pin_note">Pin note</string>
+    <string name="unpin_note">Unpin note</string>
     <string name="open_note_in_reading_mode">Open note in reading mode</string>
-    <string name="un_star_note">Un-star note</string>
-    <string name="note_is_starred">Note has been starred.</string>
-    <string name="note_is_un_starred">Note has been un-starred.</string>
     <string name="edit_note_reminder">Edit note reminder</string>
     <string name="note_options">Note options</string>
     <string name="note_is_deleted">Note has been deleted.</string>
