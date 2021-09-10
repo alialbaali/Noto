@@ -2,10 +2,7 @@ package com.noto.app.library
 
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import androidx.activity.addCallback
@@ -17,8 +14,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.R
 import com.noto.app.databinding.LibraryFragmentBinding
 import com.noto.app.domain.model.*
@@ -35,6 +35,10 @@ class LibraryFragment : Fragment() {
 
     private val args by navArgs<LibraryFragmentArgs>()
 
+    private lateinit var epoxyController: EpoxyController
+
+    private lateinit var itemTouchHelper: ItemTouchHelper
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryFragmentBinding.inflate(inflater, container, false).withBinding {
             setupState()
@@ -50,6 +54,7 @@ class LibraryFragment : Fragment() {
             .onEach { state ->
                 setupLibraryColors(state.library.color)
                 setupNotes(state.notes, state.font, state.library, layoutItems)
+                setupItemTouchHelper(state.library.layoutManager)
                 tb.title = state.library.title
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     val text = state.library.getArchiveText(resources.stringResource(R.string.archive))
@@ -147,6 +152,17 @@ class LibraryFragment : Fragment() {
             layoutItems.forEach { it.visibility = View.VISIBLE }
             tvPlaceHolder.visibility = View.GONE
             rv.withModels {
+                epoxyController = this
+
+                noteListSortingItem {
+                    id(0)
+                    sorting(library.sorting)
+                    sortingOrder(library.sortingOrder)
+                    onClickListener { _ ->
+                        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingDialogFragment(args.libraryId))
+                    }
+                }
+
                 val items = { items: List<Note> ->
                     items.forEach { note ->
                         noteItem {
@@ -155,6 +171,7 @@ class LibraryFragment : Fragment() {
                             font(font)
                             previewSize(library.notePreviewSize)
                             isShowCreationDate(library.isShowNoteCreationDate)
+                            isManualSorting(library.sorting == NoteListSorting.Manual)
                             onClickListener { _ ->
                                 findNavController()
                                     .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(note.libraryId, note.id))
@@ -169,6 +186,13 @@ class LibraryFragment : Fragment() {
                                         )
                                     )
                                 true
+                            }
+                            onDragHandleTouchListener { view, event ->
+                                if (event.action == MotionEvent.ACTION_DOWN)
+                                    rv.findContainingViewHolder(view)?.let { viewHolder ->
+                                        itemTouchHelper.startDrag(viewHolder)
+                                    }
+                                view.performClick()
                             }
                         }
                     }
@@ -243,6 +267,20 @@ class LibraryFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             fab.outlineAmbientShadowColor = color
             fab.outlineSpotShadowColor = color
+        }
+    }
+
+    private fun LibraryFragmentBinding.setupItemTouchHelper(layoutManager: LayoutManager) {
+        if (this@LibraryFragment::epoxyController.isInitialized) {
+            val itemTouchHelperCallback = NoteItemTouchHelperCallback(epoxyController, layoutManager) {
+                rv.forEach { view ->
+                    val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
+                    val model = viewHolder.model as? NoteItem
+                    if (model != null) viewModel.updateNotePosition(model.note, viewHolder.bindingAdapterPosition)
+                }
+            }
+            itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+                .apply { attachToRecyclerView(rv) }
         }
     }
 }

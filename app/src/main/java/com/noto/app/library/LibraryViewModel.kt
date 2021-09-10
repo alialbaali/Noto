@@ -7,6 +7,7 @@ import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
+import com.noto.app.util.sortByOrder
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -34,12 +35,17 @@ class LibraryViewModel(
             storage.get(Constants.FontKey)
                 .filterNotNull()
                 .map { Font.valueOf(it) },
-        ) { library, notes, archivedNotes, font -> State(library, notes, archivedNotes, font) }
-            .onEach {
-                mutableState.value = it
-                mutableNotoColors.value = mutableNotoColors.value.mapTrueIfSameColor(it.library.color)
-            }
-            .launchIn(viewModelScope)
+        ) { library, notes, archivedNotes, font ->
+            State(
+                library,
+                notes.sorted(library.sorting, library.sortingOrder),
+                archivedNotes.sorted(library.sorting, library.sortingOrder),
+                font
+            )
+        }.onEach {
+            mutableState.value = it
+            mutableNotoColors.value = mutableNotoColors.value.mapTrueIfSameColor(it.library.color)
+        }.launchIn(viewModelScope)
     }
 
     fun createOrUpdateLibrary(title: String, notePreviewSize: Int, isShowNoteCreationDate: Boolean, isSetNewNoteCursorOnTitle: Boolean) =
@@ -76,6 +82,18 @@ class LibraryViewModel(
         libraryRepository.updateLibrary(state.value.library.copy(layoutManager = value))
     }
 
+    fun updateNotePosition(note: Note, position: Int) = viewModelScope.launch {
+        noteRepository.updateNote(note.copy(position = position))
+    }
+
+    fun updateSorting(value: NoteListSorting) = viewModelScope.launch {
+        libraryRepository.updateLibrary(state.value.library.copy(sorting = value))
+    }
+
+    fun updateSortingOrder(value: SortingOrder) = viewModelScope.launch {
+        libraryRepository.updateLibrary(state.value.library.copy(sortingOrder = value))
+    }
+
     fun searchNotes(term: String) = viewModelScope.launch {
         val currentNotes = noteRepository.getNotesByLibraryId(libraryId)
             .first()
@@ -95,6 +113,14 @@ class LibraryViewModel(
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }
+
+    private fun List<Note>.sorted(sorting: NoteListSorting, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { note ->
+        when (sorting) {
+            NoteListSorting.Manual -> note.position
+            NoteListSorting.CreationDate -> note.creationDate
+            NoteListSorting.Alphabetical -> note.title.ifBlank { note.body }
+        }
+    }
 
     data class State(
         val library: Library,
