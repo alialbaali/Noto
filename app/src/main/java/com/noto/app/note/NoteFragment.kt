@@ -63,6 +63,19 @@ class NoteFragment : Fragment() {
             .onEach { state -> setupNote(state.note, state.font) }
             .launchIn(lifecycleScope)
 
+        viewModel.state
+            .distinctUntilChangedBy { it.library.isSetNewNoteCursorOnTitle }
+            .onEach { state ->
+                if (args.noteId == 0L) {
+                    requireActivity().showKeyboard(root)
+                    if (state.library.isSetNewNoteCursorOnTitle)
+                        etNoteTitle.requestFocus()
+                    else
+                        etNoteBody.requestFocus()
+                }
+            }
+            .launchIn(lifecycleScope)
+
         combine(
             etNoteTitle.textAsFlow()
                 .filterNotNull(),
@@ -145,13 +158,6 @@ class NoteFragment : Fragment() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             etNoteTitle.textCursorDrawable?.mutate()?.setTint(color)
             etNoteBody.textCursorDrawable?.mutate()?.setTint(color)
-        }
-        if (args.noteId == 0L) {
-            requireActivity().showKeyboard(root)
-            if (library.isSetNewNoteCursorOnTitle)
-                etNoteTitle.requestFocus()
-            else
-                etNoteBody.requestFocus()
         }
     }
 
