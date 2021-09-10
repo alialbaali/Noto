@@ -25,12 +25,6 @@ data class Library(
     @ColumnInfo(name = "creation_date")
     val creationDate: Instant = Clock.System.now(),
 
-    @ColumnInfo(name = "sorting_type")
-    val sortingType: SortingType = SortingType.CreationDate,
-
-    @ColumnInfo(name = "sorting_method")
-    val sortingMethod: SortingMethod = SortingMethod.Desc,
-
     @ColumnInfo(name = "layout_manager", defaultValue = "0")
     val layoutManager: LayoutManager = LayoutManager.Linear,
 
@@ -48,4 +42,10 @@ data class Library(
 
     @ColumnInfo(name = "is_set_new_note_cursor_on_title", defaultValue = "0")
     val isSetNewNoteCursorOnTitle: Boolean = false,
+
+    @ColumnInfo(name = "sorting", defaultValue = "1")
+    val sorting: NoteListSorting = NoteListSorting.CreationDate,
+
+    @ColumnInfo(name = "sorting_order", defaultValue = "1")
+    val sortingOrder: SortingOrder = SortingOrder.Descending,
 )
