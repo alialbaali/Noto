@@ -196,13 +196,25 @@ class MainFragment : Fragment() {
 
     private fun MainFragmentBinding.setupItemTouchHelper(layoutManager: LayoutManager) {
         if (this@MainFragment::epoxyController.isInitialized) {
-            val itemTouchHelperCallback = LibraryItemTouchHelperCallback(epoxyController, layoutManager) {
-                rv.forEach { view ->
-                    val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
-                    val model = viewHolder.model as? LibraryItem
-                    if (model != null) viewModel.updateLibraryPosition(model.library, viewHolder.bindingAdapterPosition)
+            val itemTouchHelperCallback = LibraryItemTouchHelperCallback(
+                epoxyController = epoxyController,
+                layoutManager = layoutManager,
+                swipeCallback = { viewHolder, direction ->
+                    val model = viewHolder.model as LibraryItem
+                    if (direction == ItemTouchHelper.START)
+                        viewModel.toggleLibraryIsPinned(model.library)
+                    else if (direction == ItemTouchHelper.END)
+                        viewModel.toggleLibraryIsArchived(model.library)
+                    epoxyController.notifyModelChanged(viewHolder.bindingAdapterPosition)
+                },
+                dragCallback = {
+                    rv.forEach { view ->
+                        val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
+                        val model = viewHolder.model as? LibraryItem
+                        if (model != null) viewModel.updateLibraryPosition(model.library, viewHolder.bindingAdapterPosition)
+                    }
                 }
-            }
+            )
             itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
                 .apply { attachToRecyclerView(rv) }
         }

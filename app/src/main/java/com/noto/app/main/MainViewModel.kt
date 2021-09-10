@@ -70,6 +70,14 @@ class MainViewModel(
         libraryRepository.updateLibrary(library.copy(position = position))
     }
 
+    fun toggleLibraryIsArchived(library: Library) = viewModelScope.launch {
+        libraryRepository.updateLibrary(library.copy(isArchived = !library.isArchived))
+    }
+
+    fun toggleLibraryIsPinned(library: Library) = viewModelScope.launch {
+        libraryRepository.updateLibrary(library.copy(isPinned = !library.isPinned))
+    }
+
     private fun List<Library>.sorted(sorting: LibraryListSorting, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { library ->
         when (sorting) {
             LibraryListSorting.Manual -> library.position
