@@ -54,7 +54,6 @@ class LibraryFragment : Fragment() {
             .onEach { state ->
                 setupLibraryColors(state.library.color)
                 setupNotes(state.notes, state.font, state.library, layoutItems)
-                setupItemTouchHelper(state.library.layoutManager)
                 tb.title = state.library.title
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     val text = state.library.getArchiveText(resources.stringResource(R.string.archive))
@@ -63,7 +62,10 @@ class LibraryFragment : Fragment() {
                 }
             }
             .distinctUntilChangedBy { state -> state.library.layoutManager }
-            .onEach { state -> setupLayoutManager(state.library.layoutManager, layoutManagerMenuItem) }
+            .onEach { state ->
+                setupItemTouchHelper(state.library.layoutManager)
+                setupLayoutManager(state.library.layoutManager, layoutManagerMenuItem)
+            }
             .launchIn(lifecycleScope)
     }
 
