@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/spacing_extra_small"
-        tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry" />
+        tools:text="Lorem Ipsum is simply dummy text of the printing andttt typesetting industry" />
 
     <TextView
         android:id="@+id/tv_creation_date"
@@ -32,4 +32,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_extra_small"
         tools:text="Created at Aug 30" />
+
+    <ImageButton
+        android:id="@+id/ib_drag"
+        android:src="@drawable/ic_round_drag_handle_24"
+        android:layout_gravity="end"
+        android:background="@android:color/transparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:tint="@color/colorOnSecondary"
+        android:contentDescription="@string/drag" />
+
 </LinearLayout>

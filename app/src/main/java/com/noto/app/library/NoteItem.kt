@@ -29,12 +29,18 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     open var isShowCreationDate: Boolean = false
 
     @EpoxyAttribute
+    open var isManualSorting: Boolean = false
+
+    @EpoxyAttribute
     lateinit var onClickListener: View.OnClickListener
 
     @EpoxyAttribute
     lateinit var onLongClickListener: View.OnLongClickListener
 
-    @SuppressLint("SetTextI18n")
+    @EpoxyAttribute
+    lateinit var onDragHandleTouchListener: View.OnTouchListener
+
+    @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
     override fun bind(holder: Holder) {
         holder.binding.tvNoteTitle.text = note.title
         if (isShowCreationDate) {
@@ -48,6 +54,8 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         holder.binding.root.setOnLongClickListener(onLongClickListener)
         holder.binding.tvNoteTitle.setBoldFont(font)
         holder.binding.tvNoteBody.setSemiboldFont(font)
+        holder.binding.ibDrag.isVisible = isManualSorting
+        holder.binding.ibDrag.setOnTouchListener(onDragHandleTouchListener)
         if (note.title.isBlank() && previewSize == 0) {
             holder.binding.tvNoteBody.text = note.body.takeLines(1)
             holder.binding.tvNoteBody.maxLines = 1
