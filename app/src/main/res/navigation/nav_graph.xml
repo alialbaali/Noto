@@ -106,6 +106,9 @@
         <action
             android:id="@+id/action_libraryFragment_to_libraryDialogFragment"
             app:destination="@id/libraryDialogFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_noteListSortingDialogFragment"
+            app:destination="@id/noteListSortingDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/newLibraryDialogFragment"
@@ -325,4 +328,12 @@
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
+    <dialog
+        android:id="@+id/noteListSortingDialogFragment"
+        android:name="com.noto.app.library.NoteListSortingDialogFragment"
+        android:label="NoteListSortingDialogFragment" >
+        <argument
+            android:name="library_id"
+            app:argType="long" />
+    </dialog>
 </navigation>

@@ -76,6 +76,7 @@
 
     <!-- Note -->
     <string name="starred">Starred</string>
+    <string name="notes_sorting">Notes sorting</string>
     <string name="all_notes">All notes</string>
     <string name="archive_is_empty">Archive is empty.</string>
     <string name="body">Body</string>
