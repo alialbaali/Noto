@@ -50,7 +50,14 @@ class NoteFragment : Fragment() {
         viewModel.state
             .onEach { state ->
                 setupLibrary(state.library)
+                setupShortcut(state.note)
                 tvWordCount.text = state.note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
+                fab.setImageDrawable(
+                    if (state.note.reminderDate == null)
+                        resources.drawableResource(R.drawable.ic_round_notification_add_24)
+                    else
+                        resources.drawableResource(R.drawable.ic_round_edit_notifications_24)
+                )
             }
             .distinctUntilChanged { _, _ -> etNoteTitle.text.isNotBlank() || etNoteBody.text.isNotBlank() }
             .onEach { state -> setupNote(state.note, state.font) }
@@ -157,14 +164,6 @@ class NoteFragment : Fragment() {
         etNoteTitle.setBoldFont(font)
         etNoteBody.setSemiboldFont(font)
         tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.creationDate.format(requireContext())}"
-        fab.setImageDrawable(
-            if (note.reminderDate == null)
-                resources.drawableResource(R.drawable.ic_round_notification_add_24)
-            else
-                resources.drawableResource(R.drawable.ic_round_edit_notifications_24)
-        )
-
-        setupShortcut(note)
     }
 
     private fun NoteFragmentBinding.setupShortcut(note: Note) {
