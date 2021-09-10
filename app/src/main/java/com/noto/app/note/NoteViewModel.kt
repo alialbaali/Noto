@@ -51,6 +51,7 @@ class NoteViewModel(
             if (note.id == 0L)
                 noteRepository.createNote(note).also { id ->
                     noteRepository.getNoteById(id)
+                        .filterNotNull()
                         .onEach { createdNote -> mutableState.value = state.value.copy(note = createdNote) }
                         .launchIn(viewModelScope)
                 }
