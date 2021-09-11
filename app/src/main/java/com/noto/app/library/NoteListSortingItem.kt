@@ -57,9 +57,9 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
             resources.stringResource(R.string.notes)
         )
         holder.binding.tvLibraryNotesCount.setTextColor(color)
-        holder.binding.tvSorting.background?.setTint(ColorUtils.setAlphaComponent(color, 25))
         holder.binding.tvSorting.setTextColor(color)
-        holder.binding.tvSorting.compoundDrawables[0]?.setTint(color)
+        holder.binding.tvSorting.background?.mutate()?.setTint(ColorUtils.setAlphaComponent(color, 25))
+        holder.binding.tvSorting.compoundDrawables[0]?.mutate()?.setTint(color)
     }
 
     class Holder : EpoxyHolder() {

@@ -129,7 +129,7 @@
 
     <style name="MaterialButtonSecondary" parent="MaterialButton">
         <item name="android:backgroundTint">@color/colorSurface</item>
-        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="HorizontalScrollView">
@@ -154,7 +154,7 @@
     <style name="NoteTitleEditText" parent="Widget.AppCompat.EditText">
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_normal</item>
-        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textColorHint">@color/colorOnSecondary</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textCursorDrawable">@drawable/cursor_shape</item>
@@ -165,7 +165,7 @@
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:gravity">top</item>
-        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
         <item name="android:textCursorDrawable">@drawable/cursor_shape</item>
     </style>
@@ -173,7 +173,7 @@
     <style name="NoteTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_small</item>
-        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:ellipsize">end</item>
     </style>
 
@@ -181,7 +181,7 @@
         <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">@dimen/size_tiny</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
-        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:ellipsize">end</item>
     </style>
 
