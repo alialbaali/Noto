@@ -86,7 +86,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         )
         swShowNoteCreationDate.isChecked = library.isShowNoteCreationDate
         swSetNewNoteCursor.isChecked = library.isSetNewNoteCursorOnTitle
-        val switchOffColor = ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorOnSecondary), 128)
+        val switchOffColor = ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorSecondary), 128)
         if (library.id != 0L) {
             val color = resources.colorResource(library.color.toResource())
             val colorStateList = resources.colorStateResource(library.color.toResource())

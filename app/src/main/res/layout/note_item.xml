@@ -40,7 +40,7 @@
         android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:tint="@color/colorOnSecondary"
+        android:tint="@color/colorSecondary"
         android:contentDescription="@string/drag" />
 
 </LinearLayout>

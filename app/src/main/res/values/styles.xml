@@ -11,8 +11,8 @@
         <item name="android:colorControlHighlight">@color/colorSurface</item>
         <item name="android:textColorHighlight">@color/colorSurface</item>
         <item name="android:colorControlNormal">@color/colorPrimary</item>
-        <item name="android:textColorHint">@color/colorOnPrimary</item>
-        <item name="hintTextColor">@color/colorOnPrimary</item>
+        <item name="android:textColorHint">@color/colorSecondary</item>
+        <item name="hintTextColor">@color/colorSecondary</item>
         <item name="android:fontFamily">@font/nunito_semibold</item>
         <item name="fontFamily">@font/nunito_semibold</item>
     </style>
@@ -108,8 +108,8 @@
         <item name="boxCornerRadiusTopEnd">@dimen/spacing_small</item>
         <item name="boxCornerRadiusTopStart">@dimen/spacing_small</item>
         <item name="hintEnabled">false</item>
-        <item name="android:textColorHint">@color/colorOnPrimary</item>
-        <item name="android:textColorHighlight">@color/colorOnSecondary</item>
+        <item name="android:textColorHint">@color/colorSecondary</item>
+        <item name="android:textColorHighlight">@color/colorSecondary</item>
         <item name="android:colorControlActivated">@color/colorPrimary</item>
     </style>
 
@@ -145,7 +145,7 @@
     </style>
 
     <style name="LibraryNotesCountTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:textSize">@dimen/size_tiny</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
@@ -155,7 +155,7 @@
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_normal</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textColorHint">@color/colorOnSecondary</item>
+        <item name="android:textColorHint">@color/colorSecondary</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textCursorDrawable">@drawable/cursor_shape</item>
     </style>
@@ -186,7 +186,7 @@
     </style>
 
     <style name="NoteCreationDateTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorOnSecondary</item>
+        <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:textSize">@dimen/size_extra_tiny</item>
         <item name="fontFamily">@font/nunito_semibold_italic</item>
     </style>
@@ -201,14 +201,14 @@
         <item name="android:colorControlActivated">@color/colorPrimary</item>
         <item name="android:colorControlHighlight">@color/colorPrimary</item>
         <item name="android:colorControlNormal">@color/colorPrimary</item>
-        <item name="android:textColorHighlight">@color/colorOnPrimary</item>
-        <item name="android:textColorHint">@color/colorOnPrimary</item>
-        <item name="hintTextColor">@color/colorOnPrimary</item>
+        <item name="android:textColorHighlight">@color/colorSecondary</item>
+        <item name="android:textColorHint">@color/colorSecondary</item>
+        <item name="hintTextColor">@color/colorSecondary</item>
     </style>
 
     <style name="PlaceholderTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_extra_huge</item>
-        <item name="android:textColor">@color/colorOnPrimary</item>
+        <item name="android:textColor">@color/colorSecondary</item>
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:gravity">center</item>
     </style>

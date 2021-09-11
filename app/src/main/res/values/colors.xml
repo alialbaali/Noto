@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <color name="colorBackground">#FFFFFF</color>
-    <color name="colorPrimary">#121212</color>
-    <color name="colorOnPrimary">#616161</color>
-
     <color name="colorSurface">#F0F0F0</color>
-    <color name="colorSecondary">#1E1E1E</color>
-    <color name="colorOnSecondary">#858585</color>
+    <color name="colorPrimary">#121212</color>
+    <color name="colorSecondary">#707070</color>
 
     <color name="colorAccentGray">#616161</color>
     <color name="colorAccentBlue">#1A237E</color>

@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-
+<resources>
     <color name="colorBackground">#121212</color>
-    <color name="colorPrimary">#FFFFFF</color>
-    <color name="colorOnPrimary">#BDBDBD</color>
-
     <color name="colorSurface">#1E1E1E</color>
-    <color name="colorSecondary">#F0F0F0</color>
-    <color name="colorOnSecondary">#858585</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorSecondary">#BDBDBD</color>
 
     <color name="colorAccentGray">#E0E0E0</color>
     <color name="colorAccentBlue">#BBDEFB</color>

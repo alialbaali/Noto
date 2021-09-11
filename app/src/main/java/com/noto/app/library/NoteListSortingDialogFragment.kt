@@ -72,8 +72,8 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteListSortingDialogFragmentBinding.disableSortingOrder() {
-        val disabledColor = resources.colorResource(R.color.colorOnPrimary)
-        val disableColorState = resources.colorStateResource(R.color.colorOnPrimary)
+        val disabledColor = resources.colorResource(R.color.colorSecondary)
+        val disableColorState = resources.colorStateResource(R.color.colorSecondary)
         viewModel.updateSortingOrder(SortingOrder.Ascending)
         rbSortingAsc.isChecked = true
         rbSortingAsc.isEnabled = false
