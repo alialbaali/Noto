@@ -2,6 +2,7 @@ package com.noto.app.library
 
 import android.annotation.SuppressLint
 import android.view.View
+import androidx.core.graphics.ColorUtils
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
@@ -9,9 +10,9 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.noto.app.R
 import com.noto.app.databinding.NoteListSortingItemBinding
 import com.noto.app.domain.model.NoteListSorting
+import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.SortingOrder
-import com.noto.app.util.setFullSpan
-import com.noto.app.util.stringResource
+import com.noto.app.util.*
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass(layout = R.layout.note_list_sorting_item)
@@ -26,9 +27,16 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
     @EpoxyAttribute
     lateinit var onClickListener: View.OnClickListener
 
+    @EpoxyAttribute
+    var notesCount: Int = 0
+
+    @EpoxyAttribute
+    lateinit var notoColor: NotoColor
+
     override fun bind(holder: Holder) {
         val resources = holder.binding.root.resources
         val sortingText = resources.stringResource(R.string.sorting).lowercase()
+        val color = resources.colorResource(notoColor.toResource())
         holder.binding.tvSorting.text = when (sorting) {
             NoteListSorting.Manual -> "${resources.stringResource(R.string.manual)} $sortingText"
             NoteListSorting.CreationDate -> "${resources.stringResource(R.string.creation_date)} $sortingText"
@@ -44,6 +52,14 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
             holder.binding.tvSorting.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
         else
             holder.binding.tvSorting.setCompoundDrawablesWithIntrinsicBounds(arrowDrawable, 0, 0, 0)
+        holder.binding.tvLibraryNotesCount.text = notesCount.toCountText(
+            resources.stringResource(R.string.note),
+            resources.stringResource(R.string.notes)
+        )
+        holder.binding.tvLibraryNotesCount.setTextColor(color)
+        holder.binding.tvSorting.background?.setTint(ColorUtils.setAlphaComponent(color, 25))
+        holder.binding.tvSorting.setTextColor(color)
+        holder.binding.tvSorting.compoundDrawables[0]?.setTint(color)
     }
 
     class Holder : EpoxyHolder() {

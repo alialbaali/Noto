@@ -28,17 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/spacing_normal"
-            app:title="@string/libraries">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_libraries_count"
-                style="@style/SubtitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="7 Libraries"
-                tools:textColor="@color/colorPrimary" />
-
-        </com.google.android.material.appbar.MaterialToolbar>
+            app:title="@string/libraries" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.textview.MaterialTextView

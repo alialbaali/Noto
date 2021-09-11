@@ -56,11 +56,10 @@ class MainFragment : Fragment() {
 
     private fun MainFragmentBinding.setupState() {
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
-        val layoutItems = listOf(tvLibrariesCount, rv)
 
         viewModel.state
             .onEach { state ->
-                setupLibraries(state.libraries, state.sortingOrder, state.sorting, layoutItems)
+                setupLibraries(state.libraries, state.sortingOrder, state.sorting)
                 setupItemTouchHelper(state.layoutManager)
             }
             .distinctUntilChangedBy { it.layoutManager }
@@ -90,19 +89,14 @@ class MainFragment : Fragment() {
         libraries: List<Library>,
         sortingOrder: SortingOrder,
         sorting: LibraryListSorting,
-        layoutItems: List<View>,
     ) {
         if (libraries.isEmpty()) {
-            layoutItems.forEach { it.visibility = View.GONE }
+            rv.visibility = View.GONE
             tvPlaceHolder.visibility = View.VISIBLE
         } else {
-            layoutItems.forEach { it.visibility = View.VISIBLE }
+            rv.visibility = View.VISIBLE
             tvPlaceHolder.visibility = View.GONE
             setupModels(libraries, sorting, sortingOrder)
-            tvLibrariesCount.text = libraries.size.toCountText(
-                resources.stringResource(R.string.library),
-                resources.stringResource(R.string.libraries)
-            )
         }
     }
 
@@ -138,6 +132,7 @@ class MainFragment : Fragment() {
                 id(0)
                 sorting(sorting)
                 sortingOrder(sortingOrder)
+                librariesCount(libraries.size)
                 onClickListener { _ ->
                     findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
                 }

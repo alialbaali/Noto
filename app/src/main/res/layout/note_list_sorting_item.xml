@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:padding="@dimen/spacing_small"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -22,5 +22,15 @@
         android:textColor="@color/colorPrimary"
         app:fontFamily="@font/nunito_bold"
         tools:text="Sorting" />
+
+    <TextView
+        android:id="@+id/tv_library_notes_count"
+        style="@style/SubtitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="end"
+        tools:text="7 Notes"
+        tools:textColor="@color/colorAccentTeal" />
 
 </LinearLayout>
