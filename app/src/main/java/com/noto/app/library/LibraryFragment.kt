@@ -48,12 +48,11 @@ class LibraryFragment : Fragment() {
     private fun LibraryFragmentBinding.setupState() {
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
-        val layoutItems = listOf(tvLibraryNotesCount, rv)
 
         viewModel.state
             .onEach { state ->
                 setupLibraryColors(state.library.color)
-                setupNotes(state.notes, state.font, state.library, layoutItems)
+                setupNotes(state.notes, state.font, state.library)
                 setupItemTouchHelper(state.library.layoutManager)
                 tb.title = state.library.title
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -141,15 +140,14 @@ class LibraryFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun LibraryFragmentBinding.setupNotes(notes: List<Note>, font: Font, library: Library, layoutItems: List<View>) {
-        tvLibraryNotesCount.text = notes.size.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
+    private fun LibraryFragmentBinding.setupNotes(notes: List<Note>, font: Font, library: Library) {
         if (notes.isEmpty()) {
             if (tilSearch.isVisible)
                 tvPlaceHolder.text = resources.stringResource(R.string.no_note_matches_search_term)
-            layoutItems.forEach { it.visibility = View.GONE }
+            rv.visibility = View.GONE
             tvPlaceHolder.visibility = View.VISIBLE
         } else {
-            layoutItems.forEach { it.visibility = View.VISIBLE }
+            rv.visibility = View.VISIBLE
             tvPlaceHolder.visibility = View.GONE
             rv.withModels {
                 epoxyController = this
@@ -158,6 +156,8 @@ class LibraryFragment : Fragment() {
                     id(0)
                     sorting(library.sorting)
                     sortingOrder(library.sortingOrder)
+                    notesCount(notes.size)
+                    notoColor(library.color)
                     onClickListener { _ ->
                         findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingDialogFragment(args.libraryId))
                     }
@@ -256,7 +256,6 @@ class LibraryFragment : Fragment() {
         val colorStateList = resources.colorStateResource(notoColor.toResource())
 
         tb.setTitleTextColor(color)
-        tvLibraryNotesCount.setTextColor(color)
         tb.navigationIcon?.mutate()?.setTint(color)
         bab.navigationIcon?.mutate()?.setTint(color)
         fab.backgroundTintList = colorStateList

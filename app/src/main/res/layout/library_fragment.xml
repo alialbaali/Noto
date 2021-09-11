@@ -30,17 +30,7 @@
             android:layout_height="wrap_content"
             app:navigationIcon="@drawable/ic_round_back_24"
             app:navigationContentDescription="@string/back"
-            app:title="@string/all_notes">
-
-            <TextView
-                android:id="@+id/tv_library_notes_count"
-                style="@style/SubtitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                tools:text="7 Notes"
-                tools:textColor="@color/colorAccentTeal" />
-        </com.google.android.material.appbar.MaterialToolbar>
+            app:title="@string/all_notes" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_search"

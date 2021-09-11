@@ -12,6 +12,7 @@ import com.noto.app.domain.model.LibraryListSorting
 import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.setFullSpan
 import com.noto.app.util.stringResource
+import com.noto.app.util.toCountText
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass(layout = R.layout.library_list_sorting_item)
@@ -25,6 +26,9 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
 
     @EpoxyAttribute
     lateinit var onClickListener: View.OnClickListener
+
+    @EpoxyAttribute
+    var librariesCount: Int = 0
 
     @SuppressLint("SetTextI18n")
     override fun bind(holder: Holder) {
@@ -45,6 +49,10 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
             holder.binding.tvSorting.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
         else
             holder.binding.tvSorting.setCompoundDrawablesWithIntrinsicBounds(arrowDrawable, 0, 0, 0)
+        holder.binding.tvLibrariesCount.text = librariesCount.toCountText(
+            resources.stringResource(R.string.library),
+            resources.stringResource(R.string.libraries)
+        )
     }
 
     class Holder : EpoxyHolder() {
