@@ -164,7 +164,13 @@ class LibraryFragment : Fragment() {
                 }
 
                 val items = { items: List<Note> ->
-                    items.forEach { note ->
+                    items.sortByOrder(library.sortingOrder) { note -> // removing this will sort randomly for some reason.
+                        when (library.sorting) {
+                            NoteListSorting.Manual -> note.position
+                            NoteListSorting.CreationDate -> note.creationDate
+                            NoteListSorting.Alphabetical -> note.title.ifBlank { note.body }
+                        }
+                    }.forEach { note ->
                         noteItem {
                             id(note.id)
                             note(note)
