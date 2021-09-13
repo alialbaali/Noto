@@ -15,8 +15,8 @@ import com.noto.app.R
 import com.noto.app.databinding.MainArchiveFragmentBinding
 import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Library
+import com.noto.app.util.headerItem
 import com.noto.app.util.stringResource
-import com.noto.app.util.toCountText
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
@@ -57,41 +57,58 @@ class MainArchiveFragment : Fragment() {
     }
 
     private fun MainArchiveFragmentBinding.setupLibraries(libraries: List<Library>) {
-        val layoutItems = listOf(tvLibrariesCount, rv)
-
         if (libraries.isEmpty()) {
-            layoutItems.forEach { it.visibility = View.GONE }
+            rv.visibility = View.GONE
             tvPlaceHolder.visibility = View.VISIBLE
         } else {
-            layoutItems.forEach { it.visibility = View.VISIBLE }
+            rv.visibility = View.VISIBLE
             tvPlaceHolder.visibility = View.GONE
             setupModels(libraries)
-            tvLibrariesCount.text = libraries.size.toCountText(
-                resources.stringResource(R.string.library),
-                resources.stringResource(R.string.libraries)
-            )
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun MainArchiveFragmentBinding.setupModels(libraries: List<Library>) {
         rv.withModels {
-            libraries.forEach { library ->
-                libraryItem {
-                    id(library.id)
-                    library(library)
-                    notesCount(viewModel.countNotes(library.id))
-                    isManualSorting(false)
-                    onClickListener { _ ->
-                        findNavController().navigate(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(library.id))
+
+            val items = { items: List<Library> ->
+                items.forEach { library ->
+                    libraryItem {
+                        id(library.id)
+                        library(library)
+                        notesCount(viewModel.countNotes(library.id))
+                        isManualSorting(false)
+                        onClickListener { _ ->
+                            findNavController().navigate(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(library.id))
+                        }
+                        onLongClickListener { _ ->
+                            findNavController().navigate(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(library.id))
+                            true
+                        }
+                        onDragHandleTouchListener { _, _ -> false }
                     }
-                    onLongClickListener { _ ->
-                        findNavController().navigate(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(library.id))
-                        true
-                    }
-                    onDragHandleTouchListener { _, _ -> false }
                 }
             }
+
+            val pinnedLibraries = libraries.filter { it.isPinned }
+            val notPinnedLibraries = libraries.filterNot { it.isPinned }
+
+            if (pinnedLibraries.isNotEmpty()) {
+                headerItem {
+                    id("pinned")
+                    title(resources.stringResource(R.string.pinned))
+                }
+
+                items(pinnedLibraries)
+
+                if (notPinnedLibraries.isNotEmpty())
+                    headerItem {
+                        id("libraries")
+                        title(resources.stringResource(R.string.libraries))
+                    }
+            }
+
+            items(notPinnedLibraries)
         }
     }
 }
