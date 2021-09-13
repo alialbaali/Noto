@@ -1,5 +1,6 @@
 package com.noto.app.library
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,12 +44,10 @@ class LibraryArchiveFragment : Fragment() {
     }
 
     private fun LibraryArchiveFragmentBinding.setupState() {
-        val layoutItems = listOf(tvLibraryNotesCount, rv)
-
         viewModel.state
             .onEach { state ->
                 setupLibrary(state.library)
-                setupArchivedNotes(state.archivedNotes, state.font, layoutItems)
+                setupArchivedNotes(state.archivedNotes, state.font, state.library)
             }
             .distinctUntilChangedBy { state -> state.library.layoutManager }
             .onEach { state -> setupLayoutManger(state.library.layoutManager) }
@@ -67,51 +66,74 @@ class LibraryArchiveFragment : Fragment() {
     private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library) {
         val color = resources.colorResource(library.color.toResource())
         tb.navigationIcon?.mutate()?.setTint(color)
-        tvLibraryNotesCount.setTextColor(color)
         tb.title = library.getArchiveText(resources.stringResource(R.string.archive))
         tb.setTitleTextColor(color)
     }
 
-    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Note>, font: Font, layoutItems: List<View>) {
+    @SuppressLint("ClickableViewAccessibility")
+    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Note>, font: Font, library: Library) {
         if (archivedNotes.isEmpty()) {
-            layoutItems.forEach { it.visibility = View.GONE }
+            rv.visibility = View.GONE
             tvPlaceHolder.visibility = View.VISIBLE
         } else {
+            rv.visibility = View.VISIBLE
             tvPlaceHolder.visibility = View.GONE
-            layoutItems.forEach { it.visibility = View.VISIBLE }
             rv.withModels {
-                archivedNotes.forEach { archivedNote ->
-                    noteItem {
-                        id(archivedNote.id)
-                        note(archivedNote)
-                        font(font)
-                        onClickListener { _ ->
-                            findNavController()
-                                .navigate(
-                                    LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
-                                        archivedNote.libraryId,
-                                        archivedNote.id
+
+                val items = { items: List<Note> ->
+                    items.forEach { archivedNote ->
+                        noteItem {
+                            id(archivedNote.id)
+                            note(archivedNote)
+                            font(font)
+                            previewSize(library.notePreviewSize)
+                            isShowCreationDate(library.isShowNoteCreationDate)
+                            isManualSorting(false)
+                            onClickListener { _ ->
+                                findNavController()
+                                    .navigate(
+                                        LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
+                                            archivedNote.libraryId,
+                                            archivedNote.id
+                                        )
                                     )
-                                )
-                        }
-                        onLongClickListener { _ ->
-                            findNavController()
-                                .navigate(
-                                    LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
-                                        archivedNote.libraryId,
-                                        archivedNote.id,
-                                        R.id.libraryArchiveFragment
+                            }
+                            onLongClickListener { _ ->
+                                findNavController()
+                                    .navigate(
+                                        LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
+                                            archivedNote.libraryId,
+                                            archivedNote.id,
+                                            R.id.libraryArchiveFragment
+                                        )
                                     )
-                                )
-                            true
+                                true
+                            }
+                            onDragHandleTouchListener { _, _ -> false }
                         }
                     }
                 }
+
+                val pinnedNotes = archivedNotes.filter { it.isPinned }
+                val notPinnedNotes = archivedNotes.filterNot { it.isPinned }
+
+                if (pinnedNotes.isNotEmpty()) {
+                    headerItem {
+                        id("pinned")
+                        title(resources.stringResource(R.string.pinned))
+                    }
+
+                    items(pinnedNotes)
+
+                    if (notPinnedNotes.isNotEmpty())
+                        headerItem {
+                            id("notes")
+                            title(resources.stringResource(R.string.notes))
+                        }
+                }
+
+                items(notPinnedNotes)
             }
-            tvLibraryNotesCount.text = archivedNotes.size.toCountText(
-                resources.stringResource(R.string.note),
-                resources.stringResource(R.string.notes)
-            )
         }
     }
 }
