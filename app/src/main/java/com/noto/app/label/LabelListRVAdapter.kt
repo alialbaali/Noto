@@ -37,7 +37,7 @@ class LabelListRVAdapter(private val labelItemListener: LabelItemListener) : Lis
         private val drawable = resources.getDrawable(R.drawable.dialog_item_shape, null)
 
         private val rippleDrawable by lazy {
-            RippleDrawable(ColorStateList.valueOf(resources.getColor(label.labelColor.toResource())), drawable, drawable)
+            RippleDrawable(ColorStateList.valueOf(resources.getColor(label.color.toResource())), drawable, drawable)
         }
 
         init {
@@ -58,17 +58,17 @@ class LabelListRVAdapter(private val labelItemListener: LabelItemListener) : Lis
         }
 
         fun bind(label: Label) {
-            binding.ivLabelNotoColor.contentDescription = label.labelTitle
-            binding.tvLabelTitle.text = label.labelTitle
-            binding.ivLabelNotoColor.imageTintList = ResourcesCompat.getColorStateList(resources, label.labelColor.toResource(), null)
+            binding.ivLabelNotoColor.contentDescription = label.title
+            binding.tvLabelTitle.text = label.title
+            binding.ivLabelNotoColor.imageTintList = ResourcesCompat.getColorStateList(resources, label.color.toResource(), null)
             binding.root.background = rippleDrawable
-            binding.root.backgroundTintList = ResourcesCompat.getColorStateList(resources, label.labelColor.toResource(), null)
+            binding.root.backgroundTintList = ResourcesCompat.getColorStateList(resources, label.color.toResource(), null)
         }
     }
 
     class LabelItemDiffCallback : DiffUtil.ItemCallback<Label>() {
 
-        override fun areItemsTheSame(oldItem: Label, newItem: Label): Boolean = oldItem.labelId == newItem.labelId
+        override fun areItemsTheSame(oldItem: Label, newItem: Label): Boolean = oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Label, newItem: Label): Boolean = oldItem == newItem
 

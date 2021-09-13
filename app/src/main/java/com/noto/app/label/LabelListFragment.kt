@@ -27,7 +27,7 @@ class LabelListFragment : Fragment() {
         LabelListRVAdapter(object : LabelListRVAdapter.LabelItemListener {
 
             override fun onClick(label: Label) {
-                findNavController().navigate(LabelListFragmentDirections.actionLabelListFragmentToLabelDialogFragment(label.labelId))
+                findNavController().navigate(LabelListFragmentDirections.actionLabelListFragmentToLabelDialogFragment(label.id))
             }
 
         })

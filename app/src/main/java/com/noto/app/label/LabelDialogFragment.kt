@@ -45,7 +45,7 @@ class LabelDialogFragment : BaseDialogFragment() {
 
                     dismiss()
 
-                    val label = Label(labelTitle = labelTitle, labelColor = labelColor)
+                    val label = Label(title = labelTitle, libraryId = 0, color = labelColor)
 
                     viewModel.saveLabel(label)
 
@@ -64,11 +64,11 @@ class LabelDialogFragment : BaseDialogFragment() {
 
             viewModel.label.observe(viewLifecycleOwner) { label ->
 
-                binding.et.setText(label.labelTitle)
+                binding.et.setText(label.title)
 
-                labelColor = label.labelColor
+                labelColor = label.color
 
-                binding.til.setStartIconTintList(ResourcesCompat.getColorStateList(resources, label.labelColor.toResource(), null))
+                binding.til.setStartIconTintList(ResourcesCompat.getColorStateList(resources, label.color.toResource(), null))
 
             }
 
@@ -82,7 +82,7 @@ class LabelDialogFragment : BaseDialogFragment() {
 
                     dismiss()
 
-                    val label = viewModel.label.value!!.copy(labelTitle = labelTitle, labelColor = labelColor)
+                    val label = viewModel.label.value!!.copy(title = labelTitle, color = labelColor)
 
                     viewModel.saveLabel(label)
 

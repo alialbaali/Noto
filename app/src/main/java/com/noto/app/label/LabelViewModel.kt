@@ -27,7 +27,7 @@ class LabelViewModel(private val labelRepository: LabelRepository) : ViewModel()
 
     fun saveLabel(label: Label) = viewModelScope.launch {
 
-        if (label.labelId == 0L) labelRepository.createLabel(label) else labelRepository.updateLabel(label)
+        if (label.id == 0L) labelRepository.createLabel(label) else labelRepository.updateLabel(label)
 
     }
 

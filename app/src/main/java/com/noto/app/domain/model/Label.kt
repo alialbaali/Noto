@@ -2,18 +2,30 @@ package com.noto.app.domain.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "labels")
+@Entity(
+    tableName = "labels",
+    foreignKeys = [ForeignKey(
+        entity = Library::class,
+        parentColumns = ["id"],
+        childColumns = ["library_id"],
+        onDelete = ForeignKey.CASCADE
+    )]
+)
 data class Label(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "label_id")
-    val labelId: Long = 0,
+    @ColumnInfo(name = "id")
+    val id: Long = 0,
 
-    @ColumnInfo(name = "label_title")
-    val labelTitle: String,
+    @ColumnInfo(name = "library_id")
+    val libraryId: Long,
 
-    @ColumnInfo(name = "label_noto_color")
-    val labelColor: NotoColor
+    @ColumnInfo(name = "title")
+    val title: String,
+
+    @ColumnInfo(name = "color")
+    val color: NotoColor
 )

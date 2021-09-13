@@ -18,11 +18,11 @@ class LabelRepositoryImpl(
     override fun getLabel(labelId: Long): Flow<Label> = dataSource.getLabel(labelId)
 
     override suspend fun createLabel(label: Label) = withContext(dispatcher) {
-        dataSource.createLabel(label.copy(labelTitle = label.labelTitle.trim()))
+        dataSource.createLabel(label.copy(title = label.title.trim()))
     }
 
     override suspend fun updateLabel(label: Label) = withContext(dispatcher) {
-        dataSource.updateLabel(label.copy(labelTitle = label.labelTitle.trim()))
+        dataSource.updateLabel(label.copy(title = label.title.trim()))
     }
 
     override suspend fun deleteLabel(label: Label) = withContext(dispatcher) {
