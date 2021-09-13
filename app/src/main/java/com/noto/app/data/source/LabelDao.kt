@@ -5,21 +5,21 @@ import com.noto.app.domain.model.Label
 import com.noto.app.domain.source.LocalLabelDataSource
 import kotlinx.coroutines.flow.Flow
 
-@Dao
+//@Dao
 interface LabelDao : LocalLabelDataSource {
 
-    @Query("SELECT * FROM labels")
+//    @Query("SELECT * FROM labels")
     override fun getLabels(): Flow<List<Label>>
 
-    @Query("SELECT * FROM labels WHERE label_id = :labelId")
+//    @Query("SELECT * FROM labels WHERE label_id = :labelId")
     override fun getLabel(labelId: Long): Flow<Label>
 
-    @Insert
+//    @Insert
     override suspend fun createLabel(label: Label)
 
-    @Update
+//    @Update
     override suspend fun updateLabel(label: Label)
 
-    @Delete
+//    @Delete
     override suspend fun deleteLabel(label: Label)
 }

@@ -56,7 +56,7 @@ val localDataSourceModule = module {
 
     single<LocalNoteDataSource> { NotoDatabase.getInstance(androidContext()).noteDao }
 
-    single<LocalLabelDataSource> { NotoDatabase.getInstance(androidContext()).labelDao }
+//    single<LocalLabelDataSource> { NotoDatabase.getInstance(androidContext()).labelDao }
 
     single<DataStore<Preferences>> { androidContext().createDataStore(DataStoreName) }
 
