@@ -85,7 +85,7 @@
 
     <style name="DialogSectionItem" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:maxLines">1</item>
     </style>
