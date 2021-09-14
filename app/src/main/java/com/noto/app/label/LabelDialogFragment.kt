@@ -45,9 +45,9 @@ class LabelDialogFragment : BaseDialogFragment() {
 
                     dismiss()
 
-                    val label = Label(title = labelTitle, libraryId = 0, color = labelColor)
-
-                    viewModel.saveLabel(label)
+//                    val label = Label(title = labelTitle, libraryId = 0, color = labelColor)
+//
+//                    viewModel.saveLabel(label)
 
                 }
 

@@ -7,25 +7,25 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "labels",
-    foreignKeys = [ForeignKey(
-        entity = Library::class,
-        parentColumns = ["id"],
-        childColumns = ["library_id"],
-        onDelete = ForeignKey.CASCADE
-    )]
+//    foreignKeys = [ForeignKey(
+//        entity = Library::class,
+//        parentColumns = ["id"],
+//        childColumns = ["library_id"],
+//        onDelete = ForeignKey.CASCADE
+//    )]
 )
 data class Label(
 
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
+    @ColumnInfo(name = "label_id")
     val id: Long = 0,
 
-    @ColumnInfo(name = "library_id")
-    val libraryId: Long,
+//    @ColumnInfo(name = "library_id")
+//    val libraryId: Long,
 
-    @ColumnInfo(name = "title")
+    @ColumnInfo(name = "label_title")
     val title: String,
 
-    @ColumnInfo(name = "color")
+    @ColumnInfo(name = "label_noto_color")
     val color: NotoColor
 )

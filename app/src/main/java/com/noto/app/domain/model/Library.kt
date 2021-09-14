@@ -48,4 +48,10 @@ data class Library(
 
     @ColumnInfo(name = "sorting_order", defaultValue = "1")
     val sortingOrder: SortingOrder = SortingOrder.Descending,
+
+    @ColumnInfo(name = "sorting_method")
+    val sortingMethod: Int = 0,
+
+    @ColumnInfo(name = "sorting_type")
+    val sortingType: Int = 0
 )

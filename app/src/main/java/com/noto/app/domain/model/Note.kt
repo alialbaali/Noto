@@ -37,7 +37,7 @@ data class Note(
     @ColumnInfo(name = "creation_date")
     val creationDate: Instant = Clock.System.now(),
 
-    @ColumnInfo(name = "is_pinned")
+    @ColumnInfo(name = "is_starred")
     val isPinned: Boolean = false,
 
     @ColumnInfo(name = "is_archived")

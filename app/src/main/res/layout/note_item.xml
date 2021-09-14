@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
+        android:gravity="center|end"
         android:layout_marginTop="@dimen/spacing_extra_small">
 
         <TextView
