@@ -12,10 +12,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteListSortingDialogFragmentBinding
 import com.noto.app.domain.model.NoteListSorting
 import com.noto.app.domain.model.SortingOrder
-import com.noto.app.util.colorResource
-import com.noto.app.util.colorStateResource
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -33,7 +30,7 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View = NoteListSortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
-        BaseDialogFragmentBinding.bind(root).apply {
+        val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
             tvDialogTitle.text = resources.stringResource(R.string.notes_sorting)
         }
 
@@ -57,6 +54,15 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
                         disableSortingOrder()
                     }
                 }
+                val color = resources.colorResource(state.library.color.toResource())
+                val colorState = resources.colorStateResource(state.library.color.toResource())
+                baseDialog.tvDialogTitle.setTextColor(color)
+                baseDialog.vHead.background?.setTint(color)
+                rbSortingAsc.buttonTintList = colorState
+                rbSortingDesc.buttonTintList = colorState
+                rbAlphabetical.buttonTintList = colorState
+                rbCreationDate.buttonTintList = colorState
+                rbManual.buttonTintList = colorState
             }
             .launchIn(lifecycleScope)
 
