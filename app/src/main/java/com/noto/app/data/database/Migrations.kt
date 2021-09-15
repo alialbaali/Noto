@@ -8,16 +8,19 @@ import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
 object Migrations {
-    @DeleteColumn(tableName = "libraries", columnName = "sorting_type")
-    class DeleteSortingTypeColumn : AutoMigrationSpec
-
-    @DeleteColumn(tableName = "libraries", columnName = "sorting_method")
-    class DeleteSortingMethodColumn : AutoMigrationSpec
+    @DeleteColumn.Entries(
+        DeleteColumn(tableName = "libraries", columnName = "sorting_type"),
+        DeleteColumn(tableName = "libraries", columnName = "sorting_method"),
+    )
+    class DeleteSortingTypeAndSortingMethodColumns : AutoMigrationSpec
 
     @RenameColumn(tableName = "notes", fromColumnName = "is_starred", toColumnName = "is_pinned")
     class RenameIsStarredColumn : AutoMigrationSpec
 
-    @DeleteTable.Entries(DeleteTable(tableName = "labels"), DeleteTable(tableName = "noto_labels"))
+    @DeleteTable.Entries(
+        DeleteTable(tableName = "labels"),
+        DeleteTable(tableName = "noto_labels"),
+    )
     class DeleteLabelAndNoteLabelTables : AutoMigrationSpec
 }
 
