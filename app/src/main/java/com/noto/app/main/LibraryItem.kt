@@ -1,7 +1,6 @@
 package com.noto.app.main
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -41,38 +40,38 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
     @EpoxyAttribute
     var notesCount: Int = 0
 
-    override fun bind(holder: Holder) = holder.bind()
+    @SuppressLint("ClickableViewAccessibility")
 
-    inner class Holder : EpoxyHolder() {
-        private lateinit var binding: LibraryItemBinding
+    override fun bind(holder: Holder) = with(holder.binding) {
+        val resources = root.resources
+        val color = resources.colorResource(library.color.toResource())
+        tvLibraryTitle.text = library.title
+        tvLibraryNotesCount.text = notesCount.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
+        ibDrag.isVisible = isManualSorting
+        vColor.background.setTint(color)
+        tvLibraryTitle.setTextColor(color)
+        tvLibraryNotesCount.setTextColor(color)
+        ibDrag.drawable?.mutate()?.setTint(color)
+        ibDrag.setOnTouchListener(onDragHandleTouchListener)
+        root.setOnClickListener(onClickListener)
+        root.setOnLongClickListener(onLongClickListener)
+        tvLibraryNotesCount.isVisible = isShowNotesCount
+        if (!isShowNotesCount)
+            tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMarginsRelative(bottom = 0.dp)
+            }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            root.outlineAmbientShadowColor = color
+            root.outlineSpotShadowColor = color
+        }
+    }
+
+    class Holder : EpoxyHolder() {
+        lateinit var binding: LibraryItemBinding
+            private set
 
         override fun bindView(itemView: View) {
             binding = LibraryItemBinding.bind(itemView)
-        }
-
-        @SuppressLint("ClickableViewAccessibility")
-        fun bind() = with(binding) {
-            val resources = binding.root.resources
-            val color = resources.colorResource(library.color.toResource())
-            tvLibraryTitle.text = library.title
-            tvLibraryNotesCount.text = notesCount.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
-            ibDrag.isVisible = isManualSorting
-            vColor.background.setTint(color)
-            tvLibraryTitle.setTextColor(color)
-            tvLibraryNotesCount.setTextColor(color)
-            ibDrag.drawable?.mutate()?.setTint(color)
-            ibDrag.setOnTouchListener(onDragHandleTouchListener)
-            root.setOnClickListener(onClickListener)
-            root.setOnLongClickListener(onLongClickListener)
-            tvLibraryNotesCount.isVisible = isShowNotesCount
-            if (!isShowNotesCount)
-                tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    updateMarginsRelative(bottom = 0.dp)
-                }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                root.outlineAmbientShadowColor = color
-                root.outlineSpotShadowColor = color
-            }
         }
     }
 }
