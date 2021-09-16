@@ -26,20 +26,19 @@ abstract class NotoColorItem : EpoxyModelWithHolder<NotoColorItem.Holder>() {
     @EpoxyAttribute
     lateinit var onClickListener: View.OnClickListener
 
-    override fun bind(holder: Holder) = holder.bind()
+    override fun bind(holder: Holder) = with(holder.binding) {
+        rb.backgroundTintList = root.resources.colorStateResource(notoColor.toResource())
+        rb.isChecked = isChecked
+        rb.setOnClickListener(onClickListener)
+        TooltipCompat.setTooltipText(rb, notoColor.name)
+    }
 
-    inner class Holder : EpoxyHolder() {
-        private lateinit var binding: NotoColorItemBinding
+    class Holder : EpoxyHolder() {
+        lateinit var binding: NotoColorItemBinding
+            private set
 
         override fun bindView(itemView: View) {
             binding = NotoColorItemBinding.bind(itemView)
-        }
-
-        fun bind() = with(binding) {
-            rb.backgroundTintList = root.resources.colorStateResource(notoColor.toResource())
-            rb.isChecked = isChecked
-            rb.setOnClickListener(onClickListener)
-            TooltipCompat.setTooltipText(rb, notoColor.name)
         }
     }
 }
