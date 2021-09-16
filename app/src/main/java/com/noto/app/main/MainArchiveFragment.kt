@@ -16,9 +16,10 @@ import com.noto.app.databinding.MainArchiveFragmentBinding
 import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Library
 import com.noto.app.util.headerItem
+import com.noto.app.util.sorted
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
-import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -40,10 +41,15 @@ class MainArchiveFragment : Fragment() {
     }
 
     private fun MainArchiveFragmentBinding.setupState() {
-        viewModel.state
-            .onEach { state -> setupLibraries(state.archivedLibraries) }
-            .distinctUntilChangedBy { it.layoutManager }
-            .onEach { state -> setupLayoutManger(state.layoutManager) }
+        combine(
+            viewModel.archivedLibraries,
+            viewModel.sorting,
+            viewModel.sortingOrder,
+        ) { libraries, sorting, sortingOrder -> setupLibraries(libraries.sorted(sorting, sortingOrder)) }
+            .launchIn(lifecycleScope)
+
+        viewModel.layoutManager
+            .onEach { layoutManager -> setupLayoutManger(layoutManager) }
             .launchIn(lifecycleScope)
     }
 

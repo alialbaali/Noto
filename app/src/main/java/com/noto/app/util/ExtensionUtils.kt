@@ -185,3 +185,11 @@ fun View.setFullSpan() {
     if (layoutParams != null && layoutParams is StaggeredGridLayoutManager.LayoutParams)
         (layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
 }
+
+fun List<Library>.sorted(sorting: LibraryListSorting, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { library ->
+    when (sorting) {
+        LibraryListSorting.Manual -> library.position
+        LibraryListSorting.CreationDate -> library.creationDate
+        LibraryListSorting.Alphabetical -> library.title
+    }
+}

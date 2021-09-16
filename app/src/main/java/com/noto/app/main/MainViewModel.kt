@@ -10,8 +10,10 @@ import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
-import com.noto.app.util.sortByOrder
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -21,34 +23,26 @@ class MainViewModel(
     private val storage: LocalStorage,
 ) : ViewModel() {
 
-    private val mutableState = MutableStateFlow(State())
-    val state get() = mutableState.asStateFlow()
+    val libraries = libraryRepository.getLibraries()
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    init {
-        combine(
-            libraryRepository.getLibraries()
-                .filterNotNull(),
-            libraryRepository.getArchivedLibraries()
-                .filterNotNull(),
-            storage.get(Constants.LibraryListLayoutManagerKey)
-                .filterNotNull()
-                .map { LayoutManager.valueOf(it) },
-            storage.get(Constants.LibraryListSortingKey)
-                .filterNotNull()
-                .map { LibraryListSorting.valueOf(it) },
-            storage.get(Constants.LibraryListSortingOrderKey)
-                .filterNotNull()
-                .map { SortingOrder.valueOf(it) },
-        ) { libraries, archivedLibraries, layoutManager, sorting, sortingOrder ->
-            mutableState.value = State(
-                libraries.sorted(sorting, sortingOrder),
-                archivedLibraries.sorted(sorting, sortingOrder),
-                layoutManager,
-                sorting,
-                sortingOrder,
-            )
-        }.launchIn(viewModelScope)
-    }
+    val archivedLibraries = libraryRepository.getArchivedLibraries()
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+
+    val layoutManager = storage.get(Constants.LibraryListLayoutManagerKey)
+        .filterNotNull()
+        .map { LayoutManager.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, LayoutManager.Grid)
+
+    val sorting = storage.get(Constants.LibraryListSortingKey)
+        .filterNotNull()
+        .map { LibraryListSorting.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, LibraryListSorting.CreationDate)
+
+    val sortingOrder = storage.get(Constants.LibraryListSortingOrderKey)
+        .filterNotNull()
+        .map { SortingOrder.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, SortingOrder.Descending)
 
     fun countNotes(libraryId: Long): Int = runBlocking {
         noteRepository.countNotesByLibraryId(libraryId)
@@ -69,20 +63,4 @@ class MainViewModel(
     fun updateLibraryPosition(library: Library, position: Int) = viewModelScope.launch {
         libraryRepository.updateLibrary(library.copy(position = position))
     }
-
-    private fun List<Library>.sorted(sorting: LibraryListSorting, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { library ->
-        when (sorting) {
-            LibraryListSorting.Manual -> library.position
-            LibraryListSorting.CreationDate -> library.creationDate
-            LibraryListSorting.Alphabetical -> library.title
-        }
-    }
-
-    data class State(
-        val libraries: List<Library> = emptyList(),
-        val archivedLibraries: List<Library> = emptyList(),
-        val layoutManager: LayoutManager = LayoutManager.Grid,
-        val sorting: LibraryListSorting = LibraryListSorting.CreationDate,
-        val sortingOrder: SortingOrder = SortingOrder.Descending,
-    )
 }

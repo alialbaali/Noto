@@ -57,13 +57,17 @@ class MainFragment : Fragment() {
     private fun MainFragmentBinding.setupState() {
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
 
-        viewModel.state
-            .onEach { state ->
-                setupLibraries(state.libraries, state.sortingOrder, state.sorting)
-                setupItemTouchHelper(state.layoutManager)
-            }
-            .distinctUntilChangedBy { it.layoutManager }
-            .onEach { state -> setupLayoutManager(state.layoutManager, layoutManagerMenuItem) }
+        combine(
+            viewModel.libraries,
+            viewModel.sorting,
+            viewModel.sortingOrder,
+        ) { libraries, sorting, sortingOrder -> setupLibraries(libraries.sorted(sorting, sortingOrder), sorting, sortingOrder) }
+            .launchIn(lifecycleScope)
+
+        viewModel.layoutManager
+            .onEach { layoutManager -> setupLayoutManager(layoutManager, layoutManagerMenuItem) }
+            .combine(viewModel.libraries) { layoutManager, _ -> layoutManager }
+            .onEach { layoutManager -> setupItemTouchHelper(layoutManager) }
             .launchIn(lifecycleScope)
     }
 
@@ -87,8 +91,8 @@ class MainFragment : Fragment() {
 
     private fun MainFragmentBinding.setupLibraries(
         libraries: List<Library>,
-        sortingOrder: SortingOrder,
         sorting: LibraryListSorting,
+        sortingOrder: SortingOrder,
     ) {
         if (libraries.isEmpty()) {
             rv.visibility = View.GONE
@@ -101,7 +105,7 @@ class MainFragment : Fragment() {
     }
 
     private fun MainFragmentBinding.setupLayoutMangerMenuItem(): Boolean {
-        when (viewModel.state.value.layoutManager) {
+        when (viewModel.layoutManager.value) {
             LayoutManager.Linear -> {
                 viewModel.updateLayoutManager(LayoutManager.Grid)
                 root.snackbar(

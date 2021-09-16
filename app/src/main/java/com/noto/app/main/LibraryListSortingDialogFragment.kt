@@ -33,13 +33,9 @@ class LibraryListSortingDialogFragment : BaseDialogFragment() {
             tvDialogTitle.text = resources.stringResource(R.string.libraries_sorting)
         }
 
-        viewModel.state
-            .onEach { state ->
-                when (state.sortingOrder) {
-                    SortingOrder.Ascending -> rbSortingAsc.isChecked = true
-                    SortingOrder.Descending -> rbSortingDesc.isChecked = true
-                }
-                when (state.sorting) {
+        viewModel.sorting
+            .onEach { sorting ->
+                when (sorting) {
                     LibraryListSorting.Alphabetical -> {
                         rbAlphabetical.isChecked = true
                         enableSortingOrder()
@@ -52,6 +48,15 @@ class LibraryListSortingDialogFragment : BaseDialogFragment() {
                         rbManual.isChecked = true
                         disableSortingOrder()
                     }
+                }
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.sortingOrder
+            .onEach { sortingOrder ->
+                when (sortingOrder) {
+                    SortingOrder.Ascending -> rbSortingAsc.isChecked = true
+                    SortingOrder.Descending -> rbSortingDesc.isChecked = true
                 }
             }
             .launchIn(lifecycleScope)
