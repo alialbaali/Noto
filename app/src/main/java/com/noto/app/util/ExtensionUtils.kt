@@ -3,8 +3,10 @@ package com.noto.app.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Typeface
 import android.net.Uri
+import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -193,3 +195,18 @@ fun List<Library>.sorted(sorting: LibraryListSorting, sortingOrder: SortingOrder
         LibraryListSorting.Alphabetical -> library.title
     }
 }
+
+fun List<Note>.sorted(sorting: NoteListSorting, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { note ->
+    when (sorting) {
+        NoteListSorting.Manual -> note.position
+        NoteListSorting.CreationDate -> note.creationDate
+        NoteListSorting.Alphabetical -> note.title.ifBlank { note.body }
+    }
+}
+
+val Number.dp
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this.toFloat(),
+        Resources.getSystem().displayMetrics
+    ).toInt()

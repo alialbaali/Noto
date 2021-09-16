@@ -64,7 +64,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/tv_show_notes_count"
+                android:id="@+id/sw_show_notes_count"
                 style="@style/SettingsItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

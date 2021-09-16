@@ -2,16 +2,19 @@ package com.noto.app.settings
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.noto.app.R
 import com.noto.app.databinding.SettingsFragmentBinding
+import com.noto.app.util.colorResource
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -40,8 +43,24 @@ class SettingsFragment : Fragment() {
 
         tvVersion.text = resources.stringResource(R.string.version) + " $version"
 
+        val switchOffColor = ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorSecondary), 128)
+        val state = arrayOf(
+            intArrayOf(android.R.attr.state_checked),
+            intArrayOf(-android.R.attr.state_checked),
+        )
+        val switchThumbTintList = ColorStateList(
+            state,
+            intArrayOf(resources.colorResource(R.color.colorPrimary), resources.colorResource(R.color.colorSurface))
+        )
+        val switchTrackTintList = ColorStateList(
+            state,
+            intArrayOf(ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorPrimary), 128), switchOffColor)
+        )
+        swShowNotesCount.thumbTintList = switchThumbTintList
+        swShowNotesCount.trackTintList = switchTrackTintList
+
         viewModel.isShowNotesCount
-            .onEach { isShowNotesCount -> tvShowNotesCount.isChecked = isShowNotesCount }
+            .onEach { isShowNotesCount -> swShowNotesCount.isChecked = isShowNotesCount }
             .launchIn(lifecycleScope)
     }
 
@@ -58,7 +77,7 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToFontDialogFragment())
         }
 
-        tvShowNotesCount.setOnClickListener {
+        swShowNotesCount.setOnClickListener {
             viewModel.toggleShowNotesCount()
         }
 
