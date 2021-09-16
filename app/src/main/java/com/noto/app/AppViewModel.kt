@@ -10,21 +10,18 @@ import kotlinx.coroutines.launch
 
 class AppViewModel(private val storage: LocalStorage) : ViewModel() {
 
-    private val mutableState = MutableStateFlow(State())
-    val state get() = mutableState.asStateFlow()
+    val theme = storage.get(Constants.ThemeKey)
+        .filterNotNull()
+        .map { Theme.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, Theme.System)
+
+    val font = storage.get(Constants.FontKey)
+        .filterNotNull()
+        .map { Font.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
 
     init {
         createDefaultConstants()
-
-        combine(
-            storage.get(Constants.ThemeKey)
-                .filterNotNull()
-                .map { Theme.valueOf(it) },
-            storage.get(Constants.FontKey)
-                .filterNotNull()
-                .map { Font.valueOf(it) },
-        ) { theme, font -> mutableState.value = State(theme, font) }
-            .launchIn(viewModelScope)
     }
 
     fun updateTheme(value: Theme) = viewModelScope.launch {
@@ -63,6 +60,11 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
             storage.getOrNull(Constants.LibraryListLayoutManagerKey)
                 .firstOrNull()
                 .also { if (it == null) storage.put(Constants.LibraryListLayoutManagerKey, LayoutManager.Grid.toString()) }
+        }
+        launch {
+            storage.getOrNull(Constants.ShowNotesCountKey)
+                .firstOrNull()
+                .also { if (it == null) storage.put(Constants.ShowNotesCountKey, true.toString()) }
         }
     }
 

@@ -33,9 +33,9 @@ class FontDialogFragment : BaseDialogFragment() {
     }
 
     private fun FontDialogFragmentBinding.setupState() {
-        viewModel.state
-            .onEach { state ->
-                when (state.font) {
+        viewModel.font
+            .onEach { font ->
+                when (font) {
                     Font.Nunito -> rbNunito.isChecked = true
                     Font.Monospace -> rbMonospace.isChecked = true
                 }

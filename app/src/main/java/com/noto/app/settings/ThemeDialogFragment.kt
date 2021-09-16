@@ -32,8 +32,8 @@ class ThemeDialogFragment : BaseDialogFragment() {
     }
 
     private fun ThemeDialogFragmentBinding.setupState() {
-        viewModel.state
-            .onEach { state -> setupTheme(state.theme) }
+        viewModel.theme
+            .onEach { theme -> setupTheme(theme) }
             .launchIn(lifecycleScope)
     }
 
