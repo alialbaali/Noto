@@ -2,7 +2,10 @@ package com.noto.app.library
 
 import android.annotation.SuppressLint
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMarginsRelative
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
@@ -74,6 +77,14 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
                 tvNoteBody.text = note.body.takeLines(previewSize)
                 tvNoteBody.maxLines = previewSize
                 tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
+            }
+            when {
+                note.title.isBlank() -> tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    updateMarginsRelative(top = 0.dp, bottom = 0.dp)
+                }
+                note.body.isBlank() || previewSize == 0 -> tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    updateMarginsRelative(bottom = 0.dp)
+                }
             }
         }
     }

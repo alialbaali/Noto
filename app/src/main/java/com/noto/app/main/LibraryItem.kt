@@ -65,9 +65,10 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
             root.setOnClickListener(onClickListener)
             root.setOnLongClickListener(onLongClickListener)
             tvLibraryNotesCount.isVisible = isShowNotesCount
-            tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                updateMarginsRelative(bottom = if (isShowNotesCount) 4.dp else 0.dp)
-            }
+            if (!isShowNotesCount)
+                tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    updateMarginsRelative(bottom = 0.dp)
+                }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 root.outlineAmbientShadowColor = color
                 root.outlineSpotShadowColor = color
