@@ -75,6 +75,14 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             note.body.isBlank() || previewSize == 0 -> tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 updateMarginsRelative(bottom = 0.dp)
             }
+            else -> {
+                tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    updateMarginsRelative(top = 4.dp, bottom = 4.dp)
+                }
+                tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    updateMarginsRelative(bottom = 4.dp)
+                }
+            }
         }
     }
 
