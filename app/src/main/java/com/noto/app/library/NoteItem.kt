@@ -47,7 +47,6 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
 
     inner class Holder : EpoxyHolder() {
         private lateinit var binding: NoteItemBinding
-            private set
 
         override fun bindView(itemView: View) {
             binding = NoteItemBinding.bind(itemView)
