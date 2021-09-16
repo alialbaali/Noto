@@ -35,27 +35,27 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
             tvDialogTitle.text = resources.stringResource(R.string.notes_sorting)
         }
 
-        viewModel.state
-            .onEach { state ->
-                val color = resources.colorResource(state.library.color.toResource())
-                val colorStateList = resources.colorStateResource(state.library.color.toResource())
+        viewModel.library
+            .onEach { library ->
+                val color = resources.colorResource(library.color.toResource())
+                val colorStateList = resources.colorStateResource(library.color.toResource())
                 baseDialog.tvDialogTitle.setTextColor(color)
                 baseDialog.vHead.background?.setTint(color)
                 rbManual.buttonTintList = colorStateList
                 rbAlphabetical.buttonTintList = colorStateList
                 rbCreationDate.buttonTintList = colorStateList
-                when (state.library.sortingOrder) {
+                when (library.sortingOrder) {
                     SortingOrder.Ascending -> rbSortingAsc.isChecked = true
                     SortingOrder.Descending -> rbSortingDesc.isChecked = true
                 }
-                when (state.library.sorting) {
+                when (library.sorting) {
                     NoteListSorting.Alphabetical -> {
                         rbAlphabetical.isChecked = true
-                        enableSortingOrder(state.library.color)
+                        enableSortingOrder(library.color)
                     }
                     NoteListSorting.CreationDate -> {
                         rbCreationDate.isChecked = true
-                        enableSortingOrder(state.library.color)
+                        enableSortingOrder(library.color)
                     }
                     NoteListSorting.Manual -> {
                         rbManual.isChecked = true

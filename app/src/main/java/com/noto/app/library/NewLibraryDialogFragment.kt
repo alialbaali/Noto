@@ -52,8 +52,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             requireActivity().showKeyboard(root)
         }
 
-        viewModel.state
-            .onEach { state -> setupLibrary(state.library, baseDialogFragment) }
+        viewModel.library
+            .onEach { library -> setupLibrary(library, baseDialogFragment) }
             .launchIn(lifecycleScope)
 
         viewModel.notoColors
@@ -136,7 +136,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun NewLibraryDialogFragmentBinding.updatePinnedShortcut(title: String) {
-        val library = viewModel.state.value.library.copy(
+        val library = viewModel.library.value.copy(
             title = title,
             color = viewModel.notoColors.value.first { it.second }.first
         )

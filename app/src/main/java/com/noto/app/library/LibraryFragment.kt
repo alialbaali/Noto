@@ -23,6 +23,7 @@ import com.noto.app.R
 import com.noto.app.databinding.LibraryFragmentBinding
 import com.noto.app.domain.model.*
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -50,34 +51,29 @@ class LibraryFragment : Fragment() {
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
 
-        viewModel.state
-            .onEach { state ->
-                setupLibraryColors(state.library.color)
-                setupNotes(state.notes, state.font, state.library)
-//                state.labels
-//                    .map { label -> label.toButton() }
-//                    .onEach { labelButton ->
-//                        labels.addView(labelButton, ViewGroup.LayoutParams(500, 200))
-//                    }
-//                rvLabels.withModels {
-//                    state.labels.forEach { label ->
-//                        labelItem {
-//                            id(label.id)
-//                            label(label)
-//                        }
-//                    }
-//                }
-                setupItemTouchHelper(state.library.layoutManager)
-                tb.title = state.library.title
+        viewModel.library
+            .onEach { library ->
+                setupLibrary(library)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val text = state.library.getArchiveText(resources.stringResource(R.string.archive))
+                    val text = library.getArchiveText(resources.stringResource(R.string.archive))
                     archiveMenuItem.contentDescription = text
                     archiveMenuItem.tooltipText = text
                 }
             }
-            .distinctUntilChangedBy { state -> state.library.layoutManager }
-            .onEach { state -> setupLayoutManager(state.library.layoutManager, layoutManagerMenuItem) }
+            .distinctUntilChangedBy { library -> library.layoutManager }
+            .onEach { library -> setupLayoutManager(library.layoutManager, layoutManagerMenuItem) }
             .launchIn(lifecycleScope)
+
+        viewModel.library
+
+        combine(
+            viewModel.notes,
+            viewModel.font,
+            viewModel.library,
+        ) { notes, font, library ->
+            setupNotes(notes.sorted(library.sorting, library.sortingOrder), font, library)
+            setupItemTouchHelper(library.layoutManager)
+        }.launchIn(lifecycleScope)
     }
 
     private fun LibraryFragmentBinding.setupListeners() {
@@ -133,7 +129,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupLayoutManager(layoutManager: LayoutManager, layoutManagerMenuItem: MenuItem) {
-        val color = viewModel.state.value.library.color.toResource()
+        val color = viewModel.library.value.color.toResource()
         val resource = resources.colorResource(color)
         when (layoutManager) {
             LayoutManager.Linear -> {
@@ -178,13 +174,7 @@ class LibraryFragment : Fragment() {
                 }
 
                 val items = { items: List<Note> ->
-                    items.sortByOrder(library.sortingOrder) { note -> // removing this will sort randomly for some reason.
-                        when (library.sorting) {
-                            NoteListSorting.Manual -> note.position
-                            NoteListSorting.CreationDate -> note.creationDate
-                            NoteListSorting.Alphabetical -> note.title.ifBlank { note.body }
-                        }
-                    }.forEach { note ->
+                    items.forEach { note ->
                         noteItem {
                             id(note.id)
                             note(note)
@@ -247,7 +237,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupLayoutManagerMenuItem(): Boolean {
-        when (viewModel.state.value.library.layoutManager) {
+        when (viewModel.library.value.layoutManager) {
             LayoutManager.Linear -> {
                 viewModel.updateLayoutManager(LayoutManager.Grid)
                 root.snackbar(getString(R.string.layout_is_grid_mode), anchorView = fab)
@@ -270,11 +260,10 @@ class LibraryFragment : Fragment() {
         return true
     }
 
-    private fun LibraryFragmentBinding.setupLibraryColors(notoColor: NotoColor) {
-
-        val color = resources.colorResource(notoColor.toResource())
-        val colorStateList = resources.colorStateResource(notoColor.toResource())
-
+    private fun LibraryFragmentBinding.setupLibrary(library: Library) {
+        val color = resources.colorResource(library.color.toResource())
+        val colorStateList = resources.colorStateResource(library.color.toResource())
+        tb.title = library.title
         tb.setTitleTextColor(color)
         tb.navigationIcon?.mutate()?.setTint(color)
         bab.navigationIcon?.mutate()?.setTint(color)

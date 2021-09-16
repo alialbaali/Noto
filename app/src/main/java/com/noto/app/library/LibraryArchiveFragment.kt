@@ -19,6 +19,7 @@ import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -44,14 +45,19 @@ class LibraryArchiveFragment : Fragment() {
     }
 
     private fun LibraryArchiveFragmentBinding.setupState() {
-        viewModel.state
-            .onEach { state ->
-                setupLibrary(state.library)
-                setupArchivedNotes(state.archivedNotes, state.font, state.library)
-            }
-            .distinctUntilChangedBy { state -> state.library.layoutManager }
-            .onEach { state -> setupLayoutManger(state.library.layoutManager) }
+        viewModel.library
+            .onEach { library -> setupLibrary(library) }
+            .distinctUntilChangedBy { library -> library.layoutManager }
+            .onEach { library -> setupLayoutManger(library.layoutManager) }
             .launchIn(lifecycleScope)
+
+        combine(
+            viewModel.archivedNotes,
+            viewModel.font,
+            viewModel.library,
+        ) { archivedNotes, font, library ->
+            setupArchivedNotes(archivedNotes.sorted(library.sorting, library.sortingOrder), font, library)
+        }.launchIn(lifecycleScope)
     }
 
     private fun LibraryArchiveFragmentBinding.setupLayoutManger(layoutManager: LayoutManager) {

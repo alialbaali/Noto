@@ -50,8 +50,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun LibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        viewModel.state
-            .onEach { state -> setupLibrary(state.library, baseDialogFragment) }
+        viewModel.library
+            .onEach { library -> setupLibrary(library, baseDialogFragment) }
             .launchIn(lifecycleScope)
     }
 
@@ -72,14 +72,14 @@ class LibraryDialogFragment : BaseDialogFragment() {
         tvNewNoteShortcut.setOnClickListener {
             dismiss()
             if (ShortcutManagerCompat.isRequestPinShortcutSupported(requireContext()))
-                ShortcutManagerCompat.requestPinShortcut(requireContext(), requireContext().createPinnedShortcut(viewModel.state.value.library), null)
+                ShortcutManagerCompat.requestPinShortcut(requireContext(), requireContext().createPinnedShortcut(viewModel.library.value), null)
         }
 
         tvArchiveLibrary.setOnClickListener {
             dismiss()
             viewModel.toggleLibraryIsArchived()
 
-            val resource = if (viewModel.state.value.library.isArchived)
+            val resource = if (viewModel.library.value.isArchived)
                 R.string.library_is_unarchived
             else
                 R.string.library_is_archived
@@ -91,7 +91,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
             dismiss()
             viewModel.toggleLibraryIsPinned()
 
-            val resource = if (viewModel.state.value.library.isPinned)
+            val resource = if (viewModel.library.value.isPinned)
                 R.string.library_is_unpinned
             else
                 R.string.library_is_pinned
@@ -116,11 +116,12 @@ class LibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun LibraryDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
-        val resource = resources.colorStateResource(library.color.toResource())
-        baseDialogFragment.vHead.backgroundTintList = resource
-        baseDialogFragment.tvDialogTitle.setTextColor(resource)
+        val color = resources.colorResource(library.color.toResource())
+        val colorState = resources.colorStateResource(library.color.toResource())
+        baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+        baseDialogFragment.tvDialogTitle.setTextColor(color)
         listOf(tvEditLibrary, tvArchiveLibrary, tvPinLibrary, tvNewNoteShortcut, tvExportLibrary, tvDeleteLibrary)
-            .forEach { TextViewCompat.setCompoundDrawableTintList(it, resource) }
+            .forEach { TextViewCompat.setCompoundDrawableTintList(it, colorState) }
 
         if (library.isArchived) {
             tvArchiveLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
@@ -147,7 +148,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
         findNavController().popBackStack(R.id.mainFragment, false)
         dismiss()
 
-        viewModel.state.value.notes
+        viewModel.notes
+            .value
             .filter { note -> note.reminderDate != null }
             .forEach { note -> alarmManager.cancelAlarm(requireContext(), note.id) }
 
@@ -158,8 +160,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
         if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
                 var documentUri: Uri? = Uri.EMPTY
-                viewModel.state.value.notes.forEach { note ->
-                    documentUri = requireContext().exportNote(uri, viewModel.state.value.library, note)
+                viewModel.notes.value.forEach { note ->
+                    documentUri = requireContext().exportNote(uri, viewModel.library.value, note)
                 }
                 val parentView = requireParentFragment().requireView()
                 val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
