@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalLabelDataSource {
 
-    fun getLabels(): Flow<List<Label>>
+    fun getLabelsByLibraryId(libraryId: Long): Flow<List<Label>>
 
-    fun getLabel(labelId: Long): Flow<Label>
+    fun getLabelById(id: Long): Flow<Label>
 
     suspend fun createLabel(label: Label)
 

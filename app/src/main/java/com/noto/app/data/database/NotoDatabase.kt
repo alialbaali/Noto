@@ -2,6 +2,7 @@ package com.noto.app.data.database
 
 import android.content.Context
 import androidx.room.*
+import com.noto.app.data.source.LabelDao
 import com.noto.app.data.source.LibraryDao
 import com.noto.app.data.source.NoteDao
 import com.noto.app.domain.model.Label
@@ -40,6 +41,8 @@ abstract class NotoDatabase : RoomDatabase() {
     abstract val noteDao: NoteDao
 
     abstract val libraryDao: LibraryDao
+
+    abstract val labelDao: LabelDao
 
     companion object {
 
