@@ -31,25 +31,25 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
     var librariesCount: Int = 0
 
     @SuppressLint("SetTextI18n")
-    override fun bind(holder: Holder) {
-        val resources = holder.binding.root.resources
+    override fun bind(holder: Holder) = with(holder.binding) {
+        val resources = root.resources
         val sortingText = resources.stringResource(R.string.sorting).lowercase()
-        holder.binding.tvSorting.text = when (sorting) {
+        tvSorting.text = when (sorting) {
             LibraryListSorting.Manual -> "${resources.stringResource(R.string.manual)} $sortingText"
             LibraryListSorting.CreationDate -> "${resources.stringResource(R.string.creation_date)} $sortingText"
             LibraryListSorting.Alphabetical -> "${resources.stringResource(R.string.alphabetical)} $sortingText"
         }
-        holder.binding.tvSorting.setOnClickListener(onClickListener)
-        holder.binding.root.rootView.setFullSpan()
+        tvSorting.setOnClickListener(onClickListener)
+        root.rootView.setFullSpan()
         val arrowDrawable = when (sortingOrder) {
             SortingOrder.Ascending -> R.drawable.ic_round_arrow_up_24
             SortingOrder.Descending -> R.drawable.ic_round_arrow_down_24
         }
         if (sorting == LibraryListSorting.Manual)
-            holder.binding.tvSorting.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
+            tvSorting.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
         else
-            holder.binding.tvSorting.setCompoundDrawablesWithIntrinsicBounds(arrowDrawable, 0, 0, 0)
-        holder.binding.tvLibrariesCount.text = librariesCount.toCountText(
+            tvSorting.setCompoundDrawablesWithIntrinsicBounds(arrowDrawable, 0, 0, 0)
+        tvLibrariesCount.text = librariesCount.toCountText(
             resources.stringResource(R.string.library),
             resources.stringResource(R.string.libraries)
         )
