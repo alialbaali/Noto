@@ -26,6 +26,7 @@ import com.noto.app.util.*
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import nl.bryanderidder.themedtogglebuttongroup.ThemedButton
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -53,6 +54,19 @@ class LibraryFragment : Fragment() {
             .onEach { state ->
                 setupLibraryColors(state.library.color)
                 setupNotes(state.notes, state.font, state.library)
+//                state.labels
+//                    .map { label -> label.toButton() }
+//                    .onEach { labelButton ->
+//                        labels.addView(labelButton, ViewGroup.LayoutParams(500, 200))
+//                    }
+//                rvLabels.withModels {
+//                    state.labels.forEach { label ->
+//                        labelItem {
+//                            id(label.id)
+//                            label(label)
+//                        }
+//                    }
+//                }
                 setupItemTouchHelper(state.library.layoutManager)
                 tb.title = state.library.title
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -286,6 +300,13 @@ class LibraryFragment : Fragment() {
             }
             itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
                 .apply { attachToRecyclerView(rv) }
+        }
+    }
+
+    private fun Label.toButton(): ThemedButton {
+        return ThemedButton(requireContext()).apply {
+            borderColor = resources.colorResource(color.toResource())
+            text = title
         }
     }
 }

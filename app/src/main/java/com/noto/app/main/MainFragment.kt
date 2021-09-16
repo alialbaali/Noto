@@ -61,8 +61,10 @@ class MainFragment : Fragment() {
             viewModel.libraries,
             viewModel.sorting,
             viewModel.sortingOrder,
-        ) { libraries, sorting, sortingOrder -> setupLibraries(libraries.sorted(sorting, sortingOrder), sorting, sortingOrder) }
-            .launchIn(lifecycleScope)
+            viewModel.isShowNotesCount,
+        ) { libraries, sorting, sortingOrder, isShowNotesCount ->
+            setupLibraries(libraries.sorted(sorting, sortingOrder), sorting, sortingOrder, isShowNotesCount)
+        }.launchIn(lifecycleScope)
 
         viewModel.layoutManager
             .onEach { layoutManager -> setupLayoutManager(layoutManager, layoutManagerMenuItem) }
@@ -93,6 +95,7 @@ class MainFragment : Fragment() {
         libraries: List<Library>,
         sorting: LibraryListSorting,
         sortingOrder: SortingOrder,
+        isShowNotesCount: Boolean,
     ) {
         if (libraries.isEmpty()) {
             rv.visibility = View.GONE
@@ -100,7 +103,7 @@ class MainFragment : Fragment() {
         } else {
             rv.visibility = View.VISIBLE
             tvPlaceHolder.visibility = View.GONE
-            setupModels(libraries, sorting, sortingOrder)
+            setupModels(libraries, sorting, sortingOrder, isShowNotesCount)
         }
     }
 
@@ -127,7 +130,8 @@ class MainFragment : Fragment() {
     private fun MainFragmentBinding.setupModels(
         libraries: List<Library>,
         sorting: LibraryListSorting,
-        sortingOrder: SortingOrder
+        sortingOrder: SortingOrder,
+        isShowNotesCount: Boolean,
     ) {
         rv.withModels {
             epoxyController = this
@@ -149,6 +153,7 @@ class MainFragment : Fragment() {
                         library(library)
                         notesCount(viewModel.countNotes(library.id))
                         isManualSorting(sorting == LibraryListSorting.Manual)
+                        isShowNotesCount(isShowNotesCount)
                         onClickListener { _ ->
                             findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
                         }

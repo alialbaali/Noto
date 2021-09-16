@@ -44,6 +44,11 @@ class MainViewModel(
         .map { SortingOrder.valueOf(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, SortingOrder.Descending)
 
+    val isShowNotesCount = storage.get(Constants.ShowNotesCountKey)
+        .filterNotNull()
+        .map { it.toBoolean() }
+        .stateIn(viewModelScope, SharingStarted.Lazily, true)
+
     fun countNotes(libraryId: Long): Int = runBlocking {
         noteRepository.countNotesByLibraryId(libraryId)
     }

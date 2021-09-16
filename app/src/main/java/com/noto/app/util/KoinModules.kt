@@ -19,6 +19,7 @@ import com.noto.app.domain.source.LocalStorage
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.main.MainViewModel
 import com.noto.app.note.NoteViewModel
+import com.noto.app.settings.SettingsViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -34,6 +35,8 @@ val appModule = module {
     viewModel { NoteViewModel(get(), get(), get(), it[0], it[1], it.getOrNull()) }
 
     viewModel { AppViewModel(get()) }
+
+    viewModel { SettingsViewModel(get()) }
 }
 
 val repositoryModule = module {

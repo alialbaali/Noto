@@ -3,6 +3,7 @@ package com.noto.app.library
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.*
+import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 class LibraryViewModel(
     private val libraryRepository: LibraryRepository,
     private val noteRepository: NoteRepository,
+    private val labelRepository: LabelRepository,
     private val storage: LocalStorage,
     private val libraryId: Long,
 ) : ViewModel() {
@@ -25,6 +27,9 @@ class LibraryViewModel(
     val notoColors get() = mutableNotoColors.asStateFlow()
 
     init {
+        viewModelScope.launch {
+            labelRepository.createLabel(Label(libraryId = libraryId, title = "Label", color = NotoColor.values().random()))
+        }
         combine(
             libraryRepository.getLibraryById(libraryId)
                 .filterNotNull(),
@@ -32,14 +37,17 @@ class LibraryViewModel(
                 .filterNotNull(),
             noteRepository.getArchivedNotesByLibraryId(libraryId)
                 .filterNotNull(),
+            labelRepository.getLabelsByLibraryId(libraryId)
+                .filterNotNull(),
             storage.get(Constants.FontKey)
                 .filterNotNull()
                 .map { Font.valueOf(it) },
-        ) { library, notes, archivedNotes, font ->
+        ) { library, notes, archivedNotes, labels, font ->
             State(
                 library,
                 notes.sorted(library.sorting, library.sortingOrder),
                 archivedNotes.sorted(library.sorting, library.sortingOrder),
+                labels,
                 font
             )
         }.onEach {
@@ -126,6 +134,7 @@ class LibraryViewModel(
         val library: Library,
         val notes: List<Note> = emptyList(),
         val archivedNotes: List<Note> = emptyList(),
+        val labels: List<Label> = emptyList(),
         val font: Font = Font.Nunito,
     )
 }

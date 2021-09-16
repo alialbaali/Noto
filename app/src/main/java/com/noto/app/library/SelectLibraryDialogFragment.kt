@@ -13,10 +13,10 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.SelectLibraryDialogFragmentBinding
+import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Library
 import com.noto.app.main.MainViewModel
 import com.noto.app.main.libraryItem
-import com.noto.app.domain.model.LayoutManager
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -42,12 +42,14 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun SelectLibraryDialogFragmentBinding.setupState() {
-        viewModel.state
-            .map { state -> state.copy(libraries = state.libraries.filter { library -> library.id != args.libraryId }) }
-            .onEach { state ->
-                setupLayoutManager(state.layoutManager)
-                setupLibraries(state.libraries)
-            }
+
+        viewModel.libraries
+            .map { libraries -> libraries.filter { library -> library.id != args.libraryId } }
+            .onEach { libraries -> setupLibraries(libraries) }
+            .launchIn(lifecycleScope)
+
+        viewModel.layoutManager
+            .onEach { layoutManager -> setupLayoutManager(layoutManager) }
             .launchIn(lifecycleScope)
     }
 

@@ -36,6 +36,9 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
     open var isManualSorting: Boolean = false
 
     @EpoxyAttribute
+    open var isShowNotesCount: Boolean = true
+
+    @EpoxyAttribute
     var notesCount: Int = 0
 
     @SuppressLint("ClickableViewAccessibility")
@@ -52,6 +55,7 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
         holder.binding.ibDrag.setOnTouchListener(onDragHandleTouchListener)
         holder.binding.root.setOnClickListener(onClickListener)
         holder.binding.root.setOnLongClickListener(onLongClickListener)
+        holder.binding.tvLibraryNotesCount.isVisible = isShowNotesCount
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             holder.binding.root.outlineAmbientShadowColor = color
             holder.binding.root.outlineSpotShadowColor = color
