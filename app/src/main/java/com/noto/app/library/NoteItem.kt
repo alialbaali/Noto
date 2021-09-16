@@ -40,39 +40,41 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute
     lateinit var onDragHandleTouchListener: View.OnTouchListener
 
-    @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
-    override fun bind(holder: Holder) {
-        holder.binding.tvNoteTitle.text = note.title
-        if (isShowCreationDate) {
-            val createdText = holder.binding.root.resources.stringResource(R.string.created)
-            val formattedCreationDate = note.creationDate.format(holder.binding.root.context)
-            holder.binding.tvCreationDate.text = "$createdText $formattedCreationDate"
-        }
-        holder.binding.tvCreationDate.isVisible = isShowCreationDate
-        holder.binding.tvNoteTitle.isVisible = note.title.isNotBlank()
-        holder.binding.root.setOnClickListener(onClickListener)
-        holder.binding.root.setOnLongClickListener(onLongClickListener)
-        holder.binding.tvNoteTitle.setBoldFont(font)
-        holder.binding.tvNoteBody.setSemiboldFont(font)
-        holder.binding.ibDrag.isVisible = isManualSorting
-        holder.binding.ibDrag.setOnTouchListener(onDragHandleTouchListener)
-        if (note.title.isBlank() && previewSize == 0) {
-            holder.binding.tvNoteBody.text = note.body.takeLines(1)
-            holder.binding.tvNoteBody.maxLines = 1
-            holder.binding.tvNoteBody.isVisible = true
-        } else {
-            holder.binding.tvNoteBody.text = note.body.takeLines(previewSize)
-            holder.binding.tvNoteBody.maxLines = previewSize
-            holder.binding.tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
-        }
-    }
+    override fun bind(holder: Holder) = holder.bind()
 
-    class Holder : EpoxyHolder() {
-        lateinit var binding: NoteItemBinding
+    inner class Holder : EpoxyHolder() {
+        private lateinit var binding: NoteItemBinding
             private set
 
         override fun bindView(itemView: View) {
             binding = NoteItemBinding.bind(itemView)
+        }
+
+        @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
+        fun bind() = with(binding) {
+            tvNoteTitle.text = note.title
+            if (isShowCreationDate) {
+                val createdText = root.resources.stringResource(R.string.created)
+                val formattedCreationDate = note.creationDate.format(root.context)
+                tvCreationDate.text = "$createdText $formattedCreationDate"
+            }
+            tvCreationDate.isVisible = isShowCreationDate
+            tvNoteTitle.isVisible = note.title.isNotBlank()
+            root.setOnClickListener(onClickListener)
+            root.setOnLongClickListener(onLongClickListener)
+            tvNoteTitle.setBoldFont(font)
+            tvNoteBody.setSemiboldFont(font)
+            ibDrag.isVisible = isManualSorting
+            ibDrag.setOnTouchListener(onDragHandleTouchListener)
+            if (note.title.isBlank() && previewSize == 0) {
+                tvNoteBody.text = note.body.takeLines(1)
+                tvNoteBody.maxLines = 1
+                tvNoteBody.isVisible = true
+            } else {
+                tvNoteBody.text = note.body.takeLines(previewSize)
+                tvNoteBody.maxLines = previewSize
+                tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
+            }
         }
     }
 }
