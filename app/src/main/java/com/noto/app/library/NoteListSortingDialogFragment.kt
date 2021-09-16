@@ -11,6 +11,7 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteListSortingDialogFragmentBinding
 import com.noto.app.domain.model.NoteListSorting
+import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -36,6 +37,13 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
 
         viewModel.state
             .onEach { state ->
+                val color = resources.colorResource(state.library.color.toResource())
+                val colorStateList = resources.colorStateResource(state.library.color.toResource())
+                baseDialog.tvDialogTitle.setTextColor(color)
+                baseDialog.vHead.background?.setTint(color)
+                rbManual.buttonTintList = colorStateList
+                rbAlphabetical.buttonTintList = colorStateList
+                rbCreationDate.buttonTintList = colorStateList
                 when (state.library.sortingOrder) {
                     SortingOrder.Ascending -> rbSortingAsc.isChecked = true
                     SortingOrder.Descending -> rbSortingDesc.isChecked = true
@@ -43,26 +51,17 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
                 when (state.library.sorting) {
                     NoteListSorting.Alphabetical -> {
                         rbAlphabetical.isChecked = true
-                        enableSortingOrder()
+                        enableSortingOrder(state.library.color)
                     }
                     NoteListSorting.CreationDate -> {
                         rbCreationDate.isChecked = true
-                        enableSortingOrder()
+                        enableSortingOrder(state.library.color)
                     }
                     NoteListSorting.Manual -> {
                         rbManual.isChecked = true
                         disableSortingOrder()
                     }
                 }
-                val color = resources.colorResource(state.library.color.toResource())
-                val colorState = resources.colorStateResource(state.library.color.toResource())
-                baseDialog.tvDialogTitle.setTextColor(color)
-                baseDialog.vHead.background?.setTint(color)
-                rbSortingAsc.buttonTintList = colorState
-                rbSortingDesc.buttonTintList = colorState
-                rbAlphabetical.buttonTintList = colorState
-                rbCreationDate.buttonTintList = colorState
-                rbManual.buttonTintList = colorState
             }
             .launchIn(lifecycleScope)
 
@@ -91,9 +90,9 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
         tvSortingOrder.setTextColor(disabledColor)
     }
 
-    private fun NoteListSortingDialogFragmentBinding.enableSortingOrder() {
+    private fun NoteListSortingDialogFragmentBinding.enableSortingOrder(color: NotoColor) {
         val enabledColor = resources.colorResource(R.color.colorPrimary)
-        val enabledColorState = resources.colorStateResource(R.color.colorPrimary)
+        val enabledColorState = resources.colorStateResource(color.toResource())
         rbSortingAsc.isEnabled = true
         rbSortingDesc.isEnabled = true
         rbSortingAsc.buttonTintList = enabledColorState
