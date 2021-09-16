@@ -43,48 +43,47 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute
     lateinit var onDragHandleTouchListener: View.OnTouchListener
 
-    override fun bind(holder: Holder) = holder.bind()
+    @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
+    override fun bind(holder: Holder) = with(holder.binding) {
+        tvNoteTitle.text = note.title
+        if (isShowCreationDate) {
+            val createdText = root.resources.stringResource(com.noto.app.R.string.created)
+            val formattedCreationDate = note.creationDate.format(root.context)
+            tvCreationDate.text = "$createdText $formattedCreationDate"
+        }
+        tvCreationDate.isVisible = isShowCreationDate
+        tvNoteTitle.isVisible = note.title.isNotBlank()
+        root.setOnClickListener(onClickListener)
+        root.setOnLongClickListener(onLongClickListener)
+        tvNoteTitle.setBoldFont(font)
+        tvNoteBody.setSemiboldFont(font)
+        ibDrag.isVisible = isManualSorting
+        ibDrag.setOnTouchListener(onDragHandleTouchListener)
+        if (note.title.isBlank() && previewSize == 0) {
+            tvNoteBody.text = note.body.takeLines(1)
+            tvNoteBody.maxLines = 1
+            tvNoteBody.isVisible = true
+        } else {
+            tvNoteBody.text = note.body.takeLines(previewSize)
+            tvNoteBody.maxLines = previewSize
+            tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
+        }
+        when {
+            note.title.isBlank() -> tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMarginsRelative(top = 0.dp, bottom = 0.dp)
+            }
+            note.body.isBlank() || previewSize == 0 -> tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMarginsRelative(bottom = 0.dp)
+            }
+        }
+    }
 
-    inner class Holder : EpoxyHolder() {
-        private lateinit var binding: NoteItemBinding
+    class Holder : EpoxyHolder() {
+        lateinit var binding: NoteItemBinding
+            private set
 
         override fun bindView(itemView: View) {
             binding = NoteItemBinding.bind(itemView)
-        }
-
-        @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
-        fun bind() = with(binding) {
-            tvNoteTitle.text = note.title
-            if (isShowCreationDate) {
-                val createdText = root.resources.stringResource(R.string.created)
-                val formattedCreationDate = note.creationDate.format(root.context)
-                tvCreationDate.text = "$createdText $formattedCreationDate"
-            }
-            tvCreationDate.isVisible = isShowCreationDate
-            tvNoteTitle.isVisible = note.title.isNotBlank()
-            root.setOnClickListener(onClickListener)
-            root.setOnLongClickListener(onLongClickListener)
-            tvNoteTitle.setBoldFont(font)
-            tvNoteBody.setSemiboldFont(font)
-            ibDrag.isVisible = isManualSorting
-            ibDrag.setOnTouchListener(onDragHandleTouchListener)
-            if (note.title.isBlank() && previewSize == 0) {
-                tvNoteBody.text = note.body.takeLines(1)
-                tvNoteBody.maxLines = 1
-                tvNoteBody.isVisible = true
-            } else {
-                tvNoteBody.text = note.body.takeLines(previewSize)
-                tvNoteBody.maxLines = previewSize
-                tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
-            }
-            when {
-                note.title.isBlank() -> tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    updateMarginsRelative(top = 0.dp, bottom = 0.dp)
-                }
-                note.body.isBlank() || previewSize == 0 -> tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    updateMarginsRelative(bottom = 0.dp)
-                }
-            }
         }
     }
 }
