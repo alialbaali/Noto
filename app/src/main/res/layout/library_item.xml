@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cl"
+    android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacing_small"
+    android:orientation="horizontal"
     android:padding="@dimen/spacing_normal"
     android:background="@drawable/library_item_shape"
     android:elevation="@dimen/elevation_normal">
@@ -13,49 +14,45 @@
     <View
         android:id="@+id/v_color"
         android:layout_width="5dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:background="@drawable/color_view_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_library_title"
-        style="@style/LibraryTitleTextView"
+    <LinearLayout
+        android:layout_weight="1"
+        android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_marginBottom="@dimen/spacing_extra_small"
-        app:layout_constraintBottom_toTopOf="@id/tv_library_notes_count"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/v_color"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Library" />
+        android:layout_height="wrap_content">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_library_notes_count"
-        style="@style/LibraryNotesCountTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_marginTop="@dimen/spacing_extra_small"
-        android:gravity="start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/ib_drag"
-        app:layout_constraintStart_toEndOf="@id/v_color"
-        app:layout_constraintTop_toBottomOf="@+id/tv_library_title"
-        tools:text="3 Notes" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_library_title"
+            style="@style/LibraryTitleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_extra_small"
+            tools:text="Library" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_library_notes_count"
+            style="@style/LibraryNotesCountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_extra_small"
+            android:gravity="start"
+            tools:text="3 Notes" />
+
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/ib_drag"
         android:src="@drawable/ic_round_drag_handle_24"
         android:background="@android:color/transparent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/drag"
-        app:layout_constraintBottom_toBottomOf="@id/tv_library_notes_count"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/tv_library_notes_count"
-        app:layout_constraintTop_toTopOf="@id/tv_library_notes_count" />
+        android:layout_height="match_parent"
+        android:contentDescription="@string/drag" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
