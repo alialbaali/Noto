@@ -42,7 +42,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_extra_small"
-            android:gravity="start"
             tools:text="3 Notes" />
 
     </LinearLayout>
