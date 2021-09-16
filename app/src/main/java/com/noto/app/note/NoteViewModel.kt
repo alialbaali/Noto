@@ -25,25 +25,36 @@ class NoteViewModel(
     private val body: String?,
 ) : ViewModel() {
 
-    private val mutableState = MutableStateFlow(State(Library(position = 0), Note(libraryId = libraryId, position = 0)))
-    val state get() = mutableState.asStateFlow()
+    private val mutableNote = MutableStateFlow(
+        Note(
+            noteId,
+            libraryId,
+            position = 0,
+            title = body.firstLineOrEmpty(),
+            body = body.takeAfterFirstLineOrEmpty()
+        )
+    )
+    val note get() = mutableNote.asStateFlow()
+
+    val library = libraryRepository.getLibraryById(libraryId)
+        .filterNotNull()
+        .stateIn(viewModelScope, SharingStarted.Lazily, Library(position = 0))
+
+    val font = storage.get(Constants.FontKey)
+        .filterNotNull()
+        .map { Font.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
 
     init {
-        combine(
-            libraryRepository.getLibraryById(libraryId)
-                .filterNotNull(),
-            noteRepository.getNoteById(noteId)
-                .onStart { emit(Note(noteId, libraryId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
-                .filterNotNull(),
-            storage.get(Constants.FontKey)
-                .filterNotNull()
-                .map { Font.valueOf(it) },
-        ) { library, note, font -> mutableState.value = State(library, note, font) }
+        noteRepository.getNoteById(noteId)
+            .onStart { emit(Note(noteId, libraryId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
+            .filterNotNull()
+            .onEach { mutableNote.value = it }
             .launchIn(viewModelScope)
     }
 
     fun createOrUpdateNote(title: String, body: String) = viewModelScope.launch {
-        val note = state.value.note.copy(
+        val note = note.value.copy(
             title = title.trim(),
             body = body.trim(),
         )
@@ -52,7 +63,7 @@ class NoteViewModel(
                 noteRepository.createNote(note).also { id ->
                     noteRepository.getNoteById(id)
                         .filterNotNull()
-                        .onEach { createdNote -> mutableState.value = state.value.copy(note = createdNote) }
+                        .onEach { createdNote -> mutableNote.value = createdNote }
                         .launchIn(viewModelScope)
                 }
             else
@@ -60,36 +71,30 @@ class NoteViewModel(
     }
 
     fun deleteNote() = viewModelScope.launch {
-        noteRepository.deleteNote(state.value.note)
+        noteRepository.deleteNote(note.value)
     }
 
     fun toggleNoteIsArchived() = viewModelScope.launch {
-        noteRepository.updateNote(state.value.note.copy(isArchived = !state.value.note.isArchived))
+        noteRepository.updateNote(note.value.copy(isArchived = !note.value.isArchived))
     }
 
     fun toggleNoteIsPinned() = viewModelScope.launch {
-        noteRepository.updateNote(state.value.note.copy(isPinned = !state.value.note.isPinned))
+        noteRepository.updateNote(note.value.copy(isPinned = !note.value.isPinned))
     }
 
     fun setNoteReminder(instant: Instant?) = viewModelScope.launch {
-        noteRepository.updateNote(state.value.note.copy(reminderDate = instant))
+        noteRepository.updateNote(note.value.copy(reminderDate = instant))
     }
 
     fun moveNote(libraryId: Long) = viewModelScope.launch {
-        noteRepository.updateNote(state.value.note.copy(libraryId = libraryId))
+        noteRepository.updateNote(note.value.copy(libraryId = libraryId))
     }
 
     fun copyNote(libraryId: Long) = viewModelScope.launch {
-        noteRepository.createNote(state.value.note.copy(id = 0, libraryId = libraryId))
+        noteRepository.createNote(note.value.copy(id = 0, libraryId = libraryId))
     }
 
     fun duplicateNote() = viewModelScope.launch {
-        noteRepository.createNote(state.value.note.copy(id = 0, reminderDate = null))
+        noteRepository.createNote(note.value.copy(id = 0, reminderDate = null))
     }
-
-    data class State(
-        val library: Library,
-        val note: Note,
-        val font: Font = Font.Nunito,
-    )
 }

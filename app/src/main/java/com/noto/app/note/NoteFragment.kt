@@ -47,33 +47,33 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupState() {
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
 
-        viewModel.state
-            .onEach { state ->
-                setupLibrary(state.library)
-                setupShortcut(state.note)
-                tvWordCount.text = state.note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
+        viewModel.library
+            .onEach { library -> setupLibrary(library) }
+            .distinctUntilChangedBy { it.isSetNewNoteCursorOnTitle }
+            .onEach { library ->
+                if (args.noteId == 0L) {
+                    requireActivity().showKeyboard(root)
+                    if (library.isSetNewNoteCursorOnTitle)
+                        etNoteTitle.requestFocus()
+                    else
+                        etNoteBody.requestFocus()
+                }
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.note
+            .onEach { note ->
+                setupShortcut(note)
+                tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
                 fab.setImageDrawable(
-                    if (state.note.reminderDate == null)
+                    if (note.reminderDate == null)
                         resources.drawableResource(R.drawable.ic_round_notification_add_24)
                     else
                         resources.drawableResource(R.drawable.ic_round_edit_notifications_24)
                 )
             }
             .distinctUntilChanged { _, _ -> etNoteTitle.text.isNotBlank() || etNoteBody.text.isNotBlank() }
-            .onEach { state -> setupNote(state.note, state.font) }
-            .launchIn(lifecycleScope)
-
-        viewModel.state
-            .distinctUntilChangedBy { it.library.isSetNewNoteCursorOnTitle }
-            .onEach { state ->
-                if (args.noteId == 0L) {
-                    requireActivity().showKeyboard(root)
-                    if (state.library.isSetNewNoteCursorOnTitle)
-                        etNoteTitle.requestFocus()
-                    else
-                        etNoteBody.requestFocus()
-                }
-            }
+            .combine(viewModel.font) { note, font -> setupNote(note, font) }
             .launchIn(lifecycleScope)
 
         combine(
@@ -90,7 +90,7 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupListeners() {
         fab.setOnClickListener {
             findNavController()
-                .navigate(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.libraryId, viewModel.state.value.note.id))
+                .navigate(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.libraryId, viewModel.note.value.id))
         }
 
         val backCallback = {
@@ -118,7 +118,7 @@ class NoteFragment : Fragment() {
             findNavController().navigate(
                 NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
                     args.libraryId,
-                    viewModel.state.value.note.id,
+                    viewModel.note.value.id,
                     R.id.libraryFragment
                 )
             )
@@ -127,12 +127,12 @@ class NoteFragment : Fragment() {
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.share_note -> {
-                    launchShareNoteIntent(viewModel.state.value.note)
+                    launchShareNoteIntent(viewModel.note.value)
                     true
                 }
                 R.id.reading_mode -> {
                     findNavController()
-                        .navigate(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.libraryId, viewModel.state.value.note.id))
+                        .navigate(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.libraryId, viewModel.note.value.id))
                     true
                 }
                 else -> false

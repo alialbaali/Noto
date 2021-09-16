@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -56,11 +57,12 @@ class NoteDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        viewModel.state
-            .onEach { state ->
-                setupLibrary(state.library, baseDialogFragment)
-                setupNote(state.note)
-            }
+        viewModel.library
+            .onEach { library -> setupLibrary(library, baseDialogFragment) }
+            .launchIn(lifecycleScope)
+
+        viewModel.note
+            .onEach { note -> setupNote(note) }
             .launchIn(lifecycleScope)
     }
 
@@ -72,7 +74,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             dismiss()
             viewModel.toggleNoteIsArchived()
 
-            val resource = if (viewModel.state.value.note.isArchived)
+            val resource = if (viewModel.note.value.isArchived)
                 R.string.note_is_unarchived
             else
                 R.string.note_is_archived
@@ -104,7 +106,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvPinNote.setOnClickListener {
             dismiss()
             viewModel.toggleNoteIsPinned()
-            val resource = if (viewModel.state.value.note.isPinned)
+            val resource = if (viewModel.note.value.isPinned)
                 R.string.note_is_unpinned
             else
                 R.string.note_is_pinned
@@ -113,7 +115,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvCopyToClipboard.setOnClickListener {
             dismiss()
-            val clipData = ClipData.newPlainText(viewModel.state.value.library.title, viewModel.state.value.note.format())
+            val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
             clipboardManager.setPrimaryClip(clipData)
             parentView.snackbar(getString(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
         }
@@ -150,7 +152,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvShareNote.setOnClickListener {
             dismiss()
-            launchShareNoteIntent(viewModel.state.value.note)
+            launchShareNoteIntent(viewModel.note.value)
         }
 
         tvExportNote.setOnClickListener {
@@ -165,8 +167,8 @@ class NoteDialogFragment : BaseDialogFragment() {
                 parentView.snackbar(resources.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
                 findNavController().popBackStack(args.destination, false)
                 dismiss()
-                if (viewModel.state.value.note.reminderDate != null)
-                    alarmManager.cancelAlarm(requireContext(), viewModel.state.value.note.id)
+                if (viewModel.note.value.reminderDate != null)
+                    alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id)
                 viewModel.deleteNote()
             }
 
@@ -184,7 +186,7 @@ class NoteDialogFragment : BaseDialogFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
-                val documentUri = requireContext().exportNote(uri, viewModel.state.value.library, viewModel.state.value.note)
+                val documentUri = requireContext().exportNote(uri, viewModel.library.value, viewModel.note.value)
                 val parentView = requireParentFragment().requireView()
                 val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
                 val message = resources.stringResource(R.string.note_is_exported) + " ${documentUri?.directoryPath}."

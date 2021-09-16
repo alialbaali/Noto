@@ -69,15 +69,15 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
                     .also { viewModel.setNoteReminder(it) }
                     .toEpochMilliseconds()
                     .also {
-                        val note = viewModel.state.value.note
+                        val note = viewModel.note.value
                         alarmManager.createAlarm(requireContext(), note.libraryId, note.id, it)
                     }
             }, startHour, startMinute, is24HourFormat)
                 .apply {
                     show()
-                    getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(buttonTextColor)
-                    getButton(DatePickerDialog.BUTTON_NEUTRAL).setTextColor(buttonTextColor)
-                    getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(buttonTextColor)
+                    getButton(DatePickerDialog.BUTTON_POSITIVE)?.setTextColor(buttonTextColor)
+                    getButton(DatePickerDialog.BUTTON_NEUTRAL)?.setTextColor(buttonTextColor)
+                    getButton(DatePickerDialog.BUTTON_NEGATIVE)?.setTextColor(buttonTextColor)
                 }
         }, startYear, startMonth, startDay)
             .apply {
@@ -86,9 +86,9 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
                     .toEpochMilliseconds()
                     .minus(1000)
                 show()
-                getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(buttonTextColor)
-                getButton(DatePickerDialog.BUTTON_NEUTRAL).setTextColor(buttonTextColor)
-                getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(buttonTextColor)
+                getButton(DatePickerDialog.BUTTON_POSITIVE)?.setTextColor(buttonTextColor)
+                getButton(DatePickerDialog.BUTTON_NEUTRAL)?.setTextColor(buttonTextColor)
+                getButton(DatePickerDialog.BUTTON_NEGATIVE)?.setTextColor(buttonTextColor)
             }
     }
 
@@ -98,21 +98,22 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
         }
 
         til.setEndIconOnClickListener {
-            if (viewModel.state.value.note.reminderDate == null) {
+            if (viewModel.note.value.reminderDate == null) {
                 showDateTimeDialog()
             } else {
-                alarmManager.cancelAlarm(requireContext(), viewModel.state.value.note.id)
+                alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id)
                 viewModel.setNoteReminder(null)
             }
         }
     }
 
     private fun NoteReminderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        viewModel.state
-            .onEach { state ->
-                setupLibrary(state.library, baseDialogFragment)
-                setupNote(state.note, baseDialogFragment)
-            }
+        viewModel.library
+            .onEach { library -> setupLibrary(library, baseDialogFragment) }
+            .launchIn(lifecycleScope)
+
+        viewModel.note
+            .onEach { note -> setupNote(note, baseDialogFragment) }
             .launchIn(lifecycleScope)
     }
 

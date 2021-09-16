@@ -18,6 +18,7 @@ import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,11 +46,14 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupState() {
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
 
-        viewModel.state
-            .onEach { state ->
-                setupLibrary(state.library)
-                setupNote(state.note, state.font)
-            }
+        viewModel.library
+            .onEach { library -> setupLibrary(library) }
+            .launchIn(lifecycleScope)
+
+        combine(
+            viewModel.note,
+            viewModel.font,
+        ) { note, font -> setupNote(note, font) }
             .launchIn(lifecycleScope)
     }
 
