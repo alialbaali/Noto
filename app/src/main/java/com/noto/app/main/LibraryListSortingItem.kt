@@ -25,10 +25,10 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
     lateinit var sortingOrder: SortingOrder
 
     @EpoxyAttribute
-    lateinit var onClickListener: View.OnClickListener
-
-    @EpoxyAttribute
     var librariesCount: Int = 0
+
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    lateinit var onClickListener: View.OnClickListener
 
     @SuppressLint("SetTextI18n")
     override fun bind(holder: Holder) = with(holder.binding) {

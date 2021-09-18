@@ -34,13 +34,13 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute
     open var isManualSorting: Boolean = false
 
-    @EpoxyAttribute
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onClickListener: View.OnClickListener
 
-    @EpoxyAttribute
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onLongClickListener: View.OnLongClickListener
 
-    @EpoxyAttribute
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onDragHandleTouchListener: View.OnTouchListener
 
     @SuppressLint("SetTextI18n", "ClickableViewAccessibility")

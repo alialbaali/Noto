@@ -25,13 +25,13 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
     lateinit var sortingOrder: SortingOrder
 
     @EpoxyAttribute
-    lateinit var onClickListener: View.OnClickListener
+    lateinit var notoColor: NotoColor
 
     @EpoxyAttribute
     var notesCount: Int = 0
 
-    @EpoxyAttribute
-    lateinit var notoColor: NotoColor
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    lateinit var onClickListener: View.OnClickListener
 
     override fun bind(holder: Holder) = with(holder.binding) {
         val resources = root.resources

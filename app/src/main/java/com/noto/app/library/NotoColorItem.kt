@@ -23,7 +23,7 @@ abstract class NotoColorItem : EpoxyModelWithHolder<NotoColorItem.Holder>() {
     @EpoxyAttribute
     open var isChecked: Boolean = false
 
-    @EpoxyAttribute
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onClickListener: View.OnClickListener
 
     override fun bind(holder: Holder) = with(holder.binding) {

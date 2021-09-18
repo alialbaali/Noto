@@ -23,15 +23,6 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
     lateinit var library: Library
 
     @EpoxyAttribute
-    lateinit var onClickListener: View.OnClickListener
-
-    @EpoxyAttribute
-    lateinit var onLongClickListener: View.OnLongClickListener
-
-    @EpoxyAttribute
-    lateinit var onDragHandleTouchListener: View.OnTouchListener
-
-    @EpoxyAttribute
     open var isManualSorting: Boolean = false
 
     @EpoxyAttribute
@@ -40,8 +31,16 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
     @EpoxyAttribute
     var notesCount: Int = 0
 
-    @SuppressLint("ClickableViewAccessibility")
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    lateinit var onClickListener: View.OnClickListener
 
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    lateinit var onLongClickListener: View.OnLongClickListener
+
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    lateinit var onDragHandleTouchListener: View.OnTouchListener
+
+    @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
         val resources = root.resources
         val color = resources.colorResource(library.color.toResource())
