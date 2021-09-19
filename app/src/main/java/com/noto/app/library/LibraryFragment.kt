@@ -65,7 +65,7 @@ class LibraryFragment : Fragment() {
             viewModel.font,
             viewModel.library,
         ) { notes, labels, font, library ->
-            setupNotesAndLabels(notes.toSortedMap(NoteComparator(library.sorting, library.sortingOrder)), labels, font, library)
+            setupNotesAndLabels(notes.sorted(library.sorting, library.sortingOrder), labels, font, library)
             setupItemTouchHelper(library.layoutManager)
         }.launchIn(lifecycleScope)
     }
@@ -143,7 +143,7 @@ class LibraryFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun LibraryFragmentBinding.setupNotesAndLabels(notes: Map<Note, List<Label>>, labels: Map<Label, Boolean>, font: Font, library: Library) {
+    private fun LibraryFragmentBinding.setupNotesAndLabels(notes: List<Pair<Note, List<Label>>>, labels: Map<Label, Boolean>, font: Font, library: Library) {
         if (notes.isEmpty()) {
             if (tilSearch.isVisible)
                 tvPlaceHolder.text = resources.stringResource(R.string.no_note_matches_search_term)
@@ -190,27 +190,27 @@ class LibraryFragment : Fragment() {
                     }
                 }
 
-                val items = { items: Map<Note, List<Label>> ->
+                val items = { items: List<Pair<Note, List<Label>>> ->
                     items.forEach { entry ->
                         noteItem {
-                            id(entry.key.id)
-                            note(entry.key)
+                            id(entry.first.id)
+                            note(entry.first)
                             font(font)
-                            labels(entry.value)
+                            labels(entry.second)
                             color(library.color)
                             previewSize(library.notePreviewSize)
                             isShowCreationDate(library.isShowNoteCreationDate)
                             isManualSorting(library.sorting == NoteListSorting.Manual)
                             onClickListener { _ ->
                                 findNavController()
-                                    .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.key.libraryId, entry.key.id))
+                                    .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId, entry.first.id))
                             }
                             onLongClickListener { _ ->
                                 findNavController()
                                     .navigate(
                                         LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
-                                            entry.key.libraryId,
-                                            entry.key.id,
+                                            entry.first.libraryId,
+                                            entry.first.id,
                                             R.id.libraryFragment
                                         )
                                     )
@@ -227,8 +227,8 @@ class LibraryFragment : Fragment() {
                     }
                 }
 
-                val pinnedNotes = filteredNotes.filter { it.key.isPinned }
-                val notPinnedNotes = filteredNotes.filterNot { it.key.isPinned }
+                val pinnedNotes = filteredNotes.filter { it.first.isPinned }
+                val notPinnedNotes = filteredNotes.filterNot { it.first.isPinned }
 
                 if (pinnedNotes.isNotEmpty()) {
                     headerItem {

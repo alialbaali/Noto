@@ -26,11 +26,11 @@ class LibraryViewModel(
         .onEach { library -> mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(library.color) }
         .stateIn(viewModelScope, SharingStarted.Lazily, Library(libraryId, position = 0))
 
-    private val mutableNotes = MutableStateFlow(emptyMap<Note, List<Label>>())
-    private val searchNotes = MutableStateFlow(emptyMap<Note, List<Label>>())
+    private val mutableNotes = MutableStateFlow(emptyList<Pair<Note, List<Label>>>())
+    private val searchNotes = MutableStateFlow(emptyList<Pair<Note, List<Label>>>())
     val notes get() = mutableNotes.asStateFlow()
 
-    private val mutableArchivedNotes = MutableStateFlow(emptyMap<Note, List<Label>>())
+    private val mutableArchivedNotes = MutableStateFlow(emptyList<Pair<Note, List<Label>>>())
     val archivedNotes get() = mutableArchivedNotes.asStateFlow()
 
     private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())
@@ -125,7 +125,7 @@ class LibraryViewModel(
             searchNotes.value
         else
             searchNotes.value
-                .filterKeys { it.title.contains(term, ignoreCase = true) || it.body.contains(term, ignoreCase = true) }
+                .filter { it.first.title.contains(term, ignoreCase = true) || it.first.body.contains(term, ignoreCase = true) }
     }
 
     fun selectNotoColor(notoColor: NotoColor) {
@@ -151,7 +151,7 @@ class LibraryViewModel(
             .toMap()
     }
 
-    private fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): Map<Note, List<Label>> {
+    private fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): List<Pair<Note, List<Label>>> {
         return map { note ->
             note to labels
                 .sortedBy { it.position }
@@ -160,7 +160,7 @@ class LibraryViewModel(
                         noteLabel.labelId == label.id
                     }
                 }
-        }.toMap()
+        }
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }

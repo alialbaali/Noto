@@ -53,7 +53,7 @@ class LibraryArchiveFragment : Fragment() {
             viewModel.font,
             viewModel.library,
         ) { archivedNotes, font, library ->
-            setupArchivedNotes(archivedNotes.toSortedMap(NoteComparator(library.sorting, library.sortingOrder)), font, library)
+            setupArchivedNotes(archivedNotes.sorted(library.sorting, library.sortingOrder), font, library)
         }.launchIn(lifecycleScope)
     }
 
@@ -74,7 +74,7 @@ class LibraryArchiveFragment : Fragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: Map<Note, List<Label>>, font: Font, library: Library) {
+    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Pair<Note, List<Label>>>, font: Font, library: Library) {
         if (archivedNotes.isEmpty()) {
             rv.visibility = View.GONE
             tvPlaceHolder.visibility = View.VISIBLE
@@ -83,23 +83,23 @@ class LibraryArchiveFragment : Fragment() {
             tvPlaceHolder.visibility = View.GONE
             rv.withModels {
 
-                val items = { items: Map<Note, List<Label>> ->
+                val items = { items: List<Pair<Note, List<Label>>> ->
                     items.forEach { archivedNote ->
                         noteItem {
-                            id(archivedNote.key.id)
-                            note(archivedNote.key)
+                            id(archivedNote.first.id)
+                            note(archivedNote.first)
                             font(font)
                             previewSize(library.notePreviewSize)
                             isShowCreationDate(library.isShowNoteCreationDate)
                             color(library.color)
-                            labels(archivedNote.value)
+                            labels(archivedNote.second)
                             isManualSorting(false)
                             onClickListener { _ ->
                                 findNavController()
                                     .navigate(
                                         LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
-                                            archivedNote.key.libraryId,
-                                            archivedNote.key.id
+                                            archivedNote.first.libraryId,
+                                            archivedNote.first.id
                                         )
                                     )
                             }
@@ -107,8 +107,8 @@ class LibraryArchiveFragment : Fragment() {
                                 findNavController()
                                     .navigate(
                                         LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
-                                            archivedNote.key.libraryId,
-                                            archivedNote.key.id,
+                                            archivedNote.first.libraryId,
+                                            archivedNote.first.id,
                                             R.id.libraryArchiveFragment
                                         )
                                     )
@@ -119,8 +119,8 @@ class LibraryArchiveFragment : Fragment() {
                     }
                 }
 
-                val pinnedNotes = archivedNotes.filter { it.key.isPinned }
-                val notPinnedNotes = archivedNotes.filterNot { it.key.isPinned }
+                val pinnedNotes = archivedNotes.filter { it.first.isPinned }
+                val notPinnedNotes = archivedNotes.filterNot { it.first.isPinned }
 
                 if (pinnedNotes.isNotEmpty()) {
                     headerItem {

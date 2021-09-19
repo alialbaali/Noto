@@ -35,25 +35,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onStart
 
-fun NoteComparator(sorting: NoteListSorting, sortingOrder: SortingOrder): Comparator<Note> {
-    return when (sortingOrder) {
-        SortingOrder.Ascending -> compareBy {
-            when (sorting) {
-                NoteListSorting.Manual -> it.position
-                NoteListSorting.CreationDate -> it.creationDate
-                NoteListSorting.Alphabetical -> it.title
-            }
-        }
-        SortingOrder.Descending -> compareByDescending {
-            when (sorting) {
-                NoteListSorting.Manual -> it.position
-                NoteListSorting.CreationDate -> it.creationDate
-                NoteListSorting.Alphabetical -> it.title
-            }
-        }
-    }
-}
-
 val LabelDefaultStrokeWidth = 3.dp
 val LabelDefaultCornerRadius = 1000.dp.toFloat()
 const val DefaultAnimationDuration = 250L
@@ -221,11 +202,11 @@ fun List<Library>.sorted(sorting: LibraryListSorting, sortingOrder: SortingOrder
     }
 }
 
-fun List<Note>.sorted(sorting: NoteListSorting, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { note ->
+fun List<Pair<Note, List<Label>>>.sorted(sorting: NoteListSorting, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
     when (sorting) {
-        NoteListSorting.Manual -> note.position
-        NoteListSorting.CreationDate -> note.creationDate
-        NoteListSorting.Alphabetical -> note.title.ifBlank { note.body }
+        NoteListSorting.Manual -> pair.first.position
+        NoteListSorting.CreationDate -> pair.first.creationDate
+        NoteListSorting.Alphabetical -> pair.first.title.ifBlank { pair.first.body }
     }
 }
 
@@ -240,9 +221,9 @@ fun GradientDrawable.toRippleDrawable(resources: Resources): RippleDrawable {
     return RippleDrawable(resources.colorStateResource(R.color.colorSecondary)!!, this, this)
 }
 
-fun Map<Note, List<Label>>.filterSelectedLabels(labels: Map<Label, Boolean>) = filter { entry ->
+fun List<Pair<Note, List<Label>>>.filterSelectedLabels(labels: Map<Label, Boolean>) = filter { pair ->
     val selectedLabels = labels.entries
         .filter { it.value }
         .map { it.key }
-    entry.value.containsAll(selectedLabels)
+    pair.second.containsAll(selectedLabels)
 }
