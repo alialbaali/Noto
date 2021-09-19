@@ -11,6 +11,7 @@
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipChildren="false"
         android:clipToPadding="false"
         android:paddingHorizontal="@dimen/spacing_small"
         android:paddingBottom="@dimen/padding_bottom"
@@ -28,8 +29,8 @@
             style="@style/Toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:navigationIcon="@drawable/ic_round_back_24"
             app:navigationContentDescription="@string/back"
+            app:navigationIcon="@drawable/ic_round_back_24"
             app:title="@string/all_notes" />
 
         <com.google.android.material.textfield.TextInputLayout

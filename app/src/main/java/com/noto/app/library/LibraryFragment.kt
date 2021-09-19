@@ -14,20 +14,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.*
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.R
 import com.noto.app.databinding.LibraryFragmentBinding
 import com.noto.app.domain.model.*
+import com.noto.app.label.labelListItem
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import nl.bryanderidder.themedtogglebuttongroup.ThemedButton
+import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -64,20 +59,18 @@ class LibraryFragment : Fragment() {
             .onEach { library -> setupLayoutManager(library.layoutManager, layoutManagerMenuItem) }
             .launchIn(lifecycleScope)
 
-        viewModel.library
-
         combine(
             viewModel.notes,
+            viewModel.labels,
             viewModel.font,
             viewModel.library,
-        ) { notes, font, library ->
-            setupNotes(notes.sorted(library.sorting, library.sortingOrder), font, library)
+        ) { notes, labels, font, library ->
+            setupNotesAndLabels(notes.sorted(library.sorting, library.sortingOrder), labels, font, library)
             setupItemTouchHelper(library.layoutManager)
         }.launchIn(lifecycleScope)
     }
 
     private fun LibraryFragmentBinding.setupListeners() {
-
         fab.setOnClickListener {
             findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(args.libraryId))
         }
@@ -150,7 +143,7 @@ class LibraryFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun LibraryFragmentBinding.setupNotes(notes: List<Note>, font: Font, library: Library) {
+    private fun LibraryFragmentBinding.setupNotesAndLabels(notes: List<Note>, labels: Map<Label, Boolean>, font: Font, library: Library) {
         if (notes.isEmpty()) {
             if (tilSearch.isVisible)
                 tvPlaceHolder.text = resources.stringResource(R.string.no_note_matches_search_term)
@@ -161,6 +154,29 @@ class LibraryFragment : Fragment() {
             tvPlaceHolder.visibility = View.GONE
             rv.withModels {
                 epoxyController = this
+
+                labelListItem {
+                    id("labels")
+                    labels(labels)
+                    color(library.color)
+                    onAllLabelClickListener { _ ->
+                        viewModel.clearLabelSelection()
+                    }
+                    onLabelClickListener { label ->
+                        if (labels.toList().first { it.first == label }.second)
+                            viewModel.deselectLabel(label.id)
+                        else
+                            viewModel.selectLabel(label.id)
+                    }
+                    onLabelLongClickListener { label ->
+                        findNavController()
+                            .navigate(LibraryFragmentDirections.actionLibraryFragmentToLabelDialogFragment(args.libraryId, label.id))
+                        true
+                    }
+                    onNewLabelClickListener { _ ->
+                        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNewLabelDialogFragment(args.libraryId))
+                    }
+                }
 
                 noteListSortingItem {
                     id(0)
@@ -289,13 +305,6 @@ class LibraryFragment : Fragment() {
             }
             itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
                 .apply { attachToRecyclerView(rv) }
-        }
-    }
-
-    private fun Label.toButton(): ThemedButton {
-        return ThemedButton(requireContext()).apply {
-            borderColor = resources.colorResource(color.toResource())
-            text = title
         }
     }
 }
