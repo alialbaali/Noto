@@ -83,6 +83,7 @@ class NoteFragment : Fragment() {
             viewModel.labels,
         ) { library, labels ->
             rv.withModels {
+                rv.scrollToPosition(0)
                 labels.forEach { entry ->
                     labelItem {
                         id(entry.key.id)
