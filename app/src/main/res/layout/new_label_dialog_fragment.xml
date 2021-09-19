@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/BaseDialogFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="@dimen/spacing_normal">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/base_dialog_fragment" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_label_title"
+            style="@style/DialogSectionItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:text="@string/label_title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til"
+            style="@style/TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et"
+                style="@style/TextInputEditText"
+                android:imeOptions="actionDone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/label_title"
+                android:inputType="text|textAutoCorrect|textCapSentences" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_create"
+            style="@style/MaterialButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/spacing_normal"
+            android:padding="@dimen/spacing_normal"
+            android:text="@string/create_label" />
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>
