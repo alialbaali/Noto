@@ -109,7 +109,22 @@ class NoteViewModel(
     }
 
     fun copyNote(libraryId: Long) = viewModelScope.launch {
-        noteRepository.createNote(note.value.copy(id = 0, libraryId = libraryId))
+        val noteId = noteRepository.createNote(note.value.copy(id = 0, libraryId = libraryId))
+        val libraryLabels = labelRepository.getLabelsByLibraryId(libraryId).first()
+        labels.value
+            .filterValues { it }
+            .keys
+            .forEach { label ->
+                launch {
+                    if (libraryLabels.any { it.title == label.title }) {
+                        val labelId = libraryLabels.first { it.title == label.title }.id
+                        noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
+                    } else {
+                        val labelId = labelRepository.createLabel(label.copy(id = 0, libraryId = libraryId))
+                        noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
+                    }
+                }
+            }
     }
 
     fun duplicateNote() = viewModelScope.launch {

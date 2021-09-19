@@ -15,7 +15,7 @@ interface LabelDao : LocalLabelDataSource {
     override fun getLabelById(id: Long): Flow<Label>
 
     @Insert
-    override suspend fun createLabel(label: Label)
+    override suspend fun createLabel(label: Label): Long
 
     @Update
     override suspend fun updateLabel(label: Label)

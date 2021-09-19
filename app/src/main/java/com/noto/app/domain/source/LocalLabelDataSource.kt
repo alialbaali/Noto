@@ -9,7 +9,7 @@ interface LocalLabelDataSource {
 
     fun getLabelById(id: Long): Flow<Label>
 
-    suspend fun createLabel(label: Label)
+    suspend fun createLabel(label: Label) : Long
 
     suspend fun updateLabel(label: Label)
 

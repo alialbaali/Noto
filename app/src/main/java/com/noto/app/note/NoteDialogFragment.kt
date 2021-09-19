@@ -122,10 +122,11 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvCopyNote.setOnClickListener {
             val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
-                parentView.snackbar(resources.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
-                findNavController().popBackStack(args.destination, false)
-                dismiss()
-                viewModel.copyNote(it)
+                viewModel.copyNote(it).invokeOnCompletion {
+                    parentView.snackbar(resources.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
+                    findNavController().popBackStack(args.destination, false)
+                    dismiss()
+                }
             }
             findNavController().navigate(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(
