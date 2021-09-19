@@ -5,6 +5,7 @@ import androidx.room.*
 import com.noto.app.data.source.LabelDao
 import com.noto.app.data.source.LibraryDao
 import com.noto.app.data.source.NoteDao
+import com.noto.app.data.source.NoteLabelDao
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
@@ -21,7 +22,7 @@ private const val NOTO_DATABASE = "Noto Database"
 )
 @Database(
     entities = [Note::class, Library::class, Label::class, NoteLabel::class],
-    version = 17,
+    version = 18,
     autoMigrations = [
         AutoMigration(from = 6, to = 7),
         AutoMigration(from = 7, to = 8),
@@ -34,6 +35,7 @@ private const val NOTO_DATABASE = "Noto Database"
         AutoMigration(from = 14, to = 15, spec = Migrations.DeleteSortingTypeAndSortingMethodColumns::class),
         AutoMigration(from = 15, to = 16, spec = Migrations.DeleteLabelAndNoteLabelTables::class),
         AutoMigration(from = 16, to = 17),
+        AutoMigration(from = 17, to = 18),
     ],
 )
 abstract class NotoDatabase : RoomDatabase() {
@@ -43,6 +45,8 @@ abstract class NotoDatabase : RoomDatabase() {
     abstract val libraryDao: LibraryDao
 
     abstract val labelDao: LabelDao
+
+    abstract val noteLabelDao: NoteLabelDao
 
     companion object {
 
