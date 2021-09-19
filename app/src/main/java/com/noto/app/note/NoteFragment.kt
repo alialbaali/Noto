@@ -23,6 +23,8 @@ import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
+import com.noto.app.label.labelItem
+import com.noto.app.label.newLabelItem
 import com.noto.app.util.*
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
@@ -75,6 +77,40 @@ class NoteFragment : Fragment() {
             .distinctUntilChanged { _, _ -> etNoteTitle.text.isNotBlank() || etNoteBody.text.isNotBlank() }
             .combine(viewModel.font) { note, font -> setupNote(note, font) }
             .launchIn(lifecycleScope)
+
+        combine(
+            viewModel.library,
+            viewModel.labels,
+        ) { library, labels ->
+            rv.withModels {
+                labels.forEach { entry ->
+                    labelItem {
+                        id(entry.key.id)
+                        label(entry.key)
+                        isSelected(entry.value)
+                        color(library.color)
+                        onClickListener { _ ->
+                            if (entry.value)
+                                viewModel.unselectLabel(entry.key.id)
+                            else
+                                viewModel.selectLabel(entry.key.id)
+                        }
+                        onLongClickListener { _ ->
+                            findNavController()
+                                .navigate(NoteFragmentDirections.actionNoteFragmentToLabelDialogFragment(args.libraryId, entry.key.id))
+                            true
+                        }
+                    }
+                }
+                newLabelItem {
+                    id("new")
+                    color(library.color)
+                    onClickListener { _ ->
+                        findNavController().navigate(NoteFragmentDirections.actionNoteFragmentToNewLabelDialogFragment(args.libraryId))
+                    }
+                }
+            }
+        }.launchIn(lifecycleScope)
 
         combine(
             etNoteTitle.textAsFlow()

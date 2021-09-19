@@ -234,4 +234,11 @@
         <item name="android:background">@drawable/settings_item_shape</item>
     </style>
 
+    <style name="LabelItem" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:background">@drawable/label_item_shape</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     android:label="SignInGraph"
     app:startDestination="@id/mainFragment">
@@ -11,29 +10,7 @@
     <argument
         android:name="note_id"
         app:argType="long" />
-    <fragment
-        android:id="@+id/labelListFragment"
-        android:name="com.noto.app.label.LabelListFragment"
-        android:label="LabelListFragment"
-        tools:layout="@layout/label_list_fragment">
-        <action
-            android:id="@+id/action_labelListFragment_to_labelDialogFragment"
-            app:destination="@id/labelDialogFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_enter_anim"
-            app:popExitAnim="@anim/nav_default_exit_anim" />
-    </fragment>
 
-    <dialog
-        android:id="@+id/labelDialogFragment"
-        android:name="com.noto.app.label.LabelDialogFragment"
-        android:label="LabelDialogFragment">
-        <argument
-            android:name="label_id"
-            android:defaultValue="0L"
-            app:argType="long" />
-    </dialog>
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.noto.app.main.MainFragment"
@@ -48,13 +25,6 @@
         <action
             android:id="@+id/action_mainFragment_to_newLibraryDialogFragment"
             app:destination="@id/newLibraryDialogFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_labelListFragment"
-            app:destination="@id/labelListFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_enter_anim"
-            app:popExitAnim="@anim/nav_default_exit_anim" />
         <action
             android:id="@+id/action_mainFragment_to_libraryDialogFragment"
             app:destination="@id/libraryDialogFragment" />
@@ -109,6 +79,12 @@
         <action
             android:id="@+id/action_libraryFragment_to_noteListSortingDialogFragment"
             app:destination="@id/noteListSortingDialogFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_newLabelDialogFragment"
+            app:destination="@id/newLabelDialogFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_labelDialogFragment"
+            app:destination="@id/labelDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/newLibraryDialogFragment"
@@ -148,6 +124,12 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_noteFragment_to_newLabelDialogFragment"
+            app:destination="@id/newLabelDialogFragment" />
+        <action
+            android:id="@+id/action_noteFragment_to_labelDialogFragment"
+            app:destination="@id/labelDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/libraryArchiveFragment"
@@ -331,9 +313,54 @@
     <dialog
         android:id="@+id/noteListSortingDialogFragment"
         android:name="com.noto.app.library.NoteListSortingDialogFragment"
-        android:label="NoteListSortingDialogFragment" >
+        android:label="NoteListSortingDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
+    </dialog>
+    <dialog
+        android:id="@+id/newLabelDialogFragment"
+        android:name="com.noto.app.label.NewLabelDialogFragment"
+        android:label="NewLabelDialogFragment">
+        <argument
+            android:name="library_id"
+            app:argType="long" />
+        <argument
+            android:name="label_id"
+            android:defaultValue="0L"
+            app:argType="long" />
+    </dialog>
+    <dialog
+        android:id="@+id/labelDialogFragment"
+        android:name="com.noto.app.label.LabelDialogFragment"
+        android:label="LabelDialogFragment" >
+        <action
+            android:id="@+id/action_labelDialogFragment_to_newLabelDialogFragment"
+            app:destination="@id/newLabelDialogFragment" />
+        <argument
+            android:name="library_id"
+            app:argType="long" />
+        <argument
+            android:name="label_id"
+            app:argType="long"
+            android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_labelDialogFragment_to_reorderLabelDialogFragment"
+            app:destination="@id/reorderLabelDialogFragment" />
+        <action
+            android:id="@+id/action_labelDialogFragment_to_confirmationDialogFragment"
+            app:destination="@id/confirmationDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/reorderLabelDialogFragment"
+        android:name="com.noto.app.label.ReorderLabelDialogFragment"
+        android:label="ReorderLabelDialogFragment" >
+        <argument
+            android:name="library_id"
+            app:argType="long" />
+        <argument
+            android:name="label_id"
+            app:argType="long"
+            android:defaultValue="0L" />
     </dialog>
 </navigation>

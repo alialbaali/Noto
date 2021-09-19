@@ -38,12 +38,18 @@
             android:orientation="vertical"
             android:paddingBottom="@dimen/padding_bottom">
 
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rv"
+                android:paddingHorizontal="@dimen/spacing_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/label_item" />
+
             <LinearLayout
                 android:id="@+id/note_info"
                 android:orientation="horizontal"
                 android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginBottom="@dimen/spacing_small"
+                android:layout_marginVertical="@dimen/spacing_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 

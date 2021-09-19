@@ -2,10 +2,10 @@ package com.noto.app.note
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.*
+import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.NoteLabelRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
@@ -19,6 +19,8 @@ import kotlinx.datetime.Instant
 class NoteViewModel(
     private val libraryRepository: LibraryRepository,
     private val noteRepository: NoteRepository,
+    private val labelRepository: LabelRepository,
+    private val noteLabelRepository: NoteLabelRepository,
     private val storage: LocalStorage,
     private val libraryId: Long,
     private val noteId: Long,
@@ -45,11 +47,27 @@ class NoteViewModel(
         .map { Font.valueOf(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
 
+    private val mutableLabels = MutableStateFlow<Map<Label, Boolean>>(emptyMap())
+    val labels get() = mutableLabels.asStateFlow()
+
     init {
         noteRepository.getNoteById(noteId)
             .onStart { emit(Note(noteId, libraryId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
             .filterNotNull()
             .onEach { mutableNote.value = it }
+            .launchIn(viewModelScope)
+
+        combine(
+            labelRepository.getLabelsByLibraryId(libraryId)
+                .filterNotNull(),
+            noteLabelRepository.getNoteLabelsByNoteId(noteId)
+                .filterNotNull(),
+        ) { labels, noteLabels ->
+            labels.sortedBy { it.position }.associateWith { label ->
+                noteLabels.any { it.labelId == label.id }
+            }
+        }
+            .onEach { mutableLabels.value = it }
             .launchIn(viewModelScope)
     }
 
@@ -96,5 +114,14 @@ class NoteViewModel(
 
     fun duplicateNote() = viewModelScope.launch {
         noteRepository.createNote(note.value.copy(id = 0, reminderDate = null))
+    }
+
+    fun selectLabel(id: Long) = viewModelScope.launch {
+        if (note.value.id != 0L)
+            noteLabelRepository.createNoteLabel(NoteLabel(noteId = note.value.id, labelId = id))
+    }
+
+    fun unselectLabel(id: Long) = viewModelScope.launch {
+        noteLabelRepository.deleteNoteLabel(note.value.id, id)
     }
 }
