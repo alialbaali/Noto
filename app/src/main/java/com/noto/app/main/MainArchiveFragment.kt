@@ -45,7 +45,10 @@ class MainArchiveFragment : Fragment() {
             viewModel.archivedLibraries,
             viewModel.sorting,
             viewModel.sortingOrder,
-        ) { libraries, sorting, sortingOrder -> setupLibraries(libraries.sorted(sorting, sortingOrder)) }
+            viewModel.isShowNotesCount,
+        ) { libraries, sorting, sortingOrder, isShowNotesCount ->
+            setupLibraries(libraries.sorted(sorting, sortingOrder), isShowNotesCount)
+        }
             .launchIn(lifecycleScope)
 
         viewModel.layoutManager
@@ -62,19 +65,19 @@ class MainArchiveFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun MainArchiveFragmentBinding.setupLibraries(libraries: List<Library>) {
+    private fun MainArchiveFragmentBinding.setupLibraries(libraries: List<Library>, isShowNotesCount: Boolean) {
         if (libraries.isEmpty()) {
             rv.visibility = View.GONE
             tvPlaceHolder.visibility = View.VISIBLE
         } else {
             rv.visibility = View.VISIBLE
             tvPlaceHolder.visibility = View.GONE
-            setupModels(libraries)
+            setupModels(libraries, isShowNotesCount)
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainArchiveFragmentBinding.setupModels(libraries: List<Library>) {
+    private fun MainArchiveFragmentBinding.setupModels(libraries: List<Library>, isShowNotesCount: Boolean) {
         rv.withModels {
 
             val items = { items: List<Library> ->
@@ -84,6 +87,7 @@ class MainArchiveFragment : Fragment() {
                         library(library)
                         notesCount(viewModel.countNotes(library.id))
                         isManualSorting(false)
+                        isShowNotesCount(isShowNotesCount)
                         onClickListener { _ ->
                             findNavController().navigate(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(library.id))
                         }

@@ -14,10 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.LibraryArchiveFragmentBinding
-import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.LayoutManager
-import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.*
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -56,7 +53,7 @@ class LibraryArchiveFragment : Fragment() {
             viewModel.font,
             viewModel.library,
         ) { archivedNotes, font, library ->
-            setupArchivedNotes(archivedNotes.sorted(library.sorting, library.sortingOrder), font, library)
+            setupArchivedNotes(archivedNotes.toSortedMap(NoteComparator(library.sorting, library.sortingOrder)), font, library)
         }.launchIn(lifecycleScope)
     }
 
@@ -77,7 +74,7 @@ class LibraryArchiveFragment : Fragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Note>, font: Font, library: Library) {
+    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: Map<Note, List<Label>>, font: Font, library: Library) {
         if (archivedNotes.isEmpty()) {
             rv.visibility = View.GONE
             tvPlaceHolder.visibility = View.VISIBLE
@@ -86,21 +83,23 @@ class LibraryArchiveFragment : Fragment() {
             tvPlaceHolder.visibility = View.GONE
             rv.withModels {
 
-                val items = { items: List<Note> ->
+                val items = { items: Map<Note, List<Label>> ->
                     items.forEach { archivedNote ->
                         noteItem {
-                            id(archivedNote.id)
-                            note(archivedNote)
+                            id(archivedNote.key.id)
+                            note(archivedNote.key)
                             font(font)
                             previewSize(library.notePreviewSize)
                             isShowCreationDate(library.isShowNoteCreationDate)
+                            color(library.color)
+                            labels(archivedNote.value)
                             isManualSorting(false)
                             onClickListener { _ ->
                                 findNavController()
                                     .navigate(
                                         LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
-                                            archivedNote.libraryId,
-                                            archivedNote.id
+                                            archivedNote.key.libraryId,
+                                            archivedNote.key.id
                                         )
                                     )
                             }
@@ -108,8 +107,8 @@ class LibraryArchiveFragment : Fragment() {
                                 findNavController()
                                     .navigate(
                                         LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
-                                            archivedNote.libraryId,
-                                            archivedNote.id,
+                                            archivedNote.key.libraryId,
+                                            archivedNote.key.id,
                                             R.id.libraryArchiveFragment
                                         )
                                     )
@@ -120,8 +119,8 @@ class LibraryArchiveFragment : Fragment() {
                     }
                 }
 
-                val pinnedNotes = archivedNotes.filter { it.isPinned }
-                val notPinnedNotes = archivedNotes.filterNot { it.isPinned }
+                val pinnedNotes = archivedNotes.filter { it.key.isPinned }
+                val notPinnedNotes = archivedNotes.filterNot { it.key.isPinned }
 
                 if (pinnedNotes.isNotEmpty()) {
                     headerItem {

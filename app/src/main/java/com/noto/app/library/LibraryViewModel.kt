@@ -29,9 +29,8 @@ class LibraryViewModel(
     private val mutableNotes = MutableStateFlow(emptyMap<Note, List<Label>>())
     val notes get() = mutableNotes.asStateFlow()
 
-    val archivedNotes = noteRepository.getArchivedNotesByLibraryId(libraryId)
-        .filterNotNull()
-        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+    private val mutableArchivedNotes = MutableStateFlow(emptyMap<Note, List<Label>>())
+    val archivedNotes get() = mutableArchivedNotes.asStateFlow()
 
     private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())
     val labels get() = mutableLabels.asStateFlow()
@@ -48,22 +47,16 @@ class LibraryViewModel(
         combine(
             noteRepository.getNotesByLibraryId(libraryId)
                 .filterNotNull(),
+            noteRepository.getArchivedNotesByLibraryId(libraryId)
+                .filterNotNull(),
             labelRepository.getLabelsByLibraryId(libraryId)
                 .filterNotNull(),
             noteLabelRepository.getNoteLabels()
                 .filterNotNull(),
-        ) { notes, labels, noteLabels ->
-            notes.map { note ->
-                note to labels
-                    .sortedBy { it.position }
-                    .filter { label ->
-                        noteLabels.filter { it.noteId == note.id }.any { noteLabel ->
-                            noteLabel.labelId == label.id
-                        }
-                    }
-            }.toMap()
-        }.onEach { mutableNotes.value = it }
-            .launchIn(viewModelScope)
+        ) { notes, archivedNotes, labels, noteLabels ->
+            mutableNotes.value = notes.mapWithLabels(labels, noteLabels)
+            mutableArchivedNotes.value = archivedNotes.mapWithLabels(labels, noteLabels)
+        }.launchIn(viewModelScope)
 
         labelRepository.getLabelsByLibraryId(libraryId)
             .filterNotNull()
@@ -158,6 +151,18 @@ class LibraryViewModel(
         mutableLabels.value = labels.value
             .map { it.key to false }
             .toMap()
+    }
+
+    private fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): Map<Note, List<Label>> {
+        return map { note ->
+            note to labels
+                .sortedBy { it.position }
+                .filter { label ->
+                    noteLabels.filter { it.noteId == note.id }.any { noteLabel ->
+                        noteLabel.labelId == label.id
+                    }
+                }
+        }.toMap()
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }
