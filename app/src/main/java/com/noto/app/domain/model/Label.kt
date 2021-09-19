@@ -24,8 +24,11 @@ data class Label(
     val libraryId: Long,
 
     @ColumnInfo(name = "title")
-    val title: String,
+    val title: String = "",
 
     @ColumnInfo(name = "color")
-    val color: NotoColor
+    val color: NotoColor = NotoColor.Gray,
+
+    @ColumnInfo(name = "position", defaultValue = "0")
+    val position: Int = 0,
 )
