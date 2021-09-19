@@ -40,16 +40,22 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rv"
+                android:paddingHorizontal="@dimen/spacing_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/label_item" />
+
             <LinearLayout
                 android:id="@+id/note_info"
                 android:orientation="horizontal"
                 android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginTop="@dimen/spacing_normal"
-                android:layout_marginBottom="@dimen/spacing_small"
+                android:layout_marginVertical="@dimen/spacing_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.textview.MaterialTextView
+            <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_created_at"
                     style="@style/SubtitleTextView"
                     android:layout_marginEnd="@dimen/spacing_small"

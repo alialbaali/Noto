@@ -17,6 +17,7 @@ import com.noto.app.databinding.NoteReadingModeFragmentBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
+import com.noto.app.label.labelItem
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -55,6 +56,24 @@ class NoteReadingModeFragment : Fragment() {
             viewModel.font,
         ) { note, font -> setupNote(note, font) }
             .launchIn(lifecycleScope)
+
+        combine(
+            viewModel.library,
+            viewModel.labels,
+        ) { library, labels ->
+            rv.withModels {
+                labels.filterValues { it }.forEach { entry ->
+                    labelItem {
+                        id(entry.key.id)
+                        label(entry.key)
+                        isSelected(entry.value)
+                        color(library.color)
+                        onClickListener { _ -> }
+                        onLongClickListener { _ -> false }
+                    }
+                }
+            }
+        }.launchIn(lifecycleScope)
     }
 
     @SuppressLint("SetTextI18n")
