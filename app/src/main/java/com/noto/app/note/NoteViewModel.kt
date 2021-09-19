@@ -113,7 +113,15 @@ class NoteViewModel(
     }
 
     fun duplicateNote() = viewModelScope.launch {
-        noteRepository.createNote(note.value.copy(id = 0, reminderDate = null))
+        val noteId = noteRepository.createNote(note.value.copy(id = 0, reminderDate = null))
+        labels.value
+            .filterValues { it }
+            .keys
+            .forEach { label ->
+                launch {
+                    noteLabelRepository.createNoteLabel(NoteLabel(noteId = noteId, labelId = label.id))
+                }
+            }
     }
 
     fun selectLabel(id: Long) = viewModelScope.launch {

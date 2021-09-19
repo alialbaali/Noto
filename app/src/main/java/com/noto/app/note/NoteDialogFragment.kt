@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -98,9 +97,10 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvDuplicateNote.setOnClickListener {
-            dismiss()
-            viewModel.duplicateNote()
-            parentView.snackbar(resources.stringResource(R.string.note_is_duplicated), parentAnchorView)
+            viewModel.duplicateNote().invokeOnCompletion {
+                dismiss()
+                parentView.snackbar(resources.stringResource(R.string.note_is_duplicated), parentAnchorView)
+            }
         }
 
         tvPinNote.setOnClickListener {
