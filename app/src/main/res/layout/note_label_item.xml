@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textview.MaterialTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv_label"
+    android:textSize="@dimen/size_extra_tiny"
+    android:layout_marginEnd="@dimen/spacing_extra_small"
+    android:paddingHorizontal="@dimen/spacing_extra_small"
+    android:paddingVertical="2dp"
+    android:background="@drawable/note_label_item_shape"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:fontFamily="@font/nunito_bold"
+    tools:text="Label" />
