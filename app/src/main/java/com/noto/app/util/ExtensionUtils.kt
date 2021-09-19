@@ -1,10 +1,16 @@
 package com.noto.app.util
 
+import android.animation.ArgbEvaluator
+import android.animation.IntEvaluator
+import android.animation.PropertyValuesHolder
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Typeface
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.RippleDrawable
 import android.net.Uri
 import android.util.TypedValue
 import android.view.View
@@ -32,6 +38,10 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onStart
+
+val LabelDefaultStrokeWidth = 3.dp
+val LabelDefaultCornerRadius = 1000.dp.toFloat()
+const val DefaultAnimationDuration = 250L
 
 inline fun <T> List<T>.sortByOrder(sortingOrder: SortingOrder, crossinline selector: (T) -> Comparable<*>?): List<T> = when (sortingOrder) {
     SortingOrder.Ascending -> sortedWith(compareBy(selector))
@@ -210,3 +220,7 @@ val Number.dp
         this.toFloat(),
         Resources.getSystem().displayMetrics
     ).toInt()
+
+fun GradientDrawable.toRippleDrawable(resources: Resources): RippleDrawable {
+    return RippleDrawable(resources.colorStateResource(R.color.colorSecondary)!!, this, this)
+}
