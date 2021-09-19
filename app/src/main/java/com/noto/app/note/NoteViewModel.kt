@@ -60,11 +60,11 @@ class NoteViewModel(
         combine(
             labelRepository.getLabelsByLibraryId(libraryId)
                 .filterNotNull(),
-            noteLabelRepository.getNoteLabelsByNoteId(noteId)
+            noteLabelRepository.getNoteLabels()
                 .filterNotNull(),
         ) { labels, noteLabels ->
             labels.sortedBy { it.position }.associateWith { label ->
-                noteLabels.any { it.labelId == label.id }
+                noteLabels.filter { it.noteId == note.value.id }.any { it.labelId == label.id }
             }
         }
             .onEach { mutableLabels.value = it }
