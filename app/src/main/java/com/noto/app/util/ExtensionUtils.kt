@@ -1,9 +1,5 @@
 package com.noto.app.util
 
-import android.animation.ArgbEvaluator
-import android.animation.IntEvaluator
-import android.animation.PropertyValuesHolder
-import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -38,6 +34,25 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onStart
+
+fun NoteComparator(sorting: NoteListSorting, sortingOrder: SortingOrder): Comparator<Note> {
+    return when (sortingOrder) {
+        SortingOrder.Ascending -> compareBy {
+            when (sorting) {
+                NoteListSorting.Manual -> it.position
+                NoteListSorting.CreationDate -> it.creationDate
+                NoteListSorting.Alphabetical -> it.title
+            }
+        }
+        SortingOrder.Descending -> compareByDescending {
+            when (sorting) {
+                NoteListSorting.Manual -> it.position
+                NoteListSorting.CreationDate -> it.creationDate
+                NoteListSorting.Alphabetical -> it.title
+            }
+        }
+    }
+}
 
 val LabelDefaultStrokeWidth = 3.dp
 val LabelDefaultCornerRadius = 1000.dp.toFloat()
@@ -223,4 +238,11 @@ val Number.dp
 
 fun GradientDrawable.toRippleDrawable(resources: Resources): RippleDrawable {
     return RippleDrawable(resources.colorStateResource(R.color.colorSecondary)!!, this, this)
+}
+
+fun Map<Note, List<Label>>.filterSelectedLabels(labels: Map<Label, Boolean>) = filter { entry ->
+    val selectedLabels = labels.entries
+        .filter { it.value }
+        .map { it.key }
+    entry.value.containsAll(selectedLabels)
 }

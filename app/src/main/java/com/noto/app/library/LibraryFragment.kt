@@ -65,7 +65,7 @@ class LibraryFragment : Fragment() {
             viewModel.font,
             viewModel.library,
         ) { notes, labels, font, library ->
-            setupNotesAndLabels(notes.sorted(library.sorting, library.sortingOrder), labels, font, library)
+            setupNotesAndLabels(notes.toSortedMap(NoteComparator(library.sorting, library.sortingOrder)), labels, font, library)
             setupItemTouchHelper(library.layoutManager)
         }.launchIn(lifecycleScope)
     }
@@ -143,13 +143,14 @@ class LibraryFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun LibraryFragmentBinding.setupNotesAndLabels(notes: List<Note>, labels: Map<Label, Boolean>, font: Font, library: Library) {
+    private fun LibraryFragmentBinding.setupNotesAndLabels(notes: Map<Note, List<Label>>, labels: Map<Label, Boolean>, font: Font, library: Library) {
         if (notes.isEmpty()) {
             if (tilSearch.isVisible)
                 tvPlaceHolder.text = resources.stringResource(R.string.no_note_matches_search_term)
             rv.visibility = View.GONE
             tvPlaceHolder.visibility = View.VISIBLE
         } else {
+            val filteredNotes = notes.filterSelectedLabels(labels)
             rv.visibility = View.VISIBLE
             tvPlaceHolder.visibility = View.GONE
             rv.withModels {
@@ -182,32 +183,34 @@ class LibraryFragment : Fragment() {
                     id(0)
                     sorting(library.sorting)
                     sortingOrder(library.sortingOrder)
-                    notesCount(notes.size)
+                    notesCount(filteredNotes.size)
                     notoColor(library.color)
                     onClickListener { _ ->
                         findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingDialogFragment(args.libraryId))
                     }
                 }
 
-                val items = { items: List<Note> ->
-                    items.forEach { note ->
+                val items = { items: Map<Note, List<Label>> ->
+                    items.forEach { entry ->
                         noteItem {
-                            id(note.id)
-                            note(note)
+                            id(entry.key.id)
+                            note(entry.key)
                             font(font)
+                            labels(entry.value)
+                            color(library.color)
                             previewSize(library.notePreviewSize)
                             isShowCreationDate(library.isShowNoteCreationDate)
                             isManualSorting(library.sorting == NoteListSorting.Manual)
                             onClickListener { _ ->
                                 findNavController()
-                                    .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(note.libraryId, note.id))
+                                    .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.key.libraryId, entry.key.id))
                             }
                             onLongClickListener { _ ->
                                 findNavController()
                                     .navigate(
                                         LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
-                                            note.libraryId,
-                                            note.id,
+                                            entry.key.libraryId,
+                                            entry.key.id,
                                             R.id.libraryFragment
                                         )
                                     )
@@ -224,8 +227,8 @@ class LibraryFragment : Fragment() {
                     }
                 }
 
-                val pinnedNotes = notes.filter { it.isPinned }
-                val notPinnedNotes = notes.filterNot { it.isPinned }
+                val pinnedNotes = filteredNotes.filter { it.key.isPinned }
+                val notPinnedNotes = filteredNotes.filterNot { it.key.isPinned }
 
                 if (pinnedNotes.isNotEmpty()) {
                     headerItem {

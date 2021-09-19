@@ -10,10 +10,17 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxItemDecoration
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.NoteItemBinding
 import com.noto.app.domain.model.Font
+import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.NotoColor
+import com.noto.app.label.noteLabelItem
 import com.noto.app.util.*
 
 @SuppressLint("NonConstantResourceId")
@@ -24,6 +31,12 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
 
     @EpoxyAttribute
     lateinit var font: Font
+
+    @EpoxyAttribute
+    lateinit var labels: List<Label>
+
+    @EpoxyAttribute
+    lateinit var color: NotoColor
 
     @EpoxyAttribute
     var previewSize: Int = 0
@@ -59,6 +72,22 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         tvNoteBody.setSemiboldFont(font)
         ibDrag.isVisible = isManualSorting
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
+        rv.isVisible = labels.isNotEmpty()
+        rv.layoutManager = FlexboxLayoutManager(root.context, FlexDirection.ROW, FlexWrap.WRAP)
+        val itemDecoration = FlexboxItemDecoration(root.context).apply {
+            setDrawable(root.resources.drawableResource(R.drawable.note_label_item_decoration))
+            setOrientation(FlexboxItemDecoration.HORIZONTAL)
+        }
+        rv.addItemDecoration(itemDecoration)
+        rv.withModels {
+            labels.forEach { label ->
+                noteLabelItem {
+                    id(label.id)
+                    label(label)
+                    color(color)
+                }
+            }
+        }
         if (note.title.isBlank() && previewSize == 0) {
             tvNoteBody.text = note.body.takeLines(1)
             tvNoteBody.maxLines = 1
@@ -72,14 +101,17 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             note.title.isBlank() -> tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 updateMarginsRelative(top = 0.dp, bottom = 0.dp)
             }
-            note.body.isBlank() || previewSize == 0 -> tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                updateMarginsRelative(bottom = 0.dp)
+            note.body.isBlank() || previewSize == 0 || labels.isEmpty() -> tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMarginsRelative(top = 0.dp, bottom = 0.dp)
             }
             else -> {
                 tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                     updateMarginsRelative(top = 4.dp, bottom = 4.dp)
                 }
                 tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    updateMarginsRelative(top = 4.dp, bottom = 4.dp)
+                }
+                rv.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                     updateMarginsRelative(bottom = 4.dp)
                 }
             }

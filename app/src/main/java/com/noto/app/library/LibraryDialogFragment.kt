@@ -150,6 +150,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
         viewModel.notes
             .value
+            .keys
             .filter { note -> note.reminderDate != null }
             .forEach { note -> alarmManager.cancelAlarm(requireContext(), note.id) }
 
@@ -160,7 +161,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
         if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
                 var documentUri: Uri? = Uri.EMPTY
-                viewModel.notes.value.forEach { note ->
+                viewModel.notes.value.keys.forEach { note ->
                     documentUri = requireContext().exportNote(uri, viewModel.library.value, note)
                 }
                 val parentView = requireParentFragment().requireView()

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.NoteLabelRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
@@ -15,6 +16,7 @@ class LibraryViewModel(
     private val libraryRepository: LibraryRepository,
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
+    private val noteLabelRepository: NoteLabelRepository,
     private val storage: LocalStorage,
     private val libraryId: Long,
 ) : ViewModel() {
@@ -24,7 +26,7 @@ class LibraryViewModel(
         .onEach { library -> mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(library.color) }
         .stateIn(viewModelScope, SharingStarted.Lazily, Library(libraryId, position = 0))
 
-    private val mutableNotes = MutableStateFlow(emptyList<Note>())
+    private val mutableNotes = MutableStateFlow(emptyMap<Note, List<Label>>())
     val notes get() = mutableNotes.asStateFlow()
 
     val archivedNotes = noteRepository.getArchivedNotesByLibraryId(libraryId)
@@ -43,9 +45,24 @@ class LibraryViewModel(
     val notoColors get() = mutableNotoColors.asStateFlow()
 
     init {
-        noteRepository.getNotesByLibraryId(libraryId)
-            .filterNotNull()
-            .onEach { mutableNotes.value = it }
+        combine(
+            noteRepository.getNotesByLibraryId(libraryId)
+                .filterNotNull(),
+            labelRepository.getLabelsByLibraryId(libraryId)
+                .filterNotNull(),
+            noteLabelRepository.getNoteLabels()
+                .filterNotNull(),
+        ) { notes, labels, noteLabels ->
+            notes.map { note ->
+                note to labels
+                    .sortedBy { it.position }
+                    .filter { label ->
+                        noteLabels.filter { it.noteId == note.id }.any { noteLabel ->
+                            noteLabel.labelId == label.id
+                        }
+                    }
+            }.toMap()
+        }.onEach { mutableNotes.value = it }
             .launchIn(viewModelScope)
 
         labelRepository.getLabelsByLibraryId(libraryId)
@@ -112,12 +129,12 @@ class LibraryViewModel(
     fun searchNotes(term: String) = viewModelScope.launch {
         val currentNotes = noteRepository.getNotesByLibraryId(libraryId)
             .first()
-
-        mutableNotes.value = if (term.isBlank())
-            currentNotes
-        else
-            currentNotes
-                .filter { it.title.contains(term, ignoreCase = true) || it.body.contains(term, ignoreCase = true) }
+//
+//        mutableNotes.value = if (term.isBlank())
+//            currentNotes
+//        else
+//            currentNotes
+//                .filter { it.title.contains(term, ignoreCase = true) || it.body.contains(term, ignoreCase = true) }
     }
 
     fun selectNotoColor(notoColor: NotoColor) {

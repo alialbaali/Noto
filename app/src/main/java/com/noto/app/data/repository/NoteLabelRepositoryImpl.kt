@@ -15,6 +15,8 @@ class NoteLabelRepositoryImpl(
 
     override fun getNoteLabelsByNoteId(noteId: Long): Flow<List<NoteLabel>> = source.getNoteLabelsByNoteId(noteId)
 
+    override fun getNoteLabels(): Flow<List<NoteLabel>> = source.getNoteLabels()
+
     override suspend fun createNoteLabel(noteLabel: NoteLabel) = withContext(dispatcher) {
         source.createNoteLabel(noteLabel)
     }

@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/drawable/bell_plus_outline.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/bell_remove_outline.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/bell_ring_outline.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/bg_divider.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/button_text_color.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/checked_color.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/chip_background_selector.xml" value="0.2241042345276873" />
@@ -130,6 +131,8 @@
         <entry key="app/src/main/res/drawable/library_item_shape.xml" value="0.33" />
         <entry key="app/src/main/res/drawable/note_item_drag_handle_shape.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/note_item_shape.xml" value="0.2" />
+        <entry key="app/src/main/res/drawable/note_label_item_decoration.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/note_label_item_shape.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/noto_color_item_shape.xml" value="0.22664473684210526" />
         <entry key="app/src/main/res/drawable/noto_color_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/noto_colors_background_shape.xml" value="0.22631578947368422" />
@@ -212,6 +215,7 @@
         <entry key="app/src/main/res/layout/note_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/note_fragment.xml" value="0.18972332015810275" />
         <entry key="app/src/main/res/layout/note_item.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/note_label_item.xml" value="0.21" />
         <entry key="app/src/main/res/layout/note_list_archive_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_list_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/note_list_sorting_dialog_fragment.xml" value="0.21611842105263157" />
