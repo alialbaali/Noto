@@ -23,7 +23,13 @@ class LibraryViewModel(
 
     val library = libraryRepository.getLibraryById(libraryId)
         .filterNotNull()
-        .onStart { emit(Library(libraryId, position = 0)) }
+        .onStart {
+            val position = libraryRepository.getLibraries()
+                .filterNotNull()
+                .first()
+                .count()
+            emit(Library(libraryId, position = position))
+        }
         .onEach { library -> mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(library.color) }
         .stateIn(viewModelScope, SharingStarted.Lazily, Library(libraryId, position = 0))
 
