@@ -138,10 +138,11 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvMoveNote.setOnClickListener {
             val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
-                parentView.snackbar(resources.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
-                findNavController().popBackStack(args.destination, false)
-                dismiss()
-                viewModel.moveNote(it)
+                viewModel.moveNote(it).invokeOnCompletion {
+                    parentView.snackbar(resources.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
+                    findNavController().popBackStack(args.destination, false)
+                    dismiss()
+                }
             }
             findNavController().navigate(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(

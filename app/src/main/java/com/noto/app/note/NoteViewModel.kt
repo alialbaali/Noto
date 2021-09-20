@@ -106,6 +106,21 @@ class NoteViewModel(
 
     fun moveNote(libraryId: Long) = viewModelScope.launch {
         noteRepository.updateNote(note.value.copy(libraryId = libraryId))
+        val libraryLabels = labelRepository.getLabelsByLibraryId(libraryId).first()
+        labels.value
+            .filterValues { it }
+            .keys
+            .forEach { label ->
+                launch {
+                    if (libraryLabels.any { it.title == label.title }) {
+                        val labelId = libraryLabels.first { it.title == label.title }.id
+                        noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id))
+                    } else {
+                        val labelId = labelRepository.createLabel(label.copy(id = 0, libraryId = libraryId))
+                        noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id))
+                    }
+                }
+            }
     }
 
     fun copyNote(libraryId: Long) = viewModelScope.launch {
