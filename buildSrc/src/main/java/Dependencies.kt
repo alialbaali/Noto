@@ -20,7 +20,7 @@ object Libraries {
 
 object Versions {
     const val JavaTime = "1.1.5"
-    const val Kotlin = "1.5.30"
+    const val Kotlin = "1.5.31"
     const val Navigation = "2.3.5"
     const val Android = "7.0.2"
     const val Koin = "3.1.2"
