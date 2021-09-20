@@ -52,7 +52,13 @@ class NoteViewModel(
 
     init {
         noteRepository.getNoteById(noteId)
-            .onStart { emit(Note(noteId, libraryId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
+            .onStart {
+                val position = noteRepository.getNotesByLibraryId(libraryId)
+                    .filterNotNull()
+                    .first()
+                    .count()
+                emit(Note(noteId, libraryId, position = position, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty()))
+            }
             .filterNotNull()
             .onEach { mutableNote.value = it }
             .launchIn(viewModelScope)
