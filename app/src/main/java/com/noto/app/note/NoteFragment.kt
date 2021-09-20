@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.ListUpdateCallback
 import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
@@ -83,7 +84,9 @@ class NoteFragment : Fragment() {
             viewModel.labels,
         ) { library, labels ->
             rv.withModels {
-                rv.scrollToPosition(0)
+                addModelBuildListener {
+                    it.dispatchTo(NoteListUpdateCallback)
+                }
                 labels.forEach { entry ->
                     labelItem {
                         id(entry.key.id)
@@ -241,4 +244,12 @@ class NoteFragment : Fragment() {
             }
         }
     }
+
+    private val NoteFragmentBinding.NoteListUpdateCallback
+        get() = object : ListUpdateCallback {
+            override fun onInserted(position: Int, count: Int) = if (rv.childCount == 1) rv.scrollToPosition(0) else Unit
+            override fun onRemoved(position: Int, count: Int) {}
+            override fun onMoved(fromPosition: Int, toPosition: Int) {}
+            override fun onChanged(position: Int, count: Int, payload: Any?) {}
+        }
 }
