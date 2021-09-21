@@ -14,16 +14,6 @@ class LocalStorageImpl(private val storage: DataStore<Preferences>) : LocalStora
 
     override fun getOrNull(key: String): Flow<String?> = storage.data
         .map { preferences -> preferences[preferencesKey(key)] }
-//
-//    override fun getOrDefault(key: String, defaultValue: String): Flow<String> = storage.data
-//        .map { preferences ->
-//            val value = preferences[preferencesKey(key)]
-//
-//            if (value == null)
-//                defaultValue
-//            else
-//                value as String
-//        }
 
     override suspend fun put(key: String, value: String) {
         storage.edit { preferences -> preferences[preferencesKey(key)] = value }
