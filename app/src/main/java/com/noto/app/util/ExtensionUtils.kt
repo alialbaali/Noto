@@ -21,8 +21,6 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
@@ -87,8 +85,6 @@ fun Note.format(): String = """
 fun Activity.showKeyboard(view: View) = WindowInsetsControllerCompat(window, view).show(WindowInsetsCompat.Type.ime())
 fun Activity.hideKeyboard(view: View) = WindowInsetsControllerCompat(window, view).hide(WindowInsetsCompat.Type.ime())
 
-fun <T> MutableLiveData<T>.asLiveData(): LiveData<T> = this
-
 fun View.snackbar(message: String, anchorView: View? = null) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
     animationMode = Snackbar.ANIMATION_MODE_SLIDE
     setBackgroundTint(resources.colorResource(R.color.colorPrimary))
@@ -114,11 +110,6 @@ fun NotoColor.toResource(): Int = when (this) {
     NotoColor.Brown -> R.color.colorAccentBrown
     NotoColor.BlueGray -> R.color.colorAccentBlueGray
     NotoColor.Teal -> R.color.colorAccentTeal
-}
-
-fun <T> MutableList<T>.replaceWith(value: T, predicate: (T) -> Boolean) {
-    val result = first(predicate)
-    this[indexOf(result)] = value
 }
 
 fun Context.exportNote(uri: Uri, library: Library, note: Note): Uri? {
