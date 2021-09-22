@@ -135,7 +135,7 @@ class LibraryViewModel(
             searchNotes.value
         else
             searchNotes.value
-                .filter { it.first.title.contains(term, ignoreCase = true) || it.first.body.contains(term, ignoreCase = true) }
+                .filter { it.first.title.contains(term.trim(), ignoreCase = true) || it.first.body.contains(term.trim(), ignoreCase = true) }
     }
 
     fun selectNotoColor(notoColor: NotoColor) {
@@ -161,7 +161,7 @@ class LibraryViewModel(
             .toMap()
     }
 
-    fun toggleIsSearchEnabled() = viewModelScope.launch {
+    fun toggleIsSearchEnabled() {
         mutableIsSearchEnabled.value = !mutableIsSearchEnabled.value
     }
 

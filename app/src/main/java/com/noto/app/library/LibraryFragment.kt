@@ -166,7 +166,7 @@ class LibraryFragment : Fragment() {
         library: Library,
     ) {
         if (notes.isEmpty()) {
-            if (tilSearch.isVisible)
+            if (viewModel.isSearchEnabled.value)
                 tvPlaceHolder.text = resources.stringResource(R.string.no_note_matches_search_term)
             rv.visibility = View.GONE
             tvPlaceHolder.visibility = View.VISIBLE
