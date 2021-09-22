@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import android.util.TypedValue
 import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
+import com.noto.app.R
+import com.noto.app.domain.model.NotoColor
 
 fun Resources.colorStateResource(@ColorRes id: Int): ColorStateList? = ResourcesCompat.getColorStateList(this, id, null)
 fun Resources.colorResource(@ColorRes id: Int): Int = ResourcesCompat.getColor(this, id, null)
@@ -19,3 +22,25 @@ fun Context.tryLoadingFontResource(@FontRes id: Int) = try {
 } catch (exception: Throwable) {
     null
 }
+
+fun NotoColor.toResource(): Int = when (this) {
+    NotoColor.Blue -> R.color.colorAccentBlue
+    NotoColor.Gray -> R.color.colorAccentGray
+    NotoColor.Pink -> R.color.colorAccentPink
+    NotoColor.Cyan -> R.color.colorAccentCyan
+    NotoColor.Purple -> R.color.colorAccentPurple
+    NotoColor.Red -> R.color.colorAccentRed
+    NotoColor.Yellow -> R.color.colorAccentYellow
+    NotoColor.Orange -> R.color.colorAccentOrange
+    NotoColor.Green -> R.color.colorAccentGreen
+    NotoColor.Brown -> R.color.colorAccentBrown
+    NotoColor.BlueGray -> R.color.colorAccentBlueGray
+    NotoColor.Teal -> R.color.colorAccentTeal
+}
+
+val Number.dp
+    get() = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        this.toFloat(),
+        Resources.getSystem().displayMetrics
+    ).toInt()
