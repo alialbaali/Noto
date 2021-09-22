@@ -116,7 +116,7 @@ class LibraryFragment : Fragment() {
         tilSearch.isVisible = true
         rv.startAnimation(rvAnimation)
         etSearch.requestFocus()
-        requireActivity().showKeyboard(root)
+        etSearch.showKeyboardUsingImm()
 
         requireActivity().onBackPressedDispatcher
             .addCallback(viewLifecycleOwner) {

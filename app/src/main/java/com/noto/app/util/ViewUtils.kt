@@ -1,6 +1,7 @@
 package com.noto.app.util
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Typeface
@@ -8,6 +9,7 @@ import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.net.Uri
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.core.view.WindowInsetsCompat
@@ -19,7 +21,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.noto.app.R
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.NotoColor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -59,6 +60,10 @@ fun GradientDrawable.toRippleDrawable(resources: Resources): RippleDrawable {
 
 fun Activity.showKeyboard(view: View) = WindowInsetsControllerCompat(window, view).show(WindowInsetsCompat.Type.ime())
 fun Activity.hideKeyboard(view: View) = WindowInsetsControllerCompat(window, view).hide(WindowInsetsCompat.Type.ime())
+fun View.showKeyboardUsingImm() {
+    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}
 
 fun TextView.setBoldFont(font: Font) {
     when (font) {
