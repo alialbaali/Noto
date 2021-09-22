@@ -6,7 +6,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "noto_labels",
+    tableName = "note_labels",
     foreignKeys = [
         ForeignKey(
             entity = Note::class,
