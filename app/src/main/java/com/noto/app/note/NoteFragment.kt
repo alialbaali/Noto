@@ -36,7 +36,7 @@ private const val DebounceTimeoutMillis = 250L
 
 class NoteFragment : Fragment() {
 
-    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId, args.body) }
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId, args.body, args.labelsIds) }
 
     private val args by navArgs<NoteFragmentArgs>()
 

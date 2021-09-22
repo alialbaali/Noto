@@ -25,6 +25,7 @@ class NoteViewModel(
     private val libraryId: Long,
     private val noteId: Long,
     private val body: String?,
+    private val labelsIds: LongArray = longArrayOf(),
 ) : ViewModel() {
 
     private val mutableNote = MutableStateFlow(
@@ -70,7 +71,7 @@ class NoteViewModel(
                 .filterNotNull(),
         ) { labels, noteLabels ->
             labels.sortedBy { it.position }.associateWith { label ->
-                noteLabels.filter { it.noteId == note.value.id }.any { it.labelId == label.id }
+                noteLabels.filter { it.noteId == note.value.id }.any { it.labelId == label.id } || labelsIds.any { label.id == it }
             }
         }
             .onEach { mutableLabels.value = it }

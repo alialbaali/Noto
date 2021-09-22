@@ -72,7 +72,11 @@ class LibraryFragment : Fragment() {
 
     private fun LibraryFragmentBinding.setupListeners() {
         fab.setOnClickListener {
-            findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(args.libraryId))
+            val selectedLabelsIds = viewModel.labels.value
+                .filter { it.value }
+                .map { it.key.id }
+                .toLongArray()
+            findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(args.libraryId, labelsIds = selectedLabelsIds))
         }
         tb.setNavigationOnClickListener {
             findNavController().navigateUp()
@@ -143,7 +147,12 @@ class LibraryFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun LibraryFragmentBinding.setupNotesAndLabels(notes: List<Pair<Note, List<Label>>>, labels: Map<Label, Boolean>, font: Font, library: Library) {
+    private fun LibraryFragmentBinding.setupNotesAndLabels(
+        notes: List<Pair<Note, List<Label>>>,
+        labels: Map<Label, Boolean>,
+        font: Font,
+        library: Library
+    ) {
         if (notes.isEmpty()) {
             if (tilSearch.isVisible)
                 tvPlaceHolder.text = resources.stringResource(R.string.no_note_matches_search_term)
