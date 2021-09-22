@@ -10,10 +10,10 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/layout_manager"
-        android:contentDescription="@string/view"
+        android:id="@+id/layout"
+        android:contentDescription="@string/layout"
         android:icon="@drawable/ic_round_view_agenda_24"
-        android:title="@string/view"
+        android:title="@string/layout"
         app:showAsAction="ifRoom" />
 
     <item

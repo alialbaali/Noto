@@ -51,6 +51,9 @@ class LibraryViewModel(
     private val mutableNotoColors = MutableStateFlow(NotoColor.values().associateWith { false }.toList())
     val notoColors get() = mutableNotoColors.asStateFlow()
 
+    private val mutableIsSearchEnabled = MutableStateFlow(false)
+    val isSearchEnabled get() = mutableIsSearchEnabled.asStateFlow()
+
     init {
         combine(
             noteRepository.getNotesByLibraryId(libraryId)
@@ -156,6 +159,10 @@ class LibraryViewModel(
         mutableLabels.value = labels.value
             .map { it.key to false }
             .toMap()
+    }
+
+    fun toggleIsSearchEnabled() = viewModelScope.launch {
+        mutableIsSearchEnabled.value = !mutableIsSearchEnabled.value
     }
 
     private fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): List<Pair<Note, List<Label>>> {

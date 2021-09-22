@@ -43,7 +43,7 @@ class LibraryFragment : Fragment() {
         }
 
     private fun LibraryFragmentBinding.setupState() {
-        val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
+        val layoutManagerMenuItem = bab.menu.findItem(R.id.layout)
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
 
         viewModel.library
@@ -68,6 +68,15 @@ class LibraryFragment : Fragment() {
             setupNotesAndLabels(notes.sorted(library.sorting, library.sortingOrder), labels, font, library)
             setupItemTouchHelper(library.layoutManager)
         }.launchIn(lifecycleScope)
+
+        viewModel.isSearchEnabled
+            .onEach { isSearchEnabled ->
+                if (isSearchEnabled)
+                    enableSearch()
+                else
+                    disableSearch()
+            }
+            .launchIn(lifecycleScope)
     }
 
     private fun LibraryFragmentBinding.setupListeners() {
@@ -89,7 +98,7 @@ class LibraryFragment : Fragment() {
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.archive -> setupArchivedNotesMenuItem()
-                R.id.layout_manager -> setupLayoutManagerMenuItem()
+                R.id.layout -> setupLayoutManagerMenuItem()
                 R.id.search -> setupSearchMenuItem()
                 else -> false
             }
@@ -104,16 +113,19 @@ class LibraryFragment : Fragment() {
         val rvAnimation = TranslateAnimation(0F, 0F, -50F, 0F).apply {
             duration = 250
         }
+        tilSearch.isVisible = true
         rv.startAnimation(rvAnimation)
         etSearch.requestFocus()
         requireActivity().showKeyboard(root)
 
-        if (!requireActivity().onBackPressedDispatcher.hasEnabledCallbacks())
-            requireActivity().onBackPressedDispatcher
-                .addCallback(viewLifecycleOwner) {
-                    disableSearch()
-                    if (isEnabled) isEnabled = false
+        requireActivity().onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner) {
+                disableSearch()
+                if (isEnabled) {
+                    isEnabled = false
+                    requireActivity().onBackPressed()
                 }
+            }
     }
 
     private fun LibraryFragmentBinding.disableSearch() {
@@ -151,7 +163,7 @@ class LibraryFragment : Fragment() {
         notes: List<Pair<Note, List<Label>>>,
         labels: Map<Label, Boolean>,
         font: Font,
-        library: Library
+        library: Library,
     ) {
         if (notes.isEmpty()) {
             if (tilSearch.isVisible)
@@ -279,12 +291,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupSearchMenuItem(): Boolean {
-        val searchEt = tilSearch
-        searchEt.isVisible = !searchEt.isVisible
-        if (searchEt.isVisible)
-            enableSearch()
-        else
-            disableSearch()
+        viewModel.toggleIsSearchEnabled()
         return true
     }
 

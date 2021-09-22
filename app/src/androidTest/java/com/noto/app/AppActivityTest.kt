@@ -189,7 +189,7 @@ class AppActivityTest : KoinTest {
 
     @Test
     fun change_main_fragment_layout_manager() {
-        onView(withContentDescription(R.string.view))
+        onView(withContentDescription(R.string.layout))
             .perform(click())
 
         assertTrue { libraryViewModel.library.value.layoutManager == LayoutManager.Linear }

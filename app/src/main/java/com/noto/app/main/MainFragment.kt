@@ -47,7 +47,7 @@ class MainFragment : Fragment() {
 
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.layout_manager -> setupLayoutMangerMenuItem()
+                R.id.layout -> setupLayoutMangerMenuItem()
                 R.id.libraries_archive -> setupLibrariesArchiveMenuItem()
                 else -> false
             }
@@ -55,7 +55,7 @@ class MainFragment : Fragment() {
     }
 
     private fun MainFragmentBinding.setupState() {
-        val layoutManagerMenuItem = bab.menu.findItem(R.id.layout_manager)
+        val layoutManagerMenuItem = bab.menu.findItem(R.id.layout)
 
         combine(
             viewModel.libraries,
