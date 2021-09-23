@@ -80,11 +80,15 @@ fun TextView.setSemiboldFont(font: Font) {
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
-fun EditText.textAsFlow(): Flow<CharSequence?> {
+fun EditText.textAsFlow(emitNewTextOnly: Boolean = false): Flow<CharSequence?> {
     return callbackFlow {
         val listener = doOnTextChanged { text, start, before, count ->
-            if (before <= count)
+            if (emitNewTextOnly) {
+                if (before <= count)
+                    trySend(text)
+            } else {
                 trySend(text)
+            }
         }
         addTextChangedListener(listener)
         awaitClose { removeTextChangedListener(listener) }

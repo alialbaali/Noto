@@ -34,7 +34,6 @@ class LibraryViewModel(
         .stateIn(viewModelScope, SharingStarted.Lazily, Library(libraryId, position = 0))
 
     private val mutableNotes = MutableStateFlow(emptyList<Pair<Note, List<Label>>>())
-    private val searchNotes = MutableStateFlow(emptyList<Pair<Note, List<Label>>>())
     val notes get() = mutableNotes.asStateFlow()
 
     private val mutableArchivedNotes = MutableStateFlow(emptyList<Pair<Note, List<Label>>>())
@@ -65,7 +64,7 @@ class LibraryViewModel(
             noteLabelRepository.getNoteLabels()
                 .filterNotNull(),
         ) { notes, archivedNotes, labels, noteLabels ->
-            mutableNotes.value = notes.mapWithLabels(labels, noteLabels).also { searchNotes.value = it }
+            mutableNotes.value = notes.mapWithLabels(labels, noteLabels)
             mutableArchivedNotes.value = archivedNotes.mapWithLabels(labels, noteLabels)
         }.launchIn(viewModelScope)
 
@@ -128,14 +127,6 @@ class LibraryViewModel(
 
     fun updateSortingOrder(value: SortingOrder) = viewModelScope.launch {
         libraryRepository.updateLibrary(library.value.copy(sortingOrder = value))
-    }
-
-    fun searchNotes(term: String) = viewModelScope.launch {
-        mutableNotes.value = if (term.isBlank())
-            searchNotes.value
-        else
-            searchNotes.value
-                .filter { it.first.title.contains(term.trim(), ignoreCase = true) || it.first.body.contains(term.trim(), ignoreCase = true) }
     }
 
     fun selectNotoColor(notoColor: NotoColor) {

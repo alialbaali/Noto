@@ -117,9 +117,9 @@ class NoteFragment : Fragment() {
         }.launchIn(lifecycleScope)
 
         combine(
-            etNoteTitle.textAsFlow()
+            etNoteTitle.textAsFlow(emitNewTextOnly = true)
                 .filterNotNull(),
-            etNoteBody.textAsFlow()
+            etNoteBody.textAsFlow(emitNewTextOnly = true)
                 .filterNotNull(),
         ) { title, body -> title to body }
             .debounce(DebounceTimeoutMillis)

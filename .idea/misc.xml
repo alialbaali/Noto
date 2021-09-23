@@ -163,6 +163,7 @@
         <entry key="app/src/main/res/drawable/switch_track_color.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/switch_track_selector.xml" value="0.22664473684210526" />
         <entry key="app/src/main/res/drawable/switch_track_shape.xml" value="0.22664473684210526" />
+        <entry key="app/src/main/res/drawable/tab_indicator_shape.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/text_input_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/theme.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/toggle_button_shape.xml" value="0.2241042345276873" />
@@ -202,7 +203,7 @@
         <entry key="app/src/main/res/layout/library_item.xml" value="0.19066147859922178" />
         <entry key="app/src/main/res/layout/library_list_dialog_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/library_list_fragment.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/library_list_sorting_dialog_fragment.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/library_list_sorting_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/library_list_sorting_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/main_archive_fragment.xml" value="0.21611842105263157" />

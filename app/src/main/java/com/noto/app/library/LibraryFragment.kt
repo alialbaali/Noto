@@ -9,7 +9,6 @@ import androidx.activity.addCallback
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
-import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -64,8 +63,18 @@ class LibraryFragment : Fragment() {
             viewModel.labels,
             viewModel.font,
             viewModel.library,
-        ) { notes, labels, font, library ->
-            setupNotesAndLabels(notes.sorted(library.sorting, library.sortingOrder), labels, font, library)
+            etSearch.textAsFlow()
+                .onStart { emit(etSearch.text) }
+                .filterNotNull()
+                .map { it.trim() },
+        ) { notes, labels, font, library, searchTerm ->
+            setupNotesAndLabels(
+                notes.sorted(library.sorting, library.sortingOrder)
+                    .filter { it.first.title.contains(searchTerm, ignoreCase = true) || it.first.body.contains(searchTerm, ignoreCase = true) },
+                labels,
+                font,
+                library
+            )
             setupItemTouchHelper(library.layoutManager)
         }.launchIn(lifecycleScope)
 
@@ -102,10 +111,6 @@ class LibraryFragment : Fragment() {
                 R.id.search -> setupSearchMenuItem()
                 else -> false
             }
-        }
-
-        etSearch.doAfterTextChanged {
-            viewModel.searchNotes(it.toString())
         }
     }
 
