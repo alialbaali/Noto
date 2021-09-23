@@ -25,18 +25,10 @@ class NoteViewModel(
     private val libraryId: Long,
     private val noteId: Long,
     private val body: String?,
-    private val labelsIds: LongArray = longArrayOf(),
+    private var labelsIds: LongArray,
 ) : ViewModel() {
 
-    private val mutableNote = MutableStateFlow(
-        Note(
-            noteId,
-            libraryId,
-            position = 0,
-            title = body.firstLineOrEmpty(),
-            body = body.takeAfterFirstLineOrEmpty()
-        )
-    )
+    private val mutableNote = MutableStateFlow(Note(noteId, libraryId, position = 0))
     val note get() = mutableNote.asStateFlow()
 
     val library = libraryRepository.getLibraryById(libraryId)
@@ -74,7 +66,10 @@ class NoteViewModel(
                 noteLabels.filter { it.noteId == note.value.id }.any { it.labelId == label.id } || labelsIds.any { label.id == it }
             }
         }
-            .onEach { mutableLabels.value = it }
+            .onEach {
+                mutableLabels.value = it
+                labelsIds = longArrayOf() // Setting this value to empty array so it can be used only once.
+            }
             .launchIn(viewModelScope)
     }
 
