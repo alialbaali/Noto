@@ -12,6 +12,7 @@
         android:id="@+id/tv_sorting"
         android:drawableStart="@drawable/ic_round_arrow_up_24"
         android:drawablePadding="@dimen/spacing_small"
+        android:gravity="center"
         android:clickable="true"
         android:focusable="true"
         android:textSize="@dimen/size_extra_small"
