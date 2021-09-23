@@ -43,7 +43,6 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
             NoteListSorting.Alphabetical -> "${resources.stringResource(R.string.alphabetical)} $sortingText"
         }
         tvSorting.setOnClickListener(onClickListener)
-        root.rootView.setFullSpan()
         val arrowDrawable = when (sortingOrder) {
             SortingOrder.Ascending -> R.drawable.ic_round_arrow_up_24
             SortingOrder.Descending -> R.drawable.ic_round_arrow_down_24
@@ -60,6 +59,11 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
         tvSorting.compoundDrawables[0]?.mutate()?.setTint(color)
         tvLibraryNotesCount.setTextColor(color)
         tvSorting.setTextColor(color)
+    }
+
+    override fun onViewAttachedToWindow(holder: Holder) {
+        super.onViewAttachedToWindow(holder)
+        holder.binding.root.setFullSpan()
     }
 
     class Holder : EpoxyHolder() {

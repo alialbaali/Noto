@@ -35,7 +35,6 @@ abstract class LabelListItem : EpoxyModelWithHolder<LabelListItem.Holder>() {
     lateinit var onNewLabelClickListener: View.OnClickListener
 
     override fun bind(holder: Holder) = with(holder.binding) {
-        root.rootView.setFullSpan()
         rv.withModels {
             allLabelItem {
                 id("all")
@@ -65,6 +64,11 @@ abstract class LabelListItem : EpoxyModelWithHolder<LabelListItem.Holder>() {
                 onClickListener(onNewLabelClickListener)
             }
         }
+    }
+
+    override fun onViewAttachedToWindow(holder: Holder) {
+        super.onViewAttachedToWindow(holder)
+        holder.binding.root.setFullSpan()
     }
 
     class Holder : EpoxyHolder() {

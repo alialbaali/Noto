@@ -18,7 +18,11 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
 
     override fun bind(holder: Holder) = with(holder.binding) {
         tvTitle.text = title
-        root.rootView.setFullSpan()
+    }
+
+    override fun onViewAttachedToWindow(holder: Holder) {
+        super.onViewAttachedToWindow(holder)
+        holder.binding.root.setFullSpan()
     }
 
     class Holder : EpoxyHolder() {
