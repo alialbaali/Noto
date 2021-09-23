@@ -90,6 +90,10 @@ class NoteViewModel(
                         .filterNotNull()
                         .onEach { createdNote -> mutableNote.value = createdNote }
                         .launchIn(viewModelScope)
+
+                    labels.value.filterValues { it }
+                        .keys
+                        .forEach { label -> noteLabelRepository.createNoteLabel(NoteLabel(noteId = id, labelId = label.id)) }
                 }
             else
                 noteRepository.updateNote(note)
@@ -162,11 +166,17 @@ class NoteViewModel(
     }
 
     fun selectLabel(id: Long) = viewModelScope.launch {
-        if (note.value.id != 0L)
+        if (note.value.id == 0L)
+            mutableLabels.value = mutableLabels.value.mapValues { if (it.key.id == id) true else it.value }
+        else
             noteLabelRepository.createNoteLabel(NoteLabel(noteId = note.value.id, labelId = id))
+
     }
 
     fun unselectLabel(id: Long) = viewModelScope.launch {
-        noteLabelRepository.deleteNoteLabel(note.value.id, id)
+        if (note.value.id == 0L)
+            mutableLabels.value = mutableLabels.value.mapValues { if (it.key.id == id) false else it.value }
+        else
+            noteLabelRepository.deleteNoteLabel(note.value.id, id)
     }
 }
