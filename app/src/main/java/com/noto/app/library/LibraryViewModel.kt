@@ -83,23 +83,29 @@ class LibraryViewModel(
             .launchIn(viewModelScope)
     }
 
-    fun createOrUpdateLibrary(title: String, notePreviewSize: Int, isShowNoteCreationDate: Boolean, isSetNewNoteCursorOnTitle: Boolean) =
-        viewModelScope.launch {
-            val color = notoColors.value.first { it.second }.first
+    fun createOrUpdateLibrary(
+        title: String,
+        layoutManager: LayoutManager,
+        notePreviewSize: Int,
+        isShowNoteCreationDate: Boolean,
+        isSetNewNoteCursorOnTitle: Boolean
+    ) = viewModelScope.launch {
+        val color = notoColors.value.first { it.second }.first
 
-            val library = library.value.copy(
-                title = title.trim(),
-                color = color,
-                notePreviewSize = notePreviewSize,
-                isShowNoteCreationDate = isShowNoteCreationDate,
-                isSetNewNoteCursorOnTitle = isSetNewNoteCursorOnTitle,
-            )
+        val library = library.value.copy(
+            title = title.trim(),
+            color = color,
+            layoutManager = layoutManager,
+            notePreviewSize = notePreviewSize,
+            isShowNoteCreationDate = isShowNoteCreationDate,
+            isSetNewNoteCursorOnTitle = isSetNewNoteCursorOnTitle,
+        )
 
-            if (libraryId == 0L)
-                libraryRepository.createLibrary(library)
-            else
-                libraryRepository.updateLibrary(library)
-        }
+        if (libraryId == 0L)
+            libraryRepository.createLibrary(library)
+        else
+            libraryRepository.updateLibrary(library)
+    }
 
     fun deleteLibrary() = viewModelScope.launch {
         libraryRepository.deleteLibrary(library.value)

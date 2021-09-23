@@ -14,6 +14,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
+import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
@@ -71,7 +72,18 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 requireActivity().hideKeyboard(root)
                 dismiss()
                 updatePinnedShortcut(title)
-                viewModel.createOrUpdateLibrary(title, sNotePreviewSize.value.toInt(), swShowNoteCreationDate.isChecked, swSetNewNoteCursor.isChecked)
+                viewModel.createOrUpdateLibrary(
+                    title,
+                    tlLibraryLayout.selectedTabPosition.let {
+                        when (it) {
+                            0 -> LayoutManager.Linear
+                            else -> LayoutManager.Grid
+                        }
+                    },
+                    sNotePreviewSize.value.toInt(),
+                    swShowNoteCreationDate.isChecked,
+                    swSetNewNoteCursor.isChecked,
+                )
             }
         }
     }
@@ -80,6 +92,11 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         et.setText(library.title)
         et.setSelection(library.title.length)
         rv.smoothScrollToPosition(library.color.ordinal)
+        val tab = when (library.layoutManager) {
+            LayoutManager.Linear -> tlLibraryLayout.getTabAt(0)
+            LayoutManager.Grid -> tlLibraryLayout.getTabAt(1)
+        }
+        tlLibraryLayout.selectTab(tab)
         val state = arrayOf(
             intArrayOf(android.R.attr.state_checked),
             intArrayOf(-android.R.attr.state_checked),
@@ -92,7 +109,9 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             val colorStateList = resources.colorStateResource(library.color.toResource())
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+            tlLibraryLayout.setSelectedTabIndicatorColor(color)
             if (colorStateList != null) {
+                tlLibraryLayout.tabRippleColor = colorStateList
                 sNotePreviewSize.value = library.notePreviewSize.toFloat()
                 sNotePreviewSize.trackActiveTintList = colorStateList
                 sNotePreviewSize.thumbTintList = colorStateList

@@ -58,6 +58,42 @@
             tools:listitem="@layout/noto_color_item" />
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_library_layout"
+            style="@style/DialogSectionItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:text="@string/library_layout" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_library_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/generic_shape"
+            app:tabIconTint="@color/tab_icon_color_selector"
+            app:tabIndicator="@drawable/tab_indicator_shape"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorGravity="stretch"
+            app:tabInlineLabel="true"
+            app:tabSelectedTextColor="@color/colorBackground"
+            app:tabTextAppearance="@style/TabItemTextAppearance"
+            app:tabTextColor="@color/colorPrimary">
+
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/list"
+                android:icon="@drawable/ic_round_view_agenda_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/grid"
+                android:icon="@drawable/ic_round_view_grid_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_note_max_lines"
             style="@style/DialogSectionItem"
             android:layout_width="match_parent"

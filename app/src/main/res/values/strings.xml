@@ -14,7 +14,10 @@
     <string name="share_to">Share to</string>
     <string name="share">Share</string>
     <string name="copy_to">Copy to</string>
+    <string name="library_layout">Library layout</string>
     <string name="layout">Layout</string>
+    <string name="list">List</string>
+    <string name="grid">Grid</string>
     <string name="created">Created</string>
     <string name="words">Words</string>
     <string name="word">Word</string>
