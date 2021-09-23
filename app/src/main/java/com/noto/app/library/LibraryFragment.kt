@@ -129,11 +129,13 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.disableSearch() {
-        val rvAnimation = TranslateAnimation(0F, 0F, 50F, 0F).apply {
-            duration = 250
+        if (tilSearch.isVisible) {
+            val rvAnimation = TranslateAnimation(0F, 0F, 50F, 0F).apply {
+                duration = 250
+            }
+            tilSearch.isVisible = false
+            rv.startAnimation(rvAnimation)
         }
-        tilSearch.isVisible = false
-        rv.startAnimation(rvAnimation)
         requireActivity().hideKeyboard(root)
     }
 
