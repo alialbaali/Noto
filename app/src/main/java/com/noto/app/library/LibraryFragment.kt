@@ -141,6 +141,7 @@ class LibraryFragment : Fragment() {
             tilSearch.isVisible = false
             rv.startAnimation(rvAnimation)
         }
+        etSearch.text = null
         requireActivity().hideKeyboard(root)
     }
 
