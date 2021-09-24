@@ -148,11 +148,9 @@ class LibraryDialogFragment : BaseDialogFragment() {
         findNavController().popBackStack(R.id.mainFragment, false)
         dismiss()
 
-//        viewModel.notes
-//            .value
-//            .keys
-//            .filter { note -> note.reminderDate != null }
-//            .forEach { note -> alarmManager.cancelAlarm(requireContext(), note.id) }
+        viewModel.notes.value
+            .filter { entry -> entry.first.reminderDate != null }
+            .forEach { entry -> alarmManager.cancelAlarm(requireContext(), entry.first.id) }
 
         viewModel.deleteLibrary()
     }
@@ -161,9 +159,9 @@ class LibraryDialogFragment : BaseDialogFragment() {
         if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
                 var documentUri: Uri? = Uri.EMPTY
-//                viewModel.notes.value.keys.forEach { note ->
-//                    documentUri = requireContext().exportNote(uri, viewModel.library.value, note)
-//                }
+                viewModel.notes.value.forEach { entry ->
+                    documentUri = requireContext().exportNote(uri, viewModel.library.value, entry.first)
+                }
                 val parentView = requireParentFragment().requireView()
                 val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
                 val message = resources.stringResource(R.string.library_is_exported) + " ${documentUri?.directoryPath}."
