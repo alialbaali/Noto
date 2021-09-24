@@ -96,7 +96,9 @@ class LibraryFragment : Fragment() {
                 .toLongArray()
             findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(args.libraryId, labelsIds = selectedLabelsIds))
         }
+
         tb.setNavigationOnClickListener {
+            disableSearch()
             findNavController().navigateUp()
         }
 
