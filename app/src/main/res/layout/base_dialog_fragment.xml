@@ -5,7 +5,7 @@
     <View
         android:id="@+id/v_head"
         android:layout_width="30dp"
-        android:layout_height="2dp"
+        android:layout_height="5dp"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/spacing_normal"
         android:background="@drawable/head_view_shape" />
