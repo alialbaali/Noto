@@ -13,6 +13,9 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_dialog_title"
         style="@style/DialogTitle"
+        android:paddingBottom="@dimen/spacing_normal"
+        android:paddingTop="@dimen/spacing_small"
+        android:paddingHorizontal="@dimen/spacing_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Placeholder Options" />
