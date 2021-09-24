@@ -23,6 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val PlayStoreUrl = "https://play.google.com/store/apps/details?id=com.noto"
 private const val GithubUrl = "https://github.com/alialbaali/Noto"
+private const val GithubIssueUrl = "https://github.com/alialbaali/Noto/issues/new"
 
 class SettingsFragment : Fragment() {
 
@@ -103,6 +104,11 @@ class SettingsFragment : Fragment() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(PlayStoreUrl))
             val chooser = Intent.createChooser(intent, resources.stringResource(R.string.open_with))
             startActivity(chooser)
+        }
+
+        tvReportIssue.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubIssueUrl))
+            startActivity(intent)
         }
     }
 }

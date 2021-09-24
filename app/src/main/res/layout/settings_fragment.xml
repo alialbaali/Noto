@@ -103,6 +103,14 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_round_star_rate_24"
                 android:text="@string/rate_app_on_play_store" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_report_issue"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_report_problem_24"
+                android:text="@string/report_issue" />
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView
