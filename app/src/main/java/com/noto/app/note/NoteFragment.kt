@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
@@ -74,6 +75,10 @@ class NoteFragment : Fragment() {
                     else
                         resources.drawableResource(R.drawable.ic_round_edit_notifications_24)
                 )
+                if (note.isValid())
+                    enableBottomAppBarActions()
+                else
+                    disableBottomAppBarActions()
             }
             .distinctUntilChanged { _, _ -> etNoteTitle.text.isNotBlank() || etNoteBody.text.isNotBlank() }
             .combine(viewModel.font) { note, font -> setupNote(note, font) }
@@ -125,6 +130,39 @@ class NoteFragment : Fragment() {
             .debounce(DebounceTimeoutMillis)
             .onEach { (title, body) -> viewModel.createOrUpdateNote(title.toString(), body.toString()) }
             .launchIn(lifecycleScope)
+    }
+
+    private fun NoteFragmentBinding.enableBottomAppBarActions() {
+        val color = resources.colorResource(viewModel.library.value.color.toResource())
+        fab.alpha = 1F
+        fab.isEnabled = true
+        bab.navigationIcon?.mutate()?.setTint(color)
+        bab.menu.forEach {
+            it.isEnabled = true
+            it.icon?.mutate()?.setTint(color)
+        }
+        bab.setNavigationOnClickListener {
+            findNavController().navigate(
+                NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
+                    args.libraryId,
+                    viewModel.note.value.id,
+                    R.id.libraryFragment
+                )
+            )
+        }
+    }
+
+    private fun NoteFragmentBinding.disableBottomAppBarActions() {
+        val color = resources.colorResource(viewModel.library.value.color.toResource())
+            .let { ColorUtils.setAlphaComponent(it, 128) }
+        fab.alpha = 0.50F
+        fab.isEnabled = false
+        bab.navigationIcon?.mutate()?.setTint(color)
+        bab.menu.forEach {
+            it.isEnabled = false
+            it.icon?.mutate()?.setTint(color)
+        }
+        bab.setNavigationOnClickListener(null)
     }
 
     private fun NoteFragmentBinding.setupListeners() {
