@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ConfirmationDialogFragmentBinding
-import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import java.io.Serializable
 
@@ -23,16 +22,13 @@ class ConfirmationDialogFragment : BaseDialogFragment() {
         }
 
     private fun ConfirmationDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.confirmation_dialog)
+        tvDialogTitle.text = args.btnText
     }
 
     private fun ConfirmationDialogFragmentBinding.setupState() {
-        tvTitle.text = args.title
+        tvConfirmation.text = args.confirmation
+        tvDescription.text = args.description
         btnConfirm.text = args.btnText
-        if (args.description.isNullOrBlank())
-            tvDescription.visibility = View.GONE
-        else
-            tvDescription.text = args.description
     }
 
     private fun ConfirmationDialogFragmentBinding.setupListeners() {

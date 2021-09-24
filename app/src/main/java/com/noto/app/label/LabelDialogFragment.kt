@@ -68,7 +68,8 @@ class LabelDialogFragment : BaseDialogFragment() {
         }
 
         tvDeleteLabel.setOnClickListener {
-            val title = resources.stringResource(R.string.delete_label_confirmation)
+            val confirmationText = resources.stringResource(R.string.delete_label_confirmation)
+            val descriptionText = resources.stringResource(R.string.delete_label_description)
             val btnText = resources.stringResource(R.string.delete_label)
             val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
                 val parentView = requireParentFragment().requireView()
@@ -80,8 +81,8 @@ class LabelDialogFragment : BaseDialogFragment() {
 
             findNavController().navigate(
                 LabelDialogFragmentDirections.actionLabelDialogFragmentToConfirmationDialogFragment(
-                    title,
-                    null,
+                    confirmationText,
+                    descriptionText,
                     btnText,
                     clickListener,
                 )

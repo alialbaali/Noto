@@ -163,7 +163,8 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvDeleteNote.setOnClickListener {
-            val title = resources.stringResource(R.string.delete_note_confirmation)
+            val confirmationText = resources.stringResource(R.string.delete_note_confirmation)
+            val descriptionText = resources.stringResource(R.string.delete_note_description)
             val btnText = resources.stringResource(R.string.delete_note)
             val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
                 parentView.snackbar(resources.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
@@ -176,8 +177,8 @@ class NoteDialogFragment : BaseDialogFragment() {
 
             findNavController().navigate(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToConfirmationDialogFragment(
-                    title,
-                    null,
+                    confirmationText,
+                    descriptionText,
                     btnText,
                     clickListener,
                 )

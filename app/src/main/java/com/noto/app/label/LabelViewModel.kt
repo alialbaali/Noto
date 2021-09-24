@@ -27,13 +27,13 @@ class LabelViewModel(
 
     val label = labelRepository.getLabelById(labelId)
         .filterNotNull()
-            .onStart {
-                val position = labelRepository.getLabelsByLibraryId(libraryId)
-                        .filterNotNull()
-                        .first()
-                        .count()
-                emit(Label(labelId, libraryId, position = position))
-            }
+        .onStart {
+            val position = labelRepository.getLabelsByLibraryId(libraryId)
+                .filterNotNull()
+                .first()
+                .count()
+            emit(Label(labelId, libraryId, position = position))
+        }
         .stateIn(viewModelScope, SharingStarted.Lazily, Label(labelId, libraryId))
 
     fun createOrUpdateLabel(title: String) = viewModelScope.launch {

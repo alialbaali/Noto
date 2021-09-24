@@ -221,12 +221,11 @@
         android:name="com.noto.app.ConfirmationDialogFragment"
         android:label="ConfirmationDialogFragment">
         <argument
-            android:name="title"
+            android:name="confirmation"
             app:argType="string" />
         <argument
             android:name="description"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <argument
             android:name="btn_text"
             app:argType="string" />

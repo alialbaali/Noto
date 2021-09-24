@@ -100,14 +100,15 @@ class LibraryDialogFragment : BaseDialogFragment() {
         }
 
         tvDeleteLibrary.setOnClickListener {
-            val title = resources.stringResource(R.string.delete_library_confirmation)
+            val confirmationText = resources.stringResource(R.string.delete_library_confirmation)
+            val descriptionText = resources.stringResource(R.string.delete_library_description)
             val btnText = resources.stringResource(R.string.delete_library)
             val clickListener = setupConfirmationDialogClickListener()
 
             findNavController().navigate(
                 LibraryDialogFragmentDirections.actionLibraryDialogFragmentToConfirmationDialogFragment(
-                    title,
-                    null,
+                    confirmationText,
+                    descriptionText,
                     btnText,
                     clickListener,
                 )
