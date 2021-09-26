@@ -42,7 +42,6 @@ class LibraryFragment : Fragment() {
         }
 
     private fun LibraryFragmentBinding.setupState() {
-        val layoutManagerMenuItem = bab.menu.findItem(R.id.layout)
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
@@ -56,7 +55,7 @@ class LibraryFragment : Fragment() {
                 }
             }
             .distinctUntilChangedBy { library -> library.layoutManager }
-            .onEach { library -> setupLayoutManager(library.layoutManager, layoutManagerMenuItem) }
+            .onEach { library -> setupLayoutManager(library.layoutManager) }
             .launchIn(lifecycleScope)
 
         combine(
@@ -110,7 +109,6 @@ class LibraryFragment : Fragment() {
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.archive -> setupArchivedNotesMenuItem()
-                R.id.layout -> setupLayoutManagerMenuItem()
                 R.id.search -> setupSearchMenuItem()
                 else -> false
             }
@@ -148,25 +146,11 @@ class LibraryFragment : Fragment() {
         requireActivity().hideKeyboard(root)
     }
 
-    private fun LibraryFragmentBinding.setupLayoutManager(layoutManager: LayoutManager, layoutManagerMenuItem: MenuItem) {
-        val color = viewModel.library.value.color.toResource()
-        val resource = resources.colorResource(color)
+    private fun LibraryFragmentBinding.setupLayoutManager(layoutManager: LayoutManager) {
         when (layoutManager) {
-            LayoutManager.Linear -> {
-                layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_grid_24)
-                rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            }
-            LayoutManager.Grid -> {
-                layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_agenda_24)
-                rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            }
+            LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
-        layoutManagerMenuItem.icon?.mutate()?.setTint(resource)
-
-        rv.visibility = View.INVISIBLE
-        rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
-
-        rv.visibility = View.VISIBLE
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
@@ -284,20 +268,6 @@ class LibraryFragment : Fragment() {
 
     private fun LibraryFragmentBinding.setupArchivedNotesMenuItem(): Boolean {
         findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToLibraryArchiveFragment(args.libraryId))
-        return true
-    }
-
-    private fun LibraryFragmentBinding.setupLayoutManagerMenuItem(): Boolean {
-        when (viewModel.library.value.layoutManager) {
-            LayoutManager.Linear -> {
-                viewModel.updateLayoutManager(LayoutManager.Grid)
-                root.snackbar(getString(R.string.layout_is_grid_mode), anchorView = fab)
-            }
-            LayoutManager.Grid -> {
-                viewModel.updateLayoutManager(LayoutManager.Linear)
-                root.snackbar(getString(R.string.layout_is_list_mode), anchorView = fab)
-            }
-        }
         return true
     }
 

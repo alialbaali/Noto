@@ -85,10 +85,6 @@ class MainFragment : Fragment() {
                 rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             }
         }
-        rv.visibility = View.INVISIBLE
-        rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.hide))
-
-        rv.visibility = View.VISIBLE
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
