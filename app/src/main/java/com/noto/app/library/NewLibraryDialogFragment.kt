@@ -48,6 +48,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
     private fun NewLibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         rv.clipToOutline = true
+        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+
         if (args.libraryId == 0L) {
             et.requestFocus()
             requireActivity().showKeyboard(root)

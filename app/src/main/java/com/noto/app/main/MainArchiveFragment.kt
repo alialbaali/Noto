@@ -15,10 +15,7 @@ import com.noto.app.R
 import com.noto.app.databinding.MainArchiveFragmentBinding
 import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Library
-import com.noto.app.util.headerItem
-import com.noto.app.util.sorted
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -41,6 +38,8 @@ class MainArchiveFragment : Fragment() {
     }
 
     private fun MainArchiveFragmentBinding.setupState() {
+        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+
         combine(
             viewModel.archivedLibraries,
             viewModel.sorting,

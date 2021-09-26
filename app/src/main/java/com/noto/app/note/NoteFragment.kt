@@ -50,6 +50,7 @@ class NoteFragment : Fragment() {
     @OptIn(FlowPreview::class)
     private fun NoteFragmentBinding.setupState() {
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+        rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         viewModel.library
             .onEach { library -> setupLibrary(library) }

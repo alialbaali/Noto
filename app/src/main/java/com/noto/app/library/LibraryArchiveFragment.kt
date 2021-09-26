@@ -42,6 +42,8 @@ class LibraryArchiveFragment : Fragment() {
     }
 
     private fun LibraryArchiveFragmentBinding.setupState() {
+        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+
         viewModel.library
             .onEach { library -> setupLibrary(library) }
             .distinctUntilChangedBy { library -> library.layoutManager }

@@ -56,6 +56,7 @@ class MainFragment : Fragment() {
 
     private fun MainFragmentBinding.setupState() {
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout)
+        rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         combine(
             viewModel.libraries,

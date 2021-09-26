@@ -18,10 +18,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ReorderLabelDialogFragmentBinding
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.NotoColor
-import com.noto.app.util.colorResource
-import com.noto.app.util.stringResource
-import com.noto.app.util.toResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -51,6 +48,8 @@ class ReorderLabelDialogFragment : BaseDialogFragment() {
 
     private fun ReorderLabelDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+
         viewModel.library
             .onEach { library ->
                 val color = resources.colorResource(library.color.toResource())

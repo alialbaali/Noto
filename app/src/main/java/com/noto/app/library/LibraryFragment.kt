@@ -44,6 +44,7 @@ class LibraryFragment : Fragment() {
     private fun LibraryFragmentBinding.setupState() {
         val layoutManagerMenuItem = bab.menu.findItem(R.id.layout)
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
+        rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         viewModel.library
             .onEach { library ->

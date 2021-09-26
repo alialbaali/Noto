@@ -46,6 +46,7 @@ class NoteReadingModeFragment : Fragment() {
 
     private fun NoteReadingModeFragmentBinding.setupState() {
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+        rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         viewModel.library
             .onEach { library -> setupLibrary(library) }

@@ -17,6 +17,7 @@ import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.Library
 import com.noto.app.main.MainViewModel
 import com.noto.app.main.libraryItem
+import com.noto.app.util.BounceEdgeEffectFactory
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -42,6 +43,7 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun SelectLibraryDialogFragmentBinding.setupState() {
+        rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         viewModel.libraries
             .map { libraries -> libraries.filter { library -> library.id != args.libraryId } }
