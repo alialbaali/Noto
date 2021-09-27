@@ -40,14 +40,6 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
             LibraryListSorting.Alphabetical -> "${resources.stringResource(R.string.alphabetical)} $sortingText"
         }
         tvSorting.setOnClickListener(onClickListener)
-        val arrowDrawable = when (sortingOrder) {
-            SortingOrder.Ascending -> R.drawable.ic_round_arrow_up_24
-            SortingOrder.Descending -> R.drawable.ic_round_arrow_down_24
-        }
-        if (sorting == LibraryListSorting.Manual)
-            tvSorting.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
-        else
-            tvSorting.setCompoundDrawablesWithIntrinsicBounds(arrowDrawable, 0, 0, 0)
         tvLibrariesCount.text = librariesCount.toCountText(
             resources.stringResource(R.string.library),
             resources.stringResource(R.string.libraries)

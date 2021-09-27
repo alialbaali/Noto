@@ -43,14 +43,6 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
             NoteListSorting.Alphabetical -> "${resources.stringResource(R.string.alphabetical)} $sortingText"
         }
         tvSorting.setOnClickListener(onClickListener)
-        val arrowDrawable = when (sortingOrder) {
-            SortingOrder.Ascending -> R.drawable.ic_round_arrow_up_24
-            SortingOrder.Descending -> R.drawable.ic_round_arrow_down_24
-        }
-        if (sorting == NoteListSorting.Manual)
-            tvSorting.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0)
-        else
-            tvSorting.setCompoundDrawablesWithIntrinsicBounds(arrowDrawable, 0, 0, 0)
         tvLibraryNotesCount.text = notesCount.toCountText(
             resources.stringResource(R.string.note),
             resources.stringResource(R.string.notes)

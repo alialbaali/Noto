@@ -245,4 +245,14 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <style name="SortingItem" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">@dimen/size_tiny</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/sorting_item_shape</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>
