@@ -74,11 +74,13 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
         rv.isVisible = labels.isNotEmpty()
         rv.layoutManager = FlexboxLayoutManager(root.context, FlexDirection.ROW, FlexWrap.WRAP)
-        val itemDecoration = FlexboxItemDecoration(root.context).apply {
-            setDrawable(root.resources.drawableResource(R.drawable.note_label_item_decoration))
-            setOrientation(FlexboxItemDecoration.HORIZONTAL)
+        if (rv.itemDecorationCount == 0) {
+            val itemDecoration = FlexboxItemDecoration(root.context).apply {
+                setDrawable(root.resources.drawableResource(R.drawable.note_label_item_decoration))
+                setOrientation(FlexboxItemDecoration.HORIZONTAL)
+            }
+            rv.addItemDecoration(itemDecoration)
         }
-        rv.addItemDecoration(itemDecoration)
         rv.withModels {
             labels.forEach { label ->
                 noteLabelItem {
