@@ -13,31 +13,24 @@
         <include layout="@layout/base_dialog_fragment" />
 
         <RadioGroup
-            android:id="@+id/rg_sorting"
+            android:id="@+id/rg_sorting_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_manual"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/manual" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_creation_date"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/creation_date" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_alphabetical"
+                android:id="@+id/rb_sorting_asc"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/alphabetical" />
+                android:text="@string/ascending" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_sorting_desc"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/descending" />
 
         </RadioGroup>
     </LinearLayout>

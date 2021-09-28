@@ -77,14 +77,14 @@
             android:id="@+id/action_libraryFragment_to_libraryDialogFragment"
             app:destination="@id/libraryDialogFragment" />
         <action
-            android:id="@+id/action_libraryFragment_to_noteListSortingDialogFragment"
-            app:destination="@id/noteListSortingDialogFragment" />
-        <action
             android:id="@+id/action_libraryFragment_to_newLabelDialogFragment"
             app:destination="@id/newLabelDialogFragment" />
         <action
             android:id="@+id/action_libraryFragment_to_labelDialogFragment"
             app:destination="@id/labelDialogFragment" />
+        <action
+            android:id="@+id/action_libraryFragment_to_noteListSortingGroupingDialogFragment"
+            app:destination="@id/noteListSortingGroupingDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/newLibraryDialogFragment"
@@ -366,5 +366,38 @@
             android:name="label_id"
             app:argType="long"
             android:defaultValue="0L" />
+    </dialog>
+    <dialog
+        android:id="@+id/noteListSortingOrderDialogFragment"
+        android:name="com.noto.app.library.NoteListSortingOrderDialogFragment"
+        android:label="NoteListSortingOrderDialogFragment" >
+        <argument
+            android:name="library_id"
+            app:argType="long" />
+    </dialog>
+    <dialog
+        android:id="@+id/noteListGroupingDialogFragment"
+        android:name="com.noto.app.library.NoteListGroupingDialogFragment"
+        android:label="NoteListGroupingDialogFragment" >
+        <argument
+            android:name="library_id"
+            app:argType="long" />
+    </dialog>
+    <dialog
+        android:id="@+id/noteListSortingGroupingDialogFragment"
+        android:name="com.noto.app.library.NoteListSortingGroupingDialogFragment"
+        android:label="NoteListSortingGroupingDialogFragment" >
+        <argument
+            android:name="library_id"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_noteListSortingGroupingDialogFragment_to_noteListSortingOrderDialogFragment"
+            app:destination="@id/noteListSortingOrderDialogFragment" />
+        <action
+            android:id="@+id/action_noteListSortingGroupingDialogFragment_to_noteListGroupingDialogFragment"
+            app:destination="@id/noteListGroupingDialogFragment" />
+        <action
+            android:id="@+id/action_noteListSortingGroupingDialogFragment_to_noteListSortingDialogFragment"
+            app:destination="@id/noteListSortingDialogFragment" />
     </dialog>
 </navigation>
