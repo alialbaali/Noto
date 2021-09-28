@@ -48,4 +48,7 @@ data class Library(
 
     @ColumnInfo(name = "sorting_order", defaultValue = "1")
     val sortingOrder: SortingOrder = SortingOrder.Descending,
+
+    @ColumnInfo(name = "grouping", defaultValue = "0")
+    val grouping: Grouping = Grouping.Default,
 )

@@ -2,6 +2,7 @@ package com.noto.app.data.database
 
 import android.annotation.SuppressLint
 import androidx.room.TypeConverter
+import com.noto.app.domain.model.Grouping
 import com.noto.app.domain.model.LayoutManager
 import com.noto.app.domain.model.NoteListSorting
 import com.noto.app.domain.model.NotoColor
@@ -65,5 +66,17 @@ object SortingOrderConverter {
     @TypeConverter
     @JvmStatic
     fun toEnum(ordinal: Int): SortingOrder = SortingOrder.values().first { sortingOrder -> sortingOrder.ordinal == ordinal }
+
+}
+
+object GroupingConvertor {
+
+    @TypeConverter
+    @JvmStatic
+    fun toOrdinal(grouping: Grouping): Int = grouping.ordinal
+
+    @TypeConverter
+    @JvmStatic
+    fun toEnum(ordinal: Int): Grouping = Grouping.values().first { grouping -> grouping.ordinal == ordinal }
 
 }
