@@ -135,6 +135,10 @@ class LibraryViewModel(
         libraryRepository.updateLibrary(library.value.copy(sortingOrder = value))
     }
 
+    fun updateGrouping(value: Grouping) = viewModelScope.launch {
+        libraryRepository.updateLibrary(library.value.copy(grouping = value))
+    }
+
     fun selectNotoColor(notoColor: NotoColor) {
         mutableNotoColors.value = mutableNotoColors.value
             .mapTrueIfSameColor(notoColor)

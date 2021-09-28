@@ -35,3 +35,22 @@ fun Instant.format(context: Context): String {
             }
         }
 }
+
+fun LocalDate.format(): String {
+    val timeZone = TimeZone.currentSystemDefault()
+    return toJavaLocalDate()
+        .let { localDate ->
+            val currentDateTime = Clock.System
+                .now()
+                .toLocalDateTime(timeZone)
+            if (localDate.year > currentDateTime.year) {
+                val format = "EEE, d MMM yyyy"
+                localDate.format(DateTimeFormatter.ofPattern(format))
+            } else {
+                val format = "EEE, d MMM"
+                localDate.format(DateTimeFormatter.ofPattern(format))
+            }
+        }
+}
+
+fun Instant.toLocalDate() = toLocalDateTime(TimeZone.currentSystemDefault()).date

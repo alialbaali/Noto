@@ -69,8 +69,7 @@ class LibraryFragment : Fragment() {
                 .map { it.trim() },
         ) { notes, labels, font, library, searchTerm ->
             setupNotesAndLabels(
-                notes.sorted(library.sorting, library.sortingOrder)
-                    .filter { it.first.title.contains(searchTerm, ignoreCase = true) || it.first.body.contains(searchTerm, ignoreCase = true) },
+                notes.filter { it.first.title.contains(searchTerm, ignoreCase = true) || it.first.body.contains(searchTerm, ignoreCase = true) },
                 labels,
                 font,
                 library
@@ -202,7 +201,7 @@ class LibraryFragment : Fragment() {
                     notesCount(filteredNotes.size)
                     notoColor(library.color)
                     onClickListener { _ ->
-                        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingDialogFragment(args.libraryId))
+                        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingGroupingDialogFragment(args.libraryId))
                     }
                 }
 
@@ -243,25 +242,52 @@ class LibraryFragment : Fragment() {
                     }
                 }
 
-                val pinnedNotes = filteredNotes.filter { it.first.isPinned }
-                val notPinnedNotes = filteredNotes.filterNot { it.first.isPinned }
+                when (library.grouping) {
+                    Grouping.Default -> {
+                        val pinnedNotes = filteredNotes.filter { it.first.isPinned }.sorted(library.sorting, library.sortingOrder)
+                        val notPinnedNotes = filteredNotes.filterNot { it.first.isPinned }.sorted(library.sorting, library.sortingOrder)
 
-                if (pinnedNotes.isNotEmpty()) {
-                    headerItem {
-                        id("pinned")
-                        title(resources.stringResource(R.string.pinned))
-                    }
+                        if (pinnedNotes.isNotEmpty()) {
+                            headerItem {
+                                id("pinned")
+                                title(resources.stringResource(R.string.pinned))
+                            }
 
-                    items(pinnedNotes)
+                            items(pinnedNotes)
 
-                    if (notPinnedNotes.isNotEmpty())
-                        headerItem {
-                            id("notes")
-                            title(resources.stringResource(R.string.notes))
+                            if (notPinnedNotes.isNotEmpty())
+                                headerItem {
+                                    id("notes")
+                                    title(resources.stringResource(R.string.notes))
+                                }
                         }
+                        items(notPinnedNotes)
+                    }
+                    Grouping.CreationDate -> {
+                        filteredNotes.groupByDate(library.sorting, library.sortingOrder).forEach { (date, notes) ->
+                            headerItem {
+                                id(date.dayOfYear)
+                                title(date.format())
+                            }
+                            items(notes)
+                        }
+                    }
+                    Grouping.Label -> {
+                        filteredNotes.groupByLabels(library.sorting, library.sortingOrder).forEach { (labels, notes) ->
+                            if (labels.isEmpty())
+                                headerItem {
+                                    id("without_label")
+                                    title(resources.stringResource(R.string.without_label))
+                                }
+                            else
+                                headerItem {
+                                    id(*labels.map { it.id }.toTypedArray())
+                                    title(labels.joinToString(" • ") { it.title })
+                                }
+                            items(notes)
+                        }
+                    }
                 }
-
-                items(notPinnedNotes)
             }
         }
     }

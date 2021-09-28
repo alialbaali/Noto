@@ -24,6 +24,7 @@
     <string name="alphabetical">Alphabetical</string>
     <string name="creation_date">Creation date</string>
     <string name="manual">Manual</string>
+    <string name="default_grouping">Default</string>
     <string name="descending">Descending</string>
     <string name="ascending">Ascending</string>
     <string name="settings">Settings</string>
@@ -90,6 +91,8 @@
     <string name="archive_note">Archive note</string>
     <string name="duplicate_note">Duplicate note</string>
     <string name="sorting">Sorting</string>
+    <string name="sorting_and_grouping">Sorting &amp; Grouping</string>
+    <string name="grouping">Grouping</string>
     <string name="sorting_order">Sorting order</string>
     <string name="save_to_noto">Save to Noto</string>
     <string name="unarchive_note">Unarchive note</string>
@@ -134,6 +137,8 @@
     <string name="labels">Labels</string>
     <string name="create_label">Create label</string>
     <string name="label_title">Label title</string>
+    <string name="label">Label</string>
+    <string name="without_label">Without label</string>
     <string name="label_color">Label color</string>
     <string name="label_options">Label options</string>
     <string name="update_label">Update label</string>

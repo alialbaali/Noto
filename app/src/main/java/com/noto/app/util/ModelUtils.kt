@@ -65,3 +65,16 @@ fun List<Pair<Note, List<Label>>>.filterSelectedLabels(labels: Map<Label, Boolea
         .map { it.key }
     pair.second.containsAll(selectedLabels)
 }
+
+fun List<Pair<Note, List<Label>>>.groupByDate(sorting: NoteListSorting, sortingOrder: SortingOrder) =
+    groupBy { it.first.creationDate.toLocalDate() }
+        .mapValues { it.value.sorted(sorting, sortingOrder).sortedByDescending { it.first.isPinned } }
+        .map { it.toPair() }
+        .sortedByDescending { it.first }
+
+fun List<Pair<Note, List<Label>>>.groupByLabels(sorting: NoteListSorting, sortingOrder: SortingOrder) =
+    map { it.second to (it.first to emptyList<Label>()) }
+        .groupBy({ it.first }, { it.second })
+        .mapValues { it.value.sorted(sorting, sortingOrder).sortedByDescending { it.first.isPinned } }
+        .map { it.toPair() }
+        .sortedBy { it.first.firstOrNull()?.position }

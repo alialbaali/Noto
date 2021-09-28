@@ -121,25 +121,52 @@ class LibraryArchiveFragment : Fragment() {
                     }
                 }
 
-                val pinnedNotes = archivedNotes.filter { it.first.isPinned }
-                val notPinnedNotes = archivedNotes.filterNot { it.first.isPinned }
+                when (library.grouping) {
+                    Grouping.Default -> {
+                        val pinnedNotes = archivedNotes.filter { it.first.isPinned }.sorted(library.sorting, library.sortingOrder)
+                        val notPinnedNotes = archivedNotes.filterNot { it.first.isPinned }.sorted(library.sorting, library.sortingOrder)
 
-                if (pinnedNotes.isNotEmpty()) {
-                    headerItem {
-                        id("pinned")
-                        title(resources.stringResource(R.string.pinned))
-                    }
+                        if (pinnedNotes.isNotEmpty()) {
+                            headerItem {
+                                id("pinned")
+                                title(resources.stringResource(R.string.pinned))
+                            }
 
-                    items(pinnedNotes)
+                            items(pinnedNotes)
 
-                    if (notPinnedNotes.isNotEmpty())
-                        headerItem {
-                            id("notes")
-                            title(resources.stringResource(R.string.notes))
+                            if (notPinnedNotes.isNotEmpty())
+                                headerItem {
+                                    id("notes")
+                                    title(resources.stringResource(R.string.notes))
+                                }
                         }
+                        items(notPinnedNotes)
+                    }
+                    Grouping.CreationDate -> {
+                        archivedNotes.groupByDate(library.sorting, library.sortingOrder).forEach { (date, notes) ->
+                            headerItem {
+                                id(date.dayOfYear)
+                                title(date.format())
+                            }
+                            items(notes)
+                        }
+                    }
+                    Grouping.Label -> {
+                        archivedNotes.groupByLabels(library.sorting, library.sortingOrder).forEach { (labels, notes) ->
+                            if (labels.isEmpty())
+                                headerItem {
+                                    id("without_label")
+                                    title(resources.stringResource(R.string.without_label))
+                                }
+                            else
+                                headerItem {
+                                    id(*labels.map { it.id }.toTypedArray())
+                                    title(labels.joinToString(" • ") { it.title })
+                                }
+                            items(notes)
+                        }
+                    }
                 }
-
-                items(notPinnedNotes)
             }
         }
     }
