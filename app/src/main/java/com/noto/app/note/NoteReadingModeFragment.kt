@@ -1,6 +1,5 @@
 package com.noto.app.note
 
-import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -31,7 +30,6 @@ class NoteReadingModeFragment : Fragment() {
 
     private val args by navArgs<NoteReadingModeFragmentArgs>()
 
-    @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteReadingModeFragmentBinding.inflate(inflater, container, false).withBinding {
             setupState()
@@ -77,12 +75,11 @@ class NoteReadingModeFragment : Fragment() {
         }.launchIn(lifecycleScope)
     }
 
-    @SuppressLint("SetTextI18n")
     private fun NoteReadingModeFragmentBinding.setupNote(note: Note, font: Font) {
         tvNoteTitle.text = note.title
         tvNoteBody.text = note.body
-        tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.creationDate.format(requireContext())}"
-        tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
+        tvCreatedAt.text = resources.stringResource(R.string.created, note.creationDate.format(requireContext()))
+        tvWordCount.text = resources.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
         tvNoteTitle.isVisible = note.title.isNotBlank()
         tvNoteBody.isVisible = note.body.isNotBlank()
         tvNoteTitle.setBoldFont(font)

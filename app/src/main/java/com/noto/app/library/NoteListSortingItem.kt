@@ -35,18 +35,14 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
 
     override fun bind(holder: Holder) = with(holder.binding) {
         val resources = root.resources
-        val sortingText = resources.stringResource(R.string.sorting).lowercase()
         val color = resources.colorResource(notoColor.toResource())
         tvSorting.text = when (sorting) {
-            NoteListSorting.Manual -> "${resources.stringResource(R.string.manual)} $sortingText"
-            NoteListSorting.CreationDate -> "${resources.stringResource(R.string.creation_date)} $sortingText"
-            NoteListSorting.Alphabetical -> "${resources.stringResource(R.string.alphabetical)} $sortingText"
+            NoteListSorting.Manual -> resources.stringResource(R.string.manual_sorting)
+            NoteListSorting.CreationDate -> resources.stringResource(R.string.creation_date_sorting)
+            NoteListSorting.Alphabetical -> resources.stringResource(R.string.alphabetical_sorting)
         }
         tvSorting.setOnClickListener(onClickListener)
-        tvLibraryNotesCount.text = notesCount.toCountText(
-            resources.stringResource(R.string.note),
-            resources.stringResource(R.string.notes)
-        )
+        tvLibraryNotesCount.text = resources.pluralsResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
         tvSorting.background?.mutate()?.setTint(ColorUtils.setAlphaComponent(color, 25))
         tvSorting.compoundDrawables[0]?.mutate()?.setTint(color)
         tvLibraryNotesCount.setTextColor(color)

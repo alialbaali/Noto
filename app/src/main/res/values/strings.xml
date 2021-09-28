@@ -10,12 +10,13 @@
     <string name="layout">Layout</string>
     <string name="list">List</string>
     <string name="grid">Grid</string>
-    <string name="created">Created</string>
-    <string name="words">Words</string>
-    <string name="word">Word</string>
+    <string name="created">Created %s</string>
     <string name="alphabetical">Alphabetical</string>
+    <string name="alphabetical_sorting">Alphabetical sorting</string>
     <string name="creation_date">Creation date</string>
+    <string name="creation_date_sorting">Creation date sorting</string>
     <string name="manual">Manual</string>
+    <string name="manual_sorting">Manual sorting</string>
     <string name="default_grouping">Default</string>
     <string name="descending">Descending</string>
     <string name="ascending">Ascending</string>
@@ -28,7 +29,7 @@
     <string name="share_with">Share with</string>
     <string name="open_with">Open with</string>
     <string name="invite_text">Check out Noto!</string>
-    <string name="version">Version</string>
+    <string name="version">Version %s</string>
     <string name="layout_is_list_mode">Layout has been set to list mode.</string>
     <string name="layout_is_grid_mode">Layout has been set to grid mode.</string>
     <string name="drag">Drag</string>
@@ -40,7 +41,10 @@
 
     <!-- Library -->
     <string name="libraries">Libraries</string>
-    <string name="library">Library</string>
+    <plurals name="libraries_count">
+        <item quantity="one">%d Library</item>
+        <item quantity="other">%d Libraries</item>
+    </plurals>
     <string name="create_library">Create library</string>
     <string name="new_library">New Library</string>
     <string name="library_options">Library options</string>
@@ -74,6 +78,14 @@
     <string name="all_notes">All notes</string>
     <string name="all">All</string>
     <string name="archive_is_empty">Archive is empty.</string>
+    <plurals name="notes_count">
+        <item quantity="one">%d Note</item>
+        <item quantity="other">%d Notes</item>
+    </plurals>
+    <plurals name="words_count">
+        <item quantity="one">%d Word</item>
+        <item quantity="other">%d Words</item>
+    </plurals>
     <string name="body">Body</string>
     <string name="title">Title</string>
     <string name="create_note">Create note</string>
@@ -87,7 +99,6 @@
     <string name="save_to_noto">Save to Noto</string>
     <string name="unarchive_note">Unarchive note</string>
     <string name="notes">Notes</string>
-    <string name="note">Note</string>
     <string name="no_note_matches_search_term">There\'s no note that matches the search term.</string>
     <string name="note_is_archived">Note has been archived.</string>
     <string name="note_is_pinned">Note has been pinned.</string>
@@ -104,7 +115,7 @@
     <string name="delete_note_confirmation">Are you sure you want to delete this note?</string>
     <string name="share_note">Share note with…</string>
     <string name="export_note">Export note to…</string>
-    <string name="note_is_exported">Note has been exported to</string>
+    <string name="note_is_exported">Note has been exported to %s</string>
     <string name="add_note_reminder">Add note reminder</string>
     <string name="delete_note_description">This action can\'t be undone and will delete the note and its reminder permanently.</string>
     <string name="pin_note">Pin note</string>

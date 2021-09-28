@@ -1,6 +1,5 @@
 package com.noto.app.settings
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -35,14 +34,13 @@ class SettingsFragment : Fragment() {
             setupListeners()
         }
 
-    @SuppressLint("SetTextI18n")
     private fun SettingsFragmentBinding.setupState() {
         val version = requireContext()
             .packageManager
             ?.getPackageInfo(requireContext().packageName, 0)
             ?.versionName
 
-        tvVersion.text = resources.stringResource(R.string.version) + " $version"
+        tvVersion.text = resources.stringResource(R.string.version, version)
 
         val switchOffColor = ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorSecondary), 128)
         val state = arrayOf(

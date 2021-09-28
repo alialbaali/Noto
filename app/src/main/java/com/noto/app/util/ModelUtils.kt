@@ -21,11 +21,8 @@ fun String.takeLines(n: Int) = lines().take(n).joinToString("\n")
 
 fun Library.getArchiveText(archiveText: String) = "$title ${archiveText.lowercase()}"
 
-fun Note.countWords(single: String, plural: String) = if (body.isBlank())
-    "0 $plural".lowercase()
-else body.split("\\s+".toRegex())
-    .size
-    .toCountText(single, plural)
+val Note.wordsCount
+    get() = if (body.isBlank()) 0 else body.split("\\s+".toRegex()).size
 
 inline fun <T : ViewBinding> T.withBinding(crossinline block: T.() -> Unit): View {
     block()

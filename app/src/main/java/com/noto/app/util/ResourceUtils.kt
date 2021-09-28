@@ -13,9 +13,11 @@ import com.noto.app.domain.model.NotoColor
 fun Resources.colorStateResource(@ColorRes id: Int): ColorStateList? = ResourcesCompat.getColorStateList(this, id, null)
 fun Resources.colorResource(@ColorRes id: Int): Int = ResourcesCompat.getColor(this, id, null)
 fun Resources.stringResource(@StringRes id: Int): String = getString(id)
+fun Resources.stringResource(@StringRes id: Int, vararg formatArgs: Any?): String = getString(id, *formatArgs)
 fun Resources.drawableResource(@DrawableRes id: Int): Drawable? = ResourcesCompat.getDrawable(this, id, null)
 fun Resources.dimenResource(@DimenRes id: Int): Float = getDimension(id)
 fun Resources.fontResource(context: Context, @FontRes id: Int) = ResourcesCompat.getFont(context, id)
+fun Resources.pluralsResource(@PluralsRes id: Int, quantity: Int, vararg formatArgs: Any?) = getQuantityString(id, quantity, *formatArgs)
 
 fun Context.tryLoadingFontResource(@FontRes id: Int) = try {
     resources.fontResource(this, id)

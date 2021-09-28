@@ -192,7 +192,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 val documentUri = requireContext().exportNote(uri, viewModel.library.value, viewModel.note.value)
                 val parentView = requireParentFragment().requireView()
                 val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
-                val message = resources.stringResource(R.string.note_is_exported) + " ${documentUri?.directoryPath}."
+                val message = resources.stringResource(R.string.note_is_exported, documentUri?.directoryPath)
                 parentView.snackbar(message, parentAnchorView)
                 findNavController().navigateUp()
             }

@@ -45,7 +45,7 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
         val resources = root.resources
         val color = resources.colorResource(library.color.toResource())
         tvLibraryTitle.text = library.title
-        tvLibraryNotesCount.text = notesCount.toCountText(resources.stringResource(R.string.note), resources.stringResource(R.string.notes))
+        tvLibraryNotesCount.text = resources.pluralsResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
         ibDrag.isVisible = isManualSorting
         vColor.background.setTint(color)
         tvLibraryTitle.setTextColor(color)

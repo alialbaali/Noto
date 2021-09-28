@@ -1,6 +1,5 @@
 package com.noto.app.note
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -69,7 +68,7 @@ class NoteFragment : Fragment() {
         viewModel.note
             .onEach { note ->
                 setupShortcut(note)
-                tvWordCount.text = note.countWords(resources.stringResource(R.string.word), resources.stringResource(R.string.words))
+                tvWordCount.text = resources.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
                 fab.setImageDrawable(
                     if (note.reminderDate == null)
                         resources.drawableResource(R.drawable.ic_round_notification_add_24)
@@ -240,7 +239,6 @@ class NoteFragment : Fragment() {
         }
     }
 
-    @SuppressLint("SetTextI18n")
     private fun NoteFragmentBinding.setupNote(note: Note, font: Font) {
         etNoteTitle.setText(note.title)
         etNoteBody.setText(note.body)
@@ -248,7 +246,7 @@ class NoteFragment : Fragment() {
         etNoteBody.setSelection(note.body.length)
         etNoteTitle.setBoldFont(font)
         etNoteBody.setSemiboldFont(font)
-        tvCreatedAt.text = "${resources.stringResource(R.string.created)} ${note.creationDate.format(requireContext())}"
+        tvCreatedAt.text = resources.stringResource(R.string.created, note.creationDate.format(requireContext()))
     }
 
     private fun NoteFragmentBinding.setupShortcut(note: Note) {

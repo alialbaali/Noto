@@ -56,14 +56,11 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onDragHandleTouchListener: View.OnTouchListener
 
-    @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
         tvNoteTitle.text = note.title
-        if (isShowCreationDate) {
-            val createdText = root.resources.stringResource(com.noto.app.R.string.created)
-            val formattedCreationDate = note.creationDate.format(root.context)
-            tvCreationDate.text = "$createdText $formattedCreationDate"
-        }
+        if (isShowCreationDate)
+            tvCreationDate.text = root.resources.stringResource(R.string.created, note.creationDate.format(root.context))
         tvCreationDate.isVisible = isShowCreationDate
         tvNoteTitle.isVisible = note.title.isNotBlank()
         root.setOnClickListener(onClickListener)
