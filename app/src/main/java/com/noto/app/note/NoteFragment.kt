@@ -75,7 +75,7 @@ class NoteFragment : Fragment() {
                     else
                         resources.drawableResource(R.drawable.ic_round_edit_notifications_24)
                 )
-                if (note.isValid())
+                if (note.isValid)
                     enableBottomAppBarActions()
                 else
                     disableBottomAppBarActions()
@@ -250,7 +250,7 @@ class NoteFragment : Fragment() {
     }
 
     private fun NoteFragmentBinding.setupShortcut(note: Note) {
-        if (note.id != 0L && note.isValid()) {
+        if (note.id != 0L && note.isValid) {
             val intent = Intent(Intent.ACTION_EDIT, null, requireContext(), AppActivity::class.java).apply {
                 putExtra(Constants.LibraryId, note.libraryId)
                 putExtra(Constants.NoteId, note.id)

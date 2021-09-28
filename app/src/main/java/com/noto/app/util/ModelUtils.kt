@@ -36,9 +36,8 @@ fun Note.format(): String = """
 """.trimIndent()
     .trim()
 
-fun Note.isValid(): Boolean = !(title.isBlank() && body.isBlank())
-
-fun Int.toCountText(single: String, plural: String) = if (this == 1) "$this ${single.lowercase()}" else "$this ${plural.lowercase()}"
+val Note.isValid
+    get() = title.isNotBlank() || body.isNotBlank()
 
 fun List<Library>.sorted(sorting: LibraryListSorting, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { library ->
     when (sorting) {

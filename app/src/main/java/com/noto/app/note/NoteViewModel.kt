@@ -78,7 +78,7 @@ class NoteViewModel(
             title = title.trim(),
             body = body.trim(),
         )
-        if (note.isValid())
+        if (note.isValid)
             if (note.id == 0L)
                 noteRepository.createNote(note).also { id ->
                     noteRepository.getNoteById(id)

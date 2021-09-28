@@ -242,7 +242,7 @@ class LibraryFragment : Fragment() {
                     }
                 }
 
-                buildNotesModels(library, notes, resources, items)
+                buildNotesModels(library, filteredNotes, resources, items)
             }
         }
     }
