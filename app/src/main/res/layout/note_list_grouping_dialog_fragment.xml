@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/BaseDialogFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/base_dialog_fragment" />
+
+        <RadioGroup
+            android:id="@+id/rg_grouping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_default"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/default_grouping" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_creation_date"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/creation_date" />
+
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_label"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/label" />
+
+        </RadioGroup>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
