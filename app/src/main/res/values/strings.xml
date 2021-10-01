@@ -4,6 +4,7 @@
     <string name="app_name">Noto</string>
     <string name="done">Done</string>
     <string name="search">Search</string>
+    <!-- More options for library, note, etc -->
     <string name="more">More</string>
     <string name="back">Back</string>
     <string name="library_layout">Library layout</string>
@@ -27,6 +28,7 @@
     <string name="rate_app_on_play_store">Rate app on Play Store</string>
     <string name="report_issue">Report an issue</string>
     <string name="share_with">Share with</string>
+    <!-- Open with an app such as Signal -->
     <string name="open_with">Open with</string>
     <string name="invite_text">Check out Noto!</string>
     <string name="version">Version %s</string>
@@ -53,7 +55,7 @@
     <string name="unarchive_library">Unarchive library</string>
     <string name="add_new_note_shortcut">Add new note shortcut</string>
     <string name="export_library">Export library to…</string>
-    <string name="library_is_exported">Library has been exported to</string>
+    <string name="library_is_exported">Library has been exported to %s</string>
     <string name="delete_library_description">This action can\'t be undone and will delete the library and all of its content permanently.</string>
     <string name="library_title">Library title</string>
     <string name="library_color">Library color</string>

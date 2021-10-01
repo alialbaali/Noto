@@ -165,7 +165,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 }
                 val parentView = requireParentFragment().requireView()
                 val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
-                val message = resources.stringResource(R.string.library_is_exported) + " ${documentUri?.directoryPath}."
+                val message = resources.stringResource(R.string.library_is_exported, documentUri?.directoryPath)
                 parentView.snackbar(message, parentAnchorView)
                 findNavController().navigateUp()
             }
