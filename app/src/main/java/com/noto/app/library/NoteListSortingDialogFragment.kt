@@ -11,6 +11,7 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteListSortingDialogFragmentBinding
 import com.noto.app.domain.model.NoteListSorting
+import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -53,6 +54,7 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
         rbManual.setOnClickListener {
             dismiss()
             viewModel.updateSorting(NoteListSorting.Manual)
+            viewModel.updateSortingOrder(SortingOrder.Ascending)
         }
 
         rbCreationDate.setOnClickListener {
