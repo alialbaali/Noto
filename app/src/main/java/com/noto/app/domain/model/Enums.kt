@@ -18,3 +18,5 @@ enum class LayoutManager { Linear, Grid, }
 enum class Font { Nunito, Monospace, }
 
 enum class Grouping { Default, CreationDate, Label, }
+
+enum class Language { System, English, Turkish, }
