@@ -82,9 +82,4 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
                 .also { if (it == null) storage.put(Constants.ShowNotesCountKey, true.toString()) }
         }
     }
-
-    data class State(
-        val theme: Theme = Theme.System,
-        val font: Font = Font.Nunito,
-    )
 }
