@@ -96,24 +96,11 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             tvNoteBody.maxLines = previewSize
             tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
         }
-        when {
-            note.title.isBlank() -> tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                updateMarginsRelative(top = 0.dp, bottom = 0.dp)
-            }
-            note.body.isBlank() || previewSize == 0 || labels.isEmpty() -> tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                updateMarginsRelative(top = 0.dp, bottom = 0.dp)
-            }
-            else -> {
-                tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    updateMarginsRelative(top = 4.dp, bottom = 4.dp)
-                }
-                tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    updateMarginsRelative(top = 4.dp, bottom = 4.dp)
-                }
-                rv.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    updateMarginsRelative(bottom = 4.dp)
-                }
-            }
+        tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            updateMarginsRelative(bottom = if (note.body.isBlank() || previewSize == 0) 0.dp else 4.dp)
+        }
+        tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+            updateMarginsRelative(top = if (note.title.isBlank()) 0.dp else 4.dp)
         }
     }
 

@@ -19,7 +19,7 @@
             android:id="@+id/rv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_extra_small"
+            android:layout_marginBottom="@dimen/spacing_small"
             tools:listitem="@layout/note_label_item" />
 
         <LinearLayout
@@ -33,7 +33,7 @@
             style="@style/NoteTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_extra_small"
+            android:layout_marginBottom="@dimen/spacing_extra_small"
             tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry" />
 
         <TextView
@@ -41,13 +41,13 @@
             style="@style/NoteBodyTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/spacing_extra_small"
+            android:layout_marginTop="@dimen/spacing_extra_small"
             tools:text="Lorem Ipsum is simply dummy text of the printing andttt typesetting industry" />
 
         <TextView
             android:id="@+id/tv_creation_date"
             style="@style/NoteCreationDateTextView"
-            android:layout_marginTop="@dimen/spacing_extra_small"
+            android:layout_marginTop="@dimen/spacing_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Created at Aug 30" />
