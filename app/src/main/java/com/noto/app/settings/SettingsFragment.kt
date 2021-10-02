@@ -76,6 +76,10 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToFontDialogFragment())
         }
 
+        tvChangeLanguage.setOnClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialogFragment())
+        }
+
         swShowNotesCount.setOnClickListener {
             viewModel.toggleShowNotesCount()
         }

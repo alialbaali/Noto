@@ -12,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.noto.app.databinding.AppActivityBinding
+import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.Theme
 import com.noto.app.library.SelectLibraryDialogFragment
 import com.noto.app.util.Constants
@@ -21,6 +22,7 @@ import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class AppActivity : AppCompatActivity() {
 
@@ -74,6 +76,7 @@ class AppActivity : AppCompatActivity() {
         navController.navigate(R.id.selectLibraryDialogFragment, args)
     }
 
+    @Suppress("DEPRECATION")
     private fun AppActivityBinding.setupState() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             window.statusBarColor = resources.colorResource(android.R.color.black)
@@ -89,6 +92,10 @@ class AppActivity : AppCompatActivity() {
         viewModel.theme
             .onEach { theme -> setupTheme(theme) }
             .launchIn(lifecycleScope)
+
+        viewModel.language
+            .onEach { language -> setupLanguage(language) }
+            .launchIn(lifecycleScope)
     }
 
     private fun AppActivityBinding.setupTheme(theme: Theme) {
@@ -96,6 +103,20 @@ class AppActivity : AppCompatActivity() {
             Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             Theme.Dark -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun AppActivityBinding.setupLanguage(language: Language) {
+        val locale = when (language) {
+            Language.System -> Locale.getDefault()
+            Language.English -> Locale("en", "US")
+            Language.Turkish -> Locale("tr", "TR")
+        }
+        if (resources.configuration.locale != locale) {
+            resources.configuration.locale = locale
+            resources.updateConfiguration(resources.configuration, resources.displayMetrics)
+            recreate()
         }
     }
 }

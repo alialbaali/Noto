@@ -155,5 +155,11 @@
     <string name="system_theme">System theme</string>
     <string name="light_theme">Light theme</string>
     <string name="dark_theme">Dark theme</string>
+    <!-- Language -->
+    <string name="language">Language</string>
+    <string name="change_language">Change language</string>
+    <string name="system_language">System language</string>
+    <string name="english">English</string>
+    <string name="turkish">Turkish</string>
 
 </resources>

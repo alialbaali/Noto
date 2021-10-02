@@ -7,6 +7,7 @@ object Constants {
     const val LibraryListSortingKey = "Library_List_Sorting"
     const val LibraryListSortingOrderKey = "Library_List_Sorting_Order"
     const val ShowNotesCountKey = "Show_Notes_Count"
+    const val LanguageKey = "Language"
     const val LibraryId = "library_id"
     const val NoteId = "note_id"
     const val Body = "body"

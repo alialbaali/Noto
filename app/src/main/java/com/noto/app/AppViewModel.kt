@@ -20,6 +20,11 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
         .map { Font.valueOf(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
 
+    val language = storage.get(Constants.LanguageKey)
+        .filterNotNull()
+        .map { Language.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, Language.System)
+
     init {
         createDefaultConstants()
     }
@@ -30,6 +35,10 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
 
     fun updateFont(value: Font) = viewModelScope.launch {
         storage.put(Constants.FontKey, value.toString())
+    }
+
+    fun updateLanguage(value: Language) = viewModelScope.launch {
+        storage.put(Constants.LanguageKey, value.toString())
     }
 
     private fun createDefaultConstants() = viewModelScope.launch {
@@ -43,6 +52,12 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
             storage.getOrNull(Constants.FontKey)
                 .firstOrNull()
                 .also { if (it == null) storage.put(Constants.FontKey, Font.Nunito.toString()) }
+        }
+
+        launch {
+            storage.getOrNull(Constants.LanguageKey)
+                .firstOrNull()
+                .also { if (it == null) storage.put(Constants.LanguageKey, Language.System.toString()) }
         }
 
         launch {
