@@ -68,6 +68,7 @@ class NoteFragment : Fragment() {
         viewModel.note
             .onEach { note ->
                 setupShortcut(note)
+                nsv.isFillViewport = note.id != 0L
                 tvWordCount.text = resources.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
                 fab.setImageDrawable(
                     if (note.reminderDate == null)
