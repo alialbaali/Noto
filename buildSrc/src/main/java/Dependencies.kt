@@ -32,7 +32,7 @@ object App {
     const val VersionCode = 23
     const val ID = "com.noto"
     const val MinSDK = 21
-    const val CompileSDK = 30
+    const val CompileSDK = 31
     const val BuildTools = "31.0.0"
     const val TargetSDK = CompileSDK
 }
