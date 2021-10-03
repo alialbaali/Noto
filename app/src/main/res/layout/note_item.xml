@@ -22,12 +22,6 @@
             android:layout_marginBottom="@dimen/spacing_small"
             tools:listitem="@layout/note_label_item" />
 
-        <LinearLayout
-            android:id="@+id/ll_labels"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" />
-
         <TextView
             android:id="@+id/tv_note_title"
             style="@style/NoteTitleTextView"
