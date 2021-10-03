@@ -19,7 +19,7 @@
             android:id="@+id/rv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_extra_small"
             tools:listitem="@layout/note_label_item" />
 
         <TextView

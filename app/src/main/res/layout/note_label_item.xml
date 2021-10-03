@@ -5,6 +5,7 @@
     android:id="@+id/tv_label"
     android:textSize="@dimen/size_extra_tiny"
     android:layout_marginEnd="@dimen/spacing_extra_small"
+    android:layout_marginBottom="@dimen/spacing_extra_small"
     android:paddingHorizontal="@dimen/spacing_extra_small"
     android:background="@drawable/note_label_item_shape"
     android:layout_width="wrap_content"
