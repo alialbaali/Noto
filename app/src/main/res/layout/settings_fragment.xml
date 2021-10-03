@@ -51,7 +51,7 @@
                 style="@style/SettingsItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_language_24"
+                android:drawableStart="@drawable/ic_round_language_24"
                 android:text="@string/change_language" />
 
             <com.google.android.material.textview.MaterialTextView
