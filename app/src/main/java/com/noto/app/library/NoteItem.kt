@@ -64,6 +64,10 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         tvNoteTitle.isVisible = note.title.isNotBlank()
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
+        vTransparent.setOnClickListener {
+            root.background?.state = intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled)
+            onClickListener.onClick(it)
+        }
         tvNoteTitle.setBoldFont(font)
         tvNoteBody.setSemiboldFont(font)
         ibDrag.isVisible = isManualSorting
