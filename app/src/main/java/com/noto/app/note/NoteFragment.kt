@@ -50,6 +50,7 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupState() {
         nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        abl.bringToFront()
 
         viewModel.library
             .onEach { library -> setupLibrary(library) }

@@ -32,7 +32,8 @@
         android:scrollbars="vertical"
         android:scrollbarSize="@dimen/spacing_extra_small"
         android:fillViewport="true"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+        android:overScrollMode="never"
+        app:layout_behavior="com.noto.app.util.BounceScrollingViewBehavior">
 
         <LinearLayout
             android:id="@+id/ll"
@@ -55,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <com.google.android.material.textview.MaterialTextView
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_created_at"
                     style="@style/SubtitleTextView"
                     android:layout_marginEnd="@dimen/spacing_small"
@@ -80,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_normal"
                 android:layout_marginVertical="@dimen/spacing_small"
-                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
+                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_note_body"
@@ -90,7 +91,7 @@
                 android:layout_marginHorizontal="@dimen/spacing_normal"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:layout_marginBottom="@dimen/spacing_normal"
-                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." />
+                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
