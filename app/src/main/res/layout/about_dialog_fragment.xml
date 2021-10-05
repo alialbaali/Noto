@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/BaseDialogFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/base_dialog_fragment" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_about"
+            android:background="@drawable/generic_shape"
+            android:textSize="@dimen/size_small"
+            android:textColor="@color/colorPrimary"
+            android:layout_margin="@dimen/spacing_normal"
+            android:padding="@dimen/spacing_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/about_message"
+            app:fontFamily="@font/nunito_bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_okay"
+            style="@style/MaterialButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:text="@string/okay" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
