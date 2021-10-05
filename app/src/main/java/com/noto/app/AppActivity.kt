@@ -114,6 +114,7 @@ class AppActivity : AppCompatActivity() {
             Language.Turkish -> Locale("tr", "TR")
         }
         if (resources.configuration.locale != locale) {
+            Locale.setDefault(locale)
             resources.configuration.locale = locale
             resources.updateConfiguration(resources.configuration, resources.displayMetrics)
             recreate()
