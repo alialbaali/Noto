@@ -17,8 +17,8 @@ class LabelOrderItemTouchHelperCallback(
         return makeMovementFlags(dragFlags, 0)
     }
 
-    override fun clearView(model: LabelOrderItem?, itemView: View?) {
-        super.clearView(model, itemView)
+    override fun onModelMoved(fromPosition: Int, toPosition: Int, modelBeingMoved: LabelOrderItem?, itemView: View?) {
+        super.onModelMoved(fromPosition, toPosition, modelBeingMoved, itemView)
         callback()
     }
 }
