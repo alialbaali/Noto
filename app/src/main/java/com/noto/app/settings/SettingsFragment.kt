@@ -80,6 +80,10 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialogFragment())
         }
 
+        tvAbout.setOnClickListener {
+            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToAboutDialogFragment())
+        }
+
         swShowNotesCount.setOnClickListener {
             viewModel.toggleShowNotesCount()
         }

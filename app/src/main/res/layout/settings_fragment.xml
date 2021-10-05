@@ -119,6 +119,14 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_round_report_problem_24"
                 android:text="@string/report_issue" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_about"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_info_24"
+                android:text="@string/about" />
         </LinearLayout>
 
         <com.google.android.material.textview.MaterialTextView

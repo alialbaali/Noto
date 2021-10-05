@@ -271,6 +271,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_languageDialogFragment"
             app:destination="@id/languageDialogFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutDialogFragment"
+            app:destination="@id/aboutDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"
@@ -407,4 +410,8 @@
         android:id="@+id/languageDialogFragment"
         android:name="com.noto.app.settings.LanguageDialogFragment"
         android:label="LanguageDialogFragment" />
+    <dialog
+        android:id="@+id/aboutDialogFragment"
+        android:name="com.noto.app.settings.AboutDialogFragment"
+        android:label="AboutDialogFragment" />
 </navigation>

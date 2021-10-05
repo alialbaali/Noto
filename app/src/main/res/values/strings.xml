@@ -3,6 +3,7 @@
     <!-- App -->
     <string name="app_name">Noto</string>
     <string name="done">Done</string>
+    <string name="okay">Okay</string>
     <string name="search">Search</string>
     <!-- More options for library, note, etc -->
     <string name="more">More</string>
@@ -27,6 +28,8 @@
     <string name="share_app_with_others">Share app with others</string>
     <string name="rate_app_on_play_store">Rate app on Play Store</string>
     <string name="report_issue">Report an issue</string>
+    <string name="about">About</string>
+    <string name="about_message">Special thanks to Nuray Sabri and Alparslan Şakçi for the Turkish localization.</string>
     <string name="share_with">Share with</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Open with</string>
@@ -155,6 +158,7 @@
     <string name="system_theme">System theme</string>
     <string name="light_theme">Light theme</string>
     <string name="dark_theme">Dark theme</string>
+
     <!-- Language -->
     <string name="language">Language</string>
     <string name="change_language">Change language</string>
