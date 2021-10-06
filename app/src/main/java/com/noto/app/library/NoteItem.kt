@@ -72,7 +72,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         tvNoteBody.setSemiboldFont(font)
         ibDrag.isVisible = isManualSorting
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
-        rv.isVisible = labels.isNotEmpty()
+        fl.isVisible = labels.isNotEmpty()
         rv.layoutManager = FlexboxLayoutManager(root.context, FlexDirection.ROW, FlexWrap.WRAP)
         rv.withModels {
             labels.forEach { label ->
