@@ -8,6 +8,9 @@ import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.net.Uri
+import android.text.SpannableString
+import android.text.TextPaint
+import android.text.style.URLSpan
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -93,4 +96,22 @@ fun EditText.textAsFlow(emitNewTextOnly: Boolean = false): Flow<CharSequence?> {
         addTextChangedListener(listener)
         awaitClose { removeTextChangedListener(listener) }
     }.onStart { emit(text) }
+}
+
+fun TextView.removeLinksUnderline() {
+    val spannable = SpannableString(text)
+    for (urlSpan in spannable.getSpans(0, spannable.length, URLSpan::class.java)) {
+        spannable.setSpan(
+            object : URLSpan(urlSpan.url) {
+                override fun updateDrawState(ds: TextPaint) {
+                    super.updateDrawState(ds)
+                    ds.isUnderlineText = false
+                }
+            },
+            spannable.getSpanStart(urlSpan),
+            spannable.getSpanEnd(urlSpan),
+            0,
+        )
+    }
+    text = spannable
 }
