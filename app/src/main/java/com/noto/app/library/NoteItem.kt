@@ -1,6 +1,8 @@
 package com.noto.app.library
 
 import android.annotation.SuppressLint
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -64,15 +66,11 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         tvNoteTitle.isVisible = note.title.isNotBlank()
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
-        vTransparent.setOnClickListener {
-            root.background?.state = intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled)
-            onClickListener.onClick(it)
-        }
         tvNoteTitle.setBoldFont(font)
         tvNoteBody.setSemiboldFont(font)
         ibDrag.isVisible = isManualSorting
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
-        fl.isVisible = labels.isNotEmpty()
+        rv.isVisible = labels.isNotEmpty()
         rv.layoutManager = FlexboxLayoutManager(root.context, FlexDirection.ROW, FlexWrap.WRAP)
         rv.withModels {
             labels.forEach { label ->
@@ -97,6 +95,25 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         }
         tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(top = if (note.title.isBlank()) 0.dp else 4.dp)
+        }
+        val gestureDetectorListener = object : GestureDetector.SimpleOnGestureListener() {
+            override fun onLongPress(e: MotionEvent?) {
+                onLongClickListener.onLongClick(root)
+            }
+
+            override fun onSingleTapUp(e: MotionEvent?): Boolean {
+                onClickListener.onClick(root)
+                return true
+            }
+        }
+        val gestureDetector = GestureDetector(root.context, gestureDetectorListener)
+        rv.setOnTouchListener { _, motionEvent ->
+            gestureDetector.onTouchEvent(motionEvent)
+            if (motionEvent.action == MotionEvent.ACTION_DOWN)
+                root.background?.state = intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled)
+            else if (motionEvent.action == MotionEvent.ACTION_UP || motionEvent.action == MotionEvent.ACTION_CANCEL)
+                root.background?.state = intArrayOf(-android.R.attr.state_pressed, -android.R.attr.state_enabled)
+            false
         }
     }
 

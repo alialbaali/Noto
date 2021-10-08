@@ -15,23 +15,12 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <FrameLayout
-            android:id="@+id/fl"
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_extra_small">
-
-            <com.airbnb.epoxy.EpoxyRecyclerView
-                android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/note_label_item" />
-
-            <View
-                android:id="@+id/v_transparent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
+            android:layout_marginBottom="@dimen/spacing_extra_small"
+            tools:listitem="@layout/note_label_item" />
 
         <TextView
             android:id="@+id/tv_note_title"
