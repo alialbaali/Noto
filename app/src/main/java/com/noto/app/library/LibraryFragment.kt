@@ -49,7 +49,7 @@ class LibraryFragment : Fragment() {
             .onEach { library ->
                 setupLibrary(library)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val text = library.getArchiveText(resources.stringResource(R.string.archive))
+                    val text = resources.stringResource(R.string.archive, library.title)
                     archiveMenuItem.contentDescription = text
                     archiveMenuItem.tooltipText = text
                 }

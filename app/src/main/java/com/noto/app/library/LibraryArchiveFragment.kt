@@ -71,7 +71,7 @@ class LibraryArchiveFragment : Fragment() {
     private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library) {
         val color = resources.colorResource(library.color.toResource())
         tb.navigationIcon?.mutate()?.setTint(color)
-        tb.title = library.getArchiveText(resources.stringResource(R.string.archive))
+        tb.title = resources.stringResource(R.string.archive, library.title)
         tb.setTitleTextColor(color)
     }
 

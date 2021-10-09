@@ -19,8 +19,6 @@ fun String?.takeAfterFirstLineOrEmpty() = this?.lines()?.drop(1)?.joinToString("
 
 fun String.takeLines(n: Int) = lines().take(n).joinToString("\n")
 
-fun Library.getArchiveText(archiveText: String) = "$title ${archiveText.lowercase()}"
-
 val Note.wordsCount
     get() = if (body.isBlank()) 0 else body.split("\\s+".toRegex()).size
 
