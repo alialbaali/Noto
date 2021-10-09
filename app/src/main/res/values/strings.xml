@@ -23,7 +23,7 @@
     <string name="descending">Descending</string>
     <string name="ascending">Ascending</string>
     <string name="settings">Settings</string>
-    <string name="view_code">View code on Github</string>
+    <string name="view_code">View code on GitHub</string>
     <string name="change_notes_font">Change notes font</string>
     <string name="share_app_with_others">Share app with others</string>
     <string name="rate_app_on_play_store">Rate app on Play Store</string>
@@ -80,7 +80,6 @@
     <string name="unpin_library">Unpin library</string>
 
     <!-- Note -->
-    <string name="all_notes">All notes</string>
     <string name="all">All</string>
     <string name="archive_is_empty">Archive is empty.</string>
     <plurals name="notes_count">
@@ -137,7 +136,6 @@
     <string name="show_libraries_notes_count">Show libraries notes count</string>
 
     <!-- Label -->
-    <string name="add_label">Add label</string>
     <string name="reorder_label">Reorder label</string>
     <string name="create_label">Create label</string>
     <string name="label_title">Label title</string>

@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             app:navigationContentDescription="@string/back"
             app:navigationIcon="@drawable/ic_round_back_24"
-            app:title="@string/all_notes" />
+            tools:title="Library" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_search"
