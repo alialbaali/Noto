@@ -71,11 +71,17 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
                 .firstOrNull()
                 .also { if (it == null) storage.put(Constants.LibraryListSortingOrderKey, SortingOrder.Descending.toString()) }
         }
+
         launch {
-            storage.getOrNull(Constants.LibraryListLayoutManagerKey)
+            storage.getOrNull(Constants.LibraryListLayoutKey)
                 .firstOrNull()
-                .also { if (it == null) storage.put(Constants.LibraryListLayoutManagerKey, LayoutManager.Grid.toString()) }
+                .also {
+                    val currentLayout = storage.getOrNull(Constants.LibraryListLayoutManagerKey).firstOrNull()
+                    if (it == null)
+                        storage.put(Constants.LibraryListLayoutKey, currentLayout ?: Layout.Grid.toString())
+                }
         }
+
         launch {
             storage.getOrNull(Constants.ShowNotesCountKey)
                 .firstOrNull()

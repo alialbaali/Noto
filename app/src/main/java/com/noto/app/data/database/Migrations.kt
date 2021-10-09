@@ -25,7 +25,10 @@ object Migrations {
     class DeleteLabelAndNoteLabelTables : AutoMigrationSpec
 
     @RenameTable(fromTableName = "noto_labels", toTableName = "note_labels")
-    class RenameNoteLabelsTable: AutoMigrationSpec
+    class RenameNoteLabelsTable : AutoMigrationSpec
+
+    @RenameColumn(tableName = "libraries", fromColumnName = "layout_manager", toColumnName = "layout")
+    class RenameLayoutManagerColumn : AutoMigrationSpec
 }
 
 object RemoveNotoPrefix : Migration(1, 2) {

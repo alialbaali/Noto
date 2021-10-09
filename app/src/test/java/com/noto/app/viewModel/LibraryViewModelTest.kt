@@ -1,7 +1,7 @@
 package com.noto.app.viewModel
 
 import com.noto.app.util.appModule
-import com.noto.app.domain.model.LayoutManager
+import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
@@ -14,15 +14,10 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldContain
-import io.kotest.matchers.collections.shouldHaveSize
-import io.kotest.matchers.collections.shouldNotBeEmpty
 import io.kotest.matchers.longs.shouldBeExactly
-import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldBeBlank
 import io.kotest.matchers.string.shouldBeEqualIgnoringCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.koin.core.parameter.parametersOf
@@ -104,14 +99,14 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
         "get layout manager should return linear by default" {
             viewModel.state
                 .map { it.library.layoutManager }
-                .first() shouldBe LayoutManager.Linear
+                .first() shouldBe Layout.Linear
         }
 
         "update layout manager to grid" {
-            viewModel.updateLayoutManager(LayoutManager.Grid)
+            viewModel.updateLayout(Layout.Grid)
             viewModel.state
                 .map { it.library.layoutManager }
-                .first() shouldBe LayoutManager.Grid
+                .first() shouldBe Layout.Grid
         }
 
         "get notes should return an empty list when library id is 0" {

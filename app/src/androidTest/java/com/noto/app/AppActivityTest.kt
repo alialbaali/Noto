@@ -20,7 +20,7 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.note.NoteViewModel
-import com.noto.app.domain.model.LayoutManager
+import com.noto.app.domain.model.Layout
 import com.noto.app.util.getArchiveText
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -192,7 +192,7 @@ class AppActivityTest : KoinTest {
         onView(withContentDescription(R.string.layout))
             .perform(click())
 
-        assertTrue { libraryViewModel.library.value.layoutManager == LayoutManager.Linear }
+        assertTrue { libraryViewModel.library.value.layout == Layout.Linear }
     }
 
     @Test

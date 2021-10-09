@@ -85,7 +85,7 @@ class LibraryViewModel(
 
     fun createOrUpdateLibrary(
         title: String,
-        layoutManager: LayoutManager,
+        layout: Layout,
         notePreviewSize: Int,
         isShowNoteCreationDate: Boolean,
         isSetNewNoteCursorOnTitle: Boolean
@@ -95,7 +95,7 @@ class LibraryViewModel(
         val library = library.value.copy(
             title = title.trim(),
             color = color,
-            layoutManager = layoutManager,
+            layout = layout,
             notePreviewSize = notePreviewSize,
             isShowNoteCreationDate = isShowNoteCreationDate,
             isSetNewNoteCursorOnTitle = isSetNewNoteCursorOnTitle,
@@ -117,10 +117,6 @@ class LibraryViewModel(
 
     fun toggleLibraryIsPinned() = viewModelScope.launch {
         libraryRepository.updateLibrary(library.value.copy(isPinned = !library.value.isPinned))
-    }
-
-    fun updateLayoutManager(value: LayoutManager) = viewModelScope.launch {
-        libraryRepository.updateLibrary(library.value.copy(layoutManager = value))
     }
 
     fun updateNotePosition(note: Note, position: Int) = viewModelScope.launch {

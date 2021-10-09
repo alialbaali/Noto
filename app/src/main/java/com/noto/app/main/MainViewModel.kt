@@ -2,7 +2,7 @@ package com.noto.app.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.LayoutManager
+import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.LibraryListSorting
 import com.noto.app.domain.model.SortingOrder
@@ -29,10 +29,10 @@ class MainViewModel(
     val archivedLibraries = libraryRepository.getArchivedLibraries()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    val layoutManager = storage.get(Constants.LibraryListLayoutManagerKey)
+    val layout = storage.get(Constants.LibraryListLayoutKey)
         .filterNotNull()
-        .map { LayoutManager.valueOf(it) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, LayoutManager.Grid)
+        .map { Layout.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, Layout.Grid)
 
     val sorting = storage.get(Constants.LibraryListSortingKey)
         .filterNotNull()
@@ -53,8 +53,8 @@ class MainViewModel(
         noteRepository.countNotesByLibraryId(libraryId)
     }
 
-    fun updateLayoutManager(value: LayoutManager) = viewModelScope.launch {
-        storage.put(Constants.LibraryListLayoutManagerKey, value.toString())
+    fun updateLayout(value: Layout) = viewModelScope.launch {
+        storage.put(Constants.LibraryListLayoutKey, value.toString())
     }
 
     fun updateSorting(value: LibraryListSorting) = viewModelScope.launch {

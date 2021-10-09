@@ -6,13 +6,9 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.fakeLocalDataSourceModule
 import com.noto.app.main.MainViewModel
 import com.noto.app.testRepositoryModule
-import com.noto.app.domain.model.LayoutManager
+import com.noto.app.domain.model.Layout
 import io.kotest.core.spec.style.StringSpec
-import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.ints.shouldBeExactly
-import io.kotest.matchers.shouldBe
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import org.koin.core.component.get
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
@@ -50,14 +46,14 @@ class MainViewModelTest : StringSpec(), KoinTest {
         "get layout manager should return grid by default" {
             viewModel.state
                 .map { it.layoutManager }
-                .first() shouldBe LayoutManager.Grid
+                .first() shouldBe Layout.Grid
         }
 
         "update layout manager to linear" {
-            viewModel.updateLayoutManager(LayoutManager.Linear)
+            viewModel.updateLayout(Layout.Linear)
             viewModel.state
                 .map { it.layoutManager }
-                .first() shouldBe LayoutManager.Linear
+                .first() shouldBe Layout.Linear
         }
 
         "count notes should return zero notes when library id is 0" {

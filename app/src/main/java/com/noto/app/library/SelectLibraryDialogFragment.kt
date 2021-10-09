@@ -13,7 +13,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.SelectLibraryDialogFragmentBinding
-import com.noto.app.domain.model.LayoutManager
+import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.main.MainViewModel
 import com.noto.app.main.libraryItem
@@ -50,8 +50,8 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
             .onEach { libraries -> setupLibraries(libraries) }
             .launchIn(lifecycleScope)
 
-        viewModel.layoutManager
-            .onEach { layoutManager -> setupLayoutManager(layoutManager) }
+        viewModel.layout
+            .onEach { layout -> setupLayoutManager(layout) }
             .launchIn(lifecycleScope)
     }
 
@@ -82,10 +82,10 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun SelectLibraryDialogFragmentBinding.setupLayoutManager(layoutManager: LayoutManager) {
-        when (layoutManager) {
-            LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    private fun SelectLibraryDialogFragmentBinding.setupLayoutManager(layout: Layout) {
+        when (layout) {
+            Layout.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
     }
 

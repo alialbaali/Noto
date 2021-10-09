@@ -14,7 +14,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
-import com.noto.app.domain.model.LayoutManager
+import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
@@ -78,8 +78,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                     title,
                     tlLibraryLayout.selectedTabPosition.let {
                         when (it) {
-                            0 -> LayoutManager.Linear
-                            else -> LayoutManager.Grid
+                            0 -> Layout.Linear
+                            else -> Layout.Grid
                         }
                     },
                     sNotePreviewSize.value.toInt(),
@@ -94,9 +94,9 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         et.setText(library.title)
         et.setSelection(library.title.length)
         rv.smoothScrollToPosition(library.color.ordinal)
-        val tab = when (library.layoutManager) {
-            LayoutManager.Linear -> tlLibraryLayout.getTabAt(0)
-            LayoutManager.Grid -> tlLibraryLayout.getTabAt(1)
+        val tab = when (library.layout) {
+            Layout.Linear -> tlLibraryLayout.getTabAt(0)
+            Layout.Grid -> tlLibraryLayout.getTabAt(1)
         }
         tlLibraryLayout.selectTab(tab)
         val state = arrayOf(

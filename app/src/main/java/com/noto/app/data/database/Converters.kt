@@ -3,7 +3,7 @@ package com.noto.app.data.database
 import android.annotation.SuppressLint
 import androidx.room.TypeConverter
 import com.noto.app.domain.model.Grouping
-import com.noto.app.domain.model.LayoutManager
+import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.NoteListSorting
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.model.SortingOrder
@@ -33,15 +33,15 @@ object InstantConverter {
 
 }
 
-object LayoutManagerConvertor {
+object LayoutConvertor {
 
     @TypeConverter
     @JvmStatic
-    fun toOrdinal(layoutManager: LayoutManager): Int = layoutManager.ordinal
+    fun toOrdinal(layout: Layout): Int = layout.ordinal
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): LayoutManager = LayoutManager.values().first { layoutManager -> layoutManager.ordinal == ordinal }
+    fun toEnum(ordinal: Int): Layout = Layout.values().first { layoutManager -> layoutManager.ordinal == ordinal }
 
 }
 

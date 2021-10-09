@@ -46,8 +46,8 @@ class LibraryArchiveFragment : Fragment() {
 
         viewModel.library
             .onEach { library -> setupLibrary(library) }
-            .distinctUntilChangedBy { library -> library.layoutManager }
-            .onEach { library -> setupLayoutManger(library.layoutManager) }
+            .distinctUntilChangedBy { library -> library.layout }
+            .onEach { library -> setupLayoutManger(library.layout) }
             .launchIn(lifecycleScope)
 
         combine(
@@ -59,10 +59,10 @@ class LibraryArchiveFragment : Fragment() {
         }.launchIn(lifecycleScope)
     }
 
-    private fun LibraryArchiveFragmentBinding.setupLayoutManger(layoutManager: LayoutManager) {
-        when (layoutManager) {
-            LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    private fun LibraryArchiveFragmentBinding.setupLayoutManger(layout: Layout) {
+        when (layout) {
+            Layout.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
         rv.visibility = View.VISIBLE
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))

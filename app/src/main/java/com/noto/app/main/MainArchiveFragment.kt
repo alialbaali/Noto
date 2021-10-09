@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.MainArchiveFragmentBinding
-import com.noto.app.domain.model.LayoutManager
+import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -50,15 +50,15 @@ class MainArchiveFragment : Fragment() {
         }
             .launchIn(lifecycleScope)
 
-        viewModel.layoutManager
-            .onEach { layoutManager -> setupLayoutManger(layoutManager) }
+        viewModel.layout
+            .onEach { layout -> setupLayoutManager(layout) }
             .launchIn(lifecycleScope)
     }
 
-    private fun MainArchiveFragmentBinding.setupLayoutManger(layoutManager: LayoutManager) {
-        when (layoutManager) {
-            LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    private fun MainArchiveFragmentBinding.setupLayoutManager(layout: Layout) {
+        when (layout) {
+            Layout.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
         rv.visibility = View.VISIBLE
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))

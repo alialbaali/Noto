@@ -13,7 +13,7 @@ enum class SortingOrder { Ascending, Descending, }
 
 enum class Theme { System, Light, Dark, }
 
-enum class LayoutManager { Linear, Grid, }
+enum class Layout { Linear, Grid, }
 
 enum class Font { Nunito, Monospace, }
 

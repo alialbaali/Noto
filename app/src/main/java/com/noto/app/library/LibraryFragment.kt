@@ -53,8 +53,8 @@ class LibraryFragment : Fragment() {
                 MenuItemCompat.setTooltipText(archiveMenuItem, text)
                 MenuItemCompat.setContentDescription(archiveMenuItem, text)
             }
-            .distinctUntilChangedBy { library -> library.layoutManager }
-            .onEach { library -> setupLayoutManager(library.layoutManager) }
+            .distinctUntilChangedBy { library -> library.layout }
+            .onEach { library -> setupLayoutManager(library.layout) }
             .launchIn(lifecycleScope)
 
         combine(
@@ -73,7 +73,7 @@ class LibraryFragment : Fragment() {
                 font,
                 library
             )
-            setupItemTouchHelper(library.layoutManager)
+            setupItemTouchHelper(library.layout)
         }.launchIn(lifecycleScope)
 
         viewModel.isSearchEnabled
@@ -144,10 +144,10 @@ class LibraryFragment : Fragment() {
         requireActivity().hideKeyboard(root)
     }
 
-    private fun LibraryFragmentBinding.setupLayoutManager(layoutManager: LayoutManager) {
-        when (layoutManager) {
-            LayoutManager.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            LayoutManager.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+    private fun LibraryFragmentBinding.setupLayoutManager(layout: Layout) {
+        when (layout) {
+            Layout.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
@@ -274,9 +274,9 @@ class LibraryFragment : Fragment() {
         }
     }
 
-    private fun LibraryFragmentBinding.setupItemTouchHelper(layoutManager: LayoutManager) {
+    private fun LibraryFragmentBinding.setupItemTouchHelper(layout: Layout) {
         if (this@LibraryFragment::epoxyController.isInitialized) {
-            val itemTouchHelperCallback = NoteItemTouchHelperCallback(epoxyController, layoutManager) {
+            val itemTouchHelperCallback = NoteItemTouchHelperCallback(epoxyController, layout) {
                 rv.forEach { view ->
                     val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
                     val model = viewHolder.model as? NoteItem

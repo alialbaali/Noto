@@ -14,7 +14,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.R
 import com.noto.app.databinding.MainFragmentBinding
-import com.noto.app.domain.model.LayoutManager
+import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.LibraryListSorting
 import com.noto.app.domain.model.SortingOrder
@@ -47,7 +47,7 @@ class MainFragment : Fragment() {
 
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.layout -> setupLayoutMangerMenuItem()
+                R.id.layout -> setupLayoutMenuItem()
                 R.id.libraries_archive -> setupLibrariesArchiveMenuItem()
                 else -> false
             }
@@ -67,20 +67,20 @@ class MainFragment : Fragment() {
             setupLibraries(libraries.sorted(sorting, sortingOrder), sorting, sortingOrder, isShowNotesCount)
         }.launchIn(lifecycleScope)
 
-        viewModel.layoutManager
-            .onEach { layoutManager -> setupLayoutManager(layoutManager, layoutManagerMenuItem) }
-            .combine(viewModel.libraries) { layoutManager, _ -> layoutManager }
-            .onEach { layoutManager -> setupItemTouchHelper(layoutManager) }
+        viewModel.layout
+            .onEach { layout -> setupLayoutManager(layout, layoutManagerMenuItem) }
+            .combine(viewModel.libraries) { layout, _ -> layout }
+            .onEach { layout -> setupItemTouchHelper(layout) }
             .launchIn(lifecycleScope)
     }
 
-    private fun MainFragmentBinding.setupLayoutManager(layoutManager: LayoutManager, layoutManagerMenuItem: MenuItem) {
-        when (layoutManager) {
-            LayoutManager.Linear -> {
+    private fun MainFragmentBinding.setupLayoutManager(layout: Layout, layoutManagerMenuItem: MenuItem) {
+        when (layout) {
+            Layout.Linear -> {
                 layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_grid_24)
                 rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             }
-            LayoutManager.Grid -> {
+            Layout.Grid -> {
                 layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_agenda_24)
                 rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             }
@@ -104,17 +104,17 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun MainFragmentBinding.setupLayoutMangerMenuItem(): Boolean {
-        when (viewModel.layoutManager.value) {
-            LayoutManager.Linear -> {
-                viewModel.updateLayoutManager(LayoutManager.Grid)
+    private fun MainFragmentBinding.setupLayoutMenuItem(): Boolean {
+        when (viewModel.layout.value) {
+            Layout.Linear -> {
+                viewModel.updateLayout(Layout.Grid)
                 root.snackbar(
                     getString(R.string.layout_is_grid_mode),
                     anchorView = fab
                 )
             }
-            LayoutManager.Grid -> {
-                viewModel.updateLayoutManager(LayoutManager.Linear)
+            Layout.Grid -> {
+                viewModel.updateLayout(Layout.Linear)
                 root.snackbar(
                     getString(R.string.layout_is_list_mode),
                     anchorView = fab
@@ -195,9 +195,9 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun MainFragmentBinding.setupItemTouchHelper(layoutManager: LayoutManager) {
+    private fun MainFragmentBinding.setupItemTouchHelper(layout: Layout) {
         if (this@MainFragment::epoxyController.isInitialized) {
-            val itemTouchHelperCallback = LibraryItemTouchHelperCallback(epoxyController, layoutManager) {
+            val itemTouchHelperCallback = LibraryItemTouchHelperCallback(epoxyController, layout) {
                 rv.forEach { view ->
                     val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
                     val model = viewHolder.model as? LibraryItem
