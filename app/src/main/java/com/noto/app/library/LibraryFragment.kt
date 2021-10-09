@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import androidx.activity.addCallback
 import androidx.core.graphics.ColorUtils
+import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -48,11 +49,9 @@ class LibraryFragment : Fragment() {
         viewModel.library
             .onEach { library ->
                 setupLibrary(library)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val text = resources.stringResource(R.string.archive, library.title)
-                    archiveMenuItem.contentDescription = text
-                    archiveMenuItem.tooltipText = text
-                }
+                val text = resources.stringResource(R.string.archive, library.title)
+                MenuItemCompat.setTooltipText(archiveMenuItem, text)
+                MenuItemCompat.setContentDescription(archiveMenuItem, text)
             }
             .distinctUntilChangedBy { library -> library.layoutManager }
             .onEach { library -> setupLayoutManager(library.layoutManager) }
