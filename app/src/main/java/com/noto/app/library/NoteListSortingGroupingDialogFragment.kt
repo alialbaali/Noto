@@ -53,7 +53,7 @@ class NoteListSortingGroupingDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
 
         tvGrouping.setOnClickListener {
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 NoteListSortingGroupingDialogFragmentDirections.actionNoteListSortingGroupingDialogFragmentToNoteListGroupingDialogFragment(
                     args.libraryId
                 )
@@ -61,7 +61,7 @@ class NoteListSortingGroupingDialogFragment : BaseDialogFragment() {
         }
 
         tvSorting.setOnClickListener {
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 NoteListSortingGroupingDialogFragmentDirections.actionNoteListSortingGroupingDialogFragmentToNoteListSortingDialogFragment(
                     args.libraryId
                 )
@@ -69,7 +69,7 @@ class NoteListSortingGroupingDialogFragment : BaseDialogFragment() {
         }
 
         tvSortingOrder.setOnClickListener {
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 NoteListSortingGroupingDialogFragmentDirections.actionNoteListSortingGroupingDialogFragmentToNoteListSortingOrderDialogFragment(
                     args.libraryId
                 )

@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import com.noto.app.R
 import com.noto.app.databinding.SettingsFragmentBinding
 import com.noto.app.util.colorResource
+import com.noto.app.util.navigateSafely
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -69,19 +70,19 @@ class SettingsFragment : Fragment() {
         }
 
         tvChangeTheme.setOnClickListener {
-            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToThemeDialogFragment())
+            findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToThemeDialogFragment())
         }
 
         tvChangeNotesFont.setOnClickListener {
-            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToFontDialogFragment())
+            findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToFontDialogFragment())
         }
 
         tvChangeLanguage.setOnClickListener {
-            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialogFragment())
+            findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialogFragment())
         }
 
         tvAbout.setOnClickListener {
-            findNavController().navigate(SettingsFragmentDirections.actionSettingsFragmentToAboutDialogFragment())
+            findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToAboutDialogFragment())
         }
 
         swShowNotesCount.setOnClickListener {

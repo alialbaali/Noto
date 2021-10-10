@@ -19,6 +19,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.noto.app.R
@@ -29,6 +31,11 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onStart
+
+fun NavController.navigateSafely(directions: NavDirections) {
+    if (currentDestination?.getAction(directions.actionId) != null)
+        navigate(directions)
+}
 
 val Uri.directoryPath
     get() = path?.substringAfterLast(':')?.substringBeforeLast('/')

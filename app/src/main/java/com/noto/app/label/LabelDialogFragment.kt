@@ -58,13 +58,13 @@ class LabelDialogFragment : BaseDialogFragment() {
         tvEditLabel.setOnClickListener {
             dismiss()
             findNavController()
-                .navigate(LabelDialogFragmentDirections.actionLabelDialogFragmentToNewLabelDialogFragment(args.libraryId, args.labelId))
+                .navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToNewLabelDialogFragment(args.libraryId, args.labelId))
         }
 
         tvReorderLabel.setOnClickListener {
             dismiss()
             findNavController()
-                .navigate(LabelDialogFragmentDirections.actionLabelDialogFragmentToReorderLabelDialogFragment(args.libraryId, args.labelId))
+                .navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToReorderLabelDialogFragment(args.libraryId, args.labelId))
         }
 
         tvDeleteLabel.setOnClickListener {
@@ -79,7 +79,7 @@ class LabelDialogFragment : BaseDialogFragment() {
                 viewModel.deleteLabel()
             }
 
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 LabelDialogFragmentDirections.actionLabelDialogFragmentToConfirmationDialogFragment(
                     confirmationText,
                     descriptionText,

@@ -88,10 +88,10 @@ class MainArchiveFragment : Fragment() {
                         isManualSorting(false)
                         isShowNotesCount(isShowNotesCount)
                         onClickListener { _ ->
-                            findNavController().navigate(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(library.id))
+                            findNavController().navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(library.id))
                         }
                         onLongClickListener { _ ->
-                            findNavController().navigate(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(library.id))
+                            findNavController().navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(library.id))
                             true
                         }
                         onDragHandleTouchListener { _, _ -> false }

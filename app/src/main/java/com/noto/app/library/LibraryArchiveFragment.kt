@@ -98,7 +98,7 @@ class LibraryArchiveFragment : Fragment() {
                             isManualSorting(false)
                             onClickListener { _ ->
                                 findNavController()
-                                    .navigate(
+                                    .navigateSafely(
                                         LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
                                             archivedNote.first.libraryId,
                                             archivedNote.first.id
@@ -107,7 +107,7 @@ class LibraryArchiveFragment : Fragment() {
                             }
                             onLongClickListener { _ ->
                                 findNavController()
-                                    .navigate(
+                                    .navigateSafely(
                                         LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
                                             archivedNote.first.libraryId,
                                             archivedNote.first.id,

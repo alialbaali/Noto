@@ -92,7 +92,7 @@ class LibraryFragment : Fragment() {
                 .filter { it.value }
                 .map { it.key.id }
                 .toLongArray()
-            findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(args.libraryId, labelsIds = selectedLabelsIds))
+            findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(args.libraryId, labelsIds = selectedLabelsIds))
         }
 
         tb.setNavigationOnClickListener {
@@ -101,7 +101,7 @@ class LibraryFragment : Fragment() {
         }
 
         bab.setNavigationOnClickListener {
-            findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
+            findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
         }
 
         bab.setOnMenuItemClickListener { menuItem ->
@@ -185,11 +185,11 @@ class LibraryFragment : Fragment() {
                     }
                     onLabelLongClickListener { label ->
                         findNavController()
-                            .navigate(LibraryFragmentDirections.actionLibraryFragmentToLabelDialogFragment(args.libraryId, label.id))
+                            .navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLabelDialogFragment(args.libraryId, label.id))
                         true
                     }
                     onNewLabelClickListener { _ ->
-                        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNewLabelDialogFragment(args.libraryId))
+                        findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNewLabelDialogFragment(args.libraryId))
                     }
                 }
 
@@ -200,7 +200,7 @@ class LibraryFragment : Fragment() {
                     notesCount(filteredNotes.size)
                     notoColor(library.color)
                     onClickListener { _ ->
-                        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingGroupingDialogFragment(args.libraryId))
+                        findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingGroupingDialogFragment(args.libraryId))
                     }
                 }
 
@@ -217,11 +217,11 @@ class LibraryFragment : Fragment() {
                             isManualSorting(library.sorting == NoteListSorting.Manual)
                             onClickListener { _ ->
                                 findNavController()
-                                    .navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId, entry.first.id))
+                                    .navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId, entry.first.id))
                             }
                             onLongClickListener { _ ->
                                 findNavController()
-                                    .navigate(
+                                    .navigateSafely(
                                         LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
                                             entry.first.libraryId,
                                             entry.first.id,
@@ -247,7 +247,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupArchivedNotesMenuItem(): Boolean {
-        findNavController().navigate(LibraryFragmentDirections.actionLibraryFragmentToLibraryArchiveFragment(args.libraryId))
+        findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLibraryArchiveFragment(args.libraryId))
         return true
     }
 

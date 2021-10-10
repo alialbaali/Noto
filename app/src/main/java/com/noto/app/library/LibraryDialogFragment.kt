@@ -66,7 +66,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
         tvEditLibrary.setOnClickListener {
             dismiss()
-            findNavController().navigate(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToNewLibraryDialogFragment(args.libraryId))
+            findNavController().navigateSafely(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToNewLibraryDialogFragment(args.libraryId))
         }
 
         tvNewNoteShortcut.setOnClickListener {
@@ -105,7 +105,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
             val btnText = resources.stringResource(R.string.delete_library)
             val clickListener = setupConfirmationDialogClickListener()
 
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 LibraryDialogFragmentDirections.actionLibraryDialogFragmentToConfirmationDialogFragment(
                     confirmationText,
                     descriptionText,

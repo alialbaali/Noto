@@ -8,6 +8,7 @@
         <entry key="../../.gradle/caches/transforms-3/22edce91b047008032d6884bfdc23003/transformed/jetified-fastadapter-extensions-ui-5.4.1/res/layout/single_line_item.xml" value="0.21611842105263157" />
         <entry key="../../.gradle/caches/transforms-3/22edce91b047008032d6884bfdc23003/transformed/jetified-fastadapter-extensions-ui-5.4.1/res/layout/three_line_item.xml" value="0.21611842105263157" />
         <entry key="../../.gradle/caches/transforms-3/22edce91b047008032d6884bfdc23003/transformed/jetified-fastadapter-extensions-ui-5.4.1/res/layout/two_line_item.xml" value="0.21611842105263157" />
+        <entry key="../../Android/Sdk/platforms/android-31/data/res/drawable/btn_radio.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable-v24/archive_arrow_down_outline.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable-v24/archive_outline.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable-v24/ic_sort.xml" value="0.35833333333333334" />
@@ -28,6 +29,7 @@
         <entry key="app/src/main/res/drawable/content_copy.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/cursor_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/dialog_item_shape.xml" value="0.20260416666666667" />
+        <entry key="app/src/main/res/drawable/dialog_radio_button_item.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/dialog_shape.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/generic_shape.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.35833333333333334" />
@@ -198,10 +200,10 @@
         <entry key="app/src/main/res/layout/archive_dialog_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/base_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/confirmation_dialog_fragment.xml" value="0.18" />
-        <entry key="app/src/main/res/layout/font_dialog_fragment.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/font_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/header_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/label_chooser_dialog_fragment.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/label_dialog_fragment.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/label_dialog_fragment.xml" value="0.16" />
         <entry key="app/src/main/res/layout/label_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/label_list_fragment.xml" value="0.18" />
         <entry key="app/src/main/res/layout/label_list_item.xml" value="0.21644736842105264" />

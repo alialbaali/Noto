@@ -15,10 +15,7 @@ import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.Theme
 import com.noto.app.library.SelectLibraryDialogFragment
-import com.noto.app.util.Constants
-import com.noto.app.util.colorResource
-import com.noto.app.util.createNotificationChannel
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel

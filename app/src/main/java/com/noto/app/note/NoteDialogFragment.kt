@@ -83,7 +83,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvRemindMe.setOnClickListener {
             dismiss()
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReminderDialogFragment(
                     args.libraryId,
                     args.noteId
@@ -93,7 +93,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvOpenInReadingMode.setOnClickListener {
             dismiss()
-            findNavController().navigate(NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReadingModeFragment(args.libraryId, args.noteId))
+            findNavController().navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReadingModeFragment(args.libraryId, args.noteId))
         }
 
         tvDuplicateNote.setOnClickListener {
@@ -128,7 +128,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                     dismiss()
                 }
             }
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(
                     selectLibraryItemClickListener,
                     args.libraryId
@@ -144,7 +144,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                     dismiss()
                 }
             }
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(
                     selectLibraryItemClickListener,
                     args.libraryId
@@ -175,7 +175,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 viewModel.deleteNote()
             }
 
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToConfirmationDialogFragment(
                     confirmationText,
                     descriptionText,

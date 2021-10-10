@@ -9,6 +9,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainDialogFragmentBinding
+import com.noto.app.util.navigateSafely
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 
@@ -27,22 +28,22 @@ class MainDialogFragment : BaseDialogFragment() {
     private fun MainDialogFragmentBinding.setupListeners() {
         tvLibrariesArchive.setOnClickListener {
             dismiss()
-            findNavController().navigate(MainDialogFragmentDirections.actionMainDialogFragmentToMainArchiveFragment())
+            findNavController().navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainArchiveFragment())
         }
 
         tvChangeLibrarySorting.setOnClickListener {
             dismiss()
-            findNavController().navigate(MainDialogFragmentDirections.actionMainDialogFragmentToLibraryListSortingDialogFragment())
+            findNavController().navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToLibraryListSortingDialogFragment())
         }
 
         tvChangeTheme.setOnClickListener {
             dismiss()
-            findNavController().navigate(MainDialogFragmentDirections.actionMainDialogFragmentToThemeDialogFragment())
+            findNavController().navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToThemeDialogFragment())
         }
 
         tvSettings.setOnClickListener {
             dismiss()
-            findNavController().navigate(MainDialogFragmentDirections.actionMainDialogFragmentToSettingsFragment())
+            findNavController().navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToSettingsFragment())
         }
     }
 }

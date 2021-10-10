@@ -38,11 +38,11 @@ class MainFragment : Fragment() {
 
     private fun MainFragmentBinding.setupListeners() {
         fab.setOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionMainFragmentToNewLibraryDialogFragment())
+            findNavController().navigateSafely(MainFragmentDirections.actionMainFragmentToNewLibraryDialogFragment())
         }
 
         bab.setNavigationOnClickListener {
-            findNavController().navigate(MainFragmentDirections.actionMainFragmentToMainDialogFragment())
+            findNavController().navigateSafely(MainFragmentDirections.actionMainFragmentToMainDialogFragment())
         }
 
         bab.setOnMenuItemClickListener { menuItem ->
@@ -139,7 +139,7 @@ class MainFragment : Fragment() {
                 sortingOrder(sortingOrder)
                 librariesCount(libraries.size)
                 onClickListener { _ ->
-                    findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
+                    findNavController().navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
                 }
             }
 
@@ -152,10 +152,10 @@ class MainFragment : Fragment() {
                         isManualSorting(sorting == LibraryListSorting.Manual)
                         isShowNotesCount(isShowNotesCount)
                         onClickListener { _ ->
-                            findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
+                            findNavController().navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
                         }
                         onLongClickListener { _ ->
-                            findNavController().navigate(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(library.id))
+                            findNavController().navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(library.id))
                             true
                         }
                         onDragHandleTouchListener { view, event ->
@@ -210,7 +210,7 @@ class MainFragment : Fragment() {
     }
 
     private fun MainFragmentBinding.setupLibrariesArchiveMenuItem(): Boolean {
-        findNavController().navigate(MainFragmentDirections.actionMainFragmentToMainArchiveFragment())
+        findNavController().navigateSafely(MainFragmentDirections.actionMainFragmentToMainArchiveFragment())
         return true
     }
 

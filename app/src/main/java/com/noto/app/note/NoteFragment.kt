@@ -108,7 +108,7 @@ class NoteFragment : Fragment() {
                         }
                         onLongClickListener { _ ->
                             findNavController()
-                                .navigate(NoteFragmentDirections.actionNoteFragmentToLabelDialogFragment(args.libraryId, entry.key.id))
+                                .navigateSafely(NoteFragmentDirections.actionNoteFragmentToLabelDialogFragment(args.libraryId, entry.key.id))
                             true
                         }
                     }
@@ -117,7 +117,7 @@ class NoteFragment : Fragment() {
                     id("new")
                     color(library.color)
                     onClickListener { _ ->
-                        findNavController().navigate(NoteFragmentDirections.actionNoteFragmentToNewLabelDialogFragment(args.libraryId))
+                        findNavController().navigateSafely(NoteFragmentDirections.actionNoteFragmentToNewLabelDialogFragment(args.libraryId))
                     }
                 }
             }
@@ -144,7 +144,7 @@ class NoteFragment : Fragment() {
             it.icon?.mutate()?.setTint(color)
         }
         bab.setNavigationOnClickListener {
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
                     args.libraryId,
                     viewModel.note.value.id,
@@ -170,7 +170,7 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupListeners() {
         fab.setOnClickListener {
             findNavController()
-                .navigate(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.libraryId, viewModel.note.value.id))
+                .navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.libraryId, viewModel.note.value.id))
         }
 
         val backCallback = {
@@ -195,7 +195,7 @@ class NoteFragment : Fragment() {
         }
 
         bab.setNavigationOnClickListener {
-            findNavController().navigate(
+            findNavController().navigateSafely(
                 NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
                     args.libraryId,
                     viewModel.note.value.id,
@@ -212,7 +212,7 @@ class NoteFragment : Fragment() {
                 }
                 R.id.reading_mode -> {
                     findNavController()
-                        .navigate(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.libraryId, viewModel.note.value.id))
+                        .navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.libraryId, viewModel.note.value.id))
                     true
                 }
                 else -> false
