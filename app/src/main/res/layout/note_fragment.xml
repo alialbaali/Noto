@@ -75,6 +75,8 @@
             <EditText
                 android:id="@+id/et_note_title"
                 style="@style/NoteTitleEditText"
+                android:autoLink="all"
+                android:linksClickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/spacing_normal"
@@ -87,6 +89,8 @@
             <EditText
                 android:id="@+id/et_note_body"
                 style="@style/NoteBodyEditText"
+                android:autoLink="all"
+                android:linksClickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="@dimen/spacing_normal"
