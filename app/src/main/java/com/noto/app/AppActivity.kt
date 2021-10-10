@@ -53,11 +53,13 @@ class AppActivity : AppCompatActivity() {
                 val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
                 val noteId = intent.getLongExtra(Constants.NoteId, 0)
                 val args = bundleOf(Constants.LibraryId to libraryId, Constants.NoteId to noteId)
+                navController.navigate(R.id.libraryFragment, args)
                 navController.navigate(R.id.noteFragment, args)
             }
             Intent.ACTION_CREATE_DOCUMENT -> {
                 val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
                 val args = bundleOf(Constants.LibraryId to libraryId)
+                navController.navigate(R.id.libraryFragment, args)
                 navController.navigate(R.id.noteFragment, args)
             }
         }
@@ -66,6 +68,7 @@ class AppActivity : AppCompatActivity() {
     private fun AppActivityBinding.showSelectLibraryDialog(content: String?) {
         val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
             val args = bundleOf(Constants.LibraryId to it, Constants.Body to content)
+            navController.navigate(R.id.libraryFragment, args)
             navController.navigate(R.id.noteFragment, args)
         }
 
