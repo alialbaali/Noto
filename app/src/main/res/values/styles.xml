@@ -74,7 +74,6 @@
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:singleLine">true</item>
         <item name="android:background">@drawable/dialog_item_shape</item>
         <item name="android:padding">@dimen/spacing_normal</item>
         <item name="android:clickable">true</item>
@@ -86,7 +85,6 @@
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:maxLines">1</item>
     </style>
 
     <style name="DialogRadioButtonItem" parent="Widget.AppCompat.CompoundButton.RadioButton">
