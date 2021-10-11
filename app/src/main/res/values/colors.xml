@@ -17,4 +17,7 @@
     <color name="colorAccentBrown">#795548</color>
     <color name="colorAccentBlueGray">#607D8B</color>
     <color name="colorAccentTeal">#009688</color>
+    <color name="colorAccentIndigo">#3F51B5</color>
+    <color name="colorAccentDeepPurple">#673AB7</color>
+    <color name="colorAccentDeepOrange">#D84315</color>
 </resources>
