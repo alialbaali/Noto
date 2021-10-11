@@ -18,8 +18,10 @@ import com.noto.app.domain.model.Library
 import com.noto.app.main.MainViewModel
 import com.noto.app.main.libraryItem
 import com.noto.app.util.BounceEdgeEffectFactory
+import com.noto.app.util.sorted
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
@@ -45,10 +47,14 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
     private fun SelectLibraryDialogFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
-        viewModel.libraries
-            .map { libraries -> libraries.filter { library -> library.id != args.libraryId } }
-            .onEach { libraries -> setupLibraries(libraries) }
-            .launchIn(lifecycleScope)
+        combine(
+            viewModel.libraries
+                .map { libraries -> libraries.filter { library -> library.id != args.libraryId } },
+            viewModel.sorting,
+            viewModel.sortingOrder,
+        ) { libraries, sorting, sortingOrder ->
+            setupLibraries(libraries.sorted(sorting, sortingOrder))
+        }.launchIn(lifecycleScope)
 
         viewModel.layout
             .onEach { layout -> setupLayoutManager(layout) }
