@@ -78,7 +78,6 @@
     <string name="pin_library">Kitaplığı sabitle</string>
     <string name="unpin_library">Sabitlemeyi kaldır</string>
     <!-- Note -->
-    <string name="all_notes">Tüm notlar</string>
     <string name="all">Tümü</string>
     <string name="archive_is_empty">Arşiv boş.</string>
     <plurals name="notes_count">
@@ -134,7 +133,6 @@
     <string name="show_note_creation_date">Not oluşturma tarihini göster</string>
     <string name="show_libraries_notes_count">Kitaplıktaki not sayısını göster</string>
     <!-- Label -->
-    <string name="add_label">Etiket ekle</string>
     <string name="reorder_label">Etiketleri yeniden sırala</string>
     <string name="create_label">Etiket oluştur</string>
     <string name="label_title">Etiket başlığı</string>
