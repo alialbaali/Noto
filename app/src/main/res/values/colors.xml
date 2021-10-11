@@ -5,16 +5,16 @@
     <color name="colorPrimary">#121212</color>
     <color name="colorSecondary">#707070</color>
 
-    <color name="colorAccentGray">#616161</color>
-    <color name="colorAccentBlue">#1A237E</color>
-    <color name="colorAccentPink">#880E4F</color>
-    <color name="colorAccentCyan">#006064</color>
-    <color name="colorAccentPurple">#7B1FA2</color>
-    <color name="colorAccentRed">#D32F2F</color>
-    <color name="colorAccentYellow">#99751B</color>
-    <color name="colorAccentOrange">#AB5600</color>
-    <color name="colorAccentGreen">#388E3C</color>
-    <color name="colorAccentBrown">#5D4037</color>
-    <color name="colorAccentBlueGray">#455A64</color>
-    <color name="colorAccentTeal">#00796B</color>
+    <color name="colorAccentGray">#757575</color>
+    <color name="colorAccentBlue">#2196F3</color>
+    <color name="colorAccentPink">#EC407A</color>
+    <color name="colorAccentCyan">#00BCD4</color>
+    <color name="colorAccentPurple">#9C27B0</color>
+    <color name="colorAccentRed">#E53935</color>
+    <color name="colorAccentYellow">#D59E17</color>
+    <color name="colorAccentOrange">#EF6C00</color>
+    <color name="colorAccentGreen">#4CAF50</color>
+    <color name="colorAccentBrown">#795548</color>
+    <color name="colorAccentBlueGray">#607D8B</color>
+    <color name="colorAccentTeal">#009688</color>
 </resources>
