@@ -231,6 +231,8 @@ class NoteFragment : Fragment() {
         fab.backgroundTintList = resources.colorStateResource(library.color.toResource())
         bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
         bab.navigationIcon?.mutate()?.setTint(color)
+        etNoteTitle.setLinkTextColor(color)
+        etNoteBody.setLinkTextColor(color)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             fab.outlineAmbientShadowColor = color
             fab.outlineSpotShadowColor = color

@@ -93,6 +93,8 @@ class NoteReadingModeFragment : Fragment() {
         tb.setTitleTextColor(color)
         tvCreatedAt.setTextColor(color)
         tvWordCount.setTextColor(color)
+        tvNoteTitle.setLinkTextColor(color)
+        tvNoteBody.setLinkTextColor(color)
         tb.navigationIcon?.mutate()?.setTint(color)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             nsv.verticalScrollbarThumbDrawable?.mutate()?.setTint(color)
