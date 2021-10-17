@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cool"
     android:layout_width="match_parent"
-    android:animateLayoutChanges="true"
     android:layout_height="match_parent"
     android:background="@color/colorBackground">
 
@@ -54,17 +53,6 @@
 
         </com.google.android.material.textfield.TextInputLayout>
     </com.google.android.material.appbar.AppBarLayout>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_place_holder"
-        style="@style/PlaceholderTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/spacing_normal"
-        android:text="@string/library_is_empty"
-        android:visibility="gone"
-        tools:visibility="visible" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"

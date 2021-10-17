@@ -68,7 +68,9 @@ class LibraryFragment : Fragment() {
                 .map { it.trim() },
         ) { notes, labels, font, library, searchTerm ->
             setupNotesAndLabels(
-                notes.filter { it.first.title.contains(searchTerm, ignoreCase = true) || it.first.body.contains(searchTerm, ignoreCase = true) },
+                notes
+                    .filter { it.first.title.contains(searchTerm, ignoreCase = true) || it.first.body.contains(searchTerm, ignoreCase = true) }
+                    .filterSelectedLabels(labels),
                 labels,
                 font,
                 library
@@ -92,7 +94,12 @@ class LibraryFragment : Fragment() {
                 .filter { it.value }
                 .map { it.key.id }
                 .toLongArray()
-            findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(args.libraryId, labelsIds = selectedLabelsIds))
+            findNavController().navigateSafely(
+                LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(
+                    args.libraryId,
+                    labelsIds = selectedLabelsIds
+                )
+            )
         }
 
         tb.setNavigationOnClickListener {
@@ -158,91 +165,87 @@ class LibraryFragment : Fragment() {
         font: Font,
         library: Library,
     ) {
-        if (notes.isEmpty()) {
-            if (viewModel.isSearchEnabled.value)
-                tvPlaceHolder.text = resources.stringResource(R.string.no_note_matches_search_term)
-            rv.visibility = View.GONE
-            tvPlaceHolder.visibility = View.VISIBLE
-        } else {
-            val filteredNotes = notes.filterSelectedLabels(labels)
-            rv.visibility = View.VISIBLE
-            tvPlaceHolder.visibility = View.GONE
-            rv.withModels {
-                epoxyController = this
+        rv.withModels {
+            epoxyController = this
 
-                labelListItem {
-                    id("labels")
-                    labels(labels)
-                    color(library.color)
-                    onAllLabelClickListener { _ ->
-                        viewModel.clearLabelSelection()
-                    }
-                    onLabelClickListener { label ->
-                        if (labels.toList().first { it.first == label }.second)
-                            viewModel.deselectLabel(label.id)
-                        else
-                            viewModel.selectLabel(label.id)
-                    }
-                    onLabelLongClickListener { label ->
-                        findNavController()
-                            .navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLabelDialogFragment(args.libraryId, label.id))
-                        true
-                    }
-                    onNewLabelClickListener { _ ->
-                        findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNewLabelDialogFragment(args.libraryId))
-                    }
+            labelListItem {
+                id("labels")
+                labels(labels)
+                color(library.color)
+                onAllLabelClickListener { _ ->
+                    viewModel.clearLabelSelection()
                 }
-
-                noteListSortingItem {
-                    id(0)
-                    sorting(library.sorting)
-                    sortingOrder(library.sortingOrder)
-                    notesCount(filteredNotes.size)
-                    notoColor(library.color)
-                    onClickListener { _ ->
-                        findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingGroupingDialogFragment(args.libraryId))
-                    }
+                onLabelClickListener { label ->
+                    if (labels.toList().first { it.first == label }.second)
+                        viewModel.deselectLabel(label.id)
+                    else
+                        viewModel.selectLabel(label.id)
                 }
+                onLabelLongClickListener { label ->
+                    findNavController()
+                        .navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLabelDialogFragment(args.libraryId, label.id))
+                    true
+                }
+                onNewLabelClickListener { _ ->
+                    findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNewLabelDialogFragment(args.libraryId))
+                }
+            }
 
-                val items = { items: List<Pair<Note, List<Label>>> ->
-                    items.forEach { entry ->
-                        noteItem {
-                            id(entry.first.id)
-                            note(entry.first)
-                            font(font)
-                            labels(entry.second)
-                            color(library.color)
-                            previewSize(library.notePreviewSize)
-                            isShowCreationDate(library.isShowNoteCreationDate)
-                            isManualSorting(library.sorting == NoteListSorting.Manual)
-                            onClickListener { _ ->
-                                findNavController()
-                                    .navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId, entry.first.id))
-                            }
-                            onLongClickListener { _ ->
-                                findNavController()
-                                    .navigateSafely(
-                                        LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
-                                            entry.first.libraryId,
-                                            entry.first.id,
-                                            R.id.libraryFragment
-                                        )
+            noteListSortingItem {
+                id(0)
+                sorting(library.sorting)
+                sortingOrder(library.sortingOrder)
+                notesCount(notes.size)
+                notoColor(library.color)
+                onClickListener { _ ->
+                    findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingGroupingDialogFragment(args.libraryId))
+                }
+            }
+
+            val items = { items: List<Pair<Note, List<Label>>> ->
+                items.forEach { entry ->
+                    noteItem {
+                        id(entry.first.id)
+                        note(entry.first)
+                        font(font)
+                        labels(entry.second)
+                        color(library.color)
+                        previewSize(library.notePreviewSize)
+                        isShowCreationDate(library.isShowNoteCreationDate)
+                        isManualSorting(library.sorting == NoteListSorting.Manual)
+                        onClickListener { _ ->
+                            findNavController()
+                                .navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId, entry.first.id))
+                        }
+                        onLongClickListener { _ ->
+                            findNavController()
+                                .navigateSafely(
+                                    LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
+                                        entry.first.libraryId,
+                                        entry.first.id,
+                                        R.id.libraryFragment
                                     )
-                                true
-                            }
-                            onDragHandleTouchListener { view, event ->
-                                if (event.action == MotionEvent.ACTION_DOWN)
-                                    rv.findContainingViewHolder(view)?.let { viewHolder ->
-                                        itemTouchHelper.startDrag(viewHolder)
-                                    }
-                                view.performClick()
-                            }
+                                )
+                            true
+                        }
+                        onDragHandleTouchListener { view, event ->
+                            if (event.action == MotionEvent.ACTION_DOWN)
+                                rv.findContainingViewHolder(view)?.let { viewHolder ->
+                                    itemTouchHelper.startDrag(viewHolder)
+                                }
+                            view.performClick()
                         }
                     }
                 }
-
-                buildNotesModels(library, filteredNotes, resources, items)
             }
+
+            if (notes.isEmpty())
+                placeholderItem {
+                    id("placeholder")
+                    placeholder(resources.stringResource(R.string.no_notes_found))
+                }
+            else
+                buildNotesModels(library, notes, resources, items)
         }
     }
 
