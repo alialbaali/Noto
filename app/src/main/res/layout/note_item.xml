@@ -25,6 +25,8 @@
         <TextView
             android:id="@+id/tv_note_title"
             style="@style/NoteTitleTextView"
+            android:autoLink="all"
+            android:linksClickable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_extra_small"
@@ -33,6 +35,8 @@
         <TextView
             android:id="@+id/tv_note_body"
             style="@style/NoteBodyTextView"
+            android:autoLink="all"
+            android:linksClickable="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_extra_small"
