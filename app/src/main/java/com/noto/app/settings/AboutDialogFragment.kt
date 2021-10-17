@@ -25,16 +25,16 @@ class AboutDialogFragment : BaseDialogFragment() {
         setupListeners()
     }
 
-    fun AboutDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
+    private fun AboutDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
         tvDialogTitle.text = resources.stringResource(R.string.about)
     }
 
-    fun AboutDialogFragmentBinding.setupState() {
+    private fun AboutDialogFragmentBinding.setupState() {
         tvAbout.removeLinksUnderline()
         tvAbout.movementMethod = LinkMovementMethod.getInstance()
     }
 
-    fun AboutDialogFragmentBinding.setupListeners() {
+    private fun AboutDialogFragmentBinding.setupListeners() {
         btnOkay.setOnClickListener {
             dismiss()
         }
