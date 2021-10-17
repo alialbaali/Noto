@@ -124,17 +124,6 @@
         <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
-    <style name="MaterialButtonSecondary" parent="MaterialButton">
-        <item name="android:backgroundTint">@color/colorSurface</item>
-        <item name="android:textColor">@color/colorPrimary</item>
-    </style>
-
-    <style name="HorizontalScrollView">
-        <item name="android:background">@drawable/generic_shape</item>
-        <item name="android:padding">@dimen/spacing_extra_small</item>
-        <item name="android:scrollbars">none</item>
-    </style>
-
     <style name="LibraryTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/size_small</item>

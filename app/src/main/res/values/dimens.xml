@@ -10,7 +10,7 @@
     <dimen name="spacing_huge">48dp</dimen>
 
     <!-- Elevation -->
-    <dimen name="elevation_no">0dp</dimen>
+    <dimen name="elevation_none">0dp</dimen>
     <dimen name="elevation_extra_small">1dp</dimen>
     <dimen name="elevation_small">2dp</dimen>
     <dimen name="elevation_normal">4dp</dimen>
