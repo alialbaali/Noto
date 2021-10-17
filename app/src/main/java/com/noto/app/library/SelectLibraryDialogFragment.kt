@@ -52,8 +52,9 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
                 .map { libraries -> libraries.filter { library -> library.id != args.libraryId } },
             viewModel.sorting,
             viewModel.sortingOrder,
-        ) { libraries, sorting, sortingOrder ->
-            setupLibraries(libraries.sorted(sorting, sortingOrder))
+            viewModel.isShowNotesCount,
+        ) { libraries, sorting, sortingOrder, isShowNotesCount ->
+            setupLibraries(libraries.sorted(sorting, sortingOrder), isShowNotesCount)
         }.launchIn(lifecycleScope)
 
         viewModel.layout
@@ -62,7 +63,7 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun SelectLibraryDialogFragmentBinding.setupLibraries(libraries: List<Library>) {
+    private fun SelectLibraryDialogFragmentBinding.setupLibraries(libraries: List<Library>, isShowNotesCount: Boolean) {
         if (libraries.isEmpty()) {
             tvPlaceHolder.visibility = View.VISIBLE
             rv.visibility = View.GONE
@@ -75,6 +76,7 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
                         id(library.id)
                         library(library)
                         notesCount(viewModel.countNotes(library.id))
+                        isShowNotesCount(isShowNotesCount)
                         isManualSorting(false)
                         onClickListener { _ ->
                             args.selectLibraryItemClickListener.onClick(library.id)
