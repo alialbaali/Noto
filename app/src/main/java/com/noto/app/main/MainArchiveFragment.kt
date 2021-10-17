@@ -64,21 +64,9 @@ class MainArchiveFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
     }
 
-    private fun MainArchiveFragmentBinding.setupLibraries(libraries: List<Library>, isShowNotesCount: Boolean) {
-        if (libraries.isEmpty()) {
-            rv.visibility = View.GONE
-            tvPlaceHolder.visibility = View.VISIBLE
-        } else {
-            rv.visibility = View.VISIBLE
-            tvPlaceHolder.visibility = View.GONE
-            setupModels(libraries, isShowNotesCount)
-        }
-    }
-
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainArchiveFragmentBinding.setupModels(libraries: List<Library>, isShowNotesCount: Boolean) {
+    private fun MainArchiveFragmentBinding.setupLibraries(libraries: List<Library>, isShowNotesCount: Boolean) {
         rv.withModels {
-
             val items = { items: List<Library> ->
                 items.forEach { library ->
                     libraryItem {
@@ -99,25 +87,31 @@ class MainArchiveFragment : Fragment() {
                 }
             }
 
-            val pinnedLibraries = libraries.filter { it.isPinned }
-            val notPinnedLibraries = libraries.filterNot { it.isPinned }
-
-            if (pinnedLibraries.isNotEmpty()) {
-                headerItem {
-                    id("pinned")
-                    title(resources.stringResource(R.string.pinned))
+            if (libraries.isEmpty()) {
+                placeholderItem {
+                    id("placeholder")
+                    placeholder(resources.stringResource(R.string.archive_is_empty))
                 }
+            } else {
+                val pinnedLibraries = libraries.filter { it.isPinned }
+                val notPinnedLibraries = libraries.filterNot { it.isPinned }
 
-                items(pinnedLibraries)
-
-                if (notPinnedLibraries.isNotEmpty())
+                if (pinnedLibraries.isNotEmpty()) {
                     headerItem {
-                        id("libraries")
-                        title(resources.stringResource(R.string.libraries))
+                        id("pinned")
+                        title(resources.stringResource(R.string.pinned))
                     }
-            }
 
-            items(notPinnedLibraries)
+                    items(pinnedLibraries)
+
+                    if (notPinnedLibraries.isNotEmpty())
+                        headerItem {
+                            id("libraries")
+                            title(resources.stringResource(R.string.libraries))
+                        }
+                }
+                items(notPinnedLibraries)
+            }
         }
     }
 }
