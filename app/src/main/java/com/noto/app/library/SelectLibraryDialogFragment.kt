@@ -17,10 +17,7 @@ import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.main.MainViewModel
 import com.noto.app.main.libraryItem
-import com.noto.app.util.BounceEdgeEffectFactory
-import com.noto.app.util.sorted
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
@@ -64,13 +61,13 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun SelectLibraryDialogFragmentBinding.setupLibraries(libraries: List<Library>, isShowNotesCount: Boolean) {
-        if (libraries.isEmpty()) {
-            tvPlaceHolder.visibility = View.VISIBLE
-            rv.visibility = View.GONE
-        } else {
-            tvPlaceHolder.visibility = View.GONE
-            rv.visibility = View.VISIBLE
-            rv.withModels {
+        rv.withModels {
+            if (libraries.isEmpty()) {
+                placeholderItem {
+                    id("placeholder")
+                    placeholder(resources.stringResource(R.string.no_libraries_found))
+                }
+            } else {
                 libraries.forEach { library ->
                     libraryItem {
                         id(library.id)

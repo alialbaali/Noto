@@ -9,19 +9,7 @@
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
-        android:paddingHorizontal="@dimen/spacing_small"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/library_item" />
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_place_holder"
-        style="@style/PlaceholderTextView"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/spacing_normal"
-        android:text="@string/no_libraries"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
+        android:paddingHorizontal="@dimen/spacing_small"
+        tools:listitem="@layout/library_item" />
 </LinearLayout>
