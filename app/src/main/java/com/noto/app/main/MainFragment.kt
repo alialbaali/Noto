@@ -94,42 +94,6 @@ class MainFragment : Fragment() {
         sortingOrder: SortingOrder,
         isShowNotesCount: Boolean,
     ) {
-        if (libraries.isEmpty()) {
-            rv.visibility = View.GONE
-            tvPlaceHolder.visibility = View.VISIBLE
-        } else {
-            rv.visibility = View.VISIBLE
-            tvPlaceHolder.visibility = View.GONE
-            setupModels(libraries, sorting, sortingOrder, isShowNotesCount)
-        }
-    }
-
-    private fun MainFragmentBinding.setupLayoutMenuItem(): Boolean {
-        when (viewModel.layout.value) {
-            Layout.Linear -> {
-                viewModel.updateLayout(Layout.Grid)
-                root.snackbar(
-                    getString(R.string.layout_is_grid_mode),
-                    anchorView = fab
-                )
-            }
-            Layout.Grid -> {
-                viewModel.updateLayout(Layout.Linear)
-                root.snackbar(
-                    getString(R.string.layout_is_list_mode),
-                    anchorView = fab
-                )
-            }
-        }
-        return true
-    }
-
-    private fun MainFragmentBinding.setupModels(
-        libraries: List<Library>,
-        sorting: LibraryListSorting,
-        sortingOrder: SortingOrder,
-        isShowNotesCount: Boolean,
-    ) {
         rv.withModels {
             epoxyController = this
 
@@ -169,30 +133,57 @@ class MainFragment : Fragment() {
                 }
             }
 
-            val pinnedLibraries = libraries.filter { it.isPinned }
-            val notPinnedLibraries = libraries.filterNot { it.isPinned }
 
-            if (pinnedLibraries.isNotEmpty()) {
-                tb.title = resources.stringResource(R.string.app_name)
-
-                headerItem {
-                    id("pinned")
-                    title(resources.stringResource(R.string.pinned))
+            if (libraries.isEmpty()) {
+                placeholderItem {
+                    id("placeholder")
+                    placeholder(resources.stringResource(R.string.no_libraries_found))
                 }
-
-                items(pinnedLibraries)
-
-                if (notPinnedLibraries.isNotEmpty())
-                    headerItem {
-                        id("libraries")
-                        title(resources.stringResource(R.string.libraries))
-                    }
             } else {
-                tb.title = resources.stringResource(R.string.libraries)
-            }
+                val pinnedLibraries = libraries.filter { it.isPinned }
+                val notPinnedLibraries = libraries.filterNot { it.isPinned }
 
-            items(notPinnedLibraries)
+                if (pinnedLibraries.isNotEmpty()) {
+                    tb.title = resources.stringResource(R.string.app_name)
+
+                    headerItem {
+                        id("pinned")
+                        title(resources.stringResource(R.string.pinned))
+                    }
+
+                    items(pinnedLibraries)
+
+                    if (notPinnedLibraries.isNotEmpty())
+                        headerItem {
+                            id("libraries")
+                            title(resources.stringResource(R.string.libraries))
+                        }
+                } else {
+                    tb.title = resources.stringResource(R.string.libraries)
+                }
+                items(notPinnedLibraries)
+            }
         }
+    }
+
+    private fun MainFragmentBinding.setupLayoutMenuItem(): Boolean {
+        when (viewModel.layout.value) {
+            Layout.Linear -> {
+                viewModel.updateLayout(Layout.Grid)
+                root.snackbar(
+                    getString(R.string.layout_is_grid_mode),
+                    anchorView = fab
+                )
+            }
+            Layout.Grid -> {
+                viewModel.updateLayout(Layout.Linear)
+                root.snackbar(
+                    getString(R.string.layout_is_list_mode),
+                    anchorView = fab
+                )
+            }
+        }
+        return true
     }
 
     private fun MainFragmentBinding.setupItemTouchHelper(layout: Layout) {
