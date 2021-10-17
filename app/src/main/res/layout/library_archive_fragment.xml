@@ -33,16 +33,4 @@
             tools:title="Archive" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_place_holder"
-        style="@style/PlaceholderTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/spacing_normal"
-        android:text="@string/archive_is_empty"
-        android:visibility="gone"
-        tools:visibility="visible" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

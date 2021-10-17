@@ -77,52 +77,50 @@ class LibraryArchiveFragment : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Pair<Note, List<Label>>>, font: Font, library: Library) {
-        if (archivedNotes.isEmpty()) {
-            rv.visibility = View.GONE
-            tvPlaceHolder.visibility = View.VISIBLE
-        } else {
-            rv.visibility = View.VISIBLE
-            tvPlaceHolder.visibility = View.GONE
-            rv.withModels {
-
-                val items = { items: List<Pair<Note, List<Label>>> ->
-                    items.forEach { archivedNote ->
-                        noteItem {
-                            id(archivedNote.first.id)
-                            note(archivedNote.first)
-                            font(font)
-                            previewSize(library.notePreviewSize)
-                            isShowCreationDate(library.isShowNoteCreationDate)
-                            color(library.color)
-                            labels(archivedNote.second)
-                            isManualSorting(false)
-                            onClickListener { _ ->
-                                findNavController()
-                                    .navigateSafely(
-                                        LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
-                                            archivedNote.first.libraryId,
-                                            archivedNote.first.id
-                                        )
+        rv.withModels {
+            val items = { items: List<Pair<Note, List<Label>>> ->
+                items.forEach { archivedNote ->
+                    noteItem {
+                        id(archivedNote.first.id)
+                        note(archivedNote.first)
+                        font(font)
+                        previewSize(library.notePreviewSize)
+                        isShowCreationDate(library.isShowNoteCreationDate)
+                        color(library.color)
+                        labels(archivedNote.second)
+                        isManualSorting(false)
+                        onClickListener { _ ->
+                            findNavController()
+                                .navigateSafely(
+                                    LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
+                                        archivedNote.first.libraryId,
+                                        archivedNote.first.id
                                     )
-                            }
-                            onLongClickListener { _ ->
-                                findNavController()
-                                    .navigateSafely(
-                                        LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
-                                            archivedNote.first.libraryId,
-                                            archivedNote.first.id,
-                                            R.id.libraryArchiveFragment
-                                        )
-                                    )
-                                true
-                            }
-                            onDragHandleTouchListener { _, _ -> false }
+                                )
                         }
+                        onLongClickListener { _ ->
+                            findNavController()
+                                .navigateSafely(
+                                    LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
+                                        archivedNote.first.libraryId,
+                                        archivedNote.first.id,
+                                        R.id.libraryArchiveFragment
+                                    )
+                                )
+                            true
+                        }
+                        onDragHandleTouchListener { _, _ -> false }
                     }
                 }
-
-                buildNotesModels(library, archivedNotes, resources, items)
             }
+
+            if (archivedNotes.isEmpty())
+                placeholderItem {
+                    id("placeholder")
+                    placeholder(resources.stringResource(R.string.archive_is_empty))
+                }
+            else
+                buildNotesModels(library, archivedNotes, resources, items)
         }
     }
 }
