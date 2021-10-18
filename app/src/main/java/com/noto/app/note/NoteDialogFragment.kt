@@ -7,10 +7,13 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.print.PdfGenerator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.FileProvider
 import androidx.core.widget.TextViewCompat
+import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -28,6 +31,7 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.io.File
 
 private const val SelectDirectoryRequestCode = 1
 
@@ -93,7 +97,12 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvOpenInReadingMode.setOnClickListener {
             dismiss()
-            findNavController().navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReadingModeFragment(args.libraryId, args.noteId))
+            findNavController().navigateSafely(
+                NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReadingModeFragment(
+                    args.libraryId,
+                    args.noteId
+                )
+            )
         }
 
         tvDuplicateNote.setOnClickListener {
@@ -158,8 +167,28 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvExportNote.setOnClickListener {
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-            startActivityForResult(intent, SelectDirectoryRequestCode)
+            val outputFile = File(requireContext().externalCacheDir, "example.pdf")
+            PdfGenerator.create(outputFile, """
+                <strong>${viewModel.note.value.title}</strong>
+
+                ${viewModel.note.value.body}
+            """.trimIndent(), requireContext(), object : PdfGenerator.ResultCallback {
+                override fun onSuccess(file: File) {
+                    val uri = FileProvider.getUriForFile(requireContext(), requireContext().applicationContext.packageName + ".provider", file)
+                    val intent = Intent(Intent.ACTION_VIEW).apply {
+                        type = "application/pdf"
+                        data = uri
+                        flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    }
+                    val chooser = Intent.createChooser(intent, getString(R.string.export_note))
+                    startActivity(chooser)
+                }
+
+                override fun onFailure(message: String?) {
+                }
+            })
+//            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
+//            startActivityForResult(intent, SelectDirectoryRequestCode)
         }
 
         tvDeleteNote.setOnClickListener {
@@ -189,11 +218,47 @@ class NoteDialogFragment : BaseDialogFragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
             data?.data?.let { uri ->
-                val documentUri = requireContext().exportNote(uri, viewModel.library.value, viewModel.note.value)
+//                val attributes = PrintAttributes.Builder()
+//                    .setMinMargins(PrintAttributes.Margins.NO_MARGINS)
+//                    .setMediaSize(PrintAttributes.MediaSize.ISO_A4)
+//                    .setResolution(PrintAttributes.Resolution("Standard", "Standard", 100, 100))
+//                    .build()
+//                val textView = TextView(requireContext())
+//                textView.text = viewModel.note.value.body
+//                val layout = LinearLayout(requireContext()).apply {
+//                    setPadding(16.dp)
+//                    addView(textView)
+//                }
+//
+//                PrintedPdfDocument(requireContext(), attributes).apply {
+//                    startPage(0).apply {
+//                        layout.measure(canvas.width, canvas.height)
+//                        layout.layout(0, 0, canvas.width, canvas.height)
+//                        layout.draw(canvas)
+//                        finishPage(this)
+//                    }
+                val documentFile = DocumentFile.fromTreeUri(requireContext(), uri)?.createFile("application/pdf", "Example.pdf")
+//                val uri = FileProvider.getUriForFile(requireContext(), requireContext().applicationContext.packageName + ".provider", outputFile)
+//                    val outputStream = requireContext().contentResolver.openOutputStream(documentFile!!.uri)
+//                    writeTo(outputStream)
+//                    close()
+//                }
+
+                val outputFile = File(requireContext().externalCacheDir, "example.pdf")
+                PdfGenerator.create(outputFile, viewModel.note.value.body, requireContext(), object : PdfGenerator.ResultCallback {
+                    override fun onSuccess(file: File) {
+
+                    }
+
+                    override fun onFailure(message: String?) {
+                    }
+                })
+
+//                val documentUri = requireContext().exportNote(uri, viewModel.library.value, viewModel.note.value)
                 val parentView = requireParentFragment().requireView()
-                val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
-                val message = resources.stringResource(R.string.note_is_exported, documentUri?.directoryPath)
-                parentView.snackbar(message, parentAnchorView)
+//                val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
+//                val message = resources.stringResource(R.string.note_is_exported, documentUri?.directoryPath)
+//                parentView.snackbar(message, parentAnchorView)
                 findNavController().navigateUp()
             }
         }
