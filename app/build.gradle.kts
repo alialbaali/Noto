@@ -5,6 +5,7 @@ plugins {
     kotlin(Plugins.KotlinAndroid)
     kotlin(Plugins.KotlinKapt)
     id(Plugins.NavigationSafeArgs)
+    kotlin("plugin.serialization") version "1.5.31"
 }
 
 android {
@@ -104,6 +105,7 @@ dependencies {
     implementation(AndroidX.Work.runtimeKtx)
     implementation(KotlinX.Coroutines.core)
     implementation(KotlinX.Coroutines.android)
+    implementation(KotlinX.Serialization.json)
     implementation(Libraries.Main.DataStore)
     implementation(Libraries.Main.Koin)
     implementation(Libraries.Main.Epoxy)
