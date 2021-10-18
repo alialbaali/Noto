@@ -4,6 +4,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalStorage {
 
+    fun getAll(): Flow<Map<String, String>>
+
     fun get(key: String): Flow<String>
 
     fun getOrNull(key: String): Flow<String?>

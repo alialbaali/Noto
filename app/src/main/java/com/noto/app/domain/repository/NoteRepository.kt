@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface NoteRepository {
 
+    fun getAllNotes(): Flow<List<Note>>
+
     fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>>
 
     fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>>

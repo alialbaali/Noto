@@ -5,13 +5,15 @@ import kotlinx.coroutines.flow.Flow
 
 interface LibraryRepository {
 
+    fun getAllLibraries(): Flow<List<Library>>
+
     fun getLibraries(): Flow<List<Library>>
 
     fun getArchivedLibraries(): Flow<List<Library>>
 
     fun getLibraryById(libraryId: Long): Flow<Library>
 
-    suspend fun createLibrary(library: Library)
+    suspend fun createLibrary(library: Library): Long
 
     suspend fun updateLibrary(library: Library)
 

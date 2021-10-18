@@ -13,6 +13,8 @@ class LibraryRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : LibraryRepository {
 
+    override fun getAllLibraries(): Flow<List<Library>> = dataSource.getAllLibraries()
+
     override fun getLibraries(): Flow<List<Library>> = dataSource.getLibraries()
 
     override fun getArchivedLibraries(): Flow<List<Library>> = dataSource.getArchivedLibraries()

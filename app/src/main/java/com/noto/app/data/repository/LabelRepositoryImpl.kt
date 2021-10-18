@@ -13,6 +13,8 @@ class LabelRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : LabelRepository {
 
+    override fun getAllLabels(): Flow<List<Label>> = dataSource.getAllLabels()
+
     override fun getLabelsByLibraryId(libraryId: Long): Flow<List<Label>> = dataSource.getLabelsByLibraryId(libraryId)
 
     override fun getLabelById(id: Long): Flow<Label> = dataSource.getLabelById(id)

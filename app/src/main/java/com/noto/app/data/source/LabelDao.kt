@@ -8,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface LabelDao : LocalLabelDataSource {
 
+    @Query("SELECT * FROM labels")
+    override fun getAllLabels(): Flow<List<Label>>
+
     @Query("SELECT * FROM labels WHERE library_id = :libraryId")
     override fun getLabelsByLibraryId(libraryId: Long): Flow<List<Label>>
 

@@ -9,6 +9,13 @@ import kotlinx.coroutines.flow.mapNotNull
 
 class LocalStorageImpl(private val storage: DataStore<Preferences>) : LocalStorage {
 
+    override fun getAll(): Flow<Map<String, String>> = storage.data
+        .mapNotNull { preferences ->
+            preferences.asMap()
+                .mapKeys { it.key.name }
+                .mapValues { it.value as String }
+        }
+
     override fun get(key: String): Flow<String> = storage.data
         .mapNotNull { preferences -> preferences[preferencesKey(key)] }
 

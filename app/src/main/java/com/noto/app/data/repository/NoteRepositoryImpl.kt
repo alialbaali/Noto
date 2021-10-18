@@ -13,6 +13,8 @@ class NoteRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : NoteRepository {
 
+    override fun getAllNotes(): Flow<List<Note>> = dataSource.getAllNotes()
+
     override fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getNotesByLibraryId(libraryId)
 
     override fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getArchivedNotesByLibraryId(libraryId)
