@@ -38,7 +38,7 @@ fun NavController.navigateSafely(directions: NavDirections) {
 }
 
 val Uri.directoryPath
-    get() = path?.substringAfterLast(':')?.substringBeforeLast('/')
+    get() = path?.substringAfterLast(':')
 
 fun Fragment.launchShareNoteIntent(note: Note) {
     val intent = note.createShareIntent()
