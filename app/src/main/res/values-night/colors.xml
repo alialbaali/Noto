@@ -20,4 +20,9 @@
     <color name="colorAccentIndigo">#5C6BC0</color>
     <color name="colorAccentDeepPurple">#9575CD</color>
     <color name="colorAccentDeepOrange">#FF7043</color>
+    <color name="colorAccentDeepGreen">#00E676</color>
+    <color name="colorAccentLightBlue">#4FC3F7</color>
+    <color name="colorAccentLightGreen">#8BC34A</color>
+    <color name="colorAccentLightRed">#FF7864</color>
+    <color name="colorAccentLightPink">#FF80AB</color>
 </resources>
