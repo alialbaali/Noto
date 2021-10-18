@@ -30,7 +30,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
     private val args by navArgs<LibraryDialogFragmentArgs>()
 
-    private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
+    private val alarmManager by lazy { context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager? }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -50,8 +50,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun LibraryDialogFragmentBinding.setupListeners() {
-        val parentView = requireParentFragment().requireView()
-        val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
+        val parentView = parentFragment?.view
+        val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
 
         tvEditLibrary.setOnClickListener {
             dismiss()
@@ -60,8 +60,10 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
         tvNewNoteShortcut.setOnClickListener {
             dismiss()
-            if (ShortcutManagerCompat.isRequestPinShortcutSupported(requireContext()))
-                ShortcutManagerCompat.requestPinShortcut(requireContext(), requireContext().createPinnedShortcut(viewModel.library.value), null)
+            context?.let { context ->
+                if (ShortcutManagerCompat.isRequestPinShortcutSupported(context))
+                    ShortcutManagerCompat.requestPinShortcut(context, context.createPinnedShortcut(viewModel.library.value), null)
+            }
         }
 
         tvArchiveLibrary.setOnClickListener {
@@ -73,7 +75,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
             else
                 R.string.library_is_archived
 
-            parentView.snackbar(resources.stringResource(resource), parentAnchorView)
+            parentView?.snackbar(resources.stringResource(resource), parentAnchorView)
         }
 
         tvPinLibrary.setOnClickListener {
@@ -85,7 +87,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
             else
                 R.string.library_is_pinned
 
-            parentView.snackbar(resources.stringResource(resource), parentAnchorView)
+            parentView?.snackbar(resources.stringResource(resource), parentAnchorView)
         }
 
         tvDeleteLibrary.setOnClickListener {
@@ -131,16 +133,20 @@ class LibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun setupConfirmationDialogClickListener() = ConfirmationDialogFragment.ConfirmationDialogClickListener {
-        val parentView = requireParentFragment().requireView()
-        val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
-        parentView.snackbar(resources.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
+        val parentView = parentFragment?.view
+        val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
+        parentView?.snackbar(resources.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
 
         findNavController().popBackStack(R.id.mainFragment, false)
         dismiss()
 
         viewModel.notes.value
             .filter { entry -> entry.first.reminderDate != null }
-            .forEach { entry -> alarmManager.cancelAlarm(requireContext(), entry.first.id) }
+            .forEach { entry ->
+                context?.let { context ->
+                    alarmManager?.cancelAlarm(context, entry.first.id)
+                }
+            }
 
         viewModel.deleteLibrary()
     }

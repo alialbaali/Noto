@@ -36,10 +36,11 @@ class SettingsFragment : Fragment() {
         }
 
     private fun SettingsFragmentBinding.setupState() {
-        val version = requireContext()
-            .packageManager
-            ?.getPackageInfo(requireContext().packageName, 0)
-            ?.versionName
+        val version = context?.let { context ->
+            context.packageManager
+                ?.getPackageInfo(context.packageName, 0)
+                ?.versionName
+        }
 
         tvVersion.text = resources.stringResource(R.string.version, version)
 

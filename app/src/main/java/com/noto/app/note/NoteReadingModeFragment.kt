@@ -43,7 +43,7 @@ class NoteReadingModeFragment : Fragment() {
     }
 
     private fun NoteReadingModeFragmentBinding.setupState() {
-        nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+        nsv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         abl.bringToFront()
 
@@ -79,7 +79,9 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupNote(note: Note, font: Font) {
         tvNoteTitle.text = note.title
         tvNoteBody.text = note.body
-        tvCreatedAt.text = resources.stringResource(R.string.created, note.creationDate.format(requireContext()))
+        context?.let { context ->
+            tvCreatedAt.text = resources.stringResource(R.string.created, note.creationDate.format(context))
+        }
         tvWordCount.text = resources.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
         tvNoteTitle.isVisible = note.title.isNotBlank()
         tvNoteBody.isVisible = note.body.isNotBlank()

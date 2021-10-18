@@ -89,7 +89,7 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
 
     private fun SelectLibraryDialogFragmentBinding.setupLayoutManager(layout: Layout) {
         when (layout) {
-            Layout.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            Layout.Linear -> rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
     }

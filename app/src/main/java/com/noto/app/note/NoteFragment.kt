@@ -48,7 +48,7 @@ class NoteFragment : Fragment() {
 
     @OptIn(FlowPreview::class)
     private fun NoteFragmentBinding.setupState() {
-        nsv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+        nsv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         abl.bringToFront()
 
@@ -57,7 +57,7 @@ class NoteFragment : Fragment() {
             .distinctUntilChangedBy { it.isSetNewNoteCursorOnTitle }
             .onEach { library ->
                 if (args.noteId == 0L) {
-                    requireActivity().showKeyboard(root)
+                    activity?.showKeyboard(root)
                     if (library.isSetNewNoteCursorOnTitle)
                         etNoteTitle.requestFocus()
                     else
@@ -182,13 +182,12 @@ class NoteFragment : Fragment() {
                 etNoteTitle.text.toString(),
                 etNoteBody.text.toString(),
             )
-            requireActivity().hideKeyboard(root)
+            activity?.hideKeyboard(root)
         }
 
-        requireActivity()
-            .onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner) { backCallback() }
-            .isEnabled = true
+        activity?.onBackPressedDispatcher
+            ?.addCallback(viewLifecycleOwner) { backCallback() }
+            ?.isEnabled = true
 
         tb.setNavigationOnClickListener {
             backCallback()
@@ -250,38 +249,42 @@ class NoteFragment : Fragment() {
         etNoteBody.setSelection(note.body.length)
         etNoteTitle.setBoldFont(font)
         etNoteBody.setSemiboldFont(font)
-        tvCreatedAt.text = resources.stringResource(R.string.created, note.creationDate.format(requireContext()))
+        context?.let { context ->
+            tvCreatedAt.text = resources.stringResource(R.string.created, note.creationDate.format(context))
+        }
     }
 
     private fun NoteFragmentBinding.setupShortcut(note: Note) {
         if (note.id != 0L && note.isValid) {
-            val intent = Intent(Intent.ACTION_EDIT, null, requireContext(), AppActivity::class.java).apply {
+            val intent = Intent(Intent.ACTION_EDIT, null, context, AppActivity::class.java).apply {
                 putExtra(Constants.LibraryId, note.libraryId)
                 putExtra(Constants.NoteId, note.id)
             }
 
             val label = note.title.ifBlank { note.body }
 
-            val shortcut = ShortcutInfoCompat.Builder(requireContext(), note.id.toString())
-                .setIntent(intent)
-                .setShortLabel(label)
-                .setLongLabel(label)
-                .setIcon(IconCompat.createWithResource(requireContext(), R.mipmap.ic_note))
-                .build()
+            context?.let { context ->
+                val shortcut = ShortcutInfoCompat.Builder(context, note.id.toString())
+                    .setIntent(intent)
+                    .setShortLabel(label)
+                    .setLongLabel(label)
+                    .setIcon(IconCompat.createWithResource(context, R.mipmap.ic_note))
+                    .build()
 
-            try {
-                ShortcutManagerCompat.getDynamicShortcuts(requireContext()).also { shortcuts ->
-                    val maxShortcutsCount = ShortcutManagerCompat.getMaxShortcutCountPerActivity(requireContext())
-                    if (shortcuts.count() == maxShortcutsCount) {
-                        shortcuts.removeLastOrNull()
-                        shortcuts.add(0, shortcut)
-                        ShortcutManagerCompat.setDynamicShortcuts(requireContext(), shortcuts)
-                    } else {
-                        ShortcutManagerCompat.pushDynamicShortcut(requireContext(), shortcut)
+                try {
+                    ShortcutManagerCompat.getDynamicShortcuts(context).also { shortcuts ->
+                        val maxShortcutsCount = ShortcutManagerCompat.getMaxShortcutCountPerActivity(context)
+                        if (shortcuts.count() == maxShortcutsCount) {
+                            shortcuts.removeLastOrNull()
+                            shortcuts.add(0, shortcut)
+                            ShortcutManagerCompat.setDynamicShortcuts(context, shortcuts)
+                        } else {
+                            ShortcutManagerCompat.pushDynamicShortcut(context, shortcut)
+                        }
                     }
+                } catch (exception: Throwable) {
+                    ShortcutManagerCompat.removeAllDynamicShortcuts(context)
                 }
-            } catch (exception: Throwable) {
-                ShortcutManagerCompat.removeAllDynamicShortcuts(requireContext())
             }
         }
     }

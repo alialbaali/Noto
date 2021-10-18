@@ -47,7 +47,7 @@ class ReorderLabelDialogFragment : BaseDialogFragment() {
     }
 
     private fun ReorderLabelDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         viewModel.library

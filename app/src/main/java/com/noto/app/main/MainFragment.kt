@@ -78,14 +78,14 @@ class MainFragment : Fragment() {
         when (layout) {
             Layout.Linear -> {
                 layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_grid_24)
-                rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             }
             Layout.Grid -> {
                 layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_agenda_24)
                 rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             }
         }
-        rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+        rv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
     }
 
     private fun MainFragmentBinding.setupLibraries(

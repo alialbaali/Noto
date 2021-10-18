@@ -46,13 +46,13 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun NewLibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rv.clipToOutline = true
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         if (args.libraryId == 0L) {
             et.requestFocus()
-            requireActivity().showKeyboard(root)
+            activity?.showKeyboard(root)
         }
 
         viewModel.library
@@ -71,7 +71,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 til.isErrorEnabled = true
                 til.error = resources.stringResource(R.string.empty_title)
             } else {
-                requireActivity().hideKeyboard(root)
+                activity?.hideKeyboard(root)
                 dismiss()
                 updatePinnedShortcut(title)
                 viewModel.createOrUpdateLibrary(
@@ -161,6 +161,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             title = title,
             color = viewModel.notoColors.value.first { it.second }.first
         )
-        ShortcutManagerCompat.updateShortcuts(requireContext(), listOf(requireContext().createPinnedShortcut(library)))
+        context?.let { context ->
+            ShortcutManagerCompat.updateShortcuts(context, listOf(context.createPinnedShortcut(library)))
+        }
     }
 }

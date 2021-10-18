@@ -61,11 +61,11 @@ class LibraryArchiveFragment : Fragment() {
 
     private fun LibraryArchiveFragmentBinding.setupLayoutManger(layout: Layout) {
         when (layout) {
-            Layout.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            Layout.Linear -> rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
         rv.visibility = View.VISIBLE
-        rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+        rv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
     }
 
     private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library) {

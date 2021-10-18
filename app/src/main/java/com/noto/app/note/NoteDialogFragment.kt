@@ -33,9 +33,9 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private val args by navArgs<NoteDialogFragmentArgs>()
 
-    private val clipboardManager by lazy { requireContext().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager }
+    private val clipboardManager by lazy { context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager? }
 
-    private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
+    private val alarmManager by lazy { context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager? }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,8 +62,8 @@ class NoteDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteDialogFragmentBinding.setupListeners() {
-        val parentView = requireParentFragment().requireView()
-        val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
+        val parentView = parentFragment?.view
+        val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
 
         tvArchiveNote.setOnClickListener {
             dismiss()
@@ -74,7 +74,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             else
                 R.string.note_is_archived
 
-            parentView.snackbar(resources.stringResource(resource), parentAnchorView)
+            parentView?.snackbar(resources.stringResource(resource), parentAnchorView)
         }
 
         tvRemindMe.setOnClickListener {
@@ -100,7 +100,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvDuplicateNote.setOnClickListener {
             viewModel.duplicateNote().invokeOnCompletion {
                 dismiss()
-                parentView.snackbar(resources.stringResource(R.string.note_is_duplicated), parentAnchorView)
+                parentView?.snackbar(resources.stringResource(R.string.note_is_duplicated), parentAnchorView)
             }
         }
 
@@ -111,20 +111,20 @@ class NoteDialogFragment : BaseDialogFragment() {
                 R.string.note_is_unpinned
             else
                 R.string.note_is_pinned
-            parentView.snackbar(resources.stringResource(resource), parentAnchorView)
+            parentView?.snackbar(resources.stringResource(resource), parentAnchorView)
         }
 
         tvCopyToClipboard.setOnClickListener {
             dismiss()
             val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
-            clipboardManager.setPrimaryClip(clipData)
-            parentView.snackbar(getString(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
+            clipboardManager?.setPrimaryClip(clipData)
+            parentView?.snackbar(getString(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
         }
 
         tvCopyNote.setOnClickListener {
             val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
                 viewModel.copyNote(it).invokeOnCompletion {
-                    parentView.snackbar(resources.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
+                    parentView?.snackbar(resources.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
                     findNavController().popBackStack(args.destination, false)
                     dismiss()
                 }
@@ -140,7 +140,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvMoveNote.setOnClickListener {
             val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
                 viewModel.moveNote(it).invokeOnCompletion {
-                    parentView.snackbar(resources.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
+                    parentView?.snackbar(resources.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
                     findNavController().popBackStack(args.destination, false)
                     dismiss()
                 }
@@ -163,11 +163,13 @@ class NoteDialogFragment : BaseDialogFragment() {
             val descriptionText = resources.stringResource(R.string.delete_note_description)
             val btnText = resources.stringResource(R.string.delete_note)
             val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
-                parentView.snackbar(resources.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
+                parentView?.snackbar(resources.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
                 findNavController().popBackStack(args.destination, false)
                 dismiss()
                 if (viewModel.note.value.reminderDate != null)
-                    alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id)
+                    context?.let { context ->
+                        alarmManager?.cancelAlarm(context, viewModel.note.value.id)
+                    }
                 viewModel.deleteNote()
             }
 

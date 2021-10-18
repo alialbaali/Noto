@@ -35,7 +35,7 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
 
     private val args by navArgs<NoteReminderDialogFragmentArgs>()
 
-    private val alarmManager by lazy { requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager }
+    private val alarmManager by lazy { context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager? }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -60,36 +60,38 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
 
         val buttonTextColor = resources.colorResource(R.color.colorPrimary)
 
-        val is24HourFormat = DateFormat.is24HourFormat(requireContext())
+        val is24HourFormat = DateFormat.is24HourFormat(context)
 
-        DatePickerDialog(requireContext(), theme, { _, year, month, day ->
-            TimePickerDialog(requireContext(), theme, { _, hour, minute ->
-                LocalDateTime(year, month + 1, day, hour, minute)
-                    .toInstant(TimeZone.currentSystemDefault())
-                    .also { viewModel.setNoteReminder(it) }
-                    .toEpochMilliseconds()
-                    .also {
-                        val note = viewModel.note.value
-                        alarmManager.createAlarm(requireContext(), note.libraryId, note.id, it)
+        context?.let { context ->
+            DatePickerDialog(context, theme, { _, year, month, day ->
+                TimePickerDialog(context, theme, { _, hour, minute ->
+                    LocalDateTime(year, month + 1, day, hour, minute)
+                        .toInstant(TimeZone.currentSystemDefault())
+                        .also { viewModel.setNoteReminder(it) }
+                        .toEpochMilliseconds()
+                        .also {
+                            val note = viewModel.note.value
+                            alarmManager?.createAlarm(context, note.libraryId, note.id, it)
+                        }
+                }, startHour, startMinute, is24HourFormat)
+                    .apply {
+                        show()
+                        getButton(DatePickerDialog.BUTTON_POSITIVE)?.setTextColor(buttonTextColor)
+                        getButton(DatePickerDialog.BUTTON_NEUTRAL)?.setTextColor(buttonTextColor)
+                        getButton(DatePickerDialog.BUTTON_NEGATIVE)?.setTextColor(buttonTextColor)
                     }
-            }, startHour, startMinute, is24HourFormat)
+            }, startYear, startMonth, startDay)
                 .apply {
+                    datePicker.minDate = Clock.System
+                        .now()
+                        .toEpochMilliseconds()
+                        .minus(1000)
                     show()
                     getButton(DatePickerDialog.BUTTON_POSITIVE)?.setTextColor(buttonTextColor)
                     getButton(DatePickerDialog.BUTTON_NEUTRAL)?.setTextColor(buttonTextColor)
                     getButton(DatePickerDialog.BUTTON_NEGATIVE)?.setTextColor(buttonTextColor)
                 }
-        }, startYear, startMonth, startDay)
-            .apply {
-                datePicker.minDate = Clock.System
-                    .now()
-                    .toEpochMilliseconds()
-                    .minus(1000)
-                show()
-                getButton(DatePickerDialog.BUTTON_POSITIVE)?.setTextColor(buttonTextColor)
-                getButton(DatePickerDialog.BUTTON_NEUTRAL)?.setTextColor(buttonTextColor)
-                getButton(DatePickerDialog.BUTTON_NEGATIVE)?.setTextColor(buttonTextColor)
-            }
+        }
     }
 
     private fun NoteReminderDialogFragmentBinding.setupListeners() {
@@ -101,7 +103,9 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
             if (viewModel.note.value.reminderDate == null) {
                 showDateTimeDialog()
             } else {
-                alarmManager.cancelAlarm(requireContext(), viewModel.note.value.id)
+                context?.let { context ->
+                    alarmManager?.cancelAlarm(context, viewModel.note.value.id)
+                }
                 viewModel.setNoteReminder(null)
             }
         }
@@ -136,7 +140,9 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
         } else {
             til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_cancel_24)
             baseDialogFragment.tvDialogTitle.text = resources.stringResource(R.string.edit_note_reminder)
-            et.setText(note.reminderDate.format(requireContext()))
+            context?.let { context ->
+                et.setText(note.reminderDate.format(context))
+            }
         }
     }
 }

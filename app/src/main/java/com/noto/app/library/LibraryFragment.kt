@@ -129,12 +129,11 @@ class LibraryFragment : Fragment() {
         etSearch.requestFocus()
         etSearch.showKeyboardUsingImm()
 
-        requireActivity().onBackPressedDispatcher
-            .addCallback(viewLifecycleOwner) {
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
                 disableSearch()
                 if (isEnabled) {
                     isEnabled = false
-                    requireActivity().onBackPressed()
+                    activity?.onBackPressed()
                 }
             }
     }
@@ -148,15 +147,15 @@ class LibraryFragment : Fragment() {
             rv.startAnimation(rvAnimation)
         }
         etSearch.text = null
-        requireActivity().hideKeyboard(root)
+        activity?.hideKeyboard(root)
     }
 
     private fun LibraryFragmentBinding.setupLayoutManager(layout: Layout) {
         when (layout) {
-            Layout.Linear -> rv.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            Layout.Linear -> rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
-        rv.startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.show))
+        rv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
     }
 
     private fun LibraryFragmentBinding.setupNotesAndLabels(

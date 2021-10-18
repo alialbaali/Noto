@@ -30,7 +30,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
             exportData(uri)
         } else {
             dismiss()
-            requireParentFragment().requireView().snackbar(resources.stringResource(R.string.no_folder_is_selected))
+            parentFragment?.view?.snackbar(resources.stringResource(R.string.no_folder_is_selected))
         }
     }
 
@@ -39,7 +39,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
             importData(uri)
         } else {
             dismiss()
-            requireParentFragment().requireView().snackbar(resources.stringResource(R.string.no_file_is_selected))
+            parentFragment?.view?.snackbar(resources.stringResource(R.string.no_file_is_selected))
         }
     }
 
@@ -71,29 +71,31 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                 resources.stringResource(R.string.exporting_data)
             )
         )
-        val zipFile = DocumentFile.fromTreeUri(requireContext(), uri)?.createFile(ZipMimeType, ZipFileName)
-        if (zipFile != null) {
-            val zipFileOutputStream = requireContext().contentResolver?.openOutputStream(zipFile.uri)
-            if (zipFileOutputStream != null) {
-                lifecycleScope.launchWhenResumed {
-                    withContext(Dispatchers.IO) {
-                        val exportedData = viewModel.exportData()
-                        writeDataToZipFile(zipFileOutputStream, exportedData)
+        context?.let { context ->
+            val zipFile = DocumentFile.fromTreeUri(context, uri)?.createFile(ZipMimeType, ZipFileName)
+            if (zipFile != null) {
+                val zipFileOutputStream = context.contentResolver?.openOutputStream(zipFile.uri)
+                if (zipFileOutputStream != null) {
+                    lifecycleScope.launchWhenResumed {
+                        withContext(Dispatchers.IO) {
+                            val exportedData = viewModel.exportData()
+                            writeDataToZipFile(zipFileOutputStream, exportedData)
+                        }
+                    }.invokeOnCompletion {
+                        parentFragment?.view?.snackbar(resources.stringResource(R.string.data_is_exported, zipFile.uri.directoryPath))
+                        findNavController().navigateUp()
+                        dismiss()
                     }
-                }.invokeOnCompletion {
-                    requireParentFragment().requireView().snackbar(resources.stringResource(R.string.data_is_exported, zipFile.uri.directoryPath))
+                } else {
+                    parentFragment?.view?.snackbar(resources.stringResource(R.string.exporting_failed))
                     findNavController().navigateUp()
                     dismiss()
                 }
             } else {
-                requireParentFragment().requireView().snackbar(resources.stringResource(R.string.exporting_failed))
+                parentFragment?.view?.snackbar(resources.stringResource(R.string.create_file_failed))
                 findNavController().navigateUp()
                 dismiss()
             }
-        } else {
-            requireParentFragment().requireView().snackbar(resources.stringResource(R.string.create_file_failed))
-            findNavController().navigateUp()
-            dismiss()
         }
     }
 
@@ -103,7 +105,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                 resources.stringResource(R.string.importing_data)
             )
         )
-        val inputStream = requireContext().contentResolver.openInputStream(uri)
+        val inputStream = context?.contentResolver?.openInputStream(uri)
         if (inputStream != null) {
             lifecycleScope.launchWhenResumed {
                 withContext(Dispatchers.IO) {
@@ -111,12 +113,12 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                     viewModel.importData(data)
                 }
             }.invokeOnCompletion {
-                requireParentFragment().requireView().snackbar(resources.stringResource(R.string.data_is_imported))
+                parentFragment?.view?.snackbar(resources.stringResource(R.string.data_is_imported))
                 findNavController().navigateUp()
                 dismiss()
             }
         } else {
-            requireParentFragment().requireView().snackbar(resources.stringResource(R.string.importing_failed))
+            parentFragment?.view?.snackbar(resources.stringResource(R.string.importing_failed))
             findNavController().navigateUp()
             dismiss()
         }

@@ -43,7 +43,7 @@ class NewLabelDialogFragment : BaseDialogFragment() {
 
     private fun NewLabelDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         et.requestFocus()
-        requireActivity().showKeyboard(root)
+        activity?.showKeyboard(root)
 
         viewModel.library
             .onEach { library ->
@@ -68,7 +68,7 @@ class NewLabelDialogFragment : BaseDialogFragment() {
                 til.isErrorEnabled = true
                 til.error = resources.stringResource(R.string.empty_title)
             } else {
-                requireActivity().hideKeyboard(root)
+                activity?.hideKeyboard(root)
                 dismiss()
                 viewModel.createOrUpdateLabel(title)
             }

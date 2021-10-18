@@ -72,9 +72,9 @@ class LabelDialogFragment : BaseDialogFragment() {
             val descriptionText = resources.stringResource(R.string.delete_label_description)
             val btnText = resources.stringResource(R.string.delete_label)
             val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
-                val parentView = requireParentFragment().requireView()
-                val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
-                parentView.snackbar(resources.stringResource(R.string.label_is_deleted), anchorView = parentAnchorView)
+                val parentView = parentFragment?.view
+                val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
+                parentView?.snackbar(resources.stringResource(R.string.label_is_deleted), anchorView = parentAnchorView)
                 dismiss()
                 viewModel.deleteLabel()
             }
