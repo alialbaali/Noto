@@ -197,7 +197,7 @@ class LibraryFragment : Fragment() {
                 notesCount(notes.size)
                 notoColor(library.color)
                 onClickListener { _ ->
-                    findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingGroupingDialogFragment(args.libraryId))
+                    findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingDialogFragment(args.libraryId))
                 }
             }
 

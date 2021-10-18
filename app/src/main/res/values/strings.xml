@@ -106,7 +106,7 @@
     <string name="archive_note">Archive note</string>
     <string name="duplicate_note">Duplicate note</string>
     <string name="sorting_type">Sorting type</string>
-    <string name="sorting_and_grouping">Sorting &amp; Grouping</string>
+    <string name="notes_sorting">Notes sorting</string>
     <string name="grouping">Grouping</string>
     <string name="sorting_order">Sorting order</string>
     <string name="save_to_noto">Save to Noto</string>

@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
-import com.noto.app.databinding.NoteListSortingGroupingDialogFragmentBinding
+import com.noto.app.databinding.NoteListSortingDialogFragmentBinding
 import com.noto.app.domain.model.NoteListSortingType
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -20,20 +20,20 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class NoteListSortingGroupingDialogFragment : BaseDialogFragment() {
+class NoteListSortingDialogFragment : BaseDialogFragment() {
 
     private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
-    private val args by navArgs<NoteListSortingGroupingDialogFragmentArgs>()
+    private val args by navArgs<NoteListSortingDialogFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = NoteListSortingGroupingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+    ): View = NoteListSortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.sorting_and_grouping)
+            tvDialogTitle.text = resources.stringResource(R.string.notes_sorting)
         }
 
         viewModel.library
@@ -42,7 +42,7 @@ class NoteListSortingGroupingDialogFragment : BaseDialogFragment() {
                 baseDialog.tvDialogTitle.setTextColor(color)
                 baseDialog.vHead.background?.mutate()?.setTint(color)
                 val colorStateList = resources.colorStateResource(library.color.toResource())
-                listOf(tvGrouping, tvSorting, tvSortingOrder).onEach {
+                listOf(tvGrouping, tvSortingType, tvSortingOrder).onEach {
                     TextViewCompat.setCompoundDrawableTintList(it, colorStateList)
                 }
                 when (library.sortingType) {
@@ -54,15 +54,15 @@ class NoteListSortingGroupingDialogFragment : BaseDialogFragment() {
 
         tvGrouping.setOnClickListener {
             findNavController().navigateSafely(
-                NoteListSortingGroupingDialogFragmentDirections.actionNoteListSortingGroupingDialogFragmentToNoteListGroupingDialogFragment(
+                NoteListSortingDialogFragmentDirections.actionNoteListSortingDialogFragmentToNoteListGroupingDialogFragment(
                     args.libraryId
                 )
             )
         }
 
-        tvSorting.setOnClickListener {
+        tvSortingType.setOnClickListener {
             findNavController().navigateSafely(
-                NoteListSortingGroupingDialogFragmentDirections.actionNoteListSortingGroupingDialogFragmentToNoteListSortingDialogFragment(
+                NoteListSortingDialogFragmentDirections.actionNoteListSortingDialogFragmentToNoteListSortingTypeDialogFragment(
                     args.libraryId
                 )
             )
@@ -70,7 +70,7 @@ class NoteListSortingGroupingDialogFragment : BaseDialogFragment() {
 
         tvSortingOrder.setOnClickListener {
             findNavController().navigateSafely(
-                NoteListSortingGroupingDialogFragmentDirections.actionNoteListSortingGroupingDialogFragmentToNoteListSortingOrderDialogFragment(
+                NoteListSortingDialogFragmentDirections.actionNoteListSortingDialogFragmentToNoteListSortingOrderDialogFragment(
                     args.libraryId
                 )
             )

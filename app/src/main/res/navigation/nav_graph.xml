@@ -83,8 +83,8 @@
             android:id="@+id/action_libraryFragment_to_labelDialogFragment"
             app:destination="@id/labelDialogFragment" />
         <action
-            android:id="@+id/action_libraryFragment_to_noteListSortingGroupingDialogFragment"
-            app:destination="@id/noteListSortingGroupingDialogFragment" />
+            android:id="@+id/action_libraryFragment_to_noteListSortingDialogFragment"
+            app:destination="@id/noteListSortingDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/newLibraryDialogFragment"
@@ -393,20 +393,20 @@
             app:argType="long" />
     </dialog>
     <dialog
-        android:id="@+id/noteListSortingGroupingDialogFragment"
-        android:name="com.noto.app.library.NoteListSortingGroupingDialogFragment"
-        android:label="NoteListSortingGroupingDialogFragment">
+        android:id="@+id/noteListSortingDialogFragment"
+        android:name="com.noto.app.library.NoteListSortingDialogFragment"
+        android:label="NoteListSortingDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
         <action
-            android:id="@+id/action_noteListSortingGroupingDialogFragment_to_noteListSortingOrderDialogFragment"
+            android:id="@+id/action_noteListSortingDialogFragment_to_noteListSortingOrderDialogFragment"
             app:destination="@id/noteListSortingOrderDialogFragment" />
         <action
-            android:id="@+id/action_noteListSortingGroupingDialogFragment_to_noteListGroupingDialogFragment"
+            android:id="@+id/action_noteListSortingDialogFragment_to_noteListGroupingDialogFragment"
             app:destination="@id/noteListGroupingDialogFragment" />
         <action
-            android:id="@+id/action_noteListSortingGroupingDialogFragment_to_noteListSortingDialogFragment"
+            android:id="@+id/action_noteListSortingDialogFragment_to_noteListSortingTypeDialogFragment"
             app:destination="@id/noteListSortingTypeDialogFragment" />
     </dialog>
     <dialog
