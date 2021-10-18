@@ -50,15 +50,6 @@
             app:drawableStartCompat="@drawable/ic_round_add_to_home_screen_24" />
 
         <TextView
-            android:id="@+id/tv_export_library"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
-            android:text="@string/export_library"
-            app:drawableStartCompat="@drawable/ic_round_folder_upload_24" />
-
-        <TextView
             android:id="@+id/tv_delete_library"
             style="@style/DialogItem"
             android:layout_width="match_parent"

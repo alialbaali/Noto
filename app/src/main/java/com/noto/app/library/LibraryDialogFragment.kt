@@ -1,10 +1,7 @@
 package com.noto.app.library
 
-import android.app.Activity
 import android.app.AlarmManager
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,9 +23,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
-
-
-private const val SelectDirectoryRequestCode = 1
 
 class LibraryDialogFragment : BaseDialogFragment() {
 
@@ -58,11 +52,6 @@ class LibraryDialogFragment : BaseDialogFragment() {
     private fun LibraryDialogFragmentBinding.setupListeners() {
         val parentView = requireParentFragment().requireView()
         val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
-
-        tvExportLibrary.setOnClickListener {
-            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT_TREE)
-            startActivityForResult(intent, SelectDirectoryRequestCode)
-        }
 
         tvEditLibrary.setOnClickListener {
             dismiss()
@@ -121,7 +110,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
         val colorState = resources.colorStateResource(library.color.toResource())
         baseDialogFragment.vHead.background?.mutate()?.setTint(color)
         baseDialogFragment.tvDialogTitle.setTextColor(color)
-        listOf(tvEditLibrary, tvArchiveLibrary, tvPinLibrary, tvNewNoteShortcut, tvExportLibrary, tvDeleteLibrary)
+        listOf(tvEditLibrary, tvArchiveLibrary, tvPinLibrary, tvNewNoteShortcut, tvDeleteLibrary)
             .forEach { TextViewCompat.setCompoundDrawableTintList(it, colorState) }
 
         if (library.isArchived) {
@@ -154,21 +143,5 @@ class LibraryDialogFragment : BaseDialogFragment() {
             .forEach { entry -> alarmManager.cancelAlarm(requireContext(), entry.first.id) }
 
         viewModel.deleteLibrary()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == SelectDirectoryRequestCode && resultCode == Activity.RESULT_OK) {
-            data?.data?.let { uri ->
-                var documentUri: Uri? = Uri.EMPTY
-                viewModel.notes.value.forEach { entry ->
-                    documentUri = requireContext().exportNote(uri, viewModel.library.value, entry.first)
-                }
-                val parentView = requireParentFragment().requireView()
-                val parentAnchorView = parentView.findViewById<FloatingActionButton>(R.id.fab)
-                val message = resources.stringResource(R.string.library_is_exported, documentUri?.directoryPath)
-                parentView.snackbar(message, parentAnchorView)
-                findNavController().navigateUp()
-            }
-        }
     }
 }
