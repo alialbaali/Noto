@@ -132,9 +132,9 @@
             app:destination="@id/labelDialogFragment" />
         <argument
             android:name="labels_ids"
+            android:defaultValue="@null"
             app:argType="long[]"
-                app:nullable="true"
-                android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/libraryArchiveFragment"
@@ -274,6 +274,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_aboutDialogFragment"
             app:destination="@id/aboutDialogFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_exportImportDialogFragment"
+            app:destination="@id/exportImportDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"
@@ -343,7 +346,7 @@
     <dialog
         android:id="@+id/labelDialogFragment"
         android:name="com.noto.app.label.LabelDialogFragment"
-        android:label="LabelDialogFragment" >
+        android:label="LabelDialogFragment">
         <action
             android:id="@+id/action_labelDialogFragment_to_newLabelDialogFragment"
             app:destination="@id/newLabelDialogFragment" />
@@ -352,8 +355,8 @@
             app:argType="long" />
         <argument
             android:name="label_id"
-            app:argType="long"
-            android:defaultValue="0L" />
+            android:defaultValue="0L"
+            app:argType="long" />
         <action
             android:id="@+id/action_labelDialogFragment_to_reorderLabelDialogFragment"
             app:destination="@id/reorderLabelDialogFragment" />
@@ -364,19 +367,19 @@
     <dialog
         android:id="@+id/reorderLabelDialogFragment"
         android:name="com.noto.app.label.ReorderLabelDialogFragment"
-        android:label="ReorderLabelDialogFragment" >
+        android:label="ReorderLabelDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
         <argument
             android:name="label_id"
-            app:argType="long"
-            android:defaultValue="0L" />
+            android:defaultValue="0L"
+            app:argType="long" />
     </dialog>
     <dialog
         android:id="@+id/noteListSortingOrderDialogFragment"
         android:name="com.noto.app.library.NoteListSortingOrderDialogFragment"
-        android:label="NoteListSortingOrderDialogFragment" >
+        android:label="NoteListSortingOrderDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
@@ -384,7 +387,7 @@
     <dialog
         android:id="@+id/noteListGroupingDialogFragment"
         android:name="com.noto.app.library.NoteListGroupingDialogFragment"
-        android:label="NoteListGroupingDialogFragment" >
+        android:label="NoteListGroupingDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
@@ -392,7 +395,7 @@
     <dialog
         android:id="@+id/noteListSortingGroupingDialogFragment"
         android:name="com.noto.app.library.NoteListSortingGroupingDialogFragment"
-        android:label="NoteListSortingGroupingDialogFragment" >
+        android:label="NoteListSortingGroupingDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
@@ -414,4 +417,20 @@
         android:id="@+id/aboutDialogFragment"
         android:name="com.noto.app.settings.AboutDialogFragment"
         android:label="AboutDialogFragment" />
+    <dialog
+        android:id="@+id/exportImportDialogFragment"
+        android:name="com.noto.app.settings.ExportImportDialogFragment"
+        android:label="ExportImportDialogFragment">
+        <action
+            android:id="@+id/action_exportImportDialogFragment_to_progressDialogFragment"
+            app:destination="@id/progressDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/progressDialogFragment"
+        android:name="com.noto.app.ProgressDialogFragment"
+        android:label="ProgressDialogFragment" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </dialog>
 </navigation>

@@ -31,6 +31,18 @@
     <string name="about">About</string>
     <string name="about_message">Noto is developed and maintained by <a href="https://www.alialbaali.com/">Ali Albaali</a>.\n\nThe app is distributed under the terms of the <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.\n\nSpecial thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization, and everyone who has helped and contributed in the development.</string>
     <string name="share_with">Share with</string>
+    <string name="export_import_data">Export/Import data</string>
+    <string name="exporting_failed">Failed to export the data.</string>
+    <string name="importing_failed">Failed to import the data.</string>
+    <string name="data_is_exported">Data has been exported to %s</string>
+    <string name="data_is_imported">Data has been imported.</string>
+    <string name="export_data">Export data</string>
+    <string name="import_data">Import data</string>
+    <string name="importing_data">Importing data…</string>
+    <string name="exporting_data">Exporting data…</string>
+    <string name="create_file_failed">Failed to create a file.</string>
+    <string name="no_folder_is_selected">No folder has been selected.</string>
+    <string name="no_file_is_selected">No file has been selected.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Open with</string>
     <string name="invite_text">Check out Noto!</string>
@@ -68,12 +80,11 @@
     <string name="change_libraries_sorting">Change libraries sorting</string>
     <string name="empty_title">Title can\'t be empty.</string>
     <string name="library_is_deleted">Library has been deleted.</string>
-    <string name="library_is_empty">Library is empty.</string>
     <string name="library_is_archived">Library has been archived.</string>
     <string name="library_is_unarchived">Library has been unarchived.</string>
     <string name="library_is_pinned">Library has been pinned.</string>
     <string name="library_is_unpinned">Library has been unpinned.</string>
-    <string name="no_libraries">No libraries. Try creating a library by clicking the + icon.</string>
+    <string name="no_libraries_found">No libraries found. Try creating a library by clicking the + icon.</string>
     <string name="select_library">Select library</string>
     <string name="pinned">Pinned</string>
     <string name="pin_library">Pin library</string>
@@ -101,9 +112,9 @@
     <string name="grouping">Grouping</string>
     <string name="sorting_order">Sorting order</string>
     <string name="save_to_noto">Save to Noto</string>
+    <string name="no_notes_found">No notes found.</string>
     <string name="unarchive_note">Unarchive note</string>
     <string name="notes">Notes</string>
-    <string name="no_note_matches_search_term">There\'s no note that matches the search term.</string>
     <string name="note_is_archived">Note has been archived.</string>
     <string name="note_is_pinned">Note has been pinned.</string>
     <string name="note_is_unpinned">Note has been unpinned.</string>

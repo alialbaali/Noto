@@ -36,7 +36,7 @@ val appModule = module {
 
     viewModel { AppViewModel(get()) }
 
-    viewModel { SettingsViewModel(get()) }
+    viewModel { SettingsViewModel(get(), get(), get(), get(), get()) }
 
     viewModel { LabelViewModel(get(), get(), it[0], it[1]) }
 }
