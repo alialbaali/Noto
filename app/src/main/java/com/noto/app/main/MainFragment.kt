@@ -16,7 +16,7 @@ import com.noto.app.R
 import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.LibraryListSorting
+import com.noto.app.domain.model.LibraryListSortingType
 import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
@@ -60,11 +60,11 @@ class MainFragment : Fragment() {
 
         combine(
             viewModel.libraries,
-            viewModel.sorting,
+            viewModel.sortingType,
             viewModel.sortingOrder,
             viewModel.isShowNotesCount,
-        ) { libraries, sorting, sortingOrder, isShowNotesCount ->
-            setupLibraries(libraries.sorted(sorting, sortingOrder), sorting, sortingOrder, isShowNotesCount)
+        ) { libraries, sortingType, sortingOrder, isShowNotesCount ->
+            setupLibraries(libraries.sorted(sortingType, sortingOrder), sortingType, sortingOrder, isShowNotesCount)
         }.launchIn(lifecycleScope)
 
         viewModel.layout
@@ -90,7 +90,7 @@ class MainFragment : Fragment() {
 
     private fun MainFragmentBinding.setupLibraries(
         libraries: List<Library>,
-        sorting: LibraryListSorting,
+        sortingType: LibraryListSortingType,
         sortingOrder: SortingOrder,
         isShowNotesCount: Boolean,
     ) {
@@ -99,7 +99,7 @@ class MainFragment : Fragment() {
 
             libraryListSortingItem {
                 id(0)
-                sorting(sorting)
+                sortingType(sortingType)
                 sortingOrder(sortingOrder)
                 librariesCount(libraries.size)
                 onClickListener { _ ->
@@ -113,7 +113,7 @@ class MainFragment : Fragment() {
                         id(library.id)
                         library(library)
                         notesCount(viewModel.countNotes(library.id))
-                        isManualSorting(sorting == LibraryListSorting.Manual)
+                        isManualSorting(sortingType == LibraryListSortingType.Manual)
                         isShowNotesCount(isShowNotesCount)
                         onClickListener { _ ->
                             findNavController().navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))

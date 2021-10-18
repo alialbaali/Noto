@@ -9,7 +9,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryListSortingDialogFragmentBinding
-import com.noto.app.domain.model.LibraryListSorting
+import com.noto.app.domain.model.LibraryListSortingType
 import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.colorResource
 import com.noto.app.util.colorStateResource
@@ -33,18 +33,18 @@ class LibraryListSortingDialogFragment : BaseDialogFragment() {
             tvDialogTitle.text = resources.stringResource(R.string.libraries_sorting)
         }
 
-        viewModel.sorting
-            .onEach { sorting ->
-                when (sorting) {
-                    LibraryListSorting.Alphabetical -> {
+        viewModel.sortingType
+            .onEach { sortingType ->
+                when (sortingType) {
+                    LibraryListSortingType.Alphabetical -> {
                         rbAlphabetical.isChecked = true
                         enableSortingOrder()
                     }
-                    LibraryListSorting.CreationDate -> {
+                    LibraryListSortingType.CreationDate -> {
                         rbCreationDate.isChecked = true
                         enableSortingOrder()
                     }
-                    LibraryListSorting.Manual -> {
+                    LibraryListSortingType.Manual -> {
                         rbManual.isChecked = true
                         disableSortingOrder()
                     }
@@ -63,9 +63,9 @@ class LibraryListSortingDialogFragment : BaseDialogFragment() {
 
         rbSortingAsc.setOnClickListener { viewModel.updateSortingOrder(SortingOrder.Ascending) }
         rbSortingDesc.setOnClickListener { viewModel.updateSortingOrder(SortingOrder.Descending) }
-        rbManual.setOnClickListener { viewModel.updateSorting(LibraryListSorting.Manual) }
-        rbCreationDate.setOnClickListener { viewModel.updateSorting(LibraryListSorting.CreationDate) }
-        rbAlphabetical.setOnClickListener { viewModel.updateSorting(LibraryListSorting.Alphabetical) }
+        rbManual.setOnClickListener { viewModel.updateSorting(LibraryListSortingType.Manual) }
+        rbCreationDate.setOnClickListener { viewModel.updateSorting(LibraryListSortingType.CreationDate) }
+        rbAlphabetical.setOnClickListener { viewModel.updateSorting(LibraryListSortingType.Alphabetical) }
 
         btnDone.setOnClickListener {
             dismiss()

@@ -47,11 +47,11 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
         combine(
             viewModel.libraries
                 .map { libraries -> libraries.filter { library -> library.id != args.libraryId } },
-            viewModel.sorting,
+            viewModel.sortingType,
             viewModel.sortingOrder,
             viewModel.isShowNotesCount,
-        ) { libraries, sorting, sortingOrder, isShowNotesCount ->
-            setupLibraries(libraries.sorted(sorting, sortingOrder), isShowNotesCount)
+        ) { libraries, sortingType, sortingOrder, isShowNotesCount ->
+            setupLibraries(libraries.sorted(sortingType, sortingOrder), isShowNotesCount)
         }.launchIn(lifecycleScope)
 
         viewModel.layout

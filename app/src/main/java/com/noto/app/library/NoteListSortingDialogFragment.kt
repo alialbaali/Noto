@@ -30,7 +30,7 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
     ): View = NoteListSortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.sorting)
+            tvDialogTitle.text = resources.stringResource(R.string.sorting_type)
         }
 
         viewModel.library

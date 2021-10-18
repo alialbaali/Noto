@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/dialog_item_shape"
-            android:text="@string/sorting"
+            android:text="@string/sorting_type"
             app:drawableStartCompat="@drawable/ic_round_sorting_24" />
 
         <TextView

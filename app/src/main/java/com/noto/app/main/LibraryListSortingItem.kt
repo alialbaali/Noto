@@ -8,7 +8,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.noto.app.R
 import com.noto.app.databinding.LibraryListSortingItemBinding
-import com.noto.app.domain.model.LibraryListSorting
+import com.noto.app.domain.model.LibraryListSortingType
 import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.pluralsResource
 import com.noto.app.util.setFullSpan
@@ -19,7 +19,7 @@ import com.noto.app.util.stringResource
 abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingItem.Holder>() {
 
     @EpoxyAttribute
-    lateinit var sorting: LibraryListSorting
+    lateinit var sortingType: LibraryListSortingType
 
     @EpoxyAttribute
     lateinit var sortingOrder: SortingOrder
@@ -32,10 +32,10 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
 
     override fun bind(holder: Holder) = with(holder.binding) {
         val resources = root.resources
-        tvSorting.text = when (sorting) {
-            LibraryListSorting.Manual -> resources.stringResource(R.string.manual_sorting)
-            LibraryListSorting.CreationDate -> resources.stringResource(R.string.creation_date_sorting)
-            LibraryListSorting.Alphabetical -> resources.stringResource(R.string.alphabetical_sorting)
+        tvSorting.text = when (sortingType) {
+            LibraryListSortingType.Manual -> resources.stringResource(R.string.manual_sorting)
+            LibraryListSortingType.CreationDate -> resources.stringResource(R.string.creation_date_sorting)
+            LibraryListSortingType.Alphabetical -> resources.stringResource(R.string.alphabetical_sorting)
         }
         tvSorting.setOnClickListener(onClickListener)
         tvLibrariesCount.text = resources.pluralsResource(R.plurals.libraries_count, librariesCount, librariesCount).lowercase()

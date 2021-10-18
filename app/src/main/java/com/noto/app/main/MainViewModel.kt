@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.LibraryListSorting
+import com.noto.app.domain.model.LibraryListSortingType
 import com.noto.app.domain.model.SortingOrder
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
@@ -34,10 +34,10 @@ class MainViewModel(
         .map { Layout.valueOf(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, Layout.Grid)
 
-    val sorting = storage.get(Constants.LibraryListSortingKey)
+    val sortingType = storage.get(Constants.LibraryListSortingTypeKey)
         .filterNotNull()
-        .map { LibraryListSorting.valueOf(it) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, LibraryListSorting.CreationDate)
+        .map { LibraryListSortingType.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, LibraryListSortingType.CreationDate)
 
     val sortingOrder = storage.get(Constants.LibraryListSortingOrderKey)
         .filterNotNull()
@@ -57,8 +57,8 @@ class MainViewModel(
         storage.put(Constants.LibraryListLayoutKey, value.toString())
     }
 
-    fun updateSorting(value: LibraryListSorting) = viewModelScope.launch {
-        storage.put(Constants.LibraryListSortingKey, value.toString())
+    fun updateSorting(value: LibraryListSortingType) = viewModelScope.launch {
+        storage.put(Constants.LibraryListSortingTypeKey, value.toString())
     }
 
     fun updateSortingOrder(value: SortingOrder) = viewModelScope.launch {

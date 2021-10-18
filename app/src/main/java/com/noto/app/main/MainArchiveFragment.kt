@@ -42,11 +42,11 @@ class MainArchiveFragment : Fragment() {
 
         combine(
             viewModel.archivedLibraries,
-            viewModel.sorting,
+            viewModel.sortingType,
             viewModel.sortingOrder,
             viewModel.isShowNotesCount,
-        ) { libraries, sorting, sortingOrder, isShowNotesCount ->
-            setupLibraries(libraries.sorted(sorting, sortingOrder), isShowNotesCount)
+        ) { libraries, sortingType, sortingOrder, isShowNotesCount ->
+            setupLibraries(libraries.sorted(sortingType, sortingOrder), isShowNotesCount)
         }
             .launchIn(lifecycleScope)
 

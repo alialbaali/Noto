@@ -105,7 +105,7 @@
     <string name="delete_note">Delete note</string>
     <string name="archive_note">Archive note</string>
     <string name="duplicate_note">Duplicate note</string>
-    <string name="sorting">Sorting</string>
+    <string name="sorting_type">Sorting type</string>
     <string name="sorting_and_grouping">Sorting &amp; Grouping</string>
     <string name="grouping">Grouping</string>
     <string name="sorting_order">Sorting order</string>
