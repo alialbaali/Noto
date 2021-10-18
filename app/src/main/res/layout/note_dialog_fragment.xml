@@ -95,15 +95,6 @@
             app:drawableStartCompat="@drawable/ic_round_share_24" />
 
         <TextView
-            android:id="@+id/tv_export_note"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
-            android:text="@string/export_note"
-            app:drawableStartCompat="@drawable/ic_round_file_upload_24" />
-
-        <TextView
             android:id="@+id/tv_delete_note"
             style="@style/DialogItem"
             android:layout_width="match_parent"
