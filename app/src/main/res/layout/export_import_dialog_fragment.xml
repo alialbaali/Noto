@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/dialog_item_shape"
             android:text="@string/export_data"
-            app:drawableStartCompat="@drawable/ic_round_upload_24" />
+            app:drawableStartCompat="@drawable/ic_round_file_upload_24" />
 
         <TextView
             android:id="@+id/tv_import"
