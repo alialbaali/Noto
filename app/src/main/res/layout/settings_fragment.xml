@@ -28,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
+        android:overScrollMode="never"
         app:layout_behavior="com.noto.app.util.BounceScrollingViewBehavior">
 
         <LinearLayout
@@ -96,6 +97,23 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_export_import"
+                    style="@style/SettingsItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_round_import_export_24"
+                    android:text="@string/export_import_data" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginVertical="@dimen/spacing_small"
+                android:background="@drawable/generic_shape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_view_code"
                     style="@style/SettingsItem"
                     android:layout_width="match_parent"
@@ -146,7 +164,7 @@
                 android:clickable="false"
                 android:focusable="false"
                 android:gravity="center|bottom"
-                tools:text="Version\n 1.0.0" />
+                tools:text="Version 1.0.0" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

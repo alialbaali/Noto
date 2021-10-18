@@ -81,6 +81,10 @@ class SettingsFragment : Fragment() {
             findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialogFragment())
         }
 
+        tvExportImport.setOnClickListener {
+            findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToExportImportDialogFragment())
+        }
+
         tvAbout.setOnClickListener {
             findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToAboutDialogFragment())
         }
