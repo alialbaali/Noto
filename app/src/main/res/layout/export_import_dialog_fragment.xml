@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/BaseDialogFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/base_dialog_fragment" />
+
+        <TextView
+            android:id="@+id/tv_export"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/export_data"
+            app:drawableStartCompat="@drawable/ic_round_upload_24" />
+
+        <TextView
+            android:id="@+id/tv_import"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/import_data"
+            app:drawableStartCompat="@drawable/ic_round_file_download_24" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
