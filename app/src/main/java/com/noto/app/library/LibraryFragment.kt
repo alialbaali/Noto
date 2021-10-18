@@ -192,7 +192,7 @@ class LibraryFragment : Fragment() {
 
             noteListSortingItem {
                 id(0)
-                sorting(library.sorting)
+                sortingType(library.sortingType)
                 sortingOrder(library.sortingOrder)
                 notesCount(notes.size)
                 notoColor(library.color)
@@ -211,7 +211,7 @@ class LibraryFragment : Fragment() {
                         color(library.color)
                         previewSize(library.notePreviewSize)
                         isShowCreationDate(library.isShowNoteCreationDate)
-                        isManualSorting(library.sorting == NoteListSorting.Manual)
+                        isManualSorting(library.sortingType == NoteListSortingType.Manual)
                         onClickListener { _ ->
                             findNavController()
                                 .navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId, entry.first.id))

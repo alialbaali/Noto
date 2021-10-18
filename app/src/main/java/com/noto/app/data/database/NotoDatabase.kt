@@ -17,13 +17,13 @@ private const val NOTO_DATABASE = "Noto Database"
     NotoColorConverter::class,
     InstantConverter::class,
     LayoutConvertor::class,
-    SortingConverter::class,
+    SortingTypeConverter::class,
     SortingOrderConverter::class,
     GroupingConvertor::class,
 )
 @Database(
     entities = [Note::class, Library::class, Label::class, NoteLabel::class],
-    version = 21,
+    version = 22,
     autoMigrations = [
         AutoMigration(from = 6, to = 7),
         AutoMigration(from = 7, to = 8),
@@ -40,6 +40,7 @@ private const val NOTO_DATABASE = "Noto Database"
         AutoMigration(from = 18, to = 19, spec = Migrations.RenameNoteLabelsTable::class),
         AutoMigration(from = 19, to = 20),
         AutoMigration(from = 20, to = 21, spec = Migrations.RenameLayoutManagerColumn::class),
+        AutoMigration(from = 21, to = 22, spec = Migrations.RenameNoteListSortingTypeColumn::class),
     ],
 )
 abstract class NotoDatabase : RoomDatabase() {

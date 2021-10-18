@@ -2,11 +2,7 @@ package com.noto.app.data.database
 
 import android.annotation.SuppressLint
 import androidx.room.TypeConverter
-import com.noto.app.domain.model.Grouping
-import com.noto.app.domain.model.Layout
-import com.noto.app.domain.model.NoteListSorting
-import com.noto.app.domain.model.NotoColor
-import com.noto.app.domain.model.SortingOrder
+import com.noto.app.domain.model.*
 import kotlinx.datetime.Instant
 
 object NotoColorConverter {
@@ -45,15 +41,15 @@ object LayoutConvertor {
 
 }
 
-object SortingConverter {
+object SortingTypeConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toOrdinal(sorting: NoteListSorting): Int = sorting.ordinal
+    fun toOrdinal(sortingType: NoteListSortingType): Int = sortingType.ordinal
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): NoteListSorting = NoteListSorting.values().first { sorting -> sorting.ordinal == ordinal }
+    fun toEnum(ordinal: Int): NoteListSortingType = NoteListSortingType.values().first { sortingType -> sortingType.ordinal == ordinal }
 
 }
 

@@ -45,11 +45,11 @@ fun List<Library>.sorted(sortingType: LibraryListSortingType, sortingOrder: Sort
     }
 }
 
-fun List<Pair<Note, List<Label>>>.sorted(sorting: NoteListSorting, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
-    when (sorting) {
-        NoteListSorting.Manual -> pair.first.position
-        NoteListSorting.CreationDate -> pair.first.creationDate
-        NoteListSorting.Alphabetical -> pair.first.title.ifBlank { pair.first.body }
+fun List<Pair<Note, List<Label>>>.sorted(sortingType: NoteListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
+    when (sortingType) {
+        NoteListSortingType.Manual -> pair.first.position
+        NoteListSortingType.CreationDate -> pair.first.creationDate
+        NoteListSortingType.Alphabetical -> pair.first.title.ifBlank { pair.first.body }
     }
 }
 
@@ -60,15 +60,15 @@ fun List<Pair<Note, List<Label>>>.filterSelectedLabels(labels: Map<Label, Boolea
     pair.second.containsAll(selectedLabels)
 }
 
-fun List<Pair<Note, List<Label>>>.groupByDate(sorting: NoteListSorting, sortingOrder: SortingOrder) =
+fun List<Pair<Note, List<Label>>>.groupByDate(sortingType: NoteListSortingType, sortingOrder: SortingOrder) =
     groupBy { it.first.creationDate.toLocalDate() }
-        .mapValues { it.value.sorted(sorting, sortingOrder).sortedByDescending { it.first.isPinned } }
+        .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.first.isPinned } }
         .map { it.toPair() }
         .sortedByDescending { it.first }
 
-fun List<Pair<Note, List<Label>>>.groupByLabels(sorting: NoteListSorting, sortingOrder: SortingOrder) =
+fun List<Pair<Note, List<Label>>>.groupByLabels(sortingType: NoteListSortingType, sortingOrder: SortingOrder) =
     map { it.second to (it.first to emptyList<Label>()) }
         .groupBy({ it.first }, { it.second })
-        .mapValues { it.value.sorted(sorting, sortingOrder).sortedByDescending { it.first.isPinned } }
+        .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.first.isPinned } }
         .map { it.toPair() }
         .sortedBy { it.first.firstOrNull()?.position }

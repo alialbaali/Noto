@@ -16,8 +16,8 @@ inline fun EpoxyController.buildNotesModels(
 ) {
     when (library.grouping) {
         Grouping.Default -> {
-            val pinnedNotes = notes.filter { it.first.isPinned }.sorted(library.sorting, library.sortingOrder)
-            val notPinnedNotes = notes.filterNot { it.first.isPinned }.sorted(library.sorting, library.sortingOrder)
+            val pinnedNotes = notes.filter { it.first.isPinned }.sorted(library.sortingType, library.sortingOrder)
+            val notPinnedNotes = notes.filterNot { it.first.isPinned }.sorted(library.sortingType, library.sortingOrder)
 
             if (pinnedNotes.isNotEmpty()) {
                 headerItem {
@@ -36,7 +36,7 @@ inline fun EpoxyController.buildNotesModels(
             items(notPinnedNotes)
         }
         Grouping.CreationDate -> {
-            notes.groupByDate(library.sorting, library.sortingOrder).forEach { (date, notes) ->
+            notes.groupByDate(library.sortingType, library.sortingOrder).forEach { (date, notes) ->
                 headerItem {
                     id(date.dayOfYear)
                     title(date.format())
@@ -45,7 +45,7 @@ inline fun EpoxyController.buildNotesModels(
             }
         }
         Grouping.Label -> {
-            notes.groupByLabels(library.sorting, library.sortingOrder).forEach { (labels, notes) ->
+            notes.groupByLabels(library.sortingType, library.sortingOrder).forEach { (labels, notes) ->
                 if (labels.isEmpty())
                     headerItem {
                         id("without_label")

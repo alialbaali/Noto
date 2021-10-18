@@ -324,9 +324,9 @@
             app:popExitAnim="@anim/nav_default_exit_anim" />
     </fragment>
     <dialog
-        android:id="@+id/noteListSortingDialogFragment"
-        android:name="com.noto.app.library.NoteListSortingDialogFragment"
-        android:label="NoteListSortingDialogFragment">
+        android:id="@+id/noteListSortingTypeDialogFragment"
+        android:name="com.noto.app.library.NoteListSortingTypeDialogFragment"
+        android:label="NoteListSortingTypeDialogFragment">
         <argument
             android:name="library_id"
             app:argType="long" />
@@ -407,7 +407,7 @@
             app:destination="@id/noteListGroupingDialogFragment" />
         <action
             android:id="@+id/action_noteListSortingGroupingDialogFragment_to_noteListSortingDialogFragment"
-            app:destination="@id/noteListSortingDialogFragment" />
+            app:destination="@id/noteListSortingTypeDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/languageDialogFragment"
@@ -428,7 +428,7 @@
     <dialog
         android:id="@+id/progressDialogFragment"
         android:name="com.noto.app.ProgressDialogFragment"
-        android:label="ProgressDialogFragment" >
+        android:label="ProgressDialogFragment">
         <argument
             android:name="title"
             app:argType="string" />

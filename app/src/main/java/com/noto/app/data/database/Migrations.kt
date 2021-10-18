@@ -29,6 +29,9 @@ object Migrations {
 
     @RenameColumn(tableName = "libraries", fromColumnName = "layout_manager", toColumnName = "layout")
     class RenameLayoutManagerColumn : AutoMigrationSpec
+
+    @RenameColumn(tableName = "libraries", fromColumnName = "sorting", toColumnName = "sorting_type")
+    class RenameNoteListSortingTypeColumn : AutoMigrationSpec
 }
 
 object RemoveNotoPrefix : Migration(1, 2) {

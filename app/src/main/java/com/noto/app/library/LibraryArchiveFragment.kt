@@ -55,7 +55,7 @@ class LibraryArchiveFragment : Fragment() {
             viewModel.font,
             viewModel.library,
         ) { archivedNotes, font, library ->
-            setupArchivedNotes(archivedNotes.sorted(library.sorting, library.sortingOrder), font, library)
+            setupArchivedNotes(archivedNotes.sorted(library.sortingType, library.sortingOrder), font, library)
         }.launchIn(lifecycleScope)
     }
 

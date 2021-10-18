@@ -123,11 +123,11 @@ class LibraryViewModel(
         noteRepository.updateNote(note.copy(position = position))
     }
 
-    fun updateSorting(value: NoteListSorting) = viewModelScope.launch {
-        if (value == NoteListSorting.Manual)
-            libraryRepository.updateLibrary(library.value.copy(sorting = value, sortingOrder = SortingOrder.Ascending))
+    fun updateSortingType(value: NoteListSortingType) = viewModelScope.launch {
+        if (value == NoteListSortingType.Manual)
+            libraryRepository.updateLibrary(library.value.copy(sortingType = value, sortingOrder = SortingOrder.Ascending))
         else
-            libraryRepository.updateLibrary(library.value.copy(sorting = value))
+            libraryRepository.updateLibrary(library.value.copy(sortingType = value))
     }
 
     fun updateSortingOrder(value: SortingOrder) = viewModelScope.launch {

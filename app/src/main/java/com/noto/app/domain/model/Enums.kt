@@ -9,7 +9,7 @@ enum class NotoColor {
 
 enum class LibraryListSortingType { Manual, CreationDate, Alphabetical, }
 
-enum class NoteListSorting { Manual, CreationDate, Alphabetical, }
+enum class NoteListSortingType { Manual, CreationDate, Alphabetical, }
 
 enum class SortingOrder { Ascending, Descending, }
 

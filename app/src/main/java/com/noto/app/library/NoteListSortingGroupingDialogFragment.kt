@@ -13,7 +13,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteListSortingGroupingDialogFragmentBinding
-import com.noto.app.domain.model.NoteListSorting
+import com.noto.app.domain.model.NoteListSortingType
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -45,8 +45,8 @@ class NoteListSortingGroupingDialogFragment : BaseDialogFragment() {
                 listOf(tvGrouping, tvSorting, tvSortingOrder).onEach {
                     TextViewCompat.setCompoundDrawableTintList(it, colorStateList)
                 }
-                when (library.sorting) {
-                    NoteListSorting.Manual -> tvSortingOrder.isVisible = false
+                when (library.sortingType) {
+                    NoteListSortingType.Manual -> tvSortingOrder.isVisible = false
                     else -> tvSortingOrder.isVisible = true
                 }
             }
