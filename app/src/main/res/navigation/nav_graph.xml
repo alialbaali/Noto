@@ -303,7 +303,14 @@
     <dialog
         android:id="@+id/libraryListSortingDialogFragment"
         android:name="com.noto.app.main.LibraryListSortingDialogFragment"
-        android:label="LibraryListSortingDialogFragment" />
+        android:label="LibraryListSortingDialogFragment" >
+        <action
+            android:id="@+id/action_libraryListSortingDialogFragment_to_libraryListSortingOrderDialogFragment"
+            app:destination="@id/libraryListSortingOrderDialogFragment" />
+        <action
+            android:id="@+id/action_libraryListSortingDialogFragment_to_libraryListSortingTypeDialogFragment"
+            app:destination="@id/libraryListSortingTypeDialogFragment" />
+    </dialog>
     <dialog
         android:id="@+id/fontDialogFragment"
         android:name="com.noto.app.settings.FontDialogFragment"
@@ -433,4 +440,12 @@
             android:name="title"
             app:argType="string" />
     </dialog>
+    <dialog
+        android:id="@+id/libraryListSortingOrderDialogFragment"
+        android:name="com.noto.app.main.LibraryListSortingOrderDialogFragment"
+        android:label="LibraryListSortingOrderDialogFragment" />
+    <dialog
+        android:id="@+id/libraryListSortingTypeDialogFragment"
+        android:name="com.noto.app.main.LibraryListSortingTypeDialogFragment"
+        android:label="LibraryListSortingTypeDialogFragment" />
 </navigation>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/BaseDialogFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -12,72 +13,23 @@
 
         <include layout="@layout/base_dialog_fragment" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_sorting"
-            style="@style/DialogSectionItem"
-            android:padding="@dimen/spacing_normal"
+        <TextView
+            android:id="@+id/tv_sorting_type"
+            style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sorting_type" />
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/sorting_type"
+            app:drawableStartCompat="@drawable/ic_round_sorting_24" />
 
-        <RadioGroup
-            android:id="@+id/rg_sorting_by"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_manual"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/manual" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_creation_date"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/creation_date" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_alphabetical"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/alphabetical" />
-
-        </RadioGroup>
-
-        <com.google.android.material.textview.MaterialTextView
+        <TextView
             android:id="@+id/tv_sorting_order"
-            style="@style/DialogSectionItem"
-            android:padding="@dimen/spacing_normal"
+            style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sorting_order" />
-
-        <RadioGroup
-            android:id="@+id/rg_sorting_order"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_sorting_asc"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/ascending" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_sorting_desc"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/descending" />
-
-        </RadioGroup>
+            android:background="@drawable/dialog_item_shape"
+            android:text="@string/sorting_order"
+            app:drawableStartCompat="@drawable/ic_round_unfold_more_24" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_done"

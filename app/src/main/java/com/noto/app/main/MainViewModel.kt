@@ -57,7 +57,7 @@ class MainViewModel(
         storage.put(Constants.LibraryListLayoutKey, value.toString())
     }
 
-    fun updateSorting(value: LibraryListSortingType) = viewModelScope.launch {
+    fun updateSortingType(value: LibraryListSortingType) = viewModelScope.launch {
         storage.put(Constants.LibraryListSortingTypeKey, value.toString())
     }
 
