@@ -20,3 +20,20 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 -keepnames class * extends java.io.Serializable
+
+-keepattributes *Annotation*, InnerClasses
+-dontnote kotlinx.serialization.AnnotationsKt # core serialization annotations
+
+-keepclassmembers @kotlinx.serialization.Serializable class com.noto.app.domain.model.** {
+    # lookup for plugin generated serializable classes
+    *** Companion;
+    # lookup for serializable objects
+    *** INSTANCE;
+    kotlinx.serialization.KSerializer serializer(...);
+}
+
+# lookup for plugin generated serializable classes
+-if @kotlinx.serialization.Serializable class com.noto.app.domain.model.**
+-keepclassmembers class com.noto.app.domain.model.<1>$Companion {
+    kotlinx.serialization.KSerializer serializer(...);
+}
