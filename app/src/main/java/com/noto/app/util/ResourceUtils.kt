@@ -46,6 +46,7 @@ fun NotoColor.toResource(): Int = when (this) {
     NotoColor.LightGreen -> R.color.colorAccentLightGreen
     NotoColor.LightRed -> R.color.colorAccentLightRed
     NotoColor.LightPink -> R.color.colorAccentLightPink
+    NotoColor.Black -> R.color.colorAccentBlack
 }
 
 val Number.dp

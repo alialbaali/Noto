@@ -4,7 +4,7 @@ enum class NotoColor {
     Gray, Blue, Pink, Cyan, Purple, Red,
     Yellow, Orange, Green, Brown, BlueGray, Teal,
     Indigo, DeepPurple, DeepOrange, DeepGreen,
-    LightBlue, LightGreen, LightRed, LightPink,
+    LightBlue, LightGreen, LightRed, LightPink, Black,
 }
 
 enum class LibraryListSortingType { Manual, CreationDate, Alphabetical, }

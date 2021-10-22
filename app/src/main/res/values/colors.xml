@@ -10,19 +10,20 @@
     <color name="colorAccentPink">#EC407A</color>
     <color name="colorAccentCyan">#00BCD4</color>
     <color name="colorAccentPurple">#9C27B0</color>
-    <color name="colorAccentRed">#E53935</color>
+    <color name="colorAccentRed">#F44336</color>
     <color name="colorAccentYellow">#D59E17</color>
-    <color name="colorAccentOrange">#EF6C00</color>
+    <color name="colorAccentOrange">#FF9800</color>
     <color name="colorAccentGreen">#4CAF50</color>
     <color name="colorAccentBrown">#795548</color>
     <color name="colorAccentBlueGray">#607D8B</color>
     <color name="colorAccentTeal">#009688</color>
     <color name="colorAccentIndigo">#3F51B5</color>
-    <color name="colorAccentDeepPurple">#673AB7</color>
-    <color name="colorAccentDeepOrange">#D84315</color>
-    <color name="colorAccentDeepGreen">#00E676</color>
-    <color name="colorAccentLightBlue">#4FC3F7</color>
+    <color name="colorAccentDeepPurple">#7E57C2</color>
+    <color name="colorAccentDeepOrange">#FF7043</color>
+    <color name="colorAccentDeepGreen">#00C853</color>
+    <color name="colorAccentLightBlue">#40C4FF</color>
     <color name="colorAccentLightGreen">#8BC34A</color>
-    <color name="colorAccentLightRed">#FF6E40</color>
+    <color name="colorAccentLightRed">#FF8A80</color>
     <color name="colorAccentLightPink">#FF80AB</color>
+    <color name="colorAccentBlack">#000000</color>
 </resources>
