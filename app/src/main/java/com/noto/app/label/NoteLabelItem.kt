@@ -24,9 +24,11 @@ abstract class NoteLabelItem : EpoxyModelWithHolder<NoteLabelItem.Holder>() {
     lateinit var color: NotoColor
 
     override fun bind(holder: Holder) = with(holder.binding) {
+        root.context?.let { context ->
+            tvLabel.background?.mutate()?.setTint(context.colorResource(color.toResource()))
+            tvLabel.setTextColor(context.colorResource(R.color.colorBackground))
+        }
         tvLabel.text = label.title
-        tvLabel.background?.mutate()?.setTint(root.resources.colorResource(color.toResource()))
-        tvLabel.setTextColor(root.resources.colorResource(R.color.colorBackground))
     }
 
     class Holder : EpoxyHolder() {

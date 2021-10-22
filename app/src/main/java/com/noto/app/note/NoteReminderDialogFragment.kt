@@ -58,11 +58,10 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
         val theme = if (isDarkMode) android.R.style.Theme_DeviceDefault_Dialog
         else android.R.style.Theme_DeviceDefault_Light_Dialog
 
-        val buttonTextColor = resources.colorResource(R.color.colorPrimary)
-
         val is24HourFormat = DateFormat.is24HourFormat(context)
 
         context?.let { context ->
+            val buttonTextColor = context.colorResource(R.color.colorPrimary)
             DatePickerDialog(context, theme, { _, year, month, day ->
                 TimePickerDialog(context, theme, { _, hour, minute ->
                     LocalDateTime(year, month + 1, day, hour, minute)
@@ -121,26 +120,31 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
     }
 
-    private fun NoteReminderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.new_note_reminder)
-    }
+    private fun NoteReminderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
+        .apply {
+            context?.let { context ->
+                tvDialogTitle.text = context.stringResource(R.string.new_note_reminder)
+            }
+        }
 
     private fun NoteReminderDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
-        val color = resources.colorResource(library.color.toResource())
-        baseDialogFragment.vHead.background.setTint(color)
-        baseDialogFragment.tvDialogTitle.setTextColor(color)
-        til.boxStrokeColor = color
+        context?.let { context ->
+            val color = context.colorResource(library.color.toResource())
+            baseDialogFragment.vHead.background.setTint(color)
+            baseDialogFragment.tvDialogTitle.setTextColor(color)
+            til.boxStrokeColor = color
+        }
     }
 
     private fun NoteReminderDialogFragmentBinding.setupNote(note: Note, baseDialogFragment: BaseDialogFragmentBinding) {
-        if (note.reminderDate == null) {
-            et.setText(getString(R.string.no_note_reminder))
-            til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_notification_add_24)
-            baseDialogFragment.tvDialogTitle.text = resources.stringResource(R.string.new_note_reminder)
-        } else {
-            til.endIconDrawable = resources.drawableResource(R.drawable.ic_round_cancel_24)
-            baseDialogFragment.tvDialogTitle.text = resources.stringResource(R.string.edit_note_reminder)
-            context?.let { context ->
+        context?.let { context ->
+            if (note.reminderDate == null) {
+                et.setText(getString(R.string.no_note_reminder))
+                til.endIconDrawable = context.drawableResource(R.drawable.ic_round_notification_add_24)
+                baseDialogFragment.tvDialogTitle.text = context.stringResource(R.string.new_note_reminder)
+            } else {
+                til.endIconDrawable = context.drawableResource(R.drawable.ic_round_cancel_24)
+                baseDialogFragment.tvDialogTitle.text = context.stringResource(R.string.edit_note_reminder)
                 et.setText(note.reminderDate.format(context))
             }
         }

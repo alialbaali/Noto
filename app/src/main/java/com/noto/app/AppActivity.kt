@@ -79,8 +79,8 @@ class AppActivity : AppCompatActivity() {
     @Suppress("DEPRECATION")
     private fun AppActivityBinding.setupState() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            window.statusBarColor = resources.colorResource(android.R.color.black)
-            window.navigationBarColor = resources.colorResource(android.R.color.black)
+            window.statusBarColor = colorResource(android.R.color.black)
+            window.navigationBarColor = colorResource(android.R.color.black)
         }
 
         when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {

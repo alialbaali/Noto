@@ -32,18 +32,23 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View = NoteListSortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
-        val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.notes_sorting)
-        }
+        val baseDialog = BaseDialogFragmentBinding.bind(root)
+            .apply {
+                context?.let { context ->
+                    tvDialogTitle.text = context.stringResource(R.string.notes_sorting)
+                }
+            }
 
         viewModel.library
             .onEach { library ->
-                val color = resources.colorResource(library.color.toResource())
-                baseDialog.tvDialogTitle.setTextColor(color)
-                baseDialog.vHead.background?.mutate()?.setTint(color)
-                val colorStateList = resources.colorStateResource(library.color.toResource())
-                listOf(tvGrouping, tvSortingType, tvSortingOrder).onEach {
-                    TextViewCompat.setCompoundDrawableTintList(it, colorStateList)
+                context?.let { context ->
+                    val color = context.colorResource(library.color.toResource())
+                    baseDialog.tvDialogTitle.setTextColor(color)
+                    baseDialog.vHead.background?.mutate()?.setTint(color)
+                    val colorStateList = context.colorStateResource(library.color.toResource())
+                    listOf(tvGrouping, tvSortingType, tvSortingOrder).onEach {
+                        TextViewCompat.setCompoundDrawableTintList(it, colorStateList)
+                    }
                 }
                 when (library.sortingType) {
                     NoteListSortingType.Manual -> tvSortingOrder.isVisible = false

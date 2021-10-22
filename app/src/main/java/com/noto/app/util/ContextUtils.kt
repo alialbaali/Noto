@@ -38,9 +38,9 @@ fun Context.createPinnedShortcut(library: Library): ShortcutInfoCompat {
     val size = 512
 
     val bitmap = createBitmap(size, size).applyCanvas {
-        drawColor(resources.colorResource(android.R.color.white))
-        resources.drawableResource(R.drawable.ic_round_edit_24)?.mutate()?.let { drawable ->
-            drawable.setTint(resources.colorResource(resourceId))
+        drawColor(colorResource(android.R.color.white))
+        drawableResource(R.drawable.ic_round_edit_24)?.mutate()?.let { drawable ->
+            drawable.setTint(colorResource(resourceId))
             val spacing = 128
             drawable.setBounds(spacing, spacing, width - spacing, height - spacing)
             drawable.draw(this)

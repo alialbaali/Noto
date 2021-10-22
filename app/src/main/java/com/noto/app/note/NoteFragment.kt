@@ -70,13 +70,15 @@ class NoteFragment : Fragment() {
             .onEach { note ->
                 setupShortcut(note)
                 nsv.isFillViewport = note.id != 0L
-                tvWordCount.text = resources.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
-                fab.setImageDrawable(
-                    if (note.reminderDate == null)
-                        resources.drawableResource(R.drawable.ic_round_notification_add_24)
-                    else
-                        resources.drawableResource(R.drawable.ic_round_edit_notifications_24)
-                )
+                context?.let { context ->
+                    tvWordCount.text = context.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
+                    fab.setImageDrawable(
+                        if (note.reminderDate == null)
+                            context.drawableResource(R.drawable.ic_round_notification_add_24)
+                        else
+                            context.drawableResource(R.drawable.ic_round_edit_notifications_24)
+                    )
+                }
                 if (note.isValid)
                     enableBottomAppBarActions()
                 else
@@ -135,36 +137,40 @@ class NoteFragment : Fragment() {
     }
 
     private fun NoteFragmentBinding.enableBottomAppBarActions() {
-        val color = resources.colorResource(viewModel.library.value.color.toResource())
-        fab.alpha = 1F
-        fab.isEnabled = true
-        bab.navigationIcon?.mutate()?.setTint(color)
-        bab.menu.forEach {
-            it.isEnabled = true
-            it.icon?.mutate()?.setTint(color)
-        }
-        bab.setNavigationOnClickListener {
-            findNavController().navigateSafely(
-                NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
-                    args.libraryId,
-                    viewModel.note.value.id,
-                    R.id.libraryFragment
+        context?.let { context ->
+            val color = context.colorResource(viewModel.library.value.color.toResource())
+            fab.alpha = 1F
+            fab.isEnabled = true
+            bab.navigationIcon?.mutate()?.setTint(color)
+            bab.menu.forEach {
+                it.isEnabled = true
+                it.icon?.mutate()?.setTint(color)
+            }
+            bab.setNavigationOnClickListener {
+                findNavController().navigateSafely(
+                    NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
+                        args.libraryId,
+                        viewModel.note.value.id,
+                        R.id.libraryFragment
+                    )
                 )
-            )
+            }
         }
     }
 
     private fun NoteFragmentBinding.disableBottomAppBarActions() {
-        val color = resources.colorResource(viewModel.library.value.color.toResource())
-            .let { ColorUtils.setAlphaComponent(it, 128) }
-        fab.alpha = 0.50F
-        fab.isEnabled = false
-        bab.navigationIcon?.mutate()?.setTint(color)
-        bab.menu.forEach {
-            it.isEnabled = false
-            it.icon?.mutate()?.setTint(color)
+        context?.let { context ->
+            val color = context.colorResource(viewModel.library.value.color.toResource())
+                .let { ColorUtils.setAlphaComponent(it, 128) }
+            fab.alpha = 0.50F
+            fab.isEnabled = false
+            bab.navigationIcon?.mutate()?.setTint(color)
+            bab.menu.forEach {
+                it.isEnabled = false
+                it.icon?.mutate()?.setTint(color)
+            }
+            bab.setNavigationOnClickListener(null)
         }
-        bab.setNavigationOnClickListener(null)
     }
 
     private fun NoteFragmentBinding.setupListeners() {
@@ -220,25 +226,26 @@ class NoteFragment : Fragment() {
     }
 
     private fun NoteFragmentBinding.setupLibrary(library: Library) {
-        val color = resources.colorResource(library.color.toResource())
-
-        tb.title = library.title
-        tb.setTitleTextColor(color)
-        tvCreatedAt.setTextColor(color)
-        tvWordCount.setTextColor(color)
-        tb.navigationIcon?.mutate()?.setTint(color)
-        fab.backgroundTintList = resources.colorStateResource(library.color.toResource())
-        bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
-        bab.navigationIcon?.mutate()?.setTint(color)
-        etNoteTitle.setLinkTextColor(color)
-        etNoteBody.setLinkTextColor(color)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            fab.outlineAmbientShadowColor = color
-            fab.outlineSpotShadowColor = color
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            etNoteTitle.textCursorDrawable?.mutate()?.setTint(color)
-            etNoteBody.textCursorDrawable?.mutate()?.setTint(color)
+        context?.let { context ->
+            val color = context.colorResource(library.color.toResource())
+            tb.title = library.title
+            tb.setTitleTextColor(color)
+            tvCreatedAt.setTextColor(color)
+            tvWordCount.setTextColor(color)
+            tb.navigationIcon?.mutate()?.setTint(color)
+            fab.backgroundTintList = context.colorStateResource(library.color.toResource())
+            bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
+            bab.navigationIcon?.mutate()?.setTint(color)
+            etNoteTitle.setLinkTextColor(color)
+            etNoteBody.setLinkTextColor(color)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                fab.outlineAmbientShadowColor = color
+                fab.outlineSpotShadowColor = color
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                etNoteTitle.textCursorDrawable?.mutate()?.setTint(color)
+                etNoteBody.textCursorDrawable?.mutate()?.setTint(color)
+            }
         }
     }
 
@@ -250,7 +257,7 @@ class NoteFragment : Fragment() {
         etNoteTitle.setBoldFont(font)
         etNoteBody.setSemiboldFont(font)
         context?.let { context ->
-            tvCreatedAt.text = resources.stringResource(R.string.created, note.creationDate.format(context))
+            tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
         }
     }
 

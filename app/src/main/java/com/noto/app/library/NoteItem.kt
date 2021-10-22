@@ -59,18 +59,20 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
-        val colorResource= root.resources.colorResource(color.toResource())
+        root.context?.let { context ->
+            val colorResource = context.colorResource(color.toResource())
+            tvNoteTitle.setLinkTextColor(colorResource)
+            tvNoteBody.setLinkTextColor(colorResource)
+            if (isShowCreationDate)
+                tvCreationDate.text = context.stringResource(R.string.created, note.creationDate.format(root.context))
+        }
         tvNoteTitle.text = note.title
-        if (isShowCreationDate)
-            tvCreationDate.text = root.resources.stringResource(R.string.created, note.creationDate.format(root.context))
         tvCreationDate.isVisible = isShowCreationDate
         tvNoteTitle.isVisible = note.title.isNotBlank()
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
         tvNoteTitle.setBoldFont(font)
         tvNoteBody.setSemiboldFont(font)
-        tvNoteTitle.setLinkTextColor(colorResource)
-        tvNoteBody.setLinkTextColor(colorResource)
         ibDrag.isVisible = isManualSorting
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
         rv.isVisible = labels.isNotEmpty()

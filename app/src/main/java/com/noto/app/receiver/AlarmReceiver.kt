@@ -20,7 +20,7 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        val notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager = context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
 
         intent?.let {
 
@@ -33,8 +33,8 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
                 val note = noteRepository.getNoteById(noteId)
                     .firstOrNull()
 
-                if (note != null && library != null) {
-                    notificationManager.createNotification(context, library, note)
+                if (note != null && library != null && context != null) {
+                    notificationManager?.createNotification(context, library, note)
                     noteRepository.updateNote(note.copy(reminderDate = null))
                 }
             }

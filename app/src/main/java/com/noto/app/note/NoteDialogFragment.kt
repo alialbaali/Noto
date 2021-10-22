@@ -48,7 +48,9 @@ class NoteDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.note_options)
+        context?.let { context ->
+            tvDialogTitle.text = context.stringResource(R.string.note_options)
+        }
     }
 
     private fun NoteDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
@@ -74,7 +76,9 @@ class NoteDialogFragment : BaseDialogFragment() {
             else
                 R.string.note_is_archived
 
-            parentView?.snackbar(resources.stringResource(resource), parentAnchorView)
+            context?.let { context ->
+                parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+            }
         }
 
         tvRemindMe.setOnClickListener {
@@ -100,7 +104,9 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvDuplicateNote.setOnClickListener {
             viewModel.duplicateNote().invokeOnCompletion {
                 dismiss()
-                parentView?.snackbar(resources.stringResource(R.string.note_is_duplicated), parentAnchorView)
+                context?.let { context ->
+                    parentView?.snackbar(context.stringResource(R.string.note_is_duplicated), parentAnchorView)
+                }
             }
         }
 
@@ -111,20 +117,26 @@ class NoteDialogFragment : BaseDialogFragment() {
                 R.string.note_is_unpinned
             else
                 R.string.note_is_pinned
-            parentView?.snackbar(resources.stringResource(resource), parentAnchorView)
+            context?.let { context ->
+                parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+            }
         }
 
         tvCopyToClipboard.setOnClickListener {
             dismiss()
             val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
             clipboardManager?.setPrimaryClip(clipData)
-            parentView?.snackbar(getString(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
+            context?.let { context ->
+                parentView?.snackbar(context.stringResource(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
+            }
         }
 
         tvCopyNote.setOnClickListener {
             val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
                 viewModel.copyNote(it).invokeOnCompletion {
-                    parentView?.snackbar(resources.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
+                    context?.let { context ->
+                        parentView?.snackbar(context.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
+                    }
                     findNavController().popBackStack(args.destination, false)
                     dismiss()
                 }
@@ -140,7 +152,9 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvMoveNote.setOnClickListener {
             val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
                 viewModel.moveNote(it).invokeOnCompletion {
-                    parentView?.snackbar(resources.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
+                    context?.let { context ->
+                        parentView?.snackbar(context.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
+                    }
                     findNavController().popBackStack(args.destination, false)
                     dismiss()
                 }
@@ -159,66 +173,70 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvDeleteNote.setOnClickListener {
-            val confirmationText = resources.stringResource(R.string.delete_note_confirmation)
-            val descriptionText = resources.stringResource(R.string.delete_note_description)
-            val btnText = resources.stringResource(R.string.delete_note)
-            val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
-                parentView?.snackbar(resources.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
-                findNavController().popBackStack(args.destination, false)
-                dismiss()
-                if (viewModel.note.value.reminderDate != null)
-                    context?.let { context ->
-                        alarmManager?.cancelAlarm(context, viewModel.note.value.id)
-                    }
-                viewModel.deleteNote()
-            }
+            context?.let { context ->
+                val confirmationText = context.stringResource(R.string.delete_note_confirmation)
+                val descriptionText = context.stringResource(R.string.delete_note_description)
+                val btnText = context.stringResource(R.string.delete_note)
+                val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
+                    parentView?.snackbar(context.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
+                    findNavController().popBackStack(args.destination, false)
+                    dismiss()
+                    if (viewModel.note.value.reminderDate != null)
+                        context?.let { context ->
+                            alarmManager?.cancelAlarm(context, viewModel.note.value.id)
+                        }
+                    viewModel.deleteNote()
+                }
 
-            findNavController().navigateSafely(
-                NoteDialogFragmentDirections.actionNoteDialogFragmentToConfirmationDialogFragment(
-                    confirmationText,
-                    descriptionText,
-                    btnText,
-                    clickListener,
+                findNavController().navigateSafely(
+                    NoteDialogFragmentDirections.actionNoteDialogFragmentToConfirmationDialogFragment(
+                        confirmationText,
+                        descriptionText,
+                        btnText,
+                        clickListener,
+                    )
                 )
-            )
+            }
         }
     }
 
     private fun NoteDialogFragmentBinding.setupNote(note: Note) {
+        context?.let { context ->
+            if (note.isPinned) {
+                tvPinNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
+                tvPinNote.text = context.stringResource(R.string.unpin_note)
+            } else {
+                tvPinNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
+                tvPinNote.text = context.stringResource(R.string.pin_note)
+            }
 
-        if (note.isPinned) {
-            tvPinNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
-            tvPinNote.text = resources.stringResource(R.string.unpin_note)
-        } else {
-            tvPinNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
-            tvPinNote.text = resources.stringResource(R.string.pin_note)
-        }
+            if (note.isArchived) {
+                tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
+                tvArchiveNote.text = context.stringResource(R.string.unarchive_note)
+            } else {
+                tvArchiveNote.text = context.stringResource(R.string.archive_note)
+                tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
+            }
 
-        if (note.isArchived) {
-            tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
-            tvArchiveNote.text = resources.stringResource(R.string.unarchive_note)
-        } else {
-            tvArchiveNote.text = resources.stringResource(R.string.archive_note)
-            tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
-        }
-
-        if (note.reminderDate == null) {
-            tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_notification_add_24, 0, 0, 0)
-            tvRemindMe.text = resources.stringResource(R.string.add_note_reminder)
-        } else {
-            tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_edit_notifications_24, 0, 0, 0)
-            tvRemindMe.text = resources.stringResource(R.string.edit_note_reminder)
+            if (note.reminderDate == null) {
+                tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_notification_add_24, 0, 0, 0)
+                tvRemindMe.text = context.stringResource(R.string.add_note_reminder)
+            } else {
+                tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_edit_notifications_24, 0, 0, 0)
+                tvRemindMe.text = context.stringResource(R.string.edit_note_reminder)
+            }
         }
     }
 
     private fun NoteDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
-        baseDialogFragment.tvDialogTitle.setTextColor(resources.colorResource(library.color.toResource()))
-        baseDialogFragment.vHead.backgroundTintList = resources.colorStateResource(library.color.toResource())
-
-        listOf(
-            tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
-            tvDuplicateNote, tvPinNote, tvRemindMe, tvDeleteNote, tvMoveNote,
-        ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, resources.colorStateResource(library.color.toResource())) }
+        context?.let { context ->
+            baseDialogFragment.tvDialogTitle.setTextColor(context.colorResource(library.color.toResource()))
+            baseDialogFragment.vHead.backgroundTintList = context.colorStateResource(library.color.toResource())
+            listOf(
+                tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
+                tvDuplicateNote, tvPinNote, tvRemindMe, tvDeleteNote, tvMoveNote,
+            ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, context.colorStateResource(library.color.toResource())) }
+        }
     }
 
 }

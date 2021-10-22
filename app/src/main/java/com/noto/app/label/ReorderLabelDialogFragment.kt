@@ -42,9 +42,12 @@ class ReorderLabelDialogFragment : BaseDialogFragment() {
         setupState(baseDialogFragment)
     }
 
-    private fun ReorderLabelDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.labels_order)
-    }
+    private fun ReorderLabelDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
+        .apply {
+            context?.let { context ->
+                tvDialogTitle.text = context.stringResource(R.string.labels_order)
+            }
+        }
 
     private fun ReorderLabelDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -52,9 +55,11 @@ class ReorderLabelDialogFragment : BaseDialogFragment() {
 
         viewModel.library
             .onEach { library ->
-                val color = resources.colorResource(library.color.toResource())
-                baseDialogFragment.tvDialogTitle.setTextColor(color)
-                baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+                context?.let { context ->
+                    val color = context.colorResource(library.color.toResource())
+                    baseDialogFragment.tvDialogTitle.setTextColor(color)
+                    baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+                }
             }
             .launchIn(lifecycleScope)
 

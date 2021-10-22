@@ -55,7 +55,9 @@ class ThemeDialogFragment : BaseDialogFragment() {
     }
 
     private fun ThemeDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.theme)
+        context?.let { context ->
+            tvDialogTitle.text = context.stringResource(R.string.theme)
+        }
     }
 
     private fun ThemeDialogFragmentBinding.setupTheme(theme: Theme) {

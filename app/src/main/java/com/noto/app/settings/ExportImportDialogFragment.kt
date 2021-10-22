@@ -30,7 +30,9 @@ class ExportImportDialogFragment : BaseDialogFragment() {
             exportData(uri)
         } else {
             dismiss()
-            parentFragment?.view?.snackbar(resources.stringResource(R.string.no_folder_is_selected))
+            context?.let { context ->
+                parentFragment?.view?.snackbar(context.stringResource(R.string.no_folder_is_selected))
+            }
         }
     }
 
@@ -39,7 +41,9 @@ class ExportImportDialogFragment : BaseDialogFragment() {
             importData(uri)
         } else {
             dismiss()
-            parentFragment?.view?.snackbar(resources.stringResource(R.string.no_file_is_selected))
+            context?.let { context ->
+                parentFragment?.view?.snackbar(context.stringResource(R.string.no_file_is_selected))
+            }
         }
     }
 
@@ -53,7 +57,11 @@ class ExportImportDialogFragment : BaseDialogFragment() {
     }
 
     private fun ExportImportDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-        .apply { tvDialogTitle.text = resources.stringResource(R.string.export_import_data) }
+        .apply {
+            context?.let { context ->
+                tvDialogTitle.text = context.stringResource(R.string.export_import_data)
+            }
+        }
 
     private fun ExportImportDialogFragmentBinding.setupListeners() {
         tvExport.setOnClickListener {
@@ -66,12 +74,12 @@ class ExportImportDialogFragment : BaseDialogFragment() {
     }
 
     private fun exportData(uri: Uri) {
-        findNavController().navigateSafely(
-            ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressDialogFragment(
-                resources.stringResource(R.string.exporting_data)
-            )
-        )
         context?.let { context ->
+            findNavController().navigateSafely(
+                ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressDialogFragment(
+                    context.stringResource(R.string.exporting_data)
+                )
+            )
             val zipFile = DocumentFile.fromTreeUri(context, uri)?.createFile(ZipMimeType, ZipFileName)
             if (zipFile != null) {
                 val zipFileOutputStream = context.contentResolver?.openOutputStream(zipFile.uri)
@@ -82,17 +90,17 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                             writeDataToZipFile(zipFileOutputStream, exportedData)
                         }
                     }.invokeOnCompletion {
-                        parentFragment?.view?.snackbar(resources.stringResource(R.string.data_is_exported, zipFile.uri.directoryPath))
+                        parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_exported, zipFile.uri.directoryPath))
                         findNavController().navigateUp()
                         dismiss()
                     }
                 } else {
-                    parentFragment?.view?.snackbar(resources.stringResource(R.string.exporting_failed))
+                    parentFragment?.view?.snackbar(context.stringResource(R.string.exporting_failed))
                     findNavController().navigateUp()
                     dismiss()
                 }
             } else {
-                parentFragment?.view?.snackbar(resources.stringResource(R.string.create_file_failed))
+                parentFragment?.view?.snackbar(context.stringResource(R.string.create_file_failed))
                 findNavController().navigateUp()
                 dismiss()
             }
@@ -100,27 +108,29 @@ class ExportImportDialogFragment : BaseDialogFragment() {
     }
 
     private fun importData(uri: Uri) {
-        findNavController().navigateSafely(
-            ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressDialogFragment(
-                resources.stringResource(R.string.importing_data)
+        context?.let { context ->
+            findNavController().navigateSafely(
+                ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressDialogFragment(
+                    context.stringResource(R.string.importing_data)
+                )
             )
-        )
-        val inputStream = context?.contentResolver?.openInputStream(uri)
-        if (inputStream != null) {
-            lifecycleScope.launchWhenResumed {
-                withContext(Dispatchers.IO) {
-                    val data = readDataFromZipFile(inputStream)
-                    viewModel.importData(data)
+            val inputStream = context.contentResolver?.openInputStream(uri)
+            if (inputStream != null) {
+                lifecycleScope.launchWhenResumed {
+                    withContext(Dispatchers.IO) {
+                        val data = readDataFromZipFile(inputStream)
+                        viewModel.importData(data)
+                    }
+                }.invokeOnCompletion {
+                    parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_imported))
+                    findNavController().navigateUp()
+                    dismiss()
                 }
-            }.invokeOnCompletion {
-                parentFragment?.view?.snackbar(resources.stringResource(R.string.data_is_imported))
+            } else {
+                parentFragment?.view?.snackbar(context.stringResource(R.string.importing_failed))
                 findNavController().navigateUp()
                 dismiss()
             }
-        } else {
-            parentFragment?.view?.snackbar(resources.stringResource(R.string.importing_failed))
-            findNavController().navigateUp()
-            dismiss()
         }
     }
 }

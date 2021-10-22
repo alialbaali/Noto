@@ -29,7 +29,7 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
         .setContentIntent(pendingIntent)
         .setSubText(library.title)
         .setStyle(style)
-        .setColor(context.resources.colorResource(library.color.toResource()))
+        .setColor(context.colorResource(library.color.toResource()))
         .setColorized(true)
         .setCategory(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Notification.CATEGORY_REMINDER else null)
         .setSmallIcon(R.mipmap.ic_launcher_round)

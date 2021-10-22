@@ -22,7 +22,9 @@ class MainDialogFragment : BaseDialogFragment() {
         }
 
     private fun MainDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.app_name)
+        context?.let { context ->
+            tvDialogTitle.text = context.stringResource(R.string.app_name)
+        }
     }
 
     private fun MainDialogFragmentBinding.setupListeners() {

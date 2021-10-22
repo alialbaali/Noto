@@ -32,7 +32,9 @@ class LanguageDialogFragment : BaseDialogFragment() {
     }
 
     fun LanguageDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.language)
+        context?.let { context ->
+            tvDialogTitle.text = context.stringResource(R.string.language)
+        }
     }
 
     fun LanguageDialogFragmentBinding.setupState() {

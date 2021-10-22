@@ -1,26 +1,23 @@
 package com.noto.app.util
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.content.res.Resources
-import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
 import com.noto.app.R
 import com.noto.app.domain.model.NotoColor
 
-fun Resources.colorStateResource(@ColorRes id: Int): ColorStateList? = ResourcesCompat.getColorStateList(this, id, null)
-fun Resources.colorResource(@ColorRes id: Int): Int = ResourcesCompat.getColor(this, id, null)
-fun Resources.stringResource(@StringRes id: Int): String = getString(id)
-fun Resources.stringResource(@StringRes id: Int, vararg formatArgs: Any?): String = getString(id, *formatArgs)
-fun Resources.drawableResource(@DrawableRes id: Int): Drawable? = ResourcesCompat.getDrawable(this, id, null)
-fun Resources.dimenResource(@DimenRes id: Int): Float = getDimension(id)
-fun Resources.fontResource(context: Context, @FontRes id: Int) = ResourcesCompat.getFont(context, id)
-fun Resources.pluralsResource(@PluralsRes id: Int, quantity: Int, vararg formatArgs: Any?) = getQuantityString(id, quantity, *formatArgs)
+fun Context.colorStateResource(@ColorRes id: Int) = ResourcesCompat.getColorStateList(resources, id, null)
+fun Context.colorResource(@ColorRes id: Int) = ResourcesCompat.getColor(resources, id, null)
+fun Context.stringResource(@StringRes id: Int, vararg formatArgs: Any? = emptyArray()) = getString(id, *formatArgs)
+fun Context.drawableResource(@DrawableRes id: Int) = ResourcesCompat.getDrawable(resources, id, null)
+fun Context.dimenResource(@DimenRes id: Int) = resources.getDimension(id)
+fun Context.fontResource(@FontRes id: Int) = ResourcesCompat.getFont(this, id)
+fun Context.pluralsResource(@PluralsRes id: Int, quantity: Int, vararg formatArgs: Any?) = resources.getQuantityString(id, quantity, *formatArgs)
 
 fun Context.tryLoadingFontResource(@FontRes id: Int) = try {
-    resources.fontResource(this, id)
+    fontResource(id)
 } catch (exception: Throwable) {
     null
 }

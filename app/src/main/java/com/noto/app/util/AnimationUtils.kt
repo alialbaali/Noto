@@ -31,7 +31,7 @@ fun View.animateLabelColors(fromColor: Int, toColor: Int) {
         addUpdateListener { animator ->
             val backgroundColor = animator.getAnimatedValue("background") as Int
             val strokeWidth = animator.getAnimatedValue("stroke") as Int
-            background = resources.drawableResource(R.drawable.label_item_shape)
+            background = context.drawableResource(R.drawable.label_item_shape)
                 ?.mutate()
                 ?.let { it as RippleDrawable }
                 ?.let { it.getDrawable(0) as GradientDrawable }
@@ -40,7 +40,7 @@ fun View.animateLabelColors(fromColor: Int, toColor: Int) {
                     cornerRadius = LabelDefaultCornerRadius
                     setColor(backgroundColor)
                 }
-                ?.toRippleDrawable(resources)
+                ?.toRippleDrawable(context)
         }
         start()
     }

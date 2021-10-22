@@ -13,7 +13,10 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.noto.app.R
 import com.noto.app.databinding.LibraryItemBinding
 import com.noto.app.domain.model.Library
-import com.noto.app.util.*
+import com.noto.app.util.colorResource
+import com.noto.app.util.dp
+import com.noto.app.util.pluralsResource
+import com.noto.app.util.toResource
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass(layout = R.layout.library_item)
@@ -42,25 +45,26 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
-        val resources = root.resources
-        val color = resources.colorResource(library.color.toResource())
+        root.context?.let { context ->
+            val color = context.colorResource(library.color.toResource())
+            tvLibraryNotesCount.text = context.pluralsResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
+            vColor.background.setTint(color)
+            tvLibraryTitle.setTextColor(color)
+            tvLibraryNotesCount.setTextColor(color)
+            ibDrag.drawable?.mutate()?.setTint(color)
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                root.outlineAmbientShadowColor = color
+                root.outlineSpotShadowColor = color
+            }
+        }
         tvLibraryTitle.text = library.title
-        tvLibraryNotesCount.text = resources.pluralsResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
         ibDrag.isVisible = isManualSorting
-        vColor.background.setTint(color)
-        tvLibraryTitle.setTextColor(color)
-        tvLibraryNotesCount.setTextColor(color)
-        ibDrag.drawable?.mutate()?.setTint(color)
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
         tvLibraryNotesCount.isVisible = isShowNotesCount
         tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(bottom = if (isShowNotesCount) 4.dp else 0.dp)
-        }
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-            root.outlineAmbientShadowColor = color
-            root.outlineSpotShadowColor = color
         }
     }
 

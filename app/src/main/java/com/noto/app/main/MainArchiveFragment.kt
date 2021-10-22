@@ -86,31 +86,32 @@ class MainArchiveFragment : Fragment() {
                     }
                 }
             }
-
-            if (libraries.isEmpty()) {
-                placeholderItem {
-                    id("placeholder")
-                    placeholder(resources.stringResource(R.string.archive_is_empty))
-                }
-            } else {
-                val pinnedLibraries = libraries.filter { it.isPinned }
-                val notPinnedLibraries = libraries.filterNot { it.isPinned }
-
-                if (pinnedLibraries.isNotEmpty()) {
-                    headerItem {
-                        id("pinned")
-                        title(resources.stringResource(R.string.pinned))
+            context?.let { context ->
+                if (libraries.isEmpty()) {
+                    placeholderItem {
+                        id("placeholder")
+                        placeholder(context.stringResource(R.string.archive_is_empty))
                     }
+                } else {
+                    val pinnedLibraries = libraries.filter { it.isPinned }
+                    val notPinnedLibraries = libraries.filterNot { it.isPinned }
 
-                    items(pinnedLibraries)
-
-                    if (notPinnedLibraries.isNotEmpty())
+                    if (pinnedLibraries.isNotEmpty()) {
                         headerItem {
-                            id("libraries")
-                            title(resources.stringResource(R.string.libraries))
+                            id("pinned")
+                            title(context.stringResource(R.string.pinned))
                         }
+
+                        items(pinnedLibraries)
+
+                        if (notPinnedLibraries.isNotEmpty())
+                            headerItem {
+                                id("libraries")
+                                title(context.stringResource(R.string.libraries))
+                            }
+                    }
+                    items(notPinnedLibraries)
                 }
-                items(notPinnedLibraries)
             }
         }
     }

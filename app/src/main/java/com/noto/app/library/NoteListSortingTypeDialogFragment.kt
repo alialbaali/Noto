@@ -29,19 +29,24 @@ class NoteListSortingTypeDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View = NoteListSortingTypeDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
-        val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.sorting_type)
-        }
+        val baseDialog = BaseDialogFragmentBinding.bind(root)
+            .apply {
+                context?.let { context ->
+                    tvDialogTitle.text = context.stringResource(R.string.sorting_type)
+                }
+            }
 
         viewModel.library
             .onEach { library ->
-                val color = resources.colorResource(library.color.toResource())
-                val colorStateList = resources.colorStateResource(library.color.toResource())
-                baseDialog.tvDialogTitle.setTextColor(color)
-                baseDialog.vHead.background?.mutate()?.setTint(color)
-                rbManual.buttonTintList = colorStateList
-                rbAlphabetical.buttonTintList = colorStateList
-                rbCreationDate.buttonTintList = colorStateList
+                context?.let { context ->
+                    val color = context.colorResource(library.color.toResource())
+                    val colorStateList = context.colorStateResource(library.color.toResource())
+                    baseDialog.tvDialogTitle.setTextColor(color)
+                    baseDialog.vHead.background?.mutate()?.setTint(color)
+                    rbManual.buttonTintList = colorStateList
+                    rbAlphabetical.buttonTintList = colorStateList
+                    rbCreationDate.buttonTintList = colorStateList
+                }
                 when (library.sortingType) {
                     NoteListSortingType.Alphabetical -> rbAlphabetical.isChecked = true
                     NoteListSortingType.CreationDate -> rbCreationDate.isChecked = true

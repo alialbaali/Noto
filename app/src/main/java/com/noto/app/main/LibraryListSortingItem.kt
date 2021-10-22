@@ -31,14 +31,15 @@ abstract class LibraryListSortingItem : EpoxyModelWithHolder<LibraryListSortingI
     lateinit var onClickListener: View.OnClickListener
 
     override fun bind(holder: Holder) = with(holder.binding) {
-        val resources = root.resources
-        tvSorting.text = when (sortingType) {
-            LibraryListSortingType.Manual -> resources.stringResource(R.string.manual_sorting)
-            LibraryListSortingType.CreationDate -> resources.stringResource(R.string.creation_date_sorting)
-            LibraryListSortingType.Alphabetical -> resources.stringResource(R.string.alphabetical_sorting)
+        root.context?.let { context ->
+            tvSorting.text = when (sortingType) {
+                LibraryListSortingType.Manual -> context.stringResource(R.string.manual_sorting)
+                LibraryListSortingType.CreationDate -> context.stringResource(R.string.creation_date_sorting)
+                LibraryListSortingType.Alphabetical -> context.stringResource(R.string.alphabetical_sorting)
+            }
+            tvLibrariesCount.text = context.pluralsResource(R.plurals.libraries_count, librariesCount, librariesCount).lowercase()
         }
         tvSorting.setOnClickListener(onClickListener)
-        tvLibrariesCount.text = resources.pluralsResource(R.plurals.libraries_count, librariesCount, librariesCount).lowercase()
     }
 
     override fun onViewAttachedToWindow(holder: Holder) {

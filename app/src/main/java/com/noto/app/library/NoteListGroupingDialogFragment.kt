@@ -29,19 +29,24 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View = NoteListGroupingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
-        val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.grouping)
-        }
+        val baseDialog = BaseDialogFragmentBinding.bind(root)
+            .apply {
+                context?.let { context ->
+                    tvDialogTitle.text = context.stringResource(R.string.grouping)
+                }
+            }
 
         viewModel.library
             .onEach { library ->
-                val color = resources.colorResource(library.color.toResource())
-                val colorStateList = resources.colorStateResource(library.color.toResource())
-                baseDialog.tvDialogTitle.setTextColor(color)
-                baseDialog.vHead.background?.mutate()?.setTint(color)
-                rbDefault.buttonTintList = colorStateList
-                rbLabel.buttonTintList = colorStateList
-                rbCreationDate.buttonTintList = colorStateList
+                context?.let { context ->
+                    val color = context.colorResource(library.color.toResource())
+                    val colorStateList = context.colorStateResource(library.color.toResource())
+                    baseDialog.tvDialogTitle.setTextColor(color)
+                    baseDialog.vHead.background?.mutate()?.setTint(color)
+                    rbDefault.buttonTintList = colorStateList
+                    rbLabel.buttonTintList = colorStateList
+                    rbCreationDate.buttonTintList = colorStateList
+                }
                 when (library.grouping) {
                     Grouping.Default -> rbDefault.isChecked = true
                     Grouping.CreationDate -> rbCreationDate.isChecked = true

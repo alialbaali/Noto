@@ -49,9 +49,11 @@ class LibraryFragment : Fragment() {
         viewModel.library
             .onEach { library ->
                 setupLibrary(library)
-                val text = resources.stringResource(R.string.archive, library.title)
-                MenuItemCompat.setTooltipText(archiveMenuItem, text)
-                MenuItemCompat.setContentDescription(archiveMenuItem, text)
+                context?.let { context ->
+                    val text = context.stringResource(R.string.archive, library.title)
+                    MenuItemCompat.setTooltipText(archiveMenuItem, text)
+                    MenuItemCompat.setContentDescription(archiveMenuItem, text)
+                }
             }
             .distinctUntilChangedBy { library -> library.layout }
             .onEach { library -> setupLayoutManager(library.layout) }
@@ -130,12 +132,12 @@ class LibraryFragment : Fragment() {
         etSearch.showKeyboardUsingImm()
 
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
-                disableSearch()
-                if (isEnabled) {
-                    isEnabled = false
-                    activity?.onBackPressed()
-                }
+            disableSearch()
+            if (isEnabled) {
+                isEnabled = false
+                activity?.onBackPressed()
             }
+        }
     }
 
     private fun LibraryFragmentBinding.disableSearch() {
@@ -238,13 +240,15 @@ class LibraryFragment : Fragment() {
                 }
             }
 
-            if (notes.isEmpty())
-                placeholderItem {
-                    id("placeholder")
-                    placeholder(resources.stringResource(R.string.no_notes_found))
-                }
-            else
-                buildNotesModels(library, notes, resources, items)
+            context?.let { context ->
+                if (notes.isEmpty())
+                    placeholderItem {
+                        id("placeholder")
+                        placeholder(context.stringResource(R.string.no_notes_found))
+                    }
+                else
+                    buildNotesModels(context, library, notes, items)
+            }
         }
     }
 
@@ -259,20 +263,22 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupLibrary(library: Library) {
-        val color = resources.colorResource(library.color.toResource())
-        val colorStateList = resources.colorStateResource(library.color.toResource())
-        tb.title = library.title
-        tb.setTitleTextColor(color)
-        tb.navigationIcon?.mutate()?.setTint(color)
-        bab.navigationIcon?.mutate()?.setTint(color)
-        fab.backgroundTintList = colorStateList
-        bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
-        tilSearch.boxBackgroundColor = ColorUtils.setAlphaComponent(color, 25)
-        etSearch.setHintTextColor(colorStateList)
-        etSearch.setTextColor(colorStateList)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            fab.outlineAmbientShadowColor = color
-            fab.outlineSpotShadowColor = color
+        context?.let { context ->
+            val color = context.colorResource(library.color.toResource())
+            val colorStateList = context.colorStateResource(library.color.toResource())
+            tb.title = library.title
+            tb.setTitleTextColor(color)
+            tb.navigationIcon?.mutate()?.setTint(color)
+            bab.navigationIcon?.mutate()?.setTint(color)
+            fab.backgroundTintList = colorStateList
+            bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
+            tilSearch.boxBackgroundColor = ColorUtils.setAlphaComponent(color, 25)
+            etSearch.setHintTextColor(colorStateList)
+            etSearch.setTextColor(colorStateList)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                fab.outlineAmbientShadowColor = color
+                fab.outlineSpotShadowColor = color
+            }
         }
     }
 

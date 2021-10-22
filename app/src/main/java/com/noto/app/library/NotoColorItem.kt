@@ -27,7 +27,9 @@ abstract class NotoColorItem : EpoxyModelWithHolder<NotoColorItem.Holder>() {
     lateinit var onClickListener: View.OnClickListener
 
     override fun bind(holder: Holder) = with(holder.binding) {
-        rb.backgroundTintList = root.resources.colorStateResource(notoColor.toResource())
+        root.context?.let { context ->
+            rb.backgroundTintList = context.colorStateResource(notoColor.toResource())
+        }
         rb.isChecked = isChecked
         rb.setOnClickListener(onClickListener)
         TooltipCompat.setTooltipText(rb, notoColor.name)

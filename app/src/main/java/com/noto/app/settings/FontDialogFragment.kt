@@ -29,7 +29,9 @@ class FontDialogFragment : BaseDialogFragment() {
         }
 
     private fun FontDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.font)
+        context?.let { context ->
+            tvDialogTitle.text = context.stringResource(R.string.font)
+        }
     }
 
     private fun FontDialogFragmentBinding.setupState() {

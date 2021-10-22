@@ -3,7 +3,6 @@ package com.noto.app.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
@@ -42,7 +41,7 @@ val Uri.directoryPath
 
 fun Fragment.launchShareNoteIntent(note: Note) {
     val intent = note.createShareIntent()
-    val chooser = Intent.createChooser(intent, resources.stringResource(R.string.share_note))
+    val chooser = Intent.createChooser(intent, context?.stringResource(R.string.share_note))
     startActivity(chooser)
 }
 
@@ -53,8 +52,8 @@ private fun Note.createShareIntent() = Intent(Intent.ACTION_SEND).apply {
 
 fun View.snackbar(message: String, anchorView: View? = null) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
     animationMode = Snackbar.ANIMATION_MODE_SLIDE
-    setBackgroundTint(resources.colorResource(R.color.colorPrimary))
-    setTextColor(resources.colorResource(R.color.colorBackground))
+    setBackgroundTint(context.colorResource(R.color.colorPrimary))
+    setTextColor(context.colorResource(R.color.colorBackground))
     setAnchorView(anchorView)
     show()
 }
@@ -64,8 +63,10 @@ fun View.setFullSpan() {
         (layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
 }
 
-fun GradientDrawable.toRippleDrawable(resources: Resources): RippleDrawable {
-    return RippleDrawable(resources.colorStateResource(R.color.colorSecondary)!!, this, this)
+fun GradientDrawable.toRippleDrawable(context: Context): RippleDrawable? {
+    return context.colorStateResource(R.color.colorSecondary)?.let {
+        RippleDrawable(it, this, this)
+    }
 }
 
 fun Activity.showKeyboard(view: View) = WindowInsetsControllerCompat(window, view).show(WindowInsetsCompat.Type.ime())
@@ -77,14 +78,14 @@ fun View.showKeyboardUsingImm() {
 
 fun TextView.setBoldFont(font: Font) {
     when (font) {
-        Font.Nunito -> context?.tryLoadingFontResource(R.font.nunito_bold)?.let { typeface = it }
+        Font.Nunito -> context.tryLoadingFontResource(R.font.nunito_bold)?.let { typeface = it }
         Font.Monospace -> setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
     }
 }
 
 fun TextView.setSemiboldFont(font: Font) {
     when (font) {
-        Font.Nunito -> context?.tryLoadingFontResource(R.font.nunito_semibold)?.let { typeface = it }
+        Font.Nunito -> context.tryLoadingFontResource(R.font.nunito_semibold)?.let { typeface = it }
         Font.Monospace -> typeface = Typeface.MONOSPACE
     }
 }

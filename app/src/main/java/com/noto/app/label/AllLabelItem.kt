@@ -25,18 +25,18 @@ abstract class AllLabelItem : EpoxyModelWithHolder<AllLabelItem.Holder>() {
     lateinit var onClickListener: View.OnClickListener
 
     override fun bind(holder: Holder) = with(holder.binding) {
-        val resources = root.resources
-        val backgroundColor = resources.colorResource(R.color.colorBackground)
-        val resourceColor = resources.colorResource(color.toResource())
-        tvAllLabel.setOnClickListener(onClickListener)
-        if (isSelected) {
-            tvAllLabel.animateBackgroundColor(backgroundColor, resourceColor)
-            tvAllLabel.animateTextColor(resourceColor, backgroundColor)
-        } else {
-            tvAllLabel.animateLabelColors(fromColor = resourceColor, toColor = backgroundColor)
-            tvAllLabel.animateTextColor(backgroundColor, resourceColor)
+        root.context?.let { context ->
+            val backgroundColor = context.colorResource(R.color.colorBackground)
+            val resourceColor = context.colorResource(color.toResource())
+            if (isSelected) {
+                tvAllLabel.animateBackgroundColor(backgroundColor, resourceColor)
+                tvAllLabel.animateTextColor(resourceColor, backgroundColor)
+            } else {
+                tvAllLabel.animateLabelColors(fromColor = resourceColor, toColor = backgroundColor)
+                tvAllLabel.animateTextColor(backgroundColor, resourceColor)
+            }
         }
-        Unit
+        tvAllLabel.setOnClickListener(onClickListener)
     }
 
     class Holder : EpoxyHolder() {

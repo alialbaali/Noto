@@ -36,29 +36,27 @@ class SettingsFragment : Fragment() {
         }
 
     private fun SettingsFragmentBinding.setupState() {
-        val version = context?.let { context ->
-            context.packageManager
+        context?.let { context ->
+            val version = context.packageManager
                 ?.getPackageInfo(context.packageName, 0)
                 ?.versionName
+            tvVersion.text = context.stringResource(R.string.version, version)
+            val switchOffColor = ColorUtils.setAlphaComponent(context.colorResource(R.color.colorSecondary), 128)
+            val state = arrayOf(
+                intArrayOf(android.R.attr.state_checked),
+                intArrayOf(-android.R.attr.state_checked),
+            )
+            val switchThumbTintList = ColorStateList(
+                state,
+                intArrayOf(context.colorResource(R.color.colorPrimary), context.colorResource(R.color.colorSurface))
+            )
+            val switchTrackTintList = ColorStateList(
+                state,
+                intArrayOf(ColorUtils.setAlphaComponent(context.colorResource(R.color.colorPrimary), 128), switchOffColor)
+            )
+            swShowNotesCount.thumbTintList = switchThumbTintList
+            swShowNotesCount.trackTintList = switchTrackTintList
         }
-
-        tvVersion.text = resources.stringResource(R.string.version, version)
-
-        val switchOffColor = ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorSecondary), 128)
-        val state = arrayOf(
-            intArrayOf(android.R.attr.state_checked),
-            intArrayOf(-android.R.attr.state_checked),
-        )
-        val switchThumbTintList = ColorStateList(
-            state,
-            intArrayOf(resources.colorResource(R.color.colorPrimary), resources.colorResource(R.color.colorSurface))
-        )
-        val switchTrackTintList = ColorStateList(
-            state,
-            intArrayOf(ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorPrimary), 128), switchOffColor)
-        )
-        swShowNotesCount.thumbTintList = switchThumbTintList
-        swShowNotesCount.trackTintList = switchTrackTintList
 
         viewModel.isShowNotesCount
             .onEach { isShowNotesCount -> swShowNotesCount.isChecked = isShowNotesCount }
@@ -99,11 +97,11 @@ class SettingsFragment : Fragment() {
                 type = "text/plain"
                 putExtra(
                     Intent.EXTRA_TEXT,
-                    "${resources.stringResource(R.string.invite_text)} $PlayStoreUrl"
+                    "${context?.stringResource(R.string.invite_text)} $PlayStoreUrl"
                 )
             }
 
-            val chooser = Intent.createChooser(intent, resources.stringResource(R.string.share_with))
+            val chooser = Intent.createChooser(intent, context?.stringResource(R.string.share_with))
             startActivity(chooser)
         }
 
@@ -114,7 +112,7 @@ class SettingsFragment : Fragment() {
 
         tvRateApp.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(PlayStoreUrl))
-            val chooser = Intent.createChooser(intent, resources.stringResource(R.string.open_with))
+            val chooser = Intent.createChooser(intent, context?.stringResource(R.string.open_with))
             startActivity(chooser)
         }
 

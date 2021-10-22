@@ -36,19 +36,24 @@ class LabelDialogFragment : BaseDialogFragment() {
         setupListeners()
     }
 
-    private fun LabelDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.label_options)
-    }
+    private fun LabelDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
+        .apply {
+            context?.let { context ->
+                tvDialogTitle.text = context.stringResource(R.string.label_options)
+            }
+        }
 
     private fun LabelDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         viewModel.library
             .onEach { library ->
-                val color = resources.colorResource(library.color.toResource())
-                val colorState = resources.colorStateResource(library.color.toResource())
-                baseDialogFragment.vHead.background?.mutate()?.setTint(color)
-                baseDialogFragment.tvDialogTitle.setTextColor(color)
-                listOf(tvEditLabel, tvReorderLabel, tvDeleteLabel)
-                    .forEach { TextViewCompat.setCompoundDrawableTintList(it, colorState) }
+                context?.let { context ->
+                    val color = context.colorResource(library.color.toResource())
+                    val colorState = context.colorStateResource(library.color.toResource())
+                    baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+                    baseDialogFragment.tvDialogTitle.setTextColor(color)
+                    listOf(tvEditLabel, tvReorderLabel, tvDeleteLabel)
+                        .forEach { TextViewCompat.setCompoundDrawableTintList(it, colorState) }
+                }
             }
             .launchIn(lifecycleScope)
 
@@ -68,26 +73,27 @@ class LabelDialogFragment : BaseDialogFragment() {
         }
 
         tvDeleteLabel.setOnClickListener {
-            val confirmationText = resources.stringResource(R.string.delete_label_confirmation)
-            val descriptionText = resources.stringResource(R.string.delete_label_description)
-            val btnText = resources.stringResource(R.string.delete_label)
-            val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
-                val parentView = parentFragment?.view
-                val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
-                parentView?.snackbar(resources.stringResource(R.string.label_is_deleted), anchorView = parentAnchorView)
-                dismiss()
-                viewModel.deleteLabel()
-            }
+            context?.let { context ->
+                val confirmationText = context.stringResource(R.string.delete_label_confirmation)
+                val descriptionText = context.stringResource(R.string.delete_label_description)
+                val btnText = context.stringResource(R.string.delete_label)
+                val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
+                    val parentView = parentFragment?.view
+                    val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
+                    parentView?.snackbar(context.stringResource(R.string.label_is_deleted), anchorView = parentAnchorView)
+                    dismiss()
+                    viewModel.deleteLabel()
+                }
 
-            findNavController().navigateSafely(
-                LabelDialogFragmentDirections.actionLabelDialogFragmentToConfirmationDialogFragment(
-                    confirmationText,
-                    descriptionText,
-                    btnText,
-                    clickListener,
+                findNavController().navigateSafely(
+                    LabelDialogFragmentDirections.actionLabelDialogFragmentToConfirmationDialogFragment(
+                        confirmationText,
+                        descriptionText,
+                        btnText,
+                        clickListener,
+                    )
                 )
-            )
+            }
         }
     }
-
 }

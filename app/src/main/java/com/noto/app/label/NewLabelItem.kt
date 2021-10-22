@@ -24,18 +24,20 @@ abstract class NewLabelItem : EpoxyModelWithHolder<NewLabelItem.Holder>() {
     lateinit var onClickListener: View.OnClickListener
 
     override fun bind(holder: Holder) = with(holder.binding) {
+        root.context?.let { context ->
+            val resourceColor = context.colorResource(color.toResource())
+            ibNewLabel.imageTintList = context.colorStateResource(color.toResource())
+            ibNewLabel.background = context.drawableResource(R.drawable.label_item_shape)
+                ?.mutate()
+                ?.let { it as RippleDrawable }
+                ?.let { it.getDrawable(0) as GradientDrawable }
+                ?.apply {
+                    setStroke(LabelDefaultStrokeWidth, resourceColor)
+                    cornerRadius = LabelDefaultCornerRadius
+                }
+                ?.toRippleDrawable(context)
+        }
         ibNewLabel.setOnClickListener(onClickListener)
-        val resourceColor = root.resources.colorResource(color.toResource())
-        ibNewLabel.imageTintList = root.resources.colorStateResource(color.toResource())
-        ibNewLabel.background = root.resources.drawableResource(R.drawable.label_item_shape)
-            ?.mutate()
-            ?.let { it as RippleDrawable }
-            ?.let { it.getDrawable(0) as GradientDrawable }
-            ?.apply {
-                setStroke(LabelDefaultStrokeWidth, resourceColor)
-                cornerRadius = LabelDefaultCornerRadius
-            }
-            ?.toRippleDrawable(root.resources)
     }
 
     class Holder : EpoxyHolder() {

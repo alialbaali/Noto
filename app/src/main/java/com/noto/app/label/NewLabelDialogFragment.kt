@@ -32,14 +32,17 @@ class NewLabelDialogFragment : BaseDialogFragment() {
         setupListeners()
     }
 
-    private fun NewLabelDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        if (args.labelId == 0L) {
-            tvDialogTitle.text = resources.stringResource(R.string.new_label)
-        } else {
-            tvDialogTitle.text = resources.stringResource(R.string.edit_label)
-            btnCreate.text = resources.stringResource(R.string.done)
+    private fun NewLabelDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
+        .apply {
+            context?.let { context ->
+                if (args.labelId == 0L) {
+                    tvDialogTitle.text = context.stringResource(R.string.new_label)
+                } else {
+                    tvDialogTitle.text = context.stringResource(R.string.edit_label)
+                    btnCreate.text = context.stringResource(R.string.done)
+                }
+            }
         }
-    }
 
     private fun NewLabelDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         et.requestFocus()
@@ -47,9 +50,11 @@ class NewLabelDialogFragment : BaseDialogFragment() {
 
         viewModel.library
             .onEach { library ->
-                val color = resources.colorResource(library.color.toResource())
-                baseDialogFragment.tvDialogTitle.setTextColor(color)
-                baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+                context?.let { context ->
+                    val color = context.colorResource(library.color.toResource())
+                    baseDialogFragment.tvDialogTitle.setTextColor(color)
+                    baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+                }
             }
             .launchIn(lifecycleScope)
 
@@ -66,7 +71,9 @@ class NewLabelDialogFragment : BaseDialogFragment() {
             val title = et.text.toString()
             if (title.isBlank()) {
                 til.isErrorEnabled = true
-                til.error = resources.stringResource(R.string.empty_title)
+                context?.let { context ->
+                    til.error = context.stringResource(R.string.empty_title)
+                }
             } else {
                 activity?.hideKeyboard(root)
                 dismiss()

@@ -26,7 +26,9 @@ class AboutDialogFragment : BaseDialogFragment() {
     }
 
     private fun AboutDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.about)
+        context?.let { context ->
+            tvDialogTitle.text = context.stringResource(R.string.about)
+        }
     }
 
     private fun AboutDialogFragmentBinding.setupState() {

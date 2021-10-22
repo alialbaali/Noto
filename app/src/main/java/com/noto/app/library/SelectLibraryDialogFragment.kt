@@ -37,9 +37,12 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
             setupState()
         }
 
-    private fun SelectLibraryDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.select_library)
-    }
+    private fun SelectLibraryDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
+        .apply {
+            context?.let { context ->
+                tvDialogTitle.text = context.stringResource(R.string.select_library)
+            }
+        }
 
     private fun SelectLibraryDialogFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
@@ -65,7 +68,9 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
             if (libraries.isEmpty()) {
                 placeholderItem {
                     id("placeholder")
-                    placeholder(resources.stringResource(R.string.no_libraries_found))
+                    context?.let { context ->
+                        placeholder(context.stringResource(R.string.no_libraries_found))
+                    }
                 }
             } else {
                 libraries.forEach { library ->

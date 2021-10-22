@@ -34,19 +34,20 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
     lateinit var onClickListener: View.OnClickListener
 
     override fun bind(holder: Holder) = with(holder.binding) {
-        val resources = root.resources
-        val color = resources.colorResource(notoColor.toResource())
-        tvSorting.text = when (sortingType) {
-            NoteListSortingType.Manual -> resources.stringResource(R.string.manual_sorting)
-            NoteListSortingType.CreationDate -> resources.stringResource(R.string.creation_date_sorting)
-            NoteListSortingType.Alphabetical -> resources.stringResource(R.string.alphabetical_sorting)
+        root.context?.let { context ->
+            val color = context.colorResource(notoColor.toResource())
+            tvLibraryNotesCount.text = context.pluralsResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
+            tvSorting.background?.mutate()?.setTint(ColorUtils.setAlphaComponent(color, 25))
+            tvSorting.compoundDrawables[0]?.mutate()?.setTint(color)
+            tvLibraryNotesCount.setTextColor(color)
+            tvSorting.setTextColor(color)
+            tvSorting.text = when (sortingType) {
+                NoteListSortingType.Manual -> context.stringResource(R.string.manual_sorting)
+                NoteListSortingType.CreationDate -> context.stringResource(R.string.creation_date_sorting)
+                NoteListSortingType.Alphabetical -> context.stringResource(R.string.alphabetical_sorting)
+            }
         }
         tvSorting.setOnClickListener(onClickListener)
-        tvLibraryNotesCount.text = resources.pluralsResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
-        tvSorting.background?.mutate()?.setTint(ColorUtils.setAlphaComponent(color, 25))
-        tvSorting.compoundDrawables[0]?.mutate()?.setTint(color)
-        tvLibraryNotesCount.setTextColor(color)
-        tvSorting.setTextColor(color)
     }
 
     override fun onViewAttachedToWindow(holder: Holder) {

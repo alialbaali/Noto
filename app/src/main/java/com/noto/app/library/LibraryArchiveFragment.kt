@@ -69,10 +69,12 @@ class LibraryArchiveFragment : Fragment() {
     }
 
     private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library) {
-        val color = resources.colorResource(library.color.toResource())
-        tb.navigationIcon?.mutate()?.setTint(color)
-        tb.title = resources.stringResource(R.string.archive, library.title)
-        tb.setTitleTextColor(color)
+        context?.let { context ->
+            val color = context.colorResource(library.color.toResource())
+            tb.navigationIcon?.mutate()?.setTint(color)
+            tb.title = context.stringResource(R.string.archive, library.title)
+            tb.setTitleTextColor(color)
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -114,13 +116,15 @@ class LibraryArchiveFragment : Fragment() {
                 }
             }
 
-            if (archivedNotes.isEmpty())
-                placeholderItem {
-                    id("placeholder")
-                    placeholder(resources.stringResource(R.string.archive_is_empty))
-                }
-            else
-                buildNotesModels(library, archivedNotes, resources, items)
+            context?.let { context ->
+                if (archivedNotes.isEmpty())
+                    placeholderItem {
+                        id("placeholder")
+                        placeholder(context.stringResource(R.string.archive_is_empty))
+                    }
+                else
+                    buildNotesModels(context, library, archivedNotes, items)
+            }
         }
     }
 }

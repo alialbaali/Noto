@@ -75,14 +75,16 @@ class MainFragment : Fragment() {
     }
 
     private fun MainFragmentBinding.setupLayoutManager(layout: Layout, layoutManagerMenuItem: MenuItem) {
-        when (layout) {
-            Layout.Linear -> {
-                layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_grid_24)
-                rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            }
-            Layout.Grid -> {
-                layoutManagerMenuItem.icon = resources.drawableResource(R.drawable.ic_round_view_agenda_24)
-                rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        context?.let { context ->
+            when (layout) {
+                Layout.Linear -> {
+                    layoutManagerMenuItem.icon = context.drawableResource(R.drawable.ic_round_view_grid_24)
+                    rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                }
+                Layout.Grid -> {
+                    layoutManagerMenuItem.icon = context.drawableResource(R.drawable.ic_round_view_agenda_24)
+                    rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                }
             }
         }
         rv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
@@ -134,34 +136,36 @@ class MainFragment : Fragment() {
             }
 
 
-            if (libraries.isEmpty()) {
-                placeholderItem {
-                    id("placeholder")
-                    placeholder(resources.stringResource(R.string.no_libraries_found))
-                }
-            } else {
-                val pinnedLibraries = libraries.filter { it.isPinned }
-                val notPinnedLibraries = libraries.filterNot { it.isPinned }
-
-                if (pinnedLibraries.isNotEmpty()) {
-                    tb.title = resources.stringResource(R.string.app_name)
-
-                    headerItem {
-                        id("pinned")
-                        title(resources.stringResource(R.string.pinned))
+            context?.let { context ->
+                if (libraries.isEmpty()) {
+                    placeholderItem {
+                        id("placeholder")
+                        placeholder(context.stringResource(R.string.no_libraries_found))
                     }
-
-                    items(pinnedLibraries)
-
-                    if (notPinnedLibraries.isNotEmpty())
-                        headerItem {
-                            id("libraries")
-                            title(resources.stringResource(R.string.libraries))
-                        }
                 } else {
-                    tb.title = resources.stringResource(R.string.libraries)
+                    val pinnedLibraries = libraries.filter { it.isPinned }
+                    val notPinnedLibraries = libraries.filterNot { it.isPinned }
+
+                    if (pinnedLibraries.isNotEmpty()) {
+                        tb.title = context.stringResource(R.string.app_name)
+
+                        headerItem {
+                            id("pinned")
+                            title(context.stringResource(R.string.pinned))
+                        }
+
+                        items(pinnedLibraries)
+
+                        if (notPinnedLibraries.isNotEmpty())
+                            headerItem {
+                                id("libraries")
+                                title(context.stringResource(R.string.libraries))
+                            }
+                    } else {
+                        tb.title = context.stringResource(R.string.libraries)
+                    }
+                    items(notPinnedLibraries)
                 }
-                items(notPinnedLibraries)
             }
         }
     }

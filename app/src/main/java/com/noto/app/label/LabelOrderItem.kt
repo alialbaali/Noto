@@ -30,19 +30,21 @@ abstract class LabelOrderItem : EpoxyModelWithHolder<LabelOrderItem.Holder>() {
     @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
         tvLabel.text = label.title
-        val resourceColor = root.resources.colorResource(color.toResource())
-        val backgroundColor = root.resources.colorResource(R.color.colorBackground)
-        tvLabel.background = root.resources.drawableResource(R.drawable.label_item_shape)
-            ?.mutate()
-            ?.let { it as RippleDrawable }
-            ?.let { it.getDrawable(0) as GradientDrawable }
-            ?.apply {
-                setStroke(LabelDefaultStrokeWidth, resourceColor)
-                cornerRadius = LabelDefaultCornerRadius
-                setColor(backgroundColor)
-            }
-            ?.toRippleDrawable(root.resources)
-        tvLabel.setTextColor(resourceColor)
+        root.context?.let { context ->
+            val resourceColor = context.colorResource(color.toResource())
+            val backgroundColor = context.colorResource(R.color.colorBackground)
+            tvLabel.background = root.context.drawableResource(R.drawable.label_item_shape)
+                ?.mutate()
+                ?.let { it as RippleDrawable }
+                ?.let { it.getDrawable(0) as GradientDrawable }
+                ?.apply {
+                    setStroke(LabelDefaultStrokeWidth, resourceColor)
+                    cornerRadius = LabelDefaultCornerRadius
+                    setColor(backgroundColor)
+                }
+                ?.toRippleDrawable(context)
+            tvLabel.setTextColor(resourceColor)
+        }
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
     }
 

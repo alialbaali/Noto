@@ -80,9 +80,9 @@ class NoteReadingModeFragment : Fragment() {
         tvNoteTitle.text = note.title
         tvNoteBody.text = note.body
         context?.let { context ->
-            tvCreatedAt.text = resources.stringResource(R.string.created, note.creationDate.format(context))
+            tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
+            tvWordCount.text = context.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
         }
-        tvWordCount.text = resources.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
         tvNoteTitle.isVisible = note.title.isNotBlank()
         tvNoteBody.isVisible = note.body.isNotBlank()
         tvNoteTitle.setBoldFont(font)
@@ -90,16 +90,18 @@ class NoteReadingModeFragment : Fragment() {
     }
 
     private fun NoteReadingModeFragmentBinding.setupLibrary(library: Library) {
-        val color = resources.colorResource(library.color.toResource())
-        tb.title = library.title
-        tb.setTitleTextColor(color)
-        tvCreatedAt.setTextColor(color)
-        tvWordCount.setTextColor(color)
-        tvNoteTitle.setLinkTextColor(color)
-        tvNoteBody.setLinkTextColor(color)
-        tb.navigationIcon?.mutate()?.setTint(color)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            nsv.verticalScrollbarThumbDrawable?.mutate()?.setTint(color)
+        context?.let { context ->
+            val color = context.colorResource(library.color.toResource())
+            tb.title = library.title
+            tb.setTitleTextColor(color)
+            tvCreatedAt.setTextColor(color)
+            tvWordCount.setTextColor(color)
+            tvNoteTitle.setLinkTextColor(color)
+            tvNoteBody.setLinkTextColor(color)
+            tb.navigationIcon?.mutate()?.setTint(color)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                nsv.verticalScrollbarThumbDrawable?.mutate()?.setTint(color)
+            }
         }
     }
 }

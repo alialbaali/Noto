@@ -37,11 +37,13 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         }
 
     private fun NewLibraryDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        if (args.libraryId == 0L) {
-            tvDialogTitle.text = resources.stringResource(R.string.new_library)
-        } else {
-            tvDialogTitle.text = resources.stringResource(R.string.edit_library)
-            btnCreate.text = resources.stringResource(R.string.done)
+        context?.let { context ->
+            if (args.libraryId == 0L) {
+                tvDialogTitle.text = context.stringResource(R.string.new_library)
+            } else {
+                tvDialogTitle.text = context.stringResource(R.string.edit_library)
+                btnCreate.text = context.stringResource(R.string.done)
+            }
         }
     }
 
@@ -69,7 +71,9 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             val title = et.text.toString()
             if (title.isBlank()) {
                 til.isErrorEnabled = true
-                til.error = resources.stringResource(R.string.empty_title)
+                context?.let { context ->
+                    til.error = context.stringResource(R.string.empty_title)
+                }
             } else {
                 activity?.hideKeyboard(root)
                 dismiss()
@@ -105,39 +109,41 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         )
         swShowNoteCreationDate.isChecked = library.isShowNoteCreationDate
         swSetNewNoteCursor.isChecked = library.isSetNewNoteCursorOnTitle
-        val switchOffColor = ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorSecondary), 128)
-        if (library.id != 0L) {
-            val color = resources.colorResource(library.color.toResource())
-            val colorStateList = resources.colorStateResource(library.color.toResource())
-            baseDialogFragment.tvDialogTitle.setTextColor(color)
-            baseDialogFragment.vHead.background?.mutate()?.setTint(color)
-            tlLibraryLayout.setSelectedTabIndicatorColor(color)
-            if (colorStateList != null) {
-                tlLibraryLayout.tabRippleColor = colorStateList
-                sNotePreviewSize.value = library.notePreviewSize.toFloat()
-                sNotePreviewSize.trackActiveTintList = colorStateList
-                sNotePreviewSize.thumbTintList = colorStateList
-                sNotePreviewSize.tickInactiveTintList = colorStateList
-                val switchThumbTintList = ColorStateList(state, intArrayOf(color, resources.colorResource(R.color.colorSurface)))
-                val switchTrackTintList = ColorStateList(state, intArrayOf(ColorUtils.setAlphaComponent(color, 128), switchOffColor))
+        context?.let { context ->
+            val switchOffColor = ColorUtils.setAlphaComponent(context.colorResource(R.color.colorSecondary), 128)
+            if (library.id != 0L) {
+                val color = context.colorResource(library.color.toResource())
+                val colorStateList = context.colorStateResource(library.color.toResource())
+                baseDialogFragment.tvDialogTitle.setTextColor(color)
+                baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+                tlLibraryLayout.setSelectedTabIndicatorColor(color)
+                if (colorStateList != null) {
+                    tlLibraryLayout.tabRippleColor = colorStateList
+                    sNotePreviewSize.value = library.notePreviewSize.toFloat()
+                    sNotePreviewSize.trackActiveTintList = colorStateList
+                    sNotePreviewSize.thumbTintList = colorStateList
+                    sNotePreviewSize.tickInactiveTintList = colorStateList
+                    val switchThumbTintList = ColorStateList(state, intArrayOf(color, context.colorResource(R.color.colorSurface)))
+                    val switchTrackTintList = ColorStateList(state, intArrayOf(ColorUtils.setAlphaComponent(color, 128), switchOffColor))
+                    swShowNoteCreationDate.thumbTintList = switchThumbTintList
+                    swShowNoteCreationDate.trackTintList = switchTrackTintList
+                    swSetNewNoteCursor.thumbTintList = switchThumbTintList
+                    swSetNewNoteCursor.trackTintList = switchTrackTintList
+                }
+            } else {
+                val switchThumbTintList = ColorStateList(
+                    state,
+                    intArrayOf(context.colorResource(R.color.colorPrimary), context.colorResource(R.color.colorSurface))
+                )
+                val switchTrackTintList = ColorStateList(
+                    state,
+                    intArrayOf(ColorUtils.setAlphaComponent(context.colorResource(R.color.colorPrimary), 128), switchOffColor)
+                )
                 swShowNoteCreationDate.thumbTintList = switchThumbTintList
                 swShowNoteCreationDate.trackTintList = switchTrackTintList
                 swSetNewNoteCursor.thumbTintList = switchThumbTintList
                 swSetNewNoteCursor.trackTintList = switchTrackTintList
             }
-        } else {
-            val switchThumbTintList = ColorStateList(
-                state,
-                intArrayOf(resources.colorResource(R.color.colorPrimary), resources.colorResource(R.color.colorSurface))
-            )
-            val switchTrackTintList = ColorStateList(
-                state,
-                intArrayOf(ColorUtils.setAlphaComponent(resources.colorResource(R.color.colorPrimary), 128), switchOffColor)
-            )
-            swShowNoteCreationDate.thumbTintList = switchThumbTintList
-            swShowNoteCreationDate.trackTintList = switchTrackTintList
-            swSetNewNoteCursor.thumbTintList = switchThumbTintList
-            swSetNewNoteCursor.trackTintList = switchTrackTintList
         }
     }
 

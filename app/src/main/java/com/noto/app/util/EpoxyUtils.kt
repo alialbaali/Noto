@@ -1,5 +1,6 @@
 package com.noto.app.util
 
+import android.content.Context
 import android.content.res.Resources
 import com.airbnb.epoxy.EpoxyController
 import com.noto.app.R
@@ -9,9 +10,9 @@ import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 
 inline fun EpoxyController.buildNotesModels(
+    context: Context,
     library: Library,
     notes: List<Pair<Note, List<Label>>>,
-    resources: Resources,
     items: (List<Pair<Note, List<Label>>>) -> Unit,
 ) {
     when (library.grouping) {
@@ -22,7 +23,7 @@ inline fun EpoxyController.buildNotesModels(
             if (pinnedNotes.isNotEmpty()) {
                 headerItem {
                     id("pinned")
-                    title(resources.stringResource(R.string.pinned))
+                    title(context.stringResource(R.string.pinned))
                 }
 
                 items(pinnedNotes)
@@ -30,7 +31,7 @@ inline fun EpoxyController.buildNotesModels(
                 if (notPinnedNotes.isNotEmpty())
                     headerItem {
                         id("notes")
-                        title(resources.stringResource(R.string.notes))
+                        title(context.stringResource(R.string.notes))
                     }
             }
             items(notPinnedNotes)
@@ -49,7 +50,7 @@ inline fun EpoxyController.buildNotesModels(
                 if (labels.isEmpty())
                     headerItem {
                         id("without_label")
-                        title(resources.stringResource(R.string.without_label))
+                        title(context.stringResource(R.string.without_label))
                     }
                 else
                     headerItem {

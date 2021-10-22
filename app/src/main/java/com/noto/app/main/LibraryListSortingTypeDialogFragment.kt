@@ -27,7 +27,9 @@ class LibraryListSortingTypeDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?
     ): View = LibraryListSortingTypeDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.sorting_type)
+            context?.let { context ->
+                tvDialogTitle.text = context.stringResource(R.string.sorting_type)
+            }
         }
 
         viewModel.sortingType

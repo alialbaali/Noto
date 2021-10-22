@@ -39,9 +39,12 @@ class LibraryDialogFragment : BaseDialogFragment() {
             setupState(baseDialogFragment)
         }
 
-    private fun LibraryDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = resources.stringResource(R.string.library_options)
-    }
+    private fun LibraryDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
+        .apply {
+            context?.let { context ->
+                tvDialogTitle.text = context.stringResource(R.string.library_options)
+            }
+        }
 
     private fun LibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         viewModel.library
@@ -75,7 +78,9 @@ class LibraryDialogFragment : BaseDialogFragment() {
             else
                 R.string.library_is_archived
 
-            parentView?.snackbar(resources.stringResource(resource), parentAnchorView)
+            context?.let { context ->
+                parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+            }
         }
 
         tvPinLibrary.setOnClickListener {
@@ -87,56 +92,63 @@ class LibraryDialogFragment : BaseDialogFragment() {
             else
                 R.string.library_is_pinned
 
-            parentView?.snackbar(resources.stringResource(resource), parentAnchorView)
+            context?.let { context ->
+                parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+            }
         }
 
         tvDeleteLibrary.setOnClickListener {
-            val confirmationText = resources.stringResource(R.string.delete_library_confirmation)
-            val descriptionText = resources.stringResource(R.string.delete_library_description)
-            val btnText = resources.stringResource(R.string.delete_library)
-            val clickListener = setupConfirmationDialogClickListener()
+            context?.let { context ->
+                val confirmationText = context.stringResource(R.string.delete_library_confirmation)
+                val descriptionText = context.stringResource(R.string.delete_library_description)
+                val btnText = context.stringResource(R.string.delete_library)
+                val clickListener = setupConfirmationDialogClickListener()
 
-            findNavController().navigateSafely(
-                LibraryDialogFragmentDirections.actionLibraryDialogFragmentToConfirmationDialogFragment(
-                    confirmationText,
-                    descriptionText,
-                    btnText,
-                    clickListener,
+                findNavController().navigateSafely(
+                    LibraryDialogFragmentDirections.actionLibraryDialogFragmentToConfirmationDialogFragment(
+                        confirmationText,
+                        descriptionText,
+                        btnText,
+                        clickListener,
+                    )
                 )
-            )
+            }
         }
     }
 
     private fun LibraryDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
-        val color = resources.colorResource(library.color.toResource())
-        val colorState = resources.colorStateResource(library.color.toResource())
-        baseDialogFragment.vHead.background?.mutate()?.setTint(color)
-        baseDialogFragment.tvDialogTitle.setTextColor(color)
-        listOf(tvEditLibrary, tvArchiveLibrary, tvPinLibrary, tvNewNoteShortcut, tvDeleteLibrary)
-            .forEach { TextViewCompat.setCompoundDrawableTintList(it, colorState) }
+        context?.let { context ->
+            val color = context.colorResource(library.color.toResource())
+            val colorState = context.colorStateResource(library.color.toResource())
+            baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+            baseDialogFragment.tvDialogTitle.setTextColor(color)
+            listOf(tvEditLibrary, tvArchiveLibrary, tvPinLibrary, tvNewNoteShortcut, tvDeleteLibrary)
+                .forEach { TextViewCompat.setCompoundDrawableTintList(it, colorState) }
 
-        if (library.isArchived) {
-            tvArchiveLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
-            tvArchiveLibrary.text = resources.stringResource(R.string.unarchive_library)
-        } else {
-            tvArchiveLibrary.text = resources.stringResource(R.string.archive_library)
-            tvArchiveLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
-        }
+            if (library.isArchived) {
+                tvArchiveLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
+                tvArchiveLibrary.text = context.stringResource(R.string.unarchive_library)
+            } else {
+                tvArchiveLibrary.text = context.stringResource(R.string.archive_library)
+                tvArchiveLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
+            }
 
-        if (library.isPinned) {
-            tvPinLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
-            tvPinLibrary.text = resources.stringResource(R.string.unpin_library)
-        } else {
-            tvPinLibrary.text = resources.stringResource(R.string.pin_library)
-            tvPinLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
+            if (library.isPinned) {
+                tvPinLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
+                tvPinLibrary.text = context.stringResource(R.string.unpin_library)
+            } else {
+                tvPinLibrary.text = context.stringResource(R.string.pin_library)
+                tvPinLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
+            }
         }
     }
 
     private fun setupConfirmationDialogClickListener() = ConfirmationDialogFragment.ConfirmationDialogClickListener {
         val parentView = parentFragment?.view
         val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
-        parentView?.snackbar(resources.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
-
+        context?.let { context ->
+            parentView?.snackbar(context.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
+        }
         findNavController().popBackStack(R.id.mainFragment, false)
         dismiss()
 

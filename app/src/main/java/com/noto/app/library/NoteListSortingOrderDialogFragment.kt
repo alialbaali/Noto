@@ -30,17 +30,21 @@ class NoteListSortingOrderDialogFragment : BaseDialogFragment() {
     ): View = NoteListSortingOrderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
-            tvDialogTitle.text = resources.stringResource(R.string.sorting_order)
+            context?.let { context ->
+                tvDialogTitle.text = context.stringResource(R.string.sorting_order)
+            }
         }
 
         viewModel.library
             .onEach { library ->
-                val color = resources.colorResource(library.color.toResource())
-                val colorStateList = resources.colorStateResource(library.color.toResource())
-                baseDialog.tvDialogTitle.setTextColor(color)
-                baseDialog.vHead.background?.mutate()?.setTint(color)
-                rbSortingAsc.buttonTintList = colorStateList
-                rbSortingDesc.buttonTintList = colorStateList
+                context?.let { context ->
+                    val color = context.colorResource(library.color.toResource())
+                    val colorStateList = context.colorStateResource(library.color.toResource())
+                    baseDialog.tvDialogTitle.setTextColor(color)
+                    baseDialog.vHead.background?.mutate()?.setTint(color)
+                    rbSortingAsc.buttonTintList = colorStateList
+                    rbSortingDesc.buttonTintList = colorStateList
+                }
                 when (library.sortingOrder) {
                     SortingOrder.Ascending -> rbSortingAsc.isChecked = true
                     SortingOrder.Descending -> rbSortingDesc.isChecked = true
