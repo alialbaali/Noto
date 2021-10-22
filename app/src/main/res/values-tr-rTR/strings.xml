@@ -25,14 +25,26 @@
     <string name="settings">Ayarlar</string>
     <string name="view_code">Kodu Github\'da görüntüle</string>
     <string name="change_notes_font">Not yazı tipini değiştir</string>
-    <string name="share_app_with_others">Uygulamayı başkalarıyla paylaş</string>
-    <string name="rate_app_on_play_store">Uygulamayı Play Store\'da puanla</string>
+    <string name="share_app_with_others">Başkalarıyla paylaş</string>
+    <string name="rate_app_on_play_store">Play Store\'da puanla</string>
     <string name="report_issue">Sorun bildir</string>
     <string name="about">Hakkında</string>
-    <string name="about_message">Noto <a href="https://www.alialbaali.com/">Ali Albaali</a> tarafından geliştirilen bir uygulamadır.\n\nUygulama <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Lisansı 2.0</a> koşulları altında dağıtılmaktadır.\n\nTürkçe yerelleştirme için <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> ve <a href="https://sakci.me">Alparslan Şakçi</a>\'ye, ayrıca geliştirme sürecinde emeği geçen diğer herkese teşekkürler.</string>
+    <string name="about_message">Noto <a href="https://www.alialbaali.com/">Ali Albaali</a> tarafından geliştirilen bir uygulamadır.\n\nUygulama <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Lisansı 2.0</a> koşulları altında dağıtılmaktadır.\n\nTürkçe yerelleştirme için <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> ve <a href="https://sakci.me/tr">Alparslan Şakçi</a>\'ye, ayrıca geliştirme sürecinde emeği geçen herkese teşekkürler.</string>
     <string name="share_with">Paylaşılacak uygulama</string>
+    <string name="export_import_data">Verileri içe/dışa aktar</string>
+    <string name="exporting_failed">Dışa aktarma başarısız.</string>
+    <string name="importing_failed">İçe aktarma başarısız.</string>
+    <string name="data_is_exported">Veriler başarıyla %s dizinine aktarıldı</string>
+    <string name="data_is_imported">Veriler başarıyla içe aktarıldı.</string>
+    <string name="export_data">Verileri dışa aktar</string>
+    <string name="import_data">Verileri içe aktar</string>
+    <string name="importing_data">Veriler içe aktarılıyor…</string>
+    <string name="exporting_data">Veriler dışa aktarılıyor…</string>
+    <string name="create_file_failed">Dosya oluşturma başarısız.</string>
+    <string name="no_folder_is_selected">Seçili bir klasör yok.</string>
+    <string name="no_file_is_selected">Seçili bir dosya yok.</string>
     <!-- Open with an app such as Signal -->
-    <string name="open_with">Başka bir uygulamayla aç</string>
+    <string name="open_with">Açılacak uygulama</string>
     <string name="invite_text">Noto\'ya göz at!</string>
     <string name="version">Sürüm: %s</string>
     <string name="layout_is_list_mode">Düzen tek sütun olarak ayarlandı.</string>
@@ -56,8 +68,6 @@
     <string name="archive_library">Kitaplığı arşivle</string>
     <string name="unarchive_library">Kitaplığı arşivden çıkar</string>
     <string name="add_new_note_shortcut">Yeni not kısayolu ekle</string>
-    <string name="export_library">Kitaplığı dışa aktar</string>
-    <string name="library_is_exported">Kitaplık başarıyla %s dizinine aktarıldı</string>
     <string name="delete_library_description">Bu işlem geri alınamaz. Kitaplık ve içindeki her şey kalıcı olarak silinecektir.</string>
     <string name="library_title">Kitaplık başlığı</string>
     <string name="library_color">Kitaplık rengi</string>
@@ -67,12 +77,11 @@
     <string name="change_libraries_sorting">Kitaplık sıralamasını değiştir</string>
     <string name="empty_title">Başlık boş bırakılamaz.</string>
     <string name="library_is_deleted">Kitaplık silindi.</string>
-    <string name="library_is_empty">Kitaplık boş.</string>
     <string name="library_is_archived">Kitaplık arşivlendi.</string>
     <string name="library_is_unarchived">Kitaplık arşivden çıkarıldı.</string>
     <string name="library_is_pinned">Kitaplık sabitlendi.</string>
     <string name="library_is_unpinned">Sabitleme kaldırıldı.</string>
-    <string name="no_libraries">Kitaplık bulunamadı. Bir kitaplık oluşturmak için + ikonuna tıklayın.</string>
+    <string name="no_libraries_found">Kitaplık bulunamadı. Bir kitaplık oluşturmak için + düğmesine tıklayın.</string>
     <string name="select_library">Kitaplık seç</string>
     <string name="pinned">Sabitlenmiş</string>
     <string name="pin_library">Kitaplığı sabitle</string>
@@ -94,14 +103,14 @@
     <string name="delete_note">Notu sil</string>
     <string name="archive_note">Notu arşivle</string>
     <string name="duplicate_note">Notu çoğalt</string>
-    <string name="sorting">Sıralama</string>
-    <string name="sorting_and_grouping">Sıralama &amp; Gruplandırma</string>
+    <string name="sorting_type">Sıralama türü</string>
+    <string name="notes_sorting">Not sıralaması</string>
     <string name="grouping">Gruplandırma</string>
     <string name="sorting_order">Sıralama düzeni</string>
     <string name="save_to_noto">Noto\'ya kaydet</string>
+    <string name="no_notes_found">Not bulunamadı.</string>
     <string name="unarchive_note">Notu arşivden çıkar</string>
     <string name="notes">Notlar</string>
-    <string name="no_note_matches_search_term">Aramanızla eşleşen bir not yok.</string>
     <string name="note_is_archived">Not arşivlendi.</string>
     <string name="note_is_pinned">Not sabitlendi.</string>
     <string name="note_is_unpinned">Sabitleme kaldırıldı.</string>
@@ -109,15 +118,13 @@
     <string name="note_is_unarchived">Not arşivden çıkarıldı.</string>
     <string name="reminder">Hatırlatıcı</string>
     <string name="new_note_reminder">Yeni hatırlatıcı</string>
-    <string name="archive">Arşiv</string>
+    <string name="archive">%s arşivi</string>
     <string name="copy_note_to_clipboard">Panoya kopyala</string>
     <string name="copy_note_to">Notu kopyala</string>
     <string name="note_is_copied">Not kopyalandı.</string>
     <string name="note_copied_to_clipboard">Not panoya kopyalandı.</string>
     <string name="delete_note_confirmation">Bu notu silmek istediğinizden emin misiniz?</string>
     <string name="share_note">Notu paylaş</string>
-    <string name="export_note">Notu dışa aktar</string>
-    <string name="note_is_exported">Not başarıyla %s dizinine aktarıldı</string>
     <string name="add_note_reminder">Hatırlatıcı ekle</string>
     <string name="delete_note_description">Bu işlem geri alınamaz. Not ve hatırlatıcı kalıcı olarak silinecektir.</string>
     <string name="pin_note">Notu sabitle</string>
@@ -131,7 +138,7 @@
     <string name="note_is_moved">Not taşındı.</string>
     <string name="note_preview_size">Not önizleme boyutu</string>
     <string name="show_note_creation_date">Not oluşturma tarihini göster</string>
-    <string name="show_libraries_notes_count">Kitaplıktaki not sayısını göster</string>
+    <string name="show_libraries_notes_count">Not sayısını göster</string>
     <!-- Label -->
     <string name="reorder_label">Etiketleri yeniden sırala</string>
     <string name="create_label">Etiket oluştur</string>
