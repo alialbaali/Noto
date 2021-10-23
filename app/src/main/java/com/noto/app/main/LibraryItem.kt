@@ -1,6 +1,7 @@
 package com.noto.app.main
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -52,6 +53,10 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
             tvLibraryTitle.setTextColor(color)
             tvLibraryNotesCount.setTextColor(color)
             ibDrag.drawable?.mutate()?.setTint(color)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                root.outlineAmbientShadowColor = color
+                root.outlineSpotShadowColor = color
+            }
         }
         tvLibraryTitle.text = library.title
         ibDrag.isVisible = isManualSorting
