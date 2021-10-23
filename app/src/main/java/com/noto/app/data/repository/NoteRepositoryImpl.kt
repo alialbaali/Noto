@@ -6,6 +6,8 @@ import com.noto.app.domain.source.LocalNoteDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 
 class NoteRepositoryImpl(
@@ -22,7 +24,8 @@ class NoteRepositoryImpl(
     override fun getNoteById(noteId: Long): Flow<Note> = dataSource.getNoteById(noteId)
 
     override suspend fun createNote(note: Note) = withContext(dispatcher) {
-        dataSource.createNote(note)
+        val position = getNotePosition(note.libraryId)
+        dataSource.createNote(note.copy(position = position))
     }
 
     override suspend fun updateNote(note: Note) = withContext(dispatcher) {
@@ -38,4 +41,9 @@ class NoteRepositoryImpl(
     }
 
     override suspend fun clearNotes() = dataSource.clearNotes()
+
+    private suspend fun getNotePosition(libraryId: Long) = dataSource.getNotesByLibraryId(libraryId)
+        .filterNotNull()
+        .first()
+        .count()
 }

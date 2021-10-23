@@ -6,6 +6,8 @@ import com.noto.app.domain.source.LocalLibraryDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 
 class LibraryRepositoryImpl(
@@ -22,7 +24,8 @@ class LibraryRepositoryImpl(
     override fun getLibraryById(libraryId: Long): Flow<Library> = dataSource.getLibraryById(libraryId)
 
     override suspend fun createLibrary(library: Library) = withContext(dispatcher) {
-        dataSource.createLibrary(library)
+        val position = getLibraryPosition()
+        dataSource.createLibrary(library.copy(position = position))
     }
 
     override suspend fun updateLibrary(library: Library) = withContext(dispatcher) {
@@ -34,4 +37,9 @@ class LibraryRepositoryImpl(
     }
 
     override suspend fun clearLibraries() = dataSource.clearLibraries()
+
+    private suspend fun getLibraryPosition() = dataSource.getLibraries()
+        .filterNotNull()
+        .first()
+        .count()
 }

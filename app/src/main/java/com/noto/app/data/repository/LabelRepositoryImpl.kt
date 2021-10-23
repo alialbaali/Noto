@@ -6,6 +6,8 @@ import com.noto.app.domain.source.LocalLabelDataSource
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 
 class LabelRepositoryImpl(
@@ -20,7 +22,8 @@ class LabelRepositoryImpl(
     override fun getLabelById(id: Long): Flow<Label> = dataSource.getLabelById(id)
 
     override suspend fun createLabel(label: Label) = withContext(dispatcher) {
-        dataSource.createLabel(label.copy(title = label.title.trim()))
+        val position = getLabelPosition(label.libraryId)
+        dataSource.createLabel(label.copy(position = position))
     }
 
     override suspend fun updateLabel(label: Label) = withContext(dispatcher) {
@@ -30,4 +33,9 @@ class LabelRepositoryImpl(
     override suspend fun deleteLabel(label: Label) = withContext(dispatcher) {
         dataSource.deleteLabel(label)
     }
+
+    private suspend fun getLabelPosition(libraryId: Long) = dataSource.getLabelsByLibraryId(libraryId)
+        .filterNotNull()
+        .first()
+        .count()
 }

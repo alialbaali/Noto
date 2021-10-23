@@ -6,7 +6,10 @@ import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.repository.LibraryRepository
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class LabelViewModel(
@@ -27,13 +30,6 @@ class LabelViewModel(
 
     val label = labelRepository.getLabelById(labelId)
         .filterNotNull()
-        .onStart {
-            val position = labelRepository.getLabelsByLibraryId(libraryId)
-                .filterNotNull()
-                .first()
-                .count()
-            emit(Label(labelId, libraryId, position = position))
-        }
         .stateIn(viewModelScope, SharingStarted.Lazily, Label(labelId, libraryId))
 
     fun createOrUpdateLabel(title: String) = viewModelScope.launch {
