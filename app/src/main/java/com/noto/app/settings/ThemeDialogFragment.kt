@@ -39,18 +39,18 @@ class ThemeDialogFragment : BaseDialogFragment() {
 
     private fun ThemeDialogFragmentBinding.setupListeners() {
         rbSystemTheme.setOnClickListener {
-            dismiss()
             viewModel.updateTheme(Theme.System)
+            dismiss()
         }
 
         rbLightTheme.setOnClickListener {
-            dismiss()
             viewModel.updateTheme(Theme.Light)
+            dismiss()
         }
 
         rbDarkTheme.setOnClickListener {
-            dismiss()
             viewModel.updateTheme(Theme.Dark)
+            dismiss()
         }
     }
 

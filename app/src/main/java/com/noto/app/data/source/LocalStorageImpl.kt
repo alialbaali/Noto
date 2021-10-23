@@ -1,7 +1,9 @@
 package com.noto.app.data.source
 
-import androidx.datastore.DataStore
-import androidx.datastore.preferences.*
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.noto.app.domain.source.LocalStorage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -17,17 +19,17 @@ class LocalStorageImpl(private val storage: DataStore<Preferences>) : LocalStora
         }
 
     override fun get(key: String): Flow<String> = storage.data
-        .mapNotNull { preferences -> preferences[preferencesKey(key)] }
+        .mapNotNull { preferences -> preferences[stringPreferencesKey(key)] }
 
     override fun getOrNull(key: String): Flow<String?> = storage.data
-        .map { preferences -> preferences[preferencesKey(key)] }
+        .map { preferences -> preferences[stringPreferencesKey(key)] }
 
     override suspend fun put(key: String, value: String) {
-        storage.edit { preferences -> preferences[preferencesKey(key)] = value }
+        storage.edit { preferences -> preferences[stringPreferencesKey(key)] = value }
     }
 
     override suspend fun remove(key: String) {
-        storage.edit { preferences -> preferences.remove(preferencesKey(key)) }
+        storage.edit { preferences -> preferences.remove(stringPreferencesKey(key)) }
     }
 
     override suspend fun clear() {

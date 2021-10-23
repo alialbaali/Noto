@@ -51,18 +51,18 @@ class LanguageDialogFragment : BaseDialogFragment() {
 
     fun LanguageDialogFragmentBinding.setupListeners() {
         rbSystem.setOnClickListener {
-            dismiss()
             viewModel.updateLanguage(Language.System)
+            dismiss()
         }
 
         rbEnglish.setOnClickListener {
-            dismiss()
             viewModel.updateLanguage(Language.English)
+            dismiss()
         }
 
         rbTurkish.setOnClickListener {
-            dismiss()
             viewModel.updateLanguage(Language.Turkish)
+            dismiss()
         }
     }
 }

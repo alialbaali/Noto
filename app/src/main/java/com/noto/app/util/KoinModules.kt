@@ -1,8 +1,9 @@
 package com.noto.app.util
 
-import androidx.datastore.DataStore
-import androidx.datastore.preferences.Preferences
-import androidx.datastore.preferences.createDataStore
+import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import com.noto.app.AppViewModel
 import com.noto.app.data.database.NotoDatabase
 import com.noto.app.data.repository.LabelRepositoryImpl
@@ -25,6 +26,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 private const val DataStoreName = "Noto Data Store"
+private val Context.dataStore by preferencesDataStore(name = DataStoreName)
 
 val appModule = module {
 
@@ -63,7 +65,7 @@ val localDataSourceModule = module {
 
     single<LocalNoteLabelDataSource> { NotoDatabase.getInstance(androidContext()).noteLabelDao }
 
-    single<DataStore<Preferences>> { androidContext().createDataStore(DataStoreName) }
+    single<DataStore<Preferences>> { androidContext().dataStore }
 
     single<LocalStorage> { LocalStorageImpl(get()) }
 

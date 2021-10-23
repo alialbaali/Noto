@@ -10,7 +10,6 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryListSortingTypeDialogFragmentBinding
 import com.noto.app.domain.model.LibraryListSortingType
-import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -43,17 +42,16 @@ class LibraryListSortingTypeDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
 
         rbManual.setOnClickListener {
-            dismiss()
             viewModel.updateSortingType(LibraryListSortingType.Manual)
-            viewModel.updateSortingOrder(SortingOrder.Ascending)
+                .invokeOnCompletion { dismiss() }
         }
         rbCreationDate.setOnClickListener {
-            dismiss()
             viewModel.updateSortingType(LibraryListSortingType.CreationDate)
+            dismiss()
         }
         rbAlphabetical.setOnClickListener {
-            dismiss()
             viewModel.updateSortingType(LibraryListSortingType.Alphabetical)
+            dismiss()
         }
     }
 }

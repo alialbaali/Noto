@@ -47,13 +47,13 @@ class FontDialogFragment : BaseDialogFragment() {
 
     private fun FontDialogFragmentBinding.setupListeners() {
         rbNunito.setOnClickListener {
-            dismiss()
             viewModel.updateFont(Font.Nunito)
+            dismiss()
         }
 
         rbMonospace.setOnClickListener {
-            dismiss()
             viewModel.updateFont(Font.Monospace)
+            dismiss()
         }
     }
 }

@@ -41,12 +41,12 @@ class LibraryListSortingOrderDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
 
         rbSortingAsc.setOnClickListener {
-            dismiss()
             viewModel.updateSortingOrder(SortingOrder.Ascending)
+            dismiss()
         }
         rbSortingDesc.setOnClickListener {
-            dismiss()
             viewModel.updateSortingOrder(SortingOrder.Descending)
+            dismiss()
         }
     }
 }

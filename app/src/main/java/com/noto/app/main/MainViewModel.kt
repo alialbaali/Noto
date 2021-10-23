@@ -59,6 +59,8 @@ class MainViewModel(
 
     fun updateSortingType(value: LibraryListSortingType) = viewModelScope.launch {
         storage.put(Constants.LibraryListSortingTypeKey, value.toString())
+        if (value == LibraryListSortingType.Manual)
+            updateSortingOrder(SortingOrder.Ascending)
     }
 
     fun updateSortingOrder(value: SortingOrder) = viewModelScope.launch {
