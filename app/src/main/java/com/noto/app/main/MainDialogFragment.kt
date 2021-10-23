@@ -33,11 +33,6 @@ class MainDialogFragment : BaseDialogFragment() {
             findNavController().navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainArchiveFragment())
         }
 
-        tvChangeLibrarySorting.setOnClickListener {
-            dismiss()
-            findNavController().navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToLibraryListSortingDialogFragment())
-        }
-
         tvChangeTheme.setOnClickListener {
             dismiss()
             findNavController().navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToThemeDialogFragment())
