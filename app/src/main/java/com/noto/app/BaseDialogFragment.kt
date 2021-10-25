@@ -18,4 +18,10 @@ open class BaseDialogFragment : BottomSheetDialogFragment() {
             }
         }
     }
+
+    @Suppress("DEPRECATION")
+    override fun onResume() {
+        super.onResume()
+        dialog?.window?.decorView?.systemUiVisibility = 0
+    }
 }
