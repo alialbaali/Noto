@@ -1,11 +1,10 @@
 package com.noto.app.note
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
 import androidx.core.content.pm.ShortcutInfoCompat
@@ -69,7 +68,6 @@ class NoteFragment : Fragment() {
         viewModel.note
             .onEach { note ->
                 setupShortcut(note)
-                nsv.isFillViewport = note.id != 0L
                 context?.let { context ->
                     tvWordCount.text = context.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
                     fab.setImageDrawable(
@@ -173,6 +171,7 @@ class NoteFragment : Fragment() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private fun NoteFragmentBinding.setupListeners() {
         fab.setOnClickListener {
             findNavController()
@@ -222,6 +221,19 @@ class NoteFragment : Fragment() {
                 }
                 else -> false
             }
+        }
+
+        val nsvClickListener = object : GestureDetector.SimpleOnGestureListener() {
+            override fun onSingleTapUp(e: MotionEvent?): Boolean {
+                etNoteBody.requestFocus()
+                etNoteBody.showKeyboardUsingImm()
+                return super.onSingleTapUp(e)
+            }
+        }
+        val gestureDetector = GestureDetector(requireContext(), nsvClickListener)
+        nsv.setOnTouchListener { v, event ->
+            gestureDetector.onTouchEvent(event)
+            v.performClick()
         }
     }
 
