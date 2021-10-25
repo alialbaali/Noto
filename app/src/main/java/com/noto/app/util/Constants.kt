@@ -3,9 +3,7 @@ package com.noto.app.util
 object Constants {
     const val ThemeKey = "Theme"
     const val FontKey = "Font"
-    const val LibraryListLayoutManagerKey = "Library_List_Layout_Manager" // Remove this after two releases
     const val LibraryListLayoutKey = "Library_List_Layout"
-    const val LibraryListSortingKey = "Library_List_Sorting"
     const val LibraryListSortingTypeKey = "Library_List_Sorting_Type"
     const val LibraryListSortingOrderKey = "Library_List_Sorting_Order"
     const val ShowNotesCountKey = "Show_Notes_Count"

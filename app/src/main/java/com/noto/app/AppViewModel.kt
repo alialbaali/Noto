@@ -63,10 +63,7 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
         launch {
             storage.getOrNull(Constants.LibraryListSortingTypeKey)
                 .firstOrNull()
-                .also {
-                    val currentSortingType = storage.getOrNull(Constants.LibraryListSortingKey).firstOrNull()
-                    if (it == null) storage.put(Constants.LibraryListSortingTypeKey, currentSortingType ?: LibraryListSortingType.CreationDate.toString())
-                }
+                .also { if (it == null) storage.put(Constants.LibraryListSortingTypeKey, LibraryListSortingType.CreationDate.toString()) }
         }
 
         launch {
@@ -78,11 +75,7 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
         launch {
             storage.getOrNull(Constants.LibraryListLayoutKey)
                 .firstOrNull()
-                .also {
-                    val currentLayout = storage.getOrNull(Constants.LibraryListLayoutManagerKey).firstOrNull()
-                    if (it == null)
-                        storage.put(Constants.LibraryListLayoutKey, currentLayout ?: Layout.Grid.toString())
-                }
+                .also { if (it == null) storage.put(Constants.LibraryListLayoutKey, Layout.Grid.toString()) }
         }
 
         launch {
