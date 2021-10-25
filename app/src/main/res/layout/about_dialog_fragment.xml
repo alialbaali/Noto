@@ -16,6 +16,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_about"
             android:background="@drawable/generic_shape"
+            android:textDirection="locale"
             android:textSize="@dimen/size_small"
             android:textColor="@color/colorPrimary"
             android:layout_margin="@dimen/spacing_normal"

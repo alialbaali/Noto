@@ -203,26 +203,26 @@ class NoteDialogFragment : BaseDialogFragment() {
     private fun NoteDialogFragmentBinding.setupNote(note: Note) {
         context?.let { context ->
             if (note.isPinned) {
-                tvPinNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
+                tvPinNote.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
                 tvPinNote.text = context.stringResource(R.string.unpin_note)
             } else {
-                tvPinNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
+                tvPinNote.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
                 tvPinNote.text = context.stringResource(R.string.pin_note)
             }
 
             if (note.isArchived) {
-                tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
+                tvArchiveNote.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
                 tvArchiveNote.text = context.stringResource(R.string.unarchive_note)
             } else {
                 tvArchiveNote.text = context.stringResource(R.string.archive_note)
-                tvArchiveNote.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
+                tvArchiveNote.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
             }
 
             if (note.reminderDate == null) {
-                tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_notification_add_24, 0, 0, 0)
+                tvRemindMe.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_notification_add_24, 0, 0, 0)
                 tvRemindMe.text = context.stringResource(R.string.add_note_reminder)
             } else {
-                tvRemindMe.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_edit_notifications_24, 0, 0, 0)
+                tvRemindMe.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_edit_notifications_24, 0, 0, 0)
                 tvRemindMe.text = context.stringResource(R.string.edit_note_reminder)
             }
         }

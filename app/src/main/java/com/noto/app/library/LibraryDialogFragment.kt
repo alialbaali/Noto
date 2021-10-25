@@ -126,19 +126,19 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 .forEach { TextViewCompat.setCompoundDrawableTintList(it, colorState) }
 
             if (library.isArchived) {
-                tvArchiveLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
+                tvArchiveLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
                 tvArchiveLibrary.text = context.stringResource(R.string.unarchive_library)
             } else {
                 tvArchiveLibrary.text = context.stringResource(R.string.archive_library)
-                tvArchiveLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
+                tvArchiveLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
             }
 
             if (library.isPinned) {
-                tvPinLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
+                tvPinLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
                 tvPinLibrary.text = context.stringResource(R.string.unpin_library)
             } else {
                 tvPinLibrary.text = context.stringResource(R.string.pin_library)
-                tvPinLibrary.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
+                tvPinLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
             }
         }
     }
