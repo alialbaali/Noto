@@ -170,5 +170,6 @@
     <string name="system_language">System language</string>
     <string name="english">English</string>
     <string name="turkish">Turkish</string>
+    <string name="arabic">Arabic</string>
 
 </resources>

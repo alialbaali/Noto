@@ -38,6 +38,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/turkish" />
+
+            <RadioButton
+                android:id="@+id/rb_arabic"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/arabic" />
         </RadioGroup>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

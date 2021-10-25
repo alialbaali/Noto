@@ -44,6 +44,7 @@ class LanguageDialogFragment : BaseDialogFragment() {
                     Language.System -> rbSystem.isChecked = true
                     Language.English -> rbEnglish.isChecked = true
                     Language.Turkish -> rbTurkish.isChecked = true
+                    Language.Arabic -> rbArabic.isChecked = true
                 }
             }
             .launchIn(lifecycleScope)
@@ -62,6 +63,11 @@ class LanguageDialogFragment : BaseDialogFragment() {
 
         rbTurkish.setOnClickListener {
             viewModel.updateLanguage(Language.Turkish)
+            dismiss()
+        }
+
+        rbArabic.setOnClickListener {
+            viewModel.updateLanguage(Language.Arabic)
             dismiss()
         }
     }

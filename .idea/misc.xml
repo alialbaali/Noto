@@ -236,7 +236,7 @@
         <entry key="app/src/main/res/layout/new_library_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/note_archive_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/note_dialog_fragment.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/note_fragment.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/note_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/note_item.xml" value="0.22" />
         <entry key="app/src/main/res/layout/note_label_item.xml" value="0.21" />
         <entry key="app/src/main/res/layout/note_list_archive_fragment.xml" value="0.3421875" />

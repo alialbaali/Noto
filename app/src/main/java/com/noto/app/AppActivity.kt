@@ -112,10 +112,12 @@ class AppActivity : AppCompatActivity() {
             Language.System -> Locale.getDefault()
             Language.English -> Locale("en", "US")
             Language.Turkish -> Locale("tr", "TR")
+            Language.Arabic -> Locale("ar", "")
         }
         if (resources.configuration.locale != locale) {
             Locale.setDefault(locale)
             resources.configuration.locale = locale
+            resources.configuration.setLayoutDirection(locale)
             resources.updateConfiguration(resources.configuration, resources.displayMetrics)
             recreate()
         }
