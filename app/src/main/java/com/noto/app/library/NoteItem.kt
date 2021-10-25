@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMarginsRelative
+import androidx.recyclerview.selection.SelectionTracker
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
@@ -48,6 +49,9 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute
     open var isManualSorting: Boolean = false
 
+    @EpoxyAttribute
+    open var isSelected: Boolean = false
+
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onClickListener: View.OnClickListener
 
@@ -75,6 +79,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         tvNoteBody.setSemiboldFont(font)
         ibDrag.isVisible = isManualSorting
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
+        root.isSelected = isSelected
         rv.isVisible = labels.isNotEmpty()
         rv.layoutManager = FlexboxLayoutManager(root.context, FlexDirection.ROW, FlexWrap.WRAP)
         rv.withModels {

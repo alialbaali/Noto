@@ -100,6 +100,7 @@ dependencies {
     implementation(AndroidX.Lifecycle.liveDataCoreKtx)
     implementation(AndroidX.Lifecycle.viewModelSavedState)
     implementation(AndroidX.recyclerView)
+    implementation(AndroidX.recyclerViewSelection)
     implementation(AndroidX.Legacy.supportV4)
     implementation(Google.Android.material)
     implementation(AndroidX.Work.runtimeKtx)

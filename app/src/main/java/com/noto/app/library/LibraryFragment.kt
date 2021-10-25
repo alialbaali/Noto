@@ -14,6 +14,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.selection.SelectionPredicates
+import androidx.recyclerview.selection.SelectionTracker
+import androidx.recyclerview.selection.StableIdKeyProvider
+import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.*
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
@@ -160,6 +164,8 @@ class LibraryFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
     }
 
+    private lateinit var tracker: SelectionTracker<Long>
+
     private fun LibraryFragmentBinding.setupNotesAndLabels(
         notes: List<Pair<Note, List<Label>>>,
         labels: Map<Label, Boolean>,
@@ -168,6 +174,16 @@ class LibraryFragment : Fragment() {
     ) {
         rv.withModels {
             epoxyController = this
+
+            if (!this@LibraryFragment::tracker.isInitialized)
+                tracker = SelectionTracker.Builder(
+                    "MySelection",
+                    rv,
+                    StableIdKeyProvider(rv),
+                    NoteItemDetailsLookup(rv),
+                    StorageStrategy.createLongStorage(),
+                ).withSelectionPredicate(SelectionPredicates.createSelectAnything())
+                    .build()
 
             labelListItem {
                 id("labels")
@@ -214,6 +230,7 @@ class LibraryFragment : Fragment() {
                         previewSize(library.notePreviewSize)
                         isShowCreationDate(library.isShowNoteCreationDate)
                         isManualSorting(library.sortingType == NoteListSortingType.Manual)
+//                        isSelected(tracker.isSelected(entry.first.id))
                         onClickListener { _ ->
                             findNavController()
                                 .navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId, entry.first.id))
