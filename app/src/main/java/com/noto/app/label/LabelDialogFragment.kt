@@ -84,7 +84,7 @@ class LabelDialogFragment : BaseDialogFragment() {
                     viewModel.deleteLabel().invokeOnCompletion { dismiss() }
                 }
 
-                findNavController().navigateSafely(
+                navController?.navigateSafely(
                     LabelDialogFragmentDirections.actionLabelDialogFragmentToConfirmationDialogFragment(
                         confirmationText,
                         descriptionText,

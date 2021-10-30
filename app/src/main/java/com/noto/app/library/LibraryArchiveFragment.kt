@@ -37,7 +37,7 @@ class LibraryArchiveFragment : Fragment() {
 
     private fun LibraryArchiveFragmentBinding.setupListeners() {
         tb.setNavigationOnClickListener {
-            findNavController().navigateUp()
+            navController?.navigateUp()
         }
     }
 

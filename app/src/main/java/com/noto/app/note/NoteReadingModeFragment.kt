@@ -38,7 +38,7 @@ class NoteReadingModeFragment : Fragment() {
 
     private fun NoteReadingModeFragmentBinding.setupListeners() {
         tb.setNavigationOnClickListener {
-            findNavController().navigateUp()
+            navController?.navigateUp()
         }
     }
 

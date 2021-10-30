@@ -84,7 +84,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvRemindMe.setOnClickListener {
             dismiss()
-            findNavController().navigateSafely(
+            navController?.navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReminderDialogFragment(
                     args.libraryId,
                     args.noteId
@@ -94,7 +94,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvOpenInReadingMode.setOnClickListener {
             dismiss()
-            findNavController().navigateSafely(
+            navController?.navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReadingModeFragment(
                     args.libraryId,
                     args.noteId
@@ -141,11 +141,11 @@ class NoteDialogFragment : BaseDialogFragment() {
                     context?.let { context ->
                         parentView?.snackbar(context.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
                     }
-                    findNavController().popBackStack(args.destination, false)
+                    navController?.popBackStack(args.destination, false)
                     dismiss()
                 }
             }
-            findNavController().navigateSafely(
+            navController?.navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(
                     selectLibraryItemClickListener,
                     args.libraryId
@@ -159,11 +159,11 @@ class NoteDialogFragment : BaseDialogFragment() {
                     context?.let { context ->
                         parentView?.snackbar(context.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
                     }
-                    findNavController().popBackStack(args.destination, false)
+                    navController?.popBackStack(args.destination, false)
                     dismiss()
                 }
             }
-            findNavController().navigateSafely(
+            navController?.navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(
                     selectLibraryItemClickListener,
                     args.libraryId
@@ -183,13 +183,13 @@ class NoteDialogFragment : BaseDialogFragment() {
                 val btnText = context.stringResource(R.string.delete_note)
                 val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
                     parentView?.snackbar(context.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
-                    findNavController().popBackStack(args.destination, false)
+                    navController?.popBackStack(args.destination, false)
                     if (viewModel.note.value.reminderDate != null)
                         alarmManager?.cancelAlarm(context, viewModel.note.value.id)
                     viewModel.deleteNote().invokeOnCompletion { dismiss() }
                 }
 
-                findNavController().navigateSafely(
+                navController?.navigateSafely(
                     NoteDialogFragmentDirections.actionNoteDialogFragmentToConfirmationDialogFragment(
                         confirmationText,
                         descriptionText,

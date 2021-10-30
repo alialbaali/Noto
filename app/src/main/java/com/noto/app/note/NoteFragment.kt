@@ -116,7 +116,7 @@ class NoteFragment : Fragment() {
                     id("new")
                     color(library.color)
                     onClickListener { _ ->
-                        findNavController().navigateSafely(NoteFragmentDirections.actionNoteFragmentToNewLabelDialogFragment(args.libraryId))
+                        navController?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNewLabelDialogFragment(args.libraryId))
                     }
                 }
             }
@@ -142,7 +142,7 @@ class NoteFragment : Fragment() {
         }
         bab.navigationIcon?.mutate()?.alpha = 255
         bab.setNavigationOnClickListener {
-            findNavController().navigateSafely(
+            navController?.navigateSafely(
                 NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
                     args.libraryId,
                     viewModel.note.value.id,
@@ -172,9 +172,9 @@ class NoteFragment : Fragment() {
 
         val backCallback = {
             if (args.body != null)
-                findNavController().popBackStack(R.id.mainFragment, false)
+                navController?.popBackStack(R.id.mainFragment, false)
 
-            findNavController().navigateUp()
+            navController?.navigateUp()
             viewModel.createOrUpdateNote(
                 etNoteTitle.text.toString(),
                 etNoteBody.text.toString(),

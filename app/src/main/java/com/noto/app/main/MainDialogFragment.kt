@@ -9,6 +9,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainDialogFragmentBinding
+import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
@@ -30,17 +31,17 @@ class MainDialogFragment : BaseDialogFragment() {
     private fun MainDialogFragmentBinding.setupListeners() {
         tvLibrariesArchive.setOnClickListener {
             dismiss()
-            findNavController().navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainArchiveFragment())
+            navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainArchiveFragment())
         }
 
         tvChangeTheme.setOnClickListener {
             dismiss()
-            findNavController().navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToThemeDialogFragment())
+            navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToThemeDialogFragment())
         }
 
         tvSettings.setOnClickListener {
             dismiss()
-            findNavController().navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToSettingsFragment())
+            navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToSettingsFragment())
         }
     }
 }

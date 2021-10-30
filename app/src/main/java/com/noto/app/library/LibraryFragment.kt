@@ -96,7 +96,7 @@ class LibraryFragment : Fragment() {
                 .filter { it.value }
                 .map { it.key.id }
                 .toLongArray()
-            findNavController().navigateSafely(
+            navController?.navigateSafely(
                 LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(
                     args.libraryId,
                     labelsIds = selectedLabelsIds
@@ -106,11 +106,11 @@ class LibraryFragment : Fragment() {
 
         tb.setNavigationOnClickListener {
             disableSearch()
-            findNavController().navigateUp()
+            navController?.navigateUp()
         }
 
         bab.setNavigationOnClickListener {
-            findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
+            navController?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
         }
 
         bab.setOnMenuItemClickListener { menuItem ->
@@ -188,7 +188,7 @@ class LibraryFragment : Fragment() {
                     true
                 }
                 onNewLabelClickListener { _ ->
-                    findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNewLabelDialogFragment(args.libraryId))
+                    navController?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNewLabelDialogFragment(args.libraryId))
                 }
             }
 
@@ -199,7 +199,7 @@ class LibraryFragment : Fragment() {
                 notesCount(notes.size)
                 notoColor(library.color)
                 onClickListener { _ ->
-                    findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingDialogFragment(args.libraryId))
+                    navController?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingDialogFragment(args.libraryId))
                 }
             }
 
@@ -253,7 +253,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupArchivedNotesMenuItem(): Boolean {
-        findNavController().navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLibraryArchiveFragment(args.libraryId))
+        navController?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLibraryArchiveFragment(args.libraryId))
         return true
     }
 

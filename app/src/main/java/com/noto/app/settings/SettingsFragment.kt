@@ -13,10 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.noto.app.R
 import com.noto.app.databinding.SettingsFragmentBinding
-import com.noto.app.util.colorResource
-import com.noto.app.util.navigateSafely
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -65,27 +62,27 @@ class SettingsFragment : Fragment() {
 
     private fun SettingsFragmentBinding.setupListeners() {
         tb.setNavigationOnClickListener {
-            findNavController().navigateUp()
+            navController?.navigateUp()
         }
 
         tvChangeTheme.setOnClickListener {
-            findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToThemeDialogFragment())
+            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToThemeDialogFragment())
         }
 
         tvChangeNotesFont.setOnClickListener {
-            findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToFontDialogFragment())
+            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToFontDialogFragment())
         }
 
         tvChangeLanguage.setOnClickListener {
-            findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialogFragment())
+            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialogFragment())
         }
 
         tvExportImport.setOnClickListener {
-            findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToExportImportDialogFragment())
+            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToExportImportDialogFragment())
         }
 
         tvAbout.setOnClickListener {
-            findNavController().navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToAboutDialogFragment())
+            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToAboutDialogFragment())
         }
 
         swShowNotesCount.setOnClickListener {

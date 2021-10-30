@@ -75,7 +75,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
 
     private fun exportData(uri: Uri) {
         context?.let { context ->
-            findNavController().navigateSafely(
+            navController?.navigateSafely(
                 ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressDialogFragment(
                     context.stringResource(R.string.exporting_data)
                 )
@@ -91,17 +91,17 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                         }
                     }.invokeOnCompletion {
                         parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_exported, zipFile.uri.directoryPath))
-                        findNavController().navigateUp()
+                        navController?.navigateUp()
                         dismiss()
                     }
                 } else {
                     parentFragment?.view?.snackbar(context.stringResource(R.string.exporting_failed))
-                    findNavController().navigateUp()
+                    navController?.navigateUp()
                     dismiss()
                 }
             } else {
                 parentFragment?.view?.snackbar(context.stringResource(R.string.create_file_failed))
-                findNavController().navigateUp()
+                navController?.navigateUp()
                 dismiss()
             }
         }
@@ -109,7 +109,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
 
     private fun importData(uri: Uri) {
         context?.let { context ->
-            findNavController().navigateSafely(
+            navController?.navigateSafely(
                 ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressDialogFragment(
                     context.stringResource(R.string.importing_data)
                 )
@@ -123,12 +123,12 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                     }
                 }.invokeOnCompletion {
                     parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_imported))
-                    findNavController().navigateUp()
+                    navController?.navigateUp()
                     dismiss()
                 }
             } else {
                 parentFragment?.view?.snackbar(context.stringResource(R.string.importing_failed))
-                findNavController().navigateUp()
+                navController?.navigateUp()
                 dismiss()
             }
         }

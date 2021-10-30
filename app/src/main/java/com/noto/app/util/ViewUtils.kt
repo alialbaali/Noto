@@ -20,6 +20,7 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.noto.app.R
@@ -35,6 +36,9 @@ fun NavController.navigateSafely(directions: NavDirections) {
     if (currentDestination?.getAction(directions.actionId) != null)
         navigate(directions)
 }
+
+val Fragment.navController: NavController?
+    get() = if (isAdded) findNavController() else null
 
 val Uri.directoryPath
     get() = path?.substringAfterLast(':')

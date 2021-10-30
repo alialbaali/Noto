@@ -58,7 +58,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
         tvEditLibrary.setOnClickListener {
             dismiss()
-            findNavController().navigateSafely(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToNewLibraryDialogFragment(args.libraryId))
+            navController?.navigateSafely(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToNewLibraryDialogFragment(args.libraryId))
         }
 
         tvNewNoteShortcut.setOnClickListener {
@@ -106,7 +106,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 val btnText = context.stringResource(R.string.delete_library)
                 val clickListener = setupConfirmationDialogClickListener()
 
-                findNavController().navigateSafely(
+                navController?.navigateSafely(
                     LibraryDialogFragmentDirections.actionLibraryDialogFragmentToConfirmationDialogFragment(
                         confirmationText,
                         descriptionText,
@@ -151,7 +151,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
         context?.let { context ->
             parentView?.snackbar(context.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
         }
-        findNavController().popBackStack(R.id.mainFragment, false)
+        navController?.popBackStack(R.id.mainFragment, false)
         viewModel.notes.value
             .filter { entry -> entry.first.reminderDate != null }
             .forEach { entry ->

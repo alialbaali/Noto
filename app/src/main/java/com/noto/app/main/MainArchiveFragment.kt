@@ -33,7 +33,7 @@ class MainArchiveFragment : Fragment() {
 
     private fun MainArchiveFragmentBinding.setupListeners() {
         tb.setNavigationOnClickListener {
-            findNavController().navigateUp()
+            navController?.navigateUp()
         }
     }
 
@@ -76,10 +76,10 @@ class MainArchiveFragment : Fragment() {
                         isManualSorting(false)
                         isShowNotesCount(isShowNotesCount)
                         onClickListener { _ ->
-                            findNavController().navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(library.id))
+                            navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(library.id))
                         }
                         onLongClickListener { _ ->
-                            findNavController().navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(library.id))
+                            navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(library.id))
                             true
                         }
                         onDragHandleTouchListener { _, _ -> false }
