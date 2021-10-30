@@ -126,7 +126,7 @@
     <string name="note_is_archived">تم إرشاف الملاحظة.</string>
     <string name="note_is_pinned">تم تثبيت الملاحظة.</string>
     <string name="note_is_unpinned">تم إلغاء تثبيت الملاحظة.</string>
-    <string name="no_note_reminder">لم يتم إعداد أي تذكير بالملاحظة.</string>
+    <string name="no_note_reminder">لم يتم إعداد أي تنبيه إلى الملاحظة.</string>
     <string name="note_is_unarchived">تم إلغاء إرشاف الملاحظة.</string>
     <string name="reminder">تنبيه</string>
     <string name="new_note_reminder">تنبيه ملاحظة جديد</string>

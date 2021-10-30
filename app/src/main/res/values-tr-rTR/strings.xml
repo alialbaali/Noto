@@ -41,8 +41,8 @@
     <string name="importing_data">Veriler içe aktarılıyor…</string>
     <string name="exporting_data">Veriler dışa aktarılıyor…</string>
     <string name="create_file_failed">Dosya oluşturma başarısız.</string>
-    <string name="no_folder_is_selected">Seçili bir klasör yok.</string>
-    <string name="no_file_is_selected">Seçili bir dosya yok.</string>
+    <string name="no_folder_is_selected">Herhangi bir klasör seçilmedi.</string>
+    <string name="no_file_is_selected">Herhangi bir dosya seçilmedi.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Açılacak uygulama</string>
     <string name="invite_text">Noto\'ya göz at!</string>
