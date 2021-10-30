@@ -53,13 +53,11 @@ class NoteListSortingOrderDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
 
         rbSortingAsc.setOnClickListener {
-            dismiss()
-            viewModel.updateSortingOrder(SortingOrder.Ascending)
+            viewModel.updateSortingOrder(SortingOrder.Ascending).invokeOnCompletion { dismiss() }
         }
 
         rbSortingDesc.setOnClickListener {
-            dismiss()
-            viewModel.updateSortingOrder(SortingOrder.Descending)
+            viewModel.updateSortingOrder(SortingOrder.Descending).invokeOnCompletion { dismiss() }
         }
     }
 }

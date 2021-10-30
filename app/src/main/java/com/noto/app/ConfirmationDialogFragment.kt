@@ -33,8 +33,8 @@ class ConfirmationDialogFragment : BaseDialogFragment() {
 
     private fun ConfirmationDialogFragmentBinding.setupListeners() {
         btnConfirm.setOnClickListener {
-            dismiss()
             args.clickListener.onClick()
+            dismiss()
         }
     }
 

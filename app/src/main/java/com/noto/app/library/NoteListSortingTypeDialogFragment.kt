@@ -56,18 +56,15 @@ class NoteListSortingTypeDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
 
         rbManual.setOnClickListener {
-            dismiss()
-            viewModel.updateSortingType(NoteListSortingType.Manual)
+            viewModel.updateSortingType(NoteListSortingType.Manual).invokeOnCompletion { dismiss() }
         }
 
         rbCreationDate.setOnClickListener {
-            dismiss()
-            viewModel.updateSortingType(NoteListSortingType.CreationDate)
+            viewModel.updateSortingType(NoteListSortingType.CreationDate).invokeOnCompletion { dismiss() }
         }
 
         rbAlphabetical.setOnClickListener {
-            dismiss()
-            viewModel.updateSortingType(NoteListSortingType.Alphabetical)
+            viewModel.updateSortingType(NoteListSortingType.Alphabetical).invokeOnCompletion { dismiss() }
         }
     }
 }

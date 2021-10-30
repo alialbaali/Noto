@@ -76,8 +76,7 @@ class NewLabelDialogFragment : BaseDialogFragment() {
                 }
             } else {
                 activity?.hideKeyboard(root)
-                dismiss()
-                viewModel.createOrUpdateLabel(title)
+                viewModel.createOrUpdateLabel(title).invokeOnCompletion { dismiss() }
             }
         }
     }

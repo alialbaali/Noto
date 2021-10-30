@@ -29,10 +29,10 @@ class ExportImportDialogFragment : BaseDialogFragment() {
         if (uri != null) {
             exportData(uri)
         } else {
-            dismiss()
             context?.let { context ->
                 parentFragment?.view?.snackbar(context.stringResource(R.string.no_folder_is_selected))
             }
+            dismiss()
         }
     }
 
@@ -40,10 +40,10 @@ class ExportImportDialogFragment : BaseDialogFragment() {
         if (uri != null) {
             importData(uri)
         } else {
-            dismiss()
             context?.let { context ->
                 parentFragment?.view?.snackbar(context.stringResource(R.string.no_file_is_selected))
             }
+            dismiss()
         }
     }
 

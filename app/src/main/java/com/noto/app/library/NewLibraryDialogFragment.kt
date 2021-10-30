@@ -76,7 +76,6 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 }
             } else {
                 activity?.hideKeyboard(root)
-                dismiss()
                 updatePinnedShortcut(title)
                 viewModel.createOrUpdateLibrary(
                     title,
@@ -89,7 +88,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                     sNotePreviewSize.value.toInt(),
                     swShowNoteCreationDate.isChecked,
                     swSetNewNoteCursor.isChecked,
-                )
+                ).invokeOnCompletion { dismiss() }
             }
         }
     }

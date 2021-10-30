@@ -81,8 +81,7 @@ class LabelDialogFragment : BaseDialogFragment() {
                     val parentView = parentFragment?.view
                     val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
                     parentView?.snackbar(context.stringResource(R.string.label_is_deleted), anchorView = parentAnchorView)
-                    dismiss()
-                    viewModel.deleteLabel()
+                    viewModel.deleteLabel().invokeOnCompletion { dismiss() }
                 }
 
                 findNavController().navigateSafely(

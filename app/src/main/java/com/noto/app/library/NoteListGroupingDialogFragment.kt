@@ -56,18 +56,15 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
 
         rbDefault.setOnClickListener {
-            dismiss()
-            viewModel.updateGrouping(Grouping.Default)
+            viewModel.updateGrouping(Grouping.Default).invokeOnCompletion { dismiss() }
         }
 
         rbCreationDate.setOnClickListener {
-            dismiss()
-            viewModel.updateGrouping(Grouping.CreationDate)
+            viewModel.updateGrouping(Grouping.CreationDate).invokeOnCompletion { dismiss() }
         }
 
         rbLabel.setOnClickListener {
-            dismiss()
-            viewModel.updateGrouping(Grouping.Label)
+            viewModel.updateGrouping(Grouping.Label).invokeOnCompletion { dismiss() }
         }
     }
 }

@@ -62,38 +62,40 @@ class LibraryDialogFragment : BaseDialogFragment() {
         }
 
         tvNewNoteShortcut.setOnClickListener {
-            dismiss()
             context?.let { context ->
                 if (ShortcutManagerCompat.isRequestPinShortcutSupported(context))
                     ShortcutManagerCompat.requestPinShortcut(context, context.createPinnedShortcut(viewModel.library.value), null)
             }
+            dismiss()
         }
 
         tvArchiveLibrary.setOnClickListener {
-            dismiss()
-            viewModel.toggleLibraryIsArchived()
+            viewModel.toggleLibraryIsArchived().invokeOnCompletion {
+                val resource = if (viewModel.library.value.isArchived)
+                    R.string.library_is_unarchived
+                else
+                    R.string.library_is_archived
 
-            val resource = if (viewModel.library.value.isArchived)
-                R.string.library_is_unarchived
-            else
-                R.string.library_is_archived
+                context?.let { context ->
+                    parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                }
 
-            context?.let { context ->
-                parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                dismiss()
             }
         }
 
         tvPinLibrary.setOnClickListener {
-            dismiss()
-            viewModel.toggleLibraryIsPinned()
+            viewModel.toggleLibraryIsPinned().invokeOnCompletion {
+                val resource = if (viewModel.library.value.isPinned)
+                    R.string.library_is_unpinned
+                else
+                    R.string.library_is_pinned
 
-            val resource = if (viewModel.library.value.isPinned)
-                R.string.library_is_unpinned
-            else
-                R.string.library_is_pinned
+                context?.let { context ->
+                    parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                }
 
-            context?.let { context ->
-                parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                dismiss()
             }
         }
 
@@ -150,8 +152,6 @@ class LibraryDialogFragment : BaseDialogFragment() {
             parentView?.snackbar(context.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
         }
         findNavController().popBackStack(R.id.mainFragment, false)
-        dismiss()
-
         viewModel.notes.value
             .filter { entry -> entry.first.reminderDate != null }
             .forEach { entry ->
@@ -159,7 +159,6 @@ class LibraryDialogFragment : BaseDialogFragment() {
                     alarmManager?.cancelAlarm(context, entry.first.id)
                 }
             }
-
-        viewModel.deleteLibrary()
+        viewModel.deleteLibrary().invokeOnCompletion { dismiss() }
     }
 }

@@ -68,16 +68,17 @@ class NoteDialogFragment : BaseDialogFragment() {
         val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
 
         tvArchiveNote.setOnClickListener {
-            dismiss()
-            viewModel.toggleNoteIsArchived()
+            viewModel.toggleNoteIsArchived().invokeOnCompletion {
+                val resource = if (viewModel.note.value.isArchived)
+                    R.string.note_is_unarchived
+                else
+                    R.string.note_is_archived
 
-            val resource = if (viewModel.note.value.isArchived)
-                R.string.note_is_unarchived
-            else
-                R.string.note_is_archived
+                context?.let { context ->
+                    parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                }
 
-            context?.let { context ->
-                parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                dismiss()
             }
         }
 
@@ -103,32 +104,35 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvDuplicateNote.setOnClickListener {
             viewModel.duplicateNote().invokeOnCompletion {
-                dismiss()
                 context?.let { context ->
                     parentView?.snackbar(context.stringResource(R.string.note_is_duplicated), parentAnchorView)
                 }
+                dismiss()
             }
         }
 
         tvPinNote.setOnClickListener {
-            dismiss()
-            viewModel.toggleNoteIsPinned()
-            val resource = if (viewModel.note.value.isPinned)
-                R.string.note_is_unpinned
-            else
-                R.string.note_is_pinned
-            context?.let { context ->
-                parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+            viewModel.toggleNoteIsPinned().invokeOnCompletion {
+                val resource = if (viewModel.note.value.isPinned)
+                    R.string.note_is_unpinned
+                else
+                    R.string.note_is_pinned
+
+                context?.let { context ->
+                    parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                }
+
+                dismiss()
             }
         }
 
         tvCopyToClipboard.setOnClickListener {
-            dismiss()
             val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
             clipboardManager?.setPrimaryClip(clipData)
             context?.let { context ->
                 parentView?.snackbar(context.stringResource(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
             }
+            dismiss()
         }
 
         tvCopyNote.setOnClickListener {
@@ -180,12 +184,9 @@ class NoteDialogFragment : BaseDialogFragment() {
                 val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
                     parentView?.snackbar(context.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
                     findNavController().popBackStack(args.destination, false)
-                    dismiss()
                     if (viewModel.note.value.reminderDate != null)
-                        context?.let { context ->
-                            alarmManager?.cancelAlarm(context, viewModel.note.value.id)
-                        }
-                    viewModel.deleteNote()
+                        alarmManager?.cancelAlarm(context, viewModel.note.value.id)
+                    viewModel.deleteNote().invokeOnCompletion { dismiss() }
                 }
 
                 findNavController().navigateSafely(
