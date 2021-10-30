@@ -9,7 +9,6 @@ import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
-import androidx.core.graphics.ColorUtils
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
@@ -135,40 +134,33 @@ class NoteFragment : Fragment() {
     }
 
     private fun NoteFragmentBinding.enableBottomAppBarActions() {
-        context?.let { context ->
-            val color = context.colorResource(viewModel.library.value.color.toResource())
-            fab.alpha = 1F
-            fab.isEnabled = true
-            bab.navigationIcon?.mutate()?.setTint(color)
-            bab.menu.forEach {
-                it.isEnabled = true
-                it.icon?.mutate()?.setTint(color)
-            }
-            bab.setNavigationOnClickListener {
-                findNavController().navigateSafely(
-                    NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
-                        args.libraryId,
-                        viewModel.note.value.id,
-                        R.id.libraryFragment
-                    )
+        fab.alpha = 1F
+        fab.isEnabled = true
+        bab.menu.forEach {
+            it.isEnabled = true
+            it.icon?.alpha = 255
+        }
+        bab.navigationIcon?.mutate()?.alpha = 255
+        bab.setNavigationOnClickListener {
+            findNavController().navigateSafely(
+                NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
+                    args.libraryId,
+                    viewModel.note.value.id,
+                    R.id.libraryFragment
                 )
-            }
+            )
         }
     }
 
     private fun NoteFragmentBinding.disableBottomAppBarActions() {
-        context?.let { context ->
-            val color = context.colorResource(viewModel.library.value.color.toResource())
-                .let { ColorUtils.setAlphaComponent(it, 128) }
-            fab.alpha = 0.50F
-            fab.isEnabled = false
-            bab.navigationIcon?.mutate()?.setTint(color)
-            bab.menu.forEach {
-                it.isEnabled = false
-                it.icon?.mutate()?.setTint(color)
-            }
-            bab.setNavigationOnClickListener(null)
+        fab.alpha = 0.50F
+        fab.isEnabled = false
+        bab.menu.forEach {
+            it.isEnabled = false
+            it.icon?.alpha = 128
         }
+        bab.navigationIcon?.mutate()?.alpha = 128
+        bab.setNavigationOnClickListener(null)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -196,16 +188,6 @@ class NoteFragment : Fragment() {
 
         tb.setNavigationOnClickListener {
             backCallback()
-        }
-
-        bab.setNavigationOnClickListener {
-            findNavController().navigateSafely(
-                NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
-                    args.libraryId,
-                    viewModel.note.value.id,
-                    R.id.libraryFragment
-                )
-            )
         }
 
         bab.setOnMenuItemClickListener { menuItem ->
