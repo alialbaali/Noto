@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/widget_config_nav_graph"
+    app:startDestination="@id/widgetConfigDialogFragment">
+
+    <dialog
+        android:id="@+id/widgetConfigDialogFragment"
+        android:name="com.noto.app.widget.WidgetConfigDialogFragment"
+        android:label="WidgetConfigDialogFragment">
+        <argument
+            android:name="app_widget_id"
+            app:argType="integer" />
+    </dialog>
+</navigation>
