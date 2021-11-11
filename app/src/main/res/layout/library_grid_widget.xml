@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_shape"
+    android:paddingHorizontal="@dimen/spacing_small"
+    android:scrollbars="none"
+    android:numColumns="2"
+    tools:listitem="@layout/library_item" />
