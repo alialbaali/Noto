@@ -15,7 +15,10 @@ import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.Theme
 import com.noto.app.library.SelectLibraryDialogFragment
-import com.noto.app.util.*
+import com.noto.app.util.Constants
+import com.noto.app.util.colorResource
+import com.noto.app.util.createNotificationChannel
+import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -61,6 +64,12 @@ class AppActivity : AppCompatActivity() {
                 val args = bundleOf(Constants.LibraryId to libraryId)
                 navController.navigate(R.id.libraryFragment, args)
                 navController.navigate(R.id.noteFragment, args)
+            }
+            Constants.Intent.ActionOpenLibrary -> {
+                val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
+                val args = bundleOf(Constants.LibraryId to libraryId)
+                navController.popBackStack(R.id.libraryFragment, true)
+                navController.navigate(R.id.libraryFragment, args)
             }
         }
     }

@@ -17,9 +17,11 @@ object Constants {
     const val Labels = "Labels"
     const val NoteLabels = "NoteLabels"
     const val Settings = "Settings"
+    const val AppWidgetId = "app_widget_id"
 
     object Intent {
         const val ActionCreateLibrary = "com.noto.intent.action.CREATE_LIBRARY"
         const val ActionCreateNote = "com.noto.intent.action.CREATE_NOTE"
+        const val ActionOpenLibrary = "com.noto.intent.action.OPEN_LIBRARY"
     }
 }
