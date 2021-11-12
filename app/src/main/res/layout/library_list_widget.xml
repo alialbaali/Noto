@@ -8,4 +8,4 @@
     android:paddingHorizontal="@dimen/spacing_small"
     android:scrollbars="none"
     android:divider="@null"
-    tools:listitem="@layout/library_item" />
+    tools:listitem="@layout/widget_library_item" />
