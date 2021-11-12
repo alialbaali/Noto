@@ -49,7 +49,7 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
         root.context?.let { context ->
             val color = context.colorResource(library.color.toResource())
             tvLibraryNotesCount.text = context.pluralsResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
-            ivLibraryColor.setColorFilter(color)
+            vColor.background.setTint(color)
             tvLibraryTitle.setTextColor(color)
             tvLibraryNotesCount.setTextColor(color)
             ibDrag.drawable?.mutate()?.setTint(color)

@@ -8,12 +8,7 @@ import android.widget.RemoteViewsService
 import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.Library
-import com.noto.app.util.Constants
-import com.noto.app.util.colorResource
-import com.noto.app.util.pluralsResource
-import com.noto.app.util.toResource
-
-private const val SetColorFilterMethodName = "setColorFilter"
+import com.noto.app.util.*
 
 class LibraryListRemoteViewsFactory(
     private val context: Context,
@@ -39,10 +34,9 @@ class LibraryListRemoteViewsFactory(
         }
         val notesCount = countNotes(library.id)
         val notesCountText = context.pluralsResource(R.plurals.notes_count, notesCount, notesCount)
-        val remoteViews = RemoteViews(context.packageName, R.layout.library_item).apply {
+        val remoteViews = RemoteViews(context.packageName, R.layout.widget_library_item).apply {
             setOnClickFillInIntent(R.id.ll, intent)
             setContentDescription(R.id.ll, library.title)
-            setViewVisibility(R.id.ib_drag, View.GONE)
             setViewVisibility(R.id.tv_library_notes_count, if (isShowNotesCount) View.VISIBLE else View.GONE)
             setTextViewText(R.id.tv_library_title, library.title)
             setTextViewText(R.id.tv_library_notes_count, notesCountText)

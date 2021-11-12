@@ -32,6 +32,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onStart
 
+const val SetColorFilterMethodName = "setColorFilter"
+
 fun NavController.navigateSafely(directions: NavDirections) {
     if (currentDestination?.getAction(directions.actionId) != null)
         navigate(directions)

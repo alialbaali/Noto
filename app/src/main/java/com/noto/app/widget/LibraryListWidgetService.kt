@@ -20,20 +20,18 @@ class LibraryListWidgetService : RemoteViewsService(), KoinComponent {
     private val noteRepository by inject<NoteRepository>()
 
     override fun onGetViewFactory(intent: Intent?): RemoteViewsFactory {
-        val libraries = runBlocking {
-            libraryRepository.getLibraries()
+        return runBlocking {
+            val libraries = libraryRepository.getLibraries()
                 .filterNotNull()
                 .first()
-        }
-        val isShowNotesCount = runBlocking {
-            storage.get(Constants.ShowNotesCountKey)
+            val isShowNotesCount = storage.get(Constants.ShowNotesCountKey)
                 .filterNotNull()
                 .map { it.toBoolean() }
                 .first()
-        }
-        return LibraryListRemoteViewsFactory(applicationContext, intent, libraries, isShowNotesCount) { libraryId ->
-            runBlocking {
-                noteRepository.countNotesByLibraryId(libraryId)
+            LibraryListRemoteViewsFactory(applicationContext, intent, libraries, isShowNotesCount) { libraryId ->
+                runBlocking {
+                    noteRepository.countNotesByLibraryId(libraryId)
+                }
             }
         }
     }

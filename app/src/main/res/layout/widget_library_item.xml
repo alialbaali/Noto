@@ -10,11 +10,11 @@
     android:background="@drawable/library_item_shape"
     android:elevation="@dimen/elevation_normal">
 
-    <View
-        android:id="@+id/v_color"
+    <ImageView
+        android:id="@+id/iv_library_color"
         android:layout_width="5dp"
         android:layout_height="match_parent"
-        android:background="@drawable/color_view_shape"
+        android:src="@drawable/color_view_shape"
         android:contentDescription="@string/library_color" />
 
     <LinearLayout
@@ -24,16 +24,17 @@
         android:layout_marginEnd="@dimen/spacing_extra_small"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
+        <TextView
             android:id="@+id/tv_library_title"
             style="@style/LibraryTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_extra_small"
+            android:textStyle="bold"
             tools:text="Library" />
 
-        <com.google.android.material.textview.MaterialTextView
+        <TextView
             android:id="@+id/tv_library_notes_count"
             style="@style/LibraryNotesCountTextView"
             android:layout_width="match_parent"
@@ -41,16 +42,5 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_extra_small"
             tools:text="3 Notes" />
-
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/ib_drag"
-        android:src="@drawable/ic_round_drag_handle_24"
-        android:background="@android:color/transparent"
-        android:layout_marginStart="@dimen/spacing_extra_small"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/drag" />
-
 </LinearLayout>
