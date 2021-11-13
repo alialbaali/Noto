@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_small"
+    android:background="@drawable/note_item_shape"
+    android:padding="@dimen/spacing_normal">
+
+    <LinearLayout
+        android:id="@+id/ll_labels"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_extra_small"
+        tools:listitem="@layout/note_label_item" />
+
+    <TextView
+        android:id="@+id/tv_note_title"
+        style="@style/NoteTitleTextView"
+        android:autoLink="all"
+        android:linksClickable="false"
+        android:layout_width="match_parent"
+        android:textColorLink="@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/spacing_extra_small"
+        android:textStyle="bold"
+        tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry" />
+
+    <TextView
+        android:id="@+id/tv_note_body"
+        style="@style/NoteBodyTextView"
+        android:autoLink="all"
+        android:linksClickable="false"
+        android:textColorLink="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_extra_small"
+        tools:text="Lorem Ipsum is simply dummy text of the printing andttt typesetting industry" />
+
+    <TextView
+        android:id="@+id/tv_creation_date"
+        style="@style/NoteCreationDateTextView"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        tools:text="Created at Aug 30" />
+</LinearLayout>

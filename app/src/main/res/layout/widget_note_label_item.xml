@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/spacing_extra_small"
+    android:layout_marginBottom="@dimen/spacing_extra_small">
+
+    <ImageView
+        android:id="@+id/iv_library_color"
+        android:src="@drawable/note_label_item_shape"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/label"
+        tools:tint="@color/colorAccentTeal" />
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="@dimen/spacing_extra_small"
+        android:textSize="@dimen/size_extra_tiny"
+        android:textColor="@color/colorBackground"
+        android:textStyle="bold"
+        tools:text="Label" />
+</FrameLayout>
