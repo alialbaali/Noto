@@ -13,7 +13,6 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ListUpdateCallback
 import com.noto.app.AppActivity
@@ -106,8 +105,8 @@ class NoteFragment : Fragment() {
                                 viewModel.selectLabel(entry.key.id)
                         }
                         onLongClickListener { _ ->
-                            findNavController()
-                                .navigateSafely(NoteFragmentDirections.actionNoteFragmentToLabelDialogFragment(args.libraryId, entry.key.id))
+                            navController
+                                ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToLabelDialogFragment(args.libraryId, entry.key.id))
                             true
                         }
                     }
@@ -166,8 +165,8 @@ class NoteFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun NoteFragmentBinding.setupListeners() {
         fab.setOnClickListener {
-            findNavController()
-                .navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.libraryId, viewModel.note.value.id))
+            navController
+                ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.libraryId, viewModel.note.value.id))
         }
 
         val backCallback = {
@@ -197,8 +196,8 @@ class NoteFragment : Fragment() {
                     true
                 }
                 R.id.reading_mode -> {
-                    findNavController()
-                        .navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.libraryId, viewModel.note.value.id))
+                    navController
+                        ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.libraryId, viewModel.note.value.id))
                     true
                 }
                 else -> false

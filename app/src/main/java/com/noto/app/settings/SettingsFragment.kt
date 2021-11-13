@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.noto.app.R
 import com.noto.app.databinding.SettingsFragmentBinding
 import com.noto.app.util.*

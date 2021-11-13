@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -92,8 +91,8 @@ class LibraryArchiveFragment : Fragment() {
                         labels(archivedNote.second)
                         isManualSorting(false)
                         onClickListener { _ ->
-                            findNavController()
-                                .navigateSafely(
+                            navController
+                                ?.navigateSafely(
                                     LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
                                         archivedNote.first.libraryId,
                                         archivedNote.first.id
@@ -101,8 +100,8 @@ class LibraryArchiveFragment : Fragment() {
                                 )
                         }
                         onLongClickListener { _ ->
-                            findNavController()
-                                .navigateSafely(
+                            navController
+                                ?.navigateSafely(
                                     LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
                                         archivedNote.first.libraryId,
                                         archivedNote.first.id,

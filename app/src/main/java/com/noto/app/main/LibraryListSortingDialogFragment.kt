@@ -6,12 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryListSortingDialogFragmentBinding
 import com.noto.app.domain.model.LibraryListSortingType
+import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
@@ -45,13 +45,13 @@ class LibraryListSortingDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
 
         tvSortingType.setOnClickListener {
-            findNavController()
-                .navigateSafely(LibraryListSortingDialogFragmentDirections.actionLibraryListSortingDialogFragmentToLibraryListSortingTypeDialogFragment())
+            navController
+                ?.navigateSafely(LibraryListSortingDialogFragmentDirections.actionLibraryListSortingDialogFragmentToLibraryListSortingTypeDialogFragment())
         }
 
         tvSortingOrder.setOnClickListener {
-            findNavController()
-                .navigateSafely(LibraryListSortingDialogFragmentDirections.actionLibraryListSortingDialogFragmentToLibraryListSortingOrderDialogFragment())
+            navController
+                ?.navigateSafely(LibraryListSortingDialogFragmentDirections.actionLibraryListSortingDialogFragmentToLibraryListSortingOrderDialogFragment())
         }
 
         btnDone.setOnClickListener {

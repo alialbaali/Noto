@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.noto.app.BaseDialogFragment
@@ -62,14 +61,14 @@ class LabelDialogFragment : BaseDialogFragment() {
     private fun LabelDialogFragmentBinding.setupListeners() {
         tvEditLabel.setOnClickListener {
             dismiss()
-            findNavController()
-                .navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToNewLabelDialogFragment(args.libraryId, args.labelId))
+            navController
+                ?.navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToNewLabelDialogFragment(args.libraryId, args.labelId))
         }
 
         tvReorderLabel.setOnClickListener {
             dismiss()
-            findNavController()
-                .navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToReorderLabelDialogFragment(args.libraryId, args.labelId))
+            navController
+                ?.navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToReorderLabelDialogFragment(args.libraryId, args.labelId))
         }
 
         tvDeleteLabel.setOnClickListener {

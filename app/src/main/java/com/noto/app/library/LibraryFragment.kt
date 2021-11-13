@@ -12,7 +12,6 @@ import androidx.core.view.forEach
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.*
 import com.airbnb.epoxy.EpoxyController
@@ -183,8 +182,7 @@ class LibraryFragment : Fragment() {
                         viewModel.selectLabel(label.id)
                 }
                 onLabelLongClickListener { label ->
-                    findNavController()
-                        .navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLabelDialogFragment(args.libraryId, label.id))
+                    navController?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLabelDialogFragment(args.libraryId, label.id))
                     true
                 }
                 onNewLabelClickListener { _ ->
@@ -215,12 +213,12 @@ class LibraryFragment : Fragment() {
                         isShowCreationDate(library.isShowNoteCreationDate)
                         isManualSorting(library.sortingType == NoteListSortingType.Manual)
                         onClickListener { _ ->
-                            findNavController()
-                                .navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId, entry.first.id))
+                            navController
+                                ?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId, entry.first.id))
                         }
                         onLongClickListener { _ ->
-                            findNavController()
-                                .navigateSafely(
+                            navController
+                                ?.navigateSafely(
                                     LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
                                         entry.first.libraryId,
                                         entry.first.id,
