@@ -102,7 +102,6 @@ dependencies {
     implementation(AndroidX.recyclerView)
     implementation(AndroidX.Legacy.supportV4)
     implementation(Google.Android.material)
-    implementation(AndroidX.Work.runtimeKtx)
     implementation(KotlinX.Coroutines.core)
     implementation(KotlinX.Coroutines.android)
     implementation(KotlinX.Serialization.json)
