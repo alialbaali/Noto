@@ -9,6 +9,7 @@ import com.noto.app.domain.repository.NoteLabelRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
+import com.noto.app.util.mapWithLabels
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -157,18 +158,6 @@ class LibraryViewModel(
 
     fun toggleIsSearchEnabled() {
         mutableIsSearchEnabled.value = !mutableIsSearchEnabled.value
-    }
-
-    private fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): List<Pair<Note, List<Label>>> {
-        return map { note ->
-            note to labels
-                .sortedBy { it.position }
-                .filter { label ->
-                    noteLabels.filter { it.noteId == note.id }.any { noteLabel ->
-                        noteLabel.labelId == label.id
-                    }
-                }
-        }
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }

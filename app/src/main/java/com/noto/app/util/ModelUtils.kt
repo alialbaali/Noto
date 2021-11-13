@@ -72,3 +72,15 @@ fun List<Pair<Note, List<Label>>>.groupByLabels(sortingType: NoteListSortingType
         .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.first.isPinned } }
         .map { it.toPair() }
         .sortedBy { it.first.firstOrNull()?.position }
+
+fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): List<Pair<Note, List<Label>>> {
+    return map { note ->
+        note to labels
+            .sortedBy { it.position }
+            .filter { label ->
+                noteLabels.filter { it.noteId == note.id }.any { noteLabel ->
+                    noteLabel.labelId == label.id
+                }
+            }
+    }
+}
