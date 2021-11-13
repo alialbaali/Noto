@@ -41,40 +41,40 @@
             android:enabled="true"
             android:exported="false" />
 
-        <receiver
-            android:name=".widget.LibraryListWidgetProvider"
-            android:label="@string/libraries"
-            android:exported="true">
+<!--        <receiver-->
+<!--            android:name=".widget.LibraryListWidgetProvider"-->
+<!--            android:label="@string/libraries"-->
+<!--            android:exported="true">-->
 
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
+<!--            <intent-filter>-->
+<!--                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
+<!--            </intent-filter>-->
 
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/library_list_widget_provider" />
-        </receiver>
+<!--            <meta-data-->
+<!--                android:name="android.appwidget.provider"-->
+<!--                android:resource="@xml/library_list_widget_provider" />-->
+<!--        </receiver>-->
 
-        <service
-            android:name=".widget.LibraryListWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
+<!--        <service-->
+<!--            android:name=".widget.LibraryListWidgetService"-->
+<!--            android:permission="android.permission.BIND_REMOTEVIEWS" />-->
 
-        <receiver
-            android:name=".widget.NoteListWidgetProvider"
-            android:label="@string/notes"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
+<!--        <receiver-->
+<!--            android:name=".widget.NoteListWidgetProvider"-->
+<!--            android:label="@string/notes"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />-->
+<!--            </intent-filter>-->
 
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/note_list_widget_provider" />
-        </receiver>
+<!--            <meta-data-->
+<!--                android:name="android.appwidget.provider"-->
+<!--                android:resource="@xml/note_list_widget_provider" />-->
+<!--        </receiver>-->
 
-        <service
-            android:name=".widget.NoteListWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
+<!--        <service-->
+<!--            android:name=".widget.NoteListWidgetService"-->
+<!--            android:permission="android.permission.BIND_REMOTEVIEWS" />-->
     </application>
 
 </manifest>
