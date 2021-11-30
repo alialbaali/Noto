@@ -11,4 +11,6 @@
     android:previewImage="@layout/library_list_widget"
     android:previewLayout="@layout/library_list_widget"
     android:initialLayout="@layout/library_list_widget"
+    android:configure="com.noto.app.widget.LibraryListWidgetConfigActivity"
+    android:widgetFeatures="reconfigurable|configuration_optional"
     tools:targetApi="s" />

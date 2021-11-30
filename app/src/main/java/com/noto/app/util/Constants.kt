@@ -17,12 +17,22 @@ object Constants {
     const val Labels = "Labels"
     const val NoteLabels = "NoteLabels"
     const val Settings = "Settings"
-    const val AppWidgetId = "app_widget_id"
 
     object Intent {
         const val ActionCreateLibrary = "com.noto.intent.action.CREATE_LIBRARY"
         const val ActionCreateNote = "com.noto.intent.action.CREATE_NOTE"
         const val ActionOpenLibrary = "com.noto.intent.action.OPEN_LIBRARY"
         const val ActionOpenNote = "com.noto.intent.action.OPEN_NOTE"
+    }
+
+    object Widget {
+        val Int.WidgetId get() = "Widget_Id_$this"
+        val Int.WidgetHeader get() = "Widget_Header_$this"
+        val Int.EditWidgetButton get() = "Edit_Widget_Button_$this"
+        val Int.AppIcon get() = "App_Icon_$this"
+        val Int.NewLibraryButton get() = "New_Library_Button_$this"
+        val Int.NotesCount get() = "Notes_Count_$this"
+        val Int.WidgetRadius get() = "Widget_Radius_$this"
+        val Int.WidgetLayout get() = "Widget_Layout_$this"
     }
 }

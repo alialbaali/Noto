@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cool"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl"
+        style="@style/AppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            app:title="@string/widget_options" />
+
+        <LinearLayout
+            android:background="@drawable/generic_shape"
+            android:animateLayoutChanges="true"
+            android:padding="@dimen/spacing_normal"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/spacing_normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/list_widget"
+                layout="@layout/library_list_widget" />
+
+            <include
+                android:id="@+id/grid_widget"
+                layout="@layout/library_grid_widget" />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_behavior="com.noto.app.util.BounceScrollingViewBehavior">
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:animateLayoutChanges="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@drawable/generic_shape"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginVertical="@dimen/spacing_small"
+                android:animateLayoutChanges="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sw_widget_header"
+                    style="@style/SettingsItem"
+                    android:text="@string/widget_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sw_edit_widget"
+                    style="@style/SettingsItem"
+                    android:text="@string/edit_widget_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sw_app_icon"
+                    style="@style/SettingsItem"
+                    android:text="@string/app_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@drawable/generic_shape"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginVertical="@dimen/spacing_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sw_new_library"
+                    style="@style/SettingsItem"
+                    android:text="@string/new_library_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sw_notes_count"
+                    style="@style/SettingsItem"
+                    android:text="@string/libraries_notes_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:background="@drawable/generic_shape"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginVertical="@dimen/spacing_small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_widget_radius"
+                    style="@style/SettingsItem"
+                    android:clickable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/widget_radius" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/s_widget_radius"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:valueFrom="8"
+                    android:valueTo="24"
+                    android:value="16"
+                    android:stepSize="8"
+                    android:contentDescription="@string/widget_radius"
+                    android:layout_marginHorizontal="@dimen/spacing_normal"
+                    app:haloColor="@color/colorSurface"
+                    app:labelStyle="@style/SliderLabel"
+                    app:thumbColor="@color/colorPrimary"
+                    app:thumbRadius="12dp"
+                    app:thumbStrokeColor="@color/colorPrimary"
+                    app:thumbStrokeWidth="0dp"
+                    app:tickColorActive="@color/colorBackground"
+                    app:tickColorInactive="@color/colorPrimary"
+                    app:trackColorActive="@color/colorPrimary"
+                    app:trackColorInactive="@color/colorBackground"
+                    app:trackHeight="@dimen/spacing_normal" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_widget_layout"
+                    style="@style/SettingsItem"
+                    android:clickable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/widget_layout" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tl_widget_layout"
+                    android:layout_margin="@dimen/spacing_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/generic_shape"
+                    android:backgroundTint="@color/colorBackground"
+                    app:tabIconTint="@color/tab_icon_color_selector"
+                    app:tabIndicator="@drawable/tab_indicator_shape"
+                    app:tabIndicatorAnimationMode="elastic"
+                    app:tabIndicatorColor="@color/colorPrimary"
+                    app:tabIndicatorGravity="stretch"
+                    app:tabInlineLabel="true"
+                    app:tabSelectedTextColor="@color/colorBackground"
+                    app:tabTextAppearance="@style/TabItemTextAppearance"
+                    app:tabTextColor="@color/colorPrimary">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:text="@string/list"
+                        android:icon="@drawable/ic_round_view_agenda_24"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:text="@string/grid"
+                        android:icon="@drawable/ic_round_view_grid_24"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.tabs.TabLayout>
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_create"
+                style="@style/MaterialButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_normal"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/create_widget" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -139,7 +139,7 @@ class MainFragment : Fragment() {
                 if (libraries.isEmpty()) {
                     placeholderItem {
                         id("placeholder")
-                        placeholder(context.stringResource(R.string.no_libraries_found))
+                        placeholder(context.stringResource(R.string.no_libraries_found_create))
                     }
                 } else {
                     val pinnedLibraries = libraries.filter { it.isPinned }

@@ -3,6 +3,7 @@ package com.noto.app.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
@@ -14,6 +15,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.widget.doOnTextChanged
@@ -23,6 +25,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.noto.app.R
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
@@ -33,6 +36,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onStart
 
 const val SetColorFilterMethodName = "setColorFilter"
+const val SetBackgroundResourceMethodName = "setBackgroundResource"
 
 fun NavController.navigateSafely(directions: NavDirections) {
     if (currentDestination?.getAction(directions.actionId) != null)
@@ -128,4 +132,20 @@ fun TextView.removeLinksUnderline() {
         )
     }
     text = spannable
+}
+
+fun SwitchMaterial.setupColors(
+    thumbCheckedColor: Int = context.colorResource(R.color.colorPrimary),
+    thumbUnCheckedColor: Int = context.colorResource(R.color.colorSurface),
+    trackCheckedColor: Int = context.colorResource(R.color.colorPrimary),
+    trackUnCheckedColor: Int = context.colorResource(R.color.colorSecondary),
+) {
+    val state = arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf(-android.R.attr.state_checked))
+    val thumbColors = intArrayOf(thumbCheckedColor, thumbUnCheckedColor)
+    val trackColors = intArrayOf(
+        ColorUtils.setAlphaComponent(trackCheckedColor, 128),
+        ColorUtils.setAlphaComponent(trackUnCheckedColor, 128)
+    )
+    thumbTintList = ColorStateList(state, thumbColors)
+    trackTintList = ColorStateList(state, trackColors)
 }

@@ -1,9 +1,6 @@
 package com.noto.app
 
-import android.app.Activity
 import android.app.NotificationManager
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -22,7 +19,6 @@ import com.noto.app.util.Constants
 import com.noto.app.util.colorResource
 import com.noto.app.util.createNotificationChannel
 import com.noto.app.util.withBinding
-import com.noto.app.widget.NoteListWidgetProvider
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -82,24 +78,6 @@ class AppActivity : AppCompatActivity() {
                 navController.popBackStack(R.id.libraryFragment, true)
                 navController.navigate(R.id.libraryFragment, args)
                 navController.navigate(R.id.noteFragment, args)
-            }
-            AppWidgetManager.ACTION_APPWIDGET_CONFIGURE -> {
-                setResult(Activity.RESULT_CANCELED)
-                val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener { libraryId ->
-                    val widgetComponentName = ComponentName(this@AppActivity, NoteListWidgetProvider::class.java)
-                    val appWidgetIds = AppWidgetManager.getInstance(this@AppActivity).getAppWidgetIds(widgetComponentName)
-                    val intent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE, null, this@AppActivity, NoteListWidgetProvider::class.java)
-                        .apply {
-                            putExtra(Constants.LibraryId, libraryId)
-                            putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
-                        }
-                    sendBroadcast(intent)
-                    setResult(Activity.RESULT_OK, intent)
-                    finish()
-                }
-                val args = bundleOf(Constants.LibraryId to 0L, Constants.SelectedLibraryItemClickListener to selectLibraryItemClickListener)
-                navController.popBackStack(R.id.selectLibraryDialogFragment, true)
-                navController.navigate(R.id.selectLibraryDialogFragment, args)
             }
         }
     }

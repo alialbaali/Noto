@@ -63,7 +63,7 @@
         <item quantity="other">%d Libraries</item>
     </plurals>
     <string name="create_library">Create library</string>
-    <string name="new_library">New Library</string>
+    <string name="new_library">New library</string>
     <string name="library_options">Library options</string>
     <string name="edit_library">Edit library</string>
     <string name="archive_library">Archive library</string>
@@ -82,7 +82,8 @@
     <string name="library_is_unarchived">Library has been unarchived.</string>
     <string name="library_is_pinned">Library has been pinned.</string>
     <string name="library_is_unpinned">Library has been unpinned.</string>
-    <string name="no_libraries_found">No libraries found. Try creating a library by clicking the + icon.</string>
+    <string name="no_libraries_found">No libraries found.</string>
+    <string name="no_libraries_found_create">No libraries found. Try creating a library by clicking the + icon.</string>
     <string name="select_library">Select library</string>
     <string name="pinned">Pinned</string>
     <string name="pin_library">Pin library</string>
@@ -172,4 +173,17 @@
     <string name="turkish">Turkish</string>
     <string name="arabic">Arabic</string>
 
+    <!-- Widget -->
+    <string name="create_widget">Create widget</string>
+    <string name="update_widget">Update widget</string>
+    <string name="widget_options">Widget options</string>
+    <string name="new_library_button">New library button</string>
+    <string name="new_note_button">New note button</string>
+    <string name="widget_header">Widget header</string>
+    <string name="app_icon">App icon</string>
+    <string name="widget_radius">Widget radius</string>
+    <string name="widget_layout">Widget layout</string>
+    <string name="edit_widget">Edit widget</string>
+    <string name="edit_widget_button">Edit widget button</string>
+    <string name="libraries_notes_count">Libraries notes count</string>
 </resources>

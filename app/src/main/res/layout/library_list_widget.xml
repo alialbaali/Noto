@@ -1,11 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lv"
+    android:id="@+id/ll"
+    android:background="@drawable/widget_shape_medium"
+    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/widget_shape"
-    android:paddingHorizontal="@dimen/spacing_small"
-    android:scrollbars="none"
-    android:divider="@null"
-    tools:listitem="@layout/widget_library_item" />
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_header"
+        android:background="@drawable/widget_header_shape_medium"
+        android:elevation="@dimen/elevation_normal"
+        android:animateLayoutChanges="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_app_icon"
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="30dp"
+            android:layout_margin="@dimen/spacing_normal"
+            android:background="@drawable/ic_btn_shape"
+            android:layout_height="30dp"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/tv_app_name"
+            style="@style/DialogTitle"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:text="@string/app_name"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/ll_edit_widget"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="end|center_vertical"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/iv_edit_widget"
+                android:src="@drawable/ic_round_settings_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_normal"
+                android:background="@drawable/ic_btn_shape"
+                android:backgroundTint="@color/colorBackground"
+                android:tint="@color/colorPrimary"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:contentDescription="@string/edit_widget" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/lv"
+            android:paddingHorizontal="@dimen/spacing_small"
+            android:scrollbars="none"
+            android:divider="@null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/padding_bottom"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            tools:listitem="@layout/widget_library_item" />
+
+        <TextView
+            android:id="@+id/tv_placeholder"
+            style="@style/PlaceholderTextView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/spacing_normal"
+            android:paddingStart="@dimen/spacing_normal"
+            android:paddingEnd="@dimen/spacing_normal"
+            android:paddingBottom="@dimen/padding_bottom"
+            android:textSize="@dimen/size_large"
+            android:textStyle="bold"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:text="@string/no_libraries_found" />
+
+        <ImageButton
+            android:id="@+id/fab"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/ic_round_add_24"
+            android:backgroundTint="@color/colorPrimary"
+            android:background="@drawable/ic_btn_shape"
+            android:padding="@dimen/spacing_normal"
+            android:tint="@color/colorBackground"
+            android:contentDescription="@string/create_library" />
+    </FrameLayout>
+</LinearLayout>
