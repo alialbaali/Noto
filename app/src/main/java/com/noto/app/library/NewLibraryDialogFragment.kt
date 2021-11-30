@@ -1,12 +1,10 @@
 package com.noto.app.library
 
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.pm.ShortcutManagerCompat
-import androidx.core.graphics.ColorUtils
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -102,46 +100,27 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             Layout.Grid -> tlLibraryLayout.getTabAt(1)
         }
         tlLibraryLayout.selectTab(tab)
-        val state = arrayOf(
-            intArrayOf(android.R.attr.state_checked),
-            intArrayOf(-android.R.attr.state_checked),
-        )
         swShowNoteCreationDate.isChecked = library.isShowNoteCreationDate
         swSetNewNoteCursor.isChecked = library.isSetNewNoteCursorOnTitle
         context?.let { context ->
-            val switchOffColor = ColorUtils.setAlphaComponent(context.colorResource(R.color.colorSecondary), 128)
             if (library.id != 0L) {
                 val color = context.colorResource(library.color.toResource())
                 val colorStateList = context.colorStateResource(library.color.toResource())
                 baseDialogFragment.tvDialogTitle.setTextColor(color)
                 baseDialogFragment.vHead.background?.mutate()?.setTint(color)
                 tlLibraryLayout.setSelectedTabIndicatorColor(color)
+                sNotePreviewSize.value = library.notePreviewSize.toFloat()
                 if (colorStateList != null) {
                     tlLibraryLayout.tabRippleColor = colorStateList
-                    sNotePreviewSize.value = library.notePreviewSize.toFloat()
                     sNotePreviewSize.trackActiveTintList = colorStateList
                     sNotePreviewSize.thumbTintList = colorStateList
                     sNotePreviewSize.tickInactiveTintList = colorStateList
-                    val switchThumbTintList = ColorStateList(state, intArrayOf(color, context.colorResource(R.color.colorSurface)))
-                    val switchTrackTintList = ColorStateList(state, intArrayOf(ColorUtils.setAlphaComponent(color, 128), switchOffColor))
-                    swShowNoteCreationDate.thumbTintList = switchThumbTintList
-                    swShowNoteCreationDate.trackTintList = switchTrackTintList
-                    swSetNewNoteCursor.thumbTintList = switchThumbTintList
-                    swSetNewNoteCursor.trackTintList = switchTrackTintList
                 }
+                swShowNoteCreationDate.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
+                swSetNewNoteCursor.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
             } else {
-                val switchThumbTintList = ColorStateList(
-                    state,
-                    intArrayOf(context.colorResource(R.color.colorPrimary), context.colorResource(R.color.colorSurface))
-                )
-                val switchTrackTintList = ColorStateList(
-                    state,
-                    intArrayOf(ColorUtils.setAlphaComponent(context.colorResource(R.color.colorPrimary), 128), switchOffColor)
-                )
-                swShowNoteCreationDate.thumbTintList = switchThumbTintList
-                swShowNoteCreationDate.trackTintList = switchTrackTintList
-                swSetNewNoteCursor.thumbTintList = switchThumbTintList
-                swSetNewNoteCursor.trackTintList = switchTrackTintList
+                swShowNoteCreationDate.setupColors()
+                swSetNewNoteCursor.setupColors()
             }
         }
     }

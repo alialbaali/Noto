@@ -1,13 +1,11 @@
 package com.noto.app.settings
 
 import android.content.Intent
-import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.ColorUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.R
@@ -37,21 +35,7 @@ class SettingsFragment : Fragment() {
                 ?.getPackageInfo(context.packageName, 0)
                 ?.versionName
             tvVersion.text = context.stringResource(R.string.version, version)
-            val switchOffColor = ColorUtils.setAlphaComponent(context.colorResource(R.color.colorSecondary), 128)
-            val state = arrayOf(
-                intArrayOf(android.R.attr.state_checked),
-                intArrayOf(-android.R.attr.state_checked),
-            )
-            val switchThumbTintList = ColorStateList(
-                state,
-                intArrayOf(context.colorResource(R.color.colorPrimary), context.colorResource(R.color.colorSurface))
-            )
-            val switchTrackTintList = ColorStateList(
-                state,
-                intArrayOf(ColorUtils.setAlphaComponent(context.colorResource(R.color.colorPrimary), 128), switchOffColor)
-            )
-            swShowNotesCount.thumbTintList = switchThumbTintList
-            swShowNotesCount.trackTintList = switchTrackTintList
+            swShowNotesCount.setupColors()
         }
 
         viewModel.isShowNotesCount
