@@ -25,7 +25,7 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.Serializable
 
-class SelectLibraryDialogFragment : BaseDialogFragment() {
+class SelectLibraryDialogFragment(private val isDismissible: Boolean = true) : BaseDialogFragment() {
 
     private val viewModel by viewModel<MainViewModel>()
 
@@ -33,6 +33,7 @@ class SelectLibraryDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         SelectLibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+            isCancelable = isDismissible
             setupBaseDialogFragment()
             setupState()
         }

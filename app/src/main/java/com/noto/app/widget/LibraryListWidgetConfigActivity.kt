@@ -24,7 +24,7 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
     private val viewModel by viewModel<LibraryListWidgetConfigViewModel> { parametersOf(appWidgetId) }
 
     private val appWidgetId by lazy {
-        intent?.extras?.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
+        intent?.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
             ?: AppWidgetManager.INVALID_APPWIDGET_ID
     }
 
@@ -202,8 +202,10 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
         )
 
         btnCreate.setOnClickListener {
-            val appWidgetManager = AppWidgetManager.getInstance(this@LibraryListWidgetConfigActivity)
             viewModel.setIsWidgetCreated()
+            val appWidgetManager = AppWidgetManager.getInstance(this@LibraryListWidgetConfigActivity)
+            // Needed to update the visibility of notes count in library items.
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, viewModel.widgetLayout.value.toWidgetViewId())
             appWidgetManager.updateAppWidget(
                 appWidgetId,
                 createLibraryListWidgetRemoteViews(

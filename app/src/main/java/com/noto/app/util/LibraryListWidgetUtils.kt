@@ -27,17 +27,14 @@ fun Context.createLibraryListWidgetRemoteViews(
         Layout.Linear -> R.layout.library_list_widget
         Layout.Grid -> R.layout.library_grid_widget
     }
-    val viewId = when (layout) {
-        Layout.Linear -> R.id.lv
-        Layout.Grid -> R.id.gv
-    }
+    val viewId = layout.toWidgetViewId()
     return RemoteViews(packageName, layoutId).apply {
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_edit_widget, if (isEditWidgetButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_app_icon, if (isAppIconEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.fab, if (isNewLibraryButtonEnabled) View.VISIBLE else View.GONE)
-//        setViewVisibility(R.id.tv_placeholder, if (isEmpty) View.VISIBLE else View.GONE)
-//        setViewVisibility(viewId, if (isEmpty) View.GONE else View.VISIBLE)
+        setViewVisibility(R.id.tv_placeholder, if (isEmpty) View.VISIBLE else View.GONE)
+        setViewVisibility(viewId, if (isEmpty) View.GONE else View.VISIBLE)
         setOnClickPendingIntent(R.id.iv_edit_widget, createEditWidgetButtonPendingIntent(appWidgetId))
         setOnClickPendingIntent(R.id.fab, createNewLibraryButtonPendingIntent(appWidgetId))
         setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId))
@@ -74,7 +71,7 @@ private fun Context.createNewLibraryButtonPendingIntent(appWidgetId: Int): Pendi
     return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
 }
 
-fun Context.createLibraryListServiceIntent(appWidgetId: Int): Intent {
+private fun Context.createLibraryListServiceIntent(appWidgetId: Int): Intent {
     return Intent(this, LibraryListWidgetService::class.java).apply {
         putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         data = Uri.parse(this.toUri(Intent.URI_INTENT_SCHEME))
