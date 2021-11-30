@@ -22,6 +22,7 @@ import com.noto.app.main.MainViewModel
 import com.noto.app.note.NoteViewModel
 import com.noto.app.settings.SettingsViewModel
 import com.noto.app.widget.LibraryListWidgetConfigViewModel
+import com.noto.app.widget.NoteListWidgetConfigViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -44,6 +45,8 @@ val appModule = module {
     viewModel { LabelViewModel(get(), get(), it[0], it[1]) }
 
     viewModel { LibraryListWidgetConfigViewModel(it.get(), get(), get(), get()) }
+
+    viewModel { NoteListWidgetConfigViewModel(it.get(), get(), get(), get(), get(), get()) }
 }
 
 val repositoryModule = module {

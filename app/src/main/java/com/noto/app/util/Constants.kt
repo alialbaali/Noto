@@ -34,5 +34,6 @@ object Constants {
         val Int.NotesCount get() = "Notes_Count_$this"
         val Int.WidgetRadius get() = "Widget_Radius_$this"
         val Int.WidgetLayout get() = "Widget_Layout_$this"
+        fun WidgetLabelIds(libraryId: Long, appWidgetId: Int) = LibraryId + libraryId.toString() + "_" + appWidgetId.WidgetId
     }
 }

@@ -157,6 +157,7 @@
     <string name="delete_label_confirmation">Are you sure you want to delete this label?</string>
     <string name="label_is_deleted">Label has been deleted.</string>
     <string name="delete_label_description">This action can\'t be undone and will delete the label and remove the label from the associated notes permanently.</string>
+    <string name="filter_labels">Filter labels</string>
 
     <!-- Theme -->
     <string name="theme">Theme</string>

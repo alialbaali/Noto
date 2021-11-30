@@ -84,3 +84,7 @@ fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): 
             }
     }
 }
+
+fun Map<Label, Boolean>.filterSelected() = filterValues { it }.map { it.key }
+
+fun String.toLongList() = split(", ").mapNotNull { it.toLongOrNull() }

@@ -1,5 +1,6 @@
 package com.noto.app.widget
 
+import android.appwidget.AppWidgetManager
 import android.content.Context
 import android.content.Intent
 import android.view.View
@@ -10,19 +11,58 @@ import com.noto.app.R
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
+import com.noto.app.domain.repository.LabelRepository
+import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.NoteLabelRepository
+import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class NoteListRemoteViewsFactory(
-    private val context: Context,
-    private val intent: Intent?,
-    val library: Library,
-    val notes: List<Pair<Note, List<Label>>>,
-) : RemoteViewsService.RemoteViewsFactory, KoinComponent {
+class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) : RemoteViewsService.RemoteViewsFactory, KoinComponent {
+
+    private val libraryRepository by inject<LibraryRepository>()
+    private val noteRepository by inject<NoteRepository>()
+    private val labelRepository by inject<LabelRepository>()
+    private val noteLabelRepository by inject<NoteLabelRepository>()
+    private val storage by inject<LocalStorage>()
+    private val appWidgetId = intent?.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
+        ?: AppWidgetManager.INVALID_APPWIDGET_ID
+    private val libraryId = intent?.getLongExtra(Constants.LibraryId, 0) ?: 0
+    private lateinit var library: Library
+    private lateinit var labelIds: List<Long>
+    private lateinit var notes: List<Pair<Note, List<Label>>>
 
     override fun onCreate() {}
 
-    override fun onDataSetChanged() {}
+    override fun onDataSetChanged() = runBlocking {
+        library = libraryRepository.getLibraryById(libraryId)
+            .filterNotNull()
+            .first()
+        labelIds = storage.get(Constants.Widget.WidgetLabelIds(libraryId, appWidgetId))
+            .filterNotNull()
+            .map { it.toLongList() }
+            .first()
+        val labels = labelRepository.getLabelsByLibraryId(libraryId)
+            .filterNotNull()
+            .first()
+        val noteLabels = noteLabelRepository.getNoteLabels()
+            .filterNotNull()
+            .first()
+        notes = noteRepository.getNotesByLibraryId(libraryId)
+            .filterNotNull()
+            .map {
+                it.mapWithLabels(labels, noteLabels)
+                    .filter { it.second.map { it.id }.containsAll(labelIds.toList()) }
+                    .sorted(library.sortingType, library.sortingOrder)
+            }
+            .first()
+    }
 
     override fun onDestroy() {}
 

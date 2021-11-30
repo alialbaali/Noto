@@ -7,9 +7,10 @@
     android:targetCellHeight="2"
     android:updatePeriodMillis="3600000"
     android:resizeMode="vertical|horizontal"
-    android:configure="com.noto.app.AppActivity"
     android:description="@string/notes"
     android:previewImage="@layout/library_list_widget"
     android:previewLayout="@layout/library_list_widget"
     android:initialLayout="@layout/library_list_widget"
+    android:configure="com.noto.app.widget.NoteListWidgetConfigActivity"
+    android:widgetFeatures="reconfigurable|configuration_optional"
     tools:targetApi="s" />

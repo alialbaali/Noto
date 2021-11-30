@@ -51,7 +51,16 @@ class AppActivity : AppCompatActivity() {
             Intent.ACTION_SEND -> intent.getStringExtra(Intent.EXTRA_TEXT)
                 ?.let { content -> showSelectLibraryDialog(content) }
             Constants.Intent.ActionCreateLibrary -> navController.navigate(R.id.newLibraryDialogFragment)
-            Constants.Intent.ActionCreateNote -> showSelectLibraryDialog(null)
+            Constants.Intent.ActionCreateNote -> {
+                val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
+                if (libraryId == 0L) {
+                    showSelectLibraryDialog(null)
+                } else {
+                    val args = bundleOf(Constants.LibraryId to libraryId)
+                    navController.navigate(R.id.libraryFragment, args)
+                    navController.navigate(R.id.noteFragment, args)
+                }
+            }
             Intent.ACTION_EDIT -> {
                 val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
                 val noteId = intent.getLongExtra(Constants.NoteId, 0)
