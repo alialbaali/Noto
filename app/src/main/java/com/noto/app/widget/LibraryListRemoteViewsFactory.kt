@@ -48,6 +48,7 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
             .filterNotNull()
             .first()
             .sorted(sortingType, sortingOrder)
+            .sortedByDescending { it.isPinned }
         isShowNotesCount = storage.getOrNull(appWidgetId.NotesCount)
             .map { it?.toBoolean() ?: true }
             .first()

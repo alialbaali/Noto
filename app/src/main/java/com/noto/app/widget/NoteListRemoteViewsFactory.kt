@@ -61,6 +61,7 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
                 it.mapWithLabels(labels, noteLabels)
                     .filter { it.second.map { it.id }.containsAll(labelIds.toList()) }
                     .sorted(library.sortingType, library.sortingOrder)
+                    .sortedByDescending { it.first.isPinned }
             }
             .first()
     }
