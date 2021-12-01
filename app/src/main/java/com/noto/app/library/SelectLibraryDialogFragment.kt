@@ -33,7 +33,10 @@ class SelectLibraryDialogFragment(private val isDismissible: Boolean = true) : B
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         SelectLibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-            isCancelable = isDismissible
+            if (!isDismissible) {
+                dialog?.setCanceledOnTouchOutside(false)
+                dialog?.setOnCancelListener { activity?.finish() }
+            }
             setupBaseDialogFragment()
             setupState()
         }
