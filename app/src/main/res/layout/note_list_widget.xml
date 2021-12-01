@@ -62,6 +62,7 @@
 
         <ListView
             android:id="@+id/lv"
+            android:paddingTop="@dimen/spacing_small"
             android:paddingHorizontal="@dimen/spacing_small"
             android:scrollbars="none"
             android:divider="@null"

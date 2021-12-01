@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
+        android:paddingTop="@dimen/spacing_small"
         android:paddingHorizontal="@dimen/spacing_small"
         android:paddingBottom="@dimen/padding_bottom"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
