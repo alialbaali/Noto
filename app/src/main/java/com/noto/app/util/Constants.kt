@@ -26,14 +26,14 @@ object Constants {
     }
 
     object Widget {
-        val Int.WidgetId get() = "Widget_Id_$this"
-        val Int.WidgetHeader get() = "Widget_Header_$this"
-        val Int.EditWidgetButton get() = "Edit_Widget_Button_$this"
-        val Int.AppIcon get() = "App_Icon_$this"
-        val Int.NewLibraryButton get() = "New_Library_Button_$this"
-        val Int.NotesCount get() = "Notes_Count_$this"
-        val Int.WidgetRadius get() = "Widget_Radius_$this"
-        val Int.WidgetLayout get() = "Widget_Layout_$this"
-        fun WidgetLabelIds(libraryId: Long, appWidgetId: Int) = LibraryId + libraryId.toString() + "_" + appWidgetId.WidgetId
+        val Int.Id get() = "Widget_Id_$this"
+        val Int.Header get() = "Widget_Header_$this"
+        val Int.EditButton get() = "Widget_Edit_Button$this"
+        val Int.AppIcon get() = "Widget_App_Icon_$this"
+        val Int.NewItemButton get() = "Widget_New_Item_Button_$this"
+        val Int.NotesCount get() = "Widget_Notes_Count_$this"
+        val Int.Radius get() = "Widget_Radius_$this"
+        val Int.Layout get() = "Widget_Layout_$this"
+        fun Int.LabelIds(libraryId: Long) = Id + "_" + LibraryId + libraryId.toString()
     }
 }

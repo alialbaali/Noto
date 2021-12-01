@@ -11,14 +11,14 @@ import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteLabelRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
-import com.noto.app.util.Constants
 import com.noto.app.util.Constants.Widget.AppIcon
-import com.noto.app.util.Constants.Widget.EditWidgetButton
-import com.noto.app.util.Constants.Widget.NewLibraryButton
-import com.noto.app.util.Constants.Widget.WidgetHeader
-import com.noto.app.util.Constants.Widget.WidgetId
-import com.noto.app.util.Constants.Widget.WidgetLayout
-import com.noto.app.util.Constants.Widget.WidgetRadius
+import com.noto.app.util.Constants.Widget.EditButton
+import com.noto.app.util.Constants.Widget.Header
+import com.noto.app.util.Constants.Widget.Id
+import com.noto.app.util.Constants.Widget.LabelIds
+import com.noto.app.util.Constants.Widget.Layout
+import com.noto.app.util.Constants.Widget.NewItemButton
+import com.noto.app.util.Constants.Widget.Radius
 import com.noto.app.util.mapWithLabels
 import com.noto.app.util.toLongList
 import kotlinx.coroutines.flow.*
@@ -42,17 +42,17 @@ class NoteListWidgetConfigViewModel(
     private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())
     val labels get() = mutableLabels.asStateFlow()
 
-    val isWidgetCreated = storage.get(appWidgetId.WidgetId)
+    val isWidgetCreated = storage.get(appWidgetId.Id)
         .filterNotNull()
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
-    val isWidgetHeaderEnabled = storage.get(appWidgetId.WidgetHeader)
+    val isWidgetHeaderEnabled = storage.get(appWidgetId.Header)
         .filterNotNull()
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
-    val isEditWidgetButtonEnabled = storage.get(appWidgetId.EditWidgetButton)
+    val isEditWidgetButtonEnabled = storage.get(appWidgetId.EditButton)
         .filterNotNull()
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
@@ -62,17 +62,17 @@ class NoteListWidgetConfigViewModel(
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
-    val isNewLibraryButtonEnabled = storage.get(appWidgetId.NewLibraryButton)
+    val isNewLibraryButtonEnabled = storage.get(appWidgetId.NewItemButton)
         .filterNotNull()
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
-    val widgetRadius = storage.get(appWidgetId.WidgetRadius)
+    val widgetRadius = storage.get(appWidgetId.Radius)
         .filterNotNull()
         .map { it.toInt() }
         .stateIn(viewModelScope, SharingStarted.Lazily, 16)
 
-    val widgetLayout = storage.get(appWidgetId.WidgetLayout)
+    val widgetLayout = storage.get(appWidgetId.Layout)
         .filterNotNull()
         .map { Layout.valueOf(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, Layout.Linear)
@@ -97,7 +97,7 @@ class NoteListWidgetConfigViewModel(
         combine(
             labelRepository.getLabelsByLibraryId(libraryId)
                 .filterNotNull(),
-            storage.get(Constants.Widget.WidgetLabelIds(libraryId, appWidgetId))
+            storage.get(appWidgetId.LabelIds(libraryId))
                 .filterNotNull()
                 .map { it.toLongList() }
                 .onStart { emit(emptyList()) },
@@ -123,11 +123,11 @@ class NoteListWidgetConfigViewModel(
     }
 
     fun setIsWidgetHeaderEnabled(value: Boolean) = viewModelScope.launch {
-        storage.put(appWidgetId.WidgetHeader, value.toString())
+        storage.put(appWidgetId.Header, value.toString())
     }
 
     fun setIsEditWidgetButtonEnabled(value: Boolean) = viewModelScope.launch {
-        storage.put(appWidgetId.EditWidgetButton, value.toString())
+        storage.put(appWidgetId.EditButton, value.toString())
     }
 
     fun setIsAppIconEnabled(value: Boolean) = viewModelScope.launch {
@@ -135,23 +135,23 @@ class NoteListWidgetConfigViewModel(
     }
 
     fun setIsNewLibraryButtonEnabled(value: Boolean) = viewModelScope.launch {
-        storage.put(appWidgetId.NewLibraryButton, value.toString())
+        storage.put(appWidgetId.NewItemButton, value.toString())
     }
 
     fun setWidgetRadius(value: Int) = viewModelScope.launch {
-        storage.put(appWidgetId.WidgetRadius, value.toString())
+        storage.put(appWidgetId.Radius, value.toString())
     }
 
     fun setWidgetLayout(value: Layout) = viewModelScope.launch {
-        storage.put(appWidgetId.WidgetLayout, value.toString())
+        storage.put(appWidgetId.Layout, value.toString())
     }
 
     fun setIsWidgetCreated() = viewModelScope.launch {
-        storage.put(appWidgetId.WidgetId, true.toString())
+        storage.put(appWidgetId.Id, true.toString())
     }
 
     fun saveLabelIds() = viewModelScope.launch {
         val labelIds = labels.value.filterValues { it }.map { it.key.id }.joinToString()
-        storage.put(Constants.Widget.WidgetLabelIds(library.value.id, appWidgetId), labelIds)
+        storage.put(appWidgetId.LabelIds(library.value.id), labelIds)
     }
 }

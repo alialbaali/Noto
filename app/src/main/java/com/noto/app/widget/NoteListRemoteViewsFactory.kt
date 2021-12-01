@@ -17,6 +17,7 @@ import com.noto.app.domain.repository.NoteLabelRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.*
+import com.noto.app.util.Constants.Widget.LabelIds
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -44,7 +45,7 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
         library = libraryRepository.getLibraryById(libraryId)
             .filterNotNull()
             .first()
-        labelIds = storage.get(Constants.Widget.WidgetLabelIds(libraryId, appWidgetId))
+        labelIds = storage.get(appWidgetId.LabelIds(libraryId))
             .filterNotNull()
             .map { it.toLongList() }
             .first()
