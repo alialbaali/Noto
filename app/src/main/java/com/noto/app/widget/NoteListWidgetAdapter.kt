@@ -15,8 +15,6 @@ import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
 
-private const val PreviewSize = 3
-
 class NoteListWidgetAdapter(
     context: Context,
     layoutResourceId: Int,
@@ -49,9 +47,9 @@ class NoteListWidgetAdapter(
                     tvNoteBody.maxLines = 1
                     tvNoteBody.isVisible = true
                 } else {
-                    tvNoteBody.text = note.body.takeLines(PreviewSize)
-                    tvNoteBody.maxLines = PreviewSize
-                    tvNoteBody.isVisible = note.body.isNotBlank()
+                    tvNoteBody.text = note.body.takeLines(previewSize)
+                    tvNoteBody.maxLines = previewSize
+                    tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
                 }
                 tvNoteTitle.setPadding(0.dp, 0.dp, 0.dp, if (note.body.isBlank() || previewSize == 0) 0.dp else 4.dp)
                 tvNoteBody.setPadding(if (note.title.isBlank()) 0.dp else 4.dp, 0.dp, 0.dp, 0.dp)
