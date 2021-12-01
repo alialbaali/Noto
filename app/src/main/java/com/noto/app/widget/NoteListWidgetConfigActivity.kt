@@ -69,6 +69,8 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
             val filteredNotes = notes.filter { it.second.containsAll(labels.filterSelected()) }
             val color = colorResource(library.color.toResource())
             val colorStateList = colorStateResource(library.color.toResource())
+            tvFilterLabels.isVisible = labels.isNotEmpty()
+            rv.isVisible = labels.isNotEmpty()
             listWidget.tvLibraryTitle.text = library.title
             listWidget.tvLibraryTitle.setTextColor(color)
             listWidget.fab.background?.setTint(color)
