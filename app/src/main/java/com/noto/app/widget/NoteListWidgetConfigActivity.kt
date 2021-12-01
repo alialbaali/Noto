@@ -75,7 +75,12 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
             gridWidget.tvLibraryTitle.text = library.title
             gridWidget.tvLibraryTitle.setTextColor(color)
             gridWidget.fab.background?.setTint(color)
+            val tab = when (library.layout) {
+                Layout.Linear -> tlWidgetLayout.getTabAt(0)
+                Layout.Grid -> tlWidgetLayout.getTabAt(1)
+            }
             tlWidgetLayout.setSelectedTabIndicatorColor(color)
+            tlWidgetLayout.selectTab(tab)
             listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewLibrary)
                 .onEach { it.setupColors(thumbCheckedColor = color, trackCheckedColor = color) }
             if (colorStateList != null) {
