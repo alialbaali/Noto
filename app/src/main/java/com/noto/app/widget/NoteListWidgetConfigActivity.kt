@@ -41,7 +41,7 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
             if (libraryId == 0L)
                 showSelectLibraryDialog(false)
             else
-                viewModel.getData(libraryId)
+                viewModel.getWidgetData(libraryId)
             setupState()
             setupListeners()
         }
@@ -250,8 +250,7 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
 
         btnCreate.setOnClickListener {
 //            sendBroadcast() // Maybe we can send broadcast to NoteListWidgetProvider instead of updating it manually
-            viewModel.setIsWidgetCreated()
-            viewModel.saveLabelIds()
+            viewModel.createOrUpdateWidget()
             val appWidgetManager = AppWidgetManager.getInstance(this@NoteListWidgetConfigActivity)
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, viewModel.widgetLayout.value.toWidgetViewId())
             appWidgetManager.updateAppWidget(
@@ -276,7 +275,7 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
 
     private fun showSelectLibraryDialog(isDismissible: Boolean) {
         val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener { libraryId ->
-            viewModel.getData(libraryId)
+            viewModel.getWidgetData(libraryId)
         }
         val args = bundleOf(Constants.LibraryId to 0L, Constants.SelectedLibraryItemClickListener to selectLibraryItemClickListener)
         SelectLibraryDialogFragment(isDismissible)

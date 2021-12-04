@@ -202,7 +202,7 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
         )
 
         btnCreate.setOnClickListener {
-            viewModel.setIsWidgetCreated()
+            viewModel.createOrUpdateWidget()
             val appWidgetManager = AppWidgetManager.getInstance(this@LibraryListWidgetConfigActivity)
             // Needed to update the visibility of notes count in library items.
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, viewModel.widgetLayout.value.toWidgetViewId())

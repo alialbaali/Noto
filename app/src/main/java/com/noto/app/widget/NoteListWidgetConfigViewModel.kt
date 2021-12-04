@@ -47,37 +47,63 @@ class NoteListWidgetConfigViewModel(
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
-    val isWidgetHeaderEnabled = storage.get(appWidgetId.Header)
-        .filterNotNull()
-        .map { it.toBoolean() }
-        .stateIn(viewModelScope, SharingStarted.Lazily, true)
+    private val mutableIsWidgetHeaderEnabled = MutableStateFlow(true)
+    val isWidgetHeaderEnabled get() = mutableIsWidgetHeaderEnabled.asStateFlow()
 
-    val isEditWidgetButtonEnabled = storage.get(appWidgetId.EditButton)
-        .filterNotNull()
-        .map { it.toBoolean() }
-        .stateIn(viewModelScope, SharingStarted.Lazily, true)
+    private val mutableIsEditWidgetButtonEnabled = MutableStateFlow(true)
+    val isEditWidgetButtonEnabled get() = mutableIsEditWidgetButtonEnabled.asStateFlow()
 
-    val isAppIconEnabled = storage.get(appWidgetId.AppIcon)
-        .filterNotNull()
-        .map { it.toBoolean() }
-        .stateIn(viewModelScope, SharingStarted.Lazily, true)
+    private val mutableIsAppIconEnabled = MutableStateFlow(true)
+    val isAppIconEnabled get() = mutableIsAppIconEnabled.asStateFlow()
 
-    val isNewLibraryButtonEnabled = storage.get(appWidgetId.NewItemButton)
-        .filterNotNull()
-        .map { it.toBoolean() }
-        .stateIn(viewModelScope, SharingStarted.Lazily, true)
+    private val mutableIsNewLibraryButtonEnabled = MutableStateFlow(true)
+    val isNewLibraryButtonEnabled get() = mutableIsNewLibraryButtonEnabled.asStateFlow()
 
-    val widgetRadius = storage.get(appWidgetId.Radius)
-        .filterNotNull()
-        .map { it.toInt() }
-        .stateIn(viewModelScope, SharingStarted.Lazily, 16)
+    private val mutableWidgetRadius = MutableStateFlow(16)
+    val widgetRadius get() = mutableWidgetRadius.asStateFlow()
 
-    val widgetLayout = storage.get(appWidgetId.Layout)
-        .filterNotNull()
-        .map { Layout.valueOf(it) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, Layout.Linear)
+    private val mutableWidgetLayout = MutableStateFlow(Layout.Linear)
+    val widgetLayout get() = mutableWidgetLayout.asStateFlow()
 
-    fun getData(libraryId: Long) {
+    init {
+        storage.get(appWidgetId.Header)
+            .filterNotNull()
+            .map { it.toBoolean() }
+            .onEach { mutableIsWidgetHeaderEnabled.value = it }
+            .launchIn(viewModelScope)
+
+        storage.get(appWidgetId.EditButton)
+            .filterNotNull()
+            .map { it.toBoolean() }
+            .onEach { mutableIsEditWidgetButtonEnabled.value = it }
+            .launchIn(viewModelScope)
+
+        storage.get(appWidgetId.AppIcon)
+            .filterNotNull()
+            .map { it.toBoolean() }
+            .onEach { mutableIsAppIconEnabled.value = it }
+            .launchIn(viewModelScope)
+
+        storage.get(appWidgetId.NewItemButton)
+            .filterNotNull()
+            .map { it.toBoolean() }
+            .onEach { mutableIsNewLibraryButtonEnabled.value = it }
+            .launchIn(viewModelScope)
+
+        storage.get(appWidgetId.Radius)
+            .filterNotNull()
+            .map { it.toInt() }
+            .onEach { mutableWidgetRadius.value = it }
+            .launchIn(viewModelScope)
+
+        storage.get(appWidgetId.Layout)
+            .filterNotNull()
+            .map { Layout.valueOf(it) }
+            .onEach { mutableWidgetLayout.value = it }
+            .launchIn(viewModelScope)
+    }
+
+    fun getWidgetData(libraryId: Long) {
         libraryRepository.getLibraryById(libraryId)
             .filterNotNull()
             .onEach { mutableLibrary.value = it }
@@ -102,7 +128,6 @@ class NoteListWidgetConfigViewModel(
                 .map { it.toLongList() }
                 .onStart { emit(emptyList()) },
         ) { labels, labelIds ->
-            // For some reason this is getting called on every action with storage
             mutableLabels.value = labels.sortedBy { it.position }.map { label ->
                 val value = labelIds.any { it == label.id }
                 label to value
@@ -122,36 +147,39 @@ class NoteListWidgetConfigViewModel(
             .toMap()
     }
 
-    fun setIsWidgetHeaderEnabled(value: Boolean) = viewModelScope.launch {
-        storage.put(appWidgetId.Header, value.toString())
+    fun setIsWidgetHeaderEnabled(value: Boolean) {
+        mutableIsWidgetHeaderEnabled.value = value
     }
 
-    fun setIsEditWidgetButtonEnabled(value: Boolean) = viewModelScope.launch {
-        storage.put(appWidgetId.EditButton, value.toString())
+    fun setIsEditWidgetButtonEnabled(value: Boolean) {
+        mutableIsEditWidgetButtonEnabled.value = value
     }
 
-    fun setIsAppIconEnabled(value: Boolean) = viewModelScope.launch {
-        storage.put(appWidgetId.AppIcon, value.toString())
+    fun setIsAppIconEnabled(value: Boolean) {
+        mutableIsAppIconEnabled.value = value
     }
 
-    fun setIsNewLibraryButtonEnabled(value: Boolean) = viewModelScope.launch {
-        storage.put(appWidgetId.NewItemButton, value.toString())
+    fun setIsNewLibraryButtonEnabled(value: Boolean) {
+        mutableIsNewLibraryButtonEnabled.value = value
     }
 
-    fun setWidgetRadius(value: Int) = viewModelScope.launch {
-        storage.put(appWidgetId.Radius, value.toString())
+    fun setWidgetRadius(value: Int) {
+        mutableWidgetRadius.value = value
     }
 
-    fun setWidgetLayout(value: Layout) = viewModelScope.launch {
-        storage.put(appWidgetId.Layout, value.toString())
+    fun setWidgetLayout(value: Layout) {
+        mutableWidgetLayout.value = value
     }
 
-    fun setIsWidgetCreated() = viewModelScope.launch {
-        storage.put(appWidgetId.Id, true.toString())
-    }
-
-    fun saveLabelIds() = viewModelScope.launch {
+    fun createOrUpdateWidget() = viewModelScope.launch {
         val labelIds = labels.value.filterValues { it }.map { it.key.id }.joinToString()
         storage.put(appWidgetId.LabelIds(library.value.id), labelIds)
+        storage.put(appWidgetId.Id, true.toString())
+        storage.put(appWidgetId.Header, isWidgetHeaderEnabled.value.toString())
+        storage.put(appWidgetId.EditButton, isEditWidgetButtonEnabled.value.toString())
+        storage.put(appWidgetId.AppIcon, isAppIconEnabled.value.toString())
+        storage.put(appWidgetId.NewItemButton, isNewLibraryButtonEnabled.value.toString())
+        storage.put(appWidgetId.Radius, widgetRadius.value.toString())
+        storage.put(appWidgetId.Layout, widgetLayout.value.toString())
     }
 }
