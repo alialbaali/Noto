@@ -29,12 +29,8 @@
             android:layout_height="300dp">
 
             <include
-                android:id="@+id/list_widget"
+                android:id="@+id/widget"
                 layout="@layout/library_list_widget" />
-
-            <include
-                android:id="@+id/grid_widget"
-                layout="@layout/library_grid_widget" />
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -49,14 +49,9 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
 
     private fun NoteListWidgetConfigActivityBinding.setupState() {
         setResult(Activity.RESULT_CANCELED)
-        listWidget.root.clipToOutline = true
-        listWidget.lv.dividerHeight = 16.dp
-        listWidget.lv.setPaddingRelative(8.dp, 16.dp, 8.dp, 100.dp)
-        gridWidget.root.isVisible = false
-        gridWidget.root.clipToOutline = true
-        gridWidget.gv.horizontalSpacing = 16.dp
-        gridWidget.gv.verticalSpacing = 16.dp
-        gridWidget.gv.setPaddingRelative(8.dp, 16.dp, 8.dp, 100.dp)
+        widget.lv.dividerHeight = 16.dp
+        widget.gv.horizontalSpacing = 16.dp
+        widget.gv.verticalSpacing = 16.dp
 
         viewModel.isWidgetCreated
             .onEach { isCreated ->
@@ -73,12 +68,9 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
             val colorStateList = colorStateResource(library.color.toResource())
             tvFilterLabels.isVisible = labels.isNotEmpty()
             rv.isVisible = labels.isNotEmpty()
-            listWidget.tvLibraryTitle.text = library.title
-            listWidget.tvLibraryTitle.setTextColor(color)
-            listWidget.fab.background?.setTint(color)
-            gridWidget.tvLibraryTitle.text = library.title
-            gridWidget.tvLibraryTitle.setTextColor(color)
-            gridWidget.fab.background?.setTint(color)
+            widget.tvLibraryTitle.text = library.title
+            widget.tvLibraryTitle.setTextColor(color)
+            widget.fab.background?.setTint(color)
             val tab = when (viewModel.widgetLayout.value) {
                 Layout.Linear -> tlWidgetLayout.getTabAt(0)
                 Layout.Grid -> tlWidgetLayout.getTabAt(1)
@@ -94,29 +86,23 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
                 sWidgetRadius.tickInactiveTintList = colorStateList
             }
             if (filteredNotes.isEmpty()) {
-                listWidget.lv.isVisible = false
-                gridWidget.gv.isVisible = false
-                listWidget.tvPlaceholder.isVisible = true
-                gridWidget.tvPlaceholder.isVisible = true
+                widget.lv.isVisible = false
+                widget.gv.isVisible = false
+                widget.tvPlaceholder.isVisible = true
             } else {
-                listWidget.lv.isVisible = true
-                gridWidget.gv.isVisible = true
-                listWidget.tvPlaceholder.isVisible = false
-                gridWidget.tvPlaceholder.isVisible = false
-                val layoutResourceId = when (viewModel.widgetLayout.value) {
-                    Layout.Linear -> R.layout.note_list_widget
-                    Layout.Grid -> R.layout.note_grid_widget
-                }
+                widget.lv.isVisible = true
+                widget.gv.isVisible = true
+                widget.tvPlaceholder.isVisible = false
                 val adapter = NoteListWidgetAdapter(
                     this@NoteListWidgetConfigActivity,
-                    layoutResourceId,
+                    R.layout.note_list_widget,
                     filteredNotes,
                     library.isShowNoteCreationDate,
                     library.color,
                     library.notePreviewSize,
                 )
-                listWidget.lv.adapter = adapter
-                gridWidget.gv.adapter = adapter
+                widget.lv.adapter = adapter
+                widget.gv.adapter = adapter
             }
 
             rv.withModels {
@@ -141,9 +127,8 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
 
         viewModel.isWidgetHeaderEnabled
             .onEach { isEnabled ->
+                widget.llHeader.isVisible = isEnabled
                 swWidgetHeader.isChecked = isEnabled
-                listWidget.llHeader.isVisible = isEnabled
-                gridWidget.llHeader.isVisible = isEnabled
                 swAppIcon.isVisible = isEnabled
                 swEditWidget.isVisible = isEnabled
             }
@@ -151,44 +136,34 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
 
         viewModel.isEditWidgetButtonEnabled
             .onEach { isEnabled ->
-                listWidget.llEditWidget.isVisible = isEnabled
-                gridWidget.llEditWidget.isVisible = isEnabled
+                widget.llEditWidget.isVisible = isEnabled
                 swEditWidget.isChecked = isEnabled
             }
             .launchIn(lifecycleScope)
 
         viewModel.isAppIconEnabled
             .onEach { isEnabled ->
-                listWidget.ivAppIcon.isVisible = isEnabled
-                gridWidget.ivAppIcon.isVisible = isEnabled
-                if (isEnabled) {
-                    listWidget.tvLibraryTitle.setPadding(0.dp, 16.dp, 0.dp, 16.dp)
-                    gridWidget.tvLibraryTitle.setPadding(0.dp, 16.dp, 0.dp, 16.dp)
-                } else {
-                    listWidget.tvLibraryTitle.setPadding(16.dp)
-                    gridWidget.tvLibraryTitle.setPadding(16.dp)
-                }
+                widget.ivAppIcon.isVisible = isEnabled
                 swAppIcon.isChecked = isEnabled
+                if (isEnabled)
+                    widget.tvLibraryTitle.setPadding(0.dp, 16.dp, 0.dp, 16.dp)
+                else
+                    widget.tvLibraryTitle.setPadding(16.dp)
             }
             .launchIn(lifecycleScope)
 
         viewModel.isNewLibraryButtonEnabled
             .onEach { isEnabled ->
-                listWidget.fab.isVisible = isEnabled
-                gridWidget.fab.isVisible = isEnabled
+                widget.fab.isVisible = isEnabled
                 swNewLibrary.isChecked = isEnabled
             }
             .launchIn(lifecycleScope)
 
         viewModel.widgetRadius
             .onEach { radius ->
-                val drawable = drawableResource(radius.toWidgetShapeId())
-                val headerDrawable = drawableResource(radius.toWidgetHeaderShapeId())
                 sWidgetRadius.value = radius.toFloat()
-                listWidget.ll.background = drawable
-                gridWidget.ll.background = drawable
-                listWidget.llHeader.background = headerDrawable
-                gridWidget.llHeader.background = headerDrawable
+                widget.ll.background = drawableResource(radius.toWidgetShapeId())
+                widget.llHeader.background = drawableResource(radius.toWidgetHeaderShapeId())
             }
             .launchIn(lifecycleScope)
 
@@ -197,13 +172,13 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
                 when (layout) {
                     Layout.Linear -> {
                         tlWidgetLayout.selectTab(tlWidgetLayout.getTabAt(0))
-                        listWidget.root.isVisible = true
-                        gridWidget.root.isVisible = false
+                        widget.lv.isVisible = true
+                        widget.gv.isVisible = false
                     }
                     Layout.Grid -> {
                         tlWidgetLayout.selectTab(tlWidgetLayout.getTabAt(1))
-                        listWidget.root.isVisible = false
-                        gridWidget.root.isVisible = true
+                        widget.lv.isVisible = false
+                        widget.gv.isVisible = true
                     }
                 }
             }

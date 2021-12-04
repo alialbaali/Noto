@@ -26,12 +26,8 @@ fun Context.createNoteListWidgetRemoteViews(
     isEmpty: Boolean,
 ): RemoteViews {
     val color = colorResource(library.color.toResource())
-    val layoutId = when (layout) {
-        Layout.Linear -> R.layout.note_list_widget
-        Layout.Grid -> R.layout.note_grid_widget
-    }
     val viewId = layout.toWidgetViewId()
-    return RemoteViews(packageName, layoutId).apply {
+    return RemoteViews(packageName, R.layout.note_list_widget).apply {
         setTextViewText(R.id.tv_library_title, library.title)
         setTextColor(R.id.tv_library_title, color)
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
@@ -41,6 +37,8 @@ fun Context.createNoteListWidgetRemoteViews(
         setViewVisibility(R.id.fab, if (isNewLibraryButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.tv_placeholder, if (isEmpty) View.VISIBLE else View.GONE)
         setViewVisibility(viewId, if (isEmpty) View.GONE else View.VISIBLE)
+        setViewVisibility(R.id.lv, if (layout == Layout.Linear) View.VISIBLE else View.GONE)
+        setViewVisibility(R.id.gv, if (layout == Layout.Grid) View.VISIBLE else View.GONE)
         setOnClickPendingIntent(R.id.iv_edit_widget, createEditWidgetButtonPendingIntent(appWidgetId, library.id))
         setOnClickPendingIntent(R.id.fab, createNewNoteButtonPendingIntent(appWidgetId, library.id))
         setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId))

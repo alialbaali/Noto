@@ -23,18 +23,16 @@ fun Context.createLibraryListWidgetRemoteViews(
     widgetRadius: Int,
     isEmpty: Boolean,
 ): RemoteViews {
-    val layoutId = when (layout) {
-        Layout.Linear -> R.layout.library_list_widget
-        Layout.Grid -> R.layout.library_grid_widget
-    }
     val viewId = layout.toWidgetViewId()
-    return RemoteViews(packageName, layoutId).apply {
+    return RemoteViews(packageName, R.layout.library_list_widget).apply {
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_edit_widget, if (isEditWidgetButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_app_icon, if (isAppIconEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.fab, if (isNewLibraryButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.tv_placeholder, if (isEmpty) View.VISIBLE else View.GONE)
         setViewVisibility(viewId, if (isEmpty) View.GONE else View.VISIBLE)
+        setViewVisibility(R.id.lv, if (layout == Layout.Linear) View.VISIBLE else View.GONE)
+        setViewVisibility(R.id.gv, if (layout == Layout.Grid) View.VISIBLE else View.GONE)
         setOnClickPendingIntent(R.id.iv_edit_widget, createEditWidgetButtonPendingIntent(appWidgetId))
         setOnClickPendingIntent(R.id.fab, createNewLibraryButtonPendingIntent(appWidgetId))
         setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId))

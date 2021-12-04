@@ -40,14 +40,15 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
 
     private fun LibraryListWidgetConfigActivityBinding.setupState() {
         setResult(Activity.RESULT_CANCELED)
-        listWidget.root.clipToOutline = true
-        listWidget.lv.dividerHeight = 16.dp
-        listWidget.lv.setPaddingRelative(8.dp, 16.dp, 8.dp, 100.dp)
-        gridWidget.root.isVisible = false
-        gridWidget.root.clipToOutline = true
-        gridWidget.gv.horizontalSpacing = 16.dp
-        gridWidget.gv.verticalSpacing = 16.dp
-        gridWidget.gv.setPaddingRelative(8.dp, 16.dp, 8.dp, 100.dp)
+        widget.lv.dividerHeight = 16.dp
+        widget.gv.horizontalSpacing = 16.dp
+        widget.gv.verticalSpacing = 16.dp
+        val tab = when (viewModel.widgetLayout.value) {
+            Layout.Linear -> tlWidgetLayout.getTabAt(0)
+            Layout.Grid -> tlWidgetLayout.getTabAt(1)
+        }
+        tlWidgetLayout.selectTab(tab)
+
         listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewLibrary, swNotesCount)
             .onEach { it.setupColors() }
 
@@ -58,28 +59,22 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
         ) { libraries, widgetLayout, isShowNotesCount ->
             swNotesCount.isChecked = isShowNotesCount
             if (libraries.isEmpty()) {
-                listWidget.lv.isVisible = false
-                gridWidget.gv.isVisible = false
-                listWidget.tvPlaceholder.isVisible = true
-                gridWidget.tvPlaceholder.isVisible = true
+                widget.lv.isVisible = false
+                widget.gv.isVisible = false
+                widget.tvPlaceholder.isVisible = true
             } else {
-                listWidget.lv.isVisible = true
-                gridWidget.gv.isVisible = true
-                listWidget.tvPlaceholder.isVisible = false
-                gridWidget.tvPlaceholder.isVisible = false
-                val layoutResourceId = when (widgetLayout) {
-                    Layout.Linear -> R.layout.library_list_widget
-                    Layout.Grid -> R.layout.library_grid_widget
-                }
+                widget.lv.isVisible = true
+                widget.gv.isVisible = true
+                widget.tvPlaceholder.isVisible = false
                 val adapter = LibraryListWidgetAdapter(
                     this@LibraryListWidgetConfigActivity,
                     libraries,
-                    layoutResourceId,
+                    R.layout.library_list_widget,
                     isShowNotesCount,
                     viewModel::countNotes
                 )
-                listWidget.lv.adapter = adapter
-                gridWidget.gv.adapter = adapter
+                widget.lv.adapter = adapter
+                widget.gv.adapter = adapter
             }
         }.launchIn(lifecycleScope)
 
@@ -94,9 +89,8 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
 
         viewModel.isWidgetHeaderEnabled
             .onEach { isEnabled ->
+                widget.llHeader.isVisible = isEnabled
                 swWidgetHeader.isChecked = isEnabled
-                listWidget.llHeader.isVisible = isEnabled
-                gridWidget.llHeader.isVisible = isEnabled
                 swAppIcon.isVisible = isEnabled
                 swEditWidget.isVisible = isEnabled
             }
@@ -104,44 +98,34 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
 
         viewModel.isEditWidgetButtonEnabled
             .onEach { isEnabled ->
-                listWidget.llEditWidget.isVisible = isEnabled
-                gridWidget.llEditWidget.isVisible = isEnabled
+                widget.llEditWidget.isVisible = isEnabled
                 swEditWidget.isChecked = isEnabled
             }
             .launchIn(lifecycleScope)
 
         viewModel.isAppIconEnabled
             .onEach { isEnabled ->
-                listWidget.ivAppIcon.isVisible = isEnabled
-                gridWidget.ivAppIcon.isVisible = isEnabled
-                if (isEnabled) {
-                    listWidget.tvAppName.setPadding(0.dp, 16.dp, 0.dp, 16.dp)
-                    gridWidget.tvAppName.setPadding(0.dp, 16.dp, 0.dp, 16.dp)
-                } else {
-                    listWidget.tvAppName.setPadding(16.dp)
-                    gridWidget.tvAppName.setPadding(16.dp)
-                }
+                widget.ivAppIcon.isVisible = isEnabled
                 swAppIcon.isChecked = isEnabled
+                if (isEnabled)
+                    widget.tvAppName.setPadding(0.dp, 16.dp, 0.dp, 16.dp)
+                else
+                    widget.tvAppName.setPadding(16.dp)
             }
             .launchIn(lifecycleScope)
 
         viewModel.isNewLibraryButtonEnabled
             .onEach { isEnabled ->
-                listWidget.fab.isVisible = isEnabled
-                gridWidget.fab.isVisible = isEnabled
+                widget.fab.isVisible = isEnabled
                 swNewLibrary.isChecked = isEnabled
             }
             .launchIn(lifecycleScope)
 
         viewModel.widgetRadius
             .onEach { radius ->
-                val drawable = drawableResource(radius.toWidgetShapeId())
-                val headerDrawable = drawableResource(radius.toWidgetHeaderShapeId())
                 sWidgetRadius.value = radius.toFloat()
-                listWidget.ll.background = drawable
-                gridWidget.ll.background = drawable
-                listWidget.llHeader.background = headerDrawable
-                gridWidget.llHeader.background = headerDrawable
+                widget.ll.background = drawableResource(radius.toWidgetHeaderShapeId())
+                widget.llHeader.background = drawableResource(radius.toWidgetHeaderShapeId())
             }
             .launchIn(lifecycleScope)
 
@@ -150,13 +134,13 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
                 when (layout) {
                     Layout.Linear -> {
                         tlWidgetLayout.selectTab(tlWidgetLayout.getTabAt(0))
-                        listWidget.root.isVisible = true
-                        gridWidget.root.isVisible = false
+                        widget.lv.isVisible = true
+                        widget.gv.isVisible = false
                     }
                     Layout.Grid -> {
                         tlWidgetLayout.selectTab(tlWidgetLayout.getTabAt(1))
-                        listWidget.root.isVisible = false
-                        gridWidget.root.isVisible = true
+                        widget.lv.isVisible = false
+                        widget.gv.isVisible = true
                     }
                 }
             }
