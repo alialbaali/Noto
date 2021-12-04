@@ -177,7 +177,10 @@
     <!-- Widget -->
     <string name="create_widget">Create widget</string>
     <string name="update_widget">Update widget</string>
-    <string name="widget_options">Widget options</string>
+    <string name="new_notes_widget">New notes widget</string>
+    <string name="edit_notes_widget">Edit notes widget</string>
+    <string name="new_libraries_widget">New libraries widget</string>
+    <string name="edit_libraries_widget">Edit libraries widget</string>
     <string name="new_library_button">New library button</string>
     <string name="new_note_button">New note button</string>
     <string name="widget_header">Widget header</string>

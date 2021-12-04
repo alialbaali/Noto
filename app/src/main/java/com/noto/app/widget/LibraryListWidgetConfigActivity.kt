@@ -85,8 +85,10 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
 
         viewModel.isWidgetCreated
             .onEach { isCreated ->
-                if (isCreated)
+                if (isCreated) {
+                    tb.title = stringResource(R.string.edit_libraries_widget)
                     btnCreate.text = stringResource(R.string.update_widget)
+                }
             }
             .launchIn(lifecycleScope)
 

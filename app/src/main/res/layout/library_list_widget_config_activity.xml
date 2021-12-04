@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/spacing_normal"
-            app:title="@string/widget_options" />
+            app:title="@string/new_libraries_widget" />
 
         <LinearLayout
             android:background="@drawable/generic_shape"

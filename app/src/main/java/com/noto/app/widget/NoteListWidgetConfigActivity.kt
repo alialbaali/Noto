@@ -60,8 +60,10 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
 
         viewModel.isWidgetCreated
             .onEach { isCreated ->
-                if (isCreated)
+                if (isCreated) {
+                    tb.title = stringResource(R.string.edit_notes_widget)
                     btnCreate.text = stringResource(R.string.update_widget)
+                }
             }
             .launchIn(lifecycleScope)
 
