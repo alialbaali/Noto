@@ -66,19 +66,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sw_edit_widget"
-                    style="@style/SettingsItem"
-                    android:text="@string/edit_widget_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                                <com.google.android.material.switchmaterial.SwitchMaterial
+                                    android:id="@+id/sw_edit_widget"
+                                    style="@style/SettingsItem"
+                                    android:text="@string/edit_widget_button"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sw_app_icon"
-                    style="@style/SettingsItem"
-                    android:text="@string/app_icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                                <com.google.android.material.switchmaterial.SwitchMaterial
+                                    android:id="@+id/sw_app_icon"
+                                    style="@style/SettingsItem"
+                                    android:text="@string/app_icon"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
@@ -143,14 +143,20 @@
                     app:trackHeight="@dimen/spacing_normal" />
             </LinearLayout>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_create"
-                style="@style/MaterialButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:gravity="bottom"
                 android:layout_margin="@dimen/spacing_normal"
-                android:padding="@dimen/spacing_normal"
-                android:text="@string/create_widget" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_create"
+                    style="@style/MaterialButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/create_widget" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
