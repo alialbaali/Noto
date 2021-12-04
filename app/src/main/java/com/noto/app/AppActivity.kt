@@ -137,7 +137,7 @@ class AppActivity : AppCompatActivity() {
         val locale = when (language) {
             Language.System -> Locale.getDefault()
             Language.English -> Locale("en", "US")
-            Language.Turkish -> Locale("tr", "TR")
+            Language.Turkish -> Locale("tr", "")
             Language.Arabic -> Locale("ar", "")
         }
         if (resources.configuration.locale != locale) {
