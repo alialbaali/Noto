@@ -69,6 +69,7 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
             widget.tvLibraryTitle.text = library.title
             widget.tvLibraryTitle.setTextColor(color)
             widget.fab.background?.setTint(color)
+            widget.ivFab.setColorFilter(color)
             listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewLibrary)
                 .onEach { it.setupColors(thumbCheckedColor = color, trackCheckedColor = color) }
             if (colorStateList != null) {

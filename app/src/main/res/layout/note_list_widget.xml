@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll"
     android:background="@drawable/widget_shape_medium"
@@ -89,17 +90,30 @@
             android:clipToPadding="false"
             android:text="@string/no_notes_found" />
 
-        <ImageButton
+        <FrameLayout
             android:id="@+id/fab"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:layout_margin="@dimen/spacing_normal"
             android:layout_gravity="end|bottom"
-            android:src="@drawable/ic_round_edit_24"
-            android:backgroundTint="@color/colorPrimary"
-            android:background="@drawable/ic_btn_shape"
-            android:padding="@dimen/spacing_normal"
-            android:tint="@color/colorBackground"
-            android:contentDescription="@string/create_library" />
+            android:layout_margin="@dimen/spacing_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_fab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/create_library"
+                android:src="@drawable/ic_btn_shape"
+                app:tint="@color/colorPrimary" />
+
+            <ImageButton
+                android:id="@+id/ib_fab"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:src="@drawable/ic_round_edit_24"
+                android:background="@null"
+                android:padding="@dimen/spacing_normal"
+                android:tint="@color/colorBackground"
+                android:contentDescription="@string/create_library" />
+        </FrameLayout>
     </FrameLayout>
 </LinearLayout>
