@@ -39,6 +39,9 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
     private fun LibraryListWidgetConfigActivityBinding.setupState() {
         setResult(Activity.RESULT_CANCELED)
         widget.lv.dividerHeight = 16.dp
+        widget.lv.setPaddingRelative(8.dp, 16.dp, 8.dp, 100.dp)
+        widget.root.clipToOutline = true
+
         listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewLibrary, swNotesCount)
             .onEach { it.setupColors() }
 
@@ -109,7 +112,7 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
         viewModel.widgetRadius
             .onEach { radius ->
                 sWidgetRadius.value = radius.toFloat()
-                widget.ll.background = drawableResource(radius.toWidgetHeaderShapeId())
+                widget.ll.background = drawableResource(radius.toWidgetShapeId())
                 widget.llHeader.background = drawableResource(radius.toWidgetHeaderShapeId())
             }
             .launchIn(lifecycleScope)

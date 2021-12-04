@@ -48,6 +48,8 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
     private fun NoteListWidgetConfigActivityBinding.setupState() {
         setResult(Activity.RESULT_CANCELED)
         widget.lv.dividerHeight = 16.dp
+        widget.lv.setPaddingRelative(8.dp, 16.dp, 8.dp, 100.dp)
+        widget.root.clipToOutline = true
 
         viewModel.isWidgetCreated
             .onEach { isCreated ->
