@@ -9,10 +9,8 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.tabs.TabLayout
 import com.noto.app.R
 import com.noto.app.databinding.NoteListWidgetConfigActivityBinding
-import com.noto.app.domain.model.Layout
 import com.noto.app.label.labelItem
 import com.noto.app.library.SelectLibraryDialogFragment
 import com.noto.app.util.*
@@ -50,8 +48,6 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
     private fun NoteListWidgetConfigActivityBinding.setupState() {
         setResult(Activity.RESULT_CANCELED)
         widget.lv.dividerHeight = 16.dp
-        widget.gv.horizontalSpacing = 16.dp
-        widget.gv.verticalSpacing = 16.dp
 
         viewModel.isWidgetCreated
             .onEach { isCreated ->
@@ -71,29 +67,20 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
             widget.tvLibraryTitle.text = library.title
             widget.tvLibraryTitle.setTextColor(color)
             widget.fab.background?.setTint(color)
-            val tab = when (viewModel.widgetLayout.value) {
-                Layout.Linear -> tlWidgetLayout.getTabAt(0)
-                Layout.Grid -> tlWidgetLayout.getTabAt(1)
-            }
-            tlWidgetLayout.setSelectedTabIndicatorColor(color)
-            tlWidgetLayout.selectTab(tab)
             listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewLibrary)
                 .onEach { it.setupColors(thumbCheckedColor = color, trackCheckedColor = color) }
             if (colorStateList != null) {
-                tlWidgetLayout.tabRippleColor = colorStateList
                 sWidgetRadius.trackActiveTintList = colorStateList
                 sWidgetRadius.thumbTintList = colorStateList
                 sWidgetRadius.tickInactiveTintList = colorStateList
             }
             if (filteredNotes.isEmpty()) {
                 widget.lv.isVisible = false
-                widget.gv.isVisible = false
                 widget.tvPlaceholder.isVisible = true
             } else {
                 widget.lv.isVisible = true
-                widget.gv.isVisible = true
                 widget.tvPlaceholder.isVisible = false
-                val adapter = NoteListWidgetAdapter(
+                widget.lv.adapter = NoteListWidgetAdapter(
                     this@NoteListWidgetConfigActivity,
                     R.layout.note_list_widget,
                     filteredNotes,
@@ -101,8 +88,6 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
                     library.color,
                     library.notePreviewSize,
                 )
-                widget.lv.adapter = adapter
-                widget.gv.adapter = adapter
             }
 
             rv.withModels {
@@ -166,23 +151,6 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
                 widget.llHeader.background = drawableResource(radius.toWidgetHeaderShapeId())
             }
             .launchIn(lifecycleScope)
-
-        viewModel.widgetLayout
-            .onEach { layout ->
-                when (layout) {
-                    Layout.Linear -> {
-                        tlWidgetLayout.selectTab(tlWidgetLayout.getTabAt(0))
-                        widget.lv.isVisible = true
-                        widget.gv.isVisible = false
-                    }
-                    Layout.Grid -> {
-                        tlWidgetLayout.selectTab(tlWidgetLayout.getTabAt(1))
-                        widget.lv.isVisible = false
-                        widget.gv.isVisible = true
-                    }
-                }
-            }
-            .launchIn(lifecycleScope)
     }
 
     private fun NoteListWidgetConfigActivityBinding.setupListeners() {
@@ -210,31 +178,15 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
             viewModel.setWidgetRadius(value.toInt())
         }
 
-        tlWidgetLayout.addOnTabSelectedListener(
-            object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    val layout = if (tab?.text == stringResource(R.string.list))
-                        Layout.Linear
-                    else
-                        Layout.Grid
-                    viewModel.setWidgetLayout(layout)
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            }
-        )
-
         btnCreate.setOnClickListener {
-//            sendBroadcast() // Maybe we can send broadcast to NoteListWidgetProvider instead of updating it manually
+//            sendBroadcast() Maybe we can send broadcast to NoteListWidgetProvider instead of updating it manually
             viewModel.createOrUpdateWidget()
             val appWidgetManager = AppWidgetManager.getInstance(this@NoteListWidgetConfigActivity)
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, viewModel.widgetLayout.value.toWidgetViewId())
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.lv)
             appWidgetManager.updateAppWidget(
                 appWidgetId,
                 createNoteListWidgetRemoteViews(
                     appWidgetId,
-                    viewModel.widgetLayout.value,
                     viewModel.isWidgetHeaderEnabled.value,
                     viewModel.isEditWidgetButtonEnabled.value,
                     viewModel.isAppIconEnabled.value,

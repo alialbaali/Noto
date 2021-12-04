@@ -8,10 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.tabs.TabLayout
 import com.noto.app.R
 import com.noto.app.databinding.LibraryListWidgetConfigActivityBinding
-import com.noto.app.domain.model.Layout
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -41,40 +39,27 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
     private fun LibraryListWidgetConfigActivityBinding.setupState() {
         setResult(Activity.RESULT_CANCELED)
         widget.lv.dividerHeight = 16.dp
-        widget.gv.horizontalSpacing = 16.dp
-        widget.gv.verticalSpacing = 16.dp
-        val tab = when (viewModel.widgetLayout.value) {
-            Layout.Linear -> tlWidgetLayout.getTabAt(0)
-            Layout.Grid -> tlWidgetLayout.getTabAt(1)
-        }
-        tlWidgetLayout.selectTab(tab)
-
         listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewLibrary, swNotesCount)
             .onEach { it.setupColors() }
 
         combine(
             viewModel.libraries,
-            viewModel.widgetLayout,
             viewModel.isNotesCountEnabled,
-        ) { libraries, widgetLayout, isShowNotesCount ->
+        ) { libraries, isShowNotesCount ->
             swNotesCount.isChecked = isShowNotesCount
             if (libraries.isEmpty()) {
                 widget.lv.isVisible = false
-                widget.gv.isVisible = false
                 widget.tvPlaceholder.isVisible = true
             } else {
                 widget.lv.isVisible = true
-                widget.gv.isVisible = true
                 widget.tvPlaceholder.isVisible = false
-                val adapter = LibraryListWidgetAdapter(
+                widget.lv.adapter = LibraryListWidgetAdapter(
                     this@LibraryListWidgetConfigActivity,
                     libraries,
                     R.layout.library_list_widget,
                     isShowNotesCount,
                     viewModel::countNotes
                 )
-                widget.lv.adapter = adapter
-                widget.gv.adapter = adapter
             }
         }.launchIn(lifecycleScope)
 
@@ -128,23 +113,6 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
                 widget.llHeader.background = drawableResource(radius.toWidgetHeaderShapeId())
             }
             .launchIn(lifecycleScope)
-
-        viewModel.widgetLayout
-            .onEach { layout ->
-                when (layout) {
-                    Layout.Linear -> {
-                        tlWidgetLayout.selectTab(tlWidgetLayout.getTabAt(0))
-                        widget.lv.isVisible = true
-                        widget.gv.isVisible = false
-                    }
-                    Layout.Grid -> {
-                        tlWidgetLayout.selectTab(tlWidgetLayout.getTabAt(1))
-                        widget.lv.isVisible = false
-                        widget.gv.isVisible = true
-                    }
-                }
-            }
-            .launchIn(lifecycleScope)
     }
 
     private fun LibraryListWidgetConfigActivityBinding.setupListeners() {
@@ -172,31 +140,14 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
             viewModel.setWidgetRadius(value.toInt())
         }
 
-        tlWidgetLayout.addOnTabSelectedListener(
-            object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    val layout = if (tab?.text == stringResource(R.string.list))
-                        Layout.Linear
-                    else
-                        Layout.Grid
-                    viewModel.setWidgetLayout(layout)
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            }
-        )
-
         btnCreate.setOnClickListener {
             viewModel.createOrUpdateWidget()
             val appWidgetManager = AppWidgetManager.getInstance(this@LibraryListWidgetConfigActivity)
-            // Needed to update the visibility of notes count in library items.
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, viewModel.widgetLayout.value.toWidgetViewId())
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.lv) // Needed to update the visibility of notes count in library items.
             appWidgetManager.updateAppWidget(
                 appWidgetId,
                 createLibraryListWidgetRemoteViews(
                     appWidgetId,
-                    viewModel.widgetLayout.value,
                     viewModel.isWidgetHeaderEnabled.value,
                     viewModel.isEditWidgetButtonEnabled.value,
                     viewModel.isAppIconEnabled.value,

@@ -33,7 +33,6 @@ object Constants {
         val Int.NewItemButton get() = "Widget_New_Item_Button_$this"
         val Int.NotesCount get() = "Widget_Notes_Count_$this"
         val Int.Radius get() = "Widget_Radius_$this"
-        val Int.Layout get() = "Widget_Layout_$this"
         fun Int.LabelIds(libraryId: Long) = Id + "_" + LibraryId + libraryId.toString()
     }
 }

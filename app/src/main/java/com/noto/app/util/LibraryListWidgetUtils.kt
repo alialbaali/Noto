@@ -9,13 +9,11 @@ import android.view.View
 import android.widget.RemoteViews
 import com.noto.app.AppActivity
 import com.noto.app.R
-import com.noto.app.domain.model.Layout
 import com.noto.app.widget.LibraryListWidgetConfigActivity
 import com.noto.app.widget.LibraryListWidgetService
 
 fun Context.createLibraryListWidgetRemoteViews(
     appWidgetId: Int,
-    layout: Layout,
     isHeaderEnabled: Boolean,
     isEditWidgetButtonEnabled: Boolean,
     isAppIconEnabled: Boolean,
@@ -23,22 +21,19 @@ fun Context.createLibraryListWidgetRemoteViews(
     widgetRadius: Int,
     isEmpty: Boolean,
 ): RemoteViews {
-    val viewId = layout.toWidgetViewId()
     return RemoteViews(packageName, R.layout.library_list_widget).apply {
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_edit_widget, if (isEditWidgetButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_app_icon, if (isAppIconEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.fab, if (isNewLibraryButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.tv_placeholder, if (isEmpty) View.VISIBLE else View.GONE)
-        setViewVisibility(viewId, if (isEmpty) View.GONE else View.VISIBLE)
-        setViewVisibility(R.id.lv, if (layout == Layout.Linear) View.VISIBLE else View.GONE)
-        setViewVisibility(R.id.gv, if (layout == Layout.Grid) View.VISIBLE else View.GONE)
+        setViewVisibility(R.id.lv, if (isEmpty) View.GONE else View.VISIBLE)
         setOnClickPendingIntent(R.id.iv_edit_widget, createEditWidgetButtonPendingIntent(appWidgetId))
         setOnClickPendingIntent(R.id.fab, createNewLibraryButtonPendingIntent(appWidgetId))
         setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId))
         setOnClickPendingIntent(R.id.tv_app_name, createAppLauncherPendingIntent(appWidgetId))
-        setRemoteAdapter(viewId, createLibraryListServiceIntent(appWidgetId))
-        setPendingIntentTemplate(viewId, createLibraryItemPendingIntent(appWidgetId))
+        setRemoteAdapter(R.id.lv, createLibraryListServiceIntent(appWidgetId))
+        setPendingIntentTemplate(R.id.lv, createLibraryItemPendingIntent(appWidgetId))
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())
         if (!isAppIconEnabled)

@@ -3,7 +3,6 @@ package com.noto.app.widget
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Label
-import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.repository.LabelRepository
@@ -16,7 +15,6 @@ import com.noto.app.util.Constants.Widget.EditButton
 import com.noto.app.util.Constants.Widget.Header
 import com.noto.app.util.Constants.Widget.Id
 import com.noto.app.util.Constants.Widget.LabelIds
-import com.noto.app.util.Constants.Widget.Layout
 import com.noto.app.util.Constants.Widget.NewItemButton
 import com.noto.app.util.Constants.Widget.Radius
 import com.noto.app.util.mapWithLabels
@@ -62,9 +60,6 @@ class NoteListWidgetConfigViewModel(
     private val mutableWidgetRadius = MutableStateFlow(16)
     val widgetRadius get() = mutableWidgetRadius.asStateFlow()
 
-    private val mutableWidgetLayout = MutableStateFlow(Layout.Linear)
-    val widgetLayout get() = mutableWidgetLayout.asStateFlow()
-
     init {
         storage.get(appWidgetId.Header)
             .filterNotNull()
@@ -94,12 +89,6 @@ class NoteListWidgetConfigViewModel(
             .filterNotNull()
             .map { it.toInt() }
             .onEach { mutableWidgetRadius.value = it }
-            .launchIn(viewModelScope)
-
-        storage.get(appWidgetId.Layout)
-            .filterNotNull()
-            .map { Layout.valueOf(it) }
-            .onEach { mutableWidgetLayout.value = it }
             .launchIn(viewModelScope)
     }
 
@@ -167,10 +156,6 @@ class NoteListWidgetConfigViewModel(
         mutableWidgetRadius.value = value
     }
 
-    fun setWidgetLayout(value: Layout) {
-        mutableWidgetLayout.value = value
-    }
-
     fun createOrUpdateWidget() = viewModelScope.launch {
         val labelIds = labels.value.filterValues { it }.map { it.key.id }.joinToString()
         storage.put(appWidgetId.LabelIds(library.value.id), labelIds)
@@ -180,6 +165,5 @@ class NoteListWidgetConfigViewModel(
         storage.put(appWidgetId.AppIcon, isAppIconEnabled.value.toString())
         storage.put(appWidgetId.NewItemButton, isNewLibraryButtonEnabled.value.toString())
         storage.put(appWidgetId.Radius, widgetRadius.value.toString())
-        storage.put(appWidgetId.Layout, widgetLayout.value.toString())
     }
 }

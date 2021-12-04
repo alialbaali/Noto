@@ -2,7 +2,6 @@ package com.noto.app.widget
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.Layout
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
@@ -10,7 +9,6 @@ import com.noto.app.util.Constants.Widget.AppIcon
 import com.noto.app.util.Constants.Widget.EditButton
 import com.noto.app.util.Constants.Widget.Header
 import com.noto.app.util.Constants.Widget.Id
-import com.noto.app.util.Constants.Widget.Layout
 import com.noto.app.util.Constants.Widget.NewItemButton
 import com.noto.app.util.Constants.Widget.NotesCount
 import com.noto.app.util.Constants.Widget.Radius
@@ -52,9 +50,6 @@ class LibraryListWidgetConfigViewModel(
     private val mutableWidgetRadius = MutableStateFlow(16)
     val widgetRadius get() = mutableWidgetRadius.asStateFlow()
 
-    private val mutableWidgetLayout = MutableStateFlow(Layout.Linear)
-    val widgetLayout get() = mutableWidgetLayout.asStateFlow()
-
     init {
         storage.get(appWidgetId.Header)
             .filterNotNull()
@@ -91,12 +86,6 @@ class LibraryListWidgetConfigViewModel(
             .map { it.toInt() }
             .onEach { mutableWidgetRadius.value = it }
             .launchIn(viewModelScope)
-
-        storage.get(appWidgetId.Layout)
-            .filterNotNull()
-            .map { Layout.valueOf(it) }
-            .onEach { mutableWidgetLayout.value = it }
-            .launchIn(viewModelScope)
     }
 
 
@@ -120,10 +109,6 @@ class LibraryListWidgetConfigViewModel(
         mutableWidgetRadius.value = value
     }
 
-    fun setWidgetLayout(value: Layout) {
-        mutableWidgetLayout.value = value
-    }
-
     fun setIsNotesCountEnabled(value: Boolean) {
         mutableIsNotesCountEnabled.value = value
     }
@@ -140,6 +125,5 @@ class LibraryListWidgetConfigViewModel(
         storage.put(appWidgetId.NewItemButton, isNewLibraryButtonEnabled.value.toString())
         storage.put(appWidgetId.NotesCount, isNotesCountEnabled.value.toString())
         storage.put(appWidgetId.Radius, widgetRadius.value.toString())
-        storage.put(appWidgetId.Layout, widgetLayout.value.toString())
     }
 }

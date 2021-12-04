@@ -74,20 +74,6 @@
             android:clipToPadding="false"
             tools:listitem="@layout/widget_library_item" />
 
-        <GridView
-            android:id="@+id/gv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/spacing_small"
-            android:paddingHorizontal="@dimen/spacing_small"
-            android:paddingBottom="@dimen/padding_bottom"
-            android:scrollbars="none"
-            android:numColumns="2"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:visibility="gone"
-            tools:listitem="@layout/widget_library_item" />
-
         <TextView
             android:id="@+id/tv_placeholder"
             style="@style/PlaceholderTextView"

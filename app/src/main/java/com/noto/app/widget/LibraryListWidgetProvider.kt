@@ -3,13 +3,11 @@ package com.noto.app.widget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
-import com.noto.app.domain.model.Layout
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants.Widget.AppIcon
 import com.noto.app.util.Constants.Widget.EditButton
 import com.noto.app.util.Constants.Widget.Header
-import com.noto.app.util.Constants.Widget.Layout
 import com.noto.app.util.Constants.Widget.NewItemButton
 import com.noto.app.util.Constants.Widget.Radius
 import com.noto.app.util.createLibraryListWidgetRemoteViews
@@ -32,7 +30,6 @@ class LibraryListWidgetProvider : AppWidgetProvider(), KoinComponent {
             coroutineScope.launch {
                 val remoteViews = context?.createLibraryListWidgetRemoteViews(
                     appWidgetId,
-                    storage.getOrNull(appWidgetId.Layout).map { if (it == null) Layout.Linear else Layout.valueOf(it) }.first(),
                     storage.getOrNull(appWidgetId.Header).map { it?.toBoolean() ?: true }.first(),
                     storage.getOrNull(appWidgetId.EditButton).map { it?.toBoolean() ?: true }.first(),
                     storage.getOrNull(appWidgetId.AppIcon).map { it?.toBoolean() ?: true }.first(),

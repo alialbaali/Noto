@@ -141,44 +141,6 @@
                     app:trackColorActive="@color/colorPrimary"
                     app:trackColorInactive="@color/colorBackground"
                     app:trackHeight="@dimen/spacing_normal" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_widget_layout"
-                    style="@style/SettingsItem"
-                    android:clickable="false"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/widget_layout" />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tl_widget_layout"
-                    android:layout_margin="@dimen/spacing_normal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/generic_shape"
-                    android:backgroundTint="@color/colorBackground"
-                    app:tabIconTint="@color/tab_icon_color_selector"
-                    app:tabIndicator="@drawable/tab_indicator_shape"
-                    app:tabIndicatorAnimationMode="elastic"
-                    app:tabIndicatorColor="@color/colorPrimary"
-                    app:tabIndicatorGravity="stretch"
-                    app:tabInlineLabel="true"
-                    app:tabSelectedTextColor="@color/colorBackground"
-                    app:tabTextAppearance="@style/TabItemTextAppearance"
-                    app:tabTextColor="@color/colorPrimary">
-
-                    <com.google.android.material.tabs.TabItem
-                        android:text="@string/list"
-                        android:icon="@drawable/ic_round_view_agenda_24"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:text="@string/grid"
-                        android:icon="@drawable/ic_round_view_grid_24"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </com.google.android.material.tabs.TabLayout>
             </LinearLayout>
 
             <com.google.android.material.button.MaterialButton

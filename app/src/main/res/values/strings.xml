@@ -186,7 +186,6 @@
     <string name="widget_header">Widget header</string>
     <string name="app_icon">App icon</string>
     <string name="widget_radius">Widget radius</string>
-    <string name="widget_layout">Widget layout</string>
     <string name="edit_widget">Edit widget</string>
     <string name="edit_widget_button">Edit widget button</string>
     <string name="libraries_notes_count">Libraries notes count</string>

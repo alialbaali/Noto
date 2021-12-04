@@ -9,14 +9,12 @@ import android.view.View
 import android.widget.RemoteViews
 import com.noto.app.AppActivity
 import com.noto.app.R
-import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.widget.NoteListWidgetConfigActivity
 import com.noto.app.widget.NoteListWidgetService
 
 fun Context.createNoteListWidgetRemoteViews(
     appWidgetId: Int,
-    layout: Layout,
     isHeaderEnabled: Boolean,
     isEditWidgetButtonEnabled: Boolean,
     isAppIconEnabled: Boolean,
@@ -26,7 +24,6 @@ fun Context.createNoteListWidgetRemoteViews(
     isEmpty: Boolean,
 ): RemoteViews {
     val color = colorResource(library.color.toResource())
-    val viewId = layout.toWidgetViewId()
     return RemoteViews(packageName, R.layout.note_list_widget).apply {
         setTextViewText(R.id.tv_library_title, library.title)
         setTextColor(R.id.tv_library_title, color)
@@ -36,15 +33,13 @@ fun Context.createNoteListWidgetRemoteViews(
         setViewVisibility(R.id.fab, if (isNewLibraryButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.fab, if (isNewLibraryButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.tv_placeholder, if (isEmpty) View.VISIBLE else View.GONE)
-        setViewVisibility(viewId, if (isEmpty) View.GONE else View.VISIBLE)
-        setViewVisibility(R.id.lv, if (layout == Layout.Linear) View.VISIBLE else View.GONE)
-        setViewVisibility(R.id.gv, if (layout == Layout.Grid) View.VISIBLE else View.GONE)
+        setViewVisibility(R.id.lv, if (isEmpty) View.GONE else View.VISIBLE)
         setOnClickPendingIntent(R.id.iv_edit_widget, createEditWidgetButtonPendingIntent(appWidgetId, library.id))
         setOnClickPendingIntent(R.id.fab, createNewNoteButtonPendingIntent(appWidgetId, library.id))
         setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId))
         setOnClickPendingIntent(R.id.tv_library_title, createLibraryLauncherPendingIntent(appWidgetId, library.id))
-        setRemoteAdapter(viewId, createNoteListServiceIntent(appWidgetId, library.id))
-        setPendingIntentTemplate(viewId, createNoteItemPendingIntent(appWidgetId))
+        setRemoteAdapter(R.id.lv, createNoteListServiceIntent(appWidgetId, library.id))
+        setPendingIntentTemplate(R.id.lv, createNoteItemPendingIntent(appWidgetId))
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())
         setInt(R.id.fab, SetColorFilterMethodName, color)
