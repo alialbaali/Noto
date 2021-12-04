@@ -4,15 +4,31 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import com.noto.app.domain.model.Layout
+import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
+import com.noto.app.util.Constants.Widget.AppIcon
+import com.noto.app.util.Constants.Widget.EditButton
+import com.noto.app.util.Constants.Widget.Header
+import com.noto.app.util.Constants.Widget.Layout
+import com.noto.app.util.Constants.Widget.NewItemButton
+import com.noto.app.util.Constants.Widget.Radius
 import com.noto.app.util.createNoteListWidgetRemoteViews
-import com.noto.app.util.filterSelected
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import org.koin.core.parameter.parametersOf
 
 class NoteListWidgetProvider : AppWidgetProvider(), KoinComponent {
 
+    private val libraryRepository by inject<LibraryRepository>()
+    private val noteRepository by inject<NoteRepository>()
+    private val storage by inject<LocalStorage>()
     var libraryId: Long = 0
 
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -21,26 +37,25 @@ class NoteListWidgetProvider : AppWidgetProvider(), KoinComponent {
     }
 
     override fun onUpdate(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?) {
-        appWidgetIds?.forEach { appWidgetId ->
-            libraryId.takeIf { it != 0L }?.let { libraryId ->
-                val viewModel by inject<NoteListWidgetConfigViewModel> { parametersOf(appWidgetId) }
-                viewModel.getData(libraryId)
-                val remoteViews = context?.createNoteListWidgetRemoteViews(
-                    appWidgetId,
-                    viewModel.widgetLayout.value,
-                    viewModel.isWidgetHeaderEnabled.value,
-                    viewModel.isEditWidgetButtonEnabled.value,
-                    viewModel.isAppIconEnabled.value,
-                    viewModel.isNewLibraryButtonEnabled.value,
-                    viewModel.widgetRadius.value,
-                    viewModel.library.value,
-                    viewModel.notes.value.isEmpty(),
-                    viewModel.labels.value.filterSelected(),
-                )
-                appWidgetManager?.updateAppWidget(appWidgetId, remoteViews)
+        val coroutineScope = CoroutineScope(Dispatchers.Main.immediate)
+        libraryId.takeIf { it != 0L }?.let { libraryId ->
+            appWidgetIds?.forEach { appWidgetId ->
+                coroutineScope.launch {
+                    val remoteViews = context?.createNoteListWidgetRemoteViews(
+                        appWidgetId,
+                        storage.getOrNull(appWidgetId.Layout).map { if (it == null) Layout.Linear else Layout.valueOf(it) }.first(),
+                        storage.getOrNull(appWidgetId.Header).map { it?.toBoolean() ?: true }.first(),
+                        storage.getOrNull(appWidgetId.EditButton).map { it?.toBoolean() ?: true }.first(),
+                        storage.getOrNull(appWidgetId.AppIcon).map { it?.toBoolean() ?: true }.first(),
+                        storage.getOrNull(appWidgetId.NewItemButton).map { it?.toBoolean() ?: true }.first(),
+                        storage.getOrNull(appWidgetId.Radius).map { it?.toInt() ?: 16 }.first(),
+                        libraryRepository.getLibraryById(libraryId).first(),
+                        noteRepository.getNotesByLibraryId(libraryId).first().isEmpty(),
+                    )
+                    appWidgetManager?.updateAppWidget(appWidgetId, remoteViews)
+                }
             }
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds)
     }
-
 }

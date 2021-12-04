@@ -266,7 +266,6 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
                     viewModel.widgetRadius.value,
                     viewModel.library.value,
                     viewModel.notes.value.isEmpty(),
-                    viewModel.labels.value.filterSelected(),
                 )
             )
             val resultValue = Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)

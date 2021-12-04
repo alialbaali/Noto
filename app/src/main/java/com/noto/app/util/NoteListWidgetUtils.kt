@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.RemoteViews
 import com.noto.app.AppActivity
 import com.noto.app.R
-import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.widget.NoteListWidgetConfigActivity
@@ -25,7 +24,6 @@ fun Context.createNoteListWidgetRemoteViews(
     widgetRadius: Int,
     library: Library,
     isEmpty: Boolean,
-    labels: List<Label>,
 ): RemoteViews {
     val color = colorResource(library.color.toResource())
     val layoutId = when (layout) {
@@ -47,7 +45,7 @@ fun Context.createNoteListWidgetRemoteViews(
         setOnClickPendingIntent(R.id.fab, createNewNoteButtonPendingIntent(appWidgetId, library.id))
         setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId))
         setOnClickPendingIntent(R.id.tv_library_title, createLibraryLauncherPendingIntent(appWidgetId, library.id))
-        setRemoteAdapter(viewId, createNoteListServiceIntent(appWidgetId, library.id, labels.map { it.id }))
+        setRemoteAdapter(viewId, createNoteListServiceIntent(appWidgetId, library.id))
         setPendingIntentTemplate(viewId, createNoteItemPendingIntent(appWidgetId))
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())
@@ -91,7 +89,7 @@ private fun Context.createNewNoteButtonPendingIntent(appWidgetId: Int, libraryId
     return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
 }
 
-private fun Context.createNoteListServiceIntent(appWidgetId: Int, libraryId: Long, labelIds: List<Long>): Intent {
+private fun Context.createNoteListServiceIntent(appWidgetId: Int, libraryId: Long): Intent {
     return Intent(this, NoteListWidgetService::class.java).apply {
         putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         putExtra(Constants.LibraryId, libraryId)
