@@ -128,7 +128,11 @@ class NoteFragment : Fragment() {
                 .filterNotNull(),
         ) { title, body -> title to body }
             .debounce(DebounceTimeoutMillis)
-            .onEach { (title, body) -> viewModel.createOrUpdateNote(title.toString(), body.toString()) }
+            .onEach { (title, body) ->
+                viewModel.createOrUpdateNote(title.toString(), body.toString())
+                context?.updateAllWidgetsData()
+                context?.updateNoteListWidgets(viewModel.library.value.id)
+            }
             .launchIn(lifecycleScope)
     }
 
@@ -178,6 +182,8 @@ class NoteFragment : Fragment() {
                 etNoteTitle.text.toString(),
                 etNoteBody.text.toString(),
             )
+            context?.updateAllWidgetsData()
+            context?.updateNoteListWidgets(viewModel.library.value.id)
             activity?.hideKeyboard(root)
         }
 

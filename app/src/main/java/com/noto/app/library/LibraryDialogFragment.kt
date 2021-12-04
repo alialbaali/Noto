@@ -76,9 +76,9 @@ class LibraryDialogFragment : BaseDialogFragment() {
                     R.string.library_is_archived
 
                 context?.let { context ->
+                    context.updateAllWidgetsData()
                     parentView?.snackbar(context.stringResource(resource), parentAnchorView)
                 }
-
                 dismiss()
             }
         }
@@ -91,9 +91,9 @@ class LibraryDialogFragment : BaseDialogFragment() {
                     R.string.library_is_pinned
 
                 context?.let { context ->
+                    context.updateAllWidgetsData()
                     parentView?.snackbar(context.stringResource(resource), parentAnchorView)
                 }
-
                 dismiss()
             }
         }
@@ -149,6 +149,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
         val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
         context?.let { context ->
             parentView?.snackbar(context.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
+            context.updateAllWidgetsData()
+            context.updateLibraryListWidgets()
         }
         navController?.popBackStack(R.id.mainFragment, false)
         viewModel.notes.value

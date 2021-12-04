@@ -86,7 +86,12 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                     sNotePreviewSize.value.toInt(),
                     swShowNoteCreationDate.isChecked,
                     swSetNewNoteCursor.isChecked,
-                ).invokeOnCompletion { dismiss() }
+                ).invokeOnCompletion {
+                    context?.updateAllWidgetsData()
+                    context?.updateLibraryListWidgets()
+                    context?.updateNoteListWidgets(viewModel.library.value.id)
+                    dismiss()
+                }
             }
         }
     }

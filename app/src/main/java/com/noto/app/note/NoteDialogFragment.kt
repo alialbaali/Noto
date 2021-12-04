@@ -39,7 +39,7 @@ class NoteDialogFragment : BaseDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = NoteDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         val baseDialog = setupBaseDialogFragment()
         setupListeners()
@@ -74,9 +74,10 @@ class NoteDialogFragment : BaseDialogFragment() {
                     R.string.note_is_archived
 
                 context?.let { context ->
+                    context.updateAllWidgetsData()
+                    context.updateNoteListWidgets(viewModel.library.value.id)
                     parentView?.snackbar(context.stringResource(resource), parentAnchorView)
                 }
-
                 dismiss()
             }
         }
@@ -104,6 +105,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvDuplicateNote.setOnClickListener {
             viewModel.duplicateNote().invokeOnCompletion {
                 context?.let { context ->
+                    context.updateAllWidgetsData()
                     parentView?.snackbar(context.stringResource(R.string.note_is_duplicated), parentAnchorView)
                 }
                 dismiss()
@@ -118,9 +120,9 @@ class NoteDialogFragment : BaseDialogFragment() {
                     R.string.note_is_pinned
 
                 context?.let { context ->
+                    context.updateAllWidgetsData()
                     parentView?.snackbar(context.stringResource(resource), parentAnchorView)
                 }
-
                 dismiss()
             }
         }
@@ -135,9 +137,11 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyNote.setOnClickListener {
-            val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
-                viewModel.copyNote(it).invokeOnCompletion {
+            val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener { libraryId ->
+                viewModel.copyNote(libraryId).invokeOnCompletion {
                     context?.let { context ->
+                        context.updateAllWidgetsData()
+                        context.updateNoteListWidgets(libraryId)
                         parentView?.snackbar(context.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
                     }
                     navController?.popBackStack(args.destination, false)
@@ -153,9 +157,12 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvMoveNote.setOnClickListener {
-            val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
-                viewModel.moveNote(it).invokeOnCompletion {
+            val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener { libraryId ->
+                viewModel.moveNote(libraryId).invokeOnCompletion {
                     context?.let { context ->
+                        context.updateAllWidgetsData()
+                        context.updateNoteListWidgets(viewModel.library.value.id)
+                        context.updateNoteListWidgets(libraryId)
                         parentView?.snackbar(context.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
                     }
                     navController?.popBackStack(args.destination, false)
@@ -185,7 +192,11 @@ class NoteDialogFragment : BaseDialogFragment() {
                     navController?.popBackStack(args.destination, false)
                     if (viewModel.note.value.reminderDate != null)
                         alarmManager?.cancelAlarm(context, viewModel.note.value.id)
-                    viewModel.deleteNote().invokeOnCompletion { dismiss() }
+                    viewModel.deleteNote().invokeOnCompletion {
+                        context.updateAllWidgetsData()
+                        context.updateNoteListWidgets(viewModel.library.value.id)
+                        dismiss()
+                    }
                 }
 
                 navController?.navigateSafely(

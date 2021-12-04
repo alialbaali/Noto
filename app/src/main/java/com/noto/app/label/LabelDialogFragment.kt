@@ -28,7 +28,7 @@ class LabelDialogFragment : BaseDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = LabelDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         val baseDialogFragment = setupBaseDialogFragment()
         setupState(baseDialogFragment)
@@ -60,12 +60,14 @@ class LabelDialogFragment : BaseDialogFragment() {
 
     private fun LabelDialogFragmentBinding.setupListeners() {
         tvEditLabel.setOnClickListener {
+            context?.updateAllWidgetsData()
             dismiss()
             navController
                 ?.navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToNewLabelDialogFragment(args.libraryId, args.labelId))
         }
 
         tvReorderLabel.setOnClickListener {
+            context?.updateAllWidgetsData()
             dismiss()
             navController
                 ?.navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToReorderLabelDialogFragment(args.libraryId, args.labelId))
@@ -73,6 +75,7 @@ class LabelDialogFragment : BaseDialogFragment() {
 
         tvDeleteLabel.setOnClickListener {
             context?.let { context ->
+                context.updateAllWidgetsData()
                 val confirmationText = context.stringResource(R.string.delete_label_confirmation)
                 val descriptionText = context.stringResource(R.string.delete_label_description)
                 val btnText = context.stringResource(R.string.delete_label)
