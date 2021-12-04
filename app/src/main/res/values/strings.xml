@@ -173,6 +173,9 @@
     <string name="english">English</string>
     <string name="turkish">Turkish</string>
     <string name="arabic">Arabic</string>
+    <string name="indonesian">Indonesian</string>
+    <string name="russian">Russian</string>
+    <string name="tamil">Tamil</string>
 
     <!-- Widget -->
     <string name="create_widget">Create widget</string>

@@ -21,4 +21,4 @@ enum class Font { Nunito, Monospace, }
 
 enum class Grouping { Default, CreationDate, Label, }
 
-enum class Language { System, English, Turkish, Arabic, }
+enum class Language { System, English, Turkish, Arabic, Indonesian, Russian, Tamil, }

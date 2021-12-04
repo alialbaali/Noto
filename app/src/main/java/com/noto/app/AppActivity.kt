@@ -136,9 +136,12 @@ class AppActivity : AppCompatActivity() {
     private fun AppActivityBinding.setupLanguage(language: Language) {
         val locale = when (language) {
             Language.System -> Locale.getDefault()
-            Language.English -> Locale("en", "US")
-            Language.Turkish -> Locale("tr", "")
-            Language.Arabic -> Locale("ar", "")
+            Language.English -> Locale("en")
+            Language.Turkish -> Locale("tr")
+            Language.Arabic -> Locale("ar")
+            Language.Indonesian -> Locale("in")
+            Language.Russian -> Locale("ru")
+            Language.Tamil -> Locale("ta")
         }
         if (resources.configuration.locale != locale) {
             Locale.setDefault(locale)
