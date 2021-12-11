@@ -34,7 +34,7 @@
     <string name="export_import_data">Verileri içe/dışa aktar</string>
     <string name="exporting_failed">Dışa aktarma başarısız.</string>
     <string name="importing_failed">İçe aktarma başarısız.</string>
-    <string name="data_is_exported">Veriler başarıyla %s dizinine aktarıldı</string>
+    <string name="data_is_exported">Veriler başarıyla %s dizinine aktarıldı.</string>
     <string name="data_is_imported">Veriler başarıyla içe aktarıldı.</string>
     <string name="export_data">Verileri dışa aktar</string>
     <string name="import_data">Verileri içe aktar</string>
@@ -62,7 +62,7 @@
         <item quantity="other">%d Kitaplık</item>
     </plurals>
     <string name="create_library">Kitaplık oluştur</string>
-    <string name="new_library">Yeni Kitaplık</string>
+    <string name="new_library">Yeni kitaplık</string>
     <string name="library_options">Kitaplık seçenekleri</string>
     <string name="edit_library">Kitaplığı düzenle</string>
     <string name="archive_library">Kitaplığı arşivle</string>
@@ -81,7 +81,8 @@
     <string name="library_is_unarchived">Kitaplık arşivden çıkarıldı.</string>
     <string name="library_is_pinned">Kitaplık sabitlendi.</string>
     <string name="library_is_unpinned">Sabitleme kaldırıldı.</string>
-    <string name="no_libraries_found">Kitaplık bulunamadı. Bir kitaplık oluşturmak için + düğmesine tıklayın.</string>
+    <string name="no_libraries_found">Kitaplık bulunamadı.</string>
+    <string name="no_libraries_found_create">Kitaplık bulunamadı. Bir kitaplık oluşturmak için + düğmesine tıklayın.</string>
     <string name="select_library">Kitaplık seç</string>
     <string name="pinned">Sabitlenmiş</string>
     <string name="pin_library">Kitaplığı sabitle</string>
@@ -153,6 +154,7 @@
     <string name="delete_label_confirmation">Bu etiketi silmek istediğinizden emin misiniz?</string>
     <string name="label_is_deleted">Etiket silindi.</string>
     <string name="delete_label_description">Bu işlem geri alınamaz. Etiket silinecek ve ilgili notlardan kalıcı olarak kaldırılacaktır.</string>
+    <string name="filter_labels">Etiketleri filtrele</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
     <string name="change_theme">Temayı değiştir</string>
@@ -166,4 +168,22 @@
     <string name="english">İngilizce</string>
     <string name="turkish">Türkçe</string>
     <string name="arabic">Arapça</string>
+    <string name="indonesian">Endonezce</string>
+    <string name="russian">Rusça</string>
+    <string name="tamil">Tamilce</string>
+    <!-- Widget -->
+    <string name="create_widget">Widget oluştur</string>
+    <string name="update_widget">Widget\'ı güncelle</string>
+    <string name="new_notes_widget">Yeni not widget\'ı</string>
+    <string name="edit_notes_widget">Not widget\'ını düzenle</string>
+    <string name="new_libraries_widget">Yeni kitaplık widget\'ı</string>
+    <string name="edit_libraries_widget">Kitaplık widget\'ını düzenle</string>
+    <string name="new_library_button">Yeni kitaplık düğmesi</string>
+    <string name="new_note_button">Yeni not düğmesi</string>
+    <string name="widget_header">Widget başlığı</string>
+    <string name="app_icon">Uygulama simgesi</string>
+    <string name="widget_radius">Widget genişliği</string>
+    <string name="edit_widget">Widget\'ı düzenle</string>
+    <string name="edit_widget_button">Widget düğmesini düzenle</string>
+    <string name="libraries_notes_count">Not sayısı</string>
 </resources>

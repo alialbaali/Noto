@@ -84,6 +84,7 @@
     <string name="library_is_pinned">Библиотека закреплена.</string>
     <string name="library_is_unpinned">Библиотека откреплена.</string>
     <string name="no_libraries_found">Библиотеки не найдены. Попробуйте создать библиотеку, нажав значок +.</string>
+    <string name="no_libraries_found_create">Библиотеки не найдены. Попробуйте создать библиотеку, нажав значок +.</string>
     <string name="select_library">Выбрать библиотеку</string>
     <string name="pinned">Закреплено</string>
     <string name="pin_library">Закрепить</string>
@@ -159,6 +160,7 @@
     <string name="delete_label_confirmation">Вы уверены, что хотите удалить эту метку?</string>
     <string name="label_is_deleted">Метка удалена.</string>
     <string name="delete_label_description">Это действие не может быть отменено и метка будет безвозвратно удалена из связанных заметок.</string>
+    <string name="filter_labels">Фильтр меток</string>
     <!-- Theme -->
     <string name="theme">Тема</string>
     <string name="change_theme">Изменить тему</string>
@@ -172,4 +174,22 @@
     <string name="english">Английский</string>
     <string name="turkish">Турецкий</string>
     <string name="arabic">Арабский</string>
+    <string name="indonesian">Индонезийский</string>
+    <string name="russian">Русский</string>
+    <string name="tamil">Тамильский</string>
+    <!-- Widget -->
+    <string name="create_widget">Создать виджет</string>
+    <string name="update_widget">Обновить виджет</string>
+    <string name="new_notes_widget">Новый виджет заметок</string>
+    <string name="edit_notes_widget">Изменить виджет заметок</string>
+    <string name="new_libraries_widget">Виджет новых библиотек</string>
+    <string name="edit_libraries_widget">Изменить виджет библиотек</string>
+    <string name="new_library_button">Кнопка \"Новая библиотека\"</string>
+    <string name="new_note_button">Кнопка \"Новая заметка\"</string>
+    <string name="widget_header">Центр виджетов</string>
+    <string name="app_icon">Иконка приложения</string>
+    <string name="widget_radius">Радиус виджета</string>
+    <string name="edit_widget">Изменить Виджет</string>
+    <string name="edit_widget_button">Изменить кнопку виджета</string>
+    <string name="libraries_notes_count">Количество заметок в библиотеке</string>
 </resources>

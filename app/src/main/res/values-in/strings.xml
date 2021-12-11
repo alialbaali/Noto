@@ -81,6 +81,7 @@
     <string name="library_is_pinned">Pustaka telah disematkan.</string>
     <string name="library_is_unpinned">Penyemat pustaka telah dilepas.</string>
     <string name="no_libraries_found">Tidak ada pustaka yang ditemukan. Untuk membuat pustaka, sentuh + ikon.</string>
+    <string name="no_libraries_found_create">Tidak ada pustaka yang ditemukan. Untuk membuat pustaka, sentuh + ikon.</string>
     <string name="select_library">Pilih pustaka</string>
     <string name="pinned">Disematkan</string>
     <string name="pin_library">Sematkan pustaka</string>
@@ -150,6 +151,7 @@
     <string name="delete_label_confirmation">Apakah kamu yakin ingin menghapus tanda ini?</string>
     <string name="label_is_deleted">Tanda telah dihapus.</string>
     <string name="delete_label_description">Tindakan ini tidak dapat diurungkan dan akan menghapus tanda dan menyingkirkan tanda dari catatan terkait secara permanen.</string>
+    <string name="filter_labels">Saring label</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
     <string name="change_theme">Ganti tema</string>
@@ -163,4 +165,22 @@
     <string name="english">Inggris</string>
     <string name="turkish">Turki</string>
     <string name="arabic">Arab</string>
+    <string name="indonesian">Indonesia</string>
+    <string name="russian">Rusia</string>
+    <string name="tamil">Tamil</string>
+    <!-- Widget -->
+    <string name="create_widget">Buat widget</string>
+    <string name="update_widget">Perbarui widget</string>
+    <string name="new_notes_widget">Widget catatan baru</string>
+    <string name="edit_notes_widget">Widget sunting catatan</string>
+    <string name="new_libraries_widget">Widget pustaka baru</string>
+    <string name="edit_libraries_widget">Widget sunting pustaka</string>
+    <string name="new_library_button">Tombol pustaka baru</string>
+    <string name="new_note_button">Tombol catatan baru</string>
+    <string name="widget_header">Tajuk widget</string>
+    <string name="app_icon">Ikon aplikasi</string>
+    <string name="widget_radius">Radius widget</string>
+    <string name="edit_widget">Sunting widget</string>
+    <string name="edit_widget_button">Tombol sunting widget</string>
+    <string name="libraries_notes_count">Jumlah catatan pustaka</string>
 </resources>

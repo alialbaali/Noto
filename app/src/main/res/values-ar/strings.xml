@@ -29,7 +29,7 @@
     <string name="rate_app_on_play_store">قيم التطبيق على متجر بلي</string>
     <string name="report_issue">الإبلاغ عن مشكلة</string>
     <string name="about">حول</string>
-    <string name="about_message">Noto يتم تطويره وصيانته من قبل <a href="https://www.alialbaali.com/">Ali Albaali</a>.\n\n يتم نشر التطبيق بموجب شروط <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.\n\nشكر خاص لـ <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> و <a href="https://sakci.me">Alparslan Şakçi</a> لترجمة التطبيق إلى اللغة التركية، وكل من ساعد وأسهم في التنمية.</string>
+    <string name="about_message">Noto يتم تطويره وصيانته من قبل <a href="https://www.alialbaali.com/">Ali Albaali</a>.\n\n يتم نشر التطبيق بموجب شروط <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.\n\nشكر خاص لـ <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> و <a href="https://sakci.me">Alparslan Şakçi</a> لترجمة التطبيق إلى اللغة التركية، <a href="https://github.com/heheboi22">heheboi</a> لترجمة التطبيق إلى اللغة التاميلية, وكل من ساعد وأسهم في التنمية.</string>
     <string name="share_with">مشاركة مع</string>
     <string name="export_import_data">تصدير/استيراد البيانات</string>
     <string name="exporting_failed">فشل في تصدير البيانات.</string>
@@ -86,6 +86,7 @@
     <string name="library_is_pinned">تم تثبيت الدفتر.</string>
     <string name="library_is_unpinned">تم إلغاء تثبيت الدفتر.</string>
     <string name="no_libraries_found">لا توجد أي دفاتر. حاول إنشاء دفتر بالنقر على أيقونة +.</string>
+    <string name="no_libraries_found_create">لا توجد أي دفاتر. حاول إنشاء دفتر بالنقر على أيقونة +.</string>
     <string name="select_library">اختر الدفتر</string>
     <string name="pinned">مثبت</string>
     <string name="pin_library">تثبيت الدفتر</string>
@@ -165,6 +166,7 @@
     <string name="delete_label_confirmation">هل أنت متأكد من أنك تريد حذف هذا الملصق؟</string>
     <string name="label_is_deleted">تم حذف الملصق.</string>
     <string name="delete_label_description">لا يمكن التراجع عن هذا الإجراء وسيتم حذف الملصق وإزالة الملصق من الملاحظات المرتبطة به بشكل دائم.</string>
+    <string name="filter_labels">تصفية الملصقات</string>
     <!-- Theme -->
     <string name="theme">المظهر</string>
     <string name="change_theme">تغيير المظهر</string>
@@ -178,4 +180,22 @@
     <string name="english">اللغة الإنكليزية</string>
     <string name="turkish">اللغة التركية</string>
     <string name="arabic">اللغة العربية</string>
+    <string name="indonesian">اللغة الأندونيسية</string>
+    <string name="russian">اللغة الروسية</string>
+    <string name="tamil">اللغة التاميلية</string>
+    <!-- Widget -->
+    <string name="create_widget">إنشاء قطعة</string>
+    <string name="update_widget">تحديث القطعة</string>
+    <string name="new_notes_widget">ملاحظات ملصق جديد</string>
+    <string name="edit_notes_widget">تعديل قطعة الملاحظات</string>
+    <string name="new_libraries_widget">قطعة دفاتر جديد</string>
+    <string name="edit_libraries_widget">تعديل قطعة الدفاتر</string>
+    <string name="new_library_button">زر دفتر جديد</string>
+    <string name="new_note_button">زر ملاحظة جديد</string>
+    <string name="widget_header">رأس القطعة</string>
+    <string name="app_icon">أيقونة التطبيق</string>
+    <string name="widget_radius">قطعة نصف القطر</string>
+    <string name="edit_widget">تعديل القطعة</string>
+    <string name="edit_widget_button">زر تعديل القطعة</string>
+    <string name="libraries_notes_count">عدد ملاحظات الدفاتر</string>
 </resources>

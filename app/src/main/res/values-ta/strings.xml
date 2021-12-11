@@ -82,6 +82,7 @@
     <string name="library_is_pinned">நூலகம் Pin செய்யப்பட்டது.</string>
     <string name="library_is_unpinned">நூலகம் அகற்றப்பட்டது.</string>
     <string name="no_libraries_found">நூலகங்கள் எதுவும் இல்லை. + ஐகானைக் கிளிக் செய்வதன் மூலம் புதிய நூலகத்தை உருவாக்க முடியும்.</string>
+    <string name="no_libraries_found_create">நூலகங்கள் இல்லை. + ஐகானைக் கிளிக் செய்வதன் மூலம் நூலகத்தை உருவாக்க முயற்சிக்கவும்.</string>
     <string name="select_library">நூலகத்தைத் தேர்ந்தெடுக்கவும்</string>
     <string name="pinned">Pin செய்யப்பட்டது</string>
     <string name="pin_library">நூலகத்தை Pin செய்</string>
@@ -153,6 +154,7 @@
     <string name="delete_label_confirmation">இந்த லேபிளை நிச்சயமாக நீக்க விரும்புகிறீர்களா?</string>
     <string name="label_is_deleted">லேபிள் நீக்கப்பட்டது.</string>
     <string name="delete_label_description">இந்தச் செயலைச் செயல்தவிர்க்க முடியாது மேலும் லேபிளை நீக்கிவிடும் மற்றும் தொடர்புடைய குறிப்புகளில் இருந்து லேபிளை நிரந்தரமாக அகற்றும்.</string>
+    <string name="filter_labels">லேபிள்களை வடிகட்டவும்</string>
     <!-- Theme -->
     <string name="theme">நிற அமைப்பு</string>
     <string name="change_theme">நிற அமைப்பை மாற்றவும்</string>
@@ -166,4 +168,22 @@
     <string name="english">ஆங்கிலம்</string>
     <string name="turkish">துருக்கிய</string>
     <string name="arabic">அரபிக்</string>
+    <string name="indonesian">இந்தோனேசியன்</string>
+    <string name="russian">ரஷியன்</string>
+    <string name="tamil">தமிழ்</string>
+    <!-- Widget -->
+    <string name="create_widget">விட்ஜெட்டை உருவாக்கவும்</string>
+    <string name="update_widget">விட்ஜெட்டைப் புதுப்பிக்கவும்</string>
+    <string name="new_notes_widget">புதிய குறிப்புகள் விட்ஜெட்</string>
+    <string name="edit_notes_widget">குறிப்புகள் விட்ஜெட்டைத் திருத்தவும்</string>
+    <string name="new_libraries_widget">புதிய நூலக விட்ஜெட்</string>
+    <string name="edit_libraries_widget">நூலக விட்ஜெட்டைத் திருத்து</string>
+    <string name="new_library_button">புதிய நூலக பொத்தான்</string>
+    <string name="new_note_button">புதிய குறிப்பு பொத்தான்</string>
+    <string name="widget_header">விட்ஜெட் தலைப்பு</string>
+    <string name="app_icon">செயலி ஐகான்</string>
+    <string name="widget_radius">விட்ஜெட் ஆரம்</string>
+    <string name="edit_widget">விட்ஜெட்டைத் திருத்து</string>
+    <string name="edit_widget_button">விட்ஜெட் பொத்தானை திருத்து</string>
+    <string name="libraries_notes_count">நூலகக் குறிப்புகள் எண்ணிக்கை</string>
 </resources>
