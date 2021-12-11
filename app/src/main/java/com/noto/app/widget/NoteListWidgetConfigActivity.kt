@@ -55,7 +55,7 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
             .onEach { isCreated ->
                 if (isCreated) {
                     tb.title = stringResource(R.string.edit_notes_widget)
-                    btnCreate.text = stringResource(R.string.update_widget)
+                    btnCreate.text = stringResource(R.string.done)
                 }
             }
             .launchIn(lifecycleScope)
