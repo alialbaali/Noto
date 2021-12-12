@@ -10,6 +10,7 @@ import com.noto.app.R
 import com.noto.app.databinding.NoteLabelItemBinding
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.NotoColor
+import com.noto.app.util.attributeColoResource
 import com.noto.app.util.colorResource
 import com.noto.app.util.toResource
 
@@ -26,7 +27,7 @@ abstract class NoteLabelItem : EpoxyModelWithHolder<NoteLabelItem.Holder>() {
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
             tvLabel.background?.mutate()?.setTint(context.colorResource(color.toResource()))
-            tvLabel.setTextColor(context.colorResource(R.color.colorBackground))
+            tvLabel.setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
         }
         tvLabel.text = label.title
     }

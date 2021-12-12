@@ -26,7 +26,7 @@ abstract class NewLabelItem : EpoxyModelWithHolder<NewLabelItem.Holder>() {
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
             val resourceColor = context.colorResource(color.toResource())
-            ibNewLabel.imageTintList = context.colorStateResource(color.toResource())
+            ibNewLabel.imageTintList = resourceColor.toColorStateList()
             ibNewLabel.background = context.drawableResource(R.drawable.label_item_shape)
                 ?.mutate()
                 ?.let { it as RippleDrawable }

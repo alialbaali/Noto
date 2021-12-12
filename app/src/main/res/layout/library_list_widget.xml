@@ -50,8 +50,8 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_normal"
                 android:background="@drawable/ic_btn_shape"
-                android:backgroundTint="@color/colorBackground"
-                android:tint="@color/colorPrimary"
+                android:backgroundTint="?attr/notoBackgroundColor"
+                android:tint="?attr/notoPrimaryColor"
                 android:layout_marginEnd="@dimen/spacing_small"
                 android:contentDescription="@string/edit_widget" />
         </LinearLayout>
@@ -98,10 +98,10 @@
             android:layout_margin="@dimen/spacing_normal"
             android:layout_gravity="end|bottom"
             android:src="@drawable/ic_round_add_24"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="?attr/notoPrimaryColor"
             android:background="@drawable/ic_btn_shape"
             android:padding="@dimen/spacing_normal"
-            android:tint="@color/colorBackground"
+            android:tint="?attr/notoBackgroundColor"
             android:contentDescription="@string/create_library" />
     </FrameLayout>
 </LinearLayout>

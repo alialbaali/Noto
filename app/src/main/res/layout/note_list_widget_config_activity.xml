@@ -159,16 +159,16 @@
                     android:stepSize="8"
                     android:contentDescription="@string/widget_radius"
                     android:layout_marginHorizontal="@dimen/spacing_normal"
-                    app:haloColor="@color/colorSurface"
+                    app:haloColor="?attr/notoSurfaceColor"
                     app:labelStyle="@style/SliderLabel"
-                    app:thumbColor="@color/colorPrimary"
+                    app:thumbColor="?attr/notoPrimaryColor"
                     app:thumbRadius="12dp"
-                    app:thumbStrokeColor="@color/colorPrimary"
+                    app:thumbStrokeColor="?attr/notoPrimaryColor"
                     app:thumbStrokeWidth="0dp"
-                    app:tickColorActive="@color/colorBackground"
-                    app:tickColorInactive="@color/colorPrimary"
-                    app:trackColorActive="@color/colorPrimary"
-                    app:trackColorInactive="@color/colorBackground"
+                    app:tickColorActive="?attr/notoBackgroundColor"
+                    app:tickColorInactive="?attr/notoPrimaryColor"
+                    app:trackColorActive="?attr/notoPrimaryColor"
+                    app:trackColorInactive="?attr/notoBackgroundColor"
                     app:trackHeight="@dimen/spacing_normal" />
             </LinearLayout>
 

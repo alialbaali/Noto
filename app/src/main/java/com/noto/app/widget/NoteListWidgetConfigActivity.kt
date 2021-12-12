@@ -63,7 +63,7 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
         combine(viewModel.library, viewModel.notes, viewModel.labels) { library, notes, labels ->
             val filteredNotes = notes.filter { it.second.containsAll(labels.filterSelected()) }
             val color = colorResource(library.color.toResource())
-            val colorStateList = colorStateResource(library.color.toResource())
+            val colorStateList = color.toColorStateList()
             tvFilterLabels.isVisible = labels.isNotEmpty()
             rv.isVisible = labels.isNotEmpty()
             widget.tvLibraryTitle.text = library.title
@@ -100,7 +100,7 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
                         label(entry.key)
                         isSelected(entry.value)
                         color(library.color)
-                        backgroundColor(colorResource(R.color.colorSurface))
+                        backgroundColor(attributeColoResource(R.attr.notoSurfaceColor))
                         onClickListener { _ ->
                             if (entry.value)
                                 viewModel.deselectLabel(entry.key.id)

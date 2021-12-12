@@ -232,7 +232,7 @@ class NoteFragment : Fragment() {
             tvCreatedAt.setTextColor(color)
             tvWordCount.setTextColor(color)
             tb.navigationIcon?.mutate()?.setTint(color)
-            fab.backgroundTintList = context.colorStateResource(library.color.toResource())
+            fab.backgroundTintList = color.toColorStateList()
             bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
             bab.navigationIcon?.mutate()?.setTint(color)
             etNoteTitle.setLinkTextColor(color)
@@ -295,11 +295,12 @@ class NoteFragment : Fragment() {
         }
     }
 
-    private val NoteFragmentBinding.NoteListUpdateCallback
-        get() = object : ListUpdateCallback {
-            override fun onInserted(position: Int, count: Int) = if (rv.childCount == 1) rv.scrollToPosition(0) else Unit
-            override fun onRemoved(position: Int, count: Int) {}
-            override fun onMoved(fromPosition: Int, toPosition: Int) {}
-            override fun onChanged(position: Int, count: Int, payload: Any?) {}
-        }
 }
+
+private val NoteFragmentBinding.NoteListUpdateCallback
+    get() = object : ListUpdateCallback {
+        override fun onInserted(position: Int, count: Int) = if (rv.childCount == 1) rv.scrollToPosition(0) else Unit
+        override fun onRemoved(position: Int, count: Int) {}
+        override fun onMoved(fromPosition: Int, toPosition: Int) {}
+        override fun onChanged(position: Int, count: Int, payload: Any?) {}
+    }

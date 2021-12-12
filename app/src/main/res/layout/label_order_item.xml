@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="@dimen/spacing_small"
-        android:tint="@color/colorSecondary"
+        android:tint="?attr/notoSecondaryColor"
         android:contentDescription="@string/drag"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

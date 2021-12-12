@@ -44,9 +44,8 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
                     val color = context.colorResource(library.color.toResource())
                     baseDialog.tvDialogTitle.setTextColor(color)
                     baseDialog.vHead.background?.mutate()?.setTint(color)
-                    val colorStateList = context.colorStateResource(library.color.toResource())
                     listOf(tvGrouping, tvSortingType, tvSortingOrder).onEach {
-                        TextViewCompat.setCompoundDrawableTintList(it, colorStateList)
+                        TextViewCompat.setCompoundDrawableTintList(it, color.toColorStateList())
                     }
                 }
                 when (library.sortingType) {

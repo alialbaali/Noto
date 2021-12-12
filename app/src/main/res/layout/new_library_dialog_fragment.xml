@@ -73,12 +73,12 @@
             app:tabIconTint="@color/tab_icon_color_selector"
             app:tabIndicator="@drawable/tab_indicator_shape"
             app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorColor="?attr/notoPrimaryColor"
             app:tabIndicatorGravity="stretch"
             app:tabInlineLabel="true"
-            app:tabSelectedTextColor="@color/colorBackground"
+            app:tabSelectedTextColor="?attr/notoBackgroundColor"
             app:tabTextAppearance="@style/TabItemTextAppearance"
-            app:tabTextColor="@color/colorPrimary">
+            app:tabTextColor="?attr/notoPrimaryColor">
 
             <com.google.android.material.tabs.TabItem
                 android:text="@string/list"
@@ -110,16 +110,16 @@
             android:value="15"
             android:stepSize="1"
             android:contentDescription="@string/note_preview_size"
-            app:haloColor="@color/colorSurface"
+            app:haloColor="?attr/notoSurfaceColor"
             app:labelStyle="@style/SliderLabel"
-            app:thumbColor="@color/colorPrimary"
+            app:thumbColor="?attr/notoPrimaryColor"
             app:thumbRadius="12dp"
-            app:thumbStrokeColor="@color/colorPrimary"
+            app:thumbStrokeColor="?attr/notoPrimaryColor"
             app:thumbStrokeWidth="0dp"
-            app:tickColorActive="@color/colorBackground"
-            app:tickColorInactive="@color/colorPrimary"
-            app:trackColorActive="@color/colorPrimary"
-            app:trackColorInactive="@color/colorSurface"
+            app:tickColorActive="?attr/notoBackgroundColor"
+            app:tickColorInactive="?attr/notoPrimaryColor"
+            app:trackColorActive="?attr/notoPrimaryColor"
+            app:trackColorInactive="?attr/notoSurfaceColor"
             app:trackHeight="@dimen/spacing_normal" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
@@ -129,8 +129,8 @@
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/spacing_normal"
             android:text="@string/show_note_creation_date"
-            app:thumbTint="@color/colorPrimary"
-            app:trackTint="@color/colorSurface" />
+            app:thumbTint="?attr/notoPrimaryColor"
+            app:trackTint="?attr/notoSurfaceColor" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/sw_set_new_note_cursor"
@@ -139,8 +139,8 @@
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/spacing_normal"
             android:text="@string/set_new_note_cursor_on_title"
-            app:thumbTint="@color/colorPrimary"
-            app:trackTint="@color/colorSurface" />
+            app:thumbTint="?attr/notoPrimaryColor"
+            app:trackTint="?attr/notoSurfaceColor" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_create"

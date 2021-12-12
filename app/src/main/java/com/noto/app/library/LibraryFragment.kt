@@ -263,7 +263,7 @@ class LibraryFragment : Fragment() {
     private fun LibraryFragmentBinding.setupLibrary(library: Library) {
         context?.let { context ->
             val color = context.colorResource(library.color.toResource())
-            val colorStateList = context.colorStateResource(library.color.toResource())
+            val colorStateList = color.toColorStateList()
             tb.title = library.title
             tb.setTitleTextColor(color)
             tb.navigationIcon?.mutate()?.setTint(color)

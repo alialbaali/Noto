@@ -57,7 +57,7 @@ class NoteListWidgetAdapter(
                     NoteLabelItemBinding.inflate(layoutInflater, parent, false).withBinding {
                         tvLabel.text = label.title
                         tvLabel.background?.mutate()?.setTint(context.colorResource(color.toResource()))
-                        tvLabel.setTextColor(context.colorResource(R.color.colorBackground))
+                        tvLabel.setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
                         llLabels.addView(root)
                     }
                 }

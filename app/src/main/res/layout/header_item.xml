@@ -7,6 +7,6 @@
     android:padding="@dimen/spacing_small"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:textColor="@color/colorSecondary"
+    android:textColor="?attr/notoSecondaryColor"
     app:fontFamily="@font/nunito_bold"
     tools:text="Libraries" />

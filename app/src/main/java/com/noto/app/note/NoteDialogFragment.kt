@@ -241,12 +241,14 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private fun NoteDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
-            baseDialogFragment.tvDialogTitle.setTextColor(context.colorResource(library.color.toResource()))
-            baseDialogFragment.vHead.backgroundTintList = context.colorStateResource(library.color.toResource())
+            val color = context.colorResource(library.color.toResource())
+            val colorStateList =color.toColorStateList()
+            baseDialogFragment.tvDialogTitle.setTextColor(color)
+            baseDialogFragment.vHead.backgroundTintList = colorStateList
             listOf(
                 tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
                 tvDuplicateNote, tvPinNote, tvRemindMe, tvDeleteNote, tvMoveNote,
-            ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, context.colorStateResource(library.color.toResource())) }
+            ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, colorStateList) }
         }
     }
 

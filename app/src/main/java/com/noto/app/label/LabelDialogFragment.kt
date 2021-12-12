@@ -47,11 +47,10 @@ class LabelDialogFragment : BaseDialogFragment() {
             .onEach { library ->
                 context?.let { context ->
                     val color = context.colorResource(library.color.toResource())
-                    val colorState = context.colorStateResource(library.color.toResource())
                     baseDialogFragment.vHead.background?.mutate()?.setTint(color)
                     baseDialogFragment.tvDialogTitle.setTextColor(color)
                     listOf(tvEditLabel, tvReorderLabel, tvDeleteLabel)
-                        .forEach { TextViewCompat.setCompoundDrawableTintList(it, colorState) }
+                        .forEach { TextViewCompat.setCompoundDrawableTintList(it, color.toColorStateList()) }
                 }
             }
             .launchIn(lifecycleScope)

@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/spacing_extra_small"
         android:textSize="@dimen/size_extra_tiny"
-        android:textColor="@color/colorBackground"
+        android:textColor="?attr/notoBackgroundColor"
         android:textStyle="bold"
         tools:text="Label" />
 </FrameLayout>

@@ -61,7 +61,7 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
         val is24HourFormat = DateFormat.is24HourFormat(context)
 
         context?.let { context ->
-            val buttonTextColor = context.colorResource(R.color.colorPrimary)
+            val buttonTextColor = context.attributeColoResource(R.attr.notoPrimaryColor)
             DatePickerDialog(context, theme, { _, year, month, day ->
                 TimePickerDialog(context, theme, { _, hour, minute ->
                     LocalDateTime(year, month + 1, day, hour, minute)

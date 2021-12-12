@@ -39,7 +39,7 @@ class NoteListSortingOrderDialogFragment : BaseDialogFragment() {
             .onEach { library ->
                 context?.let { context ->
                     val color = context.colorResource(library.color.toResource())
-                    val colorStateList = context.colorStateResource(library.color.toResource())
+                    val colorStateList = color.toColorStateList()
                     baseDialog.tvDialogTitle.setTextColor(color)
                     baseDialog.vHead.background?.mutate()?.setTint(color)
                     rbSortingAsc.buttonTintList = colorStateList

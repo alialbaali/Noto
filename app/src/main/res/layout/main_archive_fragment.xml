@@ -5,7 +5,7 @@
     android:id="@+id/cool"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="?attr/notoBackgroundColor">
 
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/rv"
@@ -19,7 +19,7 @@
         android:id="@+id/abl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBackground"
+        android:background="?attr/notoBackgroundColor"
         android:elevation="0dp"
         app:elevation="0dp">
 

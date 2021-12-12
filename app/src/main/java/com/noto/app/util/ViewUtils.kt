@@ -62,8 +62,8 @@ private fun Note.createShareIntent() = Intent(Intent.ACTION_SEND).apply {
 
 fun View.snackbar(message: String, anchorView: View? = null) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
     animationMode = Snackbar.ANIMATION_MODE_SLIDE
-    setBackgroundTint(context.colorResource(R.color.colorPrimary))
-    setTextColor(context.colorResource(R.color.colorBackground))
+    setBackgroundTint(context.attributeColoResource(R.attr.notoPrimaryColor))
+    setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
     setAnchorView(anchorView)
     show()
 }
@@ -73,10 +73,9 @@ fun View.setFullSpan() {
         (layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
 }
 
-fun GradientDrawable.toRippleDrawable(context: Context): RippleDrawable? {
-    return context.colorStateResource(R.color.colorSecondary)?.let {
-        RippleDrawable(it, this, this)
-    }
+fun GradientDrawable.toRippleDrawable(context: Context): RippleDrawable {
+    val colorStateList = context.attributeColoResource(R.attr.notoSecondaryColor).toColorStateList()
+    return RippleDrawable(colorStateList, this, this)
 }
 
 fun Activity.showKeyboard(view: View) = WindowInsetsControllerCompat(window, view).show(WindowInsetsCompat.Type.ime())
@@ -135,10 +134,10 @@ fun TextView.removeLinksUnderline() {
 }
 
 fun SwitchMaterial.setupColors(
-    thumbCheckedColor: Int = context.colorResource(R.color.colorPrimary),
-    thumbUnCheckedColor: Int = context.colorResource(R.color.colorSurface),
-    trackCheckedColor: Int = context.colorResource(R.color.colorPrimary),
-    trackUnCheckedColor: Int = context.colorResource(R.color.colorSecondary),
+    thumbCheckedColor: Int = context.attributeColoResource(R.attr.notoPrimaryColor),
+    thumbUnCheckedColor: Int = context.attributeColoResource(R.attr.notoSurfaceColor),
+    trackCheckedColor: Int = context.attributeColoResource(R.attr.notoPrimaryColor),
+    trackUnCheckedColor: Int = context.attributeColoResource(R.attr.notoSecondaryColor),
 ) {
     val state = arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf(-android.R.attr.state_checked))
     val thumbColors = intArrayOf(thumbCheckedColor, thumbUnCheckedColor)

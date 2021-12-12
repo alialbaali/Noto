@@ -5,7 +5,7 @@
     android:id="@+id/cool"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground">
+    android:background="?attr/notoBackgroundColor">
 
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/rv"
@@ -60,7 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:backgroundTint="@color/colorBackground"
+        app:backgroundTint="?attr/notoBackgroundColor"
         app:fabAnimationMode="scale"
         app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
@@ -74,8 +74,8 @@
         android:layout_margin="@dimen/spacing_normal"
         android:contentDescription="@string/create_note"
         android:src="@drawable/ic_round_edit_24"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="?attr/notoPrimaryColor"
         app:layout_anchor="@id/bab"
-        app:tint="@color/colorBackground" />
+        app:tint="?attr/notoBackgroundColor" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

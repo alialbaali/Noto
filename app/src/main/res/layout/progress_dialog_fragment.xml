@@ -20,7 +20,7 @@
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:indeterminate="true"
-            app:indicatorColor="@color/colorPrimary"
+            app:indicatorColor="?attr/notoPrimaryColor"
             app:trackCornerRadius="@dimen/spacing_extra_large" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

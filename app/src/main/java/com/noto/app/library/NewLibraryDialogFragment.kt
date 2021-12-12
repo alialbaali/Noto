@@ -110,7 +110,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         context?.let { context ->
             if (library.id != 0L) {
                 val color = context.colorResource(library.color.toResource())
-                val colorStateList = context.colorStateResource(library.color.toResource())
+                val colorStateList = color.toColorStateList()
                 baseDialogFragment.tvDialogTitle.setTextColor(color)
                 baseDialogFragment.vHead.background?.mutate()?.setTint(color)
                 tlLibraryLayout.setSelectedTabIndicatorColor(color)
