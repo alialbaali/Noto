@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="notoPrimaryColor" format="reference" />
+    <attr name="notoSecondaryColor" format="reference" />
+    <attr name="notoBackgroundColor" format="reference" />
+    <attr name="notoSurfaceColor" format="reference" />
+</resources>
