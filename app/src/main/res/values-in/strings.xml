@@ -155,7 +155,7 @@
     <!-- Theme -->
     <string name="theme">Tema</string>
     <string name="change_theme">Ganti tema</string>
-    <string name="system_theme">Tema sistem</string>
+    <string name="system_dark_theme">Tema sistem</string>
     <string name="light_theme">Tema terang</string>
     <string name="dark_theme">Tema gelap</string>
     <!-- Language -->

@@ -2,7 +2,6 @@ package com.noto.app
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.NavHostFragment
 import com.noto.app.databinding.TextSelectionActivityBinding
@@ -10,7 +9,7 @@ import com.noto.app.library.SelectLibraryDialogFragment
 import com.noto.app.util.Constants
 import com.noto.app.util.withBinding
 
-class TextSelectionActivity : AppCompatActivity() {
+class TextSelectionActivity : BaseActivity() {
 
     private val navController by lazy {
         (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
@@ -18,7 +17,6 @@ class TextSelectionActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         TextSelectionActivityBinding.inflate(layoutInflater).withBinding {
             setContentView(root)

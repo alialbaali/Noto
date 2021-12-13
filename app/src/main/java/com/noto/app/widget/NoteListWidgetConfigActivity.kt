@@ -4,11 +4,11 @@ import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
+import com.noto.app.BaseActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteListWidgetConfigActivityBinding
 import com.noto.app.label.labelItem
@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class NoteListWidgetConfigActivity : AppCompatActivity() {
+class NoteListWidgetConfigActivity : BaseActivity() {
 
     private val viewModel by viewModel<NoteListWidgetConfigViewModel> { parametersOf(appWidgetId) }
 
@@ -32,7 +32,6 @@ class NoteListWidgetConfigActivity : AppCompatActivity() {
     private val libraryId by lazy { intent?.getLongExtra(Constants.LibraryId, 0) ?: 0 }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         NoteListWidgetConfigActivityBinding.inflate(layoutInflater).withBinding {
             setContentView(root)

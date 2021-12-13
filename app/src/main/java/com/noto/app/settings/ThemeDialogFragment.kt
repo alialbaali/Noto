@@ -24,7 +24,7 @@ class ThemeDialogFragment : BaseDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = ThemeDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         setupBaseDialogFragment()
         setupState()
@@ -38,8 +38,13 @@ class ThemeDialogFragment : BaseDialogFragment() {
     }
 
     private fun ThemeDialogFragmentBinding.setupListeners() {
-        rbSystemTheme.setOnClickListener {
+        rbSystemDarkTheme.setOnClickListener {
             viewModel.updateTheme(Theme.System)
+            dismiss()
+        }
+
+        rbSystemBlackTheme.setOnClickListener {
+            viewModel.updateTheme(Theme.SystemBlack)
             dismiss()
         }
 
@@ -52,6 +57,11 @@ class ThemeDialogFragment : BaseDialogFragment() {
             viewModel.updateTheme(Theme.Dark)
             dismiss()
         }
+
+        rbBlackTheme.setOnClickListener {
+            viewModel.updateTheme(Theme.Black)
+            dismiss()
+        }
     }
 
     private fun ThemeDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
@@ -62,9 +72,11 @@ class ThemeDialogFragment : BaseDialogFragment() {
 
     private fun ThemeDialogFragmentBinding.setupTheme(theme: Theme) {
         when (theme) {
-            Theme.System -> rbSystemTheme.isChecked = true
+            Theme.System -> rbSystemDarkTheme.isChecked = true
+            Theme.SystemBlack -> rbSystemBlackTheme.isChecked = true
             Theme.Light -> rbLightTheme.isChecked = true
             Theme.Dark -> rbDarkTheme.isChecked = true
+            Theme.Black -> rbBlackTheme.isChecked = true
         }
     }
 }

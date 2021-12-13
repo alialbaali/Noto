@@ -158,7 +158,7 @@
     <!-- Theme -->
     <string name="theme">நிற அமைப்பு</string>
     <string name="change_theme">நிற அமைப்பை மாற்றவும்</string>
-    <string name="system_theme">சிஸ்டமின் நிற அமைப்பு</string>
+    <string name="system_dark_theme">சிஸ்டமின் நிற அமைப்பு</string>
     <string name="light_theme">வெள்ளை நிறம்</string>
     <string name="dark_theme">இருண்ட நிறம்</string>
     <!-- Language -->

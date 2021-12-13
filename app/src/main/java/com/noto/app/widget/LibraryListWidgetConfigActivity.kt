@@ -4,10 +4,10 @@ import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
+import com.noto.app.BaseActivity
 import com.noto.app.R
 import com.noto.app.databinding.LibraryListWidgetConfigActivityBinding
 import com.noto.app.util.*
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class LibraryListWidgetConfigActivity : AppCompatActivity() {
+class LibraryListWidgetConfigActivity : BaseActivity() {
 
     private val viewModel by viewModel<LibraryListWidgetConfigViewModel> { parametersOf(appWidgetId) }
 
@@ -27,7 +27,6 @@ class LibraryListWidgetConfigActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         LibraryListWidgetConfigActivityBinding.inflate(layoutInflater).withBinding {
             setContentView(root)

@@ -164,7 +164,7 @@
     <!-- Theme -->
     <string name="theme">Тема</string>
     <string name="change_theme">Изменить тему</string>
-    <string name="system_theme">Тема системы</string>
+    <string name="system_dark_theme">Тема системы</string>
     <string name="light_theme">Светлая тема</string>
     <string name="dark_theme">Тёмная тема</string>
     <!-- Language -->

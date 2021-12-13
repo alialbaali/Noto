@@ -13,7 +13,7 @@ enum class NoteListSortingType { Manual, CreationDate, Alphabetical, }
 
 enum class SortingOrder { Ascending, Descending, }
 
-enum class Theme { System, Light, Dark, }
+enum class Theme { System, SystemBlack, Light, Dark, Black, }
 
 enum class Layout { Linear, Grid, }
 

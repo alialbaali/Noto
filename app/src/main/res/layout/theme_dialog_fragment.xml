@@ -18,12 +18,19 @@
             android:layout_height="wrap_content">
 
             <RadioButton
-                android:id="@+id/rb_system_theme"
+                android:id="@+id/rb_system_dark_theme"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/system_theme" />
+                android:text="@string/system_dark_theme" />
+
+            <RadioButton
+                android:id="@+id/rb_system_black_theme"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/system_black_theme" />
 
             <RadioButton
                 android:id="@+id/rb_light_theme"
@@ -38,6 +45,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dark_theme" />
+
+            <RadioButton
+                android:id="@+id/rb_black_theme"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/black_theme" />
 
         </RadioGroup>
 

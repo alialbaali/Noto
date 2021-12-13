@@ -170,7 +170,7 @@
     <!-- Theme -->
     <string name="theme">المظهر</string>
     <string name="change_theme">تغيير المظهر</string>
-    <string name="system_theme">مظهر النظام</string>
+    <string name="system_dark_theme">مظهر النظام</string>
     <string name="light_theme">مظهر فاتح</string>
     <string name="dark_theme">مظهر داكن</string>
     <!-- Language -->

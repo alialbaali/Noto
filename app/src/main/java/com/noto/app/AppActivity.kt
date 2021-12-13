@@ -3,20 +3,14 @@ package com.noto.app
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.Language
-import com.noto.app.domain.model.Theme
 import com.noto.app.library.SelectLibraryDialogFragment
 import com.noto.app.util.Constants
-import com.noto.app.util.colorResource
 import com.noto.app.util.createNotificationChannel
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -24,7 +18,7 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
-class AppActivity : AppCompatActivity() {
+class AppActivity : BaseActivity() {
 
     private val viewModel by viewModel<AppViewModel>()
 
@@ -36,7 +30,6 @@ class AppActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         notificationManager.createNotificationChannel()
         AppActivityBinding.inflate(layoutInflater).withBinding {
@@ -102,34 +95,10 @@ class AppActivity : AppCompatActivity() {
         navController.navigate(R.id.selectLibraryDialogFragment, args)
     }
 
-    @Suppress("DEPRECATION")
     private fun AppActivityBinding.setupState() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            window.statusBarColor = colorResource(android.R.color.black)
-            window.navigationBarColor = colorResource(android.R.color.black)
-        }
-
-        when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-            Configuration.UI_MODE_NIGHT_YES -> {
-                window.decorView.systemUiVisibility = 0
-            }
-        }
-
-        viewModel.theme
-            .onEach { theme -> setupTheme(theme) }
-            .launchIn(lifecycleScope)
-
         viewModel.language
             .onEach { language -> setupLanguage(language) }
             .launchIn(lifecycleScope)
-    }
-
-    private fun AppActivityBinding.setupTheme(theme: Theme) {
-        when (theme) {
-            Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            Theme.Dark -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
     }
 
     @Suppress("DEPRECATION")

@@ -158,7 +158,7 @@
     <!-- Theme -->
     <string name="theme">Tema</string>
     <string name="change_theme">Temayı değiştir</string>
-    <string name="system_theme">Sistem teması</string>
+    <string name="system_dark_theme">Sistem teması</string>
     <string name="light_theme">Açık tema</string>
     <string name="dark_theme">Koyu tema</string>
     <!-- Language -->
