@@ -32,6 +32,7 @@
         <entry key="app/src/main/res/drawable/dialog_item_shape.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/drawable/dialog_radio_button_item.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/dialog_shape.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/divider.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/edit_btn_shape.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/fab_shape.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/generic_shape.xml" value="0.22631578947368422" />
@@ -142,6 +143,7 @@
         <entry key="app/src/main/res/drawable/ic_style_24px.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_twotone_push_pin_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_unchecked_24dp.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/ic_widget_btn_shape.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/ic_work_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/item_ripple_background.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/label_item_shape.xml" value="0.2244299674267101" />
@@ -198,6 +200,8 @@
         <entry key="app/src/main/res/drawable/widget_header_shape_large.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/widget_header_shape_medium.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/widget_header_shape_small.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/widget_library_item_shape.xml" value="0.2244299674267101" />
+        <entry key="app/src/main/res/drawable/widget_note_item_shape.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/widget_shape.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/widget_shape_large.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/widget_shape_medium.xml" value="0.2241042345276873" />

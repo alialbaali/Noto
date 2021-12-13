@@ -97,6 +97,13 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="WidgetTitle" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/nunito_extrabold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/size_large</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="DialogItem" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_small</item>
@@ -157,8 +164,21 @@
         <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
+    <style name="WidgetLibraryTitleTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/size_small</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
     <style name="LibraryNotesCountTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/notoSecondaryColor</item>
+        <item name="android:textSize">@dimen/size_tiny</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="WidgetLibraryNotesCountTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:textSize">@dimen/size_tiny</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
@@ -190,11 +210,26 @@
         <item name="android:ellipsize">end</item>
     </style>
 
+    <style name="WidgetNoteTitleTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
     <style name="NoteBodyTextView" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">@dimen/size_tiny</item>
         <item name="android:lineSpacingMultiplier">1.1</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="WidgetNoteBodyTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/size_tiny</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:ellipsize">end</item>
     </style>
 
@@ -204,9 +239,22 @@
         <item name="fontFamily">@font/nunito_semibold_italic</item>
     </style>
 
+    <style name="WidgetNoteCreationDateTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/colorSecondary</item>
+        <item name="android:textSize">@dimen/size_extra_tiny</item>
+        <item name="fontFamily">@font/nunito_semibold_italic</item>
+    </style>
+
     <style name="PlaceholderTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_extra_huge</item>
         <item name="android:textColor">?attr/notoSecondaryColor</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="WidgetPlaceholderTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">@dimen/size_extra_huge</item>
+        <item name="android:textColor">@color/colorSecondary</item>
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:gravity">center</item>
     </style>

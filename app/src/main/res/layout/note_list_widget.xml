@@ -22,13 +22,13 @@
             android:src="@mipmap/ic_launcher"
             android:layout_width="30dp"
             android:layout_margin="@dimen/spacing_normal"
-            android:background="@drawable/ic_btn_shape"
+            android:background="@drawable/ic_widget_btn_shape"
             android:layout_height="30dp"
             android:contentDescription="@string/app_icon" />
 
         <TextView
             android:id="@+id/tv_library_title"
-            style="@style/DialogTitle"
+            style="@style/WidgetTitle"
             android:paddingVertical="@dimen/spacing_normal"
             android:textStyle="bold"
             android:ellipsize="end"
@@ -50,9 +50,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/spacing_normal"
-                android:background="@drawable/ic_btn_shape"
-                android:backgroundTint="?attr/notoBackgroundColor"
-                android:tint="?attr/notoPrimaryColor"
+                android:background="@drawable/ic_widget_btn_shape"
+                android:backgroundTint="@color/colorBackground"
+                android:tint="@color/colorPrimary"
                 android:layout_marginEnd="@dimen/spacing_small"
                 android:contentDescription="@string/edit_widget" />
         </LinearLayout>
@@ -79,7 +79,7 @@
 
         <TextView
             android:id="@+id/tv_placeholder"
-            style="@style/PlaceholderTextView"
+            style="@style/WidgetPlaceholderTextView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="@dimen/spacing_normal"
@@ -104,8 +104,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:contentDescription="@string/create_library"
-                android:src="@drawable/ic_btn_shape"
-                app:tint="?attr/notoPrimaryColor" />
+                android:src="@drawable/ic_widget_btn_shape"
+                app:tint="@color/colorPrimary" />
 
             <ImageButton
                 android:id="@+id/ib_fab"
@@ -114,7 +114,7 @@
                 android:src="@drawable/ic_round_edit_24"
                 android:background="@null"
                 android:padding="@dimen/spacing_normal"
-                android:tint="?attr/notoBackgroundColor"
+                android:tint="@color/colorBackground"
                 android:contentDescription="@string/create_library" />
         </FrameLayout>
     </FrameLayout>

@@ -7,7 +7,7 @@
     android:layout_margin="@dimen/spacing_small"
     android:orientation="horizontal"
     android:padding="@dimen/spacing_normal"
-    android:background="@drawable/library_item_shape"
+    android:background="@drawable/widget_library_item_shape"
     android:elevation="@dimen/elevation_normal">
 
     <ImageView
@@ -26,7 +26,7 @@
 
         <TextView
             android:id="@+id/tv_library_title"
-            style="@style/LibraryTitleTextView"
+            style="@style/WidgetLibraryTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"
@@ -36,7 +36,7 @@
 
         <TextView
             android:id="@+id/tv_library_notes_count"
-            style="@style/LibraryNotesCountTextView"
+            style="@style/WidgetLibraryNotesCountTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_normal"

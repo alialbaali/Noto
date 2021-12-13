@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacing_small"
-    android:background="@drawable/note_item_shape"
+    android:background="@drawable/widget_note_item_shape"
     android:padding="@dimen/spacing_normal">
 
     <LinearLayout
@@ -16,16 +16,15 @@
         android:layout_height="wrap_content"
         android:divider="@drawable/divider"
         android:showDividers="middle"
-        android:paddingBottom="@dimen/spacing_extra_small"
-        tools:listitem="@layout/note_label_item" />
+        android:paddingBottom="@dimen/spacing_extra_small" />
 
     <TextView
         android:id="@+id/tv_note_title"
-        style="@style/NoteTitleTextView"
+        style="@style/WidgetNoteTitleTextView"
         android:autoLink="all"
         android:linksClickable="false"
         android:layout_width="match_parent"
-        android:textColorLink="?attr/notoPrimaryColor"
+        android:textColorLink="@color/colorPrimary"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/spacing_extra_small"
         android:textStyle="bold"
@@ -33,10 +32,10 @@
 
     <TextView
         android:id="@+id/tv_note_body"
-        style="@style/NoteBodyTextView"
+        style="@style/WidgetNoteBodyTextView"
         android:autoLink="all"
         android:linksClickable="false"
-        android:textColorLink="?attr/notoPrimaryColor"
+        android:textColorLink="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/spacing_extra_small"
@@ -44,7 +43,7 @@
 
     <TextView
         android:id="@+id/tv_creation_date"
-        style="@style/NoteCreationDateTextView"
+        style="@style/WidgetNoteCreationDateTextView"
         android:layout_marginTop="@dimen/spacing_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
