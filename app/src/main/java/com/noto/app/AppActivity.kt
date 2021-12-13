@@ -19,6 +19,7 @@ import com.noto.app.util.Constants
 import com.noto.app.util.colorResource
 import com.noto.app.util.createNotificationChannel
 import com.noto.app.util.withBinding
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,8 +36,11 @@ class AppActivity : AppCompatActivity() {
             .navController
     }
 
+    private val currentTheme
+        get() = intent?.getStringExtra(Constants.ThemeKey)?.let(Theme::valueOf)
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
+        currentTheme?.toAndroidTheme()?.also(::setTheme)
         super.onCreate(savedInstanceState)
         notificationManager.createNotificationChannel()
         AppActivityBinding.inflate(layoutInflater).withBinding {
@@ -116,6 +120,7 @@ class AppActivity : AppCompatActivity() {
         }
 
         viewModel.theme
+            .drop(1)
             .onEach { theme -> setupTheme(theme) }
             .launchIn(lifecycleScope)
 
@@ -124,12 +129,49 @@ class AppActivity : AppCompatActivity() {
             .launchIn(lifecycleScope)
     }
 
-    private fun AppActivityBinding.setupTheme(theme: Theme) {
-        when (theme) {
-            Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            Theme.Dark -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+    private fun Theme.toAndroidTheme() = when (this) {
+        Theme.System, Theme.Light, Theme.Dark -> R.style.LightDarkTheme
+        Theme.SystemBlack, Theme.Black -> R.style.LightBlackTheme
+    }
+
+    private fun setupTheme(theme: Theme) {
+        if (currentTheme != theme) {
+            when (theme) {
+                Theme.System -> {
+                    setTheme(R.style.LightDarkTheme)
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                }
+                Theme.Light -> {
+                    setTheme(R.style.LightDarkTheme)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+                Theme.Dark -> {
+                    setTheme(R.style.LightDarkTheme)
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+                Theme.SystemBlack -> {
+                    setTheme(R.style.LightBlackTheme)
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                }
+                Theme.Black -> {
+                    setTheme(R.style.LightBlackTheme)
+//                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+            }
+            recreateCurrentActivity(theme)
         }
+    }
+
+    private fun recreateCurrentActivity(theme: Theme) {
+        val intent = Intent(this, AppActivity::class.java).apply {
+            putExtra(Constants.ThemeKey, theme.name)
+        }
+        finish()
+        startActivity(intent)
     }
 
     @Suppress("DEPRECATION")
