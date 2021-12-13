@@ -136,42 +136,40 @@ class AppActivity : AppCompatActivity() {
 
     private fun setupTheme(theme: Theme) {
         if (currentTheme != theme) {
+            intent?.putExtra(Constants.ThemeKey, theme.name)
             when (theme) {
                 Theme.System -> {
                     setTheme(R.style.LightDarkTheme)
+//                    recreate()
 //                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 }
                 Theme.Light -> {
                     setTheme(R.style.LightDarkTheme)
+//                    recreate()
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
                 Theme.Dark -> {
                     setTheme(R.style.LightDarkTheme)
+//                    recreate()
 //                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
                 Theme.SystemBlack -> {
                     setTheme(R.style.LightBlackTheme)
+//                    recreate()
 //                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 }
                 Theme.Black -> {
                     setTheme(R.style.LightBlackTheme)
+//                    recreate()
 //                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
             }
-            recreateCurrentActivity(theme)
+            recreate()
         }
-    }
-
-    private fun recreateCurrentActivity(theme: Theme) {
-        val intent = Intent(this, AppActivity::class.java).apply {
-            putExtra(Constants.ThemeKey, theme.name)
-        }
-        finish()
-        startActivity(intent)
     }
 
     @Suppress("DEPRECATION")
