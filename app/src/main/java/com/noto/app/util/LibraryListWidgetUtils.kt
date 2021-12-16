@@ -36,7 +36,9 @@ fun Context.createLibraryListWidgetRemoteViews(
         setPendingIntentTemplate(R.id.lv, createLibraryItemPendingIntent(appWidgetId))
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())
-        if (!isAppIconEnabled)
+        if (isAppIconEnabled)
+            setViewPadding(R.id.tv_app_name, 0.dp, 16.dp, 0.dp, 16.dp)
+        else
             setViewPadding(R.id.tv_app_name, 16.dp, 16.dp, 16.dp, 16.dp)
     }
 }
