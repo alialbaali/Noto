@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <corners android:radius="@dimen/spacing_extra_large"/>
-    <solid android:color="?attr/notoPrimaryColor"/>
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:right="@dimen/spacing_small"
+        android:left="@dimen/spacing_small">
+        <shape>
+            <corners android:radius="@dimen/spacing_extra_large" />
+            <solid android:color="?attr/notoPrimaryColor" />
+            <size android:width="@dimen/spacing_small" />
+        </shape>
+    </item>
+</layer-list>
