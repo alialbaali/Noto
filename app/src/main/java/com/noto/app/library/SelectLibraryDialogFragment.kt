@@ -23,9 +23,8 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.Serializable
 
-class SelectLibraryDialogFragment(private val isDismissible: Boolean = true) : BaseDialogFragment() {
+class SelectLibraryDialogFragment(private val onClick: (Long) -> Unit = {}) : BaseDialogFragment() {
 
     private val viewModel by viewModel<MainViewModel>()
 
@@ -33,7 +32,7 @@ class SelectLibraryDialogFragment(private val isDismissible: Boolean = true) : B
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         SelectLibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-            if (!isDismissible) {
+            if (!args.isDismissible) {
                 dialog?.setCanceledOnTouchOutside(false)
                 dialog?.setOnCancelListener { activity?.finish() }
             }
@@ -85,7 +84,11 @@ class SelectLibraryDialogFragment(private val isDismissible: Boolean = true) : B
                         isShowNotesCount(isShowNotesCount)
                         isManualSorting(false)
                         onClickListener { _ ->
-                            args.selectLibraryItemClickListener.onClick(library.id)
+                            try {
+                                navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.LibraryId, library.id)
+                            } catch (exception: IllegalStateException) {
+                                onClick(library.id)
+                            }
                             dismiss()
                         }
                         onLongClickListener { _ -> false }
@@ -101,9 +104,5 @@ class SelectLibraryDialogFragment(private val isDismissible: Boolean = true) : B
             Layout.Linear -> rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
-    }
-
-    fun interface SelectLibraryItemClickListener : Serializable {
-        fun onClick(libraryId: Long)
     }
 }

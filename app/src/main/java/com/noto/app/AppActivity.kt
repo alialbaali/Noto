@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.Language
-import com.noto.app.library.SelectLibraryDialogFragment
 import com.noto.app.util.Constants
 import com.noto.app.util.createNotificationChannel
 import com.noto.app.util.withBinding
@@ -85,13 +84,15 @@ class AppActivity : BaseActivity() {
     }
 
     private fun AppActivityBinding.showSelectLibraryDialog(content: String?) {
-        val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
-            val args = bundleOf(Constants.LibraryId to it, Constants.Body to content)
-            navController.navigate(R.id.libraryFragment, args)
-            navController.navigate(R.id.noteFragment, args)
-        }
-
-        val args = bundleOf(Constants.LibraryId to 0L, Constants.SelectedLibraryItemClickListener to selectLibraryItemClickListener)
+        navController.currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Long>(Constants.LibraryId)
+            ?.observe(this@AppActivity) { libraryId ->
+                val args = bundleOf(Constants.LibraryId to libraryId, Constants.Body to content)
+                navController.navigate(R.id.libraryFragment, args)
+                navController.navigate(R.id.noteFragment, args)
+            }
+        val args = bundleOf(Constants.LibraryId to 0L)
         navController.navigate(R.id.selectLibraryDialogFragment, args)
     }
 

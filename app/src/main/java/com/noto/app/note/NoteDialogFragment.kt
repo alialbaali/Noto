@@ -19,7 +19,6 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
-import com.noto.app.library.SelectLibraryDialogFragment
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -137,44 +136,40 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyNote.setOnClickListener {
-            val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener { libraryId ->
-                viewModel.copyNote(libraryId).invokeOnCompletion {
-                    context?.let { context ->
-                        context.updateAllWidgetsData()
-                        context.updateNoteListWidgets(libraryId)
-                        parentView?.snackbar(context.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
+            navController?.currentBackStackEntry
+                ?.savedStateHandle
+                ?.getLiveData<Long>(Constants.LibraryId)
+                ?.observe(viewLifecycleOwner) { libraryId ->
+                    viewModel.copyNote(libraryId).invokeOnCompletion {
+                        context?.let { context ->
+                            context.updateAllWidgetsData()
+                            context.updateNoteListWidgets(libraryId)
+                            parentView?.snackbar(context.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
+                        }
+                        navController?.popBackStack(args.destination, false)
+                        dismiss()
                     }
-                    navController?.popBackStack(args.destination, false)
-                    dismiss()
                 }
-            }
-            navController?.navigateSafely(
-                NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(
-                    selectLibraryItemClickListener,
-                    args.libraryId
-                )
-            )
+            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(args.libraryId))
         }
 
         tvMoveNote.setOnClickListener {
-            val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener { libraryId ->
-                viewModel.moveNote(libraryId).invokeOnCompletion {
-                    context?.let { context ->
-                        context.updateAllWidgetsData()
-                        context.updateNoteListWidgets(viewModel.library.value.id)
-                        context.updateNoteListWidgets(libraryId)
-                        parentView?.snackbar(context.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
+            navController?.currentBackStackEntry
+                ?.savedStateHandle
+                ?.getLiveData<Long>(Constants.LibraryId)
+                ?.observe(viewLifecycleOwner) { libraryId ->
+                    viewModel.moveNote(libraryId).invokeOnCompletion {
+                        context?.let { context ->
+                            context.updateAllWidgetsData()
+                            context.updateNoteListWidgets(viewModel.library.value.id)
+                            context.updateNoteListWidgets(libraryId)
+                            parentView?.snackbar(context.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
+                        }
+                        navController?.popBackStack(args.destination, false)
+                        dismiss()
                     }
-                    navController?.popBackStack(args.destination, false)
-                    dismiss()
                 }
-            }
-            navController?.navigateSafely(
-                NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(
-                    selectLibraryItemClickListener,
-                    args.libraryId
-                )
-            )
+            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(args.libraryId))
         }
 
         tvShareNote.setOnClickListener {
@@ -242,7 +237,7 @@ class NoteDialogFragment : BaseDialogFragment() {
     private fun NoteDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
             val color = context.colorResource(library.color.toResource())
-            val colorStateList =color.toColorStateList()
+            val colorStateList = color.toColorStateList()
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             baseDialogFragment.vHead.backgroundTintList = colorStateList
             listOf(

@@ -28,12 +28,15 @@ class TextSelectionActivity : BaseActivity() {
         when (intent?.action) {
             Intent.ACTION_PROCESS_TEXT -> {
                 val content = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
-                val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener {
-                    val args = bundleOf(Constants.LibraryId to it, Constants.Body to content)
-                    navController.navigate(R.id.libraryFragment, args)
-                    navController.navigate(R.id.noteFragment, args)
-                }
-                val args = bundleOf(Constants.LibraryId to 0L, Constants.SelectedLibraryItemClickListener to selectLibraryItemClickListener)
+                navController.currentBackStackEntry
+                    ?.savedStateHandle
+                    ?.getLiveData<Long>(Constants.LibraryId)
+                    ?.observe(this) { libraryId ->
+                        val args = bundleOf(Constants.LibraryId to libraryId, Constants.Body to content)
+                        navController.navigate(R.id.libraryFragment, args)
+                        navController.navigate(R.id.noteFragment, args)
+                    }
+                val args = bundleOf(Constants.LibraryId to 0L)
                 navController.navigate(R.id.selectLibraryDialogFragment, args)
             }
         }

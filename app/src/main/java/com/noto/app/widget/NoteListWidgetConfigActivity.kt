@@ -205,11 +205,8 @@ class NoteListWidgetConfigActivity : BaseActivity() {
     }
 
     private fun showSelectLibraryDialog(isDismissible: Boolean) {
-        val selectLibraryItemClickListener = SelectLibraryDialogFragment.SelectLibraryItemClickListener { libraryId ->
-            viewModel.getWidgetData(libraryId)
-        }
-        val args = bundleOf(Constants.LibraryId to 0L, Constants.SelectedLibraryItemClickListener to selectLibraryItemClickListener)
-        SelectLibraryDialogFragment(isDismissible)
+        val args = bundleOf(Constants.LibraryId to 0L, Constants.IsDismissible to isDismissible)
+        SelectLibraryDialogFragment { libraryId -> viewModel.getWidgetData(libraryId) }
             .apply { arguments = args }
             .show(supportFragmentManager, null)
     }

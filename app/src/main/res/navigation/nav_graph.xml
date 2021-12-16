@@ -294,16 +294,17 @@
         android:name="com.noto.app.library.SelectLibraryDialogFragment"
         android:label="SelectLibraryDialogFragment">
         <argument
-            android:name="select_library_item_click_listener"
-            app:argType="com.noto.app.library.SelectLibraryDialogFragment$SelectLibraryItemClickListener" />
-        <argument
             android:name="library_id"
             app:argType="long" />
+        <argument
+            android:name="is_dismissible"
+            android:defaultValue="true"
+            app:argType="boolean" />
     </dialog>
     <dialog
         android:id="@+id/libraryListSortingDialogFragment"
         android:name="com.noto.app.main.LibraryListSortingDialogFragment"
-        android:label="LibraryListSortingDialogFragment" >
+        android:label="LibraryListSortingDialogFragment">
         <action
             android:id="@+id/action_libraryListSortingDialogFragment_to_libraryListSortingOrderDialogFragment"
             app:destination="@id/libraryListSortingOrderDialogFragment" />
