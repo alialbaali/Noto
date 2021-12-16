@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.noto.app.BaseDialogFragment
-import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LabelDialogFragmentBinding
@@ -78,19 +77,20 @@ class LabelDialogFragment : BaseDialogFragment() {
                 val confirmationText = context.stringResource(R.string.delete_label_confirmation)
                 val descriptionText = context.stringResource(R.string.delete_label_description)
                 val btnText = context.stringResource(R.string.delete_label)
-                val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
-                    val parentView = parentFragment?.view
-                    val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
-                    parentView?.snackbar(context.stringResource(R.string.label_is_deleted), anchorView = parentAnchorView)
-                    viewModel.deleteLabel().invokeOnCompletion { dismiss() }
-                }
-
+                navController?.currentBackStackEntry
+                    ?.savedStateHandle
+                    ?.getLiveData<Int>(Constants.ClickListener)
+                    ?.observe(viewLifecycleOwner) {
+                        val parentView = parentFragment?.view
+                        val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
+                        parentView?.snackbar(context.stringResource(R.string.label_is_deleted), anchorView = parentAnchorView)
+                        viewModel.deleteLabel().invokeOnCompletion { dismiss() }
+                    }
                 navController?.navigateSafely(
                     LabelDialogFragmentDirections.actionLabelDialogFragmentToConfirmationDialogFragment(
                         confirmationText,
                         descriptionText,
                         btnText,
-                        clickListener,
                     )
                 )
             }

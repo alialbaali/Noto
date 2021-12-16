@@ -12,6 +12,7 @@ object Constants {
     const val NoteId = "note_id"
     const val Body = "body"
     const val IsDismissible = "is_dismissible"
+    const val ClickListener = "click_listener"
     const val Libraries = "Libraries"
     const val Notes = "Notes"
     const val Labels = "Labels"

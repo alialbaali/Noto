@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.noto.app.BaseDialogFragment
-import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryDialogFragmentBinding
@@ -103,14 +102,13 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 val confirmationText = context.stringResource(R.string.delete_library_confirmation)
                 val descriptionText = context.stringResource(R.string.delete_library_description)
                 val btnText = context.stringResource(R.string.delete_library)
-                val clickListener = setupConfirmationDialogClickListener()
+                setupConfirmationDialogClickListener()
 
                 navController?.navigateSafely(
                     LibraryDialogFragmentDirections.actionLibraryDialogFragmentToConfirmationDialogFragment(
                         confirmationText,
                         descriptionText,
                         btnText,
-                        clickListener,
                     )
                 )
             }
@@ -143,22 +141,27 @@ class LibraryDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun setupConfirmationDialogClickListener() = ConfirmationDialogFragment.ConfirmationDialogClickListener {
-        val parentView = parentFragment?.view
-        val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
-        context?.let { context ->
-            parentView?.snackbar(context.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
-            context.updateAllWidgetsData()
-            context.updateLibraryListWidgets()
-        }
-        navController?.popBackStack(R.id.mainFragment, false)
-        viewModel.notes.value
-            .filter { entry -> entry.first.reminderDate != null }
-            .forEach { entry ->
+    private fun setupConfirmationDialogClickListener() {
+        navController?.currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Int>(Constants.ClickListener)
+            ?.observe(viewLifecycleOwner) {
+                val parentView = parentFragment?.view
+                val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
                 context?.let { context ->
-                    alarmManager?.cancelAlarm(context, entry.first.id)
+                    parentView?.snackbar(context.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
+                    context.updateAllWidgetsData()
+                    context.updateLibraryListWidgets()
                 }
+                navController?.popBackStack(R.id.mainFragment, false)
+                viewModel.notes.value
+                    .filter { entry -> entry.first.reminderDate != null }
+                    .forEach { entry ->
+                        context?.let { context ->
+                            alarmManager?.cancelAlarm(context, entry.first.id)
+                        }
+                    }
+                viewModel.deleteLibrary().invokeOnCompletion { dismiss() }
             }
-        viewModel.deleteLibrary().invokeOnCompletion { dismiss() }
     }
 }

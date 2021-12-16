@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.noto.app.BaseDialogFragment
-import com.noto.app.ConfirmationDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
@@ -182,24 +181,26 @@ class NoteDialogFragment : BaseDialogFragment() {
                 val confirmationText = context.stringResource(R.string.delete_note_confirmation)
                 val descriptionText = context.stringResource(R.string.delete_note_description)
                 val btnText = context.stringResource(R.string.delete_note)
-                val clickListener = ConfirmationDialogFragment.ConfirmationDialogClickListener {
-                    parentView?.snackbar(context.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
-                    navController?.popBackStack(args.destination, false)
-                    if (viewModel.note.value.reminderDate != null)
-                        alarmManager?.cancelAlarm(context, viewModel.note.value.id)
-                    viewModel.deleteNote().invokeOnCompletion {
-                        context.updateAllWidgetsData()
-                        context.updateNoteListWidgets(viewModel.library.value.id)
-                        dismiss()
+                navController?.currentBackStackEntry
+                    ?.savedStateHandle
+                    ?.getLiveData<Int>(Constants.ClickListener)
+                    ?.observe(viewLifecycleOwner) {
+                        parentView?.snackbar(context.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
+                        navController?.popBackStack(args.destination, false)
+                        if (viewModel.note.value.reminderDate != null)
+                            alarmManager?.cancelAlarm(context, viewModel.note.value.id)
+                        viewModel.deleteNote().invokeOnCompletion {
+                            context.updateAllWidgetsData()
+                            context.updateNoteListWidgets(viewModel.library.value.id)
+                            dismiss()
+                        }
                     }
-                }
 
                 navController?.navigateSafely(
                     NoteDialogFragmentDirections.actionNoteDialogFragmentToConfirmationDialogFragment(
                         confirmationText,
                         descriptionText,
                         btnText,
-                        clickListener,
                     )
                 )
             }

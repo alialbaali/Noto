@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ConfirmationDialogFragmentBinding
+import com.noto.app.util.Constants
+import com.noto.app.util.navController
 import com.noto.app.util.withBinding
-import java.io.Serializable
 
 class ConfirmationDialogFragment : BaseDialogFragment() {
 
@@ -33,12 +34,8 @@ class ConfirmationDialogFragment : BaseDialogFragment() {
 
     private fun ConfirmationDialogFragmentBinding.setupListeners() {
         btnConfirm.setOnClickListener {
-            args.clickListener.onClick()
+            navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.ClickListener, 0)
             dismiss()
         }
-    }
-
-    fun interface ConfirmationDialogClickListener : Serializable {
-        fun onClick()
     }
 }

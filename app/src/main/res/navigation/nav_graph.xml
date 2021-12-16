@@ -229,9 +229,6 @@
         <argument
             android:name="btn_text"
             app:argType="string" />
-        <argument
-            android:name="click_listener"
-            app:argType="com.noto.app.ConfirmationDialogFragment$ConfirmationDialogClickListener" />
     </dialog>
     <dialog
         android:id="@+id/mainDialogFragment"
