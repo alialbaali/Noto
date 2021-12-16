@@ -22,6 +22,11 @@ android {
             keyPassword = properties["key.password"] as String
         }
     }
+    bundle {
+        language {
+            enableSplit = false
+        }
+    }
     defaultConfig {
         applicationId = App.ID
         minSdk = App.MinSDK
