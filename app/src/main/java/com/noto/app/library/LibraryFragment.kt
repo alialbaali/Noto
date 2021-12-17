@@ -71,11 +71,7 @@ class LibraryFragment : Fragment() {
                 .map { it.trim() },
         ) { notes, labels, font, library, searchTerm ->
             setupNotesAndLabels(
-                notes.map {
-                    it.filter { entry ->
-                        entry.first.title.contains(searchTerm, ignoreCase = true) || entry.first.body.contains(searchTerm, ignoreCase = true)
-                    }.filterSelectedLabels(labels)
-                },
+                notes.map { it.filterContent(searchTerm).filterSelectedLabels(labels) },
                 labels,
                 font,
                 library

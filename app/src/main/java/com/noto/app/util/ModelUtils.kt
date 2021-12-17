@@ -61,6 +61,10 @@ fun List<NoteWithLabels>.filterSelectedLabels(labels: Map<Label, Boolean>) = fil
     pair.second.containsAll(selectedLabels)
 }
 
+fun List<NoteWithLabels>.filterContent(content: CharSequence) = filter { entry ->
+    entry.first.title.contains(content, ignoreCase = true) || entry.first.body.contains(content, ignoreCase = true)
+}
+
 fun List<NoteWithLabels>.groupByDate(sortingType: NoteListSortingType, sortingOrder: SortingOrder) =
     groupBy { it.first.creationDate.toLocalDate() }
         .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.first.isPinned } }
