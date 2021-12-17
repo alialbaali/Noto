@@ -40,8 +40,10 @@ class AppActivity : BaseActivity() {
 
     private fun AppActivityBinding.handleIntentContent() {
         when (intent?.action) {
-            Intent.ACTION_SEND -> intent.getStringExtra(Intent.EXTRA_TEXT)
-                ?.let { content -> showSelectLibraryDialog(content) }
+            Intent.ACTION_SEND -> {
+                val content = intent.getStringExtra(Intent.EXTRA_TEXT)
+                showSelectLibraryDialog(content)
+            }
             Constants.Intent.ActionCreateLibrary -> navController.navigate(R.id.newLibraryDialogFragment)
             Constants.Intent.ActionCreateNote -> {
                 val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
@@ -79,6 +81,10 @@ class AppActivity : BaseActivity() {
                 navController.popBackStack(R.id.libraryFragment, true)
                 navController.navigate(R.id.libraryFragment, args)
                 navController.navigate(R.id.noteFragment, args)
+            }
+            Intent.ACTION_PROCESS_TEXT -> {
+                val content = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
+                showSelectLibraryDialog(content)
             }
         }
     }
