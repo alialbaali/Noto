@@ -6,11 +6,13 @@ import com.airbnb.epoxy.EpoxyRecyclerView
 import com.noto.app.R
 import com.noto.app.domain.model.Grouping
 import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.NotoColor
 
-fun EpoxyRecyclerView.setupLoadingIndicator() {
+fun EpoxyRecyclerView.setupLoadingIndicator(color: NotoColor? = null) {
     withModels {
         loadingIndicatorItem {
             id("loading")
+            color(color)
         }
     }
 }

@@ -81,7 +81,7 @@ class LibraryArchiveFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     private fun LibraryArchiveFragmentBinding.setupArchivedNotes(state: UiState<List<NoteWithLabels>>, font: Font, library: Library) {
         when (state) {
-            is UiState.Loading -> rv.setupLoadingIndicator()
+            is UiState.Loading -> rv.setupLoadingIndicator(library.color)
             is UiState.Success -> {
                 val archivedNotes = state.value
 
