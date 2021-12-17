@@ -55,6 +55,7 @@ class AppActivity : BaseActivity() {
                     showSelectLibraryDialog(null)
                 } else {
                     val args = bundleOf(Constants.LibraryId to libraryId)
+                    navController.popBackStack(R.id.libraryFragment, true)
                     navController.navigate(R.id.libraryFragment, args)
                     navController.navigate(R.id.noteFragment, args)
                 }
