@@ -44,6 +44,10 @@ class AppActivity : BaseActivity() {
                 val content = intent.getStringExtra(Intent.EXTRA_TEXT)
                 showSelectLibraryDialog(content)
             }
+            Intent.ACTION_PROCESS_TEXT -> {
+                val content = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
+                showSelectLibraryDialog(content)
+            }
             Constants.Intent.ActionCreateLibrary -> navController.navigate(R.id.newLibraryDialogFragment)
             Constants.Intent.ActionCreateNote -> {
                 val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
@@ -54,19 +58,6 @@ class AppActivity : BaseActivity() {
                     navController.navigate(R.id.libraryFragment, args)
                     navController.navigate(R.id.noteFragment, args)
                 }
-            }
-            Intent.ACTION_EDIT -> {
-                val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
-                val noteId = intent.getLongExtra(Constants.NoteId, 0)
-                val args = bundleOf(Constants.LibraryId to libraryId, Constants.NoteId to noteId)
-                navController.navigate(R.id.libraryFragment, args)
-                navController.navigate(R.id.noteFragment, args)
-            }
-            Intent.ACTION_CREATE_DOCUMENT -> {
-                val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
-                val args = bundleOf(Constants.LibraryId to libraryId)
-                navController.navigate(R.id.libraryFragment, args)
-                navController.navigate(R.id.noteFragment, args)
             }
             Constants.Intent.ActionOpenLibrary -> {
                 val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
@@ -81,10 +72,6 @@ class AppActivity : BaseActivity() {
                 navController.popBackStack(R.id.libraryFragment, true)
                 navController.navigate(R.id.libraryFragment, args)
                 navController.navigate(R.id.noteFragment, args)
-            }
-            Intent.ACTION_PROCESS_TEXT -> {
-                val content = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
-                showSelectLibraryDialog(content)
             }
         }
     }

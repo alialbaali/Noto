@@ -11,7 +11,7 @@ import com.noto.app.R
 import com.noto.app.domain.model.Library
 
 fun Context.createPinnedShortcut(library: Library): ShortcutInfoCompat {
-    val intent = Intent(Intent.ACTION_CREATE_DOCUMENT, null, this, AppActivity::class.java).apply {
+    val intent = Intent(Constants.Intent.ActionCreateNote, null, this, AppActivity::class.java).apply {
         putExtra(Constants.LibraryId, library.id)
     }
 
