@@ -160,7 +160,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupNotesAndLabels(
-        notes: List<Pair<Note, List<Label>>>,
+        notes: List<NoteWithLabels>,
         labels: Map<Label, Boolean>,
         font: Font,
         library: Library,
@@ -201,7 +201,7 @@ class LibraryFragment : Fragment() {
                 }
             }
 
-            val items = { items: List<Pair<Note, List<Label>>> ->
+            val items = { items: List<NoteWithLabels> ->
                 items.forEach { entry ->
                     noteItem {
                         id(entry.first.id)

@@ -77,9 +77,9 @@ class LibraryArchiveFragment : Fragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<Pair<Note, List<Label>>>, font: Font, library: Library) {
+    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<NoteWithLabels>, font: Font, library: Library) {
         rv.withModels {
-            val items = { items: List<Pair<Note, List<Label>>> ->
+            val items = { items: List<NoteWithLabels> ->
                 items.forEach { archivedNote ->
                     noteItem {
                         id(archivedNote.first.id)

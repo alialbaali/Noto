@@ -17,6 +17,7 @@ import com.noto.app.util.Constants.Widget.Id
 import com.noto.app.util.Constants.Widget.LabelIds
 import com.noto.app.util.Constants.Widget.NewItemButton
 import com.noto.app.util.Constants.Widget.Radius
+import com.noto.app.util.NoteWithLabels
 import com.noto.app.util.mapWithLabels
 import com.noto.app.util.toLongList
 import kotlinx.coroutines.flow.*
@@ -34,7 +35,7 @@ class NoteListWidgetConfigViewModel(
     private val mutableLibrary = MutableStateFlow(Library(title = "Library", position = 0))
     val library get() = mutableLibrary.asStateFlow()
 
-    private val mutableNotes = MutableStateFlow(emptyList<Pair<Note, List<Label>>>())
+    private val mutableNotes = MutableStateFlow(emptyList<NoteWithLabels>())
     val notes get() = mutableNotes.asStateFlow()
 
     private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())

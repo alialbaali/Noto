@@ -37,7 +37,7 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
     private val libraryId = intent?.getLongExtra(Constants.LibraryId, 0) ?: 0
     private lateinit var library: Library
     private lateinit var labelIds: List<Long>
-    private lateinit var notes: List<Pair<Note, List<Label>>>
+    private lateinit var notes: List<NoteWithLabels>
 
     override fun onCreate() {}
 

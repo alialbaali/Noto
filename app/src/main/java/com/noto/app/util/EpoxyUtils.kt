@@ -12,8 +12,8 @@ import com.noto.app.domain.model.Note
 inline fun EpoxyController.buildNotesModels(
     context: Context,
     library: Library,
-    notes: List<Pair<Note, List<Label>>>,
-    items: (List<Pair<Note, List<Label>>>) -> Unit,
+    notes: List<NoteWithLabels>,
+    items: (List<NoteWithLabels>) -> Unit,
 ) {
     when (library.grouping) {
         Grouping.Default -> {

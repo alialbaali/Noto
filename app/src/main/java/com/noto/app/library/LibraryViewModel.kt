@@ -9,6 +9,7 @@ import com.noto.app.domain.repository.NoteLabelRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
+import com.noto.app.util.NoteWithLabels
 import com.noto.app.util.mapWithLabels
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -28,10 +29,10 @@ class LibraryViewModel(
         .onEach { library -> mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(library.color) }
         .stateIn(viewModelScope, SharingStarted.Lazily, Library(libraryId, position = 0))
 
-    private val mutableNotes = MutableStateFlow(emptyList<Pair<Note, List<Label>>>())
+    private val mutableNotes = MutableStateFlow(emptyList<NoteWithLabels>())
     val notes get() = mutableNotes.asStateFlow()
 
-    private val mutableArchivedNotes = MutableStateFlow(emptyList<Pair<Note, List<Label>>>())
+    private val mutableArchivedNotes = MutableStateFlow(emptyList<NoteWithLabels>())
     val archivedNotes get() = mutableArchivedNotes.asStateFlow()
 
     private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())

@@ -7,6 +7,7 @@ import com.noto.app.domain.model.*
 val LabelDefaultStrokeWidth = 3.dp
 val LabelDefaultCornerRadius = 1000.dp.toFloat()
 const val DefaultAnimationDuration = 250L
+typealias NoteWithLabels = Pair<Note, List<Label>>
 
 inline fun <T> List<T>.sortByOrder(sortingOrder: SortingOrder, crossinline selector: (T) -> Comparable<*>?): List<T> = when (sortingOrder) {
     SortingOrder.Ascending -> sortedWith(compareBy(selector))
@@ -45,7 +46,7 @@ fun List<Library>.sorted(sortingType: LibraryListSortingType, sortingOrder: Sort
     }
 }
 
-fun List<Pair<Note, List<Label>>>.sorted(sortingType: NoteListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
+fun List<NoteWithLabels>.sorted(sortingType: NoteListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
     when (sortingType) {
         NoteListSortingType.Manual -> pair.first.position
         NoteListSortingType.CreationDate -> pair.first.creationDate
@@ -53,27 +54,27 @@ fun List<Pair<Note, List<Label>>>.sorted(sortingType: NoteListSortingType, sorti
     }
 }
 
-fun List<Pair<Note, List<Label>>>.filterSelectedLabels(labels: Map<Label, Boolean>) = filter { pair ->
+fun List<NoteWithLabels>.filterSelectedLabels(labels: Map<Label, Boolean>) = filter { pair ->
     val selectedLabels = labels.entries
         .filter { it.value }
         .map { it.key }
     pair.second.containsAll(selectedLabels)
 }
 
-fun List<Pair<Note, List<Label>>>.groupByDate(sortingType: NoteListSortingType, sortingOrder: SortingOrder) =
+fun List<NoteWithLabels>.groupByDate(sortingType: NoteListSortingType, sortingOrder: SortingOrder) =
     groupBy { it.first.creationDate.toLocalDate() }
         .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.first.isPinned } }
         .map { it.toPair() }
         .sortedByDescending { it.first }
 
-fun List<Pair<Note, List<Label>>>.groupByLabels(sortingType: NoteListSortingType, sortingOrder: SortingOrder) =
+fun List<NoteWithLabels>.groupByLabels(sortingType: NoteListSortingType, sortingOrder: SortingOrder) =
     map { it.second to (it.first to emptyList<Label>()) }
         .groupBy({ it.first }, { it.second })
         .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.first.isPinned } }
         .map { it.toPair() }
         .sortedBy { it.first.firstOrNull()?.position }
 
-fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): List<Pair<Note, List<Label>>> {
+fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): List<NoteWithLabels> {
     return map { note ->
         note to labels
             .sortedBy { it.position }

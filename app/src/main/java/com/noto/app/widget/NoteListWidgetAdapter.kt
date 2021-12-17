@@ -18,11 +18,11 @@ import com.noto.app.util.*
 class NoteListWidgetAdapter(
     context: Context,
     layoutResourceId: Int,
-    notes: List<Pair<Note, List<Label>>>,
+    notes: List<NoteWithLabels>,
     private val isShowCreationDate: Boolean,
     private val color: NotoColor,
     private val previewSize: Int,
-) : ArrayAdapter<Pair<Note, List<Label>>>(context, layoutResourceId, notes) {
+) : ArrayAdapter<NoteWithLabels>(context, layoutResourceId, notes) {
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val layoutInflater = LayoutInflater.from(context)
