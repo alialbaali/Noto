@@ -11,9 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
+import com.noto.app.UiState
 import com.noto.app.databinding.MainArchiveFragmentBinding
 import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
+import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -45,7 +47,7 @@ class MainArchiveFragment : Fragment() {
             viewModel.sortingOrder,
             viewModel.isShowNotesCount,
         ) { libraries, sortingType, sortingOrder, isShowNotesCount ->
-            setupLibraries(libraries.sorted(sortingType, sortingOrder), isShowNotesCount)
+            setupLibraries(libraries.map { it.sorted(sortingType, sortingOrder) }, isShowNotesCount)
         }
             .launchIn(lifecycleScope)
 
@@ -64,52 +66,59 @@ class MainArchiveFragment : Fragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainArchiveFragmentBinding.setupLibraries(libraries: List<Library>, isShowNotesCount: Boolean) {
-        rv.withModels {
-            val items = { items: List<Library> ->
-                items.forEach { library ->
-                    libraryItem {
-                        id(library.id)
-                        library(library)
-                        notesCount(viewModel.countNotes(library.id))
-                        isManualSorting(false)
-                        isShowNotesCount(isShowNotesCount)
-                        onClickListener { _ ->
-                            navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(library.id))
-                        }
-                        onLongClickListener { _ ->
-                            navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(library.id))
-                            true
-                        }
-                        onDragHandleTouchListener { _, _ -> false }
-                    }
-                }
-            }
-            context?.let { context ->
-                if (libraries.isEmpty()) {
-                    placeholderItem {
-                        id("placeholder")
-                        placeholder(context.stringResource(R.string.archive_is_empty))
-                    }
-                } else {
-                    val pinnedLibraries = libraries.filter { it.isPinned }
-                    val notPinnedLibraries = libraries.filterNot { it.isPinned }
+    private fun MainArchiveFragmentBinding.setupLibraries(state: UiState<List<Library>>, isShowNotesCount: Boolean) {
+        when (state) {
+            is UiState.Loading -> rv.setupLoadingIndicator()
+            is UiState.Success -> {
+                val libraries = state.value
 
-                    if (pinnedLibraries.isNotEmpty()) {
-                        headerItem {
-                            id("pinned")
-                            title(context.stringResource(R.string.pinned))
-                        }
-
-                        items(pinnedLibraries)
-
-                        if (notPinnedLibraries.isNotEmpty())
-                            headerItem {
-                                id("libraries")
-                                title(context.stringResource(R.string.libraries))
+                rv.withModels {
+                    val items = { items: List<Library> ->
+                        items.forEach { library ->
+                            libraryItem {
+                                id(library.id)
+                                library(library)
+                                notesCount(viewModel.countNotes(library.id))
+                                isManualSorting(false)
+                                isShowNotesCount(isShowNotesCount)
+                                onClickListener { _ ->
+                                    navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(library.id))
+                                }
+                                onLongClickListener { _ ->
+                                    navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(library.id))
+                                    true
+                                }
+                                onDragHandleTouchListener { _, _ -> false }
                             }
+                        }
                     }
-                    items(notPinnedLibraries)
+                    context?.let { context ->
+                        if (libraries.isEmpty()) {
+                            placeholderItem {
+                                id("placeholder")
+                                placeholder(context.stringResource(R.string.archive_is_empty))
+                            }
+                        } else {
+                            val pinnedLibraries = libraries.filter { it.isPinned }
+                            val notPinnedLibraries = libraries.filterNot { it.isPinned }
+
+                            if (pinnedLibraries.isNotEmpty()) {
+                                headerItem {
+                                    id("pinned")
+                                    title(context.stringResource(R.string.pinned))
+                                }
+
+                                items(pinnedLibraries)
+
+                                if (notPinnedLibraries.isNotEmpty())
+                                    headerItem {
+                                        id("libraries")
+                                        title(context.stringResource(R.string.libraries))
+                                    }
+                            }
+                            items(notPinnedLibraries)
+                        }
+                    }
                 }
             }
         }

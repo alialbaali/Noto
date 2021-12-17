@@ -12,11 +12,13 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.R
+import com.noto.app.UiState
 import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.LibraryListSortingType
 import com.noto.app.domain.model.SortingOrder
+import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -63,7 +65,7 @@ class MainFragment : Fragment() {
             viewModel.sortingOrder,
             viewModel.isShowNotesCount,
         ) { libraries, sortingType, sortingOrder, isShowNotesCount ->
-            setupLibraries(libraries.sorted(sortingType, sortingOrder), sortingType, sortingOrder, isShowNotesCount)
+            setupLibraries(libraries.map { it.sorted(sortingType, sortingOrder) }, sortingType, sortingOrder, isShowNotesCount)
         }.launchIn(lifecycleScope)
 
         viewModel.layout
@@ -90,80 +92,85 @@ class MainFragment : Fragment() {
     }
 
     private fun MainFragmentBinding.setupLibraries(
-        libraries: List<Library>,
+        state: UiState<List<Library>>,
         sortingType: LibraryListSortingType,
         sortingOrder: SortingOrder,
         isShowNotesCount: Boolean,
     ) {
-        rv.withModels {
-            epoxyController = this
+        when (state) {
+            is UiState.Loading -> rv.setupLoadingIndicator()
+            is UiState.Success -> {
+                rv.withModels {
+                    epoxyController = this
+                    val libraries = state.value
 
-            libraryListSortingItem {
-                id(0)
-                sortingType(sortingType)
-                sortingOrder(sortingOrder)
-                librariesCount(libraries.size)
-                onClickListener { _ ->
-                    navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
-                }
-            }
-
-            val items = { items: List<Library> ->
-                items.forEach { library ->
-                    libraryItem {
-                        id(library.id)
-                        library(library)
-                        notesCount(viewModel.countNotes(library.id))
-                        isManualSorting(sortingType == LibraryListSortingType.Manual)
-                        isShowNotesCount(isShowNotesCount)
+                    libraryListSortingItem {
+                        id(0)
+                        sortingType(sortingType)
+                        sortingOrder(sortingOrder)
+                        librariesCount(libraries.size)
                         onClickListener { _ ->
-                            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
+                            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
                         }
-                        onLongClickListener { _ ->
-                            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(library.id))
-                            true
-                        }
-                        onDragHandleTouchListener { view, event ->
-                            if (event.action == MotionEvent.ACTION_DOWN)
-                                rv.findContainingViewHolder(view)?.let { viewHolder ->
-                                    itemTouchHelper.startDrag(viewHolder)
+                    }
+
+                    val items = { items: List<Library> ->
+                        items.forEach { library ->
+                            libraryItem {
+                                id(library.id)
+                                library(library)
+                                notesCount(viewModel.countNotes(library.id))
+                                isManualSorting(sortingType == LibraryListSortingType.Manual)
+                                isShowNotesCount(isShowNotesCount)
+                                onClickListener { _ ->
+                                    navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
                                 }
-                            view.performClick()
-                        }
-                    }
-                }
-            }
-
-
-            context?.let { context ->
-                if (libraries.isEmpty()) {
-                    placeholderItem {
-                        id("placeholder")
-                        placeholder(context.stringResource(R.string.no_libraries_found_create))
-                    }
-                } else {
-                    val pinnedLibraries = libraries.filter { it.isPinned }
-                    val notPinnedLibraries = libraries.filterNot { it.isPinned }
-
-                    if (pinnedLibraries.isNotEmpty()) {
-                        tb.title = context.stringResource(R.string.app_name)
-
-                        headerItem {
-                            id("pinned")
-                            title(context.stringResource(R.string.pinned))
-                        }
-
-                        items(pinnedLibraries)
-
-                        if (notPinnedLibraries.isNotEmpty())
-                            headerItem {
-                                id("libraries")
-                                title(context.stringResource(R.string.libraries))
+                                onLongClickListener { _ ->
+                                    navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(library.id))
+                                    true
+                                }
+                                onDragHandleTouchListener { view, event ->
+                                    if (event.action == MotionEvent.ACTION_DOWN)
+                                        rv.findContainingViewHolder(view)?.let { viewHolder ->
+                                            itemTouchHelper.startDrag(viewHolder)
+                                        }
+                                    view.performClick()
+                                }
                             }
-                    } else {
-                        tb.title = context.stringResource(R.string.libraries)
+                        }
                     }
-                    items(notPinnedLibraries)
+
+                    context?.let { context ->
+                        if (libraries.isEmpty()) {
+                            placeholderItem {
+                                id("placeholder")
+                                placeholder(context.stringResource(R.string.no_libraries_found_create))
+                            }
+                        } else {
+                            val pinnedLibraries = libraries.filter { it.isPinned }
+                            val notPinnedLibraries = libraries.filterNot { it.isPinned }
+
+                            if (pinnedLibraries.isNotEmpty()) {
+                                tb.title = context.stringResource(R.string.app_name)
+
+                                headerItem {
+                                    id("pinned")
+                                    title(context.stringResource(R.string.pinned))
+                                }
+
+                                items(pinnedLibraries)
+
+                                if (notPinnedLibraries.isNotEmpty())
+                                    headerItem {
+                                        id("libraries")
+                                        title(context.stringResource(R.string.libraries))
+                                    }
+                            } else {
+                                tb.title = context.stringResource(R.string.libraries)
+                            }
+                            items(notPinnedLibraries)
+                        }
+                    }
                 }
             }
         }
@@ -207,5 +214,4 @@ class MainFragment : Fragment() {
         navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToMainArchiveFragment())
         return true
     }
-
 }

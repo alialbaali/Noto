@@ -1,13 +1,19 @@
 package com.noto.app.util
 
 import android.content.Context
-import android.content.res.Resources
 import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.EpoxyRecyclerView
 import com.noto.app.R
 import com.noto.app.domain.model.Grouping
-import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.Note
+
+fun EpoxyRecyclerView.setupLoadingIndicator() {
+    withModels {
+        loadingIndicatorItem {
+            id("loading")
+        }
+    }
+}
 
 inline fun EpoxyController.buildNotesModels(
     context: Context,

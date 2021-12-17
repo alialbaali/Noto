@@ -2,6 +2,7 @@ package com.noto.app.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.noto.app.UiState
 import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.LibraryListSortingType
@@ -24,10 +25,12 @@ class MainViewModel(
 ) : ViewModel() {
 
     val libraries = libraryRepository.getLibraries()
-        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+        .map { UiState.Success(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
     val archivedLibraries = libraryRepository.getArchivedLibraries()
-        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+        .map { UiState.Success(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
     val layout = storage.get(Constants.LibraryListLayoutKey)
         .filterNotNull()

@@ -250,6 +250,7 @@
         <entry key="app/src/main/res/layout/library_list_widget_config_activity.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/library_list_widget_config_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/list_widget.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/loading_indicator_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/main_activity.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/main_archive_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/main_dialog_fragment.xml" value="0.21611842105263157" />

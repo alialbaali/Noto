@@ -2,6 +2,7 @@ package com.noto.app.library
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.noto.app.UiState
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.repository.LibraryRepository
@@ -29,10 +30,10 @@ class LibraryViewModel(
         .onEach { library -> mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(library.color) }
         .stateIn(viewModelScope, SharingStarted.Lazily, Library(libraryId, position = 0))
 
-    private val mutableNotes = MutableStateFlow(emptyList<NoteWithLabels>())
+    private val mutableNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
 
-    private val mutableArchivedNotes = MutableStateFlow(emptyList<NoteWithLabels>())
+    private val mutableArchivedNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
     val archivedNotes get() = mutableArchivedNotes.asStateFlow()
 
     private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())
@@ -60,8 +61,8 @@ class LibraryViewModel(
             noteLabelRepository.getNoteLabels()
                 .filterNotNull(),
         ) { notes, archivedNotes, labels, noteLabels ->
-            mutableNotes.value = notes.mapWithLabels(labels, noteLabels)
-            mutableArchivedNotes.value = archivedNotes.mapWithLabels(labels, noteLabels)
+            mutableNotes.value = notes.mapWithLabels(labels, noteLabels).let { UiState.Success(it) }
+            mutableArchivedNotes.value = archivedNotes.mapWithLabels(labels, noteLabels).let { UiState.Success(it) }
         }.launchIn(viewModelScope)
 
         labelRepository.getLabelsByLibraryId(libraryId)
@@ -84,7 +85,7 @@ class LibraryViewModel(
         layout: Layout,
         notePreviewSize: Int,
         isShowNoteCreationDate: Boolean,
-        isSetNewNoteCursorOnTitle: Boolean
+        isSetNewNoteCursorOnTitle: Boolean,
     ) = viewModelScope.launch {
         val color = notoColors.value.first { it.second }.first
 

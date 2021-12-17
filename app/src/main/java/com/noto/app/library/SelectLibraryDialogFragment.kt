@@ -11,16 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.UiState
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.SelectLibraryDialogFragmentBinding
 import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.main.MainViewModel
 import com.noto.app.main.libraryItem
+import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -51,13 +52,15 @@ class SelectLibraryDialogFragment(private val onClick: (Long) -> Unit = {}) : Ba
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         combine(
-            viewModel.libraries
-                .map { libraries -> libraries.filter { library -> library.id != args.libraryId } },
+            viewModel.libraries,
             viewModel.sortingType,
             viewModel.sortingOrder,
             viewModel.isShowNotesCount,
         ) { libraries, sortingType, sortingOrder, isShowNotesCount ->
-            setupLibraries(libraries.sorted(sortingType, sortingOrder), isShowNotesCount)
+            setupLibraries(
+                libraries.map { it.filter { library -> library.id != args.libraryId }.sorted(sortingType, sortingOrder) },
+                isShowNotesCount
+            )
         }.launchIn(lifecycleScope)
 
         viewModel.layout
@@ -66,33 +69,39 @@ class SelectLibraryDialogFragment(private val onClick: (Long) -> Unit = {}) : Ba
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun SelectLibraryDialogFragmentBinding.setupLibraries(libraries: List<Library>, isShowNotesCount: Boolean) {
-        rv.withModels {
-            if (libraries.isEmpty()) {
-                placeholderItem {
-                    id("placeholder")
-                    context?.let { context ->
-                        placeholder(context.stringResource(R.string.no_libraries_found))
-                    }
-                }
-            } else {
-                libraries.forEach { library ->
-                    libraryItem {
-                        id(library.id)
-                        library(library)
-                        notesCount(viewModel.countNotes(library.id))
-                        isShowNotesCount(isShowNotesCount)
-                        isManualSorting(false)
-                        onClickListener { _ ->
-                            try {
-                                navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.LibraryId, library.id)
-                            } catch (exception: IllegalStateException) {
-                                onClick(library.id)
+    private fun SelectLibraryDialogFragmentBinding.setupLibraries(state: UiState<List<Library>>, isShowNotesCount: Boolean) {
+        when (state) {
+            is UiState.Loading -> rv.setupLoadingIndicator()
+            is UiState.Success -> {
+                val libraries = state.value
+                rv.withModels {
+                    if (libraries.isEmpty()) {
+                        placeholderItem {
+                            id("placeholder")
+                            context?.let { context ->
+                                placeholder(context.stringResource(R.string.no_libraries_found))
                             }
-                            dismiss()
                         }
-                        onLongClickListener { _ -> false }
-                        onDragHandleTouchListener { _, _ -> false }
+                    } else {
+                        libraries.forEach { library ->
+                            libraryItem {
+                                id(library.id)
+                                library(library)
+                                notesCount(viewModel.countNotes(library.id))
+                                isShowNotesCount(isShowNotesCount)
+                                isManualSorting(false)
+                                onClickListener { _ ->
+                                    try {
+                                        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.LibraryId, library.id)
+                                    } catch (exception: IllegalStateException) {
+                                        onClick(library.id)
+                                    }
+                                    dismiss()
+                                }
+                                onLongClickListener { _ -> false }
+                                onDragHandleTouchListener { _, _ -> false }
+                            }
+                        }
                     }
                 }
             }

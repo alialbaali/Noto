@@ -12,8 +12,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
+import com.noto.app.UiState
 import com.noto.app.databinding.LibraryArchiveFragmentBinding
 import com.noto.app.domain.model.*
+import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -54,7 +56,7 @@ class LibraryArchiveFragment : Fragment() {
             viewModel.font,
             viewModel.library,
         ) { archivedNotes, font, library ->
-            setupArchivedNotes(archivedNotes.sorted(library.sortingType, library.sortingOrder), font, library)
+            setupArchivedNotes(archivedNotes.map { it.sorted(library.sortingType, library.sortingOrder) }, font, library)
         }.launchIn(lifecycleScope)
     }
 
@@ -77,52 +79,59 @@ class LibraryArchiveFragment : Fragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(archivedNotes: List<NoteWithLabels>, font: Font, library: Library) {
-        rv.withModels {
-            val items = { items: List<NoteWithLabels> ->
-                items.forEach { archivedNote ->
-                    noteItem {
-                        id(archivedNote.first.id)
-                        note(archivedNote.first)
-                        font(font)
-                        previewSize(library.notePreviewSize)
-                        isShowCreationDate(library.isShowNoteCreationDate)
-                        color(library.color)
-                        labels(archivedNote.second)
-                        isManualSorting(false)
-                        onClickListener { _ ->
-                            navController
-                                ?.navigateSafely(
-                                    LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
-                                        archivedNote.first.libraryId,
-                                        archivedNote.first.id
-                                    )
-                                )
+    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(state: UiState<List<NoteWithLabels>>, font: Font, library: Library) {
+        when (state) {
+            is UiState.Loading -> rv.setupLoadingIndicator()
+            is UiState.Success -> {
+                val archivedNotes = state.value
+
+                rv.withModels {
+                    val items = { items: List<NoteWithLabels> ->
+                        items.forEach { archivedNote ->
+                            noteItem {
+                                id(archivedNote.first.id)
+                                note(archivedNote.first)
+                                font(font)
+                                previewSize(library.notePreviewSize)
+                                isShowCreationDate(library.isShowNoteCreationDate)
+                                color(library.color)
+                                labels(archivedNote.second)
+                                isManualSorting(false)
+                                onClickListener { _ ->
+                                    navController
+                                        ?.navigateSafely(
+                                            LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
+                                                archivedNote.first.libraryId,
+                                                archivedNote.first.id
+                                            )
+                                        )
+                                }
+                                onLongClickListener { _ ->
+                                    navController
+                                        ?.navigateSafely(
+                                            LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
+                                                archivedNote.first.libraryId,
+                                                archivedNote.first.id,
+                                                R.id.libraryArchiveFragment
+                                            )
+                                        )
+                                    true
+                                }
+                                onDragHandleTouchListener { _, _ -> false }
+                            }
                         }
-                        onLongClickListener { _ ->
-                            navController
-                                ?.navigateSafely(
-                                    LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
-                                        archivedNote.first.libraryId,
-                                        archivedNote.first.id,
-                                        R.id.libraryArchiveFragment
-                                    )
-                                )
-                            true
-                        }
-                        onDragHandleTouchListener { _, _ -> false }
+                    }
+
+                    context?.let { context ->
+                        if (archivedNotes.isEmpty())
+                            placeholderItem {
+                                id("placeholder")
+                                placeholder(context.stringResource(R.string.archive_is_empty))
+                            }
+                        else
+                            buildNotesModels(context, library, archivedNotes, items)
                     }
                 }
-            }
-
-            context?.let { context ->
-                if (archivedNotes.isEmpty())
-                    placeholderItem {
-                        id("placeholder")
-                        placeholder(context.stringResource(R.string.archive_is_empty))
-                    }
-                else
-                    buildNotesModels(context, library, archivedNotes, items)
             }
         }
     }

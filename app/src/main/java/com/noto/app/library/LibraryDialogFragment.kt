@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.UiState
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryDialogFragmentBinding
 import com.noto.app.domain.model.Library
@@ -154,13 +155,12 @@ class LibraryDialogFragment : BaseDialogFragment() {
                     context.updateLibraryListWidgets()
                 }
                 navController?.popBackStack(R.id.mainFragment, false)
-                viewModel.notes.value
-                    .filter { entry -> entry.first.reminderDate != null }
-                    .forEach { entry ->
-                        context?.let { context ->
-                            alarmManager?.cancelAlarm(context, entry.first.id)
-                        }
-                    }
+                context?.let { context ->
+                    val notes = viewModel.notes.value as? UiState.Success
+                    notes?.value
+                        ?.filter { entry -> entry.first.reminderDate != null }
+                        ?.forEach { entry -> alarmManager?.cancelAlarm(context, entry.first.id) }
+                }
                 viewModel.deleteLibrary().invokeOnCompletion { dismiss() }
             }
     }
