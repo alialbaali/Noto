@@ -181,7 +181,6 @@
 
     <!-- Widget -->
     <string name="create_widget">Create widget</string>
-    <string name="update_widget">Update widget</string>
     <string name="new_notes_widget">New notes widget</string>
     <string name="edit_notes_widget">Edit notes widget</string>
     <string name="new_libraries_widget">New libraries widget</string>
@@ -194,4 +193,5 @@
     <string name="edit_widget">Edit widget</string>
     <string name="edit_widget_button">Edit widget button</string>
     <string name="libraries_notes_count">Libraries notes count</string>
+    <string name="loading_content">Loading content</string>
 </resources>
