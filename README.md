@@ -24,19 +24,20 @@ Noto is part of my [portfolio](https://alialbaali.com) projects. It showcases my
 * Reading mode
 * Each library has its own archive.
 * Duplicating notes within the same library
-* Moving notes to different libraries
-* Coping notes to different libraries
+* Moving and copying notes to different libraries
 * Notes word-count
-* Pinned libraries
-* Pinned notes
+* Pinned libraries and notes
 * Custom sorting and grouping
-* Export notes and libraries
+* Exporting and importing notes and libraries for backup
 * Small APK size (around 3MB)
 * Dark mode
 * Support for devices with API 21 (Lollipop) and up
 * No permissions are required
 * All data stored locally on the device
 * Ad-Free
+* Black theme and dark theme
+* Supported languages (English, Turkish, Arabic, Indonesian, Russian, Tamil)
+* Libraries and notes widgets
 
 ## Contributions
 
