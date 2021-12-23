@@ -49,7 +49,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = ExportImportDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         setupBaseDialogFragment()
         setupListeners()
@@ -75,7 +75,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
     private fun exportData(uri: Uri) {
         context?.let { context ->
             navController?.navigateSafely(
-                ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressDialogFragment(
+                ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressIndicatorDialogFragment(
                     context.stringResource(R.string.exporting_data)
                 )
             )
@@ -109,7 +109,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
     private fun importData(uri: Uri) {
         context?.let { context ->
             navController?.navigateSafely(
-                ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressDialogFragment(
+                ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressIndicatorDialogFragment(
                     context.stringResource(R.string.importing_data)
                 )
             )

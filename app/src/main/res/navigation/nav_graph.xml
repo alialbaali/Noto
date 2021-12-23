@@ -427,13 +427,13 @@
         android:name="com.noto.app.settings.ExportImportDialogFragment"
         android:label="ExportImportDialogFragment">
         <action
-            android:id="@+id/action_exportImportDialogFragment_to_progressDialogFragment"
-            app:destination="@id/progressDialogFragment" />
+            android:id="@+id/action_exportImportDialogFragment_to_progressIndicatorDialogFragment"
+            app:destination="@id/progressIndicatorDialogFragment" />
     </dialog>
     <dialog
-        android:id="@+id/progressDialogFragment"
-        android:name="com.noto.app.ProgressDialogFragment"
-        android:label="ProgressDialogFragment">
+        android:id="@+id/progressIndicatorDialogFragment"
+        android:name="com.noto.app.ProgressIndicatorDialogFragment"
+        android:label="ProgressIndicatorDialogFragment">
         <argument
             android:name="title"
             app:argType="string" />

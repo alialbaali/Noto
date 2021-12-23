@@ -14,7 +14,7 @@
         <include layout="@layout/base_dialog_fragment" />
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/progress"
+            android:id="@+id/indicator"
             android:padding="@dimen/spacing_normal"
             android:layout_width="wrap_content"
             android:layout_gravity="center"

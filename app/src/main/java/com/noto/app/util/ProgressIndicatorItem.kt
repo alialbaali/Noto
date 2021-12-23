@@ -7,12 +7,12 @@ import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.noto.app.R
-import com.noto.app.databinding.LoadingIndicatorItemBinding
+import com.noto.app.databinding.ProgressIndicatorItemBinding
 import com.noto.app.domain.model.NotoColor
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.loading_indicator_item)
-abstract class LoadingIndicatorItem : EpoxyModelWithHolder<LoadingIndicatorItem.Holder>() {
+@EpoxyModelClass(layout = R.layout.progress_indicator_item)
+abstract class ProgressIndicatorItem : EpoxyModelWithHolder<ProgressIndicatorItem.Holder>() {
 
     @EpoxyAttribute
     var color: NotoColor? = null
@@ -31,11 +31,11 @@ abstract class LoadingIndicatorItem : EpoxyModelWithHolder<LoadingIndicatorItem.
     }
 
     class Holder : EpoxyHolder() {
-        lateinit var binding: LoadingIndicatorItemBinding
+        lateinit var binding: ProgressIndicatorItemBinding
             private set
 
         override fun bindView(itemView: View) {
-            binding = LoadingIndicatorItemBinding.bind(itemView)
+            binding = ProgressIndicatorItemBinding.bind(itemView)
         }
     }
 }
