@@ -9,13 +9,21 @@
         <entry key="../../.gradle/caches/transforms-3/22edce91b047008032d6884bfdc23003/transformed/jetified-fastadapter-extensions-ui-5.4.1/res/layout/three_line_item.xml" value="0.21611842105263157" />
         <entry key="../../.gradle/caches/transforms-3/22edce91b047008032d6884bfdc23003/transformed/jetified-fastadapter-extensions-ui-5.4.1/res/layout/two_line_item.xml" value="0.21611842105263157" />
         <entry key="../../Android/Sdk/platforms/android-31/data/res/drawable/btn_radio.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable-v21/ic_launcher_background.xml" value="0.17777777777777778" />
+        <entry key="app/src/main/res/drawable-v21/ic_splash_screen_foreground.xml" value="0.17777777777777778" />
+        <entry key="app/src/main/res/drawable-v21/splash_screen.xml" value="0.17777777777777778" />
+        <entry key="app/src/main/res/drawable-v23/splash_screen.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/drawable-v24/archive_arrow_down_outline.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable-v24/archive_outline.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_background.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_v2_background.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/drawable-v24/ic_sort.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable-v24/ic_sort_alphabetically.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable-v24/ic_sort_asc.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable-v24/ic_sort_checked.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable-v24/ic_sort_modification_date.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable-v24/ic_splash_background.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable-v24/splash_screen.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/drawable/DialogItem.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/abl_shape.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/archive_button_ripple.xml" value="0.2241042345276873" />
@@ -58,8 +66,14 @@
         <entry key="app/src/main/res/drawable/ic_foreground.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_labels_24dp.xml" value="0.22" />
         <entry key="app/src/main/res/drawable/ic_language_24.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/ic_launcher_v2_background.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/ic_launcher_v2_foreground.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_library_add_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_list_24dp.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/ic_n2.xml" value="0.17777777777777778" />
+        <entry key="app/src/main/res/drawable/ic_n_letter.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_note_foreground.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_outline_edit_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_outline_share_24.xml" value="0.35833333333333334" />
@@ -137,7 +151,9 @@
         <entry key="app/src/main/res/drawable/ic_schedule_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_search_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_shop_24dp.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/ic_splash_foreground.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/ic_splash_screen.xml" value="0.22" />
+        <entry key="app/src/main/res/drawable/ic_splash_screen_foreground.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_star_checked_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_star_unchecked_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_style_24px.xml" value="0.35833333333333334" />
@@ -179,7 +195,8 @@
         <entry key="app/src/main/res/drawable/shape_view_head.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/sorting_checked.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/sorting_item_shape.xml" value="0.22631578947368422" />
-        <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.22" />
+        <entry key="app/src/main/res/drawable/splash_screen_v2.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/switch_thumb_selector.xml" value="0.22664473684210526" />
         <entry key="app/src/main/res/drawable/switch_thumb_shape.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/switch_track_color.xml" value="0.2241042345276873" />
@@ -237,7 +254,7 @@
         <entry key="app/src/main/res/layout/language_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/library_archive_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/library_dialog_fragment.xml" value="0.2" />
-        <entry key="app/src/main/res/layout/library_fragment.xml" value="0.17" />
+        <entry key="app/src/main/res/layout/library_fragment.xml" value="0.14" />
         <entry key="app/src/main/res/layout/library_grid_widget.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/library_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/library_list_dialog_fragment.xml" value="0.22" />
@@ -312,7 +329,10 @@
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_create_note.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.12960526315789472" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_v2.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_v2_round.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_note.xml" value="0.12960526315789472" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_splash.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/xml/provider_paths.xml" value="0.21611842105263157" />
       </map>
     </option>
