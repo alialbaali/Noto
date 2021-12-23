@@ -14,9 +14,9 @@ inline fun <T> List<T>.sortByOrder(sortingOrder: SortingOrder, crossinline selec
     SortingOrder.Descending -> sortedWith(compareByDescending(selector))
 }
 
-fun String?.firstLineOrEmpty() = this?.lines()?.firstOrNull()?.trim() ?: ""
+fun String?.firstLineOrEmpty() = this?.lines()?.firstOrNull()?.trim().orEmpty()
 
-fun String?.takeAfterFirstLineOrEmpty() = this?.lines()?.drop(1)?.joinToString("\n")?.trim() ?: ""
+fun String?.takeAfterFirstLineOrEmpty() = this?.lines()?.drop(1)?.joinToString("\n")?.trim().orEmpty()
 
 fun String.takeLines(n: Int) = lines().take(n).joinToString("\n")
 
