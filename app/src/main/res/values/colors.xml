@@ -3,6 +3,7 @@
     <color name="colorBackground">#FFFFFF</color>
     <color name="colorBackgroundVariant">#FFFFFF</color>
     <color name="colorSurface">#F0F0F0</color>
+    <color name="colorSurfaceVariant">#F0F0F0</color>
     <color name="colorPrimary">#121212</color>
     <color name="colorSecondary">#707070</color>
 

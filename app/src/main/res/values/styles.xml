@@ -23,10 +23,12 @@
 
     <style name="LightDarkTheme" parent="BaseTheme">
         <item name="notoBackgroundColor">@color/colorBackground</item>
+        <item name="notoSurfaceColor">@color/colorSurface</item>
     </style>
 
     <style name="LightBlackTheme" parent="BaseTheme">
         <item name="notoBackgroundColor">@color/colorBackgroundVariant</item>
+        <item name="notoSurfaceColor">@color/colorSurfaceVariant</item>
     </style>
 
     <style name="SplashScreenTheme" parent="BaseTheme">
