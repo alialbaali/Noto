@@ -1,5 +1,7 @@
 # Noto
 
+<img src="images/Icon.svg" alt="icon"/>
+
 #### Simple and minimal note-taking Android application built with Kotlin.
 
 ## Download
@@ -37,6 +39,7 @@ Noto is part of my [portfolio](https://alialbaali.com) projects. It showcases my
 * Ad-Free
 
 ## Contributions
+
 Contributions are always welcome! If you would like to contribute, please feel free to file an issue or create a PR.
 
 #### Special thanks to everyone who has helped and contributed in the development.
@@ -45,7 +48,7 @@ Contributions are always welcome! If you would like to contribute, please feel f
 
 If you would like to translate the app, please contact me via [email](mailto:ali@albaali.com).
 
-#### Special thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization, and <a href="https://github.com/heheboi22">heheboi</a> for Tamil localization.
+#### Special thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization, and <a href="https://github.com/heheboi22">புகழ்</a> for Tamil localization.
 
 ## Architecture
 
@@ -66,15 +69,16 @@ Contains all the UI logic.
 ## Screenshots
 
 <p float="left">
-<img src="Screenshots/Frame%203.png" height="400"  alt="screenshot"/>
-<img src="Screenshots/Frame%206.png" height="400"  alt="screenshot"/>
-<img src="Screenshots/Frame%205.png" height="400"  alt="screenshot"/>
-<img src="Screenshots/Frame%204.png" height="400"  alt="screenshot"/>
-<img src="Screenshots/Frame%202.png" height="400"  alt="screenshot"/>
-<img src="Screenshots/Frame%201.png" height="400"  alt="screenshot"/>
-<img src="Screenshots/Frame%208.png" height="400"  alt="screenshot"/>
-<img src="Screenshots/Frame%207.png" height="400"  alt="screenshot"/>
+<img src="images/Frame%203.png" height="400"  alt="screenshot"/>
+<img src="images/Frame%206.png" height="400"  alt="screenshot"/>
+<img src="images/Frame%205.png" height="400"  alt="screenshot"/>
+<img src="images/Frame%204.png" height="400"  alt="screenshot"/>
+<img src="images/Frame%202.png" height="400"  alt="screenshot"/>
+<img src="images/Frame%201.png" height="400"  alt="screenshot"/>
+<img src="images/Frame%208.png" height="400"  alt="screenshot"/>
+<img src="images/Frame%207.png" height="400"  alt="screenshot"/>
 </p>
 
 ## License
+
 Noto is distributed under the terms of the Apache License (Version 2.0). See [License](LICENSE.md) for details.
