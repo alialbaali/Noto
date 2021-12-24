@@ -23,7 +23,8 @@ class MainViewModel(
     val libraries = libraryRepository.getLibraries()
         .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
             libraries.map { library ->
-                library to librariesNotesCount.first { it.libraryId == library.id }.notesCount
+                val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
+                library to notesCount
             }
         }
         .map { UiState.Success(it) }
@@ -32,7 +33,8 @@ class MainViewModel(
     val archivedLibraries = libraryRepository.getArchivedLibraries()
         .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
             libraries.map { library ->
-                library to librariesNotesCount.first { it.libraryId == library.id }.notesCount
+                val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
+                library to notesCount
             }
         }
         .map { UiState.Success(it) }

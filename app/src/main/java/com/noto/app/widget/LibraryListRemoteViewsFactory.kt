@@ -47,7 +47,10 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
             .first()
         libraries = libraryRepository.getLibraries()
             .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
-                libraries.map { library -> library to librariesNotesCount.first { it.libraryId == library.id }.notesCount }
+                libraries.map { library ->
+                    val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
+                    library to notesCount
+                }
             }
             .filterNotNull()
             .first()
