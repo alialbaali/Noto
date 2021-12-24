@@ -304,4 +304,14 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="ProgressIndicator" parent="Widget.MaterialComponents.CircularProgressIndicator">
+        <item name="android:indeterminate">true</item>
+        <item name="android:contentDescription">@string/loading_content</item>
+        <item name="indicatorColor">?attr/notoPrimaryColor</item>
+        <item name="indicatorSize">50dp</item>
+        <item name="trackColor">?attr/notoBackgroundColor</item>
+        <item name="trackCornerRadius">@dimen/spacing_extra_large</item>
+        <item name="trackThickness">5dp</item>
+    </style>
+
 </resources>

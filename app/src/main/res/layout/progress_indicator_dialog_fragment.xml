@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/BaseDialogFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -15,12 +14,10 @@
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/indicator"
+            style="@style/ProgressIndicator"
             android:padding="@dimen/spacing_normal"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            app:indicatorColor="?attr/notoPrimaryColor"
-            app:trackCornerRadius="@dimen/spacing_extra_large" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

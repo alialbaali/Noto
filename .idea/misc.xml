@@ -299,7 +299,7 @@
         <entry key="app/src/main/res/layout/placeholder_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/progress_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/progress_indicator_dialog_fragment.xml" value="0.21644736842105264" />
-        <entry key="app/src/main/res/layout/progress_indicator_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/progress_indicator_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/rb_shape.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/read_mode_fragment.xml" value="0.3421875" />
         <entry key="app/src/main/res/layout/reminder_dialog_fragment.xml" value="0.18645833333333334" />
