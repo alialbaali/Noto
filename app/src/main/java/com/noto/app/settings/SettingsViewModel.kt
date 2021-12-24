@@ -36,7 +36,7 @@ class SettingsViewModel(
     }
 
     suspend fun exportData(): Map<String, String> {
-        val libraries = libraryRepository.getLibraries().first()
+        val libraries = libraryRepository.getAllLibraries().first()
         val notes = noteRepository.getAllNotes().first()
         val labels = labelRepository.getAllLabels().first()
         val noteLabels = noteLabelRepository.getNoteLabels().first()
