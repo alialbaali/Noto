@@ -1,5 +1,6 @@
 package com.noto.app.data.repository
 
+import com.noto.app.domain.model.LibraryIdWithNotesCount
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalNoteDataSource
@@ -23,6 +24,8 @@ class NoteRepositoryImpl(
 
     override fun getNoteById(noteId: Long): Flow<Note> = dataSource.getNoteById(noteId)
 
+    override fun getLibrariesNotesCount(): Flow<List<LibraryIdWithNotesCount>> = dataSource.getLibrariesNotesCount()
+
     override suspend fun createNote(note: Note) = withContext(dispatcher) {
         val position = getNotePosition(note.libraryId)
         dataSource.createNote(note.copy(position = position))
@@ -34,10 +37,6 @@ class NoteRepositoryImpl(
 
     override suspend fun deleteNote(note: Note) = withContext(dispatcher) {
         dataSource.deleteNote(note)
-    }
-
-    override suspend fun countNotesByLibraryId(libraryId: Long): Int = withContext(dispatcher) {
-        dataSource.countNotesByLibraryId(libraryId)
     }
 
     override suspend fun clearNotes() = dataSource.clearNotes()

@@ -17,18 +17,18 @@ import com.noto.app.util.*
 
 class LibraryListWidgetAdapter(
     context: Context,
-    libraries: List<Library>,
+    libraries: List<Pair<Library, Int>>,
     layoutResourceId: Int,
     private val isShowNotesCount: Boolean,
-    private val countNotes: (Long) -> Int,
-) : ArrayAdapter<Library>(context, layoutResourceId, libraries) {
+) : ArrayAdapter<Pair<Library, Int>>(context, layoutResourceId, libraries) {
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val layoutInflater = LayoutInflater.from(context)
         return WidgetLibraryItemBinding.inflate(layoutInflater, parent, false).withBinding {
-            getItem(position)?.let { library ->
+            getItem(position)?.let { entry ->
+                val library = entry.first
+                val notesCount = entry.second
                 val color = context.colorResource(library.color.toResource())
-                val notesCount = countNotes(library.id)
                 tvLibraryNotesCount.text = context.pluralsResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
                 ivLibraryColor.setColorFilter(color)
                 tvLibraryTitle.setTextColor(color)

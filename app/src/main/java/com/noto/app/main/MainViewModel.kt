@@ -11,12 +11,8 @@ import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.filterNotNull
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class MainViewModel(
     private val libraryRepository: LibraryRepository,
@@ -25,10 +21,20 @@ class MainViewModel(
 ) : ViewModel() {
 
     val libraries = libraryRepository.getLibraries()
+        .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
+            libraries.map { library ->
+                library to librariesNotesCount.first { it.libraryId == library.id }.notesCount
+            }
+        }
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
     val archivedLibraries = libraryRepository.getArchivedLibraries()
+        .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
+            libraries.map { library ->
+                library to librariesNotesCount.first { it.libraryId == library.id }.notesCount
+            }
+        }
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
@@ -51,10 +57,6 @@ class MainViewModel(
         .filterNotNull()
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
-
-    fun countNotes(libraryId: Long): Int = runBlocking {
-        noteRepository.countNotesByLibraryId(libraryId)
-    }
 
     fun updateLayout(value: Layout) = viewModelScope.launch {
         storage.put(Constants.LibraryListLayoutKey, value.toString())

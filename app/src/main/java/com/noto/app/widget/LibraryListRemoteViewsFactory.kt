@@ -16,6 +16,7 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.*
 import com.noto.app.util.Constants.Widget.NotesCount
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -30,7 +31,7 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
     private val storage by inject<LocalStorage>()
     private val appWidgetId = intent?.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
         ?: AppWidgetManager.INVALID_APPWIDGET_ID
-    private lateinit var libraries: List<Library>
+    private lateinit var libraries: List<Pair<Library, Int>>
     private var isShowNotesCount: Boolean = true
 
     override fun onCreate() {}
@@ -45,10 +46,13 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
             .map { SortingOrder.valueOf(it) }
             .first()
         libraries = libraryRepository.getLibraries()
+            .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
+                libraries.map { library -> library to librariesNotesCount.first { it.libraryId == library.id }.notesCount }
+            }
             .filterNotNull()
             .first()
             .sorted(sortingType, sortingOrder)
-            .sortedByDescending { it.isPinned }
+            .sortedByDescending { it.first.isPinned }
         isShowNotesCount = storage.getOrNull(appWidgetId.NotesCount)
             .map { it?.toBoolean() ?: true }
             .first()
@@ -59,17 +63,16 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
     override fun getCount(): Int = libraries.count()
 
     override fun getViewAt(position: Int): RemoteViews {
-        val library = libraries[position]
+        val entry = libraries[position]
+        val library = entry.first
+        val notesCount = entry.second
         val color = context.colorResource(library.color.toResource())
         val intent = Intent(Constants.Intent.ActionOpenLibrary, null, context, AppActivity::class.java).apply {
             putExtra(Constants.LibraryId, library.id)
         }
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_library_item).apply {
-            runBlocking {
-                val notesCount = noteRepository.countNotesByLibraryId(library.id)
-                val notesCountText = context.pluralsResource(R.plurals.notes_count, notesCount, notesCount)
-                setTextViewText(R.id.tv_library_notes_count, notesCountText)
-            }
+            val notesCountText = context.pluralsResource(R.plurals.notes_count, notesCount, notesCount)
+            setTextViewText(R.id.tv_library_notes_count, notesCountText)
             setOnClickFillInIntent(R.id.ll, intent)
             setContentDescription(R.id.ll, library.title)
             setViewVisibility(R.id.tv_library_notes_count, if (isShowNotesCount) View.VISIBLE else View.GONE)
@@ -85,7 +88,7 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
 
     override fun getViewTypeCount(): Int = 1
 
-    override fun getItemId(position: Int): Long = libraries[position].id
+    override fun getItemId(position: Int): Long = libraries[position].first.id
 
     override fun hasStableIds(): Boolean = true
 }

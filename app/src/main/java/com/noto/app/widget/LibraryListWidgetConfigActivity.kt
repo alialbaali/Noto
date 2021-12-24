@@ -60,7 +60,6 @@ class LibraryListWidgetConfigActivity : BaseActivity() {
                     libraries,
                     R.layout.library_list_widget,
                     isShowNotesCount,
-                    viewModel::countNotes
                 )
             }
         }.launchIn(lifecycleScope)

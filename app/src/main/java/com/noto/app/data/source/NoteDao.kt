@@ -1,6 +1,7 @@
 package com.noto.app.data.source
 
 import androidx.room.*
+import com.noto.app.domain.model.LibraryIdWithNotesCount
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.source.LocalNoteDataSource
 import kotlinx.coroutines.flow.Flow
@@ -20,6 +21,9 @@ interface NoteDao : LocalNoteDataSource {
     @Query("SELECT * FROM notes WHERE id = :noteId")
     override fun getNoteById(noteId: Long): Flow<Note>
 
+    @Query("SELECT library_id, COUNT(*) as notesCount FROM notes WHERE is_archived = 0 GROUP BY library_id")
+    override fun getLibrariesNotesCount(): Flow<List<LibraryIdWithNotesCount>>
+
     @Insert
     override suspend fun createNote(note: Note): Long
 
@@ -28,9 +32,6 @@ interface NoteDao : LocalNoteDataSource {
 
     @Delete
     override suspend fun deleteNote(note: Note)
-
-    @Query("SELECT COUNT(*) FROM notes WHERE library_id = :libraryId AND is_archived = 0")
-    override suspend fun countNotesByLibraryId(libraryId: Long): Int
 
     @Query("DELETE FROM notes")
     override suspend fun clearNotes()

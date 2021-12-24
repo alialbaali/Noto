@@ -66,26 +66,26 @@ class MainArchiveFragment : Fragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainArchiveFragmentBinding.setupLibraries(state: UiState<List<Library>>, isShowNotesCount: Boolean) {
+    private fun MainArchiveFragmentBinding.setupLibraries(state: UiState<List<Pair<Library, Int>>>, isShowNotesCount: Boolean) {
         when (state) {
             is UiState.Loading -> rv.setupLoadingIndicator()
             is UiState.Success -> {
                 val libraries = state.value
 
                 rv.withModels {
-                    val items = { items: List<Library> ->
-                        items.forEach { library ->
+                    val items = { items: List<Pair<Library, Int>> ->
+                        items.forEach { entry ->
                             libraryItem {
-                                id(library.id)
-                                library(library)
-                                notesCount(viewModel.countNotes(library.id))
+                                id(entry.first.id)
+                                library(entry.first)
+                                notesCount(entry.second)
                                 isManualSorting(false)
                                 isShowNotesCount(isShowNotesCount)
                                 onClickListener { _ ->
-                                    navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(library.id))
+                                    navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(entry.first.id))
                                 }
                                 onLongClickListener { _ ->
-                                    navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(library.id))
+                                    navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(entry.first.id))
                                     true
                                 }
                                 onDragHandleTouchListener { _, _ -> false }
@@ -99,8 +99,8 @@ class MainArchiveFragment : Fragment() {
                                 placeholder(context.stringResource(R.string.archive_is_empty))
                             }
                         } else {
-                            val pinnedLibraries = libraries.filter { it.isPinned }
-                            val notPinnedLibraries = libraries.filterNot { it.isPinned }
+                            val pinnedLibraries = libraries.filter { it.first.isPinned }
+                            val notPinnedLibraries = libraries.filterNot { it.first.isPinned }
 
                             if (pinnedLibraries.isNotEmpty()) {
                                 headerItem {

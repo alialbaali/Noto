@@ -9,7 +9,6 @@ import io.kotest.matchers.collections.shouldBeEmpty
 import io.kotest.matchers.collections.shouldContain
 import io.kotest.matchers.collections.shouldHaveSize
 import io.kotest.matchers.collections.shouldNotBeEmpty
-import io.kotest.matchers.ints.shouldBeExactly
 import io.kotest.matchers.longs.shouldBeExactly
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldBeEqualIgnoringCase
@@ -125,7 +124,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
                 val note = Note(id = it.toLong(), libraryId = 1, title = "Title $it", "Body $it", position = 0)
                 repository.createNote(note)
             }
-            repository.countNotesByLibraryId(libraryId = 1) shouldBeExactly 5
+            repository.getLibrariesNotesCount(libraryId = 1) shouldBeExactly 5
         }
     }
 }

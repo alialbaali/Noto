@@ -38,11 +38,11 @@ fun Note.format(): String = """
 val Note.isValid
     get() = title.isNotBlank() || body.isNotBlank()
 
-fun List<Library>.sorted(sortingType: LibraryListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { library ->
+fun List<Pair<Library, Int>>.sorted(sortingType: LibraryListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
     when (sortingType) {
-        LibraryListSortingType.Manual -> library.position
-        LibraryListSortingType.CreationDate -> library.creationDate
-        LibraryListSortingType.Alphabetical -> library.title
+        LibraryListSortingType.Manual -> pair.first.position
+        LibraryListSortingType.CreationDate -> pair.first.creationDate
+        LibraryListSortingType.Alphabetical -> pair.first.title
     }
 }
 

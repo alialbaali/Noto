@@ -58,7 +58,7 @@ class SelectLibraryDialogFragment(private val onClick: (Long) -> Unit = {}) : Ba
             viewModel.isShowNotesCount,
         ) { libraries, sortingType, sortingOrder, isShowNotesCount ->
             setupLibraries(
-                libraries.map { it.filter { library -> library.id != args.libraryId }.sorted(sortingType, sortingOrder) },
+                libraries.map { it.filter { entry -> entry.first.id != args.libraryId }.sorted(sortingType, sortingOrder) },
                 isShowNotesCount
             )
         }.launchIn(lifecycleScope)
@@ -69,7 +69,7 @@ class SelectLibraryDialogFragment(private val onClick: (Long) -> Unit = {}) : Ba
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun SelectLibraryDialogFragmentBinding.setupLibraries(state: UiState<List<Library>>, isShowNotesCount: Boolean) {
+    private fun SelectLibraryDialogFragmentBinding.setupLibraries(state: UiState<List<Pair<Library, Int>>>, isShowNotesCount: Boolean) {
         when (state) {
             is UiState.Loading -> rv.setupLoadingIndicator()
             is UiState.Success -> {
@@ -83,18 +83,18 @@ class SelectLibraryDialogFragment(private val onClick: (Long) -> Unit = {}) : Ba
                             }
                         }
                     } else {
-                        libraries.forEach { library ->
+                        libraries.forEach { entry ->
                             libraryItem {
-                                id(library.id)
-                                library(library)
-                                notesCount(viewModel.countNotes(library.id))
+                                id(entry.first.id)
+                                library(entry.first)
+                                notesCount(entry.second)
                                 isShowNotesCount(isShowNotesCount)
                                 isManualSorting(false)
                                 onClickListener { _ ->
                                     try {
-                                        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.LibraryId, library.id)
+                                        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.LibraryId, entry.first.id)
                                     } catch (exception: IllegalStateException) {
-                                        onClick(library.id)
+                                        onClick(entry.first.id)
                                     }
                                     dismiss()
                                 }

@@ -14,7 +14,6 @@ import com.noto.app.util.Constants.Widget.NotesCount
 import com.noto.app.util.Constants.Widget.Radius
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class LibraryListWidgetConfigViewModel(
     private val appWidgetId: Int,
@@ -24,6 +23,9 @@ class LibraryListWidgetConfigViewModel(
 ) : ViewModel() {
 
     val libraries = libraryRepository.getLibraries()
+        .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
+            libraries.map { library -> library to librariesNotesCount.first { it.libraryId == library.id }.notesCount }
+        }
         .filterNotNull()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
@@ -111,10 +113,6 @@ class LibraryListWidgetConfigViewModel(
 
     fun setIsNotesCountEnabled(value: Boolean) {
         mutableIsNotesCountEnabled.value = value
-    }
-
-    fun countNotes(libraryId: Long) = runBlocking {
-        noteRepository.countNotesByLibraryId(libraryId)
     }
 
     fun createOrUpdateWidget() = viewModelScope.launch {

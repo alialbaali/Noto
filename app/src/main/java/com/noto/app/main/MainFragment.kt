@@ -92,7 +92,7 @@ class MainFragment : Fragment() {
     }
 
     private fun MainFragmentBinding.setupLibraries(
-        state: UiState<List<Library>>,
+        state: UiState<List<Pair<Library, Int>>>,
         sortingType: LibraryListSortingType,
         sortingOrder: SortingOrder,
         isShowNotesCount: Boolean,
@@ -114,19 +114,19 @@ class MainFragment : Fragment() {
                         }
                     }
 
-                    val items = { items: List<Library> ->
-                        items.forEach { library ->
+                    val items = { items: List<Pair<Library, Int>> ->
+                        items.forEach { entry ->
                             libraryItem {
-                                id(library.id)
-                                library(library)
-                                notesCount(viewModel.countNotes(library.id))
+                                id(entry.first.id)
+                                library(entry.first)
+                                notesCount(entry.second)
                                 isManualSorting(sortingType == LibraryListSortingType.Manual)
                                 isShowNotesCount(isShowNotesCount)
                                 onClickListener { _ ->
-                                    navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(library.id))
+                                    navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(entry.first.id))
                                 }
                                 onLongClickListener { _ ->
-                                    navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(library.id))
+                                    navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(entry.first.id))
                                     true
                                 }
                                 onDragHandleTouchListener { view, event ->
@@ -147,8 +147,8 @@ class MainFragment : Fragment() {
                                 placeholder(context.stringResource(R.string.no_libraries_found_create))
                             }
                         } else {
-                            val pinnedLibraries = libraries.filter { it.isPinned }
-                            val notPinnedLibraries = libraries.filterNot { it.isPinned }
+                            val pinnedLibraries = libraries.filter { it.first.isPinned }
+                            val notPinnedLibraries = libraries.filterNot { it.first.isPinned }
 
                             if (pinnedLibraries.isNotEmpty()) {
                                 tb.title = context.stringResource(R.string.app_name)
