@@ -8,7 +8,7 @@ import com.noto.app.domain.model.Grouping
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.NotoColor
 
-fun EpoxyRecyclerView.setupLoadingIndicator(color: NotoColor? = null) {
+fun EpoxyRecyclerView.setupProgressIndicator(color: NotoColor? = null) {
     withModels {
         progressIndicatorItem {
             id("loading")

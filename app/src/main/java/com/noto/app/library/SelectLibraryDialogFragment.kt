@@ -71,7 +71,7 @@ class SelectLibraryDialogFragment(private val onClick: (Long) -> Unit = {}) : Ba
     @SuppressLint("ClickableViewAccessibility")
     private fun SelectLibraryDialogFragmentBinding.setupLibraries(state: UiState<List<Pair<Library, Int>>>, isShowNotesCount: Boolean) {
         when (state) {
-            is UiState.Loading -> rv.setupLoadingIndicator()
+            is UiState.Loading -> rv.setupProgressIndicator()
             is UiState.Success -> {
                 val libraries = state.value
                 rv.withModels {

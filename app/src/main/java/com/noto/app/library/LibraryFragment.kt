@@ -166,7 +166,7 @@ class LibraryFragment : Fragment() {
         library: Library,
     ) {
         when (state) {
-            is UiState.Loading -> rv.setupLoadingIndicator(library.color)
+            is UiState.Loading -> rv.setupProgressIndicator(library.color)
             is UiState.Success -> {
                 val notes = state.value
 

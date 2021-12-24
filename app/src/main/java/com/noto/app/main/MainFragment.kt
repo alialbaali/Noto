@@ -98,7 +98,7 @@ class MainFragment : Fragment() {
         isShowNotesCount: Boolean,
     ) {
         when (state) {
-            is UiState.Loading -> rv.setupLoadingIndicator()
+            is UiState.Loading -> rv.setupProgressIndicator()
             is UiState.Success -> {
                 rv.withModels {
                     epoxyController = this
