@@ -13,7 +13,7 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
     val theme = storage.get(Constants.ThemeKey)
         .filterNotNull()
         .map { Theme.valueOf(it) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, Theme.System)
+        .shareIn(viewModelScope, SharingStarted.Lazily, replay = 1)
 
     val font = storage.get(Constants.FontKey)
         .filterNotNull()
