@@ -158,9 +158,11 @@
     <!-- Theme -->
     <string name="theme">நிற அமைப்பு</string>
     <string name="change_theme">நிற அமைப்பை மாற்றவும்</string>
-    <string name="system_dark_theme">சிஸ்டமின் நிற அமைப்பு</string>
+    <string name="system_dark_theme">சிஸ்டம் + டார்க் தீம்</string>
+    <string name="system_black_theme">கணினி + கருப்பு தீம்</string>
     <string name="light_theme">வெள்ளை நிறம்</string>
     <string name="dark_theme">இருண்ட நிறம்</string>
+    <string name="black_theme">கருப்பு தீம்</string>
     <!-- Language -->
     <string name="language">மொழி</string>
     <string name="change_language">மொழியை மாற்றவும்</string>
@@ -173,7 +175,6 @@
     <string name="tamil">தமிழ்</string>
     <!-- Widget -->
     <string name="create_widget">விட்ஜெட்டை உருவாக்கவும்</string>
-    <string name="update_widget">விட்ஜெட்டைப் புதுப்பிக்கவும்</string>
     <string name="new_notes_widget">புதிய குறிப்புகள் விட்ஜெட்</string>
     <string name="edit_notes_widget">குறிப்புகள் விட்ஜெட்டைத் திருத்தவும்</string>
     <string name="new_libraries_widget">புதிய நூலக விட்ஜெட்</string>
@@ -186,4 +187,5 @@
     <string name="edit_widget">விட்ஜெட்டைத் திருத்து</string>
     <string name="edit_widget_button">விட்ஜெட் பொத்தானை திருத்து</string>
     <string name="libraries_notes_count">நூலகக் குறிப்புகள் எண்ணிக்கை</string>
+    <string name="loading_content">உள்ளடக்கத்தை ஏற்றுகிறது</string>
 </resources>

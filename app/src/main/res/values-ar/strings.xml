@@ -29,7 +29,7 @@
     <string name="rate_app_on_play_store">قيم التطبيق على متجر بلي</string>
     <string name="report_issue">الإبلاغ عن مشكلة</string>
     <string name="about">حول</string>
-    <string name="about_message">Noto يتم تطويره وصيانته من قبل <a href="https://www.alialbaali.com/">Ali Albaali</a>.\n\n يتم نشر التطبيق بموجب شروط <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.\n\nشكر خاص لـ <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> و <a href="https://sakci.me">Alparslan Şakçi</a> لترجمة التطبيق إلى اللغة التركية، <a href="https://github.com/heheboi22">heheboi</a> لترجمة التطبيق إلى اللغة التاميلية, وكل من ساعد وأسهم في التنمية.</string>
+    <string name="about_message">Noto يتم تطويره وصيانته من قبل <a href="https://www.alialbaali.com/">Ali Albaali</a>.\n\n يتم نشر التطبيق بموجب شروط <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.\n\nشكر خاص لـ <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> و <a href="https://sakci.me">Alparslan Şakçi</a> لترجمة التطبيق إلى اللغة التركية، <a href="https://github.com/heheboi22">heheboi</a>لترجمة التطبيق إلى اللغة التاميلية, وكل من ساعد وأسهم في التنمية.</string>
     <string name="share_with">مشاركة مع</string>
     <string name="export_import_data">تصدير/استيراد البيانات</string>
     <string name="exporting_failed">فشل في تصدير البيانات.</string>
@@ -120,7 +120,7 @@
     <string name="notes_sorting">فرز الملاحظات</string>
     <string name="grouping">التجميع</string>
     <string name="sorting_order">ترتيب الفرز</string>
-    <string name="save_to_noto">حفظ إلى Noto</string>
+    <string name="save_to_noto">حفظ في Noto</string>
     <string name="no_notes_found">لا توجد أي ملاحظات.</string>
     <string name="unarchive_note">إلغاء إرشاف الملاحظة</string>
     <string name="notes">الملاحظات</string>
@@ -170,9 +170,11 @@
     <!-- Theme -->
     <string name="theme">المظهر</string>
     <string name="change_theme">تغيير المظهر</string>
-    <string name="system_dark_theme">مظهر النظام</string>
+    <string name="system_dark_theme">مظهر النظام + داكن</string>
+    <string name="system_black_theme">مظهر النظام + أسود</string>
     <string name="light_theme">مظهر فاتح</string>
     <string name="dark_theme">مظهر داكن</string>
+    <string name="black_theme">مظهر أسود</string>
     <!-- Language -->
     <string name="language">اللغة</string>
     <string name="change_language">تغيير اللغة</string>
@@ -185,7 +187,6 @@
     <string name="tamil">اللغة التاميلية</string>
     <!-- Widget -->
     <string name="create_widget">إنشاء قطعة</string>
-    <string name="update_widget">تحديث القطعة</string>
     <string name="new_notes_widget">ملاحظات ملصق جديد</string>
     <string name="edit_notes_widget">تعديل قطعة الملاحظات</string>
     <string name="new_libraries_widget">قطعة دفاتر جديد</string>
@@ -198,4 +199,5 @@
     <string name="edit_widget">تعديل القطعة</string>
     <string name="edit_widget_button">زر تعديل القطعة</string>
     <string name="libraries_notes_count">عدد ملاحظات الدفاتر</string>
+    <string name="loading_content">جاري تحميل المحتوى</string>
 </resources>

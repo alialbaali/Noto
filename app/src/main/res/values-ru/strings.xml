@@ -14,11 +14,11 @@
     <string name="grid">Сетка</string>
     <string name="created">Создано %s</string>
     <string name="alphabetical">По алфавиту</string>
-    <string name="alphabetical_sorting">Сортировка по алфавиту</string>
-    <string name="creation_date">Дата создания</string>
-    <string name="creation_date_sorting">Сортировка по дате создания</string>
+    <string name="alphabetical_sorting">По алфавиту</string>
+    <string name="creation_date">По дате</string>
+    <string name="creation_date_sorting">По дате</string>
     <string name="manual">Ручной</string>
-    <string name="manual_sorting">Ручная сортировка</string>
+    <string name="manual_sorting">Ручная</string>
     <string name="default_grouping">По умолчанию</string>
     <string name="descending">По убыванию</string>
     <string name="ascending">По возрастанию</string>
@@ -75,7 +75,7 @@
     <string name="library_color">Цвет</string>
     <string name="delete_library">Удалить</string>
     <string name="delete_library_confirmation">Вы уверены, что хотите удалить эту библиотеку?</string>
-    <string name="libraries_sorting">Сортировка библиотек</string>
+    <string name="libraries_sorting">Сортировка</string>
     <string name="change_libraries_sorting">Изменить сортировку библиотек</string>
     <string name="empty_title">Название не может быть пустым.</string>
     <string name="library_is_deleted">Библиотека удалена.</string>
@@ -111,7 +111,7 @@
     <string name="archive_note">Архивировать</string>
     <string name="duplicate_note">Дублировать</string>
     <string name="sorting_type">Тип сортировки</string>
-    <string name="notes_sorting">Сортировка заметок</string>
+    <string name="notes_sorting">Сортировка</string>
     <string name="grouping">Группировка</string>
     <string name="sorting_order">Порядок сортировки</string>
     <string name="save_to_noto">Сохранить в Noto</string>
@@ -150,7 +150,7 @@
     <string name="reorder_label">Изменить порядок</string>
     <string name="create_label">Создать метку</string>
     <string name="label_title">Название</string>
-    <string name="label">Метка</string>
+    <string name="label">По метке</string>
     <string name="without_label">Без метки</string>
     <string name="label_options">Параметры метки</string>
     <string name="delete_label">Удалить</string>
@@ -164,13 +164,15 @@
     <!-- Theme -->
     <string name="theme">Тема</string>
     <string name="change_theme">Изменить тему</string>
-    <string name="system_dark_theme">Тема системы</string>
+    <string name="system_dark_theme">Системная + Тёмная тема</string>
+    <string name="system_black_theme">Системная + Чёрная тема</string>
     <string name="light_theme">Светлая тема</string>
     <string name="dark_theme">Тёмная тема</string>
+    <string name="black_theme">Чёрная тема</string>
     <!-- Language -->
     <string name="language">Язык</string>
     <string name="change_language">Изменить язык</string>
-    <string name="system_language">Язык системы</string>
+    <string name="system_language">Системный</string>
     <string name="english">Английский</string>
     <string name="turkish">Турецкий</string>
     <string name="arabic">Арабский</string>
@@ -179,7 +181,6 @@
     <string name="tamil">Тамильский</string>
     <!-- Widget -->
     <string name="create_widget">Создать виджет</string>
-    <string name="update_widget">Обновить виджет</string>
     <string name="new_notes_widget">Новый виджет заметок</string>
     <string name="edit_notes_widget">Изменить виджет заметок</string>
     <string name="new_libraries_widget">Виджет новых библиотек</string>
@@ -192,4 +193,5 @@
     <string name="edit_widget">Изменить Виджет</string>
     <string name="edit_widget_button">Изменить кнопку виджета</string>
     <string name="libraries_notes_count">Количество заметок в библиотеке</string>
+    <string name="loading_content">Загрузка контента</string>
 </resources>

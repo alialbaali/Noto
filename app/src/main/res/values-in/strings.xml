@@ -155,9 +155,11 @@
     <!-- Theme -->
     <string name="theme">Tema</string>
     <string name="change_theme">Ganti tema</string>
-    <string name="system_dark_theme">Tema sistem</string>
+    <string name="system_dark_theme">Sistem + Tema gelap</string>
+    <string name="system_black_theme">Sistem + Tema hitam</string>
     <string name="light_theme">Tema terang</string>
     <string name="dark_theme">Tema gelap</string>
+    <string name="black_theme">Tema hitam</string>
     <!-- Language -->
     <string name="language">Bahasa</string>
     <string name="change_language">Ganti bahasa</string>
@@ -170,7 +172,6 @@
     <string name="tamil">Tamil</string>
     <!-- Widget -->
     <string name="create_widget">Buat widget</string>
-    <string name="update_widget">Perbarui widget</string>
     <string name="new_notes_widget">Widget catatan baru</string>
     <string name="edit_notes_widget">Widget sunting catatan</string>
     <string name="new_libraries_widget">Widget pustaka baru</string>
@@ -183,4 +184,5 @@
     <string name="edit_widget">Sunting widget</string>
     <string name="edit_widget_button">Tombol sunting widget</string>
     <string name="libraries_notes_count">Jumlah catatan pustaka</string>
+    <string name="loading_content">Memuat konten</string>
 </resources>

@@ -29,7 +29,7 @@
     <string name="rate_app_on_play_store">Rate app on Play Store</string>
     <string name="report_issue">Report an issue</string>
     <string name="about">About</string>
-    <string name="about_message">Noto is developed and maintained by <a href="https://www.alialbaali.com/">Ali Albaali</a>.\n\nThe app is distributed under the terms of the <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.\n\nSpecial thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization, <a href="https://github.com/heheboi22">heheboi</a> for Tamil localization, and everyone who has helped and contributed in the development.</string>
+    <string name="about_message">Noto is developed and maintained by <a href="https://www.alialbaali.com/">Ali Albaali</a>.\n\nThe app is distributed under the terms of the <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.\n\nSpecial thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization, <a href="https://github.com/heheboi22">புகழ்</a> for Tamil localization, and everyone who has helped and contributed in the development.</string>
     <string name="share_with">Share with</string>
     <string name="export_import_data">Export/Import data</string>
     <string name="exporting_failed">Failed to export the data.</string>

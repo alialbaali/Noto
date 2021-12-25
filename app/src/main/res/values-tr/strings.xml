@@ -158,9 +158,11 @@
     <!-- Theme -->
     <string name="theme">Tema</string>
     <string name="change_theme">Temayı değiştir</string>
-    <string name="system_dark_theme">Sistem teması</string>
+    <string name="system_dark_theme">Sistem + Koyu tema</string>
+    <string name="system_black_theme">Sistem + Siyah tema</string>
     <string name="light_theme">Açık tema</string>
     <string name="dark_theme">Koyu tema</string>
+    <string name="black_theme">Siyah tema</string>
     <!-- Language -->
     <string name="language">Dil</string>
     <string name="change_language">Dili değiştir</string>
@@ -173,7 +175,6 @@
     <string name="tamil">Tamilce</string>
     <!-- Widget -->
     <string name="create_widget">Widget oluştur</string>
-    <string name="update_widget">Widget\'ı güncelle</string>
     <string name="new_notes_widget">Yeni not widget\'ı</string>
     <string name="edit_notes_widget">Not widget\'ını düzenle</string>
     <string name="new_libraries_widget">Yeni kitaplık widget\'ı</string>
@@ -186,4 +187,5 @@
     <string name="edit_widget">Widget\'ı düzenle</string>
     <string name="edit_widget_button">Widget düğmesini düzenle</string>
     <string name="libraries_notes_count">Not sayısı</string>
+    <string name="loading_content">İçerik yükleniyor</string>
 </resources>
