@@ -31,6 +31,7 @@
         <entry key="app/src/main/res/drawable/bell_remove_outline.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/bell_ring_outline.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/bg_divider.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/bottom_app_bar_shape.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/button_text_color.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/checked_color.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/chip_background_selector.xml" value="0.2241042345276873" />
@@ -67,6 +68,7 @@
         <entry key="app/src/main/res/drawable/ic_labels_24dp.xml" value="0.22" />
         <entry key="app/src/main/res/drawable/ic_language_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background_v2.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_launcher_v2_background.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_launcher_v2_foreground.xml" value="0.2241042345276873" />

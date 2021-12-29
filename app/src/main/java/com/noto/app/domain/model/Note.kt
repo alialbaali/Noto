@@ -46,5 +46,8 @@ data class Note(
     val isArchived: Boolean = false,
 
     @ColumnInfo(name = "reminder_date")
-    val reminderDate: Instant? = null
+    val reminderDate: Instant? = null,
+
+    @ColumnInfo(name = "is_vaulted", defaultValue = "0")
+    val isVaulted: Boolean = false,
 )

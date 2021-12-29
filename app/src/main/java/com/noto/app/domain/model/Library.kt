@@ -53,4 +53,7 @@ data class Library(
 
     @ColumnInfo(name = "grouping", defaultValue = "0")
     val grouping: Grouping = Grouping.Default,
+
+    @ColumnInfo(name = "is_vaulted", defaultValue = "0")
+    val isVaulted: Boolean = false,
 )
