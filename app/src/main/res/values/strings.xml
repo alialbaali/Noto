@@ -107,6 +107,7 @@
     <string name="passcode_doesnt_match">Passcode doesn\'t match the current one</string>
     <string name="vault_passcode_has_changed">Vault passcode has been updated.</string>
     <string name="vault_passcode_message">Vault passcode can\'t be changed if you lost the current one, so please make sure to store it in somewhere safe.</string>
+    <string name="open_the_vault">Open the vault</string>
 
     <!-- Note -->
     <string name="all">All</string>

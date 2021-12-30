@@ -40,18 +40,27 @@ class MainVaultFragment : Fragment() {
     }
 
     private fun MainVaultFragmentBinding.setupListeners() {
-        et.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                val passcode = et.text.toString()
-                if (passcode == viewModel.vaultPasscode.value)
-                    viewModel.openVault()
-                else
-                    til.error = context?.stringResource(R.string.invalid_passcode)
+        val openVaultCallback = {
+            val passcode = et.text.toString()
+            if (passcode == viewModel.vaultPasscode.value) {
                 activity?.hideKeyboard(et)
+                viewModel.openVault()
+            } else {
+                til.error = context?.stringResource(R.string.invalid_passcode)
+            }
+        }
+
+        et.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                openVaultCallback()
                 true
             } else {
                 false
             }
+        }
+
+        btnOpen.setOnClickListener {
+            openVaultCallback()
         }
 
         val backCallback = {

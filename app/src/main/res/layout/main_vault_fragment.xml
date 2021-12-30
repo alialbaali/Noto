@@ -76,6 +76,16 @@
                     android:hint="@string/vault_passcode"
                     android:inputType="numberPassword" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_open"
+                style="@style/MaterialButton"
+                android:layout_marginVertical="@dimen/spacing_normal"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/open_the_vault"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
     </eightbitlab.com.blurview.BlurView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
