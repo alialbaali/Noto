@@ -121,6 +121,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.5.31")
     implementation("nl.bryanderidder:themed-toggle-button-group:1.3.4")
     implementation("com.google.android:flexbox:2.0.1")
+    implementation("com.eightbitlab:blurview:1.6.6")
 
     testImplementation(Testing.Kotest.Runner.junit5)
     testImplementation(Testing.Kotest.Assertions.core)
