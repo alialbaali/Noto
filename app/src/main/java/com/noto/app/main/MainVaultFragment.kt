@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
-import androidx.activity.addCallback
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -63,22 +62,8 @@ class MainVaultFragment : Fragment() {
             openVaultCallback()
         }
 
-        val backCallback = {
-            viewModel.closeVault()
-            activity?.hideKeyboard(et)
-        }
-
-        activity?.onBackPressedDispatcher
-            ?.addCallback(viewLifecycleOwner) {
-                backCallback()
-                if (isEnabled) {
-                    isEnabled = false
-                    activity?.onBackPressed()
-                }
-            }
-
         tb.setNavigationOnClickListener {
-            backCallback()
+            activity?.hideKeyboard(et)
             navController?.navigateUp()
         }
     }

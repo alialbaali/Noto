@@ -101,6 +101,8 @@
     <string name="current_vault_passcode">Current vault passcode</string>
     <string name="new_vault_passcode">New vault passcode</string>
     <string name="change_vault_passcode">Change vault passcode</string>
+    <string name="change_vault_timeout">Change vault timeout</string>
+    <string name="vault_timeout">Vault timeout</string>
     <string name="invalid_passcode">Invalid passcode</string>
     <string name="passcode_length_message">Passcode must contain at least 6 numbers</string>
     <string name="passcode_empty_message">Passcode can\'t be empty</string>
@@ -108,6 +110,8 @@
     <string name="vault_passcode_has_changed">Vault passcode has been updated.</string>
     <string name="vault_passcode_message">Vault passcode can\'t be changed if you lost the current one, so please make sure to store it in somewhere safe.</string>
     <string name="open_the_vault">Open the vault</string>
+    <string name="immediately">Immediately</string>
+    <string name="on_app_close">On app close</string>
 
     <!-- Note -->
     <string name="all">All</string>

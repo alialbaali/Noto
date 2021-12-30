@@ -5,10 +5,14 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.Language
+import com.noto.app.domain.model.VaultTimeout
+import com.noto.app.main.MainVaultFragment
 import com.noto.app.util.Constants
 import com.noto.app.util.createNotificationChannel
 import com.noto.app.util.withBinding
@@ -23,10 +27,9 @@ class AppActivity : BaseActivity() {
 
     private val notificationManager by lazy { getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager }
 
-    private val navController by lazy {
-        (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
-            .navController
-    }
+    private val navHostFragment by lazy { supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment }
+
+    private val navController by lazy { navHostFragment.navController }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +39,12 @@ class AppActivity : BaseActivity() {
             setupState()
             handleIntentContent()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (viewModel.vaultTimeout.value == VaultTimeout.OnAppClose)
+            viewModel.closeVault()
     }
 
     private fun AppActivityBinding.handleIntentContent() {
@@ -94,6 +103,20 @@ class AppActivity : BaseActivity() {
         viewModel.language
             .onEach { language -> setupLanguage(language) }
             .launchIn(lifecycleScope)
+
+        this@AppActivity.navHostFragment
+            .childFragmentManager
+            .registerFragmentLifecycleCallbacks(
+                object : FragmentManager.FragmentLifecycleCallbacks() {
+                    override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
+                        super.onFragmentDestroyed(fm, f)
+                        if (f is MainVaultFragment)
+                            if (viewModel.vaultTimeout.value == VaultTimeout.Immediately)
+                                viewModel.closeVault()
+                    }
+                },
+                false
+            )
     }
 
     @Suppress("DEPRECATION")

@@ -136,6 +136,7 @@
         <entry key="app/src/main/res/drawable/ic_round_redo_24.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/ic_round_reorder_24.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/ic_round_report_problem_24.xml" value="0.21944444444444444" />
+        <entry key="app/src/main/res/drawable/ic_round_schedule_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_round_search_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_settings_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_share_24.xml" value="0.20260416666666667" />
@@ -314,7 +315,7 @@
         <entry key="app/src/main/res/layout/reorder_label_dialog_fragment.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/reorder_labels_dialog_fragment.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/select_library_dialog_fragment.xml" value="0.21611842105263157" />
-        <entry key="app/src/main/res/layout/settings_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/settings_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/share_note_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/sorting_dialog_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/sorting_header_item.xml" value="0.21611842105263157" />
@@ -326,6 +327,7 @@
         <entry key="app/src/main/res/layout/text_selection_activity.xml" value="0.21433224755700325" />
         <entry key="app/src/main/res/layout/theme_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/vault_passcode_dialog_fragment.xml" value="0.21644736842105264" />
+        <entry key="app/src/main/res/layout/vault_timeout_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/widget_config_activity.xml" value="0.19" />
         <entry key="app/src/main/res/layout/widget_config_dialog_fragment.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/widget_library_item.xml" value="0.21644736842105264" />

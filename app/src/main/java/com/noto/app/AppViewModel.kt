@@ -25,8 +25,16 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
         .map { Language.valueOf(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, Language.System)
 
+    val vaultTimeout = storage.get(Constants.VaultTimeout)
+        .filterNotNull()
+        .map { VaultTimeout.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, VaultTimeout.Immediately)
+
     init {
         createDefaultConstants()
+        vaultTimeout
+            .onEach { timeout -> if (timeout == VaultTimeout.Immediately) closeVault() }
+            .launchIn(viewModelScope)
     }
 
     fun updateTheme(value: Theme) = viewModelScope.launch {
@@ -39,6 +47,10 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
 
     fun updateLanguage(value: Language) = viewModelScope.launch {
         storage.put(Constants.LanguageKey, value.toString())
+    }
+
+    fun closeVault() = viewModelScope.launch {
+        storage.put(Constants.IsVaultOpen, false.toString())
     }
 
     private fun createDefaultConstants() = viewModelScope.launch {
@@ -82,6 +94,12 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
             storage.getOrNull(Constants.ShowNotesCountKey)
                 .firstOrNull()
                 .also { if (it == null) storage.put(Constants.ShowNotesCountKey, true.toString()) }
+        }
+
+        launch {
+            storage.getOrNull(Constants.VaultTimeout)
+                .firstOrNull()
+                .also { if (it == null) storage.put(Constants.VaultTimeout, VaultTimeout.Immediately.toString()) }
         }
     }
 }

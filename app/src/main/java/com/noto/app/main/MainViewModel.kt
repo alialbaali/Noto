@@ -99,8 +99,4 @@ class MainViewModel(
     fun openVault() = viewModelScope.launch {
         storage.put(Constants.IsVaultOpen, true.toString())
     }
-
-    fun closeVault() = viewModelScope.launch {
-        storage.put(Constants.IsVaultOpen, false.toString())
-    }
 }
