@@ -17,6 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val PlayStoreUrl = "https://play.google.com/store/apps/details?id=com.noto"
 private const val GithubUrl = "https://github.com/alialbaali/Noto"
+private const val RedditUrl = "https://reddit.com/r/notoapp"
 private const val GithubIssueUrl = "https://github.com/alialbaali/Noto/issues/new"
 
 class SettingsFragment : Fragment() {
@@ -95,6 +96,11 @@ class SettingsFragment : Fragment() {
 
         tvViewCode.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubUrl))
+            startActivity(intent)
+        }
+
+        tvJoinCommunity.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(RedditUrl))
             startActivity(intent)
         }
 

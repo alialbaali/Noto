@@ -139,6 +139,14 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_join_community"
+                    style="@style/SettingsItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_round_group_24"
+                    android:text="@string/join_community" />
+
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_view_code"
                     style="@style/SettingsItem"
                     android:layout_width="match_parent"
