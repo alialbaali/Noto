@@ -26,13 +26,30 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/rv"
+    <FrameLayout
+        android:id="@+id/fl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/spacing_small"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/library_item" />
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/spacing_small"
+            tools:listitem="@layout/library_item" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_close"
+            style="@style/MaterialButton"
+            android:layout_gravity="bottom"
+            android:layout_margin="@dimen/spacing_normal"
+            android:layout_marginVertical="@dimen/spacing_normal"
+            android:padding="@dimen/spacing_normal"
+            android:text="@string/close_the_vault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
 
     <eightbitlab.com.blurview.BlurView
         android:id="@+id/blurView"

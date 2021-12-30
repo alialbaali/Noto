@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/spacing_normal"
             android:textColor="?attr/notoPrimaryColor"
-            android:textSize="@dimen/size_normal"
+            android:textSize="@dimen/size_small"
             android:text="@string/vault_passcode_message"
             app:fontFamily="@font/nunito_bold" />
 

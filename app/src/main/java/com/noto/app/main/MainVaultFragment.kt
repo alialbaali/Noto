@@ -62,6 +62,14 @@ class MainVaultFragment : Fragment() {
             openVaultCallback()
         }
 
+        btnClose.setOnClickListener {
+            viewModel.closeVault()
+            et.setText("")
+            til.error = null
+            activity?.hideKeyboard(et)
+            navController?.navigateUp()
+        }
+
         tb.setNavigationOnClickListener {
             activity?.hideKeyboard(et)
             navController?.navigateUp()
@@ -74,18 +82,20 @@ class MainVaultFragment : Fragment() {
         viewModel.isVaultOpen
             .onEach { isVaultOpen ->
                 if (isVaultOpen) {
+                    activity?.hideKeyboard(et)
+                    btnClose.isClickable = true
                     blurView.animate()
                         .alpha(0F)
                         .withEndAction { blurView.isVisible = false }
-                    activity?.hideKeyboard(et)
                 } else {
                     blurView.animate()
                         .alpha(1F)
                         .withEndAction { blurView.isVisible = true }
                     et.requestFocus()
                     activity?.showKeyboard(et)
-                    rv.post {
-                        blurView.setupWith(rv)
+                    btnClose.isClickable = false
+                    fl.post {
+                        blurView.setupWith(fl)
                             .setFrameClearDrawable(activity?.window?.decorView?.background)
                             .setBlurAlgorithm(RenderScriptBlur(context))
                             .setBlurRadius(10F)

@@ -108,10 +108,11 @@
     <string name="passcode_empty_message">Passcode can\'t be empty</string>
     <string name="passcode_doesnt_match">Passcode doesn\'t match the current one</string>
     <string name="vault_passcode_has_changed">Vault passcode has been updated.</string>
-    <string name="vault_passcode_message">Vault passcode can\'t be changed if you lost the current one, so please make sure to store it in somewhere safe.</string>
+    <string name="vault_passcode_message">Vault passcode can\'t be changed if you have lost the current one, so please make sure to store it in somewhere safe.</string>
     <string name="open_the_vault">Open the vault</string>
     <string name="immediately">Immediately</string>
     <string name="on_app_close">On app close</string>
+    <string name="close_the_vault">Close the vault</string>
 
     <!-- Note -->
     <string name="all">All</string>
