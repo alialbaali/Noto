@@ -50,6 +50,7 @@ class MainFragment : Fragment() {
             when (menuItem.itemId) {
                 R.id.layout -> setupLayoutMenuItem()
                 R.id.libraries_archive -> setupLibrariesArchiveMenuItem()
+                R.id.libraries_vault -> setupLibrariesVaultMenuItem()
                 else -> false
             }
         }
@@ -212,6 +213,11 @@ class MainFragment : Fragment() {
 
     private fun MainFragmentBinding.setupLibrariesArchiveMenuItem(): Boolean {
         navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToMainArchiveFragment())
+        return true
+    }
+
+    private fun MainFragmentBinding.setupLibrariesVaultMenuItem(): Boolean {
+        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToMainVaultFragment())
         return true
     }
 }

@@ -16,4 +16,11 @@
         android:visible="true"
         app:showAsAction="ifRoom" />
 
+    <item
+        android:id="@+id/libraries_vault"
+        android:icon="@drawable/ic_round_shield_24"
+        android:title="@string/libraries_archive"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
+
 </menu>

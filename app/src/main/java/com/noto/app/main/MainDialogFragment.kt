@@ -33,6 +33,11 @@ class MainDialogFragment : BaseDialogFragment() {
             navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainArchiveFragment())
         }
 
+        tvLibrariesVault.setOnClickListener {
+            dismiss()
+            navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainVaultFragment())
+        }
+
         tvChangeTheme.setOnClickListener {
             dismiss()
             navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToThemeDialogFragment())
