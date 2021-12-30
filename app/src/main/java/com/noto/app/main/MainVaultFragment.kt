@@ -43,8 +43,6 @@ class MainVaultFragment : Fragment() {
         et.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 val passcode = et.text.toString()
-                println("ENTERED $passcode")
-                println("ACTUAL ${viewModel.vaultPasscode.value}")
                 if (passcode == viewModel.vaultPasscode.value)
                     viewModel.openVault()
                 else

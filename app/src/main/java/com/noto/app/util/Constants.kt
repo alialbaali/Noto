@@ -18,6 +18,8 @@ object Constants {
     const val Labels = "Labels"
     const val NoteLabels = "NoteLabels"
     const val Settings = "Settings"
+    const val IsVaultOpen = "IsVaultOpen"
+    const val VaultPasscode = "VaultPasscode"
 
     object Intent {
         const val ActionCreateLibrary = "com.noto.intent.action.CREATE_LIBRARY"

@@ -40,6 +40,24 @@ class MainViewModel(
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
+    val vaultedLibraries = libraryRepository.getVaultedLibraries()
+        .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
+            libraries.map { library ->
+                val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
+                library to notesCount
+            }
+        }
+        .map { UiState.Success(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
+
+    val isVaultOpen = storage.get(Constants.IsVaultOpen)
+        .filterNotNull()
+        .map { it.toBoolean() }
+        .stateIn(viewModelScope, SharingStarted.Lazily, false)
+
+    val vaultPasscode = storage.getOrNull(Constants.VaultPasscode)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     val layout = storage.get(Constants.LibraryListLayoutKey)
         .filterNotNull()
         .map { Layout.valueOf(it) }
@@ -76,5 +94,13 @@ class MainViewModel(
 
     fun updateLibraryPosition(library: Library, position: Int) = viewModelScope.launch {
         libraryRepository.updateLibrary(library.copy(position = position))
+    }
+
+    fun openVault() = viewModelScope.launch {
+        storage.put(Constants.IsVaultOpen, true.toString())
+    }
+
+    fun closeVault() = viewModelScope.launch {
+        storage.put(Constants.IsVaultOpen, false.toString())
     }
 }

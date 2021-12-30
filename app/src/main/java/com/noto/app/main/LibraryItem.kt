@@ -35,6 +35,12 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
     @EpoxyAttribute
     var notesCount: Int = 0
 
+    @EpoxyAttribute
+    open var isClickable: Boolean = true
+
+    @EpoxyAttribute
+    open var isLongClickable: Boolean = true
+
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onClickListener: View.OnClickListener
 
@@ -63,6 +69,8 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
+        root.isClickable = isClickable
+        root.isLongClickable = isLongClickable
         tvLibraryNotesCount.isVisible = isShowNotesCount
         tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(bottom = if (isShowNotesCount) 4.dp else 0.dp)

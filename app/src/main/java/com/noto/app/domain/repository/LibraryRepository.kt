@@ -11,6 +11,8 @@ interface LibraryRepository {
 
     fun getArchivedLibraries(): Flow<List<Library>>
 
+    fun getVaultedLibraries(): Flow<List<Library>>
+
     fun getLibraryById(libraryId: Long): Flow<Library>
 
     suspend fun createLibrary(library: Library): Long
