@@ -69,6 +69,14 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_round_font_24"
                     android:text="@string/change_notes_font" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_change_vaults_passcode"
+                    style="@style/SettingsItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_round_password_24"
+                    android:text="@string/change_vault_passcode" />
             </LinearLayout>
 
             <LinearLayout

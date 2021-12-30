@@ -60,6 +60,10 @@ class SettingsFragment : Fragment() {
             navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialogFragment())
         }
 
+        tvChangeVaultsPasscode.setOnClickListener {
+            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultPasscodeDialogFragment())
+        }
+
         tvExportImport.setOnClickListener {
             navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToExportImportDialogFragment())
         }

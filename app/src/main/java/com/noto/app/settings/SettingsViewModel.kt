@@ -31,6 +31,9 @@ class SettingsViewModel(
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
+    val vaultPasscode = storage.getOrNull(Constants.VaultPasscode)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     fun toggleShowNotesCount() = viewModelScope.launch {
         storage.put(Constants.ShowNotesCountKey, (!isShowNotesCount.value).toString())
     }
@@ -79,6 +82,10 @@ class SettingsViewModel(
             }
         DefaultJson.decodeFromString<Map<String, String>>(data.getValue(Constants.Settings))
             .forEach { (key, value) -> storage.put(key, value) }
+    }
+
+    fun setVaultPasscode(passcode: String) = viewModelScope.launch {
+        storage.put(Constants.VaultPasscode, passcode)
     }
 }
 

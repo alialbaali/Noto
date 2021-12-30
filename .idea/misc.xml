@@ -118,12 +118,15 @@
         <entry key="app/src/main/res/drawable/ic_round_info_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_round_inventory_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_language_24.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/ic_round_lock_24.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/ic_round_lock_open_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_round_menu_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_move_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_note_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_note_alt_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_notification_add_24.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/drawable/ic_round_palette_24.xml" value="0.2241042345276873" />
+        <entry key="app/src/main/res/drawable/ic_round_password_24.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/ic_round_person_outline_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_picture_as_pdf_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_round_pin_24.xml" value="0.22664473684210526" />
@@ -136,6 +139,7 @@
         <entry key="app/src/main/res/drawable/ic_round_search_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_settings_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_share_24.xml" value="0.20260416666666667" />
+        <entry key="app/src/main/res/drawable/ic_round_shield_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_round_sorting_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_star_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_star_border_24.xml" value="0.20260416666666667" />
@@ -152,6 +156,7 @@
         <entry key="app/src/main/res/drawable/ic_round_view_grid_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_schedule_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_search_24dp.xml" value="0.35833333333333334" />
+        <entry key="app/src/main/res/drawable/ic_shield_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_shop_24dp.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_splash_foreground.xml" value="0.12" />
         <entry key="app/src/main/res/drawable/ic_splash_screen.xml" value="0.22" />
@@ -274,6 +279,7 @@
         <entry key="app/src/main/res/layout/main_archive_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/main_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.20454545454545456" />
+        <entry key="app/src/main/res/layout/main_vault_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/new_label_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/new_label_item.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/new_library_dialog_fragment.xml" value="0.2" />
@@ -308,7 +314,7 @@
         <entry key="app/src/main/res/layout/reorder_label_dialog_fragment.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/reorder_labels_dialog_fragment.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/select_library_dialog_fragment.xml" value="0.21611842105263157" />
-        <entry key="app/src/main/res/layout/settings_fragment.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/settings_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/share_note_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/sorting_dialog_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/sorting_header_item.xml" value="0.21611842105263157" />
@@ -319,6 +325,7 @@
         <entry key="app/src/main/res/layout/test.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/text_selection_activity.xml" value="0.21433224755700325" />
         <entry key="app/src/main/res/layout/theme_dialog_fragment.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/vault_passcode_dialog_fragment.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/widget_config_activity.xml" value="0.19" />
         <entry key="app/src/main/res/layout/widget_config_dialog_fragment.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/widget_library_item.xml" value="0.21644736842105264" />

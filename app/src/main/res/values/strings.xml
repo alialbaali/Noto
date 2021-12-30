@@ -54,7 +54,9 @@
     <string name="monospace">Monospace</string>
     <string name="font">Font</string>
     <string name="libraries_archive">Libraries archive</string>
+    <string name="libraries_vault">Libraries vault</string>
     <string name="set_new_note_cursor_on_title">Set new note cursor on title</string>
+    <string name="enter_vault_passcode">Enter vault passcode</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>
@@ -88,6 +90,23 @@
     <string name="pinned">Pinned</string>
     <string name="pin_library">Pin library</string>
     <string name="unpin_library">Unpin library</string>
+    <string name="vault_library">Vault library</string>
+    <string name="unvault_library">Unvault library</string>
+    <string name="library_is_vaulted">Library has been vaulted.</string>
+    <string name="library_is_unvaulted">Library has been unvaulted.</string>
+    <string name="vault_is_empty">Vault is empty.</string>
+    <string name="archive_vaulted_library_confirmation">Are you sure you want to archive this library?</string>
+    <string name="archive_vaulted_library_description">Archiving this library will also remove it from the vault.</string>
+    <string name="vault_passcode">Vault passcode</string>
+    <string name="current_vault_passcode">Current vault passcode</string>
+    <string name="new_vault_passcode">New vault passcode</string>
+    <string name="change_vault_passcode">Change vault passcode</string>
+    <string name="invalid_passcode">Invalid passcode</string>
+    <string name="passcode_length_message">Passcode must contain at least 6 numbers</string>
+    <string name="passcode_empty_message">Passcode can\'t be empty</string>
+    <string name="passcode_doesnt_match">Passcode doesn\'t match the current one</string>
+    <string name="vault_passcode_has_changed">Vault passcode has been updated.</string>
+    <string name="vault_passcode_message">Vault passcode can\'t be changed if you lost the current one, so please make sure to store it in somewhere safe.</string>
 
     <!-- Note -->
     <string name="all">All</string>
