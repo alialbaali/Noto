@@ -109,7 +109,11 @@ class LibraryViewModel(
     }
 
     fun toggleLibraryIsArchived() = viewModelScope.launch {
-        libraryRepository.updateLibrary(library.value.copy(isArchived = !library.value.isArchived))
+        libraryRepository.updateLibrary(library.value.copy(isArchived = !library.value.isArchived, isVaulted = false))
+    }
+
+    fun toggleLibraryIsVaulted() = viewModelScope.launch {
+        libraryRepository.updateLibrary(library.value.copy(isVaulted = !library.value.isVaulted, isArchived = false))
     }
 
     fun toggleLibraryIsPinned() = viewModelScope.launch {

@@ -69,11 +69,42 @@ class LibraryDialogFragment : BaseDialogFragment() {
         }
 
         tvArchiveLibrary.setOnClickListener {
-            viewModel.toggleLibraryIsArchived().invokeOnCompletion {
-                val resource = if (viewModel.library.value.isArchived)
-                    R.string.library_is_unarchived
+            if (viewModel.library.value.isVaulted) {
+                context?.let { context ->
+                    val confirmationText = context.stringResource(R.string.archive_vaulted_library_confirmation)
+                    val descriptionText = context.stringResource(R.string.archive_vaulted_library_description)
+                    val btnText = context.stringResource(R.string.archive_library)
+                    setupArchiveVaultedLibraryConfirmationDialog()
+                    navController?.navigateSafely(
+                        LibraryDialogFragmentDirections.actionLibraryDialogFragmentToConfirmationDialogFragment(
+                            confirmationText,
+                            descriptionText,
+                            btnText,
+                        )
+                    )
+                }
+            } else {
+                viewModel.toggleLibraryIsArchived().invokeOnCompletion {
+                    val resource = if (viewModel.library.value.isArchived)
+                        R.string.library_is_unarchived
+                    else
+                        R.string.library_is_archived
+
+                    context?.let { context ->
+                        context.updateAllWidgetsData()
+                        parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                    }
+                    dismiss()
+                }
+            }
+        }
+
+        tvVaultLibrary.setOnClickListener {
+            viewModel.toggleLibraryIsVaulted().invokeOnCompletion {
+                val resource = if (viewModel.library.value.isVaulted)
+                    R.string.library_is_unvaulted
                 else
-                    R.string.library_is_archived
+                    R.string.library_is_vaulted
 
                 context?.let { context ->
                     context.updateAllWidgetsData()
@@ -103,8 +134,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 val confirmationText = context.stringResource(R.string.delete_library_confirmation)
                 val descriptionText = context.stringResource(R.string.delete_library_description)
                 val btnText = context.stringResource(R.string.delete_library)
-                setupConfirmationDialogClickListener()
-
+                setupDeleteLibraryConfirmationDialog()
                 navController?.navigateSafely(
                     LibraryDialogFragmentDirections.actionLibraryDialogFragmentToConfirmationDialogFragment(
                         confirmationText,
@@ -121,7 +151,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
             val color = context.colorResource(library.color.toResource())
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
             baseDialogFragment.tvDialogTitle.setTextColor(color)
-            listOf(tvEditLibrary, tvArchiveLibrary, tvPinLibrary, tvNewNoteShortcut, tvDeleteLibrary)
+            listOf(tvEditLibrary, tvArchiveLibrary, tvVaultLibrary, tvPinLibrary, tvNewNoteShortcut, tvDeleteLibrary)
                 .forEach { TextViewCompat.setCompoundDrawableTintList(it, color.toColorStateList()) }
 
             if (library.isArchived) {
@@ -130,6 +160,14 @@ class LibraryDialogFragment : BaseDialogFragment() {
             } else {
                 tvArchiveLibrary.text = context.stringResource(R.string.archive_library)
                 tvArchiveLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
+            }
+
+            if (library.isVaulted) {
+                tvVaultLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_lock_open_24, 0, 0, 0)
+                tvVaultLibrary.text = context.stringResource(R.string.unvault_library)
+            } else {
+                tvVaultLibrary.text = context.stringResource(R.string.vault_library)
+                tvVaultLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_lock_24, 0, 0, 0)
             }
 
             if (library.isPinned) {
@@ -142,7 +180,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun setupConfirmationDialogClickListener() {
+    private fun setupDeleteLibraryConfirmationDialog() {
         navController?.currentBackStackEntry
             ?.savedStateHandle
             ?.getLiveData<Int>(Constants.ClickListener)
@@ -162,6 +200,29 @@ class LibraryDialogFragment : BaseDialogFragment() {
                         ?.forEach { entry -> alarmManager?.cancelAlarm(context, entry.first.id) }
                 }
                 viewModel.deleteLibrary().invokeOnCompletion { dismiss() }
+            }
+    }
+
+    private fun setupArchiveVaultedLibraryConfirmationDialog() {
+        navController?.currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Int>(Constants.ClickListener)
+            ?.observe(viewLifecycleOwner) {
+                val parentView = parentFragment?.view
+                val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
+                viewModel.toggleLibraryIsArchived().invokeOnCompletion {
+                    val resource = if (viewModel.library.value.isArchived)
+                        R.string.library_is_unarchived
+                    else
+                        R.string.library_is_archived
+
+                    context?.let { context ->
+                        context.updateAllWidgetsData()
+                        context.updateLibraryListWidgets()
+                        parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                    }
+                    dismiss()
+                }
             }
     }
 }
