@@ -288,6 +288,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_vaultPasscodeDialogFragment"
             app:destination="@id/vaultPasscodeDialogFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_vaultTimeoutDialogFragment"
+            app:destination="@id/vaultTimeoutDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"
@@ -479,4 +482,8 @@
         android:id="@+id/vaultPasscodeDialogFragment"
         android:name="com.noto.app.settings.VaultPasscodeDialogFragment"
         android:label="VaultPasscodeDialogFragment" />
+    <dialog
+        android:id="@+id/vaultTimeoutDialogFragment"
+        android:name="com.noto.app.settings.VaultTimeoutDialogFragment"
+        android:label="VaultTimeoutDialogFragment" />
 </navigation>

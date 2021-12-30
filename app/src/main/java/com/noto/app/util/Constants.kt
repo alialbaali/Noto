@@ -20,6 +20,7 @@ object Constants {
     const val Settings = "Settings"
     const val IsVaultOpen = "IsVaultOpen"
     const val VaultPasscode = "VaultPasscode"
+    const val VaultTimeout = "VaultTimeout"
 
     object Intent {
         const val ActionCreateLibrary = "com.noto.intent.action.CREATE_LIBRARY"

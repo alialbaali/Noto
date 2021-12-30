@@ -2,10 +2,7 @@ package com.noto.app.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.Label
-import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.NoteLabel
+import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteLabelRepository
@@ -33,6 +30,11 @@ class SettingsViewModel(
 
     val vaultPasscode = storage.getOrNull(Constants.VaultPasscode)
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    val vaultTimeout = storage.get(Constants.VaultTimeout)
+        .filterNotNull()
+        .map { VaultTimeout.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, VaultTimeout.Immediately)
 
     fun toggleShowNotesCount() = viewModelScope.launch {
         storage.put(Constants.ShowNotesCountKey, (!isShowNotesCount.value).toString())
@@ -86,6 +88,10 @@ class SettingsViewModel(
 
     fun setVaultPasscode(passcode: String) = viewModelScope.launch {
         storage.put(Constants.VaultPasscode, passcode)
+    }
+
+    fun setVaultTimeout(timeout: VaultTimeout) = viewModelScope.launch {
+        storage.put(Constants.VaultTimeout, timeout.name)
     }
 }
 
