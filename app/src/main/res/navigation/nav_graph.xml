@@ -291,6 +291,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_vaultTimeoutDialogFragment"
             app:destination="@id/vaultTimeoutDialogFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_whatsNewDialogFragment"
+            app:destination="@id/whatsNewDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"
@@ -486,4 +489,8 @@
         android:id="@+id/vaultTimeoutDialogFragment"
         android:name="com.noto.app.settings.VaultTimeoutDialogFragment"
         android:label="VaultTimeoutDialogFragment" />
+    <dialog
+        android:id="@+id/whatsNewDialogFragment"
+        android:name="com.noto.app.settings.WhatsNewDialogFragment"
+        android:label="WhatsNewDialogFragment" />
 </navigation>

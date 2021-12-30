@@ -114,5 +114,9 @@ class SettingsFragment : Fragment() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubIssueUrl))
             startActivity(intent)
         }
+
+        tvWhatsNew.setOnClickListener {
+            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewDialogFragment())
+        }
     }
 }

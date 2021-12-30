@@ -170,6 +170,24 @@
                     android:drawableStart="@drawable/ic_round_star_rate_24"
                     android:text="@string/rate_app_on_play_store" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginVertical="@dimen/spacing_small"
+                android:background="@drawable/generic_shape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_whats_new"
+                    style="@style/SettingsItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_round_new_releases_24"
+                    android:text="@string/whats_new" />
+
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_report_issue"
                     style="@style/SettingsItem"
@@ -185,6 +203,7 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_round_info_24"
                     android:text="@string/about" />
+
             </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
