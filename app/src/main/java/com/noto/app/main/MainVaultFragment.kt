@@ -98,7 +98,7 @@ class MainVaultFragment : Fragment() {
                         blurView.setupWith(fl)
                             .setFrameClearDrawable(activity?.window?.decorView?.background)
                             .setBlurAlgorithm(RenderScriptBlur(context))
-                            .setBlurRadius(10F)
+                            .setBlurRadius(25F)
                             .setBlurAutoUpdate(true)
                             .setHasFixedTransformationMatrix(false)
                     }
