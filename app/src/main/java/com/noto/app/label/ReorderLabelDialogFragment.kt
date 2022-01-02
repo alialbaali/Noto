@@ -36,7 +36,7 @@ class ReorderLabelDialogFragment : BaseDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = ReorderLabelDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         val baseDialogFragment = setupBaseDialogFragment()
         setupState(baseDialogFragment)
@@ -81,7 +81,8 @@ class ReorderLabelDialogFragment : BaseDialogFragment() {
                     onDragHandleTouchListener { view, event ->
                         if (event.action == MotionEvent.ACTION_DOWN)
                             rv.findContainingViewHolder(view)?.let { viewHolder ->
-                                itemTouchHelper.startDrag(viewHolder)
+                                if (this@ReorderLabelDialogFragment::itemTouchHelper.isInitialized)
+                                    itemTouchHelper.startDrag(viewHolder)
                             }
                         view.performClick()
                     }

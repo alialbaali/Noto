@@ -237,7 +237,8 @@ class LibraryFragment : Fragment() {
                                 onDragHandleTouchListener { view, event ->
                                     if (event.action == MotionEvent.ACTION_DOWN)
                                         rv.findContainingViewHolder(view)?.let { viewHolder ->
-                                            itemTouchHelper.startDrag(viewHolder)
+                                            if (this@LibraryFragment::itemTouchHelper.isInitialized)
+                                                itemTouchHelper.startDrag(viewHolder)
                                         }
                                     view.performClick()
                                 }
