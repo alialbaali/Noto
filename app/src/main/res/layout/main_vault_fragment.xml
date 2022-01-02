@@ -48,7 +48,7 @@
             android:layout_margin="@dimen/spacing_normal"
             android:layout_marginVertical="@dimen/spacing_normal"
             android:padding="@dimen/spacing_normal"
-            android:text="@string/close_the_vault"
+            android:text="@string/close_vault"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </FrameLayout>
@@ -101,7 +101,7 @@
                 style="@style/MaterialButton"
                 android:layout_marginVertical="@dimen/spacing_normal"
                 android:padding="@dimen/spacing_normal"
-                android:text="@string/open_the_vault"
+                android:text="@string/open_vault"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
