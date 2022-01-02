@@ -25,7 +25,13 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SelectLibraryDialogFragment(private val onClick: (Long) -> Unit = {}) : BaseDialogFragment() {
+class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
+
+    private var onClick: (Long) -> Unit = {}
+
+    constructor(onClick: (Long) -> Unit = {}) : this() {
+        this.onClick = onClick
+    }
 
     private val viewModel by viewModel<MainViewModel>()
 
