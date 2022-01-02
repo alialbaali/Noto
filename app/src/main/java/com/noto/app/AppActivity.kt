@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.Language
+import com.noto.app.domain.model.Release
 import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.main.MainVaultFragment
 import com.noto.app.util.Constants
@@ -102,6 +103,14 @@ class AppActivity : BaseActivity() {
     private fun AppActivityBinding.setupState() {
         viewModel.language
             .onEach { language -> setupLanguage(language) }
+            .launchIn(lifecycleScope)
+
+        viewModel.lastVersion
+            .onEach {
+                if (it != Release.CurrentVersion)
+                    if (navController.currentDestination?.id != R.id.whatsNewDialogFragment)
+                        navController.navigate(R.id.whatsNewDialogFragment)
+            }
             .launchIn(lifecycleScope)
 
         this@AppActivity.navHostFragment

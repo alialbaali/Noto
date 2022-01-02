@@ -7,6 +7,10 @@ sealed interface Release {
     val version: String
     val date: LocalDate
     val changelog: String
+
+    companion object {
+        const val CurrentVersion = "1.8.0"
+    }
 }
 
 data class Release_1_8_0(override val changelog: String) : Release {

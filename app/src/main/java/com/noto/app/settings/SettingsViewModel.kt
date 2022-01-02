@@ -100,6 +100,10 @@ class SettingsViewModel(
     fun setWhatsNewTab(tab: WhatsNewTab) {
         mutableWhatsNewTab.value = tab
     }
+
+    fun updateLastVersion() = viewModelScope.launch {
+        storage.put(Constants.LastVersion, Release.CurrentVersion)
+    }
 }
 
 private val DefaultJson = Json {

@@ -30,6 +30,9 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
         .map { VaultTimeout.valueOf(it) }
         .stateIn(viewModelScope, SharingStarted.Eagerly, VaultTimeout.Immediately)
 
+    val lastVersion = storage.get(Constants.LastVersion)
+        .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
+
     init {
         createDefaultConstants()
         vaultTimeout
@@ -100,6 +103,12 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
             storage.getOrNull(Constants.VaultTimeout)
                 .firstOrNull()
                 .also { if (it == null) storage.put(Constants.VaultTimeout, VaultTimeout.Immediately.toString()) }
+        }
+
+        launch {
+            storage.getOrNull(Constants.LastVersion)
+                .firstOrNull()
+                .also { if (it == null) storage.put(Constants.LastVersion, "1.7.2") }
         }
     }
 }

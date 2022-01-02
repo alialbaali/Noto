@@ -1,5 +1,6 @@
 package com.noto.app.settings
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +12,6 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.WhatsNewDialogFragmentBinding
 import com.noto.app.domain.model.Release_1_8_0
-import com.noto.app.domain.model.Release_1_9_0
-import com.noto.app.domain.model.Release_1_9_1
 import com.noto.app.util.BounceEdgeEffectFactory
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
@@ -89,7 +88,14 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
         )
 
         btnOkay.setOnClickListener {
-            dismiss()
+            viewModel.updateLastVersion().invokeOnCompletion {
+                dismiss()
+            }
         }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        viewModel.updateLastVersion()
+        super.onDismiss(dialog)
     }
 }
