@@ -313,6 +313,7 @@
         <entry key="app/src/main/res/layout/progress_indicator_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/rb_shape.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/read_mode_fragment.xml" value="0.3421875" />
+        <entry key="app/src/main/res/layout/release_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/reminder_dialog_fragment.xml" value="0.18645833333333334" />
         <entry key="app/src/main/res/layout/reorder_label_dialog_fragment.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/reorder_labels_dialog_fragment.xml" value="0.21644736842105264" />
@@ -330,7 +331,8 @@
         <entry key="app/src/main/res/layout/theme_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/vault_passcode_dialog_fragment.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/vault_timeout_dialog_fragment.xml" value="0.21611842105263157" />
-        <entry key="app/src/main/res/layout/whats_new_dialog_fragment.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/version_item.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/whats_new_dialog_fragment.xml" value="0.18" />
         <entry key="app/src/main/res/layout/widget_config_activity.xml" value="0.19" />
         <entry key="app/src/main/res/layout/widget_config_dialog_fragment.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/widget_library_item.xml" value="0.21644736842105264" />

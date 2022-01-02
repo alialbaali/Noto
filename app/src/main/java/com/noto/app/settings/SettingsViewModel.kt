@@ -36,6 +36,9 @@ class SettingsViewModel(
         .map { VaultTimeout.valueOf(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, VaultTimeout.Immediately)
 
+    private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
+    val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
+
     fun toggleShowNotesCount() = viewModelScope.launch {
         storage.put(Constants.ShowNotesCountKey, (!isShowNotesCount.value).toString())
     }
@@ -92,6 +95,10 @@ class SettingsViewModel(
 
     fun setVaultTimeout(timeout: VaultTimeout) = viewModelScope.launch {
         storage.put(Constants.VaultTimeout, timeout.name)
+    }
+
+    fun setWhatsNewTab(tab: WhatsNewTab) {
+        mutableWhatsNewTab.value = tab
     }
 }
 

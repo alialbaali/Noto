@@ -67,18 +67,9 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_library_layout"
+            style="@style/TabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/generic_shape"
-            app:tabIconTint="@color/tab_icon_color_selector"
-            app:tabIndicator="@drawable/tab_indicator_shape"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicatorColor="?attr/notoPrimaryColor"
-            app:tabIndicatorGravity="stretch"
-            app:tabInlineLabel="true"
-            app:tabSelectedTextColor="?attr/notoBackgroundColor"
-            app:tabTextAppearance="@style/TabItemTextAppearance"
-            app:tabTextColor="?attr/notoPrimaryColor">
+            android:layout_height="wrap_content">
 
             <com.google.android.material.tabs.TabItem
                 android:text="@string/list"

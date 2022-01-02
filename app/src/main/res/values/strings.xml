@@ -49,6 +49,8 @@
     <string name="open_with">Open with</string>
     <string name="invite_text">Check out Noto!</string>
     <string name="version">Version %s</string>
+    <string name="empty_version">Version</string>
+    <string name="date">Date</string>
     <string name="layout_is_list_mode">Layout has been set to list mode.</string>
     <string name="layout_is_grid_mode">Layout has been set to grid mode.</string>
     <string name="drag">Drag</string>
@@ -115,6 +117,8 @@
     <string name="immediately">Immediately</string>
     <string name="on_app_close">On app close</string>
     <string name="close_vault">Close vault</string>
+    <string name="current_release">Current release</string>
+    <string name="previous_releases">Previous releases</string>
 
     <!-- Note -->
     <string name="all">All</string>
@@ -221,4 +225,11 @@
     <string name="edit_widget_button">Edit widget button</string>
     <string name="libraries_notes_count">Libraries notes count</string>
     <string name="loading_content">Loading content</string>
+
+    <!-- Versions -->
+    <string name="release_1_8_8">
+        • Support for passcode protected libraries vault and the ability to pick vault timeout.
+        \n• Add a link for the new <a href="https://www.reddit.com/r/notoapp">Reddit</a> community.
+        \n• Other bug fixes and design improvements.
+    </string>
 </resources>

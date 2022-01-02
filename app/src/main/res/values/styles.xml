@@ -314,4 +314,18 @@
         <item name="trackThickness">5dp</item>
     </style>
 
+    <style name="TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@drawable/generic_shape</item>
+        <item name="tabIconTint">@color/tab_icon_color_selector</item>
+        <item name="tabIndicator">@drawable/tab_indicator_shape</item>
+        <item name="tabIndicatorAnimationMode">elastic</item>
+        <item name="tabIndicatorColor">?attr/notoPrimaryColor</item>
+        <item name="tabIndicatorGravity">stretch</item>
+        <item name="tabInlineLabel">true</item>
+        <item name="tabSelectedTextColor">?attr/notoBackgroundColor</item>
+        <item name="tabTextAppearance">@style/TabItemTextAppearance</item>
+        <item name="tabTextColor">?attr/notoPrimaryColor</item>
+        <item name="tabIndicatorAnimationDuration">500</item>
+    </style>
+
 </resources>
