@@ -218,7 +218,11 @@ class MainFragment : Fragment() {
     }
 
     private fun MainFragmentBinding.setupLibrariesVaultMenuItem(): Boolean {
-        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToMainVaultFragment())
+        if (viewModel.vaultPasscode.value == null) {
+            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToVaultPasscodeDialogFragment())
+        } else {
+            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToMainVaultFragment())
+        }
         return true
     }
 }
