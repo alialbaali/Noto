@@ -9,6 +9,7 @@ import com.noto.app.domain.repository.NoteLabelRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
+import com.noto.app.util.hash
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
@@ -90,7 +91,7 @@ class SettingsViewModel(
     }
 
     fun setVaultPasscode(passcode: String) = viewModelScope.launch {
-        storage.put(Constants.VaultPasscode, passcode)
+        storage.put(Constants.VaultPasscode, passcode.hash())
     }
 
     fun setVaultTimeout(timeout: VaultTimeout) = viewModelScope.launch {

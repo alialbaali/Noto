@@ -1,13 +1,20 @@
 package com.noto.app.util
 
+import android.util.Base64
 import android.view.View
 import androidx.viewbinding.ViewBinding
 import com.noto.app.domain.model.*
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.PBEKeySpec
 
 val LabelDefaultStrokeWidth = 3.dp
 val LabelDefaultCornerRadius = 1000.dp.toFloat()
 const val DefaultAnimationDuration = 250L
 typealias NoteWithLabels = Pair<Note, List<Label>>
+
+private const val HashAlgorithm = "PBKDF2WithHmacSHA1"
+private const val HashIterationCount = 65536
+private const val HashKeyLength = 128
 
 inline fun <T> List<T>.sortByOrder(sortingOrder: SortingOrder, crossinline selector: (T) -> Comparable<*>?): List<T> = when (sortingOrder) {
     SortingOrder.Ascending -> sortedWith(compareBy(selector))
@@ -93,3 +100,11 @@ fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): 
 fun Map<Label, Boolean>.filterSelected() = filterValues { it }.map { it.key }
 
 fun String.toLongList() = split(", ").mapNotNull { it.toLongOrNull() }
+
+fun String.hash(): String {
+    val salt = ByteArray(16)
+    val spec = PBEKeySpec(this.toCharArray(), salt, HashIterationCount, HashKeyLength)
+    val factory = SecretKeyFactory.getInstance(HashAlgorithm)
+    val bytes = factory.generateSecret(spec).encoded
+    return Base64.encodeToString(bytes, Base64.DEFAULT)
+}

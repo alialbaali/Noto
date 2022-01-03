@@ -43,7 +43,7 @@ class MainVaultFragment : Fragment() {
     private fun MainVaultFragmentBinding.setupListeners() {
         val openVaultCallback = {
             val passcode = et.text.toString()
-            if (passcode == viewModel.vaultPasscode.value) {
+            if (passcode.hash() == viewModel.vaultPasscode.value) {
                 activity?.hideKeyboard(et)
                 shouldAnimateBlur = true
                 viewModel.openVault()

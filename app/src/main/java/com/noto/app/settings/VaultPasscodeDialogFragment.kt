@@ -68,7 +68,7 @@ class VaultPasscodeDialogFragment : BaseDialogFragment() {
                         val currentPasscode = etCurrentPasscode.text.toString()
                         when {
                             currentPasscode.isBlank() -> tilCurrentPasscode.error = context?.stringResource(R.string.passcode_empty_message)
-                            currentPasscode != viewModel.vaultPasscode.value -> tilCurrentPasscode.error = context?.stringResource(R.string.passcode_doesnt_match)
+                            currentPasscode.hash() != viewModel.vaultPasscode.value -> tilCurrentPasscode.error = context?.stringResource(R.string.passcode_doesnt_match)
                             else -> setVaultPasscodeAndDismiss(newPasscode)
                         }
                     }
