@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
@@ -79,7 +80,9 @@ class VaultPasscodeDialogFragment : BaseDialogFragment() {
     private fun VaultPasscodeDialogFragmentBinding.setVaultPasscodeAndDismiss(passcode: String) {
         viewModel.setVaultPasscode(passcode)
             .invokeOnCompletion {
-                context?.let { context -> parentFragment?.view?.snackbar(context.stringResource(R.string.vault_passcode_has_changed)) }
+                val parentView = parentFragment?.view
+                val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
+                context?.let { context -> parentView?.snackbar(context.stringResource(R.string.vault_passcode_has_changed), parentAnchorView) }
                 activity?.hideKeyboard(etNewPasscode)
                 activity?.hideKeyboard(etCurrentPasscode)
                 dismiss()
