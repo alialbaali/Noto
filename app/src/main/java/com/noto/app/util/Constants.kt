@@ -21,6 +21,7 @@ object Constants {
     const val IsVaultOpen = "IsVaultOpen"
     const val VaultPasscode = "VaultPasscode"
     const val VaultTimeout = "VaultTimeout"
+    const val ScheduledVaultTimeout = "ScheduledVaultTimeout"
     const val LastVersion = "LastVersion"
 
     object Intent {
