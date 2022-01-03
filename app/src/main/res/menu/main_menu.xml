@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
@@ -7,20 +8,21 @@
         android:contentDescription="@string/layout"
         android:icon="@drawable/ic_round_view_agenda_24"
         android:title="@string/layout"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
 
     <item
         android:id="@+id/libraries_archive"
         android:icon="@drawable/ic_round_inventory_24"
         android:title="@string/libraries_archive"
         android:visible="true"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/libraries_vault"
         android:icon="@drawable/ic_round_shield_24"
-        android:title="@string/libraries_archive"
+        android:title="@string/libraries_vault"
         android:visible="true"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
 </menu>

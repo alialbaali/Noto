@@ -29,6 +29,8 @@ class MainVaultFragment : Fragment() {
 
     private val viewModel by viewModel<MainViewModel>()
 
+    private var shouldAnimateBlur = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,6 +45,7 @@ class MainVaultFragment : Fragment() {
             val passcode = et.text.toString()
             if (passcode == viewModel.vaultPasscode.value) {
                 activity?.hideKeyboard(et)
+                shouldAnimateBlur = true
                 viewModel.openVault()
             } else {
                 til.error = context?.stringResource(R.string.invalid_passcode)
@@ -84,13 +87,25 @@ class MainVaultFragment : Fragment() {
                 if (isVaultOpen) {
                     activity?.hideKeyboard(et)
                     btnClose.isClickable = true
-                    blurView.animate()
-                        .alpha(0F)
-                        .withEndAction { blurView.isVisible = false }
+                    if (shouldAnimateBlur)
+                        blurView.animate()
+                            .alpha(0F)
+                            .withEndAction {
+                                shouldAnimateBlur = false
+                                blurView.isVisible = false
+                            }
+                    else
+                        blurView.isVisible = false
                 } else {
-                    blurView.animate()
-                        .alpha(1F)
-                        .withEndAction { blurView.isVisible = true }
+                    if (shouldAnimateBlur)
+                        blurView.animate()
+                            .alpha(1F)
+                            .withEndAction {
+                                shouldAnimateBlur = false
+                                blurView.isVisible = true
+                            }
+                    else
+                        blurView.isVisible = true
                     et.requestFocus()
                     activity?.showKeyboard(et)
                     btnClose.isClickable = false
