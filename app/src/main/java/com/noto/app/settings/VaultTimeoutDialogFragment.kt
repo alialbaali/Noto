@@ -42,6 +42,9 @@ class VaultTimeoutDialogFragment : BaseDialogFragment() {
                 when (timeout) {
                     VaultTimeout.Immediately -> rbImmediately.isChecked = true
                     VaultTimeout.OnAppClose -> rbOnAppClose.isChecked = true
+                    VaultTimeout.After1Hour -> rbAfter1Hour.isChecked = true
+                    VaultTimeout.After4Hours -> rbAfter4Hours.isChecked = true
+                    VaultTimeout.After12Hours -> rbAfter12Hours.isChecked = true
                 }
             }
             .launchIn(lifecycleScope)
@@ -55,6 +58,21 @@ class VaultTimeoutDialogFragment : BaseDialogFragment() {
 
         rbOnAppClose.setOnClickListener {
             viewModel.setVaultTimeout(VaultTimeout.OnAppClose)
+            dismiss()
+        }
+
+        rbAfter1Hour.setOnClickListener {
+            viewModel.setVaultTimeout(VaultTimeout.After1Hour)
+            dismiss()
+        }
+
+        rbAfter4Hours.setOnClickListener {
+            viewModel.setVaultTimeout(VaultTimeout.After4Hours)
+            dismiss()
+        }
+
+        rbAfter12Hours.setOnClickListener {
+            viewModel.setVaultTimeout(VaultTimeout.After12Hours)
             dismiss()
         }
     }

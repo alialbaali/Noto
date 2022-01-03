@@ -116,6 +116,9 @@
     <string name="open_vault">Open vault</string>
     <string name="immediately">Immediately</string>
     <string name="on_app_close">On app close</string>
+    <string name="after_1_hour">After 1 hour</string>
+    <string name="after_4_hours">After 4 hours</string>
+    <string name="after_12_hours">After 12 hours</string>
     <string name="close_vault">Close vault</string>
     <string name="current_release">Current release</string>
     <string name="previous_releases">Previous releases</string>

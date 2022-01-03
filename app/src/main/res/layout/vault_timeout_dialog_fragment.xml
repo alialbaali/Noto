@@ -31,6 +31,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/on_app_close" />
+
+            <RadioButton
+                android:id="@+id/rb_after_1_hour"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/after_1_hour" />
+
+            <RadioButton
+                android:id="@+id/rb_after_4_hours"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/after_4_hours" />
+
+            <RadioButton
+                android:id="@+id/rb_after_12_hours"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/after_12_hours" />
         </RadioGroup>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
