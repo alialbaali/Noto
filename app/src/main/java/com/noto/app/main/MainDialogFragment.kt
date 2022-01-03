@@ -12,8 +12,11 @@ import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainDialogFragment : BaseDialogFragment() {
+
+    private val viewModel by viewModel<MainViewModel>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         MainDialogFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -35,7 +38,10 @@ class MainDialogFragment : BaseDialogFragment() {
 
         tvLibrariesVault.setOnClickListener {
             dismiss()
-            navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainVaultFragment())
+            if (viewModel.vaultPasscode.value == null)
+                navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToVaultPasscodeDialogFragment())
+            else
+                navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainVaultFragment())
         }
 
         tvChangeTheme.setOnClickListener {
