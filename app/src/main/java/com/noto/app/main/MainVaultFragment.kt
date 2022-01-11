@@ -102,6 +102,7 @@ class MainVaultFragment : Fragment() {
         viewModel.isVaultOpen
             .onEach { isVaultOpen ->
                 if (isVaultOpen) {
+                    et.clearFocus()
                     activity?.hideKeyboard(et)
                     btnClose.isClickable = true
                     if (shouldAnimateBlur)
