@@ -33,7 +33,7 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
     // If the activity gets destroyed, a new work will be enqueued everytime the app runs. This way, we check if there has been any scheduled work before,
     // so we don't cancel an already existing one unless they don't match with [vaultTimeout] property above.
     val scheduledVaultTimeout = storage.getOrNull(Constants.ScheduledVaultTimeout)
-        .mapNotNull { if (it != null) VaultTimeout.valueOf(it) else null }
+        .map { if (it != null) VaultTimeout.valueOf(it) else null }
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
     val isVaultOpen = storage.get(Constants.IsVaultOpen)

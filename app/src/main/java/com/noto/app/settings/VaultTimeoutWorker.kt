@@ -13,6 +13,7 @@ class VaultTimeoutWorker(context: Context, params: WorkerParameters) : Coroutine
 
     override suspend fun doWork(): Result {
         storage.put(Constants.IsVaultOpen, false.toString())
+        storage.remove(Constants.ScheduledVaultTimeout)
         return Result.success()
     }
 }

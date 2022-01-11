@@ -21,7 +21,6 @@ import com.noto.app.util.Constants
 import com.noto.app.util.createNotificationChannel
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -123,7 +122,7 @@ class AppActivity : BaseActivity() {
 
         combine(
             viewModel.isVaultOpen,
-            viewModel.vaultTimeout.drop(1),
+            viewModel.vaultTimeout,
             viewModel.scheduledVaultTimeout,
         ) { isVaultOpen, vaultTimeout, scheduledVaultTimeout ->
             if (vaultTimeout != scheduledVaultTimeout) {
