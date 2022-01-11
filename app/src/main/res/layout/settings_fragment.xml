@@ -94,6 +94,14 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_round_schedule_24"
                     android:text="@string/change_vault_timeout" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/sw_bio_auth"
+                    style="@style/SettingsItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_round_fingerprint_24"
+                    android:text="@string/enable_bio_auth" />
             </LinearLayout>
 
             <LinearLayout

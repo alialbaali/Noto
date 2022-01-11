@@ -122,6 +122,8 @@
     <string name="close_vault">Close vault</string>
     <string name="current_release">Current release</string>
     <string name="previous_releases">Previous releases</string>
+    <string name="enable_bio_auth">Enable biometric authentication</string>
+    <string name="use_passcode">Use passcode</string>
 
     <!-- Note -->
     <string name="all">All</string>

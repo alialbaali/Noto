@@ -37,6 +37,10 @@ class SettingsViewModel(
         .map { VaultTimeout.valueOf(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, VaultTimeout.Immediately)
 
+    val isBioAuthEnabled = storage.getOrNull(Constants.IsBioAuthEnabled)
+        .map { it.toBoolean() }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
     private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
     val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
 
@@ -96,6 +100,10 @@ class SettingsViewModel(
 
     fun setVaultTimeout(timeout: VaultTimeout) = viewModelScope.launch {
         storage.put(Constants.VaultTimeout, timeout.name)
+    }
+
+    fun toggleIsBioAuthEnabled() = viewModelScope.launch {
+        storage.put(Constants.IsBioAuthEnabled, isBioAuthEnabled.value.not().toString())
     }
 
     fun setWhatsNewTab(tab: WhatsNewTab) {

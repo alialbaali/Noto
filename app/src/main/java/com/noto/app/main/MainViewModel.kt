@@ -58,6 +58,10 @@ class MainViewModel(
     val vaultPasscode = storage.getOrNull(Constants.VaultPasscode)
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
+    val isBioAuthEnabled = storage.getOrNull(Constants.IsBioAuthEnabled)
+        .map { it.toBoolean() }
+        .stateIn(viewModelScope, SharingStarted.Lazily, false)
+
     val layout = storage.get(Constants.LibraryListLayoutKey)
         .filterNotNull()
         .map { Layout.valueOf(it) }

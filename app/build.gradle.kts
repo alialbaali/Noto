@@ -118,6 +118,7 @@ dependencies {
     implementation(KotlinX.Coroutines.core)
     implementation(KotlinX.Coroutines.android)
     implementation(KotlinX.Serialization.json)
+    implementation(AndroidX.Biometric.ktx)
     implementation(AndroidX.DataStore.preferences)
     implementation(Koin.android)
     implementation(Libraries.Main.Epoxy)

@@ -23,6 +23,7 @@ object Constants {
     const val VaultTimeout = "VaultTimeout"
     const val ScheduledVaultTimeout = "ScheduledVaultTimeout"
     const val LastVersion = "LastVersion"
+    const val IsBioAuthEnabled = "IsBioAuthEnabled"
 
     object Intent {
         const val ActionCreateLibrary = "com.noto.intent.action.CREATE_LIBRARY"

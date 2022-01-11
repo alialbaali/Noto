@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.biometric.BiometricManager
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.R
@@ -37,10 +39,20 @@ class SettingsFragment : Fragment() {
                 ?.versionName
             tvVersion.text = context.stringResource(R.string.version, version)
             swShowNotesCount.setupColors()
+            swBioAuth.setupColors()
+
+            when (BiometricManager.from(context).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
+                BiometricManager.BIOMETRIC_SUCCESS -> swBioAuth.isVisible = true
+                else -> swBioAuth.isVisible = false
+            }
         }
 
         viewModel.isShowNotesCount
             .onEach { isShowNotesCount -> swShowNotesCount.isChecked = isShowNotesCount }
+            .launchIn(lifecycleScope)
+
+        viewModel.isBioAuthEnabled
+            .onEach { isBioAuthEnabled -> swBioAuth.isChecked = isBioAuthEnabled }
             .launchIn(lifecycleScope)
     }
 
@@ -67,6 +79,10 @@ class SettingsFragment : Fragment() {
 
         tvChangeVaultTimeout.setOnClickListener {
             navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultTimeoutDialogFragment())
+        }
+
+        swBioAuth.setOnClickListener {
+            viewModel.toggleIsBioAuthEnabled()
         }
 
         tvExportImport.setOnClickListener {

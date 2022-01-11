@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.inputmethod.EditorInfo
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -21,6 +24,7 @@ import com.noto.app.map
 import com.noto.app.util.*
 import eightbitlab.com.blurview.RenderScriptBlur
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -41,20 +45,9 @@ class MainVaultFragment : Fragment() {
     }
 
     private fun MainVaultFragmentBinding.setupListeners() {
-        val openVaultCallback = {
-            val passcode = et.text.toString()
-            if (passcode.hash() == viewModel.vaultPasscode.value) {
-                activity?.hideKeyboard(et)
-                shouldAnimateBlur = true
-                viewModel.openVault()
-            } else {
-                til.error = context?.stringResource(R.string.invalid_passcode)
-            }
-        }
-
         et.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                openVaultCallback()
+                openVaultUsingPasscode()
                 true
             } else {
                 false
@@ -62,7 +55,7 @@ class MainVaultFragment : Fragment() {
         }
 
         btnOpen.setOnClickListener {
-            openVaultCallback()
+            openVaultUsingPasscode()
         }
 
         btnClose.setOnClickListener {
@@ -81,6 +74,32 @@ class MainVaultFragment : Fragment() {
 
     private fun MainVaultFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+
+        viewModel.isBioAuthEnabled
+            .onEach { isBioAuthEnabled ->
+                if (isBioAuthEnabled)
+                    context?.let { context ->
+                        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                            .setTitle(context.stringResource(R.string.open_vault))
+                            .setNegativeButtonText(context.stringResource(R.string.use_passcode))
+                            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
+                            .build()
+
+                        val biometricPrompt = BiometricPrompt(
+                            this@MainVaultFragment,
+                            ContextCompat.getMainExecutor(requireContext()),
+                            object : BiometricPrompt.AuthenticationCallback() {
+                                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                                    super.onAuthenticationSucceeded(result)
+                                    openVault()
+                                }
+                            }
+                        )
+
+                        biometricPrompt.authenticate(promptInfo)
+                    }
+            }
+            .launchIn(lifecycleScope)
 
         viewModel.isVaultOpen
             .onEach { isVaultOpen ->
@@ -204,6 +223,21 @@ class MainVaultFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun MainVaultFragmentBinding.openVault() {
+        activity?.hideKeyboard(et)
+        shouldAnimateBlur = true
+        viewModel.openVault()
+    }
+
+    private fun MainVaultFragmentBinding.openVaultUsingPasscode() {
+        val passcode = et.text.toString()
+        when {
+            passcode.isBlank() -> til.error = context?.stringResource(R.string.passcode_empty_message)
+            passcode.hash() == viewModel.vaultPasscode.value -> openVault()
+            else -> til.error = context?.stringResource(R.string.invalid_passcode)
         }
     }
 }
