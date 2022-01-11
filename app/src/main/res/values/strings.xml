@@ -114,6 +114,8 @@
     <string name="vault_passcode_has_changed">Vault passcode has been updated.</string>
     <string name="vault_passcode_message">Vault passcode can\'t be changed if you lose the current one, so please make sure to store it in somewhere safe.</string>
     <string name="open_vault">Open vault</string>
+    <string name="vault">Vault</string>
+    <string name="vault_is_open">Vault is open</string>
     <string name="immediately">Immediately</string>
     <string name="on_app_close">On app close</string>
     <string name="after_1_hour">After 1 hour</string>
@@ -156,6 +158,7 @@
     <string name="no_note_reminder">No note reminder is setup.</string>
     <string name="note_is_unarchived">Note has been unarchived.</string>
     <string name="reminder">Reminder</string>
+    <string name="reminders">Reminders</string>
     <string name="new_note_reminder">New note reminder</string>
     <string name="archive">%s archive</string>
     <string name="copy_note_to_clipboard">Copy note to clipboard</string>

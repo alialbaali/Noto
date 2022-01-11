@@ -17,9 +17,7 @@ import com.noto.app.domain.model.Release
 import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.main.MainVaultFragment
 import com.noto.app.settings.VaultTimeoutWorker
-import com.noto.app.util.Constants
-import com.noto.app.util.createNotificationChannel
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -41,7 +39,7 @@ class AppActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        notificationManager.createNotificationChannel()
+        notificationManager.createNotificationChannels(this)
         AppActivityBinding.inflate(layoutInflater).withBinding {
             setContentView(root)
             setupState()
@@ -51,8 +49,10 @@ class AppActivity : BaseActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if (viewModel.vaultTimeout.value == VaultTimeout.OnAppClose)
+        if (viewModel.vaultTimeout.value == VaultTimeout.OnAppClose) {
             viewModel.closeVault()
+            notificationManager.cancelVaultNotification()
+        }
     }
 
     private fun AppActivityBinding.handleIntentContent() {
@@ -120,6 +120,15 @@ class AppActivity : BaseActivity() {
             }
             .launchIn(lifecycleScope)
 
+        viewModel.isVaultOpen
+            .onEach { isVaultOpen ->
+                if (isVaultOpen)
+                    notificationManager.createVaultNotification(this@AppActivity)
+                else
+                    notificationManager.cancelVaultNotification()
+            }
+            .launchIn(lifecycleScope)
+
         combine(
             viewModel.isVaultOpen,
             viewModel.vaultTimeout,
@@ -153,8 +162,10 @@ class AppActivity : BaseActivity() {
                     override fun onFragmentDestroyed(fm: FragmentManager, f: Fragment) {
                         super.onFragmentDestroyed(fm, f)
                         if (f is MainVaultFragment)
-                            if (viewModel.vaultTimeout.value == VaultTimeout.Immediately)
+                            if (viewModel.vaultTimeout.value == VaultTimeout.Immediately) {
                                 viewModel.closeVault()
+                                notificationManager.cancelVaultNotification()
+                            }
                     }
                 },
                 false

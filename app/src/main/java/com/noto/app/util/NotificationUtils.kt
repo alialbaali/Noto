@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
@@ -12,9 +13,12 @@ import androidx.navigation.NavDeepLinkBuilder
 import com.noto.app.R
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
+import com.noto.app.receiver.VaultReceiver
 
-private const val CHANNEL_ID = "Noto Channel"
-private const val CHANNEL_NAME = "Reminders"
+private const val RemindersChannelId = "Reminders"
+private const val VaultChannelId = "Vault"
+private const val VaultNotificationId = -1
+private const val RequestCode = 0
 
 fun NotificationManager.createNotification(context: Context, library: Library, note: Note) {
 
@@ -23,7 +27,7 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
     val style = NotificationCompat.BigTextStyle()
         .bigText(note.body.ifBlank { note.title })
 
-    val notification = NotificationCompat.Builder(context, CHANNEL_ID)
+    val notification = NotificationCompat.Builder(context, RemindersChannelId)
         .setContentTitle(note.title.ifBlank { note.body })
         .setContentText(note.body.ifBlank { note.title })
         .setContentIntent(pendingIntent)
@@ -42,8 +46,28 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
     notify(library.title, note.id.toInt(), notification)
 }
 
+fun NotificationManager.createVaultNotification(context: Context) {
+
+    val intent = Intent(context, VaultReceiver::class.java)
+    val pendingIntent = PendingIntent.getBroadcast(context, RequestCode, intent, PendingIntentFlags)
+    val action = NotificationCompat.Action(null, context.stringResource(R.string.close_vault), pendingIntent)
+
+    val notification = NotificationCompat.Builder(context, VaultChannelId)
+        .setContentTitle(context.stringResource(R.string.vault_is_open))
+        .addAction(action)
+        .setCategory(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Notification.CATEGORY_STATUS else null)
+        .setSmallIcon(R.drawable.ic_round_shield_24)
+        .setPriority(NotificationCompat.PRIORITY_LOW)
+        .setOngoing(true)
+        .build()
+
+    notify(VaultNotificationId, notification)
+}
+
+fun NotificationManager.cancelVaultNotification() = cancel(VaultNotificationId)
+
 private fun Context.createNotificationPendingIntent(noteId: Long, libraryId: Long): PendingIntent {
-    val args = bundleOf("library_id" to libraryId, "note_id" to noteId)
+    val args = bundleOf(Constants.LibraryId to libraryId, Constants.NoteId to noteId)
     return NavDeepLinkBuilder(this)
         .setGraph(R.navigation.nav_graph)
         .setDestination(R.id.noteFragment)
@@ -51,11 +75,11 @@ private fun Context.createNotificationPendingIntent(noteId: Long, libraryId: Lon
         .createPendingIntent()
 }
 
-fun NotificationManager.createNotificationChannel() {
+fun NotificationManager.createNotificationChannels(context: Context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        val notificationChannel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH).apply {
-            enableVibration(true)
-        }
-        createNotificationChannel(notificationChannel)
+        NotificationChannel(RemindersChannelId, context.stringResource(R.string.reminders), NotificationManager.IMPORTANCE_HIGH)
+            .also(this::createNotificationChannel)
+        NotificationChannel(VaultChannelId, context.stringResource(R.string.vault), NotificationManager.IMPORTANCE_LOW)
+            .also(this::createNotificationChannel)
     }
 }
