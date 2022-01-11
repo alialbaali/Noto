@@ -58,9 +58,7 @@
     <string name="monospace">Monospace</string>
     <string name="font">Font</string>
     <string name="libraries_archive">Libraries archive</string>
-    <string name="libraries_vault">Libraries vault</string>
     <string name="set_new_note_cursor_on_title">Set new note cursor on title</string>
-    <string name="enter_vault_passcode">Enter vault passcode</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>
@@ -94,6 +92,10 @@
     <string name="pinned">Pinned</string>
     <string name="pin_library">Pin library</string>
     <string name="unpin_library">Unpin library</string>
+
+    <!-- Vault -->
+    <string name="libraries_vault">Libraries vault</string>
+    <string name="enter_vault_passcode">Enter vault passcode</string>
     <string name="vault_library">Vault library</string>
     <string name="unvault_library">Unvault library</string>
     <string name="library_is_vaulted">Library has been vaulted.</string>
@@ -122,8 +124,6 @@
     <string name="after_4_hours">After 4 hours</string>
     <string name="after_12_hours">After 12 hours</string>
     <string name="close_vault">Close vault</string>
-    <string name="current_release">Current release</string>
-    <string name="previous_releases">Previous releases</string>
     <string name="enable_bio_auth">Enable biometric authentication</string>
     <string name="use_passcode">Use passcode</string>
 
@@ -235,7 +235,9 @@
     <string name="libraries_notes_count">Libraries notes count</string>
     <string name="loading_content">Loading content</string>
 
-    <!-- Versions -->
+    <!-- Releases -->
+    <string name="current_release">Current release</string>
+    <string name="previous_releases">Previous releases</string>
     <string name="release_1_8_0">• Support for passcode protected libraries vault.
         \n• Support for vault timeout options.
         \n• Support for biometric vault authentication on supported devices.
