@@ -24,7 +24,6 @@ import com.noto.app.map
 import com.noto.app.util.*
 import eightbitlab.com.blurview.RenderScriptBlur
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -75,31 +74,30 @@ class MainVaultFragment : Fragment() {
     private fun MainVaultFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
-        viewModel.isBioAuthEnabled
-            .onEach { isBioAuthEnabled ->
-                if (isBioAuthEnabled)
-                    context?.let { context ->
-                        val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                            .setTitle(context.stringResource(R.string.open_vault))
-                            .setNegativeButtonText(context.stringResource(R.string.use_passcode))
-                            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
-                            .build()
+        combine(viewModel.isVaultOpen, viewModel.isBioAuthEnabled) { isVaultOpen, isBioAuthEnabled ->
+            if (!isVaultOpen && isBioAuthEnabled)
+                context?.let { context ->
+                    val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                        .setTitle(context.stringResource(R.string.open_vault))
+                        .setNegativeButtonText(context.stringResource(R.string.use_passcode))
+                        .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
+                        .build()
 
-                        val biometricPrompt = BiometricPrompt(
-                            this@MainVaultFragment,
-                            ContextCompat.getMainExecutor(requireContext()),
-                            object : BiometricPrompt.AuthenticationCallback() {
-                                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                                    super.onAuthenticationSucceeded(result)
-                                    openVault()
-                                }
+                    val biometricPrompt = BiometricPrompt(
+                        this@MainVaultFragment,
+                        ContextCompat.getMainExecutor(requireContext()),
+                        object : BiometricPrompt.AuthenticationCallback() {
+                            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                                super.onAuthenticationSucceeded(result)
+                                openVault()
                             }
-                        )
+                        }
+                    )
 
-                        biometricPrompt.authenticate(promptInfo)
-                    }
-            }
-            .launchIn(lifecycleScope)
+                    biometricPrompt.authenticate(promptInfo)
+                }
+
+        }.launchIn(lifecycleScope)
 
         viewModel.isVaultOpen
             .onEach { isVaultOpen ->
