@@ -82,6 +82,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:fontFamily="@font/nunito_bold"
-        tools:text="@string/release_1_8_8" />
+        tools:text="@string/release_1_8_0" />
 
 </LinearLayout>

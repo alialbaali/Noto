@@ -15,15 +15,5 @@ sealed interface Release {
 
 data class Release_1_8_0(override val changelog: String) : Release {
     override val version: String = "1.8.0"
-    override val date: LocalDate = LocalDate(2022, Month.JANUARY, 1)
-}
-
-class Release_1_9_0(override val changelog: String) : Release {
-    override val version: String = "1.9.0"
-    override val date: LocalDate = LocalDate(2022, Month.JANUARY, 1)
-}
-
-class Release_1_9_1(override val changelog: String) : Release {
-    override val version: String = "1.9.1"
-    override val date: LocalDate = LocalDate(2022, Month.JANUARY, 1)
+    override val date: LocalDate = LocalDate(2022, Month.JANUARY, 11)
 }

@@ -232,8 +232,10 @@
     <string name="loading_content">Loading content</string>
 
     <!-- Versions -->
-    <string name="release_1_8_8">
-        • Support for passcode protected libraries vault and the ability to pick vault timeout.
+    <string name="release_1_8_0">• Support for passcode protected libraries vault.
+        \n• Support for vault timeout options.
+        \n• Support for biometric vault authentication on supported devices.
+        \n• Support for the Spanish language.
         \n• Add a link for the new <a href="https://www.reddit.com/r/notoapp">Reddit</a> community.
         \n• Other bug fixes and design improvements.
     </string>

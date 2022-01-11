@@ -54,8 +54,8 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
             .mapNotNull { tab ->
                 context?.let { context ->
                     when (tab) {
-                        WhatsNewTab.CurrentRelease -> listOf(Release_1_8_0(context.stringResource(R.string.release_1_8_8)))
-                        WhatsNewTab.PreviousReleases -> listOf(Release_1_8_0(context.stringResource(R.string.release_1_8_8)))
+                        WhatsNewTab.CurrentRelease -> listOf(Release_1_8_0(context.stringResource(R.string.release_1_8_0)))
+                        WhatsNewTab.PreviousReleases -> listOf(Release_1_8_0(context.stringResource(R.string.release_1_8_0)))
                     }
                 }
             }
