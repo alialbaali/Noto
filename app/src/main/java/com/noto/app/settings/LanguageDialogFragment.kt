@@ -24,7 +24,7 @@ class LanguageDialogFragment : BaseDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = LanguageDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         setupBaseDialogFragment()
         setupState()
@@ -48,6 +48,7 @@ class LanguageDialogFragment : BaseDialogFragment() {
                     Language.Indonesian -> rbIndonesian.isChecked = true
                     Language.Russian -> rbRussian.isChecked = true
                     Language.Tamil -> rbTamil.isChecked = true
+                    Language.Spanish -> rbSpanish.isChecked = true
                 }
             }
             .launchIn(lifecycleScope)
@@ -86,6 +87,11 @@ class LanguageDialogFragment : BaseDialogFragment() {
 
         rbTamil.setOnClickListener {
             viewModel.updateLanguage(Language.Tamil)
+            dismiss()
+        }
+
+        rbSpanish.setOnClickListener {
+            viewModel.updateLanguage(Language.Spanish)
             dismiss()
         }
     }

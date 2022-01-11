@@ -182,6 +182,7 @@ class AppActivity : BaseActivity() {
             Language.Indonesian -> Locale("in")
             Language.Russian -> Locale("ru")
             Language.Tamil -> Locale("ta")
+            Language.Spanish -> Locale("es")
         }
         if (resources.configuration.locale != locale) {
             Locale.setDefault(locale)
