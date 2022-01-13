@@ -24,6 +24,7 @@ object Constants {
     const val ScheduledVaultTimeout = "ScheduledVaultTimeout"
     const val LastVersion = "LastVersion"
     const val IsBioAuthEnabled = "IsBioAuthEnabled"
+    const val MainLibraryId = "MainLibraryId"
 
     object Intent {
         const val ActionCreateLibrary = "com.noto.intent.action.CREATE_LIBRARY"
@@ -40,6 +41,8 @@ object Constants {
         val Int.NewItemButton get() = "Widget_New_Item_Button_$this"
         val Int.NotesCount get() = "Widget_Notes_Count_$this"
         val Int.Radius get() = "Widget_Radius_$this"
+
+        @Suppress("FunctionName")
         fun Int.LabelIds(libraryId: Long) = Id + "_" + LibraryId + libraryId.toString()
     }
 }
