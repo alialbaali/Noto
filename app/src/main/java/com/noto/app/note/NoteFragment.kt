@@ -168,6 +168,10 @@ class NoteFragment : Fragment() {
             navController?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToMainFragment())
         }
 
+        bab.setOnSwipeGestureListener {
+            navController?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToMainFragment())
+        }
+
         val backCallback = {
             if (args.body != null)
                 navController?.popBackStack(R.id.mainFragment, false)
