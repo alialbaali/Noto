@@ -47,6 +47,14 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_change_main_library"
+                    style="@style/SettingsItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_round_folder_24"
+                    android:text="@string/change_main_library" />
+
+                <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_change_theme"
                     style="@style/SettingsItem"
                     android:layout_width="match_parent"
@@ -216,7 +224,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_version"
-                style="@style/SettingsItem"
+                style="@style/DialogItem"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="bottom"
