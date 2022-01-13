@@ -1,60 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cool"
+    style="@style/BaseDialogFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/rv"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/spacing_small"
-        android:paddingHorizontal="@dimen/spacing_small"
-        android:paddingBottom="@dimen/padding_bottom"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-        tools:listitem="@layout/library_item" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/abl"
-        style="@style/AppBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <include layout="@layout/base_dialog_fragment" />
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/tb"
-            style="@style/Toolbar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="@dimen/spacing_normal"
-            app:title="@string/libraries" />
-    </com.google.android.material.appbar.AppBarLayout>
+            android:orientation="horizontal"
+            android:gravity="center">
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bab"
+            <ImageButton
+                android:id="@+id/ib_archive"
+                android:src="@drawable/ic_round_inventory_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_normal"
+                android:background="@drawable/ic_widget_btn_shape"
+                android:contentDescription="@string/libraries_archive" />
+
+            <ImageButton
+                android:id="@+id/ib_vault"
+                android:src="@drawable/ic_round_shield_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_normal"
+                android:background="@drawable/ic_widget_btn_shape"
+                android:contentDescription="@string/libraries_vault" />
+
+            <ImageButton
+                android:id="@+id/ib_settings"
+                android:src="@drawable/ic_round_settings_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_normal"
+                android:background="@drawable/ic_widget_btn_shape"
+                android:contentDescription="@string/settings" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:backgroundTint="?attr/notoBackgroundColor"
-        app:fabAlignmentMode="end"
-        app:fabAnimationMode="scale"
-        app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
-        app:hideOnScroll="true"
-        app:menu="@menu/main_menu"
-        app:navigationContentDescription="@string/more"
-        app:navigationIcon="@drawable/ic_round_menu_24" />
+        android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
-        android:contentDescription="@string/create_library"
-        android:src="@drawable/ic_round_add_24"
-        app:backgroundTint="?attr/notoPrimaryColor"
-        app:layout_anchor="@id/bab"
-        app:tint="?attr/notoBackgroundColor" />
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:clipChildren="false"
+            android:paddingTop="@dimen/spacing_small"
+            android:paddingHorizontal="@dimen/spacing_small"
+            android:paddingBottom="@dimen/padding_bottom"
+            tools:listitem="@layout/library_item" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:layout_gravity="bottom|end"
+            android:contentDescription="@string/create_library"
+            android:src="@drawable/ic_round_add_24"
+            app:backgroundTint="?attr/notoPrimaryColor"
+            app:tint="?attr/notoBackgroundColor" />
+    </FrameLayout>
+</LinearLayout>
