@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navOptions
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.noto.app.databinding.AppActivityBinding
@@ -126,6 +127,20 @@ class AppActivity : BaseActivity() {
                     notificationManager.createVaultNotification(this@AppActivity)
                 else
                     notificationManager.cancelVaultNotification()
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.mainLibraryId
+            .onEach { libraryId ->
+                if (navController.currentDestination?.id == R.id.libraryFragment) {
+                    val args = bundleOf(Constants.LibraryId to libraryId)
+                    val options = navOptions {
+                        popUpTo(R.id.libraryFragment) {
+                            inclusive = true
+                        }
+                    }
+                    navController.navigate(R.id.libraryFragment, args, options)
+                }
             }
             .launchIn(lifecycleScope)
 
