@@ -6,15 +6,17 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-open class BaseDialogFragment : BottomSheetDialogFragment() {
+open class BaseDialogFragment(private val isCollapsable: Boolean = false) : BottomSheetDialogFragment() {
 
     override fun getTheme(): Int = R.style.BottomSheetDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return super.onCreateDialog(savedInstanceState).apply {
             (this as BottomSheetDialog).apply {
-                behavior.state = BottomSheetBehavior.STATE_EXPANDED
-                behavior.skipCollapsed = true
+                if (!isCollapsable) {
+                    behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                    behavior.skipCollapsed = true
+                }
             }
         }
     }
