@@ -37,7 +37,7 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
         root.context?.let { context ->
             val color = context.colorResource(notoColor.toResource())
             tvLibraryNotesCount.text = context.pluralsResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
-            tvSorting.background?.mutate()?.setTint(ColorUtils.setAlphaComponent(color, 25))
+            tvSorting.background?.mutate()?.setTint(color.withDefaultAlpha())
             tvSorting.compoundDrawables[0]?.mutate()?.setTint(color)
             tvLibraryNotesCount.setTextColor(color)
             tvSorting.setTextColor(color)

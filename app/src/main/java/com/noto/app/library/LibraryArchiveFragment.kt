@@ -71,8 +71,7 @@ class LibraryArchiveFragment : BaseDialogFragment(isCollapsable = true) {
     private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
             val color = context.colorResource(library.color.toResource())
-            val libraryTitle = if (library.isInbox) context.stringResource(R.string.inbox) else library.title
-            baseDialogFragment.tvDialogTitle.text = context.stringResource(R.string.archive, libraryTitle)
+            baseDialogFragment.tvDialogTitle.text = context.stringResource(R.string.archive, library.getTitle(context))
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
         }
