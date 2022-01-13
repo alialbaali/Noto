@@ -1,36 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/cool"
+    style="@style/BaseDialogFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/notoBackgroundColor">
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/base_dialog_fragment" />
 
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/spacing_small"
-        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/note_item" />
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/abl"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/notoBackgroundColor"
-        android:elevation="0dp"
-        app:elevation="0dp">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/tb"
-            style="@style/Toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:navigationContentDescription="@string/back"
-            app:navigationIcon="@drawable/ic_round_back_24"
-            tools:title="Archive" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
