@@ -108,3 +108,6 @@ fun String.hash(): String {
     val bytes = factory.generateSecret(spec).encoded
     return Base64.encodeToString(bytes, Base64.DEFAULT)
 }
+
+val Library.isInbox
+    get() = id == Library.InboxId
