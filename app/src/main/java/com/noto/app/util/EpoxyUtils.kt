@@ -21,7 +21,7 @@ inline fun EpoxyController.buildNotesModels(
     context: Context,
     library: Library,
     notes: List<NoteWithLabels>,
-    items: (List<NoteWithLabels>) -> Unit,
+    content: (List<NoteWithLabels>) -> Unit,
 ) {
     when (library.grouping) {
         Grouping.Default -> {
@@ -34,7 +34,7 @@ inline fun EpoxyController.buildNotesModels(
                     title(context.stringResource(R.string.pinned))
                 }
 
-                items(pinnedNotes)
+                content(pinnedNotes)
 
                 if (notPinnedNotes.isNotEmpty())
                     headerItem {
@@ -42,7 +42,7 @@ inline fun EpoxyController.buildNotesModels(
                         title(context.stringResource(R.string.notes))
                     }
             }
-            items(notPinnedNotes)
+            content(notPinnedNotes)
         }
         Grouping.CreationDate -> {
             notes.groupByDate(library.sortingType, library.sortingOrder).forEach { (date, notes) ->
@@ -50,7 +50,7 @@ inline fun EpoxyController.buildNotesModels(
                     id(date.dayOfYear)
                     title(date.format())
                 }
-                items(notes)
+                content(notes)
             }
         }
         Grouping.Label -> {
@@ -65,8 +65,33 @@ inline fun EpoxyController.buildNotesModels(
                         id(*labels.map { it.id }.toTypedArray())
                         title(labels.joinToString(" • ") { it.title })
                     }
-                items(notes)
+                content(notes)
             }
         }
     }
+}
+
+inline fun EpoxyController.buildLibrariesModels(
+    context: Context,
+    libraries: List<Pair<Library, Int>>,
+    content: (List<Pair<Library, Int>>) -> Unit,
+) {
+    val pinnedLibraries = libraries.filter { it.first.isPinned }
+    val notPinnedLibraries = libraries.filterNot { it.first.isPinned }
+
+    if (pinnedLibraries.isNotEmpty()) {
+        headerItem {
+            id("pinned")
+            title(context.stringResource(R.string.pinned))
+        }
+
+        content(pinnedLibraries)
+
+        if (notPinnedLibraries.isNotEmpty())
+            headerItem {
+                id("libraries")
+                title(context.stringResource(R.string.libraries))
+            }
+    }
+    content(notPinnedLibraries)
 }
