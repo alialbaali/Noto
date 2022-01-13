@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
+import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryArchiveFragmentBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Layout
@@ -26,7 +27,7 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class LibraryArchiveFragment : Fragment() {
+class LibraryArchiveFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
@@ -34,21 +35,17 @@ class LibraryArchiveFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
-            setupListeners()
-            setupState()
+            val baseDialogFragment = setupBaseDialogFragment()
+            setupState(baseDialogFragment)
         }
 
-    private fun LibraryArchiveFragmentBinding.setupListeners() {
-        tb.setNavigationOnClickListener {
-            navController?.navigateUp()
-        }
-    }
+    private fun LibraryArchiveFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
 
-    private fun LibraryArchiveFragmentBinding.setupState() {
+    private fun LibraryArchiveFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         viewModel.library
-            .onEach { library -> setupLibrary(library) }
+            .onEach { library -> setupLibrary(library, baseDialogFragment) }
             .distinctUntilChangedBy { library -> library.layout }
             .onEach { library -> setupLayoutManger(library.layout) }
             .launchIn(lifecycleScope)
@@ -71,66 +68,63 @@ class LibraryArchiveFragment : Fragment() {
         rv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
     }
 
-    private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library) {
+    private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
             val color = context.colorResource(library.color.toResource())
-            tb.navigationIcon?.mutate()?.setTint(color)
-            tb.title = context.stringResource(R.string.archive, library.title)
-            tb.setTitleTextColor(color)
+            val libraryTitle = if (library.isInbox) context.stringResource(R.string.inbox) else library.title
+            baseDialogFragment.tvDialogTitle.text = context.stringResource(R.string.archive, libraryTitle)
+            baseDialogFragment.tvDialogTitle.setTextColor(color)
+            baseDialogFragment.vHead.background?.mutate()?.setTint(color)
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun LibraryArchiveFragmentBinding.setupArchivedNotes(state: UiState<List<NoteWithLabels>>, font: Font, library: Library) {
-        when (state) {
-            is UiState.Loading -> rv.setupProgressIndicator(library.color)
-            is UiState.Success -> {
-                val archivedNotes = state.value
-
-                rv.withModels {
-                    context?.let { context ->
-                        if (archivedNotes.isEmpty())
-                            placeholderItem {
-                                id("placeholder")
-                                placeholder(context.stringResource(R.string.archive_is_empty))
-                            }
-                        else
-                            buildNotesModels(context, library, archivedNotes) { notes ->
-                                notes.forEach { archivedNote ->
-                                    noteItem {
-                                        id(archivedNote.first.id)
-                                        note(archivedNote.first)
-                                        font(font)
-                                        previewSize(library.notePreviewSize)
-                                        isShowCreationDate(library.isShowNoteCreationDate)
-                                        color(library.color)
-                                        labels(archivedNote.second)
-                                        isManualSorting(false)
-                                        onClickListener { _ ->
-                                            navController
-                                                ?.navigateSafely(
-                                                    LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
-                                                        archivedNote.first.libraryId,
-                                                        archivedNote.first.id
-                                                    )
+        if (state is UiState.Success) {
+            val archivedNotes = state.value
+            rv.withModels {
+                context?.let { context ->
+                    if (archivedNotes.isEmpty())
+                        placeholderItem {
+                            id("placeholder")
+                            placeholder(context.stringResource(R.string.archive_is_empty))
+                        }
+                    else
+                        buildNotesModels(context, library, archivedNotes) { notes ->
+                            notes.forEach { archivedNote ->
+                                noteItem {
+                                    id(archivedNote.first.id)
+                                    note(archivedNote.first)
+                                    font(font)
+                                    previewSize(library.notePreviewSize)
+                                    isShowCreationDate(library.isShowNoteCreationDate)
+                                    color(library.color)
+                                    labels(archivedNote.second)
+                                    isManualSorting(false)
+                                    onClickListener { _ ->
+                                        navController
+                                            ?.navigateSafely(
+                                                LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
+                                                    archivedNote.first.libraryId,
+                                                    archivedNote.first.id
                                                 )
-                                        }
-                                        onLongClickListener { _ ->
-                                            navController
-                                                ?.navigateSafely(
-                                                    LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
-                                                        archivedNote.first.libraryId,
-                                                        archivedNote.first.id,
-                                                        R.id.libraryArchiveFragment
-                                                    )
-                                                )
-                                            true
-                                        }
-                                        onDragHandleTouchListener { _, _ -> false }
+                                            )
                                     }
+                                    onLongClickListener { _ ->
+                                        navController
+                                            ?.navigateSafely(
+                                                LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
+                                                    archivedNote.first.libraryId,
+                                                    archivedNote.first.id,
+                                                    R.id.libraryArchiveFragment
+                                                )
+                                            )
+                                        true
+                                    }
+                                    onDragHandleTouchListener { _, _ -> false }
                                 }
                             }
-                    }
+                        }
                 }
             }
         }
