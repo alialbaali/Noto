@@ -35,7 +35,3 @@ data class NoteLabel(
     @ColumnInfo(name = "label_id")
     val labelId: Long
 )
-
-//fun NoteLabel.toLabel(libraryId: Long, labelTitle: String, labelColor: NotoColor) = Label(labelId, libraryId, labelTitle, labelColor)
-//
-//fun Label.toNoteLabel(notoId: Long) = NoteLabel(labelId = id, noteId = notoId)

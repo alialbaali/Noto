@@ -12,7 +12,7 @@ import com.noto.app.BaseActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteListWidgetConfigActivityBinding
 import com.noto.app.label.labelItem
-import com.noto.app.library.SelectLibraryDialogFragment
+import com.noto.app.main.SelectLibraryDialogFragment
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -65,7 +65,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             val colorStateList = color.toColorStateList()
             tvFilterLabels.isVisible = labels.isNotEmpty()
             rv.isVisible = labels.isNotEmpty()
-            widget.tvLibraryTitle.text = library.title
+            widget.tvLibraryTitle.text = library.getTitle(this@NoteListWidgetConfigActivity)
             widget.tvLibraryTitle.setTextColor(color)
             widget.fab.background?.setTint(color)
             widget.ivFab.setColorFilter(color)

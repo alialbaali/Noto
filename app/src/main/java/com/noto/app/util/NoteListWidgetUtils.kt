@@ -25,7 +25,7 @@ fun Context.createNoteListWidgetRemoteViews(
 ): RemoteViews {
     val color = colorResource(library.color.toResource())
     return RemoteViews(packageName, R.layout.note_list_widget).apply {
-        setTextViewText(R.id.tv_library_title, library.title)
+        setTextViewText(R.id.tv_library_title, library.getTitle(this@createNoteListWidgetRemoteViews))
         setTextColor(R.id.tv_library_title, color)
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_edit_widget, if (isEditWidgetButtonEnabled) View.VISIBLE else View.GONE)

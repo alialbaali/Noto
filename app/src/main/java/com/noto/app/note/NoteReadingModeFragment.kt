@@ -91,7 +91,7 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupLibrary(library: Library) {
         context?.let { context ->
             val color = context.colorResource(library.color.toResource())
-            tb.title = library.title
+            tb.title = library.getTitle(context)
             tb.setTitleTextColor(color)
             tvCreatedAt.setTextColor(color)
             tvWordCount.setTextColor(color)

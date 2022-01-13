@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -36,11 +37,18 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private fun NewLibraryDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
         context?.let { context ->
-            if (args.libraryId == 0L) {
-                tvDialogTitle.text = context.stringResource(R.string.new_library)
-            } else {
-                tvDialogTitle.text = context.stringResource(R.string.edit_library)
-                btnCreate.text = context.stringResource(R.string.done)
+            when (args.libraryId) {
+                0L -> {
+                    tvDialogTitle.text = context.stringResource(R.string.new_library)
+                }
+                Library.InboxId -> {
+                    tvDialogTitle.text = context.stringResource(R.string.edit_inbox)
+                    btnCreate.text = context.stringResource(R.string.done)
+                }
+                else -> {
+                    tvDialogTitle.text = context.stringResource(R.string.edit_library)
+                    btnCreate.text = context.stringResource(R.string.done)
+                }
             }
         }
     }
@@ -53,6 +61,14 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         if (args.libraryId == 0L) {
             et.requestFocus()
             activity?.showKeyboard(root)
+        }
+
+        if (args.libraryId == Library.InboxId) {
+            et.setText(context?.stringResource(R.string.inbox))
+            til.isVisible = false
+            tvLibraryTitle.isVisible = false
+            tvLibraryColor.text = context?.stringResource(R.string.inbox_color)
+            tvLibraryLayout.text = context?.stringResource(R.string.inbox_layout)
         }
 
         viewModel.library
@@ -97,8 +113,6 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
     }
 
     private fun NewLibraryDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
-        et.setText(library.title)
-        et.setSelection(library.title.length)
         rv.smoothScrollToPosition(library.color.ordinal)
         val tab = when (library.layout) {
             Layout.Linear -> tlLibraryLayout.getTabAt(0)
@@ -108,6 +122,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         swShowNoteCreationDate.isChecked = library.isShowNoteCreationDate
         swSetNewNoteCursor.isChecked = library.isSetNewNoteCursorOnTitle
         context?.let { context ->
+            et.setText(library.getTitle(context))
+            et.setSelection(library.getTitle(context).length)
             if (library.id != 0L) {
                 val color = context.colorResource(library.color.toResource())
                 val colorStateList = color.toColorStateList()
@@ -115,12 +131,10 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 baseDialogFragment.vHead.background?.mutate()?.setTint(color)
                 tlLibraryLayout.setSelectedTabIndicatorColor(color)
                 sNotePreviewSize.value = library.notePreviewSize.toFloat()
-                if (colorStateList != null) {
-                    tlLibraryLayout.tabRippleColor = colorStateList
-                    sNotePreviewSize.trackActiveTintList = colorStateList
-                    sNotePreviewSize.thumbTintList = colorStateList
-                    sNotePreviewSize.tickInactiveTintList = colorStateList
-                }
+                tlLibraryLayout.tabRippleColor = colorStateList
+                sNotePreviewSize.trackActiveTintList = colorStateList
+                sNotePreviewSize.thumbTintList = colorStateList
+                sNotePreviewSize.tickInactiveTintList = colorStateList
                 swShowNoteCreationDate.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
                 swSetNewNoteCursor.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
             } else {

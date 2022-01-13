@@ -118,7 +118,7 @@
         app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
         app:menu="@menu/note_menu"
-        app:navigationContentDescription="@string/more"
+        app:navigationContentDescription="@string/libraries"
         app:navigationIcon="@drawable/ic_round_menu_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

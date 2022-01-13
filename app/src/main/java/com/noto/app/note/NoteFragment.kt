@@ -238,10 +238,7 @@ class NoteFragment : Fragment() {
             val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
             val color = context.colorResource(library.color.toResource())
             val colorStateList = color.toColorStateList()
-            tb.title = if (library.isInbox)
-                context.stringResource(R.string.inbox)
-            else
-                library.title
+            tb.title = library.getTitle(context)
             tb.setTitleTextColor(color)
             tvCreatedAt.setTextColor(color)
             tvWordCount.setTextColor(color)

@@ -4,7 +4,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.Note
 import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteLabelRepository
@@ -32,7 +31,7 @@ class NoteListWidgetConfigViewModel(
     private val storage: LocalStorage,
 ) : ViewModel() {
 
-    private val mutableLibrary = MutableStateFlow(Library(title = "Library", position = 0))
+    private val mutableLibrary = MutableStateFlow(Library(position = 0))
     val library get() = mutableLibrary.asStateFlow()
 
     private val mutableNotes = MutableStateFlow(emptyList<NoteWithLabels>())

@@ -1,8 +1,10 @@
 package com.noto.app.util
 
+import android.content.Context
 import android.util.Base64
 import android.view.View
 import androidx.viewbinding.ViewBinding
+import com.noto.app.R
 import com.noto.app.domain.model.*
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
@@ -111,3 +113,6 @@ fun String.hash(): String {
 
 val Library.isInbox
     get() = id == Library.InboxId
+
+@Suppress("DEPRECATION")
+fun Library.getTitle(context: Context) = if (isInbox) context.stringResource(R.string.inbox) else title
