@@ -6,7 +6,6 @@ import android.view.*
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import androidx.activity.addCallback
-import androidx.core.graphics.ColorUtils
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
@@ -46,12 +45,13 @@ class LibraryFragment : Fragment() {
     private fun LibraryFragmentBinding.setupState() {
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        bab.setRoundedCorners()
 
         viewModel.library
             .onEach { library ->
                 setupLibrary(library)
                 context?.let { context ->
-                    val text = context.stringResource(R.string.archive, library.title)
+                    val text = context.stringResource(R.string.archive, library.getTitle(context))
                     MenuItemCompat.setTooltipText(archiveMenuItem, text)
                     MenuItemCompat.setContentDescription(archiveMenuItem, text)
                 }
@@ -103,21 +103,21 @@ class LibraryFragment : Fragment() {
             )
         }
 
-        tb.setNavigationOnClickListener {
-            disableSearch()
-            navController?.navigateUp()
-        }
-
         bab.setNavigationOnClickListener {
-            navController?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
+            navController?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToMainFragment())
         }
 
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.archive -> setupArchivedNotesMenuItem()
                 R.id.search -> setupSearchMenuItem()
+                R.id.more -> setupMoreMenuItem()
                 else -> false
             }
+        }
+
+        bab.setOnSwipeGestureListener {
+            navController?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToMainFragment())
         }
     }
 
@@ -207,45 +207,6 @@ class LibraryFragment : Fragment() {
                         }
                     }
 
-                    val items = { items: List<NoteWithLabels> ->
-                        items.forEach { entry ->
-                            noteItem {
-                                id(entry.first.id)
-                                note(entry.first)
-                                font(font)
-                                labels(entry.second)
-                                color(library.color)
-                                previewSize(library.notePreviewSize)
-                                isShowCreationDate(library.isShowNoteCreationDate)
-                                isManualSorting(library.sortingType == NoteListSortingType.Manual)
-                                onClickListener { _ ->
-                                    navController
-                                        ?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId,
-                                            entry.first.id))
-                                }
-                                onLongClickListener { _ ->
-                                    navController
-                                        ?.navigateSafely(
-                                            LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
-                                                entry.first.libraryId,
-                                                entry.first.id,
-                                                R.id.libraryFragment
-                                            )
-                                        )
-                                    true
-                                }
-                                onDragHandleTouchListener { view, event ->
-                                    if (event.action == MotionEvent.ACTION_DOWN)
-                                        rv.findContainingViewHolder(view)?.let { viewHolder ->
-                                            if (this@LibraryFragment::itemTouchHelper.isInitialized)
-                                                itemTouchHelper.startDrag(viewHolder)
-                                        }
-                                    view.performClick()
-                                }
-                            }
-                        }
-                    }
-
                     context?.let { context ->
                         if (notes.isEmpty())
                             placeholderItem {
@@ -253,7 +214,44 @@ class LibraryFragment : Fragment() {
                                 placeholder(context.stringResource(R.string.no_notes_found))
                             }
                         else
-                            buildNotesModels(context, library, notes, items)
+                            buildNotesModels(context, library, notes) { notes ->
+                                notes.forEach { entry ->
+                                    noteItem {
+                                        id(entry.first.id)
+                                        note(entry.first)
+                                        font(font)
+                                        labels(entry.second)
+                                        color(library.color)
+                                        previewSize(library.notePreviewSize)
+                                        isShowCreationDate(library.isShowNoteCreationDate)
+                                        isManualSorting(library.sortingType == NoteListSortingType.Manual)
+                                        onClickListener { _ ->
+                                            navController
+                                                ?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId,
+                                                    entry.first.id))
+                                        }
+                                        onLongClickListener { _ ->
+                                            navController
+                                                ?.navigateSafely(
+                                                    LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
+                                                        entry.first.libraryId,
+                                                        entry.first.id,
+                                                        R.id.libraryFragment
+                                                    )
+                                                )
+                                            true
+                                        }
+                                        onDragHandleTouchListener { view, event ->
+                                            if (event.action == MotionEvent.ACTION_DOWN)
+                                                rv.findContainingViewHolder(view)?.let { viewHolder ->
+                                                    if (this@LibraryFragment::itemTouchHelper.isInitialized)
+                                                        itemTouchHelper.startDrag(viewHolder)
+                                                }
+                                            view.performClick()
+                                        }
+                                    }
+                                }
+                            }
                     }
                 }
             }
@@ -270,17 +268,24 @@ class LibraryFragment : Fragment() {
         return true
     }
 
+    private fun LibraryFragmentBinding.setupMoreMenuItem(): Boolean {
+        navController?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToLibraryDialogFragment(args.libraryId))
+        return true
+    }
+
     private fun LibraryFragmentBinding.setupLibrary(library: Library) {
         context?.let { context ->
+            val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
             val color = context.colorResource(library.color.toResource())
             val colorStateList = color.toColorStateList()
-            tb.title = library.title
-            tb.setTitleTextColor(color)
-            tb.navigationIcon?.mutate()?.setTint(color)
-            bab.navigationIcon?.mutate()?.setTint(color)
+            ctb.title = library.getTitle(context)
+            ctb.setExpandedTitleTextColor(colorStateList)
+            ctb.setCollapsedTitleTextColor(colorStateList)
             fab.backgroundTintList = colorStateList
-            bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
-            tilSearch.boxBackgroundColor = ColorUtils.setAlphaComponent(color, 25)
+            bab.backgroundTint = colorStateList
+            bab.menu.forEach { it.icon?.mutate()?.setTint(backgroundColor) }
+            bab.navigationIcon?.mutate()?.setTint(backgroundColor)
+            tilSearch.boxBackgroundColor = color.withDefaultAlpha()
             etSearch.setHintTextColor(colorStateList)
             etSearch.setTextColor(colorStateList)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
