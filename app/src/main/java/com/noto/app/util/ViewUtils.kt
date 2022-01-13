@@ -1,5 +1,6 @@
 package com.noto.app.util
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -11,6 +12,8 @@ import android.net.Uri
 import android.text.SpannableString
 import android.text.TextPaint
 import android.text.style.URLSpan
+import android.view.GestureDetector
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -39,9 +42,11 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.onStart
+import kotlin.math.absoluteValue
 
 const val SetColorFilterMethodName = "setColorFilter"
 const val SetBackgroundResourceMethodName = "setBackgroundResource"
+const val SwipeGestureThreshold = 100F
 
 fun NavController.navigateSafely(directions: NavDirections) {
     if (currentDestination?.getAction(directions.actionId) != null)
@@ -164,3 +169,25 @@ fun BottomAppBar.setRoundedCorners() {
 }
 
 fun @receiver:ColorInt Int.withDefaultAlpha(alpha: Int = 32): Int = ColorUtils.setAlphaComponent(this, alpha)
+
+@SuppressLint("ClickableViewAccessibility")
+inline fun BottomAppBar.setOnSwipeGestureListener(crossinline callback: () -> Unit) {
+    val gestureListener = object : GestureDetector.SimpleOnGestureListener() {
+        override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
+            val diffY = (e2?.y ?: 0F) - (e1?.y ?: 0F)
+            return if (diffY.absoluteValue > SwipeGestureThreshold) {
+                callback()
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    val gestureDetector = GestureDetector(context, gestureListener)
+
+    setOnTouchListener { _, event ->
+        gestureDetector.onTouchEvent(event)
+        false
+    }
+}
