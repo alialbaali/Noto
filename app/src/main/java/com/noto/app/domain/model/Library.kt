@@ -15,6 +15,10 @@ data class Library(
     @ColumnInfo(name = "id")
     val id: Long = 0L,
 
+    @Deprecated(
+        message = "This shouldn't be used directly. Use library.getTitle(context) instead.",
+        replaceWith = ReplaceWith("library.getTitle(context)", "import com.noto.app.util.getTitle"),
+    )
     @ColumnInfo(name = "title")
     val title: String = "",
 

@@ -37,7 +37,7 @@ class LibraryListWidgetAdapter(
                     root.outlineAmbientShadowColor = color
                     root.outlineSpotShadowColor = color
                 }
-                tvLibraryTitle.text = library.title
+                tvLibraryTitle.text = library.getTitle(context)
                 tvLibraryNotesCount.isVisible = isShowNotesCount
                 tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                     updateMarginsRelative(bottom = if (isShowNotesCount) 4.dp else 0.dp)

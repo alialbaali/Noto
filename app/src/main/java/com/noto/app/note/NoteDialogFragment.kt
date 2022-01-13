@@ -126,9 +126,9 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyToClipboard.setOnClickListener {
-            val clipData = ClipData.newPlainText(viewModel.library.value.title, viewModel.note.value.format())
-            clipboardManager?.setPrimaryClip(clipData)
             context?.let { context ->
+                val clipData = ClipData.newPlainText(viewModel.library.value.getTitle(context), viewModel.note.value.format())
+                clipboardManager?.setPrimaryClip(clipData)
                 parentView?.snackbar(context.stringResource(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
             }
             dismiss()

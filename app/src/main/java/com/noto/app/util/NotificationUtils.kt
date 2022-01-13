@@ -31,7 +31,7 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
         .setContentTitle(note.title.ifBlank { note.body })
         .setContentText(note.body.ifBlank { note.title })
         .setContentIntent(pendingIntent)
-        .setSubText(library.title)
+        .setSubText(library.getTitle(context))
         .setStyle(style)
         .setColor(context.colorResource(library.color.toResource()))
         .setColorized(true)
@@ -39,11 +39,11 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
         .setSmallIcon(R.mipmap.ic_launcher_round)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setAutoCancel(true)
-        .setGroup(library.title)
+        .setGroup(library.getTitle(context))
         .setGroupSummary(true)
         .build()
 
-    notify(library.title, note.id.toInt(), notification)
+    notify(library.getTitle(context), note.id.toInt(), notification)
 }
 
 fun NotificationManager.createVaultNotification(context: Context) {

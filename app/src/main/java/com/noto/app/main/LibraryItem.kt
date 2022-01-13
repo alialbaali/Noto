@@ -65,13 +65,11 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
                 selectedColorStateList
             else
                 context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
-            if (library.isInbox) {
-                tvTitle.text = context.stringResource(R.string.inbox)
+            tvTitle.text = library.getTitle(context)
+            if (library.isInbox)
                 ivIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
-            } else {
-                tvTitle.text = library.title
+            else
                 ivIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_24))
-            }
             ivIcon.imageTintList = color.toColorStateList()
         }
         ibDrag.visibility = when {

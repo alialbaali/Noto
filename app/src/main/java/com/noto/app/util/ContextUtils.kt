@@ -31,8 +31,8 @@ fun Context.createPinnedShortcut(library: Library): ShortcutInfoCompat {
 
     return ShortcutInfoCompat.Builder(this, library.id.toString())
         .setIntent(intent)
-        .setShortLabel(library.title)
-        .setLongLabel(library.title)
+        .setShortLabel(library.getTitle(this))
+        .setLongLabel(library.getTitle(this))
         .setIcon(IconCompat.createWithBitmap(bitmap))
         .build()
 }
