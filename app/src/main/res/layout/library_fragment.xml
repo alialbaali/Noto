@@ -27,13 +27,9 @@
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/ctb"
+            style="@style/CollapsingToolbar"
+            android:layout_height="@dimen/collapsing_toolbar_height"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:fitsSystemWindows="false"
-            app:collapsedTitleTextAppearance="@style/ToolbarTitleTextAppearance"
-            app:expandedTitleGravity="center"
-            app:expandedTitleTextAppearance="@style/CollapsingToolbarExpandedTitleTextAppearance"
-            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             tools:title="@string/inbox">
 
             <com.google.android.material.appbar.MaterialToolbar

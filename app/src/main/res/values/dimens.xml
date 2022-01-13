@@ -30,5 +30,7 @@
 
     <!-- Custom -->
     <dimen name="padding_bottom">100dp</dimen>
+    <dimen name="collapsing_toolbar_height">200dp</dimen>
+    <dimen name="collapsing_toolbar_expanded_text">50sp</dimen>
 
 </resources>

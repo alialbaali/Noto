@@ -279,8 +279,8 @@ class LibraryFragment : Fragment() {
             val color = context.colorResource(library.color.toResource())
             val colorStateList = color.toColorStateList()
             ctb.title = library.getTitle(context)
-            ctb.setExpandedTitleTextColor(colorStateList)
             ctb.setCollapsedTitleTextColor(colorStateList)
+            ctb.setExpandedTitleTextColor(colorStateList)
             fab.backgroundTintList = colorStateList
             bab.backgroundTint = colorStateList
             bab.menu.forEach { it.icon?.mutate()?.setTint(backgroundColor) }
