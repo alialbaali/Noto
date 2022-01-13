@@ -172,6 +172,14 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 tvEditLibrary.text = context.stringResource(R.string.edit_inbox)
             }
 
+            if (library.isInbox) {
+                tvArchiveLibrary.isVisible = false
+                tvVaultLibrary.isVisible = false
+                tvDeleteLibrary.isVisible = false
+                tvPinLibrary.isVisible = false
+                tvEditLibrary.text = context.stringResource(R.string.edit_inbox)
+            }
+
             if (library.isArchived) {
                 tvArchiveLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
                 tvArchiveLibrary.text = context.stringResource(R.string.unarchive_library)

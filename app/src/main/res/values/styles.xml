@@ -89,6 +89,13 @@
         <item name="expandedTitleMarginBottom">@dimen/spacing_normal</item>
     </style>
 
+    <style name="CollapsingToolbarExpandedTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="android:maxLines">1</item>
+        <item name="android:textSize">50sp</item>
+        <item name="fontFamily">@font/nunito_extrabold</item>
+        <item name="android:textColorPrimary">?attr/notoPrimaryColor</item>
+    </style>
+
     <style name="SubtitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_tiny</item>
         <item name="fontFamily">@font/nunito_semibold_italic</item>
@@ -133,7 +140,7 @@
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="android:background">@drawable/dialog_item_shape</item>
+        <item name="android:background">@drawable/dialog_item_selector</item>
         <item name="android:padding">@dimen/spacing_normal</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
@@ -169,6 +176,13 @@
         <item name="android:textColorHint">?attr/notoSecondaryColor</item>
         <item name="android:textColorHighlight">?attr/notoSecondaryColor</item>
         <item name="android:colorControlActivated">?attr/notoPrimaryColor</item>
+    </style>
+
+    <style name="RoundedTextInputLayout" parent="TextInputLayout">
+        <item name="boxCornerRadiusBottomEnd">@dimen/spacing_extra_large</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/spacing_extra_large</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/spacing_extra_large</item>
+        <item name="boxCornerRadiusTopStart">@dimen/spacing_extra_large</item>
     </style>
 
     <style name="TextInputEditText">
