@@ -30,7 +30,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     private lateinit var itemTouchHelper: ItemTouchHelper
 
-    private val selectedLibraryId by lazy { navController?.previousBackStackEntry?.arguments?.getLong(Constants.LibraryId) }
+    private val selectedLibraryId by lazy { navController?.lastLibraryId }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         MainFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -108,7 +108,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         isShowNotesCount(isShowNotesCount)
                         isSelected(inboxLibrary.first.id == selectedLibraryId)
                         onClickListener { _ ->
-                            if (checkIsDifferentDestination(inboxLibrary.first.id))
+                            if (inboxLibrary.first.id != selectedLibraryId)
                                 navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(inboxLibrary.first.id))
                             dismiss()
                         }
@@ -131,7 +131,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                                 isShowNotesCount(isShowNotesCount)
                                 isSelected(entry.first.id == selectedLibraryId)
                                 onClickListener { _ ->
-                                    if (checkIsDifferentDestination(entry.first.id))
+                                    if (entry.first.id != selectedLibraryId)
                                         navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(entry.first.id))
                                     dismiss()
                                 }
@@ -168,7 +168,4 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                 .apply { attachToRecyclerView(rv) }
         }
     }
-
-    private fun checkIsDifferentDestination(libraryId: Long) =
-        navController?.previousBackStackEntry?.arguments?.getLong(Constants.LibraryId) != libraryId
 }
