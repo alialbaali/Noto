@@ -17,4 +17,12 @@
         android:icon="@drawable/ic_round_share_24"
         android:title="@string/share_note"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/more"
+        android:contentDescription="@string/more"
+        android:icon="@drawable/ic_round_more_24"
+        android:title="@string/more"
+        app:showAsAction="always" />
+
 </menu>

@@ -46,6 +46,10 @@ class AppViewModel(private val libraryRepository: LibraryRepository, private val
     val lastVersion = storage.get(Constants.LastVersion)
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
+    val mainLibraryId = storage.getOrNull(Constants.MainLibraryId)
+        .map { it?.toLongOrNull() ?: Library.InboxId }
+        .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
+
     init {
         createDefaultConstants()
         vaultTimeout
