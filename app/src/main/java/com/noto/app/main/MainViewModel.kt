@@ -62,11 +62,6 @@ class MainViewModel(
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
-    val layout = storage.get(Constants.LibraryListLayoutKey)
-        .filterNotNull()
-        .map { Layout.valueOf(it) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, Layout.Grid)
-
     val sortingType = storage.get(Constants.LibraryListSortingTypeKey)
         .filterNotNull()
         .map { LibraryListSortingType.valueOf(it) }
