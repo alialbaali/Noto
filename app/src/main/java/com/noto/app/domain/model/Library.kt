@@ -56,4 +56,10 @@ data class Library(
 
     @ColumnInfo(name = "is_vaulted", defaultValue = "0")
     val isVaulted: Boolean = false,
-)
+) {
+    @Suppress("FunctionName")
+    companion object {
+        const val InboxId = -1L
+        fun Inbox() = Library(id = InboxId, position = 0, color = NotoColor.Black)
+    }
+}
