@@ -1,4 +1,4 @@
-package com.noto.app.library
+package com.noto.app.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,21 +8,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.SelectLibraryDialogFragmentBinding
-import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
-import com.noto.app.main.MainViewModel
-import com.noto.app.main.libraryItem
 import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
@@ -56,6 +51,7 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
 
     private fun SelectLibraryDialogFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         combine(
             viewModel.libraries,
@@ -68,10 +64,6 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
                 isShowNotesCount
             )
         }.launchIn(lifecycleScope)
-
-        viewModel.layout
-            .onEach { layout -> setupLayoutManager(layout) }
-            .launchIn(lifecycleScope)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -79,45 +71,59 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
         when (state) {
             is UiState.Loading -> rv.setupProgressIndicator()
             is UiState.Success -> {
-                val libraries = state.value
+                val libraries = state.value.filterNot { it.first.isInbox }
+                val inboxLibrary = state.value.firstOrNull { it.first.isInbox }
+                val callback = { library: Library ->
+                    try {
+                        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.LibraryId, library.id)
+                    } catch (exception: IllegalStateException) {
+                        onClick(library.id)
+                    }
+                    dismiss()
+                }
+
                 rv.withModels {
-                    if (libraries.isEmpty()) {
-                        placeholderItem {
-                            id("placeholder")
-                            context?.let { context ->
+
+                    inboxLibrary?.let {
+                        libraryItem {
+                            id(inboxLibrary.first.id)
+                            library(inboxLibrary.first)
+                            notesCount(inboxLibrary.second)
+                            isSelected(inboxLibrary.first.id == args.selectedLibraryId)
+                            isManualSorting(false)
+                            isShowNotesCount(isShowNotesCount)
+                            onClickListener { _ -> callback(inboxLibrary.first) }
+                            onLongClickListener { _ -> false }
+                            onDragHandleTouchListener { _, _ -> false }
+                        }
+                    }
+
+                    context?.let { context ->
+                        if (libraries.isEmpty() && inboxLibrary == null) {
+                            placeholderItem {
+                                id("placeholder")
                                 placeholder(context.stringResource(R.string.no_libraries_found))
                             }
-                        }
-                    } else {
-                        libraries.forEach { entry ->
-                            libraryItem {
-                                id(entry.first.id)
-                                library(entry.first)
-                                notesCount(entry.second)
-                                isShowNotesCount(isShowNotesCount)
-                                isManualSorting(false)
-                                onClickListener { _ ->
-                                    try {
-                                        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.LibraryId, entry.first.id)
-                                    } catch (exception: IllegalStateException) {
-                                        onClick(entry.first.id)
+                        } else {
+                            buildLibrariesModels(context, libraries) { libraries ->
+                                libraries.forEach { entry ->
+                                    libraryItem {
+                                        id(entry.first.id)
+                                        library(entry.first)
+                                        notesCount(entry.second)
+                                        isShowNotesCount(isShowNotesCount)
+                                        isSelected(entry.first.id == args.selectedLibraryId)
+                                        isManualSorting(false)
+                                        onClickListener { _ -> callback(entry.first) }
+                                        onLongClickListener { _ -> false }
+                                        onDragHandleTouchListener { _, _ -> false }
                                     }
-                                    dismiss()
                                 }
-                                onLongClickListener { _ -> false }
-                                onDragHandleTouchListener { _, _ -> false }
                             }
                         }
                     }
                 }
             }
-        }
-    }
-
-    private fun SelectLibraryDialogFragmentBinding.setupLayoutManager(layout: Layout) {
-        when (layout) {
-            Layout.Linear -> rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         }
     }
 }
