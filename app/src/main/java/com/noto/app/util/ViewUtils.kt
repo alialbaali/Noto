@@ -56,6 +56,10 @@ fun NavController.navigateSafely(directions: NavDirections) {
 val Fragment.navController: NavController?
     get() = if (isAdded) findNavController() else null
 
+val NavController.lastLibraryId
+    @SuppressLint("RestrictedApi")
+    get() = backStack.lastOrNull { it.destination.id == R.id.libraryFragment }?.arguments?.getLong(Constants.LibraryId)
+
 val Uri.directoryPath
     get() = path?.substringAfterLast(':')
 
