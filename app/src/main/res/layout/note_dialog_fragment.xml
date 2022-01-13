@@ -18,7 +18,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/add_note_reminder"
             app:drawableStartCompat="@drawable/ic_round_notification_add_24" />
 
@@ -27,7 +26,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/open_note_in_reading_mode"
             app:drawableStartCompat="@drawable/ic_round_reading_mode_24" />
 
@@ -36,7 +34,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/archive_note"
             app:drawableStartCompat="@drawable/ic_round_archive_24" />
 
@@ -45,7 +42,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/pin_note"
             app:drawableStartCompat="@drawable/ic_round_pin_24" />
 
@@ -54,7 +50,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/duplicate_note"
             app:drawableStartCompat="@drawable/ic_round_control_point_duplicate_24" />
 
@@ -63,7 +58,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/copy_note_to_clipboard"
             app:drawableStartCompat="@drawable/ic_round_copy_24" />
 
@@ -72,7 +66,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/copy_note_to"
             app:drawableStartCompat="@drawable/ic_round_file_copy_24" />
 
@@ -81,7 +74,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/move_note"
             app:drawableStartCompat="@drawable/ic_round_move_24" />
 
@@ -90,7 +82,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/share_note"
             app:drawableStartCompat="@drawable/ic_round_share_24" />
 
@@ -99,7 +90,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/delete_note"
             app:drawableStartCompat="@drawable/ic_round_delete_24" />
     </LinearLayout>

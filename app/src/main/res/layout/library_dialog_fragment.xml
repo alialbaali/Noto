@@ -18,7 +18,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/edit_library"
             app:drawableStartCompat="@drawable/ic_round_edit_24" />
 
@@ -27,7 +26,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/archive_library"
             app:drawableStartCompat="@drawable/ic_round_archive_24" />
 
@@ -36,7 +34,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/vault_library"
             app:drawableStartCompat="@drawable/ic_round_lock_24" />
 
@@ -45,7 +42,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/pin_library"
             app:drawableStartCompat="@drawable/ic_round_pin_24" />
 
@@ -54,7 +50,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/add_new_note_shortcut"
             app:drawableStartCompat="@drawable/ic_round_add_to_home_screen_24" />
 
@@ -63,7 +58,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/delete_library"
             app:drawableStartCompat="@drawable/ic_round_delete_sweep_24" />
 
