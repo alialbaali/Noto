@@ -4,53 +4,44 @@
     android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_small"
+    android:layout_marginHorizontal="@dimen/spacing_small"
     android:orientation="horizontal"
+    android:gravity="center"
     android:padding="@dimen/spacing_normal"
-    android:background="@drawable/library_item_shape"
-    android:elevation="@dimen/elevation_normal">
+    android:background="@drawable/library_item_shape">
 
-    <View
-        android:id="@+id/v_color"
-        android:layout_width="5dp"
-        android:layout_height="match_parent"
-        android:background="@drawable/color_view_shape"
-        android:contentDescription="@string/library_color" />
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/library_color"
+        tools:src="@drawable/ic_round_inbox_24" />
 
-    <LinearLayout
-        android:layout_weight="1"
-        android:orientation="vertical"
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_title"
+        style="@style/LibraryTitleTextView"
         android:layout_width="0dp"
-        android:layout_marginEnd="@dimen/spacing_extra_small"
-        android:layout_height="wrap_content">
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_small"
+        tools:text="@string/inbox" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_library_title"
-            style="@style/LibraryTitleTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_extra_small"
-            tools:text="Library" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_library_notes_count"
-            style="@style/LibraryNotesCountTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_extra_small"
-            tools:text="3 Notes" />
-
-    </LinearLayout>
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_notes_count"
+        style="@style/LibraryNotesCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_small"
+        tools:text="3" />
 
     <ImageButton
         android:id="@+id/ib_drag"
         android:src="@drawable/ic_round_drag_handle_24"
         android:background="@android:color/transparent"
-        android:layout_marginStart="@dimen/spacing_extra_small"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/spacing_small"
         android:contentDescription="@string/drag" />
 
 </LinearLayout>
