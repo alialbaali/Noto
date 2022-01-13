@@ -18,7 +18,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/grouping"
             app:drawableStartCompat="@drawable/ic_round_table_view_24" />
 
@@ -27,7 +26,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/sorting_type"
             app:drawableStartCompat="@drawable/ic_round_sorting_24" />
 
@@ -36,7 +34,6 @@
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/dialog_item_shape"
             android:text="@string/sorting_order"
             app:drawableStartCompat="@drawable/ic_round_unfold_more_24" />
 
