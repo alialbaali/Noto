@@ -3,12 +3,14 @@ package com.noto.app
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.*
+import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
+import com.noto.app.util.isInbox
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class AppViewModel(private val storage: LocalStorage) : ViewModel() {
+class AppViewModel(private val libraryRepository: LibraryRepository, private val storage: LocalStorage) : ViewModel() {
 
     val theme = storage.get(Constants.ThemeKey)
         .filterNotNull()
@@ -121,6 +123,12 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
             storage.getOrNull(Constants.LastVersion)
                 .firstOrNull()
                 .also { if (it == null) storage.put(Constants.LastVersion, "1.7.2") }
+        }
+
+        launch {
+            libraryRepository.getLibraries()
+                .firstOrNull()
+                ?.also { if (it.none { it.isInbox }) libraryRepository.createLibrary(Library.Inbox()) }
         }
     }
 
