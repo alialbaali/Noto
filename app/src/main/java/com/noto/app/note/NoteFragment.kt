@@ -48,6 +48,7 @@ class NoteFragment : Fragment() {
         nsv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         abl.bringToFront()
+        bab.setRoundedCorners()
 
         viewModel.library
             .onEach { library -> setupLibrary(library) }
@@ -145,16 +146,6 @@ class NoteFragment : Fragment() {
             it.isEnabled = true
             it.icon?.alpha = 255
         }
-        bab.navigationIcon?.mutate()?.alpha = 255
-        bab.setNavigationOnClickListener {
-            navController?.navigateSafely(
-                NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
-                    args.libraryId,
-                    viewModel.note.value.id,
-                    R.id.libraryFragment
-                )
-            )
-        }
     }
 
     private fun NoteFragmentBinding.disableBottomAppBarActions() {
@@ -164,8 +155,6 @@ class NoteFragment : Fragment() {
             it.isEnabled = false
             it.icon?.alpha = 128
         }
-        bab.navigationIcon?.mutate()?.alpha = 128
-        bab.setNavigationOnClickListener(null)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -173,6 +162,10 @@ class NoteFragment : Fragment() {
         fab.setOnClickListener {
             navController
                 ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.libraryId, viewModel.note.value.id))
+        }
+
+        bab.setNavigationOnClickListener {
+            navController?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToMainFragment())
         }
 
         val backCallback = {
@@ -208,6 +201,16 @@ class NoteFragment : Fragment() {
                         ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.libraryId, viewModel.note.value.id))
                     true
                 }
+                R.id.more -> {
+                    navController?.navigateSafely(
+                        NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
+                            args.libraryId,
+                            viewModel.note.value.id,
+                            R.id.libraryFragment
+                        )
+                    )
+                    true
+                }
                 else -> false
             }
         }
@@ -228,15 +231,21 @@ class NoteFragment : Fragment() {
 
     private fun NoteFragmentBinding.setupLibrary(library: Library) {
         context?.let { context ->
+            val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
             val color = context.colorResource(library.color.toResource())
-            tb.title = library.title
+            val colorStateList = color.toColorStateList()
+            tb.title = if (library.isInbox)
+                context.stringResource(R.string.inbox)
+            else
+                library.title
             tb.setTitleTextColor(color)
             tvCreatedAt.setTextColor(color)
             tvWordCount.setTextColor(color)
             tb.navigationIcon?.mutate()?.setTint(color)
-            fab.backgroundTintList = color.toColorStateList()
-            bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
-            bab.navigationIcon?.mutate()?.setTint(color)
+            fab.backgroundTintList = colorStateList
+            bab.backgroundTint = colorStateList
+            bab.menu.forEach { it.icon?.mutate()?.setTint(backgroundColor) }
+            bab.navigationIcon?.mutate()?.setTint(backgroundColor)
             etNoteTitle.setLinkTextColor(color)
             etNoteBody.setLinkTextColor(color)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

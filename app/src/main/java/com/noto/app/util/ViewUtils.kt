@@ -15,6 +15,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -24,6 +25,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.shape.MaterialShapeDrawable
+import com.google.android.material.shape.RelativeCornerSize
+import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.noto.app.R
@@ -148,3 +153,14 @@ fun SwitchMaterial.setupColors(
     thumbTintList = ColorStateList(state, thumbColors)
     trackTintList = ColorStateList(state, trackColors)
 }
+
+fun BottomAppBar.setRoundedCorners() {
+    val babBackgroundDrawable = background as MaterialShapeDrawable
+    babBackgroundDrawable.shapeAppearanceModel = babBackgroundDrawable.shapeAppearanceModel
+        .toBuilder()
+        .setAllCorners(RoundedCornerTreatment())
+        .setAllCornerSizes(RelativeCornerSize(0.5F))
+        .build()
+}
+
+fun @receiver:ColorInt Int.withDefaultAlpha(alpha: Int = 32): Int = ColorUtils.setAlphaComponent(this, alpha)
