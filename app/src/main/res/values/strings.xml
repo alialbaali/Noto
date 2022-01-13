@@ -62,6 +62,15 @@
     <string name="font">Font</string>
     <string name="libraries_archive">Libraries archive</string>
     <string name="set_new_note_cursor_on_title">Set new note cursor on title</string>
+    <string name="home">Home</string>
+    <string name="unformatted_archive">Archive</string>
+    <string name="inbox">Inbox</string>
+    <string name="edit_inbox">Edit inbox</string>
+    <string name="inbox_options">Inbox options</string>
+    <string name="inbox_color">Inbox color</string>
+    <string name="inbox_layout">Inbox layout</string>
+    <string name="inbox_archive">Inbox archive</string>
+    <string name="change_main_library">Change main library</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>
