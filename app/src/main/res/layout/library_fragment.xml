@@ -25,18 +25,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/tb"
-            style="@style/Toolbar"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctb"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:navigationContentDescription="@string/back"
-            app:navigationIcon="@drawable/ic_round_back_24"
-            tools:title="Library" />
+            android:layout_height="200dp"
+            android:fitsSystemWindows="false"
+            app:collapsedTitleTextAppearance="@style/ToolbarTitleTextAppearance"
+            app:expandedTitleGravity="center"
+            app:expandedTitleTextAppearance="@style/CollapsingToolbarExpandedTitleTextAppearance"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            tools:title="@string/inbox">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_search"
-            style="@style/TextInputLayout"
+            style="@style/RoundedTextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/spacing_normal"
@@ -59,12 +67,14 @@
         android:id="@+id/bab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal"
         android:layout_gravity="bottom"
         app:backgroundTint="?attr/notoBackgroundColor"
         app:fabAnimationMode="scale"
         app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
         app:menu="@menu/library_menu"
+        app:navigationContentDescription="@string/libraries"
         app:navigationIcon="@drawable/ic_round_menu_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
