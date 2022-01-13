@@ -141,7 +141,7 @@
             android:id="@+id/action_noteFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/libraryArchiveFragment"
         android:name="com.noto.app.library.LibraryArchiveFragment"
         android:label="LibraryArchiveFragment">
@@ -159,7 +159,7 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
-    </fragment>
+    </dialog>
     <dialog
         android:id="@+id/noteReminderDialogFragment"
         android:name="com.noto.app.note.NoteReminderDialogFragment"
