@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.view.isVisible
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -40,9 +41,10 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
     private fun LibraryDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
         .apply {
-            context?.let { context ->
-                tvDialogTitle.text = context.stringResource(R.string.library_options)
-            }
+            tvDialogTitle.text = if (args.libraryId == Library.InboxId)
+                context?.stringResource(R.string.inbox_options)
+            else
+                context?.stringResource(R.string.library_options)
         }
 
     private fun LibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
@@ -153,6 +155,14 @@ class LibraryDialogFragment : BaseDialogFragment() {
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             listOf(tvEditLibrary, tvArchiveLibrary, tvVaultLibrary, tvPinLibrary, tvNewNoteShortcut, tvDeleteLibrary)
                 .forEach { TextViewCompat.setCompoundDrawableTintList(it, color.toColorStateList()) }
+
+            if (library.isInbox) {
+                tvArchiveLibrary.isVisible = false
+                tvVaultLibrary.isVisible = false
+                tvDeleteLibrary.isVisible = false
+                tvPinLibrary.isVisible = false
+                tvEditLibrary.text = context.stringResource(R.string.edit_inbox)
+            }
 
             if (library.isArchived) {
                 tvArchiveLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
