@@ -54,11 +54,24 @@ class SettingsFragment : Fragment() {
         viewModel.isBioAuthEnabled
             .onEach { isBioAuthEnabled -> swBioAuth.isChecked = isBioAuthEnabled }
             .launchIn(lifecycleScope)
+
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<Long>(Constants.LibraryId)
+            ?.observe(viewLifecycleOwner, viewModel::setHomeScreenId)
     }
 
     private fun SettingsFragmentBinding.setupListeners() {
         tb.setNavigationOnClickListener {
             navController?.navigateUp()
+        }
+
+        tvChangeMainLibrary .setOnClickListener {
+            navController?.navigateSafely(
+                SettingsFragmentDirections.actionSettingsFragmentToSelectLibraryDialogFragment(
+                    libraryId = 0,
+                    selectedLibraryId = viewModel.mainLibraryId.value
+                )
+            )
         }
 
         tvChangeTheme.setOnClickListener {

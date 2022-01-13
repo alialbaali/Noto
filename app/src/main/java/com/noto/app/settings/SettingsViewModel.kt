@@ -41,6 +41,10 @@ class SettingsViewModel(
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
+    val mainLibraryId = storage.getOrNull(Constants.MainLibraryId)
+        .mapNotNull { it?.toLongOrNull() }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Library.InboxId)
+
     private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
     val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
 
@@ -112,6 +116,10 @@ class SettingsViewModel(
 
     fun updateLastVersion() = viewModelScope.launch {
         storage.put(Constants.LastVersion, Release.CurrentVersion)
+    }
+
+    fun setHomeScreenId(libraryId: Long) = viewModelScope.launch {
+        storage.put(Constants.MainLibraryId, libraryId.toString())
     }
 }
 
