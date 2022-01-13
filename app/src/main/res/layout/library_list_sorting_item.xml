@@ -4,6 +4,7 @@
     android:id="@+id/ll"
     android:orientation="horizontal"
     android:padding="@dimen/spacing_small"
+    android:layout_marginBottom="@dimen/spacing_small"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
