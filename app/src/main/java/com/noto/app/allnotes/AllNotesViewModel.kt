@@ -55,10 +55,11 @@ class AllNotesViewModel(
             mutableNotes.value = notes
                 .mapWithLabels(labels, noteLabels)
                 .groupBy { noteWithLabels ->
-                    libraries.first { library ->
+                    libraries.firstOrNull { library ->
                         library.id == noteWithLabels.first.libraryId
                     }
                 }
+                .filterNotNullKeys()
                 .let { UiState.Success(it) }
         }.launchIn(viewModelScope)
     }
@@ -75,4 +76,6 @@ class AllNotesViewModel(
                 it.value
         }
     }
+
+    private fun <K, V> Map<K?, V>.filterNotNullKeys() = filterKeys { it != null } as Map<K, V>
 }
