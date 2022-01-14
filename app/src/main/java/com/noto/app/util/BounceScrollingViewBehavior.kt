@@ -5,13 +5,14 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.ViewCompat
 import androidx.core.view.forEach
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
 import com.google.android.material.appbar.AppBarLayout
+import kotlin.math.sign
 
-private const val OverScrollArea = 8
+private const val UpOverScrollArea = 6
+private const val DownOverScrollArea = 2
 
 class BounceScrollingViewBehavior(context: Context?, attrs: AttributeSet?) : AppBarLayout.ScrollingViewBehavior(context, attrs) {
 
@@ -23,7 +24,7 @@ class BounceScrollingViewBehavior(context: Context?, attrs: AttributeSet?) : App
         directTargetChild: View,
         target: View,
         axes: Int,
-        type: Int
+        type: Int,
     ): Boolean {
         overScrollY = 0
         return true
@@ -38,10 +39,10 @@ class BounceScrollingViewBehavior(context: Context?, attrs: AttributeSet?) : App
         dxUnconsumed: Int,
         dyUnconsumed: Int,
         type: Int,
-        consumed: IntArray
+        consumed: IntArray,
     ) {
         if (dyUnconsumed == 0) return
-        overScrollY -= if (type == ViewCompat.TYPE_TOUCH) dyUnconsumed / OverScrollArea else dyUnconsumed
+        overScrollY -= if (dyUnconsumed.sign == 1) dyUnconsumed / DownOverScrollArea else dyUnconsumed / UpOverScrollArea
         (target as ViewGroup).forEach { view ->
             view.translationY = overScrollY.toFloat()
         }
@@ -51,7 +52,7 @@ class BounceScrollingViewBehavior(context: Context?, attrs: AttributeSet?) : App
         coordinatorLayout: CoordinatorLayout,
         child: View,
         target: View,
-        type: Int
+        type: Int,
     ) = animationToZeroPosition(target)
 
     override fun onNestedPreFling(
@@ -59,7 +60,7 @@ class BounceScrollingViewBehavior(context: Context?, attrs: AttributeSet?) : App
         child: View,
         target: View,
         velocityX: Float,
-        velocityY: Float
+        velocityY: Float,
     ): Boolean {
         // Scroll view by inertia when current position equals to 0
         if (overScrollY == 0) return false
