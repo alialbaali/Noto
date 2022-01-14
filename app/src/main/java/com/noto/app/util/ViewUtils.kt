@@ -13,12 +13,14 @@ import android.text.SpannableString
 import android.text.TextPaint
 import android.text.style.URLSpan
 import android.view.GestureDetector
+import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -36,6 +38,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.noto.app.R
 import com.noto.app.domain.model.Font
+import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -74,11 +77,22 @@ private fun Note.createShareIntent() = Intent(Intent.ACTION_SEND).apply {
     putExtra(Intent.EXTRA_TEXT, format())
 }
 
-fun View.snackbar(message: String, anchorView: View? = null) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
-    animationMode = Snackbar.ANIMATION_MODE_SLIDE
-    setBackgroundTint(context.attributeColoResource(R.attr.notoPrimaryColor))
-    setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
-    setAnchorView(anchorView)
+fun View.snackbar(
+    message: String,
+    library: Library? = null,
+) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
+    if (library == null) {
+        setBackgroundTint(context.attributeColoResource(R.attr.notoPrimaryColor))
+        setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
+    } else {
+        setBackgroundTint(context.colorResource(library.color.toResource()))
+        setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
+    }
+    val params = view.layoutParams as? CoordinatorLayout.LayoutParams
+    params?.let {
+        it.gravity = Gravity.TOP
+        view.layoutParams = it
+    }
     show()
 }
 

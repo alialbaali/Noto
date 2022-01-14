@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
@@ -62,7 +61,6 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private fun NoteDialogFragmentBinding.setupListeners() {
         val parentView = parentFragment?.view
-        val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
 
         tvArchiveNote.setOnClickListener {
             viewModel.toggleNoteIsArchived().invokeOnCompletion {
@@ -74,7 +72,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 context?.let { context ->
                     context.updateAllWidgetsData()
                     context.updateNoteListWidgets(viewModel.library.value.id)
-                    parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                    parentView?.snackbar(context.stringResource(resource), viewModel.library.value)
                 }
                 dismiss()
             }
@@ -104,7 +102,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             viewModel.duplicateNote().invokeOnCompletion {
                 context?.let { context ->
                     context.updateAllWidgetsData()
-                    parentView?.snackbar(context.stringResource(R.string.note_is_duplicated), parentAnchorView)
+                    parentView?.snackbar(context.stringResource(R.string.note_is_duplicated), viewModel.library.value)
                 }
                 dismiss()
             }
@@ -119,7 +117,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
                 context?.let { context ->
                     context.updateAllWidgetsData()
-                    parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                    parentView?.snackbar(context.stringResource(resource), viewModel.library.value)
                 }
                 dismiss()
             }
@@ -129,7 +127,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             context?.let { context ->
                 val clipData = ClipData.newPlainText(viewModel.library.value.getTitle(context), viewModel.note.value.format())
                 clipboardManager?.setPrimaryClip(clipData)
-                parentView?.snackbar(context.stringResource(R.string.note_copied_to_clipboard), anchorView = parentAnchorView)
+                parentView?.snackbar(context.stringResource(R.string.note_copied_to_clipboard), viewModel.library.value)
             }
             dismiss()
         }
@@ -143,7 +141,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                         context?.let { context ->
                             context.updateAllWidgetsData()
                             context.updateNoteListWidgets(libraryId)
-                            parentView?.snackbar(context.stringResource(R.string.note_is_copied), anchorView = parentAnchorView)
+                            parentView?.snackbar(context.stringResource(R.string.note_is_copied), viewModel.library.value)
                         }
                         navController?.popBackStack(args.destination, false)
                         dismiss()
@@ -162,7 +160,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                             context.updateAllWidgetsData()
                             context.updateNoteListWidgets(viewModel.library.value.id)
                             context.updateNoteListWidgets(libraryId)
-                            parentView?.snackbar(context.stringResource(R.string.note_is_moved), anchorView = parentAnchorView)
+                            parentView?.snackbar(context.stringResource(R.string.note_is_moved), viewModel.library.value)
                         }
                         navController?.popBackStack(args.destination, false)
                         dismiss()
@@ -185,7 +183,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                     ?.savedStateHandle
                     ?.getLiveData<Int>(Constants.ClickListener)
                     ?.observe(viewLifecycleOwner) {
-                        parentView?.snackbar(context.stringResource(R.string.note_is_deleted), anchorView = parentAnchorView)
+                        parentView?.snackbar(context.stringResource(R.string.note_is_deleted), viewModel.library.value)
                         navController?.popBackStack(args.destination, false)
                         if (viewModel.note.value.reminderDate != null)
                             alarmManager?.cancelAlarm(context, viewModel.note.value.id)
