@@ -12,6 +12,7 @@ import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
+import com.noto.app.allnotes.allNotesItem
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Library
@@ -70,8 +71,9 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
             viewModel.sortingType,
             viewModel.sortingOrder,
             viewModel.isShowNotesCount,
-        ) { libraries, sortingType, sortingOrder, isShowNotesCount ->
-            setupLibraries(libraries.map { it.sorted(sortingType, sortingOrder) }, sortingType, sortingOrder, isShowNotesCount)
+            viewModel.allNotesCount,
+        ) { libraries, sortingType, sortingOrder, isShowNotesCount, allNotesCount ->
+            setupLibraries(libraries.map { it.sorted(sortingType, sortingOrder) }, sortingType, sortingOrder, isShowNotesCount, allNotesCount)
             setupItemTouchHelper()
         }.launchIn(lifecycleScope)
     }
@@ -82,12 +84,14 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         sortingType: LibraryListSortingType,
         sortingOrder: SortingOrder,
         isShowNotesCount: Boolean,
+        allNotesCount: Int,
     ) {
         if (state is UiState.Success) {
             rv.withModels {
                 epoxyController = this
                 val libraries = state.value.filterNot { it.first.isInbox }
                 val inboxLibrary = state.value.firstOrNull { it.first.isInbox }
+                val isManualSorting = sortingType == LibraryListSortingType.Manual
 
                 libraryListSortingItem {
                     id(0)
@@ -104,7 +108,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         id(inboxLibrary.first.id)
                         library(inboxLibrary.first)
                         notesCount(inboxLibrary.second)
-                        isManualSorting(sortingType == LibraryListSortingType.Manual)
+                        isManualSorting(isManualSorting)
                         isShowNotesCount(isShowNotesCount)
                         isSelected(inboxLibrary.first.id == selectedLibraryId)
                         onClickListener { _ ->
@@ -120,6 +124,19 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                     }
                 }
 
+                allNotesItem {
+                    id("all_notes")
+                    notesCount(allNotesCount)
+                    isManualSorting(isManualSorting)
+                    isShowNotesCount(isShowNotesCount)
+                    isSelected(AllNotesItemId == selectedLibraryId)
+                    onClickListener { _ ->
+                        if (selectedLibraryId != AllNotesItemId)
+                            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToAllNotesFragment())
+                        dismiss()
+                    }
+                }
+
                 context?.let { context ->
                     buildLibrariesModels(context, libraries) { libraries ->
                         libraries.forEach { entry ->
@@ -127,7 +144,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                                 id(entry.first.id)
                                 library(entry.first)
                                 notesCount(entry.second)
-                                isManualSorting(sortingType == LibraryListSortingType.Manual)
+                                isManualSorting(isManualSorting)
                                 isShowNotesCount(isShowNotesCount)
                                 isSelected(entry.first.id == selectedLibraryId)
                                 onClickListener { _ ->
