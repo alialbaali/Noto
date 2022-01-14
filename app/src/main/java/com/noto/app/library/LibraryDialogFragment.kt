@@ -55,7 +55,6 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
     private fun LibraryDialogFragmentBinding.setupListeners() {
         val parentView = parentFragment?.view
-        val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
 
         tvEditLibrary.setOnClickListener {
             dismiss()
@@ -94,7 +93,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
                     context?.let { context ->
                         context.updateAllWidgetsData()
-                        parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                        parentView?.snackbar(context.stringResource(resource), viewModel.library.value)
                     }
                     dismiss()
                 }
@@ -110,7 +109,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
                 context?.let { context ->
                     context.updateAllWidgetsData()
-                    parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                    parentView?.snackbar(context.stringResource(resource), viewModel.library.value)
                 }
                 dismiss()
             }
@@ -125,7 +124,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
                 context?.let { context ->
                     context.updateAllWidgetsData()
-                    parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                    parentView?.snackbar(context.stringResource(resource), viewModel.library.value)
                 }
                 dismiss()
             }
@@ -198,7 +197,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 val parentView = parentFragment?.view
                 val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
                 context?.let { context ->
-                    parentView?.snackbar(context.stringResource(R.string.library_is_deleted), anchorView = parentAnchorView)
+                    parentView?.snackbar(context.stringResource(R.string.library_is_deleted), viewModel.library.value)
                     context.updateAllWidgetsData()
                     context.updateLibraryListWidgets()
                 }
@@ -219,7 +218,6 @@ class LibraryDialogFragment : BaseDialogFragment() {
             ?.getLiveData<Int>(Constants.ClickListener)
             ?.observe(viewLifecycleOwner) {
                 val parentView = parentFragment?.view
-                val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
                 viewModel.toggleLibraryIsArchived().invokeOnCompletion {
                     val resource = if (viewModel.library.value.isArchived)
                         R.string.library_is_unarchived
@@ -229,7 +227,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                     context?.let { context ->
                         context.updateAllWidgetsData()
                         context.updateLibraryListWidgets()
-                        parentView?.snackbar(context.stringResource(resource), parentAnchorView)
+                        parentView?.snackbar(context.stringResource(resource), viewModel.library.value)
                     }
                     dismiss()
                 }

@@ -19,6 +19,8 @@
         <item name="notoSecondaryColor">@color/colorSecondary</item>
         <item name="notoBackgroundColor">@color/colorBackground</item>
         <item name="notoSurfaceColor">@color/colorSurface</item>
+        <item name="snackbarStyle">@style/Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/SnackbarTextView</item>
     </style>
 
     <style name="LightDarkTheme" parent="BaseTheme">
@@ -357,6 +359,14 @@
         <item name="tabTextAppearance">@style/TabItemTextAppearance</item>
         <item name="tabTextColor">?attr/notoPrimaryColor</item>
         <item name="tabIndicatorAnimationDuration">500</item>
+    </style>
+
+    <style name="Snackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:layout_margin">@dimen/spacing_normal</item>
+    </style>
+
+    <style name="SnackbarTextView" parent="Widget.MaterialComponents.Snackbar.TextView">
+        <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
 </resources>

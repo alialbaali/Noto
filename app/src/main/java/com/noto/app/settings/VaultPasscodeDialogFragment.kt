@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
@@ -68,7 +67,8 @@ class VaultPasscodeDialogFragment : BaseDialogFragment() {
                         val currentPasscode = etCurrentPasscode.text.toString()
                         when {
                             currentPasscode.isBlank() -> tilCurrentPasscode.error = context?.stringResource(R.string.passcode_empty_message)
-                            currentPasscode.hash() != viewModel.vaultPasscode.value -> tilCurrentPasscode.error = context?.stringResource(R.string.passcode_doesnt_match)
+                            currentPasscode.hash() != viewModel.vaultPasscode.value -> tilCurrentPasscode.error =
+                                context?.stringResource(R.string.passcode_doesnt_match)
                             else -> setVaultPasscodeAndDismiss(newPasscode)
                         }
                     }
@@ -81,8 +81,7 @@ class VaultPasscodeDialogFragment : BaseDialogFragment() {
         viewModel.setVaultPasscode(passcode)
             .invokeOnCompletion {
                 val parentView = parentFragment?.view
-                val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
-                context?.let { context -> parentView?.snackbar(context.stringResource(R.string.vault_passcode_has_changed), parentAnchorView) }
+                context?.let { context -> parentView?.snackbar(context.stringResource(R.string.vault_passcode_has_changed)) }
                 activity?.hideKeyboard(etNewPasscode)
                 activity?.hideKeyboard(etCurrentPasscode)
                 dismiss()
