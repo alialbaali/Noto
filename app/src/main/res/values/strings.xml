@@ -72,6 +72,7 @@
     <string name="inbox_archive">Inbox archive</string>
     <string name="change_main_library">Change main library</string>
     <string name="collapse_toolbar">Collapse toolbar</string>
+    <string name="all_notes">All notes</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>

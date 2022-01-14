@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.noto.app.AppViewModel
+import com.noto.app.allnotes.AllNotesViewModel
 import com.noto.app.data.database.NotoDatabase
 import com.noto.app.data.repository.LabelRepositoryImpl
 import com.noto.app.data.repository.LibraryRepositoryImpl
@@ -47,6 +48,8 @@ val appModule = module {
     viewModel { LibraryListWidgetConfigViewModel(it.get(), get(), get(), get()) }
 
     viewModel { NoteListWidgetConfigViewModel(it.get(), get(), get(), get(), get(), get()) }
+
+    viewModel { AllNotesViewModel(get(), get(), get(), get(), get()) }
 }
 
 val repositoryModule = module {

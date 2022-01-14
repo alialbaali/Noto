@@ -77,6 +77,10 @@ class MainViewModel(
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
+    val allNotesCount = noteRepository.getAllNotes()
+        .map { it.count() }
+        .stateIn(viewModelScope, SharingStarted.Lazily, 0)
+
     fun updateLayout(value: Layout) = viewModelScope.launch {
         storage.put(Constants.LibraryListLayoutKey, value.toString())
     }
