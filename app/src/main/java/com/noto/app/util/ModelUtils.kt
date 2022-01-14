@@ -13,6 +13,7 @@ val LabelDefaultStrokeWidth = 3.dp
 val LabelDefaultCornerRadius = 1000.dp.toFloat()
 const val DefaultAnimationDuration = 250L
 typealias NoteWithLabels = Pair<Note, List<Label>>
+const val AllNotesItemId = -2L
 
 private const val HashAlgorithm = "PBKDF2WithHmacSHA1"
 private const val HashIterationCount = 65536

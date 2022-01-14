@@ -46,6 +46,15 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_enter_anim"
             app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_mainFragment_to_allNotesFragment"
+            app:destination="@id/allNotesFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim"
+            app:popUpTo="@id/libraryFragment"
+            app:popUpToInclusive="true" />
     </dialog>
     <fragment
         android:id="@+id/libraryFragment"
@@ -469,4 +478,25 @@
         android:id="@+id/whatsNewDialogFragment"
         android:name="com.noto.app.settings.WhatsNewDialogFragment"
         android:label="WhatsNewDialogFragment" />
+    <fragment
+        android:id="@+id/allNotesFragment"
+        android:name="com.noto.app.allnotes.AllNotesFragment"
+        android:label="AllNotesFragment">
+        <action
+            android:id="@+id/action_allNotesFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_allNotesFragment_to_selectLibraryDialogFragment"
+            app:destination="@id/selectLibraryDialogFragment" />
+        <action
+            android:id="@+id/action_allNotesFragment_to_noteFragment"
+            app:destination="@id/noteFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_enter_anim"
+            app:popExitAnim="@anim/nav_default_exit_anim" />
+        <action
+            android:id="@+id/action_allNotesFragment_to_noteDialogFragment"
+            app:destination="@id/noteDialogFragment" />
+    </fragment>
 </navigation>
