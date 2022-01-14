@@ -89,7 +89,7 @@ class LibraryFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         viewModel.isCollapseToolbar
-            .onEach { isCollapseToolbar -> abl.setExpanded(isCollapseToolbar, false) }
+            .onEach { isCollapseToolbar -> abl.setExpanded(!isCollapseToolbar, false) }
             .launchIn(lifecycleScope)
     }
 

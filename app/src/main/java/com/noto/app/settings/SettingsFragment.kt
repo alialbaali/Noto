@@ -61,7 +61,7 @@ class SettingsFragment : Fragment() {
         viewModel.isCollapseToolbar
             .onEach { isCollapseToolbar ->
                 swCollapseToolbar.isChecked = isCollapseToolbar
-                abl.setExpanded(isCollapseToolbar, shouldAnimateToolbar)
+                abl.setExpanded(!isCollapseToolbar, shouldAnimateToolbar)
                 shouldAnimateToolbar = false
             }
             .launchIn(lifecycleScope)

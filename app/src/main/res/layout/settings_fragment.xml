@@ -138,8 +138,8 @@
                     style="@style/SettingsItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_count_24"
-                    android:text="@string/collapse_toolbar_by_default" />
+                    android:drawableStart="@drawable/ic_round_aspect_ratio_24"
+                    android:text="@string/collapse_toolbar" />
             </LinearLayout>
 
             <LinearLayout
