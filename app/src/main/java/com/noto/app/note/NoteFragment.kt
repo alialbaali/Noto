@@ -139,7 +139,12 @@ class NoteFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         viewModel.isCollapseToolbar
-            .onEach { isCollapseToolbar -> abl.setExpanded(!isCollapseToolbar, false) }
+            .onEach { isCollapseToolbar ->
+                if (args.noteId == 0L)
+                    abl.setExpanded(false, false)
+                else
+                    abl.setExpanded(!isCollapseToolbar, false)
+            }
             .launchIn(lifecycleScope)
     }
 
