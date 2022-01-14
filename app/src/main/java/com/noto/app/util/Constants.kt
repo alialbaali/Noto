@@ -25,6 +25,7 @@ object Constants {
     const val LastVersion = "LastVersion"
     const val IsBioAuthEnabled = "IsBioAuthEnabled"
     const val MainLibraryId = "MainLibraryId"
+    const val CollapseToolbar = "CollapseToolbar"
 
     object Intent {
         const val ActionCreateLibrary = "com.noto.intent.action.CREATE_LIBRARY"

@@ -50,6 +50,10 @@ class LibraryViewModel(
     private val mutableIsSearchEnabled = MutableStateFlow(false)
     val isSearchEnabled get() = mutableIsSearchEnabled.asStateFlow()
 
+    val isCollapseToolbar = storage.getOrNull(Constants.CollapseToolbar)
+        .map { it.toBoolean() }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
     init {
         combine(
             noteRepository.getNotesByLibraryId(libraryId)
