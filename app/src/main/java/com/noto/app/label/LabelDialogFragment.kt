@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
@@ -82,8 +81,7 @@ class LabelDialogFragment : BaseDialogFragment() {
                     ?.getLiveData<Int>(Constants.ClickListener)
                     ?.observe(viewLifecycleOwner) {
                         val parentView = parentFragment?.view
-                        val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
-                        parentView?.snackbar(context.stringResource(R.string.label_is_deleted), anchorView = parentAnchorView)
+                        parentView?.snackbar(context.stringResource(R.string.label_is_deleted), viewModel.library.value)
                         viewModel.deleteLabel().invokeOnCompletion { dismiss() }
                     }
                 navController?.navigateSafely(
