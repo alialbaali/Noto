@@ -45,11 +45,19 @@ class SettingsViewModel(
         .mapNotNull { it?.toLongOrNull() }
         .stateIn(viewModelScope, SharingStarted.Eagerly, Library.InboxId)
 
+    val isCollapseToolbar = storage.getOrNull(Constants.CollapseToolbar)
+        .map { it.toBoolean() }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
     private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
     val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
 
     fun toggleShowNotesCount() = viewModelScope.launch {
         storage.put(Constants.ShowNotesCountKey, (!isShowNotesCount.value).toString())
+    }
+
+    fun toggleCollapseToolbar() = viewModelScope.launch {
+        storage.put(Constants.CollapseToolbar, (!isCollapseToolbar.value).toString())
     }
 
     suspend fun exportData(): Map<String, String> {

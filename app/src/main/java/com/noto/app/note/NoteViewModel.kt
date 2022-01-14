@@ -43,6 +43,10 @@ class NoteViewModel(
     private val mutableLabels = MutableStateFlow<Map<Label, Boolean>>(emptyMap())
     val labels get() = mutableLabels.asStateFlow()
 
+    val isCollapseToolbar = storage.getOrNull(Constants.CollapseToolbar)
+        .map { it.toBoolean() }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
     init {
         noteRepository.getNoteById(noteId)
             .onStart { emit(Note(noteId, libraryId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }

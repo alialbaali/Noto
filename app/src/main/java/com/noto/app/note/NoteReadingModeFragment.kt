@@ -73,6 +73,10 @@ class NoteReadingModeFragment : Fragment() {
                 }
             }
         }.launchIn(lifecycleScope)
+
+        viewModel.isCollapseToolbar
+            .onEach { isCollapseToolbar -> abl.setExpanded(isCollapseToolbar, false) }
+            .launchIn(lifecycleScope)
     }
 
     private fun NoteReadingModeFragmentBinding.setupNote(note: Note, font: Font) {
