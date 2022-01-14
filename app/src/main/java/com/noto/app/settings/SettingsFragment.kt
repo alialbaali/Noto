@@ -26,6 +26,8 @@ class SettingsFragment : Fragment() {
 
     private val viewModel by viewModel<SettingsViewModel>()
 
+    private var shouldAnimateToolbar = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         SettingsFragmentBinding.inflate(inflater, container, false).withBinding {
             setupState()
@@ -55,6 +57,13 @@ class SettingsFragment : Fragment() {
             .onEach { isBioAuthEnabled -> swBioAuth.isChecked = isBioAuthEnabled }
             .launchIn(lifecycleScope)
 
+        viewModel.isCollapseToolbar
+            .onEach { isCollapseToolbar ->
+                swCollapseToolbar.isChecked = isCollapseToolbar
+                abl.setExpanded(isCollapseToolbar, shouldAnimateToolbar)
+            }
+            .launchIn(lifecycleScope)
+
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Long>(Constants.LibraryId)
             ?.observe(viewLifecycleOwner, viewModel::setHomeScreenId)
@@ -65,7 +74,7 @@ class SettingsFragment : Fragment() {
             navController?.navigateUp()
         }
 
-        tvChangeMainLibrary .setOnClickListener {
+        tvChangeMainLibrary.setOnClickListener {
             navController?.navigateSafely(
                 SettingsFragmentDirections.actionSettingsFragmentToSelectLibraryDialogFragment(
                     libraryId = 0,
@@ -108,6 +117,11 @@ class SettingsFragment : Fragment() {
 
         swShowNotesCount.setOnClickListener {
             viewModel.toggleShowNotesCount()
+        }
+
+        swCollapseToolbar.setOnClickListener {
+            shouldAnimateToolbar = true
+            viewModel.toggleCollapseToolbar()
         }
 
         tvShareWithOthers.setOnClickListener {
