@@ -48,6 +48,7 @@ fun Note.format(): String = """
 val Note.isValid
     get() = title.isNotBlank() || body.isNotBlank()
 
+@Suppress("DEPRECATION")
 fun List<Pair<Library, Int>>.sorted(sortingType: LibraryListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
     when (sortingType) {
         LibraryListSortingType.Manual -> pair.first.position
