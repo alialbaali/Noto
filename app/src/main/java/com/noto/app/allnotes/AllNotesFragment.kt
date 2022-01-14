@@ -72,13 +72,14 @@ class AllNotesFragment : Fragment() {
 
         combine(
             viewModel.notes,
+            viewModel.notesVisibility,
             viewModel.font,
             etSearch.textAsFlow()
                 .onStart { emit(etSearch.text) }
                 .filterNotNull()
                 .map { it.trim() },
-        ) { notes, font, searchTerm ->
-            setupNotes(notes.map { it.mapValues { it.value.filterContent(searchTerm) } }, font)
+        ) { notes, notesVisibility, font, searchTerm ->
+            setupNotes(notes.map { it.mapValues { it.value.filterContent(searchTerm) } }, notesVisibility, font)
         }.launchIn(lifecycleScope)
 
         viewModel.isSearchEnabled
@@ -108,7 +109,11 @@ class AllNotesFragment : Fragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun AllNotesFragmentBinding.setupNotes(state: UiState<Map<Library, List<NoteWithLabels>>>, font: Font) {
+    private fun AllNotesFragmentBinding.setupNotes(
+        state: UiState<Map<Library, List<NoteWithLabels>>>,
+        notesVisibility: Map<Library, Boolean>,
+        font: Font,
+    ) {
         when (state) {
             is UiState.Loading -> rv.setupProgressIndicator()
             is UiState.Success -> {
@@ -122,44 +127,49 @@ class AllNotesFragment : Fragment() {
                             }
                         } else {
                             notes.filterValues { it.isNotEmpty() }.forEach { (library, notes) ->
+                                val isVisible = notesVisibility[library] ?: true
+
                                 headerItem {
                                     id("library ${library.id}")
                                     title(library.getTitle(context))
+                                    isVisible(isVisible)
+                                    onClickListener { _ -> viewModel.toggleVisibilityForLibrary(library.id) }
                                 }
 
-                                notes.forEach { entry ->
-                                    noteItem {
-                                        id(entry.first.id)
-                                        note(entry.first)
-                                        font(font)
-                                        labels(entry.second)
-                                        color(library.color)
-                                        previewSize(library.notePreviewSize)
-                                        isShowCreationDate(library.isShowNoteCreationDate)
-                                        isManualSorting(false)
-                                        onClickListener { _ ->
-                                            navController
-                                                ?.navigateSafely(
-                                                    AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
-                                                        entry.first.libraryId,
-                                                        entry.first.id
+                                if (isVisible)
+                                    notes.forEach { entry ->
+                                        noteItem {
+                                            id(entry.first.id)
+                                            note(entry.first)
+                                            font(font)
+                                            labels(entry.second)
+                                            color(library.color)
+                                            previewSize(library.notePreviewSize)
+                                            isShowCreationDate(library.isShowNoteCreationDate)
+                                            isManualSorting(false)
+                                            onClickListener { _ ->
+                                                navController
+                                                    ?.navigateSafely(
+                                                        AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
+                                                            entry.first.libraryId,
+                                                            entry.first.id
+                                                        )
                                                     )
-                                                )
-                                        }
-                                        onLongClickListener { _ ->
-                                            navController
-                                                ?.navigateSafely(
-                                                    AllNotesFragmentDirections.actionAllNotesFragmentToNoteDialogFragment(
-                                                        entry.first.libraryId,
-                                                        entry.first.id,
-                                                        R.id.libraryFragment
+                                            }
+                                            onLongClickListener { _ ->
+                                                navController
+                                                    ?.navigateSafely(
+                                                        AllNotesFragmentDirections.actionAllNotesFragmentToNoteDialogFragment(
+                                                            entry.first.libraryId,
+                                                            entry.first.id,
+                                                            R.id.libraryFragment
+                                                        )
                                                     )
-                                                )
-                                            true
+                                                true
+                                            }
+                                            onDragHandleTouchListener { _, _ -> false }
                                         }
-                                        onDragHandleTouchListener { _, _ -> false }
                                     }
-                                }
                             }
                         }
                     }

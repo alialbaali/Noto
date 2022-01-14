@@ -26,6 +26,9 @@ class AllNotesViewModel(
     private val mutableNotes = MutableStateFlow<UiState<Map<Library, List<NoteWithLabels>>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
 
+    private val mutableNotesVisibility = MutableStateFlow(emptyMap<Library, Boolean>())
+    val notesVisibility get() = mutableNotesVisibility.asStateFlow()
+
     val font = storage.get(Constants.FontKey)
         .filterNotNull()
         .map { Font.valueOf(it) }
@@ -45,6 +48,10 @@ class AllNotesViewModel(
             labelRepository.getAllLabels(),
             noteLabelRepository.getNoteLabels(),
         ) { libraries, notes, labels, noteLabels ->
+            mutableNotesVisibility.value = libraries.map {
+                val isVisible = notesVisibility.value[it] ?: true
+                it to isVisible
+            }.toMap()
             mutableNotes.value = notes
                 .mapWithLabels(labels, noteLabels)
                 .groupBy { noteWithLabels ->
@@ -58,5 +65,14 @@ class AllNotesViewModel(
 
     fun toggleIsSearchEnabled() {
         mutableIsSearchEnabled.value = !mutableIsSearchEnabled.value
+    }
+
+    fun toggleVisibilityForLibrary(libraryId: Long) {
+        mutableNotesVisibility.value = notesVisibility.value.mapValues {
+            if (it.key.id == libraryId)
+                !it.value
+            else
+                it.value
+        }
     }
 }
