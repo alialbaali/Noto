@@ -144,20 +144,22 @@ class NoteFragment : Fragment() {
     }
 
     private fun NoteFragmentBinding.enableBottomAppBarActions() {
-        fab.alpha = 1F
+        val alpha = 255
+        fab.imageAlpha = alpha
         fab.isEnabled = true
         bab.menu.forEach {
             it.isEnabled = true
-            it.icon?.alpha = 255
+            it.icon?.alpha = alpha
         }
     }
 
     private fun NoteFragmentBinding.disableBottomAppBarActions() {
-        fab.alpha = 0.50F
+        val alpha = 128
+        fab.imageAlpha = alpha
         fab.isEnabled = false
         bab.menu.forEach {
             it.isEnabled = false
-            it.icon?.alpha = 128
+            it.icon?.alpha = alpha
         }
     }
 
