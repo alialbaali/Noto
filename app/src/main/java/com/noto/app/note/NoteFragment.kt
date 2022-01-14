@@ -137,6 +137,10 @@ class NoteFragment : Fragment() {
                 context?.updateNoteListWidgets(viewModel.library.value.id)
             }
             .launchIn(lifecycleScope)
+
+        viewModel.isCollapseToolbar
+            .onEach { isCollapseToolbar -> abl.setExpanded(isCollapseToolbar, false) }
+            .launchIn(lifecycleScope)
     }
 
     private fun NoteFragmentBinding.enableBottomAppBarActions() {

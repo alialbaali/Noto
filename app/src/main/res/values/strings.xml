@@ -71,6 +71,7 @@
     <string name="inbox_layout">Inbox layout</string>
     <string name="inbox_archive">Inbox archive</string>
     <string name="change_main_library">Change main library</string>
+    <string name="collapse_toolbar_by_default">Collapse toolbar by default</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>

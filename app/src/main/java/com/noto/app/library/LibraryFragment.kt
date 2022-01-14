@@ -87,6 +87,10 @@ class LibraryFragment : Fragment() {
                     disableSearch()
             }
             .launchIn(lifecycleScope)
+
+        viewModel.isCollapseToolbar
+            .onEach { isCollapseToolbar -> abl.setExpanded(isCollapseToolbar, false) }
+            .launchIn(lifecycleScope)
     }
 
     private fun LibraryFragmentBinding.setupListeners() {
