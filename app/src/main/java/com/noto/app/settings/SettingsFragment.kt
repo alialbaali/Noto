@@ -42,6 +42,7 @@ class SettingsFragment : Fragment() {
             tvVersion.text = context.stringResource(R.string.version, version)
             swShowNotesCount.setupColors()
             swBioAuth.setupColors()
+            swCollapseToolbar.setupColors()
 
             when (BiometricManager.from(context).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
                 BiometricManager.BIOMETRIC_SUCCESS -> swBioAuth.isVisible = true
@@ -61,6 +62,7 @@ class SettingsFragment : Fragment() {
             .onEach { isCollapseToolbar ->
                 swCollapseToolbar.isChecked = isCollapseToolbar
                 abl.setExpanded(isCollapseToolbar, shouldAnimateToolbar)
+                shouldAnimateToolbar = false
             }
             .launchIn(lifecycleScope)
 
