@@ -13,6 +13,7 @@ import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
 import com.noto.app.util.NoteWithLabels
 import com.noto.app.util.mapWithLabels
+import com.noto.app.util.sorted
 import kotlinx.coroutines.flow.*
 
 class AllNotesViewModel(
@@ -60,6 +61,8 @@ class AllNotesViewModel(
                     }
                 }
                 .filterNotNullKeys()
+                .mapValues { it.value.sorted(it.key.sortingType, it.key.sortingOrder) }
+                .toSortedMap(compareBy { it.position })
                 .let { UiState.Success(it) }
         }.launchIn(viewModelScope)
     }
