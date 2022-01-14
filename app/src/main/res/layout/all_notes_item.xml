@@ -8,6 +8,7 @@
     android:orientation="horizontal"
     android:gravity="center"
     android:padding="@dimen/spacing_normal"
+    android:animateLayoutChanges="true"
     android:background="@drawable/library_item_shape">
 
     <ImageView
