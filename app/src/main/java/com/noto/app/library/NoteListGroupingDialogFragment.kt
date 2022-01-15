@@ -41,16 +41,29 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
                 context?.let { context ->
                     val color = context.colorResource(library.color.toResource())
                     val colorStateList = color.toColorStateList()
+                    val backgroundColorStateList = context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
                     baseDialog.tvDialogTitle.setTextColor(color)
                     baseDialog.vHead.background?.mutate()?.setTint(color)
-                    rbDefault.buttonTintList = colorStateList
-                    rbLabel.buttonTintList = colorStateList
-                    rbCreationDate.buttonTintList = colorStateList
-                }
-                when (library.grouping) {
-                    Grouping.Default -> rbDefault.isChecked = true
-                    Grouping.CreationDate -> rbCreationDate.isChecked = true
-                    Grouping.Label -> rbLabel.isChecked = true
+                    when (library.grouping) {
+                        Grouping.Default -> {
+                            rbDefault.isChecked = true
+                            rbDefault.backgroundTintList = colorStateList.withAlpha(32)
+                            rbCreationDate.backgroundTintList = backgroundColorStateList
+                            rbLabel.backgroundTintList = backgroundColorStateList
+                        }
+                        Grouping.CreationDate -> {
+                            rbCreationDate.isChecked = true
+                            rbCreationDate.backgroundTintList = colorStateList.withAlpha(32)
+                            rbDefault.backgroundTintList = backgroundColorStateList
+                            rbLabel.backgroundTintList = backgroundColorStateList
+                        }
+                        Grouping.Label -> {
+                            rbLabel.isChecked = true
+                            rbLabel.backgroundTintList = colorStateList.withAlpha(32)
+                            rbCreationDate.backgroundTintList = backgroundColorStateList
+                            rbDefault.backgroundTintList = backgroundColorStateList
+                        }
+                    }
                 }
             }
             .launchIn(lifecycleScope)
