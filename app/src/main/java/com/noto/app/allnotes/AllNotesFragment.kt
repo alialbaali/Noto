@@ -132,6 +132,7 @@ class AllNotesFragment : Fragment() {
                                 headerItem {
                                     id("library ${library.id}")
                                     title(library.getTitle(context))
+                                    color(library.color)
                                     isVisible(isVisible)
                                     onClickListener { _ -> viewModel.toggleVisibilityForLibrary(library.id) }
                                 }
