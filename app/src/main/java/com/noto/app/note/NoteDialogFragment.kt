@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -239,10 +240,17 @@ class NoteDialogFragment : BaseDialogFragment() {
             val colorStateList = color.toColorStateList()
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             baseDialogFragment.vHead.backgroundTintList = colorStateList
+            listOf(divider1, divider2, divider3).forEach { divider ->
+                divider.background?.mutate()?.setTint(color.withDefaultAlpha())
+            }
             listOf(
                 tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
                 tvDuplicateNote, tvPinNote, tvRemindMe, tvDeleteNote, tvMoveNote,
-            ).forEach { tv -> TextViewCompat.setCompoundDrawableTintList(tv, colorStateList) }
+            ).forEach { tv ->
+                TextViewCompat.setCompoundDrawableTintList(tv, colorStateList)
+                val rippleDrawable = tv.background.mutate() as RippleDrawable
+                rippleDrawable.setColor(colorStateList.withAlpha(32))
+            }
         }
     }
 
