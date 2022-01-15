@@ -29,7 +29,7 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
 
     override fun bind(holder: Holder) = with(holder.binding) {
         tvTitle.text = title
-        ibVisibility.animate().rotation(if (isVisible) 180F else 0F)
+        ibVisibility.animate().setDuration(DefaultAnimationDuration).rotation(if (isVisible) 180F else 0F)
         ibVisibility.setOnClickListener(onClickListener)
         ibVisibility.isVisible = onClickListener != null
         if (color != null) {

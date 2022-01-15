@@ -22,6 +22,7 @@ import com.noto.app.domain.model.*
 import com.noto.app.label.labelListItem
 import com.noto.app.map
 import com.noto.app.util.*
+import jp.wasabeef.recyclerview.animators.*
 import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -45,6 +46,7 @@ class LibraryFragment : Fragment() {
     private fun LibraryFragmentBinding.setupState() {
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        rv.itemAnimator = VerticalListItemAnimator()
         bab.setRoundedCorners()
 
         viewModel.library

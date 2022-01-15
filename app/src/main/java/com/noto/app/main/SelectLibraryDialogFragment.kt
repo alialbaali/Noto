@@ -52,6 +52,7 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
     private fun SelectLibraryDialogFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rv.itemAnimator = VerticalListItemAnimator()
 
         combine(
             viewModel.libraries,
