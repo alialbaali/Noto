@@ -133,7 +133,7 @@
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="android:background">@drawable/dialog_item_selector</item>
+        <item name="android:background">@drawable/dialog_item_shape</item>
         <item name="android:padding">@dimen/spacing_normal</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
