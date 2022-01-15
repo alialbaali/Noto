@@ -22,20 +22,16 @@
             app:drawableStartCompat="@drawable/ic_round_edit_24" />
 
         <TextView
-            android:id="@+id/tv_archive_library"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/archive_library"
-            app:drawableStartCompat="@drawable/ic_round_archive_24" />
-
-        <TextView
             android:id="@+id/tv_vault_library"
             style="@style/DialogItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/vault_library"
             app:drawableStartCompat="@drawable/ic_round_lock_24" />
+
+        <include
+            android:id="@+id/divider1"
+            layout="@layout/divider_item" />
 
         <TextView
             android:id="@+id/tv_pin_library"
@@ -44,6 +40,18 @@
             android:layout_height="wrap_content"
             android:text="@string/pin_library"
             app:drawableStartCompat="@drawable/ic_round_pin_24" />
+
+        <TextView
+            android:id="@+id/tv_archive_library"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/archive_library"
+            app:drawableStartCompat="@drawable/ic_round_archive_24" />
+
+        <include
+            android:id="@+id/divider2"
+            layout="@layout/divider_item" />
 
         <TextView
             android:id="@+id/tv_new_note_shortcut"
