@@ -32,14 +32,15 @@ fun HorizontalListItemAnimator() = ScaleInAnimator(DefaultInterpolator()).apply 
     removeDuration = DefaultAnimationDuration
 }
 
-
 fun View.animateBackgroundColor(fromColor: Int, toColor: Int): ValueAnimator? {
     return ValueAnimator.ofArgb(fromColor, toColor)
         .apply {
             duration = DefaultAnimationDuration
             addUpdateListener { animator ->
                 val value = animator.animatedValue as Int
-                background?.mutate()?.setTint(value)
+                background?.mutate()
+                    ?.also { it.setRippleColor(fromColor.toColorStateList()) }
+                    ?.setTint(value)
             }
             start()
         }
@@ -64,6 +65,7 @@ fun View.animateLabelColors(fromColor: Int, toColor: Int) {
                     setColor(backgroundColor)
                 }
                 ?.toRippleDrawable(context)
+                ?.also { it.setRippleColor(fromColor.toColorStateList()) }
         }
         start()
     }
