@@ -5,7 +5,6 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.view.animation.AnimationUtils
 import androidx.activity.addCallback
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -45,7 +44,6 @@ class NoteFragment : Fragment() {
 
     @OptIn(FlowPreview::class)
     private fun NoteFragmentBinding.setupState() {
-        nsv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
