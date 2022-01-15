@@ -163,6 +163,8 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 }
 
             if (library.isInbox) {
+                divider1.root.isVisible = false
+                divider2.root.isVisible = false
                 tvArchiveLibrary.isVisible = false
                 tvVaultLibrary.isVisible = false
                 tvDeleteLibrary.isVisible = false
