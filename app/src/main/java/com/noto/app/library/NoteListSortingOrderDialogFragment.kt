@@ -26,7 +26,7 @@ class NoteListSortingOrderDialogFragment : BaseDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = NoteListSortingOrderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         val baseDialog = BaseDialogFragmentBinding.bind(root).apply {
@@ -40,14 +40,21 @@ class NoteListSortingOrderDialogFragment : BaseDialogFragment() {
                 context?.let { context ->
                     val color = context.colorResource(library.color.toResource())
                     val colorStateList = color.toColorStateList()
+                    val backgroundColorStateList = context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
                     baseDialog.tvDialogTitle.setTextColor(color)
                     baseDialog.vHead.background?.mutate()?.setTint(color)
-                    rbSortingAsc.buttonTintList = colorStateList
-                    rbSortingDesc.buttonTintList = colorStateList
-                }
-                when (library.sortingOrder) {
-                    SortingOrder.Ascending -> rbSortingAsc.isChecked = true
-                    SortingOrder.Descending -> rbSortingDesc.isChecked = true
+                    when (library.sortingOrder) {
+                        SortingOrder.Ascending -> {
+                            rbSortingAsc.isChecked = true
+                            rbSortingAsc.backgroundTintList = colorStateList.withAlpha(32)
+                            rbSortingDesc.backgroundTintList = backgroundColorStateList
+                        }
+                        SortingOrder.Descending -> {
+                            rbSortingDesc.isChecked = true
+                            rbSortingDesc.backgroundTintList = colorStateList.withAlpha(32)
+                            rbSortingAsc.backgroundTintList = backgroundColorStateList
+                        }
+                    }
                 }
             }
             .launchIn(lifecycleScope)

@@ -28,7 +28,7 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = NoteListSortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         val baseDialog = BaseDialogFragmentBinding.bind(root)
@@ -42,10 +42,12 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
             .onEach { library ->
                 context?.let { context ->
                     val color = context.colorResource(library.color.toResource())
+                    val colorStateList = color.toColorStateList()
                     baseDialog.tvDialogTitle.setTextColor(color)
                     baseDialog.vHead.background?.mutate()?.setTint(color)
-                    listOf(tvGrouping, tvSortingType, tvSortingOrder).onEach {
-                        TextViewCompat.setCompoundDrawableTintList(it, color.toColorStateList())
+                    listOf(tvGrouping, tvSortingType, tvSortingOrder).onEach { tv ->
+                        TextViewCompat.setCompoundDrawableTintList(tv, colorStateList)
+                        tv.background.setRippleColor(colorStateList)
                     }
                 }
                 when (library.sortingType) {
