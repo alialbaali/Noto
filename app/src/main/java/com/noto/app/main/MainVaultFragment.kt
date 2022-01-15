@@ -74,6 +74,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainVaultFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rv.itemAnimator = VerticalListItemAnimator()
 
         combine(viewModel.isVaultOpen, viewModel.isBioAuthEnabled) { isVaultOpen, isBioAuthEnabled ->
             if (!isVaultOpen && isBioAuthEnabled)

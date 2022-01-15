@@ -7,8 +7,31 @@ import android.animation.ValueAnimator
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.view.View
+import android.view.animation.AccelerateInterpolator
 import android.widget.TextView
 import com.noto.app.R
+import jp.wasabeef.recyclerview.animators.ScaleInAnimator
+import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
+
+const val DefaultAnimationDuration = 250L
+typealias DefaultInterpolator = AccelerateInterpolator
+
+@Suppress("FunctionName")
+fun VerticalListItemAnimator() = SlideInUpAnimator(DefaultInterpolator()).apply {
+    addDuration = DefaultAnimationDuration
+    changeDuration = DefaultAnimationDuration
+    moveDuration = DefaultAnimationDuration
+    removeDuration = DefaultAnimationDuration
+}
+
+@Suppress("FunctionName")
+fun HorizontalListItemAnimator() = ScaleInAnimator(DefaultInterpolator()).apply {
+    addDuration = DefaultAnimationDuration
+    changeDuration = DefaultAnimationDuration
+    moveDuration = DefaultAnimationDuration
+    removeDuration = DefaultAnimationDuration
+}
+
 
 fun View.animateBackgroundColor(fromColor: Int, toColor: Int): ValueAnimator? {
     return ValueAnimator.ofArgb(fromColor, toColor)

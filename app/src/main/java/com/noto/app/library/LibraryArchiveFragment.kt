@@ -43,6 +43,7 @@ class LibraryArchiveFragment : BaseDialogFragment(isCollapsable = true) {
 
     private fun LibraryArchiveFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        rv.itemAnimator = VerticalListItemAnimator()
 
         viewModel.library
             .onEach { library -> setupLibrary(library, baseDialogFragment) }

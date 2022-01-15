@@ -63,6 +63,7 @@ class AllNotesFragment : Fragment() {
 
     private fun AllNotesFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        rv.itemAnimator = VerticalListItemAnimator()
         bab.setRoundedCorners()
         context?.let { context ->
             val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
