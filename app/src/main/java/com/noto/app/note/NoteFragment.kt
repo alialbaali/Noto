@@ -47,6 +47,7 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupState() {
         nsv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
         bab.setRoundedCorners()
 

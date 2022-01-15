@@ -44,6 +44,7 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupState() {
         nsv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
 
         viewModel.library

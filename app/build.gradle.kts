@@ -130,6 +130,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
     implementation("com.google.android:flexbox:2.0.1")
     implementation("com.eightbitlab:blurview:1.6.6")
+    implementation("jp.wasabeef:recyclerview-animators:4.0.2")
 
     testImplementation(Testing.Kotest.Runner.junit5)
     testImplementation(Testing.Kotest.Assertions.core)

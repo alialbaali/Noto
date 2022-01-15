@@ -65,6 +65,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        rv.itemAnimator = VerticalListItemAnimator()
 
         combine(
             viewModel.libraries,

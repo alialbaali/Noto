@@ -49,6 +49,8 @@ class NoteListWidgetConfigActivity : BaseActivity() {
         widget.lv.dividerHeight = 16.dp
         widget.lv.setPaddingRelative(8.dp, 16.dp, 8.dp, 100.dp)
         widget.root.clipToOutline = true
+        rv.itemAnimator = HorizontalListItemAnimator()
+        rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         viewModel.isWidgetCreated
             .onEach { isCreated ->
