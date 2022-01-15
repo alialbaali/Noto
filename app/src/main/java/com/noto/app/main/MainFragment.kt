@@ -113,7 +113,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         isSelected(inboxLibrary.first.id == selectedLibraryId)
                         onClickListener { _ ->
                             if (inboxLibrary.first.id != selectedLibraryId)
-                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(inboxLibrary.first.id))
+                                navigateToLibraryFragment(inboxLibrary.first.id)
                             dismiss()
                         }
                         onLongClickListener { _ ->
@@ -149,7 +149,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                                 isSelected(entry.first.id == selectedLibraryId)
                                 onClickListener { _ ->
                                     if (entry.first.id != selectedLibraryId)
-                                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(entry.first.id))
+                                        navigateToLibraryFragment(entry.first.id)
                                     dismiss()
                                 }
                                 onLongClickListener { _ ->
@@ -183,6 +183,14 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
             }
             itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
                 .apply { attachToRecyclerView(rv) }
+        }
+    }
+
+    private fun navigateToLibraryFragment(libraryId: Long) {
+        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(libraryId)) {
+            popUpTo(if (selectedLibraryId == AllNotesItemId) R.id.allNotesFragment else R.id.libraryFragment) {
+                inclusive = true
+            }
         }
     }
 }
