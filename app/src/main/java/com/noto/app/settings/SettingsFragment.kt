@@ -68,7 +68,7 @@ class SettingsFragment : Fragment() {
 
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Long>(Constants.LibraryId)
-            ?.observe(viewLifecycleOwner, viewModel::setHomeScreenId)
+            ?.observe(viewLifecycleOwner, viewModel::setMainLibraryId)
     }
 
     private fun SettingsFragmentBinding.setupListeners() {
