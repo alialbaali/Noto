@@ -34,12 +34,16 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
         ibVisibility.isVisible = onClickListener != null
         if (color != null) {
             val colorResource = root.context.colorResource(color!!.toResource())
+            val colorStateList = colorResource.toColorStateList()
             tvTitle.setTextColor(colorResource)
-            ibVisibility.imageTintList = colorResource.toColorStateList()
+            ibVisibility.imageTintList = colorStateList
+            ibVisibility.background.setRippleColor(colorStateList)
         } else {
             val colorResource = root.context.attributeColoResource(R.attr.notoSecondaryColor)
+            val rippleColorResource = root.context.attributeColoResource(R.attr.notoSurfaceColor)
             tvTitle.setTextColor(colorResource)
             ibVisibility.imageTintList = colorResource.toColorStateList()
+            ibVisibility.background.setRippleColor(rippleColorResource.toColorStateList())
         }
     }
 

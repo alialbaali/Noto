@@ -19,7 +19,8 @@
     <ImageButton
         android:id="@+id/ib_visibility"
         android:src="@drawable/ic_round_arrow_down_24"
-        android:background="@drawable/ic_widget_btn_shape"
+        android:background="@drawable/round_btn_surface_shape"
+        android:backgroundTint="?attr/notoBackgroundColor"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/spacing_small"
