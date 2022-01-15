@@ -18,6 +18,8 @@ class NoteRepositoryImpl(
 
     override fun getAllNotes(): Flow<List<Note>> = dataSource.getAllNotes()
 
+    override fun getAllMainNotes(): Flow<List<Note>> = dataSource.getAllMainNotes()
+
     override fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getNotesByLibraryId(libraryId)
 
     override fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getArchivedNotesByLibraryId(libraryId)
