@@ -3,7 +3,6 @@ package com.noto.app.library
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import androidx.activity.addCallback
 import androidx.core.view.MenuItemCompat
@@ -37,6 +36,8 @@ class LibraryFragment : Fragment() {
 
     private lateinit var itemTouchHelper: ItemTouchHelper
 
+    private lateinit var layoutManager: StaggeredGridLayoutManager
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryFragmentBinding.inflate(inflater, container, false).withBinding {
             setupState()
@@ -47,6 +48,7 @@ class LibraryFragment : Fragment() {
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
+        layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
         bab.setRoundedCorners()
 
         viewModel.library
@@ -159,10 +161,10 @@ class LibraryFragment : Fragment() {
 
     private fun LibraryFragmentBinding.setupLayoutManager(layout: Layout) {
         when (layout) {
-            Layout.Linear -> rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            Layout.Linear -> layoutManager.spanCount = 1
+            Layout.Grid -> layoutManager.spanCount = 2
         }
-        rv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
+        rv.resetAdapter()
     }
 
     private fun LibraryFragmentBinding.setupNotesAndLabels(

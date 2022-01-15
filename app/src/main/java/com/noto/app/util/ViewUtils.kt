@@ -32,6 +32,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -227,4 +228,8 @@ inline fun BottomAppBar.setOnSwipeGestureListener(crossinline callback: () -> Un
 fun Drawable.setRippleColor(colorStateList: ColorStateList) {
     val rippleDrawable = mutate() as RippleDrawable
     rippleDrawable.setColor(colorStateList.withAlpha(32))
+}
+
+fun RecyclerView.resetAdapter() {
+    adapter = adapter
 }

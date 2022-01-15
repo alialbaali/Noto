@@ -5,10 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
@@ -33,6 +31,8 @@ class LibraryArchiveFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val args by navArgs<LibraryArchiveFragmentArgs>()
 
+    private lateinit var layoutManager: StaggeredGridLayoutManager
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
             val baseDialogFragment = setupBaseDialogFragment()
@@ -44,6 +44,7 @@ class LibraryArchiveFragment : BaseDialogFragment(isCollapsable = true) {
     private fun LibraryArchiveFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
+        layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
 
         viewModel.library
             .onEach { library -> setupLibrary(library, baseDialogFragment) }
@@ -62,11 +63,10 @@ class LibraryArchiveFragment : BaseDialogFragment(isCollapsable = true) {
 
     private fun LibraryArchiveFragmentBinding.setupLayoutManger(layout: Layout) {
         when (layout) {
-            Layout.Linear -> rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            Layout.Grid -> rv.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+            Layout.Linear -> layoutManager.spanCount = 1
+            Layout.Grid -> layoutManager.spanCount = 2
         }
-        rv.visibility = View.VISIBLE
-        rv.startAnimation(AnimationUtils.loadAnimation(context, R.anim.show))
+        rv.resetAdapter()
     }
 
     private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
