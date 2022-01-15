@@ -126,7 +126,7 @@ class SettingsViewModel(
         storage.put(Constants.LastVersion, Release.CurrentVersion)
     }
 
-    fun setHomeScreenId(libraryId: Long) = viewModelScope.launch {
+    fun setMainLibraryId(libraryId: Long) = viewModelScope.launch {
         storage.put(Constants.MainLibraryId, libraryId.toString())
     }
 }

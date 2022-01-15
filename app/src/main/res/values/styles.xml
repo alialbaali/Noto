@@ -312,7 +312,7 @@
     </style>
 
     <style name="SettingsItem" parent="DialogItem">
-        <item name="android:background">@drawable/settings_item_shape</item>
+        <item name="drawableTint">?attr/notoSecondaryColor</item>
     </style>
 
     <style name="LabelItem" parent="Widget.MaterialComponents.TextView">

@@ -43,197 +43,152 @@
             android:orientation="vertical"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginVertical="@dimen/spacing_small"
-                android:background="@drawable/generic_shape"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_change_main_library"
+                style="@style/SettingsItem"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_folder_24"
+                android:text="@string/change_main_library" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_change_main_library"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_folder_24"
-                    android:text="@string/change_main_library" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_change_theme"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_theme_24"
-                    android:text="@string/change_theme" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_change_language"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_language_24"
-                    android:text="@string/change_language" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_change_notes_font"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_font_24"
-                    android:text="@string/change_notes_font" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginVertical="@dimen/spacing_small"
-                android:background="@drawable/generic_shape"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_change_theme"
+                style="@style/SettingsItem"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_theme_24"
+                android:text="@string/change_theme" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_change_vault_passcode"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_password_24"
-                    android:text="@string/change_vault_passcode" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_change_vault_timeout"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_schedule_24"
-                    android:text="@string/change_vault_timeout" />
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sw_bio_auth"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_fingerprint_24"
-                    android:text="@string/enable_bio_auth" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginVertical="@dimen/spacing_small"
-                android:background="@drawable/generic_shape"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_change_language"
+                style="@style/SettingsItem"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_language_24"
+                android:text="@string/change_language" />
 
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sw_show_notes_count"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_count_24"
-                    android:text="@string/show_libraries_notes_count" />
-
-                <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/sw_collapse_toolbar"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_aspect_ratio_24"
-                    android:text="@string/collapse_toolbar" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginVertical="@dimen/spacing_small"
-                android:background="@drawable/generic_shape"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_change_notes_font"
+                style="@style/SettingsItem"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_font_24"
+                android:text="@string/change_notes_font" />
+            <!--            </LinearLayout>-->
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_export_import"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_import_export_24"
-                    android:text="@string/export_import_data" />
-            </LinearLayout>
+            <include layout="@layout/divider_item" />
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginVertical="@dimen/spacing_small"
-                android:background="@drawable/generic_shape"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_change_vault_passcode"
+                style="@style/SettingsItem"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_password_24"
+                android:text="@string/change_vault_passcode" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_join_community"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_group_24"
-                    android:text="@string/join_community" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_view_code"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_code_24"
-                    android:text="@string/view_code" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_share_with_others"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_share_24"
-                    android:text="@string/share_app_with_others" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_rate_app"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_star_rate_24"
-                    android:text="@string/rate_app_on_play_store" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginVertical="@dimen/spacing_small"
-                android:background="@drawable/generic_shape"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_change_vault_timeout"
+                style="@style/SettingsItem"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_schedule_24"
+                android:text="@string/change_vault_timeout" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_whats_new"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_new_releases_24"
-                    android:text="@string/whats_new" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_bio_auth"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_fingerprint_24"
+                android:text="@string/enable_bio_auth" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_report_issue"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_report_problem_24"
-                    android:text="@string/report_issue" />
+            <include layout="@layout/divider_item" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_about"
-                    style="@style/SettingsItem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_round_info_24"
-                    android:text="@string/about" />
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_show_notes_count"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_count_24"
+                android:text="@string/show_libraries_notes_count" />
 
-            </LinearLayout>
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_collapse_toolbar"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_aspect_ratio_24"
+                android:text="@string/collapse_toolbar" />
+
+            <include layout="@layout/divider_item" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_export_import"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_import_export_24"
+                android:text="@string/export_import_data" />
+
+            <include layout="@layout/divider_item" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_join_community"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_group_24"
+                android:text="@string/join_community" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_view_code"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_code_24"
+                android:text="@string/view_code" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_share_with_others"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_share_24"
+                android:text="@string/share_app_with_others" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_rate_app"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_star_rate_24"
+                android:text="@string/rate_app_on_play_store" />
+
+            <include layout="@layout/divider_item" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_whats_new"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_new_releases_24"
+                android:text="@string/whats_new" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_report_issue"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_report_problem_24"
+                android:text="@string/report_issue" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_about"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_info_24"
+                android:text="@string/about" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_version"
