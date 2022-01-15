@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.net.Uri
@@ -221,4 +222,9 @@ inline fun BottomAppBar.setOnSwipeGestureListener(crossinline callback: () -> Un
         gestureDetector.onTouchEvent(event)
         false
     }
+}
+
+fun Drawable.setRippleColor(colorStateList: ColorStateList) {
+    val rippleDrawable = mutate() as RippleDrawable
+    rippleDrawable.setColor(colorStateList.withAlpha(32))
 }
