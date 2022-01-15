@@ -11,6 +11,7 @@ import com.noto.app.databinding.LabelListItemBinding
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.BounceEdgeEffectFactory
+import com.noto.app.util.HorizontalListItemAnimator
 import com.noto.app.util.setFullSpan
 
 @SuppressLint("NonConstantResourceId")
@@ -37,6 +38,7 @@ abstract class LabelListItem : EpoxyModelWithHolder<LabelListItem.Holder>() {
 
     override fun bind(holder: Holder) = with(holder.binding) {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        rv.itemAnimator = HorizontalListItemAnimator()
         rv.withModels {
             allLabelItem {
                 id("all")

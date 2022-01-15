@@ -56,6 +56,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
     private fun NewLibraryDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rv.clipToOutline = true
+        rv.itemAnimator = HorizontalListItemAnimator()
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         if (args.libraryId == 0L) {

@@ -77,6 +77,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
         rv.isVisible = labels.isNotEmpty()
         rv.layoutManager = FlexboxLayoutManager(root.context, FlexDirection.ROW, FlexWrap.WRAP)
+        rv.itemAnimator = HorizontalListItemAnimator()
         rv.withModels {
             labels.forEach { label ->
                 noteLabelItem {

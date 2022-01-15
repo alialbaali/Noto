@@ -13,6 +13,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.WhatsNewDialogFragmentBinding
 import com.noto.app.domain.model.Release_1_8_0
 import com.noto.app.util.BounceEdgeEffectFactory
+import com.noto.app.util.VerticalListItemAnimator
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -50,6 +51,7 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
 
     private fun WhatsNewDialogFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        rv.itemAnimator = VerticalListItemAnimator()
         viewModel.whatsNewTab
             .mapNotNull { tab ->
                 context?.let { context ->
