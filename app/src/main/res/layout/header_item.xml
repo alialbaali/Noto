@@ -23,5 +23,6 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/spacing_small"
-        android:contentDescription="@string/drag" />
+        android:contentDescription="@string/drag"
+        app:tint="?attr/notoSecondaryColor" />
 </LinearLayout>

@@ -9,6 +9,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.noto.app.R
 import com.noto.app.databinding.HeaderItemBinding
+import com.noto.app.domain.model.NotoColor
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass(layout = R.layout.header_item)
@@ -20,6 +21,9 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
     @EpoxyAttribute
     open var isVisible = false
 
+    @EpoxyAttribute
+    var color: NotoColor? = null
+
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     var onClickListener: View.OnClickListener? = null
 
@@ -28,6 +32,15 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
         ibVisibility.animate().rotation(if (isVisible) 180F else 0F)
         ibVisibility.setOnClickListener(onClickListener)
         ibVisibility.isVisible = onClickListener != null
+        if (color != null) {
+            val colorResource = root.context.colorResource(color!!.toResource())
+            tvTitle.setTextColor(colorResource)
+            ibVisibility.imageTintList = colorResource.toColorStateList()
+        } else {
+            val colorResource = root.context.attributeColoResource(R.attr.notoSecondaryColor)
+            tvTitle.setTextColor(colorResource)
+            ibVisibility.imageTintList = colorResource.toColorStateList()
+        }
     }
 
     override fun onViewAttachedToWindow(holder: Holder) {
