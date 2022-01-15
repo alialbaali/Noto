@@ -45,7 +45,7 @@ class AllNotesViewModel(
     init {
         combine(
             libraryRepository.getLibraries(),
-            noteRepository.getAllNotes(),
+            noteRepository.getAllMainNotes(),
             labelRepository.getAllLabels(),
             noteLabelRepository.getNoteLabels(),
         ) { libraries, notes, labels, noteLabels ->
