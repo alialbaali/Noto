@@ -3,7 +3,6 @@ package com.noto.app.library
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.view.animation.TranslateAnimation
 import androidx.activity.addCallback
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
@@ -130,11 +129,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.enableSearch() {
-        val rvAnimation = TranslateAnimation(0F, 0F, -50F, 0F).apply {
-            duration = 250
-        }
         tilSearch.isVisible = true
-        rv.startAnimation(rvAnimation)
         etSearch.requestFocus()
         etSearch.showKeyboardUsingImm()
 
@@ -148,13 +143,7 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.disableSearch() {
-        if (tilSearch.isVisible) {
-            val rvAnimation = TranslateAnimation(0F, 0F, 50F, 0F).apply {
-                duration = 250
-            }
-            tilSearch.isVisible = false
-            rv.startAnimation(rvAnimation)
-        }
+        tilSearch.isVisible = false
         etSearch.text = null
         activity?.hideKeyboard(root)
     }
