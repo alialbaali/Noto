@@ -26,7 +26,7 @@ class NoteListSortingTypeDialogFragment : BaseDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = NoteListSortingTypeDialogFragmentBinding.inflate(inflater, container, false).withBinding {
 
         val baseDialog = BaseDialogFragmentBinding.bind(root)
@@ -41,16 +41,29 @@ class NoteListSortingTypeDialogFragment : BaseDialogFragment() {
                 context?.let { context ->
                     val color = context.colorResource(library.color.toResource())
                     val colorStateList = color.toColorStateList()
+                    val backgroundColorStateList = context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
                     baseDialog.tvDialogTitle.setTextColor(color)
                     baseDialog.vHead.background?.mutate()?.setTint(color)
-                    rbManual.buttonTintList = colorStateList
-                    rbAlphabetical.buttonTintList = colorStateList
-                    rbCreationDate.buttonTintList = colorStateList
-                }
-                when (library.sortingType) {
-                    NoteListSortingType.Alphabetical -> rbAlphabetical.isChecked = true
-                    NoteListSortingType.CreationDate -> rbCreationDate.isChecked = true
-                    NoteListSortingType.Manual -> rbManual.isChecked = true
+                    when (library.sortingType) {
+                        NoteListSortingType.Alphabetical -> {
+                            rbAlphabetical.isChecked = true
+                            rbAlphabetical.backgroundTintList = colorStateList.withAlpha(32)
+                            rbCreationDate.backgroundTintList = backgroundColorStateList
+                            rbManual.backgroundTintList = backgroundColorStateList
+                        }
+                        NoteListSortingType.CreationDate -> {
+                            rbCreationDate.isChecked = true
+                            rbCreationDate.backgroundTintList = colorStateList.withAlpha(32)
+                            rbAlphabetical.backgroundTintList = backgroundColorStateList
+                            rbManual.backgroundTintList = backgroundColorStateList
+                        }
+                        NoteListSortingType.Manual -> {
+                            rbManual.isChecked = true
+                            rbManual.backgroundTintList = colorStateList.withAlpha(32)
+                            rbCreationDate.backgroundTintList = backgroundColorStateList
+                            rbAlphabetical.backgroundTintList = backgroundColorStateList
+                        }
+                    }
                 }
             }
             .launchIn(lifecycleScope)
