@@ -41,6 +41,7 @@
         <entry key="app/src/main/res/drawable/content_copy.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ctb_background_shape.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/cursor_shape.xml" value="0.22631578947368422" />
+        <entry key="app/src/main/res/drawable/dialog_item_divider.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/dialog_item_selector.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/dialog_item_shape.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/drawable/dialog_radio_button_item.xml" value="0.2241042345276873" />
