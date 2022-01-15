@@ -29,6 +29,10 @@
             android:text="@string/reorder_label"
             app:drawableStartCompat="@drawable/ic_round_reorder_24" />
 
+        <include
+            android:id="@+id/divider1"
+            layout="@layout/divider_item" />
+
         <TextView
             android:id="@+id/tv_delete_label"
             style="@style/DialogItem"
