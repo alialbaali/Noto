@@ -28,7 +28,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.shape.MaterialShapeDrawable
@@ -51,9 +53,12 @@ const val SetColorFilterMethodName = "setColorFilter"
 const val SetBackgroundResourceMethodName = "setBackgroundResource"
 const val SwipeGestureThreshold = 100F
 
-fun NavController.navigateSafely(directions: NavDirections) {
+fun NavController.navigateSafely(directions: NavDirections, builder: (NavOptionsBuilder.() -> Unit)? = null) {
     if (currentDestination?.getAction(directions.actionId) != null)
-        navigate(directions)
+        if (builder == null)
+            navigate(directions)
+        else
+            navigate(directions, navOptions(builder))
 }
 
 val Fragment.navController: NavController?
