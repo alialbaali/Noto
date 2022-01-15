@@ -150,10 +150,17 @@ class LibraryDialogFragment : BaseDialogFragment() {
     private fun LibraryDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
             val color = context.colorResource(library.color.toResource())
+            val colorStateList = color.toColorStateList()
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
             baseDialogFragment.tvDialogTitle.setTextColor(color)
+            listOf(divider1, divider2).forEach { divider ->
+                divider.root.background?.mutate()?.setTint(color.withDefaultAlpha())
+            }
             listOf(tvEditLibrary, tvArchiveLibrary, tvVaultLibrary, tvPinLibrary, tvNewNoteShortcut, tvDeleteLibrary)
-                .forEach { TextViewCompat.setCompoundDrawableTintList(it, color.toColorStateList()) }
+                .forEach { tv ->
+                    TextViewCompat.setCompoundDrawableTintList(tv, colorStateList)
+                    tv.background.setRippleColor(colorStateList)
+                }
 
             if (library.isInbox) {
                 tvArchiveLibrary.isVisible = false

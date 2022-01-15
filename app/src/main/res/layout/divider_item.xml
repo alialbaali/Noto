@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/dialog_item_divider"
+    android:layout_margin="@dimen/spacing_normal"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/dialog_item_divider_height" />

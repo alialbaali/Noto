@@ -29,20 +29,9 @@
             android:text="@string/open_note_in_reading_mode"
             app:drawableStartCompat="@drawable/ic_round_reading_mode_24" />
 
-        <View
+        <include
             android:id="@+id/divider1"
-            android:background="@drawable/dialog_item_divider"
-            android:layout_margin="@dimen/spacing_normal"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dialog_item_divider_height" />
-
-        <TextView
-            android:id="@+id/tv_archive_note"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/archive_note"
-            app:drawableStartCompat="@drawable/ic_round_archive_24" />
+            layout="@layout/divider_item" />
 
         <TextView
             android:id="@+id/tv_pin_note"
@@ -52,12 +41,17 @@
             android:text="@string/pin_note"
             app:drawableStartCompat="@drawable/ic_round_pin_24" />
 
-        <View
+        <TextView
+            android:id="@+id/tv_archive_note"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/archive_note"
+            app:drawableStartCompat="@drawable/ic_round_archive_24" />
+
+        <include
             android:id="@+id/divider2"
-            android:background="@drawable/dialog_item_divider"
-            android:layout_margin="@dimen/spacing_normal"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dialog_item_divider_height" />
+            layout="@layout/divider_item" />
 
         <TextView
             android:id="@+id/tv_duplicate_note"
@@ -91,12 +85,9 @@
             android:text="@string/move_note"
             app:drawableStartCompat="@drawable/ic_round_move_24" />
 
-        <View
+        <include
             android:id="@+id/divider3"
-            android:background="@drawable/dialog_item_divider"
-            android:layout_margin="@dimen/spacing_normal"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dialog_item_divider_height" />
+            layout="@layout/divider_item" />
 
         <TextView
             android:id="@+id/tv_share_note"
