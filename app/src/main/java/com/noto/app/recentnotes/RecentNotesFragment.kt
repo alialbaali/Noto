@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -56,6 +57,13 @@ class RecentNotesFragment : Fragment() {
                         viewModel.enableSearch()
                     true
                 }
+                R.id.change_visibility -> {
+                    if (viewModel.notesVisibility.value.any { it.value })
+                        viewModel.collapseAll()
+                    else
+                        viewModel.expandAll()
+                    true
+                }
                 else -> false
             }
         }
@@ -96,6 +104,26 @@ class RecentNotesFragment : Fragment() {
             .onEach { isCollapseToolbar ->
                 if (!abl.isExpanded)
                     abl.setExpanded(!isCollapseToolbar, false)
+            }
+            .launchIn(lifecycleScope)
+
+        val menuItem = bab.menu.findItem(R.id.change_visibility)
+        val menuItemColor = context?.attributeColoResource(R.attr.notoBackgroundColor)?.toColorStateList()
+        val expandText = context?.stringResource(R.string.expand)
+        val collapseText = context?.stringResource(R.string.collapse)
+
+        viewModel.notesVisibility
+            .onEach { visibility ->
+                if (visibility.any { it.value }) {
+                    menuItem.icon = context?.drawableResource(R.drawable.ic_round_collapse_24)
+                    menuItem.title = collapseText
+                    MenuItemCompat.setContentDescription(menuItem, collapseText)
+                } else {
+                    menuItem.icon = context?.drawableResource(R.drawable.ic_round_expand_24)
+                    menuItem.title = expandText
+                    MenuItemCompat.setContentDescription(menuItem, expandText)
+                }
+                MenuItemCompat.setIconTintList(menuItem, menuItemColor)
             }
             .launchIn(lifecycleScope)
 

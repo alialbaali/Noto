@@ -105,6 +105,7 @@
         <entry key="app/src/main/res/drawable/ic_round_cancel_24.xml" value="0.20260416666666667" />
         <entry key="app/src/main/res/drawable/ic_round_check_circle_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_circle_24.xml" value="0.22631578947368422" />
+        <entry key="app/src/main/res/drawable/ic_round_close_fullscreen_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_code_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_content_copy_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_control_point_duplicate_24.xml" value="0.35833333333333334" />
@@ -114,6 +115,7 @@
         <entry key="app/src/main/res/drawable/ic_round_drag_handle_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_edit_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_edit_notifications_24.xml" value="0.20260416666666667" />
+        <entry key="app/src/main/res/drawable/ic_round_expand_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_file_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_round_file_copy_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_file_download_24.xml" value="0.22631578947368422" />
@@ -141,6 +143,7 @@
         <entry key="app/src/main/res/drawable/ic_round_note_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_note_alt_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_notification_add_24.xml" value="0.20260416666666667" />
+        <entry key="app/src/main/res/drawable/ic_round_open_in_full_24.xml" value="0.22631578947368422" />
         <entry key="app/src/main/res/drawable/ic_round_palette_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_round_password_24.xml" value="0.2244299674267101" />
         <entry key="app/src/main/res/drawable/ic_round_person_outline_24.xml" value="0.35833333333333334" />
@@ -364,6 +367,7 @@
         <entry key="app/src/main/res/layout/widget_note_label_item.xml" value="0.75" />
         <entry key="app/src/main/res/menu/all_notes_menu.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/menu/bottom_nav_bar_menu.xml" value="0.2675925925925926" />
+        <entry key="app/src/main/res/menu/generic_menu.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/menu/library_list_menu.xml" value="0.3421875" />
         <entry key="app/src/main/res/menu/library_menu.xml" value="0.25" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.21611842105263157" />
