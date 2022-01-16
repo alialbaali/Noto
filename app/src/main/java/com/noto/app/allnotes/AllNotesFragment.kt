@@ -19,6 +19,7 @@ import com.noto.app.domain.model.Library
 import com.noto.app.library.noteItem
 import com.noto.app.map
 import com.noto.app.util.*
+import jp.wasabeef.recyclerview.animators.SlideInDownAnimator
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -127,52 +128,55 @@ class AllNotesFragment : Fragment() {
                                 placeholder(context.stringResource(R.string.no_notes_found))
                             }
                         } else {
-                            notes.filterValues { it.isNotEmpty() }.forEach { (library, notes) ->
-                                val isVisible = notesVisibility[library] ?: true
+                            notes.filterValues { it.isNotEmpty() }
+                                .toList()
+                                .sortedByDescending { it.first.isInbox }
+                                .forEach { (library, notes) ->
+                                    val isVisible = notesVisibility[library] ?: true
 
-                                headerItem {
-                                    id("library ${library.id}")
-                                    title(library.getTitle(context))
-                                    color(library.color)
-                                    isVisible(isVisible)
-                                    onClickListener { _ -> viewModel.toggleVisibilityForLibrary(library.id) }
-                                }
-
-                                if (isVisible)
-                                    notes.forEach { entry ->
-                                        noteItem {
-                                            id(entry.first.id)
-                                            note(entry.first)
-                                            font(font)
-                                            labels(entry.second)
-                                            color(library.color)
-                                            previewSize(library.notePreviewSize)
-                                            isShowCreationDate(library.isShowNoteCreationDate)
-                                            isManualSorting(false)
-                                            onClickListener { _ ->
-                                                navController
-                                                    ?.navigateSafely(
-                                                        AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
-                                                            entry.first.libraryId,
-                                                            entry.first.id
-                                                        )
-                                                    )
-                                            }
-                                            onLongClickListener { _ ->
-                                                navController
-                                                    ?.navigateSafely(
-                                                        AllNotesFragmentDirections.actionAllNotesFragmentToNoteDialogFragment(
-                                                            entry.first.libraryId,
-                                                            entry.first.id,
-                                                            R.id.libraryFragment
-                                                        )
-                                                    )
-                                                true
-                                            }
-                                            onDragHandleTouchListener { _, _ -> false }
-                                        }
+                                    headerItem {
+                                        id("library ${library.id}")
+                                        title(library.getTitle(context))
+                                        color(library.color)
+                                        isVisible(isVisible)
+                                        onClickListener { _ -> viewModel.toggleVisibilityForLibrary(library.id) }
                                     }
-                            }
+
+                                    if (isVisible)
+                                        notes.forEach { entry ->
+                                            noteItem {
+                                                id(entry.first.id)
+                                                note(entry.first)
+                                                font(font)
+                                                labels(entry.second)
+                                                color(library.color)
+                                                previewSize(library.notePreviewSize)
+                                                isShowCreationDate(library.isShowNoteCreationDate)
+                                                isManualSorting(false)
+                                                onClickListener { _ ->
+                                                    navController
+                                                        ?.navigateSafely(
+                                                            AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
+                                                                entry.first.libraryId,
+                                                                entry.first.id
+                                                            )
+                                                        )
+                                                }
+                                                onLongClickListener { _ ->
+                                                    navController
+                                                        ?.navigateSafely(
+                                                            AllNotesFragmentDirections.actionAllNotesFragmentToNoteDialogFragment(
+                                                                entry.first.libraryId,
+                                                                entry.first.id,
+                                                                R.id.libraryFragment
+                                                            )
+                                                        )
+                                                    true
+                                                }
+                                                onDragHandleTouchListener { _, _ -> false }
+                                            }
+                                        }
+                                }
                         }
                     }
                 }
