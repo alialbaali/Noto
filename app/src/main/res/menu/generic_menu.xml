@@ -2,6 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/change_visibility"
+        android:icon="@drawable/ic_round_expand_24"
+        android:contentDescription="@string/expand"
+        android:title="@string/expand"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
+
     <item
         android:id="@+id/search"
         android:contentDescription="@string/search"
