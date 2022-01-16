@@ -14,6 +14,7 @@
         tools:targetApi="m">
         <activity
             android:name=".AppActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true">
 
             <intent-filter>
