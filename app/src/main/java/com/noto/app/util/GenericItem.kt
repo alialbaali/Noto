@@ -1,6 +1,7 @@
-package com.noto.app.allnotes
+package com.noto.app.util
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.RippleDrawable
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +13,17 @@ import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.noto.app.R
-import com.noto.app.databinding.AllNotesItemBinding
-import com.noto.app.util.attributeColoResource
-import com.noto.app.util.dp
-import com.noto.app.util.toColorStateList
-import com.noto.app.util.withDefaultAlpha
+import com.noto.app.databinding.GenericItemBinding
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.all_notes_item)
-abstract class AllNotesItem : EpoxyModelWithHolder<AllNotesItem.Holder>() {
+@EpoxyModelClass(layout = R.layout.generic_item)
+abstract class GenericItem : EpoxyModelWithHolder<GenericItem.Holder>() {
+
+    @EpoxyAttribute
+    lateinit var title: String
+
+    @EpoxyAttribute
+    lateinit var icon: Drawable
 
     @EpoxyAttribute
     open var isManualSorting: Boolean = false
@@ -52,6 +55,8 @@ abstract class AllNotesItem : EpoxyModelWithHolder<AllNotesItem.Holder>() {
             else
                 context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
         }
+        tvTitle.text = title
+        ivIcon.setImageDrawable(icon)
         ibDrag.visibility = if (isManualSorting) View.INVISIBLE else View.GONE
         root.setOnClickListener(onClickListener)
         tvNotesCount.isVisible = isShowNotesCount
@@ -64,11 +69,11 @@ abstract class AllNotesItem : EpoxyModelWithHolder<AllNotesItem.Holder>() {
     }
 
     class Holder : EpoxyHolder() {
-        lateinit var binding: AllNotesItemBinding
+        lateinit var binding: GenericItemBinding
             private set
 
         override fun bindView(itemView: View) {
-            binding = AllNotesItemBinding.bind(itemView)
+            binding = GenericItemBinding.bind(itemView)
         }
     }
 }
