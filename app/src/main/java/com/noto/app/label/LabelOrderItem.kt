@@ -44,6 +44,7 @@ abstract class LabelOrderItem : EpoxyModelWithHolder<LabelOrderItem.Holder>() {
                 }
                 ?.toRippleDrawable(context)
             tvLabel.setTextColor(resourceColor)
+            ibDrag.imageTintList = resourceColor.toColorStateList()
         }
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
     }
