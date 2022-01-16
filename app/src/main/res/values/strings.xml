@@ -73,6 +73,7 @@
     <string name="change_main_library">Change main library</string>
     <string name="collapse_toolbar">Collapse toolbar</string>
     <string name="all_notes">All notes</string>
+    <string name="clear">Clear</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>

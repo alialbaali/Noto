@@ -58,6 +58,7 @@ android {
         create("release-candidate") {
             versionNameSuffix = "-rc"
             applicationIdSuffix = ".rc"
+            isDebuggable = true
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")

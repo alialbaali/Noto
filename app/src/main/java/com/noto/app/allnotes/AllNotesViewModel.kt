@@ -39,33 +39,38 @@ class AllNotesViewModel(
     private val mutableIsSearchEnabled = MutableStateFlow(false)
     val isSearchEnabled get() = mutableIsSearchEnabled.asStateFlow()
 
+    private val mutableSearchTerm = MutableStateFlow("")
+    val searchTerm get() = mutableSearchTerm.asStateFlow()
+
     init {
         combine(
             libraryRepository.getLibraries(),
             noteRepository.getAllMainNotes(),
             labelRepository.getAllLabels(),
             noteLabelRepository.getNoteLabels(),
-        ) { libraries, notes, labels, noteLabels ->
+            searchTerm.map { it.trim() },
+        ) { libraries, notes, labels, noteLabels, searchTerm ->
             mutableNotesVisibility.value = libraries.map {
                 val isVisible = notesVisibility.value[it] ?: true
                 it to isVisible
             }.toMap()
             mutableNotes.value = notes
                 .mapWithLabels(labels, noteLabels)
+                .filterContent(searchTerm)
                 .groupBy { noteWithLabels ->
                     libraries.firstOrNull { library ->
                         library.id == noteWithLabels.first.libraryId
                     }
                 }
                 .filterNotNullKeys()
+                .filterValues { it.isNotEmpty() }
                 .mapValues { it.value.sorted(it.key.sortingType, it.key.sortingOrder) }
-                .toSortedMap(compareBy { it.position })
+                .toList()
+                .sortedBy { it.first.position }
+                .sortedByDescending { it.first.isInbox }
+                .toMap()
                 .let { UiState.Success(it) }
         }.launchIn(viewModelScope)
-    }
-
-    fun toggleIsSearchEnabled() {
-        mutableIsSearchEnabled.value = !mutableIsSearchEnabled.value
     }
 
     fun toggleVisibilityForLibrary(libraryId: Long) {
@@ -75,6 +80,19 @@ class AllNotesViewModel(
             else
                 it.value
         }
+    }
+
+    fun enableSearch() {
+        mutableIsSearchEnabled.value = true
+    }
+
+    fun disableSearch() {
+        mutableIsSearchEnabled.value = false
+        setSearchTerm("")
+    }
+
+    fun setSearchTerm(searchTerm: String) {
+        mutableSearchTerm.value = searchTerm
     }
 
     private fun <K, V> Map<K?, V>.filterNotNullKeys() = filterKeys { it != null } as Map<K, V>
