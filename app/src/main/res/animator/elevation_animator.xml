@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_selected="true">
+        <objectAnimator
+            android:duration="250"
+            android:propertyName="elevation"
+            android:interpolator="@android:anim/accelerate_interpolator"
+            android:valueTo="@dimen/elevation_normal"
+            android:valueType="floatType" />
+    </item>
+
+    <item>
+        <objectAnimator
+            android:duration="250"
+            android:propertyName="elevation"
+            android:interpolator="@android:anim/accelerate_interpolator"
+            android:valueTo="@dimen/elevation_none"
+            android:valueType="floatType" />
+    </item>
+
+</selector>
