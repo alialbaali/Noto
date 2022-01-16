@@ -83,4 +83,12 @@ class RecentNotesViewModel(
     fun setSearchTerm(searchTerm: String) {
         mutableSearchTerm.value = searchTerm
     }
+
+    fun expandAll() {
+        mutableNotesVisibility.value = notesVisibility.value.mapValues { true }
+    }
+
+    fun collapseAll() {
+        mutableNotesVisibility.value = notesVisibility.value.mapValues { false }
+    }
 }
