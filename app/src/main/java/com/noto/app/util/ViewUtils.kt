@@ -34,6 +34,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.google.android.material.shape.RelativeCornerSize
@@ -233,3 +234,6 @@ fun Drawable.setRippleColor(colorStateList: ColorStateList) {
 fun RecyclerView.resetAdapter() {
     adapter = adapter
 }
+
+val AppBarLayout.isExpanded
+    get() = (height - bottom) == 0
