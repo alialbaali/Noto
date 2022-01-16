@@ -71,12 +71,13 @@ val NavController.lastLibraryId: Long?
     @SuppressLint("RestrictedApi")
     get() {
         val lastBackStackEntry = backStack.lastOrNull {
-            it.destination.id == R.id.libraryFragment || it.destination.id == R.id.allNotesFragment
+            it.destination.id == R.id.libraryFragment || it.destination.id == R.id.allNotesFragment || it.destination.id == R.id.recentNotesFragment
         }
-        return if (lastBackStackEntry?.destination?.id == R.id.allNotesFragment)
-            AllNotesItemId
-        else
-            lastBackStackEntry?.arguments?.getLong(Constants.LibraryId)
+        return when (lastBackStackEntry?.destination?.id) {
+            R.id.allNotesFragment -> AllNotesItemId
+            R.id.recentNotesFragment -> RecentNotesItemId
+            else -> lastBackStackEntry?.arguments?.getLong(Constants.LibraryId)
+        }
     }
 
 val Uri.directoryPath
