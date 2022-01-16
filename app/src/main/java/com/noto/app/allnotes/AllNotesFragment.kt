@@ -91,7 +91,10 @@ class AllNotesFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         viewModel.isCollapseToolbar
-            .onEach { isCollapseToolbar -> abl.setExpanded(!isCollapseToolbar, false) }
+            .onEach { isCollapseToolbar ->
+                if (!abl.isExpanded)
+                    abl.setExpanded(!isCollapseToolbar, false)
+            }
             .launchIn(lifecycleScope)
 
         navController?.currentBackStackEntry?.savedStateHandle
