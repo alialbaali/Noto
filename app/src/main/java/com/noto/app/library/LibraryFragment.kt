@@ -88,8 +88,18 @@ class LibraryFragment : Fragment() {
             setupItemTouchHelper(library.layout)
         }.launchIn(lifecycleScope)
 
+        viewModel.isSearchEnabled
+            .onEach { isSearchEnabled ->
+                if (isSearchEnabled)
+                    rv.smoothScrollToPosition(0)
+            }
+            .launchIn(lifecycleScope)
+
         viewModel.isCollapseToolbar
-            .onEach { isCollapseToolbar -> abl.setExpanded(!isCollapseToolbar, false) }
+            .onEach { isCollapseToolbar -> ;
+                if (!abl.isExpanded)
+                    abl.setExpanded(!isCollapseToolbar, false)
+            }
             .launchIn(lifecycleScope)
     }
 
