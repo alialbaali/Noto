@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/BaseDialogFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/base_dialog_fragment" />
+
+        <TextView
+            android:id="@+id/tv_libraries_vault"
+            style="@style/SettingsItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/libraries_vault"
+            app:drawableStartCompat="@drawable/ic_round_shield_24" />
+
+        <TextView
+            android:id="@+id/tv_libraries_archive"
+            style="@style/SettingsItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/libraries_archive"
+            app:drawableStartCompat="@drawable/ic_round_inventory_24" />
+
+        <include
+            android:id="@+id/divider1"
+            layout="@layout/divider_item" />
+
+        <TextView
+            android:id="@+id/tv_settings"
+            style="@style/SettingsItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings"
+            app:drawableStartCompat="@drawable/ic_round_settings_24" />
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
