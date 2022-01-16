@@ -34,19 +34,6 @@
             android:id="@+id/action_mainFragment_to_libraryListSortingDialogFragment"
             app:destination="@id/libraryListSortingDialogFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_mainArchiveFragment"
-            app:destination="@id/mainArchiveFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_mainVaultFragment"
-            app:destination="@id/mainVaultFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
-        <action
             android:id="@+id/action_mainFragment_to_allNotesFragment"
             app:destination="@id/allNotesFragment"
             app:enterAnim="@anim/fade_in"
@@ -64,6 +51,9 @@
             app:popExitAnim="@anim/fade_out"
             app:popUpTo="@id/libraryFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mainFragment_to_mainDialogFragment"
+            app:destination="@id/mainDialogFragment" />
     </dialog>
     <fragment
         android:id="@+id/libraryFragment"
@@ -529,4 +519,21 @@
             android:id="@+id/action_recentNotesFragment_to_selectLibraryDialogFragment"
             app:destination="@id/selectLibraryDialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/mainDialogFragment"
+        android:name="com.noto.app.main.MainDialogFragment"
+        android:label="MainDialogFragment" >
+        <action
+            android:id="@+id/action_mainDialogFragment_to_mainVaultFragment"
+            app:destination="@id/mainVaultFragment" />
+        <action
+            android:id="@+id/action_mainDialogFragment_to_mainArchiveFragment"
+            app:destination="@id/mainArchiveFragment" />
+        <action
+            android:id="@+id/action_mainDialogFragment_to_vaultPasscodeDialogFragment"
+            app:destination="@id/vaultPasscodeDialogFragment" />
+        <action
+            android:id="@+id/action_mainDialogFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </dialog>
 </navigation>
