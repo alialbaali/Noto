@@ -6,52 +6,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <include layout="@layout/base_dialog_fragment" />
+        android:layout_height="wrap_content">
 
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/spacing_normal"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/ib_archive"
-                android:src="@drawable/ic_round_inventory_24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_small"
-                android:padding="@dimen/spacing_normal"
-                android:background="@drawable/round_btn_surface_shape"
-                android:contentDescription="@string/libraries_archive" />
-
-            <ImageButton
-                android:id="@+id/ib_vault"
-                android:src="@drawable/ic_round_shield_24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_small"
-                android:padding="@dimen/spacing_normal"
-                android:background="@drawable/round_btn_surface_shape"
-                android:contentDescription="@string/libraries_vault" />
-
-            <ImageButton
-                android:id="@+id/ib_settings"
-                android:src="@drawable/ic_round_settings_24"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/spacing_small"
-                android:padding="@dimen/spacing_normal"
-                android:background="@drawable/round_btn_surface_shape"
-                android:contentDescription="@string/settings" />
-
+            <include layout="@layout/base_dialog_fragment" />
         </LinearLayout>
-    </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/ib_more"
+            android:layout_gravity="end"
+            android:background="@drawable/round_btn_surface_shape"
+            android:padding="@dimen/spacing_normal"
+            android:src="@drawable/ic_round_more_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/more" />
+    </FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
