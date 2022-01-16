@@ -33,12 +33,15 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val selectedLibraryId by lazy { navController?.lastLibraryId }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        MainFragmentBinding.inflate(inflater, container, false).withBinding {
-            setupBaseDialogFragment()
-            setupListeners()
-            setupState()
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View = MainFragmentBinding.inflate(inflater, container, false).withBinding {
+        setupBaseDialogFragment()
+        setupListeners()
+        setupState()
+    }
 
     private fun MainFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
         tvDialogTitle.text = context?.stringResource(R.string.app_name)
@@ -49,16 +52,8 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
             navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToNewLibraryDialogFragment())
         }
 
-        ibArchive.setOnClickListener {
-            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToMainArchiveFragment())
-        }
-
-        ibVault.setOnClickListener {
-            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToMainVaultFragment())
-        }
-
-        ibSettings.setOnClickListener {
-            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToSettingsFragment())
+        ibMore.setOnClickListener {
+            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToMainDialogFragment())
         }
     }
 
