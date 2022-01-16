@@ -23,7 +23,7 @@ private const val NOTO_DATABASE = "Noto Database"
 )
 @Database(
     entities = [Note::class, Library::class, Label::class, NoteLabel::class],
-    version = 23,
+    version = 24,
     autoMigrations = [
         AutoMigration(from = 6, to = 7),
         AutoMigration(from = 7, to = 8),
@@ -42,6 +42,7 @@ private const val NOTO_DATABASE = "Noto Database"
         AutoMigration(from = 20, to = 21, spec = Migrations.RenameLayoutManagerColumn::class),
         AutoMigration(from = 21, to = 22, spec = Migrations.RenameNoteListSortingTypeColumn::class),
         AutoMigration(from = 22, to = 23),
+        AutoMigration(from = 23, to = 24),
     ],
 )
 abstract class NotoDatabase : RoomDatabase() {
