@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/til_search"
+    style="@style/RoundedTextInputLayout"
+    android:layout_width="match_parent"
+    android:layout_margin="@dimen/spacing_small"
+    android:layout_height="wrap_content"
+    app:endIconContentDescription="@string/clear"
+    app:endIconMode="clear_text">
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/et_search"
+        style="@style/TextInputEditText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:hint="@string/search"
+        android:inputType="text|textCapSentences|textAutoCorrect" />
+</com.google.android.material.textfield.TextInputLayout>
