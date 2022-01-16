@@ -11,6 +11,7 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
 import com.noto.app.util.NoteWithLabels
+import com.noto.app.util.filterContent
 import com.noto.app.util.mapWithLabels
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -50,6 +51,9 @@ class LibraryViewModel(
     private val mutableIsSearchEnabled = MutableStateFlow(false)
     val isSearchEnabled get() = mutableIsSearchEnabled.asStateFlow()
 
+    private val mutableSearchTerm = MutableStateFlow("")
+    val searchTerm get() = mutableSearchTerm.asStateFlow()
+
     val isCollapseToolbar = storage.getOrNull(Constants.CollapseToolbar)
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
@@ -64,8 +68,9 @@ class LibraryViewModel(
                 .filterNotNull(),
             noteLabelRepository.getNoteLabels()
                 .filterNotNull(),
-        ) { notes, archivedNotes, labels, noteLabels ->
-            mutableNotes.value = notes.mapWithLabels(labels, noteLabels).let { UiState.Success(it) }
+            searchTerm.map { it.trim() },
+        ) { notes, archivedNotes, labels, noteLabels, searchTerm ->
+            mutableNotes.value = notes.mapWithLabels(labels, noteLabels).filterContent(searchTerm).let { UiState.Success(it) }
             mutableArchivedNotes.value = archivedNotes.mapWithLabels(labels, noteLabels).let { UiState.Success(it) }
         }.launchIn(viewModelScope)
 
@@ -166,8 +171,17 @@ class LibraryViewModel(
             .toMap()
     }
 
-    fun toggleIsSearchEnabled() {
-        mutableIsSearchEnabled.value = !mutableIsSearchEnabled.value
+    fun enableSearch() {
+        mutableIsSearchEnabled.value = true
+    }
+
+    fun disableSearch() {
+        mutableIsSearchEnabled.value = false
+        setSearchTerm("")
+    }
+
+    fun setSearchTerm(searchTerm: String) {
+        mutableSearchTerm.value = searchTerm
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }
