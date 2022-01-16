@@ -21,6 +21,7 @@ import com.noto.app.label.LabelViewModel
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.main.MainViewModel
 import com.noto.app.note.NoteViewModel
+import com.noto.app.recentnotes.RecentNotesViewModel
 import com.noto.app.settings.SettingsViewModel
 import com.noto.app.widget.LibraryListWidgetConfigViewModel
 import com.noto.app.widget.NoteListWidgetConfigViewModel
@@ -50,6 +51,8 @@ val appModule = module {
     viewModel { NoteListWidgetConfigViewModel(it.get(), get(), get(), get(), get(), get()) }
 
     viewModel { AllNotesViewModel(get(), get(), get(), get(), get()) }
+
+    viewModel { RecentNotesViewModel(get(), get(), get(), get()) }
 }
 
 val repositoryModule = module {
