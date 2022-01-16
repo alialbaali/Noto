@@ -12,11 +12,11 @@ import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
-import com.noto.app.allnotes.allNotesItem
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.LibraryListSortingType
+import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.SortingOrder
 import com.noto.app.map
 import com.noto.app.util.*
@@ -72,9 +72,9 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
             viewModel.sortingType,
             viewModel.sortingOrder,
             viewModel.isShowNotesCount,
-            viewModel.allNotesCount,
-        ) { libraries, sortingType, sortingOrder, isShowNotesCount, allNotesCount ->
-            setupLibraries(libraries.map { it.sorted(sortingType, sortingOrder) }, sortingType, sortingOrder, isShowNotesCount, allNotesCount)
+            viewModel.allNotes,
+        ) { libraries, sortingType, sortingOrder, isShowNotesCount, allNotes ->
+            setupLibraries(libraries.map { it.sorted(sortingType, sortingOrder) }, sortingType, sortingOrder, isShowNotesCount, allNotes)
             setupItemTouchHelper()
         }.launchIn(lifecycleScope)
     }
@@ -85,7 +85,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         sortingType: LibraryListSortingType,
         sortingOrder: SortingOrder,
         isShowNotesCount: Boolean,
-        allNotesCount: Int,
+        allNotes: List<Note>,
     ) {
         if (state is UiState.Success) {
             rv.withModels {
@@ -125,20 +125,38 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                     }
                 }
 
-                allNotesItem {
-                    id("all_notes")
-                    notesCount(allNotesCount)
-                    isManualSorting(isManualSorting)
-                    isShowNotesCount(isShowNotesCount)
-                    isSelected(AllNotesItemId == selectedLibraryId)
-                    onClickListener { _ ->
-                        if (selectedLibraryId != AllNotesItemId)
-                            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToAllNotesFragment())
-                        dismiss()
-                    }
-                }
-
                 context?.let { context ->
+
+                    genericItem {
+                        id("all_notes")
+                        notesCount(allNotes.count())
+                        title(context.stringResource(R.string.all_notes))
+                        icon(context.drawableResource(R.drawable.ic_round_all_inbox_24))
+                        isManualSorting(isManualSorting)
+                        isShowNotesCount(isShowNotesCount)
+                        isSelected(AllNotesItemId == selectedLibraryId)
+                        onClickListener { _ ->
+                            if (selectedLibraryId != AllNotesItemId)
+                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToAllNotesFragment())
+                            dismiss()
+                        }
+                    }
+
+                    genericItem {
+                        id("recently_accessed_notes")
+                        title(context.getString(R.string.recent_notes))
+                        icon(context.drawableResource(R.drawable.ic_round_schedule_24))
+                        notesCount(allNotes.filterRecentlyAccessed().count())
+                        isManualSorting(isManualSorting)
+                        isShowNotesCount(isShowNotesCount)
+                        isSelected(RecentNotesItemId == selectedLibraryId)
+                        onClickListener { _ ->
+                            if (selectedLibraryId != RecentNotesItemId)
+                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToRecentNotesFragment())
+                            dismiss()
+                        }
+                    }
+
                     buildLibrariesModels(context, libraries) { libraries ->
                         libraries.forEach { entry ->
                             libraryItem {
@@ -189,7 +207,12 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     private fun navigateToLibraryFragment(libraryId: Long) {
         navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(libraryId)) {
-            popUpTo(if (selectedLibraryId == AllNotesItemId) R.id.allNotesFragment else R.id.libraryFragment) {
+            val popUpToDestination = when (selectedLibraryId) {
+                AllNotesItemId -> R.id.allNotesFragment
+                RecentNotesItemId -> R.id.recentNotesFragment
+                else -> R.id.libraryFragment
+            }
+            popUpTo(popUpToDestination) {
                 inclusive = true
             }
         }
