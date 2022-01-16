@@ -10,10 +10,7 @@ import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteLabelRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
-import com.noto.app.util.Constants
-import com.noto.app.util.NoteWithLabels
-import com.noto.app.util.mapWithLabels
-import com.noto.app.util.sorted
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 
 class AllNotesViewModel(
