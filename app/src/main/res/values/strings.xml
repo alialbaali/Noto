@@ -74,6 +74,7 @@
     <string name="collapse_toolbar">Collapse toolbar</string>
     <string name="all_notes">All notes</string>
     <string name="clear">Clear</string>
+    <string name="recent_notes">Recent notes</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>

@@ -6,10 +6,13 @@ import android.view.View
 import androidx.viewbinding.ViewBinding
 import com.noto.app.R
 import com.noto.app.domain.model.*
+import kotlinx.datetime.Clock
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
+import kotlin.time.Duration.Companion.days
 
 const val AllNotesItemId = -2L
+const val RecentNotesItemId = -3L
 val LabelDefaultStrokeWidth = 3.dp
 val LabelDefaultCornerRadius = 1000.dp.toFloat()
 typealias NoteWithLabels = Pair<Note, List<Label>>
@@ -99,6 +102,11 @@ fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): 
             }
     }
 }
+
+fun List<Note>.filterRecentlyAccessed() = filter { it.accessDate != null && it.accessDate >= Clock.System.now().minus(7.days) }
+
+@Suppress("UNCHECKED_CAST")
+fun <K, V> Map<K?, V>.filterNotNullKeys() = filterKeys { it != null } as Map<K, V>
 
 fun Map<Label, Boolean>.filterSelected() = filterValues { it }.map { it.key }
 

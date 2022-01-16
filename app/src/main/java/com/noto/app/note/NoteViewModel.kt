@@ -14,6 +14,7 @@ import com.noto.app.util.isValid
 import com.noto.app.util.takeAfterFirstLineOrEmpty
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
 class NoteViewModel(
@@ -49,6 +50,11 @@ class NoteViewModel(
 
     init {
         noteRepository.getNoteById(noteId)
+            .also {
+                viewModelScope.launch {
+                    noteRepository.updateNote(it.first().copy(accessDate = Clock.System.now()))
+                }
+            }
             .onStart { emit(Note(noteId, libraryId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
             .filterNotNull()
             .onEach { mutableNote.value = it }

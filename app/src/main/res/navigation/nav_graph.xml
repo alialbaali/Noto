@@ -55,6 +55,15 @@
             app:popExitAnim="@anim/fade_out"
             app:popUpTo="@id/libraryFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mainFragment_to_recentNotesFragment"
+            app:destination="@id/recentNotesFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/libraryFragment"
+            app:popUpToInclusive="true" />
     </dialog>
     <fragment
         android:id="@+id/libraryFragment"
@@ -498,5 +507,26 @@
         <action
             android:id="@+id/action_allNotesFragment_to_noteDialogFragment"
             app:destination="@id/noteDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recentNotesFragment"
+        android:name="com.noto.app.recentnotes.RecentNotesFragment"
+        android:label="RecentlyAccessedNotesFragment">
+        <action
+            android:id="@+id/action_recentNotesFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_recentNotesFragment_to_noteFragment"
+            app:destination="@id/noteFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_recentNotesFragment_to_noteDialogFragment"
+            app:destination="@id/noteDialogFragment" />
+        <action
+            android:id="@+id/action_recentNotesFragment_to_selectLibraryDialogFragment"
+            app:destination="@id/selectLibraryDialogFragment" />
     </fragment>
 </navigation>
