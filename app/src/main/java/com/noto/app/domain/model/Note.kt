@@ -50,4 +50,7 @@ data class Note(
 
     @ColumnInfo(name = "is_vaulted", defaultValue = "0")
     val isVaulted: Boolean = false,
+
+    @ColumnInfo(name = "access_date", defaultValue = "NULL")
+    val accessDate: Instant? = null,
 )
