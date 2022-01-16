@@ -6,7 +6,6 @@ import android.view.*
 import androidx.activity.addCallback
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -43,6 +42,7 @@ class LibraryFragment : Fragment() {
             setupListeners()
         }
 
+    @Suppress("UNCHECKED_CAST")
     private fun LibraryFragmentBinding.setupState() {
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
@@ -68,28 +68,25 @@ class LibraryFragment : Fragment() {
             viewModel.labels,
             viewModel.font,
             viewModel.library,
-            etSearch.textAsFlow()
-                .onStart { emit(etSearch.text) }
-                .filterNotNull()
-                .map { it.trim() },
-        ) { notes, labels, font, library, searchTerm ->
+            viewModel.isSearchEnabled,
+            viewModel.searchTerm,
+        ) { array ->
+            val notes = array[0] as UiState<List<NoteWithLabels>>
+            val labels = array[1] as Map<Label, Boolean>
+            val font = array[2] as Font
+            val library = array[3] as Library
+            val isSearchEnabled = array[4] as Boolean
+            val searchTerm = array[5] as String
             setupNotesAndLabels(
-                notes.map { it.filterContent(searchTerm).filterSelectedLabels(labels) },
+                notes.map { it.filterSelectedLabels(labels) },
                 labels,
                 font,
-                library
+                library,
+                isSearchEnabled,
+                searchTerm,
             )
             setupItemTouchHelper(library.layout)
         }.launchIn(lifecycleScope)
-
-        viewModel.isSearchEnabled
-            .onEach { isSearchEnabled ->
-                if (isSearchEnabled)
-                    enableSearch()
-                else
-                    disableSearch()
-            }
-            .launchIn(lifecycleScope)
 
         viewModel.isCollapseToolbar
             .onEach { isCollapseToolbar -> abl.setExpanded(!isCollapseToolbar, false) }
@@ -128,26 +125,6 @@ class LibraryFragment : Fragment() {
         }
     }
 
-    private fun LibraryFragmentBinding.enableSearch() {
-        tilSearch.isVisible = true
-        etSearch.requestFocus()
-        etSearch.showKeyboardUsingImm()
-
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
-            disableSearch()
-            if (isEnabled) {
-                isEnabled = false
-                activity?.onBackPressed()
-            }
-        }
-    }
-
-    private fun LibraryFragmentBinding.disableSearch() {
-        tilSearch.isVisible = false
-        etSearch.text = null
-        activity?.hideKeyboard(root)
-    }
-
     private fun LibraryFragmentBinding.setupLayoutManager(layout: Layout) {
         when (layout) {
             Layout.Linear -> layoutManager.spanCount = 1
@@ -161,6 +138,8 @@ class LibraryFragment : Fragment() {
         labels: Map<Label, Boolean>,
         font: Font,
         library: Library,
+        isSearchEnabled: Boolean,
+        searchTerm: String,
     ) {
         when (state) {
             is UiState.Loading -> rv.setupProgressIndicator(library.color)
@@ -169,6 +148,28 @@ class LibraryFragment : Fragment() {
 
                 rv.withModels {
                     epoxyController = this
+
+                    if (isSearchEnabled) {
+                        searchItem {
+                            id("search")
+                            color(library.color)
+                            searchTerm(searchTerm)
+                            callback { searchTerm -> viewModel.setSearchTerm(searchTerm) }
+                            onBind { _, view, _ ->
+                                if (view.binding.etSearch.text.toString().isBlank()) {
+                                    view.binding.etSearch.requestFocus()
+                                    activity?.showKeyboard(view.binding.etSearch)
+                                }
+                            }
+                            onUnbind { _, view ->
+                                activity?.hideKeyboard(view.binding.etSearch)
+                            }
+                        }
+                        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
+                            viewModel.disableSearch()
+                            if (isEnabled) isEnabled = false
+                        }
+                    }
 
                     labelListItem {
                         id("labels")
@@ -261,7 +262,10 @@ class LibraryFragment : Fragment() {
     }
 
     private fun LibraryFragmentBinding.setupSearchMenuItem(): Boolean {
-        viewModel.toggleIsSearchEnabled()
+        if (viewModel.isSearchEnabled.value)
+            viewModel.disableSearch()
+        else
+            viewModel.enableSearch()
         return true
     }
 
@@ -282,9 +286,6 @@ class LibraryFragment : Fragment() {
             bab.backgroundTint = colorStateList
             bab.menu.forEach { it.icon?.mutate()?.setTint(backgroundColor) }
             bab.navigationIcon?.mutate()?.setTint(backgroundColor)
-            tilSearch.boxBackgroundColor = color.withDefaultAlpha()
-            etSearch.setHintTextColor(colorStateList)
-            etSearch.setTextColor(colorStateList)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
                 fab.outlineSpotShadowColor = color
