@@ -130,7 +130,7 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
     private fun NoteReminderDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
             val color = context.colorResource(library.color.toResource())
-            baseDialogFragment.vHead.background.setTint(color)
+            baseDialogFragment.vHead.background?.mutate()?.setTint(color)
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             til.boxStrokeColor = color
         }
