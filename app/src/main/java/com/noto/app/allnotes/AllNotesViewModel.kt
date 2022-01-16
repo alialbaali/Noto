@@ -95,5 +95,11 @@ class AllNotesViewModel(
         mutableSearchTerm.value = searchTerm
     }
 
-    private fun <K, V> Map<K?, V>.filterNotNullKeys() = filterKeys { it != null } as Map<K, V>
+    fun expandAll() {
+        mutableNotesVisibility.value = notesVisibility.value.mapValues { true }
+    }
+
+    fun collapseAll() {
+        mutableNotesVisibility.value = notesVisibility.value.mapValues { false }
+    }
 }
