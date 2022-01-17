@@ -13,8 +13,6 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ExportImportDialogFragmentBinding
 import com.noto.app.util.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val ZipMimeType = "application/zip"
@@ -84,10 +82,8 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                 val zipFileOutputStream = context.contentResolver?.openOutputStream(zipFile.uri)
                 if (zipFileOutputStream != null) {
                     lifecycleScope.launchWhenResumed {
-                        withContext(Dispatchers.IO) {
-                            val exportedData = viewModel.exportData()
-                            writeDataToZipFile(zipFileOutputStream, exportedData)
-                        }
+                        val exportedData = viewModel.exportData()
+                        writeDataToZipFile(zipFileOutputStream, exportedData)
                     }.invokeOnCompletion {
                         parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_exported, zipFile.uri.directoryPath))
                         navController?.navigateUp()
@@ -116,10 +112,8 @@ class ExportImportDialogFragment : BaseDialogFragment() {
             val inputStream = context.contentResolver?.openInputStream(uri)
             if (inputStream != null) {
                 lifecycleScope.launchWhenResumed {
-                    withContext(Dispatchers.IO) {
-                        val data = readDataFromZipFile(inputStream)
-                        viewModel.importData(data)
-                    }
+                    val data = readDataFromZipFile(inputStream)
+                    viewModel.importData(data)
                 }.invokeOnCompletion {
                     parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_imported))
                     navController?.navigateUp()

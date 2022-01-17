@@ -1,5 +1,7 @@
 package com.noto.app.util
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.InputStream
 import java.io.OutputStream
 import java.util.zip.ZipEntry
@@ -8,7 +10,7 @@ import java.util.zip.ZipOutputStream
 
 private const val FileFormat = ".json"
 
-fun writeDataToZipFile(outputStream: OutputStream, data: Map<String, String>) {
+suspend fun writeDataToZipFile(outputStream: OutputStream, data: Map<String, String>) = withContext(Dispatchers.IO) {
     ZipOutputStream(outputStream).use { zipOutputStream ->
         data.forEach { (fileName, json) ->
             val zipEntry = ZipEntry(fileName + FileFormat)
@@ -19,7 +21,7 @@ fun writeDataToZipFile(outputStream: OutputStream, data: Map<String, String>) {
     }
 }
 
-fun readDataFromZipFile(inputStream: InputStream): Map<String, String> {
+suspend fun readDataFromZipFile(inputStream: InputStream): Map<String, String> = withContext(Dispatchers.IO) {
     val data = mutableMapOf<String, String>()
     ZipInputStream(inputStream).use { zipInputStream ->
         do {
@@ -32,5 +34,5 @@ fun readDataFromZipFile(inputStream: InputStream): Map<String, String> {
             zipInputStream.closeEntry()
         } while (zipEntry != null)
     }
-    return data
+    data
 }
