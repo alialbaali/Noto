@@ -10,6 +10,7 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
 import com.noto.app.util.hash
+import com.noto.app.util.isInbox
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
@@ -81,8 +82,13 @@ class SettingsViewModel(
         val labelIds = mutableMapOf<Long, Long>()
         DefaultJson.decodeFromString<List<Library>>(data.getValue(Constants.Libraries))
             .forEach { library ->
-                val newLibraryId = libraryRepository.createLibrary(library.copy(id = 0))
-                libraryIds[library.id] = newLibraryId
+                if (library.isInbox) {
+                    libraryIds[library.id] = Library.InboxId
+                    libraryRepository.updateLibrary(library)
+                } else {
+                    val newLibraryId = libraryRepository.createLibrary(library.copy(id = 0))
+                    libraryIds[library.id] = newLibraryId
+                }
             }
         DefaultJson.decodeFromString<List<Note>>(data.getValue(Constants.Notes))
             .forEach { note ->
