@@ -11,8 +11,10 @@ import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
 import com.noto.app.util.hash
 import com.noto.app.util.isInbox
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -61,13 +63,13 @@ class SettingsViewModel(
         storage.put(Constants.CollapseToolbar, (!isCollapseToolbar.value).toString())
     }
 
-    suspend fun exportData(): Map<String, String> {
+    suspend fun exportData(): Map<String, String> = withContext(Dispatchers.IO) {
         val libraries = libraryRepository.getAllLibraries().first()
         val notes = noteRepository.getAllNotes().first()
         val labels = labelRepository.getAllLabels().first()
         val noteLabels = noteLabelRepository.getNoteLabels().first()
         val settings = storage.getAll().first()
-        return mapOf(
+        mapOf(
             Constants.Libraries to DefaultJson.encodeToString(libraries),
             Constants.Notes to DefaultJson.encodeToString(notes),
             Constants.Labels to DefaultJson.encodeToString(labels),
@@ -76,7 +78,7 @@ class SettingsViewModel(
         )
     }
 
-    suspend fun importData(data: Map<String, String>) {
+    suspend fun importData(data: Map<String, String>) = withContext(Dispatchers.IO) {
         val libraryIds = mutableMapOf<Long, Long>()
         val noteIds = mutableMapOf<Long, Long>()
         val labelIds = mutableMapOf<Long, Long>()
