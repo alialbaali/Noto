@@ -80,8 +80,10 @@ class NoteFragment : Fragment() {
                 else
                     disableBottomAppBarActions()
             }
-            .distinctUntilChanged { _, _ -> etNoteTitle.text.isNotBlank() || etNoteBody.text.isNotBlank() }
-            .combine(viewModel.font) { note, font -> setupNote(note, font) }
+            .combine(viewModel.font) { note, font ->
+                if (etNoteTitle.text.isNullOrBlank() && etNoteBody.text.isNullOrBlank())
+                    setupNote(note, font)
+            }
             .launchIn(lifecycleScope)
 
         combine(
