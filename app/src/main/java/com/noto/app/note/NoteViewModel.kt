@@ -50,13 +50,9 @@ class NoteViewModel(
 
     init {
         noteRepository.getNoteById(noteId)
-            .also {
-                viewModelScope.launch {
-                    noteRepository.updateNote(it.first().copy(accessDate = Clock.System.now()))
-                }
-            }
             .onStart { emit(Note(noteId, libraryId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
             .filterNotNull()
+            .onEach { if (it.isValid) noteRepository.updateNote(it.copy(accessDate = Clock.System.now())) }
             .onEach { mutableNote.value = it }
             .launchIn(viewModelScope)
 
