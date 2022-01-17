@@ -58,6 +58,7 @@ class RecentNotesViewModel(
                 .filterNotNullKeys()
                 .filterValues { it.isNotEmpty() }
                 .mapValues { it.value.sortedByDescending { it.first.accessDate } }
+                .toSortedMap(compareByDescending { it })
                 .let { UiState.Success(it) }
         }.launchIn(viewModelScope)
     }
