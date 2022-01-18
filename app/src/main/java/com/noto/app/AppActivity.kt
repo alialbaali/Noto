@@ -150,7 +150,7 @@ class AppActivity : BaseActivity() {
                             workManager.enqueue(createVaultTimeoutWorkRequest(12, TimeUnit.HOURS))
                             viewModel.setScheduledVaultTimeout(VaultTimeout.After12Hours)
                         }
-                        else -> {}
+                        else -> viewModel.setScheduledVaultTimeout(null)
                     }
             }
         }.launchIn(lifecycleScope)

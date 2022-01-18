@@ -124,7 +124,10 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
         }
     }
 
-    fun setScheduledVaultTimeout(vaultTimeout: VaultTimeout) = viewModelScope.launch {
-        storage.put(Constants.ScheduledVaultTimeout, vaultTimeout.toString())
+    fun setScheduledVaultTimeout(vaultTimeout: VaultTimeout?) = viewModelScope.launch {
+        if (vaultTimeout != null)
+            storage.put(Constants.ScheduledVaultTimeout, vaultTimeout.toString())
+        else
+            storage.remove(Constants.ScheduledVaultTimeout)
     }
 }
