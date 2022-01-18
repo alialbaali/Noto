@@ -49,7 +49,7 @@ Contributions are always welcome! If you would like to contribute, please feel f
 
 If you would like to translate the app, please contact me via [email](mailto:ali@albaali.com).
 
-#### Special thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization, and <a href="https://github.com/heheboi22">புகழ்</a> for Tamil localization.
+#### Special thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization, <a href="https://github.com/heheboi22">புகழ்</a> for Tamil localization, and <a href="https://github.com/faus32">Faus AM</a> for Spanish localization.
 
 ## Architecture
 
