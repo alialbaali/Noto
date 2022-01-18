@@ -24,11 +24,13 @@
     <string name="ascending">تصاعدي</string>
     <string name="settings">الإعدادات</string>
     <string name="view_code">عرض الرمز على GitHub</string>
+    <string name="join_community">الانضمام إلى مجموعة Reddit</string>
     <string name="change_notes_font">تغيير خط الملاحظات</string>
     <string name="share_app_with_others">مشاركة التطبيق مع الآخرين</string>
     <string name="rate_app_on_play_store">قيم التطبيق على متجر بلي</string>
     <string name="report_issue">الإبلاغ عن مشكلة</string>
     <string name="about">حول</string>
+    <string name="whats_new">ما هو الجديد</string>
     <string name="about_message">Noto يتم تطويره وصيانته من قبل <a href="https://www.alialbaali.com/">Ali Albaali</a>.\n\n يتم نشر التطبيق بموجب شروط <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.\n\nشكر خاص لـ <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> و <a href="https://sakci.me">Alparslan Şakçi</a> لترجمة التطبيق إلى اللغة التركية، <a href="https://github.com/heheboi22">heheboi</a>لترجمة التطبيق إلى اللغة التاميلية, وكل من ساعد وأسهم في التنمية.</string>
     <string name="share_with">مشاركة مع</string>
     <string name="export_import_data">تصدير/استيراد البيانات</string>
@@ -47,6 +49,8 @@
     <string name="open_with">فتح باستخدام</string>
     <string name="invite_text">تحقق من Noto!</string>
     <string name="version">إصدار %s</string>
+    <string name="empty_version">الإصدار</string>
+    <string name="date">التاريخ</string>
     <string name="layout_is_list_mode">تم تعيين التصميم إلى وضع القائمة.</string>
     <string name="layout_is_grid_mode">تم تعيين التصميم إلى وضع الشبكات.</string>
     <string name="drag">أسحب</string>
@@ -91,6 +95,39 @@
     <string name="pinned">مثبت</string>
     <string name="pin_library">تثبيت الدفتر</string>
     <string name="unpin_library">إلغاء تثبيت الدفتر</string>
+    <!-- Vault -->
+    <string name="libraries_vault">خزينة الدفاتر</string>
+    <string name="enter_vault_passcode">أدخل رمز المرور</string>
+    <string name="vault_library">قفل الدفتر</string>
+    <string name="unvault_library">الغاء قفل الدفتر</string>
+    <string name="library_is_vaulted">تم قفل الدفتر.</string>
+    <string name="library_is_unvaulted">تم الغاء قفل الدفتر.</string>
+    <string name="vault_is_empty">الخزينة فارغة.</string>
+    <string name="archive_vaulted_library_confirmation">هل أنت متأكد من أنك تريد إرشاف هذا الدفتر؟</string>
+    <string name="archive_vaulted_library_description">إرشاف الدفتر سيؤدي أيضًا إلى إزالتها من الخزينة.</string>
+    <string name="vault_passcode">رمز مرور الخزينة</string>
+    <string name="current_vault_passcode">رمز مرور الخزينة الحالي</string>
+    <string name="new_vault_passcode">رمز مرور الخزينة الجديد</string>
+    <string name="change_vault_passcode">تغيير رمز مرور الخزينة</string>
+    <string name="change_vault_timeout">تغيير مهلة الخزينة</string>
+    <string name="vault_timeout">مهلة الخزينة</string>
+    <string name="invalid_passcode">رمز مرور غير صالح</string>
+    <string name="passcode_length_message">يجب أن يحتوي رمز المرور على 6 أرقام على الأقل</string>
+    <string name="passcode_empty_message">رمز المرور لا يمكن أن يكون فارغاً</string>
+    <string name="passcode_doesnt_match">رمز المرور لا يتطابق مع الرمز الحالي</string>
+    <string name="vault_passcode_has_changed">تم تحديث رمز مرور الخزينة.</string>
+    <string name="vault_passcode_message">لا يمكن تغيير رمز مرور الخزينة إذا فقدت الرمز الحالي، لذا يرجى التأكد من تخزينه في مكان آمن.</string>
+    <string name="open_vault">فتح الخزينة</string>
+    <string name="vault">الخزينة</string>
+    <string name="vault_is_open">الخزينة مفتوحة</string>
+    <string name="immediately">على الفور</string>
+    <string name="on_app_close">عند إغلاق التطبيق</string>
+    <string name="after_1_hour">بعد 1 ساعة</string>
+    <string name="after_4_hours">بعد 4 ساعات</string>
+    <string name="after_12_hours">بعد 12 ساعة</string>
+    <string name="close_vault">إغلاق الخزينة</string>
+    <string name="enable_bio_auth">تفعيل توثيق البصمة</string>
+    <string name="use_passcode">استخدام رمز مرور</string>
     <!-- Note -->
     <string name="all">الكل</string>
     <string name="archive_is_empty">الأرشيف فارغ.</string>
@@ -130,6 +167,7 @@
     <string name="no_note_reminder">لم يتم إعداد أي تنبيه إلى الملاحظة.</string>
     <string name="note_is_unarchived">تم إلغاء إرشاف الملاحظة.</string>
     <string name="reminder">تنبيه</string>
+    <string name="reminders">التنبيهات</string>
     <string name="new_note_reminder">تنبيه ملاحظة جديد</string>
     <string name="archive">أرشيف %s</string>
     <string name="copy_note_to_clipboard">نسخ الملاحظة إلى الحافظة</string>
@@ -185,6 +223,7 @@
     <string name="indonesian">اللغة الأندونيسية</string>
     <string name="russian">اللغة الروسية</string>
     <string name="tamil">اللغة التاميلية</string>
+    <string name="spanish">الإسبانية</string>
     <!-- Widget -->
     <string name="create_widget">إنشاء قطعة</string>
     <string name="new_notes_widget">ملاحظات ملصق جديد</string>
@@ -200,4 +239,14 @@
     <string name="edit_widget_button">زر تعديل القطعة</string>
     <string name="libraries_notes_count">عدد ملاحظات الدفاتر</string>
     <string name="loading_content">جاري تحميل المحتوى</string>
+    <!-- Releases -->
+    <string name="current_release">الإصدار الحالي</string>
+    <string name="previous_releases">الإصدارات السابقة</string>
+    <string name="release_1_8_0">• دعم خزينة الدفاتر المحمية برمز المرور.
+        \n• دعم خيارات مهلة الخزينة.
+        \n• دعم  تفعيل توثيق البصمة على الأجهزة المدعومة.
+        \n• دعم اللغة الإسبانية.
+        \n• إضافة رابط للمجموعة الجديدة <a href="https://www.reddit.com/r/notoapp">Reddit</a>.
+        \n• إصلاح الأخطاء الأخرى وتحسين التصميم.
+    </string>
 </resources>

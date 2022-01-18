@@ -17,18 +17,20 @@
     <string name="alphabetical_sorting">По алфавиту</string>
     <string name="creation_date">По дате</string>
     <string name="creation_date_sorting">По дате</string>
-    <string name="manual">Ручной</string>
-    <string name="manual_sorting">Ручная</string>
+    <string name="manual">Ручная</string>
+    <string name="manual_sorting">Ручной</string>
     <string name="default_grouping">По умолчанию</string>
     <string name="descending">По убыванию</string>
     <string name="ascending">По возрастанию</string>
     <string name="settings">Настройки</string>
     <string name="view_code">Посмотреть код на GitHub</string>
+    <string name="join_community">Присоединиться к сообществу на Reddit</string>
     <string name="change_notes_font">Изменить шрифт заметок</string>
     <string name="share_app_with_others">Поделиться приложением</string>
     <string name="rate_app_on_play_store">Оценить приложение в Play Store</string>
     <string name="report_issue">Сообщить об ошибке</string>
     <string name="about">О приложении</string>
+    <string name="whats_new">Что нового</string>
     <string name="about_message">Noto разработан и поддерживается <a href="https://www.alialbaali.com/">Ali Albaali</a>.\n\nПриложение распространяется на условиях <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.\n\nОсобая благодарность <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> и <a href="https://sakci.me">Alparslan Şakçi</a> за турецкую локализацию, и всем, кто помогал и способствовал развитию.</string>
     <string name="share_with">Поделиться с</string>
     <string name="export_import_data">Экспорт/Импорт данных</string>
@@ -47,6 +49,8 @@
     <string name="open_with">Открыть в</string>
     <string name="invite_text">Посмотрите Noto!</string>
     <string name="version">Версия %s</string>
+    <string name="empty_version">Версия</string>
+    <string name="date">Дата</string>
     <string name="layout_is_list_mode">Вид был изменен на список.</string>
     <string name="layout_is_grid_mode">Вид был изменен на сетку.</string>
     <string name="drag">Перетащить</string>
@@ -89,6 +93,39 @@
     <string name="pinned">Закреплено</string>
     <string name="pin_library">Закрепить</string>
     <string name="unpin_library">Открепить</string>
+    <!-- Vault -->
+    <string name="libraries_vault">Хранилище библиотек</string>
+    <string name="enter_vault_passcode">Введите пароль</string>
+    <string name="vault_library">Поместить в хранилище</string>
+    <string name="unvault_library">Убрать из хранилища</string>
+    <string name="library_is_vaulted">Библиотека помещена в хранилище.</string>
+    <string name="library_is_unvaulted">Библиотека убрана из хранилища.</string>
+    <string name="vault_is_empty">Хранилище пусто.</string>
+    <string name="archive_vaulted_library_confirmation">Вы действительно хотите архивировать эту библиотеку?</string>
+    <string name="archive_vaulted_library_description">Архивирование этой библиотеки также удалит её из хранилища.</string>
+    <string name="vault_passcode">Пароль хранилища</string>
+    <string name="current_vault_passcode">Текущий пароль</string>
+    <string name="new_vault_passcode">Новый пароль</string>
+    <string name="change_vault_passcode">Измененить пароль</string>
+    <string name="change_vault_timeout">Изменить таймаут хранилища</string>
+    <string name="vault_timeout">Таймаут хранилища</string>
+    <string name="invalid_passcode">Неверный пароль</string>
+    <string name="passcode_length_message">Пароль должен содержать не менее 6 символов</string>
+    <string name="passcode_empty_message">Пароль не может быть пустым</string>
+    <string name="passcode_doesnt_match">Пароль не совпадает с текущим</string>
+    <string name="vault_passcode_has_changed">Пароль хранилища обновлён.</string>
+    <string name="vault_passcode_message">Пароль не может быть изменен, если вы его потеряете, поэтому не забудьте сохранить его в безопасном месте.</string>
+    <string name="open_vault">Открыть хранилище</string>
+    <string name="vault">Хранилище</string>
+    <string name="vault_is_open">Хранилище открыто</string>
+    <string name="immediately">Сразу</string>
+    <string name="on_app_close">При закрытии</string>
+    <string name="after_1_hour">Через 1 час</string>
+    <string name="after_4_hours">Через 4 часа</string>
+    <string name="after_12_hours">Через 12 часов</string>
+    <string name="close_vault">Закрыть хранилище</string>
+    <string name="enable_bio_auth">Включить биометрическую аутентификацию</string>
+    <string name="use_passcode">Использовать пароль</string>
     <!-- Note -->
     <string name="all">Все</string>
     <string name="archive_is_empty">Архив пуст.</string>
@@ -124,6 +161,7 @@
     <string name="no_note_reminder">Напоминание не установлено.</string>
     <string name="note_is_unarchived">Заметка разархивирована.</string>
     <string name="reminder">Напоминание</string>
+    <string name="reminders">Напоминания</string>
     <string name="new_note_reminder">Новое напоминание</string>
     <string name="archive">%s архив</string>
     <string name="copy_note_to_clipboard">Копировать в буфер обмена</string>
@@ -179,6 +217,7 @@
     <string name="indonesian">Индонезийский</string>
     <string name="russian">Русский</string>
     <string name="tamil">Тамильский</string>
+    <string name="spanish">Испанский</string>
     <!-- Widget -->
     <string name="create_widget">Создать виджет</string>
     <string name="new_notes_widget">Новый виджет заметок</string>
@@ -194,4 +233,14 @@
     <string name="edit_widget_button">Изменить кнопку виджета</string>
     <string name="libraries_notes_count">Количество заметок в библиотеке</string>
     <string name="loading_content">Загрузка контента</string>
+    <!-- Releases -->
+    <string name="current_release">Текущая версия</string>
+    <string name="previous_releases">Предыдущие версии</string>
+    <string name="release_1_8_0">• Поддержка хранилища библиотек защищенных паролем.
+        \n• Поддержка таймаута хранилища.
+        \n• Поддержка биометрической аутентификации хранилищ на поддерживаемых устройствах.
+        \n• Поддержка испанского языка.
+        \n• Добавлена ссылка сообщества <a href="https://www.reddit.com/r/notoapp">Reddit</a>.
+        \n• Исправление ошибок и улучшение дизайна.
+    </string>
 </resources>

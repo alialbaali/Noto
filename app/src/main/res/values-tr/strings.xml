@@ -24,11 +24,13 @@
     <string name="ascending">Artan</string>
     <string name="settings">Ayarlar</string>
     <string name="view_code">Kodu Github\'da görüntüle</string>
+    <string name="join_community">Reddit topluluğuna katıl</string>
     <string name="change_notes_font">Not yazı tipini değiştir</string>
     <string name="share_app_with_others">Başkalarıyla paylaş</string>
     <string name="rate_app_on_play_store">Play Store\'da puanla</string>
     <string name="report_issue">Sorun bildir</string>
     <string name="about">Hakkında</string>
+    <string name="whats_new">Yenilikler</string>
     <string name="about_message">Noto <a href="https://www.alialbaali.com/">Ali Albaali</a> tarafından geliştirilen bir uygulamadır.\n\nUygulama <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Lisansı 2.0</a> koşulları altında dağıtılmaktadır.\n\nTürkçe yerelleştirme için <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> ve <a href="https://sakci.me/tr">Alparslan Şakçi</a>\'ye, ayrıca geliştirme sürecinde emeği geçen herkese teşekkürler.</string>
     <string name="share_with">Paylaşılacak uygulama</string>
     <string name="export_import_data">Verileri içe/dışa aktar</string>
@@ -47,6 +49,8 @@
     <string name="open_with">Açılacak uygulama</string>
     <string name="invite_text">Noto\'ya göz at!</string>
     <string name="version">Sürüm: %s</string>
+    <string name="empty_version">Sürüm</string>
+    <string name="date">Tarih</string>
     <string name="layout_is_list_mode">Düzen tek sütun olarak ayarlandı.</string>
     <string name="layout_is_grid_mode">Düzen çift sütun olarak ayarlandı.</string>
     <string name="drag">Sürükle</string>
@@ -87,6 +91,39 @@
     <string name="pinned">Sabitlenmiş</string>
     <string name="pin_library">Kitaplığı sabitle</string>
     <string name="unpin_library">Sabitlemeyi kaldır</string>
+    <!-- Vault -->
+    <string name="libraries_vault">Kitaplık kasası</string>
+    <string name="enter_vault_passcode">Kasa şifresini gir</string>
+    <string name="vault_library">Kitaplığı kasaya koy</string>
+    <string name="unvault_library">Kitaplığı kasadan çıkar</string>
+    <string name="library_is_vaulted">Kitaplık kasaya yerleştirildi.</string>
+    <string name="library_is_unvaulted">Kitaplık kasadan çıkartıldı.</string>
+    <string name="vault_is_empty">Kasa boş.</string>
+    <string name="archive_vaulted_library_confirmation">Bu kitaplığı arşivlemek istediğinizden emin misiniz?</string>
+    <string name="archive_vaulted_library_description">Arşivlenen kitaplıklar kasadan çıkartılır.</string>
+    <string name="vault_passcode">Kasa şifresi</string>
+    <string name="current_vault_passcode">Mevcut kasa şifresi</string>
+    <string name="new_vault_passcode">Yeni kasa şifresi</string>
+    <string name="change_vault_passcode">Kasa şifresini değiştir</string>
+    <string name="change_vault_timeout">Kasa zaman aşımını değiştir</string>
+    <string name="vault_timeout">Kasa zaman aşımı</string>
+    <string name="invalid_passcode">Geçersiz şifre</string>
+    <string name="passcode_length_message">Şifre en az 6 rakamdan oluşmalıdır</string>
+    <string name="passcode_empty_message">Şifre boş bırakılamaz</string>
+    <string name="passcode_doesnt_match">Girdiğiniz şifre mevcut şifreyle uyuşmuyor</string>
+    <string name="vault_passcode_has_changed">Kasa şifresi güncellendi.</string>
+    <string name="vault_passcode_message">Mevcut şifreyi unutursanız kasa şifresini tekrar değiştiremezsiniz, bu yüzden şifrenizi lütfen güvenli bir yere kaydedin.</string>
+    <string name="open_vault">Kasayı aç</string>
+    <string name="vault">Kasa</string>
+    <string name="vault_is_open">Kasa açıldı</string>
+    <string name="immediately">Hemen</string>
+    <string name="on_app_close">Uygulama kapatıldığında</string>
+    <string name="after_1_hour">1 saat sonra</string>
+    <string name="after_4_hours">4 saat sonra</string>
+    <string name="after_12_hours">12 saat sonra</string>
+    <string name="close_vault">Kasayı kilitle</string>
+    <string name="enable_bio_auth">Biyometrik doğrulamayı etkinleştir</string>
+    <string name="use_passcode">Şifre kullan</string>
     <!-- Note -->
     <string name="all">Tümü</string>
     <string name="archive_is_empty">Arşiv boş.</string>
@@ -118,6 +155,7 @@
     <string name="no_note_reminder">Hatırlatıcı ayarlanmadı.</string>
     <string name="note_is_unarchived">Not arşivden çıkarıldı.</string>
     <string name="reminder">Hatırlatıcı</string>
+    <string name="reminders">Hatırlatıcılar</string>
     <string name="new_note_reminder">Yeni hatırlatıcı</string>
     <string name="archive">%s arşivi</string>
     <string name="copy_note_to_clipboard">Panoya kopyala</string>
@@ -173,6 +211,7 @@
     <string name="indonesian">Endonezce</string>
     <string name="russian">Rusça</string>
     <string name="tamil">Tamilce</string>
+    <string name="spanish">İspanyolca</string>
     <!-- Widget -->
     <string name="create_widget">Widget oluştur</string>
     <string name="new_notes_widget">Yeni not widget\'ı</string>
@@ -188,4 +227,14 @@
     <string name="edit_widget_button">Widget düğmesini düzenle</string>
     <string name="libraries_notes_count">Not sayısı</string>
     <string name="loading_content">İçerik yükleniyor</string>
+    <!-- Releases -->
+    <string name="current_release">Mevcut sürüm</string>
+    <string name="previous_releases">Eski sürümler</string>
+    <string name="release_1_8_0">• Şifre korumalı kitaplık kasası desteği
+        \n• Kasa zaman aşımı ayarları
+        \n• Desteklenen cihazlar için biyometrik doğrulama özelliği
+        \n• İspanyolca desteği
+        \n• Yeni <a href="https://www.reddit.com/r/notoapp">Reddit</a> topluluğu linki
+        \n• Diğer hata düzeltmeleri ve tasarım iyileştirmeleri
+    </string>
 </resources>
