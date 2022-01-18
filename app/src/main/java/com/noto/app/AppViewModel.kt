@@ -22,7 +22,7 @@ class AppViewModel(private val storage: LocalStorage) : ViewModel() {
 
     val language = storage.get(Constants.LanguageKey)
         .filterNotNull()
-        .map { Language.valueOf(it) }
+        .map { Language.valueOf(it).takeIf { it != Language.Tamil } ?: Language.English }
         .stateIn(viewModelScope, SharingStarted.Lazily, Language.System)
 
     val vaultTimeout = storage.get(Constants.VaultTimeout)
