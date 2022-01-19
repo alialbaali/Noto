@@ -57,36 +57,36 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
             val selectedColorStateList = color.withDefaultAlpha().toColorStateList()
             val rippleDrawable = root.background as RippleDrawable
             rippleDrawable.setColor(selectedColorStateList)
-            tvNotesCount.text = notesCount.toString()
-            tvTitle.setTextColor(color)
-            tvNotesCount.setTextColor(color)
-            ibDrag.drawable?.mutate()?.setTint(color)
+            tvLibraryNotesCount.text = notesCount.toString()
+            tvLibraryTitle.setTextColor(color)
+            tvLibraryNotesCount.setTextColor(color)
+            ibLibraryDrag.drawable?.mutate()?.setTint(color)
             root.backgroundTintList = if (isSelected)
                 selectedColorStateList
             else
                 context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
-            tvTitle.text = library.getTitle(context)
+            tvLibraryTitle.text = library.getTitle(context)
             if (library.isInbox)
-                ivIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
+                ivLibraryIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
             else
-                ivIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_24))
-            ivIcon.imageTintList = color.toColorStateList()
+                ivLibraryIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_24))
+            ivLibraryIcon.imageTintList = color.toColorStateList()
         }
-        ibDrag.visibility = when {
+        ibLibraryDrag.visibility = when {
             isManualSorting && !library.isInbox -> View.VISIBLE
             isManualSorting && library.isInbox -> View.INVISIBLE
             else -> View.GONE
         }
-        ibDrag.setOnTouchListener(onDragHandleTouchListener)
+        ibLibraryDrag.setOnTouchListener(onDragHandleTouchListener)
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
         root.isClickable = isClickable
         root.isLongClickable = isLongClickable
-        tvNotesCount.isVisible = isShowNotesCount
-        tvTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+        tvLibraryNotesCount.isVisible = isShowNotesCount
+        tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(end = if (!isShowNotesCount && !isManualSorting) 16.dp else 8.dp)
         }
-        tvNotesCount.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+        tvLibraryNotesCount.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(end = if (isManualSorting) 8.dp else 0.dp)
         }
     }
