@@ -119,6 +119,8 @@
     <string name="vault_passcode_has_changed">Vault passcode has been updated.</string>
     <string name="vault_passcode_message">Vault passcode can\'t be changed if you lose the current one, so please make sure to store it in somewhere safe.</string>
     <string name="open_vault">Open vault</string>
+    <string name="open_vault_using_passcode">Open using passcode</string>
+    <string name="open_vault_using_bio">Open using biometrics</string>
     <string name="vault">Vault</string>
     <string name="vault_is_open">Vault is open</string>
     <string name="immediately">Immediately</string>

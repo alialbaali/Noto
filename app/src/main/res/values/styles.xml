@@ -160,6 +160,16 @@
         <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
+    <style name="MaterialSecondaryButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:backgroundTint">?attr/notoBackgroundColor</item>
+        <item name="strokeColor">?attr/notoPrimaryColor</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">?attr/notoPrimaryColor</item>
+        <item name="android:textSize">20sp</item>
+        <item name="cornerRadius">@dimen/spacing_small</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
     <style name="LibraryTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:textSize">@dimen/size_small</item>

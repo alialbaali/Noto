@@ -53,8 +53,12 @@ class MainVaultFragment : Fragment() {
             }
         }
 
-        btnOpen.setOnClickListener {
+        btnOpenUsingPasscode.setOnClickListener {
             openVaultUsingPasscode()
+        }
+
+        btnOpenUsingBio.setOnClickListener {
+            openVaultUsingBio()
         }
 
         btnClose.setOnClickListener {
@@ -75,28 +79,15 @@ class MainVaultFragment : Fragment() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
         combine(viewModel.isVaultOpen, viewModel.isBioAuthEnabled) { isVaultOpen, isBioAuthEnabled ->
+            if (isBioAuthEnabled) {
+                btnOpenUsingPasscode.text = context?.stringResource(R.string.open_vault_using_passcode)
+                btnOpenUsingBio.isVisible = true
+            } else {
+                btnOpenUsingPasscode.text = context?.stringResource(R.string.open_vault)
+                btnOpenUsingBio.isVisible = false
+            }
             if (!isVaultOpen && isBioAuthEnabled)
-                context?.let { context ->
-                    val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                        .setTitle(context.stringResource(R.string.open_vault))
-                        .setNegativeButtonText(context.stringResource(R.string.use_passcode))
-                        .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
-                        .build()
-
-                    val biometricPrompt = BiometricPrompt(
-                        this@MainVaultFragment,
-                        ContextCompat.getMainExecutor(requireContext()),
-                        object : BiometricPrompt.AuthenticationCallback() {
-                            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                                super.onAuthenticationSucceeded(result)
-                                openVault()
-                            }
-                        }
-                    )
-
-                    biometricPrompt.authenticate(promptInfo)
-                }
-
+                openVaultUsingBio()
         }.launchIn(lifecycleScope)
 
         viewModel.isVaultOpen
@@ -237,6 +228,29 @@ class MainVaultFragment : Fragment() {
             passcode.isBlank() -> til.error = context?.stringResource(R.string.passcode_empty_message)
             passcode.hash() == viewModel.vaultPasscode.value -> openVault()
             else -> til.error = context?.stringResource(R.string.invalid_passcode)
+        }
+    }
+
+    private fun MainVaultFragmentBinding.openVaultUsingBio() {
+        context?.let { context ->
+            val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle(context.stringResource(R.string.open_vault))
+                .setNegativeButtonText(context.stringResource(R.string.use_passcode))
+                .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
+                .build()
+
+            val biometricPrompt = BiometricPrompt(
+                this@MainVaultFragment,
+                ContextCompat.getMainExecutor(requireContext()),
+                object : BiometricPrompt.AuthenticationCallback() {
+                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                        super.onAuthenticationSucceeded(result)
+                        openVault()
+                    }
+                }
+            )
+
+            biometricPrompt.authenticate(promptInfo)
         }
     }
 }

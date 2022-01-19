@@ -97,11 +97,21 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_open"
+                android:id="@+id/btn_open_using_passcode"
                 style="@style/MaterialButton"
-                android:layout_marginVertical="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_small"
                 android:padding="@dimen/spacing_normal"
-                android:text="@string/open_vault"
+                android:text="@string/open_vault_using_passcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_open_using_bio"
+                style="@style/MaterialSecondaryButton"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/open_vault_using_bio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
