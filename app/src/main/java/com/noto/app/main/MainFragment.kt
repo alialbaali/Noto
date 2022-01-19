@@ -33,6 +33,14 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val selectedLibraryId by lazy { navController?.lastLibraryId }
 
+    private val popUpToDestinationId by lazy {
+        when (selectedLibraryId) {
+            AllNotesItemId -> R.id.allNotesFragment
+            RecentNotesItemId -> R.id.recentNotesFragment
+            else -> R.id.libraryFragment
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -109,7 +117,11 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         isSelected(inboxLibrary.first.id == selectedLibraryId)
                         onClickListener { _ ->
                             if (inboxLibrary.first.id != selectedLibraryId)
-                                navigateToLibraryFragment(inboxLibrary.first.id)
+                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(inboxLibrary.first.id)) {
+                                    popUpTo(popUpToDestinationId) {
+                                        inclusive = true
+                                    }
+                                }
                             dismiss()
                         }
                         onLongClickListener { _ ->
@@ -132,7 +144,11 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         isSelected(AllNotesItemId == selectedLibraryId)
                         onClickListener { _ ->
                             if (selectedLibraryId != AllNotesItemId)
-                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToAllNotesFragment())
+                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToAllNotesFragment()) {
+                                    popUpTo(popUpToDestinationId) {
+                                        inclusive = true
+                                    }
+                                }
                             dismiss()
                         }
                     }
@@ -147,7 +163,11 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         isSelected(RecentNotesItemId == selectedLibraryId)
                         onClickListener { _ ->
                             if (selectedLibraryId != RecentNotesItemId)
-                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToRecentNotesFragment())
+                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToRecentNotesFragment()) {
+                                    popUpTo(popUpToDestinationId) {
+                                        inclusive = true
+                                    }
+                                }
                             dismiss()
                         }
                     }
@@ -163,7 +183,11 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                                 isSelected(entry.first.id == selectedLibraryId)
                                 onClickListener { _ ->
                                     if (entry.first.id != selectedLibraryId)
-                                        navigateToLibraryFragment(entry.first.id)
+                                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(entry.first.id)) {
+                                            popUpTo(popUpToDestinationId) {
+                                                inclusive = true
+                                            }
+                                        }
                                     dismiss()
                                 }
                                 onLongClickListener { _ ->
@@ -197,19 +221,6 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
             }
             itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
                 .apply { attachToRecyclerView(rv) }
-        }
-    }
-
-    private fun navigateToLibraryFragment(libraryId: Long) {
-        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(libraryId)) {
-            val popUpToDestination = when (selectedLibraryId) {
-                AllNotesItemId -> R.id.allNotesFragment
-                RecentNotesItemId -> R.id.recentNotesFragment
-                else -> R.id.libraryFragment
-            }
-            popUpTo(popUpToDestination) {
-                inclusive = true
-            }
         }
     }
 }
