@@ -49,11 +49,13 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
 fun NotificationManager.createVaultNotification(context: Context) {
 
     val intent = Intent(context, VaultReceiver::class.java)
-    val pendingIntent = PendingIntent.getBroadcast(context, RequestCode, intent, PendingIntentFlags)
-    val action = NotificationCompat.Action(null, context.stringResource(R.string.close_vault), pendingIntent)
+    val actionPendingIntent = PendingIntent.getBroadcast(context, RequestCode, intent, PendingIntentFlags)
+    val action = NotificationCompat.Action(null, context.stringResource(R.string.close_vault), actionPendingIntent)
+    val pendingIntent = context.createVaultNotificationPendingIntent()
 
     val notification = NotificationCompat.Builder(context, VaultChannelId)
         .setContentTitle(context.stringResource(R.string.vault_is_open))
+        .setContentIntent(pendingIntent)
         .addAction(action)
         .setCategory(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Notification.CATEGORY_STATUS else null)
         .setSmallIcon(R.drawable.ic_round_shield_24)
@@ -62,6 +64,13 @@ fun NotificationManager.createVaultNotification(context: Context) {
         .build()
 
     notify(VaultNotificationId, notification)
+}
+
+private fun Context.createVaultNotificationPendingIntent(): PendingIntent {
+    return NavDeepLinkBuilder(this)
+        .setGraph(R.navigation.nav_graph)
+        .setDestination(R.id.mainVaultFragment)
+        .createPendingIntent()
 }
 
 fun NotificationManager.cancelVaultNotification() = cancel(VaultNotificationId)
