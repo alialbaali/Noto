@@ -9,6 +9,7 @@ object Constants {
     const val ShowNotesCountKey = "Show_Notes_Count"
     const val LanguageKey = "Language"
     const val LibraryId = "library_id"
+    const val SelectedLibraryId = "selected_library_id"
     const val NoteId = "note_id"
     const val Body = "body"
     const val IsDismissible = "is_dismissible"
