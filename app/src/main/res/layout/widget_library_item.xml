@@ -4,43 +4,36 @@
     android:id="@+id/ll"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/spacing_small"
+    android:layout_marginHorizontal="@dimen/spacing_small"
     android:orientation="horizontal"
+    android:gravity="center"
     android:padding="@dimen/spacing_normal"
-    android:background="@drawable/widget_library_item_shape"
-    android:elevation="@dimen/elevation_normal">
+    android:animateLayoutChanges="true"
+    android:stateListAnimator="@animator/elevation_animator"
+    android:background="@drawable/widget_library_item_shape">
 
     <ImageView
-        android:id="@+id/iv_library_color"
-        android:layout_width="5dp"
-        android:layout_height="match_parent"
-        android:src="@drawable/color_view_shape"
-        android:contentDescription="@string/library_color" />
+        android:id="@+id/iv_library_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_round_inbox_24" />
 
-    <LinearLayout
-        android:layout_weight="1"
-        android:orientation="vertical"
+    <TextView
+        android:id="@+id/tv_library_title"
+        style="@style/WidgetLibraryTitleTextView"
         android:layout_width="0dp"
-        android:layout_marginEnd="@dimen/spacing_extra_small"
-        android:layout_height="wrap_content">
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_small"
+        tools:text="@string/inbox" />
 
-        <TextView
-            android:id="@+id/tv_library_title"
-            style="@style/WidgetLibraryTitleTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_extra_small"
-            android:textStyle="bold"
-            tools:text="Library" />
+    <TextView
+        android:id="@+id/tv_library_notes_count"
+        style="@style/WidgetLibraryNotesCountTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_small"
+        tools:text="3" />
 
-        <TextView
-            android:id="@+id/tv_library_notes_count"
-            style="@style/WidgetLibraryNotesCountTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_extra_small"
-            tools:text="3 Notes" />
-    </LinearLayout>
 </LinearLayout>
