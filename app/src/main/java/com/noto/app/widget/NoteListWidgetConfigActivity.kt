@@ -71,13 +71,14 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             widget.tvLibraryTitle.setTextColor(color)
             widget.fab.background?.setTint(color)
             widget.ivFab.setColorFilter(color)
+            sWidgetRadius.trackActiveTintList = colorStateList
+            sWidgetRadius.thumbTintList = colorStateList
+            sWidgetRadius.tickInactiveTintList = colorStateList
+            sWidgetRadius.trackInactiveTintList = color.withDefaultAlpha().toColorStateList()
             listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewLibrary)
                 .onEach { it.setupColors(thumbCheckedColor = color, trackCheckedColor = color) }
-            if (colorStateList != null) {
-                sWidgetRadius.trackActiveTintList = colorStateList
-                sWidgetRadius.thumbTintList = colorStateList
-                sWidgetRadius.tickInactiveTintList = colorStateList
-            }
+            listOf(divider1, divider2, divider3, divider4)
+                .onEach { divider -> divider.root.background?.mutate()?.setTint(color.withDefaultAlpha()) }
             if (filteredNotes.isEmpty()) {
                 widget.lv.isVisible = false
                 widget.tvPlaceholder.isVisible = true
@@ -101,7 +102,6 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                         label(entry.key)
                         isSelected(entry.value)
                         color(library.color)
-                        backgroundColor(attributeColoResource(R.attr.notoSurfaceColor))
                         onClickListener { _ ->
                             if (entry.value)
                                 viewModel.deselectLabel(entry.key.id)
@@ -207,7 +207,11 @@ class NoteListWidgetConfigActivity : BaseActivity() {
     }
 
     private fun showSelectLibraryDialog(isDismissible: Boolean) {
-        val args = bundleOf(Constants.LibraryId to 0L, Constants.IsDismissible to isDismissible)
+        val args = bundleOf(
+            Constants.LibraryId to 0L,
+            Constants.IsDismissible to isDismissible,
+            Constants.SelectedLibraryId to viewModel.library.value.id,
+        )
         SelectLibraryDialogFragment { libraryId -> viewModel.getWidgetData(libraryId) }
             .apply { arguments = args }
             .show(supportFragmentManager, null)
