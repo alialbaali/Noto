@@ -2,7 +2,6 @@ package com.noto.app.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,18 +28,19 @@ class LibraryListWidgetAdapter(
                 val library = entry.first
                 val notesCount = entry.second
                 val color = context.colorResource(library.color.toResource())
-                tvLibraryNotesCount.text = context.pluralsResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
-                ivLibraryColor.setColorFilter(color)
+                tvLibraryNotesCount.text = notesCount.toString()
                 tvLibraryTitle.setTextColor(color)
                 tvLibraryNotesCount.setTextColor(color)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    root.outlineAmbientShadowColor = color
-                    root.outlineSpotShadowColor = color
-                }
+                ivLibraryIcon.setColorFilter(color)
                 tvLibraryTitle.text = library.getTitle(context)
+                if (library.isInbox)
+                    ivLibraryIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
+                else
+                    ivLibraryIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_24))
+                ivLibraryIcon.imageTintList = color.toColorStateList()
                 tvLibraryNotesCount.isVisible = isShowNotesCount
                 tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                    updateMarginsRelative(bottom = if (isShowNotesCount) 4.dp else 0.dp)
+                    updateMarginsRelative(end = if (isShowNotesCount) 8.dp else 16.dp)
                 }
             }
         }

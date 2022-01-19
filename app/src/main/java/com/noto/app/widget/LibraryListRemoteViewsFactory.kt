@@ -56,6 +56,7 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
             .first()
             .sorted(sortingType, sortingOrder)
             .sortedByDescending { it.first.isPinned }
+            .sortedByDescending { it.first.isInbox }
         isShowNotesCount = storage.getOrNull(appWidgetId.NotesCount)
             .map { it?.toBoolean() ?: true }
             .first()
@@ -70,19 +71,20 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
         val library = entry.first
         val notesCount = entry.second
         val color = context.colorResource(library.color.toResource())
+        val iconResource = if (library.isInbox) R.drawable.ic_round_inbox_24 else R.drawable.ic_round_folder_24
         val intent = Intent(Constants.Intent.ActionOpenLibrary, null, context, AppActivity::class.java).apply {
             putExtra(Constants.LibraryId, library.id)
         }
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_library_item).apply {
-            val notesCountText = context.pluralsResource(R.plurals.notes_count, notesCount, notesCount)
-            setTextViewText(R.id.tv_library_notes_count, notesCountText)
-            setOnClickFillInIntent(R.id.ll, intent)
-            setContentDescription(R.id.ll, library.getTitle(context))
-            setViewVisibility(R.id.tv_library_notes_count, if (isShowNotesCount) View.VISIBLE else View.GONE)
+            setTextViewText(R.id.tv_library_notes_count, notesCount.toString())
             setTextViewText(R.id.tv_library_title, library.getTitle(context))
+            setContentDescription(R.id.ll, library.getTitle(context))
             setTextColor(R.id.tv_library_title, color)
             setTextColor(R.id.tv_library_notes_count, color)
-            setInt(R.id.iv_library_color, SetColorFilterMethodName, color)
+            setImageViewResource(R.id.iv_library_icon, iconResource)
+            setInt(R.id.iv_library_icon, SetColorFilterMethodName, color)
+            setOnClickFillInIntent(R.id.ll, intent)
+            setViewVisibility(R.id.tv_library_notes_count, if (isShowNotesCount) View.VISIBLE else View.GONE)
         }
         return remoteViews
     }

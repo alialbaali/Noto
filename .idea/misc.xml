@@ -276,6 +276,7 @@
         <entry key="app/src/main/res/layout/divider_item.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/export_import_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/font_dialog_fragment.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/generic_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/header_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/inbox_item.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/item_list_widget.xml" value="0.21644736842105264" />
@@ -307,6 +308,7 @@
         <entry key="app/src/main/res/layout/main_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/main_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/main_vault_fragment.xml" value="0.21611842105263157" />
+        <entry key="app/src/main/res/layout/main_widget_config_activity.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/new_label_dialog_fragment.xml" value="0.2" />
         <entry key="app/src/main/res/layout/new_label_item.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/new_library_dialog_fragment.xml" value="0.2" />
