@@ -28,6 +28,7 @@
 
     <FrameLayout
         android:id="@+id/fl"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
