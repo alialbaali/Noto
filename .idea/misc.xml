@@ -141,6 +141,9 @@
         <entry key="app/src/main/res/drawable/ic_round_menu_24.xml" value="0.35833333333333334" />
         <entry key="app/src/main/res/drawable/ic_round_more_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_round_move_24.xml" value="0.22631578947368422" />
+        <entry key="app/src/main/res/drawable/ic_round_move_down_24.xml" value="0.32222222222222224" />
+        <entry key="app/src/main/res/drawable/ic_round_move_out_24.xml" value="0.32222222222222224" />
+        <entry key="app/src/main/res/drawable/ic_round_move_up_24.xml" value="0.32222222222222224" />
         <entry key="app/src/main/res/drawable/ic_round_new_releases_24.xml" value="0.2241042345276873" />
         <entry key="app/src/main/res/drawable/ic_round_no_parent_24.xml" value="0.32037037037037036" />
         <entry key="app/src/main/res/drawable/ic_round_note_24.xml" value="0.22631578947368422" />
@@ -292,7 +295,7 @@
         <entry key="app/src/main/res/layout/label_order_item.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/language_dialog_fragment.xml" value="0.21611842105263157" />
         <entry key="app/src/main/res/layout/library_archive_fragment.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/library_dialog_fragment.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/library_dialog_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/library_fragment.xml" value="0.21" />
         <entry key="app/src/main/res/layout/library_grid_widget.xml" value="0.21644736842105264" />
         <entry key="app/src/main/res/layout/library_item.xml" value="0.2" />

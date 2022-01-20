@@ -54,6 +54,18 @@
             layout="@layout/divider_item" />
 
         <TextView
+            android:id="@+id/tv_change_parent"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_parent_library"
+            app:drawableStartCompat="@drawable/ic_round_move_out_24" />
+
+        <include
+            android:id="@+id/divider3"
+            layout="@layout/divider_item" />
+
+        <TextView
             android:id="@+id/tv_new_note_shortcut"
             style="@style/DialogItem"
             android:layout_width="match_parent"

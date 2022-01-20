@@ -3,14 +3,12 @@ package com.noto.app.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
-import com.noto.app.domain.model.Layout
-import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.LibraryListSortingType
-import com.noto.app.domain.model.SortingOrder
+import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
+import com.noto.app.util.sorted
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -20,33 +18,55 @@ class MainViewModel(
     private val storage: LocalStorage,
 ) : ViewModel() {
 
-    val libraries = libraryRepository.getLibraries()
-        .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
-            libraries.map { library ->
-                val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
-                library to notesCount
-            }
-        }
+    val sortingType = storage.get(Constants.LibraryListSortingTypeKey)
+        .filterNotNull()
+        .map { LibraryListSortingType.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, LibraryListSortingType.CreationDate)
+
+    val sortingOrder = storage.get(Constants.LibraryListSortingOrderKey)
+        .filterNotNull()
+        .map { SortingOrder.valueOf(it) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, SortingOrder.Descending)
+
+    val libraries = combine(
+        libraryRepository.getLibraries(),
+        noteRepository.getLibrariesNotesCount(),
+        sortingType,
+        sortingOrder,
+    ) { libraries, notesCount, sortingType, sortingOrder ->
+        libraries
+            .filter { it.parentId == null }
+            .mapRecursively(libraries, notesCount, sortingType, sortingOrder)
+            .sorted(sortingType, sortingOrder)
+    }
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
-    val archivedLibraries = libraryRepository.getArchivedLibraries()
-        .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
-            libraries.map { library ->
-                val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
-                library to notesCount
-            }
-        }
+    val archivedLibraries = combine(
+        libraryRepository.getArchivedLibraries(),
+        noteRepository.getLibrariesNotesCount(),
+        sortingType,
+        sortingOrder,
+    ) { libraries, notesCount, sortingType, sortingOrder ->
+        libraries
+            .filter { it.parentId == null }
+            .mapRecursively(libraries, notesCount, sortingType, sortingOrder)
+            .sorted(sortingType, sortingOrder)
+    }
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
-    val vaultedLibraries = libraryRepository.getVaultedLibraries()
-        .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
-            libraries.map { library ->
-                val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
-                library to notesCount
-            }
-        }
+    val vaultedLibraries = combine(
+        libraryRepository.getVaultedLibraries(),
+        noteRepository.getLibrariesNotesCount(),
+        sortingType,
+        sortingOrder,
+    ) { libraries, notesCount, sortingType, sortingOrder ->
+        libraries
+            .filter { it.parentId == null }
+            .mapRecursively(libraries, notesCount, sortingType, sortingOrder)
+            .sorted(sortingType, sortingOrder)
+    }
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
@@ -61,16 +81,6 @@ class MainViewModel(
     val isBioAuthEnabled = storage.getOrNull(Constants.IsBioAuthEnabled)
         .map { it.toBoolean() }
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
-
-    val sortingType = storage.get(Constants.LibraryListSortingTypeKey)
-        .filterNotNull()
-        .map { LibraryListSortingType.valueOf(it) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, LibraryListSortingType.CreationDate)
-
-    val sortingOrder = storage.get(Constants.LibraryListSortingOrderKey)
-        .filterNotNull()
-        .map { SortingOrder.valueOf(it) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, SortingOrder.Descending)
 
     val isShowNotesCount = storage.get(Constants.ShowNotesCountKey)
         .filterNotNull()
@@ -98,11 +108,31 @@ class MainViewModel(
         libraryRepository.updateLibrary(library.copy(position = position))
     }
 
+    fun updateLibraryParentId(library: Library, parentId: Long?) = viewModelScope.launch {
+        libraryRepository.updateLibrary(library.copy(parentId = parentId))
+    }
+
     fun openVault() = viewModelScope.launch {
         storage.put(Constants.IsVaultOpen, true.toString())
     }
 
     fun closeVault() = viewModelScope.launch {
         storage.put(Constants.IsVaultOpen, false.toString())
+    }
+
+    private fun List<Library>.mapRecursively(
+        allLibraries: List<Library>,
+        librariesNotesCount: List<LibraryIdWithNotesCount>,
+        sortingType: LibraryListSortingType,
+        sortingOrder: SortingOrder,
+    ): List<Pair<Library, Int>> {
+        return map { library ->
+            val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
+            val childLibraries = allLibraries
+                .filter { it.parentId == library.id }
+                .mapRecursively(allLibraries, librariesNotesCount, sortingType, sortingOrder)
+                .sorted(sortingType, sortingOrder)
+            library.copy(libraries = childLibraries) to notesCount
+        }
     }
 }

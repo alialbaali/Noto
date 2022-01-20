@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMarginsRelative
+import androidx.core.view.updatePaddingRelative
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
@@ -40,6 +41,9 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
 
     @EpoxyAttribute
     open var isSelected: Boolean = false
+
+    @EpoxyAttribute
+    var depth: Int = 1
 
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onClickListener: View.OnClickListener
@@ -83,6 +87,7 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
         root.isClickable = isClickable
         root.isLongClickable = isLongClickable
         tvLibraryNotesCount.isVisible = isShowNotesCount
+        root.updatePaddingRelative(depth * 16.dp)
         tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(end = if (!isShowNotesCount && !isManualSorting) 16.dp else 8.dp)
         }
