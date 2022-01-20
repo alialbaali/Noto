@@ -9,10 +9,7 @@ import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteLabelRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
-import com.noto.app.util.Constants
-import com.noto.app.util.NoteWithLabels
-import com.noto.app.util.filterContent
-import com.noto.app.util.mapWithLabels
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -25,11 +22,15 @@ class LibraryViewModel(
     private val libraryId: Long,
 ) : ViewModel() {
 
-    val library = libraryRepository.getLibraryById(libraryId)
-        .filterNotNull()
-        .onStart { emit(Library(libraryId, position = 0)) }
-        .onEach { library -> mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(library.color) }
-        .stateIn(viewModelScope, SharingStarted.Lazily, Library(libraryId, position = 0))
+    val library = combine(
+        libraryRepository.getLibraryById(libraryId)
+            .filterNotNull()
+            .onStart { emit(Library(libraryId, position = 0)) },
+        libraryRepository.getAllLibraries(),
+    ) { library, libraries ->
+        mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(library.color)
+        library.mapRecursively(libraries)
+    }.stateIn(viewModelScope, SharingStarted.Lazily, Library(libraryId, position = 0))
 
     private val mutableNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
@@ -118,11 +119,21 @@ class LibraryViewModel(
     }
 
     fun toggleLibraryIsArchived() = viewModelScope.launch {
-        libraryRepository.updateLibrary(library.value.copy(isArchived = !library.value.isArchived, isVaulted = false))
+        libraryRepository.updateLibrary(library.value.copy(isArchived = !library.value.isArchived, isVaulted = false, parentId = null))
+        library.value.libraries.forEachRecursively { entry, _ ->
+            launch {
+                libraryRepository.updateLibrary(entry.first.copy(isArchived = !entry.first.isArchived, isVaulted = false))
+            }
+        }
     }
 
     fun toggleLibraryIsVaulted() = viewModelScope.launch {
-        libraryRepository.updateLibrary(library.value.copy(isVaulted = !library.value.isVaulted, isArchived = false))
+        libraryRepository.updateLibrary(library.value.copy(isVaulted = !library.value.isVaulted, isArchived = false, parentId = null))
+        library.value.libraries.forEachRecursively { entry, _ ->
+            launch {
+                libraryRepository.updateLibrary(entry.first.copy(isVaulted = !entry.first.isVaulted, isArchived = false))
+            }
+        }
     }
 
     fun toggleLibraryIsPinned() = viewModelScope.launch {
@@ -184,5 +195,16 @@ class LibraryViewModel(
         mutableSearchTerm.value = searchTerm
     }
 
+    fun updateLibraryParentId(libraryId: Long) = viewModelScope.launch {
+        libraryRepository.updateLibrary(library.value.copy(parentId = libraryId))
+    }
+
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }
+
+    private fun Library.mapRecursively(allLibraries: List<Library>): Library {
+        val childLibraries = allLibraries
+            .filter { it.parentId == id }
+            .map { it.mapRecursively(allLibraries) to 0 }
+        return copy(libraries = childLibraries)
+    }
 }

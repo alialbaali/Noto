@@ -125,3 +125,39 @@ val Library.isInbox
 
 @Suppress("DEPRECATION")
 fun Library.getTitle(context: Context) = if (isInbox) context.stringResource(R.string.inbox) else title
+
+fun List<Pair<Library, Int>>.forEachRecursively(depth: Int = 1, block: (Pair<Library, Int>, depth: Int) -> Unit) {
+    forEach { entry ->
+        block(entry, depth)
+        entry.first.libraries.forEachRecursively(depth + 1, block)
+    }
+}
+
+fun List<Pair<Library, Int>>.countRecursively(): Int {
+    var count = count()
+    forEach { entry ->
+        count += entry.first.libraries.countRecursively()
+    }
+    return count
+}
+
+fun List<Pair<Library, Int>>.filterRecursively(predicate: (Pair<Library, Int>) -> Boolean): List<Pair<Library, Int>> {
+    return filter(predicate).map {
+        it.first.copy(
+            libraries = it.first.libraries.filterRecursively(predicate)
+        ) to it.second
+    }
+}
+
+fun List<Pair<Library, Int>>.findRecursively(predicate: (Pair<Library, Int>) -> Boolean): Pair<Library, Int>? {
+    val item: Pair<Library, Int>? = firstOrNull(predicate)
+    if (item != null)
+        return item
+    else
+        forEach {
+            val result = it.first.libraries.findRecursively(predicate)
+            if (result != null)
+                return result
+        }
+    return null
+}
