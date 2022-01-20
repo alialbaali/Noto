@@ -167,11 +167,12 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
                                     isClickable(isVaultOpen)
                                     isLongClickable(isVaultOpen)
                                     onClickListener { _ ->
+                                        dismiss()
                                         if (entry.first.id != selectedLibraryId)
                                             navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToLibraryFragment(entry.first.id))
-                                        dismiss()
                                     }
                                     onLongClickListener { _ ->
+                                        dismiss()
                                         navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToLibraryDialogFragment(
                                             entry.first.id))
                                         true

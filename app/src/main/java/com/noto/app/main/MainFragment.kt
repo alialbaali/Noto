@@ -57,10 +57,12 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     private fun MainFragmentBinding.setupListeners() {
         fab.setOnClickListener {
+            dismiss()
             navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToNewLibraryDialogFragment())
         }
 
         ibMore.setOnClickListener {
+            dismiss()
             navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToMainDialogFragment())
         }
     }
@@ -103,6 +105,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                     sortingOrder(sortingOrder)
                     librariesCount(libraries.size)
                     onClickListener { _ ->
+                        dismiss()
                         navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
                     }
                 }
@@ -116,15 +119,16 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         isShowNotesCount(isShowNotesCount)
                         isSelected(inboxLibrary.first.id == selectedLibraryId)
                         onClickListener { _ ->
+                            dismiss()
                             if (inboxLibrary.first.id != selectedLibraryId)
                                 navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(inboxLibrary.first.id)) {
                                     popUpTo(popUpToDestinationId) {
                                         inclusive = true
                                     }
                                 }
-                            dismiss()
                         }
                         onLongClickListener { _ ->
+                            dismiss()
                             navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(inboxLibrary.first.id))
                             true
                         }
@@ -143,13 +147,13 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         isShowNotesCount(isShowNotesCount)
                         isSelected(AllNotesItemId == selectedLibraryId)
                         onClickListener { _ ->
+                            dismiss()
                             if (selectedLibraryId != AllNotesItemId)
                                 navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToAllNotesFragment()) {
                                     popUpTo(popUpToDestinationId) {
                                         inclusive = true
                                     }
                                 }
-                            dismiss()
                         }
                     }
 
@@ -162,13 +166,13 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         isShowNotesCount(isShowNotesCount)
                         isSelected(RecentNotesItemId == selectedLibraryId)
                         onClickListener { _ ->
+                            dismiss()
                             if (selectedLibraryId != RecentNotesItemId)
                                 navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToRecentNotesFragment()) {
                                     popUpTo(popUpToDestinationId) {
                                         inclusive = true
                                     }
                                 }
-                            dismiss()
                         }
                     }
 
@@ -182,15 +186,16 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                                 isShowNotesCount(isShowNotesCount)
                                 isSelected(entry.first.id == selectedLibraryId)
                                 onClickListener { _ ->
+                                    dismiss()
                                     if (entry.first.id != selectedLibraryId)
                                         navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(entry.first.id)) {
                                             popUpTo(popUpToDestinationId) {
                                                 inclusive = true
                                             }
                                         }
-                                    dismiss()
                                 }
                                 onLongClickListener { _ ->
+                                    dismiss()
                                     navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(entry.first.id))
                                     true
                                 }
