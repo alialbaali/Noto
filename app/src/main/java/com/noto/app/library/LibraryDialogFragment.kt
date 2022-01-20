@@ -130,6 +130,17 @@ class LibraryDialogFragment : BaseDialogFragment() {
             }
         }
 
+        tvChangeParent.setOnClickListener {
+            navController?.currentBackStackEntry?.savedStateHandle
+                ?.getLiveData<Long>(Constants.LibraryId)
+                ?.observe(viewLifecycleOwner) { libraryId ->
+                    viewModel.updateLibraryParentId(libraryId).invokeOnCompletion {
+                        dismiss()
+                    }
+                }
+            navController?.navigateSafely(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToSelectLibraryDialogFragment(args.libraryId))
+        }
+
         tvDeleteLibrary.setOnClickListener {
             context?.let { context ->
                 val confirmationText = context.stringResource(R.string.delete_library_confirmation)
@@ -153,10 +164,10 @@ class LibraryDialogFragment : BaseDialogFragment() {
             val colorStateList = color.toColorStateList()
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
             baseDialogFragment.tvDialogTitle.setTextColor(color)
-            listOf(divider1, divider2).forEach { divider ->
+            listOf(divider1, divider2, divider3).forEach { divider ->
                 divider.root.background?.mutate()?.setTint(color.withDefaultAlpha())
             }
-            listOf(tvEditLibrary, tvArchiveLibrary, tvVaultLibrary, tvPinLibrary, tvNewNoteShortcut, tvDeleteLibrary)
+            listOf(tvEditLibrary, tvArchiveLibrary, tvVaultLibrary, tvPinLibrary, tvChangeParent, tvNewNoteShortcut, tvDeleteLibrary)
                 .forEach { tv ->
                     TextViewCompat.setCompoundDrawableTintList(tv, colorStateList)
                     tv.background.setRippleColor(colorStateList)
@@ -169,6 +180,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 tvVaultLibrary.isVisible = false
                 tvDeleteLibrary.isVisible = false
                 tvPinLibrary.isVisible = false
+                tvChangeParent.isVisible = false
                 tvEditLibrary.text = context.stringResource(R.string.edit_inbox)
             }
 
