@@ -2,6 +2,7 @@ package com.noto.app.domain.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
@@ -9,11 +10,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity(tableName = "libraries")
-data class Library(
+data class Library @Ignore constructor(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     val id: Long = 0L,
+
+    @ColumnInfo(name = "parent_id", defaultValue = "NULL")
+    val parentId: Long? = null,
 
     @Deprecated(
         message = "This shouldn't be used directly. Use library.getTitle(context) instead.",
@@ -60,7 +64,49 @@ data class Library(
 
     @ColumnInfo(name = "is_vaulted", defaultValue = "0")
     val isVaulted: Boolean = false,
+
+    @Ignore
+    val libraries: List<Pair<Library, Int>> = emptyList(),
 ) {
+
+    // Room constructor
+    constructor(
+        id: Long = 0L,
+        parentId: Long? = null,
+        title: String = "",
+        position: Int,
+        color: NotoColor = NotoColor.Gray,
+        creationDate: Instant = Clock.System.now(),
+        layout: Layout = Layout.Linear,
+        notePreviewSize: Int = 15,
+        isArchived: Boolean = false,
+        isPinned: Boolean = false,
+        isShowNoteCreationDate: Boolean = false,
+        isSetNewNoteCursorOnTitle: Boolean = false,
+        sortingType: NoteListSortingType = NoteListSortingType.CreationDate,
+        sortingOrder: SortingOrder = SortingOrder.Descending,
+        grouping: Grouping = Grouping.Default,
+        isVaulted: Boolean = false,
+    ) : this(
+        id,
+        parentId,
+        title,
+        position,
+        color,
+        creationDate,
+        layout,
+        notePreviewSize,
+        isArchived,
+        isPinned,
+        isShowNoteCreationDate,
+        isSetNewNoteCursorOnTitle,
+        sortingType,
+        sortingOrder,
+        grouping,
+        isVaulted,
+        emptyList(),
+    )
+
     @Suppress("FunctionName")
     companion object {
         const val InboxId = -1L
