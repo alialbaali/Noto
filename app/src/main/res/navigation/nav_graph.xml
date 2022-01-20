@@ -26,13 +26,19 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_newLibraryDialogFragment"
-            app:destination="@id/newLibraryDialogFragment" />
+            app:destination="@id/newLibraryDialogFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_libraryDialogFragment"
-            app:destination="@id/libraryDialogFragment" />
+            app:destination="@id/libraryDialogFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_libraryListSortingDialogFragment"
-            app:destination="@id/libraryListSortingDialogFragment" />
+            app:destination="@id/libraryListSortingDialogFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_allNotesFragment"
             app:destination="@id/allNotesFragment"
@@ -53,7 +59,9 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_mainDialogFragment"
-            app:destination="@id/mainDialogFragment" />
+            app:destination="@id/mainDialogFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true" />
     </dialog>
     <fragment
         android:id="@+id/libraryFragment"
@@ -323,7 +331,9 @@
         android:label="MainArchiveFragment">
         <action
             android:id="@+id/action_mainArchiveFragment_to_libraryDialogFragment"
-            app:destination="@id/libraryDialogFragment" />
+            app:destination="@id/libraryDialogFragment"
+            app:popUpTo="@id/mainArchiveFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainArchiveFragment_to_libraryFragment"
             app:destination="@id/libraryFragment"
@@ -456,7 +466,9 @@
         android:label="MainVaultFragment">
         <action
             android:id="@+id/action_mainVaultFragment_to_libraryDialogFragment"
-            app:destination="@id/libraryDialogFragment" />
+            app:destination="@id/libraryDialogFragment"
+            app:popUpTo="@id/mainVaultFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainVaultFragment_to_libraryFragment"
             app:destination="@id/libraryFragment"
@@ -522,18 +534,26 @@
     <dialog
         android:id="@+id/mainDialogFragment"
         android:name="com.noto.app.main.MainDialogFragment"
-        android:label="MainDialogFragment" >
+        android:label="MainDialogFragment">
         <action
             android:id="@+id/action_mainDialogFragment_to_mainVaultFragment"
-            app:destination="@id/mainVaultFragment" />
+            app:destination="@id/mainVaultFragment"
+            app:popUpTo="@id/mainDialogFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainDialogFragment_to_mainArchiveFragment"
-            app:destination="@id/mainArchiveFragment" />
+            app:destination="@id/mainArchiveFragment"
+            app:popUpTo="@id/mainDialogFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainDialogFragment_to_vaultPasscodeDialogFragment"
-            app:destination="@id/vaultPasscodeDialogFragment" />
+            app:destination="@id/vaultPasscodeDialogFragment"
+            app:popUpTo="@id/mainDialogFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainDialogFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            app:destination="@id/settingsFragment"
+            app:popUpTo="@id/mainDialogFragment"
+            app:popUpToInclusive="true" />
     </dialog>
 </navigation>

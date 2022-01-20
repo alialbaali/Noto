@@ -72,12 +72,13 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                                     isSelected(entry.first.id == selectedLibraryId)
                                     isShowNotesCount(isShowNotesCount)
                                     onClickListener { _ ->
+                                        dismiss()
                                         if (entry.first.id != selectedLibraryId)
                                             navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(
                                                 entry.first.id))
-                                        dismiss()
                                     }
                                     onLongClickListener { _ ->
+                                        dismiss()
                                         navController?.navigateSafely(
                                             MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(entry.first.id)
                                         )
