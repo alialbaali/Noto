@@ -9,16 +9,13 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
-import com.noto.app.BaseDialogFragment
-import com.noto.app.R
-import com.noto.app.UiState
+import com.noto.app.*
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.LibraryListSortingType
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.SortingOrder
-import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -70,7 +67,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rv.itemAnimator = VerticalListItemAnimator()
+//        rv.itemAnimator = VerticalListItemAnimator()
 
         combine(
             viewModel.libraries,
@@ -79,8 +76,8 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
             viewModel.isShowNotesCount,
             viewModel.allNotes,
         ) { libraries, sortingType, sortingOrder, isShowNotesCount, allNotes ->
-            setupLibraries(libraries.map { it.sorted(sortingType, sortingOrder) }, sortingType, sortingOrder, isShowNotesCount, allNotes)
-            setupItemTouchHelper()
+            setupLibraries(libraries, sortingType, sortingOrder, isShowNotesCount, allNotes)
+            setupItemTouchHelper(sortingType == LibraryListSortingType.Manual)
         }.launchIn(lifecycleScope)
     }
 
@@ -103,7 +100,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                     id(0)
                     sortingType(sortingType)
                     sortingOrder(sortingOrder)
-                    librariesCount(libraries.size)
+                    librariesCount(libraries.countRecursively())
                     onClickListener { _ ->
                         dismiss()
                         navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
@@ -177,7 +174,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                     }
 
                     buildLibrariesModels(context, libraries) { libraries ->
-                        libraries.forEach { entry ->
+                        libraries.forEachRecursively { entry, depth ->
                             libraryItem {
                                 id(entry.first.id)
                                 library(entry.first)
@@ -185,6 +182,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                                 isManualSorting(isManualSorting)
                                 isShowNotesCount(isShowNotesCount)
                                 isSelected(entry.first.id == selectedLibraryId)
+                                depth(depth)
                                 onClickListener { _ ->
                                     dismiss()
                                     if (entry.first.id != selectedLibraryId)
@@ -215,17 +213,52 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         }
     }
 
-    private fun MainFragmentBinding.setupItemTouchHelper() {
-        if (this@MainFragment::epoxyController.isInitialized) {
-            val itemTouchHelperCallback = LibraryItemTouchHelperCallback(epoxyController) {
-                rv.forEach { view ->
-                    val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
-                    val model = viewHolder.model as? LibraryItem
-                    if (model != null) viewModel.updateLibraryPosition(model.library, viewHolder.bindingAdapterPosition)
-                }
+    private fun MainFragmentBinding.setupItemTouchHelper(isManualSorting: Boolean) {
+        if (isManualSorting) {
+            if (this@MainFragment::epoxyController.isInitialized) {
+                val itemTouchHelperCallback = LibraryItemTouchHelperCallback(
+                    epoxyController,
+                    onSwipe = { viewHolder, direction -> onSwipe(viewHolder, direction) },
+                    onDrag = { onDrag() }
+                )
+                itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
+                    .apply { attachToRecyclerView(rv) }
             }
-            itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
-                .apply { attachToRecyclerView(rv) }
+        } else {
+            if (this@MainFragment::itemTouchHelper.isInitialized) {
+                itemTouchHelper.attachToRecyclerView(null)
+            }
+        }
+    }
+
+    private fun MainFragmentBinding.onSwipe(viewHolder: EpoxyViewHolder, direction: Int) {
+        val libraries = viewModel.libraries.value.getOrDefault(emptyList())
+        val model = viewHolder.model as? LibraryItem
+        if (model != null) {
+            if (direction == ItemTouchHelper.START) {
+                val parentId = libraries.findRecursively { it.first.id == model.library.parentId }?.first?.parentId
+                viewModel.updateLibraryParentId(model.library, parentId)
+            } else {
+                val previousViewHolder = rv.findViewHolderForAdapterPosition(viewHolder.bindingAdapterPosition - 1) as EpoxyViewHolder?
+                val previousModel = previousViewHolder?.model as? LibraryItem?
+                val parentId = libraries.findRecursively {
+                    val isSameParent = it.first.parentId == model.library.parentId
+                    val isPreviousSelf = it.first.id == previousModel?.library?.id
+                    val isWithinPreviousLibraries = it.first.libraries.findRecursively { it.first.id == previousModel?.library?.id } != null
+                    isSameParent && (isPreviousSelf || isWithinPreviousLibraries)
+                }?.first?.id
+                if (parentId != null)
+                    viewModel.updateLibraryParentId(model.library, parentId)
+            }
+            epoxyController.notifyModelChanged(viewHolder.bindingAdapterPosition)
+        }
+    }
+
+    private fun MainFragmentBinding.onDrag() {
+        rv.forEach { view ->
+            val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
+            val model = viewHolder.model as? LibraryItem
+            if (model != null) viewModel.updateLibraryPosition(model.library, viewHolder.bindingAdapterPosition)
         }
     }
 }

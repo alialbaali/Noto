@@ -18,7 +18,6 @@ import com.noto.app.UiState
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainVaultFragmentBinding
 import com.noto.app.domain.model.Library
-import com.noto.app.map
 import com.noto.app.util.*
 import eightbitlab.com.blurview.RenderScriptBlur
 import kotlinx.coroutines.flow.combine
@@ -134,12 +133,10 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
 
         combine(
             viewModel.vaultedLibraries,
-            viewModel.sortingType,
-            viewModel.sortingOrder,
             viewModel.isShowNotesCount,
             viewModel.isVaultOpen,
-        ) { libraries, sortingType, sortingOrder, isShowNotesCount, isVaultOpen ->
-            setupLibraries(libraries.map { it.sorted(sortingType, sortingOrder) }, isShowNotesCount, isVaultOpen)
+        ) { libraries, isShowNotesCount, isVaultOpen ->
+            setupLibraries(libraries, isShowNotesCount, isVaultOpen)
         }.launchIn(lifecycleScope)
     }
 
@@ -156,7 +153,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
                         }
                     } else {
                         buildLibrariesModels(context, libraries) { libraries ->
-                            libraries.forEach { entry ->
+                            libraries.forEachRecursively { entry, depth ->
                                 libraryItem {
                                     id(entry.first.id)
                                     library(entry.first)
@@ -164,6 +161,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
                                     isManualSorting(false)
                                     isSelected(entry.first.id == selectedLibraryId)
                                     isShowNotesCount(isShowNotesCount)
+                                    depth(depth)
                                     isClickable(isVaultOpen)
                                     isLongClickable(isVaultOpen)
                                     onClickListener { _ ->

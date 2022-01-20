@@ -13,7 +13,6 @@ import com.noto.app.UiState
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainArchiveFragmentBinding
 import com.noto.app.domain.model.Library
-import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -42,11 +41,9 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
 
         combine(
             viewModel.archivedLibraries,
-            viewModel.sortingType,
-            viewModel.sortingOrder,
             viewModel.isShowNotesCount,
-        ) { libraries, sortingType, sortingOrder, isShowNotesCount ->
-            setupLibraries(libraries.map { it.sorted(sortingType, sortingOrder) }, isShowNotesCount)
+        ) { libraries, isShowNotesCount ->
+            setupLibraries(libraries, isShowNotesCount)
         }.launchIn(lifecycleScope)
     }
 
@@ -63,7 +60,7 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                         }
                     } else {
                         buildLibrariesModels(context, libraries) { libraries ->
-                            libraries.forEach { entry ->
+                            libraries.forEachRecursively { entry, depth ->
                                 libraryItem {
                                     id(entry.first.id)
                                     library(entry.first)
@@ -71,6 +68,7 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                                     isManualSorting(false)
                                     isSelected(entry.first.id == selectedLibraryId)
                                     isShowNotesCount(isShowNotesCount)
+                                    depth(depth)
                                     onClickListener { _ ->
                                         dismiss()
                                         if (entry.first.id != selectedLibraryId)

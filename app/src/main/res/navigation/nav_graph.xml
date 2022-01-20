@@ -202,6 +202,9 @@
         <action
             android:id="@+id/action_libraryDialogFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />
+        <action
+            android:id="@+id/action_libraryDialogFragment_to_selectLibraryDialogFragment"
+            app:destination="@id/selectLibraryDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/confirmationDialogFragment"

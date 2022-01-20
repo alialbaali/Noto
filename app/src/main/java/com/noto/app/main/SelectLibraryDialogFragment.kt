@@ -56,12 +56,10 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
 
         combine(
             viewModel.libraries,
-            viewModel.sortingType,
-            viewModel.sortingOrder,
             viewModel.isShowNotesCount,
-        ) { libraries, sortingType, sortingOrder, isShowNotesCount ->
+        ) { libraries, isShowNotesCount ->
             setupLibraries(
-                libraries.map { it.filter { entry -> entry.first.id != args.libraryId }.sorted(sortingType, sortingOrder) },
+                libraries.map { it.filterRecursively { entry -> entry.first.id != args.libraryId } },
                 isShowNotesCount
             )
         }.launchIn(lifecycleScope)
@@ -107,7 +105,7 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
                             }
                         } else {
                             buildLibrariesModels(context, libraries) { libraries ->
-                                libraries.forEach { entry ->
+                                libraries.forEachRecursively { entry, depth ->
                                     libraryItem {
                                         id(entry.first.id)
                                         library(entry.first)
@@ -115,6 +113,7 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
                                         isShowNotesCount(isShowNotesCount)
                                         isSelected(entry.first.id == args.selectedLibraryId)
                                         isManualSorting(false)
+                                        depth(depth)
                                         onClickListener { _ -> callback(entry.first) }
                                         onLongClickListener { _ -> false }
                                         onDragHandleTouchListener { _, _ -> false }
