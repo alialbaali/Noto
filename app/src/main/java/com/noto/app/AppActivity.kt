@@ -19,9 +19,7 @@ import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.main.MainVaultFragment
 import com.noto.app.settings.VaultTimeoutWorker
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -129,20 +127,17 @@ class AppActivity : BaseActivity() {
                     notificationManager.cancelVaultNotification()
             }
             .launchIn(lifecycleScope)
-
-        viewModel.mainLibraryId
-            .onEach { libraryId ->
-                if (navController.currentDestination?.id == R.id.libraryFragment) {
-                    val args = bundleOf(Constants.LibraryId to libraryId)
-                    val options = navOptions {
-                        popUpTo(R.id.libraryFragment) {
-                            inclusive = true
-                        }
-                    }
-                    navController.navigate(R.id.libraryFragment, args, options)
+        
+        lifecycleScope.launchWhenCreated {
+            val libraryId = viewModel.mainLibraryId.first()
+            val args = bundleOf(Constants.LibraryId to libraryId)
+            val options = navOptions {
+                popUpTo(R.id.libraryFragment) {
+                    inclusive = true
                 }
             }
-            .launchIn(lifecycleScope)
+            navController.navigate(R.id.libraryFragment, args, options)
+        }
 
         combine(
             viewModel.isVaultOpen,
