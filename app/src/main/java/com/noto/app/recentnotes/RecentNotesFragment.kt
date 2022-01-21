@@ -101,10 +101,7 @@ class RecentNotesFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         viewModel.isCollapseToolbar
-            .onEach { isCollapseToolbar ->
-                if (!abl.isExpanded)
-                    abl.setExpanded(!isCollapseToolbar, false)
-            }
+            .onEach { isCollapseToolbar -> abl.setExpanded(!isCollapseToolbar && abl.isExpanded, false) }
             .launchIn(lifecycleScope)
 
         val menuItem = bab.menu.findItem(R.id.change_visibility)
