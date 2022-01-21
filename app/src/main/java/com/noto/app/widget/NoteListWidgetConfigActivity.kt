@@ -67,6 +67,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             val colorStateList = color.toColorStateList()
             tvFilterLabels.isVisible = labels.isNotEmpty()
             rv.isVisible = labels.isNotEmpty()
+            divider2.root.isVisible = labels.isNotEmpty()
             widget.tvLibraryTitle.text = library.getTitle(this@NoteListWidgetConfigActivity)
             widget.tvLibraryTitle.setTextColor(color)
             widget.fab.background?.setTint(color)
