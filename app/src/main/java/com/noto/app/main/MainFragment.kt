@@ -158,7 +158,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                     }
 
                     genericItem {
-                        id("recently_accessed_notes")
+                        id("recent_notes")
                         title(context.getString(R.string.recent_notes))
                         icon(context.drawableResource(R.drawable.ic_round_schedule_24))
                         notesCount(allNotes.filterRecentlyAccessed().count())
