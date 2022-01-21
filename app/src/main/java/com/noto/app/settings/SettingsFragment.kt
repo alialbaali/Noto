@@ -2,6 +2,7 @@ package com.noto.app.settings
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,25 @@ class SettingsFragment : Fragment() {
         }
 
     private fun SettingsFragmentBinding.setupState() {
+        listOf(
+            tvChangeMainLibrary, tvChangeVaultTimeout, tvChangeVaultPasscode,
+            tvWhatsNew, tvChangeLanguage, tvJoinCommunity, tvChangeTheme,
+            tvChangeNotesFont, tvExportImport, tvAbout, tvViewCode,
+            tvReportIssue, tvRateApp, tvShareWithOthers, tvVersion,
+        ).forEach {
+            context?.let { context ->
+                val color = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    context.colorResource(android.R.color.system_accent3_700)
+                } else {
+                    context.attributeColoResource(R.attr.notoBackgroundColor)
+                }
+                it.compoundDrawablesRelative[0]?.setTint(color)
+                it.compoundDrawablesRelative.forEach {
+                    it?.setTint(color)
+                }
+            }
+        }
+
         context?.let { context ->
             val version = context.packageManager
                 ?.getPackageInfo(context.packageName, 0)
