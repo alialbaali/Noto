@@ -268,8 +268,8 @@
         android:name="com.noto.app.main.SelectLibraryDialogFragment"
         android:label="SelectLibraryDialogFragment">
         <argument
-            android:name="library_id"
-            app:argType="long" />
+            android:name="filtered_library_ids"
+            app:argType="long[]" />
         <argument
             android:name="is_dismissible"
             android:defaultValue="true"
@@ -278,6 +278,10 @@
             android:name="selected_library_id"
             android:defaultValue="0L"
             app:argType="long" />
+        <argument
+            android:name="is_no_parent_enabled"
+            android:defaultValue="false"
+            app:argType="boolean" />
     </dialog>
     <dialog
         android:id="@+id/libraryListSortingDialogFragment"

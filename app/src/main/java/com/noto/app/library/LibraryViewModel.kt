@@ -196,7 +196,7 @@ class LibraryViewModel(
     }
 
     fun updateLibraryParentId(libraryId: Long) = viewModelScope.launch {
-        libraryRepository.updateLibrary(library.value.copy(parentId = libraryId))
+        libraryRepository.updateLibrary(library.value.copy(parentId = libraryId.takeUnless { it == 0L }))
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }

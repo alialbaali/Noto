@@ -14,7 +14,6 @@ import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
-import com.noto.app.databinding.DividerItemBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.Note
@@ -148,7 +147,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                         dismiss()
                     }
                 }
-            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(args.libraryId))
+            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(longArrayOf(args.libraryId)))
         }
 
         tvMoveNote.setOnClickListener {
@@ -167,7 +166,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                         dismiss()
                     }
                 }
-            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(args.libraryId))
+            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(longArrayOf(args.libraryId)))
         }
 
         tvShareNote.setOnClickListener {

@@ -138,7 +138,13 @@ class LibraryDialogFragment : BaseDialogFragment() {
                         dismiss()
                     }
                 }
-            navController?.navigateSafely(LibraryDialogFragmentDirections.actionLibraryDialogFragmentToSelectLibraryDialogFragment(args.libraryId))
+            navController?.navigateSafely(
+                LibraryDialogFragmentDirections.actionLibraryDialogFragmentToSelectLibraryDialogFragment(
+                    longArrayOf(args.libraryId, Library.InboxId),
+                    selectedLibraryId = viewModel.library.value.parentId ?: 0L,
+                    isNoParentEnabled = true
+                )
+            )
         }
 
         tvDeleteLibrary.setOnClickListener {

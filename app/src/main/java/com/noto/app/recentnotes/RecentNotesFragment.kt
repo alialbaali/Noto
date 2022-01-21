@@ -42,7 +42,7 @@ class RecentNotesFragment : Fragment() {
     private fun RecentNotesFragmentBinding.setupListeners() {
         fab.setOnClickListener {
             navController
-                ?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToSelectLibraryDialogFragment(libraryId = 0))
+                ?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToSelectLibraryDialogFragment(longArrayOf()))
         }
 
         bab.setNavigationOnClickListener {

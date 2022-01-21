@@ -59,7 +59,7 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
             viewModel.isShowNotesCount,
         ) { libraries, isShowNotesCount ->
             setupLibraries(
-                libraries.map { it.filterRecursively { entry -> entry.first.id != args.libraryId } },
+                libraries.map { it.filterRecursively { entry -> args.filteredLibraryIds.none { it == entry.first.id } } },
                 isShowNotesCount
             )
         }.launchIn(lifecycleScope)
@@ -72,16 +72,24 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
             is UiState.Success -> {
                 val libraries = state.value.filterNot { it.first.isInbox }
                 val inboxLibrary = state.value.firstOrNull { it.first.isInbox }
-                val callback = { library: Library ->
+                val callback = { id: Long ->
                     try {
-                        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.LibraryId, library.id)
+                        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.LibraryId, id)
                     } catch (exception: IllegalStateException) {
-                        onClick(library.id)
+                        onClick(id)
                     }
                     dismiss()
                 }
 
                 rv.withModels {
+
+                    if (args.isNoParentEnabled) {
+                        noParentItem {
+                            id("no_parent")
+                            isSelected(args.selectedLibraryId == 0L)
+                            onClickListener { _ -> callback(0L) }
+                        }
+                    }
 
                     inboxLibrary?.let {
                         libraryItem {
@@ -91,7 +99,7 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
                             isSelected(inboxLibrary.first.id == args.selectedLibraryId)
                             isManualSorting(false)
                             isShowNotesCount(isShowNotesCount)
-                            onClickListener { _ -> callback(inboxLibrary.first) }
+                            onClickListener { _ -> callback(inboxLibrary.first.id) }
                             onLongClickListener { _ -> false }
                             onDragHandleTouchListener { _, _ -> false }
                         }
@@ -114,7 +122,7 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
                                         isSelected(entry.first.id == args.selectedLibraryId)
                                         isManualSorting(false)
                                         depth(depth)
-                                        onClickListener { _ -> callback(entry.first) }
+                                        onClickListener { _ -> callback(entry.first.id) }
                                         onLongClickListener { _ -> false }
                                         onDragHandleTouchListener { _, _ -> false }
                                     }

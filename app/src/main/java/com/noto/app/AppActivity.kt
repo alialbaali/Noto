@@ -108,7 +108,7 @@ class AppActivity : BaseActivity() {
                 navController.navigate(R.id.libraryFragment, args, options)
                 navController.navigate(R.id.noteFragment, args)
             }
-        val args = bundleOf(Constants.LibraryId to 0L)
+        val args = bundleOf(Constants.FilteredLibraryIds to longArrayOf())
         navController.navigate(R.id.selectLibraryDialogFragment, args)
     }
 
