@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    android:label="SignInGraph"
     app:startDestination="@id/libraryFragment">
     <argument
         android:name="library_id"
