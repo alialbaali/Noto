@@ -513,7 +513,7 @@
     <fragment
         android:id="@+id/recentNotesFragment"
         android:name="com.noto.app.recentnotes.RecentNotesFragment"
-        android:label="RecentlyAccessedNotesFragment">
+        android:label="RecentNotesFragment">
         <action
             android:id="@+id/action_recentNotesFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
