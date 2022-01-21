@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.view.forEach
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyController
@@ -67,7 +68,12 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-//        rv.itemAnimator = VerticalListItemAnimator()
+        rv.itemAnimator = DefaultItemAnimator().apply {
+            addDuration = DefaultAnimationDuration
+            changeDuration = DefaultAnimationDuration
+            moveDuration = DefaultAnimationDuration
+            removeDuration = DefaultAnimationDuration
+        }
 
         combine(
             viewModel.libraries,
