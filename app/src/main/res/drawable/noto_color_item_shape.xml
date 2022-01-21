@@ -2,7 +2,9 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?attr/notoSurfaceColor">
     <item>
-        <selector>
+        <selector
+            android:enterFadeDuration="@integer/animation_duration"
+            android:exitFadeDuration="@integer/animation_duration">
             <item
                 android:drawable="@drawable/ic_round_check_circle_24"
                 android:state_checked="true" />

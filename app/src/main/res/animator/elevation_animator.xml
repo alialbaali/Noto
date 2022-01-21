@@ -3,7 +3,7 @@
 
     <item android:state_selected="true">
         <objectAnimator
-            android:duration="250"
+            android:duration="@integer/animation_duration"
             android:propertyName="elevation"
             android:interpolator="@android:anim/accelerate_interpolator"
             android:valueTo="@dimen/elevation_normal"
@@ -12,7 +12,7 @@
 
     <item>
         <objectAnimator
-            android:duration="250"
+            android:duration="@integer/animation_duration"
             android:propertyName="elevation"
             android:interpolator="@android:anim/accelerate_interpolator"
             android:valueTo="@dimen/elevation_none"
