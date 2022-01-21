@@ -20,6 +20,7 @@ import com.noto.app.main.MainVaultFragment
 import com.noto.app.settings.VaultTimeoutWorker
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -98,8 +99,13 @@ class AppActivity : BaseActivity() {
             ?.savedStateHandle
             ?.getLiveData<Long>(Constants.LibraryId)
             ?.observe(this@AppActivity) { libraryId ->
+                val options = navOptions {
+                    popUpTo(R.id.libraryFragment) {
+                        inclusive = true
+                    }
+                }
                 val args = bundleOf(Constants.LibraryId to libraryId, Constants.Body to content)
-                navController.navigate(R.id.libraryFragment, args)
+                navController.navigate(R.id.libraryFragment, args, options)
                 navController.navigate(R.id.noteFragment, args)
             }
         val args = bundleOf(Constants.LibraryId to 0L)
@@ -127,8 +133,8 @@ class AppActivity : BaseActivity() {
                     notificationManager.cancelVaultNotification()
             }
             .launchIn(lifecycleScope)
-        
-        lifecycleScope.launchWhenCreated {
+
+        lifecycleScope.launch {
             val libraryId = viewModel.mainLibraryId.first()
             val args = bundleOf(Constants.LibraryId to libraryId)
             val options = navOptions {
