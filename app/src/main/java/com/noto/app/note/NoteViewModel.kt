@@ -50,9 +50,15 @@ class NoteViewModel(
 
     init {
         noteRepository.getNoteById(noteId)
+            .also {
+                viewModelScope.launch {
+                    it.firstOrNull()?.let {
+                        noteRepository.updateNote(it.copy(accessDate = Clock.System.now()))
+                    }
+                }
+            }
             .onStart { emit(Note(noteId, libraryId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
             .filterNotNull()
-            .onEach { if (it.isValid) noteRepository.updateNote(it.copy(accessDate = Clock.System.now())) }
             .onEach { mutableNote.value = it }
             .launchIn(viewModelScope)
 
@@ -77,6 +83,7 @@ class NoteViewModel(
         val note = note.value.copy(
             title = title.trim(),
             body = body.trim(),
+            accessDate = Clock.System.now(),
         )
         if (note.isValid)
             if (note.id == 0L)
