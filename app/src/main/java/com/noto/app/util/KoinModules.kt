@@ -52,7 +52,7 @@ val appModule = module {
 
     viewModel { AllNotesViewModel(get(), get(), get(), get(), get()) }
 
-    viewModel { RecentNotesViewModel(get(), get(), get(), get()) }
+    viewModel { RecentNotesViewModel(get(), get(), get(), get(), get()) }
 }
 
 val repositoryModule = module {

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.repository.LabelRepository
+import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteLabelRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
@@ -13,6 +14,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.datetime.LocalDate
 
 class RecentNotesViewModel(
+    private val libraryRepository: LibraryRepository,
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
@@ -41,16 +43,18 @@ class RecentNotesViewModel(
 
     init {
         combine(
+            libraryRepository.getLibraries(),
             noteRepository.getAllMainNotes(),
             labelRepository.getAllLabels(),
             noteLabelRepository.getNoteLabels(),
             searchTerm.map { it.trim() },
-        ) { notes, labels, noteLabels, searchTerm ->
+        ) { libraries, notes, labels, noteLabels, searchTerm ->
             mutableNotesVisibility.value = notes.mapNotNull { it.accessDate?.toLocalDate() }.map {
                 val isVisible = notesVisibility.value[it] ?: true
                 it to isVisible
             }.toMap()
             mutableNotes.value = notes
+                .filter { note -> libraries.any { library -> library.id == note.libraryId } }
                 .filterRecentlyAccessed()
                 .mapWithLabels(labels, noteLabels)
                 .filterContent(searchTerm)

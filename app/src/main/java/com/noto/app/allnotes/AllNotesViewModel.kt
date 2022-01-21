@@ -55,6 +55,7 @@ class AllNotesViewModel(
                 it to isVisible
             }.toMap()
             mutableNotes.value = notes
+                .filter { note -> libraries.any { library -> library.id == note.libraryId } }
                 .mapWithLabels(labels, noteLabels)
                 .filterContent(searchTerm)
                 .groupBy { noteWithLabels ->
