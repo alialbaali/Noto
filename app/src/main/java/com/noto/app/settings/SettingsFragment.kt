@@ -79,7 +79,7 @@ class SettingsFragment : Fragment() {
         tvChangeMainLibrary.setOnClickListener {
             navController?.navigateSafely(
                 SettingsFragmentDirections.actionSettingsFragmentToSelectLibraryDialogFragment(
-                    libraryId = 0,
+                    longArrayOf(),
                     selectedLibraryId = viewModel.mainLibraryId.value
                 )
             )

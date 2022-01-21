@@ -39,7 +39,7 @@ class AllNotesFragment : Fragment() {
 
     private fun AllNotesFragmentBinding.setupListeners() {
         fab.setOnClickListener {
-            navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToSelectLibraryDialogFragment(libraryId = 0))
+            navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToSelectLibraryDialogFragment(longArrayOf()))
         }
 
         bab.setNavigationOnClickListener {
