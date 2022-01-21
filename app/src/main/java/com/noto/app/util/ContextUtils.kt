@@ -10,25 +10,23 @@ import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.Library
 
+private const val IconSize = 512
+private const val IconSpacing = 128
+
 fun Context.createPinnedShortcut(library: Library): ShortcutInfoCompat {
     val intent = Intent(Constants.Intent.ActionCreateNote, null, this, AppActivity::class.java).apply {
         putExtra(Constants.LibraryId, library.id)
     }
-
-    val resourceId = library.color.toResource()
-
-    val size = 512
-
-    val bitmap = createBitmap(size, size).applyCanvas {
-        drawColor(colorResource(android.R.color.white))
+    val backgroundColor = library.color.toResource().let(this::colorResource)
+    val iconColor = colorResource(android.R.color.white)
+    val bitmap = createBitmap(IconSize, IconSize).applyCanvas {
+        drawColor(backgroundColor)
         drawableResource(R.drawable.ic_round_edit_24)?.mutate()?.let { drawable ->
-            drawable.setTint(colorResource(resourceId))
-            val spacing = 128
-            drawable.setBounds(spacing, spacing, width - spacing, height - spacing)
+            drawable.setTint(iconColor)
+            drawable.setBounds(IconSpacing, IconSpacing, width - IconSpacing, height - IconSpacing)
             drawable.draw(this)
         }
     }
-
     return ShortcutInfoCompat.Builder(this, library.id.toString())
         .setIntent(intent)
         .setShortLabel(library.title)
