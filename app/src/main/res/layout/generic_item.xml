@@ -9,7 +9,7 @@
     android:gravity="center"
     android:padding="@dimen/spacing_normal"
     android:animateLayoutChanges="true"
-    android:background="@drawable/library_item_shape">
+    android:background="@drawable/generic_item_selector">
 
     <ImageView
         android:id="@+id/iv_icon"

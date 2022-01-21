@@ -2,7 +2,6 @@ package com.noto.app.util
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
-import android.graphics.drawable.RippleDrawable
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -42,19 +41,7 @@ abstract class GenericItem : EpoxyModelWithHolder<GenericItem.Holder>() {
 
     @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
-        root.context?.let { context ->
-            val color = context.attributeColoResource(R.attr.notoPrimaryColor)
-            val selectedColorStateList = color.withDefaultAlpha().toColorStateList()
-            val rippleDrawable = root.background as RippleDrawable
-            rippleDrawable.setColor(selectedColorStateList)
-            tvNotesCount.text = notesCount.toString()
-            tvTitle.setTextColor(color)
-            tvNotesCount.setTextColor(color)
-            root.backgroundTintList = if (isSelected)
-                selectedColorStateList
-            else
-                context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
-        }
+        root.isSelected = isSelected
         tvTitle.text = title
         ivIcon.setImageDrawable(icon)
         ibDrag.visibility = if (isManualSorting) View.INVISIBLE else View.GONE
