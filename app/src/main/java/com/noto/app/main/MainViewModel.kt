@@ -132,6 +132,7 @@ class MainViewModel(
                 .filter { it.parentId == library.id }
                 .mapRecursively(allLibraries, librariesNotesCount, sortingType, sortingOrder)
                 .sorted(sortingType, sortingOrder)
+                .sortedByDescending { it.first.isPinned }
             library.copy(libraries = childLibraries) to notesCount
         }
     }
