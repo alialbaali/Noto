@@ -85,6 +85,31 @@
         </com.google.android.material.tabs.TabLayout>
 
         <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_new_note_cursor_position"
+            style="@style/DialogSectionItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:text="@string/new_note_cursor_position" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_new_note_cursor_position"
+            style="@style/TabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_note_max_lines"
             style="@style/DialogSectionItem"
             android:layout_width="match_parent"
@@ -120,16 +145,6 @@
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/spacing_normal"
             android:text="@string/show_note_creation_date"
-            app:thumbTint="?attr/notoPrimaryColor"
-            app:trackTint="?attr/notoSurfaceColor" />
-
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/sw_set_new_note_cursor"
-            style="@style/DialogSectionItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/spacing_normal"
-            android:text="@string/set_new_note_cursor_on_title"
             app:thumbTint="?attr/notoPrimaryColor"
             app:trackTint="?attr/notoSurfaceColor" />
 
