@@ -186,10 +186,7 @@ fun SwitchMaterial.setupColors(
 ) {
     val state = arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf(-android.R.attr.state_checked))
     val thumbColors = intArrayOf(thumbCheckedColor, thumbUnCheckedColor)
-    val trackColors = intArrayOf(
-        ColorUtils.setAlphaComponent(trackCheckedColor, 128),
-        ColorUtils.setAlphaComponent(trackUnCheckedColor, 128)
-    )
+    val trackColors = intArrayOf(trackCheckedColor.withDefaultAlpha(64), trackUnCheckedColor.withDefaultAlpha(64))
     thumbTintList = ColorStateList(state, thumbColors)
     trackTintList = ColorStateList(state, trackColors)
 }

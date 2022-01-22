@@ -1,5 +1,6 @@
 package com.noto.app.library
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -27,6 +29,8 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
     private val viewModel by viewModel<LibraryViewModel> { parametersOf(args.libraryId) }
 
     private val args by navArgs<NewLibraryDialogFragmentArgs>()
+
+    private var lastColor = NotoColor.Gray
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NewLibraryDialogFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -78,6 +82,25 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
         viewModel.notoColors
             .onEach { pairs -> setupNotoColors(pairs) }
+            .drop(1)
+            .onEach { pairs ->
+                val selectedColor = pairs.first { it.second }.first
+                context?.let { context ->
+                    ValueAnimator.ofArgb(
+                        context.colorResource(lastColor.toResource()),
+                        context.colorResource(selectedColor.toResource())
+                    ).apply {
+                        interpolator = DefaultInterpolator()
+                        duration = DefaultAnimationDuration
+                        addUpdateListener {
+                            val color = it.animatedValue as Int
+                            updateColors(color, baseDialogFragment)
+                        }
+                        start()
+                    }
+                }
+                lastColor = selectedColor
+            }
             .launchIn(lifecycleScope)
     }
 
@@ -115,34 +138,39 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private fun NewLibraryDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
         rv.smoothScrollToPosition(library.color.ordinal)
-        val tab = when (library.layout) {
-            Layout.Linear -> tlLibraryLayout.getTabAt(0)
-            Layout.Grid -> tlLibraryLayout.getTabAt(1)
-        }
-        tlLibraryLayout.selectTab(tab)
+        tlLibraryLayout.selectTab(convertLayoutToTab(library.layout))
         swShowNoteCreationDate.isChecked = library.isShowNoteCreationDate
         swSetNewNoteCursor.isChecked = library.isSetNewNoteCursorOnTitle
+        sNotePreviewSize.value = library.notePreviewSize.toFloat()
         context?.let { context ->
             et.setText(library.getTitle(context))
             et.setSelection(library.getTitle(context).length)
             if (library.id != 0L) {
                 val color = context.colorResource(library.color.toResource())
-                val colorStateList = color.toColorStateList()
-                baseDialogFragment.tvDialogTitle.setTextColor(color)
-                baseDialogFragment.vHead.background?.mutate()?.setTint(color)
-                tlLibraryLayout.setSelectedTabIndicatorColor(color)
-                sNotePreviewSize.value = library.notePreviewSize.toFloat()
-                tlLibraryLayout.tabRippleColor = colorStateList
-                sNotePreviewSize.trackActiveTintList = colorStateList
-                sNotePreviewSize.thumbTintList = colorStateList
-                sNotePreviewSize.tickInactiveTintList = colorStateList
-                swShowNoteCreationDate.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
-                swSetNewNoteCursor.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
+                updateColors(color, baseDialogFragment)
             } else {
                 swShowNoteCreationDate.setupColors()
                 swSetNewNoteCursor.setupColors()
             }
         }
+    }
+
+    private fun NewLibraryDialogFragmentBinding.updateColors(color: Int, baseDialogFragment: BaseDialogFragmentBinding) {
+        val alphaColor = color.withDefaultAlpha()
+        val colorStateList = color.toColorStateList()
+        baseDialogFragment.tvDialogTitle.setTextColor(color)
+        baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+        til.boxBackgroundColor = alphaColor
+        tlLibraryLayout.background?.mutate()?.setTint(alphaColor)
+        tlLibraryLayout.setSelectedTabIndicatorColor(color)
+        tlLibraryLayout.tabRippleColor = colorStateList
+        sNotePreviewSize.trackActiveTintList = colorStateList
+        sNotePreviewSize.trackInactiveTintList = alphaColor.toColorStateList()
+        sNotePreviewSize.thumbTintList = colorStateList
+        sNotePreviewSize.tickInactiveTintList = colorStateList
+        swShowNoteCreationDate.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
+        swSetNewNoteCursor.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
+        tlLibraryLayout.selectTab(convertLayoutToTab(viewModel.library.value.layout))
     }
 
     private fun NewLibraryDialogFragmentBinding.setupNotoColors(pairs: List<Pair<NotoColor, Boolean>>) {
@@ -168,5 +196,10 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         context?.let { context ->
             ShortcutManagerCompat.updateShortcuts(context, listOf(context.createPinnedShortcut(library)))
         }
+    }
+
+    private fun NewLibraryDialogFragmentBinding.convertLayoutToTab(layout: Layout) = when (layout) {
+        Layout.Linear -> tlLibraryLayout.getTabAt(0)
+        Layout.Grid -> tlLibraryLayout.getTabAt(1)
     }
 }
