@@ -78,6 +78,7 @@
     <string name="collapse">Collapse</string>
     <string name="expand">Expand</string>
     <string name="no_parent">No parent</string>
+    <string name="new_note_cursor_position">New note cursor position</string>
 
     <!-- Library -->
     <string name="libraries">Libraries</string>
