@@ -32,6 +32,9 @@ object Migrations {
 
     @RenameColumn(tableName = "libraries", fromColumnName = "sorting", toColumnName = "sorting_type")
     class RenameNoteListSortingTypeColumn : AutoMigrationSpec
+
+    @RenameColumn(tableName = "libraries", fromColumnName = "is_set_new_note_cursor_on_title", toColumnName = "new_note_cursor_position")
+    class RenameIsSetNewNoteCursorOnTitle: AutoMigrationSpec
 }
 
 object RemoveNotoPrefix : Migration(1, 2) {

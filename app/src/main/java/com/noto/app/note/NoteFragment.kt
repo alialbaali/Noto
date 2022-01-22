@@ -19,6 +19,7 @@ import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.NewNoteCursorPosition
 import com.noto.app.domain.model.Note
 import com.noto.app.label.labelItem
 import com.noto.app.label.newLabelItem
@@ -51,14 +52,14 @@ class NoteFragment : Fragment() {
 
         viewModel.library
             .onEach { library -> setupLibrary(library) }
-            .distinctUntilChangedBy { it.isSetNewNoteCursorOnTitle }
+            .distinctUntilChangedBy { it.newNoteCursorPosition }
             .onEach { library ->
                 if (args.noteId == 0L) {
                     activity?.showKeyboard(root)
-                    if (library.isSetNewNoteCursorOnTitle)
-                        etNoteTitle.requestFocus()
-                    else
-                        etNoteBody.requestFocus()
+                    when (library.newNoteCursorPosition) {
+                        NewNoteCursorPosition.Body -> etNoteBody.requestFocus()
+                        NewNoteCursorPosition.Title -> etNoteTitle.requestFocus()
+                    }
                 }
             }
             .launchIn(lifecycleScope)

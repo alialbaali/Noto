@@ -93,8 +93,8 @@ class LibraryViewModel(
         title: String,
         layout: Layout,
         notePreviewSize: Int,
+        newNoteCursorPosition: NewNoteCursorPosition,
         isShowNoteCreationDate: Boolean,
-        isSetNewNoteCursorOnTitle: Boolean,
     ) = viewModelScope.launch {
         val color = notoColors.value.first { it.second }.first
 
@@ -104,7 +104,7 @@ class LibraryViewModel(
             layout = layout,
             notePreviewSize = notePreviewSize,
             isShowNoteCreationDate = isShowNoteCreationDate,
-            isSetNewNoteCursorOnTitle = isSetNewNoteCursorOnTitle,
+            newNoteCursorPosition = newNoteCursorPosition,
         )
 
         if (libraryId == 0L)
