@@ -8,7 +8,12 @@ import android.view.View
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+<<<<<<< HEAD
 import com.noto.app.util.colorResource
+||||||| parent of 8dafd54 (Set bottom sheet dialog peek height to 500 dp when it's collapsable)
+=======
+import com.noto.app.util.dp
+>>>>>>> 8dafd54 (Set bottom sheet dialog peek height to 500 dp when it's collapsable)
 
 open class BaseDialogFragment(private val isCollapsable: Boolean = false) : BottomSheetDialogFragment() {
 
@@ -17,7 +22,9 @@ open class BaseDialogFragment(private val isCollapsable: Boolean = false) : Bott
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return super.onCreateDialog(savedInstanceState).apply {
             (this as BottomSheetDialog).apply {
-                if (!isCollapsable) {
+                if (isCollapsable) {
+                    behavior.peekHeight = 500.dp
+                } else {
                     behavior.state = BottomSheetBehavior.STATE_EXPANDED
                     behavior.skipCollapsed = true
                 }
