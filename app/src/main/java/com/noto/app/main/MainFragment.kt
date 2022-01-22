@@ -68,12 +68,6 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rv.itemAnimator = DefaultItemAnimator().apply {
-            addDuration = DefaultAnimationDuration
-            changeDuration = DefaultAnimationDuration
-            moveDuration = DefaultAnimationDuration
-            removeDuration = DefaultAnimationDuration
-        }
 
         combine(
             viewModel.libraries,
@@ -85,6 +79,20 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
             setupLibraries(libraries, sortingType, sortingOrder, isShowNotesCount, allNotes)
             setupItemTouchHelper(sortingType == LibraryListSortingType.Manual)
         }.launchIn(lifecycleScope)
+
+        viewModel.sortingType
+            .onEach { sortingType ->
+                rv.itemAnimator = when (sortingType) {
+                    LibraryListSortingType.Manual -> DefaultItemAnimator().apply {
+                        addDuration = DefaultAnimationDuration
+                        changeDuration = DefaultAnimationDuration
+                        moveDuration = DefaultAnimationDuration
+                        removeDuration = DefaultAnimationDuration
+                    }
+                    else -> VerticalListItemAnimator()
+                }
+            }
+            .launchIn(lifecycleScope)
     }
 
     @SuppressLint("ClickableViewAccessibility")
