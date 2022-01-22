@@ -46,8 +46,8 @@ data class Library(
     @ColumnInfo(name = "is_show_note_creation_date", defaultValue = "0")
     val isShowNoteCreationDate: Boolean = false,
 
-    @ColumnInfo(name = "is_set_new_note_cursor_on_title", defaultValue = "0")
-    val isSetNewNoteCursorOnTitle: Boolean = false,
+    @ColumnInfo(name = "new_note_cursor_position", defaultValue = "0")
+    val newNoteCursorPosition: NewNoteCursorPosition = NewNoteCursorPosition.Body,
 
     @ColumnInfo(name = "sorting_type", defaultValue = "1")
     val sortingType: NoteListSortingType = NoteListSortingType.CreationDate,

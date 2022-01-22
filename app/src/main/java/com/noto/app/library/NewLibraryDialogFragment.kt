@@ -15,6 +15,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
 import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.NewNoteCursorPosition
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -90,19 +91,26 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                     til.error = context.stringResource(R.string.empty_title)
                 }
             } else {
+                val layout = tlLibraryLayout.selectedTabPosition.let {
+                    when (it) {
+                        0 -> Layout.Linear
+                        else -> Layout.Grid
+                    }
+                }
+                val cursorPosition = tlNewNoteCursorPosition.selectedTabPosition.let {
+                    when (it) {
+                        0 -> NewNoteCursorPosition.Body
+                        else -> NewNoteCursorPosition.Title
+                    }
+                }
                 activity?.hideKeyboard(root)
                 updatePinnedShortcut(title)
                 viewModel.createOrUpdateLibrary(
                     title,
-                    tlLibraryLayout.selectedTabPosition.let {
-                        when (it) {
-                            0 -> Layout.Linear
-                            else -> Layout.Grid
-                        }
-                    },
+                    layout,
                     sNotePreviewSize.value.toInt(),
+                    cursorPosition,
                     swShowNoteCreationDate.isChecked,
-                    swSetNewNoteCursor.isChecked,
                 ).invokeOnCompletion {
                     context?.updateAllWidgetsData()
                     context?.updateLibraryListWidgets()
@@ -115,13 +123,17 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
 
     private fun NewLibraryDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
         rv.smoothScrollToPosition(library.color.ordinal)
-        val tab = when (library.layout) {
+        val layoutTab = when (library.layout) {
             Layout.Linear -> tlLibraryLayout.getTabAt(0)
             Layout.Grid -> tlLibraryLayout.getTabAt(1)
         }
-        tlLibraryLayout.selectTab(tab)
+        val cursorPositionTab = when (library.newNoteCursorPosition) {
+            NewNoteCursorPosition.Body -> tlNewNoteCursorPosition.getTabAt(0)
+            NewNoteCursorPosition.Title -> tlNewNoteCursorPosition.getTabAt(1)
+        }
+        tlLibraryLayout.selectTab(layoutTab)
+        tlNewNoteCursorPosition.selectTab(cursorPositionTab)
         swShowNoteCreationDate.isChecked = library.isShowNoteCreationDate
-        swSetNewNoteCursor.isChecked = library.isSetNewNoteCursorOnTitle
         context?.let { context ->
             et.setText(library.getTitle(context))
             et.setSelection(library.getTitle(context).length)
@@ -131,16 +143,16 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 baseDialogFragment.tvDialogTitle.setTextColor(color)
                 baseDialogFragment.vHead.background?.mutate()?.setTint(color)
                 tlLibraryLayout.setSelectedTabIndicatorColor(color)
+                tlNewNoteCursorPosition.setSelectedTabIndicatorColor(color)
                 sNotePreviewSize.value = library.notePreviewSize.toFloat()
                 tlLibraryLayout.tabRippleColor = colorStateList
+                tlNewNoteCursorPosition.tabRippleColor = colorStateList
                 sNotePreviewSize.trackActiveTintList = colorStateList
                 sNotePreviewSize.thumbTintList = colorStateList
                 sNotePreviewSize.tickInactiveTintList = colorStateList
                 swShowNoteCreationDate.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
-                swSetNewNoteCursor.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
             } else {
                 swShowNoteCreationDate.setupColors()
-                swSetNewNoteCursor.setupColors()
             }
         }
     }

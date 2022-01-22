@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 24,
-    "identityHash": "58580cff626a8cc5be22c7d7a6e172eb",
+    "version": 25,
+    "identityHash": "c4c81636a95da21738dc523f51399668",
     "entities": [
       {
         "tableName": "notes",
@@ -100,7 +100,7 @@
       },
       {
         "tableName": "libraries",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `position` INTEGER NOT NULL, `color` INTEGER NOT NULL, `creation_date` TEXT NOT NULL, `layout` INTEGER NOT NULL DEFAULT 0, `note_preview_size` INTEGER NOT NULL DEFAULT 15, `is_archived` INTEGER NOT NULL DEFAULT 0, `is_pinned` INTEGER NOT NULL DEFAULT 0, `is_show_note_creation_date` INTEGER NOT NULL DEFAULT 0, `is_set_new_note_cursor_on_title` INTEGER NOT NULL DEFAULT 0, `sorting_type` INTEGER NOT NULL DEFAULT 1, `sorting_order` INTEGER NOT NULL DEFAULT 1, `grouping` INTEGER NOT NULL DEFAULT 0, `is_vaulted` INTEGER NOT NULL DEFAULT 0)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `position` INTEGER NOT NULL, `color` INTEGER NOT NULL, `creation_date` TEXT NOT NULL, `layout` INTEGER NOT NULL DEFAULT 0, `note_preview_size` INTEGER NOT NULL DEFAULT 15, `is_archived` INTEGER NOT NULL DEFAULT 0, `is_pinned` INTEGER NOT NULL DEFAULT 0, `is_show_note_creation_date` INTEGER NOT NULL DEFAULT 0, `new_note_cursor_position` INTEGER NOT NULL DEFAULT 0, `sorting_type` INTEGER NOT NULL DEFAULT 1, `sorting_order` INTEGER NOT NULL DEFAULT 1, `grouping` INTEGER NOT NULL DEFAULT 0, `is_vaulted` INTEGER NOT NULL DEFAULT 0)",
         "fields": [
           {
             "fieldPath": "id",
@@ -169,7 +169,7 @@
           },
           {
             "fieldPath": "newNoteCursorPosition",
-            "columnName": "is_set_new_note_cursor_on_title",
+            "columnName": "new_note_cursor_position",
             "affinity": "INTEGER",
             "notNull": true,
             "defaultValue": "0"
@@ -328,7 +328,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '58580cff626a8cc5be22c7d7a6e172eb')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c4c81636a95da21738dc523f51399668')"
     ]
   }
 }
