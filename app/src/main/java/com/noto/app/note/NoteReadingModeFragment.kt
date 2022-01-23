@@ -30,6 +30,7 @@ class NoteReadingModeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteReadingModeFragmentBinding.inflate(inflater, container, false).withBinding {
+            setupFadeTransition()
             setupState()
             setupListeners()
         }

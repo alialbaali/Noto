@@ -38,6 +38,7 @@ class LibraryFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         LibraryFragmentBinding.inflate(inflater, container, false).withBinding {
+            setupMixedTransitions()
             setupState()
             setupListeners()
         }

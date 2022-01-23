@@ -34,6 +34,7 @@ class RecentNotesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = RecentNotesFragmentBinding.inflate(inflater, container, false).withBinding {
+        setupMixedTransitions()
         setupState()
         setupListeners()
     }

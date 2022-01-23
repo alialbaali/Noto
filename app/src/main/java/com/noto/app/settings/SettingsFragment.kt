@@ -30,6 +30,7 @@ class SettingsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         SettingsFragmentBinding.inflate(inflater, container, false).withBinding {
+            setupMixedTransitions()
             setupState()
             setupListeners()
         }

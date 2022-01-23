@@ -33,6 +33,7 @@ class AllNotesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = AllNotesFragmentBinding.inflate(inflater, container, false).withBinding {
+        setupMixedTransitions()
         setupState()
         setupListeners()
     }

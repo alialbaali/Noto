@@ -39,6 +39,7 @@ class NoteFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteFragmentBinding.inflate(inflater, container, false).withBinding {
+            setupMixedTransitions()
             setupState()
             setupListeners()
         }
@@ -212,6 +213,7 @@ class NoteFragment : Fragment() {
                     true
                 }
                 R.id.reading_mode -> {
+                    setupFadeTransition()
                     navController
                         ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.libraryId, viewModel.note.value.id))
                     true

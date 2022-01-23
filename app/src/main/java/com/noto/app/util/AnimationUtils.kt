@@ -9,6 +9,11 @@ import android.graphics.drawable.RippleDrawable
 import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.transition.Visibility
+import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialFade
+import com.google.android.material.transition.MaterialSharedAxis
 import com.noto.app.R
 import jp.wasabeef.recyclerview.animators.ScaleInAnimator
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
@@ -81,4 +86,23 @@ fun TextView.animateTextColor(fromColor: Int, toColor: Int): ValueAnimator? {
             }
             start()
         }
+}
+
+private fun Visibility.applyDefaultConfig() = apply {
+    duration = DefaultAnimationDuration
+    interpolator = DefaultInterpolator()
+}
+
+fun Fragment.setupMixedTransitions() {
+    exitTransition = MaterialElevationScale(false).applyDefaultConfig()
+    reenterTransition = MaterialElevationScale(true).applyDefaultConfig()
+    enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, true).applyDefaultConfig()
+    returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, false).applyDefaultConfig()
+}
+
+fun Fragment.setupFadeTransition() {
+    exitTransition = MaterialFade().applyDefaultConfig()
+    enterTransition = MaterialFade().applyDefaultConfig()
+    reenterTransition = MaterialFade().applyDefaultConfig()
+    returnTransition = MaterialFade().applyDefaultConfig()
 }
