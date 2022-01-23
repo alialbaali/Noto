@@ -3,15 +3,20 @@ package com.noto.app.library
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import androidx.activity.addCallback
 import androidx.core.view.MenuItemCompat
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.*
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
+import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.MaterialSharedAxis
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.LibraryFragmentBinding
@@ -49,6 +54,12 @@ class LibraryFragment : Fragment() {
         rv.itemAnimator = VerticalListItemAnimator()
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
         bab.setRoundedCorners()
+//        exitTransition = MaterialSharedAxis(MaterialSharedAxis.Y, /* forward= */ true)
+//        reenterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, /* forward= */ false)
+        postponeEnterTransition()
+        rv.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
 
         viewModel.library
             .onEach { library ->
@@ -230,10 +241,15 @@ class LibraryFragment : Fragment() {
                                         previewSize(library.notePreviewSize)
                                         isShowCreationDate(library.isShowNoteCreationDate)
                                         isManualSorting(library.sortingType == NoteListSortingType.Manual)
-                                        onClickListener { _ ->
+                                        onClickListener { view ->
+                                            exitTransition = MaterialElevationScale(false)
+                                            reenterTransition = MaterialElevationScale(true)
+                                            val tvTitle = view.findViewById<TextView>(R.id.tv_note_title)
+                                            val tvBody = view.findViewById<TextView>(R.id.tv_note_body)
                                             navController
-                                                ?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId,
-                                                    entry.first.id))
+                                                ?.navigate(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId,
+                                                    entry.first.id),
+                                                FragmentNavigatorExtras(tvTitle to tvTitle.transitionName, tvBody to tvBody.transitionName))
                                         }
                                         onLongClickListener { _ ->
                                             navController

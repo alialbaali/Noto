@@ -121,6 +121,8 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
                 root.background?.state = intArrayOf(-android.R.attr.state_pressed, -android.R.attr.state_enabled)
             false
         }
+        tvNoteTitle.transitionName = "title_${note.id}"
+        tvNoteBody.transitionName = "body_${note.id}"
     }
 
     class Holder : EpoxyHolder() {

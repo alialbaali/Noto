@@ -9,11 +9,14 @@ import androidx.activity.addCallback
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ListUpdateCallback
+import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.MaterialSharedAxis
 import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
@@ -49,6 +52,9 @@ class NoteFragment : Fragment() {
         rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
         bab.setRoundedCorners()
+        sharedElementEnterTransition = MaterialContainerTransform()
+//        enterTransition = MaterialSharedAxis(MaterialSharedAxis.Y, /* forward= */ true)
+//        returnTransition = MaterialSharedAxis(MaterialSharedAxis.Y, /* forward= */ false)
 
         viewModel.library
             .onEach { library -> setupLibrary(library) }
@@ -67,6 +73,8 @@ class NoteFragment : Fragment() {
         viewModel.note
             .onEach { note ->
                 setupShortcut(note)
+                etNoteTitle.transitionName = "title_${note.id}"
+                etNoteBody.transitionName = "body_${note.id}"
                 context?.let { context ->
                     tvWordCount.text = context.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
                     fab.setImageDrawable(
