@@ -42,9 +42,13 @@ private const val NOTO_DATABASE = "Noto Database"
         AutoMigration(from = 19, to = 20),
         AutoMigration(from = 20, to = 21, spec = Migrations.RenameLayoutManagerColumn::class),
         AutoMigration(from = 21, to = 22, spec = Migrations.RenameNoteListSortingTypeColumn::class),
+        /** Add isVaulted properties to [Library] and [Note] */
         AutoMigration(from = 22, to = 23),
+        /** Add accessDate property to [Note] */
         AutoMigration(from = 23, to = 24),
+        /** Rename isSetNewNoteCursorOnTitle property to newNoteCursorPosition in [Library] */
         AutoMigration(from = 24, to = 25, spec = Migrations.RenameIsSetNewNoteCursorOnTitle::class),
+        /** Add parentId property to [Library] */
         AutoMigration(from = 25, to = 26),
     ],
 )
