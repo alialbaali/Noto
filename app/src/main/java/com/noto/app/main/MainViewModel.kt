@@ -3,11 +3,15 @@ package com.noto.app.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
-import com.noto.app.domain.model.*
+import com.noto.app.domain.model.Layout
+import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.LibraryListSortingType
+import com.noto.app.domain.model.SortingOrder
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.Constants
+import com.noto.app.util.mapRecursively
 import com.noto.app.util.sorted
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -118,22 +122,5 @@ class MainViewModel(
 
     fun closeVault() = viewModelScope.launch {
         storage.put(Constants.IsVaultOpen, false.toString())
-    }
-
-    private fun List<Library>.mapRecursively(
-        allLibraries: List<Library>,
-        librariesNotesCount: List<LibraryIdWithNotesCount>,
-        sortingType: LibraryListSortingType,
-        sortingOrder: SortingOrder,
-    ): List<Pair<Library, Int>> {
-        return map { library ->
-            val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
-            val childLibraries = allLibraries
-                .filter { it.parentId == library.id }
-                .mapRecursively(allLibraries, librariesNotesCount, sortingType, sortingOrder)
-                .sorted(sortingType, sortingOrder)
-                .sortedByDescending { it.first.isPinned }
-            library.copy(libraries = childLibraries) to notesCount
-        }
     }
 }

@@ -16,7 +16,6 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalStorage
 import com.noto.app.util.*
 import com.noto.app.util.Constants.Widget.NotesCount
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -45,15 +44,11 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
             .filterNotNull()
             .map { SortingOrder.valueOf(it) }
             .first()
-        libraries = libraryRepository.getLibraries()
-            .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
-                libraries.map { library ->
-                    val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
-                    library to notesCount
-                }
-            }
-            .filterNotNull()
-            .first()
+        val librariesNotesCount = noteRepository.getLibrariesNotesCount().first()
+        val allLibraries = libraryRepository.getLibraries().first()
+        libraries = allLibraries
+            .filter { it.parentId == null }
+            .mapRecursively(allLibraries, librariesNotesCount, sortingType, sortingOrder)
             .sorted(sortingType, sortingOrder)
             .sortedByDescending { it.first.isPinned }
             .sortedByDescending { it.first.isInbox }
@@ -68,25 +63,7 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
 
     override fun getViewAt(position: Int): RemoteViews {
         val entry = libraries[position]
-        val library = entry.first
-        val notesCount = entry.second
-        val color = context.colorResource(library.color.toResource())
-        val iconResource = if (library.isInbox) R.drawable.ic_round_inbox_24 else R.drawable.ic_round_folder_24
-        val intent = Intent(Constants.Intent.ActionOpenLibrary, null, context, AppActivity::class.java).apply {
-            putExtra(Constants.LibraryId, library.id)
-        }
-        val remoteViews = RemoteViews(context.packageName, R.layout.widget_library_item).apply {
-            setTextViewText(R.id.tv_library_notes_count, notesCount.toString())
-            setTextViewText(R.id.tv_library_title, library.getTitle(context))
-            setContentDescription(R.id.ll, library.getTitle(context))
-            setTextColor(R.id.tv_library_title, color)
-            setTextColor(R.id.tv_library_notes_count, color)
-            setImageViewResource(R.id.iv_library_icon, iconResource)
-            setInt(R.id.iv_library_icon, SetColorFilterMethodName, color)
-            setOnClickFillInIntent(R.id.ll, intent)
-            setViewVisibility(R.id.tv_library_notes_count, if (isShowNotesCount) View.VISIBLE else View.GONE)
-        }
-        return remoteViews
+        return createRemoteViews(entry)
     }
 
     override fun getLoadingView(): RemoteViews? = null
@@ -96,4 +73,30 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
     override fun getItemId(position: Int): Long = libraries[position].first.id
 
     override fun hasStableIds(): Boolean = true
+
+    private fun createRemoteViews(entry: Pair<Library, Int>, depth: Int = 1): RemoteViews {
+        val library = entry.first
+        val notesCount = entry.second
+        val color = context.colorResource(library.color.toResource())
+        val iconResource = if (library.isInbox) R.drawable.ic_round_inbox_24 else R.drawable.ic_round_folder_24
+        val intent = Intent(Constants.Intent.ActionOpenLibrary, null, context, AppActivity::class.java).apply {
+            putExtra(Constants.LibraryId, library.id)
+        }
+        return RemoteViews(context.packageName, R.layout.widget_library_item).apply {
+            removeAllViews(R.id.ll_nested)
+            library.libraries.forEachRecursively { pair, depth ->
+                addView(R.id.ll_nested, createRemoteViews(pair, depth))
+            }
+            setTextViewText(R.id.tv_library_notes_count, notesCount.toString())
+            setTextViewText(R.id.tv_library_title, library.getTitle(context))
+            setContentDescription(R.id.ll, library.getTitle(context))
+            setTextColor(R.id.tv_library_title, color)
+            setTextColor(R.id.tv_library_notes_count, color)
+            setImageViewResource(R.id.iv_library_icon, iconResource)
+            setInt(R.id.iv_library_icon, SetColorFilterMethodName, color)
+            setOnClickFillInIntent(R.id.ll, intent)
+            setViewVisibility(R.id.tv_library_notes_count, if (isShowNotesCount) View.VISIBLE else View.GONE)
+            setViewPadding(R.id.ll, depth * 16.dp, 16.dp, 16.dp, 16.dp)
+        }
+    }
 }

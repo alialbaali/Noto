@@ -161,3 +161,20 @@ fun List<Pair<Library, Int>>.findRecursively(predicate: (Pair<Library, Int>) -> 
         }
     return null
 }
+
+fun List<Library>.mapRecursively(
+    allLibraries: List<Library>,
+    librariesNotesCount: List<LibraryIdWithNotesCount>,
+    sortingType: LibraryListSortingType,
+    sortingOrder: SortingOrder,
+): List<Pair<Library, Int>> {
+    return map { library ->
+        val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
+        val childLibraries = allLibraries
+            .filter { it.parentId == library.id }
+            .mapRecursively(allLibraries, librariesNotesCount, sortingType, sortingOrder)
+            .sorted(sortingType, sortingOrder)
+            .sortedByDescending { it.first.isPinned }
+        library.copy(libraries = childLibraries) to notesCount
+    }
+}
