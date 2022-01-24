@@ -44,8 +44,8 @@ abstract class SearchItem : EpoxyModelWithHolder<SearchItem.Holder>() {
         etSearch.doOnTextChanged { text, _, _, _ ->
             if (text != null)
                 callback(text.toString())
-        }.also(etSearch::addTextChangedListener)
-        if (etSearch.text.toString() != searchTerm) {
+        }
+        if (!etSearch.isFocused) {
             etSearch.setText(searchTerm)
             etSearch.setSelection(searchTerm.length)
         }
