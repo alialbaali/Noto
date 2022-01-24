@@ -4,11 +4,13 @@ import android.app.Dialog
 import android.content.res.Configuration
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.noto.app.util.colorResource
 import com.noto.app.util.dp
+
 open class BaseDialogFragment(private val isCollapsable: Boolean = false) : BottomSheetDialogFragment() {
 
     override fun getTheme(): Int = R.style.BottomSheetDialog
