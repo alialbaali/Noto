@@ -89,13 +89,6 @@
         <item name="expandedTitleMarginBottom">@dimen/spacing_normal</item>
     </style>
 
-    <style name="CollapsingToolbarExpandedTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
-        <item name="android:maxLines">1</item>
-        <item name="android:textSize">50sp</item>
-        <item name="fontFamily">@font/nunito_extrabold</item>
-        <item name="android:textColorPrimary">?attr/notoPrimaryColor</item>
-    </style>
-
     <style name="SubtitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_tiny</item>
         <item name="fontFamily">@font/nunito_semibold_italic</item>

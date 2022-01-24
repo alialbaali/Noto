@@ -45,7 +45,7 @@ private const val NOTO_DATABASE = "Noto Database"
         AutoMigration(from = 22, to = 23),
         AutoMigration(from = 23, to = 24),
         AutoMigration(from = 24, to = 25, spec = Migrations.RenameIsSetNewNoteCursorOnTitle::class),
-        AutoMigration(from = 25, to = 26, spec = Migrations.RenameIsSetNewNoteCursorOnTitle::class),
+        AutoMigration(from = 25, to = 26),
     ],
 )
 abstract class NotoDatabase : RoomDatabase() {
