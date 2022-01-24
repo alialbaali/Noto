@@ -54,22 +54,16 @@
     <string name="version">Version %s</string>
     <string name="empty_version">Version</string>
     <string name="date">Date</string>
-    <string name="layout_is_list_mode">Layout has been set to list mode.</string>
-    <string name="layout_is_grid_mode">Layout has been set to grid mode.</string>
     <string name="drag">Drag</string>
     <string name="nunito">Nunito (default)</string>
     <string name="monospace">Monospace</string>
     <string name="font">Font</string>
     <string name="libraries_archive">Libraries archive</string>
-    <string name="set_new_note_cursor_on_title">Set new note cursor on title</string>
-    <string name="home">Home</string>
-    <string name="unformatted_archive">Archive</string>
     <string name="inbox">Inbox</string>
     <string name="edit_inbox">Edit inbox</string>
     <string name="inbox_options">Inbox options</string>
     <string name="inbox_color">Inbox color</string>
     <string name="inbox_layout">Inbox layout</string>
-    <string name="inbox_archive">Inbox archive</string>
     <string name="change_main_library">Change main library</string>
     <string name="collapse_toolbar">Collapse toolbar</string>
     <string name="all_notes">All notes</string>
@@ -99,7 +93,6 @@
     <string name="delete_library">Delete library</string>
     <string name="delete_library_confirmation">Are you sure you want to delete this library?</string>
     <string name="libraries_sorting">Libraries sorting</string>
-    <string name="change_libraries_sorting">Change libraries sorting</string>
     <string name="empty_title">Title can\'t be empty.</string>
     <string name="library_is_deleted">Library has been deleted.</string>
     <string name="library_is_archived">Library has been archived.</string>
@@ -107,7 +100,6 @@
     <string name="library_is_pinned">Library has been pinned.</string>
     <string name="library_is_unpinned">Library has been unpinned.</string>
     <string name="no_libraries_found">No libraries found.</string>
-    <string name="no_libraries_found_create">No libraries found. Try creating a library by clicking the + icon.</string>
     <string name="select_library">Select library</string>
     <string name="pinned">Pinned</string>
     <string name="pin_library">Pin library</string>
@@ -239,7 +231,6 @@
     <string name="arabic">Arabic</string>
     <string name="indonesian">Indonesian</string>
     <string name="russian">Russian</string>
-    <string name="tamil">Tamil</string>
     <string name="spanish">Spanish</string>
 
     <!-- Widget -->
