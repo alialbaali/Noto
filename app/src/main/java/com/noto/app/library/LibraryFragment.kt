@@ -230,6 +230,7 @@ class LibraryFragment : Fragment() {
                                         color(library.color)
                                         previewSize(library.notePreviewSize)
                                         isShowCreationDate(library.isShowNoteCreationDate)
+                                        searchTerm(if (isSearchEnabled) searchTerm.trim() else null)
                                         isManualSorting(library.sortingType == NoteListSortingType.Manual)
                                         onClickListener { _ ->
                                             navController

@@ -1,10 +1,13 @@
 package com.noto.app.library
 
 import android.annotation.SuppressLint
+import android.text.Spannable
+import android.text.style.ForegroundColorSpan
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.toSpannable
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMarginsRelative
@@ -48,6 +51,9 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute
     open var isManualSorting: Boolean = false
 
+    @EpoxyAttribute
+    var searchTerm: String? = null
+
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onClickListener: View.OnClickListener
 
@@ -63,10 +69,19 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             val colorResource = context.colorResource(color.toResource())
             tvNoteTitle.setLinkTextColor(colorResource)
             tvNoteBody.setLinkTextColor(colorResource)
+            tvNoteTitle.text = note.title.highlightText(colorResource)
+            if (note.title.isBlank() && previewSize == 0) {
+                tvNoteBody.text = note.body.takeLines(1).highlightText(colorResource)
+                tvNoteBody.maxLines = 1
+                tvNoteBody.isVisible = true
+            } else {
+                tvNoteBody.text = note.body.takeLines(previewSize).highlightText(colorResource)
+                tvNoteBody.maxLines = previewSize
+                tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
+            }
             if (isShowCreationDate)
                 tvCreationDate.text = context.stringResource(R.string.created, note.creationDate.format(root.context))
         }
-        tvNoteTitle.text = note.title
         tvCreationDate.isVisible = isShowCreationDate
         tvNoteTitle.isVisible = note.title.isNotBlank()
         root.setOnClickListener(onClickListener)
@@ -86,15 +101,6 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
                     color(color)
                 }
             }
-        }
-        if (note.title.isBlank() && previewSize == 0) {
-            tvNoteBody.text = note.body.takeLines(1)
-            tvNoteBody.maxLines = 1
-            tvNoteBody.isVisible = true
-        } else {
-            tvNoteBody.text = note.body.takeLines(previewSize)
-            tvNoteBody.maxLines = previewSize
-            tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
         }
         tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(bottom = if (note.body.isBlank() || previewSize == 0) 0.dp else 4.dp)
@@ -120,6 +126,17 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             else if (motionEvent.action == MotionEvent.ACTION_UP || motionEvent.action == MotionEvent.ACTION_CANCEL)
                 root.background?.state = intArrayOf(-android.R.attr.state_pressed, -android.R.attr.state_enabled)
             false
+        }
+    }
+
+    private fun String.highlightText(color: Int): Spannable {
+        return this.toSpannable().apply {
+            searchTerm?.takeIf { it.isNotBlank() }?.let { searchTerm ->
+                val startIndex = this.indexOf(searchTerm, ignoreCase = true)
+                val endIndex = startIndex + searchTerm.length
+                if (startIndex != -1)
+                    setSpan(ForegroundColorSpan(color), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
         }
     }
 
