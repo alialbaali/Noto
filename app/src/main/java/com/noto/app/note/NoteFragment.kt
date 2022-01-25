@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.ListUpdateCallback
 import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
-import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Library
 import com.noto.app.domain.model.NewNoteCursorPosition
 import com.noto.app.domain.model.Note
@@ -81,10 +80,15 @@ class NoteFragment : Fragment() {
                     enableBottomAppBarActions()
                 else
                     disableBottomAppBarActions()
-            }
-            .combine(viewModel.font) { note, font ->
                 if (etNoteTitle.text.isNullOrBlank() && etNoteBody.text.isNullOrBlank())
-                    setupNote(note, font)
+                    setupNote(note)
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.font
+            .onEach { font ->
+                etNoteTitle.setBoldFont(font)
+                etNoteBody.setSemiboldFont(font)
             }
             .launchIn(lifecycleScope)
 
@@ -274,13 +278,11 @@ class NoteFragment : Fragment() {
         }
     }
 
-    private fun NoteFragmentBinding.setupNote(note: Note, font: Font) {
+    private fun NoteFragmentBinding.setupNote(note: Note) {
         etNoteTitle.setText(note.title)
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
-        etNoteTitle.setBoldFont(font)
-        etNoteBody.setSemiboldFont(font)
         context?.let { context ->
             tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
         }
