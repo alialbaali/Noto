@@ -36,7 +36,7 @@ class LibraryListWidgetAdapter(
                 if (library.isInbox)
                     ivLibraryIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
                 else
-                    ivLibraryIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_24))
+                    ivLibraryIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_library_24))
                 ivLibraryIcon.imageTintList = color.toColorStateList()
                 tvLibraryNotesCount.isVisible = isShowNotesCount
                 tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
