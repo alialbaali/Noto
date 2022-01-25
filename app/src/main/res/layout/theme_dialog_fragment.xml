@@ -1,59 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/BaseDialogFragment"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="bottom"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/ll"
+    <androidx.core.widget.NestedScrollView
+        style="@style/BaseDialogFragment"
+        android:layout_margin="@dimen/spacing_normal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <include layout="@layout/base_dialog_fragment" />
-
-        <RadioGroup
-            android:id="@+id/rg_theme"
+        <LinearLayout
+            android:id="@+id/ll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/rb_system_dark_theme"
-                style="@style/DialogRadioButtonItem"
+            <include layout="@layout/base_dialog_fragment" />
+
+            <RadioGroup
+                android:id="@+id/rg_theme"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/system_dark_theme" />
+                android:layout_height="wrap_content">
 
-            <RadioButton
-                android:id="@+id/rb_system_black_theme"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/system_black_theme" />
+                <RadioButton
+                    android:id="@+id/rb_system_dark_theme"
+                    style="@style/DialogRadioButtonItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/system_dark_theme" />
 
-            <RadioButton
-                android:id="@+id/rb_light_theme"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/light_theme" />
+                <RadioButton
+                    android:id="@+id/rb_system_black_theme"
+                    style="@style/DialogRadioButtonItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/system_black_theme" />
 
-            <RadioButton
-                android:id="@+id/rb_dark_theme"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/dark_theme" />
+                <RadioButton
+                    android:id="@+id/rb_light_theme"
+                    style="@style/DialogRadioButtonItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/light_theme" />
 
-            <RadioButton
-                android:id="@+id/rb_black_theme"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/black_theme" />
+                <RadioButton
+                    android:id="@+id/rb_dark_theme"
+                    style="@style/DialogRadioButtonItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dark_theme" />
 
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rb_black_theme"
+                    style="@style/DialogRadioButtonItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/black_theme" />
 
-    </LinearLayout>
-</androidx.core.widget.NestedScrollView>
+            </RadioGroup>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</FrameLayout>
