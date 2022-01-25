@@ -67,21 +67,31 @@ class NoteFragment : Fragment() {
         viewModel.note
             .onEach { note ->
                 setupShortcut(note)
-                context?.let { context ->
-                    tvWordCount.text = context.pluralsResource(R.plurals.words_count, note.wordsCount, note.wordsCount).lowercase()
-                    fab.setImageDrawable(
-                        if (note.reminderDate == null)
-                            context.drawableResource(R.drawable.ic_round_notification_add_24)
-                        else
-                            context.drawableResource(R.drawable.ic_round_edit_notifications_24)
-                    )
-                }
+                if (etNoteTitle.text.isNullOrBlank() && etNoteBody.text.isNullOrBlank())
+                    setupNote(note)
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.note
+            .distinctUntilChangedBy { note -> note.reminderDate }
+            .onEach { note ->
+                val reminderDrawable = context?.drawableResource(
+                    if (note.reminderDate == null)
+                        R.drawable.ic_round_notification_add_24
+                    else
+                        R.drawable.ic_round_edit_notifications_24
+                )
+                fab.setImageDrawable(reminderDrawable)
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.note
+            .distinctUntilChangedBy { note -> note.isValid }
+            .onEach { note ->
                 if (note.isValid)
                     enableBottomAppBarActions()
                 else
                     disableBottomAppBarActions()
-                if (etNoteTitle.text.isNullOrBlank() && etNoteBody.text.isNullOrBlank())
-                    setupNote(note)
             }
             .launchIn(lifecycleScope)
 
@@ -135,6 +145,9 @@ class NoteFragment : Fragment() {
             etNoteBody.textAsFlow(emitNewTextOnly = true)
                 .filterNotNull(),
         ) { title, body -> title to body }
+            .onEach { (_, body) ->
+                tvWordCount.text = context?.pluralsResource(R.plurals.words_count, body.wordsCount, body.wordsCount)?.lowercase()
+            }
             .debounce(DebounceTimeoutMillis)
             .onEach { (title, body) ->
                 viewModel.createOrUpdateNote(title.toString(), body.toString())
@@ -283,6 +296,7 @@ class NoteFragment : Fragment() {
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
+        tvWordCount.text = context?.pluralsResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)?.lowercase()
         context?.let { context ->
             tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
         }
