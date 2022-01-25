@@ -29,10 +29,10 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     private lateinit var itemTouchHelper: ItemTouchHelper
 
-    private val selectedLibraryId by lazy { navController?.lastLibraryId }
+    private val selectedDestinationId by lazy { navController?.lastDestinationId }
 
     private val popUpToDestinationId by lazy {
-        when (selectedLibraryId) {
+        when (selectedDestinationId) {
             AllNotesItemId -> R.id.allNotesFragment
             RecentNotesItemId -> R.id.recentNotesFragment
             else -> R.id.libraryFragment
@@ -128,10 +128,10 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         notesCount(inboxLibrary.second)
                         isManualSorting(isManualSorting)
                         isShowNotesCount(isShowNotesCount)
-                        isSelected(inboxLibrary.first.id == selectedLibraryId)
+                        isSelected(inboxLibrary.first.id == selectedDestinationId)
                         onClickListener { _ ->
                             dismiss()
-                            if (inboxLibrary.first.id != selectedLibraryId)
+                            if (inboxLibrary.first.id != selectedDestinationId)
                                 navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(inboxLibrary.first.id)) {
                                     popUpTo(popUpToDestinationId) {
                                         inclusive = true
@@ -156,10 +156,10 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         icon(context.drawableResource(R.drawable.ic_round_all_inbox_24))
                         isManualSorting(isManualSorting)
                         isShowNotesCount(isShowNotesCount)
-                        isSelected(AllNotesItemId == selectedLibraryId)
+                        isSelected(AllNotesItemId == selectedDestinationId)
                         onClickListener { _ ->
                             dismiss()
-                            if (selectedLibraryId != AllNotesItemId)
+                            if (selectedDestinationId != AllNotesItemId)
                                 navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToAllNotesFragment()) {
                                     popUpTo(popUpToDestinationId) {
                                         inclusive = true
@@ -175,10 +175,10 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         notesCount(allNotes.filterRecentlyAccessed().count())
                         isManualSorting(isManualSorting)
                         isShowNotesCount(isShowNotesCount)
-                        isSelected(RecentNotesItemId == selectedLibraryId)
+                        isSelected(RecentNotesItemId == selectedDestinationId)
                         onClickListener { _ ->
                             dismiss()
-                            if (selectedLibraryId != RecentNotesItemId)
+                            if (selectedDestinationId != RecentNotesItemId)
                                 navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToRecentNotesFragment()) {
                                     popUpTo(popUpToDestinationId) {
                                         inclusive = true
@@ -195,11 +195,11 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                                 notesCount(entry.second)
                                 isManualSorting(isManualSorting)
                                 isShowNotesCount(isShowNotesCount)
-                                isSelected(entry.first.id == selectedLibraryId)
+                                isSelected(entry.first.id == selectedDestinationId)
                                 depth(depth)
                                 onClickListener { _ ->
                                     dismiss()
-                                    if (entry.first.id != selectedLibraryId)
+                                    if (entry.first.id != selectedDestinationId)
                                         navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(entry.first.id)) {
                                             popUpTo(popUpToDestinationId) {
                                                 inclusive = true

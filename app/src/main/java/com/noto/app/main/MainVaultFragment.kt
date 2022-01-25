@@ -29,7 +29,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val viewModel by viewModel<MainViewModel>()
 
-    private val selectedLibraryId by lazy { navController?.lastLibraryId }
+    private val selectedDestinationId by lazy { navController?.lastDestinationId }
 
     private var shouldAnimateBlur = false
 
@@ -159,14 +159,14 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
                                     library(entry.first)
                                     notesCount(entry.second)
                                     isManualSorting(false)
-                                    isSelected(entry.first.id == selectedLibraryId)
+                                    isSelected(entry.first.id == selectedDestinationId)
                                     isShowNotesCount(isShowNotesCount)
                                     depth(depth)
                                     isClickable(isVaultOpen)
                                     isLongClickable(isVaultOpen)
                                     onClickListener { _ ->
                                         dismiss()
-                                        if (entry.first.id != selectedLibraryId)
+                                        if (entry.first.id != selectedDestinationId)
                                             navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToLibraryFragment(entry.first.id))
                                     }
                                     onLongClickListener { _ ->

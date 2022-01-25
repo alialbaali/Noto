@@ -67,7 +67,7 @@ fun NavController.navigateSafely(directions: NavDirections, builder: (NavOptions
 val Fragment.navController: NavController?
     get() = if (isAdded) findNavController() else null
 
-val NavController.lastLibraryId: Long?
+val NavController.lastDestinationId: Long?
     @SuppressLint("RestrictedApi")
     get() {
         val lastBackStackEntry = backStack.lastOrNull {
