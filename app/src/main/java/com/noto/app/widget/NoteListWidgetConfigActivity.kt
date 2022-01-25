@@ -209,7 +209,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
 
     private fun showSelectLibraryDialog(isDismissible: Boolean) {
         val args = bundleOf(
-            Constants.LibraryId to 0L,
+            Constants.FilteredLibraryIds to longArrayOf(),
             Constants.IsDismissible to isDismissible,
             Constants.SelectedLibraryId to viewModel.library.value.id,
         )
