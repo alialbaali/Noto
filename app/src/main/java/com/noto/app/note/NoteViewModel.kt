@@ -3,12 +3,7 @@ package com.noto.app.note
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.*
-import com.noto.app.domain.repository.LabelRepository
-import com.noto.app.domain.repository.LibraryRepository
-import com.noto.app.domain.repository.NoteLabelRepository
-import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.LocalStorage
-import com.noto.app.util.Constants
+import com.noto.app.domain.repository.*
 import com.noto.app.util.firstLineOrEmpty
 import com.noto.app.util.isValid
 import com.noto.app.util.takeAfterFirstLineOrEmpty
@@ -22,7 +17,7 @@ class NoteViewModel(
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
-    private val storage: LocalStorage,
+    private val settingsRepository: SettingsRepository,
     private val libraryId: Long,
     private val noteId: Long,
     private val body: String?,
@@ -36,16 +31,13 @@ class NoteViewModel(
         .filterNotNull()
         .stateIn(viewModelScope, SharingStarted.Lazily, Library(position = 0))
 
-    val font = storage.get(Constants.FontKey)
-        .filterNotNull()
-        .map { Font.valueOf(it) }
+    val font = settingsRepository.font
         .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
 
     private val mutableLabels = MutableStateFlow<Map<Label, Boolean>>(emptyMap())
     val labels get() = mutableLabels.asStateFlow()
 
-    val isCollapseToolbar = storage.getOrNull(Constants.CollapseToolbar)
-        .map { it.toBoolean() }
+    val isCollapseToolbar = settingsRepository.isCollapseToolbar
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     init {

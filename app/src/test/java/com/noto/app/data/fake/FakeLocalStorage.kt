@@ -1,6 +1,5 @@
 package com.noto.app.data.fake
 
-import com.noto.app.domain.source.LocalStorage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map

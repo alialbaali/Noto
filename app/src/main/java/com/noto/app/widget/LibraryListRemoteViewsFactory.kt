@@ -9,17 +9,13 @@ import android.widget.RemoteViewsService
 import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.LibraryListSortingType
-import com.noto.app.domain.model.SortingOrder
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.LocalStorage
+import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.*
-import com.noto.app.util.Constants.Widget.NotesCount
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -28,7 +24,7 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
 
     private val libraryRepository by inject<LibraryRepository>()
     private val noteRepository by inject<NoteRepository>()
-    private val storage by inject<LocalStorage>()
+    private val settingsRepository by inject<SettingsRepository>()
     private val appWidgetId = intent?.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
         ?: AppWidgetManager.INVALID_APPWIDGET_ID
     private lateinit var libraries: List<Pair<Library, Int>>
@@ -37,14 +33,9 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
     override fun onCreate() {}
 
     override fun onDataSetChanged() = runBlocking {
-        val sortingType = storage.get(Constants.LibraryListSortingTypeKey)
-            .filterNotNull()
-            .map { LibraryListSortingType.valueOf(it) }
-            .first()
-        val sortingOrder = storage.get(Constants.LibraryListSortingOrderKey)
-            .filterNotNull()
-            .map { SortingOrder.valueOf(it) }
-            .first()
+        val sortingType = settingsRepository.sortingType.first()
+        val sortingOrder = settingsRepository.sortingOrder.first()
+        isShowNotesCount = settingsRepository.getWidgetNotesCount(appWidgetId).first()
         libraries = libraryRepository.getLibraries()
             .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
                 libraries.map { library ->
@@ -57,9 +48,6 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
             .sorted(sortingType, sortingOrder)
             .sortedByDescending { it.first.isPinned }
             .sortedByDescending { it.first.isInbox }
-        isShowNotesCount = storage.getOrNull(appWidgetId.NotesCount)
-            .map { it?.toBoolean() ?: true }
-            .first()
     }
 
     override fun onDestroy() {}

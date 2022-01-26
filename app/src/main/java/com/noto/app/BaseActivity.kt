@@ -18,7 +18,7 @@ open class BaseActivity : AppCompatActivity() {
     private val viewModel by viewModel<AppViewModel>()
 
     private val currentTheme
-        get() = intent?.getStringExtra(Constants.ThemeKey)?.let(Theme::valueOf)
+        get() = intent?.getStringExtra(Constants.Theme)?.let(Theme::valueOf)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         currentTheme?.toAndroidTheme()?.also(::setTheme)
@@ -46,7 +46,7 @@ open class BaseActivity : AppCompatActivity() {
 
     private fun setupTheme(theme: Theme) {
         if (currentTheme != theme) {
-            intent?.putExtra(Constants.ThemeKey, theme.name)
+            intent?.putExtra(Constants.Theme, theme.name)
             when (theme) {
                 Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

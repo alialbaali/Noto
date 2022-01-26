@@ -4,12 +4,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.*
-import com.noto.app.domain.repository.LabelRepository
-import com.noto.app.domain.repository.LibraryRepository
-import com.noto.app.domain.repository.NoteLabelRepository
-import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.LocalStorage
-import com.noto.app.util.*
+import com.noto.app.domain.repository.*
+import com.noto.app.util.NoteWithLabels
+import com.noto.app.util.filterContent
+import com.noto.app.util.forEachRecursively
+import com.noto.app.util.mapWithLabels
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -18,7 +17,7 @@ class LibraryViewModel(
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
-    private val storage: LocalStorage,
+    private val settingsRepository: SettingsRepository,
     private val libraryId: Long,
 ) : ViewModel() {
 
@@ -41,9 +40,7 @@ class LibraryViewModel(
     private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())
     val labels get() = mutableLabels.asStateFlow()
 
-    val font = storage.get(Constants.FontKey)
-        .filterNotNull()
-        .map { Font.valueOf(it) }
+    val font = settingsRepository.font
         .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
 
     private val mutableNotoColors = MutableStateFlow(NotoColor.values().associateWith { false }.toList())
@@ -55,8 +52,7 @@ class LibraryViewModel(
     private val mutableSearchTerm = MutableStateFlow("")
     val searchTerm get() = mutableSearchTerm.asStateFlow()
 
-    val isCollapseToolbar = storage.getOrNull(Constants.CollapseToolbar)
-        .map { it.toBoolean() }
+    val isCollapseToolbar = settingsRepository.isCollapseToolbar
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     init {

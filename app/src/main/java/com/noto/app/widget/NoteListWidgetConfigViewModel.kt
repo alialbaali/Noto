@@ -4,21 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Library
-import com.noto.app.domain.repository.LabelRepository
-import com.noto.app.domain.repository.LibraryRepository
-import com.noto.app.domain.repository.NoteLabelRepository
-import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.LocalStorage
-import com.noto.app.util.Constants.Widget.AppIcon
-import com.noto.app.util.Constants.Widget.EditButton
-import com.noto.app.util.Constants.Widget.Header
-import com.noto.app.util.Constants.Widget.Id
-import com.noto.app.util.Constants.Widget.LabelIds
-import com.noto.app.util.Constants.Widget.NewItemButton
-import com.noto.app.util.Constants.Widget.Radius
+import com.noto.app.domain.repository.*
 import com.noto.app.util.NoteWithLabels
 import com.noto.app.util.mapWithLabels
-import com.noto.app.util.toLongList
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -28,7 +16,7 @@ class NoteListWidgetConfigViewModel(
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
-    private val storage: LocalStorage,
+    private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
     private val mutableLibrary = MutableStateFlow(Library(position = 0))
@@ -40,9 +28,7 @@ class NoteListWidgetConfigViewModel(
     private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())
     val labels get() = mutableLabels.asStateFlow()
 
-    val isWidgetCreated = storage.get(appWidgetId.Id)
-        .filterNotNull()
-        .map { it.toBoolean() }
+    val isWidgetCreated = settingsRepository.getIsWidgetCreated(appWidgetId)
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
     private val mutableIsWidgetHeaderEnabled = MutableStateFlow(true)
@@ -61,33 +47,23 @@ class NoteListWidgetConfigViewModel(
     val widgetRadius get() = mutableWidgetRadius.asStateFlow()
 
     init {
-        storage.get(appWidgetId.Header)
-            .filterNotNull()
-            .map { it.toBoolean() }
+        settingsRepository.getIsWidgetHeaderEnabled(appWidgetId)
             .onEach { mutableIsWidgetHeaderEnabled.value = it }
             .launchIn(viewModelScope)
 
-        storage.get(appWidgetId.EditButton)
-            .filterNotNull()
-            .map { it.toBoolean() }
+        settingsRepository.getIsWidgetEditButtonEnabled(appWidgetId)
             .onEach { mutableIsEditWidgetButtonEnabled.value = it }
             .launchIn(viewModelScope)
 
-        storage.get(appWidgetId.AppIcon)
-            .filterNotNull()
-            .map { it.toBoolean() }
+        settingsRepository.getIsWidgetAppIconEnabled(appWidgetId)
             .onEach { mutableIsAppIconEnabled.value = it }
             .launchIn(viewModelScope)
 
-        storage.get(appWidgetId.NewItemButton)
-            .filterNotNull()
-            .map { it.toBoolean() }
+        settingsRepository.getIsWidgetNewItemButtonEnabled(appWidgetId)
             .onEach { mutableIsNewLibraryButtonEnabled.value = it }
             .launchIn(viewModelScope)
 
-        storage.get(appWidgetId.Radius)
-            .filterNotNull()
-            .map { it.toInt() }
+        settingsRepository.getWidgetRadius(appWidgetId)
             .onEach { mutableWidgetRadius.value = it }
             .launchIn(viewModelScope)
     }
@@ -112,9 +88,7 @@ class NoteListWidgetConfigViewModel(
         combine(
             labelRepository.getLabelsByLibraryId(libraryId)
                 .filterNotNull(),
-            storage.get(appWidgetId.LabelIds(libraryId))
-                .filterNotNull()
-                .map { it.toLongList() }
+            settingsRepository.getWidgetSelectedLabelIds(appWidgetId, libraryId)
                 .onStart { emit(emptyList()) },
         ) { labels, labelIds ->
             mutableLabels.value = labels.sortedBy { it.position }.map { label ->
@@ -157,13 +131,13 @@ class NoteListWidgetConfigViewModel(
     }
 
     fun createOrUpdateWidget() = viewModelScope.launch {
-        val labelIds = labels.value.filterValues { it }.map { it.key.id }.joinToString()
-        storage.put(appWidgetId.LabelIds(library.value.id), labelIds)
-        storage.put(appWidgetId.Id, true.toString())
-        storage.put(appWidgetId.Header, isWidgetHeaderEnabled.value.toString())
-        storage.put(appWidgetId.EditButton, isEditWidgetButtonEnabled.value.toString())
-        storage.put(appWidgetId.AppIcon, isAppIconEnabled.value.toString())
-        storage.put(appWidgetId.NewItemButton, isNewLibraryButtonEnabled.value.toString())
-        storage.put(appWidgetId.Radius, widgetRadius.value.toString())
+        val labelIds = labels.value.filterValues { it }.map { it.key.id }
+        launch { settingsRepository.updateIsWidgetCreated(appWidgetId, true) }
+        launch { settingsRepository.updateIsWidgetHeaderEnabled(appWidgetId, isWidgetHeaderEnabled.value) }
+        launch { settingsRepository.updateIsWidgetEditButtonEnabled(appWidgetId, isEditWidgetButtonEnabled.value) }
+        launch { settingsRepository.updateIsWidgetAppIconEnabled(appWidgetId, isAppIconEnabled.value) }
+        launch { settingsRepository.updateIsWidgetNewItemButtonEnabled(appWidgetId, isNewLibraryButtonEnabled.value) }
+        launch { settingsRepository.updateWidgetRadius(appWidgetId, widgetRadius.value) }
+        launch { settingsRepository.updateWidgetSelectedLabelIds(appWidgetId, library.value.id, labelIds) }
     }
 }

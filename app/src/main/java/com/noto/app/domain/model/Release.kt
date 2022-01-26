@@ -10,6 +10,7 @@ sealed interface Release {
 
     companion object {
         const val CurrentVersion = "1.8.0"
+        const val DefaultLastVersion = "1.7.2"
     }
 }
 

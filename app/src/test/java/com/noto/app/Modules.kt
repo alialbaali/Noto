@@ -6,7 +6,6 @@ import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalLibraryDataSource
 import com.noto.app.domain.source.LocalNoteDataSource
-import com.noto.app.domain.source.LocalStorage
 import com.noto.app.data.fake.FakeLocalLibraryDataSource
 import com.noto.app.data.fake.FakeLocalNoteDataSource
 import com.noto.app.data.fake.FakeLocalStorage
@@ -18,8 +17,6 @@ val fakeLocalDataSourceModule = module {
     single<LocalLibraryDataSource> { FakeLocalLibraryDataSource() }
 
     single<LocalNoteDataSource> { FakeLocalNoteDataSource() }
-
-    single<LocalStorage> { FakeLocalStorage() }
 
 }
 

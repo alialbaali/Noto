@@ -17,7 +17,6 @@ import androidx.test.filters.LargeTest
 import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.LocalStorage
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.note.NoteViewModel
 import com.noto.app.domain.model.Layout

@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
-import com.noto.app.AppViewModel
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
@@ -19,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LanguageDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by viewModel<AppViewModel>()
+    private val viewModel by viewModel<SettingsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

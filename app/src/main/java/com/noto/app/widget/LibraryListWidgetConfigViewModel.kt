@@ -4,14 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.LocalStorage
-import com.noto.app.util.Constants.Widget.AppIcon
-import com.noto.app.util.Constants.Widget.EditButton
-import com.noto.app.util.Constants.Widget.Header
-import com.noto.app.util.Constants.Widget.Id
-import com.noto.app.util.Constants.Widget.NewItemButton
-import com.noto.app.util.Constants.Widget.NotesCount
-import com.noto.app.util.Constants.Widget.Radius
+import com.noto.app.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -19,7 +12,7 @@ class LibraryListWidgetConfigViewModel(
     private val appWidgetId: Int,
     private val libraryRepository: LibraryRepository,
     private val noteRepository: NoteRepository,
-    private val storage: LocalStorage,
+    private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
     val libraries = libraryRepository.getLibraries()
@@ -32,9 +25,7 @@ class LibraryListWidgetConfigViewModel(
         .filterNotNull()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    val isWidgetCreated = storage.get(appWidgetId.Id)
-        .filterNotNull()
-        .map { it.toBoolean() }
+    val isWidgetCreated = settingsRepository.getIsWidgetCreated(appWidgetId)
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
     private val mutableIsWidgetHeaderEnabled = MutableStateFlow(true)
@@ -56,43 +47,30 @@ class LibraryListWidgetConfigViewModel(
     val widgetRadius get() = mutableWidgetRadius.asStateFlow()
 
     init {
-        storage.get(appWidgetId.Header)
-            .filterNotNull()
-            .map { it.toBoolean() }
+        settingsRepository.getIsWidgetHeaderEnabled(appWidgetId)
             .onEach { mutableIsWidgetHeaderEnabled.value = it }
             .launchIn(viewModelScope)
 
-        storage.get(appWidgetId.EditButton)
-            .filterNotNull()
-            .map { it.toBoolean() }
+        settingsRepository.getIsWidgetEditButtonEnabled(appWidgetId)
             .onEach { mutableIsEditWidgetButtonEnabled.value = it }
             .launchIn(viewModelScope)
 
-        storage.get(appWidgetId.AppIcon)
-            .filterNotNull()
-            .map { it.toBoolean() }
+        settingsRepository.getIsWidgetAppIconEnabled(appWidgetId)
             .onEach { mutableIsAppIconEnabled.value = it }
             .launchIn(viewModelScope)
 
-        storage.get(appWidgetId.NewItemButton)
-            .filterNotNull()
-            .map { it.toBoolean() }
+        settingsRepository.getIsWidgetNewItemButtonEnabled(appWidgetId)
             .onEach { mutableIsNewLibraryButtonEnabled.value = it }
             .launchIn(viewModelScope)
 
-        storage.get(appWidgetId.NotesCount)
-            .filterNotNull()
-            .map { it.toBoolean() }
+        settingsRepository.getWidgetNotesCount(appWidgetId)
             .onEach { mutableIsNotesCountEnabled.value = it }
             .launchIn(viewModelScope)
 
-        storage.get(appWidgetId.Radius)
-            .filterNotNull()
-            .map { it.toInt() }
+        settingsRepository.getWidgetRadius(appWidgetId)
             .onEach { mutableWidgetRadius.value = it }
             .launchIn(viewModelScope)
     }
-
 
     fun setIsWidgetHeaderEnabled(value: Boolean) {
         mutableIsWidgetHeaderEnabled.value = value
@@ -119,12 +97,12 @@ class LibraryListWidgetConfigViewModel(
     }
 
     fun createOrUpdateWidget() = viewModelScope.launch {
-        storage.put(appWidgetId.Id, true.toString())
-        storage.put(appWidgetId.Header, isWidgetHeaderEnabled.value.toString())
-        storage.put(appWidgetId.EditButton, isEditWidgetButtonEnabled.value.toString())
-        storage.put(appWidgetId.AppIcon, isAppIconEnabled.value.toString())
-        storage.put(appWidgetId.NewItemButton, isNewLibraryButtonEnabled.value.toString())
-        storage.put(appWidgetId.NotesCount, isNotesCountEnabled.value.toString())
-        storage.put(appWidgetId.Radius, widgetRadius.value.toString())
+        launch { settingsRepository.updateIsWidgetCreated(appWidgetId, true) }
+        launch { settingsRepository.updateIsWidgetHeaderEnabled(appWidgetId, isWidgetHeaderEnabled.value) }
+        launch { settingsRepository.updateIsWidgetEditButtonEnabled(appWidgetId, isEditWidgetButtonEnabled.value) }
+        launch { settingsRepository.updateIsWidgetAppIconEnabled(appWidgetId, isAppIconEnabled.value) }
+        launch { settingsRepository.updateIsWidgetNewItemButtonEnabled(appWidgetId, isNewLibraryButtonEnabled.value) }
+        launch { settingsRepository.updateWidgetNotesCount(appWidgetId, isNotesCountEnabled.value) }
+        launch { settingsRepository.updateWidgetRadius(appWidgetId, widgetRadius.value) }
     }
 }

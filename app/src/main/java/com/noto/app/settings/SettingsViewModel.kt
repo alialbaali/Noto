@@ -3,11 +3,7 @@ package com.noto.app.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.*
-import com.noto.app.domain.repository.LabelRepository
-import com.noto.app.domain.repository.LibraryRepository
-import com.noto.app.domain.repository.NoteLabelRepository
-import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.LocalStorage
+import com.noto.app.domain.repository.*
 import com.noto.app.util.Constants
 import com.noto.app.util.hash
 import com.noto.app.util.isInbox
@@ -15,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -24,43 +21,45 @@ class SettingsViewModel(
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
-    private val storage: LocalStorage,
+    private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
-    val isShowNotesCount = storage.get(Constants.ShowNotesCountKey)
-        .filterNotNull()
-        .map { it.toBoolean() }
+    val theme = settingsRepository.theme
+        .shareIn(viewModelScope, SharingStarted.Lazily, replay = 1)
+
+    val font = settingsRepository.font
+        .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
+
+    val language = settingsRepository.language
+        .stateIn(viewModelScope, SharingStarted.Lazily, Language.System)
+
+    val isShowNotesCount = settingsRepository.isShowNotesCount
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
-    val vaultPasscode = storage.getOrNull(Constants.VaultPasscode)
+    val vaultPasscode = settingsRepository.vaultPasscode
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
-    val vaultTimeout = storage.get(Constants.VaultTimeout)
-        .filterNotNull()
-        .map { VaultTimeout.valueOf(it) }
+    val vaultTimeout = settingsRepository.vaultTimeout
         .stateIn(viewModelScope, SharingStarted.Lazily, VaultTimeout.Immediately)
 
-    val isBioAuthEnabled = storage.getOrNull(Constants.IsBioAuthEnabled)
-        .map { it.toBoolean() }
+    val isBioAuthEnabled = settingsRepository.isBioAuthEnabled
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
-    val mainLibraryId = storage.getOrNull(Constants.MainLibraryId)
-        .mapNotNull { it?.toLongOrNull() }
+    val mainLibraryId = settingsRepository.mainLibraryId
         .stateIn(viewModelScope, SharingStarted.Eagerly, Library.InboxId)
 
-    val isCollapseToolbar = storage.getOrNull(Constants.CollapseToolbar)
-        .map { it.toBoolean() }
+    val isCollapseToolbar = settingsRepository.isCollapseToolbar
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
     val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
 
     fun toggleShowNotesCount() = viewModelScope.launch {
-        storage.put(Constants.ShowNotesCountKey, (!isShowNotesCount.value).toString())
+        settingsRepository.updateIsShowNotesCount(!isShowNotesCount.value)
     }
 
     fun toggleCollapseToolbar() = viewModelScope.launch {
-        storage.put(Constants.CollapseToolbar, (!isCollapseToolbar.value).toString())
+        settingsRepository.updateIsCollapseToolbar(!isCollapseToolbar.value)
     }
 
     suspend fun exportData(): Map<String, String> = withContext(Dispatchers.IO) {
@@ -68,7 +67,7 @@ class SettingsViewModel(
         val notes = noteRepository.getAllNotes().first()
         val labels = labelRepository.getAllLabels().first()
         val noteLabels = noteLabelRepository.getNoteLabels().first()
-        val settings = storage.getAll().first()
+        val settings = settingsRepository.config.first()
         mapOf(
             Constants.Libraries to DefaultJson.encodeToString(libraries),
             Constants.Notes to DefaultJson.encodeToString(notes),
@@ -110,20 +109,20 @@ class SettingsViewModel(
                 val labelId = labelIds.getValue(noteLabel.labelId)
                 noteLabelRepository.createNoteLabel(noteLabel.copy(id = 0, noteId = noteId, labelId = labelId))
             }
-        DefaultJson.decodeFromString<Map<String, String>>(data.getValue(Constants.Settings))
-            .forEach { (key, value) -> storage.put(key, value) }
+        DefaultJson.decodeFromString<SettingsConfig>(data.getValue(Constants.Settings))
+            .also { settingsRepository.updateConfig(it) }
     }
 
     fun setVaultPasscode(passcode: String) = viewModelScope.launch {
-        storage.put(Constants.VaultPasscode, passcode.hash())
+        settingsRepository.updateVaultPasscode(passcode.hash())
     }
 
     fun setVaultTimeout(timeout: VaultTimeout) = viewModelScope.launch {
-        storage.put(Constants.VaultTimeout, timeout.name)
+        settingsRepository.updateVaultTimeout(timeout)
     }
 
     fun toggleIsBioAuthEnabled() = viewModelScope.launch {
-        storage.put(Constants.IsBioAuthEnabled, isBioAuthEnabled.value.not().toString())
+        settingsRepository.updateIsBioAuthEnabled(!isBioAuthEnabled.value)
     }
 
     fun setWhatsNewTab(tab: WhatsNewTab) {
@@ -131,19 +130,34 @@ class SettingsViewModel(
     }
 
     fun updateLastVersion() = viewModelScope.launch {
-        storage.put(Constants.LastVersion, Release.CurrentVersion)
+        settingsRepository.updateLastVersion(Release.CurrentVersion)
     }
 
     fun setMainLibraryId(libraryId: Long) = viewModelScope.launch {
-        storage.put(Constants.MainLibraryId, libraryId.toString())
+        settingsRepository.updateMainLibraryId(libraryId)
     }
+
+    fun updateTheme(value: Theme) = viewModelScope.launch {
+        settingsRepository.updateTheme(value)
+    }
+
+    fun updateFont(value: Font) = viewModelScope.launch {
+        settingsRepository.updateFont(value)
+    }
+
+    fun updateLanguage(value: Language) = viewModelScope.launch {
+        settingsRepository.updateLanguage(value)
+    }
+
 }
 
+@OptIn(ExperimentalSerializationApi::class)
 private val DefaultJson = Json {
     isLenient = true
     allowStructuredMapKeys = true
     coerceInputValues = true
     encodeDefaults = true
     ignoreUnknownKeys = true
+    explicitNulls = false
     prettyPrint = true
 }

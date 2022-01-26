@@ -7,16 +7,12 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.noto.app.AppViewModel
 import com.noto.app.allnotes.AllNotesViewModel
 import com.noto.app.data.database.NotoDatabase
-import com.noto.app.data.repository.LabelRepositoryImpl
-import com.noto.app.data.repository.LibraryRepositoryImpl
-import com.noto.app.data.repository.NoteLabelRepositoryImpl
-import com.noto.app.data.repository.NoteRepositoryImpl
-import com.noto.app.data.source.LocalStorageImpl
-import com.noto.app.domain.repository.LabelRepository
-import com.noto.app.domain.repository.LibraryRepository
-import com.noto.app.domain.repository.NoteLabelRepository
-import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.*
+import com.noto.app.data.repository.*
+import com.noto.app.domain.repository.*
+import com.noto.app.domain.source.LocalLabelDataSource
+import com.noto.app.domain.source.LocalLibraryDataSource
+import com.noto.app.domain.source.LocalNoteDataSource
+import com.noto.app.domain.source.LocalNoteLabelDataSource
 import com.noto.app.label.LabelViewModel
 import com.noto.app.library.LibraryViewModel
 import com.noto.app.main.MainViewModel
@@ -65,6 +61,8 @@ val repositoryModule = module {
 
     single<NoteLabelRepository> { NoteLabelRepositoryImpl(get()) }
 
+    single<SettingsRepository> { SettingsRepositoryImpl(get()) }
+
 }
 
 val localDataSourceModule = module {
@@ -78,7 +76,5 @@ val localDataSourceModule = module {
     single<LocalNoteLabelDataSource> { NotoDatabase.getInstance(androidContext()).noteLabelDao }
 
     single<DataStore<Preferences>> { androidContext().dataStore }
-
-    single<LocalStorage> { LocalStorageImpl(get()) }
 
 }

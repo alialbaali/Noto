@@ -8,16 +8,9 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.noto.app.AppActivity
 import com.noto.app.R
-import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Library
-import com.noto.app.domain.model.Note
-import com.noto.app.domain.repository.LabelRepository
-import com.noto.app.domain.repository.LibraryRepository
-import com.noto.app.domain.repository.NoteLabelRepository
-import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.LocalStorage
+import com.noto.app.domain.repository.*
 import com.noto.app.util.*
-import com.noto.app.util.Constants.Widget.LabelIds
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -31,7 +24,7 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
     private val noteRepository by inject<NoteRepository>()
     private val labelRepository by inject<LabelRepository>()
     private val noteLabelRepository by inject<NoteLabelRepository>()
-    private val storage by inject<LocalStorage>()
+    private val settingsRepository by inject<SettingsRepository>()
     private val appWidgetId = intent?.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
         ?: AppWidgetManager.INVALID_APPWIDGET_ID
     private val libraryId = intent?.getLongExtra(Constants.LibraryId, 0) ?: 0
@@ -45,10 +38,7 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
         library = libraryRepository.getLibraryById(libraryId)
             .filterNotNull()
             .first()
-        labelIds = storage.get(appWidgetId.LabelIds(libraryId))
-            .filterNotNull()
-            .map { it.toLongList() }
-            .first()
+        labelIds = settingsRepository.getWidgetSelectedLabelIds(appWidgetId, libraryId).first()
         val labels = labelRepository.getLabelsByLibraryId(libraryId)
             .filterNotNull()
             .first()

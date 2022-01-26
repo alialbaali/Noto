@@ -5,11 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Library
-import com.noto.app.domain.repository.LabelRepository
-import com.noto.app.domain.repository.LibraryRepository
-import com.noto.app.domain.repository.NoteLabelRepository
-import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.source.LocalStorage
+import com.noto.app.domain.repository.*
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 
@@ -18,7 +14,7 @@ class AllNotesViewModel(
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
-    private val storage: LocalStorage,
+    private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
     private val mutableNotes = MutableStateFlow<UiState<Map<Library, List<NoteWithLabels>>>>(UiState.Loading)
@@ -27,13 +23,10 @@ class AllNotesViewModel(
     private val mutableNotesVisibility = MutableStateFlow(emptyMap<Library, Boolean>())
     val notesVisibility get() = mutableNotesVisibility.asStateFlow()
 
-    val font = storage.get(Constants.FontKey)
-        .filterNotNull()
-        .map { Font.valueOf(it) }
+    val font = settingsRepository.font
         .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
 
-    val isCollapseToolbar = storage.getOrNull(Constants.CollapseToolbar)
-        .map { it.toBoolean() }
+    val isCollapseToolbar = settingsRepository.isCollapseToolbar
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     private val mutableIsSearchEnabled = MutableStateFlow(false)
