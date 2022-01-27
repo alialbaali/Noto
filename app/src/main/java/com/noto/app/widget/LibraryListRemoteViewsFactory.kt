@@ -59,7 +59,7 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
         val library = entry.first
         val notesCount = entry.second
         val color = context.colorResource(library.color.toResource())
-        val iconResource = if (library.isInbox) R.drawable.ic_round_inbox_24 else R.drawable.ic_round_library_24
+        val iconResource = if (library.isInbox) R.drawable.ic_round_inbox_24 else R.drawable.ic_round_folder_24
         val intent = Intent(Constants.Intent.ActionOpenLibrary, null, context, AppActivity::class.java).apply {
             putExtra(Constants.LibraryId, library.id)
         }

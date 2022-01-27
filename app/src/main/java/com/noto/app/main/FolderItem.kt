@@ -70,10 +70,14 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
             else
                 context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
             tvFolderTitle.text = folder.getTitle(context)
-            if (folder.isInbox)
+            if (folder.isInbox) {
                 ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
-            else
-                ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_library_24))
+            } else {
+                if (isSelected)
+                    ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_open_24))
+                else
+                    ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_24))
+            }
             ivFolderIcon.imageTintList = color.toColorStateList()
         }
         ibFolderHandle.visibility = when {
