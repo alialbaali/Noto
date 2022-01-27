@@ -42,7 +42,7 @@
             android:paddingTop="@dimen/spacing_small"
             android:paddingHorizontal="@dimen/spacing_small"
             android:paddingBottom="@dimen/padding_bottom"
-            tools:listitem="@layout/library_item" />
+            tools:listitem="@layout/folder_item" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"

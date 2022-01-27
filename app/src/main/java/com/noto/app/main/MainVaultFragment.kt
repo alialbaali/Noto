@@ -154,7 +154,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
                     } else {
                         buildLibrariesModels(context, libraries) { libraries ->
                             libraries.forEachRecursively { entry, depth ->
-                                libraryItem {
+                                folderItem {
                                     id(entry.first.id)
                                     library(entry.first)
                                     notesCount(entry.second)

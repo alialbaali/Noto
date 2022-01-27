@@ -18,11 +18,11 @@ class LibraryItemTouchHelperCallback(
     epoxyController: EpoxyController,
     private val onSwipe: (EpoxyViewHolder, Int) -> Unit,
     private val onDrag: () -> Unit,
-) : EpoxyModelTouchCallback<LibraryItem>(epoxyController, LibraryItem::class.java) {
+) : EpoxyModelTouchCallback<FolderItem>(epoxyController, FolderItem::class.java) {
 
     override fun isLongPressDragEnabled(): Boolean = false
 
-    override fun getMovementFlagsForModel(model: LibraryItem?, adapterPosition: Int): Int {
+    override fun getMovementFlagsForModel(model: FolderItem?, adapterPosition: Int): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
         val swipeFlags = if (model?.library?.isInbox == true) 0 else ItemTouchHelper.START or ItemTouchHelper.END
         return makeMovementFlags(dragFlags, swipeFlags)
@@ -45,7 +45,7 @@ class LibraryItemTouchHelperCallback(
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
         val view = viewHolder.itemView
         val context = view.context
-        val model = viewHolder.model as LibraryItem
+        val model = viewHolder.model as FolderItem
         val color = context.colorResource(model.library.color.toResource())
         val margin = context.dimenResource(R.dimen.spacing_normal).toInt()
         val radius = context.dimenResource(R.dimen.spacing_small)
@@ -131,12 +131,12 @@ class LibraryItemTouchHelperCallback(
             }
     }
 
-    override fun onModelMoved(fromPosition: Int, toPosition: Int, modelBeingMoved: LibraryItem?, itemView: View?) {
+    override fun onModelMoved(fromPosition: Int, toPosition: Int, modelBeingMoved: FolderItem?, itemView: View?) {
         super.onModelMoved(fromPosition, toPosition, modelBeingMoved, itemView)
         onDrag()
     }
 
-    override fun onDragStarted(model: LibraryItem?, itemView: View?, adapterPosition: Int) {
+    override fun onDragStarted(model: FolderItem?, itemView: View?, adapterPosition: Int) {
         super.onDragStarted(model, itemView, adapterPosition)
         itemView?.isSelected = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -151,7 +151,7 @@ class LibraryItemTouchHelperCallback(
         }
     }
 
-    override fun onDragReleased(model: LibraryItem?, itemView: View?) {
+    override fun onDragReleased(model: FolderItem?, itemView: View?) {
         super.onDragReleased(model, itemView)
         itemView?.isSelected = false
     }

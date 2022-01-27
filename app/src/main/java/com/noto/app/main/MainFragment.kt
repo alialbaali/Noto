@@ -122,7 +122,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                 }
 
                 inboxLibrary?.let {
-                    libraryItem {
+                    folderItem {
                         id(inboxLibrary.first.id)
                         library(inboxLibrary.first)
                         notesCount(inboxLibrary.second)
@@ -189,7 +189,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
                     buildLibrariesModels(context, libraries) { libraries ->
                         libraries.forEachRecursively { entry, depth ->
-                            libraryItem {
+                            folderItem {
                                 id(entry.first.id)
                                 library(entry.first)
                                 notesCount(entry.second)
@@ -247,14 +247,14 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     private fun MainFragmentBinding.onSwipe(viewHolder: EpoxyViewHolder, direction: Int) {
         val libraries = viewModel.libraries.value.getOrDefault(emptyList())
-        val model = viewHolder.model as? LibraryItem
+        val model = viewHolder.model as? FolderItem
         if (model != null) {
             if (direction == ItemTouchHelper.START) {
                 val parentId = libraries.findRecursively { it.first.id == model.library.parentId }?.first?.parentId
                 viewModel.updateLibraryParentId(model.library, parentId)
             } else {
                 val previousViewHolder = rv.findViewHolderForAdapterPosition(viewHolder.bindingAdapterPosition - 1) as EpoxyViewHolder?
-                val previousModel = previousViewHolder?.model as? LibraryItem?
+                val previousModel = previousViewHolder?.model as? FolderItem?
                 val parentId = libraries.findRecursively {
                     val isSameParent = it.first.parentId == model.library.parentId
                     val isPreviousSelf = it.first.id == previousModel?.library?.id
@@ -271,7 +271,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.onDrag() {
         rv.forEach { view ->
             val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
-            val model = viewHolder.model as? LibraryItem
+            val model = viewHolder.model as? FolderItem
             if (model != null) viewModel.updateLibraryPosition(model.library, viewHolder.bindingAdapterPosition)
         }
     }

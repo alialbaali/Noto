@@ -13,13 +13,13 @@ import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.noto.app.R
-import com.noto.app.databinding.LibraryItemBinding
+import com.noto.app.databinding.FolderItemBinding
 import com.noto.app.domain.model.Library
 import com.noto.app.util.*
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.library_item)
-abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
+@EpoxyModelClass(layout = R.layout.folder_item)
+abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
 
     @EpoxyAttribute
     lateinit var library: Library
@@ -61,47 +61,47 @@ abstract class LibraryItem : EpoxyModelWithHolder<LibraryItem.Holder>() {
             val selectedColorStateList = color.withDefaultAlpha().toColorStateList()
             val rippleDrawable = root.background as RippleDrawable
             rippleDrawable.setColor(selectedColorStateList)
-            tvLibraryNotesCount.text = notesCount.toString()
-            tvLibraryTitle.setTextColor(color)
-            tvLibraryNotesCount.setTextColor(color)
-            ibLibraryDrag.drawable?.mutate()?.setTint(color)
+            tvFolderNotesCount.text = notesCount.toString()
+            tvFolderTitle.setTextColor(color)
+            tvFolderNotesCount.setTextColor(color)
+            ibFolderHandle.drawable?.mutate()?.setTint(color)
             root.backgroundTintList = if (isSelected)
                 selectedColorStateList
             else
                 context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
-            tvLibraryTitle.text = library.getTitle(context)
+            tvFolderTitle.text = library.getTitle(context)
             if (library.isInbox)
-                ivLibraryIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
+                ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
             else
-                ivLibraryIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_library_24))
-            ivLibraryIcon.imageTintList = color.toColorStateList()
+                ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_library_24))
+            ivFolderIcon.imageTintList = color.toColorStateList()
         }
-        ibLibraryDrag.visibility = when {
+        ibFolderHandle.visibility = when {
             isManualSorting && !library.isInbox -> View.VISIBLE
             isManualSorting && library.isInbox -> View.INVISIBLE
             else -> View.GONE
         }
-        ibLibraryDrag.setOnTouchListener(onDragHandleTouchListener)
+        ibFolderHandle.setOnTouchListener(onDragHandleTouchListener)
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
         root.isClickable = isClickable
         root.isLongClickable = isLongClickable
-        tvLibraryNotesCount.isVisible = isShowNotesCount
+        tvFolderNotesCount.isVisible = isShowNotesCount
         root.updatePaddingRelative(depth * 16.dp)
-        tvLibraryTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+        tvFolderTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(end = if (!isShowNotesCount && !isManualSorting) 16.dp else 8.dp)
         }
-        tvLibraryNotesCount.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+        tvFolderNotesCount.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(end = if (isManualSorting) 8.dp else 0.dp)
         }
     }
 
     class Holder : EpoxyHolder() {
-        lateinit var binding: LibraryItemBinding
+        lateinit var binding: FolderItemBinding
             private set
 
         override fun bindView(itemView: View) {
-            binding = LibraryItemBinding.bind(itemView)
+            binding = FolderItemBinding.bind(itemView)
         }
     }
 }

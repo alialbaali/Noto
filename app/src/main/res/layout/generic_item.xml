@@ -20,7 +20,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_title"
-        style="@style/LibraryTitleTextView"
+        style="@style/FolderTitleTextView"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_notes_count"
-        style="@style/LibraryNotesCountTextView"
+        style="@style/FolderNotesCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_small"

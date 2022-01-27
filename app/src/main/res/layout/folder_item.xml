@@ -10,17 +10,17 @@
     android:padding="@dimen/spacing_normal"
     android:animateLayoutChanges="true"
     android:stateListAnimator="@animator/elevation_animator"
-    android:background="@drawable/library_item_shape">
+    android:background="@drawable/folder_item_shape">
 
     <ImageView
-        android:id="@+id/iv_library_icon"
+        android:id="@+id/iv_folder_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:src="@drawable/ic_round_inbox_24" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_library_title"
-        style="@style/LibraryTitleTextView"
+        android:id="@+id/tv_folder_title"
+        style="@style/FolderTitleTextView"
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
@@ -29,15 +29,15 @@
         tools:text="@string/inbox" />
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tv_library_notes_count"
-        style="@style/LibraryNotesCountTextView"
+        android:id="@+id/tv_folder_notes_count"
+        style="@style/FolderNotesCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_small"
         tools:text="3" />
 
     <ImageButton
-        android:id="@+id/ib_library_drag"
+        android:id="@+id/ib_folder_handle"
         android:src="@drawable/ic_round_drag_handle_24"
         android:background="@android:color/transparent"
         android:layout_width="wrap_content"

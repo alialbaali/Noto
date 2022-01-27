@@ -195,7 +195,7 @@
         <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
-    <style name="LibraryTitleTextView" parent="Widget.MaterialComponents.TextView">
+    <style name="FolderTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="fontFamily">@font/nunito_bold</item>
@@ -207,7 +207,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="LibraryNotesCountTextView" parent="Widget.MaterialComponents.TextView">
+    <style name="FolderNotesCountTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/notoSecondaryColor</item>
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="fontFamily">@font/nunito_bold</item>
