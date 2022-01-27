@@ -7,7 +7,7 @@ import android.content.Context
 import android.content.Intent
 import com.noto.app.AppActivity
 import com.noto.app.R
-import com.noto.app.widget.LibraryListWidgetProvider
+import com.noto.app.widget.FolderListWidgetProvider
 import com.noto.app.widget.NoteListWidgetProvider
 
 fun Context.createAppLauncherPendingIntent(appWidgetId: Int): PendingIntent? {
@@ -28,32 +28,32 @@ fun Int.toWidgetHeaderShapeId() = when (this) {
 }
 
 fun Context.updateAllWidgetsData() {
-    val libraryListComponentName = ComponentName(this, LibraryListWidgetProvider::class.java)
+    val folderListComponentName = ComponentName(this, FolderListWidgetProvider::class.java)
     val noteListComponentName = ComponentName(this, NoteListWidgetProvider::class.java)
     val appWidgetManager = AppWidgetManager.getInstance(this)
-    val libraryListWidgetIds = appWidgetManager.getAppWidgetIds(libraryListComponentName)
+    val folderListWidgetIds = appWidgetManager.getAppWidgetIds(folderListComponentName)
     val noteListWidgetIds = appWidgetManager.getAppWidgetIds(noteListComponentName)
-    val allWidgetIds = libraryListWidgetIds + noteListWidgetIds
+    val allWidgetIds = folderListWidgetIds + noteListWidgetIds
     appWidgetManager.notifyAppWidgetViewDataChanged(allWidgetIds, R.id.lv)
 }
 
-fun Context.updateNoteListWidgets(libraryId: Long) {
+fun Context.updateNoteListWidgets(folderId: Long) {
     val componentName = ComponentName(this, NoteListWidgetProvider::class.java)
     val appWidgetManager = AppWidgetManager.getInstance(this)
     val widgetIds = appWidgetManager.getAppWidgetIds(componentName)
     val intent = Intent(this, NoteListWidgetProvider::class.java).apply {
-        putExtra(Constants.LibraryId, libraryId)
+        putExtra(Constants.FolderId, folderId)
         putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds)
         action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
     }
     sendBroadcast(intent)
 }
 
-fun Context.updateLibraryListWidgets() {
-    val componentName = ComponentName(this, LibraryListWidgetProvider::class.java)
+fun Context.updateFolderListWidgets() {
+    val componentName = ComponentName(this, FolderListWidgetProvider::class.java)
     val appWidgetManager = AppWidgetManager.getInstance(this)
     val widgetIds = appWidgetManager.getAppWidgetIds(componentName)
-    val intent = Intent(this, LibraryListWidgetProvider::class.java).apply {
+    val intent = Intent(this, FolderListWidgetProvider::class.java).apply {
         putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds)
         action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
     }

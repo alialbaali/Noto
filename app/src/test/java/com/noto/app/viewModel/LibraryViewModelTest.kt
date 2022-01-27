@@ -5,10 +5,10 @@ import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
-import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.fakeLocalDataSourceModule
-import com.noto.app.library.LibraryViewModel
+import com.noto.app.folder.FolderViewModel
 import com.noto.app.testRepositoryModule
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.booleans.shouldBeFalse
@@ -27,8 +27,8 @@ import org.koin.test.get
 @ExperimentalCoroutinesApi
 class LibraryViewModelTest : StringSpec(), KoinTest {
 
-    private lateinit var viewModel: LibraryViewModel
-    private lateinit var libraryRepository: LibraryRepository
+    private lateinit var viewModel: FolderViewModel
+    private lateinit var folderRepository: FolderRepository
     private lateinit var noteRepository: NoteRepository
 
     init {
@@ -36,8 +36,8 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
             startKoin {
                 modules(appModule, testRepositoryModule, fakeLocalDataSourceModule)
             }
-            libraryRepository = get()
-            libraryRepository.createLibrary(Folder(id = 1L, title = "Work", position = 0))
+            folderRepository = get()
+            folderRepository.createFolder(Folder(id = 1L, title = "Work", position = 0))
             noteRepository = get()
             repeat(3) {
                 val note = Note(id = it.toLong(), folderId = 1, title = "Title $it", body = "Body $it", position = 0)
@@ -72,16 +72,16 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
         }
 
         "update library should update library with matching id" {
-            viewModel.createOrUpdateLibrary("UpdatedTitle")
-            val library = libraryRepository.getLibraryById(1)
+            viewModel.createOrUpdateFolder("UpdatedTitle")
+            val library = folderRepository.getFolderById(1)
                 .first()
             library.id shouldBeExactly 1L
             library.title shouldBeEqualIgnoringCase "UpdatedTitle"
         }
 
         "delete library should remove the current library in the viewModel" {
-            viewModel.deleteLibrary()
-            libraryRepository.getLibraries()
+            viewModel.deleteFolder()
+            folderRepository.getFolders()
                 .first()
                 .shouldBeEmpty()
         }

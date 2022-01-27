@@ -24,7 +24,7 @@ import org.koin.core.parameter.parametersOf
 
 class NoteReadingModeFragment : Fragment() {
 
-    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId) }
 
     private val args by navArgs<NoteReadingModeFragmentArgs>()
 
@@ -46,8 +46,8 @@ class NoteReadingModeFragment : Fragment() {
         rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
 
-        viewModel.library
-            .onEach { library -> setupLibrary(library) }
+        viewModel.folder
+            .onEach { folder -> setupFolder(folder) }
             .launchIn(lifecycleScope)
 
         combine(
@@ -57,16 +57,16 @@ class NoteReadingModeFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         combine(
-            viewModel.library,
+            viewModel.folder,
             viewModel.labels,
-        ) { library, labels ->
+        ) { folder, labels ->
             rv.withModels {
                 labels.filterValues { it }.forEach { entry ->
                     labelItem {
                         id(entry.key.id)
                         label(entry.key)
                         isSelected(entry.value)
-                        color(library.color)
+                        color(folder.color)
                         onClickListener { _ -> }
                         onLongClickListener { _ -> false }
                     }
@@ -92,7 +92,7 @@ class NoteReadingModeFragment : Fragment() {
         tvNoteBody.setSemiboldFont(font)
     }
 
-    private fun NoteReadingModeFragmentBinding.setupLibrary(folder: Folder) {
+    private fun NoteReadingModeFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()

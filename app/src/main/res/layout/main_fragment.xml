@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
             android:layout_gravity="bottom|end"
-            android:contentDescription="@string/create_library"
+            android:contentDescription="@string/create_folder"
             android:src="@drawable/ic_round_add_24"
             app:backgroundTint="?attr/notoPrimaryColor"
             app:tint="?attr/notoBackgroundColor" />

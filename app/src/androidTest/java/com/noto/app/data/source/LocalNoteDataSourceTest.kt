@@ -158,6 +158,6 @@ class LocalNoteDataSourceTest : KoinTest {
         assertTrue { updatedDbNotes.isEmpty() }
     }
 
-    private fun createNote(libraryId: Long = 1, title: String = "Work", body: String = "Working", isArchived: Boolean = false) =
-        Note(folderId = libraryId, title = title, body = body, position = 0, isArchived = isArchived)
+    private fun createNote(folderId: Long = 1, title: String = "Work", body: String = "Working", isArchived: Boolean = false) =
+        Note(folderId = folderId, title = title, body = body, position = 0, isArchived = isArchived)
 }

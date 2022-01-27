@@ -20,13 +20,13 @@ class NoteRepositoryImpl(
 
     override fun getAllMainNotes(): Flow<List<Note>> = dataSource.getAllMainNotes()
 
-    override fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getNotesByFolderId(libraryId)
+    override fun getNotesByFolderId(folderId: Long): Flow<List<Note>> = dataSource.getNotesByFolderId(folderId)
 
-    override fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getArchivedNotesByFolderId(libraryId)
+    override fun getArchivedNotesByFolderId(folderId: Long): Flow<List<Note>> = dataSource.getArchivedNotesByFolderId(folderId)
 
     override fun getNoteById(noteId: Long): Flow<Note> = dataSource.getNoteById(noteId)
 
-    override fun getLibrariesNotesCount(): Flow<List<FolderIdWithNotesCount>> = dataSource.getFoldersNotesCount()
+    override fun getFolderNotesCount(): Flow<List<FolderIdWithNotesCount>> = dataSource.getFoldersNotesCount()
 
     override suspend fun createNote(note: Note) = withContext(dispatcher) {
         val position = getNotePosition(note.folderId)
@@ -43,7 +43,7 @@ class NoteRepositoryImpl(
 
     override suspend fun clearNotes() = dataSource.clearNotes()
 
-    private suspend fun getNotePosition(libraryId: Long) = dataSource.getNotesByFolderId(libraryId)
+    private suspend fun getNotePosition(folderId: Long) = dataSource.getNotesByFolderId(folderId)
         .filterNotNull()
         .first()
         .count()

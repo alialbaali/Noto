@@ -31,7 +31,7 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
         }
 
     private fun MainArchiveFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = context?.stringResource(R.string.libraries_archive)
+        tvDialogTitle.text = context?.stringResource(R.string.folders_archive)
     }
 
     private fun MainArchiveFragmentBinding.setupState() {
@@ -40,27 +40,27 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
         rv.itemAnimator = VerticalListItemAnimator()
 
         combine(
-            viewModel.archivedLibraries,
+            viewModel.archivedFolders,
             viewModel.isShowNotesCount,
-        ) { libraries, isShowNotesCount ->
-            setupLibraries(libraries, isShowNotesCount)
+        ) { folders, isShowNotesCount ->
+            setupFolders(folders, isShowNotesCount)
         }.launchIn(lifecycleScope)
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainArchiveFragmentBinding.setupLibraries(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean) {
+    private fun MainArchiveFragmentBinding.setupFolders(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean) {
         if (state is UiState.Success) {
-            val libraries = state.value
+            val folders = state.value
             rv.withModels {
                 context?.let { context ->
-                    if (libraries.isEmpty()) {
+                    if (folders.isEmpty()) {
                         placeholderItem {
                             id("placeholder")
                             placeholder(context.stringResource(R.string.archive_is_empty))
                         }
                     } else {
-                        buildLibrariesModels(context, libraries) { libraries ->
-                            libraries.forEachRecursively { entry, depth ->
+                        buildFoldersModels(context, folders) { folders ->
+                            folders.forEachRecursively { entry, depth ->
                                 folderItem {
                                     id(entry.first.id)
                                     folder(entry.first)
@@ -72,13 +72,13 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                                     onClickListener { _ ->
                                         dismiss()
                                         if (entry.first.id != selectedDestinationId)
-                                            navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryFragment(
+                                            navController?.navigateSafely(MainArchiveFragmentDirections.actionMainArchiveFragmentToFolderFragment(
                                                 entry.first.id))
                                     }
                                     onLongClickListener { _ ->
                                         dismiss()
                                         navController?.navigateSafely(
-                                            MainArchiveFragmentDirections.actionMainArchiveFragmentToLibraryDialogFragment(entry.first.id)
+                                            MainArchiveFragmentDirections.actionMainArchiveFragmentToFolderDialogFragment(entry.first.id)
                                         )
                                         true
                                     }

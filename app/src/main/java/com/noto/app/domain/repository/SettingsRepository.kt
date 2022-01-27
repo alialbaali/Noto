@@ -25,7 +25,7 @@ interface SettingsRepository {
 
     val lastVersion: Flow<String>
 
-    val sortingType: Flow<LibraryListSortingType>
+    val sortingType: Flow<FolderListSortingType>
 
     val sortingOrder: Flow<SortingOrder>
 
@@ -33,7 +33,7 @@ interface SettingsRepository {
 
     val isShowNotesCount: Flow<Boolean>
 
-    val mainLibraryId: Flow<Long>
+    val mainFolderId: Flow<Long>
 
     fun getIsWidgetCreated(widgetId: Int): Flow<Boolean>
 
@@ -49,7 +49,7 @@ interface SettingsRepository {
 
     fun getWidgetRadius(widgetId: Int): Flow<Int>
 
-    fun getWidgetSelectedLabelIds(widgetId: Int, libraryId: Long): Flow<List<Long>>
+    fun getWidgetSelectedLabelIds(widgetId: Int, folderId: Long): Flow<List<Long>>
 
     suspend fun updateConfig(config: SettingsConfig)
 
@@ -71,7 +71,7 @@ interface SettingsRepository {
 
     suspend fun updateLastVersion(version: String)
 
-    suspend fun updateSortingType(sortingType: LibraryListSortingType)
+    suspend fun updateSortingType(sortingType: FolderListSortingType)
 
     suspend fun updateSortingOrder(sortingOrder: SortingOrder)
 
@@ -79,7 +79,7 @@ interface SettingsRepository {
 
     suspend fun updateIsShowNotesCount(isShow: Boolean)
 
-    suspend fun updateMainLibraryId(libraryId: Long)
+    suspend fun updateMainFolderId(folderId: Long)
 
     suspend fun updateIsWidgetCreated(widgetId: Int, isCreated: Boolean)
 
@@ -95,6 +95,6 @@ interface SettingsRepository {
 
     suspend fun updateWidgetRadius(widgetId: Int, radius: Int)
 
-    suspend fun updateWidgetSelectedLabelIds(widgetId: Int, libraryId: Long, labelIds: List<Long>)
+    suspend fun updateWidgetSelectedLabelIds(widgetId: Int, folderId: Long, labelIds: List<Long>)
 
 }

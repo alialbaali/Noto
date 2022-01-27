@@ -7,7 +7,7 @@ enum class NotoColor {
     LightBlue, LightGreen, LightRed, LightPink, Black,
 }
 
-enum class LibraryListSortingType { Manual, CreationDate, Alphabetical, }
+enum class FolderListSortingType { Manual, CreationDate, Alphabetical, }
 
 enum class NoteListSortingType { Manual, CreationDate, Alphabetical, }
 

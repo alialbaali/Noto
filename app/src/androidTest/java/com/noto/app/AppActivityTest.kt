@@ -15,9 +15,9 @@ import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.airbnb.epoxy.EpoxyViewHolder
-import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.library.LibraryViewModel
+import com.noto.app.folder.FolderViewModel
 import com.noto.app.note.NoteViewModel
 import com.noto.app.domain.model.Layout
 import com.noto.app.util.getArchiveText
@@ -40,21 +40,21 @@ class AppActivityTest : KoinTest {
     var activityScenarioRule = activityScenarioRule<AppActivity>()
 
     private lateinit var navController: NavHostController
-    private lateinit var libraryViewModel: LibraryViewModel
+    private lateinit var folderViewModel: FolderViewModel
     private lateinit var noteViewModel: NoteViewModel
-    private lateinit var libraryRepository: LibraryRepository
+    private lateinit var folderRepository: FolderRepository
     private lateinit var noteRepository: NoteRepository
     private lateinit var localStorage: LocalStorage
 
     @Before
     fun setup() {
-        libraryViewModel = get { parametersOf(0L) }
+        folderViewModel = get { parametersOf(0L) }
         noteViewModel = get { parametersOf(59L, 0L) }
-        libraryRepository = get()
+        folderRepository = get()
         noteRepository = get()
         localStorage = get()
         runBlocking {
-            libraryRepository.clearLibraries()
+            folderRepository.clearFolders()
             noteRepository.clearNotes()
             localStorage.clear()
         }
@@ -77,7 +77,7 @@ class AppActivityTest : KoinTest {
 
     @Test
     fun create_new_library_should_display_library() {
-        libraryViewModel.createOrUpdateLibrary("Work")
+        folderViewModel.createOrUpdateFolder("Work")
 
         shortTimeDelay()
 
@@ -100,12 +100,12 @@ class AppActivityTest : KoinTest {
 
         onView(withId(R.id.et))
             .check(matches(isFocused()))
-            .check(matches(withHint(R.string.library_title)))
+            .check(matches(withHint(R.string.folder_title)))
     }
 
     @Test
     fun navigate_to_empty_library_by_clicking_library_item() {
-        libraryViewModel.createOrUpdateLibrary("Work")
+        folderViewModel.createOrUpdateFolder("Work")
 
         shortTimeDelay()
 
@@ -174,7 +174,7 @@ class AppActivityTest : KoinTest {
 
     @Test
     fun navigate_to_library_dialog_fragment() {
-        libraryViewModel.createOrUpdateLibrary("Work")
+        folderViewModel.createOrUpdateFolder("Work")
 
         shortTimeDelay()
 
@@ -191,7 +191,7 @@ class AppActivityTest : KoinTest {
         onView(withContentDescription(R.string.layout))
             .perform(click())
 
-        assertTrue { libraryViewModel.library.value.layout == Layout.Linear }
+        assertTrue { folderViewModel.folder.value.layout == Layout.Linear }
     }
 
     @Test
@@ -234,7 +234,7 @@ class AppActivityTest : KoinTest {
 
     @Test
     fun edit_library() {
-        libraryViewModel.createOrUpdateLibrary("Work")
+        folderViewModel.createOrUpdateFolder("Work")
 
         onView(withId(R.id.rv))
             .perform(actionOnItem<EpoxyViewHolder>(hasDescendant(withText("Work")), longClick()))
@@ -256,7 +256,7 @@ class AppActivityTest : KoinTest {
 
     @Test
     fun delete_library() {
-        libraryViewModel.createOrUpdateLibrary("Work")
+        folderViewModel.createOrUpdateFolder("Work")
 
         onView(withId(R.id.rv))
             .perform(actionOnItem<EpoxyViewHolder>(hasDescendant(withText("Work")), longClick()))
@@ -367,7 +367,7 @@ class AppActivityTest : KoinTest {
             .check(matches(withText(R.string.note_is_archived)))
             .check(matches(isDisplayed()))
 
-        onView(withContentDescription(libraryViewModel.library.value.getArchiveText("Archive")))
+        onView(withContentDescription(folderViewModel.folder.value.getArchiveText("Archive")))
             .perform(click())
 
         onView(withId(R.id.rv))
@@ -375,7 +375,7 @@ class AppActivityTest : KoinTest {
     }
 
     private fun createNote() {
-        libraryViewModel.createOrUpdateLibrary("Work")
+        folderViewModel.createOrUpdateFolder("Work")
 
         onView(withId(R.id.rv))
             .perform(actionOnItemAtPosition<EpoxyViewHolder>(1, click()))

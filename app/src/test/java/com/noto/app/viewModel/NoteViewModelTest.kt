@@ -3,7 +3,7 @@ package com.noto.app.viewModel
 import com.noto.app.util.appModule
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
-import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.fakeLocalDataSourceModule
 import com.noto.app.note.NoteViewModel
@@ -30,7 +30,7 @@ import org.koin.test.get
 class NoteViewModelTest : StringSpec(), KoinTest {
 
     private lateinit var viewModel: NoteViewModel
-    private lateinit var libraryRepository: LibraryRepository
+    private lateinit var folderRepository: FolderRepository
     private lateinit var noteRepository: NoteRepository
 
     init {
@@ -38,10 +38,10 @@ class NoteViewModelTest : StringSpec(), KoinTest {
             startKoin {
                 modules(appModule, testRepositoryModule, fakeLocalDataSourceModule)
             }
-            libraryRepository = get()
+            folderRepository = get()
             noteRepository = get()
-            libraryRepository.createLibrary(Folder(id = 1, title = "Work", position = 0))
-            libraryRepository.createLibrary(Folder(id = 2, title = "Home", position = 0))
+            folderRepository.createFolder(Folder(id = 1, title = "Work", position = 0))
+            folderRepository.createFolder(Folder(id = 2, title = "Home", position = 0))
             noteRepository.createNote(Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0))
             viewModel = get { parametersOf(1L, 1L) }
         }
@@ -86,7 +86,7 @@ class NoteViewModelTest : StringSpec(), KoinTest {
 
         "delete note should remove note with matching id" {
             viewModel.deleteNote()
-            noteRepository.getNotesByLibraryId(libraryId = 1)
+            noteRepository.getNotesByFolderId(folderId = 1)
                 .first()
                 .shouldBeEmpty()
         }
@@ -130,12 +130,12 @@ class NoteViewModelTest : StringSpec(), KoinTest {
         }
 
         "duplicate note should create new note with same data" {
-            noteRepository.getNotesByLibraryId(libraryId = 1L)
+            noteRepository.getNotesByFolderId(folderId = 1L)
                 .first()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(1)
             viewModel.duplicateNote()
-            noteRepository.getNotesByLibraryId(libraryId = 1L)
+            noteRepository.getNotesByFolderId(folderId = 1L)
                 .first()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(2)
@@ -146,29 +146,29 @@ class NoteViewModelTest : StringSpec(), KoinTest {
         }
 
         "copy note should create a new note with a different library id" {
-            noteRepository.getNotesByLibraryId(libraryId = 2)
+            noteRepository.getNotesByFolderId(folderId = 2)
                 .first()
                 .shouldBeEmpty()
             viewModel.copyNote(libraryId = 2)
-            noteRepository.getNotesByLibraryId(libraryId = 2)
+            noteRepository.getNotesByFolderId(folderId = 2)
                 .first()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(1)
         }
 
         "move note should move current note to a different library" {
-            noteRepository.getNotesByLibraryId(libraryId = 1)
+            noteRepository.getNotesByFolderId(folderId = 1)
                 .first()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(1)
-            noteRepository.getNotesByLibraryId(libraryId = 2)
+            noteRepository.getNotesByFolderId(folderId = 2)
                 .first()
                 .shouldBeEmpty()
-            viewModel.moveNote(libraryId = 2)
-            noteRepository.getNotesByLibraryId(libraryId = 1)
+            viewModel.moveNote(folderId = 2)
+            noteRepository.getNotesByFolderId(folderId = 1)
                 .first()
                 .shouldBeEmpty()
-            noteRepository.getNotesByLibraryId(libraryId = 2)
+            noteRepository.getNotesByFolderId(folderId = 2)
                 .first()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(1)

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/BaseDialogFragment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/base_dialog_fragment" />
+
+        <TextView
+            android:id="@+id/tv_edit_folder"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit_folder"
+            app:drawableStartCompat="@drawable/ic_round_edit_24" />
+
+        <TextView
+            android:id="@+id/tv_vault_folder"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/vault_folder"
+            app:drawableStartCompat="@drawable/ic_round_lock_24" />
+
+        <include
+            android:id="@+id/divider1"
+            layout="@layout/divider_item" />
+
+        <TextView
+            android:id="@+id/tv_pin_folder"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pin_folder"
+            app:drawableStartCompat="@drawable/ic_round_pin_24" />
+
+        <TextView
+            android:id="@+id/tv_archive_folder"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/archive_folder"
+            app:drawableStartCompat="@drawable/ic_round_archive_24" />
+
+        <include
+            android:id="@+id/divider2"
+            layout="@layout/divider_item" />
+
+        <TextView
+            android:id="@+id/tv_change_parent"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/change_parent_folder"
+            app:drawableStartCompat="@drawable/ic_round_move_out_24" />
+
+        <include
+            android:id="@+id/divider3"
+            layout="@layout/divider_item" />
+
+        <TextView
+            android:id="@+id/tv_new_note_shortcut"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/add_new_note_shortcut"
+            app:drawableStartCompat="@drawable/ic_round_add_to_home_screen_24" />
+
+        <TextView
+            android:id="@+id/tv_delete_folder"
+            style="@style/DialogItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/delete_folder"
+            app:drawableStartCompat="@drawable/ic_round_delete_sweep_24" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

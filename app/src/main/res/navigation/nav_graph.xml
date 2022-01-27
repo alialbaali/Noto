@@ -2,9 +2,9 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/libraryFragment">
+    app:startDestination="@id/folderFragment">
     <argument
-        android:name="library_id"
+        android:name="folder_id"
         app:argType="long" />
     <argument
         android:name="note_id"
@@ -14,34 +14,34 @@
         android:name="com.noto.app.main.MainFragment"
         android:label="MainFragment">
         <action
-            android:id="@+id/action_mainFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment"
-            app:popUpTo="@id/libraryFragment"
+            android:id="@+id/action_mainFragment_to_folderFragment"
+            app:destination="@id/folderFragment"
+            app:popUpTo="@id/folderFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_mainFragment_to_newLibraryDialogFragment"
-            app:destination="@id/newLibraryDialogFragment"
+            android:id="@+id/action_mainFragment_to_newFolderDialogFragment"
+            app:destination="@id/newFolderDialogFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_mainFragment_to_libraryDialogFragment"
-            app:destination="@id/libraryDialogFragment"
+            android:id="@+id/action_mainFragment_to_folderDialogFragment"
+            app:destination="@id/folderDialogFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_mainFragment_to_libraryListSortingDialogFragment"
-            app:destination="@id/libraryListSortingDialogFragment"
+            android:id="@+id/action_mainFragment_to_folderListSortingDialogFragment"
+            app:destination="@id/folderListSortingDialogFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_allNotesFragment"
             app:destination="@id/allNotesFragment"
-            app:popUpTo="@id/libraryFragment"
+            app:popUpTo="@id/folderFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_recentNotesFragment"
             app:destination="@id/recentNotesFragment"
-            app:popUpTo="@id/libraryFragment"
+            app:popUpTo="@id/folderFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_mainDialogFragment"
@@ -50,44 +50,44 @@
             app:popUpToInclusive="true" />
     </dialog>
     <fragment
-        android:id="@+id/libraryFragment"
-        android:name="com.noto.app.library.LibraryFragment"
-        android:label="LibraryFragment">
+        android:id="@+id/folderFragment"
+        android:name="com.noto.app.folder.FolderFragment"
+        android:label="FolderFragment">
         <action
-            android:id="@+id/action_libraryFragment_to_noteFragment"
+            android:id="@+id/action_folderFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             android:defaultValue="-1L"
             app:argType="long" />
         <action
-            android:id="@+id/action_libraryFragment_to_libraryArchiveFragment"
-            app:destination="@id/libraryArchiveFragment" />
+            android:id="@+id/action_folderFragment_to_folderArchiveFragment"
+            app:destination="@id/folderArchiveFragment" />
         <action
-            android:id="@+id/action_libraryFragment_to_noteDialogFragment"
+            android:id="@+id/action_folderFragment_to_noteDialogFragment"
             app:destination="@id/noteDialogFragment" />
         <action
-            android:id="@+id/action_libraryFragment_to_libraryDialogFragment"
-            app:destination="@id/libraryDialogFragment" />
+            android:id="@+id/action_folderFragment_to_folderDialogFragment"
+            app:destination="@id/folderDialogFragment" />
         <action
-            android:id="@+id/action_libraryFragment_to_newLabelDialogFragment"
+            android:id="@+id/action_folderFragment_to_newLabelDialogFragment"
             app:destination="@id/newLabelDialogFragment" />
         <action
-            android:id="@+id/action_libraryFragment_to_labelDialogFragment"
+            android:id="@+id/action_folderFragment_to_labelDialogFragment"
             app:destination="@id/labelDialogFragment" />
         <action
-            android:id="@+id/action_libraryFragment_to_noteListSortingDialogFragment"
+            android:id="@+id/action_folderFragment_to_noteListSortingDialogFragment"
             app:destination="@id/noteListSortingDialogFragment" />
         <action
-            android:id="@+id/action_libraryFragment_to_mainFragment"
+            android:id="@+id/action_folderFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
     <dialog
-        android:id="@+id/newLibraryDialogFragment"
-        android:name="com.noto.app.library.NewLibraryDialogFragment"
-        android:label="NewLibraryDialogFragment">
+        android:id="@+id/newFolderDialogFragment"
+        android:name="com.noto.app.folder.NewFolderDialogFragment"
+        android:label="NewFolderDialogFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             android:defaultValue="0L"
             app:argType="long" />
     </dialog>
@@ -96,7 +96,7 @@
         android:name="com.noto.app.note.NoteFragment"
         android:label="NoteFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
         <argument
             android:name="note_id"
@@ -132,18 +132,18 @@
             app:destination="@id/mainFragment" />
     </fragment>
     <dialog
-        android:id="@+id/libraryArchiveFragment"
-        android:name="com.noto.app.library.LibraryArchiveFragment"
-        android:label="LibraryArchiveFragment">
+        android:id="@+id/folderArchiveFragment"
+        android:name="com.noto.app.folder.FolderArchiveFragment"
+        android:label="FolderArchiveFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             android:defaultValue="0L"
             app:argType="long" />
         <action
-            android:id="@+id/action_libraryArchiveFragment_to_noteDialogFragment"
+            android:id="@+id/action_folderArchiveFragment_to_noteDialogFragment"
             app:destination="@id/noteDialogFragment" />
         <action
-            android:id="@+id/action_libraryArchiveFragment_to_noteFragment"
+            android:id="@+id/action_folderArchiveFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
     </dialog>
     <dialog
@@ -151,7 +151,7 @@
         android:name="com.noto.app.note.NoteReminderDialogFragment"
         android:label="NoteReminderDialogFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
         <argument
             android:name="note_id"
@@ -163,7 +163,7 @@
         android:name="com.noto.app.note.NoteDialogFragment"
         android:label="NoteDialogFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
         <argument
             android:name="note_id"
@@ -181,30 +181,30 @@
             android:id="@+id/action_noteDialogFragment_to_noteReadingModeFragment"
             app:destination="@id/noteReadingModeFragment" />
         <action
-            android:id="@+id/action_noteDialogFragment_to_selectLibraryDialogFragment"
-            app:destination="@id/selectLibraryDialogFragment" />
+            android:id="@+id/action_noteDialogFragment_to_selectFolderDialogFragment"
+            app:destination="@id/selectFolderDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"
         android:name="com.noto.app.settings.ThemeDialogFragment"
         android:label="ThemeDialogFragment" />
     <dialog
-        android:id="@+id/libraryDialogFragment"
-        android:name="com.noto.app.library.LibraryDialogFragment"
-        android:label="LibraryDialogFragment">
+        android:id="@+id/folderDialogFragment"
+        android:name="com.noto.app.folder.FolderDialogFragment"
+        android:label="FolderDialogFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             android:defaultValue="0L"
             app:argType="long" />
         <action
-            android:id="@+id/action_libraryDialogFragment_to_newLibraryDialogFragment"
-            app:destination="@id/newLibraryDialogFragment" />
+            android:id="@+id/action_folderDialogFragment_to_newFolderDialogFragment"
+            app:destination="@id/newFolderDialogFragment" />
         <action
-            android:id="@+id/action_libraryDialogFragment_to_confirmationDialogFragment"
+            android:id="@+id/action_folderDialogFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />
         <action
-            android:id="@+id/action_libraryDialogFragment_to_selectLibraryDialogFragment"
-            app:destination="@id/selectLibraryDialogFragment" />
+            android:id="@+id/action_folderDialogFragment_to_selectFolderDialogFragment"
+            app:destination="@id/selectFolderDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/confirmationDialogFragment"
@@ -249,33 +249,33 @@
             android:id="@+id/action_settingsFragment_to_whatsNewDialogFragment"
             app:destination="@id/whatsNewDialogFragment" />
         <action
-            android:id="@+id/action_settingsFragment_to_selectLibraryDialogFragment"
-            app:destination="@id/selectLibraryDialogFragment" />
+            android:id="@+id/action_settingsFragment_to_selectFolderDialogFragment"
+            app:destination="@id/selectFolderDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"
         android:name="com.noto.app.note.NoteReadingModeFragment"
         android:label="NoteReadModeFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
         <argument
             android:name="note_id"
             app:argType="long" />
     </fragment>
     <dialog
-        android:id="@+id/selectLibraryDialogFragment"
-        android:name="com.noto.app.main.SelectLibraryDialogFragment"
-        android:label="SelectLibraryDialogFragment">
+        android:id="@+id/selectFolderDialogFragment"
+        android:name="com.noto.app.main.SelectFolderDialogFragment"
+        android:label="SelectFolderDialogFragment">
         <argument
-            android:name="filtered_library_ids"
+            android:name="filtered_folder_ids"
             app:argType="long[]" />
         <argument
             android:name="is_dismissible"
             android:defaultValue="true"
             app:argType="boolean" />
         <argument
-            android:name="selected_library_id"
+            android:name="selected_folder_id"
             android:defaultValue="0L"
             app:argType="long" />
         <argument
@@ -284,15 +284,15 @@
             app:argType="boolean" />
     </dialog>
     <dialog
-        android:id="@+id/libraryListSortingDialogFragment"
-        android:name="com.noto.app.main.LibraryListSortingDialogFragment"
-        android:label="LibraryListSortingDialogFragment">
+        android:id="@+id/folderListSortingDialogFragment"
+        android:name="com.noto.app.main.FolderListSortingDialogFragment"
+        android:label="FolderListSortingDialogFragment">
         <action
-            android:id="@+id/action_libraryListSortingDialogFragment_to_libraryListSortingOrderDialogFragment"
-            app:destination="@id/libraryListSortingOrderDialogFragment" />
+            android:id="@+id/action_folderListSortingDialogFragment_to_folderListSortingOrderDialogFragment"
+            app:destination="@id/folderListSortingOrderDialogFragment" />
         <action
-            android:id="@+id/action_libraryListSortingDialogFragment_to_libraryListSortingTypeDialogFragment"
-            app:destination="@id/libraryListSortingTypeDialogFragment" />
+            android:id="@+id/action_folderListSortingDialogFragment_to_folderListSortingTypeDialogFragment"
+            app:destination="@id/folderListSortingTypeDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/fontDialogFragment"
@@ -303,20 +303,20 @@
         android:name="com.noto.app.main.MainArchiveFragment"
         android:label="MainArchiveFragment">
         <action
-            android:id="@+id/action_mainArchiveFragment_to_libraryDialogFragment"
-            app:destination="@id/libraryDialogFragment"
+            android:id="@+id/action_mainArchiveFragment_to_folderDialogFragment"
+            app:destination="@id/folderDialogFragment"
             app:popUpTo="@id/mainArchiveFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_mainArchiveFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment" />
+            android:id="@+id/action_mainArchiveFragment_to_folderFragment"
+            app:destination="@id/folderFragment" />
     </dialog>
     <dialog
         android:id="@+id/noteListSortingTypeDialogFragment"
-        android:name="com.noto.app.library.NoteListSortingTypeDialogFragment"
+        android:name="com.noto.app.folder.NoteListSortingTypeDialogFragment"
         android:label="NoteListSortingTypeDialogFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
     </dialog>
     <dialog
@@ -324,7 +324,7 @@
         android:name="com.noto.app.label.NewLabelDialogFragment"
         android:label="NewLabelDialogFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
         <argument
             android:name="label_id"
@@ -339,7 +339,7 @@
             android:id="@+id/action_labelDialogFragment_to_newLabelDialogFragment"
             app:destination="@id/newLabelDialogFragment" />
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
         <argument
             android:name="label_id"
@@ -357,7 +357,7 @@
         android:name="com.noto.app.label.ReorderLabelDialogFragment"
         android:label="ReorderLabelDialogFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
         <argument
             android:name="label_id"
@@ -366,26 +366,26 @@
     </dialog>
     <dialog
         android:id="@+id/noteListSortingOrderDialogFragment"
-        android:name="com.noto.app.library.NoteListSortingOrderDialogFragment"
+        android:name="com.noto.app.folder.NoteListSortingOrderDialogFragment"
         android:label="NoteListSortingOrderDialogFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
     </dialog>
     <dialog
         android:id="@+id/noteListGroupingDialogFragment"
-        android:name="com.noto.app.library.NoteListGroupingDialogFragment"
+        android:name="com.noto.app.folder.NoteListGroupingDialogFragment"
         android:label="NoteListGroupingDialogFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
     </dialog>
     <dialog
         android:id="@+id/noteListSortingDialogFragment"
-        android:name="com.noto.app.library.NoteListSortingDialogFragment"
+        android:name="com.noto.app.folder.NoteListSortingDialogFragment"
         android:label="NoteListSortingDialogFragment">
         <argument
-            android:name="library_id"
+            android:name="folder_id"
             app:argType="long" />
         <action
             android:id="@+id/action_noteListSortingDialogFragment_to_noteListSortingOrderDialogFragment"
@@ -422,25 +422,25 @@
             app:argType="string" />
     </dialog>
     <dialog
-        android:id="@+id/libraryListSortingOrderDialogFragment"
-        android:name="com.noto.app.main.LibraryListSortingOrderDialogFragment"
-        android:label="LibraryListSortingOrderDialogFragment" />
+        android:id="@+id/folderListSortingOrderDialogFragment"
+        android:name="com.noto.app.main.FolderListSortingOrderDialogFragment"
+        android:label="folderListSortingOrderDialogFragment" />
     <dialog
-        android:id="@+id/libraryListSortingTypeDialogFragment"
-        android:name="com.noto.app.main.LibraryListSortingTypeDialogFragment"
-        android:label="LibraryListSortingTypeDialogFragment" />
+        android:id="@+id/folderListSortingTypeDialogFragment"
+        android:name="com.noto.app.main.FolderListSortingTypeDialogFragment"
+        android:label="folderListSortingTypeDialogFragment" />
     <dialog
         android:id="@+id/mainVaultFragment"
         android:name="com.noto.app.main.MainVaultFragment"
         android:label="MainVaultFragment">
         <action
-            android:id="@+id/action_mainVaultFragment_to_libraryDialogFragment"
-            app:destination="@id/libraryDialogFragment"
+            android:id="@+id/action_mainVaultFragment_to_folderDialogFragment"
+            app:destination="@id/folderDialogFragment"
             app:popUpTo="@id/mainVaultFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_mainVaultFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment" />
+            android:id="@+id/action_mainVaultFragment_to_folderFragment"
+            app:destination="@id/folderFragment" />
     </dialog>
     <dialog
         android:id="@+id/vaultPasscodeDialogFragment"
@@ -462,8 +462,8 @@
             android:id="@+id/action_allNotesFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
         <action
-            android:id="@+id/action_allNotesFragment_to_selectLibraryDialogFragment"
-            app:destination="@id/selectLibraryDialogFragment" />
+            android:id="@+id/action_allNotesFragment_to_selectFolderDialogFragment"
+            app:destination="@id/selectFolderDialogFragment" />
         <action
             android:id="@+id/action_allNotesFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
@@ -485,8 +485,8 @@
             android:id="@+id/action_recentNotesFragment_to_noteDialogFragment"
             app:destination="@id/noteDialogFragment" />
         <action
-            android:id="@+id/action_recentNotesFragment_to_selectLibraryDialogFragment"
-            app:destination="@id/selectLibraryDialogFragment" />
+            android:id="@+id/action_recentNotesFragment_to_selectFolderDialogFragment"
+            app:destination="@id/selectFolderDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/mainDialogFragment"

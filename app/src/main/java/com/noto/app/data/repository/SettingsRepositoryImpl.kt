@@ -33,7 +33,7 @@ class SettingsRepositoryImpl(
             sortingOrder.first(),
             isCollapseToolbar.first(),
             isShowNotesCount.first(),
-            mainLibraryId.first()
+            mainFolderId.first()
         )
     }
 
@@ -81,13 +81,13 @@ class SettingsRepositoryImpl(
         .map { it ?: Release.DefaultLastVersion }
         .flowOn(dispatcher)
 
-    override val sortingType: Flow<LibraryListSortingType> = storage.data
-        .map { preferences -> preferences[SettingsKeys.LibraryListSortingType] }
-        .map { if (it != null) LibraryListSortingType.valueOf(it) else LibraryListSortingType.CreationDate }
+    override val sortingType: Flow<FolderListSortingType> = storage.data
+        .map { preferences -> preferences[SettingsKeys.FolderListSortingType] }
+        .map { if (it != null) FolderListSortingType.valueOf(it) else FolderListSortingType.CreationDate }
         .flowOn(dispatcher)
 
     override val sortingOrder: Flow<SortingOrder> = storage.data
-        .map { preferences -> preferences[SettingsKeys.LibraryListSortingOrder] }
+        .map { preferences -> preferences[SettingsKeys.FolderListSortingOrder] }
         .map { if (it != null) SortingOrder.valueOf(it) else SortingOrder.Descending }
         .flowOn(dispatcher)
 
@@ -101,8 +101,8 @@ class SettingsRepositoryImpl(
         .map { it.toBoolean() }
         .flowOn(dispatcher)
 
-    override val mainLibraryId: Flow<Long> = storage.data
-        .map { preferences -> preferences[SettingsKeys.MainLibraryId] }
+    override val mainFolderId: Flow<Long> = storage.data
+        .map { preferences -> preferences[SettingsKeys.MainFolderId] }
         .map { it ?: Folder.InboxId }
         .flowOn(dispatcher)
 
@@ -155,9 +155,9 @@ class SettingsRepositoryImpl(
             .flowOn(dispatcher)
     }
 
-    override fun getWidgetSelectedLabelIds(widgetId: Int, libraryId: Long): Flow<List<Long>> {
+    override fun getWidgetSelectedLabelIds(widgetId: Int, folderId: Long): Flow<List<Long>> {
         return storage.data
-            .map { preferences -> preferences[SettingsKeys.Widget.SelectedLabelIds(widgetId, libraryId)] }
+            .map { preferences -> preferences[SettingsKeys.Widget.SelectedLabelIds(widgetId, folderId)] }
             .map { it?.toLongList() ?: emptyList() }
             .flowOn(dispatcher)
     }
@@ -178,7 +178,7 @@ class SettingsRepositoryImpl(
                 updateSortingOrder(sortingOrder)
                 updateIsCollapseToolbar(isCollapseToolbar)
                 updateIsShowNotesCount(isShowNotesCount)
-                updateMainLibraryId(mainLibraryId)
+                updateMainFolderId(mainFolderId)
             }
         }
     }
@@ -242,15 +242,15 @@ class SettingsRepositoryImpl(
         }
     }
 
-    override suspend fun updateSortingType(sortingType: LibraryListSortingType) {
+    override suspend fun updateSortingType(sortingType: FolderListSortingType) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.LibraryListSortingType] = sortingType.toString() }
+            storage.edit { preferences -> preferences[SettingsKeys.FolderListSortingType] = sortingType.toString() }
         }
     }
 
     override suspend fun updateSortingOrder(sortingOrder: SortingOrder) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.LibraryListSortingOrder] = sortingOrder.toString() }
+            storage.edit { preferences -> preferences[SettingsKeys.FolderListSortingOrder] = sortingOrder.toString() }
         }
     }
 
@@ -266,9 +266,9 @@ class SettingsRepositoryImpl(
         }
     }
 
-    override suspend fun updateMainLibraryId(libraryId: Long) {
+    override suspend fun updateMainFolderId(folderId: Long) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.MainLibraryId] = libraryId }
+            storage.edit { preferences -> preferences[SettingsKeys.MainFolderId] = folderId }
         }
     }
 
@@ -314,9 +314,9 @@ class SettingsRepositoryImpl(
         }
     }
 
-    override suspend fun updateWidgetSelectedLabelIds(widgetId: Int, libraryId: Long, labelIds: List<Long>) {
+    override suspend fun updateWidgetSelectedLabelIds(widgetId: Int, folderId: Long, labelIds: List<Long>) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.Widget.SelectedLabelIds(widgetId, libraryId)] = labelIds.joinToString() }
+            storage.edit { preferences -> preferences[SettingsKeys.Widget.SelectedLabelIds(widgetId, folderId)] = labelIds.joinToString() }
         }
     }
 

@@ -31,12 +31,12 @@ class MainDialogFragment : BaseDialogFragment() {
     }
 
     private fun MainDialogFragmentBinding.setupListeners() {
-        tvLibrariesArchive.setOnClickListener {
+        tvFoldersArchive.setOnClickListener {
             dismiss()
             navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainArchiveFragment())
         }
 
-        tvLibrariesVault.setOnClickListener {
+        tvFoldersVault.setOnClickListener {
             dismiss()
             if (viewModel.vaultPasscode.value == null)
                 navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToVaultPasscodeDialogFragment())

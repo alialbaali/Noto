@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cool"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl"
+        style="@style/AppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            app:title="@string/new_folders_widget" />
+
+        <LinearLayout
+            android:background="@drawable/generic_shape"
+            android:animateLayoutChanges="true"
+            android:padding="@dimen/spacing_normal"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/spacing_normal"
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+            <include
+                android:id="@+id/widget"
+                layout="@layout/folder_list_widget" />
+        </LinearLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_behavior="com.noto.app.util.BounceScrollingViewBehavior">
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:animateLayoutChanges="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_widget_header"
+                style="@style/SettingsItem"
+                android:text="@string/widget_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_edit_widget"
+                style="@style/SettingsItem"
+                android:text="@string/edit_widget_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_app_icon"
+                style="@style/SettingsItem"
+                android:text="@string/app_icon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include layout="@layout/divider_item" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_new_folder"
+                style="@style/SettingsItem"
+                android:text="@string/new_folder_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_notes_count"
+                style="@style/SettingsItem"
+                android:text="@string/folders_notes_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <include layout="@layout/divider_item" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_widget_radius"
+                style="@style/SettingsItem"
+                android:clickable="false"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/widget_radius" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/s_widget_radius"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:valueFrom="8"
+                android:valueTo="24"
+                android:value="16"
+                android:stepSize="8"
+                android:contentDescription="@string/widget_radius"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                app:haloColor="?attr/notoSurfaceColor"
+                app:labelStyle="@style/SliderLabel"
+                app:thumbColor="?attr/notoPrimaryColor"
+                app:thumbRadius="12dp"
+                app:thumbStrokeColor="?attr/notoPrimaryColor"
+                app:thumbStrokeWidth="0dp"
+                app:tickColorActive="?attr/notoBackgroundColor"
+                app:tickColorInactive="?attr/notoPrimaryColor"
+                app:trackColorActive="?attr/notoPrimaryColor"
+                app:trackColorInactive="?attr/notoBackgroundColor"
+                app:trackHeight="@dimen/spacing_normal" />
+
+            <LinearLayout
+                android:gravity="bottom"
+                android:layout_margin="@dimen/spacing_normal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_create"
+                    style="@style/MaterialButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/create_widget" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

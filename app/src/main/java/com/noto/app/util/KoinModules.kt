@@ -14,12 +14,12 @@ import com.noto.app.domain.source.LocalFolderDataSource
 import com.noto.app.domain.source.LocalNoteDataSource
 import com.noto.app.domain.source.LocalNoteLabelDataSource
 import com.noto.app.label.LabelViewModel
-import com.noto.app.library.LibraryViewModel
+import com.noto.app.folder.FolderViewModel
 import com.noto.app.main.MainViewModel
 import com.noto.app.note.NoteViewModel
 import com.noto.app.recentnotes.RecentNotesViewModel
 import com.noto.app.settings.SettingsViewModel
-import com.noto.app.widget.LibraryListWidgetConfigViewModel
+import com.noto.app.widget.FolderListWidgetConfigViewModel
 import com.noto.app.widget.NoteListWidgetConfigViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -32,7 +32,7 @@ val appModule = module {
 
     viewModel { MainViewModel(get(), get(), get()) }
 
-    viewModel { LibraryViewModel(get(), get(), get(), get(), get(), it.get()) }
+    viewModel { FolderViewModel(get(), get(), get(), get(), get(), it.get()) }
 
     viewModel { NoteViewModel(get(), get(), get(), get(), get(), it[0], it[1], it.getOrNull(), it.getOrNull() ?: longArrayOf()) }
 
@@ -42,7 +42,7 @@ val appModule = module {
 
     viewModel { LabelViewModel(get(), get(), it[0], it[1]) }
 
-    viewModel { LibraryListWidgetConfigViewModel(it.get(), get(), get(), get()) }
+    viewModel { FolderListWidgetConfigViewModel(it.get(), get(), get(), get()) }
 
     viewModel { NoteListWidgetConfigViewModel(it.get(), get(), get(), get(), get(), get()) }
 
@@ -53,7 +53,7 @@ val appModule = module {
 
 val repositoryModule = module {
 
-    single<LibraryRepository> { LibraryRepositoryImpl(get()) }
+    single<FolderRepository> { FolderRepositoryImpl(get()) }
 
     single<NoteRepository> { NoteRepositoryImpl(get()) }
 

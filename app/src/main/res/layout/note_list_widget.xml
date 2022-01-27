@@ -27,7 +27,7 @@
             android:contentDescription="@string/app_icon" />
 
         <TextView
-            android:id="@+id/tv_library_title"
+            android:id="@+id/tv_folder_title"
             style="@style/WidgetTitle"
             android:paddingVertical="@dimen/spacing_normal"
             android:textStyle="bold"
@@ -35,7 +35,7 @@
             android:maxLines="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="@string/library_title" />
+            tools:text="@string/folder_title" />
 
         <LinearLayout
             android:id="@+id/ll_edit_widget"
@@ -103,7 +103,7 @@
                 android:id="@+id/iv_fab"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="@string/create_library"
+                android:contentDescription="@string/create_folder"
                 android:src="@drawable/ic_widget_btn_shape"
                 app:tint="@color/colorPrimary" />
 
@@ -115,7 +115,7 @@
                 android:background="@null"
                 android:padding="@dimen/spacing_normal"
                 android:tint="@color/colorBackground"
-                android:contentDescription="@string/create_library" />
+                android:contentDescription="@string/create_folder" />
         </FrameLayout>
     </FrameLayout>
 </LinearLayout>

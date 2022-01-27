@@ -71,27 +71,27 @@ inline fun EpoxyController.buildNotesModels(
     }
 }
 
-inline fun EpoxyController.buildLibrariesModels(
+inline fun EpoxyController.buildFoldersModels(
     context: Context,
-    libraries: List<Pair<Folder, Int>>,
+    folders: List<Pair<Folder, Int>>,
     content: (List<Pair<Folder, Int>>) -> Unit,
 ) {
-    val pinnedLibraries = libraries.filter { it.first.isPinned }
-    val notPinnedLibraries = libraries.filterNot { it.first.isPinned }
+    val pinnedFolders = folders.filter { it.first.isPinned }
+    val notPinnedFolders = folders.filterNot { it.first.isPinned }
 
-    if (pinnedLibraries.isNotEmpty()) {
+    if (pinnedFolders.isNotEmpty()) {
         headerItem {
             id("pinned")
             title(context.stringResource(R.string.pinned))
         }
 
-        content(pinnedLibraries)
+        content(pinnedFolders)
 
-        if (notPinnedLibraries.isNotEmpty())
+        if (notPinnedFolders.isNotEmpty())
             headerItem {
                 id("libraries")
-                title(context.stringResource(R.string.libraries))
+                title(context.stringResource(R.string.folders))
             }
     }
-    content(notPinnedLibraries)
+    content(notPinnedFolders)
 }

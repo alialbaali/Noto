@@ -17,7 +17,7 @@
         tools:text="Sorting" />
 
     <TextView
-        android:id="@+id/tv_library_notes_count"
+        android:id="@+id/tv_folder_notes_count"
         style="@style/SubtitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

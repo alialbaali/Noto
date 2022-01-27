@@ -20,8 +20,8 @@ data class Folder @Ignore constructor(
     val parentId: Long? = null,
 
     @Deprecated(
-        message = "This shouldn't be used directly. Use library.getTitle(context) instead.",
-        replaceWith = ReplaceWith("library.getTitle(context)", "import com.noto.app.util.getTitle"),
+        message = "This shouldn't be used directly. Use folder.getTitle(context) instead.",
+        replaceWith = ReplaceWith("folder.getTitle(context)", "import com.noto.app.util.getTitle"),
     )
     @ColumnInfo(name = "title")
     val title: String = "",
@@ -66,7 +66,7 @@ data class Folder @Ignore constructor(
     val isVaulted: Boolean = false,
 
     @Ignore
-    val libraries: List<Pair<Folder, Int>> = emptyList(),
+    val folders: List<Pair<Folder, Int>> = emptyList(),
 ) {
 
     // Room constructor

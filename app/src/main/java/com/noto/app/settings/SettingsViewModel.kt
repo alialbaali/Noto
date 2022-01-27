@@ -17,7 +17,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 class SettingsViewModel(
-    private val libraryRepository: LibraryRepository,
+    private val folderRepository: FolderRepository,
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
@@ -45,7 +45,7 @@ class SettingsViewModel(
     val isBioAuthEnabled = settingsRepository.isBioAuthEnabled
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
-    val mainLibraryId = settingsRepository.mainLibraryId
+    val mainFolderId = settingsRepository.mainFolderId
         .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.InboxId)
 
     val isCollapseToolbar = settingsRepository.isCollapseToolbar
@@ -63,13 +63,13 @@ class SettingsViewModel(
     }
 
     suspend fun exportData(): Map<String, String> = withContext(Dispatchers.IO) {
-        val libraries = libraryRepository.getAllLibraries().first()
+        val folders = folderRepository.getAllFolders().first()
         val notes = noteRepository.getAllNotes().first()
         val labels = labelRepository.getAllLabels().first()
         val noteLabels = noteLabelRepository.getNoteLabels().first()
         val settings = settingsRepository.config.first()
         mapOf(
-            Constants.Libraries to DefaultJson.encodeToString(libraries),
+            Constants.Folders to DefaultJson.encodeToString(folders),
             Constants.Notes to DefaultJson.encodeToString(notes),
             Constants.Labels to DefaultJson.encodeToString(labels),
             Constants.NoteLabels to DefaultJson.encodeToString(noteLabels),
@@ -78,29 +78,29 @@ class SettingsViewModel(
     }
 
     suspend fun importData(data: Map<String, String>) = withContext(Dispatchers.IO) {
-        val libraryIds = mutableMapOf<Long, Long>()
+        val folderIds = mutableMapOf<Long, Long>()
         val noteIds = mutableMapOf<Long, Long>()
         val labelIds = mutableMapOf<Long, Long>()
-        DefaultJson.decodeFromString<List<Folder>>(data.getValue(Constants.Libraries))
-            .forEach { library ->
-                if (library.isInbox) {
-                    libraryIds[library.id] = Folder.InboxId
-                    libraryRepository.updateLibrary(library)
+        DefaultJson.decodeFromString<List<Folder>>(data.getValue(Constants.Folders))
+            .forEach { folder ->
+                if (folder.isInbox) {
+                    folderIds[folder.id] = Folder.InboxId
+                    folderRepository.updateFolder(folder)
                 } else {
-                    val newLibraryId = libraryRepository.createLibrary(library.copy(id = 0))
-                    libraryIds[library.id] = newLibraryId
+                    val newFolderId = folderRepository.createFolder(folder.copy(id = 0))
+                    folderIds[folder.id] = newFolderId
                 }
             }
         DefaultJson.decodeFromString<List<Note>>(data.getValue(Constants.Notes))
             .forEach { note ->
-                val libraryId = libraryIds.getValue(note.folderId)
-                val newNoteId = noteRepository.createNote(note.copy(id = 0, folderId = libraryId))
+                val folderId = folderIds.getValue(note.folderId)
+                val newNoteId = noteRepository.createNote(note.copy(id = 0, folderId = folderId))
                 noteIds[note.id] = newNoteId
             }
         DefaultJson.decodeFromString<List<Label>>(data.getValue(Constants.Labels))
             .forEach { label ->
-                val libraryId = libraryIds.getValue(label.folderId)
-                val newLabelId = labelRepository.createLabel(label.copy(id = 0, folderId = libraryId))
+                val folderId = folderIds.getValue(label.folderId)
+                val newLabelId = labelRepository.createLabel(label.copy(id = 0, folderId = folderId))
                 labelIds[label.id] = newLabelId
             }
         DefaultJson.decodeFromString<List<NoteLabel>>(data.getValue(Constants.NoteLabels))
@@ -133,8 +133,8 @@ class SettingsViewModel(
         settingsRepository.updateLastVersion(Release.CurrentVersion)
     }
 
-    fun setMainLibraryId(libraryId: Long) = viewModelScope.launch {
-        settingsRepository.updateMainLibraryId(libraryId)
+    fun setMainFolderId(folderId: Long) = viewModelScope.launch {
+        settingsRepository.updateMainFolderId(folderId)
     }
 
     fun updateTheme(value: Theme) = viewModelScope.launch {

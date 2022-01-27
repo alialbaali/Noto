@@ -10,13 +10,13 @@ interface NoteRepository {
 
     fun getAllMainNotes(): Flow<List<Note>>
 
-    fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>>
+    fun getNotesByFolderId(folderId: Long): Flow<List<Note>>
 
-    fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>>
+    fun getArchivedNotesByFolderId(folderId: Long): Flow<List<Note>>
 
     fun getNoteById(noteId: Long): Flow<Note>
 
-    fun getLibrariesNotesCount(): Flow<List<FolderIdWithNotesCount>>
+    fun getFolderNotesCount(): Flow<List<FolderIdWithNotesCount>>
 
     suspend fun createNote(note: Note): Long
 

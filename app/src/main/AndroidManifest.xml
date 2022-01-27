@@ -41,7 +41,7 @@
         </activity>
 
         <activity
-            android:name=".widget.LibraryListWidgetConfigActivity"
+            android:name=".widget.FolderListWidgetConfigActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
@@ -65,8 +65,8 @@
             android:exported="false" />
 
         <receiver
-            android:name=".widget.LibraryListWidgetProvider"
-            android:label="@string/libraries"
+            android:name=".widget.FolderListWidgetProvider"
+            android:label="@string/folders"
             android:exported="true">
 
             <intent-filter>
@@ -75,11 +75,11 @@
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/library_list_widget_provider" />
+                android:resource="@xml/folder_list_widget_provider" />
         </receiver>
 
         <service
-            android:name=".widget.LibraryListWidgetService"
+            android:name=".widget.FolderListWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <receiver

@@ -20,14 +20,14 @@ import org.koin.core.component.inject
 
 class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) : RemoteViewsService.RemoteViewsFactory, KoinComponent {
 
-    private val libraryRepository by inject<LibraryRepository>()
+    private val folderRepository by inject<FolderRepository>()
     private val noteRepository by inject<NoteRepository>()
     private val labelRepository by inject<LabelRepository>()
     private val noteLabelRepository by inject<NoteLabelRepository>()
     private val settingsRepository by inject<SettingsRepository>()
     private val appWidgetId = intent?.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
         ?: AppWidgetManager.INVALID_APPWIDGET_ID
-    private val libraryId = intent?.getLongExtra(Constants.LibraryId, 0) ?: 0
+    private val folderId = intent?.getLongExtra(Constants.FolderId, 0) ?: 0
     private lateinit var folder: Folder
     private lateinit var labelIds: List<Long>
     private lateinit var notes: List<NoteWithLabels>
@@ -35,17 +35,17 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
     override fun onCreate() {}
 
     override fun onDataSetChanged() = runBlocking {
-        folder = libraryRepository.getLibraryById(libraryId)
+        folder = folderRepository.getFolderById(folderId)
             .filterNotNull()
             .first()
-        labelIds = settingsRepository.getWidgetSelectedLabelIds(appWidgetId, libraryId).first()
-        val labels = labelRepository.getLabelsByLibraryId(libraryId)
+        labelIds = settingsRepository.getWidgetSelectedLabelIds(appWidgetId, folderId).first()
+        val labels = labelRepository.getLabelsByFolderId(folderId)
             .filterNotNull()
             .first()
         val noteLabels = noteLabelRepository.getNoteLabels()
             .filterNotNull()
             .first()
-        notes = noteRepository.getNotesByLibraryId(libraryId)
+        notes = noteRepository.getNotesByFolderId(folderId)
             .filterNotNull()
             .map {
                 it.mapWithLabels(labels, noteLabels)
@@ -64,7 +64,7 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_note_item).apply {
             val pair = notes[position]
             val intent = Intent(Constants.Intent.ActionOpenNote, null, context, AppActivity::class.java).apply {
-                putExtra(Constants.LibraryId, folder.id)
+                putExtra(Constants.FolderId, folder.id)
                 putExtra(Constants.NoteId, pair.first.id)
             }
             val color = context.colorResource(folder.color.toResource())
@@ -73,7 +73,7 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
                 val remoteViews = RemoteViews(context.packageName, R.layout.widget_note_label_item).apply {
                     setContentDescription(R.id.fl, label.title)
                     setTextViewText(R.id.tv_label, label.title)
-                    setInt(R.id.iv_library_color, SetColorFilterMethodName, color)
+                    setInt(R.id.iv_folder_color, SetColorFilterMethodName, color)
                 }
                 addView(R.id.ll_labels, remoteViews)
             }

@@ -75,8 +75,8 @@ private fun Context.createVaultNotificationPendingIntent(): PendingIntent {
 
 fun NotificationManager.cancelVaultNotification() = cancel(VaultNotificationId)
 
-private fun Context.createNotificationPendingIntent(noteId: Long, libraryId: Long): PendingIntent {
-    val args = bundleOf(Constants.LibraryId to libraryId, Constants.NoteId to noteId)
+private fun Context.createNotificationPendingIntent(noteId: Long, folderId: Long): PendingIntent {
+    val args = bundleOf(Constants.FolderId to folderId, Constants.NoteId to noteId)
     return NavDeepLinkBuilder(this)
         .setGraph(R.navigation.nav_graph)
         .setDestination(R.id.noteFragment)

@@ -7,7 +7,7 @@ interface LabelRepository {
 
     fun getAllLabels(): Flow<List<Label>>
 
-    fun getLabelsByLibraryId(libraryId: Long): Flow<List<Label>>
+    fun getLabelsByFolderId(folderId: Long): Flow<List<Label>>
 
     fun getLabelById(id: Long): Flow<Label>
 

@@ -18,7 +18,7 @@ import org.koin.core.parameter.parametersOf
 
 class NewLabelDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by viewModel<LabelViewModel> { parametersOf(args.libraryId, args.labelId) }
+    private val viewModel by viewModel<LabelViewModel> { parametersOf(args.folderId, args.labelId) }
 
     private val args by navArgs<NewLabelDialogFragmentArgs>()
 
@@ -48,10 +48,10 @@ class NewLabelDialogFragment : BaseDialogFragment() {
         et.requestFocus()
         activity?.showKeyboard(root)
 
-        viewModel.library
-            .onEach { library ->
+        viewModel.folder
+            .onEach { folder ->
                 context?.let { context ->
-                    val color = context.colorResource(library.color.toResource())
+                    val color = context.colorResource(folder.color.toResource())
                     baseDialogFragment.tvDialogTitle.setTextColor(color)
                     baseDialogFragment.vHead.background?.mutate()?.setTint(color)
                 }

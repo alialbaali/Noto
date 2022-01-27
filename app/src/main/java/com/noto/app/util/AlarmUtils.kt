@@ -7,10 +7,10 @@ import android.content.Intent
 import androidx.core.app.AlarmManagerCompat
 import com.noto.app.receiver.AlarmReceiver
 
-fun AlarmManager.createAlarm(context: Context, libraryId: Long, noteId: Long, epochMilliseconds: Long) {
+fun AlarmManager.createAlarm(context: Context, folderId: Long, noteId: Long, epochMilliseconds: Long) {
 
     val intent = Intent(context, AlarmReceiver::class.java).apply {
-        putExtra(Constants.LibraryId, libraryId)
+        putExtra(Constants.FolderId, folderId)
         putExtra(Constants.NoteId, noteId)
     }
 

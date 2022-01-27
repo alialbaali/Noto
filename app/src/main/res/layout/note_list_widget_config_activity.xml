@@ -52,11 +52,11 @@
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_select_library"
+                android:id="@+id/tv_select_folder"
                 style="@style/SettingsItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/select_library" />
+                android:text="@string/select_folder" />
 
             <include android:id="@+id/divider1" layout="@layout/divider_item" />
 
@@ -104,7 +104,7 @@
             <include android:id="@+id/divider3" layout="@layout/divider_item" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/sw_new_library"
+                android:id="@+id/sw_new_folder"
                 style="@style/SettingsItem"
                 android:text="@string/new_note_button"
                 android:layout_width="match_parent"

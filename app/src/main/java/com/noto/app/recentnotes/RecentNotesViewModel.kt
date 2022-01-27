@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.*
 import kotlinx.datetime.LocalDate
 
 class RecentNotesViewModel(
-    private val libraryRepository: LibraryRepository,
+    private val folderRepository: FolderRepository,
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
@@ -36,18 +36,18 @@ class RecentNotesViewModel(
 
     init {
         combine(
-            libraryRepository.getLibraries(),
+            folderRepository.getFolders(),
             noteRepository.getAllMainNotes(),
             labelRepository.getAllLabels(),
             noteLabelRepository.getNoteLabels(),
             searchTerm.map { it.trim() },
-        ) { libraries, notes, labels, noteLabels, searchTerm ->
+        ) { folders, notes, labels, noteLabels, searchTerm ->
             mutableNotesVisibility.value = notes.mapNotNull { it.accessDate?.toLocalDate() }.map {
                 val isVisible = notesVisibility.value[it] ?: true
                 it to isVisible
             }.toMap()
             mutableNotes.value = notes
-                .filter { note -> libraries.any { library -> library.id == note.folderId } }
+                .filter { note -> folders.any { folder -> folder.id == note.folderId } }
                 .filterRecentlyAccessed()
                 .mapWithLabels(labels, noteLabels)
                 .filterContent(searchTerm)

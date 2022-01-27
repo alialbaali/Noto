@@ -42,8 +42,8 @@ import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.noto.app.R
-import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -71,12 +71,12 @@ val NavController.lastDestinationId: Long?
     @SuppressLint("RestrictedApi")
     get() {
         val lastBackStackEntry = backStack.lastOrNull {
-            it.destination.id == R.id.libraryFragment || it.destination.id == R.id.allNotesFragment || it.destination.id == R.id.recentNotesFragment
+            it.destination.id == R.id.folderFragment || it.destination.id == R.id.allNotesFragment || it.destination.id == R.id.recentNotesFragment
         }
         return when (lastBackStackEntry?.destination?.id) {
             R.id.allNotesFragment -> AllNotesItemId
             R.id.recentNotesFragment -> RecentNotesItemId
-            else -> lastBackStackEntry?.arguments?.getLong(Constants.LibraryId)
+            else -> lastBackStackEntry?.arguments?.getLong(Constants.FolderId)
         }
     }
 

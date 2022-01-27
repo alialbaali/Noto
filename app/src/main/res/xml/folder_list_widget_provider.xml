@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:minWidth="250dp"
+    android:minHeight="110dp"
+    android:targetCellWidth="4"
+    android:targetCellHeight="2"
+    android:updatePeriodMillis="0"
+    android:resizeMode="vertical|horizontal"
+    android:description="@string/folders"
+    android:previewImage="@layout/folder_list_widget"
+    android:previewLayout="@layout/folder_list_widget"
+    android:initialLayout="@layout/folder_list_widget"
+    android:configure="com.noto.app.widget.FolderListWidgetConfigActivity"
+    android:widgetFeatures="reconfigurable|configuration_optional"
+    tools:targetApi="s" />

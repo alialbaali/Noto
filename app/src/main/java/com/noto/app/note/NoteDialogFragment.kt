@@ -25,7 +25,7 @@ import org.koin.core.parameter.parametersOf
 
 class NoteDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId) }
 
     private val args by navArgs<NoteDialogFragmentArgs>()
 
@@ -50,8 +50,8 @@ class NoteDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        viewModel.library
-            .onEach { library -> setupLibrary(library, baseDialogFragment) }
+        viewModel.folder
+            .onEach { folder -> setupFolder(folder, baseDialogFragment) }
             .launchIn(lifecycleScope)
 
         viewModel.note
@@ -71,8 +71,8 @@ class NoteDialogFragment : BaseDialogFragment() {
 
                 context?.let { context ->
                     context.updateAllWidgetsData()
-                    context.updateNoteListWidgets(viewModel.library.value.id)
-                    parentView?.snackbar(context.stringResource(resource), viewModel.library.value)
+                    context.updateNoteListWidgets(viewModel.folder.value.id)
+                    parentView?.snackbar(context.stringResource(resource), viewModel.folder.value)
                 }
                 dismiss()
             }
@@ -82,7 +82,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             dismiss()
             navController?.navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReminderDialogFragment(
-                    args.libraryId,
+                    args.folderId,
                     args.noteId
                 )
             )
@@ -92,7 +92,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             dismiss()
             navController?.navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReadingModeFragment(
-                    args.libraryId,
+                    args.folderId,
                     args.noteId
                 )
             )
@@ -102,7 +102,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             viewModel.duplicateNote().invokeOnCompletion {
                 context?.let { context ->
                     context.updateAllWidgetsData()
-                    parentView?.snackbar(context.stringResource(R.string.note_is_duplicated), viewModel.library.value)
+                    parentView?.snackbar(context.stringResource(R.string.note_is_duplicated), viewModel.folder.value)
                 }
                 dismiss()
             }
@@ -117,7 +117,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
                 context?.let { context ->
                     context.updateAllWidgetsData()
-                    parentView?.snackbar(context.stringResource(resource), viewModel.library.value)
+                    parentView?.snackbar(context.stringResource(resource), viewModel.folder.value)
                 }
                 dismiss()
             }
@@ -125,9 +125,9 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvCopyToClipboard.setOnClickListener {
             context?.let { context ->
-                val clipData = ClipData.newPlainText(viewModel.library.value.getTitle(context), viewModel.note.value.format())
+                val clipData = ClipData.newPlainText(viewModel.folder.value.getTitle(context), viewModel.note.value.format())
                 clipboardManager?.setPrimaryClip(clipData)
-                parentView?.snackbar(context.stringResource(R.string.note_copied_to_clipboard), viewModel.library.value)
+                parentView?.snackbar(context.stringResource(R.string.note_copied_to_clipboard), viewModel.folder.value)
             }
             dismiss()
         }
@@ -135,38 +135,38 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvCopyNote.setOnClickListener {
             navController?.currentBackStackEntry
                 ?.savedStateHandle
-                ?.getLiveData<Long>(Constants.LibraryId)
-                ?.observe(viewLifecycleOwner) { libraryId ->
-                    viewModel.copyNote(libraryId).invokeOnCompletion {
+                ?.getLiveData<Long>(Constants.FolderId)
+                ?.observe(viewLifecycleOwner) { folderId ->
+                    viewModel.copyNote(folderId).invokeOnCompletion {
                         context?.let { context ->
                             context.updateAllWidgetsData()
-                            context.updateNoteListWidgets(libraryId)
-                            parentView?.snackbar(context.stringResource(R.string.note_is_copied), viewModel.library.value)
+                            context.updateNoteListWidgets(folderId)
+                            parentView?.snackbar(context.stringResource(R.string.note_is_copied), viewModel.folder.value)
                         }
                         navController?.popBackStack(args.destination, false)
                         dismiss()
                     }
                 }
-            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(longArrayOf(args.libraryId)))
+            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectFolderDialogFragment(longArrayOf(args.folderId)))
         }
 
         tvMoveNote.setOnClickListener {
             navController?.currentBackStackEntry
                 ?.savedStateHandle
-                ?.getLiveData<Long>(Constants.LibraryId)
-                ?.observe(viewLifecycleOwner) { libraryId ->
-                    viewModel.moveNote(libraryId).invokeOnCompletion {
+                ?.getLiveData<Long>(Constants.FolderId)
+                ?.observe(viewLifecycleOwner) { folderId ->
+                    viewModel.moveNote(folderId).invokeOnCompletion {
                         context?.let { context ->
                             context.updateAllWidgetsData()
-                            context.updateNoteListWidgets(viewModel.library.value.id)
-                            context.updateNoteListWidgets(libraryId)
-                            parentView?.snackbar(context.stringResource(R.string.note_is_moved), viewModel.library.value)
+                            context.updateNoteListWidgets(viewModel.folder.value.id)
+                            context.updateNoteListWidgets(folderId)
+                            parentView?.snackbar(context.stringResource(R.string.note_is_moved), viewModel.folder.value)
                         }
                         navController?.popBackStack(args.destination, false)
                         dismiss()
                     }
                 }
-            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectLibraryDialogFragment(longArrayOf(args.libraryId)))
+            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectFolderDialogFragment(longArrayOf(args.folderId)))
         }
 
         tvShareNote.setOnClickListener {
@@ -183,13 +183,13 @@ class NoteDialogFragment : BaseDialogFragment() {
                     ?.savedStateHandle
                     ?.getLiveData<Int>(Constants.ClickListener)
                     ?.observe(viewLifecycleOwner) {
-                        parentView?.snackbar(context.stringResource(R.string.note_is_deleted), viewModel.library.value)
+                        parentView?.snackbar(context.stringResource(R.string.note_is_deleted), viewModel.folder.value)
                         navController?.popBackStack(args.destination, false)
                         if (viewModel.note.value.reminderDate != null)
                             alarmManager?.cancelAlarm(context, viewModel.note.value.id)
                         viewModel.deleteNote().invokeOnCompletion {
                             context.updateAllWidgetsData()
-                            context.updateNoteListWidgets(viewModel.library.value.id)
+                            context.updateNoteListWidgets(viewModel.folder.value.id)
                             dismiss()
                         }
                     }
@@ -233,7 +233,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun NoteDialogFragmentBinding.setupLibrary(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteDialogFragmentBinding.setupFolder(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()

@@ -17,8 +17,8 @@ object SettingsKeys {
     val Theme = stringPreferencesKey(Keys.Theme)
     val Font = stringPreferencesKey(Keys.Font)
     val Language = stringPreferencesKey(Keys.Language)
-    val LibraryListSortingType = stringPreferencesKey(Keys.LibraryListSortingType)
-    val LibraryListSortingOrder = stringPreferencesKey(Keys.LibraryListSortingOrder)
+    val FolderListSortingType = stringPreferencesKey(Keys.FolderListSortingType)
+    val FolderListSortingOrder = stringPreferencesKey(Keys.FolderListSortingOrder)
     val ShowNotesCount = stringPreferencesKey(Keys.ShowNotesCount)
     val IsVaultOpen = stringPreferencesKey(Keys.IsVaultOpen)
     val VaultPasscode = stringPreferencesKey(Keys.VaultPasscode)
@@ -26,7 +26,7 @@ object SettingsKeys {
     val ScheduledVaultTimeout = stringPreferencesKey(Keys.ScheduledVaultTimeout)
     val LastVersion = stringPreferencesKey(Keys.LastVersion)
     val IsBioAuthEnabled = stringPreferencesKey(Keys.IsBioAuthEnabled)
-    val MainLibraryId = longPreferencesKey(Keys.MainLibraryId)
+    val MainFolderId = longPreferencesKey(Keys.MainFolderId)
     val CollapseToolbar = booleanPreferencesKey(Keys.CollapseToolbar)
 
     @Suppress("FunctionName")
@@ -38,15 +38,15 @@ object SettingsKeys {
         fun NewItemButton(widgetId: Int) = stringPreferencesKey(widgetId.NewItemButton)
         fun NotesCount(widgetId: Int) = stringPreferencesKey(widgetId.NotesCount)
         fun Radius(widgetId: Int) = stringPreferencesKey(widgetId.Radius)
-        fun SelectedLabelIds(widgetId: Int, libraryId: Long) = stringPreferencesKey(widgetId.SelectedLabelIds(libraryId))
+        fun SelectedLabelIds(widgetId: Int, folderId: Long) = stringPreferencesKey(widgetId.SelectedLabelIds(folderId))
     }
 
     private object Keys {
         const val Theme = "Theme"
         const val Font = "Font"
         const val Language = "Language"
-        const val LibraryListSortingType = "Library_List_Sorting_Type"
-        const val LibraryListSortingOrder = "Library_List_Sorting_Order"
+        const val FolderListSortingType = "Library_List_Sorting_Type"
+        const val FolderListSortingOrder = "Library_List_Sorting_Order"
         const val ShowNotesCount = "Show_Notes_Count"
         const val IsVaultOpen = "IsVaultOpen"
         const val VaultPasscode = "VaultPasscode"
@@ -54,7 +54,7 @@ object SettingsKeys {
         const val ScheduledVaultTimeout = "ScheduledVaultTimeout"
         const val LastVersion = "LastVersion"
         const val IsBioAuthEnabled = "IsBioAuthEnabled"
-        const val MainLibraryId = "MainLibraryId"
+        const val MainFolderId = "MainFolderId"
         const val CollapseToolbar = "CollapseToolbar"
 
         object Widget {
@@ -67,7 +67,7 @@ object SettingsKeys {
             val Int.Radius get() = "Widget_Radius_$this"
 
             @Suppress("FunctionName")
-            fun Int.SelectedLabelIds(libraryId: Long) = Id + "_" + Constants.LibraryId + libraryId.toString()
+            fun Int.SelectedLabelIds(folderId: Long) = Id + "_" + Constants.FolderId + folderId.toString()
         }
     }
 }

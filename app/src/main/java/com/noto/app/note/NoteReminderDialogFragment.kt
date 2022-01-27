@@ -31,7 +31,7 @@ import java.util.*
 
 class NoteReminderDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId) }
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId) }
 
     private val args by navArgs<NoteReminderDialogFragmentArgs>()
 
@@ -111,8 +111,8 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteReminderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        viewModel.library
-            .onEach { library -> setupLibrary(library, baseDialogFragment) }
+        viewModel.folder
+            .onEach { folder -> setupFolder(folder, baseDialogFragment) }
             .launchIn(lifecycleScope)
 
         viewModel.note
@@ -127,7 +127,7 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
             }
         }
 
-    private fun NoteReminderDialogFragmentBinding.setupLibrary(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteReminderDialogFragmentBinding.setupFolder(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)

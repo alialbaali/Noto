@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.FolderIdWithNotesCount
-import com.noto.app.domain.model.LibraryListSortingType
+import com.noto.app.domain.model.FolderListSortingType
 import com.noto.app.domain.model.SortingOrder
-import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.sorted
@@ -15,54 +15,54 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val libraryRepository: LibraryRepository,
+    private val folderRepository: FolderRepository,
     private val noteRepository: NoteRepository,
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
     val sortingType = settingsRepository.sortingType
-        .stateIn(viewModelScope, SharingStarted.Lazily, LibraryListSortingType.CreationDate)
+        .stateIn(viewModelScope, SharingStarted.Lazily, FolderListSortingType.CreationDate)
 
     val sortingOrder = settingsRepository.sortingOrder
         .stateIn(viewModelScope, SharingStarted.Lazily, SortingOrder.Descending)
 
-    val libraries = combine(
-        libraryRepository.getLibraries(),
-        noteRepository.getLibrariesNotesCount(),
+    val folders = combine(
+        folderRepository.getFolders(),
+        noteRepository.getFolderNotesCount(),
         sortingType,
         sortingOrder,
-    ) { libraries, notesCount, sortingType, sortingOrder ->
-        libraries
+    ) { folders, notesCount, sortingType, sortingOrder ->
+        folders
             .filter { it.parentId == null }
-            .mapRecursively(libraries, notesCount, sortingType, sortingOrder)
+            .mapRecursively(folders, notesCount, sortingType, sortingOrder)
             .sorted(sortingType, sortingOrder)
     }
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
-    val archivedLibraries = combine(
-        libraryRepository.getArchivedLibraries(),
-        noteRepository.getLibrariesNotesCount(),
+    val archivedFolders = combine(
+        folderRepository.getArchivedFolders(),
+        noteRepository.getFolderNotesCount(),
         sortingType,
         sortingOrder,
-    ) { libraries, notesCount, sortingType, sortingOrder ->
-        libraries
+    ) { folders, notesCount, sortingType, sortingOrder ->
+        folders
             .filter { it.parentId == null }
-            .mapRecursively(libraries, notesCount, sortingType, sortingOrder)
+            .mapRecursively(folders, notesCount, sortingType, sortingOrder)
             .sorted(sortingType, sortingOrder)
     }
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
-    val vaultedLibraries = combine(
-        libraryRepository.getVaultedLibraries(),
-        noteRepository.getLibrariesNotesCount(),
+    val vaultedFolders = combine(
+        folderRepository.getVaultedFolders(),
+        noteRepository.getFolderNotesCount(),
         sortingType,
         sortingOrder,
-    ) { libraries, notesCount, sortingType, sortingOrder ->
-        libraries
+    ) { folders, notesCount, sortingType, sortingOrder ->
+        folders
             .filter { it.parentId == null }
-            .mapRecursively(libraries, notesCount, sortingType, sortingOrder)
+            .mapRecursively(folders, notesCount, sortingType, sortingOrder)
             .sorted(sortingType, sortingOrder)
     }
         .map { UiState.Success(it) }
@@ -83,9 +83,9 @@ class MainViewModel(
     val allNotes = noteRepository.getAllNotes()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    fun updateSortingType(value: LibraryListSortingType) = viewModelScope.launch {
+    fun updateSortingType(value: FolderListSortingType) = viewModelScope.launch {
         settingsRepository.updateSortingType(value)
-        if (value == LibraryListSortingType.Manual)
+        if (value == FolderListSortingType.Manual)
             updateSortingOrder(SortingOrder.Ascending)
     }
 
@@ -93,12 +93,12 @@ class MainViewModel(
         settingsRepository.updateSortingOrder(value)
     }
 
-    fun updateLibraryPosition(folder: Folder, position: Int) = viewModelScope.launch {
-        libraryRepository.updateLibrary(folder.copy(position = position))
+    fun updateFolderPosition(folder: Folder, position: Int) = viewModelScope.launch {
+        folderRepository.updateFolder(folder.copy(position = position))
     }
 
-    fun updateLibraryParentId(folder: Folder, parentId: Long?) = viewModelScope.launch {
-        libraryRepository.updateLibrary(folder.copy(parentId = parentId))
+    fun updateFolderParentId(folder: Folder, parentId: Long?) = viewModelScope.launch {
+        folderRepository.updateFolder(folder.copy(parentId = parentId))
     }
 
     fun openVault() = viewModelScope.launch {
@@ -111,18 +111,18 @@ class MainViewModel(
 
     private fun List<Folder>.mapRecursively(
         allFolders: List<Folder>,
-        librariesNotesCount: List<FolderIdWithNotesCount>,
-        sortingType: LibraryListSortingType,
+        foldersNotesCount: List<FolderIdWithNotesCount>,
+        sortingType: FolderListSortingType,
         sortingOrder: SortingOrder,
     ): List<Pair<Folder, Int>> {
-        return map { library ->
-            val notesCount = librariesNotesCount.firstOrNull { it.folderId == library.id }?.notesCount ?: 0
+        return map { folder ->
+            val notesCount = foldersNotesCount.firstOrNull { it.folderId == folder.id }?.notesCount ?: 0
             val childLibraries = allFolders
-                .filter { it.parentId == library.id }
-                .mapRecursively(allFolders, librariesNotesCount, sortingType, sortingOrder)
+                .filter { it.parentId == folder.id }
+                .mapRecursively(allFolders, foldersNotesCount, sortingType, sortingOrder)
                 .sorted(sortingType, sortingOrder)
                 .sortedByDescending { it.first.isPinned }
-            library.copy(libraries = childLibraries) to notesCount
+            folder.copy(folders = childLibraries) to notesCount
         }
     }
 }

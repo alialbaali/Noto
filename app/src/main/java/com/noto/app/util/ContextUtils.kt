@@ -15,7 +15,7 @@ private const val IconSpacing = 128
 
 fun Context.createPinnedShortcut(folder: Folder): ShortcutInfoCompat {
     val intent = Intent(Constants.Intent.ActionCreateNote, null, this, AppActivity::class.java).apply {
-        putExtra(Constants.LibraryId, folder.id)
+        putExtra(Constants.FolderId, folder.id)
     }
     val backgroundColor = folder.color.toResource().let(this::colorResource)
     val iconColor = colorResource(android.R.color.white)

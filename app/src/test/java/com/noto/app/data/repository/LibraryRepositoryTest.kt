@@ -2,7 +2,7 @@ package com.noto.app.data.repository
 
 import com.noto.app.util.repositoryModule
 import com.noto.app.domain.model.Folder
-import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.fakeLocalDataSourceModule
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.collections.shouldBeEmpty
@@ -18,7 +18,7 @@ import org.koin.test.get
 
 class LibraryRepositoryTest : StringSpec(), KoinTest {
 
-    private lateinit var repository: LibraryRepository
+    private lateinit var repository: FolderRepository
 
     init {
         beforeTest {
@@ -33,15 +33,15 @@ class LibraryRepositoryTest : StringSpec(), KoinTest {
         }
 
         "get all libraries should be empty" {
-            repository.getLibraries()
+            repository.getFolders()
                 .single()
                 .shouldBeEmpty()
         }
 
         "create library should insert a new library" {
             val library = Folder(id = 1, title = "Work", position = 0)
-            repository.createLibrary(library)
-            repository.getLibraries()
+            repository.createFolder(library)
+            repository.getFolders()
                 .single()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(1)
@@ -50,12 +50,12 @@ class LibraryRepositoryTest : StringSpec(), KoinTest {
 
         "update library should update existing library" {
             val library = Folder(id = 1, title = "Work", position = 0)
-            repository.createLibrary(library)
+            repository.createFolder(library)
 
             val updatedLibrary = library.copy(title = "Home")
-            repository.updateLibrary(updatedLibrary)
+            repository.updateFolder(updatedLibrary)
 
-            repository.getLibraryById(libraryId = 1)
+            repository.getFolderById(folderId = 1)
                 .single()
                 .title shouldBeEqualIgnoringCase "Home"
         }
@@ -63,13 +63,13 @@ class LibraryRepositoryTest : StringSpec(), KoinTest {
         "delete library should remove existing library" {
             val library = Folder(id = 1, title = "Work", position = 0)
 
-            repository.createLibrary(library)
-            repository.getLibraries()
+            repository.createFolder(library)
+            repository.getFolders()
                 .single()
                 .shouldNotBeEmpty()
 
-            repository.deleteLibrary(library)
-            repository.getLibraries()
+            repository.deleteFolder(library)
+            repository.getFolders()
                 .single()
                 .shouldBeEmpty()
         }

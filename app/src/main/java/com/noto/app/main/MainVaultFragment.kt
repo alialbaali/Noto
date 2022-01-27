@@ -44,7 +44,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     private fun MainVaultFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = context?.stringResource(R.string.libraries_vault)
+        tvDialogTitle.text = context?.stringResource(R.string.folders_vault)
     }
 
     private fun MainVaultFragmentBinding.setupListeners() {
@@ -132,28 +132,28 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
             .launchIn(lifecycleScope)
 
         combine(
-            viewModel.vaultedLibraries,
+            viewModel.vaultedFolders,
             viewModel.isShowNotesCount,
             viewModel.isVaultOpen,
-        ) { libraries, isShowNotesCount, isVaultOpen ->
-            setupLibraries(libraries, isShowNotesCount, isVaultOpen)
+        ) { folders, isShowNotesCount, isVaultOpen ->
+            setupFolders(folders, isShowNotesCount, isVaultOpen)
         }.launchIn(lifecycleScope)
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainVaultFragmentBinding.setupLibraries(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean, isVaultOpen: Boolean) {
+    private fun MainVaultFragmentBinding.setupFolders(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean, isVaultOpen: Boolean) {
         if (state is UiState.Success) {
-            val libraries = state.value
+            val folders = state.value
             rv.withModels {
                 context?.let { context ->
-                    if (libraries.isEmpty()) {
+                    if (folders.isEmpty()) {
                         placeholderItem {
                             id("placeholder")
                             placeholder(context.stringResource(R.string.vault_is_empty))
                         }
                     } else {
-                        buildLibrariesModels(context, libraries) { libraries ->
-                            libraries.forEachRecursively { entry, depth ->
+                        buildFoldersModels(context, folders) { folders ->
+                            folders.forEachRecursively { entry, depth ->
                                 folderItem {
                                     id(entry.first.id)
                                     folder(entry.first)
@@ -167,11 +167,11 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
                                     onClickListener { _ ->
                                         dismiss()
                                         if (entry.first.id != selectedDestinationId)
-                                            navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToLibraryFragment(entry.first.id))
+                                            navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToFolderFragment(entry.first.id))
                                     }
                                     onLongClickListener { _ ->
                                         dismiss()
-                                        navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToLibraryDialogFragment(
+                                        navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToFolderDialogFragment(
                                             entry.first.id))
                                         true
                                     }

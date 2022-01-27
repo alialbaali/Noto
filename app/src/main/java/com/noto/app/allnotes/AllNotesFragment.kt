@@ -13,9 +13,9 @@ import androidx.lifecycle.lifecycleScope
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.AllNotesFragmentBinding
-import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Folder
-import com.noto.app.library.noteItem
+import com.noto.app.domain.model.Font
+import com.noto.app.folder.noteItem
 import com.noto.app.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
@@ -40,7 +40,7 @@ class AllNotesFragment : Fragment() {
 
     private fun AllNotesFragmentBinding.setupListeners() {
         fab.setOnClickListener {
-            navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToSelectLibraryDialogFragment(longArrayOf()))
+            navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToSelectFolderDialogFragment(longArrayOf()))
         }
 
         bab.setNavigationOnClickListener {
@@ -124,13 +124,13 @@ class AllNotesFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Long>(Constants.LibraryId)
-            ?.observe(viewLifecycleOwner) { libraryId ->
-                if (libraryId != null) {
+            ?.getLiveData<Long>(Constants.FolderId)
+            ?.observe(viewLifecycleOwner) { folderId ->
+                if (folderId != null) {
                     lifecycleScope.launch {
                         delay(150) // Wait for the fragment to be destroyed
-                        navController?.currentBackStackEntry?.savedStateHandle?.remove<Long>(Constants.LibraryId)
-                        navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(libraryId))
+                        navController?.currentBackStackEntry?.savedStateHandle?.remove<Long>(Constants.FolderId)
+                        navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(folderId))
                     }
                 }
             }
@@ -178,15 +178,15 @@ class AllNotesFragment : Fragment() {
                                 placeholder(context.stringResource(R.string.no_notes_found))
                             }
                         } else {
-                            notes.forEach { (library, notes) ->
-                                val isVisible = notesVisibility[library] ?: true
+                            notes.forEach { (folder, notes) ->
+                                val isVisible = notesVisibility[folder] ?: true
 
                                 headerItem {
-                                    id("library ${library.id}")
-                                    title(library.getTitle(context))
-                                    color(library.color)
+                                    id("folder ${folder.id}")
+                                    title(folder.getTitle(context))
+                                    color(folder.color)
                                     isVisible(isVisible)
-                                    onClickListener { _ -> viewModel.toggleVisibilityForLibrary(library.id) }
+                                    onClickListener { _ -> viewModel.toggleVisibilityForFolder(folder.id) }
                                 }
 
                                 if (isVisible)
@@ -196,9 +196,9 @@ class AllNotesFragment : Fragment() {
                                             note(entry.first)
                                             font(font)
                                             labels(entry.second)
-                                            color(library.color)
-                                            previewSize(library.notePreviewSize)
-                                            isShowCreationDate(library.isShowNoteCreationDate)
+                                            color(folder.color)
+                                            previewSize(folder.notePreviewSize)
+                                            isShowCreationDate(folder.isShowNoteCreationDate)
                                             isManualSorting(false)
                                             onClickListener { _ ->
                                                 navController
@@ -215,7 +215,7 @@ class AllNotesFragment : Fragment() {
                                                         AllNotesFragmentDirections.actionAllNotesFragmentToNoteDialogFragment(
                                                             entry.first.folderId,
                                                             entry.first.id,
-                                                            R.id.libraryFragment
+                                                            R.id.folderFragment
                                                         )
                                                     )
                                                 true

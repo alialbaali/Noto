@@ -51,11 +51,11 @@ val Note.isValid
     get() = title.isNotBlank() || body.isNotBlank()
 
 @Suppress("DEPRECATION")
-fun List<Pair<Folder, Int>>.sorted(sortingType: LibraryListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
+fun List<Pair<Folder, Int>>.sorted(sortingType: FolderListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
     when (sortingType) {
-        LibraryListSortingType.Manual -> pair.first.position
-        LibraryListSortingType.CreationDate -> pair.first.creationDate
-        LibraryListSortingType.Alphabetical -> pair.first.title
+        FolderListSortingType.Manual -> pair.first.position
+        FolderListSortingType.CreationDate -> pair.first.creationDate
+        FolderListSortingType.Alphabetical -> pair.first.title
     }
 }
 
@@ -129,14 +129,14 @@ fun Folder.getTitle(context: Context) = if (isInbox) context.stringResource(R.st
 fun List<Pair<Folder, Int>>.forEachRecursively(depth: Int = 1, block: (Pair<Folder, Int>, depth: Int) -> Unit) {
     forEach { entry ->
         block(entry, depth)
-        entry.first.libraries.forEachRecursively(depth + 1, block)
+        entry.first.folders.forEachRecursively(depth + 1, block)
     }
 }
 
 fun List<Pair<Folder, Int>>.countRecursively(): Int {
     var count = count()
     forEach { entry ->
-        count += entry.first.libraries.countRecursively()
+        count += entry.first.folders.countRecursively()
     }
     return count
 }
@@ -144,7 +144,7 @@ fun List<Pair<Folder, Int>>.countRecursively(): Int {
 fun List<Pair<Folder, Int>>.filterRecursively(predicate: (Pair<Folder, Int>) -> Boolean): List<Pair<Folder, Int>> {
     return filter(predicate).map {
         it.first.copy(
-            libraries = it.first.libraries.filterRecursively(predicate)
+            folders = it.first.folders.filterRecursively(predicate)
         ) to it.second
     }
 }
@@ -155,7 +155,7 @@ fun List<Pair<Folder, Int>>.findRecursively(predicate: (Pair<Folder, Int>) -> Bo
         return item
     else
         forEach {
-            val result = it.first.libraries.findRecursively(predicate)
+            val result = it.first.folders.findRecursively(predicate)
             if (result != null)
                 return result
         }

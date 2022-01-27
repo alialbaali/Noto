@@ -18,26 +18,26 @@ fun Context.createNoteListWidgetRemoteViews(
     isHeaderEnabled: Boolean,
     isEditWidgetButtonEnabled: Boolean,
     isAppIconEnabled: Boolean,
-    isNewLibraryButtonEnabled: Boolean,
+    isNewFolderButtonEnabled: Boolean,
     widgetRadius: Int,
     folder: Folder,
     isEmpty: Boolean,
 ): RemoteViews {
     val color = colorResource(folder.color.toResource())
     return RemoteViews(packageName, R.layout.note_list_widget).apply {
-        setTextViewText(R.id.tv_library_title, folder.getTitle(this@createNoteListWidgetRemoteViews))
-        setTextColor(R.id.tv_library_title, color)
+        setTextViewText(R.id.tv_folder_title, folder.getTitle(this@createNoteListWidgetRemoteViews))
+        setTextColor(R.id.tv_folder_title, color)
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_edit_widget, if (isEditWidgetButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_app_icon, if (isAppIconEnabled) View.VISIBLE else View.GONE)
-        setViewVisibility(R.id.fab, if (isNewLibraryButtonEnabled) View.VISIBLE else View.GONE)
-        setViewVisibility(R.id.fab, if (isNewLibraryButtonEnabled) View.VISIBLE else View.GONE)
+        setViewVisibility(R.id.fab, if (isNewFolderButtonEnabled) View.VISIBLE else View.GONE)
+        setViewVisibility(R.id.fab, if (isNewFolderButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.tv_placeholder, if (isEmpty) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.lv, if (isEmpty) View.GONE else View.VISIBLE)
         setOnClickPendingIntent(R.id.iv_edit_widget, createEditWidgetButtonPendingIntent(appWidgetId, folder.id))
         setOnClickPendingIntent(R.id.ib_fab, createNewNoteButtonPendingIntent(appWidgetId, folder.id))
         setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId))
-        setOnClickPendingIntent(R.id.tv_library_title, createLibraryLauncherPendingIntent(appWidgetId, folder.id))
+        setOnClickPendingIntent(R.id.tv_folder_title, createFolderLauncherPendingIntent(appWidgetId, folder.id))
         setRemoteAdapter(R.id.lv, createNoteListServiceIntent(appWidgetId, folder.id))
         setPendingIntentTemplate(R.id.lv, createNoteItemPendingIntent(appWidgetId))
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
@@ -45,13 +45,13 @@ fun Context.createNoteListWidgetRemoteViews(
         setInt(R.id.iv_fab, SetColorFilterMethodName, color)
         setInt(R.id.iv_edit_widget, SetColorFilterMethodName, color)
         if (isAppIconEnabled)
-            setViewPadding(R.id.tv_library_title, 0.dp, 16.dp, 0.dp, 16.dp)
+            setViewPadding(R.id.tv_folder_title, 0.dp, 16.dp, 0.dp, 16.dp)
         else
-            setViewPadding(R.id.tv_library_title, 16.dp, 16.dp, 16.dp, 16.dp)
+            setViewPadding(R.id.tv_folder_title, 16.dp, 16.dp, 16.dp, 16.dp)
     }
 }
 
-private fun Context.createEditWidgetButtonPendingIntent(appWidgetId: Int, libraryId: Long): PendingIntent? {
+private fun Context.createEditWidgetButtonPendingIntent(appWidgetId: Int, folderId: Long): PendingIntent? {
     val intent = Intent(
         AppWidgetManager.ACTION_APPWIDGET_CONFIGURE,
         null,
@@ -59,35 +59,35 @@ private fun Context.createEditWidgetButtonPendingIntent(appWidgetId: Int, librar
         NoteListWidgetConfigActivity::class.java
     ).apply {
         putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-        putExtra(Constants.LibraryId, libraryId)
+        putExtra(Constants.FolderId, folderId)
         data = Uri.parse(this.toUri(Intent.URI_INTENT_SCHEME))
     }
     return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
 }
 
-private fun Context.createLibraryLauncherPendingIntent(appWidgetId: Int, libraryId: Long): PendingIntent? {
-    val intent = Intent(Constants.Intent.ActionOpenLibrary, null, this, AppActivity::class.java).apply {
-        putExtra(Constants.LibraryId, libraryId)
+private fun Context.createFolderLauncherPendingIntent(appWidgetId: Int, folderId: Long): PendingIntent? {
+    val intent = Intent(Constants.Intent.ActionOpenFolder, null, this, AppActivity::class.java).apply {
+        putExtra(Constants.FolderId, folderId)
     }
     return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
 }
 
-private fun Context.createNewNoteButtonPendingIntent(appWidgetId: Int, libraryId: Long): PendingIntent? {
+private fun Context.createNewNoteButtonPendingIntent(appWidgetId: Int, folderId: Long): PendingIntent? {
     val intent = Intent(
         Constants.Intent.ActionCreateNote,
         null,
         this,
         AppActivity::class.java
     ).apply {
-        putExtra(Constants.LibraryId, libraryId)
+        putExtra(Constants.FolderId, folderId)
     }
     return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
 }
 
-private fun Context.createNoteListServiceIntent(appWidgetId: Int, libraryId: Long): Intent {
+private fun Context.createNoteListServiceIntent(appWidgetId: Int, folderId: Long): Intent {
     return Intent(this, NoteListWidgetService::class.java).apply {
         putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-        putExtra(Constants.LibraryId, libraryId)
+        putExtra(Constants.FolderId, folderId)
         data = Uri.parse(this.toUri(Intent.URI_INTENT_SCHEME))
     }
 }

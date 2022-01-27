@@ -14,7 +14,7 @@ import com.noto.app.*
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Folder
-import com.noto.app.domain.model.LibraryListSortingType
+import com.noto.app.domain.model.FolderListSortingType
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.*
@@ -35,7 +35,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         when (selectedDestinationId) {
             AllNotesItemId -> R.id.allNotesFragment
             RecentNotesItemId -> R.id.recentNotesFragment
-            else -> R.id.libraryFragment
+            else -> R.id.folderFragment
         }
     }
 
@@ -56,7 +56,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.setupListeners() {
         fab.setOnClickListener {
             dismiss()
-            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToNewLibraryDialogFragment())
+            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToNewFolderDialogFragment())
         }
 
         ibMore.setOnClickListener {
@@ -70,20 +70,20 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
         combine(
-            viewModel.libraries,
+            viewModel.folders,
             viewModel.sortingType,
             viewModel.sortingOrder,
             viewModel.isShowNotesCount,
             viewModel.allNotes,
-        ) { libraries, sortingType, sortingOrder, isShowNotesCount, allNotes ->
-            setupLibraries(libraries, sortingType, sortingOrder, isShowNotesCount, allNotes)
-            setupItemTouchHelper(sortingType == LibraryListSortingType.Manual)
+        ) { folders, sortingType, sortingOrder, isShowNotesCount, allNotes ->
+            setupFolders(folders, sortingType, sortingOrder, isShowNotesCount, allNotes)
+            setupItemTouchHelper(sortingType == FolderListSortingType.Manual)
         }.launchIn(lifecycleScope)
 
         viewModel.sortingType
             .onEach { sortingType ->
                 rv.itemAnimator = when (sortingType) {
-                    LibraryListSortingType.Manual -> DefaultItemAnimator().apply {
+                    FolderListSortingType.Manual -> DefaultItemAnimator().apply {
                         addDuration = DefaultAnimationDuration
                         changeDuration = DefaultAnimationDuration
                         moveDuration = DefaultAnimationDuration
@@ -96,9 +96,9 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainFragmentBinding.setupLibraries(
+    private fun MainFragmentBinding.setupFolders(
         state: UiState<List<Pair<Folder, Int>>>,
-        sortingType: LibraryListSortingType,
+        sortingType: FolderListSortingType,
         sortingOrder: SortingOrder,
         isShowNotesCount: Boolean,
         allNotes: List<Note>,
@@ -106,33 +106,33 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         if (state is UiState.Success) {
             rv.withModels {
                 epoxyController = this
-                val libraries = state.value.filterNot { it.first.isInbox }
-                val inboxLibrary = state.value.firstOrNull { it.first.isInbox }
-                val isManualSorting = sortingType == LibraryListSortingType.Manual
+                val folders = state.value.filterNot { it.first.isInbox }
+                val inboxFolder = state.value.firstOrNull { it.first.isInbox }
+                val isManualSorting = sortingType == FolderListSortingType.Manual
 
-                libraryListSortingItem {
+                folderListSortingItem {
                     id(0)
                     sortingType(sortingType)
                     sortingOrder(sortingOrder)
-                    librariesCount(libraries.countRecursively())
+                    librariesCount(folders.countRecursively())
                     onClickListener { _ ->
                         dismiss()
-                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryListSortingDialogFragment())
+                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderListSortingDialogFragment())
                     }
                 }
 
-                inboxLibrary?.let {
+                inboxFolder?.let {
                     folderItem {
-                        id(inboxLibrary.first.id)
-                        folder(inboxLibrary.first)
-                        notesCount(inboxLibrary.second)
+                        id(inboxFolder.first.id)
+                        folder(inboxFolder.first)
+                        notesCount(inboxFolder.second)
                         isManualSorting(isManualSorting)
                         isShowNotesCount(isShowNotesCount)
-                        isSelected(inboxLibrary.first.id == selectedDestinationId)
+                        isSelected(inboxFolder.first.id == selectedDestinationId)
                         onClickListener { _ ->
                             dismiss()
-                            if (inboxLibrary.first.id != selectedDestinationId)
-                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(inboxLibrary.first.id)) {
+                            if (inboxFolder.first.id != selectedDestinationId)
+                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderFragment(inboxFolder.first.id)) {
                                     popUpTo(popUpToDestinationId) {
                                         inclusive = true
                                     }
@@ -140,7 +140,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         }
                         onLongClickListener { _ ->
                             dismiss()
-                            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(inboxLibrary.first.id))
+                            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderDialogFragment(inboxFolder.first.id))
                             true
                         }
                         onDragHandleTouchListener { _, _ -> false }
@@ -187,8 +187,8 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         }
                     }
 
-                    buildLibrariesModels(context, libraries) { libraries ->
-                        libraries.forEachRecursively { entry, depth ->
+                    buildFoldersModels(context, folders) { folders ->
+                        folders.forEachRecursively { entry, depth ->
                             folderItem {
                                 id(entry.first.id)
                                 folder(entry.first)
@@ -200,7 +200,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                                 onClickListener { _ ->
                                     dismiss()
                                     if (entry.first.id != selectedDestinationId)
-                                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryFragment(entry.first.id)) {
+                                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderFragment(entry.first.id)) {
                                             popUpTo(popUpToDestinationId) {
                                                 inclusive = true
                                             }
@@ -208,7 +208,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                                 }
                                 onLongClickListener { _ ->
                                     dismiss()
-                                    navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToLibraryDialogFragment(entry.first.id))
+                                    navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderDialogFragment(entry.first.id))
                                     true
                                 }
                                 onDragHandleTouchListener { view, event ->
@@ -230,7 +230,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.setupItemTouchHelper(isManualSorting: Boolean) {
         if (isManualSorting) {
             if (this@MainFragment::epoxyController.isInitialized) {
-                val itemTouchHelperCallback = LibraryItemTouchHelperCallback(
+                val itemTouchHelperCallback = FolderItemTouchHelperCallback(
                     epoxyController,
                     onSwipe = { viewHolder, direction -> onSwipe(viewHolder, direction) },
                     onDrag = { onDrag() }
@@ -246,23 +246,23 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     private fun MainFragmentBinding.onSwipe(viewHolder: EpoxyViewHolder, direction: Int) {
-        val libraries = viewModel.libraries.value.getOrDefault(emptyList())
+        val folders = viewModel.folders.value.getOrDefault(emptyList())
         val model = viewHolder.model as? FolderItem
         if (model != null) {
             if (direction == ItemTouchHelper.START) {
-                val parentId = libraries.findRecursively { it.first.id == model.folder.parentId }?.first?.parentId
-                viewModel.updateLibraryParentId(model.folder, parentId)
+                val parentId = folders.findRecursively { it.first.id == model.folder.parentId }?.first?.parentId
+                viewModel.updateFolderParentId(model.folder, parentId)
             } else {
                 val previousViewHolder = rv.findViewHolderForAdapterPosition(viewHolder.bindingAdapterPosition - 1) as EpoxyViewHolder?
                 val previousModel = previousViewHolder?.model as? FolderItem?
-                val parentId = libraries.findRecursively {
+                val parentId = folders.findRecursively {
                     val isSameParent = it.first.parentId == model.folder.parentId
                     val isPreviousSelf = it.first.id == previousModel?.folder?.id
-                    val isWithinPreviousLibraries = it.first.libraries.findRecursively { it.first.id == previousModel?.folder?.id } != null
-                    isSameParent && (isPreviousSelf || isWithinPreviousLibraries)
+                    val isWithinPreviousFolders = it.first.folders.findRecursively { it.first.id == previousModel?.folder?.id } != null
+                    isSameParent && (isPreviousSelf || isWithinPreviousFolders)
                 }?.first?.id
                 if (parentId != null)
-                    viewModel.updateLibraryParentId(model.folder, parentId)
+                    viewModel.updateFolderParentId(model.folder, parentId)
             }
             epoxyController.notifyModelChanged(viewHolder.bindingAdapterPosition)
         }
@@ -272,7 +272,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         rv.forEach { view ->
             val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
             val model = viewHolder.model as? FolderItem
-            if (model != null) viewModel.updateLibraryPosition(model.folder, viewHolder.bindingAdapterPosition)
+            if (model != null) viewModel.updateFolderPosition(model.folder, viewHolder.bindingAdapterPosition)
         }
     }
 }

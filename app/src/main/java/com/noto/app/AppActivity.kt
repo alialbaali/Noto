@@ -59,57 +59,57 @@ class AppActivity : BaseActivity() {
         when (intent?.action) {
             Intent.ACTION_SEND -> {
                 val content = intent.getStringExtra(Intent.EXTRA_TEXT)
-                showSelectLibraryDialog(content)
+                showSelectFolderDialog(content)
             }
             Intent.ACTION_PROCESS_TEXT -> {
                 val content = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
-                showSelectLibraryDialog(content)
+                showSelectFolderDialog(content)
             }
-            Constants.Intent.ActionCreateLibrary -> navController.navigate(R.id.newLibraryDialogFragment)
+            Constants.Intent.ActionCreateFolder -> navController.navigate(R.id.newFolderDialogFragment)
             Constants.Intent.ActionCreateNote -> {
-                val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
-                if (libraryId == 0L) {
-                    showSelectLibraryDialog(null)
+                val folderId = intent.getLongExtra(Constants.FolderId, 0)
+                if (folderId == 0L) {
+                    showSelectFolderDialog(null)
                 } else {
-                    val args = bundleOf(Constants.LibraryId to libraryId)
-                    navController.popBackStack(R.id.libraryFragment, true)
-                    navController.navigate(R.id.libraryFragment, args)
+                    val args = bundleOf(Constants.FolderId to folderId)
+                    navController.popBackStack(R.id.folderFragment, true)
+                    navController.navigate(R.id.folderFragment, args)
                     navController.navigate(R.id.noteFragment, args)
                 }
             }
-            Constants.Intent.ActionOpenLibrary -> {
-                val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
-                val args = bundleOf(Constants.LibraryId to libraryId)
-                navController.popBackStack(R.id.libraryFragment, true)
-                navController.navigate(R.id.libraryFragment, args)
+            Constants.Intent.ActionOpenFolder -> {
+                val folderId = intent.getLongExtra(Constants.FolderId, 0)
+                val args = bundleOf(Constants.FolderId to folderId)
+                navController.popBackStack(R.id.folderFragment, true)
+                navController.navigate(R.id.folderFragment, args)
             }
             Constants.Intent.ActionOpenNote -> {
-                val libraryId = intent.getLongExtra(Constants.LibraryId, 0)
+                val folderId = intent.getLongExtra(Constants.FolderId, 0)
                 val noteId = intent.getLongExtra(Constants.NoteId, 0)
-                val args = bundleOf(Constants.LibraryId to libraryId, Constants.NoteId to noteId)
-                navController.popBackStack(R.id.libraryFragment, true)
-                navController.navigate(R.id.libraryFragment, args)
+                val args = bundleOf(Constants.FolderId to folderId, Constants.NoteId to noteId)
+                navController.popBackStack(R.id.folderFragment, true)
+                navController.navigate(R.id.folderFragment, args)
                 navController.navigate(R.id.noteFragment, args)
             }
         }
     }
 
-    private fun AppActivityBinding.showSelectLibraryDialog(content: String?) {
+    private fun AppActivityBinding.showSelectFolderDialog(content: String?) {
         navController.currentBackStackEntry
             ?.savedStateHandle
-            ?.getLiveData<Long>(Constants.LibraryId)
-            ?.observe(this@AppActivity) { libraryId ->
+            ?.getLiveData<Long>(Constants.FolderId)
+            ?.observe(this@AppActivity) { folderId ->
                 val options = navOptions {
-                    popUpTo(R.id.libraryFragment) {
+                    popUpTo(R.id.folderFragment) {
                         inclusive = true
                     }
                 }
-                val args = bundleOf(Constants.LibraryId to libraryId, Constants.Body to content)
-                navController.navigate(R.id.libraryFragment, args, options)
+                val args = bundleOf(Constants.FolderId to folderId, Constants.Body to content)
+                navController.navigate(R.id.folderFragment, args, options)
                 navController.navigate(R.id.noteFragment, args)
             }
-        val args = bundleOf(Constants.FilteredLibraryIds to longArrayOf())
-        navController.navigate(R.id.selectLibraryDialogFragment, args)
+        val args = bundleOf(Constants.FilteredFolderIds to longArrayOf())
+        navController.navigate(R.id.selectFolderDialogFragment, args)
     }
 
     private fun AppActivityBinding.setupState() {
@@ -135,14 +135,14 @@ class AppActivity : BaseActivity() {
             .launchIn(lifecycleScope)
 
         lifecycleScope.launch {
-            val libraryId = viewModel.mainLibraryId.first()
-            val args = bundleOf(Constants.LibraryId to libraryId)
+            val folderId = viewModel.mainFolderId.first()
+            val args = bundleOf(Constants.FolderId to folderId)
             val options = navOptions {
-                popUpTo(R.id.libraryFragment) {
+                popUpTo(R.id.folderFragment) {
                     inclusive = true
                 }
             }
-            navController.navigate(R.id.libraryFragment, args, options)
+            navController.navigate(R.id.folderFragment, args, options)
         }
 
         combine(

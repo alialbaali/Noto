@@ -4,7 +4,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.Constants
@@ -18,19 +18,19 @@ import org.koin.core.component.inject
 
 class NoteListWidgetProvider : AppWidgetProvider(), KoinComponent {
 
-    private val libraryRepository by inject<LibraryRepository>()
+    private val folderRepository by inject<FolderRepository>()
     private val noteRepository by inject<NoteRepository>()
     private val settingsRepository by inject<SettingsRepository>()
-    var libraryId: Long = 0
+    var folderId: Long = 0
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        libraryId = intent?.getLongExtra(Constants.LibraryId, 0) ?: 0
+        folderId = intent?.getLongExtra(Constants.FolderId, 0) ?: 0
         super.onReceive(context, intent)
     }
 
     override fun onUpdate(context: Context?, appWidgetManager: AppWidgetManager?, appWidgetIds: IntArray?) {
         val coroutineScope = CoroutineScope(Dispatchers.Main.immediate)
-        libraryId.takeIf { it != 0L }?.let { libraryId ->
+        folderId.takeIf { it != 0L }?.let { folderId ->
             appWidgetIds?.forEach { appWidgetId ->
                 coroutineScope.launch {
                     val remoteViews = context?.createNoteListWidgetRemoteViews(
@@ -40,8 +40,8 @@ class NoteListWidgetProvider : AppWidgetProvider(), KoinComponent {
                         settingsRepository.getIsWidgetAppIconEnabled(appWidgetId).first(),
                         settingsRepository.getIsWidgetNewItemButtonEnabled(appWidgetId).first(),
                         settingsRepository.getWidgetRadius(appWidgetId).first(),
-                        libraryRepository.getLibraryById(libraryId).first(),
-                        noteRepository.getNotesByLibraryId(libraryId).first().isEmpty(),
+                        folderRepository.getFolderById(folderId).first(),
+                        noteRepository.getNotesByFolderId(folderId).first().isEmpty(),
                     )
                     appWidgetManager?.updateAppWidget(appWidgetId, remoteViews)
                 }

@@ -15,7 +15,7 @@
         android:id="@+id/iv_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="@string/library_color"
+        android:contentDescription="@string/folder_color"
         android:src="@drawable/ic_round_all_inbox_24" />
 
     <com.google.android.material.textview.MaterialTextView

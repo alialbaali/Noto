@@ -13,21 +13,21 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
 class NoteViewModel(
-    private val libraryRepository: LibraryRepository,
+    private val folderRepository: FolderRepository,
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
     private val settingsRepository: SettingsRepository,
-    private val libraryId: Long,
+    private val folderId: Long,
     private val noteId: Long,
     private val body: String?,
     private var labelsIds: LongArray,
 ) : ViewModel() {
 
-    private val mutableNote = MutableStateFlow(Note(noteId, libraryId, position = 0))
+    private val mutableNote = MutableStateFlow(Note(noteId, folderId, position = 0))
     val note get() = mutableNote.asStateFlow()
 
-    val library = libraryRepository.getLibraryById(libraryId)
+    val folder = folderRepository.getFolderById(folderId)
         .filterNotNull()
         .stateIn(viewModelScope, SharingStarted.Lazily, Folder(position = 0))
 
@@ -49,13 +49,13 @@ class NoteViewModel(
                     }
                 }
             }
-            .onStart { emit(Note(noteId, libraryId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
+            .onStart { emit(Note(noteId, folderId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
             .filterNotNull()
             .onEach { mutableNote.value = it }
             .launchIn(viewModelScope)
 
         combine(
-            labelRepository.getLabelsByLibraryId(libraryId)
+            labelRepository.getLabelsByFolderId(folderId)
                 .filterNotNull(),
             noteLabelRepository.getNoteLabels()
                 .filterNotNull(),
@@ -109,38 +109,38 @@ class NoteViewModel(
         noteRepository.updateNote(note.value.copy(reminderDate = instant))
     }
 
-    fun moveNote(libraryId: Long) = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(folderId = libraryId))
-        val libraryLabels = labelRepository.getLabelsByLibraryId(libraryId).first()
+    fun moveNote(folderId: Long) = viewModelScope.launch {
+        noteRepository.updateNote(note.value.copy(folderId = folderId))
+        val folderLabels = labelRepository.getLabelsByFolderId(folderId).first()
         labels.value
             .filterValues { it }
             .keys
             .forEach { label ->
                 launch {
-                    if (libraryLabels.any { it.title == label.title }) {
-                        val labelId = libraryLabels.first { it.title == label.title }.id
+                    if (folderLabels.any { it.title == label.title }) {
+                        val labelId = folderLabels.first { it.title == label.title }.id
                         noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id))
                     } else {
-                        val labelId = labelRepository.createLabel(label.copy(id = 0, folderId = libraryId))
+                        val labelId = labelRepository.createLabel(label.copy(id = 0, folderId = folderId))
                         noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id))
                     }
                 }
             }
     }
 
-    fun copyNote(libraryId: Long) = viewModelScope.launch {
-        val noteId = noteRepository.createNote(note.value.copy(id = 0, folderId = libraryId))
-        val libraryLabels = labelRepository.getLabelsByLibraryId(libraryId).first()
+    fun copyNote(folderId: Long) = viewModelScope.launch {
+        val noteId = noteRepository.createNote(note.value.copy(id = 0, folderId = folderId))
+        val folderLabels = labelRepository.getLabelsByFolderId(folderId).first()
         labels.value
             .filterValues { it }
             .keys
             .forEach { label ->
                 launch {
-                    if (libraryLabels.any { it.title == label.title }) {
-                        val labelId = libraryLabels.first { it.title == label.title }.id
+                    if (folderLabels.any { it.title == label.title }) {
+                        val labelId = folderLabels.first { it.title == label.title }.id
                         noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
                     } else {
-                        val labelId = labelRepository.createLabel(label.copy(id = 0, folderId = libraryId))
+                        val labelId = labelRepository.createLabel(label.copy(id = 0, folderId = folderId))
                         noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
                     }
                 }

@@ -10,7 +10,7 @@ import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 
 class AllNotesViewModel(
-    private val libraryRepository: LibraryRepository,
+    private val folderRepository: FolderRepository,
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
@@ -37,23 +37,23 @@ class AllNotesViewModel(
 
     init {
         combine(
-            libraryRepository.getLibraries(),
+            folderRepository.getFolders(),
             noteRepository.getAllMainNotes(),
             labelRepository.getAllLabels(),
             noteLabelRepository.getNoteLabels(),
             searchTerm.map { it.trim() },
-        ) { libraries, notes, labels, noteLabels, searchTerm ->
-            mutableNotesVisibility.value = libraries.map {
+        ) { folders, notes, labels, noteLabels, searchTerm ->
+            mutableNotesVisibility.value = folders.map {
                 val isVisible = notesVisibility.value[it] ?: true
                 it to isVisible
             }.toMap()
             mutableNotes.value = notes
-                .filter { note -> libraries.any { library -> library.id == note.folderId } }
+                .filter { note -> folders.any { folder -> folder.id == note.folderId } }
                 .mapWithLabels(labels, noteLabels)
                 .filterContent(searchTerm)
                 .groupBy { noteWithLabels ->
-                    libraries.firstOrNull { library ->
-                        library.id == noteWithLabels.first.folderId
+                    folders.firstOrNull { folder ->
+                        folder.id == noteWithLabels.first.folderId
                     }
                 }
                 .filterNotNullKeys()
@@ -67,9 +67,9 @@ class AllNotesViewModel(
         }.launchIn(viewModelScope)
     }
 
-    fun toggleVisibilityForLibrary(libraryId: Long) {
+    fun toggleVisibilityForFolder(folderId: Long) {
         mutableNotesVisibility.value = notesVisibility.value.mapValues {
-            if (it.key.id == libraryId)
+            if (it.key.id == folderId)
                 !it.value
             else
                 it.value

@@ -8,7 +8,7 @@
     android:layout_marginBottom="@dimen/spacing_extra_small">
 
     <ImageView
-        android:id="@+id/iv_library_color"
+        android:id="@+id/iv_folder_color"
         android:src="@drawable/note_label_item_shape"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

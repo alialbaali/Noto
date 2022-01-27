@@ -32,7 +32,7 @@ private const val DebounceTimeoutMillis = 250L
 
 class NoteFragment : Fragment() {
 
-    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.libraryId, args.noteId, args.body, args.labelsIds) }
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId, args.body, args.labelsIds) }
 
     private val args by navArgs<NoteFragmentArgs>()
 
@@ -50,13 +50,13 @@ class NoteFragment : Fragment() {
         abl.bringToFront()
         bab.setRoundedCorners()
 
-        viewModel.library
-            .onEach { library -> setupLibrary(library) }
+        viewModel.folder
+            .onEach { folder -> setupFolder(folder) }
             .distinctUntilChangedBy { it.newNoteCursorPosition }
-            .onEach { library ->
+            .onEach { folder ->
                 if (args.noteId == 0L) {
                     activity?.showKeyboard(root)
-                    when (library.newNoteCursorPosition) {
+                    when (folder.newNoteCursorPosition) {
                         NewNoteCursorPosition.Body -> etNoteBody.requestFocus()
                         NewNoteCursorPosition.Title -> etNoteTitle.requestFocus()
                     }
@@ -103,9 +103,9 @@ class NoteFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         combine(
-            viewModel.library,
+            viewModel.folder,
             viewModel.labels,
-        ) { library, labels ->
+        ) { folder, labels ->
             rv.withModels {
                 addModelBuildListener {
                     it.dispatchTo(NoteListUpdateCallback)
@@ -115,7 +115,7 @@ class NoteFragment : Fragment() {
                         id(entry.key.id)
                         label(entry.key)
                         isSelected(entry.value)
-                        color(library.color)
+                        color(folder.color)
                         onClickListener { _ ->
                             if (entry.value)
                                 viewModel.unselectLabel(entry.key.id)
@@ -124,16 +124,16 @@ class NoteFragment : Fragment() {
                         }
                         onLongClickListener { _ ->
                             navController
-                                ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToLabelDialogFragment(args.libraryId, entry.key.id))
+                                ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToLabelDialogFragment(args.folderId, entry.key.id))
                             true
                         }
                     }
                 }
                 newLabelItem {
                     id("new")
-                    color(library.color)
+                    color(folder.color)
                     onClickListener { _ ->
-                        navController?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNewLabelDialogFragment(args.libraryId))
+                        navController?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNewLabelDialogFragment(args.folderId))
                     }
                 }
             }
@@ -152,7 +152,7 @@ class NoteFragment : Fragment() {
             .onEach { (title, body) ->
                 viewModel.createOrUpdateNote(title.toString(), body.toString())
                 context?.updateAllWidgetsData()
-                context?.updateNoteListWidgets(viewModel.library.value.id)
+                context?.updateNoteListWidgets(viewModel.folder.value.id)
             }
             .launchIn(lifecycleScope)
 
@@ -190,7 +190,7 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupListeners() {
         fab.setOnClickListener {
             navController
-                ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.libraryId, viewModel.note.value.id))
+                ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.folderId, viewModel.note.value.id))
         }
 
         bab.setNavigationOnClickListener {
@@ -211,7 +211,7 @@ class NoteFragment : Fragment() {
                 etNoteBody.text.toString(),
             )
             context?.updateAllWidgetsData()
-            context?.updateNoteListWidgets(viewModel.library.value.id)
+            context?.updateNoteListWidgets(viewModel.folder.value.id)
             activity?.hideKeyboard(root)
         }
 
@@ -232,15 +232,15 @@ class NoteFragment : Fragment() {
                 R.id.reading_mode -> {
                     setupFadeTransition()
                     navController
-                        ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.libraryId, viewModel.note.value.id))
+                        ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.folderId, viewModel.note.value.id))
                     true
                 }
                 R.id.more -> {
                     navController?.navigateSafely(
                         NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
-                            args.libraryId,
+                            args.folderId,
                             viewModel.note.value.id,
-                            R.id.libraryFragment
+                            R.id.folderFragment
                         )
                     )
                     true
@@ -263,7 +263,7 @@ class NoteFragment : Fragment() {
         }
     }
 
-    private fun NoteFragmentBinding.setupLibrary(folder: Folder) {
+    private fun NoteFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
             val color = context.colorResource(folder.color.toResource())
@@ -305,7 +305,7 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupShortcut(note: Note) {
         if (note.id != 0L && note.isValid) {
             val intent = Intent(Constants.Intent.ActionOpenNote, null, context, AppActivity::class.java).apply {
-                putExtra(Constants.LibraryId, note.folderId)
+                putExtra(Constants.FolderId, note.folderId)
                 putExtra(Constants.NoteId, note.id)
             }
 

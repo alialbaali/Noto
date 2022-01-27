@@ -35,7 +35,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
         }
 
         "get all unarchived notes should be empty" {
-            repository.getNotesByLibraryId(0)
+            repository.getNotesByFolderId(0)
                 .single()
                 .shouldBeEmpty()
         }
@@ -44,7 +44,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
             val note = Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0)
 
             repository.createNote(note)
-            repository.getNotesByLibraryId(libraryId = 1)
+            repository.getNotesByFolderId(folderId = 1)
                 .single()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(1)
@@ -65,7 +65,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
         }
 
         "get all archived notes should be empty" {
-            repository.getArchivedNotesByLibraryId(0)
+            repository.getArchivedNotesByFolderId(0)
                 .single()
                 .shouldBeEmpty()
         }
@@ -73,7 +73,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
         "create archived note should insert a new archived note" {
             val note = Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0, isArchived = true)
             repository.createNote(note)
-            repository.getArchivedNotesByLibraryId(libraryId = 1)
+            repository.getArchivedNotesByFolderId(folderId = 1)
                 .single()
                 .shouldNotBeEmpty()
                 .shouldHaveSize(1)
@@ -108,13 +108,13 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
             val note = Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0)
             repository.createNote(note)
 
-            repository.getNotesByLibraryId(libraryId = 1)
+            repository.getNotesByFolderId(folderId = 1)
                 .single()
                 .shouldNotBeEmpty()
 
             repository.deleteNote(note)
 
-            repository.getNotesByLibraryId(libraryId = 1)
+            repository.getNotesByFolderId(folderId = 1)
                 .single()
                 .shouldBeEmpty()
         }
@@ -124,7 +124,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
                 val note = Note(id = it.toLong(), folderId = 1, title = "Title $it", "Body $it", position = 0)
                 repository.createNote(note)
             }
-            repository.getLibrariesNotesCount(libraryId = 1) shouldBeExactly 5
+            repository.getFolderNotesCount(libraryId = 1) shouldBeExactly 5
         }
     }
 }

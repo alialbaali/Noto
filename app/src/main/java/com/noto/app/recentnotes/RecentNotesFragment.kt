@@ -15,7 +15,7 @@ import com.noto.app.UiState
 import com.noto.app.databinding.RecentNotesFragmentBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.NotoColor
-import com.noto.app.library.noteItem
+import com.noto.app.folder.noteItem
 import com.noto.app.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
@@ -42,7 +42,7 @@ class RecentNotesFragment : Fragment() {
     private fun RecentNotesFragmentBinding.setupListeners() {
         fab.setOnClickListener {
             navController
-                ?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToSelectLibraryDialogFragment(longArrayOf()))
+                ?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToSelectFolderDialogFragment(longArrayOf()))
         }
 
         bab.setNavigationOnClickListener {
@@ -126,14 +126,14 @@ class RecentNotesFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Long>(Constants.LibraryId)
-            ?.observe(viewLifecycleOwner) { libraryId ->
-                if (libraryId != null) {
+            ?.getLiveData<Long>(Constants.FolderId)
+            ?.observe(viewLifecycleOwner) { folderId ->
+                if (folderId != null) {
                     lifecycleScope.launch {
                         delay(150) // Wait for the fragment to be destroyed
-                        navController?.currentBackStackEntry?.savedStateHandle?.remove<Long>(Constants.LibraryId)
+                        navController?.currentBackStackEntry?.savedStateHandle?.remove<Long>(Constants.FolderId)
                         navController?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteFragment(
-                            libraryId))
+                            folderId))
                     }
                 }
             }
@@ -217,7 +217,7 @@ class RecentNotesFragment : Fragment() {
                                                         RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteDialogFragment(
                                                             entry.first.folderId,
                                                             entry.first.id,
-                                                            R.id.libraryFragment
+                                                            R.id.folderFragment
                                                         )
                                                     )
                                                 true

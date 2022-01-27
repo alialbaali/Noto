@@ -68,8 +68,8 @@ class SettingsFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Long>(Constants.LibraryId)
-            ?.observe(viewLifecycleOwner, viewModel::setMainLibraryId)
+            ?.getLiveData<Long>(Constants.FolderId)
+            ?.observe(viewLifecycleOwner, viewModel::setMainFolderId)
     }
 
     private fun SettingsFragmentBinding.setupListeners() {
@@ -77,11 +77,11 @@ class SettingsFragment : Fragment() {
             navController?.navigateUp()
         }
 
-        tvChangeMainLibrary.setOnClickListener {
+        tvChangeMainFolder.setOnClickListener {
             navController?.navigateSafely(
-                SettingsFragmentDirections.actionSettingsFragmentToSelectLibraryDialogFragment(
+                SettingsFragmentDirections.actionSettingsFragmentToSelectFolderDialogFragment(
                     longArrayOf(),
-                    selectedLibraryId = viewModel.mainLibraryId.value
+                    selectedFolderId = viewModel.mainFolderId.value
                 )
             )
         }

@@ -17,7 +17,7 @@ class LabelRepositoryImpl(
 
     override fun getAllLabels(): Flow<List<Label>> = dataSource.getAllLabels()
 
-    override fun getLabelsByLibraryId(libraryId: Long): Flow<List<Label>> = dataSource.getLabelsByFolderId(libraryId)
+    override fun getLabelsByFolderId(folderId: Long): Flow<List<Label>> = dataSource.getLabelsByFolderId(folderId)
 
     override fun getLabelById(id: Long): Flow<Label> = dataSource.getLabelById(id)
 
@@ -34,7 +34,7 @@ class LabelRepositoryImpl(
         dataSource.deleteLabel(label)
     }
 
-    private suspend fun getLabelPosition(libraryId: Long) = dataSource.getLabelsByFolderId(libraryId)
+    private suspend fun getLabelPosition(folderId: Long) = dataSource.getLabelsByFolderId(folderId)
         .filterNotNull()
         .first()
         .count()

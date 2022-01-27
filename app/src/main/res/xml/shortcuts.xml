@@ -13,13 +13,13 @@
             android:targetClass="com.noto.app.AppActivity" />
     </shortcut>
     <shortcut
-        android:shortcutId="create_library"
+        android:shortcutId="create_folder"
         android:enabled="true"
-        android:icon="@mipmap/ic_create_library"
-        android:shortcutShortLabel="@string/create_library"
+        android:icon="@mipmap/ic_create_folder"
+        android:shortcutShortLabel="@string/create_folder"
         tools:targetApi="n_mr1">
         <intent
-            android:action="com.noto.intent.action.CREATE_LIBRARY"
+            android:action="com.noto.intent.action.CREATE_FOLDER"
             android:targetPackage="com.noto"
             android:targetClass="com.noto.app.AppActivity" />
     </shortcut>

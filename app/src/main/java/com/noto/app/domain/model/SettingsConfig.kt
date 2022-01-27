@@ -13,9 +13,9 @@ data class SettingsConfig(
     val isVaultOpen: Boolean,
     val isBioAuthEnabled: Boolean,
     val lastVersion: String,
-    val sortingType: LibraryListSortingType,
+    val sortingType: FolderListSortingType,
     val sortingOrder: SortingOrder,
     val isCollapseToolbar: Boolean,
     val isShowNotesCount: Boolean,
-    val mainLibraryId: Long,
+    val mainFolderId: Long,
 )

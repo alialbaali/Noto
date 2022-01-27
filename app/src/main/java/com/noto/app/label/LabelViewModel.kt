@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.repository.LabelRepository
-import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.FolderRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
@@ -13,24 +13,24 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class LabelViewModel(
-    private val libraryRepository: LibraryRepository,
+    private val folderRepository: FolderRepository,
     private val labelRepository: LabelRepository,
-    private val libraryId: Long,
+    private val folderId: Long,
     private val labelId: Long,
 ) : ViewModel() {
 
-    val library = libraryRepository.getLibraryById(libraryId)
+    val folder = folderRepository.getFolderById(folderId)
         .filterNotNull()
-        .stateIn(viewModelScope, SharingStarted.Lazily, Folder(libraryId, position = 0))
+        .stateIn(viewModelScope, SharingStarted.Lazily, Folder(folderId, position = 0))
 
-    val labels = labelRepository.getLabelsByLibraryId(libraryId)
+    val labels = labelRepository.getLabelsByFolderId(folderId)
         .filterNotNull()
         .map { it.sortedBy { it.position } }
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     val label = labelRepository.getLabelById(labelId)
         .filterNotNull()
-        .stateIn(viewModelScope, SharingStarted.Lazily, Label(labelId, libraryId))
+        .stateIn(viewModelScope, SharingStarted.Lazily, Label(labelId, folderId))
 
     fun createOrUpdateLabel(title: String) = viewModelScope.launch {
         val label = label.value.copy(title = title.trim())

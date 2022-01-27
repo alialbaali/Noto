@@ -27,7 +27,7 @@ import org.koin.core.parameter.parametersOf
 
 class ReorderLabelDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by viewModel<LabelViewModel> { parametersOf(args.libraryId, args.labelId) }
+    private val viewModel by viewModel<LabelViewModel> { parametersOf(args.folderId, args.labelId) }
 
     private val args by navArgs<ReorderLabelDialogFragmentArgs>()
 
@@ -53,10 +53,10 @@ class ReorderLabelDialogFragment : BaseDialogFragment() {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
 
-        viewModel.library
-            .onEach { library ->
+        viewModel.folder
+            .onEach { folder ->
                 context?.let { context ->
-                    val color = context.colorResource(library.color.toResource())
+                    val color = context.colorResource(folder.color.toResource())
                     baseDialogFragment.tvDialogTitle.setTextColor(color)
                     baseDialogFragment.vHead.background?.mutate()?.setTint(color)
                 }
@@ -64,9 +64,9 @@ class ReorderLabelDialogFragment : BaseDialogFragment() {
             .launchIn(lifecycleScope)
 
         combine(
-            viewModel.library,
+            viewModel.folder,
             viewModel.labels,
-        ) { library, labels -> setupLabels(labels, library.color) }
+        ) { folder, labels -> setupLabels(labels, folder.color) }
             .launchIn(lifecycleScope)
     }
 

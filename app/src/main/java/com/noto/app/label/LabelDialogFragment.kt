@@ -19,7 +19,7 @@ import org.koin.core.parameter.parametersOf
 
 class LabelDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by viewModel<LabelViewModel> { parametersOf(args.libraryId, args.labelId) }
+    private val viewModel by viewModel<LabelViewModel> { parametersOf(args.folderId, args.labelId) }
 
     private val args by navArgs<LabelDialogFragmentArgs>()
 
@@ -41,10 +41,10 @@ class LabelDialogFragment : BaseDialogFragment() {
         }
 
     private fun LabelDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
-        viewModel.library
-            .onEach { library ->
+        viewModel.folder
+            .onEach { folder ->
                 context?.let { context ->
-                    val color = context.colorResource(library.color.toResource())
+                    val color = context.colorResource(folder.color.toResource())
                     val colorStateList = color.toColorStateList()
                     baseDialogFragment.vHead.background?.mutate()?.setTint(color)
                     baseDialogFragment.tvDialogTitle.setTextColor(color)
@@ -65,14 +65,14 @@ class LabelDialogFragment : BaseDialogFragment() {
             context?.updateAllWidgetsData()
             dismiss()
             navController
-                ?.navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToNewLabelDialogFragment(args.libraryId, args.labelId))
+                ?.navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToNewLabelDialogFragment(args.folderId, args.labelId))
         }
 
         tvReorderLabel.setOnClickListener {
             context?.updateAllWidgetsData()
             dismiss()
             navController
-                ?.navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToReorderLabelDialogFragment(args.libraryId, args.labelId))
+                ?.navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToReorderLabelDialogFragment(args.folderId, args.labelId))
         }
 
         tvDeleteLabel.setOnClickListener {
@@ -86,7 +86,7 @@ class LabelDialogFragment : BaseDialogFragment() {
                     ?.getLiveData<Int>(Constants.ClickListener)
                     ?.observe(viewLifecycleOwner) {
                         val parentView = parentFragment?.view
-                        parentView?.snackbar(context.stringResource(R.string.label_is_deleted), viewModel.library.value)
+                        parentView?.snackbar(context.stringResource(R.string.label_is_deleted), viewModel.folder.value)
                         viewModel.deleteLabel().invokeOnCompletion { dismiss() }
                     }
                 navController?.navigateSafely(

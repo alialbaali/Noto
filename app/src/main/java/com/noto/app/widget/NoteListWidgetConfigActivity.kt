@@ -12,7 +12,7 @@ import com.noto.app.BaseActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteListWidgetConfigActivityBinding
 import com.noto.app.label.labelItem
-import com.noto.app.main.SelectLibraryDialogFragment
+import com.noto.app.main.SelectFolderDialogFragment
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -29,16 +29,16 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             ?: AppWidgetManager.INVALID_APPWIDGET_ID
     }
 
-    private val libraryId by lazy { intent?.getLongExtra(Constants.LibraryId, 0) ?: 0 }
+    private val folderId by lazy { intent?.getLongExtra(Constants.FolderId, 0) ?: 0 }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         NoteListWidgetConfigActivityBinding.inflate(layoutInflater).withBinding {
             setContentView(root)
-            if (libraryId == 0L)
-                showSelectLibraryDialog(false)
+            if (folderId == 0L)
+                showSelectFolderDialog(false)
             else
-                viewModel.getWidgetData(libraryId)
+                viewModel.getWidgetData(folderId)
             setupState()
             setupListeners()
         }
@@ -61,22 +61,22 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             }
             .launchIn(lifecycleScope)
 
-        combine(viewModel.library, viewModel.notes, viewModel.labels) { library, notes, labels ->
+        combine(viewModel.folder, viewModel.notes, viewModel.labels) { folder, notes, labels ->
             val filteredNotes = notes.filter { it.second.containsAll(labels.filterSelected()) }
-            val color = colorResource(library.color.toResource())
+            val color = colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
             tvFilterLabels.isVisible = labels.isNotEmpty()
             rv.isVisible = labels.isNotEmpty()
             divider2.root.isVisible = labels.isNotEmpty()
-            widget.tvLibraryTitle.text = library.getTitle(this@NoteListWidgetConfigActivity)
-            widget.tvLibraryTitle.setTextColor(color)
+            widget.tvFolderTitle.text = folder.getTitle(this@NoteListWidgetConfigActivity)
+            widget.tvFolderTitle.setTextColor(color)
             widget.fab.background?.setTint(color)
             widget.ivFab.setColorFilter(color)
             sWidgetRadius.trackActiveTintList = colorStateList
             sWidgetRadius.thumbTintList = colorStateList
             sWidgetRadius.tickInactiveTintList = colorStateList
             sWidgetRadius.trackInactiveTintList = color.withDefaultAlpha().toColorStateList()
-            listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewLibrary)
+            listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewFolder)
                 .onEach { it.setupColors(thumbCheckedColor = color, trackCheckedColor = color) }
             listOf(divider1, divider2, divider3, divider4)
                 .onEach { divider -> divider.root.background?.mutate()?.setTint(color.withDefaultAlpha()) }
@@ -90,9 +90,9 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                     this@NoteListWidgetConfigActivity,
                     R.layout.note_list_widget,
                     filteredNotes,
-                    library.isShowNoteCreationDate,
-                    library.color,
-                    library.notePreviewSize,
+                    folder.isShowNoteCreationDate,
+                    folder.color,
+                    folder.notePreviewSize,
                 )
             }
 
@@ -102,7 +102,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                         id(entry.key.id)
                         label(entry.key)
                         isSelected(entry.value)
-                        color(library.color)
+                        color(folder.color)
                         onClickListener { _ ->
                             if (entry.value)
                                 viewModel.deselectLabel(entry.key.id)
@@ -136,16 +136,16 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                 widget.ivAppIcon.isVisible = isEnabled
                 swAppIcon.isChecked = isEnabled
                 if (isEnabled)
-                    widget.tvLibraryTitle.setPadding(0.dp, 16.dp, 0.dp, 16.dp)
+                    widget.tvFolderTitle.setPadding(0.dp, 16.dp, 0.dp, 16.dp)
                 else
-                    widget.tvLibraryTitle.setPadding(16.dp)
+                    widget.tvFolderTitle.setPadding(16.dp)
             }
             .launchIn(lifecycleScope)
 
-        viewModel.isNewLibraryButtonEnabled
+        viewModel.isNewFolderButtonEnabled
             .onEach { isEnabled ->
                 widget.fab.isVisible = isEnabled
-                swNewLibrary.isChecked = isEnabled
+                swNewFolder.isChecked = isEnabled
             }
             .launchIn(lifecycleScope)
 
@@ -159,8 +159,8 @@ class NoteListWidgetConfigActivity : BaseActivity() {
     }
 
     private fun NoteListWidgetConfigActivityBinding.setupListeners() {
-        tvSelectLibrary.setOnClickListener {
-            showSelectLibraryDialog(true)
+        tvSelectFolder.setOnClickListener {
+            showSelectFolderDialog(true)
         }
 
         swWidgetHeader.setOnCheckedChangeListener { _, isChecked ->
@@ -175,8 +175,8 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             viewModel.setIsAppIconEnabled(isChecked)
         }
 
-        swNewLibrary.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.setIsNewLibraryButtonEnabled(isChecked)
+        swNewFolder.setOnCheckedChangeListener { _, isChecked ->
+            viewModel.setIsNewFolderButtonEnabled(isChecked)
         }
 
         sWidgetRadius.addOnChangeListener { _, value, _ ->
@@ -195,9 +195,9 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                     viewModel.isWidgetHeaderEnabled.value,
                     viewModel.isEditWidgetButtonEnabled.value,
                     viewModel.isAppIconEnabled.value,
-                    viewModel.isNewLibraryButtonEnabled.value,
+                    viewModel.isNewFolderButtonEnabled.value,
                     viewModel.widgetRadius.value,
-                    viewModel.library.value,
+                    viewModel.folder.value,
                     viewModel.notes.value.isEmpty(),
                 )
             )
@@ -207,13 +207,13 @@ class NoteListWidgetConfigActivity : BaseActivity() {
         }
     }
 
-    private fun showSelectLibraryDialog(isDismissible: Boolean) {
+    private fun showSelectFolderDialog(isDismissible: Boolean) {
         val args = bundleOf(
-            Constants.FilteredLibraryIds to longArrayOf(),
+            Constants.FilteredFolderIds to longArrayOf(),
             Constants.IsDismissible to isDismissible,
-            Constants.SelectedLibraryId to viewModel.library.value.id,
+            Constants.SelectedFolderId to viewModel.folder.value.id,
         )
-        SelectLibraryDialogFragment { libraryId -> viewModel.getWidgetData(libraryId) }
+        SelectFolderDialogFragment { folderId -> viewModel.getWidgetData(folderId) }
             .apply { arguments = args }
             .show(supportFragmentManager, null)
     }

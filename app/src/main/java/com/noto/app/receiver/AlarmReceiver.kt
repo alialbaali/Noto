@@ -4,7 +4,7 @@ import android.app.NotificationManager
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import com.noto.app.domain.repository.LibraryRepository
+import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.util.Constants
 import com.noto.app.util.createNotification
@@ -15,7 +15,7 @@ import org.koin.core.component.inject
 
 class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
-    private val libraryRepository by inject<LibraryRepository>()
+    private val folderRepository by inject<FolderRepository>()
     private val noteRepository by inject<NoteRepository>()
 
     override fun onReceive(context: Context?, intent: Intent?) {
@@ -24,17 +24,17 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
         intent?.let {
 
-            val libraryId = it.getLongExtra(Constants.LibraryId, 0)
+            val folderId = it.getLongExtra(Constants.FolderId, 0)
             val noteId = it.getLongExtra(Constants.NoteId, 0)
 
             runBlocking {
-                val library = libraryRepository.getLibraryById(libraryId)
+                val folder = folderRepository.getFolderById(folderId)
                     .firstOrNull()
                 val note = noteRepository.getNoteById(noteId)
                     .firstOrNull()
 
-                if (note != null && library != null && context != null) {
-                    notificationManager?.createNotification(context, library, note)
+                if (note != null && folder != null && context != null) {
+                    notificationManager?.createNotification(context, folder, note)
                     noteRepository.updateNote(note.copy(reminderDate = null))
                 }
             }

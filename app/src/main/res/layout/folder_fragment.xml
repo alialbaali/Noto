@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cool"
+    android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
+    android:layout_height="match_parent"
+    android:background="?attr/notoBackgroundColor">
+
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/spacing_small"
+        android:paddingHorizontal="@dimen/spacing_small"
+        android:paddingBottom="@dimen/padding_bottom"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        tools:listitem="@layout/note_item" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl"
+        style="@style/AppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctb"
+            style="@style/CollapsingToolbar"
+            android:layout_height="@dimen/collapsing_toolbar_height"
+            android:layout_width="match_parent"
+            tools:title="@string/inbox">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal"
+        android:layout_gravity="bottom"
+        app:backgroundTint="?attr/notoBackgroundColor"
+        app:fabAnimationMode="scale"
+        app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
+        app:hideOnScroll="true"
+        app:menu="@menu/folder_menu"
+        app:navigationContentDescription="@string/folders"
+        app:navigationIcon="@drawable/ic_round_menu_24" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal"
+        android:contentDescription="@string/create_note"
+        android:src="@drawable/ic_round_edit_24"
+        app:backgroundTint="?attr/notoPrimaryColor"
+        app:layout_anchor="@id/bab"
+        app:tint="?attr/notoBackgroundColor" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

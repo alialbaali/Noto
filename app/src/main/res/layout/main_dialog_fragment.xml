@@ -14,19 +14,19 @@
         <include layout="@layout/base_dialog_fragment" />
 
         <TextView
-            android:id="@+id/tv_libraries_vault"
+            android:id="@+id/tv_folders_vault"
             style="@style/SettingsItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/libraries_vault"
+            android:text="@string/folders_vault"
             app:drawableStartCompat="@drawable/ic_round_shield_24" />
 
         <TextView
-            android:id="@+id/tv_libraries_archive"
+            android:id="@+id/tv_folders_archive"
             style="@style/SettingsItem"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/libraries_archive"
+            android:text="@string/folders_archive"
             app:drawableStartCompat="@drawable/ic_round_inventory_24" />
 
         <include

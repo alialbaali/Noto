@@ -44,12 +44,12 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_change_main_library"
+                android:id="@+id/tv_change_main_folder"
                 style="@style/SettingsItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_round_folder_24"
-                android:text="@string/change_main_library" />
+                android:text="@string/change_main_folder" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_change_theme"
@@ -110,7 +110,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_round_count_24"
-                android:text="@string/show_libraries_notes_count" />
+                android:text="@string/show_folders_notes_count" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/sw_collapse_toolbar"
