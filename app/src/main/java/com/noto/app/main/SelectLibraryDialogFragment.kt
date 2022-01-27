@@ -13,7 +13,7 @@ import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.SelectLibraryDialogFragmentBinding
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -66,7 +66,7 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun SelectLibraryDialogFragmentBinding.setupLibraries(state: UiState<List<Pair<Library, Int>>>, isShowNotesCount: Boolean) {
+    private fun SelectLibraryDialogFragmentBinding.setupLibraries(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean) {
         when (state) {
             is UiState.Loading -> rv.setupProgressIndicator()
             is UiState.Success -> {
@@ -94,7 +94,7 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
                     inboxLibrary?.let {
                         folderItem {
                             id(inboxLibrary.first.id)
-                            library(inboxLibrary.first)
+                            folder(inboxLibrary.first)
                             notesCount(inboxLibrary.second)
                             isSelected(inboxLibrary.first.id == args.selectedLibraryId)
                             isManualSorting(false)
@@ -116,7 +116,7 @@ class SelectLibraryDialogFragment constructor() : BaseDialogFragment() {
                                 libraries.forEachRecursively { entry, depth ->
                                     folderItem {
                                         id(entry.first.id)
-                                        library(entry.first)
+                                        folder(entry.first)
                                         notesCount(entry.second)
                                         isShowNotesCount(isShowNotesCount)
                                         isSelected(entry.first.id == args.selectedLibraryId)

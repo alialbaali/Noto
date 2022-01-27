@@ -51,7 +51,7 @@ val Note.isValid
     get() = title.isNotBlank() || body.isNotBlank()
 
 @Suppress("DEPRECATION")
-fun List<Pair<Library, Int>>.sorted(sortingType: LibraryListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
+fun List<Pair<Folder, Int>>.sorted(sortingType: LibraryListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
     when (sortingType) {
         LibraryListSortingType.Manual -> pair.first.position
         LibraryListSortingType.CreationDate -> pair.first.creationDate
@@ -120,20 +120,20 @@ fun String.hash(): String {
     return Base64.encodeToString(bytes, Base64.DEFAULT)
 }
 
-val Library.isInbox
-    get() = id == Library.InboxId
+val Folder.isInbox
+    get() = id == Folder.InboxId
 
 @Suppress("DEPRECATION")
-fun Library.getTitle(context: Context) = if (isInbox) context.stringResource(R.string.inbox) else title
+fun Folder.getTitle(context: Context) = if (isInbox) context.stringResource(R.string.inbox) else title
 
-fun List<Pair<Library, Int>>.forEachRecursively(depth: Int = 1, block: (Pair<Library, Int>, depth: Int) -> Unit) {
+fun List<Pair<Folder, Int>>.forEachRecursively(depth: Int = 1, block: (Pair<Folder, Int>, depth: Int) -> Unit) {
     forEach { entry ->
         block(entry, depth)
         entry.first.libraries.forEachRecursively(depth + 1, block)
     }
 }
 
-fun List<Pair<Library, Int>>.countRecursively(): Int {
+fun List<Pair<Folder, Int>>.countRecursively(): Int {
     var count = count()
     forEach { entry ->
         count += entry.first.libraries.countRecursively()
@@ -141,7 +141,7 @@ fun List<Pair<Library, Int>>.countRecursively(): Int {
     return count
 }
 
-fun List<Pair<Library, Int>>.filterRecursively(predicate: (Pair<Library, Int>) -> Boolean): List<Pair<Library, Int>> {
+fun List<Pair<Folder, Int>>.filterRecursively(predicate: (Pair<Folder, Int>) -> Boolean): List<Pair<Folder, Int>> {
     return filter(predicate).map {
         it.first.copy(
             libraries = it.first.libraries.filterRecursively(predicate)
@@ -149,8 +149,8 @@ fun List<Pair<Library, Int>>.filterRecursively(predicate: (Pair<Library, Int>) -
     }
 }
 
-fun List<Pair<Library, Int>>.findRecursively(predicate: (Pair<Library, Int>) -> Boolean): Pair<Library, Int>? {
-    val item: Pair<Library, Int>? = firstOrNull(predicate)
+fun List<Pair<Folder, Int>>.findRecursively(predicate: (Pair<Folder, Int>) -> Boolean): Pair<Folder, Int>? {
+    val item: Pair<Folder, Int>? = firstOrNull(predicate)
     if (item != null)
         return item
     else

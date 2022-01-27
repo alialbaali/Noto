@@ -15,7 +15,7 @@ import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryArchiveFragmentBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Layout
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -69,17 +69,17 @@ class LibraryArchiveFragment : BaseDialogFragment(isCollapsable = true) {
         rv.resetAdapter()
     }
 
-    private fun LibraryArchiveFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun LibraryArchiveFragmentBinding.setupLibrary(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
-            val color = context.colorResource(library.color.toResource())
-            baseDialogFragment.tvDialogTitle.text = context.stringResource(R.string.archive, library.getTitle(context))
+            val color = context.colorResource(folder.color.toResource())
+            baseDialogFragment.tvDialogTitle.text = context.stringResource(R.string.archive, folder.getTitle(context))
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(state: UiState<List<NoteWithLabels>>, font: Font, library: Library) {
+    private fun LibraryArchiveFragmentBinding.setupArchivedNotes(state: UiState<List<NoteWithLabels>>, font: Font, folder: Folder) {
         if (state is UiState.Success) {
             val archivedNotes = state.value
             rv.withModels {
@@ -90,15 +90,15 @@ class LibraryArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                             placeholder(context.stringResource(R.string.archive_is_empty))
                         }
                     else
-                        buildNotesModels(context, library, archivedNotes) { notes ->
+                        buildNotesModels(context, folder, archivedNotes) { notes ->
                             notes.forEach { archivedNote ->
                                 noteItem {
                                     id(archivedNote.first.id)
                                     note(archivedNote.first)
                                     font(font)
-                                    previewSize(library.notePreviewSize)
-                                    isShowCreationDate(library.isShowNoteCreationDate)
-                                    color(library.color)
+                                    previewSize(folder.notePreviewSize)
+                                    isShowCreationDate(folder.isShowNoteCreationDate)
+                                    color(folder.color)
                                     labels(archivedNote.second)
                                     isManualSorting(false)
                                     onClickListener { _ ->

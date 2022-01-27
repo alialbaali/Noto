@@ -24,7 +24,7 @@ class LibraryItemTouchHelperCallback(
 
     override fun getMovementFlagsForModel(model: FolderItem?, adapterPosition: Int): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
-        val swipeFlags = if (model?.library?.isInbox == true) 0 else ItemTouchHelper.START or ItemTouchHelper.END
+        val swipeFlags = if (model?.folder?.isInbox == true) 0 else ItemTouchHelper.START or ItemTouchHelper.END
         return makeMovementFlags(dragFlags, swipeFlags)
     }
 
@@ -46,7 +46,7 @@ class LibraryItemTouchHelperCallback(
         val view = viewHolder.itemView
         val context = view.context
         val model = viewHolder.model as FolderItem
-        val color = context.colorResource(model.library.color.toResource())
+        val color = context.colorResource(model.folder.color.toResource())
         val margin = context.dimenResource(R.dimen.spacing_normal).toInt()
         val radius = context.dimenResource(R.dimen.spacing_small)
         val paint = Paint().apply { this.color = color.withDefaultAlpha() }
@@ -140,7 +140,7 @@ class LibraryItemTouchHelperCallback(
         super.onDragStarted(model, itemView, adapterPosition)
         itemView?.isSelected = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            val color = model?.library?.color?.toResource()
+            val color = model?.folder?.color?.toResource()
             if (color != null) {
                 val resource = itemView?.context?.colorResource(color)
                 if (resource != null) {

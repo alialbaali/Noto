@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Entity(
     tableName = "labels",
     foreignKeys = [ForeignKey(
-        entity = Library::class,
+        entity = Folder::class,
         parentColumns = ["id"],
         childColumns = ["library_id"],
         onDelete = ForeignKey.CASCADE

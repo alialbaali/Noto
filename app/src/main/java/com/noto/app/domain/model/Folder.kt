@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @Entity(tableName = "libraries")
-data class Library @Ignore constructor(
+data class Folder @Ignore constructor(
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
@@ -66,7 +66,7 @@ data class Library @Ignore constructor(
     val isVaulted: Boolean = false,
 
     @Ignore
-    val libraries: List<Pair<Library, Int>> = emptyList(),
+    val libraries: List<Pair<Folder, Int>> = emptyList(),
 ) {
 
     // Room constructor
@@ -110,6 +110,6 @@ data class Library @Ignore constructor(
     @Suppress("FunctionName")
     companion object {
         const val InboxId = -1L
-        fun Inbox() = Library(id = InboxId, position = 0, color = NotoColor.Black)
+        fun Inbox() = Folder(id = InboxId, position = 0, color = NotoColor.Black)
     }
 }

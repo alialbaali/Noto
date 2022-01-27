@@ -16,7 +16,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteReminderDialogFragmentBinding
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -127,9 +127,9 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
             }
         }
 
-    private fun NoteReminderDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteReminderDialogFragmentBinding.setupLibrary(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
-            val color = context.colorResource(library.color.toResource())
+            val color = context.colorResource(folder.color.toResource())
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             til.boxStrokeColor = color

@@ -5,7 +5,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.noto.app.R
 import com.noto.app.domain.model.Grouping
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.NotoColor
 
 fun EpoxyRecyclerView.setupProgressIndicator(color: NotoColor? = null) {
@@ -19,14 +19,14 @@ fun EpoxyRecyclerView.setupProgressIndicator(color: NotoColor? = null) {
 
 inline fun EpoxyController.buildNotesModels(
     context: Context,
-    library: Library,
+    folder: Folder,
     notes: List<NoteWithLabels>,
     content: (List<NoteWithLabels>) -> Unit,
 ) {
-    when (library.grouping) {
+    when (folder.grouping) {
         Grouping.Default -> {
-            val pinnedNotes = notes.filter { it.first.isPinned }.sorted(library.sortingType, library.sortingOrder)
-            val notPinnedNotes = notes.filterNot { it.first.isPinned }.sorted(library.sortingType, library.sortingOrder)
+            val pinnedNotes = notes.filter { it.first.isPinned }.sorted(folder.sortingType, folder.sortingOrder)
+            val notPinnedNotes = notes.filterNot { it.first.isPinned }.sorted(folder.sortingType, folder.sortingOrder)
 
             if (pinnedNotes.isNotEmpty()) {
                 headerItem {
@@ -45,7 +45,7 @@ inline fun EpoxyController.buildNotesModels(
             content(notPinnedNotes)
         }
         Grouping.CreationDate -> {
-            notes.groupByDate(library.sortingType, library.sortingOrder).forEach { (date, notes) ->
+            notes.groupByDate(folder.sortingType, folder.sortingOrder).forEach { (date, notes) ->
                 headerItem {
                     id(date.dayOfYear)
                     title(date.format())
@@ -54,7 +54,7 @@ inline fun EpoxyController.buildNotesModels(
             }
         }
         Grouping.Label -> {
-            notes.groupByLabels(library.sortingType, library.sortingOrder).forEach { (labels, notes) ->
+            notes.groupByLabels(folder.sortingType, folder.sortingOrder).forEach { (labels, notes) ->
                 if (labels.isEmpty())
                     headerItem {
                         id("without_label")
@@ -73,8 +73,8 @@ inline fun EpoxyController.buildNotesModels(
 
 inline fun EpoxyController.buildLibrariesModels(
     context: Context,
-    libraries: List<Pair<Library, Int>>,
-    content: (List<Pair<Library, Int>>) -> Unit,
+    libraries: List<Pair<Folder, Int>>,
+    content: (List<Pair<Folder, Int>>) -> Unit,
 ) {
     val pinnedLibraries = libraries.filter { it.first.isPinned }
     val notPinnedLibraries = libraries.filterNot { it.first.isPinned }

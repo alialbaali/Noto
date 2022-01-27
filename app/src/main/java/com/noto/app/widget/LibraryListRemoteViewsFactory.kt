@@ -8,7 +8,7 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.noto.app.AppActivity
 import com.noto.app.R
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
@@ -27,7 +27,7 @@ class LibraryListRemoteViewsFactory(private val context: Context, intent: Intent
     private val settingsRepository by inject<SettingsRepository>()
     private val appWidgetId = intent?.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
         ?: AppWidgetManager.INVALID_APPWIDGET_ID
-    private lateinit var libraries: List<Pair<Library, Int>>
+    private lateinit var libraries: List<Pair<Folder, Int>>
     private var isShowNotesCount: Boolean = true
 
     override fun onCreate() {}

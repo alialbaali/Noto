@@ -24,12 +24,12 @@ class LibraryViewModel(
     val library = combine(
         libraryRepository.getLibraryById(libraryId)
             .filterNotNull()
-            .onStart { emit(Library(libraryId, position = 0)) },
+            .onStart { emit(Folder(libraryId, position = 0)) },
         libraryRepository.getAllLibraries(),
     ) { library, libraries ->
         mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(library.color)
         library.mapRecursively(libraries)
-    }.stateIn(viewModelScope, SharingStarted.Lazily, Library(libraryId, position = 0))
+    }.stateIn(viewModelScope, SharingStarted.Lazily, Folder(libraryId, position = 0))
 
     private val mutableNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
@@ -197,10 +197,10 @@ class LibraryViewModel(
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }
 
-    private fun Library.mapRecursively(allLibraries: List<Library>): Library {
-        val childLibraries = allLibraries
+    private fun Folder.mapRecursively(allFolders: List<Folder>): Folder {
+        val childLibraries = allFolders
             .filter { it.parentId == id }
-            .map { it.mapRecursively(allLibraries) to 0 }
+            .map { it.mapRecursively(allFolders) to 0 }
         return copy(libraries = childLibraries)
     }
 }

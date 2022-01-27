@@ -14,7 +14,7 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLibraryDialogFragmentBinding
 import com.noto.app.domain.model.Layout
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.NewNoteCursorPosition
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
@@ -42,7 +42,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
                 0L -> {
                     tvDialogTitle.text = context.stringResource(R.string.new_library)
                 }
-                Library.InboxId -> {
+                Folder.InboxId -> {
                     tvDialogTitle.text = context.stringResource(R.string.edit_inbox)
                     btnCreate.text = context.stringResource(R.string.done)
                 }
@@ -65,7 +65,7 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
             activity?.showKeyboard(root)
         }
 
-        if (args.libraryId == Library.InboxId) {
+        if (args.libraryId == Folder.InboxId) {
             et.setText(context?.stringResource(R.string.inbox))
             til.isVisible = false
             tvLibraryTitle.isVisible = false
@@ -121,30 +121,30 @@ class NewLibraryDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun NewLibraryDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
-        rv.smoothScrollToPosition(library.color.ordinal)
-        val layoutTab = when (library.layout) {
+    private fun NewLibraryDialogFragmentBinding.setupLibrary(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
+        rv.smoothScrollToPosition(folder.color.ordinal)
+        val layoutTab = when (folder.layout) {
             Layout.Linear -> tlLibraryLayout.getTabAt(0)
             Layout.Grid -> tlLibraryLayout.getTabAt(1)
         }
-        val cursorPositionTab = when (library.newNoteCursorPosition) {
+        val cursorPositionTab = when (folder.newNoteCursorPosition) {
             NewNoteCursorPosition.Body -> tlNewNoteCursorPosition.getTabAt(0)
             NewNoteCursorPosition.Title -> tlNewNoteCursorPosition.getTabAt(1)
         }
         tlLibraryLayout.selectTab(layoutTab)
         tlNewNoteCursorPosition.selectTab(cursorPositionTab)
-        swShowNoteCreationDate.isChecked = library.isShowNoteCreationDate
+        swShowNoteCreationDate.isChecked = folder.isShowNoteCreationDate
         context?.let { context ->
-            et.setText(library.getTitle(context))
-            et.setSelection(library.getTitle(context).length)
-            if (library.id != 0L) {
-                val color = context.colorResource(library.color.toResource())
+            et.setText(folder.getTitle(context))
+            et.setSelection(folder.getTitle(context).length)
+            if (folder.id != 0L) {
+                val color = context.colorResource(folder.color.toResource())
                 val colorStateList = color.toColorStateList()
                 baseDialogFragment.tvDialogTitle.setTextColor(color)
                 baseDialogFragment.vHead.background?.mutate()?.setTint(color)
                 tlLibraryLayout.setSelectedTabIndicatorColor(color)
                 tlNewNoteCursorPosition.setSelectedTabIndicatorColor(color)
-                sNotePreviewSize.value = library.notePreviewSize.toFloat()
+                sNotePreviewSize.value = folder.notePreviewSize.toFloat()
                 tlLibraryLayout.tabRippleColor = colorStateList
                 tlNewNoteCursorPosition.tabRippleColor = colorStateList
                 sNotePreviewSize.trackActiveTintList = colorStateList

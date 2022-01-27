@@ -11,7 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
 import com.noto.app.R
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
 import com.noto.app.receiver.VaultReceiver
 
@@ -20,7 +20,7 @@ private const val VaultChannelId = "Vault"
 private const val VaultNotificationId = -1
 private const val RequestCode = 0
 
-fun NotificationManager.createNotification(context: Context, library: Library, note: Note) {
+fun NotificationManager.createNotification(context: Context, folder: Folder, note: Note) {
 
     val pendingIntent = context.createNotificationPendingIntent(note.id, note.libraryId)
 
@@ -31,19 +31,19 @@ fun NotificationManager.createNotification(context: Context, library: Library, n
         .setContentTitle(note.title.ifBlank { note.body })
         .setContentText(note.body.ifBlank { note.title })
         .setContentIntent(pendingIntent)
-        .setSubText(library.getTitle(context))
+        .setSubText(folder.getTitle(context))
         .setStyle(style)
-        .setColor(context.colorResource(library.color.toResource()))
+        .setColor(context.colorResource(folder.color.toResource()))
         .setColorized(true)
         .setCategory(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Notification.CATEGORY_REMINDER else null)
         .setSmallIcon(R.mipmap.ic_launcher_round)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setAutoCancel(true)
-        .setGroup(library.getTitle(context))
+        .setGroup(folder.getTitle(context))
         .setGroupSummary(true)
         .build()
 
-    notify(library.getTitle(context), note.id.toInt(), notification)
+    notify(folder.getTitle(context), note.id.toInt(), notification)
 }
 
 fun NotificationManager.createVaultNotification(context: Context) {

@@ -17,7 +17,7 @@ import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainVaultFragmentBinding
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.util.*
 import eightbitlab.com.blurview.RenderScriptBlur
 import kotlinx.coroutines.flow.combine
@@ -141,7 +141,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainVaultFragmentBinding.setupLibraries(state: UiState<List<Pair<Library, Int>>>, isShowNotesCount: Boolean, isVaultOpen: Boolean) {
+    private fun MainVaultFragmentBinding.setupLibraries(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean, isVaultOpen: Boolean) {
         if (state is UiState.Success) {
             val libraries = state.value
             rv.withModels {
@@ -156,7 +156,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
                             libraries.forEachRecursively { entry, depth ->
                                 folderItem {
                                     id(entry.first.id)
-                                    library(entry.first)
+                                    folder(entry.first)
                                     notesCount(entry.second)
                                     isManualSorting(false)
                                     isSelected(entry.first.id == selectedDestinationId)

@@ -2,7 +2,7 @@ package com.noto.app.viewModel
 
 import com.noto.app.util.appModule
 import com.noto.app.domain.model.Layout
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.domain.repository.LibraryRepository
@@ -37,7 +37,7 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
                 modules(appModule, testRepositoryModule, fakeLocalDataSourceModule)
             }
             libraryRepository = get()
-            libraryRepository.createLibrary(Library(id = 1L, title = "Work", position = 0))
+            libraryRepository.createLibrary(Folder(id = 1L, title = "Work", position = 0))
             noteRepository = get()
             repeat(3) {
                 val note = Note(id = it.toLong(), libraryId = 1, title = "Title $it", body = "Body $it", position = 0)

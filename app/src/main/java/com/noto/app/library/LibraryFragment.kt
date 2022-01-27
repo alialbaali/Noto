@@ -75,7 +75,7 @@ class LibraryFragment : Fragment() {
             val notes = array[0] as UiState<List<NoteWithLabels>>
             val labels = array[1] as Map<Label, Boolean>
             val font = array[2] as Font
-            val library = array[3] as Library
+            val library = array[3] as Folder
             val isSearchEnabled = array[4] as Boolean
             val searchTerm = array[5] as String
             setupNotesAndLabels(
@@ -145,12 +145,12 @@ class LibraryFragment : Fragment() {
         state: UiState<List<NoteWithLabels>>,
         labels: Map<Label, Boolean>,
         font: Font,
-        library: Library,
+        folder: Folder,
         isSearchEnabled: Boolean,
         searchTerm: String,
     ) {
         when (state) {
-            is UiState.Loading -> rv.setupProgressIndicator(library.color)
+            is UiState.Loading -> rv.setupProgressIndicator(folder.color)
             is UiState.Success -> {
                 val notes = state.value
 
@@ -160,7 +160,7 @@ class LibraryFragment : Fragment() {
                     if (isSearchEnabled) {
                         searchItem {
                             id("search")
-                            color(library.color)
+                            color(folder.color)
                             searchTerm(searchTerm)
                             callback { searchTerm -> viewModel.setSearchTerm(searchTerm) }
                             onBind { _, view, _ ->
@@ -182,7 +182,7 @@ class LibraryFragment : Fragment() {
                     labelListItem {
                         id("labels")
                         labels(labels)
-                        color(library.color)
+                        color(folder.color)
                         onAllLabelClickListener { _ ->
                             viewModel.clearLabelSelection()
                         }
@@ -204,10 +204,10 @@ class LibraryFragment : Fragment() {
 
                     noteListSortingItem {
                         id(0)
-                        sortingType(library.sortingType)
-                        sortingOrder(library.sortingOrder)
+                        sortingType(folder.sortingType)
+                        sortingOrder(folder.sortingOrder)
                         notesCount(notes.size)
-                        notoColor(library.color)
+                        notoColor(folder.color)
                         onClickListener { _ ->
                             navController?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteListSortingDialogFragment(args.libraryId))
                         }
@@ -220,18 +220,18 @@ class LibraryFragment : Fragment() {
                                 placeholder(context.stringResource(R.string.no_notes_found))
                             }
                         else
-                            buildNotesModels(context, library, notes) { notes ->
+                            buildNotesModels(context, folder, notes) { notes ->
                                 notes.forEach { entry ->
                                     noteItem {
                                         id(entry.first.id)
                                         note(entry.first)
                                         font(font)
                                         labels(entry.second)
-                                        color(library.color)
-                                        previewSize(library.notePreviewSize)
-                                        isShowCreationDate(library.isShowNoteCreationDate)
+                                        color(folder.color)
+                                        previewSize(folder.notePreviewSize)
+                                        isShowCreationDate(folder.isShowNoteCreationDate)
                                         searchTerm(if (isSearchEnabled) searchTerm.trim() else null)
-                                        isManualSorting(library.sortingType == NoteListSortingType.Manual)
+                                        isManualSorting(folder.sortingType == NoteListSortingType.Manual)
                                         onClickListener { _ ->
                                             navController
                                                 ?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId,
@@ -283,12 +283,12 @@ class LibraryFragment : Fragment() {
         return true
     }
 
-    private fun LibraryFragmentBinding.setupLibrary(library: Library) {
+    private fun LibraryFragmentBinding.setupLibrary(folder: Folder) {
         context?.let { context ->
             val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
-            val color = context.colorResource(library.color.toResource())
+            val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
-            ctb.title = library.getTitle(context)
+            ctb.title = folder.getTitle(context)
             ctb.setCollapsedTitleTextColor(colorStateList)
             ctb.setExpandedTitleTextColor(colorStateList)
             fab.backgroundTintList = colorStateList

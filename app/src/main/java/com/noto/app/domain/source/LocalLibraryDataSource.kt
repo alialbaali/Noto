@@ -1,25 +1,25 @@
 package com.noto.app.domain.source
 
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import kotlinx.coroutines.flow.Flow
 
 interface LocalLibraryDataSource {
 
-    fun getAllLibraries(): Flow<List<Library>>
+    fun getAllLibraries(): Flow<List<Folder>>
 
-    fun getLibraries(): Flow<List<Library>>
+    fun getLibraries(): Flow<List<Folder>>
 
-    fun getArchivedLibraries(): Flow<List<Library>>
+    fun getArchivedLibraries(): Flow<List<Folder>>
 
-    fun getVaultedLibraries(): Flow<List<Library>>
+    fun getVaultedLibraries(): Flow<List<Folder>>
 
-    fun getLibraryById(libraryId: Long): Flow<Library>
+    fun getLibraryById(libraryId: Long): Flow<Folder>
 
-    suspend fun createLibrary(library: Library): Long
+    suspend fun createLibrary(folder: Folder): Long
 
-    suspend fun updateLibrary(library: Library)
+    suspend fun updateLibrary(folder: Folder)
 
-    suspend fun deleteLibrary(library: Library)
+    suspend fun deleteLibrary(folder: Folder)
 
     suspend fun clearLibraries()
 }

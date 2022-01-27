@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.RemoteViews
 import com.noto.app.AppActivity
 import com.noto.app.R
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.widget.NoteListWidgetConfigActivity
 import com.noto.app.widget.NoteListWidgetService
 
@@ -20,12 +20,12 @@ fun Context.createNoteListWidgetRemoteViews(
     isAppIconEnabled: Boolean,
     isNewLibraryButtonEnabled: Boolean,
     widgetRadius: Int,
-    library: Library,
+    folder: Folder,
     isEmpty: Boolean,
 ): RemoteViews {
-    val color = colorResource(library.color.toResource())
+    val color = colorResource(folder.color.toResource())
     return RemoteViews(packageName, R.layout.note_list_widget).apply {
-        setTextViewText(R.id.tv_library_title, library.getTitle(this@createNoteListWidgetRemoteViews))
+        setTextViewText(R.id.tv_library_title, folder.getTitle(this@createNoteListWidgetRemoteViews))
         setTextColor(R.id.tv_library_title, color)
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_edit_widget, if (isEditWidgetButtonEnabled) View.VISIBLE else View.GONE)
@@ -34,11 +34,11 @@ fun Context.createNoteListWidgetRemoteViews(
         setViewVisibility(R.id.fab, if (isNewLibraryButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.tv_placeholder, if (isEmpty) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.lv, if (isEmpty) View.GONE else View.VISIBLE)
-        setOnClickPendingIntent(R.id.iv_edit_widget, createEditWidgetButtonPendingIntent(appWidgetId, library.id))
-        setOnClickPendingIntent(R.id.ib_fab, createNewNoteButtonPendingIntent(appWidgetId, library.id))
+        setOnClickPendingIntent(R.id.iv_edit_widget, createEditWidgetButtonPendingIntent(appWidgetId, folder.id))
+        setOnClickPendingIntent(R.id.ib_fab, createNewNoteButtonPendingIntent(appWidgetId, folder.id))
         setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId))
-        setOnClickPendingIntent(R.id.tv_library_title, createLibraryLauncherPendingIntent(appWidgetId, library.id))
-        setRemoteAdapter(R.id.lv, createNoteListServiceIntent(appWidgetId, library.id))
+        setOnClickPendingIntent(R.id.tv_library_title, createLibraryLauncherPendingIntent(appWidgetId, folder.id))
+        setRemoteAdapter(R.id.lv, createNoteListServiceIntent(appWidgetId, folder.id))
         setPendingIntentTemplate(R.id.lv, createNoteItemPendingIntent(appWidgetId))
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())

@@ -1,7 +1,7 @@
 package com.noto.app.data.repository
 
 import com.noto.app.util.repositoryModule
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.fakeLocalDataSourceModule
 import io.kotest.core.spec.style.StringSpec
@@ -39,7 +39,7 @@ class LibraryRepositoryTest : StringSpec(), KoinTest {
         }
 
         "create library should insert a new library" {
-            val library = Library(id = 1, title = "Work", position = 0)
+            val library = Folder(id = 1, title = "Work", position = 0)
             repository.createLibrary(library)
             repository.getLibraries()
                 .single()
@@ -49,7 +49,7 @@ class LibraryRepositoryTest : StringSpec(), KoinTest {
         }
 
         "update library should update existing library" {
-            val library = Library(id = 1, title = "Work", position = 0)
+            val library = Folder(id = 1, title = "Work", position = 0)
             repository.createLibrary(library)
 
             val updatedLibrary = library.copy(title = "Home")
@@ -61,7 +61,7 @@ class LibraryRepositoryTest : StringSpec(), KoinTest {
         }
 
         "delete library should remove existing library" {
-            val library = Library(id = 1, title = "Work", position = 0)
+            val library = Folder(id = 1, title = "Work", position = 0)
 
             repository.createLibrary(library)
             repository.getLibraries()

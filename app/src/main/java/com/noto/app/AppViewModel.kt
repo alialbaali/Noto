@@ -3,7 +3,7 @@ package com.noto.app
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Language
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.SettingsRepository
@@ -58,6 +58,6 @@ class AppViewModel(private val libraryRepository: LibraryRepository, private val
     private fun createInboxLibrary() = viewModelScope.launch {
         libraryRepository.getLibraries()
             .firstOrNull()
-            ?.also { libraries -> if (libraries.none { it.isInbox }) libraryRepository.createLibrary(Library.Inbox()) }
+            ?.also { libraries -> if (libraries.none { it.isInbox }) libraryRepository.createLibrary(Folder.Inbox()) }
     }
 }

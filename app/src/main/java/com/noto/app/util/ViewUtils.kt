@@ -43,7 +43,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.noto.app.R
 import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -96,13 +96,13 @@ private fun Note.createShareIntent() = Intent(Intent.ACTION_SEND).apply {
 
 fun View.snackbar(
     message: String,
-    library: Library? = null,
+    folder: Folder? = null,
 ) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
-    if (library == null) {
+    if (folder == null) {
         setBackgroundTint(context.attributeColoResource(R.attr.notoPrimaryColor))
         setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
     } else {
-        setBackgroundTint(context.colorResource(library.color.toResource()))
+        setBackgroundTint(context.colorResource(folder.color.toResource()))
         setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
     }
     val params = view.layoutParams as? CoordinatorLayout.LayoutParams

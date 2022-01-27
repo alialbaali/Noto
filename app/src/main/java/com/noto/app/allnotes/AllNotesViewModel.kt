@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.repository.*
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
@@ -17,10 +17,10 @@ class AllNotesViewModel(
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
-    private val mutableNotes = MutableStateFlow<UiState<Map<Library, List<NoteWithLabels>>>>(UiState.Loading)
+    private val mutableNotes = MutableStateFlow<UiState<Map<Folder, List<NoteWithLabels>>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
 
-    private val mutableNotesVisibility = MutableStateFlow(emptyMap<Library, Boolean>())
+    private val mutableNotesVisibility = MutableStateFlow(emptyMap<Folder, Boolean>())
     val notesVisibility get() = mutableNotesVisibility.asStateFlow()
 
     val font = settingsRepository.font

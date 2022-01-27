@@ -1,6 +1,6 @@
 package com.noto.app.data.repository
 
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.source.LocalLibraryDataSource
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,27 +15,27 @@ class LibraryRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : LibraryRepository {
 
-    override fun getAllLibraries(): Flow<List<Library>> = dataSource.getAllLibraries()
+    override fun getAllLibraries(): Flow<List<Folder>> = dataSource.getAllLibraries()
 
-    override fun getLibraries(): Flow<List<Library>> = dataSource.getLibraries()
+    override fun getLibraries(): Flow<List<Folder>> = dataSource.getLibraries()
 
-    override fun getArchivedLibraries(): Flow<List<Library>> = dataSource.getArchivedLibraries()
+    override fun getArchivedLibraries(): Flow<List<Folder>> = dataSource.getArchivedLibraries()
 
-    override fun getVaultedLibraries(): Flow<List<Library>> = dataSource.getVaultedLibraries()
+    override fun getVaultedLibraries(): Flow<List<Folder>> = dataSource.getVaultedLibraries()
 
-    override fun getLibraryById(libraryId: Long): Flow<Library> = dataSource.getLibraryById(libraryId)
+    override fun getLibraryById(libraryId: Long): Flow<Folder> = dataSource.getLibraryById(libraryId)
 
-    override suspend fun createLibrary(library: Library) = withContext(dispatcher) {
+    override suspend fun createLibrary(folder: Folder) = withContext(dispatcher) {
         val position = getLibraryPosition()
-        dataSource.createLibrary(library.copy(position = position))
+        dataSource.createLibrary(folder.copy(position = position))
     }
 
-    override suspend fun updateLibrary(library: Library) = withContext(dispatcher) {
-        dataSource.updateLibrary(library)
+    override suspend fun updateLibrary(folder: Folder) = withContext(dispatcher) {
+        dataSource.updateLibrary(folder)
     }
 
-    override suspend fun deleteLibrary(library: Library) = withContext(dispatcher) {
-        dataSource.deleteLibrary(library)
+    override suspend fun deleteLibrary(folder: Folder) = withContext(dispatcher) {
+        dataSource.deleteLibrary(folder)
     }
 
     override suspend fun clearLibraries() = dataSource.clearLibraries()

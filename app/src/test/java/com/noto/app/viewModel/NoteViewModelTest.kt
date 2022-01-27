@@ -1,7 +1,7 @@
 package com.noto.app.viewModel
 
 import com.noto.app.util.appModule
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.repository.LibraryRepository
 import com.noto.app.domain.repository.NoteRepository
@@ -18,10 +18,8 @@ import io.kotest.matchers.longs.shouldBeExactly
 import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.string.shouldBeBlank
 import io.kotest.matchers.string.shouldBeEqualIgnoringCase
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Clock
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
@@ -42,8 +40,8 @@ class NoteViewModelTest : StringSpec(), KoinTest {
             }
             libraryRepository = get()
             noteRepository = get()
-            libraryRepository.createLibrary(Library(id = 1, title = "Work", position = 0))
-            libraryRepository.createLibrary(Library(id = 2, title = "Home", position = 0))
+            libraryRepository.createLibrary(Folder(id = 1, title = "Work", position = 0))
+            libraryRepository.createLibrary(Folder(id = 2, title = "Home", position = 0))
             noteRepository.createNote(Note(id = 1, libraryId = 1, title = "Title", body = "Body", position = 0))
             viewModel = get { parametersOf(1L, 1L) }
         }

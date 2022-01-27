@@ -8,7 +8,7 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.noto.app.AppActivity
 import com.noto.app.R
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.repository.*
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.filterNotNull
@@ -28,14 +28,14 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
     private val appWidgetId = intent?.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID)
         ?: AppWidgetManager.INVALID_APPWIDGET_ID
     private val libraryId = intent?.getLongExtra(Constants.LibraryId, 0) ?: 0
-    private lateinit var library: Library
+    private lateinit var folder: Folder
     private lateinit var labelIds: List<Long>
     private lateinit var notes: List<NoteWithLabels>
 
     override fun onCreate() {}
 
     override fun onDataSetChanged() = runBlocking {
-        library = libraryRepository.getLibraryById(libraryId)
+        folder = libraryRepository.getLibraryById(libraryId)
             .filterNotNull()
             .first()
         labelIds = settingsRepository.getWidgetSelectedLabelIds(appWidgetId, libraryId).first()
@@ -50,7 +50,7 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
             .map {
                 it.mapWithLabels(labels, noteLabels)
                     .filter { it.second.map { it.id }.containsAll(labelIds.toList()) }
-                    .sorted(library.sortingType, library.sortingOrder)
+                    .sorted(folder.sortingType, folder.sortingOrder)
                     .sortedByDescending { it.first.isPinned }
             }
             .first()
@@ -64,10 +64,10 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_note_item).apply {
             val pair = notes[position]
             val intent = Intent(Constants.Intent.ActionOpenNote, null, context, AppActivity::class.java).apply {
-                putExtra(Constants.LibraryId, library.id)
+                putExtra(Constants.LibraryId, folder.id)
                 putExtra(Constants.NoteId, pair.first.id)
             }
-            val color = context.colorResource(library.color.toResource())
+            val color = context.colorResource(folder.color.toResource())
             removeAllViews(R.id.ll_labels)
             pair.second.forEach { label ->
                 val remoteViews = RemoteViews(context.packageName, R.layout.widget_note_label_item).apply {
@@ -81,17 +81,17 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
             setContentDescription(R.id.ll, pair.first.title)
             setTextViewText(R.id.tv_note_title, pair.first.title)
             setTextViewText(R.id.tv_creation_date, context.stringResource(R.string.created, pair.first.creationDate.format(context)))
-            setViewVisibility(R.id.tv_creation_date, if (library.isShowNoteCreationDate) View.VISIBLE else View.GONE)
+            setViewVisibility(R.id.tv_creation_date, if (folder.isShowNoteCreationDate) View.VISIBLE else View.GONE)
             setViewVisibility(R.id.tv_note_title, if (pair.first.title.isNotBlank()) View.VISIBLE else View.GONE)
             setViewVisibility(R.id.ll_labels, if (pair.second.isNotEmpty()) View.VISIBLE else View.GONE)
-            setViewPadding(R.id.tv_note_title, 0, 0, 0, if (pair.first.body.isBlank() || library.notePreviewSize == 0) 0.dp else 4.dp)
+            setViewPadding(R.id.tv_note_title, 0, 0, 0, if (pair.first.body.isBlank() || folder.notePreviewSize == 0) 0.dp else 4.dp)
             setViewPadding(R.id.tv_note_body, 0, if (pair.first.title.isBlank()) 0.dp else 4.dp, 0, 0)
-            if (pair.first.title.isBlank() && library.notePreviewSize == 0) {
+            if (pair.first.title.isBlank() && folder.notePreviewSize == 0) {
                 setTextViewText(R.id.tv_note_body, pair.first.body.takeLines(1))
                 setViewVisibility(R.id.tv_note_body, View.VISIBLE)
             } else {
-                setTextViewText(R.id.tv_note_body, pair.first.body.takeLines(library.notePreviewSize))
-                setViewVisibility(R.id.tv_note_body, if (library.notePreviewSize != 0 && pair.first.body.isNotBlank()) View.VISIBLE else View.GONE)
+                setTextViewText(R.id.tv_note_body, pair.first.body.takeLines(folder.notePreviewSize))
+                setViewVisibility(R.id.tv_note_body, if (folder.notePreviewSize != 0 && pair.first.body.isNotBlank()) View.VISIBLE else View.GONE)
             }
         }
         return remoteViews

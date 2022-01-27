@@ -14,7 +14,7 @@ import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.AllNotesFragmentBinding
 import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.library.noteItem
 import com.noto.app.util.*
 import kotlinx.coroutines.delay
@@ -138,8 +138,8 @@ class AllNotesFragment : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun AllNotesFragmentBinding.setupNotes(
-        state: UiState<Map<Library, List<NoteWithLabels>>>,
-        notesVisibility: Map<Library, Boolean>,
+        state: UiState<Map<Folder, List<NoteWithLabels>>>,
+        notesVisibility: Map<Folder, Boolean>,
         font: Font,
         isSearchEnabled: Boolean,
         searchTerm: String,

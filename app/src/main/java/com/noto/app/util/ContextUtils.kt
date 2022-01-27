@@ -8,16 +8,16 @@ import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.IconCompat
 import com.noto.app.AppActivity
 import com.noto.app.R
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 
 private const val IconSize = 512
 private const val IconSpacing = 128
 
-fun Context.createPinnedShortcut(library: Library): ShortcutInfoCompat {
+fun Context.createPinnedShortcut(folder: Folder): ShortcutInfoCompat {
     val intent = Intent(Constants.Intent.ActionCreateNote, null, this, AppActivity::class.java).apply {
-        putExtra(Constants.LibraryId, library.id)
+        putExtra(Constants.LibraryId, folder.id)
     }
-    val backgroundColor = library.color.toResource().let(this::colorResource)
+    val backgroundColor = folder.color.toResource().let(this::colorResource)
     val iconColor = colorResource(android.R.color.white)
     val bitmap = createBitmap(IconSize, IconSize).applyCanvas {
         drawColor(backgroundColor)
@@ -27,10 +27,10 @@ fun Context.createPinnedShortcut(library: Library): ShortcutInfoCompat {
             drawable.draw(this)
         }
     }
-    return ShortcutInfoCompat.Builder(this, library.id.toString())
+    return ShortcutInfoCompat.Builder(this, folder.id.toString())
         .setIntent(intent)
-        .setShortLabel(library.getTitle(this))
-        .setLongLabel(library.getTitle(this))
+        .setShortLabel(folder.getTitle(this))
+        .setLongLabel(folder.getTitle(this))
         .setIcon(IconCompat.createWithBitmap(bitmap))
         .build()
 }

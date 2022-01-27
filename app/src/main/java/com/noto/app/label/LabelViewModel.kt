@@ -3,7 +3,7 @@ package com.noto.app.label
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Label
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.domain.repository.LibraryRepository
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,7 +21,7 @@ class LabelViewModel(
 
     val library = libraryRepository.getLibraryById(libraryId)
         .filterNotNull()
-        .stateIn(viewModelScope, SharingStarted.Lazily, Library(libraryId, position = 0))
+        .stateIn(viewModelScope, SharingStarted.Lazily, Folder(libraryId, position = 0))
 
     val labels = labelRepository.getLabelsByLibraryId(libraryId)
         .filterNotNull()

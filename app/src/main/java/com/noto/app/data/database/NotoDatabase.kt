@@ -7,7 +7,7 @@ import com.noto.app.data.source.LibraryDao
 import com.noto.app.data.source.NoteDao
 import com.noto.app.data.source.NoteLabelDao
 import com.noto.app.domain.model.Label
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NoteLabel
 
@@ -23,7 +23,7 @@ private const val NOTO_DATABASE = "Noto Database"
     NewNoteCursorPositionConvertor::class,
 )
 @Database(
-    entities = [Note::class, Library::class, Label::class, NoteLabel::class],
+    entities = [Note::class, Folder::class, Label::class, NoteLabel::class],
     version = 26,
     autoMigrations = [
         AutoMigration(from = 6, to = 7),
@@ -42,13 +42,13 @@ private const val NOTO_DATABASE = "Noto Database"
         AutoMigration(from = 19, to = 20),
         AutoMigration(from = 20, to = 21, spec = Migrations.RenameLayoutManagerColumn::class),
         AutoMigration(from = 21, to = 22, spec = Migrations.RenameNoteListSortingTypeColumn::class),
-        /** Add isVaulted properties to [Library] and [Note] */
+        /** Add isVaulted properties to [Folder] and [Note] */
         AutoMigration(from = 22, to = 23),
         /** Add accessDate property to [Note] */
         AutoMigration(from = 23, to = 24),
-        /** Rename isSetNewNoteCursorOnTitle property to newNoteCursorPosition in [Library] */
+        /** Rename isSetNewNoteCursorOnTitle property to newNoteCursorPosition in [Folder] */
         AutoMigration(from = 24, to = 25, spec = Migrations.RenameIsSetNewNoteCursorOnTitle::class),
-        /** Add parentId property to [Library] */
+        /** Add parentId property to [Folder] */
         AutoMigration(from = 25, to = 26),
     ],
 )

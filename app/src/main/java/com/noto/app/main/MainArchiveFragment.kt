@@ -12,7 +12,7 @@ import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainArchiveFragmentBinding
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -48,7 +48,7 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainArchiveFragmentBinding.setupLibraries(state: UiState<List<Pair<Library, Int>>>, isShowNotesCount: Boolean) {
+    private fun MainArchiveFragmentBinding.setupLibraries(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean) {
         if (state is UiState.Success) {
             val libraries = state.value
             rv.withModels {
@@ -63,7 +63,7 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                             libraries.forEachRecursively { entry, depth ->
                                 folderItem {
                                     id(entry.first.id)
-                                    library(entry.first)
+                                    folder(entry.first)
                                     notesCount(entry.second)
                                     isManualSorting(false)
                                     isSelected(entry.first.id == selectedDestinationId)

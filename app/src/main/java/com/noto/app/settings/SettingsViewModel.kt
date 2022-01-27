@@ -46,7 +46,7 @@ class SettingsViewModel(
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     val mainLibraryId = settingsRepository.mainLibraryId
-        .stateIn(viewModelScope, SharingStarted.Eagerly, Library.InboxId)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.InboxId)
 
     val isCollapseToolbar = settingsRepository.isCollapseToolbar
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
@@ -81,10 +81,10 @@ class SettingsViewModel(
         val libraryIds = mutableMapOf<Long, Long>()
         val noteIds = mutableMapOf<Long, Long>()
         val labelIds = mutableMapOf<Long, Long>()
-        DefaultJson.decodeFromString<List<Library>>(data.getValue(Constants.Libraries))
+        DefaultJson.decodeFromString<List<Folder>>(data.getValue(Constants.Libraries))
             .forEach { library ->
                 if (library.isInbox) {
-                    libraryIds[library.id] = Library.InboxId
+                    libraryIds[library.id] = Folder.InboxId
                     libraryRepository.updateLibrary(library)
                 } else {
                     val newLibraryId = libraryRepository.createLibrary(library.copy(id = 0))

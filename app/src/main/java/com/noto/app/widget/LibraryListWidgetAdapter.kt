@@ -11,15 +11,15 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMarginsRelative
 import com.noto.app.R
 import com.noto.app.databinding.WidgetLibraryItemBinding
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.util.*
 
 class LibraryListWidgetAdapter(
     context: Context,
-    libraries: List<Pair<Library, Int>>,
+    libraries: List<Pair<Folder, Int>>,
     layoutResourceId: Int,
     private val isShowNotesCount: Boolean,
-) : ArrayAdapter<Pair<Library, Int>>(context, layoutResourceId, libraries) {
+) : ArrayAdapter<Pair<Folder, Int>>(context, layoutResourceId, libraries) {
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val layoutInflater = LayoutInflater.from(context)

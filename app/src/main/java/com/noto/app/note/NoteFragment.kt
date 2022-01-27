@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.ListUpdateCallback
 import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.NewNoteCursorPosition
 import com.noto.app.domain.model.Note
 import com.noto.app.label.labelItem
@@ -263,12 +263,12 @@ class NoteFragment : Fragment() {
         }
     }
 
-    private fun NoteFragmentBinding.setupLibrary(library: Library) {
+    private fun NoteFragmentBinding.setupLibrary(folder: Folder) {
         context?.let { context ->
             val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
-            val color = context.colorResource(library.color.toResource())
+            val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
-            ctb.title = library.getTitle(context)
+            ctb.title = folder.getTitle(context)
             ctb.setCollapsedTitleTextColor(colorStateList)
             ctb.setExpandedTitleTextColor(colorStateList)
             tvCreatedAt.setTextColor(color)

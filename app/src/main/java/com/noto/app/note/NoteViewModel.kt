@@ -29,7 +29,7 @@ class NoteViewModel(
 
     val library = libraryRepository.getLibraryById(libraryId)
         .filterNotNull()
-        .stateIn(viewModelScope, SharingStarted.Lazily, Library(position = 0))
+        .stateIn(viewModelScope, SharingStarted.Lazily, Folder(position = 0))
 
     val font = settingsRepository.font
         .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)

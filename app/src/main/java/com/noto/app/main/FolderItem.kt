@@ -14,7 +14,7 @@ import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.noto.app.R
 import com.noto.app.databinding.FolderItemBinding
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.util.*
 
 @SuppressLint("NonConstantResourceId")
@@ -22,7 +22,7 @@ import com.noto.app.util.*
 abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
 
     @EpoxyAttribute
-    lateinit var library: Library
+    lateinit var folder: Folder
 
     @EpoxyAttribute
     open var isManualSorting: Boolean = false
@@ -57,7 +57,7 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
     @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
-            val color = context.colorResource(library.color.toResource())
+            val color = context.colorResource(folder.color.toResource())
             val selectedColorStateList = color.withDefaultAlpha().toColorStateList()
             val rippleDrawable = root.background as RippleDrawable
             rippleDrawable.setColor(selectedColorStateList)
@@ -69,16 +69,16 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
                 selectedColorStateList
             else
                 context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
-            tvFolderTitle.text = library.getTitle(context)
-            if (library.isInbox)
+            tvFolderTitle.text = folder.getTitle(context)
+            if (folder.isInbox)
                 ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
             else
                 ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_library_24))
             ivFolderIcon.imageTintList = color.toColorStateList()
         }
         ibFolderHandle.visibility = when {
-            isManualSorting && !library.isInbox -> View.VISIBLE
-            isManualSorting && library.isInbox -> View.INVISIBLE
+            isManualSorting && !folder.isInbox -> View.VISIBLE
+            isManualSorting && folder.isInbox -> View.INVISIBLE
             else -> View.GONE
         }
         ibFolderHandle.setOnTouchListener(onDragHandleTouchListener)

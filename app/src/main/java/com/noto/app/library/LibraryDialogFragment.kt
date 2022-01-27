@@ -17,7 +17,7 @@ import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LibraryDialogFragmentBinding
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -41,7 +41,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
 
     private fun LibraryDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
         .apply {
-            tvDialogTitle.text = if (args.libraryId == Library.InboxId)
+            tvDialogTitle.text = if (args.libraryId == Folder.InboxId)
                 context?.stringResource(R.string.inbox_options)
             else
                 context?.stringResource(R.string.library_options)
@@ -140,7 +140,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 }
             navController?.navigateSafely(
                 LibraryDialogFragmentDirections.actionLibraryDialogFragmentToSelectLibraryDialogFragment(
-                    longArrayOf(args.libraryId, Library.InboxId),
+                    longArrayOf(args.libraryId, Folder.InboxId),
                     selectedLibraryId = viewModel.library.value.parentId ?: 0L,
                     isNoParentEnabled = true
                 )
@@ -164,9 +164,9 @@ class LibraryDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun LibraryDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun LibraryDialogFragmentBinding.setupLibrary(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
-            val color = context.colorResource(library.color.toResource())
+            val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
             baseDialogFragment.tvDialogTitle.setTextColor(color)
@@ -179,7 +179,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                     tv.background.setRippleColor(colorStateList)
                 }
 
-            if (library.isInbox) {
+            if (folder.isInbox) {
                 divider1.root.isVisible = false
                 divider2.root.isVisible = false
                 tvArchiveLibrary.isVisible = false
@@ -190,7 +190,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 tvEditLibrary.text = context.stringResource(R.string.edit_inbox)
             }
 
-            if (library.isInbox) {
+            if (folder.isInbox) {
                 tvArchiveLibrary.isVisible = false
                 tvVaultLibrary.isVisible = false
                 tvDeleteLibrary.isVisible = false
@@ -198,7 +198,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 tvEditLibrary.text = context.stringResource(R.string.edit_inbox)
             }
 
-            if (library.isArchived) {
+            if (folder.isArchived) {
                 tvArchiveLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
                 tvArchiveLibrary.text = context.stringResource(R.string.unarchive_library)
             } else {
@@ -206,7 +206,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 tvArchiveLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
             }
 
-            if (library.isVaulted) {
+            if (folder.isVaulted) {
                 tvVaultLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_lock_open_24, 0, 0, 0)
                 tvVaultLibrary.text = context.stringResource(R.string.unvault_library)
             } else {
@@ -214,7 +214,7 @@ class LibraryDialogFragment : BaseDialogFragment() {
                 tvVaultLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_lock_24, 0, 0, 0)
             }
 
-            if (library.isPinned) {
+            if (folder.isPinned) {
                 tvPinLibrary.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
                 tvPinLibrary.text = context.stringResource(R.string.unpin_library)
             } else {

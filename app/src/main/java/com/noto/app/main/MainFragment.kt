@@ -13,7 +13,7 @@ import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.*
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainFragmentBinding
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.LibraryListSortingType
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.SortingOrder
@@ -97,7 +97,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun MainFragmentBinding.setupLibraries(
-        state: UiState<List<Pair<Library, Int>>>,
+        state: UiState<List<Pair<Folder, Int>>>,
         sortingType: LibraryListSortingType,
         sortingOrder: SortingOrder,
         isShowNotesCount: Boolean,
@@ -124,7 +124,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                 inboxLibrary?.let {
                     folderItem {
                         id(inboxLibrary.first.id)
-                        library(inboxLibrary.first)
+                        folder(inboxLibrary.first)
                         notesCount(inboxLibrary.second)
                         isManualSorting(isManualSorting)
                         isShowNotesCount(isShowNotesCount)
@@ -191,7 +191,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         libraries.forEachRecursively { entry, depth ->
                             folderItem {
                                 id(entry.first.id)
-                                library(entry.first)
+                                folder(entry.first)
                                 notesCount(entry.second)
                                 isManualSorting(isManualSorting)
                                 isShowNotesCount(isShowNotesCount)
@@ -250,19 +250,19 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         val model = viewHolder.model as? FolderItem
         if (model != null) {
             if (direction == ItemTouchHelper.START) {
-                val parentId = libraries.findRecursively { it.first.id == model.library.parentId }?.first?.parentId
-                viewModel.updateLibraryParentId(model.library, parentId)
+                val parentId = libraries.findRecursively { it.first.id == model.folder.parentId }?.first?.parentId
+                viewModel.updateLibraryParentId(model.folder, parentId)
             } else {
                 val previousViewHolder = rv.findViewHolderForAdapterPosition(viewHolder.bindingAdapterPosition - 1) as EpoxyViewHolder?
                 val previousModel = previousViewHolder?.model as? FolderItem?
                 val parentId = libraries.findRecursively {
-                    val isSameParent = it.first.parentId == model.library.parentId
-                    val isPreviousSelf = it.first.id == previousModel?.library?.id
-                    val isWithinPreviousLibraries = it.first.libraries.findRecursively { it.first.id == previousModel?.library?.id } != null
+                    val isSameParent = it.first.parentId == model.folder.parentId
+                    val isPreviousSelf = it.first.id == previousModel?.folder?.id
+                    val isWithinPreviousLibraries = it.first.libraries.findRecursively { it.first.id == previousModel?.folder?.id } != null
                     isSameParent && (isPreviousSelf || isWithinPreviousLibraries)
                 }?.first?.id
                 if (parentId != null)
-                    viewModel.updateLibraryParentId(model.library, parentId)
+                    viewModel.updateLibraryParentId(model.folder, parentId)
             }
             epoxyController.notifyModelChanged(viewHolder.bindingAdapterPosition)
         }
@@ -272,7 +272,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         rv.forEach { view ->
             val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
             val model = viewHolder.model as? FolderItem
-            if (model != null) viewModel.updateLibraryPosition(model.library, viewHolder.bindingAdapterPosition)
+            if (model != null) viewModel.updateLibraryPosition(model.folder, viewHolder.bindingAdapterPosition)
         }
     }
 }

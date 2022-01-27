@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.noto.app.util.localDataSourceModule
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.source.LocalLibraryDataSource
 import com.noto.app.domain.source.LocalNoteDataSource
@@ -44,7 +44,7 @@ class LocalNoteDataSourceTest : KoinTest {
             source.clearNotes()
             get<LocalLibraryDataSource>().apply {
                 clearLibraries()
-                createLibrary(Library(id = 1, title = "Work", position = 0))
+                createLibrary(Folder(id = 1, title = "Work", position = 0))
             }
         }
     }

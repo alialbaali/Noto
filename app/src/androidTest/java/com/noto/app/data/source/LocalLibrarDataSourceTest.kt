@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.noto.app.util.localDataSourceModule
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.source.LocalLibraryDataSource
 import com.noto.app.inMemoryDatabaseModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,7 +26,7 @@ import kotlin.test.assertTrue
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @SmallTest
-class LocalLibraryDataSourceTest : KoinTest {
+class LocalFolderDataSourceTest : KoinTest {
 
     private lateinit var source: LocalLibraryDataSource
 
@@ -125,5 +125,5 @@ class LocalLibraryDataSourceTest : KoinTest {
         assertTrue { updatedDbLibraries.isEmpty() }
     }
 
-    private fun createLibrary(title: String = "Work") = Library(title = title, position = 0)
+    private fun createLibrary(title: String = "Work") = Folder(title = title, position = 0)
 }

@@ -15,7 +15,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
-import com.noto.app.domain.model.Library
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -233,9 +233,9 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun NoteDialogFragmentBinding.setupLibrary(library: Library, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteDialogFragmentBinding.setupLibrary(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
         context?.let { context ->
-            val color = context.colorResource(library.color.toResource())
+            val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             baseDialogFragment.vHead.backgroundTintList = colorStateList
