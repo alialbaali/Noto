@@ -106,8 +106,8 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         if (state is UiState.Success) {
             rv.withModels {
                 epoxyController = this
-                val folders = state.value.filterNot { it.first.isInbox }
-                val inboxFolder = state.value.firstOrNull { it.first.isInbox }
+                val folders = state.value.filterNot { it.first.isGeneral }
+                val generalFolder = state.value.firstOrNull { it.first.isGeneral }
                 val isManualSorting = sortingType == FolderListSortingType.Manual
 
                 folderListSortingItem {
@@ -121,18 +121,18 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                     }
                 }
 
-                inboxFolder?.let {
+                generalFolder?.let {
                     folderItem {
-                        id(inboxFolder.first.id)
-                        folder(inboxFolder.first)
-                        notesCount(inboxFolder.second)
+                        id(generalFolder.first.id)
+                        folder(generalFolder.first)
+                        notesCount(generalFolder.second)
                         isManualSorting(isManualSorting)
                         isShowNotesCount(isShowNotesCount)
-                        isSelected(inboxFolder.first.id == selectedDestinationId)
+                        isSelected(generalFolder.first.id == selectedDestinationId)
                         onClickListener { _ ->
                             dismiss()
-                            if (inboxFolder.first.id != selectedDestinationId)
-                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderFragment(inboxFolder.first.id)) {
+                            if (generalFolder.first.id != selectedDestinationId)
+                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderFragment(generalFolder.first.id)) {
                                     popUpTo(popUpToDestinationId) {
                                         inclusive = true
                                     }
@@ -140,7 +140,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         }
                         onLongClickListener { _ ->
                             dismiss()
-                            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderDialogFragment(inboxFolder.first.id))
+                            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderDialogFragment(generalFolder.first.id))
                             true
                         }
                         onDragHandleTouchListener { _, _ -> false }
@@ -153,7 +153,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         id("all_notes")
                         notesCount(allNotes.count())
                         title(context.stringResource(R.string.all_notes))
-                        icon(context.drawableResource(R.drawable.ic_round_all_inbox_24))
+                        icon(context.drawableResource(R.drawable.ic_round_all_notes_24))
                         isManualSorting(isManualSorting)
                         isShowNotesCount(isShowNotesCount)
                         isSelected(AllNotesItemId == selectedDestinationId)

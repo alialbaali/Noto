@@ -42,10 +42,6 @@ class NewFolderDialogFragment : BaseDialogFragment() {
                 0L -> {
                     tvDialogTitle.text = context.stringResource(R.string.new_folder)
                 }
-                Folder.InboxId -> {
-                    tvDialogTitle.text = context.stringResource(R.string.edit_inbox)
-                    btnCreate.text = context.stringResource(R.string.done)
-                }
                 else -> {
                     tvDialogTitle.text = context.stringResource(R.string.edit_folder)
                     btnCreate.text = context.stringResource(R.string.done)
@@ -65,12 +61,9 @@ class NewFolderDialogFragment : BaseDialogFragment() {
             activity?.showKeyboard(root)
         }
 
-        if (args.folderId == Folder.InboxId) {
-            et.setText(context?.stringResource(R.string.inbox))
+        if (args.folderId == Folder.GeneralFolderId) {
             til.isVisible = false
             tvFolderTitle.isVisible = false
-            tvFolderColor.text = context?.stringResource(R.string.inbox_color)
-            tvFolderLayout.text = context?.stringResource(R.string.inbox_layout)
         }
 
         viewModel.folder

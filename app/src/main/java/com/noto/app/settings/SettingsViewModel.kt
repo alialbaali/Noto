@@ -6,7 +6,7 @@ import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
 import com.noto.app.util.Constants
 import com.noto.app.util.hash
-import com.noto.app.util.isInbox
+import com.noto.app.util.isGeneral
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -46,7 +46,7 @@ class SettingsViewModel(
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     val mainFolderId = settingsRepository.mainFolderId
-        .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.InboxId)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.GeneralFolderId)
 
     val isCollapseToolbar = settingsRepository.isCollapseToolbar
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
@@ -83,8 +83,8 @@ class SettingsViewModel(
         val labelIds = mutableMapOf<Long, Long>()
         DefaultJson.decodeFromString<List<Folder>>(data.getValue(Constants.Folders))
             .forEach { folder ->
-                if (folder.isInbox) {
-                    folderIds[folder.id] = Folder.InboxId
+                if (folder.isGeneral) {
+                    folderIds[folder.id] = Folder.GeneralFolderId
                     folderRepository.updateFolder(folder)
                 } else {
                     val newFolderId = folderRepository.createFolder(folder.copy(id = 0))

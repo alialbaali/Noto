@@ -40,12 +40,7 @@ class FolderDialogFragment : BaseDialogFragment() {
         }
 
     private fun FolderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-        .apply {
-            tvDialogTitle.text = if (args.folderId == Folder.InboxId)
-                context?.stringResource(R.string.inbox_options)
-            else
-                context?.stringResource(R.string.folder_options)
-        }
+        .apply { tvDialogTitle.text = context?.stringResource(R.string.folder_options) }
 
     private fun FolderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         viewModel.folder
@@ -140,7 +135,7 @@ class FolderDialogFragment : BaseDialogFragment() {
                 }
             navController?.navigateSafely(
                 FolderDialogFragmentDirections.actionFolderDialogFragmentToSelectFolderDialogFragment(
-                    longArrayOf(args.folderId, Folder.InboxId),
+                    longArrayOf(args.folderId, Folder.GeneralFolderId),
                     selectedFolderId = viewModel.folder.value.parentId ?: 0L,
                     isNoParentEnabled = true
                 )
@@ -179,7 +174,7 @@ class FolderDialogFragment : BaseDialogFragment() {
                     tv.background.setRippleColor(colorStateList)
                 }
 
-            if (folder.isInbox) {
+            if (folder.isGeneral) {
                 divider1.root.isVisible = false
                 divider2.root.isVisible = false
                 tvArchiveFolder.isVisible = false
@@ -187,15 +182,6 @@ class FolderDialogFragment : BaseDialogFragment() {
                 tvDeleteFolder.isVisible = false
                 tvPinFolder.isVisible = false
                 tvChangeParent.isVisible = false
-                tvEditFolder.text = context.stringResource(R.string.edit_inbox)
-            }
-
-            if (folder.isInbox) {
-                tvArchiveFolder.isVisible = false
-                tvVaultFolder.isVisible = false
-                tvDeleteFolder.isVisible = false
-                tvPinFolder.isVisible = false
-                tvEditFolder.text = context.stringResource(R.string.edit_inbox)
             }
 
             if (folder.isArchived) {

@@ -120,11 +120,11 @@ fun String.hash(): String {
     return Base64.encodeToString(bytes, Base64.DEFAULT)
 }
 
-val Folder.isInbox
-    get() = id == Folder.InboxId
+val Folder.isGeneral
+    get() = id == Folder.GeneralFolderId
 
 @Suppress("DEPRECATION")
-fun Folder.getTitle(context: Context) = if (isInbox) context.stringResource(R.string.inbox) else title
+fun Folder.getTitle(context: Context) = if (isGeneral) context.stringResource(R.string.general) else title
 
 fun List<Pair<Folder, Int>>.forEachRecursively(depth: Int = 1, block: (Pair<Folder, Int>, depth: Int) -> Unit) {
     forEach { entry ->

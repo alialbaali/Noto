@@ -61,7 +61,7 @@ class AllNotesViewModel(
                 .mapValues { it.value.sorted(it.key.sortingType, it.key.sortingOrder) }
                 .toList()
                 .sortedBy { it.first.position }
-                .sortedByDescending { it.first.isInbox }
+                .sortedByDescending { it.first.isGeneral }
                 .toMap()
                 .let { UiState.Success(it) }
         }.launchIn(viewModelScope)

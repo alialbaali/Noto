@@ -59,12 +59,8 @@
     <string name="monospace">Monospace</string>
     <string name="font">Font</string>
     <string name="folders_archive">Folders archive</string>
-    <string name="inbox">Inbox</string>
-    <string name="edit_inbox">Edit inbox</string>
-    <string name="inbox_options">Inbox options</string>
-    <string name="inbox_color">Inbox color</string>
-    <string name="inbox_layout">Inbox layout</string>
     <string name="change_main_folder">Change main folder</string>
+    <string name="general">General</string>
     <string name="collapse_toolbar">Collapse toolbar by default</string>
     <string name="all_notes">All notes</string>
     <string name="clear">Clear</string>

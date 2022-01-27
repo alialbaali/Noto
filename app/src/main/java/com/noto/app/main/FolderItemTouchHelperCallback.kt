@@ -24,7 +24,7 @@ class FolderItemTouchHelperCallback(
 
     override fun getMovementFlagsForModel(model: FolderItem?, adapterPosition: Int): Int {
         val dragFlags = ItemTouchHelper.UP or ItemTouchHelper.DOWN
-        val swipeFlags = if (model?.folder?.isInbox == true) 0 else ItemTouchHelper.START or ItemTouchHelper.END
+        val swipeFlags = if (model?.folder?.isGeneral == true) 0 else ItemTouchHelper.START or ItemTouchHelper.END
         return makeMovementFlags(dragFlags, swipeFlags)
     }
 

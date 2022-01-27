@@ -70,19 +70,20 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
             else
                 context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
             tvFolderTitle.text = folder.getTitle(context)
-            if (folder.isInbox) {
-                ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
+            if (isSelected) {
+                ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_open_24))
             } else {
-                if (isSelected)
-                    ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_open_24))
-                else
+                if (folder.isGeneral) {
+                    ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_general_24))
+                } else {
                     ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_24))
+                }
             }
             ivFolderIcon.imageTintList = color.toColorStateList()
         }
         ibFolderHandle.visibility = when {
-            isManualSorting && !folder.isInbox -> View.VISIBLE
-            isManualSorting && folder.isInbox -> View.INVISIBLE
+            isManualSorting && !folder.isGeneral -> View.VISIBLE
+            isManualSorting && folder.isGeneral -> View.INVISIBLE
             else -> View.GONE
         }
         ibFolderHandle.setOnTouchListener(onDragHandleTouchListener)

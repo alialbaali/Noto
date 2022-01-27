@@ -7,7 +7,7 @@ import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.SettingsRepository
-import com.noto.app.util.isInbox
+import com.noto.app.util.isGeneral
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -40,7 +40,7 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
     init {
-        createInboxFolder()
+        createGeneralFolder()
 //        vaultTimeout
 //            .drop(1)
 //            .onEach { timeout -> if (timeout == VaultTimeout.Immediately) closeVault() }
@@ -55,9 +55,9 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
         settingsRepository.updateScheduledVaultTimeout(vaultTimeout)
     }
 
-    private fun createInboxFolder() = viewModelScope.launch {
+    private fun createGeneralFolder() = viewModelScope.launch {
         folderRepository.getFolders()
             .firstOrNull()
-            ?.also { folders -> if (folders.none { it.isInbox }) folderRepository.createFolder(Folder.Inbox()) }
+            ?.also { folders -> if (folders.none { it.isGeneral }) folderRepository.createFolder(Folder.GeneralFolder()) }
     }
 }

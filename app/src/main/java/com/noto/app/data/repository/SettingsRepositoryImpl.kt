@@ -103,7 +103,7 @@ class SettingsRepositoryImpl(
 
     override val mainFolderId: Flow<Long> = storage.data
         .map { preferences -> preferences[SettingsKeys.MainFolderId] }
-        .map { it ?: Folder.InboxId }
+        .map { it ?: Folder.GeneralFolderId }
         .flowOn(dispatcher)
 
     override fun getIsWidgetCreated(widgetId: Int): Flow<Boolean> {

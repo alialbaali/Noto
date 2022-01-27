@@ -70,8 +70,8 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment() {
         when (state) {
             is UiState.Loading -> rv.setupProgressIndicator()
             is UiState.Success -> {
-                val folders = state.value.filterNot { it.first.isInbox }
-                val inboxFolder = state.value.firstOrNull { it.first.isInbox }
+                val folders = state.value.filterNot { it.first.isGeneral }
+                val generalFolder = state.value.firstOrNull { it.first.isGeneral }
                 val callback = { id: Long ->
                     try {
                         navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.FolderId, id)
@@ -91,22 +91,22 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment() {
                         }
                     }
 
-                    inboxFolder?.let {
+                    generalFolder?.let {
                         folderItem {
-                            id(inboxFolder.first.id)
-                            folder(inboxFolder.first)
-                            notesCount(inboxFolder.second)
-                            isSelected(inboxFolder.first.id == args.selectedFolderId)
+                            id(generalFolder.first.id)
+                            folder(generalFolder.first)
+                            notesCount(generalFolder.second)
+                            isSelected(generalFolder.first.id == args.selectedFolderId)
                             isManualSorting(false)
                             isShowNotesCount(isShowNotesCount)
-                            onClickListener { _ -> callback(inboxFolder.first.id) }
+                            onClickListener { _ -> callback(generalFolder.first.id) }
                             onLongClickListener { _ -> false }
                             onDragHandleTouchListener { _, _ -> false }
                         }
                     }
 
                     context?.let { context ->
-                        if (folders.isEmpty() && inboxFolder == null) {
+                        if (folders.isEmpty() && generalFolder == null) {
                             placeholderItem {
                                 id("placeholder")
                                 placeholder(context.stringResource(R.string.no_folders_found))

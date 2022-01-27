@@ -47,7 +47,7 @@ class FolderRemoteViewsFactory(private val context: Context, intent: Intent?) : 
             .first()
             .sorted(sortingType, sortingOrder)
             .sortedByDescending { it.first.isPinned }
-            .sortedByDescending { it.first.isInbox }
+            .sortedByDescending { it.first.isGeneral }
     }
 
     override fun onDestroy() {}
@@ -59,7 +59,7 @@ class FolderRemoteViewsFactory(private val context: Context, intent: Intent?) : 
         val folder = entry.first
         val notesCount = entry.second
         val color = context.colorResource(folder.color.toResource())
-        val iconResource = if (folder.isInbox) R.drawable.ic_round_inbox_24 else R.drawable.ic_round_folder_24
+        val iconResource = if (folder.isGeneral) R.drawable.ic_round_folder_general_24 else R.drawable.ic_round_folder_24
         val intent = Intent(Constants.Intent.ActionOpenFolder, null, context, AppActivity::class.java).apply {
             putExtra(Constants.FolderId, folder.id)
         }

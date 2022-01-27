@@ -33,8 +33,8 @@ class FolderListWidgetAdapter(
                 tvFolderNotesCount.setTextColor(color)
                 ivFolderIcon.setColorFilter(color)
                 tvFolderTitle.text = folder.getTitle(context)
-                if (folder.isInbox)
-                    ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_inbox_24))
+                if (folder.isGeneral)
+                    ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_general_24))
                 else
                     ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_24))
                 ivFolderIcon.imageTintList = color.toColorStateList()

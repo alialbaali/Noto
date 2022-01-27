@@ -109,7 +109,7 @@ data class Folder @Ignore constructor(
 
     @Suppress("FunctionName")
     companion object {
-        const val InboxId = -1L
-        fun Inbox() = Folder(id = InboxId, position = 0, color = NotoColor.Black)
+        const val GeneralFolderId = -1L
+        fun GeneralFolder() = Folder(id = GeneralFolderId, position = 0, color = NotoColor.Black)
     }
 }
