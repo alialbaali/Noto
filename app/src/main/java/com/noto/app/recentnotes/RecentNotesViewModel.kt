@@ -47,7 +47,7 @@ class RecentNotesViewModel(
                 it to isVisible
             }.toMap()
             mutableNotes.value = notes
-                .filter { note -> libraries.any { library -> library.id == note.libraryId } }
+                .filter { note -> libraries.any { library -> library.id == note.folderId } }
                 .filterRecentlyAccessed()
                 .mapWithLabels(labels, noteLabels)
                 .filterContent(searchTerm)

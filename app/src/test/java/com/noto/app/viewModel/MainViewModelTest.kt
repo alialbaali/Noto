@@ -27,7 +27,7 @@ class MainViewModelTest : StringSpec(), KoinTest {
             viewModel = get()
             noteRepository = get()
             repeat(3) {
-                val note = Note(id = it.toLong(), libraryId = 1, position = 0)
+                val note = Note(id = it.toLong(), folderId = 1, position = 0)
                 noteRepository.createNote(note)
             }
         }

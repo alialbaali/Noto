@@ -110,7 +110,7 @@ class NoteViewModel(
     }
 
     fun moveNote(libraryId: Long) = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(libraryId = libraryId))
+        noteRepository.updateNote(note.value.copy(folderId = libraryId))
         val libraryLabels = labelRepository.getLabelsByLibraryId(libraryId).first()
         labels.value
             .filterValues { it }
@@ -121,7 +121,7 @@ class NoteViewModel(
                         val labelId = libraryLabels.first { it.title == label.title }.id
                         noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id))
                     } else {
-                        val labelId = labelRepository.createLabel(label.copy(id = 0, libraryId = libraryId))
+                        val labelId = labelRepository.createLabel(label.copy(id = 0, folderId = libraryId))
                         noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id))
                     }
                 }
@@ -129,7 +129,7 @@ class NoteViewModel(
     }
 
     fun copyNote(libraryId: Long) = viewModelScope.launch {
-        val noteId = noteRepository.createNote(note.value.copy(id = 0, libraryId = libraryId))
+        val noteId = noteRepository.createNote(note.value.copy(id = 0, folderId = libraryId))
         val libraryLabels = labelRepository.getLabelsByLibraryId(libraryId).first()
         labels.value
             .filterValues { it }
@@ -140,7 +140,7 @@ class NoteViewModel(
                         val labelId = libraryLabels.first { it.title == label.title }.id
                         noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
                     } else {
-                        val labelId = labelRepository.createLabel(label.copy(id = 0, libraryId = libraryId))
+                        val labelId = labelRepository.createLabel(label.copy(id = 0, folderId = libraryId))
                         noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
                     }
                 }

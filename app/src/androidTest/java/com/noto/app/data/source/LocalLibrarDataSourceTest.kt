@@ -5,7 +5,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.noto.app.util.localDataSourceModule
 import com.noto.app.domain.model.Folder
-import com.noto.app.domain.source.LocalLibraryDataSource
+import com.noto.app.domain.source.LocalFolderDataSource
 import com.noto.app.inMemoryDatabaseModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
@@ -28,7 +28,7 @@ import kotlin.test.assertTrue
 @SmallTest
 class LocalFolderDataSourceTest : KoinTest {
 
-    private lateinit var source: LocalLibraryDataSource
+    private lateinit var source: LocalFolderDataSource
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
@@ -39,13 +39,13 @@ class LocalFolderDataSourceTest : KoinTest {
         loadKoinModules(inMemoryDatabaseModule)
         source = get()
         runBlocking {
-            source.clearLibraries()
+            source.clearFolders()
         }
     }
 
     @Test
     fun get_all_libraries_should_return_an_empty_list() = runBlockingTest {
-        val dbLibraries = source.getLibraries()
+        val dbLibraries = source.getFolders()
             .first()
 
         assertTrue { dbLibraries.isEmpty() }
@@ -54,9 +54,9 @@ class LocalFolderDataSourceTest : KoinTest {
     @Test
     fun create_new_library_should_insert_new_library_in_the_database() = runBlockingTest {
         val library = createLibrary()
-        source.createLibrary(library)
+        source.createFolder(library)
 
-        val dbLibraries = source.getLibraries()
+        val dbLibraries = source.getFolders()
             .first()
 
         assertContains(dbLibraries, library.copy(id = 7))
@@ -65,9 +65,9 @@ class LocalFolderDataSourceTest : KoinTest {
     @Test
     fun get_library_by_id_should_return_a_library_with_matching_id() = runBlockingTest {
         val library = createLibrary()
-        source.createLibrary(library)
+        source.createFolder(library)
 
-        val dbLibrary = source.getLibraryById(libraryId = 9)
+        val dbLibrary = source.getFolderById(folderId = 9)
             .first()
 
         assertEquals(library.copy(id = 9), dbLibrary)
@@ -76,12 +76,12 @@ class LocalFolderDataSourceTest : KoinTest {
     @Test
     fun update_library_should_update_library_with_matching_id() = runBlockingTest {
         val library = createLibrary()
-        source.createLibrary(library)
+        source.createFolder(library)
 
         val updatedLibrary = library.copy(id = 8, title = "Code")
-        source.updateLibrary(updatedLibrary)
+        source.updateFolder(updatedLibrary)
 
-        val dbLibrary = source.getLibraryById(8)
+        val dbLibrary = source.getFolderById(8)
             .first()
 
         assertEquals(updatedLibrary, dbLibrary)
@@ -90,16 +90,16 @@ class LocalFolderDataSourceTest : KoinTest {
     @Test
     fun delete_library_should_remove_library_with_matching_id() = runBlockingTest {
         val library = createLibrary()
-        source.createLibrary(library)
+        source.createFolder(library)
 
-        val dbLibraries = source.getLibraries()
+        val dbLibraries = source.getFolders()
             .first()
 
         assertContains(dbLibraries, library.copy(id = 6))
 
-        source.deleteLibrary(library.copy(id = 6))
+        source.deleteFolder(library.copy(id = 6))
 
-        val updatedDbLibraries = source.getLibraries()
+        val updatedDbLibraries = source.getFolders()
             .first()
 
         assertTrue { updatedDbLibraries.isEmpty() }
@@ -109,17 +109,17 @@ class LocalFolderDataSourceTest : KoinTest {
     fun clear_libraries_should_remove_all_libraries() = runBlockingTest {
         repeat(5) {
             val library = createLibrary(title = "Work $it")
-            source.createLibrary(library)
+            source.createFolder(library)
         }
 
-        val dbLibraries = source.getLibraries()
+        val dbLibraries = source.getFolders()
             .first()
 
         assertTrue { dbLibraries.count() == 5 }
 
-        source.clearLibraries()
+        source.clearFolders()
 
-        val updatedDbLibraries = source.getLibraries()
+        val updatedDbLibraries = source.getFolders()
             .first()
 
         assertTrue { updatedDbLibraries.isEmpty() }

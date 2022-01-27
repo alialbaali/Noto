@@ -22,7 +22,7 @@ private const val RequestCode = 0
 
 fun NotificationManager.createNotification(context: Context, folder: Folder, note: Note) {
 
-    val pendingIntent = context.createNotificationPendingIntent(note.id, note.libraryId)
+    val pendingIntent = context.createNotificationPendingIntent(note.id, note.folderId)
 
     val style = NotificationCompat.BigTextStyle()
         .bigText(note.body.ifBlank { note.title })

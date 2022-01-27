@@ -35,6 +35,13 @@ object Migrations {
 
     @RenameColumn(tableName = "libraries", fromColumnName = "is_set_new_note_cursor_on_title", toColumnName = "new_note_cursor_position")
     class RenameIsSetNewNoteCursorOnTitle: AutoMigrationSpec
+
+    @RenameTable(fromTableName = "libraries", toTableName = "folders")
+    @RenameColumn.Entries(
+        RenameColumn(tableName = "notes", fromColumnName = "library_id", toColumnName = "folder_id"),
+        RenameColumn(tableName = "labels", fromColumnName = "library_id", toColumnName = "folder_id"),
+    )
+    class RenameLibraryToFolder: AutoMigrationSpec
 }
 
 object RemoveNotoPrefix : Migration(1, 2) {

@@ -48,12 +48,12 @@ class AllNotesViewModel(
                 it to isVisible
             }.toMap()
             mutableNotes.value = notes
-                .filter { note -> libraries.any { library -> library.id == note.libraryId } }
+                .filter { note -> libraries.any { library -> library.id == note.folderId } }
                 .mapWithLabels(labels, noteLabels)
                 .filterContent(searchTerm)
                 .groupBy { noteWithLabels ->
                     libraries.firstOrNull { library ->
-                        library.id == noteWithLabels.first.libraryId
+                        library.id == noteWithLabels.first.folderId
                     }
                 }
                 .filterNotNullKeys()

@@ -9,7 +9,7 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
 @Serializable
-@Entity(tableName = "libraries")
+@Entity(tableName = "folders")
 data class Folder @Ignore constructor(
 
     @PrimaryKey(autoGenerate = true)

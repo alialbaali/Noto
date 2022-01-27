@@ -40,11 +40,11 @@ class LibraryViewModelTest : StringSpec(), KoinTest {
             libraryRepository.createLibrary(Folder(id = 1L, title = "Work", position = 0))
             noteRepository = get()
             repeat(3) {
-                val note = Note(id = it.toLong(), libraryId = 1, title = "Title $it", body = "Body $it", position = 0)
+                val note = Note(id = it.toLong(), folderId = 1, title = "Title $it", body = "Body $it", position = 0)
                 noteRepository.createNote(note)
             }
             repeat(5) {
-                val note = Note(id = it.toLong(), libraryId = 1, title = "Title $it", body = "Body $it", position = 0, isArchived = true)
+                val note = Note(id = it.toLong(), folderId = 1, title = "Title $it", body = "Body $it", position = 0, isArchived = true)
                 noteRepository.createNote(note)
             }
             viewModel = get { parametersOf(1L) }

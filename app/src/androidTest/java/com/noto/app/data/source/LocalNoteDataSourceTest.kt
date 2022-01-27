@@ -6,7 +6,7 @@ import androidx.test.filters.SmallTest
 import com.noto.app.util.localDataSourceModule
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
-import com.noto.app.domain.source.LocalLibraryDataSource
+import com.noto.app.domain.source.LocalFolderDataSource
 import com.noto.app.domain.source.LocalNoteDataSource
 import com.noto.app.inMemoryDatabaseModule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -42,16 +42,16 @@ class LocalNoteDataSourceTest : KoinTest {
         source = get()
         runBlocking {
             source.clearNotes()
-            get<LocalLibraryDataSource>().apply {
-                clearLibraries()
-                createLibrary(Folder(id = 1, title = "Work", position = 0))
+            get<LocalFolderDataSource>().apply {
+                clearFolders()
+                createFolder(Folder(id = 1, title = "Work", position = 0))
             }
         }
     }
 
     @Test
     fun get_notes_by_library_id_should_return_an_empty_list() = runBlockingTest {
-        val dbNotes = source.getNotesByLibraryId(libraryId = 1)
+        val dbNotes = source.getNotesByFolderId(folderId = 1)
             .first()
 
         assertTrue { dbNotes.isEmpty() }
@@ -59,7 +59,7 @@ class LocalNoteDataSourceTest : KoinTest {
 
     @Test
     fun get_archived_notes_by_library_id_should_return_an_empty_list() = runBlockingTest {
-        val dbArchivedNotes = source.getArchivedNotesByLibraryId(libraryId = 1)
+        val dbArchivedNotes = source.getArchivedNotesByFolderId(folderId = 1)
             .first()
 
         assertTrue { dbArchivedNotes.isEmpty() }
@@ -72,7 +72,7 @@ class LocalNoteDataSourceTest : KoinTest {
             source.createNote(note)
         }
 
-        val dbArchivedNotes = source.getArchivedNotesByLibraryId(libraryId = 1)
+        val dbArchivedNotes = source.getArchivedNotesByFolderId(folderId = 1)
             .first()
 
         assertTrue { dbArchivedNotes.count() == 3 }
@@ -83,7 +83,7 @@ class LocalNoteDataSourceTest : KoinTest {
         val note = createNote()
         source.createNote(note)
 
-        val dbNotes = source.getNotesByLibraryId(libraryId = 1)
+        val dbNotes = source.getNotesByFolderId(folderId = 1)
             .first()
 
         assertContains(dbNotes, note.copy(id = 18))
@@ -94,7 +94,7 @@ class LocalNoteDataSourceTest : KoinTest {
         val note = createNote()
         source.createNote(note)
 
-        val dbNote = source.getNotesByLibraryId(libraryId = 1)
+        val dbNote = source.getNotesByFolderId(folderId = 1)
             .first()
             .first()
 
@@ -112,14 +112,14 @@ class LocalNoteDataSourceTest : KoinTest {
         val note = createNote()
         source.createNote(note)
 
-        val dbNotes = source.getNotesByLibraryId(libraryId = 1)
+        val dbNotes = source.getNotesByFolderId(folderId = 1)
             .first()
 
         assertContains(dbNotes, note.copy(id = 6))
 
         source.deleteNote(note.copy(id = 6))
 
-        val updatedDbNotes = source.getNotesByLibraryId(libraryId = 1)
+        val updatedDbNotes = source.getNotesByFolderId(folderId = 1)
             .first()
 
         assertTrue { updatedDbNotes.isEmpty() }
@@ -132,7 +132,7 @@ class LocalNoteDataSourceTest : KoinTest {
             source.createNote(note)
         }
 
-        val dbNotes = source.getNotesByLibraryId(libraryId = 1)
+        val dbNotes = source.getNotesByFolderId(folderId = 1)
             .first()
 
         assertTrue { dbNotes.count() == 5 }
@@ -145,19 +145,19 @@ class LocalNoteDataSourceTest : KoinTest {
             source.createNote(note)
         }
 
-        val dbNotes = source.getNotesByLibraryId(libraryId = 1)
+        val dbNotes = source.getNotesByFolderId(folderId = 1)
             .first()
 
         assertTrue { dbNotes.count() == 5 }
 
         source.clearNotes()
 
-        val updatedDbNotes = source.getNotesByLibraryId(libraryId = 1)
+        val updatedDbNotes = source.getNotesByFolderId(folderId = 1)
             .first()
 
         assertTrue { updatedDbNotes.isEmpty() }
     }
 
     private fun createNote(libraryId: Long = 1, title: String = "Work", body: String = "Working", isArchived: Boolean = false) =
-        Note(libraryId = libraryId, title = title, body = body, position = 0, isArchived = isArchived)
+        Note(folderId = libraryId, title = title, body = body, position = 0, isArchived = isArchived)
 }

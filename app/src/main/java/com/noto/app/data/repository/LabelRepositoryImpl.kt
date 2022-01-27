@@ -17,12 +17,12 @@ class LabelRepositoryImpl(
 
     override fun getAllLabels(): Flow<List<Label>> = dataSource.getAllLabels()
 
-    override fun getLabelsByLibraryId(libraryId: Long): Flow<List<Label>> = dataSource.getLabelsByLibraryId(libraryId)
+    override fun getLabelsByLibraryId(libraryId: Long): Flow<List<Label>> = dataSource.getLabelsByFolderId(libraryId)
 
     override fun getLabelById(id: Long): Flow<Label> = dataSource.getLabelById(id)
 
     override suspend fun createLabel(label: Label) = withContext(dispatcher) {
-        val position = getLabelPosition(label.libraryId)
+        val position = getLabelPosition(label.folderId)
         dataSource.createLabel(label.copy(position = position))
     }
 
@@ -34,7 +34,7 @@ class LabelRepositoryImpl(
         dataSource.deleteLabel(label)
     }
 
-    private suspend fun getLabelPosition(libraryId: Long) = dataSource.getLabelsByLibraryId(libraryId)
+    private suspend fun getLabelPosition(libraryId: Long) = dataSource.getLabelsByFolderId(libraryId)
         .filterNotNull()
         .first()
         .count()

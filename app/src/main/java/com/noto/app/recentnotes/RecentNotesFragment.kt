@@ -206,7 +206,7 @@ class RecentNotesFragment : Fragment() {
                                                 navController
                                                     ?.navigateSafely(
                                                         RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteFragment(
-                                                            entry.first.libraryId,
+                                                            entry.first.folderId,
                                                             entry.first.id
                                                         )
                                                     )
@@ -215,7 +215,7 @@ class RecentNotesFragment : Fragment() {
                                                 navController
                                                     ?.navigateSafely(
                                                         RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteDialogFragment(
-                                                            entry.first.libraryId,
+                                                            entry.first.folderId,
                                                             entry.first.id,
                                                             R.id.libraryFragment
                                                         )

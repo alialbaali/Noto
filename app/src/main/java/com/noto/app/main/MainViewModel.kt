@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.Folder
-import com.noto.app.domain.model.LibraryIdWithNotesCount
+import com.noto.app.domain.model.FolderIdWithNotesCount
 import com.noto.app.domain.model.LibraryListSortingType
 import com.noto.app.domain.model.SortingOrder
 import com.noto.app.domain.repository.LibraryRepository
@@ -111,12 +111,12 @@ class MainViewModel(
 
     private fun List<Folder>.mapRecursively(
         allFolders: List<Folder>,
-        librariesNotesCount: List<LibraryIdWithNotesCount>,
+        librariesNotesCount: List<FolderIdWithNotesCount>,
         sortingType: LibraryListSortingType,
         sortingOrder: SortingOrder,
     ): List<Pair<Folder, Int>> {
         return map { library ->
-            val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
+            val notesCount = librariesNotesCount.firstOrNull { it.folderId == library.id }?.notesCount ?: 0
             val childLibraries = allFolders
                 .filter { it.parentId == library.id }
                 .mapRecursively(allFolders, librariesNotesCount, sortingType, sortingOrder)

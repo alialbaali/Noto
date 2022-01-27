@@ -3,11 +3,11 @@ package com.noto.app.data.database
 import android.content.Context
 import androidx.room.*
 import com.noto.app.data.source.LabelDao
-import com.noto.app.data.source.LibraryDao
+import com.noto.app.data.source.FolderDao
 import com.noto.app.data.source.NoteDao
 import com.noto.app.data.source.NoteLabelDao
-import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NoteLabel
 
@@ -24,7 +24,7 @@ private const val NOTO_DATABASE = "Noto Database"
 )
 @Database(
     entities = [Note::class, Folder::class, Label::class, NoteLabel::class],
-    version = 26,
+    version = 27,
     autoMigrations = [
         AutoMigration(from = 6, to = 7),
         AutoMigration(from = 7, to = 8),
@@ -50,13 +50,15 @@ private const val NOTO_DATABASE = "Noto Database"
         AutoMigration(from = 24, to = 25, spec = Migrations.RenameIsSetNewNoteCursorOnTitle::class),
         /** Add parentId property to [Folder] */
         AutoMigration(from = 25, to = 26),
+        /** Rename Library to [Folder] */
+        AutoMigration(from = 26, to = 27, spec = Migrations.RenameLibraryToFolder::class),
     ],
 )
 abstract class NotoDatabase : RoomDatabase() {
 
     abstract val noteDao: NoteDao
 
-    abstract val libraryDao: LibraryDao
+    abstract val folderDao: FolderDao
 
     abstract val labelDao: LabelDao
 

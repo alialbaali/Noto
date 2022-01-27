@@ -11,8 +11,8 @@ interface LabelDao : LocalLabelDataSource {
     @Query("SELECT * FROM labels")
     override fun getAllLabels(): Flow<List<Label>>
 
-    @Query("SELECT * FROM labels WHERE library_id = :libraryId")
-    override fun getLabelsByLibraryId(libraryId: Long): Flow<List<Label>>
+    @Query("SELECT * FROM labels WHERE folder_id = :folderId")
+    override fun getLabelsByFolderId(folderId: Long): Flow<List<Label>>
 
     @Query("SELECT * FROM labels WHERE id = :id")
     override fun getLabelById(id: Long): Flow<Label>

@@ -1,6 +1,6 @@
 package com.noto.app.domain.repository
 
-import com.noto.app.domain.model.LibraryIdWithNotesCount
+import com.noto.app.domain.model.FolderIdWithNotesCount
 import com.noto.app.domain.model.Note
 import kotlinx.coroutines.flow.Flow
 
@@ -16,7 +16,7 @@ interface NoteRepository {
 
     fun getNoteById(noteId: Long): Flow<Note>
 
-    fun getLibrariesNotesCount(): Flow<List<LibraryIdWithNotesCount>>
+    fun getLibrariesNotesCount(): Flow<List<FolderIdWithNotesCount>>
 
     suspend fun createNote(note: Note): Long
 

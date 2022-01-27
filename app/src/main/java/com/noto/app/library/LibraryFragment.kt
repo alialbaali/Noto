@@ -234,14 +234,14 @@ class LibraryFragment : Fragment() {
                                         isManualSorting(folder.sortingType == NoteListSortingType.Manual)
                                         onClickListener { _ ->
                                             navController
-                                                ?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.libraryId,
+                                                ?.navigateSafely(LibraryFragmentDirections.actionLibraryFragmentToNoteFragment(entry.first.folderId,
                                                     entry.first.id))
                                         }
                                         onLongClickListener { _ ->
                                             navController
                                                 ?.navigateSafely(
                                                     LibraryFragmentDirections.actionLibraryFragmentToNoteDialogFragment(
-                                                        entry.first.libraryId,
+                                                        entry.first.folderId,
                                                         entry.first.id,
                                                         R.id.libraryFragment
                                                     )

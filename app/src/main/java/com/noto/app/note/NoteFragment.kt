@@ -305,7 +305,7 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupShortcut(note: Note) {
         if (note.id != 0L && note.isValid) {
             val intent = Intent(Constants.Intent.ActionOpenNote, null, context, AppActivity::class.java).apply {
-                putExtra(Constants.LibraryId, note.libraryId)
+                putExtra(Constants.LibraryId, note.folderId)
                 putExtra(Constants.NoteId, note.id)
             }
 

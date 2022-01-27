@@ -105,7 +105,7 @@ class LibraryArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                                         navController
                                             ?.navigateSafely(
                                                 LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteFragment(
-                                                    archivedNote.first.libraryId,
+                                                    archivedNote.first.folderId,
                                                     archivedNote.first.id
                                                 )
                                             )
@@ -114,7 +114,7 @@ class LibraryArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                                         navController
                                             ?.navigateSafely(
                                                 LibraryArchiveFragmentDirections.actionLibraryArchiveFragmentToNoteDialogFragment(
-                                                    archivedNote.first.libraryId,
+                                                    archivedNote.first.folderId,
                                                     archivedNote.first.id,
                                                     R.id.libraryArchiveFragment
                                                 )

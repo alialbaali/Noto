@@ -204,7 +204,7 @@ class AllNotesFragment : Fragment() {
                                                 navController
                                                     ?.navigateSafely(
                                                         AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
-                                                            entry.first.libraryId,
+                                                            entry.first.folderId,
                                                             entry.first.id
                                                         )
                                                     )
@@ -213,7 +213,7 @@ class AllNotesFragment : Fragment() {
                                                 navController
                                                     ?.navigateSafely(
                                                         AllNotesFragmentDirections.actionAllNotesFragmentToNoteDialogFragment(
-                                                            entry.first.libraryId,
+                                                            entry.first.folderId,
                                                             entry.first.id,
                                                             R.id.libraryFragment
                                                         )

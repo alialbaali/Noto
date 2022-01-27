@@ -1,6 +1,6 @@
 package com.noto.app.data.repository
 
-import com.noto.app.domain.model.LibraryIdWithNotesCount
+import com.noto.app.domain.model.FolderIdWithNotesCount
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.source.LocalNoteDataSource
@@ -20,16 +20,16 @@ class NoteRepositoryImpl(
 
     override fun getAllMainNotes(): Flow<List<Note>> = dataSource.getAllMainNotes()
 
-    override fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getNotesByLibraryId(libraryId)
+    override fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getNotesByFolderId(libraryId)
 
-    override fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getArchivedNotesByLibraryId(libraryId)
+    override fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>> = dataSource.getArchivedNotesByFolderId(libraryId)
 
     override fun getNoteById(noteId: Long): Flow<Note> = dataSource.getNoteById(noteId)
 
-    override fun getLibrariesNotesCount(): Flow<List<LibraryIdWithNotesCount>> = dataSource.getLibrariesNotesCount()
+    override fun getLibrariesNotesCount(): Flow<List<FolderIdWithNotesCount>> = dataSource.getFoldersNotesCount()
 
     override suspend fun createNote(note: Note) = withContext(dispatcher) {
-        val position = getNotePosition(note.libraryId)
+        val position = getNotePosition(note.folderId)
         dataSource.createNote(note.copy(position = position))
     }
 
@@ -43,7 +43,7 @@ class NoteRepositoryImpl(
 
     override suspend fun clearNotes() = dataSource.clearNotes()
 
-    private suspend fun getNotePosition(libraryId: Long) = dataSource.getNotesByLibraryId(libraryId)
+    private suspend fun getNotePosition(libraryId: Long) = dataSource.getNotesByFolderId(libraryId)
         .filterNotNull()
         .first()
         .count()

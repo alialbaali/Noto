@@ -42,7 +42,7 @@ class NoteViewModelTest : StringSpec(), KoinTest {
             noteRepository = get()
             libraryRepository.createLibrary(Folder(id = 1, title = "Work", position = 0))
             libraryRepository.createLibrary(Folder(id = 2, title = "Home", position = 0))
-            noteRepository.createNote(Note(id = 1, libraryId = 1, title = "Title", body = "Body", position = 0))
+            noteRepository.createNote(Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0))
             viewModel = get { parametersOf(1L, 1L) }
         }
 

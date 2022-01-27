@@ -93,14 +93,14 @@ class SettingsViewModel(
             }
         DefaultJson.decodeFromString<List<Note>>(data.getValue(Constants.Notes))
             .forEach { note ->
-                val libraryId = libraryIds.getValue(note.libraryId)
-                val newNoteId = noteRepository.createNote(note.copy(id = 0, libraryId = libraryId))
+                val libraryId = libraryIds.getValue(note.folderId)
+                val newNoteId = noteRepository.createNote(note.copy(id = 0, folderId = libraryId))
                 noteIds[note.id] = newNoteId
             }
         DefaultJson.decodeFromString<List<Label>>(data.getValue(Constants.Labels))
             .forEach { label ->
-                val libraryId = libraryIds.getValue(label.libraryId)
-                val newLabelId = labelRepository.createLabel(label.copy(id = 0, libraryId = libraryId))
+                val libraryId = libraryIds.getValue(label.folderId)
+                val newLabelId = labelRepository.createLabel(label.copy(id = 0, folderId = libraryId))
                 labelIds[label.id] = newLabelId
             }
         DefaultJson.decodeFromString<List<NoteLabel>>(data.getValue(Constants.NoteLabels))

@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.map
 class FakeLocalNoteDataSource : LocalNoteDataSource {
     private val notes = MutableStateFlow<MutableList<Note>>(mutableListOf())
 
-    override fun getNotesByLibraryId(libraryId: Long): Flow<List<Note>> = notes
-        .map { it.filter { it.libraryId == libraryId && !it.isArchived } }
+    override fun getNotesByFolderId(folderId: Long): Flow<List<Note>> = notes
+        .map { it.filter { it.folderId == folderId && !it.isArchived } }
 
-    override fun getArchivedNotesByLibraryId(libraryId: Long): Flow<List<Note>> = notes
-        .map { it.filter { it.libraryId == libraryId && it.isArchived } }
+    override fun getArchivedNotesByFolderId(folderId: Long): Flow<List<Note>> = notes
+        .map { it.filter { it.folderId == folderId && it.isArchived } }
 
     override fun getNoteById(noteId: Long): Flow<Note> = notes
         .map { it.first { it.id == noteId } }
@@ -33,7 +33,7 @@ class FakeLocalNoteDataSource : LocalNoteDataSource {
     }
 
     override suspend fun countNotesByLibraryId(libraryId: Long): Int = notes
-        .map { it.count { it.libraryId == libraryId && !it.isArchived } }
+        .map { it.count { it.folderId == libraryId && !it.isArchived } }
         .first()
 
     override suspend fun clearNotes() = notes.value.clear()

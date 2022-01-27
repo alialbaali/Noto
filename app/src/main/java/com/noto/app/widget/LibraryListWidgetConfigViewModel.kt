@@ -18,7 +18,7 @@ class LibraryListWidgetConfigViewModel(
     val libraries = libraryRepository.getLibraries()
         .combine(noteRepository.getLibrariesNotesCount()) { libraries, librariesNotesCount ->
             libraries.map { library ->
-                val notesCount = librariesNotesCount.firstOrNull { it.libraryId == library.id }?.notesCount ?: 0
+                val notesCount = librariesNotesCount.firstOrNull { it.folderId == library.id }?.notesCount ?: 0
                 library to notesCount
             }
         }

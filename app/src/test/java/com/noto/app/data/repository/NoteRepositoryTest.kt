@@ -41,7 +41,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
         }
 
         "create note should insert a new note" {
-            val note = Note(id = 1, libraryId = 1, title = "Title", body = "Body", position = 0)
+            val note = Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0)
 
             repository.createNote(note)
             repository.getNotesByLibraryId(libraryId = 1)
@@ -52,13 +52,13 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
         }
 
         "get note by id should return an existing note with matching id" {
-            val note = Note(id = 1, libraryId = 1, title = "Title", body = "Body", position = 0)
+            val note = Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0)
             repository.createNote(note)
 
             repository.getNoteById(noteId = 1)
                 .single()
                 .apply {
-                    libraryId shouldBeExactly 1
+                    folderId shouldBeExactly 1
                     title shouldBeEqualIgnoringCase "Title"
                     body shouldBeEqualIgnoringCase "Body"
                 }
@@ -71,7 +71,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
         }
 
         "create archived note should insert a new archived note" {
-            val note = Note(id = 1, libraryId = 1, title = "Title", body = "Body", position = 0, isArchived = true)
+            val note = Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0, isArchived = true)
             repository.createNote(note)
             repository.getArchivedNotesByLibraryId(libraryId = 1)
                 .single()
@@ -81,7 +81,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
         }
 
         "get archived note by id should return a note with matching id" {
-            val note = Note(id = 1, libraryId = 1, title = "Title", body = "Body", position = 0, isArchived = true)
+            val note = Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0, isArchived = true)
             repository.createNote(note)
 
             repository.getNoteById(noteId = 1)
@@ -90,7 +90,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
         }
 
         "update note by id should update an existing note with matching id" {
-            val note = Note(id = 1, libraryId = 1, title = "Title", body = "Body", position = 0, isArchived = true)
+            val note = Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0, isArchived = true)
             repository.createNote(note)
 
             val updateNote = note.copy(title = "Title1", body = "Body1")
@@ -105,7 +105,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
         }
 
         "delete note by id should remove an existing note with matching id" {
-            val note = Note(id = 1, libraryId = 1, title = "Title", body = "Body", position = 0)
+            val note = Note(id = 1, folderId = 1, title = "Title", body = "Body", position = 0)
             repository.createNote(note)
 
             repository.getNotesByLibraryId(libraryId = 1)
@@ -121,7 +121,7 @@ class NoteRepositoryTest : StringSpec(), KoinTest {
 
         "count library notes should return count of all notes with matching library id" {
             repeat(5) {
-                val note = Note(id = it.toLong(), libraryId = 1, title = "Title $it", "Body $it", position = 0)
+                val note = Note(id = it.toLong(), folderId = 1, title = "Title $it", "Body $it", position = 0)
                 repository.createNote(note)
             }
             repository.getLibrariesNotesCount(libraryId = 1) shouldBeExactly 5
