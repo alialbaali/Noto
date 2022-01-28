@@ -173,9 +173,11 @@ class FolderFragment : Fragment() {
                                 activity?.hideKeyboard(view.binding.etSearch)
                             }
                         }
-                        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
-                            viewModel.disableSearch()
-                            if (isEnabled) isEnabled = false
+                        if (activity?.onBackPressedDispatcher?.hasEnabledCallbacks() == false) {
+                            activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
+                                viewModel.disableSearch()
+                                if (isEnabled) isEnabled = false
+                            }
                         }
                     }
 
