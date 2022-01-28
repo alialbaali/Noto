@@ -91,6 +91,22 @@ class AppActivity : BaseActivity() {
                 navController.navigate(R.id.folderFragment, args)
                 navController.navigate(R.id.noteFragment, args)
             }
+            Constants.Intent.ActionSettings -> {
+                if (navController.currentDestination?.id != R.id.settingsFragment)
+                    navController.navigate(R.id.settingsFragment)
+            }
+            else -> {
+                lifecycleScope.launch {
+                    val folderId = viewModel.mainFolderId.first()
+                    val args = bundleOf(Constants.FolderId to folderId)
+                    val options = navOptions {
+                        popUpTo(R.id.folderFragment) {
+                            inclusive = true
+                        }
+                    }
+                    navController.navigate(R.id.folderFragment, args, options)
+                }
+            }
         }
     }
 
@@ -133,17 +149,6 @@ class AppActivity : BaseActivity() {
                     notificationManager.cancelVaultNotification()
             }
             .launchIn(lifecycleScope)
-
-        lifecycleScope.launch {
-            val folderId = viewModel.mainFolderId.first()
-            val args = bundleOf(Constants.FolderId to folderId)
-            val options = navOptions {
-                popUpTo(R.id.folderFragment) {
-                    inclusive = true
-                }
-            }
-            navController.navigate(R.id.folderFragment, args, options)
-        }
 
         combine(
             viewModel.isVaultOpen,

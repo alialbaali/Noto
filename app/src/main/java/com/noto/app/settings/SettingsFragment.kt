@@ -36,6 +36,11 @@ class SettingsFragment : Fragment() {
         }
 
     private fun SettingsFragmentBinding.setupState() {
+        /**
+         * Navigate to [SettingsFragment] when restarting activity due to configuration change.
+         * */
+        activity?.intent?.action = Constants.Intent.ActionSettings
+
         context?.let { context ->
             val version = context.packageManager
                 ?.getPackageInfo(context.packageName, 0)
