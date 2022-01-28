@@ -228,6 +228,7 @@
     <string name="indonesian">Indonesian</string>
     <string name="russian">Russian</string>
     <string name="spanish">Spanish</string>
+    <string name="french">French</string>
 
     <!-- Widget -->
     <string name="create_widget">Create widget</string>
@@ -248,7 +249,7 @@
     <!-- Releases -->
     <string name="current_release">Current release</string>
     <string name="previous_releases">Previous releases</string>
-    <string name="release_1_8_0">• Support for passcode protected folders vault.
+    <string name="release_1_8_0">• Support for passcode protected libraries vault.
         \n• Support for vault timeout options.
         \n• Support for biometric vault authentication on supported devices.
         \n• Support for the Spanish language.
@@ -257,17 +258,18 @@
     </string>
 
     <string name="release_2_0_0">• New year, new look!
+        \n• Libraries are gone. Welcome folders!
         \n• Improve animations across the whole app.
         \n• Experimental support for nested folders.
         \n• Experimental support for swiping horizontally to nest a folder when sorting is manual.
-        \n• Add a default folder for those notes that don\'t fit anywhere/other folders.
+        \n• Add a default "General" folder for y\'know general notes.
         \n• Support viewing all notes and recent notes and the ability to search though them.
         \n• Highlight note content when searching.
         \n• Implement collapsing toolbar for better usability and hand reachability.
         \n• Support for the French language.
         \n• Support swiping up the bottom app bar to view the folders.
         \n• Navigate to the vault when clicking on \'vault is open\' notification.
-<!--        \n• Add settings option to pick main/start folder destination.-->
+        \n• Add settings option to choose main folder destination.
         \n• Add settings option to collapse toolbar by default.
         \n• Fix static shortcuts icons on older Android devices.
         \n• Other bug fixes and design improvements.

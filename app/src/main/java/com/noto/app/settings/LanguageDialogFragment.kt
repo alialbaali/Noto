@@ -48,6 +48,7 @@ class LanguageDialogFragment : BaseDialogFragment() {
                     Language.Russian -> rbRussian.isChecked = true
 //                    Language.Tamil -> rbTamil.isChecked = true
                     Language.Spanish -> rbSpanish.isChecked = true
+                    Language.French -> rbFrench.isChecked = true
                 }
             }
             .launchIn(lifecycleScope)
@@ -91,6 +92,11 @@ class LanguageDialogFragment : BaseDialogFragment() {
 
         rbSpanish.setOnClickListener {
             viewModel.updateLanguage(Language.Spanish)
+            dismiss()
+        }
+
+        rbFrench.setOnClickListener {
+            viewModel.updateLanguage(Language.French)
             dismiss()
         }
     }
