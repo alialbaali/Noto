@@ -18,6 +18,6 @@
         android:paddingHorizontal="@dimen/spacing_normal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Placeholder Options" />
+        tools:text="@string/app_name" />
 
 </merge>

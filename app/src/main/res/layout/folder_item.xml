@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginEnd="@dimen/spacing_small"
-        tools:text="@string/inbox" />
+        tools:text="@string/general" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_folder_notes_count"
