@@ -66,7 +66,6 @@ class FolderArchiveFragment : BaseDialogFragment(isCollapsable = true) {
             Layout.Linear -> layoutManager.spanCount = 1
             Layout.Grid -> layoutManager.spanCount = 2
         }
-        rv.resetAdapter()
     }
 
     private fun FolderArchiveFragmentBinding.setupFolder(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
