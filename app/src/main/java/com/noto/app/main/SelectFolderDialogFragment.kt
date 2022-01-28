@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class SelectFolderDialogFragment constructor() : BaseDialogFragment() {
+class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsable = true) {
 
     private var onClick: (Long) -> Unit = {}
 
