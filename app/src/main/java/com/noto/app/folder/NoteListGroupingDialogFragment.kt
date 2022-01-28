@@ -40,29 +40,15 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
             .onEach { folder ->
                 context?.let { context ->
                     val color = context.colorResource(folder.color.toResource())
-                    val colorStateList = color.toColorStateList()
-                    val backgroundColorStateList = context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
                     baseDialog.tvDialogTitle.setTextColor(color)
                     baseDialog.vHead.background?.mutate()?.setTint(color)
+                    rbDefault.background = context.createDialogItemStateListDrawable(folder.color)
+                    rbCreationDate.background = context.createDialogItemStateListDrawable(folder.color)
+                    rbLabel.background = context.createDialogItemStateListDrawable(folder.color)
                     when (folder.grouping) {
-                        Grouping.Default -> {
-                            rbDefault.isChecked = true
-                            rbDefault.backgroundTintList = colorStateList.withAlpha(32)
-                            rbCreationDate.backgroundTintList = backgroundColorStateList
-                            rbLabel.backgroundTintList = backgroundColorStateList
-                        }
-                        Grouping.CreationDate -> {
-                            rbCreationDate.isChecked = true
-                            rbCreationDate.backgroundTintList = colorStateList.withAlpha(32)
-                            rbDefault.backgroundTintList = backgroundColorStateList
-                            rbLabel.backgroundTintList = backgroundColorStateList
-                        }
-                        Grouping.Label -> {
-                            rbLabel.isChecked = true
-                            rbLabel.backgroundTintList = colorStateList.withAlpha(32)
-                            rbCreationDate.backgroundTintList = backgroundColorStateList
-                            rbDefault.backgroundTintList = backgroundColorStateList
-                        }
+                        Grouping.Default -> rbDefault.isChecked = true
+                        Grouping.CreationDate -> rbCreationDate.isChecked = true
+                        Grouping.Label -> rbLabel.isChecked = true
                     }
                 }
             }

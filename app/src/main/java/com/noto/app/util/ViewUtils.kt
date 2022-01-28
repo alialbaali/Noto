@@ -9,6 +9,7 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
+import android.graphics.drawable.StateListDrawable
 import android.net.Uri
 import android.text.SpannableString
 import android.text.TextPaint
@@ -45,6 +46,7 @@ import com.noto.app.R
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.NotoColor
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -238,3 +240,37 @@ fun RecyclerView.resetAdapter() {
 
 val AppBarLayout.isExpanded
     get() = (height - bottom) == 0
+
+fun Context.createDialogItemStateListDrawable(notoColor: NotoColor): StateListDrawable {
+    val checkedDrawable = createCheckedDrawable(notoColor)
+    val uncheckedDrawable = createUncheckedDrawable(notoColor)
+    val stateDrawable = StateListDrawable().apply {
+        addState(intArrayOf(android.R.attr.state_checked), checkedDrawable)
+        addState(intArrayOf(-android.R.attr.state_checked), uncheckedDrawable)
+    }
+    return stateDrawable
+}
+
+private fun Context.createUncheckedDrawable(notoColor: NotoColor): RippleDrawable {
+    val color = colorResource(notoColor.toResource())
+    val colorStateList = color.withDefaultAlpha().toColorStateList()
+    val backgroundColorStateList = attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
+    val gradientDrawable = GradientDrawable().apply {
+        shape = GradientDrawable.RECTANGLE
+        this.color = backgroundColorStateList
+        cornerRadius = dimenResource(R.dimen.spacing_small)
+    }
+    return RippleDrawable(colorStateList, gradientDrawable, null)
+}
+
+private fun Context.createCheckedDrawable(notoColor: NotoColor): RippleDrawable {
+    val color = colorResource(notoColor.toResource())
+    val colorStateList = color.withDefaultAlpha().toColorStateList()
+    val backgroundColorStateList = attributeColoResource(R.attr.notoSecondaryColor).toColorStateList()
+    val gradientDrawable = GradientDrawable().apply {
+        shape = GradientDrawable.RECTANGLE
+        this.color = colorStateList
+        cornerRadius = dimenResource(R.dimen.spacing_small)
+    }
+    return RippleDrawable(backgroundColorStateList, gradientDrawable, null)
+}

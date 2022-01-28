@@ -39,21 +39,13 @@ class NoteListSortingOrderDialogFragment : BaseDialogFragment() {
             .onEach { folder ->
                 context?.let { context ->
                     val color = context.colorResource(folder.color.toResource())
-                    val colorStateList = color.toColorStateList()
-                    val backgroundColorStateList = context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
                     baseDialog.tvDialogTitle.setTextColor(color)
                     baseDialog.vHead.background?.mutate()?.setTint(color)
+                    rbSortingAsc.background = context.createDialogItemStateListDrawable(folder.color)
+                    rbSortingDesc.background = context.createDialogItemStateListDrawable(folder.color)
                     when (folder.sortingOrder) {
-                        SortingOrder.Ascending -> {
-                            rbSortingAsc.isChecked = true
-                            rbSortingAsc.backgroundTintList = colorStateList.withAlpha(32)
-                            rbSortingDesc.backgroundTintList = backgroundColorStateList
-                        }
-                        SortingOrder.Descending -> {
-                            rbSortingDesc.isChecked = true
-                            rbSortingDesc.backgroundTintList = colorStateList.withAlpha(32)
-                            rbSortingAsc.backgroundTintList = backgroundColorStateList
-                        }
+                        SortingOrder.Ascending -> rbSortingAsc.isChecked = true
+                        SortingOrder.Descending -> rbSortingDesc.isChecked = true
                     }
                 }
             }

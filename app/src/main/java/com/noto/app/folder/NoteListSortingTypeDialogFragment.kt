@@ -40,29 +40,15 @@ class NoteListSortingTypeDialogFragment : BaseDialogFragment() {
             .onEach { folder ->
                 context?.let { context ->
                     val color = context.colorResource(folder.color.toResource())
-                    val colorStateList = color.toColorStateList()
-                    val backgroundColorStateList = context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
                     baseDialog.tvDialogTitle.setTextColor(color)
                     baseDialog.vHead.background?.mutate()?.setTint(color)
+                    rbAlphabetical.background = context.createDialogItemStateListDrawable(folder.color)
+                    rbCreationDate.background = context.createDialogItemStateListDrawable(folder.color)
+                    rbManual.background = context.createDialogItemStateListDrawable(folder.color)
                     when (folder.sortingType) {
-                        NoteListSortingType.Alphabetical -> {
-                            rbAlphabetical.isChecked = true
-                            rbAlphabetical.backgroundTintList = colorStateList.withAlpha(32)
-                            rbCreationDate.backgroundTintList = backgroundColorStateList
-                            rbManual.backgroundTintList = backgroundColorStateList
-                        }
-                        NoteListSortingType.CreationDate -> {
-                            rbCreationDate.isChecked = true
-                            rbCreationDate.backgroundTintList = colorStateList.withAlpha(32)
-                            rbAlphabetical.backgroundTintList = backgroundColorStateList
-                            rbManual.backgroundTintList = backgroundColorStateList
-                        }
-                        NoteListSortingType.Manual -> {
-                            rbManual.isChecked = true
-                            rbManual.backgroundTintList = colorStateList.withAlpha(32)
-                            rbCreationDate.backgroundTintList = backgroundColorStateList
-                            rbAlphabetical.backgroundTintList = backgroundColorStateList
-                        }
+                        NoteListSortingType.Alphabetical -> rbAlphabetical.isChecked = true
+                        NoteListSortingType.CreationDate -> rbCreationDate.isChecked = true
+                        NoteListSortingType.Manual -> rbManual.isChecked = true
                     }
                 }
             }
