@@ -50,6 +50,10 @@ class NoteFragment : Fragment() {
         abl.bringToFront()
         abl.setExpanded(false, false)
         bab.setRoundedCorners()
+        tvWordCount.animationInterpolator = DefaultInterpolator()
+        context?.tryLoadingFontResource(R.font.nunito_semibold_italic)?.let { font ->
+            tvWordCount.typeface = font
+        }
 
         viewModel.folder
             .onEach { folder -> setupFolder(folder) }

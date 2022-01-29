@@ -67,13 +67,15 @@
                     android:layout_height="wrap_content"
                     tools:text="Created Tue, Aug 8" />
 
-                <com.google.android.material.textview.MaterialTextView
+                <com.robinhood.ticker.TickerView
                     android:id="@+id/tv_word_count"
                     style="@style/SubtitleTextView"
                     android:gravity="end"
                     android:layout_marginStart="@dimen/spacing_small"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:ticker_animationDuration="@integer/animation_duration"
+                    app:ticker_defaultCharacterList="number"
                     tools:text="30 words" />
             </LinearLayout>
 
