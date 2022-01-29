@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 @Serializable
 @Entity(tableName = "folders")
@@ -66,6 +67,7 @@ data class Folder @Ignore constructor(
     val isVaulted: Boolean = false,
 
     @Ignore
+    @Transient
     val folders: List<Pair<Folder, Int>> = emptyList(),
 ) {
 

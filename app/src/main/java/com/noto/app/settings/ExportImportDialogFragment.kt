@@ -15,8 +15,8 @@ import com.noto.app.databinding.ExportImportDialogFragmentBinding
 import com.noto.app.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private const val ZipMimeType = "application/zip"
-private const val ZipFileName = "Noto"
+private const val FileType = "application/json"
+private const val FileName = "Noto"
 
 class ExportImportDialogFragment : BaseDialogFragment() {
 
@@ -24,7 +24,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
 
     private val exportLauncher = registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
         if (uri != null) {
-            exportData(uri)
+            exportJson(uri)
         } else {
             context?.let { context ->
                 parentFragment?.view?.snackbar(context.stringResource(R.string.no_folder_is_selected))
@@ -33,9 +33,9 @@ class ExportImportDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private val importLauncher = registerForActivityResult(OpenZipDocument()) { uri ->
+    private val importLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) {
-            importData(uri)
+            importJson(uri)
         } else {
             context?.let { context ->
                 parentFragment?.view?.snackbar(context.stringResource(R.string.no_file_is_selected))
@@ -66,26 +66,26 @@ class ExportImportDialogFragment : BaseDialogFragment() {
         }
 
         tvImport.setOnClickListener {
-            importLauncher.launch(emptyArray())
+            importLauncher.launch(arrayOf(FileType))
         }
     }
 
-    private fun exportData(uri: Uri) {
+    private fun exportJson(uri: Uri) {
         context?.let { context ->
             navController?.navigateSafely(
                 ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressIndicatorDialogFragment(
                     context.stringResource(R.string.exporting_data)
                 )
             )
-            val zipFile = DocumentFile.fromTreeUri(context, uri)?.createFile(ZipMimeType, ZipFileName)
-            if (zipFile != null) {
-                val zipFileOutputStream = context.contentResolver?.openOutputStream(zipFile.uri)
-                if (zipFileOutputStream != null) {
-                    lifecycleScope.launchWhenResumed {
-                        val exportedData = viewModel.exportData()
-                        writeDataToZipFile(zipFileOutputStream, exportedData)
+            val file = DocumentFile.fromTreeUri(context, uri)?.createFile(FileType, FileName)
+            if (file != null) {
+                val fileOutputStream = context.contentResolver?.openOutputStream(file.uri)
+                if (fileOutputStream != null) {
+                    lifecycleScope.launchWhenCreated {
+                        val json = viewModel.exportJson()
+                        writeTextToOutputStream(fileOutputStream, json)
                     }.invokeOnCompletion {
-                        parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_exported, zipFile.uri.directoryPath))
+                        parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_exported, file.uri.directoryPath))
                         navController?.navigateUp()
                         dismiss()
                     }
@@ -102,7 +102,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun importData(uri: Uri) {
+    private fun importJson(uri: Uri) {
         context?.let { context ->
             navController?.navigateSafely(
                 ExportImportDialogFragmentDirections.actionExportImportDialogFragmentToProgressIndicatorDialogFragment(
@@ -111,9 +111,9 @@ class ExportImportDialogFragment : BaseDialogFragment() {
             )
             val inputStream = context.contentResolver?.openInputStream(uri)
             if (inputStream != null) {
-                lifecycleScope.launchWhenResumed {
-                    val data = readDataFromZipFile(inputStream)
-                    viewModel.importData(data)
+                lifecycleScope.launchWhenCreated {
+                    val json = readTextFromInputStream(inputStream)
+                    viewModel.importJson(json)
                 }.invokeOnCompletion {
                     parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_imported))
                     navController?.navigateUp()

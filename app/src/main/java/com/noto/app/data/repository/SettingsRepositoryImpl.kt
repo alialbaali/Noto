@@ -35,7 +35,7 @@ class SettingsRepositoryImpl(
             isShowNotesCount.first(),
             mainFolderId.first()
         )
-    }
+    }.flowOn(dispatcher)
 
     override val theme: Flow<Theme> = storage.data
         .map { preferences -> preferences[SettingsKeys.Theme] }

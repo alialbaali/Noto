@@ -9,11 +9,6 @@ object Constants {
     const val Body = "body"
     const val IsDismissible = "is_dismissible"
     const val ClickListener = "click_listener"
-    const val Folders = "Folders"
-    const val Notes = "Notes"
-    const val Labels = "Labels"
-    const val NoteLabels = "NoteLabels"
-    const val Settings = "Settings"
     const val VaultTimeout = "VaultTimeout"
 
     object Intent {
