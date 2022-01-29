@@ -11,8 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.databinding.NoteReadingModeFragmentBinding
-import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
 import com.noto.app.label.labelItem
 import com.noto.app.util.*
@@ -73,10 +73,6 @@ class NoteReadingModeFragment : Fragment() {
                 }
             }
         }.launchIn(lifecycleScope)
-
-        viewModel.isCollapseToolbar
-            .onEach { isCollapseToolbar -> abl.setExpanded(!isCollapseToolbar, false) }
-            .launchIn(lifecycleScope)
     }
 
     private fun NoteReadingModeFragmentBinding.setupNote(note: Note, font: Font) {
@@ -95,10 +91,8 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
-            val colorStateList = color.toColorStateList()
-            ctb.title = folder.getTitle(context)
-            ctb.setCollapsedTitleTextColor(colorStateList)
-            ctb.setExpandedTitleTextColor(colorStateList)
+            tb.title = folder.getTitle(context)
+            tb.setTitleTextColor(color)
             tvCreatedAt.setTextColor(color)
             tvWordCount.setTextColor(color)
             tvNoteTitle.setLinkTextColor(color)

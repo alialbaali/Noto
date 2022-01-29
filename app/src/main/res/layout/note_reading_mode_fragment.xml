@@ -12,21 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ctb"
-            style="@style/CollapsingToolbar"
-            android:layout_height="@dimen/collapsing_toolbar_height"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            style="@style/Toolbar"
             android:layout_width="match_parent"
-            tools:title="Note">
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/tb"
-                style="@style/Toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationContentDescription="@string/back"
-                app:navigationIcon="@drawable/ic_round_back_24" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            android:layout_height="?attr/actionBarSize"
+            app:navigationContentDescription="@string/back"
+            app:navigationIcon="@drawable/ic_round_back_24" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
