@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll"
     android:orientation="horizontal"
@@ -16,13 +17,15 @@
         android:layout_height="wrap_content"
         tools:text="Sorting" />
 
-    <TextView
+    <com.robinhood.ticker.TickerView
         android:id="@+id/tv_folder_notes_count"
         style="@style/SubtitleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="end"
+        app:ticker_animationDuration="@integer/animation_duration"
+        app:ticker_defaultCharacterList="number"
         tools:text="7 Notes"
         tools:textColor="@color/colorAccentTeal" />
 
