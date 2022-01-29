@@ -37,9 +37,6 @@ class NoteViewModel(
     private val mutableLabels = MutableStateFlow<Map<Label, Boolean>>(emptyMap())
     val labels get() = mutableLabels.asStateFlow()
 
-    val isCollapseToolbar = settingsRepository.isCollapseToolbar
-        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
-
     init {
         noteRepository.getNoteById(noteId)
             .also {

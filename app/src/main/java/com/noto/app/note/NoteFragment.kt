@@ -48,6 +48,7 @@ class NoteFragment : Fragment() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
+        abl.setExpanded(false, false)
         bab.setRoundedCorners()
 
         viewModel.folder
@@ -153,15 +154,6 @@ class NoteFragment : Fragment() {
                 viewModel.createOrUpdateNote(title.toString(), body.toString())
                 context?.updateAllWidgetsData()
                 context?.updateNoteListWidgets(viewModel.folder.value.id)
-            }
-            .launchIn(lifecycleScope)
-
-        viewModel.isCollapseToolbar
-            .onEach { isCollapseToolbar ->
-                if (args.noteId == 0L)
-                    abl.setExpanded(false, false)
-                else
-                    abl.setExpanded(!isCollapseToolbar, false)
             }
             .launchIn(lifecycleScope)
     }
