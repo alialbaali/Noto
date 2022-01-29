@@ -83,6 +83,10 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             }
             if (isShowCreationDate)
                 tvCreationDate.text = context.stringResource(R.string.created, note.creationDate.format(root.context))
+            if (note.reminderDate != null) {
+                llReminder.background?.mutate()?.setTint(colorResource)
+                tvReminder.text = note.reminderDate?.format(context)
+            }
             val rippleDrawable = root.background as RippleDrawable
             val gradientDrawable = rippleDrawable.getDrawable(0) as GradientDrawable
             gradientDrawable.setStroke(1.dp, colorResource)
@@ -90,6 +94,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         }
         tvCreationDate.isVisible = isShowCreationDate
         tvNoteTitle.isVisible = note.title.isNotBlank()
+        llReminder.isVisible = note.reminderDate != null
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
         tvNoteTitle.setBoldFont(font)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll"
     android:orientation="horizontal"
@@ -22,6 +23,37 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_extra_small"
             tools:listitem="@layout/note_label_item" />
+
+        <LinearLayout
+            android:id="@+id/ll_reminder"
+            android:orientation="horizontal"
+            android:background="@drawable/note_label_item_shape"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginBottom="@dimen/spacing_extra_small"
+            android:padding="@dimen/spacing_extra_small"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/ic_round_notifications_active_24"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="@dimen/spacing_extra_small"
+                android:contentDescription="@string/reminder"
+                app:tint="?attr/notoBackgroundColor" />
+
+            <TextView
+                android:id="@+id/tv_reminder"
+                android:layout_marginStart="@dimen/spacing_extra_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/size_extra_tiny"
+                android:textColor="?attr/notoBackgroundColor"
+                android:paddingHorizontal="@dimen/spacing_extra_small"
+                app:fontFamily="@font/nunito_bold"
+                tools:text="Today, 7:30 PM" />
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_note_title"
