@@ -47,6 +47,7 @@ abstract class GenericItem : EpoxyModelWithHolder<GenericItem.Holder>() {
         ibDrag.visibility = if (isManualSorting) View.INVISIBLE else View.GONE
         root.setOnClickListener(onClickListener)
         tvNotesCount.isVisible = isShowNotesCount
+        tvNotesCount.text = notesCount.toString()
         tvTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(end = if (!isShowNotesCount && !isManualSorting) 16.dp else 8.dp)
         }
