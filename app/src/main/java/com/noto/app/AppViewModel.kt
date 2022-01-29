@@ -2,8 +2,8 @@ package com.noto.app
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.SettingsRepository
@@ -41,10 +41,9 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
 
     init {
         createGeneralFolder()
-//        vaultTimeout
-//            .drop(1)
-//            .onEach { timeout -> if (timeout == VaultTimeout.Immediately) closeVault() }
-//            .launchIn(viewModelScope)
+        vaultTimeout
+            .onEach { timeout -> if (timeout == VaultTimeout.Immediately) closeVault() }
+            .launchIn(viewModelScope)
     }
 
     fun closeVault() = viewModelScope.launch {
