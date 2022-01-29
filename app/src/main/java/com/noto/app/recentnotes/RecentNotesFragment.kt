@@ -204,6 +204,7 @@ class RecentNotesFragment : Fragment() {
                                             previewSize(15)
                                             isShowCreationDate(false)
                                             isManualSorting(false)
+                                            searchTerm(if (isSearchEnabled) searchTerm.trim() else null)
                                             onClickListener { _ ->
                                                 navController
                                                     ?.navigateSafely(

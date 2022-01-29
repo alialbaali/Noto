@@ -199,6 +199,7 @@ class AllNotesFragment : Fragment() {
                                             font(font)
                                             labels(entry.second)
                                             color(folder.color)
+                                            searchTerm(if (isSearchEnabled) searchTerm.trim() else null)
                                             previewSize(folder.notePreviewSize)
                                             isShowCreationDate(folder.isShowNoteCreationDate)
                                             isManualSorting(false)
