@@ -208,7 +208,7 @@
     </style>
 
     <style name="FolderNotesCountTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">?attr/notoSecondaryColor</item>
+        <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:ellipsize">end</item>
@@ -225,7 +225,7 @@
 
     <style name="NoteTitleEditText" parent="Widget.AppCompat.EditText">
         <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">@dimen/size_normal</item>
+        <item name="android:textSize">@dimen/size_huge</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:textColorHint">?attr/notoSecondaryColor</item>
         <item name="android:background">@android:color/transparent</item>
@@ -235,10 +235,10 @@
     <style name="NoteBodyEditText" parent="Widget.AppCompat.EditText">
         <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:background">@android:color/transparent</item>
-        <item name="android:textSize">@dimen/size_extra_small</item>
+        <item name="android:textSize">@dimen/size_small</item>
         <item name="android:gravity">top</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="android:lineSpacingMultiplier">1.1</item>
+        <item name="android:lineSpacingMultiplier">1.3</item>
         <item name="android:textCursorDrawable">@drawable/cursor_shape</item>
     </style>
 
@@ -259,7 +259,7 @@
     <style name="NoteBodyTextView" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">@dimen/size_tiny</item>
-        <item name="android:lineSpacingMultiplier">1.1</item>
+        <item name="android:lineSpacingMultiplier">1</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:ellipsize">end</item>
     </style>
@@ -267,7 +267,7 @@
     <style name="WidgetNoteBodyTextView" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">@dimen/size_tiny</item>
-        <item name="android:lineSpacingMultiplier">1.1</item>
+        <item name="android:lineSpacingMultiplier">1</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:ellipsize">end</item>
     </style>
