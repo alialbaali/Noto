@@ -78,7 +78,7 @@ class SettingsRepositoryImpl(
 
     override val lastVersion: Flow<String> = storage.data
         .map { preferences -> preferences[SettingsKeys.LastVersion] }
-        .map { it ?: Release.DefaultLastVersion }
+        .map { it ?: Release.Version.Last }
         .flowOn(dispatcher)
 
     override val sortingType: Flow<FolderListSortingType> = storage.data

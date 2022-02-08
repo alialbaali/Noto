@@ -11,6 +11,8 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.WhatsNewDialogFragmentBinding
+import com.noto.app.domain.model.Release
+import com.noto.app.domain.model.Release.Changelog
 import com.noto.app.domain.model.Release_1_8_0
 import com.noto.app.util.BounceEdgeEffectFactory
 import com.noto.app.util.VerticalListItemAnimator
@@ -33,6 +35,20 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
 
     private val viewModel by viewModel<SettingsViewModel>()
 
+    private val currentRelease: List<Release> by lazy {
+        context?.let { context ->
+            val changelog = Changelog(context.stringResource(R.string.release_1_8_0))
+            listOf(Release_1_8_0(changelog))
+        } ?: emptyList()
+    }
+
+    private val previousReleases: List<Release> by lazy {
+        context?.let { context ->
+            val changelog = Changelog(context.stringResource(R.string.release_1_8_0))
+            listOf(Release_1_8_0(changelog))
+        } ?: emptyList()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,18 +70,16 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
         rv.itemAnimator = VerticalListItemAnimator()
         viewModel.whatsNewTab
             .mapNotNull { tab ->
-                context?.let { context ->
-                    when (tab) {
-                        WhatsNewTab.CurrentRelease -> listOf(Release_1_8_0(context.stringResource(R.string.release_1_8_0)))
-                        WhatsNewTab.PreviousReleases -> listOf(Release_1_8_0(context.stringResource(R.string.release_1_8_0)))
-                    }
+                when (tab) {
+                    WhatsNewTab.CurrentRelease -> currentRelease
+                    WhatsNewTab.PreviousReleases -> previousReleases
                 }
             }
             .onEach { releases ->
                 rv.withModels {
                     releases.forEach { release ->
                         releaseItem {
-                            id(release.version)
+                            id(release.version.toString())
                             release(release)
                         }
                     }

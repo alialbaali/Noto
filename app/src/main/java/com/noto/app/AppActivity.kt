@@ -135,7 +135,7 @@ class AppActivity : BaseActivity() {
 
         viewModel.lastVersion
             .onEach {
-                if (it != Release.CurrentVersion)
+                if (it != Release.Version.Current)
                     if (navController.currentDestination?.id != R.id.whatsNewDialogFragment)
                         navController.navigate(R.id.whatsNewDialogFragment)
             }
