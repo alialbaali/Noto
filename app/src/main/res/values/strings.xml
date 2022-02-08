@@ -33,8 +33,9 @@
     <string name="whats_new">What\'s new</string>
     <string name="about_message">Noto is developed and maintained by <a href="https://www.alialbaali.com/">Ali Albaali</a>.
         \n\nThe app is distributed under the terms of the <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.
-        \n\nSpecial thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization,
-        <a href="https://github.com/heheboi22">புகழ்</a> for Tamil localization, <a href="https://github.com/faus32">Faus AM</a> for Spanish localization, and everyone who has helped and contributed in the development.</string>
+        \n\nSpecial thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a>,
+        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a> for Turkish, Spanish and French localizations respectively,
+        and everyone who has helped and contributed in the development.</string>
     <string name="share_with">Share with</string>
     <string name="export_import_data">Export/Import data</string>
     <string name="exporting_failed">Failed to export the data.</string>
@@ -263,7 +264,7 @@
         \n• Experimental support for nested folders.
         \n• Experimental support for swiping horizontally to nest a folder when sorting is manual.
         \n• Add a default "General" folder for y\'know general notes.
-        \n• Support viewing all notes and recent notes and the ability to search though them.
+        \n• Support viewing all notes and recent notes and the ability to search through them.
         \n• Highlight note content when searching.
         \n• Implement collapsing toolbar for better usability and hand reachability.
         \n• Support for the French language.

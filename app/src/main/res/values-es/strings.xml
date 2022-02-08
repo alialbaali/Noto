@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Noto</string>
+    <string name="done">Hecho</string>
+    <string name="okay">Ok</string>
+    <string name="search">Buscar</string>
+    <!-- More options for folder, note, etc -->
+    <string name="more">Más</string>
+    <string name="back">Volver</string>
+    <string name="folder_layout">Diseño de carpeta</string>
+    <string name="layout">Diseño</string>
+    <string name="list">Lista</string>
+    <string name="grid">Mosaico</string>
+    <string name="created">Creado %s</string>
+    <string name="alphabetical">Alfabéticamente</string>
+    <string name="alphabetical_sorting">Orden alfabético</string>
+    <string name="creation_date">Fecha de creación</string>
+    <string name="creation_date_sorting">Ordenado por fecha de creación</string>
+    <string name="manual">Manual</string>
+    <string name="manual_sorting">Orden manual</string>
+    <string name="default_grouping">Predeterminado</string>
+    <string name="descending">Descendente</string>
+    <string name="ascending">Ascendente</string>
+    <string name="settings">Preferencias</string>
+    <string name="view_code">Ver código en GitHub</string>
+    <string name="join_community">Únete a la comunidad en Reddit</string>
+    <string name="change_notes_font">Cambiar fuente de las notas</string>
+    <string name="share_app_with_others">Compartir la aplicación con otros</string>
+    <string name="rate_app_on_play_store">Calificar en Play Store</string>
+    <string name="report_issue">Reportar un problema</string>
+    <string name="about">Acerca de</string>
+    <string name="whats_new">Novedades</string>
+    <string name="about_message">Noto está desarrollado y mantenido por <a href="https://www.alialbaali.com/">Ali Albaali</a>.
+        \n\nLa aplicación se distribuye bajo los términos de la <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Licencia Apache..</a>
+        \n\nAgradecimientos especiales a <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> y <a href="https://sakci.me">Alparslan Scope akc► i</a>,
+        <a href="https://github.com/faus32">Faus AM</a> <a href="https://github.com/kernoeb">Kernoeb</a> para localizaciones turcas, españolas y francesas respectivamente,
+        y todos aquellos que han ayudado y contribuido en el desarrollo.</string>
+    <string name="share_with">Compartir con</string>
+    <string name="export_import_data">Exportar/Importar datos</string>
+    <string name="exporting_failed">Error al importar datos.</string>
+    <string name="importing_failed">Error al importar datos.</string>
+    <string name="data_is_exported">Los datos han sido exportados a %s</string>
+    <string name="data_is_imported">Los datos han sido importados.</string>
+    <string name="export_data">Exportar datos</string>
+    <string name="import_data">Importar datos</string>
+    <string name="importing_data">Importando datos…</string>
+    <string name="exporting_data">Exportando datos…</string>
+    <string name="create_file_failed">Falló al crear el archivo.</string>
+    <string name="no_folder_is_selected">No se ha seleccionado ninguna carpeta.</string>
+    <string name="no_file_is_selected">No se ha seleccionado ningún archivo.</string>
+    <!-- Open with an app such as Signal -->
+    <string name="open_with">Abrir con</string>
+    <string name="invite_text">¡Echa un vistazo a Noto!</string>
+    <string name="version">Versión %s</string>
+    <string name="empty_version">Versión</string>
+    <string name="date">Fecha</string>
+    <string name="drag">Arrastrar</string>
+    <string name="nunito">Nunito (predeterminado)</string>
+    <string name="monospace">Monospace</string>
+    <string name="font">Fuente</string>
+    <string name="folders_archive">Archivo de carpetas</string>
+    <string name="change_main_folder">Cambiar la carpeta principal</string>
+    <string name="general">General</string>
+    <string name="collapse_toolbar">Contraer barra de herramientas por defecto</string>
+    <string name="all_notes">Todas las notas</string>
+    <string name="clear">Eliminar</string>
+    <string name="recent_notes">Notas recientes</string>
+    <string name="collapse">Contraer</string>
+    <string name="expand">Expandir</string>
+    <string name="no_parent">Sin tema principal</string>
+    <string name="new_note_cursor_position">Posición del cursor en notas nuevas</string>
+    <!-- Folder -->
+    <string name="folders">Carpetas</string>
+    <plurals name="folders_count">
+        <item quantity="one">%d Carpeta</item>
+        <item quantity="other">%d Carpetas</item>
+    </plurals>
+    <string name="create_folder">Crear carpeta</string>
+    <string name="new_folder">Nueva carpeta</string>
+    <string name="folder_options">Opciones de carpeta</string>
+    <string name="edit_folder">Editar carpeta</string>
+    <string name="archive_folder">Archivar carpeta</string>
+    <string name="unarchive_folder">Desarchivar carpeta</string>
+    <string name="add_new_note_shortcut">Añadir acceso directo de escritorio</string>
+    <string name="delete_folder_description">Esta acción no se puede deshacer y eliminará la carpeta y todo su contenido de forma permanente.</string>
+    <string name="folder_title">Título de la carpeta</string>
+    <string name="folder_color">Color de la carpeta</string>
+    <string name="delete_folder">Eliminar carpeta</string>
+    <string name="delete_folder_confirmation">¿Está seguro de que desea eliminar esta carpeta?</string>
+    <string name="folders_sorting">Ordenando carpetas</string>
+    <string name="empty_title">El título no puede estar vacío.</string>
+    <string name="folder_is_deleted">Se ha eliminado la carpeta.</string>
+    <string name="folder_is_archived">La carpeta se ha archivado.</string>
+    <string name="folder_is_unarchived">La carpeta ha sido desarchivada.</string>
+    <string name="folder_is_pinned">La carpeta ha sido fijada.</string>
+    <string name="folder_is_unpinned">La carpeta ha sido desanclada.</string>
+    <string name="no_folders_found">No se encontraron carpetas.</string>
+    <string name="select_folder">Seleccionar carpeta</string>
+    <string name="pinned">Anclado</string>
+    <string name="pin_folder">Fijar carpeta</string>
+    <string name="unpin_folder">Desfijar carpeta</string>
+    <!-- Vault -->
+    <string name="folders_vault">Bóveda de carpetas</string>
+    <string name="enter_vault_passcode">Introduzca contraseña de bóveda</string>
+    <string name="vault_folder">Carpeta de bóveda</string>
+    <string name="unvault_folder">Carpeta sin bóveda</string>
+    <string name="folder_is_vaulted">La carpeta se ha almacenado en la bóveda.</string>
+    <string name="folder_is_unvaulted">La carpeta se ha extraído de la boveda.</string>
+    <string name="vault_is_empty">Bóveda vacía.</string>
+    <string name="archive_vaulted_folder_confirmation">¿Está seguro que desea archivar este elemento?</string>
+    <string name="archive_vaulted_folder_description">Archivar esta biblioteca también la eliminará de la bóveda.</string>
+    <string name="vault_passcode">Código de la bóveda</string>
+    <string name="current_vault_passcode">Contraseña actual de bóveda</string>
+    <string name="new_vault_passcode">Introduzca contraseña de bóveda</string>
+    <string name="change_vault_passcode">Cambiar contraseña de bóveda</string>
+    <string name="change_vault_timeout">Cambiar el tiempo de espera de bóveda</string>
+    <string name="vault_timeout">Tiempo de espera de bóveda</string>
+    <string name="invalid_passcode">Contraseña no válida</string>
+    <string name="passcode_length_message">La contraseña debe contener al menos 6 números</string>
+    <string name="passcode_empty_message">La contraseña no puede estar vacía</string>
+    <string name="passcode_doesnt_match">La contraseña no coincide con la actual</string>
+    <string name="vault_passcode_has_changed">La contraseña de bóveda ha sido actualizada.</string>
+    <string name="vault_passcode_message">La contraseña de la bóveda no se puede cambiar si pierde la actual, así que asegúrese de guardarla en un lugar seguro.</string>
+    <string name="open_vault">Abrir bóveda</string>
+    <string name="open_vault_using_passcode">Abrir usando contraseña</string>
+    <string name="open_vault_using_bio">Abrir usando biométricos</string>
+    <string name="vault">Bóveda</string>
+    <string name="vault_is_open">Bóveda abierta</string>
+    <string name="immediately">Inmediatamente</string>
+    <string name="on_app_close">Al cerrar la aplicación</string>
+    <string name="after_1_hour">Tras 1 hora</string>
+    <string name="after_4_hours">Tras 4 horas</string>
+    <string name="after_12_hours">Tras 12 horas</string>
+    <string name="close_vault">Cerrar bóveda</string>
+    <string name="enable_bio_auth">Habilitar autenticación biométrica</string>
+    <string name="use_passcode">Usar contraseña</string>
+    <!-- Note -->
+    <string name="all">Todos</string>
+    <string name="archive_is_empty">El archivo está vacío.</string>
+    <plurals name="notes_count">
+        <item quantity="one">%d nota</item>
+        <item quantity="other">%d notas</item>
+    </plurals>
+    <plurals name="words_count">
+        <item quantity="one">%d palabra</item>
+        <item quantity="other">%d palabras</item>
+    </plurals>
+    <string name="body">Cuerpo</string>
+    <string name="title">Titulo</string>
+    <string name="create_note">Crear nota</string>
+    <string name="delete_note">Borrar nota</string>
+    <string name="archive_note">Archivar nota</string>
+    <string name="duplicate_note">Duplicar nota</string>
+    <string name="sorting_type">Tipo de ordenación</string>
+    <string name="notes_sorting">Ordenando notas</string>
+    <string name="grouping">Agrupación</string>
+    <string name="sorting_order">Orden de clasificación</string>
+    <string name="save_to_noto">Guardar en Noto</string>
+    <string name="no_notes_found">No se encontraron notas.</string>
+    <string name="unarchive_note">Desarchivar nota</string>
+    <string name="notes">Notas</string>
+    <string name="note_is_archived">La nota ha sido archivada.</string>
+    <string name="note_is_pinned">La nota ha sido anclada.</string>
+    <string name="note_is_unpinned">La nota ha sido desanclada.</string>
+    <string name="no_note_reminder">No hay recordatorio de nota configurado.</string>
+    <string name="note_is_unarchived">La nota se ha desarchivado.</string>
+    <string name="reminder">Recordatorio</string>
+    <string name="reminders">Recordatorios</string>
+    <string name="new_note_reminder">Nuevo recordatorio de nota</string>
+    <string name="archive">%s archivo</string>
+    <string name="copy_note_to_clipboard">Copiar nota al portapapeles</string>
+    <string name="copy_note_to">Copiar nota a…</string>
+    <string name="note_is_copied">Se ha copiado la nota.</string>
+    <string name="note_copied_to_clipboard">La nota ha sido copiada en el portapapeles.</string>
+    <string name="delete_note_confirmation">¿Está seguro que desea eliminar esta nota?</string>
+    <string name="share_note">Compartir nota con…</string>
+    <string name="add_note_reminder">Añadir un recordatorio</string>
+    <string name="delete_note_description">Esta acción no se puede deshacer y eliminará la nota y su recordatorio permanentemente.</string>
+    <string name="pin_note">Anclar nota</string>
+    <string name="unpin_note">Desanclar nota</string>
+    <string name="open_note_in_reading_mode">Abrir nota en modo lectura</string>
+    <string name="edit_note_reminder">Editar recordatorio de nota</string>
+    <string name="note_options">Opciones para Notas</string>
+    <string name="note_is_deleted">Nota eliminada.</string>
+    <string name="note_is_duplicated">La nota ha sido duplicada.</string>
+    <string name="move_note">Mover nota a…</string>
+    <string name="change_parent_folder">Cambiar la carpeta principal</string>
+    <string name="note_is_moved">Nota ha sido movida.</string>
+    <string name="note_preview_size">Tamaño de vista previa de nota</string>
+    <string name="show_note_creation_date">Mostrar fecha de creación de nota</string>
+    <string name="show_folders_notes_count">Mostrar contador de notas de carpetas</string>
+    <!-- Label -->
+    <string name="reorder_label">Reordenar etiqueta</string>
+    <string name="create_label">Crear etiqueta</string>
+    <string name="label_title">Título de la etiqueta</string>
+    <string name="label">Etiqueta</string>
+    <string name="without_label">Sin etiqueta</string>
+    <string name="label_options">Opciones de etiqueta</string>
+    <string name="delete_label">Eliminar etiqueta</string>
+    <string name="new_label">Nueva etiqueta</string>
+    <string name="edit_label">Editar etiqueta</string>
+    <string name="labels_order">Orden de etiquetas</string>
+    <string name="delete_label_confirmation">¿Está seguro que desea eliminar esta etiqueta?</string>
+    <string name="label_is_deleted">La etiqueta ha sido eliminada.</string>
+    <string name="delete_label_description">Esta acción no se puede deshacer y eliminará la etiqueta y la etiqueta de las notas asociadas permanentemente.</string>
+    <string name="filter_labels">Filtrar etiquetas</string>
+    <!-- Theme -->
+    <string name="theme">Tema</string>
+    <string name="change_theme">Cambiar tema</string>
+    <string name="system_dark_theme">Sistema + Tema oscuro</string>
+    <string name="system_black_theme">Sistema + Tema Negro</string>
+    <string name="light_theme">Tema claro</string>
+    <string name="dark_theme">Tema oscuro</string>
+    <string name="black_theme">Tema negro</string>
+    <!-- Language -->
+    <string name="language">Idioma</string>
+    <string name="change_language">Cambiar idioma</string>
+    <string name="system_language">Idioma del sistema</string>
+    <string name="english">Inglés</string>
+    <string name="turkish">Turco</string>
+    <string name="arabic">Árabe</string>
+    <string name="indonesian">Indonesio</string>
+    <string name="russian">Ruso</string>
+    <string name="spanish">Español</string>
+    <string name="french">Francés</string>
+    <!-- Widget -->
+    <string name="create_widget">Crear Widget</string>
+    <string name="new_notes_widget">Widget de notas nuevas</string>
+    <string name="edit_notes_widget">Editar widget notas</string>
+    <string name="new_folders_widget">Widget de notas nuevas</string>
+    <string name="edit_folders_widget">Editar widget notas</string>
+    <string name="new_folder_button">Nuevo botón de carpeta</string>
+    <string name="new_note_button">Nuevo botón de notas</string>
+    <string name="widget_header">Encabezado del widget</string>
+    <string name="app_icon">Icono de la aplicación</string>
+    <string name="widget_radius">Radio del widget</string>
+    <string name="edit_widget">Editar widget</string>
+    <string name="edit_widget_button">Editar botón de widget</string>
+    <string name="folders_notes_count">Contador de notas de carpetas</string>
+    <string name="loading_content">Cargando contenido</string>
+    <!-- Releases -->
+    <string name="current_release">Versión actual: {0}</string>
+    <string name="previous_releases">Versiones anteriores</string>
+    <string name="release_1_8_0">• Soporte para librerías protegidas con código de acceso.
+        \n• Soporte para opciones de tiempo de espera de bóveda.
+        \n• Soporte para autenticación de bóveda biométrica en dispositivos compatibles.
+        \n• Soporte para el idioma Español.
+        \n• Agregar un enlace para la nueva comunidad <a href="https://www.reddit.com/r/notoapp">Reddit</a>.
+        \n• Otras correcciones de errores y mejoras de diseño.
+    </string>
+    <string name="release_2_0_0">• Año nuevo, nueva apariencia!
+        \n• Las bibliotecas han desaparecido. ¡Carpetas de Bienvenida!
+        \n• Mejorar animaciones en toda la aplicación.
+        \n• Soporte experimental para carpetas anidadas.
+        \n• Soporte experimental para deslizar horizontalmente para anidar una carpeta al ordenar es manual.
+        \n• Añadir una carpeta \"General\" por defecto para notas generales de y\'know.
+        \n• Permite ver todas las notas y notas recientes y la capacidad de buscar a través de ellas.
+        \n• Resaltar el contenido de la nota al buscar.
+        \n• Implementar la barra de herramientas que colapsa para una mejor usabilidad y capacidad de reacción manual.
+        \n• Soporte para el idioma francés.
+        \n• Soporte para deslizar hacia arriba la barra inferior de la aplicación para ver las carpetas.
+        \n• Navega a la bóveda al hacer clic en la notificación \'bóveda está abierta\'.
+        \n• Añadir opción de configuración para elegir destino de carpeta principal.
+        \n• Añadir opción de configuración para contraer la barra de herramientas por defecto.
+        \n• Corregir los iconos de accesos directos estáticos en dispositivos Android antiguos.
+        \n• Otras correcciones de errores y mejoras de diseño.
+    </string>
+</resources>

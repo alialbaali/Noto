@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Noto</string>
+    <string name="done">Erledigt</string>
+    <string name="okay">OK</string>
+    <string name="search">Suchen</string>
+    <!-- More options for folder, note, etc -->
+    <string name="more">Mehr</string>
+    <string name="back">Zurück</string>
+    <string name="folder_layout">Ordnerlayout</string>
+    <string name="layout">Layout</string>
+    <string name="list">Liste</string>
+    <string name="grid">Raster</string>
+    <string name="created">Erstellt %s</string>
+    <string name="alphabetical">Alphabetisch</string>
+    <string name="alphabetical_sorting">Alphabetische Sortierung</string>
+    <string name="creation_date">Erstellungsdatum</string>
+    <string name="creation_date_sorting">Sortierung nach Erstellungsdatum</string>
+    <string name="manual">Manuell</string>
+    <string name="manual_sorting">Manuelle Sortierung</string>
+    <string name="default_grouping">Standard</string>
+    <string name="descending">Absteigend</string>
+    <string name="ascending">Aufsteigend</string>
+    <string name="settings">Einstellungen</string>
+    <string name="view_code">Code auf GitHub ansehen</string>
+    <string name="join_community">Community auf Reddit beitreten</string>
+    <string name="change_notes_font">Schriftart der Notizen ändern</string>
+    <string name="share_app_with_others">App mit Freunden teilen</string>
+    <string name="rate_app_on_play_store">App im Play Store bewerten</string>
+    <string name="report_issue">Einen Fehler melden</string>
+    <string name="about">Über</string>
+    <string name="whats_new">Was ist neu?</string>
+    <string name="about_message">Noto wird von <a href="https://www.alialbaali.com/">Ali Albaali</a>entwickelt und gepflegt.
+        \n\nDie App wird unter den Bedingungen der <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a> distribuiert.
+        \n\nBesonderen Dank an <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> und <a href="https://sakci.me">Alparslan Şakçi</a>,
+        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a> für türkische, spanische und französische Lokalisierungen
+        und alle, die bei der Entwicklung geholfen und mitgewirkt haben.</string>
+    <string name="share_with">Freigeben für</string>
+    <string name="export_import_data">Daten exportieren/importieren</string>
+    <string name="exporting_failed">Export der Daten fehlgeschlagen.</string>
+    <string name="importing_failed">Import der Daten fehlgeschlagen.</string>
+    <string name="data_is_exported">Daten wurden exportiert nach %s</string>
+    <string name="data_is_imported">Die Daten wurden importiert.</string>
+    <string name="export_data">Daten exportieren</string>
+    <string name="import_data">Daten importieren</string>
+    <string name="importing_data">Daten werden importiert…</string>
+    <string name="exporting_data">Daten werden exportiert…</string>
+    <string name="create_file_failed">Fehler beim Erstellen einer Datei.</string>
+    <string name="no_folder_is_selected">Es wurde kein Ordner gewählt.</string>
+    <string name="no_file_is_selected">Es wurde keine Datei gewählt.</string>
+    <!-- Open with an app such as Signal -->
+    <string name="open_with">Öffnen mit</string>
+    <string name="invite_text">Sieh dir Noto an!</string>
+    <string name="version">Version %s</string>
+    <string name="empty_version">Version</string>
+    <string name="date">Datum</string>
+    <string name="drag">Ziehen</string>
+    <string name="nunito">Nunito (Standard)</string>
+    <string name="monospace">Monospace</string>
+    <string name="font">Schriftart</string>
+    <string name="folders_archive">Ordnerarchiv</string>
+    <string name="change_main_folder">Hauptordner ändern</string>
+    <string name="general">Allgemein</string>
+    <string name="collapse_toolbar">Werkzeugleiste standardmäßig einklappen</string>
+    <string name="all_notes">Alle Notizen</string>
+    <string name="clear">Löschen</string>
+    <string name="recent_notes">Zuletzt erstellte Notizen</string>
+    <string name="collapse">Einklappen</string>
+    <string name="expand">Ausklappen</string>
+    <string name="no_parent">Kein Elternelement</string>
+    <string name="new_note_cursor_position">Cursorposition für neue Notiz</string>
+    <!-- Folder -->
+    <string name="folders">Ordner</string>
+    <plurals name="folders_count">
+        <item quantity="one">%d Ordner</item>
+        <item quantity="other">%d Ordner</item>
+    </plurals>
+    <string name="create_folder">Ordner anlegen</string>
+    <string name="new_folder">Neuer Ordner</string>
+    <string name="folder_options">Ordneroptionen</string>
+    <string name="edit_folder">Ordner bearbeiten</string>
+    <string name="archive_folder">Ordner archivieren</string>
+    <string name="unarchive_folder">Ordner dearchivieren</string>
+    <string name="add_new_note_shortcut">Desktopverknüpfung für neue Notiz erstellen</string>
+    <string name="delete_folder_description">Diese Aktion kann nicht rückgängig gemacht werden und wird Notiz und Erinnerung dauerhaft löschen.</string>
+    <string name="folder_title">Ordnername</string>
+    <string name="folder_color">Ordnerfarbe</string>
+    <string name="delete_folder">Ordner löschen</string>
+    <string name="delete_folder_confirmation">Soll dieser Ordner wirklich gelöscht werden?</string>
+    <string name="folders_sorting">Sortierung der Ordner</string>
+    <string name="empty_title">Der Titel darf nicht leer sein.</string>
+    <string name="folder_is_deleted">Ordner wurde gelöscht.</string>
+    <string name="folder_is_archived">Ordner wurde archiviert.</string>
+    <string name="folder_is_unarchived">Ordner wurde dearchiviert.</string>
+    <string name="folder_is_pinned">Ordner wurde angepinnt.</string>
+    <string name="folder_is_unpinned">Ordner wurde losgelöst.</string>
+    <string name="no_folders_found">Keine Ordner gefunden.</string>
+    <string name="select_folder">Ordner auswählen</string>
+    <string name="pinned">Angepinnt</string>
+    <string name="pin_folder">Ordner anheften</string>
+    <string name="unpin_folder">Ordner loslösen</string>
+    <!-- Vault -->
+    <string name="folders_vault">Folders vault</string>
+    <string name="enter_vault_passcode">Tresor-Zugangscode eingeben</string>
+    <string name="vault_folder">Ordner mit Tresor schützen</string>
+    <string name="unvault_folder">Ordner aus dem Tresor holen</string>
+    <string name="folder_is_vaulted">Ordner wurde mit Tresor geschützt.</string>
+    <string name="folder_is_unvaulted">Ordner wurde aus dem Tresor geholt.</string>
+    <string name="vault_is_empty">Tresor ist leer.</string>
+    <string name="archive_vaulted_folder_confirmation">Soll dieser Ordner wirklich archiviert werden?</string>
+    <string name="archive_vaulted_folder_description">Das Archivieren dieses Ordners entfernt ihn auch aus dem Tresor.</string>
+    <string name="vault_passcode">Zugangscode zum Tresor</string>
+    <string name="current_vault_passcode">Momentaner Zugangscode zum Tresor</string>
+    <string name="new_vault_passcode">Neuer Zugangscode zum Tresor</string>
+    <string name="change_vault_passcode">Zugangscode zum Tresor ändern</string>
+    <string name="change_vault_timeout">Ablaufzeit des Tresors ändern</string>
+    <string name="vault_timeout">Ablaufzeit für Tresor</string>
+    <string name="invalid_passcode">Ungültiger Zugangscode</string>
+    <string name="passcode_length_message">Zugangscode muss mindestens sechs Ziffern enthalten</string>
+    <string name="passcode_empty_message">Zugangscode darf nicht leer bleiben</string>
+    <string name="passcode_doesnt_match">Zugangscode stimmt nicht mit dem aktuellen überein</string>
+    <string name="vault_passcode_has_changed">Tresor-Zugangscode wurde aktualisiert.</string>
+    <string name="vault_passcode_message">Der Tresor-Zugangscode kann nicht geändert werden, wenn du den aktuellen verlierst. Bitte stelle sicher, dass du ihn an einem sicheren Ort speicherst.</string>
+    <string name="open_vault">Open vault</string>
+    <string name="open_vault_using_passcode">Mit Zugangscode öffnen</string>
+    <string name="open_vault_using_bio">Mit biometrischen Daten öffnen</string>
+    <string name="vault">Tresor</string>
+    <string name="vault_is_open">Tresor ist offen</string>
+    <string name="immediately">Sofort</string>
+    <string name="on_app_close">Beim Schließen der App</string>
+    <string name="after_1_hour">Nach 1 Stunde</string>
+    <string name="after_4_hours">Nach 4 Stunden</string>
+    <string name="after_12_hours">Nach 12 Stunden</string>
+    <string name="close_vault">Tresor schließen</string>
+    <string name="enable_bio_auth">Biometrische Authentifizierung aktivieren</string>
+    <string name="use_passcode">Passcode verwenden</string>
+    <!-- Note -->
+    <string name="all">Alle</string>
+    <string name="archive_is_empty">Archiv ist leer.</string>
+    <plurals name="notes_count">
+        <item quantity="one">%d Note</item>
+        <item quantity="other">%d Notizen</item>
+    </plurals>
+    <plurals name="words_count">
+        <item quantity="one">%d Word</item>
+        <item quantity="other">%d Wörter</item>
+    </plurals>
+    <string name="body">Haupttext</string>
+    <string name="title">Überschrift</string>
+    <string name="create_note">Notiz erstellen</string>
+    <string name="delete_note">Notiz löschen</string>
+    <string name="archive_note">Notiz archivieren</string>
+    <string name="duplicate_note">Notiz duplizieren</string>
+    <string name="sorting_type">Sortierungsart</string>
+    <string name="notes_sorting">Notizen-Sortierung</string>
+    <string name="grouping">Gruppierung</string>
+    <string name="sorting_order">Sortierreihenfolge</string>
+    <string name="save_to_noto">In Noto speichern</string>
+    <string name="no_notes_found">Keine Notizen gefunden.</string>
+    <string name="unarchive_note">Notiz dearchivieren</string>
+    <string name="notes">Notizen</string>
+    <string name="note_is_archived">Notiz wurde archiviert.</string>
+    <string name="note_is_pinned">Notiz wurde angepinnt.</string>
+    <string name="note_is_unpinned">Notiz wurde losgelöst.</string>
+    <string name="no_note_reminder">Es wurde keine Notiz-Erinnerung eingerichtet.</string>
+    <string name="note_is_unarchived">Notiz wurde dearchiviert.</string>
+    <string name="reminder">Erinnerung</string>
+    <string name="reminders">Erinnerungen</string>
+    <string name="new_note_reminder">Neue Notiz-Erinnerung</string>
+    <string name="archive">%s Archiv</string>
+    <string name="copy_note_to_clipboard">Notiz in die Zwischenablage kopieren</string>
+    <string name="copy_note_to">Notiz kopieren nach…</string>
+    <string name="note_is_copied">Notiz wurde kopiert.</string>
+    <string name="note_copied_to_clipboard">Notiz wurde in die Zwischenablage kopiert.</string>
+    <string name="delete_note_confirmation">Willst du diese Notiz wirklich löschen?</string>
+    <string name="share_note">Notiz teilen mit…</string>
+    <string name="add_note_reminder">Erinnerung zur Notiz hinzufügen</string>
+    <string name="delete_note_description">Diese Aktion kann nicht rückgängig gemacht werden und wird Notiz und Erinnerung dauerhaft löschen.</string>
+    <string name="pin_note">Notiz anheften</string>
+    <string name="unpin_note">Notiz loslösen</string>
+    <string name="open_note_in_reading_mode">Notiz im Lesemodus öffnen</string>
+    <string name="edit_note_reminder">Erinnerung zur Notiz hinzufügen</string>
+    <string name="note_options">Noitzoptionen</string>
+    <string name="note_is_deleted">Notiz wurde gelöscht.</string>
+    <string name="note_is_duplicated">Notiz wurde dupliziert.</string>
+    <string name="move_note">Notiz verschieben nach…</string>
+    <string name="change_parent_folder">Übergeordneten Ordner ändern</string>
+    <string name="note_is_moved">Notiz wurde verschoben.</string>
+    <string name="note_preview_size">Größe der Notizvorschau</string>
+    <string name="show_note_creation_date">Datum der Notizerstellung anzeigen</string>
+    <string name="show_folders_notes_count">Anzahl der Notizen für Ordner anzeigen</string>
+    <!-- Label -->
+    <string name="reorder_label">Label umsortieren</string>
+    <string name="create_label">Label erstellen</string>
+    <string name="label_title">Label-Titel</string>
+    <string name="label">Label</string>
+    <string name="without_label">Ohne Label</string>
+    <string name="label_options">Label-Optionen</string>
+    <string name="delete_label">Label löschen</string>
+    <string name="new_label">Neues Label</string>
+    <string name="edit_label">Label bearbeiten</string>
+    <string name="labels_order">Label-Reihenfolge</string>
+    <string name="delete_label_confirmation">Möchten Sie dieses Label wirklich löschen?</string>
+    <string name="label_is_deleted">Label wurde gelöscht.</string>
+    <string name="delete_label_description">Diese Aktion kann nicht rückgängig gemacht werden und wird das Label löschen und das Label von den zugehörigen Notizen dauerhaft entfernen.</string>
+    <string name="filter_labels">Nach Labels filtern</string>
+    <!-- Theme -->
+    <string name="theme">Farbschema</string>
+    <string name="change_theme">Farbschema ändern</string>
+    <string name="system_dark_theme">System + Dunkles Farbschema</string>
+    <string name="system_black_theme">System + Schwarzes Farbschema</string>
+    <string name="light_theme">Helles Farbschema</string>
+    <string name="dark_theme">Dunkles Farbschema</string>
+    <string name="black_theme">Schwarzes Farbschema</string>
+    <!-- Language -->
+    <string name="language">Sprache</string>
+    <string name="change_language">Sprache ändern</string>
+    <string name="system_language">Systemsprache</string>
+    <string name="english">Englisch</string>
+    <string name="turkish">Türkisch</string>
+    <string name="arabic">Arabisch</string>
+    <string name="indonesian">Indonesisch</string>
+    <string name="russian">Russisch</string>
+    <string name="spanish">Spanisch</string>
+    <string name="french">Französisch</string>
+    <!-- Widget -->
+    <string name="create_widget">Widget erstellen</string>
+    <string name="new_notes_widget">Neues Notiz-Widget</string>
+    <string name="edit_notes_widget">Notiz-Widget bearbeiten</string>
+    <string name="new_folders_widget">Neues Ordner-Widget</string>
+    <string name="edit_folders_widget">Ordner-Widget bearbeiten</string>
+    <string name="new_folder_button">Schaltfläche für neuen Ordner</string>
+    <string name="new_note_button">Schaltfläche für neue Notiz</string>
+    <string name="widget_header">Widget-Kopfzeile</string>
+    <string name="app_icon">App-Icon</string>
+    <string name="widget_radius">Widget-Radius</string>
+    <string name="edit_widget">Widget bearbeiten</string>
+    <string name="edit_widget_button">Schaltfläche fürs Bearbeiten von Widgets</string>
+    <string name="folders_notes_count">Anzahl der Notizen im Ordner</string>
+    <string name="loading_content">Inhalt wird geladen</string>
+    <!-- Releases -->
+    <string name="current_release">Aktuelle Version</string>
+    <string name="previous_releases">Vorherige Versionen</string>
+    <string name="release_1_8_0">• Unterstützung für Zugangscode-geschützte Tresore für Ordner.
+        \n• Option für Unterstützung von Zeitüberschreitung bei Tresoren.
+        \n• Unterstützung für biometrische Tresor-Authentifizierung auf unterstützten Geräten.
+        \n• Unterstützung für die spanische Sprache.
+        \n• Link für die neue <a href="https://www.reddit.com/r/notoapp">Reddit</a> Community hinzugefügt.
+        \n• Weitere Bugfixes und Design-Verbesserungen.
+    </string>
+    <string name="release_2_0_0">• Neues Jahr, neuer Look!
+        \n• Libraries sind Vergangenheit. Hallo Ordner!
+        \n• Verbesserte Animationen in der gesamten App.
+        \n• Experimentelle Unterstützung für verschachtelte Ordner.
+        \n• Experimentelle Unterstützung für das horizontale Wischen eines Ordners beim manuellen Sortieren.
+        \n• Standardordner \"Allgemein\" für allgemeine Notizen hinzugefügt.
+        \n• Unterstützung für das Betrachten sämtlicher Notizen und neuester Notizen sowie die Möglichkeit, diese zu durchsuchen.
+        \n• Hervorhebung des Notizinhalts bei Suchvorgängen
+        \n• Einklappbare Werkzeugleiste für bessere Nutzerfreundlichkeit und Erreichbarkeit.
+        \n• Unterstützung für die französische Sprache.
+        \n• Unterstützung für das Wischen der unteren App-Leiste um Ordner anzuzeigen.
+        \n• Navigieren Sie zum Tresor, wenn Sie auf \"Tresor ist offen\" Benachrichtigung klicken.
+        \n• Einstellungsoption hinzugefügt, um das Ziel des Hauptordners auszuwählen.
+        \n• Einstellungsoption hinzugefügt, um die Werkzeugleiste standardmäßig einzuklappen.
+        \n• Statische Verknüpfungssymbole auf älteren Android-Geräten repariert.
+        \n• Weitere Bugfixes und Design-Verbesserungen.
+    </string>
+</resources>

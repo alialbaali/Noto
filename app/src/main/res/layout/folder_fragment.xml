@@ -31,7 +31,7 @@
             style="@style/CollapsingToolbar"
             android:layout_height="@dimen/collapsing_toolbar_height"
             android:layout_width="match_parent"
-            tools:title="@string/inbox">
+            tools:title="@string/general">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/tb"
