@@ -1,8 +1,6 @@
 package com.noto.app.folder
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.RippleDrawable
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
 import android.view.GestureDetector
@@ -87,10 +85,6 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
                 llReminder.background?.mutate()?.setTint(colorResource)
                 tvReminder.text = note.reminderDate?.format(context)
             }
-            val rippleDrawable = root.background as RippleDrawable
-            val gradientDrawable = rippleDrawable.getDrawable(0) as GradientDrawable
-            gradientDrawable.setStroke(1.dp, colorResource)
-            rippleDrawable.setColor(colorResource.withDefaultAlpha().toColorStateList())
         }
         tvCreationDate.isVisible = isShowCreationDate
         tvNoteTitle.isVisible = note.title.isNotBlank()
