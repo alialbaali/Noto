@@ -112,6 +112,9 @@ class FolderViewModel(
 
     fun deleteFolder() = viewModelScope.launch {
         folderRepository.deleteFolder(folder.value)
+        folder.value.folders.forEach { childFolder ->
+            folderRepository.updateFolder(childFolder.first.copy(parentId = folder.value.parentId))
+        }
     }
 
     fun toggleFolderIsArchived() = viewModelScope.launch {
