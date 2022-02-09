@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.tabs.TabLayout
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
@@ -14,6 +15,7 @@ import com.noto.app.databinding.WhatsNewDialogFragmentBinding
 import com.noto.app.domain.model.Release
 import com.noto.app.domain.model.Release.Changelog
 import com.noto.app.domain.model.Release_1_8_0
+import com.noto.app.domain.model.Release_2_0_0
 import com.noto.app.util.BounceEdgeEffectFactory
 import com.noto.app.util.VerticalListItemAnimator
 import com.noto.app.util.stringResource
@@ -37,8 +39,8 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
 
     private val currentRelease: List<Release> by lazy {
         context?.let { context ->
-            val changelog = Changelog(context.stringResource(R.string.release_1_8_0))
-            listOf(Release_1_8_0(changelog))
+            val changelog = Changelog(context.stringResource(R.string.release_2_0_0))
+            listOf(Release_2_0_0(changelog))
         } ?: emptyList()
     }
 
@@ -68,6 +70,8 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
     private fun WhatsNewDialogFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
+        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
         viewModel.whatsNewTab
             .mapNotNull { tab ->
                 when (tab) {

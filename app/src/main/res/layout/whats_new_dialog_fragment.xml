@@ -1,55 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/BaseDialogFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/abl"
+        android:elevation="@dimen/elevation_small"
+        android:orientation="vertical"
+        android:background="@drawable/dialog_shape"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:id="@+id/abl"
-            android:elevation="@dimen/elevation_small"
-            android:orientation="vertical"
-            android:background="@drawable/dialog_shape"
+        <include layout="@layout/base_dialog_fragment" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_whats_new"
+            style="@style/TabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal">
 
-            <include layout="@layout/base_dialog_fragment" />
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/current_release"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tl_whats_new"
-                style="@style/TabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_normal">
-
-                <com.google.android.material.tabs.TabItem
-                    android:text="@string/current_release"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:text="@string/previous_releases"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.tabs.TabLayout>
-        </LinearLayout>
-
-        <com.airbnb.epoxy.EpoxyRecyclerView
-            android:id="@+id/rv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:paddingTop="@dimen/spacing_small"
-            android:paddingHorizontal="@dimen/spacing_small"
-            android:paddingBottom="@dimen/padding_bottom"
-            tools:listitem="@layout/release_item" />
+            <com.google.android.material.tabs.TabItem
+                android:text="@string/previous_releases"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.tabs.TabLayout>
     </LinearLayout>
+
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:padding="@dimen/spacing_small"
+        tools:listitem="@layout/release_item" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_okay"
@@ -61,4 +53,4 @@
         android:paddingVertical="@dimen/spacing_normal"
         android:text="@string/okay" />
 
-</FrameLayout>
+</LinearLayout>

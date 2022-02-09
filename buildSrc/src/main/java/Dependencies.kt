@@ -19,8 +19,8 @@ object Versions {
 }
 
 object App {
-    const val VersionName = "1.8.0"
-    const val VersionCode = 33
+    const val VersionName = "2.0.0"
+    const val VersionCode = 34
     const val ID = "com.noto"
     const val MinSDK = 21
     const val CompileSDK = 31
