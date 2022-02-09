@@ -101,11 +101,11 @@ fun View.snackbar(
     folder: Folder? = null,
 ) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
     if (folder == null) {
-        setBackgroundTint(context.attributeColoResource(R.attr.notoPrimaryColor))
-        setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
+        setBackgroundTint(context.colorAttributeResource(R.attr.notoPrimaryColor))
+        setTextColor(context.colorAttributeResource(R.attr.notoBackgroundColor))
     } else {
         setBackgroundTint(context.colorResource(folder.color.toResource()))
-        setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
+        setTextColor(context.colorAttributeResource(R.attr.notoBackgroundColor))
     }
     val params = view.layoutParams as? CoordinatorLayout.LayoutParams
     params?.let {
@@ -121,7 +121,7 @@ fun View.setFullSpan() {
 }
 
 fun GradientDrawable.toRippleDrawable(context: Context): RippleDrawable {
-    val colorStateList = context.attributeColoResource(R.attr.notoSecondaryColor).toColorStateList()
+    val colorStateList = context.colorAttributeResource(R.attr.notoSecondaryColor).toColorStateList()
     return RippleDrawable(colorStateList, this, this)
 }
 
@@ -181,10 +181,10 @@ fun TextView.removeLinksUnderline() {
 }
 
 fun SwitchMaterial.setupColors(
-    thumbCheckedColor: Int = context.attributeColoResource(R.attr.notoPrimaryColor),
-    thumbUnCheckedColor: Int = context.attributeColoResource(R.attr.notoSurfaceColor),
-    trackCheckedColor: Int = context.attributeColoResource(R.attr.notoPrimaryColor),
-    trackUnCheckedColor: Int = context.attributeColoResource(R.attr.notoSecondaryColor),
+    thumbCheckedColor: Int = context.colorAttributeResource(R.attr.notoPrimaryColor),
+    thumbUnCheckedColor: Int = context.colorAttributeResource(R.attr.notoSurfaceColor),
+    trackCheckedColor: Int = context.colorAttributeResource(R.attr.notoPrimaryColor),
+    trackUnCheckedColor: Int = context.colorAttributeResource(R.attr.notoSecondaryColor),
 ) {
     val state = arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf(-android.R.attr.state_checked))
     val thumbColors = intArrayOf(thumbCheckedColor, thumbUnCheckedColor)
@@ -254,7 +254,7 @@ fun Context.createDialogItemStateListDrawable(notoColor: NotoColor): StateListDr
 private fun Context.createUncheckedDrawable(notoColor: NotoColor): RippleDrawable {
     val color = colorResource(notoColor.toResource())
     val colorStateList = color.withDefaultAlpha().toColorStateList()
-    val backgroundColorStateList = attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
+    val backgroundColorStateList = colorAttributeResource(R.attr.notoBackgroundColor).toColorStateList()
     val gradientDrawable = GradientDrawable().apply {
         shape = GradientDrawable.RECTANGLE
         this.color = backgroundColorStateList
@@ -266,7 +266,7 @@ private fun Context.createUncheckedDrawable(notoColor: NotoColor): RippleDrawabl
 private fun Context.createCheckedDrawable(notoColor: NotoColor): RippleDrawable {
     val color = colorResource(notoColor.toResource())
     val colorStateList = color.withDefaultAlpha().toColorStateList()
-    val backgroundColorStateList = attributeColoResource(R.attr.notoSecondaryColor).toColorStateList()
+    val backgroundColorStateList = colorAttributeResource(R.attr.notoSecondaryColor).toColorStateList()
     val gradientDrawable = GradientDrawable().apply {
         shape = GradientDrawable.RECTANGLE
         this.color = colorStateList

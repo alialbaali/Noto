@@ -151,7 +151,7 @@ class NoteFragment : Fragment() {
                 .filterNotNull(),
         ) { title, body -> title to body }
             .onEach { (_, body) ->
-                tvWordCount.text = context?.pluralsResource(R.plurals.words_count, body.wordsCount, body.wordsCount)?.lowercase()
+                tvWordCount.text = context?.quantityStringResource(R.plurals.words_count, body.wordsCount, body.wordsCount)?.lowercase()
             }
             .debounce(DebounceTimeoutMillis)
             .onEach { (title, body) ->
@@ -261,7 +261,7 @@ class NoteFragment : Fragment() {
 
     private fun NoteFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
-            val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
+            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
             ctb.title = folder.getTitle(context)
@@ -292,7 +292,7 @@ class NoteFragment : Fragment() {
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
-        tvWordCount.text = context?.pluralsResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)?.lowercase()
+        tvWordCount.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)?.lowercase()
         context?.let { context ->
             tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
         }

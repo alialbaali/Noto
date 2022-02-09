@@ -32,7 +32,7 @@ abstract class LabelOrderItem : EpoxyModelWithHolder<LabelOrderItem.Holder>() {
         tvLabel.text = label.title
         root.context?.let { context ->
             val resourceColor = context.colorResource(color.toResource())
-            val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
+            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             tvLabel.background = root.context.drawableResource(R.drawable.label_item_shape)
                 ?.mutate()
                 ?.let { it as RippleDrawable }

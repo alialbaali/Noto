@@ -68,7 +68,7 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
             root.backgroundTintList = if (isSelected)
                 selectedColorStateList
             else
-                context.attributeColoResource(R.attr.notoBackgroundColor).toColorStateList()
+                context.colorAttributeResource(R.attr.notoBackgroundColor).toColorStateList()
             tvFolderTitle.text = folder.getTitle(context)
             if (isSelected) {
                 ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_open_24))

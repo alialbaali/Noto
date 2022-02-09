@@ -39,8 +39,8 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
             ibVisibility.imageTintList = colorStateList
             ibVisibility.background.setRippleColor(colorStateList)
         } else {
-            val colorResource = root.context.attributeColoResource(R.attr.notoSecondaryColor)
-            val rippleColorResource = root.context.attributeColoResource(R.attr.notoSurfaceColor)
+            val colorResource = root.context.colorAttributeResource(R.attr.notoSecondaryColor)
+            val rippleColorResource = root.context.colorAttributeResource(R.attr.notoSurfaceColor)
             tvTitle.setTextColor(colorResource)
             ibVisibility.imageTintList = colorResource.toColorStateList()
             ibVisibility.background.setRippleColor(rippleColorResource.toColorStateList())

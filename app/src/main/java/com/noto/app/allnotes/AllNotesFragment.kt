@@ -77,7 +77,7 @@ class AllNotesFragment : Fragment() {
         rv.itemAnimator = VerticalListItemAnimator()
         bab.setRoundedCorners()
         context?.let { context ->
-            val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
+            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             bab.navigationIcon?.mutate()?.setTint(backgroundColor)
             bab.menu.forEach { it.icon?.mutate()?.setTint(backgroundColor) }
         }
@@ -104,7 +104,7 @@ class AllNotesFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         val menuItem = bab.menu.findItem(R.id.change_visibility)
-        val menuItemColor = context?.attributeColoResource(R.attr.notoBackgroundColor)?.toColorStateList()
+        val menuItemColor = context?.colorAttributeResource(R.attr.notoBackgroundColor)?.toColorStateList()
         val expandText = context?.stringResource(R.string.expand)
         val collapseText = context?.stringResource(R.string.collapse)
 

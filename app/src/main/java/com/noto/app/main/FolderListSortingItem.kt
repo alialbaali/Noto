@@ -10,7 +10,7 @@ import com.noto.app.R
 import com.noto.app.databinding.FolderListSortingItemBinding
 import com.noto.app.domain.model.FolderListSortingType
 import com.noto.app.domain.model.SortingOrder
-import com.noto.app.util.pluralsResource
+import com.noto.app.util.quantityStringResource
 import com.noto.app.util.setFullSpan
 import com.noto.app.util.stringResource
 
@@ -37,7 +37,7 @@ abstract class FolderListSortingItem : EpoxyModelWithHolder<FolderListSortingIte
                 FolderListSortingType.CreationDate -> context.stringResource(R.string.creation_date_sorting)
                 FolderListSortingType.Alphabetical -> context.stringResource(R.string.alphabetical_sorting)
             }
-            tvLibrariesCount.text = context.pluralsResource(R.plurals.folders_count, librariesCount, librariesCount).lowercase()
+            tvLibrariesCount.text = context.quantityStringResource(R.plurals.folders_count, librariesCount, librariesCount).lowercase()
         }
         tvSorting.setOnClickListener(onClickListener)
     }

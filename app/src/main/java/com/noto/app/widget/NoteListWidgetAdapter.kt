@@ -10,8 +10,6 @@ import androidx.core.view.isVisible
 import com.noto.app.R
 import com.noto.app.databinding.NoteLabelItemBinding
 import com.noto.app.databinding.WidgetNoteItemBinding
-import com.noto.app.domain.model.Label
-import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
 
@@ -57,7 +55,7 @@ class NoteListWidgetAdapter(
                     NoteLabelItemBinding.inflate(layoutInflater, parent, false).withBinding {
                         tvLabel.text = label.title
                         tvLabel.background?.mutate()?.setTint(context.colorResource(color.toResource()))
-                        tvLabel.setTextColor(context.attributeColoResource(R.attr.notoBackgroundColor))
+                        tvLabel.setTextColor(context.colorAttributeResource(R.attr.notoBackgroundColor))
                         llLabels.addView(root)
                     }
                 }

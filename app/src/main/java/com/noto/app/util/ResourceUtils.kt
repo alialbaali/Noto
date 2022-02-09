@@ -9,14 +9,14 @@ import androidx.core.content.res.ResourcesCompat
 import com.noto.app.R
 import com.noto.app.domain.model.NotoColor
 
-fun Context.colorStateResource(@ColorRes id: Int) = ResourcesCompat.getColorStateList(resources, id, null)
+fun Context.colorStateListResource(@ColorRes id: Int) = ResourcesCompat.getColorStateList(resources, id, null)
 fun Context.colorResource(@ColorRes id: Int) = ResourcesCompat.getColor(resources, id, null)
 fun Context.stringResource(@StringRes id: Int, vararg formatArgs: Any? = emptyArray()) = getString(id, *formatArgs)
 fun Context.drawableResource(@DrawableRes id: Int) = ResourcesCompat.getDrawable(resources, id, theme)
 fun Context.dimenResource(@DimenRes id: Int) = resources.getDimension(id)
 fun Context.fontResource(@FontRes id: Int) = ResourcesCompat.getFont(this, id)
-fun Context.pluralsResource(@PluralsRes id: Int, quantity: Int, vararg formatArgs: Any?) = resources.getQuantityString(id, quantity, *formatArgs)
-fun Context.attributeColoResource(@AttrRes id: Int): Int {
+fun Context.quantityStringResource(@PluralsRes id: Int, quantity: Int, vararg formatArgs: Any?) = resources.getQuantityString(id, quantity, *formatArgs)
+fun Context.colorAttributeResource(@AttrRes id: Int): Int {
     val typedValue = TypedValue()
     theme.resolveAttribute(id, typedValue, true)
     return typedValue.data

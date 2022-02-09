@@ -33,9 +33,9 @@ abstract class SearchItem : EpoxyModelWithHolder<SearchItem.Holder>() {
             etSearch.setHintTextColor(colorStateList)
             etSearch.setTextColor(colorStateList)
         } ?: run {
-            val surfaceColor = root.context.attributeColoResource(R.attr.notoSurfaceColor)
-            val secondaryColor = root.context.attributeColoResource(R.attr.notoSecondaryColor)
-            val primaryColor = root.context.attributeColoResource(R.attr.notoPrimaryColor)
+            val surfaceColor = root.context.colorAttributeResource(R.attr.notoSurfaceColor)
+            val secondaryColor = root.context.colorAttributeResource(R.attr.notoSecondaryColor)
+            val primaryColor = root.context.colorAttributeResource(R.attr.notoPrimaryColor)
             tilSearch.boxBackgroundColor = surfaceColor
             tilSearch.setEndIconTintList(secondaryColor.toColorStateList())
             etSearch.setHintTextColor(secondaryColor)

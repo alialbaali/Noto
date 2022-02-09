@@ -80,7 +80,7 @@ class NoteReadingModeFragment : Fragment() {
         tvNoteBody.text = note.body
         context?.let { context ->
             tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
-            tvWordCount.text = context.pluralsResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount).lowercase()
+            tvWordCount.text = context.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount).lowercase()
         }
         tvNoteTitle.isVisible = note.title.isNotBlank()
         tvNoteBody.isVisible = note.body.isNotBlank()

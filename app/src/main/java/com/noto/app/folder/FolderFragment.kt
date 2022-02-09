@@ -19,7 +19,6 @@ import com.noto.app.domain.model.*
 import com.noto.app.label.labelListItem
 import com.noto.app.map
 import com.noto.app.util.*
-import jp.wasabeef.recyclerview.animators.*
 import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -287,7 +286,7 @@ class FolderFragment : Fragment() {
 
     private fun FolderFragmentBinding.setupfolder(folder: Folder) {
         context?.let { context ->
-            val backgroundColor = context.attributeColoResource(R.attr.notoBackgroundColor)
+            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
             ctb.title = folder.getTitle(context)
