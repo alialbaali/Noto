@@ -12,5 +12,5 @@
     android:previewLayout="@layout/folder_list_widget"
     android:initialLayout="@layout/folder_list_widget"
     android:configure="com.noto.app.widget.NoteListWidgetConfigActivity"
-    android:widgetFeatures="reconfigurable|configuration_optional"
+    android:widgetFeatures="reconfigurable"
     tools:targetApi="s" />
