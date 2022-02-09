@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.AppIcon
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.EditButton
+import com.noto.app.data.repository.SettingsKeys.Keys.Widget.FolderId
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.Header
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.Id
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.NewItemButton
@@ -32,6 +33,7 @@ object SettingsKeys {
     @Suppress("FunctionName")
     object Widget {
         fun Id(widgetId: Int) = stringPreferencesKey(widgetId.Id)
+        fun FolderId(widgetId: Int) = longPreferencesKey(widgetId.FolderId)
         fun Header(widgetId: Int) = stringPreferencesKey(widgetId.Header)
         fun EditButton(widgetId: Int) = stringPreferencesKey(widgetId.EditButton)
         fun AppIcon(widgetId: Int) = stringPreferencesKey(widgetId.AppIcon)
@@ -59,6 +61,7 @@ object SettingsKeys {
 
         object Widget {
             val Int.Id get() = "Widget_Id_$this"
+            val Int.FolderId get() = "Widget_Id_Folder_Id_$this"
             val Int.Header get() = "Widget_Header_$this"
             val Int.EditButton get() = "Widget_Edit_Button$this"
             val Int.AppIcon get() = "Widget_App_Icon_$this"

@@ -107,7 +107,7 @@ class NewFolderDialogFragment : BaseDialogFragment() {
                 ).invokeOnCompletion {
                     context?.updateAllWidgetsData()
                     context?.updateFolderListWidgets()
-                    context?.updateNoteListWidgets(viewModel.folder.value.id)
+                    context?.updateNoteListWidgets()
                     dismiss()
                 }
             }

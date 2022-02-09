@@ -71,7 +71,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
                 context?.let { context ->
                     context.updateAllWidgetsData()
-                    context.updateNoteListWidgets(viewModel.folder.value.id)
+                    context.updateNoteListWidgets()
                     parentView?.snackbar(context.stringResource(resource), viewModel.folder.value)
                 }
                 dismiss()
@@ -140,7 +140,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                     viewModel.copyNote(folderId).invokeOnCompletion {
                         context?.let { context ->
                             context.updateAllWidgetsData()
-                            context.updateNoteListWidgets(folderId)
+                            context.updateNoteListWidgets()
                             parentView?.snackbar(context.stringResource(R.string.note_is_copied), viewModel.folder.value)
                         }
                         navController?.popBackStack(args.destination, false)
@@ -158,8 +158,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                     viewModel.moveNote(folderId).invokeOnCompletion {
                         context?.let { context ->
                             context.updateAllWidgetsData()
-                            context.updateNoteListWidgets(viewModel.folder.value.id)
-                            context.updateNoteListWidgets(folderId)
+                            context.updateNoteListWidgets()
                             parentView?.snackbar(context.stringResource(R.string.note_is_moved), viewModel.folder.value)
                         }
                         navController?.popBackStack(args.destination, false)
@@ -189,7 +188,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                             alarmManager?.cancelAlarm(context, viewModel.note.value.id)
                         viewModel.deleteNote().invokeOnCompletion {
                             context.updateAllWidgetsData()
-                            context.updateNoteListWidgets(viewModel.folder.value.id)
+                            context.updateNoteListWidgets()
                             dismiss()
                         }
                     }

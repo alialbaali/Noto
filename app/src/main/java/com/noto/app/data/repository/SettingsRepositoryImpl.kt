@@ -106,6 +106,13 @@ class SettingsRepositoryImpl(
         .map { it ?: Folder.GeneralFolderId }
         .flowOn(dispatcher)
 
+    override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
+        return storage.data
+            .map { preferences -> preferences[SettingsKeys.Widget.FolderId(widgetId)] }
+            .map { it ?: 0L }
+            .flowOn(dispatcher)
+    }
+
     override fun getIsWidgetCreated(widgetId: Int): Flow<Boolean> {
         return storage.data
             .map { preferences -> preferences[SettingsKeys.Widget.Id(widgetId)] }
@@ -269,6 +276,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateMainFolderId(folderId: Long) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.MainFolderId] = folderId }
+        }
+    }
+
+    override suspend fun updateWidgetFolderId(widgetId: Int, folderId: Long) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.Widget.FolderId(widgetId)] = folderId }
         }
     }
 

@@ -35,6 +35,8 @@ interface SettingsRepository {
 
     val mainFolderId: Flow<Long>
 
+    fun getWidgetFolderId(widgetId: Int): Flow<Long>
+
     fun getIsWidgetCreated(widgetId: Int): Flow<Boolean>
 
     fun getIsWidgetHeaderEnabled(widgetId: Int): Flow<Boolean>
@@ -80,6 +82,8 @@ interface SettingsRepository {
     suspend fun updateIsShowNotesCount(isShow: Boolean)
 
     suspend fun updateMainFolderId(folderId: Long)
+
+    suspend fun updateWidgetFolderId(widgetId: Int, folderId: Long)
 
     suspend fun updateIsWidgetCreated(widgetId: Int, isCreated: Boolean)
 

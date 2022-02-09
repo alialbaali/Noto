@@ -157,7 +157,7 @@ class NoteFragment : Fragment() {
             .onEach { (title, body) ->
                 viewModel.createOrUpdateNote(title.toString(), body.toString())
                 context?.updateAllWidgetsData()
-                context?.updateNoteListWidgets(viewModel.folder.value.id)
+                context?.updateNoteListWidgets()
             }
             .launchIn(lifecycleScope)
     }
@@ -207,7 +207,7 @@ class NoteFragment : Fragment() {
                 etNoteBody.text.toString(),
             )
             context?.updateAllWidgetsData()
-            context?.updateNoteListWidgets(viewModel.folder.value.id)
+            context?.updateNoteListWidgets()
             activity?.hideKeyboard(root)
         }
 

@@ -37,12 +37,11 @@ fun Context.updateAllWidgetsData() {
     appWidgetManager.notifyAppWidgetViewDataChanged(allWidgetIds, R.id.lv)
 }
 
-fun Context.updateNoteListWidgets(folderId: Long) {
+fun Context.updateNoteListWidgets() {
     val componentName = ComponentName(this, NoteListWidgetProvider::class.java)
     val appWidgetManager = AppWidgetManager.getInstance(this)
     val widgetIds = appWidgetManager.getAppWidgetIds(componentName)
     val intent = Intent(this, NoteListWidgetProvider::class.java).apply {
-        putExtra(Constants.FolderId, folderId)
         putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, widgetIds)
         action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
     }

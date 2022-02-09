@@ -2,8 +2,8 @@ package com.noto.app.widget
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Label
 import com.noto.app.domain.repository.*
 import com.noto.app.util.NoteWithLabels
 import com.noto.app.util.mapWithLabels
@@ -132,6 +132,7 @@ class NoteListWidgetConfigViewModel(
 
     fun createOrUpdateWidget() = viewModelScope.launch {
         val labelIds = labels.value.filterValues { it }.map { it.key.id }
+        launch { settingsRepository.updateWidgetFolderId(appWidgetId, folder.value.id) }
         launch { settingsRepository.updateIsWidgetCreated(appWidgetId, true) }
         launch { settingsRepository.updateIsWidgetHeaderEnabled(appWidgetId, isWidgetHeaderEnabled.value) }
         launch { settingsRepository.updateIsWidgetEditButtonEnabled(appWidgetId, isEditWidgetButtonEnabled.value) }
