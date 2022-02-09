@@ -7,11 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.navigation.navOptions
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
@@ -216,14 +217,21 @@ class FolderDialogFragment : BaseDialogFragment() {
             ?.getLiveData<Int>(Constants.ClickListener)
             ?.observe(viewLifecycleOwner) {
                 val parentView = parentFragment?.view
-                val parentAnchorView = parentView?.findViewById<FloatingActionButton>(R.id.fab)
+                val selectedFolderId = navController?.getBackStackEntry(R.id.folderFragment)?.arguments?.getLong(Constants.FolderId)
+                if (selectedFolderId == viewModel.folder.value.id) {
+                    val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
+                    val options = navOptions {
+                        popUpTo(R.id.folderFragment) {
+                            inclusive = true
+                        }
+                    }
+                    navController?.navigate(R.id.folderFragment, args, options)
+                }
+
                 context?.let { context ->
                     parentView?.snackbar(context.stringResource(R.string.folder_is_deleted), viewModel.folder.value)
                     context.updateAllWidgetsData()
                     context.updateFolderListWidgets()
-                }
-                navController?.popBackStack(R.id.mainFragment, false)
-                context?.let { context ->
                     val notes = viewModel.notes.value as? UiState.Success
                     notes?.value
                         ?.filter { entry -> entry.first.reminderDate != null }
