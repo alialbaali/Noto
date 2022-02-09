@@ -11,7 +11,10 @@ import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.sorted
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -73,6 +76,11 @@ class MainViewModel(
 
     val vaultPasscode = settingsRepository.vaultPasscode
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
+    /**
+     * Temporary fix due to Koin creating multiple instances of [MainViewModel].
+     * */
+    val settingsVaultPasscode = settingsRepository.vaultPasscode
 
     val isBioAuthEnabled = settingsRepository.isBioAuthEnabled
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
