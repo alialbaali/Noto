@@ -101,49 +101,49 @@
     <string name="pin_folder">Ordner anheften</string>
     <string name="unpin_folder">Ordner loslösen</string>
     <!-- Vault -->
-    <string name="folders_vault">Folders vault</string>
-    <string name="enter_vault_passcode">Tresor-Zugangscode eingeben</string>
+    <string name="folders_vault">Ordnerschutz</string>
+    <string name="enter_vault_passcode">Zugangscode eingeben</string>
     <string name="vault_folder">Ordner mit Tresor schützen</string>
-    <string name="unvault_folder">Ordner aus dem Tresor holen</string>
-    <string name="folder_is_vaulted">Ordner wurde mit Tresor geschützt.</string>
+    <string name="unvault_folder">Ordnerschutz aufheben</string>
+    <string name="folder_is_vaulted">Ordner wurde mit Passcode geschützt.</string>
     <string name="folder_is_unvaulted">Ordner wurde aus dem Tresor geholt.</string>
-    <string name="vault_is_empty">Tresor ist leer.</string>
+    <string name="vault_is_empty">Keine Ordner enthalten.</string>
     <string name="archive_vaulted_folder_confirmation">Soll dieser Ordner wirklich archiviert werden?</string>
-    <string name="archive_vaulted_folder_description">Das Archivieren dieses Ordners entfernt ihn auch aus dem Tresor.</string>
-    <string name="vault_passcode">Zugangscode zum Tresor</string>
-    <string name="current_vault_passcode">Momentaner Zugangscode zum Tresor</string>
-    <string name="new_vault_passcode">Neuer Zugangscode zum Tresor</string>
-    <string name="change_vault_passcode">Zugangscode zum Tresor ändern</string>
-    <string name="change_vault_timeout">Ablaufzeit des Tresors ändern</string>
-    <string name="vault_timeout">Ablaufzeit für Tresor</string>
+    <string name="archive_vaulted_folder_description">Das Archivieren dieses Ordners entfernt auch aus den Passcodeschutz.</string>
+    <string name="vault_passcode">Zugangscode</string>
+    <string name="current_vault_passcode">Momentaner Zugangscode</string>
+    <string name="new_vault_passcode">Neuer Zugangscode</string>
+    <string name="change_vault_passcode">Zugangscode ändern</string>
+    <string name="change_vault_timeout">Ablaufzeit des Ordnerschutzes ändern</string>
+    <string name="vault_timeout">Ablaufzeit für Ordnerschutz</string>
     <string name="invalid_passcode">Ungültiger Zugangscode</string>
     <string name="passcode_length_message">Zugangscode muss mindestens sechs Ziffern enthalten</string>
     <string name="passcode_empty_message">Zugangscode darf nicht leer bleiben</string>
     <string name="passcode_doesnt_match">Zugangscode stimmt nicht mit dem aktuellen überein</string>
-    <string name="vault_passcode_has_changed">Tresor-Zugangscode wurde aktualisiert.</string>
-    <string name="vault_passcode_message">Der Tresor-Zugangscode kann nicht geändert werden, wenn du den aktuellen verlierst. Bitte stelle sicher, dass du ihn an einem sicheren Ort speicherst.</string>
-    <string name="open_vault">Open vault</string>
+    <string name="vault_passcode_has_changed">Zugangscode wurde aktualisiert.</string>
+    <string name="vault_passcode_message">Der Zugangscode kann nicht geändert werden, wenn du den aktuellen verlierst. Bitte speichere ihn an einem sicheren Ort.</string>
+    <string name="open_vault">Ordnerschutz aufheben</string>
     <string name="open_vault_using_passcode">Mit Zugangscode öffnen</string>
     <string name="open_vault_using_bio">Mit biometrischen Daten öffnen</string>
-    <string name="vault">Tresor</string>
-    <string name="vault_is_open">Tresor ist offen</string>
+    <string name="vault">Ordnerschutz</string>
+    <string name="vault_is_open">Ordnerschutz ist nicht aktiv</string>
     <string name="immediately">Sofort</string>
     <string name="on_app_close">Beim Schließen der App</string>
     <string name="after_1_hour">Nach 1 Stunde</string>
     <string name="after_4_hours">Nach 4 Stunden</string>
     <string name="after_12_hours">Nach 12 Stunden</string>
-    <string name="close_vault">Tresor schließen</string>
+    <string name="close_vault">Ordnerschutz herstellen</string>
     <string name="enable_bio_auth">Biometrische Authentifizierung aktivieren</string>
     <string name="use_passcode">Passcode verwenden</string>
     <!-- Note -->
     <string name="all">Alle</string>
     <string name="archive_is_empty">Archiv ist leer.</string>
     <plurals name="notes_count">
-        <item quantity="one">%d Note</item>
+        <item quantity="one">%d Notiz</item>
         <item quantity="other">%d Notizen</item>
     </plurals>
     <plurals name="words_count">
-        <item quantity="one">%d Word</item>
+        <item quantity="one">%d Wort</item>
         <item quantity="other">%d Wörter</item>
     </plurals>
     <string name="body">Haupttext</string>
@@ -242,15 +242,15 @@
     <!-- Releases -->
     <string name="current_release">Aktuelle Version</string>
     <string name="previous_releases">Vorherige Versionen</string>
-    <string name="release_1_8_0">• Unterstützung für Zugangscode-geschützte Tresore für Ordner.
-        \n• Option für Unterstützung von Zeitüberschreitung bei Tresoren.
-        \n• Unterstützung für biometrische Tresor-Authentifizierung auf unterstützten Geräten.
+    <string name="release_1_8_0">• Unterstützung für durch Zugangscode geschützte Ordner.
+        \n• Option für Unterstützung von Zeitüberschreitung bei geschützten Ordnern.
+        \n• Unterstützung für biometrische Authentifizierung auf unterstützten Geräten.
         \n• Unterstützung für die spanische Sprache.
         \n• Link für die neue <a href="https://www.reddit.com/r/notoapp">Reddit</a> Community hinzugefügt.
         \n• Weitere Bugfixes und Design-Verbesserungen.
     </string>
     <string name="release_2_0_0">• Neues Jahr, neuer Look!
-        \n• Libraries sind Vergangenheit. Hallo Ordner!
+        \n• \"Libraries\" sind Vergangenheit. Hallo Ordner!
         \n• Verbesserte Animationen in der gesamten App.
         \n• Experimentelle Unterstützung für verschachtelte Ordner.
         \n• Experimentelle Unterstützung für das horizontale Wischen eines Ordners beim manuellen Sortieren.
@@ -260,10 +260,11 @@
         \n• Einklappbare Werkzeugleiste für bessere Nutzerfreundlichkeit und Erreichbarkeit.
         \n• Unterstützung für die französische Sprache.
         \n• Unterstützung für das Wischen der unteren App-Leiste um Ordner anzuzeigen.
-        \n• Navigieren Sie zum Tresor, wenn Sie auf \"Tresor ist offen\" Benachrichtigung klicken.
+        \n• Zum Ordnerschutz navigieren, indem Sie auf die entsprechende Benachrichtigung klicken.
         \n• Einstellungsoption hinzugefügt, um das Ziel des Hauptordners auszuwählen.
         \n• Einstellungsoption hinzugefügt, um die Werkzeugleiste standardmäßig einzuklappen.
         \n• Statische Verknüpfungssymbole auf älteren Android-Geräten repariert.
         \n• Weitere Bugfixes und Design-Verbesserungen.
     </string>
+    <string name="release_2_0_1">• Fehlerbehebungen.</string>
 </resources>

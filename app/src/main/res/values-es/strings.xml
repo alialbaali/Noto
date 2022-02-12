@@ -266,4 +266,5 @@
         \n• Corregir los iconos de accesos directos estáticos en dispositivos Android antiguos.
         \n• Otras correcciones de errores y mejoras de diseño.
     </string>
+    <string name="release_2_0_1">• Corrección de errores.</string>
 </resources>

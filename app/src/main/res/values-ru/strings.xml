@@ -272,4 +272,5 @@
         \n• Исправление статических ярлыков на старых устройствах Android.
         \n• Исправления ошибок и улучшение дизайна.
     </string>
+    <string name="release_2_0_1">• Bug fixes.</string>
 </resources>

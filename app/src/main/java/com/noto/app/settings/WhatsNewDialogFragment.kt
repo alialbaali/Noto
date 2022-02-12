@@ -16,6 +16,7 @@ import com.noto.app.domain.model.Release
 import com.noto.app.domain.model.Release.Changelog
 import com.noto.app.domain.model.Release_1_8_0
 import com.noto.app.domain.model.Release_2_0_0
+import com.noto.app.domain.model.Release_2_0_1
 import com.noto.app.util.BounceEdgeEffectFactory
 import com.noto.app.util.VerticalListItemAnimator
 import com.noto.app.util.stringResource
@@ -39,15 +40,16 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
 
     private val currentRelease: List<Release> by lazy {
         context?.let { context ->
-            val changelog = Changelog(context.stringResource(R.string.release_2_0_0))
-            listOf(Release_2_0_0(changelog))
+            val changelog = Changelog(context.stringResource(R.string.release_2_0_1))
+            listOf(Release_2_0_1(changelog))
         } ?: emptyList()
     }
 
     private val previousReleases: List<Release> by lazy {
         context?.let { context ->
-            val changelog = Changelog(context.stringResource(R.string.release_1_8_0))
-            listOf(Release_1_8_0(changelog))
+            val changelog180 = Changelog(context.stringResource(R.string.release_1_8_0))
+            val changelog200 = Changelog(context.stringResource(R.string.release_2_0_0))
+            listOf(Release_2_0_0(changelog200), Release_1_8_0(changelog180))
         } ?: emptyList()
     }
 

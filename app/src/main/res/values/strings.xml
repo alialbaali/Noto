@@ -275,4 +275,6 @@
         \n• Fix static shortcuts icons on older Android devices.
         \n• Other bug fixes and design improvements.
     </string>
+
+    <string name="release_2_0_1">• Bug fixes.</string>
 </resources>

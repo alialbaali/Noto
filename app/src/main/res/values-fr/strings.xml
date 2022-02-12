@@ -266,4 +266,5 @@
         \n• Correction des icônes de raccourcis statiques sur les anciens appareils Android.
         \n• Autres corrections de bogues et améliorations de la conception.
     </string>
+    <string name="release_2_0_1">• Bug fixes.</string>
 </resources>
