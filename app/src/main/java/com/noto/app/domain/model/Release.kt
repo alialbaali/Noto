@@ -39,5 +39,5 @@ data class Release_2_0_0(override val changelog: Changelog) : Release {
 @Suppress("ClassName")
 data class Release_2_0_1(override val changelog: Changelog) : Release {
     override val version: Version = Version(2, 0, 1)
-    override val date: LocalDate = LocalDate(2022, Month.FEBRUARY, 11)
+    override val date: LocalDate = LocalDate(2022, Month.FEBRUARY, 13)
 }
