@@ -49,7 +49,6 @@ class NoteFragment : Fragment() {
         rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
         abl.setExpanded(false, false)
-        bab.setRoundedCorners()
         tvWordCount.animationInterpolator = DefaultInterpolator()
         context?.tryLoadingFontResource(R.font.nunito_semibold_italic)?.let { font ->
             tvWordCount.typeface = font
@@ -261,7 +260,6 @@ class NoteFragment : Fragment() {
 
     private fun NoteFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
-            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
             ctb.title = folder.getTitle(context)
@@ -271,9 +269,8 @@ class NoteFragment : Fragment() {
             tvWordCount.setTextColor(color)
             tb.navigationIcon?.mutate()?.setTint(color)
             fab.backgroundTintList = colorStateList
-            bab.backgroundTint = colorStateList
-            bab.menu.forEach { it.icon?.mutate()?.setTint(backgroundColor) }
-            bab.navigationIcon?.mutate()?.setTint(backgroundColor)
+            bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
+            bab.navigationIcon?.mutate()?.setTint(color)
             etNoteTitle.setLinkTextColor(color)
             etNoteBody.setLinkTextColor(color)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {

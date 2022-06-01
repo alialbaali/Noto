@@ -118,7 +118,6 @@
         android:id="@+id/bab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
         android:layout_gravity="bottom"
         app:backgroundTint="?attr/notoBackgroundColor"
         app:fabAnimationMode="scale"

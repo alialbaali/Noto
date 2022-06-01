@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.view.MenuItemCompat
-import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.R
@@ -77,12 +76,6 @@ class RecentNotesFragment : Fragment() {
     private fun RecentNotesFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
-        bab.setRoundedCorners()
-        context?.let { context ->
-            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
-            bab.navigationIcon?.mutate()?.setTint(backgroundColor)
-            bab.menu.forEach { it.icon?.mutate()?.setTint(backgroundColor) }
-        }
 
         combine(
             viewModel.notes,

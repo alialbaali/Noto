@@ -48,11 +48,10 @@ class FolderFragment : Fragment() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
-        bab.setRoundedCorners()
 
         viewModel.folder
             .onEach { folder ->
-                setupfolder(folder)
+                setupFolder(folder)
                 context?.let { context ->
                     val text = context.stringResource(R.string.archive, folder.getTitle(context))
                     MenuItemCompat.setTooltipText(archiveMenuItem, text)
@@ -284,18 +283,16 @@ class FolderFragment : Fragment() {
         return true
     }
 
-    private fun FolderFragmentBinding.setupfolder(folder: Folder) {
+    private fun FolderFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
-            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
             ctb.title = folder.getTitle(context)
             ctb.setCollapsedTitleTextColor(colorStateList)
             ctb.setExpandedTitleTextColor(colorStateList)
             fab.backgroundTintList = colorStateList
-            bab.backgroundTint = colorStateList
-            bab.menu.forEach { it.icon?.mutate()?.setTint(backgroundColor) }
-            bab.navigationIcon?.mutate()?.setTint(backgroundColor)
+            bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
+            bab.navigationIcon?.mutate()?.setTint(color)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
                 fab.outlineSpotShadowColor = color

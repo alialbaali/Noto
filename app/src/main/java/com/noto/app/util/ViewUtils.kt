@@ -37,9 +37,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
-import com.google.android.material.shape.MaterialShapeDrawable
-import com.google.android.material.shape.RelativeCornerSize
-import com.google.android.material.shape.RoundedCornerTreatment
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.noto.app.R
@@ -154,7 +151,7 @@ fun EditText.textAsFlow(emitNewTextOnly: Boolean = false): Flow<CharSequence?> {
 //                if (before <= count)
 //                    trySend(text)
 //            } else {
-                trySend(text)
+            trySend(text)
 //            }
         }
         addTextChangedListener(listener)
@@ -194,15 +191,6 @@ fun SwitchMaterial.setupColors(
     )
     thumbTintList = ColorStateList(state, thumbColors)
     trackTintList = ColorStateList(state, trackColors)
-}
-
-fun BottomAppBar.setRoundedCorners() {
-    val babBackgroundDrawable = background as MaterialShapeDrawable
-    babBackgroundDrawable.shapeAppearanceModel = babBackgroundDrawable.shapeAppearanceModel
-        .toBuilder()
-        .setAllCorners(RoundedCornerTreatment())
-        .setAllCornerSizes(RelativeCornerSize(0.5F))
-        .build()
 }
 
 fun @receiver:ColorInt Int.withDefaultAlpha(alpha: Int = 32): Int = ColorUtils.setAlphaComponent(this, alpha)
