@@ -33,14 +33,16 @@ abstract class LabelItem : EpoxyModelWithHolder<LabelItem.Holder>() {
 
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
-            val resourceColor = context.colorResource(color.toResource())
-            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
+            val selectedBackgroundColor = context.colorResource(color.toResource())
+            val selectedTextColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
+            val backgroundColor = context.colorAttributeResource(R.attr.notoSurfaceColor)
+            val textColor = context.colorAttributeResource(R.attr.notoSecondaryColor)
             if (isSelected) {
-                tvLabel.animateBackgroundColor(backgroundColor, resourceColor)
-                tvLabel.animateTextColor(resourceColor, backgroundColor)
+                tvLabel.animateBackgroundColor(backgroundColor, selectedBackgroundColor)
+                tvLabel.animateTextColor(textColor, selectedTextColor)
             } else {
-                tvLabel.animateLabelColors(fromColor = resourceColor, toColor = backgroundColor)
-                tvLabel.animateTextColor(backgroundColor, resourceColor)
+                tvLabel.animateBackgroundColor(selectedBackgroundColor, backgroundColor)
+                tvLabel.animateTextColor(selectedTextColor, textColor)
             }
         }
         tvLabel.text = label.title

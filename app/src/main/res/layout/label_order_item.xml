@@ -27,11 +27,11 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="@dimen/spacing_small"
-        android:tint="?attr/notoSecondaryColor"
         android:contentDescription="@string/drag"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/tv_label"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="?attr/notoSecondaryColor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

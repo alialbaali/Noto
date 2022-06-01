@@ -322,7 +322,7 @@
     <style name="LabelItem" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:background">@drawable/label_item_shape</item>
-        <item name="android:textColor">?attr/notoPrimaryColor</item>
+        <item name="android:textColor">?attr/notoSecondaryColor</item>
         <item name="fontFamily">@font/nunito_bold</item>
     </style>
 

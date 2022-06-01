@@ -27,14 +27,15 @@ abstract class NewLabelItem : EpoxyModelWithHolder<NewLabelItem.Holder>() {
         root.context?.let { context ->
             val resourceColor = context.colorResource(color.toResource())
             val colorStateList = resourceColor.toColorStateList()
+            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             ibNewLabel.imageTintList = colorStateList
             ibNewLabel.background = context.drawableResource(R.drawable.label_item_shape)
                 ?.mutate()
                 ?.let { it as RippleDrawable }
                 ?.let { it.getDrawable(0) as GradientDrawable }
                 ?.apply {
+                    setColor(backgroundColor)
                     setStroke(LabelDefaultStrokeWidth, resourceColor)
-                    cornerRadius = LabelDefaultCornerRadius
                 }
                 ?.toRippleDrawable(context)
                 ?.also { it.setRippleColor(colorStateList) }
