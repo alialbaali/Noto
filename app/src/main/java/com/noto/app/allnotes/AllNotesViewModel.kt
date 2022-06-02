@@ -26,9 +26,6 @@ class AllNotesViewModel(
     val font = settingsRepository.font
         .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
 
-    val isCollapseToolbar = settingsRepository.isCollapseToolbar
-        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
-
     private val mutableIsSearchEnabled = MutableStateFlow(false)
     val isSearchEnabled get() = mutableIsSearchEnabled.asStateFlow()
 
