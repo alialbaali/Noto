@@ -26,25 +26,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ctb"
-            style="@style/CollapsingToolbar"
-            android:layout_height="@dimen/collapsing_toolbar_height"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            style="@style/ToolbarWithSubtitle"
             android:layout_width="match_parent"
-            tools:title="@string/general">
+            android:layout_height="wrap_content"
+            app:menu="@menu/folder_toolbar_menu">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/tb"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_folder_title"
+                    style="@style/ToolbarTitleTextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/title"
+                    tools:textColor="@color/colorAccentTeal" />
+
+                <com.robinhood.ticker.TickerView
+                    android:id="@+id/tv_folder_notes_count"
+                    style="@style/SubtitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:ticker_animationDuration="@integer/animation_duration"
+                    app:ticker_defaultCharacterList="number"
+                    tools:text="7 notes" />
+
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         app:backgroundTint="?attr/notoBackgroundColor"
         app:fabAnimationMode="scale"
         app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
@@ -55,10 +74,10 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="wrap_content"
+        android:contentDescription="@string/create_note"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_normal"
-        android:contentDescription="@string/create_note"
+        android:layout_width="wrap_content"
         android:src="@drawable/ic_round_edit_24"
         app:backgroundTint="?attr/notoPrimaryColor"
         app:layout_anchor="@id/bab"

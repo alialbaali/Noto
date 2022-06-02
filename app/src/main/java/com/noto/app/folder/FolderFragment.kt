@@ -2,24 +2,32 @@ package com.noto.app.folder
 
 import android.os.Build
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.FolderFragmentBinding
 import com.noto.app.domain.model.*
+import com.noto.app.getOrDefault
 import com.noto.app.label.labelListItem
 import com.noto.app.map
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -49,16 +57,20 @@ class FolderFragment : Fragment() {
         rv.itemAnimator = VerticalListItemAnimator()
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
 
-        viewModel.folder
-            .onEach { folder ->
-                setupFolder(folder)
-                context?.let { context ->
-                    val text = context.stringResource(R.string.archive, folder.getTitle(context))
-                    MenuItemCompat.setTooltipText(archiveMenuItem, text)
-                    MenuItemCompat.setContentDescription(archiveMenuItem, text)
-                }
+        combine(
+            viewModel.folder,
+            viewModel.notes,
+            viewModel.labels
+        ) { folder, notes, labels ->
+            val notesCount = notes.getOrDefault(emptyList()).filterSelectedLabels(labels).count()
+            setupFolder(folder, notesCount)
+            context?.let { context ->
+                val text = context.stringResource(R.string.archive, folder.getTitle(context))
+                MenuItemCompat.setTooltipText(archiveMenuItem, text)
+                MenuItemCompat.setContentDescription(archiveMenuItem, text)
             }
-            .distinctUntilChangedBy { folder -> folder.layout }
+            folder
+        }.distinctUntilChangedBy { folder -> folder.layout }
             .onEach { folder -> setupLayoutManager(folder.layout) }
             .launchIn(lifecycleScope)
 
@@ -93,13 +105,15 @@ class FolderFragment : Fragment() {
                     rv.smoothScrollToPosition(0)
             }
             .launchIn(lifecycleScope)
-
-        viewModel.isCollapseToolbar
-            .onEach { isCollapseToolbar -> abl.setExpanded(!isCollapseToolbar && abl.isExpanded, false) }
-            .launchIn(lifecycleScope)
     }
 
     private fun FolderFragmentBinding.setupListeners() {
+        tb.setOnMenuItemClickListener {
+            if (it.itemId == R.id.sorting) navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteListSortingDialogFragment(
+                args.folderId))
+            false
+        }
+
         fab.setOnClickListener {
             val selectedLabelsIds = viewModel.labels.value
                 .filter { it.value }
@@ -202,17 +216,6 @@ class FolderFragment : Fragment() {
                         }
                     }
 
-                    noteListSortingItem {
-                        id(0)
-                        sortingType(folder.sortingType)
-                        sortingOrder(folder.sortingOrder)
-                        notesCount(notes.size)
-                        notoColor(folder.color)
-                        onClickListener { _ ->
-                            navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteListSortingDialogFragment(args.folderId))
-                        }
-                    }
-
                     context?.let { context ->
                         if (notes.isEmpty())
                             placeholderItem {
@@ -283,16 +286,15 @@ class FolderFragment : Fragment() {
         return true
     }
 
-    private fun FolderFragmentBinding.setupFolder(folder: Folder) {
+    private fun FolderFragmentBinding.setupFolder(folder: Folder, notesCount: Int) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
-            ctb.title = folder.getTitle(context)
-            ctb.setCollapsedTitleTextColor(colorStateList)
-            ctb.setExpandedTitleTextColor(colorStateList)
+            tvFolderTitle.text = folder.getTitle(context)
+            tvFolderTitle.setTextColor(colorStateList)
+            tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
+            tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_bold)
             fab.backgroundTintList = colorStateList
-            bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
-            bab.navigationIcon?.mutate()?.setTint(color)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
                 fab.outlineSpotShadowColor = color

@@ -52,9 +52,6 @@ class FolderViewModel(
     private val mutableSearchTerm = MutableStateFlow("")
     val searchTerm get() = mutableSearchTerm.asStateFlow()
 
-    val isCollapseToolbar = settingsRepository.isCollapseToolbar
-        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
-
     init {
         combine(
             noteRepository.getNotesByFolderId(folderId)
