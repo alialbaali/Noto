@@ -76,6 +76,7 @@ class RecentNotesFragment : Fragment() {
     private fun RecentNotesFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
+        tvNotesCount.typeface = context?.tryLoadingFontResource(R.font.nunito_bold)
 
         combine(
             viewModel.notes,
@@ -92,10 +93,6 @@ class RecentNotesFragment : Fragment() {
                 if (isSearchEnabled)
                     rv.smoothScrollToPosition(0)
             }
-            .launchIn(lifecycleScope)
-
-        viewModel.isCollapseToolbar
-            .onEach { isCollapseToolbar -> abl.setExpanded(!isCollapseToolbar && abl.isExpanded, false) }
             .launchIn(lifecycleScope)
 
         val menuItem = bab.menu.findItem(R.id.change_visibility)
@@ -144,6 +141,9 @@ class RecentNotesFragment : Fragment() {
             is UiState.Loading -> rv.setupProgressIndicator()
             is UiState.Success -> {
                 val notes = state.value
+                val notesCount = notes.map { it.value.count() }.sum()
+                tvNotesCount.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)?.lowercase()
+
                 rv.withModels {
 
                     if (isSearchEnabled) {
