@@ -29,8 +29,6 @@ interface SettingsRepository {
 
     val sortingOrder: Flow<SortingOrder>
 
-    val isCollapseToolbar: Flow<Boolean>
-
     val isShowNotesCount: Flow<Boolean>
 
     val mainFolderId: Flow<Long>
@@ -76,8 +74,6 @@ interface SettingsRepository {
     suspend fun updateSortingType(sortingType: FolderListSortingType)
 
     suspend fun updateSortingOrder(sortingOrder: SortingOrder)
-
-    suspend fun updateIsCollapseToolbar(isCollapse: Boolean)
 
     suspend fun updateIsShowNotesCount(isShow: Boolean)
 

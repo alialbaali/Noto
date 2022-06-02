@@ -48,7 +48,6 @@ class SettingsFragment : Fragment() {
             tvVersion.text = context.stringResource(R.string.version, version)
             swShowNotesCount.setupColors()
             swBioAuth.setupColors()
-            swCollapseToolbar.setupColors()
 
             when (BiometricManager.from(context).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
                 BiometricManager.BIOMETRIC_SUCCESS -> swBioAuth.isVisible = true
@@ -62,14 +61,6 @@ class SettingsFragment : Fragment() {
 
         viewModel.isBioAuthEnabled
             .onEach { isBioAuthEnabled -> swBioAuth.isChecked = isBioAuthEnabled }
-            .launchIn(lifecycleScope)
-
-        viewModel.isCollapseToolbar
-            .onEach { isCollapseToolbar ->
-                swCollapseToolbar.isChecked = isCollapseToolbar
-                abl.setExpanded(!isCollapseToolbar, shouldAnimateToolbar)
-                shouldAnimateToolbar = false
-            }
             .launchIn(lifecycleScope)
 
         navController?.currentBackStackEntry?.savedStateHandle
@@ -125,11 +116,6 @@ class SettingsFragment : Fragment() {
 
         swShowNotesCount.setOnClickListener {
             viewModel.toggleShowNotesCount()
-        }
-
-        swCollapseToolbar.setOnClickListener {
-            shouldAnimateToolbar = true
-            viewModel.toggleCollapseToolbar()
         }
 
         tvShareWithOthers.setOnClickListener {

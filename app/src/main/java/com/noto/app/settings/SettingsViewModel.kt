@@ -47,18 +47,11 @@ class SettingsViewModel(
     val mainFolderId = settingsRepository.mainFolderId
         .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.GeneralFolderId)
 
-    val isCollapseToolbar = settingsRepository.isCollapseToolbar
-        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
-
     private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
     val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
 
     fun toggleShowNotesCount() = viewModelScope.launch {
         settingsRepository.updateIsShowNotesCount(!isShowNotesCount.value)
-    }
-
-    fun toggleCollapseToolbar() = viewModelScope.launch {
-        settingsRepository.updateIsCollapseToolbar(!isCollapseToolbar.value)
     }
 
     suspend fun exportJson(): String = withContext(Dispatchers.IO) {

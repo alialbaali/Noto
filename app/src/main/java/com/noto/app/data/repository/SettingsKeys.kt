@@ -28,7 +28,6 @@ object SettingsKeys {
     val LastVersion = stringPreferencesKey(Keys.LastVersion)
     val IsBioAuthEnabled = stringPreferencesKey(Keys.IsBioAuthEnabled)
     val MainFolderId = longPreferencesKey(Keys.MainFolderId)
-    val CollapseToolbar = booleanPreferencesKey(Keys.CollapseToolbar)
 
     @Suppress("FunctionName")
     object Widget {

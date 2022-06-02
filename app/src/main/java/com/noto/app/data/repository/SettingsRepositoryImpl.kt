@@ -31,7 +31,6 @@ class SettingsRepositoryImpl(
             lastVersion.first(),
             sortingType.first(),
             sortingOrder.first(),
-            isCollapseToolbar.first(),
             isShowNotesCount.first(),
             mainFolderId.first()
         )
@@ -89,11 +88,6 @@ class SettingsRepositoryImpl(
     override val sortingOrder: Flow<SortingOrder> = storage.data
         .map { preferences -> preferences[SettingsKeys.FolderListSortingOrder] }
         .map { if (it != null) SortingOrder.valueOf(it) else SortingOrder.Descending }
-        .flowOn(dispatcher)
-
-    override val isCollapseToolbar: Flow<Boolean> = storage.data
-        .map { preferences -> preferences[SettingsKeys.CollapseToolbar] }
-        .map { it ?: false }
         .flowOn(dispatcher)
 
     override val isShowNotesCount: Flow<Boolean> = storage.data
@@ -183,7 +177,6 @@ class SettingsRepositoryImpl(
                 updateLastVersion(lastVersion)
                 updateSortingType(sortingType)
                 updateSortingOrder(sortingOrder)
-                updateIsCollapseToolbar(isCollapseToolbar)
                 updateIsShowNotesCount(isShowNotesCount)
                 updateMainFolderId(mainFolderId)
             }
@@ -258,12 +251,6 @@ class SettingsRepositoryImpl(
     override suspend fun updateSortingOrder(sortingOrder: SortingOrder) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.FolderListSortingOrder] = sortingOrder.toString() }
-        }
-    }
-
-    override suspend fun updateIsCollapseToolbar(isCollapse: Boolean) {
-        withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.CollapseToolbar] = isCollapse }
         }
     }
 

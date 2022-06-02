@@ -15,7 +15,6 @@ data class SettingsConfig(
     val lastVersion: String,
     val sortingType: FolderListSortingType,
     val sortingOrder: SortingOrder,
-    val isCollapseToolbar: Boolean,
     val isShowNotesCount: Boolean,
     val mainFolderId: Long,
 )
