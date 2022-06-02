@@ -6,28 +6,56 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <FrameLayout
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="match_parent"
+            android:padding="@dimen/spacing_normal"
+            android:layout_weight="1"
+            android:layout_width="0dp"
             android:layout_height="wrap_content">
 
-            <include layout="@layout/base_dialog_fragment" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_dialog_title"
+                style="@style/DialogTitle"
+                android:gravity="start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name" />
+
+            <com.robinhood.ticker.TickerView
+                android:id="@+id/tv_folders_count"
+                style="@style/SubtitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:ticker_animationDuration="@integer/animation_duration"
+                app:ticker_defaultCharacterList="number"
+                tools:text="7 notes" />
         </LinearLayout>
 
         <ImageButton
+            android:id="@+id/ib_sorting"
+            android:background="@drawable/round_btn_surface_shape"
+            android:padding="@dimen/spacing_normal"
+            android:src="@drawable/ic_round_sorting_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/sorting_type" />
+
+        <ImageButton
             android:id="@+id/ib_more"
-            android:layout_gravity="end"
             android:background="@drawable/round_btn_surface_shape"
             android:padding="@dimen/spacing_normal"
             android:src="@drawable/ic_round_more_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/more" />
-    </FrameLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:layout_width="match_parent"

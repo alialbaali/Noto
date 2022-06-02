@@ -2,7 +2,10 @@ package com.noto.app.main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.forEach
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -10,15 +13,19 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
-import com.noto.app.*
-import com.noto.app.databinding.BaseDialogFragmentBinding
+import com.noto.app.BaseDialogFragment
+import com.noto.app.R
+import com.noto.app.UiState
 import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.FolderListSortingType
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.SortingOrder
+import com.noto.app.getOrDefault
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseDialogFragment(isCollapsable = true) {
@@ -44,13 +51,8 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = MainFragmentBinding.inflate(inflater, container, false).withBinding {
-        setupBaseDialogFragment()
         setupListeners()
         setupState()
-    }
-
-    private fun MainFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = context?.stringResource(R.string.app_name)
     }
 
     private fun MainFragmentBinding.setupListeners() {
@@ -68,6 +70,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+        tvFoldersCount.typeface = context?.tryLoadingFontResource(R.font.nunito_bold)
 
         combine(
             viewModel.folders,
@@ -104,22 +107,19 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         allNotes: List<Note>,
     ) {
         if (state is UiState.Success) {
+
+            ibSorting.setOnClickListener {
+                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderListSortingDialogFragment())
+            }
+
             rv.withModels {
                 epoxyController = this
                 val folders = state.value.filterNot { it.first.isGeneral }
                 val generalFolder = state.value.firstOrNull { it.first.isGeneral }
                 val isManualSorting = sortingType == FolderListSortingType.Manual
+                val foldersCount = folders.count()
 
-                folderListSortingItem {
-                    id(0)
-                    sortingType(sortingType)
-                    sortingOrder(sortingOrder)
-                    librariesCount(folders.countRecursively())
-                    onClickListener { _ ->
-                        dismiss()
-                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderListSortingDialogFragment())
-                    }
-                }
+                tvFoldersCount.text = context?.quantityStringResource(R.plurals.folders_count, foldersCount, foldersCount)?.lowercase()
 
                 generalFolder?.let {
                     folderItem {
