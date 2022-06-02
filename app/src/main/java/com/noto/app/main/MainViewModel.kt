@@ -89,6 +89,7 @@ class MainViewModel(
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
     val allNotes = noteRepository.getAllNotes()
+        .map { it.filterNot { note -> note.isArchived || note.isVaulted } }
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     fun updateSortingType(value: FolderListSortingType) = viewModelScope.launch {
