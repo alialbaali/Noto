@@ -179,7 +179,7 @@ class RecentNotesFragment : Fragment() {
 
                                 headerItem {
                                     id(date.dayOfYear)
-                                    title(date.format(context))
+                                    title(date.format())
                                     isVisible(isVisible)
                                     onClickListener { _ -> viewModel.toggleVisibilityForDate(date) }
                                 }

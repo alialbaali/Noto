@@ -36,7 +36,7 @@ fun Instant.format(context: Context): String {
     }
 }
 
-fun LocalDate.format(context: Context): String {
+fun LocalDate.format(): String {
     val timeZone = TimeZone.currentSystemDefault()
     val currentDateTime = Clock.System.now().toLocalDateTime(timeZone)
     return if (this.year == currentDateTime.year) {
