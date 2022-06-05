@@ -50,7 +50,7 @@ inline fun EpoxyController.buildNotesModels(
             notes.groupByDate(folder.sortingType, folder.sortingOrder).forEach { (date, notes) ->
                 headerItem {
                     id(date.dayOfYear)
-                    title(date.format())
+                    title(date.format(context))
                     color(folder.color)
                 }
                 content(notes)

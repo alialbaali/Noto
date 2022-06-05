@@ -22,7 +22,7 @@ abstract class ReleaseItem : EpoxyModelWithHolder<ReleaseItem.Holder>() {
 
     override fun bind(holder: Holder) = with(holder.binding) {
         tvVersion.text = release.version.toString()
-        tvDate.text = release.date.format()
+        tvDate.text = release.date.format(root.context)
         tvChangelog.text = release.changelog.text
         tvChangelog.removeLinksUnderline()
         tvChangelog.movementMethod = LinkMovementMethod.getInstance()
