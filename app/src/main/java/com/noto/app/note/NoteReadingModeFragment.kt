@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.noto.app.R
 import com.noto.app.databinding.NoteReadingModeFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
@@ -28,6 +30,12 @@ class NoteReadingModeFragment : Fragment() {
 
     private val args by navArgs<NoteReadingModeFragmentArgs>()
 
+    private val windowInsetsController by lazy {
+        activity?.window?.decorView?.let { view ->
+            ViewCompat.getWindowInsetsController(view)
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteReadingModeFragmentBinding.inflate(inflater, container, false).withBinding {
             setupFadeTransition()
@@ -42,6 +50,8 @@ class NoteReadingModeFragment : Fragment() {
     }
 
     private fun NoteReadingModeFragmentBinding.setupState() {
+        windowInsetsController?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        windowInsetsController?.hide(WindowInsetsCompat.Type.systemBars())
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
@@ -96,5 +106,10 @@ class NoteReadingModeFragment : Fragment() {
                 nsv.verticalScrollbarThumbDrawable?.mutate()?.setTint(color)
             }
         }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        windowInsetsController?.show(WindowInsetsCompat.Type.systemBars())
     }
 }
