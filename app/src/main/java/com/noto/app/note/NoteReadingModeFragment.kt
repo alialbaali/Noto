@@ -78,10 +78,6 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupNote(note: Note, font: Font) {
         tvNoteTitle.text = note.title
         tvNoteBody.text = note.body
-        context?.let { context ->
-            tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
-            tvWordCount.text = context.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount).lowercase()
-        }
         tvNoteTitle.isVisible = note.title.isNotBlank()
         tvNoteBody.isVisible = note.body.isNotBlank()
         tvNoteTitle.setBoldFont(font)
@@ -93,8 +89,6 @@ class NoteReadingModeFragment : Fragment() {
             val color = context.colorResource(folder.color.toResource())
             tb.title = folder.getTitle(context)
             tb.setTitleTextColor(color)
-            tvCreatedAt.setTextColor(color)
-            tvWordCount.setTextColor(color)
             tvNoteTitle.setLinkTextColor(color)
             tvNoteBody.setLinkTextColor(color)
             tb.navigationIcon?.mutate()?.setTint(color)

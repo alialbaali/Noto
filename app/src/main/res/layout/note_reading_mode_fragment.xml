@@ -18,7 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationContentDescription="@string/back"
-            app:navigationIcon="@drawable/ic_round_back_24" />
+            app:navigationIcon="@drawable/ic_round_back_24"
+            tools:title="General" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -45,32 +46,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/label_item" />
-
-            <LinearLayout
-                android:id="@+id/note_info"
-                android:orientation="horizontal"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginVertical="@dimen/spacing_small"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_created_at"
-                    style="@style/SubtitleTextView"
-                    android:layout_marginEnd="@dimen/spacing_small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Created Tue, Aug 8" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_word_count"
-                    style="@style/SubtitleTextView"
-                    android:gravity="end"
-                    android:layout_marginStart="@dimen/spacing_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="30 words" />
-            </LinearLayout>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_note_title"
