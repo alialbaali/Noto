@@ -193,8 +193,10 @@
     <string name="note_preview_size">Note preview size</string>
     <string name="show_note_creation_date">Show note creation date</string>
     <string name="show_folders_notes_count">Show folders notes count</string>
+    <string name="do_not_disturb">Enable Do Not Disturb in Reading Mode</string>
     <string name="show">Show</string>
     <string name="hide">Hide</string>
+    <string name="permission_not_granted">Permission hasn\'t been granted</string>
 
     <!-- Label -->
     <string name="reorder_label">Reorder label</string>

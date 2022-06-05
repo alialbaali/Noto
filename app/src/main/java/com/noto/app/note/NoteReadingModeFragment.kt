@@ -1,5 +1,7 @@
 package com.noto.app.note
 
+import android.app.NotificationManager
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -36,6 +38,10 @@ class NoteReadingModeFragment : Fragment() {
         }
     }
 
+    private val notificationManager by lazy {
+        context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteReadingModeFragmentBinding.inflate(inflater, container, false).withBinding {
             setupFadeTransition()
@@ -55,6 +61,13 @@ class NoteReadingModeFragment : Fragment() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
+
+        viewModel.isDoNotDisturb
+            .onEach { isDoNotDisturb ->
+                if (isDoNotDisturb && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+            }
+            .launchIn(lifecycleScope)
 
         viewModel.folder
             .onEach { folder -> setupFolder(folder) }
@@ -111,5 +124,7 @@ class NoteReadingModeFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         windowInsetsController?.show(WindowInsetsCompat.Type.systemBars())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+            notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
     }
 }

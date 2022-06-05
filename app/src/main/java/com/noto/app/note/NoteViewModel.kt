@@ -37,6 +37,9 @@ class NoteViewModel(
     private val mutableLabels = MutableStateFlow<Map<Label, Boolean>>(emptyMap())
     val labels get() = mutableLabels.asStateFlow()
 
+    val isDoNotDisturb = settingsRepository.isDoNotDisturb
+        .stateIn(viewModelScope, SharingStarted.Lazily, false)
+
     init {
         noteRepository.getNoteById(noteId)
             .also {
