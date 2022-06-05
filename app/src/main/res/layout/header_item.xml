@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/header_item_shape"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
 
@@ -16,13 +17,12 @@
         app:fontFamily="@font/nunito_bold"
         tools:text="Libraries" />
 
-    <ImageButton
-        android:id="@+id/ib_visibility"
+    <ImageView
+        android:id="@+id/iv_visibility"
         android:src="@drawable/ic_round_arrow_down_24"
-        android:background="@drawable/round_btn_surface_shape"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:paddingHorizontal="@dimen/spacing_small"
-        android:contentDescription="@string/drag"
+        android:contentDescription="@string/hide"
         app:tint="?attr/notoSecondaryColor" />
 </LinearLayout>

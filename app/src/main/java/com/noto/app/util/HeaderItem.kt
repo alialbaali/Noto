@@ -29,21 +29,22 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
 
     override fun bind(holder: Holder) = with(holder.binding) {
         tvTitle.text = title
-        ibVisibility.animate().setDuration(DefaultAnimationDuration).rotation(if (isVisible) 180F else 0F)
-        ibVisibility.setOnClickListener(onClickListener)
-        ibVisibility.isVisible = onClickListener != null
+        ivVisibility.animate().setDuration(DefaultAnimationDuration).rotation(if (isVisible) 180F else 0F)
+        ivVisibility.contentDescription = root.context?.stringResource(if (isVisible) R.string.hide else R.string.show)
+        root.setOnClickListener(onClickListener)
+        ivVisibility.isVisible = onClickListener != null
         if (color != null) {
             val colorResource = root.context.colorResource(color!!.toResource())
             val colorStateList = colorResource.toColorStateList()
             tvTitle.setTextColor(colorResource)
-            ibVisibility.imageTintList = colorStateList
-            ibVisibility.background.setRippleColor(colorStateList)
+            ivVisibility.imageTintList = colorStateList
+            root.background.setRippleColor(colorStateList)
         } else {
             val colorResource = root.context.colorAttributeResource(R.attr.notoSecondaryColor)
             val rippleColorResource = root.context.colorAttributeResource(R.attr.notoSurfaceColor)
             tvTitle.setTextColor(colorResource)
-            ibVisibility.imageTintList = colorResource.toColorStateList()
-            ibVisibility.background.setRippleColor(rippleColorResource.toColorStateList())
+            ivVisibility.imageTintList = colorResource.toColorStateList()
+            root.background.setRippleColor(rippleColorResource.toColorStateList())
         }
     }
 
