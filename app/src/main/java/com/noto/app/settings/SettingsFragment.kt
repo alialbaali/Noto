@@ -1,15 +1,21 @@
 package com.noto.app.settings
 
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.biometric.BiometricManager
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.switchmaterial.SwitchMaterial
 import com.noto.app.R
 import com.noto.app.databinding.SettingsFragmentBinding
 import com.noto.app.util.*
@@ -26,7 +32,22 @@ class SettingsFragment : Fragment() {
 
     private val viewModel by viewModel<SettingsViewModel>()
 
-    private var shouldAnimateToolbar = false
+    private val notificationManager by lazy {
+        context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
+    }
+
+    private val doNotDisturbResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (notificationManager?.isNotificationPolicyAccessGranted == true) {
+                viewModel.toggleDoNotDisturb()
+            } else {
+                view?.findViewById<SwitchMaterial>(R.id.sw_do_not_disturb)?.isChecked = false
+                context?.stringResource(R.string.permission_not_granted)?.let { message ->
+                    view?.snackbar(message)
+                }
+            }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         SettingsFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -40,6 +61,7 @@ class SettingsFragment : Fragment() {
          * Navigate to [SettingsFragment] when restarting activity due to configuration change.
          * */
         activity?.intent?.action = Constants.Intent.ActionSettings
+        swDoNotDisturb.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
 
         context?.let { context ->
             val version = context.packageManager
@@ -48,6 +70,7 @@ class SettingsFragment : Fragment() {
             tvVersion.text = context.stringResource(R.string.version, version)
             swShowNotesCount.setupColors()
             swBioAuth.setupColors()
+            swDoNotDisturb.setupColors()
 
             when (BiometricManager.from(context).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
                 BiometricManager.BIOMETRIC_SUCCESS -> swBioAuth.isVisible = true
@@ -57,6 +80,10 @@ class SettingsFragment : Fragment() {
 
         viewModel.isShowNotesCount
             .onEach { isShowNotesCount -> swShowNotesCount.isChecked = isShowNotesCount }
+            .launchIn(lifecycleScope)
+
+        viewModel.isDoNotDisturb
+            .onEach { isDoNotDisturb -> swDoNotDisturb.isChecked = isDoNotDisturb }
             .launchIn(lifecycleScope)
 
         viewModel.isBioAuthEnabled
@@ -116,6 +143,21 @@ class SettingsFragment : Fragment() {
 
         swShowNotesCount.setOnClickListener {
             viewModel.toggleShowNotesCount()
+        }
+
+        swDoNotDisturb.setOnClickListener {
+            if (viewModel.isDoNotDisturb.value) {
+                viewModel.toggleDoNotDisturb()
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (notificationManager?.isNotificationPolicyAccessGranted == true) {
+                        viewModel.toggleDoNotDisturb()
+                    } else {
+                        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                        doNotDisturbResult.launch(intent)
+                    }
+                }
+            }
         }
 
         tvShareWithOthers.setOnClickListener {

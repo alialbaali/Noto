@@ -75,6 +75,10 @@ class SettingsRepositoryImpl(
         .map { it.toBoolean() }
         .flowOn(dispatcher)
 
+    override val isDoNotDisturb: Flow<Boolean> = storage.data
+        .map { preferences -> preferences[SettingsKeys.IsDoNotDisturb] ?: false }
+        .flowOn(dispatcher)
+
     override val lastVersion: Flow<String> = storage.data
         .map { preferences -> preferences[SettingsKeys.LastVersion] }
         .map { it ?: Release.Version.Last }
@@ -257,6 +261,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateIsShowNotesCount(isShow: Boolean) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.ShowNotesCount] = isShow.toString() }
+        }
+    }
+
+    override suspend fun updateIsDoNotDisturb(isDoNotDisturb: Boolean) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.IsDoNotDisturb] = isDoNotDisturb }
         }
     }
 

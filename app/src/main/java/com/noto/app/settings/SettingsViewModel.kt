@@ -35,6 +35,9 @@ class SettingsViewModel(
     val isShowNotesCount = settingsRepository.isShowNotesCount
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
+    val isDoNotDisturb = settingsRepository.isDoNotDisturb
+        .stateIn(viewModelScope, SharingStarted.Lazily, false)
+
     val vaultPasscode = settingsRepository.vaultPasscode
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
@@ -52,6 +55,10 @@ class SettingsViewModel(
 
     fun toggleShowNotesCount() = viewModelScope.launch {
         settingsRepository.updateIsShowNotesCount(!isShowNotesCount.value)
+    }
+
+    fun toggleDoNotDisturb() = viewModelScope.launch {
+        settingsRepository.updateIsDoNotDisturb(!isDoNotDisturb.value)
     }
 
     suspend fun exportJson(): String = withContext(Dispatchers.IO) {

@@ -11,21 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ctb"
-            style="@style/CollapsingToolbar"
-            android:layout_height="@dimen/collapsing_toolbar_height"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            style="@style/Toolbar"
             android:layout_width="match_parent"
-            app:title="@string/settings">
+            android:layout_height="wrap_content"
+            app:navigationContentDescription="@string/back"
+            app:navigationIcon="@drawable/ic_round_back_24"
+            app:title="@string/settings" />
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/tb"
-                style="@style/Toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationContentDescription="@string/back"
-                app:navigationIcon="@drawable/ic_round_back_24" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -74,7 +68,6 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_round_font_24"
                 android:text="@string/change_notes_font" />
-            <!--            </LinearLayout>-->
 
             <include layout="@layout/divider_item" />
 
@@ -113,12 +106,12 @@
                 android:text="@string/show_folders_notes_count" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/sw_collapse_toolbar"
+                android:id="@+id/sw_do_not_disturb"
                 style="@style/SettingsItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_round_aspect_ratio_24"
-                android:text="@string/collapse_toolbar" />
+                android:drawableStart="@drawable/ic_do_not_disturb_24"
+                android:text="@string/do_not_disturb" />
 
             <include layout="@layout/divider_item" />
 

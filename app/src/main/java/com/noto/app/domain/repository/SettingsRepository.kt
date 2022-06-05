@@ -23,6 +23,8 @@ interface SettingsRepository {
 
     val isBioAuthEnabled: Flow<Boolean>
 
+    val isDoNotDisturb: Flow<Boolean>
+
     val lastVersion: Flow<String>
 
     val sortingType: Flow<FolderListSortingType>
@@ -76,6 +78,8 @@ interface SettingsRepository {
     suspend fun updateSortingOrder(sortingOrder: SortingOrder)
 
     suspend fun updateIsShowNotesCount(isShow: Boolean)
+
+    suspend fun updateIsDoNotDisturb(isDoNotDisturb: Boolean)
 
     suspend fun updateMainFolderId(folderId: Long)
 
