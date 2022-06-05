@@ -32,6 +32,7 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
         ivVisibility.animate().setDuration(DefaultAnimationDuration).rotation(if (isVisible) 180F else 0F)
         ivVisibility.contentDescription = root.context?.stringResource(if (isVisible) R.string.hide else R.string.show)
         root.setOnClickListener(onClickListener)
+        root.isClickable = onClickListener != null
         ivVisibility.isVisible = onClickListener != null
         if (color != null) {
             val colorResource = root.context.colorResource(color!!.toResource())
