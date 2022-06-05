@@ -96,7 +96,6 @@ class RecentNotesFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         val menuItem = bab.menu.findItem(R.id.change_visibility)
-        val menuItemColor = context?.colorAttributeResource(R.attr.notoBackgroundColor)?.toColorStateList()
         val expandText = context?.stringResource(R.string.expand)
         val collapseText = context?.stringResource(R.string.collapse)
 
@@ -111,7 +110,6 @@ class RecentNotesFragment : Fragment() {
                     menuItem.title = expandText
                     MenuItemCompat.setContentDescription(menuItem, expandText)
                 }
-                MenuItemCompat.setIconTintList(menuItem, menuItemColor)
             }
             .launchIn(lifecycleScope)
 
