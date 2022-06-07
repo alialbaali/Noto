@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
@@ -46,7 +45,6 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
                     baseDialog.tvDialogTitle.setTextColor(color)
                     baseDialog.vHead.background?.mutate()?.setTint(color)
                     listOf(tvGrouping, tvSortingType, tvSortingOrder).onEach { tv ->
-                        TextViewCompat.setCompoundDrawableTintList(tv, colorStateList)
                         tv.background.setRippleColor(colorStateList)
                     }
                 }
@@ -60,6 +58,14 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
         tvGrouping.setOnClickListener {
             navController?.navigateSafely(
                 NoteListSortingDialogFragmentDirections.actionNoteListSortingDialogFragmentToNoteListGroupingDialogFragment(
+                    args.folderId
+                )
+            )
+        }
+
+        tvGroupingOrder.setOnClickListener {
+            navController?.navigateSafely(
+                NoteListSortingDialogFragmentDirections.actionNoteListSortingDialogFragmentToNoteListGroupingOrderDialogFragment(
                     args.folderId
                 )
             )

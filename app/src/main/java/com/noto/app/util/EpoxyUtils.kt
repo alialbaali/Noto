@@ -47,7 +47,7 @@ inline fun EpoxyController.buildNotesModels(
             content(notPinnedNotes)
         }
         Grouping.CreationDate -> {
-            notes.groupByDate(folder.sortingType, folder.sortingOrder).forEach { (date, notes) ->
+            notes.groupByDate(folder.sortingType, folder.sortingOrder, folder.groupingOrder).forEach { (date, notes) ->
                 headerItem {
                     id(date.dayOfYear)
                     title(date.format())
@@ -57,7 +57,7 @@ inline fun EpoxyController.buildNotesModels(
             }
         }
         Grouping.Label -> {
-            notes.groupByLabels(folder.sortingType, folder.sortingOrder).forEach { (labels, notes) ->
+            notes.groupByLabels(folder.sortingType, folder.sortingOrder, folder.groupingOrder).forEach { (labels, notes) ->
                 if (labels.isEmpty())
                     headerItem {
                         id("without_label")

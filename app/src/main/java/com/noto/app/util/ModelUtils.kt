@@ -78,18 +78,36 @@ fun List<NoteWithLabels>.filterContent(content: CharSequence) = filter { entry -
     entry.first.title.contains(content, ignoreCase = true) || entry.first.body.contains(content, ignoreCase = true)
 }
 
-fun List<NoteWithLabels>.groupByDate(sortingType: NoteListSortingType, sortingOrder: SortingOrder) =
+fun List<NoteWithLabels>.groupByDate(
+    sortingType: NoteListSortingType,
+    sortingOrder: SortingOrder,
+    groupingOrder: GroupingOrder,
+) =
     groupBy { it.first.creationDate.toLocalDate() }
         .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.first.isPinned } }
         .map { it.toPair() }
-        .sortedByDescending { it.first }
+        .let {
+            if (groupingOrder == GroupingOrder.Descending)
+                it.sortedByDescending { it.first }
+            else
+                it.sortedBy { it.first }
+        }
 
-fun List<NoteWithLabels>.groupByLabels(sortingType: NoteListSortingType, sortingOrder: SortingOrder) =
+fun List<NoteWithLabels>.groupByLabels(
+    sortingType: NoteListSortingType,
+    sortingOrder: SortingOrder,
+    groupingOrder: GroupingOrder,
+) =
     map { it.second to (it.first to emptyList<Label>()) }
         .groupBy({ it.first }, { it.second })
         .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.first.isPinned } }
         .map { it.toPair() }
-        .sortedBy { it.first.firstOrNull()?.position }
+        .let {
+            if (groupingOrder == GroupingOrder.Descending)
+                it.sortedByDescending { it.first.firstOrNull()?.position }
+            else
+                it.sortedBy { it.first.firstOrNull()?.position }
+        }
 
 fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): List<NoteWithLabels> {
     return map { note ->

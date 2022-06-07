@@ -396,6 +396,9 @@
         <action
             android:id="@+id/action_noteListSortingDialogFragment_to_noteListSortingTypeDialogFragment"
             app:destination="@id/noteListSortingTypeDialogFragment" />
+        <action
+            android:id="@+id/action_noteListSortingDialogFragment_to_noteListGroupingOrderDialogFragment"
+            app:destination="@id/noteListGroupingOrderDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/languageDialogFragment"
@@ -512,5 +515,13 @@
             app:destination="@id/settingsFragment"
             app:popUpTo="@id/mainDialogFragment"
             app:popUpToInclusive="true" />
+    </dialog>
+    <dialog
+        android:id="@+id/noteListGroupingOrderDialogFragment"
+        android:name="com.noto.app.folder.NoteListGroupingOrderDialogFragment"
+        android:label="NoteListGroupingOrderDialogFragment">
+        <argument
+            android:name="folder_id"
+            app:argType="long" />
     </dialog>
 </navigation>

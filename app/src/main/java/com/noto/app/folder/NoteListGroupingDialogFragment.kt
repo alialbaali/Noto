@@ -32,7 +32,7 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
         val baseDialog = BaseDialogFragmentBinding.bind(root)
             .apply {
                 context?.let { context ->
-                    tvDialogTitle.text = context.stringResource(R.string.grouping)
+                    tvDialogTitle.text = context.stringResource(R.string.grouping_type)
                 }
             }
 

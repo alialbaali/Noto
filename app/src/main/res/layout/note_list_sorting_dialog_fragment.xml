@@ -13,29 +13,62 @@
 
         <include layout="@layout/base_dialog_fragment" />
 
-        <TextView
-            android:id="@+id/tv_grouping"
-            style="@style/DialogItem"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/grouping"
-            app:drawableStartCompat="@drawable/ic_round_table_view_24" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_sorting_type"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sorting_type"
-            app:drawableStartCompat="@drawable/ic_round_sorting_24" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_grouping"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/grouping_type"
+                app:drawableTopCompat="@drawable/ic_round_table_view_24" />
 
-        <TextView
-            android:id="@+id/tv_sorting_order"
-            style="@style/DialogItem"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_grouping_order"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/grouping_order"
+                app:drawableTopCompat="@drawable/ic_round_unfold_more_24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sorting_order"
-            app:drawableStartCompat="@drawable/ic_round_unfold_more_24" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_sorting_type"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/sorting_type"
+                app:drawableTopCompat="@drawable/ic_round_sorting_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_sorting_order"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/sorting_order"
+                app:drawableTopCompat="@drawable/ic_round_unfold_more_24" />
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_done"
