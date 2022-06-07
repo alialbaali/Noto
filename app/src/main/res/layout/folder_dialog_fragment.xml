@@ -59,7 +59,7 @@
         </LinearLayout>
 
         <include
-            android:id="@+id/divider2"
+            android:id="@+id/divider1"
             layout="@layout/divider_item" />
 
         <LinearLayout

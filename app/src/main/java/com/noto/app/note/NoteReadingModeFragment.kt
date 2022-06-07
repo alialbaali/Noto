@@ -64,7 +64,7 @@ class NoteReadingModeFragment : Fragment() {
 
         viewModel.isDoNotDisturb
             .onEach { isDoNotDisturb ->
-                if (isDoNotDisturb && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+                if (isDoNotDisturb && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notificationManager.isNotificationPolicyAccessGranted)
                     notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
             }
             .launchIn(lifecycleScope)
@@ -124,7 +124,7 @@ class NoteReadingModeFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         windowInsetsController?.show(WindowInsetsCompat.Type.systemBars())
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notificationManager.isNotificationPolicyAccessGranted)
             notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
     }
 }
