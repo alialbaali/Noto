@@ -151,7 +151,7 @@
     <string name="duplicate_note">Gandakan catatan</string>
     <string name="sorting_type">Jenis penyortiran</string>
     <string name="notes_sorting">Penyortiran catatan</string>
-    <string name="grouping">Pengelompokan</string>
+    <string name="grouping_type">Pengelompokan</string>
     <string name="sorting_order">Urutan penyortiran</string>
     <string name="save_to_noto">Simpan ke Noto</string>
     <string name="no_notes_found">Tidak ada catatan ditemukan.</string>

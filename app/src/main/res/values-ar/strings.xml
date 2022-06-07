@@ -162,7 +162,7 @@
     <string name="duplicate_note">تكرار الملاحظة</string>
     <string name="sorting_type">نوع الفرز</string>
     <string name="notes_sorting">فرز الملاحظات</string>
-    <string name="grouping">التجميع</string>
+    <string name="grouping_type">التجميع</string>
     <string name="sorting_order">ترتيب الفرز</string>
     <string name="save_to_noto">حفظ في Noto</string>
     <string name="no_notes_found">لا توجد أي ملاحظات.</string>

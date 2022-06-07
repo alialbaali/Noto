@@ -57,17 +57,36 @@
             android:orientation="horizontal"
             tools:listitem="@layout/noto_color_item" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_folder_layout"
-            style="@style/DialogSectionItem"
+        <LinearLayout
+            android:id="@+id/ll_folder_layout"
+            android:background="@drawable/header_item_shape"
+            android:orientation="horizontal"
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/spacing_normal"
-            android:text="@string/folder_layout" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_folder_layout"
+                style="@style/DialogSectionItem"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/folder_layout" />
+
+            <ImageView
+                android:id="@+id/iv_folder_layout"
+                android:src="@drawable/ic_round_arrow_up_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/show" />
+
+        </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_folder_layout"
             style="@style/TabLayout"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -84,17 +103,75 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.tabs.TabLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_new_note_cursor_position"
-            style="@style/DialogSectionItem"
+        <LinearLayout
+            android:id="@+id/ll_parent_folder"
+            android:orientation="horizontal"
+            android:background="@drawable/header_item_shape"
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/spacing_normal"
-            android:text="@string/new_note_cursor_position" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_parent_folder"
+                style="@style/DialogSectionItem"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/parent_folder" />
+
+            <ImageView
+                android:id="@+id/iv_parent_folder"
+                android:src="@drawable/ic_round_arrow_up_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/show" />
+
+        </LinearLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_parent_folder_option"
+            style="@style/FolderTitleTextView"
+            android:visibility="gone"
+            android:background="@drawable/generic_shape"
+            android:drawablePadding="@dimen/spacing_normal"
+            android:padding="@dimen/spacing_normal"
+            android:drawableStart="@drawable/ic_round_no_parent_24"
+            android:contentDescription="@string/no_parent"
+            android:text="@string/no_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/ll_new_note_cursor_position"
+            android:orientation="horizontal"
+            android:background="@drawable/header_item_shape"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_new_note_cursor_position"
+                style="@style/DialogSectionItem"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/new_note_cursor_position" />
+
+            <ImageView
+                android:id="@+id/iv_new_note_cursor_position"
+                android:src="@drawable/ic_round_arrow_up_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/show" />
+
+        </LinearLayout>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_new_note_cursor_position"
             style="@style/TabLayout"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -109,16 +186,35 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.tabs.TabLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_note_max_lines"
-            style="@style/DialogSectionItem"
+
+        <LinearLayout
+            android:id="@+id/ll_note_preview_size"
+            android:orientation="horizontal"
+            android:background="@drawable/header_item_shape"
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="@dimen/spacing_normal"
-            android:text="@string/note_preview_size" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_note_preview_size"
+                style="@style/DialogSectionItem"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/note_preview_size" />
+
+            <ImageView
+                android:id="@+id/iv_note_preview_size"
+                android:src="@drawable/ic_round_arrow_up_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/show" />
+        </LinearLayout>
 
         <com.google.android.material.slider.Slider
             android:id="@+id/s_note_preview_size"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:valueFrom="0"

@@ -154,7 +154,7 @@
     <string name="duplicate_note">Notiz duplizieren</string>
     <string name="sorting_type">Sortierungsart</string>
     <string name="notes_sorting">Notizen-Sortierung</string>
-    <string name="grouping">Gruppierung</string>
+    <string name="grouping_type">Gruppierung</string>
     <string name="sorting_order">Sortierreihenfolge</string>
     <string name="save_to_noto">In Noto speichern</string>
     <string name="no_notes_found">Keine Notizen gefunden.</string>

@@ -160,7 +160,7 @@
     <string name="duplicate_note">Дублировать</string>
     <string name="sorting_type">Тип сортировки</string>
     <string name="notes_sorting">Сортировка</string>
-    <string name="grouping">Группировка</string>
+    <string name="grouping_type">Группировка</string>
     <string name="sorting_order">Порядок сортировки</string>
     <string name="save_to_noto">Сохранить в Noto</string>
     <string name="no_notes_found">Заметки не найдены.</string>

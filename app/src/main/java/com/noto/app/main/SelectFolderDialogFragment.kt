@@ -75,6 +75,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                 val callback = { id: Long ->
                     try {
                         navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.FolderId, id)
+                        onClick(id)
                     } catch (exception: IllegalStateException) {
                         onClick(id)
                     }
@@ -106,7 +107,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                     }
 
                     context?.let { context ->
-                        if (folders.isEmpty() && generalFolder == null) {
+                        if (folders.isEmpty() && generalFolder == null && !args.isNoParentEnabled) {
                             placeholderItem {
                                 id("placeholder")
                                 placeholder(context.stringResource(R.string.no_folders_found))

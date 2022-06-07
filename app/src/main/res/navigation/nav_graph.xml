@@ -90,6 +90,9 @@
             android:name="folder_id"
             android:defaultValue="0L"
             app:argType="long" />
+        <action
+            android:id="@+id/action_newFolderDialogFragment_to_selectFolderDialogFragment"
+            app:destination="@id/selectFolderDialogFragment" />
     </dialog>
     <fragment
         android:id="@+id/noteFragment"
@@ -202,9 +205,6 @@
         <action
             android:id="@+id/action_folderDialogFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />
-        <action
-            android:id="@+id/action_folderDialogFragment_to_selectFolderDialogFragment"
-            app:destination="@id/selectFolderDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/confirmationDialogFragment"

@@ -69,6 +69,7 @@
     <string name="collapse">Collapse</string>
     <string name="expand">Expand</string>
     <string name="no_parent">No parent</string>
+    <string name="parent_folder">Parent folder</string>
     <string name="new_note_cursor_position">New note cursor position</string>
     <string name="archive">Archive</string>
     <string name="unarchive">Unarchive</string>
@@ -158,10 +159,11 @@
     <string name="delete_note">Delete note</string>
     <string name="duplicate">Duplicate</string>
     <string name="share_note">Share note</string>
-    <string name="sorting_type">Sorting type</string>
     <string name="notes_sorting">Notes sorting</string>
-    <string name="grouping">Grouping</string>
+    <string name="sorting_type">Sorting type</string>
     <string name="sorting_order">Sorting order</string>
+    <string name="grouping_type">Grouping type</string>
+    <string name="grouping_order">Grouping order</string>
     <string name="save_to_noto">Save to Noto</string>
     <string name="no_notes_found">No notes found.</string>
     <string name="unarchive_note">Unarchive note</string>

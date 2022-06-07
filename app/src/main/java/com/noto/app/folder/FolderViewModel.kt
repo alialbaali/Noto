@@ -21,15 +21,8 @@ class FolderViewModel(
     private val folderId: Long,
 ) : ViewModel() {
 
-    val folder = combine(
-        folderRepository.getFolderById(folderId)
-            .filterNotNull()
-            .onStart { emit(Folder(folderId, position = 0)) },
-        folderRepository.getAllFolders(),
-    ) { folder, folders ->
-        mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(folder.color)
-        folder.mapRecursively(folders)
-    }.stateIn(viewModelScope, SharingStarted.Lazily, Folder(folderId, position = 0))
+    private val mutableFolder = MutableStateFlow<Folder>(Folder(folderId, position = 0))
+    val folder get() = mutableFolder.asStateFlow()
 
     private val mutableNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
@@ -53,6 +46,16 @@ class FolderViewModel(
     val searchTerm get() = mutableSearchTerm.asStateFlow()
 
     init {
+        combine(
+            folderRepository.getFolderById(folderId)
+                .filterNotNull()
+                .onStart { emit(Folder(folderId, position = 0)) },
+            folderRepository.getAllFolders(),
+        ) { folder, folders ->
+            mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(folder.color)
+            mutableFolder.value = folder.mapRecursively(folders)
+        }.launchIn(viewModelScope)
+
         combine(
             noteRepository.getNotesByFolderId(folderId)
                 .filterNotNull(),
@@ -81,6 +84,12 @@ class FolderViewModel(
             }
             .onEach { mutableLabels.value = it }
             .launchIn(viewModelScope)
+    }
+
+    suspend fun getFolderById(id: Long) = folderRepository.getFolderById(id).firstOrNull()
+
+    fun setFolderParentId(parentId: Long) {
+        mutableFolder.value = folder.value.copy(parentId = parentId.takeUnless { it == 0L })
     }
 
     fun createOrUpdateFolder(
@@ -189,10 +198,6 @@ class FolderViewModel(
 
     fun setSearchTerm(searchTerm: String) {
         mutableSearchTerm.value = searchTerm
-    }
-
-    fun updateFolderParentId(folderId: Long) = viewModelScope.launch {
-        folderRepository.updateFolder(folder.value.copy(parentId = folderId.takeUnless { it == 0L }))
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }

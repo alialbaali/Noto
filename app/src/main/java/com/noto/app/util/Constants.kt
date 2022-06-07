@@ -10,6 +10,7 @@ object Constants {
     const val IsDismissible = "is_dismissible"
     const val ClickListener = "click_listener"
     const val VaultTimeout = "VaultTimeout"
+    const val IsNotParentEnabled = "is_no_parent_enabled"
 
     object Intent {
         const val ActionCreateFolder = "com.noto.intent.action.CREATE_FOLDER"

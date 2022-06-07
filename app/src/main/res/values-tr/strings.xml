@@ -150,7 +150,7 @@
     <string name="duplicate_note">Notu çoğalt</string>
     <string name="sorting_type">Sıralama türü</string>
     <string name="notes_sorting">Not sıralaması</string>
-    <string name="grouping">Gruplandırma</string>
+    <string name="grouping_type">Gruplandırma</string>
     <string name="sorting_order">Sıralama düzeni</string>
     <string name="save_to_noto">Noto\'ya kaydet</string>
     <string name="no_notes_found">Not bulunamadı.</string>

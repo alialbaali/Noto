@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.transition.TransitionManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
@@ -17,6 +19,7 @@ import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Layout
 import com.noto.app.domain.model.NewNoteCursorPosition
 import com.noto.app.domain.model.NotoColor
+import com.noto.app.main.SelectFolderDialogFragment
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -55,6 +58,7 @@ class NewFolderDialogFragment : BaseDialogFragment() {
         rv.clipToOutline = true
         rv.itemAnimator = HorizontalListItemAnimator()
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        llParentFolder.isVisible = args.folderId != Folder.GeneralFolderId
 
         if (args.folderId == 0L) {
             et.requestFocus()
@@ -76,6 +80,45 @@ class NewFolderDialogFragment : BaseDialogFragment() {
     }
 
     private fun NewFolderDialogFragmentBinding.setupListeners() {
+        llFolderLayout.setOnClickListener {
+            TransitionManager.beginDelayedTransition(root)
+            tlFolderLayout.isVisible = !tlFolderLayout.isVisible
+            ivFolderLayout.animate().setDuration(DefaultAnimationDuration).rotation(if (tlFolderLayout.isVisible) -180F else 0F)
+            ivFolderLayout.contentDescription = context?.stringResource(if (tlFolderLayout.isVisible) R.string.hide else R.string.show)
+        }
+
+        llParentFolder.setOnClickListener {
+            TransitionManager.beginDelayedTransition(root)
+            tvParentFolderOption.isVisible = !tvParentFolderOption.isVisible
+            ivParentFolder.animate().setDuration(DefaultAnimationDuration).rotation(if (tvParentFolderOption.isVisible) -180F else 0F)
+            ivParentFolder.contentDescription = context?.stringResource(if (tvParentFolderOption.isVisible) R.string.hide else R.string.show)
+        }
+
+        llNewNoteCursorPosition.setOnClickListener {
+            TransitionManager.beginDelayedTransition(root)
+            tlNewNoteCursorPosition.isVisible = !tlNewNoteCursorPosition.isVisible
+            ivNewNoteCursorPosition.animate().setDuration(DefaultAnimationDuration).rotation(if (tlNewNoteCursorPosition.isVisible) -180F else 0F)
+            ivNewNoteCursorPosition.contentDescription =
+                context?.stringResource(if (tlNewNoteCursorPosition.isVisible) R.string.hide else R.string.show)
+        }
+
+        llNotePreviewSize.setOnClickListener {
+            TransitionManager.beginDelayedTransition(root)
+            sNotePreviewSize.isVisible = !sNotePreviewSize.isVisible
+            ivNotePreviewSize.animate().setDuration(DefaultAnimationDuration).rotation(if (sNotePreviewSize.isVisible) -180F else 0F)
+            ivNotePreviewSize.contentDescription = context?.stringResource(if (sNotePreviewSize.isVisible) R.string.hide else R.string.show)
+        }
+
+        tvParentFolderOption.setOnClickListener {
+            SelectFolderDialogFragment { folderId -> viewModel.setFolderParentId(folderId) }.apply {
+                arguments = bundleOf(
+                    Constants.FilteredFolderIds to longArrayOf(Folder.GeneralFolderId, args.folderId),
+                    Constants.SelectedFolderId to (viewModel.folder.value.parentId ?: 0L),
+                    Constants.IsNotParentEnabled to true,
+                )
+            }.show(parentFragmentManager, null)
+        }
+
         btnCreate.setOnClickListener {
             val title = et.text.toString()
             if (title.isBlank()) {
@@ -114,7 +157,7 @@ class NewFolderDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun NewFolderDialogFragmentBinding.setupFolder(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
+    private suspend fun NewFolderDialogFragmentBinding.setupFolder(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
         rv.smoothScrollToPosition(folder.color.ordinal)
         val layoutTab = when (folder.layout) {
             Layout.Linear -> tlFolderLayout.getTabAt(0)
@@ -146,6 +189,16 @@ class NewFolderDialogFragment : BaseDialogFragment() {
                 swShowNoteCreationDate.setupColors(thumbCheckedColor = color, trackCheckedColor = color)
             } else {
                 swShowNoteCreationDate.setupColors()
+            }
+            if (folder.parentId != null) {
+                val parentFolder = viewModel.getFolderById(folder.parentId ?: 0L)
+                if (parentFolder != null) {
+                    tvParentFolderOption.text = parentFolder.getTitle(context)
+                    tvParentFolderOption.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_folder_24, 0, 0, 0)
+                }
+            } else {
+                tvParentFolderOption.text = context.stringResource(R.string.no_parent)
+                tvParentFolderOption.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_no_parent_24, 0, 0, 0)
             }
         }
     }

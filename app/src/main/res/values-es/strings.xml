@@ -154,7 +154,7 @@
     <string name="duplicate_note">Duplicar nota</string>
     <string name="sorting_type">Tipo de ordenación</string>
     <string name="notes_sorting">Ordenando notas</string>
-    <string name="grouping">Agrupación</string>
+    <string name="grouping_type">Agrupación</string>
     <string name="sorting_order">Orden de clasificación</string>
     <string name="save_to_noto">Guardar en Noto</string>
     <string name="no_notes_found">No se encontraron notas.</string>

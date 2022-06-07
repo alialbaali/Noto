@@ -154,7 +154,7 @@
     <string name="duplicate_note">Dupliquer la note</string>
     <string name="sorting_type">Type de tri</string>
     <string name="notes_sorting">Tri des notes</string>
-    <string name="grouping">Groupement</string>
+    <string name="grouping_type">Groupement</string>
     <string name="sorting_order">Ordre de tri</string>
     <string name="save_to_noto">Enregistrer dans Noto</string>
     <string name="no_notes_found">Aucune note trouvée.</string>
