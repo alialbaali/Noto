@@ -9,10 +9,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainDialogFragmentBinding
-import com.noto.app.util.navController
-import com.noto.app.util.navigateSafely
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -24,12 +21,22 @@ class MainDialogFragment : BaseDialogFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         MainDialogFragmentBinding.inflate(inflater, container, false).withBinding {
             setupBaseDialogFragment()
+            setupState()
             setupListeners()
         }
 
     private fun MainDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
         context?.let { context ->
             tvDialogTitle.text = context.stringResource(R.string.app_name)
+        }
+    }
+
+    private fun MainDialogFragmentBinding.setupState() {
+        context?.let { context ->
+            val backgroundRippleColor = context.colorAttributeResource(R.attr.notoSecondaryColor).toColorStateList()
+            listOf(tvFoldersVault, tvFoldersArchive, tvSettings).forEach { tv ->
+                tv.background.setRippleColor(backgroundRippleColor)
+            }
         }
     }
 

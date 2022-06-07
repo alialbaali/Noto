@@ -13,32 +13,50 @@
 
         <include layout="@layout/base_dialog_fragment" />
 
-        <TextView
-            android:id="@+id/tv_folders_vault"
-            style="@style/SettingsItem"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/folders_vault"
-            app:drawableStartCompat="@drawable/ic_round_shield_24" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_folders_archive"
-            style="@style/SettingsItem"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_folders_vault"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/folders_vault"
+                app:drawableTopCompat="@drawable/ic_round_shield_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_folders_archive"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/folders_archive"
+                app:drawableTopCompat="@drawable/ic_round_inventory_24" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_normal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/folders_archive"
-            app:drawableStartCompat="@drawable/ic_round_inventory_24" />
+            android:layout_height="wrap_content">
 
-        <include
-            android:id="@+id/divider1"
-            layout="@layout/divider_item" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_settings"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/settings"
+                app:drawableTopCompat="@drawable/ic_round_settings_24" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_settings"
-            style="@style/SettingsItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/settings"
-            app:drawableStartCompat="@drawable/ic_round_settings_24" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
