@@ -63,6 +63,9 @@ data class Folder @Ignore constructor(
     @ColumnInfo(name = "grouping", defaultValue = "0")
     val grouping: Grouping = Grouping.Default,
 
+    @ColumnInfo(name = "grouping_order", defaultValue = "1")
+    val groupingOrder: GroupingOrder = GroupingOrder.Descending,
+
     @ColumnInfo(name = "is_vaulted", defaultValue = "0")
     val isVaulted: Boolean = false,
 
@@ -88,6 +91,7 @@ data class Folder @Ignore constructor(
         sortingType: NoteListSortingType = NoteListSortingType.CreationDate,
         sortingOrder: SortingOrder = SortingOrder.Descending,
         grouping: Grouping = Grouping.Default,
+        groupingOrder: GroupingOrder = GroupingOrder.Descending,
         isVaulted: Boolean = false,
     ) : this(
         id,
@@ -105,6 +109,7 @@ data class Folder @Ignore constructor(
         sortingType,
         sortingOrder,
         grouping,
+        groupingOrder,
         isVaulted,
         emptyList(),
     )

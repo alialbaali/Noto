@@ -88,3 +88,15 @@ object NewNoteCursorPositionConvertor {
     fun toEnum(ordinal: Int): NewNoteCursorPosition = NewNoteCursorPosition.values().first { position -> position.ordinal == ordinal }
 
 }
+
+object GroupingOrderConverter {
+
+    @TypeConverter
+    @JvmStatic
+    fun toOrdinal(groupingOrder: GroupingOrder): Int = groupingOrder.ordinal
+
+    @TypeConverter
+    @JvmStatic
+    fun toEnum(ordinal: Int): GroupingOrder = GroupingOrder.values().first { groupingOrder -> groupingOrder.ordinal == ordinal }
+
+}

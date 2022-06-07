@@ -164,6 +164,10 @@ class FolderViewModel(
         folderRepository.updateFolder(folder.value.copy(grouping = value))
     }
 
+    fun updateGroupingOrder(value: GroupingOrder) = viewModelScope.launch {
+        folderRepository.updateFolder(folder.value.copy(groupingOrder = value))
+    }
+
     fun selectNotoColor(notoColor: NotoColor) {
         mutableNotoColors.value = mutableNotoColors.value
             .mapTrueIfSameColor(notoColor)

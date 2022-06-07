@@ -26,3 +26,5 @@ enum class Language { System, English, Turkish, Arabic, Indonesian, Russian, Tam
 enum class VaultTimeout { Immediately, OnAppClose, After1Hour, After4Hours, After12Hours, }
 
 enum class NewNoteCursorPosition { Body, Title, }
+
+enum class GroupingOrder { Ascending, Descending, }
