@@ -207,26 +207,26 @@ class NoteDialogFragment : BaseDialogFragment() {
     private fun NoteDialogFragmentBinding.setupNote(note: Note) {
         context?.let { context ->
             if (note.isPinned) {
-                tvPinNote.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
-                tvPinNote.text = context.stringResource(R.string.unpin_note)
+                tvPinNote.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_pin_off_24, 0, 0)
+                tvPinNote.text = context.stringResource(R.string.unpin)
             } else {
-                tvPinNote.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
-                tvPinNote.text = context.stringResource(R.string.pin_note)
+                tvPinNote.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_pin_24, 0, 0)
+                tvPinNote.text = context.stringResource(R.string.pin)
             }
 
             if (note.isArchived) {
-                tvArchiveNote.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
-                tvArchiveNote.text = context.stringResource(R.string.unarchive_note)
+                tvArchiveNote.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_unarchive_24, 0, 0)
+                tvArchiveNote.text = context.stringResource(R.string.unarchive)
             } else {
-                tvArchiveNote.text = context.stringResource(R.string.archive_note)
-                tvArchiveNote.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
+                tvArchiveNote.text = context.stringResource(R.string.archive)
+                tvArchiveNote.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_archive_24, 0, 0)
             }
 
             if (note.reminderDate == null) {
-                tvRemindMe.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_notification_add_24, 0, 0, 0)
+                tvRemindMe.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_notification_add_24, 0, 0)
                 tvRemindMe.text = context.stringResource(R.string.add_note_reminder)
             } else {
-                tvRemindMe.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_edit_notifications_24, 0, 0, 0)
+                tvRemindMe.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_edit_notifications_24, 0, 0)
                 tvRemindMe.text = context.stringResource(R.string.edit_note_reminder)
             }
         }
@@ -238,14 +238,10 @@ class NoteDialogFragment : BaseDialogFragment() {
             val colorStateList = color.toColorStateList()
             baseDialogFragment.tvDialogTitle.setTextColor(color)
             baseDialogFragment.vHead.backgroundTintList = colorStateList
-            listOf(divider1, divider2, divider3).forEach { divider ->
-                divider.root.background?.mutate()?.setTint(color.withDefaultAlpha())
-            }
             listOf(
                 tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
                 tvDuplicateNote, tvPinNote, tvRemindMe, tvDeleteNote, tvMoveNote,
             ).forEach { tv ->
-                TextViewCompat.setCompoundDrawableTintList(tv, colorStateList)
                 tv.background.setRippleColor(colorStateList)
             }
         }

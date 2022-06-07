@@ -13,96 +13,145 @@
 
         <include layout="@layout/base_dialog_fragment" />
 
-        <TextView
-            android:id="@+id/tv_remind_me"
-            style="@style/DialogItem"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/add_note_reminder"
-            app:drawableStartCompat="@drawable/ic_round_notification_add_24" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_open_in_reading_mode"
-            style="@style/DialogItem"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_remind_me"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/add_note_reminder"
+                app:drawableTopCompat="@drawable/ic_round_notification_add_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_open_in_reading_mode"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/reading_mode"
+                app:drawableTopCompat="@drawable/ic_round_reading_mode_24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/open_note_in_reading_mode"
-            app:drawableStartCompat="@drawable/ic_round_reading_mode_24" />
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_pin_note"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/pin"
+                app:drawableTopCompat="@drawable/ic_round_pin_24" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_share_note"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/share_with"
+                app:drawableTopCompat="@drawable/ic_round_share_24" />
+
+        </LinearLayout>
 
         <include
             android:id="@+id/divider1"
             layout="@layout/divider_item" />
 
-        <TextView
-            android:id="@+id/tv_pin_note"
-            style="@style/DialogItem"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/pin_note"
-            app:drawableStartCompat="@drawable/ic_round_pin_24" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_archive_note"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/archive_note"
-            app:drawableStartCompat="@drawable/ic_round_archive_24" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_archive_note"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/archive"
+                app:drawableTopCompat="@drawable/ic_round_archive_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_duplicate_note"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/duplicate"
+                app:drawableTopCompat="@drawable/ic_round_control_point_duplicate_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_copy_to_clipboard"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/copy"
+                app:drawableTopCompat="@drawable/ic_round_copy_24" />
+
+        </LinearLayout>
 
         <include
             android:id="@+id/divider2"
             layout="@layout/divider_item" />
 
-        <TextView
-            android:id="@+id/tv_duplicate_note"
-            style="@style/DialogItem"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/duplicate_note"
-            app:drawableStartCompat="@drawable/ic_round_control_point_duplicate_24" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_copy_to_clipboard"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/copy_note_to_clipboard"
-            app:drawableStartCompat="@drawable/ic_round_copy_24" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_copy_note"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/copy_to"
+                app:drawableTopCompat="@drawable/ic_round_file_copy_24" />
 
-        <TextView
-            android:id="@+id/tv_copy_note"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/copy_note_to"
-            app:drawableStartCompat="@drawable/ic_round_file_copy_24" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_move_note"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/move_to"
+                app:drawableTopCompat="@drawable/ic_round_move_24" />
 
-        <TextView
-            android:id="@+id/tv_move_note"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/move_note"
-            app:drawableStartCompat="@drawable/ic_round_move_24" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_delete_note"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/delete"
+                app:drawableTopCompat="@drawable/ic_round_delete_24" />
+        </LinearLayout>
 
-        <include
-            android:id="@+id/divider3"
-            layout="@layout/divider_item" />
-
-        <TextView
-            android:id="@+id/tv_share_note"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/share_note"
-            app:drawableStartCompat="@drawable/ic_round_share_24" />
-
-        <TextView
-            android:id="@+id/tv_delete_note"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/delete_note"
-            app:drawableStartCompat="@drawable/ic_round_delete_24" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

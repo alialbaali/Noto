@@ -20,9 +20,9 @@
 
     <item
         android:id="@+id/more"
-        android:contentDescription="@string/more"
+        android:contentDescription="@string/folder_options"
         android:icon="@drawable/ic_round_more_24"
-        android:title="@string/more"
+        android:title="@string/folder_options"
         app:showAsAction="always" />
 
 </menu>

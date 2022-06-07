@@ -126,23 +126,6 @@ class FolderDialogFragment : BaseDialogFragment() {
             }
         }
 
-        tvChangeParent.setOnClickListener {
-            navController?.currentBackStackEntry?.savedStateHandle
-                ?.getLiveData<Long>(Constants.FolderId)
-                ?.observe(viewLifecycleOwner) { folderId ->
-                    viewModel.updateFolderParentId(folderId).invokeOnCompletion {
-                        dismiss()
-                    }
-                }
-            navController?.navigateSafely(
-                FolderDialogFragmentDirections.actionFolderDialogFragmentToSelectFolderDialogFragment(
-                    longArrayOf(args.folderId, Folder.GeneralFolderId),
-                    selectedFolderId = viewModel.folder.value.parentId ?: 0L,
-                    isNoParentEnabled = true
-                )
-            )
-        }
-
         tvDeleteFolder.setOnClickListener {
             context?.let { context ->
                 val confirmationText = context.stringResource(R.string.delete_folder_confirmation)
@@ -166,47 +149,41 @@ class FolderDialogFragment : BaseDialogFragment() {
             val colorStateList = color.toColorStateList()
             baseDialogFragment.vHead.background?.mutate()?.setTint(color)
             baseDialogFragment.tvDialogTitle.setTextColor(color)
-            listOf(divider1, divider2, divider3).forEach { divider ->
-                divider.root.background?.mutate()?.setTint(color.withDefaultAlpha())
-            }
-            listOf(tvEditFolder, tvArchiveFolder, tvVaultFolder, tvPinFolder, tvChangeParent, tvNewNoteShortcut, tvDeleteFolder)
+            listOf(tvEditFolder, tvArchiveFolder, tvVaultFolder, tvPinFolder, tvNewNoteShortcut, tvDeleteFolder)
                 .forEach { tv ->
-                    TextViewCompat.setCompoundDrawableTintList(tv, colorStateList)
                     tv.background.setRippleColor(colorStateList)
                 }
 
             if (folder.isGeneral) {
                 divider1.root.isVisible = false
-                divider2.root.isVisible = false
                 tvArchiveFolder.isVisible = false
                 tvVaultFolder.isVisible = false
                 tvDeleteFolder.isVisible = false
                 tvPinFolder.isVisible = false
-                tvChangeParent.isVisible = false
             }
 
             if (folder.isArchived) {
-                tvArchiveFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_unarchive_24, 0, 0, 0)
-                tvArchiveFolder.text = context.stringResource(R.string.unarchive_folder)
+                tvArchiveFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_unarchive_24, 0, 0)
+                tvArchiveFolder.text = context.stringResource(R.string.unarchive)
             } else {
-                tvArchiveFolder.text = context.stringResource(R.string.archive_folder)
-                tvArchiveFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_archive_24, 0, 0, 0)
+                tvArchiveFolder.text = context.stringResource(R.string.archive)
+                tvArchiveFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_archive_24, 0, 0)
             }
 
             if (folder.isVaulted) {
-                tvVaultFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_lock_open_24, 0, 0, 0)
-                tvVaultFolder.text = context.stringResource(R.string.unvault_folder)
+                tvVaultFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_lock_open_24, 0, 0)
+                tvVaultFolder.text = context.stringResource(R.string.remove_from_vault)
             } else {
-                tvVaultFolder.text = context.stringResource(R.string.vault_folder)
-                tvVaultFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_lock_24, 0, 0, 0)
+                tvVaultFolder.text = context.stringResource(R.string.add_to_vault)
+                tvVaultFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_lock_24, 0, 0)
             }
 
             if (folder.isPinned) {
-                tvPinFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_pin_off_24, 0, 0, 0)
-                tvPinFolder.text = context.stringResource(R.string.unpin_folder)
+                tvPinFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_pin_off_24, 0, 0)
+                tvPinFolder.text = context.stringResource(R.string.unpin)
             } else {
-                tvPinFolder.text = context.stringResource(R.string.pin_folder)
-                tvPinFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_pin_24, 0, 0, 0)
+                tvPinFolder.text = context.stringResource(R.string.pin)
+                tvPinFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_pin_24, 0, 0)
             }
         }
     }

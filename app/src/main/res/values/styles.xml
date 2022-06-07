@@ -140,6 +140,18 @@
         <item name="android:drawablePadding">@dimen/spacing_normal</item>
     </style>
 
+    <style name="DialogQuickItem" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:textSize">@dimen/size_extra_small</item>
+        <item name="android:textColor">?attr/notoPrimaryColor</item>
+        <item name="android:background">@drawable/dialog_quick_item_shape</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/spacing_small</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:drawablePadding">@dimen/spacing_small</item>
+    </style>
+
     <style name="DialogSectionItem" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textSize">@dimen/size_extra_small</item>
