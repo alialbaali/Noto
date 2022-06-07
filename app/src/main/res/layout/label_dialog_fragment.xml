@@ -13,33 +13,50 @@
 
         <include layout="@layout/base_dialog_fragment" />
 
-        <TextView
-            android:id="@+id/tv_edit_label"
-            style="@style/DialogItem"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_small"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/edit_label"
-            app:drawableStartCompat="@drawable/ic_round_edit_24" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_reorder_label"
-            style="@style/DialogItem"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_edit_label"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                app:drawableTopCompat="@drawable/ic_round_edit_24" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/reorder_label"
-            app:drawableStartCompat="@drawable/ic_round_reorder_24" />
+            android:layout_height="wrap_content">
 
-        <include
-            android:id="@+id/divider1"
-            layout="@layout/divider_item" />
+            <TextView
+                android:id="@+id/tv_reorder_label"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/reorder_label"
+                app:drawableTopCompat="@drawable/ic_round_reorder_24" />
 
-        <TextView
-            android:id="@+id/tv_delete_label"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/delete_label"
-            app:drawableStartCompat="@drawable/ic_round_delete_24" />
-
+            <TextView
+                android:id="@+id/tv_delete_label"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/delete"
+                app:drawableTopCompat="@drawable/ic_round_delete_24" />
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

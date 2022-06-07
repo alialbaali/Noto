@@ -48,10 +48,8 @@ class LabelDialogFragment : BaseDialogFragment() {
                     val colorStateList = color.toColorStateList()
                     baseDialogFragment.vHead.background?.mutate()?.setTint(color)
                     baseDialogFragment.tvDialogTitle.setTextColor(color)
-                    divider1.root.background?.mutate()?.setTint(color.withDefaultAlpha())
                     listOf(tvEditLabel, tvReorderLabel, tvDeleteLabel)
                         .forEach { tv ->
-                            TextViewCompat.setCompoundDrawableTintList(tv, color.toColorStateList())
                             tv.background.setRippleColor(colorStateList)
                         }
                 }

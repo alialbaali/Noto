@@ -200,7 +200,7 @@
     <string name="permission_not_granted">Permission hasn\'t been granted</string>
 
     <!-- Label -->
-    <string name="reorder_label">Reorder label</string>
+    <string name="reorder_label">Reorder</string>
     <string name="create_label">Create label</string>
     <string name="label_title">Label title</string>
     <string name="label">Label</string>
