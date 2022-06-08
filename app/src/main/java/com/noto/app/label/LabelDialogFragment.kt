@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
@@ -56,6 +55,12 @@ class LabelDialogFragment : BaseDialogFragment() {
             }
             .launchIn(lifecycleScope)
 
+        viewModel.label
+            .onEach { label ->
+                vLabel.tvLabel.text = label.title
+                vLabel.tvLabel.backgroundTintList = context?.colorAttributeResource(R.attr.notoBackgroundColor)?.toColorStateList()
+            }
+            .launchIn(lifecycleScope)
     }
 
     private fun LabelDialogFragmentBinding.setupListeners() {

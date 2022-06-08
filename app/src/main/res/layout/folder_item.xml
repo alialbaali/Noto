@@ -16,7 +16,7 @@
         android:id="@+id/iv_folder_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:src="@drawable/ic_round_inbox_24" />
+        tools:src="@drawable/ic_round_folder_general_24" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_folder_title"
