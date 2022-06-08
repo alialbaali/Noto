@@ -29,7 +29,7 @@ abstract class AllLabelItem : EpoxyModelWithHolder<AllLabelItem.Holder>() {
             val selectedBackgroundColor = context.colorResource(color.toResource())
             val selectedTextColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             val backgroundColor = context.colorAttributeResource(R.attr.notoSurfaceColor)
-            val textColor = context.colorAttributeResource(R.attr.notoSecondaryColor)
+            val textColor = context.colorAttributeResource(R.attr.notoPrimaryColor)
             if (isSelected) {
                 tvAllLabel.animateBackgroundColor(backgroundColor, selectedBackgroundColor)
                 tvAllLabel.animateTextColor(textColor, selectedTextColor)

@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/spacing_small"
+    android:stateListAnimator="@animator/elevation_animator"
     android:background="@drawable/note_item_shape"
     android:padding="@dimen/spacing_normal">
 
