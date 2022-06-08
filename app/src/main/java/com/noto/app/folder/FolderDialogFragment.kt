@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navOptions
@@ -155,12 +154,20 @@ class FolderDialogFragment : BaseDialogFragment() {
                 }
 
             if (folder.isGeneral) {
+                vFolder.ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_general_24))
                 divider1.root.isVisible = false
                 tvArchiveFolder.isVisible = false
                 tvVaultFolder.isVisible = false
                 tvDeleteFolder.isVisible = false
                 tvPinFolder.isVisible = false
+            } else {
+                vFolder.ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_24))
             }
+
+            vFolder.ibFolderHandle.isVisible = false
+            vFolder.tvFolderTitle.text = folder.getTitle(context)
+            vFolder.tvFolderTitle.setTextColor(color)
+            vFolder.ivFolderIcon.imageTintList = colorStateList
 
             if (folder.isArchived) {
                 tvArchiveFolder.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_unarchive_24, 0, 0)

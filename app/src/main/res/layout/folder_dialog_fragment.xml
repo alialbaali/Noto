@@ -1,104 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/BaseDialogFragment"
+    android:orientation="vertical"
+    android:layout_gravity="bottom"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/ll"
+    <include
+        android:id="@+id/v_folder"
+        layout="@layout/folder_item"
+        android:layout_marginHorizontal="@dimen/spacing_small"
+        android:layout_marginVertical="@dimen/spacing_normal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content" />
 
-        <include layout="@layout/base_dialog_fragment" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/spacing_normal"
-            android:layout_marginBottom="@dimen/spacing_small"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_edit_folder"
-                style="@style/DialogQuickItem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/edit"
-                app:drawableTopCompat="@drawable/ic_round_edit_24" />
-
-        </LinearLayout>
+    <androidx.core.widget.NestedScrollView
+        style="@style/BaseDialogFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/spacing_normal"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:divider="@drawable/spacing_normal_divider"
-            android:showDividers="middle"
+            android:id="@+id/ll"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_pin_folder"
-                style="@style/DialogQuickItem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/pin"
-                app:drawableTopCompat="@drawable/ic_round_pin_24" />
+            <include layout="@layout/base_dialog_fragment" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_vault_folder"
-                style="@style/DialogQuickItem"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_small"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/add_to_vault"
-                app:drawableTopCompat="@drawable/ic_round_lock_24" />
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_edit_folder"
+                    style="@style/DialogQuickItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/edit"
+                    app:drawableTopCompat="@drawable/ic_round_edit_24" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:divider="@drawable/spacing_normal_divider"
+                android:showDividers="middle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_pin_folder"
+                    style="@style/DialogQuickItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/pin"
+                    app:drawableTopCompat="@drawable/ic_round_pin_24" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_vault_folder"
+                    style="@style/DialogQuickItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/add_to_vault"
+                    app:drawableTopCompat="@drawable/ic_round_lock_24" />
+            </LinearLayout>
+
+            <include
+                android:id="@+id/divider1"
+                layout="@layout/divider_item" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:paddingHorizontal="@dimen/spacing_normal"
+                android:divider="@drawable/spacing_normal_divider"
+                android:showDividers="middle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_archive_folder"
+                    style="@style/DialogQuickItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/archive"
+                    app:drawableTopCompat="@drawable/ic_round_archive_24" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_new_note_shortcut"
+                    style="@style/DialogQuickItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/add_new_note_shortcut"
+                    app:drawableTopCompat="@drawable/ic_round_add_to_home_screen_24" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_delete_folder"
+                    style="@style/DialogQuickItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/delete"
+                    app:drawableTopCompat="@drawable/ic_round_delete_sweep_24" />
+
+            </LinearLayout>
         </LinearLayout>
-
-        <include
-            android:id="@+id/divider1"
-            layout="@layout/divider_item" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_marginBottom="@dimen/spacing_normal"
-            android:paddingHorizontal="@dimen/spacing_normal"
-            android:divider="@drawable/spacing_normal_divider"
-            android:showDividers="middle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_archive_folder"
-                style="@style/DialogQuickItem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/archive"
-                app:drawableTopCompat="@drawable/ic_round_archive_24" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_new_note_shortcut"
-                style="@style/DialogQuickItem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/add_new_note_shortcut"
-                app:drawableTopCompat="@drawable/ic_round_add_to_home_screen_24" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_delete_folder"
-                style="@style/DialogQuickItem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="@string/delete"
-                app:drawableTopCompat="@drawable/ic_round_delete_sweep_24" />
-
-        </LinearLayout>
-    </LinearLayout>
-
-</androidx.core.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>
