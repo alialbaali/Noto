@@ -27,6 +27,7 @@ object SettingsKeys {
     val ScheduledVaultTimeout = stringPreferencesKey(Keys.ScheduledVaultTimeout)
     val LastVersion = stringPreferencesKey(Keys.LastVersion)
     val IsDoNotDisturb = booleanPreferencesKey(Keys.IsDoNotDisturb)
+    val IsScreenOn = booleanPreferencesKey(Keys.IsScreenOn)
     val IsBioAuthEnabled = stringPreferencesKey(Keys.IsBioAuthEnabled)
     val MainFolderId = longPreferencesKey(Keys.MainFolderId)
 
@@ -58,6 +59,7 @@ object SettingsKeys {
         const val IsBioAuthEnabled = "IsBioAuthEnabled"
         const val MainFolderId = "MainFolderId"
         const val IsDoNotDisturb = "IsDoNotDisturb"
+        const val IsScreenOn = "IsScreenOn"
 
         object Widget {
             val Int.Id get() = "Widget_Id_$this"

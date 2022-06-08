@@ -113,6 +113,14 @@
                 android:drawableStart="@drawable/ic_do_not_disturb_24"
                 android:text="@string/do_not_disturb" />
 
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_screen_on"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_visibility_24"
+                android:text="@string/screen_on" />
+
             <include layout="@layout/divider_item" />
 
             <com.google.android.material.textview.MaterialTextView

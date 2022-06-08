@@ -16,5 +16,7 @@ data class SettingsConfig(
     val sortingType: FolderListSortingType,
     val sortingOrder: SortingOrder,
     val isShowNotesCount: Boolean,
+    val isDoNotDisturb: Boolean,
+    val isScreenOn: Boolean,
     val mainFolderId: Long,
 )

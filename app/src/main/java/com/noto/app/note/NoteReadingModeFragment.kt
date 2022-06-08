@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -69,6 +70,15 @@ class NoteReadingModeFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
+        viewModel.isScreenOn
+            .onEach { isScreenOn ->
+                if (isScreenOn)
+                    activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                else
+                    activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            }
+            .launchIn(lifecycleScope)
+
         viewModel.folder
             .onEach { folder -> setupFolder(folder) }
             .launchIn(lifecycleScope)
@@ -124,6 +134,7 @@ class NoteReadingModeFragment : Fragment() {
     override fun onDetach() {
         super.onDetach()
         windowInsetsController?.show(WindowInsetsCompat.Type.systemBars())
+        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notificationManager.isNotificationPolicyAccessGranted)
             notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
     }

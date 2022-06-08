@@ -71,6 +71,7 @@ class SettingsFragment : Fragment() {
             swShowNotesCount.setupColors()
             swBioAuth.setupColors()
             swDoNotDisturb.setupColors()
+            swScreenOn.setupColors()
 
             when (BiometricManager.from(context).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
                 BiometricManager.BIOMETRIC_SUCCESS -> swBioAuth.isVisible = true
@@ -84,6 +85,10 @@ class SettingsFragment : Fragment() {
 
         viewModel.isDoNotDisturb
             .onEach { isDoNotDisturb -> swDoNotDisturb.isChecked = isDoNotDisturb }
+            .launchIn(lifecycleScope)
+
+        viewModel.isScreenOn
+            .onEach { isScreenOn -> swScreenOn.isChecked = isScreenOn }
             .launchIn(lifecycleScope)
 
         viewModel.isBioAuthEnabled
@@ -158,6 +163,10 @@ class SettingsFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        swScreenOn.setOnClickListener {
+            viewModel.toggleScreenOn()
         }
 
         tvShareWithOthers.setOnClickListener {

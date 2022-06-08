@@ -194,9 +194,14 @@
     <string name="change_parent_folder">Change parent folder</string>
     <string name="note_is_moved">Note has been moved.</string>
     <string name="note_preview_size">Note preview size</string>
+    <string name="title_line_spacing">Title line spacing</string>
+    <string name="title_letter_spacing">Title letter spacing</string>
+    <string name="body_line_spacing">Body line spacing</string>
+    <string name="body_letter_spacing">Body letter spacing</string>
     <string name="show_note_creation_date">Show note creation date</string>
     <string name="show_folders_notes_count">Show folders notes count</string>
-    <string name="do_not_disturb">Enable Do Not Disturb in Reading Mode</string>
+    <string name="do_not_disturb">Enable Do Not Disturb during Reading Mode</string>
+    <string name="screen_on">Keep screen on during Reading Mode</string>
     <string name="show">Show</string>
     <string name="hide">Hide</string>
     <string name="permission_not_granted">Permission hasn\'t been granted</string>

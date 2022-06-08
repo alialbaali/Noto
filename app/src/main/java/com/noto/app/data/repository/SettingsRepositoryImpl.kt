@@ -32,6 +32,8 @@ class SettingsRepositoryImpl(
             sortingType.first(),
             sortingOrder.first(),
             isShowNotesCount.first(),
+            isDoNotDisturb.first(),
+            isScreenOn.first(),
             mainFolderId.first()
         )
     }.flowOn(dispatcher)
@@ -77,6 +79,10 @@ class SettingsRepositoryImpl(
 
     override val isDoNotDisturb: Flow<Boolean> = storage.data
         .map { preferences -> preferences[SettingsKeys.IsDoNotDisturb] ?: false }
+        .flowOn(dispatcher)
+
+    override val isScreenOn: Flow<Boolean> = storage.data
+        .map { preferences -> preferences[SettingsKeys.IsScreenOn] ?: true }
         .flowOn(dispatcher)
 
     override val lastVersion: Flow<String> = storage.data
@@ -182,6 +188,8 @@ class SettingsRepositoryImpl(
                 updateSortingType(sortingType)
                 updateSortingOrder(sortingOrder)
                 updateIsShowNotesCount(isShowNotesCount)
+                updateIsDoNotDisturb(isDoNotDisturb)
+                updateIsScreenOn(isScreenOn)
                 updateMainFolderId(mainFolderId)
             }
         }
@@ -267,6 +275,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateIsDoNotDisturb(isDoNotDisturb: Boolean) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.IsDoNotDisturb] = isDoNotDisturb }
+        }
+    }
+
+    override suspend fun updateIsScreenOn(isScreenOn: Boolean) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.IsScreenOn] = isScreenOn }
         }
     }
 

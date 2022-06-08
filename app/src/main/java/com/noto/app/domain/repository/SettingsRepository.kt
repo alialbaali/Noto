@@ -25,6 +25,8 @@ interface SettingsRepository {
 
     val isDoNotDisturb: Flow<Boolean>
 
+    val isScreenOn: Flow<Boolean>
+
     val lastVersion: Flow<String>
 
     val sortingType: Flow<FolderListSortingType>
@@ -80,6 +82,8 @@ interface SettingsRepository {
     suspend fun updateIsShowNotesCount(isShow: Boolean)
 
     suspend fun updateIsDoNotDisturb(isDoNotDisturb: Boolean)
+
+    suspend fun updateIsScreenOn(isScreenOn: Boolean)
 
     suspend fun updateMainFolderId(folderId: Long)
 

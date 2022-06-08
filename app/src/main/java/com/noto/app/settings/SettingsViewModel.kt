@@ -38,6 +38,9 @@ class SettingsViewModel(
     val isDoNotDisturb = settingsRepository.isDoNotDisturb
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
+    val isScreenOn = settingsRepository.isScreenOn
+        .stateIn(viewModelScope, SharingStarted.Lazily, true)
+
     val vaultPasscode = settingsRepository.vaultPasscode
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
@@ -59,6 +62,10 @@ class SettingsViewModel(
 
     fun toggleDoNotDisturb() = viewModelScope.launch {
         settingsRepository.updateIsDoNotDisturb(!isDoNotDisturb.value)
+    }
+
+    fun toggleScreenOn() = viewModelScope.launch {
+        settingsRepository.updateIsScreenOn(!isScreenOn.value)
     }
 
     suspend fun exportJson(): String = withContext(Dispatchers.IO) {

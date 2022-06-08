@@ -40,6 +40,9 @@ class NoteViewModel(
     val isDoNotDisturb = settingsRepository.isDoNotDisturb
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
+    val isScreenOn = settingsRepository.isScreenOn
+        .stateIn(viewModelScope, SharingStarted.Lazily, true)
+
     init {
         noteRepository.getNoteById(noteId)
             .also {
