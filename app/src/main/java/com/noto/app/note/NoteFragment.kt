@@ -28,6 +28,7 @@ import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
+
 private const val DebounceTimeoutMillis = 250L
 
 class NoteFragment : Fragment() {
@@ -48,11 +49,8 @@ class NoteFragment : Fragment() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
-        abl.setExpanded(false, false)
         tvWordCount.animationInterpolator = DefaultInterpolator()
-        context?.tryLoadingFontResource(R.font.nunito_semibold_italic)?.let { font ->
-            tvWordCount.typeface = font
-        }
+        tvWordCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
 
         viewModel.folder
             .onEach { folder -> setupFolder(folder) }
@@ -262,17 +260,15 @@ class NoteFragment : Fragment() {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
-            ctb.title = folder.getTitle(context)
-            ctb.setCollapsedTitleTextColor(colorStateList)
-            ctb.setExpandedTitleTextColor(colorStateList)
-            tvCreatedAt.setTextColor(color)
-            tvWordCount.setTextColor(color)
+            val highlightColor = color.withDefaultAlpha()
+            tvFolderTitle.text = folder.getTitle(context)
+            tvFolderTitle.setTextColor(color)
             tb.navigationIcon?.mutate()?.setTint(color)
             fab.backgroundTintList = colorStateList
-            bab.menu.forEach { it.icon?.mutate()?.setTint(color) }
-            bab.navigationIcon?.mutate()?.setTint(color)
             etNoteTitle.setLinkTextColor(color)
             etNoteBody.setLinkTextColor(color)
+            etNoteTitle.highlightColor = highlightColor
+            etNoteBody.highlightColor = highlightColor
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
                 fab.outlineSpotShadowColor = color

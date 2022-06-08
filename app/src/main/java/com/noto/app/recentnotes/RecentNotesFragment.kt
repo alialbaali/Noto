@@ -76,7 +76,7 @@ class RecentNotesFragment : Fragment() {
     private fun RecentNotesFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
-        tvNotesCount.typeface = context?.tryLoadingFontResource(R.font.nunito_bold)
+        tvNotesCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
 
         combine(
             viewModel.notes,

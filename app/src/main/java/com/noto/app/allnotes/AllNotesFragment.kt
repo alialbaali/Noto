@@ -74,7 +74,8 @@ class AllNotesFragment : Fragment() {
     private fun AllNotesFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
-        tvNotesCount.typeface = context?.tryLoadingFontResource(R.font.nunito_bold)
+        tvNotesCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
+
 
         combine(
             viewModel.notes,

@@ -12,21 +12,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ctb"
-            style="@style/CollapsingToolbar"
-            android:layout_height="@dimen/collapsing_toolbar_height"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            style="@style/ToolbarWithSubtitle"
             android:layout_width="match_parent"
-            tools:title="Note">
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            app:navigationContentDescription="@string/back"
+            app:navigationIcon="@drawable/ic_round_back_24">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/tb"
-                style="@style/Toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:navigationContentDescription="@string/back"
-                app:navigationIcon="@drawable/ic_round_back_24" />
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_folder_title"
+                    style="@style/ToolbarTitleTextAppearance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/title"
+                    tools:textColor="@color/colorAccentTeal" />
+
+                <com.robinhood.ticker.TickerView
+                    android:id="@+id/tv_word_count"
+                    style="@style/SubtitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/notoSecondaryColor"
+                    app:ticker_animationDuration="@integer/animation_duration"
+                    app:ticker_defaultCharacterList="number"
+                    tools:text="30 words" />
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -50,34 +68,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/label_item" />
-
-            <LinearLayout
-                android:id="@+id/note_info"
-                android:orientation="horizontal"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_marginVertical="@dimen/spacing_small"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_created_at"
-                    style="@style/SubtitleTextView"
-                    android:layout_marginEnd="@dimen/spacing_small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Created Tue, Aug 8" />
-
-                <com.robinhood.ticker.TickerView
-                    android:id="@+id/tv_word_count"
-                    style="@style/SubtitleTextView"
-                    android:gravity="end"
-                    android:layout_marginStart="@dimen/spacing_small"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:ticker_animationDuration="@integer/animation_duration"
-                    app:ticker_defaultCharacterList="number"
-                    tools:text="30 words" />
-            </LinearLayout>
 
             <EditText
                 android:id="@+id/et_note_title"
@@ -111,6 +101,19 @@
                 android:textColor="?attr/notoPrimaryColor"
                 tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_created_at"
+                style="@style/SubtitleTextView"
+                android:layout_margin="@dimen/spacing_normal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fontFamily="@font/nunito_bold_italic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/et_note_body"
+                tools:text="Created Tue, Aug 8" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
