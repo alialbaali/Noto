@@ -155,7 +155,7 @@ class FolderDialogFragment : BaseDialogFragment() {
 
             if (folder.isGeneral) {
                 vFolder.ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_general_24))
-                divider1.root.isVisible = false
+                divider.root.isVisible = false
                 tvArchiveFolder.isVisible = false
                 tvVaultFolder.isVisible = false
                 tvDeleteFolder.isVisible = false

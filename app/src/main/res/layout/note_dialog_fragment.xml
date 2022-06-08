@@ -86,7 +86,7 @@
             </LinearLayout>
 
             <include
-                android:id="@+id/divider1"
+                android:id="@+id/divider"
                 layout="@layout/divider_item" />
 
             <LinearLayout
@@ -94,6 +94,7 @@
                 android:paddingHorizontal="@dimen/spacing_normal"
                 android:divider="@drawable/spacing_normal_divider"
                 android:showDividers="middle"
+                android:layout_marginBottom="@dimen/spacing_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -126,15 +127,12 @@
 
             </LinearLayout>
 
-            <include
-                android:id="@+id/divider2"
-                layout="@layout/divider_item" />
-
             <LinearLayout
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/spacing_normal"
                 android:layout_marginBottom="@dimen/spacing_normal"
                 android:divider="@drawable/spacing_normal_divider"
+                android:layout_marginTop="@dimen/spacing_small"
                 android:showDividers="middle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
