@@ -17,7 +17,7 @@ Noto is part of my [portfolio](https://alialbaali.com) projects. It showcases my
 * Minimal, modern, and simplistic design
 * Grouping notes using libraries with colors and names
 * Filtering notes using labels configured for each library
-* Libraries archive
+* Folders archive
 * List and grid layout modes
 * Reminders
 * Auto save
@@ -37,7 +37,7 @@ Noto is part of my [portfolio](https://alialbaali.com) projects. It showcases my
 * Ad-Free
 * Black theme and dark theme
 * Supported languages (English, Turkish, Arabic, Indonesian, Russian, Tamil)
-* Libraries and notes widgets
+* Folders and notes widgets
 
 ## Contributions
 
