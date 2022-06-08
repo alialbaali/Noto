@@ -34,7 +34,7 @@ class SettingsRepositoryImpl(
             isShowNotesCount.first(),
             isDoNotDisturb.first(),
             isScreenOn.first(),
-            mainFolderId.first()
+            mainInterfaceId.first()
         )
     }.flowOn(dispatcher)
 
@@ -109,8 +109,8 @@ class SettingsRepositoryImpl(
         .map { it.toBoolean() }
         .flowOn(dispatcher)
 
-    override val mainFolderId: Flow<Long> = storage.data
-        .map { preferences -> preferences[SettingsKeys.MainFolderId] }
+    override val mainInterfaceId: Flow<Long> = storage.data
+        .map { preferences -> preferences[SettingsKeys.MainInterfaceId] }
         .map { it ?: Folder.GeneralFolderId }
         .flowOn(dispatcher)
 
@@ -194,7 +194,7 @@ class SettingsRepositoryImpl(
                 updateIsShowNotesCount(isShowNotesCount)
                 updateIsDoNotDisturb(isDoNotDisturb)
                 updateIsScreenOn(isScreenOn)
-                updateMainFolderId(mainFolderId)
+                updateMainInterfaceId(mainInterfaceId)
             }
         }
     }
@@ -294,9 +294,9 @@ class SettingsRepositoryImpl(
         }
     }
 
-    override suspend fun updateMainFolderId(folderId: Long) {
+    override suspend fun updateMainInterfaceId(interfaceId: Long) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.MainFolderId] = folderId }
+            storage.edit { preferences -> preferences[SettingsKeys.MainInterfaceId] = interfaceId }
         }
     }
 

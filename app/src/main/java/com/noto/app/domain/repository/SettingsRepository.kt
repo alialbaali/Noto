@@ -37,7 +37,7 @@ interface SettingsRepository {
 
     val isShowNotesCount: Flow<Boolean>
 
-    val mainFolderId: Flow<Long>
+    val mainInterfaceId: Flow<Long>
 
     fun getWidgetFolderId(widgetId: Int): Flow<Long>
 
@@ -89,7 +89,7 @@ interface SettingsRepository {
 
     suspend fun updateIsFullScreen(isFullScreen: Boolean)
 
-    suspend fun updateMainFolderId(folderId: Long)
+    suspend fun updateMainInterfaceId(interfaceId: Long)
 
     suspend fun updateWidgetFolderId(widgetId: Int, folderId: Long)
 

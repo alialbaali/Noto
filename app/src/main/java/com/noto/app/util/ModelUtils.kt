@@ -13,6 +13,7 @@ import kotlin.time.Duration.Companion.days
 
 const val AllNotesItemId = -2L
 const val RecentNotesItemId = -3L
+const val AllFoldersId = -4L
 val LabelDefaultStrokeWidth = 2.dp
 val LabelDefaultCornerRadius = 8.dp.toFloat()
 typealias NoteWithLabels = Pair<Note, List<Label>>

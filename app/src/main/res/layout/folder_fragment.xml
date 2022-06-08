@@ -59,6 +59,29 @@
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_search"
+        style="@style/TextInputLayout"
+        android:layout_gravity="top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_normal"
+        android:outlineProvider="bounds"
+        android:translationY="-16dp"
+        android:elevation="@dimen/spacing_small"
+        app:endIconContentDescription="@string/clear"
+        app:endIconMode="clear_text"
+        app:layout_anchor="@id/fab">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_search"
+            style="@style/TextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/search"
+            android:inputType="text|textCapSentences|textAutoCorrect" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
         android:layout_gravity="bottom"

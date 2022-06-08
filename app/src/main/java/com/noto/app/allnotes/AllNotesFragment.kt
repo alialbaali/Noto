@@ -69,6 +69,10 @@ class AllNotesFragment : Fragment() {
         bab.setOnSwipeGestureListener {
             navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToMainFragment())
         }
+
+        activity?.onBackPressedDispatcher?.addCallback {
+            navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToMainFragment(exit = true))
+        }
     }
 
     private fun AllNotesFragmentBinding.setupState() {

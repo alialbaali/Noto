@@ -45,7 +45,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
     private fun SelectFolderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
         .apply {
             context?.let { context ->
-                tvDialogTitle.text = context.stringResource(R.string.select_folder)
+                tvDialogTitle.text = context.stringResource(if (args.isMainInterface) R.string.select_main_interface else R.string.select_folder)
             }
         }
 
@@ -92,6 +92,40 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                         }
                     }
 
+                    if (args.isMainInterface) {
+                        context?.let { context ->
+                            genericItem {
+                                id("all_folders")
+                                title(context.stringResource(R.string.all_folders))
+                                icon(context.drawableResource(R.drawable.ic_round_all_folders_24))
+                                isManualSorting(false)
+                                isShowNotesCount(false)
+                                isSelected(args.selectedFolderId == AllFoldersId)
+                                onClickListener { _ -> callback(AllFoldersId) }
+                            }
+
+                            genericItem {
+                                id("all_notes")
+                                title(context.stringResource(R.string.all_notes))
+                                icon(context.drawableResource(R.drawable.ic_round_all_notes_24))
+                                isManualSorting(false)
+                                isShowNotesCount(false)
+                                isSelected(args.selectedFolderId == AllNotesItemId)
+                                onClickListener { _ -> callback(AllNotesItemId) }
+                            }
+
+                            genericItem {
+                                id("recent_notes")
+                                title(context.getString(R.string.recent_notes))
+                                icon(context.drawableResource(R.drawable.ic_round_schedule_24))
+                                isManualSorting(false)
+                                isShowNotesCount(false)
+                                isSelected(args.selectedFolderId == RecentNotesItemId)
+                                onClickListener { _ -> callback(RecentNotesItemId) }
+                            }
+                        }
+                    }
+
                     generalFolder?.let {
                         folderItem {
                             id(generalFolder.first.id)
@@ -99,7 +133,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                             notesCount(generalFolder.second)
                             isSelected(generalFolder.first.id == args.selectedFolderId)
                             isManualSorting(false)
-                            isShowNotesCount(isShowNotesCount)
+                            isShowNotesCount(isShowNotesCount && !args.isMainInterface)
                             onClickListener { _ -> callback(generalFolder.first.id) }
                             onLongClickListener { _ -> false }
                             onDragHandleTouchListener { _, _ -> false }
@@ -119,7 +153,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                                         id(entry.first.id)
                                         folder(entry.first)
                                         notesCount(entry.second)
-                                        isShowNotesCount(isShowNotesCount)
+                                        isShowNotesCount(isShowNotesCount && !args.isMainInterface)
                                         isSelected(entry.first.id == args.selectedFolderId)
                                         isManualSorting(false)
                                         depth(depth)

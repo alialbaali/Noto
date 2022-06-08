@@ -60,7 +60,7 @@
     <string name="monospace">Monospace</string>
     <string name="font">Fuente</string>
     <string name="folders_archive">Archivo de carpetas</string>
-    <string name="change_main_folder">Cambiar la carpeta principal</string>
+    <string name="change_main_interface">Cambiar la carpeta principal</string>
     <string name="general">General</string>
     <string name="collapse_toolbar">Contraer barra de herramientas por defecto</string>
     <string name="all_notes">Todas las notas</string>

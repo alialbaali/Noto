@@ -56,7 +56,7 @@
     <string name="monospace">Monospace</string>
     <string name="font">Yazı tipi</string>
     <string name="folders_archive">Klasör arşivi</string>
-    <string name="change_main_folder">Ana klasörü değiştir</string>
+    <string name="change_main_interface">Ana klasörü değiştir</string>
     <string name="general">Genel</string>
     <string name="collapse_toolbar">Araç çubuğunu varsayılan olarak daralt</string>
     <string name="all_notes">Tüm notlar</string>

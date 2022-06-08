@@ -56,7 +56,7 @@
     <string name="monospace">Monospace</string>
     <string name="font">الخط</string>
     <string name="folders_archive">أرشيف المجلدات</string>
-    <string name="change_main_folder">تغيير المجلد الرئيسي</string>
+    <string name="change_main_interface">تغيير المجلد الرئيسي</string>
     <string name="general">عام</string>
     <string name="collapse_toolbar">إغلاق شريط الأدوات افتراضياً</string>
     <string name="all_notes">جميع الملاحظات</string>

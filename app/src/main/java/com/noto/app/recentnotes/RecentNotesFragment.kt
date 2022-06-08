@@ -71,6 +71,10 @@ class RecentNotesFragment : Fragment() {
         bab.setOnSwipeGestureListener {
             navController?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToMainFragment())
         }
+
+        activity?.onBackPressedDispatcher?.addCallback {
+            navController?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToMainFragment(exit = true))
+        }
     }
 
     private fun RecentNotesFragmentBinding.setupState() {

@@ -50,8 +50,8 @@
             app:popUpToInclusive="true" />
         <argument
             android:name="exit"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
     </dialog>
     <fragment
         android:id="@+id/folderFragment"
@@ -284,6 +284,10 @@
             app:argType="long" />
         <argument
             android:name="is_no_parent_enabled"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <argument
+            android:name="is_main_interface"
             android:defaultValue="false"
             app:argType="boolean" />
     </dialog>

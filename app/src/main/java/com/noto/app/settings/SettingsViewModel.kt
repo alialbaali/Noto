@@ -53,7 +53,7 @@ class SettingsViewModel(
     val isBioAuthEnabled = settingsRepository.isBioAuthEnabled
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
-    val mainFolderId = settingsRepository.mainFolderId
+    val mainInterfaceId = settingsRepository.mainInterfaceId
         .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.GeneralFolderId)
 
     private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
@@ -139,8 +139,8 @@ class SettingsViewModel(
         settingsRepository.updateLastVersion(Release.Version.Current)
     }
 
-    fun setMainFolderId(folderId: Long) = viewModelScope.launch {
-        settingsRepository.updateMainFolderId(folderId)
+    fun setMainInterfaceId(folderId: Long) = viewModelScope.launch {
+        settingsRepository.updateMainInterfaceId(folderId)
     }
 
     fun updateTheme(value: Theme) = viewModelScope.launch {

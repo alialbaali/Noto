@@ -36,7 +36,7 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
     val lastVersion = settingsRepository.lastVersion
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
-    val mainFolderId = settingsRepository.mainFolderId
+    val mainInterfaceId = settingsRepository.mainInterfaceId
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
     init {

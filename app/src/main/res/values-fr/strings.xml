@@ -60,7 +60,7 @@
     <string name="monospace">Monospace</string>
     <string name="font">Police de caractères</string>
     <string name="folders_archive">Archive des dossiers</string>
-    <string name="change_main_folder">Modifier le dossier principal</string>
+    <string name="change_main_interface">Modifier le dossier principal</string>
     <string name="general">Général</string>
     <string name="collapse_toolbar">Réduire la barre d\'outils par défaut</string>
     <string name="all_notes">Toutes les notes</string>

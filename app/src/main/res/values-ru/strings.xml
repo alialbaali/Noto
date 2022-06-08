@@ -60,7 +60,7 @@
     <string name="monospace">Monospace</string>
     <string name="font">Шрифт</string>
     <string name="folders_archive">Архив папок</string>
-    <string name="change_main_folder">Изменить основную папку</string>
+    <string name="change_main_interface">Изменить основную папку</string>
     <string name="general">Общие</string>
     <string name="collapse_toolbar">Сворачивать панель по умолчанию</string>
     <string name="all_notes">Все заметки</string>

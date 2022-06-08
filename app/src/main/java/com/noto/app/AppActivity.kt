@@ -13,13 +13,17 @@ import androidx.navigation.navOptions
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.noto.app.databinding.AppActivityBinding
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.Release
 import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.main.MainVaultFragment
 import com.noto.app.settings.VaultTimeoutWorker
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
@@ -56,6 +60,22 @@ class AppActivity : BaseActivity() {
     }
 
     private fun AppActivityBinding.handleIntentContent() {
+        lifecycleScope.launch {
+            when (val interfaceId = viewModel.mainInterfaceId.first()) {
+                AllNotesItemId -> inflateGraphAndSetStartDestination(R.id.allNotesFragment)
+                RecentNotesItemId -> inflateGraphAndSetStartDestination(R.id.recentNotesFragment)
+                AllFoldersId -> {
+                    val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
+                    inflateGraphAndSetStartDestination(R.id.folderFragment, args)
+                    if (navController.currentDestination?.id != R.id.mainFragment)
+                        navController.navigate(R.id.mainFragment)
+                }
+                else -> {
+                    val args = bundleOf(Constants.FolderId to interfaceId)
+                    inflateGraphAndSetStartDestination(R.id.folderFragment, args)
+                }
+            }
+        }
         when (intent?.action) {
             Intent.ACTION_SEND -> {
                 val content = intent.getStringExtra(Intent.EXTRA_TEXT)
@@ -94,18 +114,6 @@ class AppActivity : BaseActivity() {
             Constants.Intent.ActionSettings -> {
                 if (navController.currentDestination?.id != R.id.settingsFragment)
                     navController.navigate(R.id.settingsFragment)
-            }
-            else -> {
-                lifecycleScope.launch {
-                    val folderId = viewModel.mainFolderId.first()
-                    val args = bundleOf(Constants.FolderId to folderId)
-                    val options = navOptions {
-                        popUpTo(R.id.folderFragment) {
-                            inclusive = true
-                        }
-                    }
-                    navController.navigate(R.id.folderFragment, args, options)
-                }
             }
         }
     }
@@ -219,4 +227,10 @@ class AppActivity : BaseActivity() {
         .setInitialDelay(duration, timeUnit)
         .addTag(Constants.VaultTimeout)
         .build()
+
+    private fun inflateGraphAndSetStartDestination(startDestination: Int, args: Bundle? = null) {
+        val graph = navController.navInflater.inflate(R.navigation.nav_graph)
+            .apply { this.startDestination = startDestination }
+        navController.setGraph(graph, args)
+    }
 }

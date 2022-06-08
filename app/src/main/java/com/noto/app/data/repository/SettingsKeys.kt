@@ -30,7 +30,7 @@ object SettingsKeys {
     val IsScreenOn = booleanPreferencesKey(Keys.IsScreenOn)
     val IsFullScreen = booleanPreferencesKey(Keys.IsFullScreen)
     val IsBioAuthEnabled = stringPreferencesKey(Keys.IsBioAuthEnabled)
-    val MainFolderId = longPreferencesKey(Keys.MainFolderId)
+    val MainInterfaceId = longPreferencesKey(Keys.MainInterfaceId)
 
     @Suppress("FunctionName")
     object Widget {
@@ -58,7 +58,7 @@ object SettingsKeys {
         const val ScheduledVaultTimeout = "ScheduledVaultTimeout"
         const val LastVersion = "LastVersion"
         const val IsBioAuthEnabled = "IsBioAuthEnabled"
-        const val MainFolderId = "MainFolderId"
+        const val MainInterfaceId = "MainFolderId"
         const val IsDoNotDisturb = "IsDoNotDisturb"
         const val IsScreenOn = "IsScreenOn"
         const val IsFullScreen = "IsFullScreen"

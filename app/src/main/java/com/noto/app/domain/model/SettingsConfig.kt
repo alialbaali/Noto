@@ -18,5 +18,5 @@ data class SettingsConfig(
     val isShowNotesCount: Boolean,
     val isDoNotDisturb: Boolean,
     val isScreenOn: Boolean,
-    val mainFolderId: Long,
+    val mainInterfaceId: Long,
 )

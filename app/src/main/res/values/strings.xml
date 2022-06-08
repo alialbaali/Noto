@@ -60,10 +60,11 @@
     <string name="monospace">Monospace</string>
     <string name="font">Font</string>
     <string name="folders_archive">Folders archive</string>
-    <string name="change_main_folder">Change main folder</string>
+    <string name="change_main_interface">Change main interface</string>
     <string name="general">General</string>
     <string name="collapse_toolbar">Collapse toolbar by default</string>
     <string name="all_notes">All notes</string>
+    <string name="all_folders">All folders</string>
     <string name="clear">Clear</string>
     <string name="recent_notes">Recent notes</string>
     <string name="collapse">Collapse</string>
@@ -104,6 +105,7 @@
     <string name="folder_is_unpinned">Folder has been unpinned.</string>
     <string name="no_folders_found">No folders found.</string>
     <string name="select_folder">Select folder</string>
+    <string name="select_main_interface">Select main interface</string>
     <string name="pinned">Pinned</string>
 
     <!-- Vault -->
