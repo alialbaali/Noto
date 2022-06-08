@@ -34,23 +34,29 @@
         </com.google.android.material.tabs.TabLayout>
     </LinearLayout>
 
-    <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/rv"
-        android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:clipChildren="false"
-        android:clipToPadding="false"
-        android:padding="@dimen/spacing_small"
-        tools:listitem="@layout/release_item" />
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_okay"
-        style="@style/MaterialButton"
-        android:layout_gravity="bottom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
-        android:paddingVertical="@dimen/spacing_normal"
-        android:text="@string/okay" />
+        <com.airbnb.epoxy.EpoxyRecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:layout_marginBottom="@dimen/padding_bottom"
+            android:padding="@dimen/spacing_small"
+            tools:listitem="@layout/release_item" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_okay"
+            style="@style/MaterialButton"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_normal"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:text="@string/okay" />
+    </FrameLayout>
 
 </LinearLayout>
