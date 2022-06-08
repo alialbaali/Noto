@@ -8,17 +8,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.TextViewCompat
+import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMarginsRelative
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Note
+import com.noto.app.label.noteLabelItem
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
@@ -54,9 +63,13 @@ class NoteDialogFragment : BaseDialogFragment() {
             .onEach { folder -> setupFolder(folder, baseDialogFragment) }
             .launchIn(lifecycleScope)
 
-        viewModel.note
-            .onEach { note -> setupNote(note) }
-            .launchIn(lifecycleScope)
+        combine(
+            viewModel.folder,
+            viewModel.note,
+            viewModel.labels.map { it.filterSelected() },
+        ) { folder, note, labels ->
+            setupNote(folder, note, labels)
+        }.launchIn(lifecycleScope)
     }
 
     private fun NoteDialogFragmentBinding.setupListeners() {
@@ -204,8 +217,44 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun NoteDialogFragmentBinding.setupNote(note: Note) {
+    private fun NoteDialogFragmentBinding.setupNote(folder: Folder, note: Note, labels: List<Label>) {
         context?.let { context ->
+            val colorResource = context.colorResource(folder.color.toResource())
+            vNote.root.backgroundTintList = context.colorAttributeResource(R.attr.notoBackgroundColor).toColorStateList()
+            vNote.ibDrag.isVisible = false
+            vNote.tvNoteTitle.text = note.title
+            vNote.tvNoteTitle.maxLines = 3
+            vNote.tvNoteTitle.isVisible = note.title.isNotBlank()
+            vNote.tvNoteTitle.setLinkTextColor(colorResource)
+            vNote.tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMarginsRelative(bottom = if (note.body.isBlank()) 0.dp else 4.dp)
+            }
+            vNote.tvNoteBody.text = note.body
+            vNote.tvNoteBody.maxLines = 5
+            vNote.tvNoteBody.isVisible = note.body.isNotBlank()
+            vNote.tvNoteBody.setLinkTextColor(colorResource)
+            vNote.tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMarginsRelative(top = if (note.title.isBlank()) 0.dp else 4.dp)
+            }
+            vNote.tvCreationDate.text = context.stringResource(R.string.created, note.creationDate.format(context))
+            if (note.reminderDate != null) {
+                vNote.llReminder.background?.mutate()?.setTint(colorResource)
+                vNote.tvReminder.text = note.reminderDate.format(context)
+            }
+            vNote.llReminder.isVisible = note.reminderDate != null
+            vNote.rv.isVisible = labels.isNotEmpty()
+            vNote.rv.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
+            vNote.rv.itemAnimator = HorizontalListItemAnimator()
+            vNote.rv.withModels {
+                labels.forEach { label ->
+                    noteLabelItem {
+                        id(label.id)
+                        label(label)
+                        color(folder.color)
+                    }
+                }
+            }
+
             if (note.isPinned) {
                 tvPinNote.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_pin_off_24, 0, 0)
                 tvPinNote.text = context.stringResource(R.string.unpin)
