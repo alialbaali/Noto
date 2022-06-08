@@ -50,6 +50,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_note_title"
                 style="@style/NoteTitleEditText"
+                android:textIsSelectable="true"
                 android:autoLink="all"
                 android:linksClickable="true"
                 android:layout_width="match_parent"
@@ -61,6 +62,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_note_body"
                 style="@style/NoteBodyEditText"
+                android:textIsSelectable="true"
                 android:autoLink="all"
                 android:linksClickable="true"
                 android:layout_width="match_parent"
