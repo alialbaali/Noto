@@ -1,6 +1,7 @@
 package com.noto.app.main
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -8,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.forEach
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
@@ -31,6 +34,8 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val viewModel by viewModel<MainViewModel>()
+
+    private val args by navArgs<MainFragmentArgs>()
 
     private lateinit var epoxyController: EpoxyController
 
@@ -275,4 +280,16 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
             if (model != null) viewModel.updateFolderPosition(model.folder, viewHolder.bindingAdapterPosition)
         }
     }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return object : BottomSheetDialog(requireContext(), theme) {
+            override fun onBackPressed() {
+                if (args.exit)
+                    activity?.finish()
+                else
+                    super.onBackPressed()
+            }
+        }
+    }
+
 }

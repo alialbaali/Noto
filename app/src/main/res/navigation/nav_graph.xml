@@ -48,6 +48,10 @@
             app:destination="@id/mainDialogFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="exit"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </dialog>
     <fragment
         android:id="@+id/folderFragment"
