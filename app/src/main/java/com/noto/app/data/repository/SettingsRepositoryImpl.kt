@@ -85,6 +85,10 @@ class SettingsRepositoryImpl(
         .map { preferences -> preferences[SettingsKeys.IsScreenOn] ?: true }
         .flowOn(dispatcher)
 
+    override val isFullScreen: Flow<Boolean> = storage.data
+        .map { preferences -> preferences[SettingsKeys.IsFullScreen] ?: true }
+        .flowOn(dispatcher)
+
     override val lastVersion: Flow<String> = storage.data
         .map { preferences -> preferences[SettingsKeys.LastVersion] }
         .map { it ?: Release.Version.Last }
@@ -281,6 +285,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateIsScreenOn(isScreenOn: Boolean) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.IsScreenOn] = isScreenOn }
+        }
+    }
+
+    override suspend fun updateIsFullScreen(isFullScreen: Boolean) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.IsFullScreen] = isFullScreen }
         }
     }
 

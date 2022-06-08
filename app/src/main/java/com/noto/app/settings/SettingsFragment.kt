@@ -72,6 +72,7 @@ class SettingsFragment : Fragment() {
             swBioAuth.setupColors()
             swDoNotDisturb.setupColors()
             swScreenOn.setupColors()
+            swFullScreen.setupColors()
 
             when (BiometricManager.from(context).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
                 BiometricManager.BIOMETRIC_SUCCESS -> swBioAuth.isVisible = true
@@ -89,6 +90,10 @@ class SettingsFragment : Fragment() {
 
         viewModel.isScreenOn
             .onEach { isScreenOn -> swScreenOn.isChecked = isScreenOn }
+            .launchIn(lifecycleScope)
+
+        viewModel.isFullScreen
+            .onEach { isFullScreen -> swFullScreen.isChecked = isFullScreen }
             .launchIn(lifecycleScope)
 
         viewModel.isBioAuthEnabled
@@ -167,6 +172,10 @@ class SettingsFragment : Fragment() {
 
         swScreenOn.setOnClickListener {
             viewModel.toggleScreenOn()
+        }
+
+        swFullScreen.setOnClickListener {
+            viewModel.toggleFullScreen()
         }
 
         tvShareWithOthers.setOnClickListener {

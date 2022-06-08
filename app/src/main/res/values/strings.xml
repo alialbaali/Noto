@@ -202,6 +202,7 @@
     <string name="show_folders_notes_count">Show folders notes count</string>
     <string name="do_not_disturb">Enable Do Not Disturb during Reading Mode</string>
     <string name="screen_on">Keep screen on during Reading Mode</string>
+    <string name="full_screen">Go full screen during Reading Mode</string>
     <string name="show">Show</string>
     <string name="hide">Hide</string>
     <string name="permission_not_granted">Permission hasn\'t been granted</string>

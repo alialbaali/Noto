@@ -27,6 +27,8 @@ interface SettingsRepository {
 
     val isScreenOn: Flow<Boolean>
 
+    val isFullScreen: Flow<Boolean>
+
     val lastVersion: Flow<String>
 
     val sortingType: Flow<FolderListSortingType>
@@ -84,6 +86,8 @@ interface SettingsRepository {
     suspend fun updateIsDoNotDisturb(isDoNotDisturb: Boolean)
 
     suspend fun updateIsScreenOn(isScreenOn: Boolean)
+
+    suspend fun updateIsFullScreen(isFullScreen: Boolean)
 
     suspend fun updateMainFolderId(folderId: Long)
 

@@ -43,6 +43,9 @@ class NoteViewModel(
     val isScreenOn = settingsRepository.isScreenOn
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
+    val isFullScreen = settingsRepository.isFullScreen
+        .stateIn(viewModelScope, SharingStarted.Lazily, true)
+
     init {
         noteRepository.getNoteById(noteId)
             .also {

@@ -121,6 +121,14 @@
                 android:drawableStart="@drawable/ic_round_visibility_24"
                 android:text="@string/screen_on" />
 
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_full_screen"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_smartphone_24"
+                android:text="@string/full_screen" />
+
             <include layout="@layout/divider_item" />
 
             <com.google.android.material.textview.MaterialTextView

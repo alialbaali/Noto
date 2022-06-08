@@ -57,8 +57,6 @@ class NoteReadingModeFragment : Fragment() {
     }
 
     private fun NoteReadingModeFragmentBinding.setupState() {
-        windowInsetsController?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-        windowInsetsController?.hide(WindowInsetsCompat.Type.systemBars())
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
@@ -76,6 +74,17 @@ class NoteReadingModeFragment : Fragment() {
                     activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
                 else
                     activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.isFullScreen
+            .onEach { isFullScreen ->
+                if (isFullScreen) {
+                    windowInsetsController?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                    windowInsetsController?.hide(WindowInsetsCompat.Type.systemBars())
+                } else {
+                    windowInsetsController?.show(WindowInsetsCompat.Type.systemBars())
+                }
             }
             .launchIn(lifecycleScope)
 

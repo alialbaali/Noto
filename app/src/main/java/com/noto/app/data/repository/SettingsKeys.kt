@@ -28,6 +28,7 @@ object SettingsKeys {
     val LastVersion = stringPreferencesKey(Keys.LastVersion)
     val IsDoNotDisturb = booleanPreferencesKey(Keys.IsDoNotDisturb)
     val IsScreenOn = booleanPreferencesKey(Keys.IsScreenOn)
+    val IsFullScreen = booleanPreferencesKey(Keys.IsFullScreen)
     val IsBioAuthEnabled = stringPreferencesKey(Keys.IsBioAuthEnabled)
     val MainFolderId = longPreferencesKey(Keys.MainFolderId)
 
@@ -60,6 +61,7 @@ object SettingsKeys {
         const val MainFolderId = "MainFolderId"
         const val IsDoNotDisturb = "IsDoNotDisturb"
         const val IsScreenOn = "IsScreenOn"
+        const val IsFullScreen = "IsFullScreen"
 
         object Widget {
             val Int.Id get() = "Widget_Id_$this"
