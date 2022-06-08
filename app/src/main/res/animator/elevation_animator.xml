@@ -6,7 +6,7 @@
             android:duration="@integer/animation_duration"
             android:propertyName="elevation"
             android:interpolator="@android:anim/accelerate_interpolator"
-            android:valueTo="@dimen/elevation_normal"
+            android:valueTo="@dimen/elevation_large"
             android:valueType="floatType" />
     </item>
 
