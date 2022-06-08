@@ -129,10 +129,13 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
+            val highlightColor = color.withDefaultAlpha()
             tb.title = folder.getTitle(context)
             tb.setTitleTextColor(color)
             tvNoteTitle.setLinkTextColor(color)
             tvNoteBody.setLinkTextColor(color)
+            tvNoteTitle.highlightColor = highlightColor
+            tvNoteBody.highlightColor = highlightColor
             tb.navigationIcon?.mutate()?.setTint(color)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 nsv.verticalScrollbarThumbDrawable?.mutate()?.setTint(color)
