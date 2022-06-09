@@ -13,9 +13,9 @@ object Libraries {
 
 object Versions {
     const val JavaTime = "1.1.5"
-    const val Kotlin = "1.6.10"
-    const val Android = "7.0.4"
-    const val Epoxy = "4.6.3"
+    const val Kotlin = "1.7.0"
+    const val Android = "7.2.1"
+    const val Epoxy = "4.6.3" // Update to 5.0.0 when released.
 }
 
 object App {
@@ -23,8 +23,8 @@ object App {
     const val VersionCode = 35
     const val ID = "com.noto"
     const val MinSDK = 21
-    const val CompileSDK = 31
-    const val BuildTools = "31.0.0"
+    const val CompileSDK = 32
+    const val BuildTools = "33.0.0"
     const val TargetSDK = CompileSDK
 }
 

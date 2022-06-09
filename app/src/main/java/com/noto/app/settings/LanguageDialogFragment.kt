@@ -46,7 +46,7 @@ class LanguageDialogFragment : BaseDialogFragment() {
                     Language.Arabic -> rbArabic.isChecked = true
                     Language.Indonesian -> rbIndonesian.isChecked = true
                     Language.Russian -> rbRussian.isChecked = true
-//                    Language.Tamil -> rbTamil.isChecked = true
+                    Language.Tamil -> {}
                     Language.Spanish -> rbSpanish.isChecked = true
                     Language.French -> rbFrench.isChecked = true
                 }

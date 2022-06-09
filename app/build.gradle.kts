@@ -5,7 +5,8 @@ plugins {
     kotlin(Plugins.KotlinAndroid)
     kotlin(Plugins.KotlinKapt)
     id(Plugins.NavigationSafeArgs)
-    kotlin("plugin.serialization") version "1.5.31"
+    kotlin("plugin.serialization") version "1.7.0"
+    id("com.google.devtools.ksp") version "1.7.0-RC2-1.0.5"
 }
 
 android {
@@ -34,10 +35,8 @@ android {
         versionCode = App.VersionCode
         versionName = App.VersionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas")
-            }
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
     buildTypes {
@@ -124,12 +123,12 @@ dependencies {
     implementation(Koin.android)
     implementation(Libraries.Main.Epoxy)
     kapt(Libraries.Main.EpoxyProcessor)
-    implementation("androidx.room:room-runtime:2.4.0")
-    implementation("androidx.room:room-ktx:2.4.0")
-    kapt("androidx.room:room-compiler:2.4.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.2.1")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
+    implementation(AndroidX.Room.runtime)
+    implementation(AndroidX.Room.ktx)
+    ksp(AndroidX.Room.compiler)
+    implementation(KotlinX.datetime)
     implementation("com.google.android:flexbox:2.0.1")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
     implementation("com.eightbitlab:blurview:1.6.6")
     implementation("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation("com.robinhood.ticker:ticker:2.0.4")
@@ -144,7 +143,7 @@ dependencies {
     testImplementation(AndroidX.Test.coreKtx)
     testImplementation(AndroidX.Test.runner)
     testImplementation(AndroidX.Test.rules)
-    testImplementation(AndroidX.Test.Ext.junitKtx)
+    testImplementation(AndroidX.Test.Ext.JUnit.ktx)
     testImplementation(AndroidX.ArchCore.testing)
     testImplementation(AndroidX.Test.Espresso.core)
     testImplementation(KotlinX.coroutines.test)
@@ -160,11 +159,11 @@ dependencies {
     androidTestImplementation(AndroidX.Test.runner)
     androidTestImplementation(AndroidX.Test.rules)
     androidTestImplementation(AndroidX.fragment.testing)
-    androidTestImplementation(AndroidX.Test.Ext.junitKtx)
+    androidTestImplementation(AndroidX.Test.Ext.JUnit.ktx)
     androidTestImplementation(AndroidX.ArchCore.testing)
     androidTestImplementation(AndroidX.Test.Espresso.core)
     androidTestImplementation(AndroidX.Test.Espresso.contrib)
-    androidTestImplementation("androidx.navigation:navigation-testing:2.3.5")
+    androidTestImplementation(AndroidX.Navigation.testing)
 
     coreLibraryDesugaring(Libraries.Main.JavaTime)
 }

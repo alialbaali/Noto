@@ -38,12 +38,12 @@
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_change_main_folder"
+                android:id="@+id/tv_change_main_interface"
                 style="@style/SettingsItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_round_folder_24"
-                android:text="@string/change_main_folder" />
+                android:text="@string/change_main_interface" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_change_theme"
