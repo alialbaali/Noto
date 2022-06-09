@@ -116,6 +116,8 @@ class AppActivity : BaseActivity() {
                     navController.navigate(R.id.settingsFragment)
             }
         }
+        /** Set [intent] to null, so that the code above doesn't run again after a configuration change.*/
+        intent = null
     }
 
     private fun AppActivityBinding.showSelectFolderDialog(content: String?) {
