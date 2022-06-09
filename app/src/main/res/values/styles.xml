@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="BaseTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="BaseTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:windowBackground">?attr/notoBackgroundColor</item>
         <item name="android:statusBarColor">?attr/notoBackgroundColor</item>
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
@@ -195,7 +195,7 @@
         <item name="android:textCursorDrawable">@drawable/cursor_shape</item>
     </style>
 
-    <style name="MaterialButton" parent="Widget.MaterialComponents.Button">
+    <style name="MaterialButton" parent="Widget.Material3.Button">
         <item name="android:backgroundTint">?attr/notoPrimaryColor</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textColor">?attr/notoBackgroundColor</item>
@@ -204,7 +204,7 @@
         <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
-    <style name="MaterialSecondaryButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+    <style name="MaterialSecondaryButton" parent="Widget.Material3.Button.OutlinedButton">
         <item name="android:backgroundTint">?attr/notoBackgroundColor</item>
         <item name="strokeColor">?attr/notoPrimaryColor</item>
         <item name="android:textAllCaps">false</item>
@@ -317,7 +317,7 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="SliderLabel" parent="Widget.MaterialComponents.Tooltip">
+    <style name="SliderLabel" parent="Widget.Material3.Tooltip">
         <item name="android:textAppearance">@style/SliderLabelTextAppearance</item>
         <item name="shapeAppearance">@style/SliderLabelShapeAppearance</item>
         <item name="backgroundTint">?attr/notoPrimaryColor</item>
@@ -329,7 +329,7 @@
         <item name="android:textSize">@dimen/size_small</item>
     </style>
 
-    <style name="SliderLabelShapeAppearance" parent="ShapeAppearance.MaterialComponents.Tooltip">
+    <style name="SliderLabelShapeAppearance" parent="ShapeAppearance.Material3.Tooltip">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/spacing_small</item>
     </style>
@@ -360,7 +360,7 @@
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="ProgressIndicator" parent="Widget.MaterialComponents.CircularProgressIndicator">
+    <style name="ProgressIndicator" parent="Widget.Material3.CircularProgressIndicator">
         <item name="android:indeterminate">true</item>
         <item name="android:contentDescription">@string/loading_content</item>
         <item name="indicatorColor">?attr/notoPrimaryColor</item>
@@ -384,11 +384,11 @@
         <item name="tabIndicatorAnimationDuration">500</item>
     </style>
 
-    <style name="Snackbar" parent="Widget.MaterialComponents.Snackbar">
+    <style name="Snackbar" parent="Widget.Material3.Snackbar">
         <item name="android:layout_margin">@dimen/spacing_normal</item>
     </style>
 
-    <style name="SnackbarTextView" parent="Widget.MaterialComponents.Snackbar.TextView">
+    <style name="SnackbarTextView" parent="Widget.Material3.Snackbar.TextView">
         <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
