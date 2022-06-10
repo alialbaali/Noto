@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -140,7 +141,8 @@ class NoteDialogFragment : BaseDialogFragment() {
             context?.let { context ->
                 val clipData = ClipData.newPlainText(viewModel.folder.value.getTitle(context), viewModel.note.value.format())
                 clipboardManager?.setPrimaryClip(clipData)
-                parentView?.snackbar(context.stringResource(R.string.note_copied_to_clipboard), viewModel.folder.value)
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
+                    parentView?.snackbar(context.stringResource(R.string.note_copied_to_clipboard), viewModel.folder.value)
             }
             dismiss()
         }
