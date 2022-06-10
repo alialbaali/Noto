@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.SettingsRepository
+import com.noto.app.util.AllFoldersId
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -111,7 +112,7 @@ class SettingsRepositoryImpl(
 
     override val mainInterfaceId: Flow<Long> = storage.data
         .map { preferences -> preferences[SettingsKeys.MainInterfaceId] }
-        .map { it ?: Folder.GeneralFolderId }
+        .map { it ?: AllFoldersId }
         .flowOn(dispatcher)
 
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
