@@ -69,7 +69,8 @@
         app:hideOnScroll="true"
         app:menu="@menu/generic_menu"
         app:navigationContentDescription="@string/folders"
-        app:navigationIcon="@drawable/ic_round_menu_24" />
+        app:navigationIcon="@drawable/ic_round_menu_24"
+        app:navigationIconTint="?attr/notoPrimaryColor" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

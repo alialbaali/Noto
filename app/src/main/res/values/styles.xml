@@ -1,26 +1,47 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="BaseTheme" parent="Theme.Material3.Light.NoActionBar">
-        <item name="android:windowBackground">?attr/notoBackgroundColor</item>
-        <item name="android:statusBarColor">?attr/notoBackgroundColor</item>
+    <style name="SplashScreen" parent="Theme.SplashScreen">
         <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
-        <item name="android:colorPrimary">?attr/notoPrimaryColor</item>
-        <item name="android:navigationBarColor">?attr/notoBackgroundColor</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">#000000</item>
+
+        <item name="windowSplashScreenBackground">@color/colorBackground</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_screen</item>
+        <item name="postSplashScreenTheme">@style/BaseTheme</item>
+    </style>
+
+    <style name="BaseTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="android:navigationBarColor">#000000</item>
+        <item name="android:statusBarColor">?attr/notoBackgroundColor</item>
+
+        <item name="android:windowBackground">?attr/notoBackgroundColor</item>
+
         <item name="android:colorControlActivated">?attr/notoPrimaryColor</item>
         <item name="android:colorControlHighlight">?attr/notoSurfaceColor</item>
         <item name="android:textColorHighlight">?attr/notoSurfaceColor</item>
         <item name="android:colorControlNormal">?attr/notoPrimaryColor</item>
         <item name="android:textColorHint">?attr/notoSecondaryColor</item>
         <item name="hintTextColor">?attr/notoSecondaryColor</item>
+
         <item name="android:fontFamily">@font/nunito_semibold</item>
         <item name="fontFamily">@font/nunito_semibold</item>
+
         <item name="notoPrimaryColor">@color/colorPrimary</item>
         <item name="notoSecondaryColor">@color/colorSecondary</item>
         <item name="notoBackgroundColor">@color/colorBackground</item>
         <item name="notoSurfaceColor">@color/colorSurface</item>
+
         <item name="snackbarStyle">@style/Snackbar</item>
         <item name="snackbarTextViewStyle">@style/SnackbarTextView</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:navigationBarColor">#000000</item>
+
+        <item name="android:colorBackground">@android:color/transparent</item>
+
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
     </style>
 
     <style name="LightDarkTheme" parent="BaseTheme">
@@ -31,21 +52,6 @@
     <style name="LightBlackTheme" parent="BaseTheme">
         <item name="notoBackgroundColor">@color/colorBackgroundVariant</item>
         <item name="notoSurfaceColor">@color/colorSurfaceVariant</item>
-    </style>
-
-    <style name="SplashScreenTheme" parent="BaseTheme">
-        <item name="android:windowBackground">@drawable/splash_screen</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
-        <item name="android:colorPrimary">?attr/notoPrimaryColor</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
-        <item name="android:colorControlActivated">?attr/notoPrimaryColor</item>
-        <item name="android:colorControlHighlight">?attr/notoPrimaryColor</item>
-        <item name="android:colorControlNormal">?attr/notoPrimaryColor</item>
-        <item name="android:textColorHighlight">?attr/notoSecondaryColor</item>
-        <item name="android:textColorHint">?attr/notoSecondaryColor</item>
-        <item name="hintTextColor">?attr/notoSecondaryColor</item>
     </style>
 
     <style name="AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Primary">
@@ -103,14 +109,6 @@
         <item name="android:textColor">?attr/notoSecondaryColor</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
-    </style>
-
-    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="android:colorBackground">@android:color/transparent</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:navigationBarColor">?attr/notoBackgroundColor</item>
     </style>
 
     <style name="BaseDialogFragment">

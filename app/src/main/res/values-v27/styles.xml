@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SplashScreen" parent="Theme.SplashScreen">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <item name="windowSplashScreenBackground">@color/colorBackground</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_screen</item>
+        <item name="postSplashScreenTheme">@style/BaseTheme</item>
+    </style>
+
+    <style name="BaseTheme" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">?attr/notoBackgroundColor</item>
+        <item name="android:statusBarColor">?attr/notoBackgroundColor</item>
+
+        <item name="android:windowBackground">?attr/notoBackgroundColor</item>
+
+        <item name="android:colorControlActivated">?attr/notoPrimaryColor</item>
+        <item name="android:colorControlHighlight">?attr/notoSurfaceColor</item>
+        <item name="android:textColorHighlight">?attr/notoSurfaceColor</item>
+        <item name="android:colorControlNormal">?attr/notoPrimaryColor</item>
+        <item name="android:textColorHint">?attr/notoSecondaryColor</item>
+        <item name="hintTextColor">?attr/notoSecondaryColor</item>
+
+        <item name="android:fontFamily">@font/nunito_semibold</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
+
+        <item name="notoPrimaryColor">@color/colorPrimary</item>
+        <item name="notoSecondaryColor">@color/colorSecondary</item>
+        <item name="notoBackgroundColor">@color/colorBackground</item>
+        <item name="notoSurfaceColor">@color/colorSurface</item>
+
+        <item name="snackbarStyle">@style/Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/SnackbarTextView</item>
+    </style>
+
+    <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:navigationBarColor">?attr/notoBackgroundColor</item>
+
+        <item name="android:colorBackground">@android:color/transparent</item>
+
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+    </style>
+
+</resources>

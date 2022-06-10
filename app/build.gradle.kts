@@ -132,6 +132,7 @@ dependencies {
     implementation("com.eightbitlab:blurview:1.6.6")
     implementation("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation("com.robinhood.ticker:ticker:2.0.4")
+    implementation("androidx.core:core-splashscreen:1.0.0-beta02")
 
     testImplementation(Testing.Kotest.Runner.junit5)
     testImplementation(Testing.Kotest.Assertions.core)

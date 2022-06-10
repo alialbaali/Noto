@@ -1,14 +1,14 @@
 package com.noto.app
 
-import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.domain.model.Theme
 import com.noto.app.util.Constants
-import com.noto.app.util.colorResource
+import com.noto.app.util.applyNightModeConfiguration
+import com.noto.app.util.applySystemBarsColorsForApiLessThan23
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,27 +21,19 @@ open class BaseActivity : AppCompatActivity() {
         get() = intent?.getStringExtra(Constants.Theme)?.let(Theme::valueOf)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         currentTheme?.toAndroidTheme()?.also(::setTheme)
         super.onCreate(savedInstanceState)
         setupState()
     }
 
-    @Suppress("DEPRECATION")
     private fun setupState() {
         viewModel.theme
             .onEach(::setupTheme)
             .launchIn(lifecycleScope)
 
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            window.statusBarColor = colorResource(android.R.color.black)
-            window.navigationBarColor = colorResource(android.R.color.black)
-        }
-
-        when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
-            Configuration.UI_MODE_NIGHT_YES -> {
-                window.decorView.systemUiVisibility = 0
-            }
-        }
+        applyNightModeConfiguration(window)
+        applySystemBarsColorsForApiLessThan23(window)
     }
 
     private fun setupTheme(theme: Theme) {
