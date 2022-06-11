@@ -24,6 +24,7 @@ class SettingsViewModel(
 ) : ViewModel() {
 
     val theme = settingsRepository.theme
+        .distinctUntilChanged()
         .shareIn(viewModelScope, SharingStarted.Lazily, replay = 1)
 
     val font = settingsRepository.font

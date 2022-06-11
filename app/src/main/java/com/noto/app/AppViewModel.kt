@@ -11,9 +11,15 @@ import com.noto.app.util.isGeneral
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
+/** Use [Flow.distinctUntilChanged] with [SharedFlow] or [Flow.shareIn]
+ * to update and emit only the value you specified. Otherwise, everytime you update
+ * a value, it will re-emit every value to every flow that uses [Flow.shareIn].
+ * */
+
 class AppViewModel(private val folderRepository: FolderRepository, private val settingsRepository: SettingsRepository) : ViewModel() {
 
     val theme = settingsRepository.theme
+        .distinctUntilChanged()
         .shareIn(viewModelScope, SharingStarted.Lazily, replay = 1)
 
     val language = settingsRepository.language
@@ -28,16 +34,18 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
      * so we don't cancel an already existing one unless they don't match with [vaultTimeout] property above.
      * */
     val scheduledVaultTimeout = settingsRepository.scheduledVaultTimeout
+        .distinctUntilChanged()
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
     val isVaultOpen = settingsRepository.isVaultOpen
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
     val lastVersion = settingsRepository.lastVersion
+        .distinctUntilChanged()
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
     val mainInterfaceId = settingsRepository.mainInterfaceId
-        .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
+        .distinctUntilChanged()
 
     init {
         createGeneralFolder()
