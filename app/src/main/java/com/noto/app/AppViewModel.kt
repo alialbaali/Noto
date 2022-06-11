@@ -7,6 +7,7 @@ import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.SettingsRepository
+import com.noto.app.util.AllFoldersId
 import com.noto.app.util.isGeneral
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -45,7 +46,9 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
     val mainInterfaceId = settingsRepository.mainInterfaceId
-        .distinctUntilChanged()
+        .stateIn(viewModelScope, SharingStarted.Eagerly, AllFoldersId)
+
+    var shouldNavigateToMainFragment = true
 
     init {
         createGeneralFolder()
