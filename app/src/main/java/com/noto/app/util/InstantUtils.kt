@@ -3,14 +3,17 @@ package com.noto.app.util
 import android.content.Context
 import android.text.format.DateFormat
 import android.text.format.DateUtils
+import com.noto.app.R
 import kotlinx.datetime.*
 import java.time.format.DateTimeFormatter
 
 fun Instant.format(context: Context): String {
     val timeZone = TimeZone.currentSystemDefault()
+    val localDate = this.toLocalDate()
     val localDateTime = this.toLocalDateTime(timeZone)
     val is24HourFormat = DateFormat.is24HourFormat(context)
-    val currentDateTime = Clock.System.now().toLocalDateTime(timeZone)
+    val currentInstant = Clock.System.now()
+    val currentDateTime = currentInstant.toLocalDateTime(timeZone)
     return if (localDateTime.year == currentDateTime.year) {
         val format = if (is24HourFormat)
             "EEE, d MMM HH:mm"
@@ -21,8 +24,9 @@ fun Instant.format(context: Context): String {
         val currentMilliseconds = currentDateTime.toInstant(timeZone).toEpochMilliseconds()
         val timeSpan = DateUtils.getRelativeTimeSpanString(milliseconds, currentMilliseconds, DateUtils.SECOND_IN_MILLIS).toString()
         when {
-            localDateTime.dayOfYear == currentDateTime.dayOfYear -> timeSpan
-            localDateTime.dayOfYear >= currentDateTime.dayOfYear.minus(6) -> "$timeSpan ($formattedDateTime)"
+            this.isNow -> context.stringResource(R.string.just_now)
+            localDate.isToday -> timeSpan
+            localDate.isThisWeek -> "$timeSpan ($formattedDateTime)"
             else -> formattedDateTime
         }
     } else {
@@ -38,7 +42,8 @@ fun Instant.format(context: Context): String {
 
 fun LocalDate.format(): String {
     val timeZone = TimeZone.currentSystemDefault()
-    val currentDateTime = Clock.System.now().toLocalDateTime(timeZone)
+    val currentInstant = Clock.System.now()
+    val currentDateTime = currentInstant.toLocalDateTime(timeZone)
     return if (this.year == currentDateTime.year) {
         val format = "EEE, d MMM"
         val formattedDate = this.toJavaLocalDate().format(DateTimeFormatter.ofPattern(format))
@@ -46,8 +51,8 @@ fun LocalDate.format(): String {
         val currentMilliseconds = currentDateTime.toInstant(timeZone).toEpochMilliseconds()
         val timeSpan = DateUtils.getRelativeTimeSpanString(milliseconds, currentMilliseconds, DateUtils.DAY_IN_MILLIS).toString()
         when {
-            this.dayOfYear == currentDateTime.dayOfYear -> timeSpan
-            this.dayOfYear >= currentDateTime.dayOfYear.minus(6) -> "$timeSpan ($formattedDate)"
+            this.isToday -> timeSpan
+            this.isThisWeek -> "$timeSpan ($formattedDate)"
             else -> formattedDate
         }
     } else {
@@ -58,3 +63,22 @@ fun LocalDate.format(): String {
 }
 
 fun Instant.toLocalDate() = toLocalDateTime(TimeZone.currentSystemDefault()).date
+
+private val LocalDate.isToday: Boolean
+    get() {
+        val currentDate = Clock.System.now().toLocalDate()
+        return this.dayOfYear == currentDate.dayOfYear
+    }
+
+private val LocalDate.isThisWeek: Boolean
+    get() {
+        val currentDate = Clock.System.now().toLocalDate()
+        return this.dayOfYear >= currentDate.dayOfYear.minus(6)
+    }
+
+private val Instant.isNow: Boolean
+    get() {
+        val currentInstant = Clock.System.now()
+        val secondsUntilNow = this.until(currentInstant, DateTimeUnit.SECOND)
+        return secondsUntilNow in 0..60
+    }

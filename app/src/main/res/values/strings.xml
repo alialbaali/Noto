@@ -78,6 +78,7 @@
     <string name="pin">Pin</string>
     <string name="unpin">Unpin</string>
     <string name="delete">Delete</string>
+    <string name="just_now">just now</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>
