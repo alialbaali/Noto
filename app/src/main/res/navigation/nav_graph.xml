@@ -137,6 +137,18 @@
         <action
             android:id="@+id/action_noteFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <argument
+            android:name="scroll_position"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="is_title_visible"
+            app:argType="boolean"
+            android:defaultValue="false" />
+        <argument
+            android:name="is_body_visible"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </fragment>
     <dialog
         android:id="@+id/folderArchiveFragment"
@@ -266,6 +278,11 @@
         <argument
             android:name="note_id"
             app:argType="long" />
+        <action
+            android:id="@+id/action_noteReadingModeFragment_to_noteFragment"
+            app:destination="@id/noteFragment"
+            app:popUpTo="@id/noteFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <dialog
         android:id="@+id/selectFolderDialogFragment"

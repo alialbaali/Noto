@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Rect
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
@@ -261,4 +262,17 @@ private fun Context.createCheckedDrawable(notoColor: NotoColor): RippleDrawable 
         cornerRadius = dimenResource(R.dimen.spacing_small)
     }
     return RippleDrawable(backgroundColorStateList, gradientDrawable, null)
+}
+
+fun View.isLayoutVisible(rootView: View): Boolean {
+    val rect = Rect()
+    rootView.getHitRect(rect)
+    return getLocalVisibleRect(rect)
+}
+
+fun TextView.getDisplayedTextIndex(scrollPosition: Int): Int {
+    val lineNumber = layout.getLineForVertical(scrollPosition)
+    val start: Int = layout.getLineStart(lineNumber)
+    val displayed: String = text.toString().substring(start)
+    return text.toString().indexOf(displayed)
 }

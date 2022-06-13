@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
 import androidx.activity.addCallback
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
@@ -289,6 +290,25 @@ class NoteFragment : Fragment() {
         context?.let { context ->
             tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
         }
+        nsv.post {
+            if (args.scrollPosition != -1) {
+                nsv.smoothScrollTo(0, args.scrollPosition)
+                when {
+                    args.isTitleVisible && !args.isBodyVisible -> {
+                        val index = etNoteTitle.getDisplayedTextIndex(args.scrollPosition)
+                        etNoteTitle.showKeyboardAtIndex(index)
+                    }
+                    !args.isTitleVisible && args.isBodyVisible -> {
+                        val index = etNoteBody.getDisplayedTextIndex(args.scrollPosition)
+                        etNoteBody.showKeyboardAtIndex(index)
+                    }
+                    else -> when (viewModel.folder.value.newNoteCursorPosition) {
+                        NewNoteCursorPosition.Body -> etNoteBody.showKeyboardAtIndex(0)
+                        NewNoteCursorPosition.Title -> etNoteTitle.showKeyboardAtIndex(0)
+                    }
+                }
+            }
+        }
     }
 
     private fun NoteFragmentBinding.setupShortcut(note: Note) {
@@ -324,6 +344,12 @@ class NoteFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun EditText.showKeyboardAtIndex(index: Int) {
+        setSelection(index)
+        requestFocus()
+        activity?.showKeyboard(this)
     }
 
 }

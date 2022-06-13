@@ -54,6 +54,22 @@ class NoteReadingModeFragment : Fragment() {
         tb.setNavigationOnClickListener {
             navController?.navigateUp()
         }
+
+        fab.setOnClickListener {
+            val scrollPosition = nsv.scrollY
+            val isTitleVisible = tvNoteTitle.isLayoutVisible(root)
+            val isBodyVisible = tvNoteBody.isLayoutVisible(root)
+            navController?.navigate(
+                NoteReadingModeFragmentDirections
+                    .actionNoteReadingModeFragmentToNoteFragment(
+                        args.folderId,
+                        args.noteId,
+                        scrollPosition = scrollPosition,
+                        isTitleVisible = isTitleVisible,
+                        isBodyVisible = isBodyVisible,
+                    )
+            )
+        }
     }
 
     private fun NoteReadingModeFragmentBinding.setupState() {
@@ -137,6 +153,7 @@ class NoteReadingModeFragment : Fragment() {
             tvNoteTitle.highlightColor = highlightColor
             tvNoteBody.highlightColor = highlightColor
             tb.navigationIcon?.mutate()?.setTint(color)
+            fab.backgroundTintList = color.toColorStateList()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 nsv.verticalScrollbarThumbDrawable?.mutate()?.setTint(color)
             }
