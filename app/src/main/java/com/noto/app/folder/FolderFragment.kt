@@ -293,7 +293,7 @@ class FolderFragment : Fragment() {
             tvFolderTitle.text = folder.getTitle(context)
             tvFolderTitle.setTextColor(colorStateList)
             tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
-            tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_bold)
+            tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_semibold_italic)
             fab.backgroundTintList = colorStateList
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
