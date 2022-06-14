@@ -42,11 +42,9 @@ import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.onStart
 import kotlin.math.absoluteValue
 
 const val SetColorFilterMethodName = "setColorFilter"
@@ -142,20 +140,10 @@ fun TextView.setSemiboldFont(font: Font) {
     }
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
-fun EditText.textAsFlow(emitNewTextOnly: Boolean = false): Flow<CharSequence?> {
-    return callbackFlow {
-        val listener = doOnTextChanged { text, start, before, count ->
-//            if (emitNewTextOnly) {
-//                if (before <= count)
-//                    trySend(text)
-//            } else {
-            trySend(text)
-//            }
-        }
-        addTextChangedListener(listener)
-        awaitClose { removeTextChangedListener(listener) }
-    }.onStart { emit(text) }
+fun EditText.textAsFlow(): Flow<CharSequence?> = callbackFlow {
+    val listener = doOnTextChanged { text, _, _, _ -> trySend(text) }
+    addTextChangedListener(listener)
+    awaitClose { removeTextChangedListener(listener) }
 }
 
 fun TextView.removeLinksUnderline() {
