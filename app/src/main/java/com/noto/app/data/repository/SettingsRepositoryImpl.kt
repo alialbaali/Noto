@@ -120,6 +120,16 @@ class SettingsRepositoryImpl(
         .map { it ?: true }
         .flowOn(dispatcher)
 
+    override val allNotesScrollingPosition: Flow<Int> = storage.data
+        .map { preferences -> preferences[SettingsKeys.AllNotesScrollingPosition] }
+        .map { it ?: 0 }
+        .flowOn(dispatcher)
+
+    override val recentNotesScrollingPosition: Flow<Int> = storage.data
+        .map { preferences -> preferences[SettingsKeys.RecentNotesScrollingPosition] }
+        .map { it ?: 0 }
+        .flowOn(dispatcher)
+
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
         return storage.data
             .map { preferences -> preferences[SettingsKeys.Widget.FolderId(widgetId)] }
@@ -303,6 +313,18 @@ class SettingsRepositoryImpl(
     override suspend fun updateMainInterfaceId(interfaceId: Long) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.MainInterfaceId] = interfaceId }
+        }
+    }
+
+    override suspend fun updateAllNotesScrollingPosition(scrollingPosition: Int) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.AllNotesScrollingPosition] = scrollingPosition }
+        }
+    }
+
+    override suspend fun updateRecentNotesScrollingPosition(scrollingPosition: Int) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.RecentNotesScrollingPosition] = scrollingPosition }
         }
     }
 

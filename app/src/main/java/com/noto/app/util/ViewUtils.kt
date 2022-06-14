@@ -15,10 +15,7 @@ import android.net.Uri
 import android.text.SpannableString
 import android.text.TextPaint
 import android.text.style.URLSpan
-import android.view.GestureDetector
-import android.view.Gravity
-import android.view.MotionEvent
-import android.view.View
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
@@ -55,6 +52,7 @@ import kotlin.math.absoluteValue
 const val SetColorFilterMethodName = "setColorFilter"
 const val SetBackgroundResourceMethodName = "setBackgroundResource"
 const val SwipeGestureThreshold = 100F
+const val DebounceTimeoutMillis = 250L
 
 fun NavController.navigateSafely(directions: NavDirections, builder: (NavOptionsBuilder.() -> Unit)? = null) {
     if (currentDestination?.getAction(directions.actionId) != null)
@@ -275,4 +273,10 @@ fun TextView.getDisplayedTextIndex(scrollPosition: Int): Int {
     val start: Int = layout.getLineStart(lineNumber)
     val displayed: String = text.toString().substring(start)
     return text.toString().indexOf(displayed)
+}
+
+fun View.scrollPositionAsFlow() = callbackFlow {
+    val listener = ViewTreeObserver.OnScrollChangedListener { trySend(Unit) }
+    viewTreeObserver?.addOnScrollChangedListener(listener)
+    awaitClose { viewTreeObserver?.removeOnScrollChangedListener(listener) }
 }

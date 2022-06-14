@@ -9,6 +9,7 @@ import androidx.activity.addCallback
 import androidx.core.view.MenuItemCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.AllNotesFragmentBinding
@@ -16,8 +17,10 @@ import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
 import com.noto.app.folder.noteItem
 import com.noto.app.util.*
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -75,11 +78,12 @@ class AllNotesFragment : Fragment() {
         }
     }
 
+    @OptIn(FlowPreview::class)
     private fun AllNotesFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
         tvNotesCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
-
+        val layoutManager = rv.layoutManager as LinearLayoutManager
 
         combine(
             viewModel.notes,
@@ -113,6 +117,27 @@ class AllNotesFragment : Fragment() {
                     menuItem.title = expandText
                     MenuItemCompat.setContentDescription(menuItem, expandText)
                 }
+            }
+            .launchIn(lifecycleScope)
+
+        combine(
+            viewModel.isRememberScrollingPosition,
+            viewModel.scrollingPosition
+        ) { isRememberScrollingPosition, scrollingPosition ->
+            layoutManager.postOnAnimation {
+                rv.post {
+                    if (isRememberScrollingPosition) {
+                        layoutManager.scrollToPosition(scrollingPosition)
+                    }
+                }
+            }
+        }.launchIn(lifecycleScope)
+
+        rv.scrollPositionAsFlow()
+            .debounce(DebounceTimeoutMillis)
+            .onEach {
+                val scrollingPosition = layoutManager.findFirstCompletelyVisibleItemPosition()
+                if (scrollingPosition != -1) viewModel.updateScrollingPosition(scrollingPosition)
             }
             .launchIn(lifecycleScope)
 

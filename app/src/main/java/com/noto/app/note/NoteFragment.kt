@@ -29,9 +29,6 @@ import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-
-private const val DebounceTimeoutMillis = 250L
-
 class NoteFragment : Fragment() {
 
     private val viewModel by viewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId, args.body, args.labelsIds) }
@@ -67,13 +64,14 @@ class NoteFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        viewModel.note
-            .onEach { note ->
-                setupShortcut(note)
-                if (etNoteTitle.text.isNullOrBlank() && etNoteBody.text.isNullOrBlank())
-                    setupNote(note)
-            }
-            .launchIn(lifecycleScope)
+        combine(
+            viewModel.note,
+            viewModel.isRememberScrollingPosition
+        ) { note, isRememberScrollingPosition ->
+            setupShortcut(note)
+            if (etNoteTitle.text.isNullOrBlank() && etNoteBody.text.isNullOrBlank())
+                setupNote(note, isRememberScrollingPosition)
+        }.launchIn(lifecycleScope)
 
         viewModel.note
             .distinctUntilChangedBy { note -> note.reminderDate }
@@ -157,6 +155,11 @@ class NoteFragment : Fragment() {
                 context?.updateAllWidgetsData()
                 context?.updateNoteListWidgets()
             }
+            .launchIn(lifecycleScope)
+
+        nsv.scrollPositionAsFlow()
+            .debounce(DebounceTimeoutMillis)
+            .onEach { viewModel.updateNoteScrollingPosition(nsv.scrollY) }
             .launchIn(lifecycleScope)
     }
 
@@ -281,7 +284,7 @@ class NoteFragment : Fragment() {
         }
     }
 
-    private fun NoteFragmentBinding.setupNote(note: Note) {
+    private fun NoteFragmentBinding.setupNote(note: Note, isRememberScrollingPosition: Boolean) {
         etNoteTitle.setText(note.title)
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
@@ -291,6 +294,9 @@ class NoteFragment : Fragment() {
             tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
         }
         nsv.post {
+            if (isRememberScrollingPosition) {
+                nsv.smoothScrollTo(0, note.scrollingPosition)
+            }
             if (args.scrollPosition != -1) {
                 nsv.smoothScrollTo(0, args.scrollPosition)
                 when {

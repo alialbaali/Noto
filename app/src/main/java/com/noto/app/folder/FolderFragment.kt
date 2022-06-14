@@ -24,10 +24,8 @@ import com.noto.app.getOrDefault
 import com.noto.app.label.labelListItem
 import com.noto.app.map
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -50,6 +48,7 @@ class FolderFragment : Fragment() {
             setupListeners()
         }
 
+    @OptIn(FlowPreview::class)
     @Suppress("UNCHECKED_CAST")
     private fun FolderFragmentBinding.setupState() {
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
@@ -60,10 +59,11 @@ class FolderFragment : Fragment() {
         combine(
             viewModel.folder,
             viewModel.notes,
-            viewModel.labels
-        ) { folder, notes, labels ->
+            viewModel.labels,
+            viewModel.isRememberScrollingPosition,
+        ) { folder, notes, labels, isRememberScrollingPosition ->
             val notesCount = notes.getOrDefault(emptyList()).filterSelectedLabels(labels).count()
-            setupFolder(folder, notesCount)
+            setupFolder(folder, notesCount, isRememberScrollingPosition)
             context?.let { context ->
                 val text = context.stringResource(R.string.archive, folder.getTitle(context))
                 MenuItemCompat.setTooltipText(archiveMenuItem, text)
@@ -105,6 +105,14 @@ class FolderFragment : Fragment() {
                     rv.smoothScrollToPosition(0)
             }
             .launchIn(lifecycleScope)
+
+        rv.scrollPositionAsFlow()
+            .debounce(DebounceTimeoutMillis)
+            .onEach {
+                val scrollingPosition = layoutManager.findFirstCompletelyVisibleItemPositions(null).firstOrNull() ?: -1
+                if (scrollingPosition != -1) viewModel.updateFolderScrollingPosition(scrollingPosition)
+            }
+            .launchIn(lifecycleScope)
     }
 
     private fun FolderFragmentBinding.setupListeners() {
@@ -142,6 +150,10 @@ class FolderFragment : Fragment() {
 
         bab.setOnSwipeGestureListener {
             navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment())
+        }
+
+        activity?.onBackPressedDispatcher?.addCallback {
+            navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment(exit = true))
         }
     }
 
@@ -286,7 +298,7 @@ class FolderFragment : Fragment() {
         return true
     }
 
-    private fun FolderFragmentBinding.setupFolder(folder: Folder, notesCount: Int) {
+    private fun FolderFragmentBinding.setupFolder(folder: Folder, notesCount: Int, isRememberScrollingPosition: Boolean) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
@@ -298,6 +310,11 @@ class FolderFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
                 fab.outlineSpotShadowColor = color
+            }
+        }
+        rv.post {
+            if (isRememberScrollingPosition) {
+                layoutManager.scrollToPosition(folder.scrollingPosition)
             }
         }
     }

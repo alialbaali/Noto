@@ -45,6 +45,9 @@ class FolderViewModel(
     private val mutableSearchTerm = MutableStateFlow("")
     val searchTerm get() = mutableSearchTerm.asStateFlow()
 
+    val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
+        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
     init {
         combine(
             folderRepository.getFolderById(folderId)
@@ -114,6 +117,10 @@ class FolderViewModel(
             folderRepository.createFolder(folder)
         else
             folderRepository.updateFolder(folder)
+    }
+
+    fun updateFolderScrollingPosition(scrollingPosition: Int) = viewModelScope.launch {
+        folderRepository.updateFolder(folder.value.copy(scrollingPosition = scrollingPosition))
     }
 
     fun deleteFolder() = viewModelScope.launch {

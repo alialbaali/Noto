@@ -3,11 +3,12 @@ package com.noto.app.allnotes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
-import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Font
 import com.noto.app.domain.repository.*
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
 class AllNotesViewModel(
     private val folderRepository: FolderRepository,
@@ -31,6 +32,12 @@ class AllNotesViewModel(
 
     private val mutableSearchTerm = MutableStateFlow("")
     val searchTerm get() = mutableSearchTerm.asStateFlow()
+
+    val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
+        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
+    val scrollingPosition = settingsRepository.allNotesScrollingPosition
+        .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
     init {
         combine(
@@ -92,5 +99,9 @@ class AllNotesViewModel(
 
     fun collapseAll() {
         mutableNotesVisibility.value = notesVisibility.value.mapValues { false }
+    }
+
+    fun updateScrollingPosition(scrollingPosition: Int) = viewModelScope.launch {
+        settingsRepository.updateAllNotesScrollingPosition(scrollingPosition)
     }
 }

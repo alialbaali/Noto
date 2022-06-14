@@ -1,6 +1,7 @@
 package com.noto.app.data.repository
 
 import androidx.datastore.preferences.core.booleanPreferencesKey
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.AppIcon
@@ -32,6 +33,8 @@ object SettingsKeys {
     val IsBioAuthEnabled = stringPreferencesKey(Keys.IsBioAuthEnabled)
     val MainInterfaceId = longPreferencesKey(Keys.MainInterfaceId)
     val IsRememberScrollingPosition = booleanPreferencesKey(Keys.IsRememberScrollingPosition)
+    val AllNotesScrollingPosition = intPreferencesKey(Keys.AllNotesScrollingPosition)
+    val RecentNotesScrollingPosition = intPreferencesKey(Keys.RecentNotesScrollingPosition)
 
     @Suppress("FunctionName")
     object Widget {
@@ -64,6 +67,8 @@ object SettingsKeys {
         const val IsScreenOn = "IsScreenOn"
         const val IsFullScreen = "IsFullScreen"
         const val IsRememberScrollingPosition = "IsRememberScrollingPosition"
+        const val AllNotesScrollingPosition = "AllNotesScrollingPosition"
+        const val RecentNotesScrollingPosition = "RecentNotesScrollingPosition"
 
         object Widget {
             val Int.Id get() = "Widget_Id_$this"

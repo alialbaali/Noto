@@ -46,6 +46,9 @@ class NoteViewModel(
     val isFullScreen = settingsRepository.isFullScreen
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
+    val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
+        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
     init {
         noteRepository.getNoteById(noteId)
             .also {
@@ -178,5 +181,9 @@ class NoteViewModel(
             mutableLabels.value = mutableLabels.value.mapValues { if (it.key.id == id) false else it.value }
         else
             noteLabelRepository.deleteNoteLabel(note.value.id, id)
+    }
+
+    fun updateNoteScrollingPosition(scrollingPosition: Int) = viewModelScope.launch {
+        noteRepository.updateNote(note.value.copy(scrollingPosition = scrollingPosition))
     }
 }

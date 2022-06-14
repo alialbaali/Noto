@@ -7,6 +7,7 @@ import com.noto.app.domain.model.Font
 import com.noto.app.domain.repository.*
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 
 class RecentNotesViewModel(
@@ -30,6 +31,12 @@ class RecentNotesViewModel(
 
     private val mutableSearchTerm = MutableStateFlow("")
     val searchTerm get() = mutableSearchTerm.asStateFlow()
+
+    val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
+        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
+    val scrollingPosition = settingsRepository.recentNotesScrollingPosition
+        .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
     init {
         combine(
@@ -85,5 +92,9 @@ class RecentNotesViewModel(
 
     fun collapseAll() {
         mutableNotesVisibility.value = notesVisibility.value.mapValues { false }
+    }
+
+    fun updateScrollingPosition(scrollingPosition: Int) = viewModelScope.launch {
+        settingsRepository.updateRecentNotesScrollingPosition(scrollingPosition)
     }
 }
