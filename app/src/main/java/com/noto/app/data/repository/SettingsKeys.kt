@@ -31,6 +31,7 @@ object SettingsKeys {
     val IsFullScreen = booleanPreferencesKey(Keys.IsFullScreen)
     val IsBioAuthEnabled = stringPreferencesKey(Keys.IsBioAuthEnabled)
     val MainInterfaceId = longPreferencesKey(Keys.MainInterfaceId)
+    val IsRememberScrollingPosition = booleanPreferencesKey(Keys.IsRememberScrollingPosition)
 
     @Suppress("FunctionName")
     object Widget {
@@ -62,6 +63,7 @@ object SettingsKeys {
         const val IsDoNotDisturb = "IsDoNotDisturb"
         const val IsScreenOn = "IsScreenOn"
         const val IsFullScreen = "IsFullScreen"
+        const val IsRememberScrollingPosition = "IsRememberScrollingPosition"
 
         object Widget {
             val Int.Id get() = "Widget_Id_$this"

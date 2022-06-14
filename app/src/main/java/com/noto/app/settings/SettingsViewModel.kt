@@ -57,6 +57,9 @@ class SettingsViewModel(
     val mainInterfaceId = settingsRepository.mainInterfaceId
         .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.GeneralFolderId)
 
+    val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
+        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
     private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
     val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
 
@@ -156,6 +159,9 @@ class SettingsViewModel(
         settingsRepository.updateLanguage(value)
     }
 
+    fun toggleRememberScrollingPosition() = viewModelScope.launch {
+        settingsRepository.updateIsRememberScrollingPosition(!isRememberScrollingPosition.value)
+    }
 }
 
 @OptIn(ExperimentalSerializationApi::class)

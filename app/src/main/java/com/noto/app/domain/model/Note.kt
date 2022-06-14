@@ -53,4 +53,7 @@ data class Note(
 
     @ColumnInfo(name = "access_date", defaultValue = "NULL")
     val accessDate: Instant? = null,
+
+    @ColumnInfo(name = "scrolling_position", defaultValue = "0")
+    val scrollingPosition: Int = 0,
 )

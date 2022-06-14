@@ -73,6 +73,7 @@ class SettingsFragment : Fragment() {
             swDoNotDisturb.setupColors()
             swScreenOn.setupColors()
             swFullScreen.setupColors()
+            swRememberScrollingPosition.setupColors()
 
             when (BiometricManager.from(context).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
                 BiometricManager.BIOMETRIC_SUCCESS -> swBioAuth.isVisible = true
@@ -98,6 +99,10 @@ class SettingsFragment : Fragment() {
 
         viewModel.isBioAuthEnabled
             .onEach { isBioAuthEnabled -> swBioAuth.isChecked = isBioAuthEnabled }
+            .launchIn(lifecycleScope)
+
+        viewModel.isRememberScrollingPosition
+            .onEach { isRemember -> swRememberScrollingPosition.isChecked = isRemember }
             .launchIn(lifecycleScope)
 
         navController?.currentBackStackEntry?.savedStateHandle
@@ -154,6 +159,10 @@ class SettingsFragment : Fragment() {
 
         swShowNotesCount.setOnClickListener {
             viewModel.toggleShowNotesCount()
+        }
+
+        swRememberScrollingPosition.setOnClickListener {
+            viewModel.toggleRememberScrollingPosition()
         }
 
         swDoNotDisturb.setOnClickListener {

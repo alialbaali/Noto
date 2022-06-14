@@ -69,6 +69,9 @@ data class Folder @Ignore constructor(
     @ColumnInfo(name = "is_vaulted", defaultValue = "0")
     val isVaulted: Boolean = false,
 
+    @ColumnInfo(name = "scrolling_position", defaultValue = "0")
+    val scrollingPosition: Int = 0,
+
     @Ignore
     @Transient
     val folders: List<Pair<Folder, Int>> = emptyList(),
@@ -93,6 +96,7 @@ data class Folder @Ignore constructor(
         grouping: Grouping = Grouping.Default,
         groupingOrder: GroupingOrder = GroupingOrder.Descending,
         isVaulted: Boolean = false,
+        scrollingPosition: Int = 0,
     ) : this(
         id,
         parentId,
@@ -111,6 +115,7 @@ data class Folder @Ignore constructor(
         grouping,
         groupingOrder,
         isVaulted,
+        scrollingPosition,
         emptyList(),
     )
 

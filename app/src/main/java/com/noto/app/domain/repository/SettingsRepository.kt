@@ -39,6 +39,8 @@ interface SettingsRepository {
 
     val mainInterfaceId: Flow<Long>
 
+    val isRememberScrollingPosition: Flow<Boolean>
+
     fun getWidgetFolderId(widgetId: Int): Flow<Long>
 
     fun getIsWidgetCreated(widgetId: Int): Flow<Boolean>
@@ -90,6 +92,8 @@ interface SettingsRepository {
     suspend fun updateIsFullScreen(isFullScreen: Boolean)
 
     suspend fun updateMainInterfaceId(interfaceId: Long)
+
+    suspend fun updateIsRememberScrollingPosition(isRememberScrollingPosition: Boolean)
 
     suspend fun updateWidgetFolderId(widgetId: Int, folderId: Long)
 

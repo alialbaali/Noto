@@ -106,6 +106,14 @@
                 android:text="@string/show_folders_notes_count" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_remember_scrolling_position"
+                style="@style/SettingsItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_round_count_24"
+                android:text="@string/remember_scrolling_position" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/sw_do_not_disturb"
                 style="@style/SettingsItem"
                 android:layout_width="match_parent"

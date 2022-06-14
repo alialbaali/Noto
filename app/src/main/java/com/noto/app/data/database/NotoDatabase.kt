@@ -2,8 +2,8 @@ package com.noto.app.data.database
 
 import android.content.Context
 import androidx.room.*
-import com.noto.app.data.source.LabelDao
 import com.noto.app.data.source.FolderDao
+import com.noto.app.data.source.LabelDao
 import com.noto.app.data.source.NoteDao
 import com.noto.app.data.source.NoteLabelDao
 import com.noto.app.domain.model.Folder
@@ -24,8 +24,8 @@ private const val NOTO_DATABASE = "Noto Database"
     GroupingOrderConverter::class
 )
 @Database(
-    entities = [Note::class, Folder::class, Label::class, NoteLabel::class],
-    version = 28,
+    entities = [Folder::class, Note::class, Label::class, NoteLabel::class],
+    version = 29,
     autoMigrations = [
         AutoMigration(from = 6, to = 7),
         AutoMigration(from = 7, to = 8),
@@ -55,6 +55,8 @@ private const val NOTO_DATABASE = "Noto Database"
         AutoMigration(from = 26, to = 27, spec = Migrations.RenameLibraryToFolder::class),
         /** Add [GroupingOrder] to [Folder] */
         AutoMigration(from = 27, to = 28),
+        /** Add [Folder.scrollingPosition] and [Note.scrollingPosition] */
+        AutoMigration(from = 28, to = 29),
     ],
 )
 abstract class NotoDatabase : RoomDatabase() {

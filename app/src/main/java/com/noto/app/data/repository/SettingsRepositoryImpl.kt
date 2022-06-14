@@ -115,6 +115,11 @@ class SettingsRepositoryImpl(
         .map { it ?: AllFoldersId }
         .flowOn(dispatcher)
 
+    override val isRememberScrollingPosition: Flow<Boolean> = storage.data
+        .map { preferences -> preferences[SettingsKeys.IsRememberScrollingPosition] }
+        .map { it ?: true }
+        .flowOn(dispatcher)
+
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
         return storage.data
             .map { preferences -> preferences[SettingsKeys.Widget.FolderId(widgetId)] }
@@ -298,6 +303,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateMainInterfaceId(interfaceId: Long) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.MainInterfaceId] = interfaceId }
+        }
+    }
+
+    override suspend fun updateIsRememberScrollingPosition(isRememberScrollingPosition: Boolean) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.IsRememberScrollingPosition] = isRememberScrollingPosition }
         }
     }
 
