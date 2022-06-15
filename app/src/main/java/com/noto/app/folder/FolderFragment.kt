@@ -312,7 +312,7 @@ class FolderFragment : Fragment() {
 
     private fun FolderFragmentBinding.enableSearch() {
         tilSearch.isVisible = true
-        etSearch.requestFocus()
+        tilSearch.postDelayed({ etSearch.requestFocus() }, DefaultAnimationDuration)
         activity?.showKeyboard(etSearch)
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
             viewModel.disableSearch()
