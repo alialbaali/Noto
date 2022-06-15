@@ -58,6 +58,22 @@
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_search"
+        style="@style/SearchTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:visibility="visible">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_search"
+            style="@style/TextInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/search"
+            android:inputType="text|textCapSentences|textAutoCorrect" />
+    </com.google.android.material.textfield.TextInputLayout>
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
         android:layout_width="match_parent"

@@ -52,7 +52,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     open var isManualSorting: Boolean = false
 
     @EpoxyAttribute
-    var searchTerm: String? = null
+    lateinit var searchTerm: String
 
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onClickListener: View.OnClickListener
@@ -136,12 +136,10 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
 
     private fun String.highlightText(color: Int): Spannable {
         return this.toSpannable().apply {
-            searchTerm?.takeIf { it.isNotBlank() }?.let { searchTerm ->
-                val startIndex = this.indexOf(searchTerm, ignoreCase = true)
-                val endIndex = startIndex + searchTerm.length
-                if (startIndex != -1)
-                    setSpan(ForegroundColorSpan(color), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
+            val startIndex = this.indexOf(searchTerm, ignoreCase = true)
+            val endIndex = startIndex + searchTerm.length
+            if (startIndex != -1)
+                setSpan(ForegroundColorSpan(color), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
     }
 

@@ -68,7 +68,7 @@ class FolderViewModel(
                 .filterNotNull(),
             noteLabelRepository.getNoteLabels()
                 .filterNotNull(),
-            searchTerm.map { it.trim() },
+            searchTerm,
         ) { notes, archivedNotes, labels, noteLabels, searchTerm ->
             mutableNotes.value = notes.mapWithLabels(labels, noteLabels).filterContent(searchTerm).let { UiState.Success(it) }
             mutableArchivedNotes.value = archivedNotes.mapWithLabels(labels, noteLabels).let { UiState.Success(it) }

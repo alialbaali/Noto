@@ -175,7 +175,7 @@
     </style>
 
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxBackgroundColor">?attr/notoBackgroundColor</item>
+        <item name="boxBackgroundColor">?attr/notoSurfaceColor</item>
         <item name="boxStrokeWidth">0dp</item>
         <item name="boxStrokeWidthFocused">0dp</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/spacing_small</item>
@@ -186,6 +186,20 @@
         <item name="android:textColorHint">?attr/notoSecondaryColor</item>
         <item name="android:textColorHighlight">?attr/notoSecondaryColor</item>
         <item name="android:colorControlActivated">?attr/notoPrimaryColor</item>
+    </style>
+
+    <style name="SearchTextInputLayout" parent="TextInputLayout">
+        <item name="boxBackgroundColor">?attr/notoBackgroundColor</item>
+        <item name="android:elevation">@dimen/elevation_normal</item>
+        <item name="android:outlineProvider">bounds</item>
+        <item name="endIconContentDescription">@string/clear</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="android:visibility">gone</item>
+        <item name="android:layout_marginStart">@dimen/spacing_normal</item>
+        <item name="android:layout_marginEnd">@dimen/spacing_normal</item>
+        <item name="layout_anchor">@id/fab</item>
+        <item name="android:translationY">-32dp</item>
+        <item name="android:layout_gravity">top</item>
     </style>
 
     <style name="TextInputEditText">

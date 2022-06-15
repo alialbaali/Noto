@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.view.MenuItemCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -91,17 +92,18 @@ class RecentNotesFragment : Fragment() {
             viewModel.notes,
             viewModel.notesVisibility,
             viewModel.font,
-            viewModel.isSearchEnabled,
             viewModel.searchTerm,
-        ) { notes, notesVisibility, font, isSearchEnabled, searchTerm ->
-            setupNotes(notes, notesVisibility, font, isSearchEnabled, searchTerm)
+        ) { notes, notesVisibility, font, searchTerm ->
+            setupNotes(notes, notesVisibility, font, searchTerm)
         }.launchIn(lifecycleScope)
 
         viewModel.isSearchEnabled
-            .onEach { isSearchEnabled ->
-                if (isSearchEnabled)
-                    rv.smoothScrollToPosition(0)
-            }
+            .onEach { isSearchEnabled -> if (isSearchEnabled) enableSearch() else disableSearch() }
+            .launchIn(lifecycleScope)
+
+        etSearch.textAsFlow()
+            .asSearchFlow()
+            .onEach { searchTerm -> viewModel.setSearchTerm(searchTerm) }
             .launchIn(lifecycleScope)
 
         val menuItem = bab.menu.findItem(R.id.change_visibility)
@@ -162,7 +164,6 @@ class RecentNotesFragment : Fragment() {
         state: UiState<Map<LocalDate, List<NoteWithLabels>>>,
         notesVisibility: Map<LocalDate, Boolean>,
         font: Font,
-        isSearchEnabled: Boolean,
         searchTerm: String,
     ) {
         when (state) {
@@ -173,29 +174,6 @@ class RecentNotesFragment : Fragment() {
                 tvNotesCount.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)?.lowercase()
 
                 rv.withModels {
-
-                    if (isSearchEnabled) {
-                        searchItem {
-                            id("search")
-                            searchTerm(searchTerm)
-                            callback { searchTerm -> viewModel.setSearchTerm(searchTerm) }
-                            onBind { _, view, _ ->
-                                if (view.binding.etSearch.text.toString().isBlank()) {
-                                    view.binding.etSearch.requestFocus()
-                                    activity?.showKeyboard(view.binding.etSearch)
-                                }
-                            }
-                            onUnbind { _, view ->
-                                activity?.hideKeyboard(view.binding.etSearch)
-                            }
-                        }
-                        if (activity?.onBackPressedDispatcher?.hasEnabledCallbacks() == false) {
-                            activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
-                                viewModel.disableSearch()
-                                if (isEnabled) isEnabled = false
-                            }
-                        }
-                    }
 
                     context?.let { context ->
                         if (notes.values.all { it.isEmpty() }) {
@@ -225,7 +203,7 @@ class RecentNotesFragment : Fragment() {
                                             previewSize(15)
                                             isShowCreationDate(false)
                                             isManualSorting(false)
-                                            searchTerm(if (isSearchEnabled) searchTerm.trim() else null)
+                                            searchTerm(searchTerm)
                                             onClickListener { _ ->
                                                 navController
                                                     ?.navigateSafely(
@@ -255,5 +233,20 @@ class RecentNotesFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun RecentNotesFragmentBinding.enableSearch() {
+        tilSearch.isVisible = true
+        etSearch.requestFocus()
+        activity?.showKeyboard(etSearch)
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
+            viewModel.disableSearch()
+            if (isEnabled) isEnabled = false
+        }
+    }
+
+    private fun RecentNotesFragmentBinding.disableSearch() {
+        tilSearch.isVisible = false
+        activity?.hideKeyboard(etSearch)
     }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -79,31 +80,25 @@ class FolderFragment : Fragment() {
             viewModel.labels,
             viewModel.font,
             viewModel.folder,
-            viewModel.isSearchEnabled,
             viewModel.searchTerm,
-        ) { array ->
-            val notes = array[0] as UiState<List<NoteWithLabels>>
-            val labels = array[1] as Map<Label, Boolean>
-            val font = array[2] as Font
-            val folder = array[3] as Folder
-            val isSearchEnabled = array[4] as Boolean
-            val searchTerm = array[5] as String
+        ) { notes, labels, font, folder, searchTerm ->
             setupNotesAndLabels(
                 notes.map { it.filterSelectedLabels(labels) },
                 labels,
                 font,
                 folder,
-                isSearchEnabled,
                 searchTerm,
             )
             setupItemTouchHelper(folder.layout)
         }.launchIn(lifecycleScope)
 
         viewModel.isSearchEnabled
-            .onEach { isSearchEnabled ->
-                if (isSearchEnabled)
-                    rv.smoothScrollToPosition(0)
-            }
+            .onEach { isSearchEnabled -> if (isSearchEnabled) enableSearch() else disableSearch() }
+            .launchIn(lifecycleScope)
+
+        etSearch.textAsFlow()
+            .asSearchFlow()
+            .onEach { searchTerm -> viewModel.setSearchTerm(searchTerm) }
             .launchIn(lifecycleScope)
 
         rv.scrollPositionAsFlow()
@@ -170,7 +165,6 @@ class FolderFragment : Fragment() {
         labels: Map<Label, Boolean>,
         font: Font,
         folder: Folder,
-        isSearchEnabled: Boolean,
         searchTerm: String,
     ) {
         when (state) {
@@ -180,30 +174,6 @@ class FolderFragment : Fragment() {
 
                 rv.withModels {
                     epoxyController = this
-
-                    if (isSearchEnabled) {
-                        searchItem {
-                            id("search")
-                            color(folder.color)
-                            searchTerm(searchTerm)
-                            callback { searchTerm -> viewModel.setSearchTerm(searchTerm) }
-                            onBind { _, view, _ ->
-                                if (view.binding.etSearch.text.toString().isBlank()) {
-                                    view.binding.etSearch.requestFocus()
-                                    activity?.showKeyboard(view.binding.etSearch)
-                                }
-                            }
-                            onUnbind { _, view ->
-                                activity?.hideKeyboard(view.binding.etSearch)
-                            }
-                        }
-                        if (activity?.onBackPressedDispatcher?.hasEnabledCallbacks() == false) {
-                            activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
-                                viewModel.disableSearch()
-                                if (isEnabled) isEnabled = false
-                            }
-                        }
-                    }
 
                     labelListItem {
                         id("labels")
@@ -245,7 +215,7 @@ class FolderFragment : Fragment() {
                                         color(folder.color)
                                         previewSize(folder.notePreviewSize)
                                         isShowCreationDate(folder.isShowNoteCreationDate)
-                                        searchTerm(if (isSearchEnabled) searchTerm.trim() else null)
+                                        searchTerm(searchTerm)
                                         isManualSorting(folder.sortingType == NoteListSortingType.Manual)
                                         onClickListener { _ ->
                                             navController
@@ -331,5 +301,20 @@ class FolderFragment : Fragment() {
             itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
                 .apply { attachToRecyclerView(rv) }
         }
+    }
+
+    private fun FolderFragmentBinding.enableSearch() {
+        tilSearch.isVisible = true
+        etSearch.requestFocus()
+        activity?.showKeyboard(etSearch)
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
+            viewModel.disableSearch()
+            if (isEnabled) isEnabled = false
+        }
+    }
+
+    private fun FolderFragmentBinding.disableSearch() {
+        tilSearch.isVisible = false
+        activity?.hideKeyboard(etSearch)
     }
 }

@@ -44,7 +44,7 @@ class RecentNotesViewModel(
             noteRepository.getAllMainNotes(),
             labelRepository.getAllLabels(),
             noteLabelRepository.getNoteLabels(),
-            searchTerm.map { it.trim() },
+            searchTerm,
         ) { folders, notes, labels, noteLabels, searchTerm ->
             mutableNotesVisibility.value = notes.mapNotNull { it.accessDate?.toLocalDate() }.map {
                 val isVisible = notesVisibility.value[it] ?: true

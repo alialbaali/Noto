@@ -45,7 +45,7 @@ class AllNotesViewModel(
             noteRepository.getAllMainNotes(),
             labelRepository.getAllLabels(),
             noteLabelRepository.getNoteLabels(),
-            searchTerm.map { it.trim() },
+            searchTerm,
         ) { folders, notes, labels, noteLabels, searchTerm ->
             mutableNotesVisibility.value = folders.map {
                 val isVisible = notesVisibility.value[it] ?: true
