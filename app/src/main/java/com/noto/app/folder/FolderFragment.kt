@@ -124,6 +124,10 @@ class FolderFragment : Fragment() {
             false
         }
 
+        tb.setOnClickListener {
+            navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment())
+        }
+
         fab.setOnClickListener {
             val selectedLabelsIds = viewModel.labels.value
                 .filter { it.value }

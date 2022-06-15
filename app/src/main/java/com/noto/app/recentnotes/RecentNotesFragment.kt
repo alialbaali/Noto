@@ -43,6 +43,10 @@ class RecentNotesFragment : Fragment() {
     }
 
     private fun RecentNotesFragmentBinding.setupListeners() {
+        tb.setOnClickListener {
+            navController?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToMainFragment())
+        }
+
         fab.setOnClickListener {
             navController
                 ?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToSelectFolderDialogFragment(longArrayOf()))

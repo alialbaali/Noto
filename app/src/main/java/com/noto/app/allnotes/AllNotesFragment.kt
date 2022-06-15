@@ -42,6 +42,10 @@ class AllNotesFragment : Fragment() {
     }
 
     private fun AllNotesFragmentBinding.setupListeners() {
+        tb.setOnClickListener {
+            navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToMainFragment())
+        }
+
         fab.setOnClickListener {
             navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToSelectFolderDialogFragment(longArrayOf()))
         }
