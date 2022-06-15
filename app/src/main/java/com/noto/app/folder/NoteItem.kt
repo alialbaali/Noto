@@ -2,6 +2,7 @@ package com.noto.app.folder
 
 import android.annotation.SuppressLint
 import android.text.Spannable
+import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -67,15 +68,16 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
             val colorResource = context.colorResource(color.toResource())
+            val isBlack = color == NotoColor.Black
             tvNoteTitle.setLinkTextColor(colorResource)
             tvNoteBody.setLinkTextColor(colorResource)
-            tvNoteTitle.text = note.title.highlightText(colorResource)
+            tvNoteTitle.text = note.title.highlightText(colorResource, isBlack)
             if (note.title.isBlank() && previewSize == 0) {
-                tvNoteBody.text = note.body.takeLines(1).highlightText(colorResource)
+                tvNoteBody.text = note.body.takeLines(1).highlightText(colorResource, isBlack)
                 tvNoteBody.maxLines = 1
                 tvNoteBody.isVisible = true
             } else {
-                tvNoteBody.text = note.body.takeLines(previewSize).highlightText(colorResource)
+                tvNoteBody.text = note.body.takeLines(previewSize).highlightText(colorResource, isBlack)
                 tvNoteBody.maxLines = previewSize
                 tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
             }
@@ -134,12 +136,17 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         }
     }
 
-    private fun String.highlightText(color: Int): Spannable {
+    private fun String.highlightText(color: Int, isBlack: Boolean): Spannable {
+        println("COLOR $color")
         return this.toSpannable().apply {
             val startIndex = this.indexOf(searchTerm, ignoreCase = true)
             val endIndex = startIndex + searchTerm.length
+            val colorSpan = if (isBlack)
+                BackgroundColorSpan(color.withDefaultAlpha())
+            else
+                ForegroundColorSpan(color)
             if (startIndex != -1)
-                setSpan(ForegroundColorSpan(color), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                setSpan(colorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
     }
 

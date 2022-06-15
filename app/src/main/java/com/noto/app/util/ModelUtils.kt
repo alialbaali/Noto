@@ -187,4 +187,3 @@ fun List<Pair<Folder, Int>>.findRecursively(predicate: (Pair<Folder, Int>) -> Bo
 
 fun Flow<CharSequence?>.asSearchFlow() = filterNotNull()
     .map { it.trim().toString() }
-    .filter { it.isNotBlank() }
