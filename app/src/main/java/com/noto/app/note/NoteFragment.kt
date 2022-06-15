@@ -141,9 +141,9 @@ class NoteFragment : Fragment() {
         }.launchIn(lifecycleScope)
 
         combine(
-            etNoteTitle.textAsFlow()
+            etNoteTitle.textAsFlow(emitInitialText = true)
                 .filterNotNull(),
-            etNoteBody.textAsFlow()
+            etNoteBody.textAsFlow(emitInitialText = true)
                 .filterNotNull(),
         ) { title, body -> title to body }
             .onEach { (_, body) ->

@@ -45,6 +45,7 @@ import com.noto.app.domain.model.NotoColor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.onStart
 import kotlin.math.absoluteValue
 
 const val SetColorFilterMethodName = "setColorFilter"
@@ -140,11 +141,11 @@ fun TextView.setSemiboldFont(font: Font) {
     }
 }
 
-fun EditText.textAsFlow(): Flow<CharSequence?> = callbackFlow {
+fun EditText.textAsFlow(emitInitialText: Boolean = false): Flow<CharSequence?> = callbackFlow {
     val listener = doOnTextChanged { text, _, _, _ -> trySend(text) }
     addTextChangedListener(listener)
     awaitClose { removeTextChangedListener(listener) }
-}
+}.onStart { if (emitInitialText) emit(text) }
 
 fun TextView.removeLinksUnderline() {
     val spannable = SpannableString(text)
