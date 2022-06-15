@@ -303,7 +303,7 @@
         <item name="android:ellipsize">end</item>
     </style>
 
-    <style name="NoteCreationDateTextView" parent="Widget.MaterialComponents.TextView">
+    <style name="NoteDateTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/notoSecondaryColor</item>
         <item name="android:textSize">@dimen/size_extra_tiny</item>
         <item name="fontFamily">@font/nunito_semibold_italic</item>

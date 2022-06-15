@@ -50,6 +50,9 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     open var isShowCreationDate: Boolean = false
 
     @EpoxyAttribute
+    open var isShowAccessDate: Boolean = false
+
+    @EpoxyAttribute
     open var isManualSorting: Boolean = false
 
     @EpoxyAttribute
@@ -83,12 +86,15 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             }
             if (isShowCreationDate)
                 tvCreationDate.text = context.stringResource(R.string.created, note.creationDate.format(root.context))
+            if (isShowAccessDate)
+                tvAccessDate.text = context.stringResource(R.string.accessed, note.accessDate?.format(root.context))
             if (note.reminderDate != null) {
                 llReminder.background?.mutate()?.setTint(colorResource)
                 tvReminder.text = note.reminderDate?.format(context)
             }
         }
         tvCreationDate.isVisible = isShowCreationDate
+        tvAccessDate.isVisible = isShowAccessDate
         tvNoteTitle.isVisible = note.title.isNotBlank()
         llReminder.isVisible = note.reminderDate != null
         root.setOnClickListener(onClickListener)
@@ -137,7 +143,6 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     }
 
     private fun String.highlightText(color: Int, isBlack: Boolean): Spannable {
-        println("COLOR $color")
         return this.toSpannable().apply {
             val startIndex = this.indexOf(searchTerm, ignoreCase = true)
             val endIndex = startIndex + searchTerm.length

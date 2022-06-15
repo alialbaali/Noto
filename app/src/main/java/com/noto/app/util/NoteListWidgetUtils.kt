@@ -43,7 +43,6 @@ fun Context.createNoteListWidgetRemoteViews(
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())
         setInt(R.id.iv_fab, SetColorFilterMethodName, color)
-        setInt(R.id.iv_edit_widget, SetColorFilterMethodName, color)
         if (isAppIconEnabled)
             setViewPadding(R.id.tv_folder_title, 0.dp, 16.dp, 0.dp, 16.dp)
         else

@@ -78,11 +78,19 @@
 
         <TextView
             android:id="@+id/tv_creation_date"
-            style="@style/NoteCreationDateTextView"
+            style="@style/NoteDateTextView"
             android:layout_marginTop="@dimen/spacing_small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="Created at Aug 30" />
+
+        <TextView
+            android:id="@+id/tv_access_date"
+            style="@style/NoteDateTextView"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Accessed at Aug 30" />
 
     </LinearLayout>
 

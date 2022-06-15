@@ -13,6 +13,7 @@
     <string name="list">List</string>
     <string name="grid">Grid</string>
     <string name="created">Created %s</string>
+    <string name="accessed">Accessed %s</string>
     <string name="alphabetical">Alphabetical</string>
     <string name="alphabetical_sorting">Alphabetical sorting</string>
     <string name="creation_date">Creation date</string>

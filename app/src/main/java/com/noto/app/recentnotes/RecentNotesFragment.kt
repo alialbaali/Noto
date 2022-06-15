@@ -202,6 +202,7 @@ class RecentNotesFragment : Fragment() {
                                             color(NotoColor.Black)
                                             previewSize(15)
                                             isShowCreationDate(false)
+                                            isShowAccessDate(true)
                                             isManualSorting(false)
                                             searchTerm(searchTerm)
                                             onClickListener { _ ->
