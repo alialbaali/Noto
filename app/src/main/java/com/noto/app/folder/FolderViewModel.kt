@@ -101,6 +101,7 @@ class FolderViewModel(
         notePreviewSize: Int,
         newNoteCursorPosition: NewNoteCursorPosition,
         isShowNoteCreationDate: Boolean,
+        onCreateFolder: (Long) -> Unit,
     ) = viewModelScope.launch {
         val color = notoColors.value.first { it.second }.first
 
@@ -114,7 +115,7 @@ class FolderViewModel(
         )
 
         if (folderId == 0L)
-            folderRepository.createFolder(folder)
+            folderRepository.createFolder(folder).also(onCreateFolder)
         else
             folderRepository.updateFolder(folder)
     }

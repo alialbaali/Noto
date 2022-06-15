@@ -147,6 +147,9 @@ class NewFolderDialogFragment : BaseDialogFragment() {
                     sNotePreviewSize.value.toInt(),
                     cursorPosition,
                     swShowNoteCreationDate.isChecked,
+                    onCreateFolder = { folderId ->
+                        navController?.navigate(NewFolderDialogFragmentDirections.actionNewFolderDialogFragmentToFolderFragment(folderId))
+                    }
                 ).invokeOnCompletion {
                     context?.updateAllWidgetsData()
                     context?.updateFolderListWidgets()
