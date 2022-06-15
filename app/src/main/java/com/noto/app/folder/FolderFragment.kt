@@ -108,6 +108,13 @@ class FolderFragment : Fragment() {
                 if (scrollingPosition != -1) viewModel.updateFolderScrollingPosition(scrollingPosition)
             }
             .launchIn(lifecycleScope)
+
+        root.keyboardVisibilityAsFlow()
+            .onEach { isVisible ->
+                fab.isVisible = !isVisible
+                bab.isVisible = !isVisible
+            }
+            .launchIn(lifecycleScope)
     }
 
     private fun FolderFragmentBinding.setupListeners() {

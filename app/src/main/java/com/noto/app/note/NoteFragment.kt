@@ -11,6 +11,7 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.core.view.forEach
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -160,6 +161,13 @@ class NoteFragment : Fragment() {
         nsv.scrollPositionAsFlow()
             .debounce(DebounceTimeoutMillis)
             .onEach { viewModel.updateNoteScrollingPosition(nsv.scrollY) }
+            .launchIn(lifecycleScope)
+
+        root.keyboardVisibilityAsFlow()
+            .onEach { isVisible ->
+                fab.isVisible = !isVisible
+                bab.isVisible = !isVisible
+            }
             .launchIn(lifecycleScope)
     }
 

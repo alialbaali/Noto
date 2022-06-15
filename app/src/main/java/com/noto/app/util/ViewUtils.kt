@@ -22,6 +22,8 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.graphics.ColorUtils
+import androidx.core.view.OnApplyWindowInsetsListener
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.widget.doOnTextChanged
@@ -268,4 +270,14 @@ fun View.scrollPositionAsFlow() = callbackFlow {
     val listener = ViewTreeObserver.OnScrollChangedListener { trySend(Unit) }
     viewTreeObserver?.addOnScrollChangedListener(listener)
     awaitClose { viewTreeObserver?.removeOnScrollChangedListener(listener) }
+}
+
+fun View.keyboardVisibilityAsFlow() = callbackFlow {
+    val listener = OnApplyWindowInsetsListener { _, insets ->
+        val isVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
+        trySend(isVisible)
+        insets
+    }
+    ViewCompat.setOnApplyWindowInsetsListener(this@keyboardVisibilityAsFlow, listener)
+    awaitClose { ViewCompat.setOnApplyWindowInsetsListener(this@keyboardVisibilityAsFlow, null) }
 }

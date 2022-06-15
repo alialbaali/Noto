@@ -143,6 +143,13 @@ class AllNotesFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
+        root.keyboardVisibilityAsFlow()
+            .onEach { isVisible ->
+                fab.isVisible = !isVisible
+                bab.isVisible = !isVisible
+            }
+            .launchIn(lifecycleScope)
+
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Long>(Constants.FolderId)
             ?.observe(viewLifecycleOwner) { folderId ->
