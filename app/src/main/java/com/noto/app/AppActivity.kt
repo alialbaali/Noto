@@ -44,8 +44,8 @@ class AppActivity : BaseActivity() {
         notificationManager.createNotificationChannels(this)
         AppActivityBinding.inflate(layoutInflater).withBinding {
             setContentView(root)
-            setupState()
             setupNavigation()
+            setupState()
             handleIntentContent()
         }
     }
