@@ -56,6 +56,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = MainFragmentBinding.inflate(inflater, container, false).withBinding {
+        setupMixedTransitions()
         setupListeners()
         setupState()
     }
@@ -63,7 +64,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.setupListeners() {
         fab.setOnClickListener {
             dismiss()
-            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToNewFolderDialogFragment())
+            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToNewFolderFragment())
         }
 
         ibMore.setOnClickListener {

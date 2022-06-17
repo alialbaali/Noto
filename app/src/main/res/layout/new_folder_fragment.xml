@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cool"
+    android:animateLayoutChanges="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl"
+        style="@style/AppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:navigationContentDescription="@string/back"
+            app:navigationIcon="@drawable/ic_round_back_24"
+            app:title="@string/new_folder" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.noto.app.util.BounceScrollingViewBehavior">
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/padding_bottom">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_folder_title"
+                style="@style/DialogSectionItem"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/folder_title" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til"
+                style="@style/TextInputLayout"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:theme="@style/TextInputLayout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et"
+                    style="@style/TextInputEditText"
+                    android:hint="@string/folder_title"
+                    android:imeOptions="actionDone"
+                    android:inputType="text|textAutoCorrect|textCapSentences"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_folder_color"
+                style="@style/DialogSectionItem"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/folder_color" />
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rv"
+                android:background="@drawable/generic_shape"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                tools:listitem="@layout/noto_color_item" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_folder_layout"
+                style="@style/DialogSectionItem"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/folder_layout" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_folder_layout"
+                style="@style/TabLayout"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <com.google.android.material.tabs.TabItem
+                    android:icon="@drawable/ic_round_view_agenda_24"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/list" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:icon="@drawable/ic_round_view_grid_24"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/grid" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_parent_folder"
+                style="@style/DialogSectionItem"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/parent_folder" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_parent_folder_option"
+                style="@style/FolderTitleTextView"
+                android:background="@drawable/generic_shape"
+                android:contentDescription="@string/no_parent"
+                android:drawablePadding="@dimen/spacing_normal"
+                android:drawableStart="@drawable/ic_round_no_parent_24"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:padding="@dimen/spacing_normal"
+                android:text="@string/no_parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_new_note_cursor_position"
+                style="@style/DialogSectionItem"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/new_note_cursor_position" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_new_note_cursor_position"
+                style="@style/TabLayout"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/body" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="@string/title" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_note_preview_size"
+                style="@style/DialogSectionItem"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/note_preview_size" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/s_note_preview_size"
+                android:contentDescription="@string/note_preview_size"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:stepSize="1"
+                android:value="15"
+                android:valueFrom="0"
+                android:valueTo="30"
+                app:haloColor="?attr/notoSurfaceColor"
+                app:labelStyle="@style/SliderLabel"
+                app:thumbColor="?attr/notoPrimaryColor"
+                app:thumbRadius="12dp"
+                app:thumbStrokeColor="?attr/notoPrimaryColor"
+                app:thumbStrokeWidth="0dp"
+                app:tickColorActive="?attr/notoBackgroundColor"
+                app:tickColorInactive="?attr/notoPrimaryColor"
+                app:trackColorActive="?attr/notoPrimaryColor"
+                app:trackColorInactive="?attr/notoSurfaceColor"
+                app:trackHeight="@dimen/spacing_normal" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/sw_show_note_creation_date"
+                style="@style/DialogSectionItem"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/show_note_creation_date"
+                app:thumbTint="?attr/notoPrimaryColor"
+                app:trackTint="?attr/notoSurfaceColor" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab"
+        android:text="@string/create_folder"
+        android:contentDescription="@string/create_folder"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/spacing_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/notoBackgroundColor"
+        app:backgroundTint="?attr/notoPrimaryColor" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

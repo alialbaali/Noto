@@ -88,6 +88,7 @@
         <item quantity="other">%d Folders</item>
     </plurals>
     <string name="create_folder">Create folder</string>
+    <string name="update_folder">Update folder</string>
     <string name="archive_folder">Archive folder</string>
     <string name="new_folder">New folder</string>
     <string name="edit_folder">Edit folder</string>

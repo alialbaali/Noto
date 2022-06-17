@@ -87,7 +87,7 @@ class AppActivity : BaseActivity() {
                 val content = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
                 showSelectFolderDialog(content)
             }
-            Constants.Intent.ActionCreateFolder -> navController.navigate(R.id.newFolderDialogFragment)
+            Constants.Intent.ActionCreateFolder -> navController.navigate(R.id.newFolderFragment)
             Constants.Intent.ActionCreateNote -> {
                 val folderId = intent.getLongExtra(Constants.FolderId, 0)
                 if (folderId == 0L) {

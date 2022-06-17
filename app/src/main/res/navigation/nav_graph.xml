@@ -19,8 +19,8 @@
             app:popUpTo="@id/folderFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_mainFragment_to_newFolderDialogFragment"
-            app:destination="@id/newFolderDialogFragment"
+            android:id="@+id/action_mainFragment_to_newFolderFragment"
+            app:destination="@id/newFolderFragment"
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
         <action
@@ -86,21 +86,23 @@
             android:id="@+id/action_folderFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/newFolderDialogFragment"
-        android:name="com.noto.app.folder.NewFolderDialogFragment"
-        android:label="NewFolderDialogFragment">
+    <fragment
+        android:id="@+id/newFolderFragment"
+        android:name="com.noto.app.folder.NewFolderFragment"
+        android:label="NewFolderFragment">
         <argument
             android:name="folder_id"
             android:defaultValue="0L"
             app:argType="long" />
         <action
-            android:id="@+id/action_newFolderDialogFragment_to_selectFolderDialogFragment"
+            android:id="@+id/action_newFolderFragment_to_selectFolderDialogFragment"
             app:destination="@id/selectFolderDialogFragment" />
         <action
-            android:id="@+id/action_newFolderDialogFragment_to_folderFragment"
-            app:destination="@id/folderFragment" />
-    </dialog>
+            android:id="@+id/action_newFolderFragment_to_folderFragment"
+            app:destination="@id/folderFragment"
+            app:popUpTo="@id/folderFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/noteFragment"
         android:name="com.noto.app.note.NoteFragment"
@@ -142,16 +144,16 @@
             app:destination="@id/mainFragment" />
         <argument
             android:name="scroll_position"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <argument
             android:name="is_title_visible"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
         <argument
             android:name="is_body_visible"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
     </fragment>
     <dialog
         android:id="@+id/folderArchiveFragment"
@@ -219,8 +221,8 @@
             android:defaultValue="0L"
             app:argType="long" />
         <action
-            android:id="@+id/action_folderDialogFragment_to_newFolderDialogFragment"
-            app:destination="@id/newFolderDialogFragment" />
+            android:id="@+id/action_folderDialogFragment_to_newFolderFragment"
+            app:destination="@id/newFolderFragment" />
         <action
             android:id="@+id/action_folderDialogFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />

@@ -53,7 +53,7 @@ class FolderDialogFragment : BaseDialogFragment() {
 
         tvEditFolder.setOnClickListener {
             dismiss()
-            navController?.navigateSafely(FolderDialogFragmentDirections.actionFolderDialogFragmentToNewFolderDialogFragment(args.folderId))
+            navController?.navigateSafely(FolderDialogFragmentDirections.actionFolderDialogFragmentToNewFolderFragment(args.folderId))
         }
 
         tvNewNoteShortcut.setOnClickListener {
