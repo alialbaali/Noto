@@ -56,7 +56,6 @@ class NewFolderDialogFragment : BaseDialogFragment() {
     private fun NewFolderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rv.clipToOutline = true
-        rv.itemAnimator = HorizontalListItemAnimator()
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         llParentFolder.isVisible = args.folderId != Folder.GeneralFolderId
 

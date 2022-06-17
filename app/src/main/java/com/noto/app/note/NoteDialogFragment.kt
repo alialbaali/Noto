@@ -246,7 +246,6 @@ class NoteDialogFragment : BaseDialogFragment() {
             vNote.llReminder.isVisible = note.reminderDate != null
             vNote.rv.isVisible = labels.isNotEmpty()
             vNote.rv.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
-            vNote.rv.itemAnimator = HorizontalListItemAnimator()
             vNote.rv.withModels {
                 labels.forEach { label ->
                     noteLabelItem {

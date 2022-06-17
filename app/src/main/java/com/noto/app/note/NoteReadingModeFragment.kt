@@ -74,7 +74,6 @@ class NoteReadingModeFragment : Fragment() {
 
     private fun NoteReadingModeFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
-        rv.itemAnimator = HorizontalListItemAnimator()
         abl.bringToFront()
 
         viewModel.isDoNotDisturb
