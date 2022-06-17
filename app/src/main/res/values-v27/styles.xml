@@ -32,6 +32,7 @@
         <item name="notoBackgroundColor">@color/colorBackground</item>
         <item name="notoSurfaceColor">@color/colorSurface</item>
 
+        <item name="appBarLayoutStyle">@style/Widget.MaterialComponents.AppBarLayout.Primary</item>
         <item name="snackbarStyle">@style/Snackbar</item>
         <item name="snackbarTextViewStyle">@style/SnackbarTextView</item>
     </style>
