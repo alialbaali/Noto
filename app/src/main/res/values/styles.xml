@@ -308,6 +308,7 @@
         <item name="android:textColor">?attr/notoSecondaryColor</item>
         <item name="android:textSize">@dimen/size_extra_tiny</item>
         <item name="fontFamily">@font/nunito_semibold_italic</item>
+        <item name="android:visibility">gone</item>
     </style>
 
     <style name="WidgetNoteCreationDateTextView" parent="Widget.MaterialComponents.TextView">

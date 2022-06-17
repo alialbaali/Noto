@@ -87,6 +87,7 @@ class NoteFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         viewModel.note
+            .onStart { viewModel.updateNoteAccessDate() }
             .distinctUntilChangedBy { note -> note.isValid }
             .onEach { note ->
                 if (note.isValid)

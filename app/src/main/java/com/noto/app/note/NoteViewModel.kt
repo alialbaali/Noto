@@ -51,13 +51,6 @@ class NoteViewModel(
 
     init {
         noteRepository.getNoteById(noteId)
-            .also {
-                viewModelScope.launch {
-                    it.firstOrNull()?.let {
-                        noteRepository.updateNote(it.copy(accessDate = Clock.System.now()))
-                    }
-                }
-            }
             .onStart { emit(Note(noteId, folderId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
             .filterNotNull()
             .onEach { mutableNote.value = it }
@@ -185,5 +178,9 @@ class NoteViewModel(
 
     fun updateNoteScrollingPosition(scrollingPosition: Int) = viewModelScope.launch {
         noteRepository.updateNote(note.value.copy(scrollingPosition = scrollingPosition))
+    }
+
+    fun updateNoteAccessDate() = viewModelScope.launch {
+        noteRepository.updateNote(note.value.copy(accessDate = Clock.System.now()))
     }
 }
