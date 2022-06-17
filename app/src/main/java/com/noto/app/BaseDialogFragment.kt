@@ -14,14 +14,12 @@ open class BaseDialogFragment(private val isCollapsable: Boolean = false) : Bott
     override fun getTheme(): Int = R.style.BottomSheetDialog
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return super.onCreateDialog(savedInstanceState).apply {
-            (this as BottomSheetDialog).apply {
-                if (isCollapsable) {
-                    behavior.peekHeight = 500.dp
-                } else {
-                    behavior.state = BottomSheetBehavior.STATE_EXPANDED
-                    behavior.skipCollapsed = true
-                }
+        return BottomSheetDialog(requireContext(), theme).apply {
+            if (isCollapsable) {
+                behavior.peekHeight = 500.dp
+            } else {
+                behavior.state = BottomSheetBehavior.STATE_EXPANDED
+                behavior.skipCollapsed = true
             }
         }
     }
