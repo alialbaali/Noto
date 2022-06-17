@@ -181,6 +181,8 @@ class NoteViewModel(
     }
 
     fun updateNoteAccessDate() = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(accessDate = Clock.System.now()))
+        noteRepository.getNoteById(noteId)
+            .firstOrNull()
+            ?.let { note -> noteRepository.updateNote(note.copy(accessDate = Clock.System.now())) }
     }
 }

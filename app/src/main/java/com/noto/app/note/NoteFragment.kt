@@ -49,6 +49,7 @@ class NoteFragment : Fragment() {
         abl.bringToFront()
         tvWordCount.animationInterpolator = DefaultInterpolator()
         tvWordCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
+        viewModel.updateNoteAccessDate()
 
         viewModel.folder
             .onEach { folder -> setupFolder(folder) }
@@ -87,7 +88,6 @@ class NoteFragment : Fragment() {
             .launchIn(lifecycleScope)
 
         viewModel.note
-            .onStart { viewModel.updateNoteAccessDate() }
             .distinctUntilChangedBy { note -> note.isValid }
             .onEach { note ->
                 if (note.isValid)

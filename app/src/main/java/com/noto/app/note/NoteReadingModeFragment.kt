@@ -24,7 +24,6 @@ import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -76,6 +75,7 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         abl.bringToFront()
+        viewModel.updateNoteAccessDate()
 
         viewModel.isDoNotDisturb
             .onEach { isDoNotDisturb ->
@@ -112,7 +112,6 @@ class NoteReadingModeFragment : Fragment() {
             viewModel.note,
             viewModel.font,
         ) { note, font -> setupNote(note, font) }
-            .onStart { viewModel.updateNoteAccessDate() }
             .launchIn(lifecycleScope)
 
         combine(
