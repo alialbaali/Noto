@@ -35,7 +35,7 @@ abstract class UndoRedoItem : EpoxyModelWithHolder<UndoRedoItem.Holder>() {
             ll.background?.mutate()?.setTint(if (isSelected) selectedColor else color)
         }
         ll.setOnClickListener(onClickListener)
-        ibCopy.setOnClickListener(onClickListener)
+        ibCopy.setOnClickListener(onCopyClickListener)
     }
 
     class Holder : EpoxyHolder() {

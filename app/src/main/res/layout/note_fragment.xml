@@ -128,25 +128,43 @@
         tools:layout_gravity="top"
         tools:visibility="visible">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_undo"
-            style="@style/ClickableTextView"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/ib_undo_history"
+            style="@style/ClickableView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_marginEnd="@dimen/spacing_small"
-            android:text="@string/undo"
-            android:drawableStart="@drawable/ic_round_undo_24" />
+            android:src="@drawable/ic_round_undo_history_24"
+            android:contentDescription="@string/undo_history" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_redo"
-            style="@style/ClickableTextView"
+        <ImageButton
+            android:id="@+id/ib_undo"
+            style="@style/ClickableView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/spacing_small"
+            android:contentDescription="@string/undo"
+            android:src="@drawable/ic_round_undo_24" />
+
+        <ImageButton
+            android:id="@+id/ib_redo"
+            style="@style/ClickableView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/spacing_small"
+            android:contentDescription="@string/redo"
+            android:src="@drawable/ic_round_redo_24" />
+
+        <ImageButton
+            android:id="@+id/ib_redo_history"
+            style="@style/ClickableView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_small"
-            android:text="@string/redo"
-            android:drawableStart="@drawable/ic_round_redo_24" />
+            android:src="@drawable/ic_round_redo_history_24"
+            android:contentDescription="@string/redo_history" />
     </LinearLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
