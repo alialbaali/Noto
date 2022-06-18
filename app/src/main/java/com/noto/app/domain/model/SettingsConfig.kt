@@ -20,4 +20,7 @@ data class SettingsConfig(
     val isDoNotDisturb: Boolean = false,
     val isScreenOn: Boolean = true,
     val mainInterfaceId: Long = AllFoldersId,
+    val isRememberScrollingPosition: Boolean = true,
+    val allNotesScrollingPosition: Int = 0,
+    val recentNotesScrollingPosition: Int = 0,
 )

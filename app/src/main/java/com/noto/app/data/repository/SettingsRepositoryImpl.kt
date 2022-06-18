@@ -35,7 +35,10 @@ class SettingsRepositoryImpl(
             isShowNotesCount.first(),
             isDoNotDisturb.first(),
             isScreenOn.first(),
-            mainInterfaceId.first()
+            mainInterfaceId.first(),
+            isRememberScrollingPosition.first(),
+            allNotesScrollingPosition.first(),
+            recentNotesScrollingPosition.first(),
         )
     }.flowOn(dispatcher)
 
@@ -211,6 +214,9 @@ class SettingsRepositoryImpl(
                 updateIsDoNotDisturb(isDoNotDisturb)
                 updateIsScreenOn(isScreenOn)
                 updateMainInterfaceId(mainInterfaceId)
+                updateIsRememberScrollingPosition(isRememberScrollingPosition)
+                updateAllNotesScrollingPosition(allNotesScrollingPosition)
+                updateRecentNotesScrollingPosition(recentNotesScrollingPosition)
             }
         }
     }
