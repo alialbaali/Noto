@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/BaseDialogFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -13,20 +12,32 @@
 
         <include layout="@layout/base_dialog_fragment" />
 
-        <TextView
-            android:id="@+id/tv_export"
-            style="@style/DialogItem"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/export_data"
-            app:drawableStartCompat="@drawable/ic_round_file_upload_24" />
+            android:orientation="horizontal"
+            android:padding="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle">
 
-        <TextView
-            android:id="@+id/tv_import"
-            style="@style/DialogItem"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/import_data"
-            app:drawableStartCompat="@drawable/ic_round_file_download_24" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_export"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/export_data"
+                android:drawableTop="@drawable/ic_round_file_upload_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_import"
+                style="@style/DialogQuickItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/import_data"
+                android:drawableTop="@drawable/ic_round_file_download_24" />
+
+        </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
