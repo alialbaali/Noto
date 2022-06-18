@@ -27,12 +27,12 @@ import com.noto.app.label.newLabelItem
 import com.noto.app.util.*
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.core.parameter.parametersOf
 
 class NoteFragment : Fragment() {
 
-    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId, args.body, args.labelsIds) }
+    private val viewModel by sharedViewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId, args.body, args.labelsIds) }
 
     private val args by navArgs<NoteFragmentArgs>()
 
@@ -42,6 +42,11 @@ class NoteFragment : Fragment() {
             setupState()
             setupListeners()
         }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity?.viewModelStore?.clear()
+    }
 
     @OptIn(FlowPreview::class)
     private fun NoteFragmentBinding.setupState() {
@@ -303,17 +308,59 @@ class NoteFragment : Fragment() {
             }
         }
 
-        tvUndo.setOnClickListener {
+        ibUndo.setOnClickListener {
             when {
                 etNoteTitle.isFocused -> viewModel.undoTitle()
                 etNoteBody.isFocused -> viewModel.undoBody()
             }
         }
 
-        tvRedo.setOnClickListener {
+        ibRedo.setOnClickListener {
             when {
                 etNoteTitle.isFocused -> viewModel.redoTitle()
                 etNoteBody.isFocused -> viewModel.redoBody()
+            }
+        }
+
+        ibUndoHistory.setOnClickListener {
+            when {
+                etNoteTitle.isFocused -> navController?.navigate(
+                    NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
+                        args.folderId,
+                        args.noteId,
+                        isUndo = true,
+                        isTitle = true
+                    )
+                )
+                etNoteBody.isFocused -> navController?.navigate(
+                    NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
+                        args.folderId,
+                        args.noteId,
+                        isUndo = true,
+                        isTitle = false
+                    )
+                )
+            }
+        }
+
+        ibRedoHistory.setOnClickListener {
+            when {
+                etNoteTitle.isFocused -> navController?.navigate(
+                    NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
+                        args.folderId,
+                        args.noteId,
+                        isUndo = false,
+                        isTitle = true
+                    )
+                )
+                etNoteBody.isFocused -> navController?.navigate(
+                    NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
+                        args.folderId,
+                        args.noteId,
+                        isUndo = false,
+                        isTitle = false
+                    )
+                )
             }
         }
 
@@ -432,20 +479,32 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.handleUndoRedo(replayCache: List<String>, currentText: String) {
         when {
             replayCache.none { it.isNotBlank() } -> {
-                tvUndo.disable()
-                tvRedo.disable()
+                ibUndo.disable()
+                ibRedo.disable()
+                ibUndoHistory.disable()
+                ibRedoHistory.disable()
             }
             replayCache.first() == currentText -> {
-                tvUndo.disable()
-                if (replayCache.size > 1) tvRedo.enable()
+                ibUndo.disable()
+                ibUndoHistory.disable()
+                if (replayCache.size > 1) {
+                    ibRedo.enable()
+                    ibRedoHistory.enable()
+                }
             }
             replayCache.last() == currentText -> {
-                tvRedo.disable()
-                if (replayCache.size > 1) tvUndo.enable()
+                ibRedo.disable()
+                ibRedoHistory.disable()
+                if (replayCache.size > 1) {
+                    ibUndo.enable()
+                    ibUndoHistory.enable()
+                }
             }
             else -> {
-                tvUndo.enable()
-                tvRedo.enable()
+                ibUndo.enable()
+                ibRedo.enable()
+                ibUndoHistory.enable()
+                ibRedoHistory.enable()
             }
         }
     }

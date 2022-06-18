@@ -229,12 +229,20 @@ class NoteViewModel(
         mutableNote.value = note.value.copy(body = value)
     }
 
-    private fun setIsUndoOrRedo() {
+    fun setIsUndoOrRedo() {
         mutableIsUndoOrRedo.value = true
     }
 
     fun resetIsUndoOrRedo() {
         mutableIsUndoOrRedo.value = false
+    }
+
+    fun setNoteTitle(title: String) {
+        mutableNote.value = note.value.copy(title = title)
+    }
+
+    fun setNoteBody(body: String) {
+        mutableNote.value = note.value.copy(body = body)
     }
 
     private fun List<String>.getPreviousValueOrCurrent(currentValue: String) = getOrElse(indexOf(currentValue) - 1) { currentValue }

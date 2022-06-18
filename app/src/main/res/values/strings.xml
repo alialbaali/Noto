@@ -164,7 +164,9 @@
     <string name="delete_note">Delete note</string>
     <string name="duplicate">Duplicate</string>
     <string name="undo">Undo</string>
+    <string name="undo_history">Undo history</string>
     <string name="redo">Redo</string>
+    <string name="redo_history">Redo history</string>
     <string name="share_note">Share note</string>
     <string name="notes_sorting">Notes sorting</string>
     <string name="sorting_type">Sorting type</string>
@@ -188,6 +190,7 @@
     <string name="copy_to">Copy to…</string>
     <string name="note_is_copied">Note has been copied.</string>
     <string name="note_copied_to_clipboard">Note has been copied to clipboard.</string>
+    <string name="text_copied">Text has been copied to clipboard.</string>
     <string name="delete_note_confirmation">Are you sure you want to delete this note?</string>
     <string name="share_with">Share with…</string>
     <string name="add_note_reminder">Add reminder</string>

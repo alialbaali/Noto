@@ -154,6 +154,9 @@
             android:name="is_body_visible"
             android:defaultValue="false"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_noteFragment_to_undoRedoDialogFragment"
+            app:destination="@id/undoRedoDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/folderArchiveFragment"
@@ -553,5 +556,22 @@
         <argument
             android:name="folder_id"
             app:argType="long" />
+    </dialog>
+    <dialog
+        android:id="@+id/undoRedoDialogFragment"
+        android:name="com.noto.app.note.UndoRedoDialogFragment"
+        android:label="UndoRedoDialogFragment">
+        <argument
+            android:name="folder_id"
+            app:argType="long" />
+        <argument
+            android:name="note_id"
+            app:argType="long" />
+        <argument
+            android:name="is_undo"
+            app:argType="boolean" />
+        <argument
+            android:name="is_title"
+            app:argType="boolean" />
     </dialog>
 </navigation>
