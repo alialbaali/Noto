@@ -2,12 +2,15 @@ package com.noto.app.allnotes
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -151,6 +154,10 @@ class AllNotesFragment : Fragment() {
             .onEach { isVisible ->
                 fab.isVisible = !isVisible
                 bab.isVisible = !isVisible
+                tilSearch.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+                    anchorId = if (isVisible) View.NO_ID else fab.id
+                    gravity = if (isVisible) Gravity.BOTTOM else Gravity.TOP
+                }
             }
             .launchIn(lifecycleScope)
 

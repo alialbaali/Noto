@@ -2,14 +2,13 @@ package com.noto.app.folder
 
 import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.activity.addCallback
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -113,6 +112,10 @@ class FolderFragment : Fragment() {
             .onEach { isVisible ->
                 fab.isVisible = !isVisible
                 bab.isVisible = !isVisible
+                tilSearch.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+                    anchorId = if (isVisible) View.NO_ID else fab.id
+                    gravity = if (isVisible) Gravity.BOTTOM else Gravity.TOP
+                }
             }
             .launchIn(lifecycleScope)
     }
