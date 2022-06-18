@@ -1,22 +1,23 @@
 package com.noto.app.domain.model
 
+import com.noto.app.util.AllFoldersId
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class SettingsConfig(
-    val theme: Theme,
-    val font: Font,
-    val language: Language,
-    val vaultPasscode: String?,
-    val vaultTimeout: VaultTimeout,
-    val scheduledVaultTimeout: VaultTimeout?,
-    val isVaultOpen: Boolean,
-    val isBioAuthEnabled: Boolean,
-    val lastVersion: String,
-    val sortingType: FolderListSortingType,
-    val sortingOrder: SortingOrder,
-    val isShowNotesCount: Boolean,
-    val isDoNotDisturb: Boolean,
-    val isScreenOn: Boolean,
-    val mainInterfaceId: Long,
+    val theme: Theme = Theme.System,
+    val font: Font = Font.Nunito,
+    val language: Language = Language.System,
+    val vaultPasscode: String? = null,
+    val vaultTimeout: VaultTimeout = VaultTimeout.Immediately,
+    val scheduledVaultTimeout: VaultTimeout? = null,
+    val isVaultOpen: Boolean = false,
+    val isBioAuthEnabled: Boolean = false,
+    val lastVersion: String = Release.Version.Last,
+    val sortingType: FolderListSortingType = FolderListSortingType.CreationDate,
+    val sortingOrder: SortingOrder = SortingOrder.Descending,
+    val isShowNotesCount: Boolean = false,
+    val isDoNotDisturb: Boolean = false,
+    val isScreenOn: Boolean = true,
+    val mainInterfaceId: Long = AllFoldersId,
 )

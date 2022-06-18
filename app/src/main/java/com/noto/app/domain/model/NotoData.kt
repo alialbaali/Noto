@@ -4,9 +4,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class NotoData(
-    val folders: List<Folder>,
-    val notes: List<Note>,
-    val labels: List<Label>,
-    val noteLabels: List<NoteLabel>,
-    val settings: SettingsConfig,
+    val folders: List<Folder> = emptyList(),
+    val notes: List<Note> = emptyList(),
+    val labels: List<Label> = emptyList(),
+    val noteLabels: List<NoteLabel> = emptyList(),
+    val settings: SettingsConfig = SettingsConfig(),
 )
