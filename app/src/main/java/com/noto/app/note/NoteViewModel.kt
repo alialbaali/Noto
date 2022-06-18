@@ -27,6 +27,15 @@ class NoteViewModel(
     private val mutableNote = MutableStateFlow(Note(noteId, folderId, position = 0))
     val note get() = mutableNote.asStateFlow()
 
+    private val mutableTitleHistory = MutableSharedFlow<String>(replay = Int.MAX_VALUE)
+    val titleHistory get() = mutableTitleHistory.asSharedFlow()
+
+    private val mutableBodyHistory = MutableSharedFlow<String>(replay = Int.MAX_VALUE)
+    val bodyHistory get() = mutableBodyHistory.asSharedFlow()
+
+    private val mutableIsUndoOrRedo = MutableStateFlow(false)
+    val isUndoOrRedo get() = mutableIsUndoOrRedo.asStateFlow()
+
     val folder = folderRepository.getFolderById(folderId)
         .filterNotNull()
         .stateIn(viewModelScope, SharingStarted.Lazily, Folder(position = 0))
@@ -73,10 +82,10 @@ class NoteViewModel(
             .launchIn(viewModelScope)
     }
 
-    fun createOrUpdateNote(title: String, body: String) = viewModelScope.launch {
+    fun createOrUpdateNote(title: String, body: String, trimContent: Boolean) = viewModelScope.launch {
         val note = note.value.copy(
-            title = title.trim(),
-            body = body.trim(),
+            title = title.takeUnless { trimContent } ?: title.trim(),
+            body = body.takeUnless { trimContent } ?: body.trim(),
             accessDate = Clock.System.now(),
         )
         if (note.isValid)
@@ -185,4 +194,50 @@ class NoteViewModel(
             .firstOrNull()
             ?.let { note -> noteRepository.updateNote(note.copy(accessDate = Clock.System.now())) }
     }
+
+    fun emitNewTitleOnly(title: String) = viewModelScope.launch {
+        if (!titleHistory.replayCache.contains(title))
+            mutableTitleHistory.emit(title)
+    }
+
+    fun emitNewBodyOnly(body: String) = viewModelScope.launch {
+        if (!bodyHistory.replayCache.contains(body))
+            mutableBodyHistory.emit(body)
+    }
+
+    fun undoTitle() {
+        val value = titleHistory.replayCache.getPreviousValueOrCurrent(note.value.title)
+        setIsUndoOrRedo()
+        mutableNote.value = note.value.copy(title = value)
+    }
+
+    fun redoTitle() {
+        val value = titleHistory.replayCache.getNextValueOrCurrent(note.value.title)
+        setIsUndoOrRedo()
+        mutableNote.value = note.value.copy(title = value)
+    }
+
+    fun undoBody() {
+        val value = bodyHistory.replayCache.getPreviousValueOrCurrent(note.value.body)
+        setIsUndoOrRedo()
+        mutableNote.value = note.value.copy(body = value)
+    }
+
+    fun redoBody() {
+        val value = bodyHistory.replayCache.getNextValueOrCurrent(note.value.body)
+        setIsUndoOrRedo()
+        mutableNote.value = note.value.copy(body = value)
+    }
+
+    private fun setIsUndoOrRedo() {
+        mutableIsUndoOrRedo.value = true
+    }
+
+    fun resetIsUndoOrRedo() {
+        mutableIsUndoOrRedo.value = false
+    }
+
+    private fun List<String>.getPreviousValueOrCurrent(currentValue: String) = getOrElse(indexOf(currentValue) - 1) { currentValue }
+
+    private fun List<String>.getNextValueOrCurrent(currentValue: String) = getOrElse(indexOf(currentValue) + 1) { currentValue }
 }

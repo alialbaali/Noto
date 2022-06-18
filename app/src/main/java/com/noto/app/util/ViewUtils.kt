@@ -22,7 +22,6 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.graphics.ColorUtils
-import androidx.core.view.OnApplyWindowInsetsListener
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -45,15 +44,15 @@ import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.callbackFlow
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import kotlin.math.absoluteValue
 
 const val SetColorFilterMethodName = "setColorFilter"
 const val SetBackgroundResourceMethodName = "setBackgroundResource"
 const val SwipeGestureThreshold = 100F
 const val DebounceTimeoutMillis = 250L
+const val DisabledAlpha = 127
+const val EnabledAlpha = 255
 
 fun NavController.navigateSafely(directions: NavDirections, builder: (NavOptionsBuilder.() -> Unit)? = null) {
     if (currentDestination?.getAction(directions.actionId) != null)
@@ -272,12 +271,44 @@ fun View.scrollPositionAsFlow() = callbackFlow {
     awaitClose { viewTreeObserver?.removeOnScrollChangedListener(listener) }
 }
 
-fun View.keyboardVisibilityAsFlow() = callbackFlow {
-    val listener = OnApplyWindowInsetsListener { _, insets ->
-        val isVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
-        trySend(isVisible)
-        insets
+// Works only on API 29 and above
+//fun View.keyboardVisibilityAsFlow() = callbackFlow {
+//    val listener = OnApplyWindowInsetsListener { _, insets ->
+//        val isVisible = insets.isVisible(WindowInsetsCompat.Type.ime())
+//        trySend(isVisible)
+//        insets
+//    }
+//    ViewCompat.setOnApplyWindowInsetsListener(this@keyboardVisibilityAsFlow, listener)
+//    awaitClose { ViewCompat.setOnApplyWindowInsetsListener(this@keyboardVisibilityAsFlow, null) }
+//}
+
+fun View.keyboardVisibilityAsFlow() = onPreDrawFlow()
+    .map { isKeyboardVisible() }
+    .distinctUntilChanged()
+
+fun View.onPreDrawFlow() = callbackFlow {
+    val onPreDrawListener = ViewTreeObserver.OnPreDrawListener {
+        trySend(Unit)
+        true
     }
-    ViewCompat.setOnApplyWindowInsetsListener(this@keyboardVisibilityAsFlow, listener)
-    awaitClose { ViewCompat.setOnApplyWindowInsetsListener(this@keyboardVisibilityAsFlow, null) }
+    viewTreeObserver?.addOnPreDrawListener(onPreDrawListener)
+    awaitClose { viewTreeObserver?.removeOnPreDrawListener(onPreDrawListener) }
+}
+
+fun View.isKeyboardVisible(): Boolean = ViewCompat.getRootWindowInsets(this)
+    ?.isVisible(WindowInsetsCompat.Type.ime()) ?: false
+
+fun View.isFocusedAsFlow() = callbackFlow {
+    setOnFocusChangeListener { _, hasFocus -> trySend(hasFocus) }
+    awaitClose { onFocusChangeListener = null }
+}.onStart { emit(isFocused) }
+
+fun View.disable() {
+    alpha = 0.5F
+    isEnabled = false
+}
+
+fun View.enable() {
+    alpha = 1F
+    isEnabled = true
 }

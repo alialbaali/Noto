@@ -67,11 +67,15 @@ class NoteFragment : Fragment() {
 
         combine(
             viewModel.note,
-            viewModel.isRememberScrollingPosition
-        ) { note, isRememberScrollingPosition ->
+            viewModel.isRememberScrollingPosition,
+            viewModel.isUndoOrRedo,
+        ) { note, isRememberScrollingPosition, isUndoOrRedo ->
             setupShortcut(note)
-            if (etNoteTitle.text.isNullOrBlank() && etNoteBody.text.isNullOrBlank())
+            val isTextNullOrBlank = etNoteTitle.text.isNullOrBlank() && etNoteBody.text.isNullOrBlank()
+            if (isTextNullOrBlank || isUndoOrRedo) {
                 setupNote(note, isRememberScrollingPosition)
+                viewModel.resetIsUndoOrRedo()
+            }
         }.launchIn(lifecycleScope)
 
         viewModel.note
@@ -141,22 +145,67 @@ class NoteFragment : Fragment() {
             }
         }.launchIn(lifecycleScope)
 
+        etNoteBody.textAsFlow(emitInitialText = true)
+            .filterNotNull()
+            .map { it.toString() }
+            .onEach { body ->
+                tvWordCount.text = context?.quantityStringResource(
+                    R.plurals.words_count,
+                    body.wordsCount,
+                    body.wordsCount
+                )?.lowercase()
+            }
+            .launchIn(lifecycleScope)
+
         combine(
             etNoteTitle.textAsFlow(emitInitialText = true)
-                .filterNotNull(),
+                .filterNotNull()
+                .map { it.toString() },
             etNoteBody.textAsFlow(emitInitialText = true)
-                .filterNotNull(),
+                .filterNotNull()
+                .map { it.toString() },
         ) { title, body -> title to body }
-            .onEach { (_, body) ->
-                tvWordCount.text = context?.quantityStringResource(R.plurals.words_count, body.wordsCount, body.wordsCount)?.lowercase()
-            }
             .debounce(DebounceTimeoutMillis)
             .onEach { (title, body) ->
-                viewModel.createOrUpdateNote(title.toString(), body.toString())
+                viewModel.createOrUpdateNote(title, body, trimContent = false)
                 context?.updateAllWidgetsData()
                 context?.updateNoteListWidgets()
             }
             .launchIn(lifecycleScope)
+
+        etNoteTitle.textAsFlow(emitInitialText = true)
+            .filterNotNull()
+            .debounce(DebounceTimeoutMillis)
+            .map { it.toString() }
+            .onEach { title -> viewModel.emitNewTitleOnly(title) }
+            .launchIn(lifecycleScope)
+
+        etNoteBody.textAsFlow(emitInitialText = true)
+            .filterNotNull()
+            .debounce(DebounceTimeoutMillis)
+            .map { it.toString() }
+            .onEach { body -> viewModel.emitNewBodyOnly(body) }
+            .launchIn(lifecycleScope)
+
+        combine(
+            viewModel.titleHistory,
+            etNoteTitle.textAsFlow(emitInitialText = true)
+                .filterNotNull()
+                .map { it.toString() },
+            etNoteTitle.isFocusedAsFlow(),
+        ) { _, title, isFocused ->
+            if (isFocused) handleUndoRedo(viewModel.titleHistory.replayCache, title)
+        }.launchIn(lifecycleScope)
+
+        combine(
+            viewModel.bodyHistory,
+            etNoteBody.textAsFlow(emitInitialText = true)
+                .filterNotNull()
+                .map { it.toString() },
+            etNoteBody.isFocusedAsFlow(),
+        ) { _, body, isFocused ->
+            if (isFocused) handleUndoRedo(viewModel.bodyHistory.replayCache, body)
+        }.launchIn(lifecycleScope)
 
         nsv.scrollPositionAsFlow()
             .debounce(DebounceTimeoutMillis)
@@ -167,27 +216,26 @@ class NoteFragment : Fragment() {
             .onEach { isVisible ->
                 fab.isVisible = !isVisible
                 bab.isVisible = !isVisible
+                llToolbar.isVisible = isVisible
             }
             .launchIn(lifecycleScope)
     }
 
     private fun NoteFragmentBinding.enableBottomAppBarActions() {
-        val alpha = 255
-        fab.imageAlpha = alpha
+        fab.imageAlpha = EnabledAlpha
         fab.isEnabled = true
         bab.menu.forEach {
             it.isEnabled = true
-            it.icon?.alpha = alpha
+            it.icon?.alpha = EnabledAlpha
         }
     }
 
     private fun NoteFragmentBinding.disableBottomAppBarActions() {
-        val alpha = 128
-        fab.imageAlpha = alpha
+        fab.imageAlpha = DisabledAlpha
         fab.isEnabled = false
         bab.menu.forEach {
             it.isEnabled = false
-            it.icon?.alpha = alpha
+            it.icon?.alpha = DisabledAlpha
         }
     }
 
@@ -214,6 +262,7 @@ class NoteFragment : Fragment() {
             viewModel.createOrUpdateNote(
                 etNoteTitle.text.toString(),
                 etNoteBody.text.toString(),
+                trimContent = true,
             )
             context?.updateAllWidgetsData()
             context?.updateNoteListWidgets()
@@ -251,6 +300,20 @@ class NoteFragment : Fragment() {
                     true
                 }
                 else -> false
+            }
+        }
+
+        tvUndo.setOnClickListener {
+            when {
+                etNoteTitle.isFocused -> viewModel.undoTitle()
+                etNoteBody.isFocused -> viewModel.undoBody()
+            }
+        }
+
+        tvRedo.setOnClickListener {
+            when {
+                etNoteTitle.isFocused -> viewModel.redoTitle()
+                etNoteBody.isFocused -> viewModel.redoBody()
             }
         }
 
@@ -366,6 +429,26 @@ class NoteFragment : Fragment() {
         activity?.showKeyboard(this)
     }
 
+    private fun NoteFragmentBinding.handleUndoRedo(replayCache: List<String>, currentText: String) {
+        when {
+            replayCache.none { it.isNotBlank() } -> {
+                tvUndo.disable()
+                tvRedo.disable()
+            }
+            replayCache.first() == currentText -> {
+                tvUndo.disable()
+                if (replayCache.size > 1) tvRedo.enable()
+            }
+            replayCache.last() == currentText -> {
+                tvRedo.disable()
+                if (replayCache.size > 1) tvUndo.enable()
+            }
+            else -> {
+                tvUndo.enable()
+                tvRedo.enable()
+            }
+        }
+    }
 }
 
 private val NoteFragmentBinding.NoteListUpdateCallback
