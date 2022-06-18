@@ -406,4 +406,13 @@
         <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
+    <style name="ClickableTextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:background">@drawable/generic_clickable_shape</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:textSize">@dimen/size_extra_small</item>
+        <item name="android:textColor">?attr/notoPrimaryColor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">@dimen/spacing_normal</item>
+    </style>
+
 </resources>

@@ -163,6 +163,8 @@
     <string name="create_note">Create note</string>
     <string name="delete_note">Delete note</string>
     <string name="duplicate">Duplicate</string>
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
     <string name="share_note">Share note</string>
     <string name="notes_sorting">Notes sorting</string>
     <string name="sorting_type">Sorting type</string>

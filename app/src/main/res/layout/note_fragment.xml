@@ -117,6 +117,38 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
+    <LinearLayout
+        android:id="@+id/ll_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="@dimen/spacing_normal"
+        android:visibility="gone"
+        tools:layout_anchor="@id/fab"
+        tools:layout_gravity="top"
+        tools:visibility="visible">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_undo"
+            style="@style/ClickableTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:text="@string/undo"
+            android:drawableStart="@drawable/ic_round_undo_24" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_redo"
+            style="@style/ClickableTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:text="@string/redo"
+            android:drawableStart="@drawable/ic_round_redo_24" />
+    </LinearLayout>
+
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
         android:layout_width="match_parent"
