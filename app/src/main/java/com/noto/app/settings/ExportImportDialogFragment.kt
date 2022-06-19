@@ -13,6 +13,8 @@ import com.noto.app.R
 import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ExportImportDialogFragmentBinding
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val FileType = "application/json"
@@ -50,6 +52,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?,
     ): View = ExportImportDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         setupBaseDialogFragment()
+        setupState()
         setupListeners()
     }
 
@@ -59,6 +62,18 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                 tvDialogTitle.text = context.stringResource(R.string.export_import_data)
             }
         }
+
+    private fun ExportImportDialogFragmentBinding.setupState() {
+        viewModel.isImportFinished
+            .onEach {
+                context?.let { context ->
+                    parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_imported))
+                    navController?.navigateUp()
+                    dismiss()
+                }
+            }
+            .launchIn(lifecycleScope)
+    }
 
     private fun ExportImportDialogFragmentBinding.setupListeners() {
         tvExport.setOnClickListener {
@@ -114,11 +129,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                 lifecycleScope.launchWhenCreated {
                     val json = readTextFromInputStream(inputStream)
                     viewModel.importJson(json)
-                }.invokeOnCompletion {
-                    parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_imported))
-                    navController?.navigateUp()
-                    dismiss()
-                }
+                }.invokeOnCompletion { viewModel.emitIsImportFinished() }
             } else {
                 parentFragment?.view?.snackbar(context.stringResource(R.string.importing_failed))
                 navController?.navigateUp()
