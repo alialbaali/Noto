@@ -17,12 +17,25 @@
         app:fontFamily="@font/nunito_bold"
         tools:text="Libraries" />
 
-    <ImageView
-        android:id="@+id/iv_visibility"
-        android:src="@drawable/ic_round_arrow_down_24"
+    <ImageButton
+        android:id="@+id/ib_create"
+        android:paddingHorizontal="@dimen/spacing_small"
+        android:src="@drawable/ic_round_add_24"
+        android:background="@drawable/round_btn_surface_shape"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:contentDescription="@string/create_note"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ImageButton
+        android:id="@+id/ib_visibility"
         android:paddingHorizontal="@dimen/spacing_small"
+        android:src="@drawable/ic_round_arrow_down_24"
+        android:background="@drawable/round_btn_surface_shape"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:contentDescription="@string/hide"
-        app:tint="?attr/notoSecondaryColor" />
+        android:visibility="gone"
+        tools:visibility="visible" />
 </LinearLayout>

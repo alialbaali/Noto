@@ -219,7 +219,19 @@ class FolderFragment : Fragment() {
                                 placeholder(context.stringResource(R.string.no_notes_found))
                             }
                         else
-                            buildNotesModels(context, folder, notes) { notes ->
+                            buildNotesModels(
+                                context,
+                                folder,
+                                notes,
+                                onCreateClick = {
+                                    navController?.navigateSafely(
+                                        FolderFragmentDirections.actionFolderFragmentToNoteFragment(
+                                            args.folderId,
+                                            labelsIds = it.toLongArray()
+                                        )
+                                    )
+                                }
+                            ) { notes ->
                                 notes.forEach { entry ->
                                     noteItem {
                                         id(entry.first.id)

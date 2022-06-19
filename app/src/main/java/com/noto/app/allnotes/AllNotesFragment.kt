@@ -206,6 +206,9 @@ class AllNotesFragment : Fragment() {
                                     color(folder.color)
                                     isVisible(isVisible)
                                     onClickListener { _ -> viewModel.toggleVisibilityForFolder(folder.id) }
+                                    onCreateClickListener { _ ->
+                                        navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(folder.id))
+                                    }
                                 }
 
                                 if (isVisible)

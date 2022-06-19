@@ -21,6 +21,7 @@ inline fun EpoxyController.buildNotesModels(
     context: Context,
     folder: Folder,
     notes: List<NoteWithLabels>,
+    crossinline onCreateClick: (List<Long>) -> Unit,
     content: (List<NoteWithLabels>) -> Unit,
 ) {
     when (folder.grouping) {
@@ -63,12 +64,14 @@ inline fun EpoxyController.buildNotesModels(
                         id("without_label")
                         title(context.stringResource(R.string.without_label))
                         color(folder.color)
+                        onCreateClickListener { _ -> onCreateClick(emptyList()) }
                     }
                 else
                     headerItem {
                         id(*labels.map { it.id }.toTypedArray())
                         title(labels.joinToString(" • ") { it.title })
                         color(folder.color)
+                        onCreateClickListener { _ -> onCreateClick(labels.map { it.id }) }
                     }
                 content(notes)
             }

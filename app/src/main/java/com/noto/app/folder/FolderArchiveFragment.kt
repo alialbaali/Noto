@@ -85,7 +85,19 @@ class FolderArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                             placeholder(context.stringResource(R.string.archive_is_empty))
                         }
                     else
-                        buildNotesModels(context, folder, archivedNotes) { notes ->
+                        buildNotesModels(
+                            context,
+                            folder,
+                            archivedNotes,
+                            onCreateClick = {
+                                navController?.navigateSafely(
+                                    FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteFragment(
+                                        args.folderId,
+                                        labelsIds = it.toLongArray()
+                                    )
+                                )
+                            }
+                        ) { notes ->
                             notes.forEach { archivedNote ->
                                 noteItem {
                                     id(archivedNote.first.id)

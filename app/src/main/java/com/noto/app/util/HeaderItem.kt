@@ -27,25 +27,37 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     var onClickListener: View.OnClickListener? = null
 
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var onCreateClickListener: View.OnClickListener? = null
+
     override fun bind(holder: Holder) = with(holder.binding) {
         tvTitle.text = title
-        ivVisibility.animate().setDuration(DefaultAnimationDuration).rotation(if (isVisible) 180F else 0F)
-        ivVisibility.contentDescription = root.context?.stringResource(if (isVisible) R.string.hide else R.string.show)
+        ibVisibility.animate().setDuration(DefaultAnimationDuration).rotation(if (isVisible) 180F else 0F)
+        ibVisibility.contentDescription = root.context?.stringResource(if (isVisible) R.string.hide else R.string.show)
+        ibVisibility.setOnClickListener(onClickListener)
+        ibCreate.setOnClickListener(onCreateClickListener)
         root.setOnClickListener(onClickListener)
         root.isClickable = onClickListener != null
-        ivVisibility.isVisible = onClickListener != null
+        ibVisibility.isVisible = onClickListener != null
+        ibCreate.isVisible = onCreateClickListener != null
         if (color != null) {
             val colorResource = root.context.colorResource(color!!.toResource())
             val colorStateList = colorResource.toColorStateList()
             tvTitle.setTextColor(colorResource)
-            ivVisibility.imageTintList = colorStateList
+            ibVisibility.imageTintList = colorStateList
+            ibCreate.imageTintList = colorStateList
             root.background.setRippleColor(colorStateList)
+            ibCreate.background.setRippleColor(colorStateList)
+            ibVisibility.background.setRippleColor(colorStateList)
         } else {
             val colorResource = root.context.colorAttributeResource(R.attr.notoSecondaryColor)
             val rippleColorResource = root.context.colorAttributeResource(R.attr.notoSurfaceColor)
             tvTitle.setTextColor(colorResource)
-            ivVisibility.imageTintList = colorResource.toColorStateList()
+            ibVisibility.imageTintList = colorResource.toColorStateList()
+            ibCreate.imageTintList = colorResource.toColorStateList()
             root.background.setRippleColor(rippleColorResource.toColorStateList())
+            ibCreate.background.setRippleColor(rippleColorResource.toColorStateList())
+            ibVisibility.background.setRippleColor(rippleColorResource.toColorStateList())
         }
     }
 
