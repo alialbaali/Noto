@@ -10,6 +10,7 @@ import com.noto.app.domain.model.SortingOrder
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
+import com.noto.app.getOrDefault
 import com.noto.app.util.sorted
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -88,8 +89,11 @@ class MainViewModel(
     val isShowNotesCount = settingsRepository.isShowNotesCount
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
-    val allNotes = noteRepository.getAllNotes()
-        .map { it.filterNot { note -> note.isArchived || note.isVaulted } }
+    val allNotes = noteRepository.getAllMainNotes()
+        .combine(folders) { notes, state ->
+            val folders = state.getOrDefault(emptyList())
+            notes.filter { note -> folders.any { folder -> folder.first.id == note.folderId } }
+        }
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     fun updateSortingType(value: FolderListSortingType) = viewModelScope.launch {
