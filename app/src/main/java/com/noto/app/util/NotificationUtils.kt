@@ -66,22 +66,24 @@ fun NotificationManager.createVaultNotification(context: Context) {
     notify(VaultNotificationId, notification)
 }
 
-private fun Context.createVaultNotificationPendingIntent(): PendingIntent {
+private fun Context.createVaultNotificationPendingIntent(): PendingIntent? {
     return NavDeepLinkBuilder(this)
         .setGraph(R.navigation.nav_graph)
         .setDestination(R.id.mainVaultFragment)
-        .createPendingIntent()
+        .createTaskStackBuilder()
+        .getPendingIntent(RequestCode, PendingIntentFlags)
 }
 
 fun NotificationManager.cancelVaultNotification() = cancel(VaultNotificationId)
 
-private fun Context.createNotificationPendingIntent(noteId: Long, folderId: Long): PendingIntent {
+private fun Context.createNotificationPendingIntent(noteId: Long, folderId: Long): PendingIntent? {
     val args = bundleOf(Constants.FolderId to folderId, Constants.NoteId to noteId)
     return NavDeepLinkBuilder(this)
         .setGraph(R.navigation.nav_graph)
         .setDestination(R.id.noteFragment)
         .setArguments(args)
-        .createPendingIntent()
+        .createTaskStackBuilder()
+        .getPendingIntent(RequestCode, PendingIntentFlags)
 }
 
 fun NotificationManager.createNotificationChannels(context: Context) {
