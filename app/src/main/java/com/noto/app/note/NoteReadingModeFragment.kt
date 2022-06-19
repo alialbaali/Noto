@@ -59,7 +59,7 @@ class NoteReadingModeFragment : Fragment() {
             val scrollPosition = nsv.scrollY
             val isTitleVisible = tvNoteTitle.isLayoutVisible(root)
             val isBodyVisible = tvNoteBody.isLayoutVisible(root)
-            navController?.navigate(
+            navController?.navigateSafely(
                 NoteReadingModeFragmentDirections
                     .actionNoteReadingModeFragmentToNoteFragment(
                         args.folderId,

@@ -114,7 +114,7 @@ class NewFolderFragment : Fragment() {
                     cursorPosition,
                     swShowNoteCreationDate.isChecked,
                     onCreateFolder = { folderId ->
-                        navController?.navigate(NewFolderFragmentDirections.actionNewFolderFragmentToFolderFragment(folderId))
+                        navController?.navigateSafely(NewFolderFragmentDirections.actionNewFolderFragmentToFolderFragment(folderId))
                     }
                 ).invokeOnCompletion {
                     context?.updateAllWidgetsData()

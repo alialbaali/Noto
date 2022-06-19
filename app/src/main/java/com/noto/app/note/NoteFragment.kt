@@ -324,7 +324,7 @@ class NoteFragment : Fragment() {
 
         ibUndoHistory.setOnClickListener {
             when {
-                etNoteTitle.isFocused -> navController?.navigate(
+                etNoteTitle.isFocused -> navController?.navigateSafely(
                     NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
                         args.folderId,
                         args.noteId,
@@ -332,7 +332,7 @@ class NoteFragment : Fragment() {
                         isTitle = true
                     )
                 )
-                etNoteBody.isFocused -> navController?.navigate(
+                etNoteBody.isFocused -> navController?.navigateSafely(
                     NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
                         args.folderId,
                         args.noteId,
@@ -345,7 +345,7 @@ class NoteFragment : Fragment() {
 
         ibRedoHistory.setOnClickListener {
             when {
-                etNoteTitle.isFocused -> navController?.navigate(
+                etNoteTitle.isFocused -> navController?.navigateSafely(
                     NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
                         args.folderId,
                         args.noteId,
@@ -353,7 +353,7 @@ class NoteFragment : Fragment() {
                         isTitle = true
                     )
                 )
-                etNoteBody.isFocused -> navController?.navigate(
+                etNoteBody.isFocused -> navController?.navigateSafely(
                     NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
                         args.folderId,
                         args.noteId,
