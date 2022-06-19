@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.VaultTimeoutDialogFragmentBinding
 import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.util.stringResource
@@ -25,18 +24,13 @@ class VaultTimeoutDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = VaultTimeoutDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        setupBaseDialogFragment()
         setupState()
         setupListeners()
     }
 
-    private fun VaultTimeoutDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        context?.let { context ->
-            tvDialogTitle.text = context.stringResource(R.string.vault_timeout)
-        }
-    }
-
     private fun VaultTimeoutDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.vault_timeout)
+
         viewModel.vaultTimeout
             .onEach { timeout ->
                 when (timeout) {

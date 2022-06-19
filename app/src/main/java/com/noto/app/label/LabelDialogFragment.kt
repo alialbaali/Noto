@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.LabelDialogFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -27,26 +26,20 @@ class LabelDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = LabelDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        val baseDialogFragment = setupBaseDialogFragment()
-        setupState(baseDialogFragment)
+        setupState()
         setupListeners()
     }
 
-    private fun LabelDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-        .apply {
-            context?.let { context ->
-                tvDialogTitle.text = context.stringResource(R.string.label_options)
-            }
-        }
+    private fun LabelDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.label_options)
 
-    private fun LabelDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         viewModel.folder
             .onEach { folder ->
                 context?.let { context ->
                     val color = context.colorResource(folder.color.toResource())
                     val colorStateList = color.toColorStateList()
-                    baseDialogFragment.vHead.background?.mutate()?.setTint(color)
-                    baseDialogFragment.tvDialogTitle.setTextColor(color)
+                    tb.vHead.background?.mutate()?.setTint(color)
+                    tb.tvDialogTitle.setTextColor(color)
                     listOf(tvEditLabel, tvReorderLabel, tvDeleteLabel)
                         .forEach { tv ->
                             tv.background.setRippleColor(colorStateList)

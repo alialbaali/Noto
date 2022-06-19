@@ -25,7 +25,9 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include layout="@layout/base_dialog_fragment" />
+            <include
+                android:id="@+id/tb"
+                layout="@layout/dialog_fragment_toolbar" />
 
             <LinearLayout
                 android:orientation="horizontal"

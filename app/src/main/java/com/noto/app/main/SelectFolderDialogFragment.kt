@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.SelectFolderDialogFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsable = true) {
@@ -38,21 +38,14 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                 dialog?.setCanceledOnTouchOutside(false)
                 dialog?.setOnCancelListener { activity?.finish() }
             }
-            setupBaseDialogFragment()
             setupState()
-        }
-
-    private fun SelectFolderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-        .apply {
-            context?.let { context ->
-                tvDialogTitle.text = context.stringResource(if (args.isMainInterface) R.string.select_main_interface else R.string.select_folder)
-            }
         }
 
     private fun SelectFolderDialogFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.itemAnimator = VerticalListItemAnimator()
+        tb.tvDialogTitle.text = context?.stringResource(if (args.isMainInterface) R.string.select_main_interface else R.string.select_folder)
 
         combine(
             viewModel.folders,
@@ -63,6 +56,10 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                 isShowNotesCount
             )
         }.launchIn(lifecycleScope)
+
+        rv.isScrollingAsFlow()
+            .onEach { isScrolling -> tb.ll.isSelected = isScrolling }
+            .launchIn(lifecycleScope)
     }
 
     @SuppressLint("ClickableViewAccessibility")

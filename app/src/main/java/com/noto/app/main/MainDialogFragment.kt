@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainDialogFragmentBinding
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
@@ -21,16 +20,17 @@ class MainDialogFragment : BaseDialogFragment() {
 
     private val viewModel by viewModel<MainViewModel>()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        MainDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-            setupBaseDialogFragment()
-            setupListeners()
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View = MainDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+        setupState()
+        setupListeners()
+    }
 
-    private fun MainDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        context?.let { context ->
-            tvDialogTitle.text = context.stringResource(R.string.app_name)
-        }
+    private fun MainDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.app_name)
     }
 
     private fun MainDialogFragmentBinding.setupListeners() {
@@ -41,6 +41,7 @@ class MainDialogFragment : BaseDialogFragment() {
 
         tvFoldersVault.setOnClickListener {
             /**
+             * TODO
              * Temporary fix due to Koin creating multiple instances of [MainViewModel].
              * */
             viewModel.settingsVaultPasscode

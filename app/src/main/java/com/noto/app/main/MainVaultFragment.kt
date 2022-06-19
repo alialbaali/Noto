@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainVaultFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.util.*
@@ -38,13 +37,8 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = MainVaultFragmentBinding.inflate(layoutInflater, container, false).withBinding {
-        setupBaseDialogFragment()
         setupListeners()
         setupState()
-    }
-
-    private fun MainVaultFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = context?.stringResource(R.string.folders_vault)
     }
 
     private fun MainVaultFragmentBinding.setupListeners() {
@@ -78,6 +72,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.itemAnimator = VerticalListItemAnimator()
+        tb.tvDialogTitle.text = context?.stringResource(R.string.folders_vault)
 
         combine(viewModel.isVaultOpen, viewModel.isBioAuthEnabled) { isVaultOpen, isBioAuthEnabled ->
             if (isBioAuthEnabled) {
@@ -138,6 +133,10 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
         ) { folders, isShowNotesCount, isVaultOpen ->
             setupFolders(folders, isShowNotesCount, isVaultOpen)
         }.launchIn(lifecycleScope)
+
+        rv.isScrollingAsFlow()
+            .onEach { isScrolling -> tb.ll.isSelected = isScrolling }
+            .launchIn(lifecycleScope)
     }
 
     @SuppressLint("ClickableViewAccessibility")

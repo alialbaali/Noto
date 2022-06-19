@@ -25,6 +25,7 @@ import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.widget.NestedScrollView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -311,4 +312,22 @@ fun View.disable() {
 fun View.enable() {
     alpha = 1F
     isEnabled = true
+}
+
+fun RecyclerView.isScrollingAsFlow() = callbackFlow {
+    val listener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            trySend(canScrollVertically(-1))
+        }
+    }
+    addOnScrollListener(listener)
+    awaitClose { removeOnScrollListener(listener) }
+}
+
+fun NestedScrollView.isScrollingAsFlow() = callbackFlow {
+    val listener = NestedScrollView.OnScrollChangeListener { _, _, _, _, _ ->
+        trySend(canScrollVertically(-1))
+    }
+    setOnScrollChangeListener(listener)
+    awaitClose { setOnScrollChangeListener(null as NestedScrollView.OnScrollChangeListener?) }
 }

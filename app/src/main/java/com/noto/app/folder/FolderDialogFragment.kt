@@ -15,7 +15,6 @@ import androidx.navigation.navOptions
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.FolderDialogFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.util.*
@@ -34,17 +33,14 @@ class FolderDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         FolderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-            val baseDialogFragment = setupBaseDialogFragment()
             setupListeners()
-            setupState(baseDialogFragment)
+            setupState()
         }
 
-    private fun FolderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-        .apply { tvDialogTitle.text = context?.stringResource(R.string.folder_options) }
-
-    private fun FolderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun FolderDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.folder_options)
         viewModel.folder
-            .onEach { folder -> setupFolder(folder, baseDialogFragment) }
+            .onEach { folder -> setupFolder(folder) }
             .launchIn(lifecycleScope)
     }
 
@@ -142,12 +138,12 @@ class FolderDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun FolderDialogFragmentBinding.setupFolder(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun FolderDialogFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
-            baseDialogFragment.vHead.background?.mutate()?.setTint(color)
-            baseDialogFragment.tvDialogTitle.setTextColor(color)
+            tb.vHead.background?.mutate()?.setTint(color)
+            tb.tvDialogTitle.setTextColor(color)
             listOf(tvEditFolder, tvArchiveFolder, tvVaultFolder, tvPinFolder, tvNewNoteShortcut, tvDeleteFolder)
                 .forEach { tv ->
                     tv.background.setRippleColor(colorStateList)

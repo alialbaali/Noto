@@ -8,13 +8,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.UndoRedoDialogFragmentBinding
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -31,21 +33,18 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = UndoRedoDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        setupBaseDialogFragment()
         setupState()
     }
-
-    private fun UndoRedoDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-        .apply {
-            context?.let { context ->
-                tvDialogTitle.text = context.stringResource(if (args.isUndo) R.string.undo_history else R.string.redo_history)
-            }
-        }
 
     private fun UndoRedoDialogFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.itemAnimator = VerticalListItemAnimator()
+        tb.tvDialogTitle.text = context?.stringResource(if (args.isUndo) R.string.undo_history else R.string.redo_history)
+
+        rv.isScrollingAsFlow()
+            .onEach { isScrolling -> tb.ll.isSelected = isScrolling }
+            .launchIn(lifecycleScope)
 
         if (args.isTitle) {
             if (args.isUndo) {

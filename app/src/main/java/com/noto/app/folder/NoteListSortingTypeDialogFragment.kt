@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteListSortingTypeDialogFragmentBinding
 import com.noto.app.domain.model.NoteListSortingType
 import com.noto.app.util.*
@@ -28,20 +27,14 @@ class NoteListSortingTypeDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = NoteListSortingTypeDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-
-        val baseDialog = BaseDialogFragmentBinding.bind(root)
-            .apply {
-                context?.let { context ->
-                    tvDialogTitle.text = context.stringResource(R.string.sorting_type)
-                }
-            }
+        tb.tvDialogTitle.text = context?.stringResource(R.string.sorting_type)
 
         viewModel.folder
             .onEach { folder ->
                 context?.let { context ->
                     val color = context.colorResource(folder.color.toResource())
-                    baseDialog.tvDialogTitle.setTextColor(color)
-                    baseDialog.vHead.background?.mutate()?.setTint(color)
+                    tb.tvDialogTitle.setTextColor(color)
+                    tb.vHead.background?.mutate()?.setTint(color)
                     rbAlphabetical.background = context.createDialogItemStateListDrawable(folder.color)
                     rbCreationDate.background = context.createDialogItemStateListDrawable(folder.color)
                     rbManual.background = context.createDialogItemStateListDrawable(folder.color)

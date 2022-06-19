@@ -14,7 +14,6 @@ import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ReorderLabelDialogFragmentBinding
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.NotoColor
@@ -38,27 +37,20 @@ class ReorderLabelDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = ReorderLabelDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        val baseDialogFragment = setupBaseDialogFragment()
-        setupState(baseDialogFragment)
+        setupState()
     }
 
-    private fun ReorderLabelDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-        .apply {
-            context?.let { context ->
-                tvDialogTitle.text = context.stringResource(R.string.labels_order)
-            }
-        }
-
-    private fun ReorderLabelDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun ReorderLabelDialogFragmentBinding.setupState() {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        tb.tvDialogTitle.text = context?.stringResource(R.string.labels_order)
 
         viewModel.folder
             .onEach { folder ->
                 context?.let { context ->
                     val color = context.colorResource(folder.color.toResource())
-                    baseDialogFragment.tvDialogTitle.setTextColor(color)
-                    baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+                    tb.tvDialogTitle.setTextColor(color)
+                    tb.vHead.background?.mutate()?.setTint(color)
                 }
             }
             .launchIn(lifecycleScope)

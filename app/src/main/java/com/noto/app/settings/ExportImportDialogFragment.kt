@@ -10,7 +10,6 @@ import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ExportImportDialogFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -51,19 +50,13 @@ class ExportImportDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = ExportImportDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        setupBaseDialogFragment()
         setupState()
         setupListeners()
     }
 
-    private fun ExportImportDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-        .apply {
-            context?.let { context ->
-                tvDialogTitle.text = context.stringResource(R.string.export_import_data)
-            }
-        }
-
     private fun ExportImportDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.export_import_data)
+
         viewModel.isImportFinished
             .onEach {
                 context?.let { context ->

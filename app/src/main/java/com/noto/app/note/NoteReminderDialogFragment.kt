@@ -14,7 +14,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteReminderDialogFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Note
@@ -39,8 +38,7 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteReminderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-            val baseDialogFragment = setupBaseDialogFragment()
-            setupState(baseDialogFragment)
+            setupState()
             setupListeners()
         }
 
@@ -110,41 +108,36 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun NoteReminderDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteReminderDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.new_note_reminder)
+
         viewModel.folder
-            .onEach { folder -> setupFolder(folder, baseDialogFragment) }
+            .onEach { folder -> setupFolder(folder) }
             .launchIn(lifecycleScope)
 
         viewModel.note
-            .onEach { note -> setupNote(note, baseDialogFragment) }
+            .onEach { note -> setupNote(note) }
             .launchIn(lifecycleScope)
     }
 
-    private fun NoteReminderDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-        .apply {
-            context?.let { context ->
-                tvDialogTitle.text = context.stringResource(R.string.new_note_reminder)
-            }
-        }
-
-    private fun NoteReminderDialogFragmentBinding.setupFolder(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteReminderDialogFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
-            baseDialogFragment.vHead.background?.mutate()?.setTint(color)
-            baseDialogFragment.tvDialogTitle.setTextColor(color)
+            tb.vHead.background?.mutate()?.setTint(color)
+            tb.tvDialogTitle.setTextColor(color)
             til.boxStrokeColor = color
         }
     }
 
-    private fun NoteReminderDialogFragmentBinding.setupNote(note: Note, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteReminderDialogFragmentBinding.setupNote(note: Note) {
         context?.let { context ->
             if (note.reminderDate == null) {
                 et.setText(getString(R.string.no_note_reminder))
                 til.endIconDrawable = context.drawableResource(R.drawable.ic_round_notification_add_24)
-                baseDialogFragment.tvDialogTitle.text = context.stringResource(R.string.new_note_reminder)
+                tb.tvDialogTitle.text = context.stringResource(R.string.new_note_reminder)
             } else {
                 til.endIconDrawable = context.drawableResource(R.drawable.ic_round_cancel_24)
-                baseDialogFragment.tvDialogTitle.text = context.stringResource(R.string.edit_note_reminder)
+                tb.tvDialogTitle.text = context.stringResource(R.string.edit_note_reminder)
                 et.setText(note.reminderDate.format(context))
             }
         }

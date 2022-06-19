@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.FontDialogFragmentBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.util.stringResource
@@ -22,18 +21,13 @@ class FontDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         FontDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-            setupBaseDialogFragment()
             setupState()
             setupListeners()
         }
 
-    private fun FontDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        context?.let { context ->
-            tvDialogTitle.text = context.stringResource(R.string.font)
-        }
-    }
-
     private fun FontDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.font)
+
         viewModel.font
             .onEach { font ->
                 when (font) {

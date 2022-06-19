@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.MainArchiveFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
@@ -24,20 +24,19 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val selectedDestinationId by lazy { navController?.lastDestinationId }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        MainArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
-            setupBaseDialogFragment()
-            setupState()
-        }
-
-    private fun MainArchiveFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = context?.stringResource(R.string.folders_archive)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View = MainArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
+        setupState()
     }
 
     private fun MainArchiveFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.itemAnimator = VerticalListItemAnimator()
+        tb.tvDialogTitle.text = context?.stringResource(R.string.folders_archive)
 
         combine(
             viewModel.archivedFolders,
@@ -45,6 +44,10 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
         ) { folders, isShowNotesCount ->
             setupFolders(folders, isShowNotesCount)
         }.launchIn(lifecycleScope)
+
+        rv.isScrollingAsFlow()
+            .onEach { isScrolling -> tb.ll.isSelected = isScrolling }
+            .launchIn(lifecycleScope)
     }
 
     @SuppressLint("ClickableViewAccessibility")

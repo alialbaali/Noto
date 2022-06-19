@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ThemeDialogFragmentBinding
 import com.noto.app.domain.model.Theme
 import com.noto.app.util.stringResource
@@ -25,12 +24,13 @@ class ThemeDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = ThemeDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        setupBaseDialogFragment()
         setupState()
         setupListeners()
     }
 
     private fun ThemeDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.theme)
+
         viewModel.theme
             .onEach { theme -> setupTheme(theme) }
             .launchIn(lifecycleScope)
@@ -60,12 +60,6 @@ class ThemeDialogFragment : BaseDialogFragment() {
         rbBlackTheme.setOnClickListener {
             viewModel.updateTheme(Theme.Black)
             dismiss()
-        }
-    }
-
-    private fun ThemeDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        context?.let { context ->
-            tvDialogTitle.text = context.stringResource(R.string.theme)
         }
     }
 

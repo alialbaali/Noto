@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.VaultPasscodeDialogFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -24,18 +23,13 @@ class VaultPasscodeDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = VaultPasscodeDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        setupBaseDialogFragment()
         setupState()
         setupListeners()
     }
 
-    private fun VaultPasscodeDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        context?.let { context ->
-            tvDialogTitle.text = context.stringResource(R.string.vault_passcode)
-        }
-    }
-
     private fun VaultPasscodeDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.vault_passcode)
+
         viewModel.vaultPasscode
             .onEach { passcode ->
                 if (passcode == null) {

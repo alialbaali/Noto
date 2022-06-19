@@ -19,7 +19,6 @@ import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteDialogFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Label
@@ -48,20 +47,15 @@ class NoteDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = NoteDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        val baseDialog = setupBaseDialogFragment()
         setupListeners()
-        setupState(baseDialog)
+        setupState()
     }
 
-    private fun NoteDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        context?.let { context ->
-            tvDialogTitle.text = context.stringResource(R.string.note_options)
-        }
-    }
+    private fun NoteDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.note_options)
 
-    private fun NoteDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
         viewModel.folder
-            .onEach { folder -> setupFolder(folder, baseDialogFragment) }
+            .onEach { folder -> setupFolder(folder) }
             .launchIn(lifecycleScope)
 
         combine(
@@ -285,12 +279,12 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun NoteDialogFragmentBinding.setupFolder(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NoteDialogFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
-            baseDialogFragment.tvDialogTitle.setTextColor(color)
-            baseDialogFragment.vHead.backgroundTintList = colorStateList
+            tb.tvDialogTitle.setTextColor(color)
+            tb.vHead.backgroundTintList = colorStateList
             listOf(
                 tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
                 tvDuplicateNote, tvPinNote, tvRemindMe, tvDeleteNote, tvMoveNote,

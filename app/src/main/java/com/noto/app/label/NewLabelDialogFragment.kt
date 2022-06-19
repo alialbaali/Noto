@@ -8,7 +8,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NewLabelDialogFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -25,35 +24,28 @@ class NewLabelDialogFragment : BaseDialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View = NewLabelDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        val baseDialogFragment = setupBaseDialogFragment()
-        setupState(baseDialogFragment)
+        setupState()
         setupListeners()
     }
 
-    private fun NewLabelDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-        .apply {
-            context?.let { context ->
-                if (args.labelId == 0L) {
-                    tvDialogTitle.text = context.stringResource(R.string.new_label)
-                } else {
-                    tvDialogTitle.text = context.stringResource(R.string.edit_label)
-                    btnCreate.text = context.stringResource(R.string.done)
-                }
-            }
-        }
-
-    private fun NewLabelDialogFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun NewLabelDialogFragmentBinding.setupState() {
         et.requestFocus()
         activity?.showKeyboard(root)
+        if (args.labelId == 0L) {
+            tb.tvDialogTitle.text = context?.stringResource(R.string.new_label)
+        } else {
+            tb.tvDialogTitle.text = context?.stringResource(R.string.edit_label)
+            btnCreate.text = context?.stringResource(R.string.done)
+        }
 
         viewModel.folder
             .onEach { folder ->
                 context?.let { context ->
                     val color = context.colorResource(folder.color.toResource())
-                    baseDialogFragment.tvDialogTitle.setTextColor(color)
-                    baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+                    tb.tvDialogTitle.setTextColor(color)
+                    tb.vHead.background?.mutate()?.setTint(color)
                 }
             }
             .launchIn(lifecycleScope)

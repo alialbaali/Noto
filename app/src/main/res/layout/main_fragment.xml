@@ -6,9 +6,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
     <LinearLayout
+        android:id="@+id/tb"
         android:orientation="horizontal"
+        android:stateListAnimator="@animator/elevation_animator"
+        android:background="@drawable/dialog_shape"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

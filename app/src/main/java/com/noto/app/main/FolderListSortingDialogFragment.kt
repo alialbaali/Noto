@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.FolderListSortingDialogFragmentBinding
 import com.noto.app.domain.model.FolderListSortingType
 import com.noto.app.util.navController
@@ -28,12 +27,7 @@ class FolderListSortingDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = FolderListSortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-
-        BaseDialogFragmentBinding.bind(root).apply {
-            context?.let { context ->
-                tvDialogTitle.text = context.stringResource(R.string.folders_sorting)
-            }
-        }
+        tb.tvDialogTitle.text = context?.stringResource(R.string.folders_sorting)
 
         viewModel.sortingType
             .onEach { sortingType ->

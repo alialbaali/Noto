@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/base_dialog_fragment" />
+        <include
+            android:id="@+id/tb"
+            layout="@layout/dialog_fragment_toolbar" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tl_whats_new"

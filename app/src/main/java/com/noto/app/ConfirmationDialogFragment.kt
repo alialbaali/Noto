@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.ConfirmationDialogFragmentBinding
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
@@ -17,16 +16,12 @@ class ConfirmationDialogFragment : BaseDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         ConfirmationDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-            setupBaseDialogFragment()
             setupState()
             setupListeners()
         }
 
-    private fun ConfirmationDialogFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root).apply {
-        tvDialogTitle.text = args.btnText
-    }
-
     private fun ConfirmationDialogFragmentBinding.setupState() {
+        tb.tvDialogTitle.text = args.btnText
         tvConfirmation.text = args.confirmation
         tvDescription.text = args.description
         btnConfirm.text = args.btnText

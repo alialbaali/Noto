@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.FolderArchiveFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
@@ -35,19 +34,16 @@ class FolderArchiveFragment : BaseDialogFragment(isCollapsable = true) {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         FolderArchiveFragmentBinding.inflate(inflater, container, false).withBinding {
-            val baseDialogFragment = setupBaseDialogFragment()
-            setupState(baseDialogFragment)
+            setupState()
         }
 
-    private fun FolderArchiveFragmentBinding.setupBaseDialogFragment() = BaseDialogFragmentBinding.bind(root)
-
-    private fun FolderArchiveFragmentBinding.setupState(baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun FolderArchiveFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
 
         viewModel.folder
-            .onEach { folder -> setupFolder(folder, baseDialogFragment) }
+            .onEach { folder -> setupFolder(folder) }
             .distinctUntilChangedBy { folder -> folder.layout }
             .onEach { folder -> setupLayoutManger(folder.layout) }
             .launchIn(lifecycleScope)
@@ -68,12 +64,12 @@ class FolderArchiveFragment : BaseDialogFragment(isCollapsable = true) {
         }
     }
 
-    private fun FolderArchiveFragmentBinding.setupFolder(folder: Folder, baseDialogFragment: BaseDialogFragmentBinding) {
+    private fun FolderArchiveFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
-            baseDialogFragment.tvDialogTitle.text = context.stringResource(R.string.archive, folder.getTitle(context))
-            baseDialogFragment.tvDialogTitle.setTextColor(color)
-            baseDialogFragment.vHead.background?.mutate()?.setTint(color)
+            tb.tvDialogTitle.text = context.stringResource(R.string.archive, folder.getTitle(context))
+            tb.tvDialogTitle.setTextColor(color)
+            tb.vHead.background?.mutate()?.setTint(color)
         }
     }
 

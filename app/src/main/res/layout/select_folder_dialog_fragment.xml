@@ -4,7 +4,9 @@
     android:id="@+id/ll"
     style="@style/BaseDialogFragment">
 
-    <include layout="@layout/base_dialog_fragment" />
+    <include
+        android:id="@+id/tb"
+        layout="@layout/dialog_fragment_toolbar" />
 
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/rv"

@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.BaseDialogFragmentBinding
 import com.noto.app.databinding.NoteListSortingDialogFragmentBinding
 import com.noto.app.domain.model.NoteListSortingType
 import com.noto.app.util.*
@@ -29,21 +28,15 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = NoteListSortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-
-        val baseDialog = BaseDialogFragmentBinding.bind(root)
-            .apply {
-                context?.let { context ->
-                    tvDialogTitle.text = context.stringResource(R.string.notes_sorting)
-                }
-            }
+        tb.tvDialogTitle.text = context?.stringResource(R.string.notes_sorting)
 
         viewModel.folder
             .onEach { folder ->
                 context?.let { context ->
                     val color = context.colorResource(folder.color.toResource())
                     val colorStateList = color.toColorStateList()
-                    baseDialog.tvDialogTitle.setTextColor(color)
-                    baseDialog.vHead.background?.mutate()?.setTint(color)
+                    tb.tvDialogTitle.setTextColor(color)
+                    tb.vHead.background?.mutate()?.setTint(color)
                     listOf(tvGrouping, tvSortingType, tvSortingOrder).onEach { tv ->
                         tv.background.setRippleColor(colorStateList)
                     }

@@ -102,6 +102,10 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                 }
             }
             .launchIn(lifecycleScope)
+
+        rv.isScrollingAsFlow()
+            .onEach { isScrolling -> tb.isSelected = isScrolling }
+            .launchIn(lifecycleScope)
     }
 
     @SuppressLint("ClickableViewAccessibility")
