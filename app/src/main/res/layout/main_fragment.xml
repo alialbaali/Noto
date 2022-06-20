@@ -50,6 +50,15 @@
             android:contentDescription="@string/sorting_type" />
 
         <ImageButton
+            android:id="@+id/ib_settings"
+            android:background="@drawable/round_btn_surface_shape"
+            android:padding="@dimen/spacing_normal"
+            android:src="@drawable/ic_round_settings_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/settings" />
+
+        <ImageButton
             android:id="@+id/ib_more"
             android:background="@drawable/round_btn_surface_shape"
             android:padding="@dimen/spacing_normal"

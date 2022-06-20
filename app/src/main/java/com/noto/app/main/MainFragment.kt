@@ -71,6 +71,15 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
             dismiss()
             navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToMainDialogFragment())
         }
+
+        ibSettings.setOnClickListener {
+            dismiss()
+            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToSettingsFragment())
+        }
+
+        ibSorting.setOnClickListener {
+            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderListSortingDialogFragment())
+        }
     }
 
     private fun MainFragmentBinding.setupState() {
@@ -117,10 +126,6 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         allNotes: List<Note>,
     ) {
         if (state is UiState.Success) {
-
-            ibSorting.setOnClickListener {
-                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderListSortingDialogFragment())
-            }
 
             rv.withModels {
                 epoxyController = this
