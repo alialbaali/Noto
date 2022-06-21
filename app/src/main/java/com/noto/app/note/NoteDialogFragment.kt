@@ -42,6 +42,12 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private val alarmManager by lazy { context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager? }
 
+    private val anchorViewId by lazy { R.id.fab }
+
+    private val parentView by lazy { parentFragment?.view }
+
+    private val folderColor by lazy { viewModel.folder.value.color }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -68,20 +74,20 @@ class NoteDialogFragment : BaseDialogFragment() {
     }
 
     private fun NoteDialogFragmentBinding.setupListeners() {
-        val parentView = parentFragment?.view
-
         tvArchiveNote.setOnClickListener {
             viewModel.toggleNoteIsArchived().invokeOnCompletion {
-                val resource = if (viewModel.note.value.isArchived)
+                val isArchived = viewModel.note.value.isArchived
+                val stringId = if (isArchived)
                     R.string.note_is_unarchived
                 else
                     R.string.note_is_archived
-
-                context?.let { context ->
-                    context.updateAllWidgetsData()
-                    context.updateNoteListWidgets()
-                    parentView?.snackbar(context.stringResource(resource), viewModel.folder.value)
-                }
+                val drawableId = if (isArchived)
+                    R.drawable.ic_round_unarchive_24
+                else
+                    R.drawable.ic_round_archive_24
+                context?.updateAllWidgetsData()
+                context?.updateNoteListWidgets()
+                parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                 dismiss()
             }
         }
@@ -108,25 +114,27 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvDuplicateNote.setOnClickListener {
             viewModel.duplicateNote().invokeOnCompletion {
-                context?.let { context ->
-                    context.updateAllWidgetsData()
-                    parentView?.snackbar(context.stringResource(R.string.note_is_duplicated), viewModel.folder.value)
-                }
+                context?.updateAllWidgetsData()
+                val stringId = R.string.note_is_duplicated
+                val drawableId = R.drawable.ic_round_control_point_duplicate_24
+                parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                 dismiss()
             }
         }
 
         tvPinNote.setOnClickListener {
             viewModel.toggleNoteIsPinned().invokeOnCompletion {
-                val resource = if (viewModel.note.value.isPinned)
+                val isPinned = viewModel.note.value.isPinned
+                val stringId = if (isPinned)
                     R.string.note_is_unpinned
                 else
                     R.string.note_is_pinned
-
-                context?.let { context ->
-                    context.updateAllWidgetsData()
-                    parentView?.snackbar(context.stringResource(resource), viewModel.folder.value)
-                }
+                val drawableId = if (isPinned)
+                    R.drawable.ic_round_pin_off_24
+                else
+                    R.drawable.ic_round_pin_24
+                context?.updateAllWidgetsData()
+                parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                 dismiss()
             }
         }
@@ -135,8 +143,11 @@ class NoteDialogFragment : BaseDialogFragment() {
             context?.let { context ->
                 val clipData = ClipData.newPlainText(viewModel.folder.value.getTitle(context), viewModel.note.value.format())
                 clipboardManager?.setPrimaryClip(clipData)
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
-                    parentView?.snackbar(context.stringResource(R.string.note_copied_to_clipboard), viewModel.folder.value)
+                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                    val stringId = R.string.note_copied_to_clipboard
+                    val drawableId = R.drawable.ic_round_copy_24
+                    parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
+                }
             }
             dismiss()
         }
@@ -147,11 +158,11 @@ class NoteDialogFragment : BaseDialogFragment() {
                 ?.getLiveData<Long>(Constants.FolderId)
                 ?.observe(viewLifecycleOwner) { folderId ->
                     viewModel.copyNote(folderId).invokeOnCompletion {
-                        context?.let { context ->
-                            context.updateAllWidgetsData()
-                            context.updateNoteListWidgets()
-                            parentView?.snackbar(context.stringResource(R.string.note_is_copied), viewModel.folder.value)
-                        }
+                        context?.updateAllWidgetsData()
+                        context?.updateNoteListWidgets()
+                        val stringId = R.string.note_is_copied
+                        val drawableId = R.drawable.ic_round_file_copy_24
+                        parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                         navController?.popBackStack(args.destination, false)
                         dismiss()
                     }
@@ -165,11 +176,11 @@ class NoteDialogFragment : BaseDialogFragment() {
                 ?.getLiveData<Long>(Constants.FolderId)
                 ?.observe(viewLifecycleOwner) { folderId ->
                     viewModel.moveNote(folderId).invokeOnCompletion {
-                        context?.let { context ->
-                            context.updateAllWidgetsData()
-                            context.updateNoteListWidgets()
-                            parentView?.snackbar(context.stringResource(R.string.note_is_moved), viewModel.folder.value)
-                        }
+                        val stringId = R.string.note_is_moved
+                        val drawableId = R.drawable.ic_round_move_24
+                        context?.updateAllWidgetsData()
+                        context?.updateNoteListWidgets()
+                        parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                         navController?.popBackStack(args.destination, false)
                         dismiss()
                     }
@@ -191,10 +202,11 @@ class NoteDialogFragment : BaseDialogFragment() {
                     ?.savedStateHandle
                     ?.getLiveData<Int>(Constants.ClickListener)
                     ?.observe(viewLifecycleOwner) {
-                        parentView?.snackbar(context.stringResource(R.string.note_is_deleted), viewModel.folder.value)
+                        val stringId = R.string.note_is_deleted
+                        val drawableId = R.drawable.ic_round_delete_24
+                        parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                         navController?.popBackStack(args.destination, false)
-                        if (viewModel.note.value.reminderDate != null)
-                            alarmManager?.cancelAlarm(context, viewModel.note.value.id)
+                        if (viewModel.note.value.reminderDate != null) alarmManager?.cancelAlarm(context, viewModel.note.value.id)
                         viewModel.deleteNote().invokeOnCompletion {
                             context.updateAllWidgetsData()
                             context.updateNoteListWidgets()

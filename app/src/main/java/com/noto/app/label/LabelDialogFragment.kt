@@ -82,7 +82,11 @@ class LabelDialogFragment : BaseDialogFragment() {
                     ?.getLiveData<Int>(Constants.ClickListener)
                     ?.observe(viewLifecycleOwner) {
                         val parentView = parentFragment?.view
-                        parentView?.snackbar(context.stringResource(R.string.label_is_deleted), viewModel.folder.value)
+                        val stringId = R.string.label_is_deleted
+                        val drawableId = R.drawable.ic_round_delete_24
+                        val anchorViewId = R.id.fab
+                        val folderColor = viewModel.folder.value.color
+                        parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                         viewModel.deleteLabel().invokeOnCompletion { dismiss() }
                     }
                 navController?.navigateSafely(

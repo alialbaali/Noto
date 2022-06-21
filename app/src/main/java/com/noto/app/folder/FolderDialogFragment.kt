@@ -31,6 +31,12 @@ class FolderDialogFragment : BaseDialogFragment() {
 
     private val alarmManager by lazy { context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager? }
 
+    private val anchorViewId by lazy { R.id.fab }
+
+    private val parentView by lazy { parentFragment?.view }
+
+    private val folderColor by lazy { viewModel.folder.value.color }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         FolderDialogFragmentBinding.inflate(inflater, container, false).withBinding {
             setupListeners()
@@ -45,8 +51,6 @@ class FolderDialogFragment : BaseDialogFragment() {
     }
 
     private fun FolderDialogFragmentBinding.setupListeners() {
-        val parentView = parentFragment?.view
-
         tvEditFolder.setOnClickListener {
             dismiss()
             navController?.navigateSafely(FolderDialogFragmentDirections.actionFolderDialogFragmentToNewFolderFragment(args.folderId))
@@ -77,15 +81,17 @@ class FolderDialogFragment : BaseDialogFragment() {
                 }
             } else {
                 viewModel.toggleFolderIsArchived().invokeOnCompletion {
-                    val resource = if (viewModel.folder.value.isArchived)
+                    val isArchived = viewModel.folder.value.isArchived
+                    val stringId = if (isArchived)
                         R.string.folder_is_unarchived
                     else
                         R.string.folder_is_archived
-
-                    context?.let { context ->
-                        context.updateAllWidgetsData()
-                        parentView?.snackbar(context.stringResource(resource), viewModel.folder.value)
-                    }
+                    val drawableId = if (isArchived)
+                        R.drawable.ic_round_unarchive_24
+                    else
+                        R.drawable.ic_round_archive_24
+                    context?.updateAllWidgetsData()
+                    parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                     dismiss()
                 }
             }
@@ -93,30 +99,35 @@ class FolderDialogFragment : BaseDialogFragment() {
 
         tvVaultFolder.setOnClickListener {
             viewModel.toggleFolderIsVaulted().invokeOnCompletion {
-                val resource = if (viewModel.folder.value.isVaulted)
+                val isVaulted = viewModel.folder.value.isVaulted
+                val stringId = if (isVaulted)
                     R.string.folder_is_unvaulted
                 else
                     R.string.folder_is_vaulted
-
-                context?.let { context ->
-                    context.updateAllWidgetsData()
-                    parentView?.snackbar(context.stringResource(resource), viewModel.folder.value)
-                }
+                val drawableId = if (isVaulted)
+                    R.drawable.ic_round_lock_open_24
+                else
+                    R.drawable.ic_round_lock_24
+                context?.updateAllWidgetsData()
+                parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                 dismiss()
             }
         }
 
         tvPinFolder.setOnClickListener {
             viewModel.toggleFolderIsPinned().invokeOnCompletion {
-                val resource = if (viewModel.folder.value.isPinned)
+                val isPinned = viewModel.folder.value.isPinned
+                val stringId = if (isPinned)
                     R.string.folder_is_unpinned
                 else
                     R.string.folder_is_pinned
+                val drawableId = if (isPinned)
+                    R.drawable.ic_round_pin_off_24
+                else
+                    R.drawable.ic_round_pin_24
 
-                context?.let { context ->
-                    context.updateAllWidgetsData()
-                    parentView?.snackbar(context.stringResource(resource), viewModel.folder.value)
-                }
+                context?.updateAllWidgetsData()
+                parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                 dismiss()
             }
         }
@@ -196,7 +207,8 @@ class FolderDialogFragment : BaseDialogFragment() {
             ?.savedStateHandle
             ?.getLiveData<Int>(Constants.ClickListener)
             ?.observe(viewLifecycleOwner) {
-                val parentView = parentFragment?.view
+                val stringId = R.string.folder_is_deleted
+                val drawableId = R.drawable.ic_round_delete_sweep_24
                 val selectedFolderId = navController?.getBackStackEntry(R.id.folderFragment)?.arguments?.getLong(Constants.FolderId)
                 if (selectedFolderId == viewModel.folder.value.id) {
                     val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
@@ -208,11 +220,11 @@ class FolderDialogFragment : BaseDialogFragment() {
                     navController?.navigate(R.id.folderFragment, args, options)
                 }
 
+                parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
+                context?.updateAllWidgetsData()
+                context?.updateFolderListWidgets()
+                val notes = viewModel.notes.value as? UiState.Success
                 context?.let { context ->
-                    parentView?.snackbar(context.stringResource(R.string.folder_is_deleted), viewModel.folder.value)
-                    context.updateAllWidgetsData()
-                    context.updateFolderListWidgets()
-                    val notes = viewModel.notes.value as? UiState.Success
                     notes?.value
                         ?.filter { entry -> entry.first.reminderDate != null }
                         ?.forEach { entry -> alarmManager?.cancelAlarm(context, entry.first.id) }
@@ -228,16 +240,20 @@ class FolderDialogFragment : BaseDialogFragment() {
             ?.observe(viewLifecycleOwner) {
                 val parentView = parentFragment?.view
                 viewModel.toggleFolderIsArchived().invokeOnCompletion {
-                    val resource = if (viewModel.folder.value.isArchived)
+                    val isArchived = viewModel.folder.value.isArchived
+                    val color = viewModel.folder.value.color
+                    val stringId = if (isArchived)
                         R.string.folder_is_unarchived
                     else
                         R.string.folder_is_archived
+                    val drawableId = if (isArchived)
+                        R.drawable.ic_round_unarchive_24
+                    else
+                        R.drawable.ic_round_archive_24
 
-                    context?.let { context ->
-                        context.updateAllWidgetsData()
-                        context.updateFolderListWidgets()
-                        parentView?.snackbar(context.stringResource(resource), viewModel.folder.value)
-                    }
+                    context?.updateAllWidgetsData()
+                    context?.updateFolderListWidgets()
+                    parentView?.snackbar(stringId, drawableId, anchorViewId, color)
                     dismiss()
                 }
             }

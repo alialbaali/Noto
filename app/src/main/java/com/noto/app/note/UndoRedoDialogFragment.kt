@@ -96,9 +96,12 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                     onCopyClickListener { _ ->
                         val clipData = ClipData.newPlainText(viewModel.note.value.title, item)
                         clipboardManager?.setPrimaryClip(clipData)
-                        context?.let { context ->
-                            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2)
-                                parentFragment?.view?.snackbar(context.stringResource(R.string.text_copied), viewModel.folder.value)
+                        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
+                            val stringId = R.string.text_copied
+                            val drawableId = R.drawable.ic_round_copy_24
+                            val anchorViewId = R.id.fab
+                            val folderColor = viewModel.folder.value.color
+                            parentFragment?.view?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                         }
                         dismiss()
                     }

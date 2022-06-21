@@ -23,13 +23,13 @@ class ExportImportDialogFragment : BaseDialogFragment() {
 
     private val viewModel by viewModel<SettingsViewModel>()
 
+    private val parentView by lazy { parentFragment?.view }
+
     private val exportLauncher = registerForActivityResult(ActivityResultContracts.OpenDocumentTree()) { uri ->
         if (uri != null) {
             exportJson(uri)
         } else {
-            context?.let { context ->
-                parentFragment?.view?.snackbar(context.stringResource(R.string.no_folder_is_selected))
-            }
+            parentView?.snackbar(R.string.no_folder_is_selected, R.drawable.ic_round_warning_24)
             dismiss()
         }
     }
@@ -38,9 +38,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
         if (uri != null) {
             importJson(uri)
         } else {
-            context?.let { context ->
-                parentFragment?.view?.snackbar(context.stringResource(R.string.no_file_is_selected))
-            }
+            parentView?.snackbar(R.string.no_file_is_selected, R.drawable.ic_round_warning_24)
             dismiss()
         }
     }
@@ -59,11 +57,9 @@ class ExportImportDialogFragment : BaseDialogFragment() {
 
         viewModel.isImportFinished
             .onEach {
-                context?.let { context ->
-                    parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_imported))
-                    navController?.navigateUp()
-                    dismiss()
-                }
+                parentView?.snackbar(R.string.data_is_imported, R.drawable.ic_round_file_download_24)
+                navController?.navigateUp()
+                dismiss()
             }
             .launchIn(lifecycleScope)
     }
@@ -93,17 +89,21 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                         val json = viewModel.exportJson()
                         writeTextToOutputStream(fileOutputStream, json)
                     }.invokeOnCompletion {
-                        parentFragment?.view?.snackbar(context.stringResource(R.string.data_is_exported, file.uri.directoryPath))
+                        parentView?.snackbar(
+                            R.string.data_is_exported,
+                            R.drawable.ic_round_file_upload_24,
+                            formatArgs = arrayOf(file.uri.directoryPath),
+                        )
                         navController?.navigateUp()
                         dismiss()
                     }
                 } else {
-                    parentFragment?.view?.snackbar(context.stringResource(R.string.exporting_failed))
+                    parentView?.snackbar(R.string.exporting_failed, R.drawable.ic_round_error_24)
                     navController?.navigateUp()
                     dismiss()
                 }
             } else {
-                parentFragment?.view?.snackbar(context.stringResource(R.string.create_file_failed))
+                parentView?.snackbar(R.string.create_file_failed, R.drawable.ic_round_error_24)
                 navController?.navigateUp()
                 dismiss()
             }
@@ -124,7 +124,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                     viewModel.importJson(json)
                 }.invokeOnCompletion { viewModel.emitIsImportFinished() }
             } else {
-                parentFragment?.view?.snackbar(context.stringResource(R.string.importing_failed))
+                parentView?.snackbar(R.string.importing_failed, R.drawable.ic_round_error_24)
                 navController?.navigateUp()
                 dismiss()
             }

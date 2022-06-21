@@ -42,9 +42,7 @@ class SettingsFragment : Fragment() {
                 viewModel.toggleDoNotDisturb()
             } else {
                 view?.findViewById<SwitchMaterial>(R.id.sw_do_not_disturb)?.isChecked = false
-                context?.stringResource(R.string.permission_not_granted)?.let { message ->
-                    view?.snackbar(message)
-                }
+                view?.snackbar(R.string.permission_not_granted, R.drawable.ic_round_warning_24)
             }
         }
     }

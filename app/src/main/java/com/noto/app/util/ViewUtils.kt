@@ -15,12 +15,17 @@ import android.net.Uri
 import android.text.SpannableString
 import android.text.TextPaint
 import android.text.style.URLSpan
-import android.view.*
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.View
+import android.view.ViewTreeObserver
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.annotation.DrawableRes
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -40,7 +45,6 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.noto.app.R
-import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
@@ -94,20 +98,31 @@ private fun Note.createShareIntent() = Intent(Intent.ACTION_SEND).apply {
 }
 
 fun View.snackbar(
-    message: String,
-    folder: Folder? = null,
-) = Snackbar.make(this, message, Snackbar.LENGTH_SHORT).apply {
-    if (folder == null) {
-        setBackgroundTint(context.colorAttributeResource(R.attr.notoPrimaryColor))
-        setTextColor(context.colorAttributeResource(R.attr.notoBackgroundColor))
-    } else {
-        setBackgroundTint(context.colorResource(folder.color.toResource()))
-        setTextColor(context.colorAttributeResource(R.attr.notoBackgroundColor))
+    @StringRes stringId: Int,
+    @DrawableRes drawableId: Int? = null,
+    @IdRes anchorViewId: Int? = null,
+    color: NotoColor? = null,
+    vararg formatArgs: Any? = emptyArray(),
+) = Snackbar.make(this, context.stringResource(stringId, *formatArgs), Snackbar.LENGTH_SHORT).apply {
+    animationMode = Snackbar.ANIMATION_MODE_SLIDE
+    val textView = view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+    if (anchorViewId != null) setAnchorView(anchorViewId)
+    if (drawableId != null) {
+        textView?.setCompoundDrawablesRelativeWithIntrinsicBounds(drawableId, 0, 0, 0)
+        textView?.compoundDrawablePadding = context.dimenResource(R.dimen.spacing_normal).toInt()
     }
-    val params = view.layoutParams as? CoordinatorLayout.LayoutParams
-    params?.let {
-        it.gravity = Gravity.TOP
-        view.layoutParams = it
+    if (color != null) {
+        val backgroundColor = context.colorResource(color.toResource())
+        val contentColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
+        setBackgroundTint(backgroundColor)
+        setTextColor(contentColor)
+        textView?.compoundDrawablesRelative?.get(0)?.mutate()?.setTint(contentColor)
+    } else {
+        val backgroundColor = context.colorAttributeResource(R.attr.notoPrimaryColor)
+        val contentColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
+        setBackgroundTint(backgroundColor)
+        setTextColor(contentColor)
+        textView?.compoundDrawablesRelative?.get(0)?.mutate()?.setTint(contentColor)
     }
     show()
 }
