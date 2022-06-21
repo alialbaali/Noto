@@ -364,6 +364,16 @@ class NoteFragment : Fragment() {
             }
         }
 
+        etNoteTitle.setOnSwipeGestureListener(
+            onSwipeLeft = { viewModel.undoTitle() },
+            onSwipeRight = { viewModel.redoTitle() },
+        )
+
+        etNoteBody.setOnSwipeGestureListener(
+            onSwipeLeft = { viewModel.undoBody() },
+            onSwipeRight = { viewModel.redoBody() },
+        )
+
         val nsvClickListener = object : GestureDetector.SimpleOnGestureListener() {
             override fun onSingleTapUp(e: MotionEvent?): Boolean {
                 etNoteBody.requestFocus()

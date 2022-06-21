@@ -314,6 +314,33 @@ fun View.enable() {
     isEnabled = true
 }
 
+@SuppressLint("ClickableViewAccessibility")
+inline fun View.setOnSwipeGestureListener(
+    crossinline onSwipeLeft: () -> Unit,
+    crossinline onSwipeRight: () -> Unit,
+) {
+    val gestureListener = object : GestureDetector.SimpleOnGestureListener() {
+        override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
+            val x1 = e1?.x ?: 0F
+            val x2 = e2?.x ?: 0F
+            val diffX = x2 - x1
+            return if (diffX.absoluteValue > SwipeGestureThreshold) {
+                if (x2 > x1) onSwipeRight() else onSwipeLeft()
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    val gestureDetector = GestureDetector(context, gestureListener)
+
+    setOnTouchListener { _, event ->
+        gestureDetector.onTouchEvent(event)
+        false
+    }
+}
+
 fun RecyclerView.isScrollingAsFlow() = callbackFlow {
     val listener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
