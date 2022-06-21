@@ -10,6 +10,7 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.biometric.BiometricManager
 import androidx.core.view.isVisible
@@ -109,6 +110,10 @@ class SettingsFragment : Fragment() {
     }
 
     private fun SettingsFragmentBinding.setupListeners() {
+        activity?.onBackPressedDispatcher?.addCallback {
+            navController?.navigateUp()
+        }
+
         tb.setNavigationOnClickListener {
             navController?.navigateUp()
         }
