@@ -7,6 +7,11 @@ enum class NotoColor {
     LightBlue, LightGreen, LightRed, LightPink, Black,
 }
 
+enum class Icon {
+    Futuristic, DarkRain, Airplane, BlossomIce, DarkAlpine,
+    DarkSide, Earth, Fire, Purpleberry, SanguineSun,
+}
+
 enum class FolderListSortingType { Manual, CreationDate, Alphabetical, }
 
 enum class NoteListSortingType { Manual, CreationDate, Alphabetical, }

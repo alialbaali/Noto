@@ -278,6 +278,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_selectFolderDialogFragment"
             app:destination="@id/selectFolderDialogFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_iconDialogFragment"
+            app:destination="@id/iconDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"
@@ -577,4 +580,8 @@
             android:name="is_title"
             app:argType="boolean" />
     </dialog>
+    <dialog
+        android:id="@+id/iconDialogFragment"
+        android:name="com.noto.app.settings.IconDialogFragment"
+        android:label="IconDialogFragment" />
 </navigation>
