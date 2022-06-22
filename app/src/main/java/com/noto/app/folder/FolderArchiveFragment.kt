@@ -103,6 +103,7 @@ class FolderArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                                     id(archivedNote.first.id)
                                     note(archivedNote.first)
                                     font(font)
+                                    searchTerm("")
                                     previewSize(folder.notePreviewSize)
                                     isShowCreationDate(folder.isShowNoteCreationDate)
                                     color(folder.color)
