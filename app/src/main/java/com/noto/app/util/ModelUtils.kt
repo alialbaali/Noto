@@ -7,7 +7,6 @@ import androidx.viewbinding.ViewBinding
 import com.noto.app.R
 import com.noto.app.domain.model.*
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Clock
@@ -72,11 +71,16 @@ fun List<NoteWithLabels>.sorted(sortingType: NoteListSortingType, sortingOrder: 
     }
 }
 
-fun List<NoteWithLabels>.filterSelectedLabels(labels: Map<Label, Boolean>) = filter { pair ->
-    val selectedLabels = labels.entries
-        .filter { it.value }
-        .map { it.key }
-    pair.second.containsAll(selectedLabels)
+fun List<NoteWithLabels>.filterSelectedLabels(labels: Map<Label, Boolean>, filteringType: FilteringType) = filter { pair ->
+    val selectedLabels = labels.filterSelected()
+    if (selectedLabels.isNotEmpty()) {
+        when (filteringType) {
+            FilteringType.Inclusive -> pair.second.any { label -> selectedLabels.any { it == label } }
+            FilteringType.Exclusive -> pair.second == selectedLabels
+        }
+    } else {
+        true
+    }
 }
 
 fun List<NoteWithLabels>.filterContent(content: CharSequence) = filter { entry ->

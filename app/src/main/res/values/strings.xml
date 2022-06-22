@@ -9,8 +9,11 @@
     <string name="more_options">More options</string>
     <string name="back">Back</string>
     <string name="folder_layout">Folder layout</string>
+    <string name="filtering_type">Filtering type</string>
     <string name="layout">Layout</string>
     <string name="list">List</string>
+    <string name="inclusive">Inclusive</string>
+    <string name="exclusive">Exclusive</string>
     <string name="grid">Grid</string>
     <string name="created">Created %s</string>
     <string name="accessed">Accessed %s</string>
@@ -170,6 +173,7 @@
     <string name="share_note">Share note</string>
     <string name="notes_sorting">Notes sorting</string>
     <string name="sorting_type">Sorting type</string>
+    <string name="notes_view">Notes view</string>
     <string name="sorting_order">Sorting order</string>
     <string name="grouping_type">Grouping type</string>
     <string name="grouping_order">Grouping order</string>

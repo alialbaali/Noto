@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <item
-        android:id="@+id/sorting"
-        android:contentDescription="@string/sorting_type"
-        android:icon="@drawable/ic_round_sorting_24"
-        android:title="@string/sorting_type"
+        android:id="@+id/notes_view"
+        android:contentDescription="@string/notes_view"
+        android:icon="@drawable/ic_round_view_24"
+        android:title="@string/notes_view"
         app:showAsAction="always"
         tools:ignore="AlwaysShowAction" />
 </menu>

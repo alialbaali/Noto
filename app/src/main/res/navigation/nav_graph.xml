@@ -52,6 +52,9 @@
             android:name="exit"
             android:defaultValue="false"
             app:argType="boolean" />
+        <action
+            android:id="@+id/action_mainFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </dialog>
     <fragment
         android:id="@+id/folderFragment"
@@ -80,8 +83,8 @@
             android:id="@+id/action_folderFragment_to_labelDialogFragment"
             app:destination="@id/labelDialogFragment" />
         <action
-            android:id="@+id/action_folderFragment_to_noteListSortingDialogFragment"
-            app:destination="@id/noteListSortingDialogFragment" />
+            android:id="@+id/action_folderFragment_to_noteListViewDialogFragment"
+            app:destination="@id/noteListViewDialogFragment" />
         <action
             android:id="@+id/action_folderFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
@@ -414,23 +417,23 @@
             app:argType="long" />
     </dialog>
     <dialog
-        android:id="@+id/noteListSortingDialogFragment"
-        android:name="com.noto.app.folder.NoteListSortingDialogFragment"
-        android:label="NoteListSortingDialogFragment">
+        android:id="@+id/noteListViewDialogFragment"
+        android:name="com.noto.app.folder.NoteListViewDialogFragment"
+        android:label="noteListViewDialogFragment">
         <argument
             android:name="folder_id"
             app:argType="long" />
         <action
-            android:id="@+id/action_noteListSortingDialogFragment_to_noteListSortingOrderDialogFragment"
+            android:id="@+id/action_noteListViewDialogFragment_to_noteListSortingOrderDialogFragment"
             app:destination="@id/noteListSortingOrderDialogFragment" />
         <action
-            android:id="@+id/action_noteListSortingDialogFragment_to_noteListGroupingDialogFragment"
+            android:id="@+id/action_noteListViewDialogFragment_to_noteListGroupingDialogFragment"
             app:destination="@id/noteListGroupingDialogFragment" />
         <action
-            android:id="@+id/action_noteListSortingDialogFragment_to_noteListSortingTypeDialogFragment"
+            android:id="@+id/action_noteListViewDialogFragment_to_noteListSortingTypeDialogFragment"
             app:destination="@id/noteListSortingTypeDialogFragment" />
         <action
-            android:id="@+id/action_noteListSortingDialogFragment_to_noteListGroupingOrderDialogFragment"
+            android:id="@+id/action_noteListViewDialogFragment_to_noteListGroupingOrderDialogFragment"
             app:destination="@id/noteListGroupingOrderDialogFragment" />
     </dialog>
     <dialog

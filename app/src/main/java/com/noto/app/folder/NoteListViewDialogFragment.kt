@@ -9,7 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.databinding.NoteListSortingDialogFragmentBinding
+import com.noto.app.databinding.NoteListViewDialogFragmentBinding
+import com.noto.app.domain.model.FilteringType
 import com.noto.app.domain.model.NoteListSortingType
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -17,18 +18,18 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
-class NoteListSortingDialogFragment : BaseDialogFragment() {
+class NoteListViewDialogFragment : BaseDialogFragment() {
 
     private val viewModel by viewModel<FolderViewModel> { parametersOf(args.folderId) }
 
-    private val args by navArgs<NoteListSortingDialogFragmentArgs>()
+    private val args by navArgs<NoteListViewDialogFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = NoteListSortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        tb.tvDialogTitle.text = context?.stringResource(R.string.notes_sorting)
+    ): View = NoteListViewDialogFragmentBinding.inflate(inflater, container, false).withBinding {
+        tb.tvDialogTitle.text = context?.stringResource(R.string.notes_view)
 
         viewModel.folder
             .onEach { folder ->
@@ -45,12 +46,16 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
                     NoteListSortingType.Manual -> tvSortingOrder.isVisible = false
                     else -> tvSortingOrder.isVisible = true
                 }
+                when (folder.filteringType) {
+                    FilteringType.Inclusive -> tlFilteringType.getTabAt(0)?.select()
+                    FilteringType.Exclusive -> tlFilteringType.getTabAt(1)?.select()
+                }
             }
             .launchIn(lifecycleScope)
 
         tvGrouping.setOnClickListener {
             navController?.navigateSafely(
-                NoteListSortingDialogFragmentDirections.actionNoteListSortingDialogFragmentToNoteListGroupingDialogFragment(
+                NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListGroupingDialogFragment(
                     args.folderId
                 )
             )
@@ -58,7 +63,7 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
 
         tvGroupingOrder.setOnClickListener {
             navController?.navigateSafely(
-                NoteListSortingDialogFragmentDirections.actionNoteListSortingDialogFragmentToNoteListGroupingOrderDialogFragment(
+                NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListGroupingOrderDialogFragment(
                     args.folderId
                 )
             )
@@ -66,7 +71,7 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
 
         tvSortingType.setOnClickListener {
             navController?.navigateSafely(
-                NoteListSortingDialogFragmentDirections.actionNoteListSortingDialogFragmentToNoteListSortingTypeDialogFragment(
+                NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListSortingTypeDialogFragment(
                     args.folderId
                 )
             )
@@ -74,14 +79,19 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
 
         tvSortingOrder.setOnClickListener {
             navController?.navigateSafely(
-                NoteListSortingDialogFragmentDirections.actionNoteListSortingDialogFragmentToNoteListSortingOrderDialogFragment(
+                NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListSortingOrderDialogFragment(
                     args.folderId
                 )
             )
         }
 
         btnDone.setOnClickListener {
-            dismiss()
+            val filteringType = when (tlFilteringType.selectedTabPosition) {
+                0 -> FilteringType.Inclusive
+                else -> FilteringType.Exclusive
+            }
+            viewModel.updateFolderFilteringType(filteringType)
+                .invokeOnCompletion { dismiss() }
         }
     }
 }

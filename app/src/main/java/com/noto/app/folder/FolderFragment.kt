@@ -62,7 +62,7 @@ class FolderFragment : Fragment() {
             viewModel.labels,
             viewModel.isRememberScrollingPosition,
         ) { folder, notes, labels, isRememberScrollingPosition ->
-            val notesCount = notes.getOrDefault(emptyList()).filterSelectedLabels(labels).count()
+            val notesCount = notes.getOrDefault(emptyList()).filterSelectedLabels(labels, folder.filteringType).count()
             setupFolder(folder, notesCount, isRememberScrollingPosition)
             context?.let { context ->
                 val text = context.stringResource(R.string.archive, folder.getTitle(context))
@@ -82,7 +82,7 @@ class FolderFragment : Fragment() {
             viewModel.searchTerm,
         ) { notes, labels, font, folder, searchTerm ->
             setupNotesAndLabels(
-                notes.map { it.filterSelectedLabels(labels) },
+                notes.map { it.filterSelectedLabels(labels, folder.filteringType) },
                 labels,
                 font,
                 folder,
@@ -122,7 +122,7 @@ class FolderFragment : Fragment() {
 
     private fun FolderFragmentBinding.setupListeners() {
         tb.setOnMenuItemClickListener {
-            if (it.itemId == R.id.sorting) navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteListSortingDialogFragment(
+            if (it.itemId == R.id.notes_view) navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteListViewDialogFragment(
                 args.folderId))
             false
         }

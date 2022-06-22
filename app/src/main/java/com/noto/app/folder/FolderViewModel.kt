@@ -21,7 +21,7 @@ class FolderViewModel(
     private val folderId: Long,
 ) : ViewModel() {
 
-    private val mutableFolder = MutableStateFlow<Folder>(Folder(folderId, position = 0))
+    private val mutableFolder = MutableStateFlow(Folder(folderId, position = 0))
     val folder get() = mutableFolder.asStateFlow()
 
     private val mutableNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
@@ -210,6 +210,10 @@ class FolderViewModel(
 
     fun setSearchTerm(searchTerm: String) {
         mutableSearchTerm.value = searchTerm
+    }
+
+    fun updateFolderFilteringType(filteringType: FilteringType) = viewModelScope.launch {
+        folderRepository.updateFolder(folder.value.copy(filteringType = filteringType))
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }
