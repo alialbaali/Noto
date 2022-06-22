@@ -19,7 +19,7 @@
 
         <ImageView
             android:id="@+id/iv_app_icon"
-            android:src="@mipmap/ic_launcher"
+            android:src="@mipmap/ic_launcher_futuristic"
             android:layout_width="30dp"
             android:layout_margin="@dimen/spacing_normal"
             android:background="@drawable/ic_widget_btn_shape"
