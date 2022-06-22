@@ -3,6 +3,7 @@ package com.noto.app
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.domain.repository.FolderRepository
@@ -26,6 +27,9 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
     val language = settingsRepository.language
         .map { it.takeIf { it != Language.Tamil } ?: Language.System }
         .stateIn(viewModelScope, SharingStarted.Lazily, Language.System)
+
+    val icon = settingsRepository.icon
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Icon.Futuristic)
 
     val vaultTimeout = settingsRepository.vaultTimeout
         .stateIn(viewModelScope, SharingStarted.Eagerly, VaultTimeout.Immediately)

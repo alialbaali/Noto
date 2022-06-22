@@ -1,8 +1,10 @@
 package com.noto.app
 
 import android.app.NotificationManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -13,10 +15,7 @@ import androidx.navigation.navOptions
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.noto.app.databinding.AppActivityBinding
-import com.noto.app.domain.model.Folder
-import com.noto.app.domain.model.Language
-import com.noto.app.domain.model.Release
-import com.noto.app.domain.model.VaultTimeout
+import com.noto.app.domain.model.*
 import com.noto.app.main.MainVaultFragment
 import com.noto.app.settings.VaultTimeoutWorker
 import com.noto.app.util.*
@@ -145,6 +144,10 @@ class AppActivity : BaseActivity() {
             .onEach { language -> setupLanguage(language) }
             .launchIn(lifecycleScope)
 
+//        viewModel.icon
+//            .onEach { icon -> setupIcon(icon) }
+//            .launchIn(lifecycleScope)
+
         viewModel.lastVersion
             .onEach {
                 if (it != Release.Version.Current)
@@ -237,4 +240,51 @@ class AppActivity : BaseActivity() {
             .apply { this.startDestination = startDestination }
         navController.setGraph(graph, args)
     }
+
+    private fun setupIcon(icon: Icon) {
+        // Disable activity icon.
+        packageManager?.setComponentEnabledSetting(
+            componentName,
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP,
+        )
+
+        // Disable old icons.
+        Icon.values().forEach { oldIcon ->
+            val activityAliasName = oldIcon.toActivityAliasName()
+            val componentName = ComponentName(this@AppActivity, activityAliasName)
+            packageManager?.setComponentEnabledSetting(
+                componentName,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+                PackageManager.DONT_KILL_APP,
+            )
+        }
+
+        // Enable new icon.
+        val activityAliasName = icon.toActivityAliasName()
+        val componentName = ComponentName(this@AppActivity, activityAliasName)
+        packageManager?.setComponentEnabledSetting(
+            componentName,
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP,
+        )
+    }
+
+    private fun restart() {
+        finish()
+        startActivity(intent)
+    }
+
+    private fun Icon.toActivityAliasName() = when (this) {
+        Icon.Futuristic -> "Futuristic"
+        Icon.DarkRain -> "DarkRain"
+        Icon.Airplane -> "Airplane"
+        Icon.BlossomIce -> "BlossomIce"
+        Icon.DarkAlpine -> "DarkAlpine"
+        Icon.DarkSide -> "DarkSide"
+        Icon.Earth -> "Earth"
+        Icon.Fire -> "Fire"
+        Icon.Purpleberry -> "Purpleberry"
+        Icon.SanguineSun -> "SanguineSun"
+    }.let { "com.noto.app.$it" }
 }

@@ -24,6 +24,7 @@ class SettingsRepositoryImpl(
             theme.first(),
             font.first(),
             language.first(),
+            icon.first(),
             vaultPasscode.first(),
             vaultTimeout.first(),
             scheduledVaultTimeout.first(),
@@ -55,6 +56,11 @@ class SettingsRepositoryImpl(
     override val language: Flow<Language> = storage.data
         .map { preferences -> preferences[SettingsKeys.Language] }
         .map { if (it != null) Language.valueOf(it) else Language.System }
+        .flowOn(dispatcher)
+
+    override val icon: Flow<Icon> = storage.data
+        .map { preferences -> preferences[SettingsKeys.Icon] }
+        .map { if (it != null) Icon.valueOf(it) else Icon.Futuristic }
         .flowOn(dispatcher)
 
     override val vaultPasscode: Flow<String?> = storage.data
@@ -202,6 +208,7 @@ class SettingsRepositoryImpl(
                 updateTheme(theme)
                 updateFont(font)
                 updateLanguage(language)
+                updateIcon(icon)
                 if (vaultPasscode != null) updateVaultPasscode(vaultPasscode)
                 updateVaultTimeout(vaultTimeout)
                 updateScheduledVaultTimeout(scheduledVaultTimeout)
@@ -236,6 +243,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateLanguage(language: Language) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.Language] = language.toString() }
+        }
+    }
+
+    override suspend fun updateIcon(icon: Icon) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.Icon] = icon.toString() }
         }
     }
 

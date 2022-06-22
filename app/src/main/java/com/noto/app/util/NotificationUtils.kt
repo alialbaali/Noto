@@ -12,6 +12,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.NavDeepLinkBuilder
 import com.noto.app.R
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.Note
 import com.noto.app.receiver.VaultReceiver
 
@@ -20,7 +21,7 @@ private const val VaultChannelId = "Vault"
 private const val VaultNotificationId = -1
 private const val RequestCode = 0
 
-fun NotificationManager.createNotification(context: Context, folder: Folder, note: Note) {
+fun NotificationManager.createNotification(context: Context, folder: Folder, note: Note, icon: Icon?) {
 
     val pendingIntent = context.createNotificationPendingIntent(note.id, note.folderId)
 
@@ -36,7 +37,7 @@ fun NotificationManager.createNotification(context: Context, folder: Folder, not
         .setColor(context.colorResource(folder.color.toResource()))
         .setColorized(true)
         .setCategory(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Notification.CATEGORY_REMINDER else null)
-        .setSmallIcon(R.mipmap.ic_launcher_round)
+        .setSmallIcon(icon?.toResource() ?: R.mipmap.ic_launcher_futuristic)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
         .setAutoCancel(true)
         .setGroup(folder.getTitle(context))

@@ -140,6 +140,10 @@ class SettingsFragment : Fragment() {
             navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialogFragment())
         }
 
+        tvChangeIcon.setOnClickListener {
+            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToIconDialogFragment())
+        }
+
         tvChangeVaultPasscode.setOnClickListener {
             navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultPasscodeDialogFragment())
         }

@@ -13,6 +13,8 @@ interface SettingsRepository {
 
     val language: Flow<Language>
 
+    val icon: Flow<Icon>
+
     val vaultPasscode: Flow<String?>
 
     val vaultTimeout: Flow<VaultTimeout>
@@ -70,6 +72,8 @@ interface SettingsRepository {
     suspend fun updateFont(font: Font)
 
     suspend fun updateLanguage(language: Language)
+
+    suspend fun updateIcon(icon: Icon)
 
     suspend fun updateVaultPasscode(passcode: String)
 

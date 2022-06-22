@@ -33,6 +33,9 @@ class SettingsViewModel(
     val language = settingsRepository.language
         .stateIn(viewModelScope, SharingStarted.Lazily, Language.System)
 
+    val icon = settingsRepository.icon
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Icon.Futuristic)
+
     val isShowNotesCount = settingsRepository.isShowNotesCount
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
@@ -160,6 +163,10 @@ class SettingsViewModel(
 
     fun updateLanguage(value: Language) = viewModelScope.launch {
         settingsRepository.updateLanguage(value)
+    }
+
+    fun updateIcon(value: Icon) = viewModelScope.launch {
+        settingsRepository.updateIcon(value)
     }
 
     fun toggleRememberScrollingPosition() = viewModelScope.launch {

@@ -37,10 +37,12 @@
     <string name="whats_new">What\'s new</string>
     <string name="about_message">Noto is developed and maintained by <a href="https://www.alialbaali.com/">Ali Albaali</a>.
         \n\nThe app is distributed under the terms of the <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.
+        App icons use <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> published
+        by <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
         \n\nSpecial thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a>,
         <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a> for Turkish, Spanish and French localizations respectively,
         and everyone who has helped and contributed in the development.</string>
-<!--    <string name="share_with">Share with</string>-->
+    <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Export/Import data</string>
     <string name="exporting_failed">Failed to export the data.</string>
     <string name="importing_failed">Failed to import the data.</string>
@@ -258,6 +260,20 @@
     <string name="russian">Russian</string>
     <string name="spanish">Spanish</string>
     <string name="french">French</string>
+
+    <!-- Icon -->
+    <string name="icon">Icon</string>
+    <string name="change_icon">Change icon</string>
+    <string name="futuristic" translatable="false">Futuristic</string>
+    <string name="airplane" translatable="false">Airplane</string>
+    <string name="dark_rain" translatable="false">Dark Rain</string>
+    <string name="blossom_ice" translatable="false">Blossom Ice</string>
+    <string name="dark_alpine" translatable="false">Dark Alpine</string>
+    <string name="dark_side" translatable="false">Dark Side</string>
+    <string name="earth" translatable="false">Earth</string>
+    <string name="fire" translatable="false">Fire</string>
+    <string name="purpleberry" translatable="false">Purpleberry</string>
+    <string name="sanguine_sun" translatable="false">Sanguine Sun</string>
 
     <!-- Widget -->
     <string name="create_widget">Create widget</string>

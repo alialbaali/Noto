@@ -19,6 +19,7 @@ object SettingsKeys {
     val Theme = stringPreferencesKey(Keys.Theme)
     val Font = stringPreferencesKey(Keys.Font)
     val Language = stringPreferencesKey(Keys.Language)
+    val Icon = stringPreferencesKey(Keys.Icon)
     val FolderListSortingType = stringPreferencesKey(Keys.FolderListSortingType)
     val FolderListSortingOrder = stringPreferencesKey(Keys.FolderListSortingOrder)
     val ShowNotesCount = stringPreferencesKey(Keys.ShowNotesCount)
@@ -53,6 +54,7 @@ object SettingsKeys {
         const val Theme = "Theme"
         const val Font = "Font"
         const val Language = "Language"
+        const val Icon = "Icon"
         const val FolderListSortingType = "Library_List_Sorting_Type"
         const val FolderListSortingOrder = "Library_List_Sorting_Order"
         const val ShowNotesCount = "Show_Notes_Count"

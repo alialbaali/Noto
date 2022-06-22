@@ -8,6 +8,7 @@ data class SettingsConfig(
     val theme: Theme = Theme.System,
     val font: Font = Font.Nunito,
     val language: Language = Language.System,
+    val icon: Icon = Icon.Futuristic,
     val vaultPasscode: String? = null,
     val vaultTimeout: VaultTimeout = VaultTimeout.Immediately,
     val scheduledVaultTimeout: VaultTimeout? = null,

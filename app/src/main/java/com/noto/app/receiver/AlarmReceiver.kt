@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.Constants
 import com.noto.app.util.createNotification
 import kotlinx.coroutines.flow.firstOrNull
@@ -17,6 +18,7 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
 
     private val folderRepository by inject<FolderRepository>()
     private val noteRepository by inject<NoteRepository>()
+    private val settingsRepository by inject<SettingsRepository>()
 
     override fun onReceive(context: Context?, intent: Intent?) {
 
@@ -32,9 +34,11 @@ class AlarmReceiver : BroadcastReceiver(), KoinComponent {
                     .firstOrNull()
                 val note = noteRepository.getNoteById(noteId)
                     .firstOrNull()
+                val icon = settingsRepository.icon
+                    .firstOrNull()
 
                 if (note != null && folder != null && context != null) {
-                    notificationManager?.createNotification(context, folder, note)
+                    notificationManager?.createNotification(context, folder, note, icon)
                     noteRepository.updateNote(note.copy(reminderDate = null))
                 }
             }

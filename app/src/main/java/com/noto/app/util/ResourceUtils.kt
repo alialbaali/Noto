@@ -7,6 +7,7 @@ import android.util.TypedValue
 import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
 import com.noto.app.R
+import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.NotoColor
 
 fun Context.colorStateListResource(@ColorRes id: Int) = ResourcesCompat.getColorStateList(resources, id, null)
@@ -52,6 +53,32 @@ fun NotoColor.toResource(): Int = when (this) {
     NotoColor.LightRed -> R.color.colorAccentLightRed
     NotoColor.LightPink -> R.color.colorAccentLightPink
     NotoColor.Black -> R.color.colorAccentBlack
+}
+
+fun Icon.toResource(): Int = when (this) {
+    Icon.Futuristic -> R.mipmap.ic_launcher_futuristic
+    Icon.DarkRain -> R.mipmap.ic_launcher_dark_rain
+    Icon.Airplane -> R.mipmap.ic_launcher_airplane
+    Icon.BlossomIce -> R.mipmap.ic_launcher_blossom_ice
+    Icon.DarkAlpine -> R.mipmap.ic_launcher_dark_alpine
+    Icon.DarkSide -> R.mipmap.ic_launcher_dark_side
+    Icon.Earth -> R.mipmap.ic_launcher_earth
+    Icon.Fire -> R.mipmap.ic_launcher_fire
+    Icon.Purpleberry -> R.mipmap.ic_launcher_purpleberry
+    Icon.SanguineSun -> R.mipmap.ic_launcher_sanguine_sun
+}
+
+fun Icon.toTitle(): Int = when (this) {
+    Icon.Futuristic -> R.string.futuristic
+    Icon.DarkRain -> R.string.dark_rain
+    Icon.Airplane -> R.string.airplane
+    Icon.BlossomIce -> R.string.blossom_ice
+    Icon.DarkAlpine -> R.string.dark_alpine
+    Icon.DarkSide -> R.string.dark_side
+    Icon.Earth -> R.string.earth
+    Icon.Fire -> R.string.fire
+    Icon.Purpleberry -> R.string.purpleberry
+    Icon.SanguineSun -> R.string.sanguine_sun
 }
 
 val Number.dp
