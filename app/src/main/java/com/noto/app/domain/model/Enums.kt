@@ -28,3 +28,5 @@ enum class VaultTimeout { Immediately, OnAppClose, After1Hour, After4Hours, Afte
 enum class NewNoteCursorPosition { Body, Title, }
 
 enum class GroupingOrder { Ascending, Descending, }
+
+enum class FilteringType { Inclusive, Exclusive, }

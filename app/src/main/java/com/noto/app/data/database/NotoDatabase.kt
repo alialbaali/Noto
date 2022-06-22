@@ -21,11 +21,12 @@ private const val NOTO_DATABASE = "Noto Database"
     SortingOrderConverter::class,
     GroupingConvertor::class,
     NewNoteCursorPositionConvertor::class,
-    GroupingOrderConverter::class
+    GroupingOrderConverter::class,
+    FilteringTypeConverter::class,
 )
 @Database(
     entities = [Folder::class, Note::class, Label::class, NoteLabel::class],
-    version = 29,
+    version = 30,
     autoMigrations = [
         AutoMigration(from = 6, to = 7),
         AutoMigration(from = 7, to = 8),
@@ -57,6 +58,8 @@ private const val NOTO_DATABASE = "Noto Database"
         AutoMigration(from = 27, to = 28),
         /** Add [Folder.scrollingPosition] and [Note.scrollingPosition] */
         AutoMigration(from = 28, to = 29),
+        /** Add [FilteringType] to [Folder] */
+        AutoMigration(from = 29, to = 30),
     ],
 )
 abstract class NotoDatabase : RoomDatabase() {

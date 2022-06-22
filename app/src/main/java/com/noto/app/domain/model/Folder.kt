@@ -72,6 +72,9 @@ data class Folder @Ignore constructor(
     @ColumnInfo(name = "scrolling_position", defaultValue = "0")
     val scrollingPosition: Int = 0,
 
+    @ColumnInfo(name = "filtering_type", defaultValue = "0")
+    val filteringType: FilteringType = FilteringType.Inclusive,
+
     @Ignore
     @Transient
     val folders: List<Pair<Folder, Int>> = emptyList(),
@@ -96,6 +99,7 @@ data class Folder @Ignore constructor(
         grouping: Grouping = Grouping.Default,
         groupingOrder: GroupingOrder = GroupingOrder.Descending,
         isVaulted: Boolean = false,
+        filteringType: FilteringType,
         scrollingPosition: Int = 0,
     ) : this(
         id,
@@ -116,6 +120,7 @@ data class Folder @Ignore constructor(
         groupingOrder,
         isVaulted,
         scrollingPosition,
+        filteringType,
         emptyList(),
     )
 

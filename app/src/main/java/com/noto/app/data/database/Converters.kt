@@ -100,3 +100,15 @@ object GroupingOrderConverter {
     fun toEnum(ordinal: Int): GroupingOrder = GroupingOrder.values().first { groupingOrder -> groupingOrder.ordinal == ordinal }
 
 }
+
+object FilteringTypeConverter {
+
+    @TypeConverter
+    @JvmStatic
+    fun toOrdinal(filteringType: FilteringType): Int = filteringType.ordinal
+
+    @TypeConverter
+    @JvmStatic
+    fun toEnum(ordinal: Int): FilteringType = FilteringType.values().first { filteringType -> filteringType.ordinal == ordinal }
+
+}
