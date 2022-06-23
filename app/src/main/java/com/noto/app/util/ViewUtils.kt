@@ -15,10 +15,7 @@ import android.net.Uri
 import android.text.SpannableString
 import android.text.TextPaint
 import android.text.style.URLSpan
-import android.view.GestureDetector
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewTreeObserver
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
@@ -110,6 +107,7 @@ fun View.snackbar(
     if (drawableId != null) {
         textView?.setCompoundDrawablesRelativeWithIntrinsicBounds(drawableId, 0, 0, 0)
         textView?.compoundDrawablePadding = context.dimenResource(R.dimen.spacing_normal).toInt()
+        textView?.gravity = Gravity.CENTER
     }
     if (color != null) {
         val backgroundColor = context.colorResource(color.toResource())
