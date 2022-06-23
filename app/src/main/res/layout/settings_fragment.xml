@@ -118,7 +118,7 @@
                 style="@style/SettingsItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_round_count_24"
+                android:drawableStart="@drawable/ic_scrolling_position"
                 android:text="@string/remember_scrolling_position" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
