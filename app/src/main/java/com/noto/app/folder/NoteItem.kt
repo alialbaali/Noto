@@ -72,6 +72,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         root.context?.let { context ->
             val colorResource = context.colorResource(color.toResource())
             val isBlack = color == NotoColor.Black
+            root.background?.setRippleColor(colorResource.toColorStateList())
             tvNoteTitle.setLinkTextColor(colorResource)
             tvNoteBody.setLinkTextColor(colorResource)
             tvNoteTitle.text = note.title.highlightText(colorResource, isBlack)
