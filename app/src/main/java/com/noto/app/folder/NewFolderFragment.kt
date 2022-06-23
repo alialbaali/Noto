@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
@@ -73,6 +74,10 @@ class NewFolderFragment : Fragment() {
     }
 
     private fun NewFolderFragmentBinding.setupListeners() {
+        activity?.onBackPressedDispatcher?.addCallback {
+            navController?.navigateUp()
+        }
+
         tb.setNavigationOnClickListener {
             navController?.navigateUp()
         }

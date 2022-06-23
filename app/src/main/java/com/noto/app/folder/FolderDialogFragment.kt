@@ -52,8 +52,8 @@ class FolderDialogFragment : BaseDialogFragment() {
 
     private fun FolderDialogFragmentBinding.setupListeners() {
         tvEditFolder.setOnClickListener {
-            dismiss()
             navController?.navigateSafely(FolderDialogFragmentDirections.actionFolderDialogFragmentToNewFolderFragment(args.folderId))
+            dismiss()
         }
 
         tvNewNoteShortcut.setOnClickListener {
