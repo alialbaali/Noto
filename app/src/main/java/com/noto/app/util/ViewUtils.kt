@@ -331,13 +331,14 @@ fun View.enable() {
 inline fun View.setOnSwipeGestureListener(
     crossinline onSwipeLeft: () -> Unit,
     crossinline onSwipeRight: () -> Unit,
+    threshold: Float = SwipeGestureThreshold,
 ) {
     val gestureListener = object : GestureDetector.SimpleOnGestureListener() {
         override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
             val x1 = e1?.x ?: 0F
             val x2 = e2?.x ?: 0F
             val diffX = x2 - x1
-            return if (diffX.absoluteValue > SwipeGestureThreshold) {
+            return if (diffX.absoluteValue > threshold) {
                 if (x2 > x1) onSwipeRight() else onSwipeLeft()
                 true
             } else {

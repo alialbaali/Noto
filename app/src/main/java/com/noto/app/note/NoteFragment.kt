@@ -367,11 +367,13 @@ class NoteFragment : Fragment() {
         etNoteTitle.setOnSwipeGestureListener(
             onSwipeLeft = { viewModel.undoTitle() },
             onSwipeRight = { viewModel.redoTitle() },
+            threshold = 0F,
         )
 
         etNoteBody.setOnSwipeGestureListener(
             onSwipeLeft = { viewModel.undoBody() },
             onSwipeRight = { viewModel.redoBody() },
+            threshold = 0F,
         )
 
         val nsvClickListener = object : GestureDetector.SimpleOnGestureListener() {
