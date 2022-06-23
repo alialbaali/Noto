@@ -371,6 +371,7 @@
     </style>
 
     <style name="TabItemTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textAllCaps">false</item>
     </style>

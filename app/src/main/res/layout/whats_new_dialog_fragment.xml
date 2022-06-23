@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:id="@+id/abl"
-        android:elevation="@dimen/elevation_small"
+        android:stateListAnimator="@animator/elevation_animator"
         android:orientation="vertical"
         android:background="@drawable/dialog_shape"
         android:layout_width="match_parent"

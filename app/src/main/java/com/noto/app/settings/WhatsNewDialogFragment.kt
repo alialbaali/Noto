@@ -16,14 +16,12 @@ import com.noto.app.domain.model.Release.Changelog
 import com.noto.app.domain.model.Release_1_8_0
 import com.noto.app.domain.model.Release_2_0_0
 import com.noto.app.domain.model.Release_2_0_1
-import com.noto.app.util.BounceEdgeEffectFactory
-import com.noto.app.util.VerticalListItemAnimator
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 enum class WhatsNewTab {
     CurrentRelease, PreviousReleases;
@@ -85,6 +83,24 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
                 }
             }
             .launchIn(lifecycleScope)
+
+        rv.isScrollingAsFlow()
+            .onEach { isScrolling ->
+                abl.isSelected = isScrolling
+                tlWhatsNew.isSelected = false
+                tb.root.isSelected = false
+                resetTabColors()
+            }
+            .launchIn(lifecycleScope)
+
+    }
+
+    private fun WhatsNewDialogFragmentBinding.resetTabColors() {
+        context?.let { context ->
+            val selectedColor = context.colorAttributeResource(R.attr.notoPrimaryColor)
+            val color = context.colorAttributeResource(R.attr.notoBackgroundColor)
+            tlWhatsNew.setTabTextColors(selectedColor, color)
+        }
     }
 
     private fun WhatsNewDialogFragmentBinding.setupListeners() {
