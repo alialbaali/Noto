@@ -70,6 +70,7 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
             else
                 context.colorAttributeResource(R.attr.notoBackgroundColor).toColorStateList()
             tvFolderTitle.text = folder.getTitle(context)
+            ivFolderIcon.contentDescription = folder.getTitle(context)
             if (isSelected) {
                 ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_open_24))
             } else {
