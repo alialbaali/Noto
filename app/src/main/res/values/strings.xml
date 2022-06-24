@@ -121,8 +121,8 @@
     <string name="enter_vault_passcode">Enter vault passcode</string>
     <string name="add_to_vault">Add to vault</string>
     <string name="remove_from_vault">Remove from vault</string>
-    <string name="folder_is_vaulted">Folder has been vaulted.</string>
-    <string name="folder_is_unvaulted">Folder has been unvaulted.</string>
+    <string name="folder_is_vaulted">Folder has been added to the vault.</string>
+    <string name="folder_is_unvaulted">Folder has been removed from the vault.</string>
     <string name="vault_is_empty">Vault is empty.</string>
     <string name="archive_vaulted_folder_confirmation">Are you sure you want to archive this folder?</string>
     <string name="archive_vaulted_folder_description">Archiving this folder will also remove it from the vault.</string>
