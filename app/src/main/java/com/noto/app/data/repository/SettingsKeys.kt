@@ -6,6 +6,7 @@ import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.AppIcon
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.EditButton
+import com.noto.app.data.repository.SettingsKeys.Keys.Widget.FilteringType
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.FolderId
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.Header
 import com.noto.app.data.repository.SettingsKeys.Keys.Widget.Id
@@ -48,6 +49,7 @@ object SettingsKeys {
         fun NotesCount(widgetId: Int) = stringPreferencesKey(widgetId.NotesCount)
         fun Radius(widgetId: Int) = stringPreferencesKey(widgetId.Radius)
         fun SelectedLabelIds(widgetId: Int, folderId: Long) = stringPreferencesKey(widgetId.SelectedLabelIds(folderId))
+        fun FilteringType(widgetId: Int) = stringPreferencesKey(widgetId.FilteringType)
     }
 
     private object Keys {
@@ -81,6 +83,7 @@ object SettingsKeys {
             val Int.NewItemButton get() = "Widget_New_Item_Button_$this"
             val Int.NotesCount get() = "Widget_Notes_Count_$this"
             val Int.Radius get() = "Widget_Radius_$this"
+            val Int.FilteringType get() = "Widget_Filtering_Type_$this"
 
             @Suppress("FunctionName")
             fun Int.SelectedLabelIds(folderId: Long) = Id + "_" + Constants.FolderId + folderId.toString()

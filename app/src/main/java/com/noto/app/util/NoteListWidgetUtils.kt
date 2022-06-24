@@ -10,6 +10,7 @@ import android.widget.RemoteViews
 import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Icon
 import com.noto.app.widget.NoteListWidgetConfigActivity
 import com.noto.app.widget.NoteListWidgetService
 
@@ -22,6 +23,7 @@ fun Context.createNoteListWidgetRemoteViews(
     widgetRadius: Int,
     folder: Folder,
     isEmpty: Boolean,
+    icon: Icon,
 ): RemoteViews {
     val color = colorResource(folder.color.toResource())
     return RemoteViews(packageName, R.layout.note_list_widget).apply {
@@ -43,6 +45,7 @@ fun Context.createNoteListWidgetRemoteViews(
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())
         setInt(R.id.iv_fab, SetColorFilterMethodName, color)
+        setInt(R.id.iv_app_icon, SetImageResource, icon.toResource())
         if (isAppIconEnabled)
             setViewPadding(R.id.tv_folder_title, 0.dp, 16.dp, 0.dp, 16.dp)
         else

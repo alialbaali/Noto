@@ -8,9 +8,11 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.tabs.TabLayout
 import com.noto.app.BaseActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteListWidgetConfigActivityBinding
+import com.noto.app.domain.model.FilteringType
 import com.noto.app.label.labelItem
 import com.noto.app.main.SelectFolderDialogFragment
 import com.noto.app.util.*
@@ -31,6 +33,8 @@ class NoteListWidgetConfigActivity : BaseActivity() {
 
     private val folderId by lazy { intent?.getLongExtra(Constants.FolderId, 0) ?: 0 }
 
+    private var selectFolderDialogFragment: SelectFolderDialogFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         NoteListWidgetConfigActivityBinding.inflate(layoutInflater).withBinding {
@@ -44,41 +48,45 @@ class NoteListWidgetConfigActivity : BaseActivity() {
         }
     }
 
+    override fun onPause() {
+        super.onPause()
+        selectFolderDialogFragment?.dismiss()
+    }
+
     private fun NoteListWidgetConfigActivityBinding.setupState() {
         setResult(Activity.RESULT_CANCELED)
         widget.lv.dividerHeight = 16.dp
         widget.lv.setPaddingRelative(8.dp, 16.dp, 8.dp, 100.dp)
         widget.root.clipToOutline = true
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
+        listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewFolder)
+            .onEach { it.setupColors() }
 
         viewModel.isWidgetCreated
             .onEach { isCreated ->
                 if (isCreated) {
                     tb.title = stringResource(R.string.edit_notes_widget)
-                    btnCreate.text = stringResource(R.string.done)
+                    fabCreate.text = stringResource(R.string.update_widget)
                 }
             }
             .launchIn(lifecycleScope)
 
-        combine(viewModel.folder, viewModel.notes, viewModel.labels) { folder, notes, labels ->
-            val filteredNotes = notes.filter { it.second.containsAll(labels.filterSelected()) }
+        combine(
+            viewModel.folder,
+            viewModel.notes,
+            viewModel.labels,
+            viewModel.widgetFilteringType,
+        ) { folder, notes, labels, filteringType ->
+            val filteredNotes = notes.filterSelectedLabels(labels.filterSelected(), filteringType)
             val color = colorResource(folder.color.toResource())
-            val colorStateList = color.toColorStateList()
             tvFilterLabels.isVisible = labels.isNotEmpty()
             rv.isVisible = labels.isNotEmpty()
             divider2.root.isVisible = labels.isNotEmpty()
+            fabCreate.setBackgroundColor(color)
             widget.tvFolderTitle.text = folder.getTitle(this@NoteListWidgetConfigActivity)
             widget.tvFolderTitle.setTextColor(color)
             widget.fab.background?.setTint(color)
             widget.ivFab.setColorFilter(color)
-            sWidgetRadius.trackActiveTintList = colorStateList
-            sWidgetRadius.thumbTintList = colorStateList
-            sWidgetRadius.tickInactiveTintList = colorStateList
-            sWidgetRadius.trackInactiveTintList = color.withDefaultAlpha().toColorStateList()
-            listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewFolder)
-                .onEach { it.setupColors(thumbCheckedColor = color, trackCheckedColor = color) }
-            listOf(divider1, divider2, divider3, divider4)
-                .onEach { divider -> divider.root.background?.mutate()?.setTint(color.withDefaultAlpha()) }
             if (filteredNotes.isEmpty()) {
                 widget.lv.isVisible = false
                 widget.tvPlaceholder.isVisible = true
@@ -155,6 +163,19 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                 widget.llHeader.background = drawableResource(radius.toWidgetHeaderShapeId())
             }
             .launchIn(lifecycleScope)
+
+        viewModel.widgetFilteringTypeFlow
+            .onEach { filteringType ->
+                when (filteringType) {
+                    FilteringType.Inclusive -> tlFilteringType.getTabAt(0)?.select()
+                    FilteringType.Exclusive -> tlFilteringType.getTabAt(1)?.select()
+                }
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.icon
+            .onEach { icon -> widget.ivAppIcon.setImageResource(icon.toResource()) }
+            .launchIn(lifecycleScope)
     }
 
     private fun NoteListWidgetConfigActivityBinding.setupListeners() {
@@ -182,24 +203,24 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             viewModel.setWidgetRadius(value.toInt())
         }
 
-        btnCreate.setOnClickListener {
-//            sendBroadcast() Maybe we can send broadcast to NoteListWidgetProvider instead of updating it manually
+        tlFilteringType.addOnTabSelectedListener(
+            object : TabLayout.OnTabSelectedListener {
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    val filteringType = when (tab?.position) {
+                        0 -> FilteringType.Inclusive
+                        else -> FilteringType.Exclusive
+                    }
+                    viewModel.setFilteringType(filteringType)
+                }
+
+                override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                override fun onTabReselected(tab: TabLayout.Tab?) {}
+            }
+        )
+
+        fabCreate.setOnClickListener {
             viewModel.createOrUpdateWidget()
-            val appWidgetManager = AppWidgetManager.getInstance(this@NoteListWidgetConfigActivity)
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.lv)
-            appWidgetManager.updateAppWidget(
-                appWidgetId,
-                createNoteListWidgetRemoteViews(
-                    appWidgetId,
-                    viewModel.isWidgetHeaderEnabled.value,
-                    viewModel.isEditWidgetButtonEnabled.value,
-                    viewModel.isAppIconEnabled.value,
-                    viewModel.isNewFolderButtonEnabled.value,
-                    viewModel.widgetRadius.value,
-                    viewModel.folder.value,
-                    viewModel.notes.value.isEmpty(),
-                )
-            )
+            updateNoteWidget(appWidgetId)
             val resultValue = Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
             setResult(Activity.RESULT_OK, resultValue)
             finish()
@@ -212,8 +233,10 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             Constants.IsDismissible to isDismissible,
             Constants.SelectedFolderId to viewModel.folder.value.id,
         )
-        SelectFolderDialogFragment { folderId -> viewModel.getWidgetData(folderId) }
-            .apply { arguments = args }
-            .show(supportFragmentManager, null)
+        selectFolderDialogFragment = SelectFolderDialogFragment { folderId -> viewModel.getWidgetData(folderId) }
+            .apply {
+                arguments = args
+                show(supportFragmentManager, null)
+            }
     }
 }

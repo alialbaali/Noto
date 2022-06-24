@@ -8,6 +8,7 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.noto.app.AppActivity
 import com.noto.app.R
+import com.noto.app.domain.model.FilteringType
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.repository.*
 import com.noto.app.util.*
@@ -31,6 +32,7 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
     private lateinit var folder: Folder
     private lateinit var labelIds: List<Long>
     private lateinit var notes: List<NoteWithLabels>
+    private lateinit var filteringType: FilteringType
 
     override fun onCreate() {}
 
@@ -42,14 +44,18 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
         val labels = labelRepository.getLabelsByFolderId(folderId)
             .filterNotNull()
             .first()
+        val selectedLabels = labels.filter { it.id in labelIds }
         val noteLabels = noteLabelRepository.getNoteLabels()
+            .filterNotNull()
+            .first()
+        filteringType = settingsRepository.getWidgetFilteringType(appWidgetId)
             .filterNotNull()
             .first()
         notes = noteRepository.getNotesByFolderId(folderId)
             .filterNotNull()
             .map {
                 it.mapWithLabels(labels, noteLabels)
-                    .filter { it.second.map { it.id }.containsAll(labelIds.toList()) }
+                    .filterSelectedLabels(selectedLabels, filteringType)
                     .sorted(folder.sortingType, folder.sortingOrder)
                     .sortedByDescending { it.first.isPinned }
             }

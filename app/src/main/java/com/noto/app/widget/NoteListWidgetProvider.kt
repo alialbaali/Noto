@@ -34,6 +34,7 @@ class NoteListWidgetProvider : AppWidgetProvider(), KoinComponent {
                         settingsRepository.getWidgetRadius(appWidgetId).first(),
                         folderRepository.getFolderById(folderId).first(),
                         noteRepository.getNotesByFolderId(folderId).first().isEmpty(),
+                        settingsRepository.icon.first(),
                     )
                     appWidgetManager?.updateAppWidget(appWidgetId, remoteViews)
                 }

@@ -38,6 +38,16 @@ fun Context.updateFolderWidget(widgetId: Int) {
     sendBroadcast(intent)
 }
 
+fun Context.updateNoteWidget(widgetId: Int) {
+    val appWidgetManager = AppWidgetManager.getInstance(this)
+    appWidgetManager.notifyAppWidgetViewDataChanged(widgetId, R.id.lv)
+    val intent = Intent(this, NoteListWidgetProvider::class.java).apply {
+        putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(widgetId))
+        action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+    }
+    sendBroadcast(intent)
+}
+
 fun Context.updateAllWidgetsData() {
     val folderListComponentName = ComponentName(this, FolderListWidgetProvider::class.java)
     val noteListComponentName = ComponentName(this, NoteListWidgetProvider::class.java)

@@ -2,7 +2,9 @@ package com.noto.app.widget
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.noto.app.domain.model.FilteringType
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.repository.*
 import com.noto.app.util.NoteWithLabels
@@ -46,6 +48,13 @@ class NoteListWidgetConfigViewModel(
     private val mutableWidgetRadius = MutableStateFlow(16)
     val widgetRadius get() = mutableWidgetRadius.asStateFlow()
 
+    private val mutableWidgetFilteringType = MutableStateFlow(FilteringType.Inclusive)
+    val widgetFilteringType get() = mutableWidgetFilteringType.asStateFlow()
+    val widgetFilteringTypeFlow = settingsRepository.getWidgetFilteringType(appWidgetId)
+
+    val icon = settingsRepository.icon
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Icon.Futuristic)
+
     init {
         settingsRepository.getIsWidgetHeaderEnabled(appWidgetId)
             .onEach { mutableIsWidgetHeaderEnabled.value = it }
@@ -65,6 +74,10 @@ class NoteListWidgetConfigViewModel(
 
         settingsRepository.getWidgetRadius(appWidgetId)
             .onEach { mutableWidgetRadius.value = it }
+            .launchIn(viewModelScope)
+
+        settingsRepository.getWidgetFilteringType(appWidgetId)
+            .onEach { mutableWidgetFilteringType.value = it }
             .launchIn(viewModelScope)
     }
 
@@ -130,6 +143,10 @@ class NoteListWidgetConfigViewModel(
         mutableWidgetRadius.value = value
     }
 
+    fun setFilteringType(filteringType: FilteringType) = viewModelScope.launch {
+        mutableWidgetFilteringType.value = filteringType
+    }
+
     fun createOrUpdateWidget() = viewModelScope.launch {
         val labelIds = labels.value.filterValues { it }.map { it.key.id }
         launch { settingsRepository.updateWidgetFolderId(appWidgetId, folder.value.id) }
@@ -140,5 +157,6 @@ class NoteListWidgetConfigViewModel(
         launch { settingsRepository.updateIsWidgetNewItemButtonEnabled(appWidgetId, isNewFolderButtonEnabled.value) }
         launch { settingsRepository.updateWidgetRadius(appWidgetId, widgetRadius.value) }
         launch { settingsRepository.updateWidgetSelectedLabelIds(appWidgetId, folder.value.id, labelIds) }
+        launch { settingsRepository.updateWidgetFilteringType(appWidgetId, widgetFilteringType.value) }
     }
 }

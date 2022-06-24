@@ -64,7 +64,7 @@ class FolderFragment : Fragment() {
             viewModel.labels,
             viewModel.isRememberScrollingPosition,
         ) { folder, notes, labels, isRememberScrollingPosition ->
-            val notesCount = notes.getOrDefault(emptyList()).filterSelectedLabels(labels, folder.filteringType).count()
+            val notesCount = notes.getOrDefault(emptyList()).filterSelectedLabels(labels.filterSelected(), folder.filteringType).count()
             setupFolder(folder, notesCount, isRememberScrollingPosition)
             context?.let { context ->
                 val text = context.stringResource(R.string.archive, folder.getTitle(context))
@@ -84,7 +84,7 @@ class FolderFragment : Fragment() {
             viewModel.searchTerm,
         ) { notes, labels, font, folder, searchTerm ->
             setupNotesAndLabels(
-                notes.map { it.filterSelectedLabels(labels, folder.filteringType) },
+                notes.map { it.filterSelectedLabels(labels.filterSelected(), folder.filteringType) },
                 labels,
                 font,
                 folder,

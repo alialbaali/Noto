@@ -71,8 +71,7 @@ fun List<NoteWithLabels>.sorted(sortingType: NoteListSortingType, sortingOrder: 
     }
 }
 
-fun List<NoteWithLabels>.filterSelectedLabels(labels: Map<Label, Boolean>, filteringType: FilteringType) = filter { pair ->
-    val selectedLabels = labels.filterSelected()
+fun List<NoteWithLabels>.filterSelectedLabels(selectedLabels: List<Label>, filteringType: FilteringType) = filter { pair ->
     if (selectedLabels.isNotEmpty()) {
         when (filteringType) {
             FilteringType.Inclusive -> pair.second.any { label -> selectedLabels.any { it == label } }

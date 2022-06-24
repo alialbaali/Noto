@@ -65,6 +65,8 @@ interface SettingsRepository {
 
     fun getWidgetSelectedLabelIds(widgetId: Int, folderId: Long): Flow<List<Long>>
 
+    fun getWidgetFilteringType(widgetId: Int): Flow<FilteringType>
+
     suspend fun updateConfig(config: SettingsConfig)
 
     suspend fun updateTheme(theme: Theme)
@@ -125,4 +127,5 @@ interface SettingsRepository {
 
     suspend fun updateWidgetSelectedLabelIds(widgetId: Int, folderId: Long, labelIds: List<Long>)
 
+    suspend fun updateWidgetFilteringType(widgetId: Int, filteringType: FilteringType)
 }

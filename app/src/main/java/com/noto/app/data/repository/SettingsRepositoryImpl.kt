@@ -202,6 +202,13 @@ class SettingsRepositoryImpl(
             .flowOn(dispatcher)
     }
 
+    override fun getWidgetFilteringType(widgetId: Int): Flow<FilteringType> {
+        return storage.data
+            .map { preferences -> preferences[SettingsKeys.Widget.FilteringType(widgetId)] }
+            .map { if (it != null) FilteringType.valueOf(it) else FilteringType.Inclusive }
+            .flowOn(dispatcher)
+    }
+
     override suspend fun updateConfig(config: SettingsConfig) {
         withContext(dispatcher) {
             with(config) {
@@ -404,6 +411,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateWidgetSelectedLabelIds(widgetId: Int, folderId: Long, labelIds: List<Long>) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.Widget.SelectedLabelIds(widgetId, folderId)] = labelIds.joinToString() }
+        }
+    }
+
+    override suspend fun updateWidgetFilteringType(widgetId: Int, filteringType: FilteringType) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.Widget.FilteringType(widgetId)] = filteringType.toString() }
         }
     }
 
