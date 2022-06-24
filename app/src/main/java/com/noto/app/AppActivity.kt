@@ -144,9 +144,11 @@ class AppActivity : BaseActivity() {
             .onEach { language -> setupLanguage(language) }
             .launchIn(lifecycleScope)
 
-//        viewModel.icon
-//            .onEach { icon -> setupIcon(icon) }
-//            .launchIn(lifecycleScope)
+        if (!BuildConfig.DEBUG) {
+            viewModel.icon
+                .onEach { icon -> setupIcon(icon) }
+                .launchIn(lifecycleScope)
+        }
 
         viewModel.lastVersion
             .onEach {
@@ -268,11 +270,6 @@ class AppActivity : BaseActivity() {
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             PackageManager.DONT_KILL_APP,
         )
-    }
-
-    private fun restart() {
-        finish()
-        startActivity(intent)
     }
 
     private fun Icon.toActivityAliasName() = when (this) {
