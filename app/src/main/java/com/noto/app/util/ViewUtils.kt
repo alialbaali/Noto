@@ -51,6 +51,7 @@ import kotlin.math.absoluteValue
 
 const val SetColorFilterMethodName = "setColorFilter"
 const val SetBackgroundResourceMethodName = "setBackgroundResource"
+const val SetImageResource = "setImageResource"
 const val SwipeGestureThreshold = 100F
 const val DebounceTimeoutMillis = 250L
 const val DisabledAlpha = 127

@@ -27,6 +27,17 @@ fun Int.toWidgetHeaderShapeId() = when (this) {
     else -> R.drawable.widget_header_shape_large
 }
 
+fun Context.updateFolderWidget(widgetId: Int) {
+    val appWidgetManager = AppWidgetManager.getInstance(this)
+    // Needed to update the visibility of notes count in Folder items.
+    appWidgetManager.notifyAppWidgetViewDataChanged(widgetId, R.id.lv)
+    val intent = Intent(this, FolderListWidgetProvider::class.java).apply {
+        putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, intArrayOf(widgetId))
+        action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+    }
+    sendBroadcast(intent)
+}
+
 fun Context.updateAllWidgetsData() {
     val folderListComponentName = ComponentName(this, FolderListWidgetProvider::class.java)
     val noteListComponentName = ComponentName(this, NoteListWidgetProvider::class.java)

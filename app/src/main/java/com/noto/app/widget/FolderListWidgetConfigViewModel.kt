@@ -2,6 +2,7 @@ package com.noto.app.widget
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.noto.app.domain.model.Icon
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
@@ -45,6 +46,9 @@ class FolderListWidgetConfigViewModel(
 
     private val mutableWidgetRadius = MutableStateFlow(16)
     val widgetRadius get() = mutableWidgetRadius.asStateFlow()
+
+    val icon = settingsRepository.icon
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Icon.Futuristic)
 
     init {
         settingsRepository.getIsWidgetHeaderEnabled(appWidgetId)

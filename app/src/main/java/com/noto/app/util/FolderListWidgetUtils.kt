@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.RemoteViews
 import com.noto.app.AppActivity
 import com.noto.app.R
+import com.noto.app.domain.model.Icon
 import com.noto.app.widget.FolderListWidgetConfigActivity
 import com.noto.app.widget.FolderListWidgetService
 
@@ -20,6 +21,7 @@ fun Context.createFolderListWidgetRemoteViews(
     isNewFolderButtonEnabled: Boolean,
     widgetRadius: Int,
     isEmpty: Boolean,
+    icon: Icon,
 ): RemoteViews {
     return RemoteViews(packageName, R.layout.folder_list_widget).apply {
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
@@ -36,6 +38,7 @@ fun Context.createFolderListWidgetRemoteViews(
         setPendingIntentTemplate(R.id.lv, createFolderItemPendingIntent(appWidgetId))
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())
+        setInt(R.id.iv_app_icon, SetImageResource, icon.toResource())
         if (isAppIconEnabled)
             setViewPadding(R.id.tv_app_name, 0.dp, 16.dp, 0.dp, 16.dp)
         else

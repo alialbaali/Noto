@@ -68,7 +68,7 @@ class FolderListWidgetConfigActivity : BaseActivity() {
             .onEach { isCreated ->
                 if (isCreated) {
                     tb.title = stringResource(R.string.edit_folders_widget)
-                    btnCreate.text = stringResource(R.string.done)
+                    fabCreate.text = stringResource(R.string.update_widget)
                 }
             }
             .launchIn(lifecycleScope)
@@ -114,6 +114,10 @@ class FolderListWidgetConfigActivity : BaseActivity() {
                 widget.llHeader.background = drawableResource(radius.toWidgetHeaderShapeId())
             }
             .launchIn(lifecycleScope)
+
+        viewModel.icon
+            .onEach { icon -> widget.ivAppIcon.setImageResource(icon.toResource()) }
+            .launchIn(lifecycleScope)
     }
 
     private fun FolderListWidgetConfigActivityBinding.setupListeners() {
@@ -141,22 +145,9 @@ class FolderListWidgetConfigActivity : BaseActivity() {
             viewModel.setWidgetRadius(value.toInt())
         }
 
-        btnCreate.setOnClickListener {
+        fabCreate.setOnClickListener {
             viewModel.createOrUpdateWidget()
-            val appWidgetManager = AppWidgetManager.getInstance(this@FolderListWidgetConfigActivity)
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.lv) // Needed to update the visibility of notes count in Folder items.
-            appWidgetManager.updateAppWidget(
-                appWidgetId,
-                createFolderListWidgetRemoteViews(
-                    appWidgetId,
-                    viewModel.isWidgetHeaderEnabled.value,
-                    viewModel.isEditWidgetButtonEnabled.value,
-                    viewModel.isAppIconEnabled.value,
-                    viewModel.isNewFolderButtonEnabled.value,
-                    viewModel.widgetRadius.value,
-                    viewModel.folders.value.isEmpty(),
-                )
-            )
+            updateFolderWidget(appWidgetId)
             val resultValue = Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
             setResult(Activity.RESULT_OK, resultValue)
             finish()

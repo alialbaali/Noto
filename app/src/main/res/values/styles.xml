@@ -76,7 +76,7 @@
 
     <style name="ToolbarTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:maxLines">1</item>
-        <item name="android:textSize">@dimen/size_extra_large</item>
+        <item name="android:textSize">@dimen/size_large</item>
         <item name="fontFamily">@font/nunito_extrabold</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
     </style>
@@ -161,7 +161,7 @@
 
     <style name="DialogRadioButtonItem" parent="Widget.AppCompat.CompoundButton.RadioButton">
         <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:button">@null</item>
         <item name="android:padding">@dimen/spacing_normal</item>
@@ -420,6 +420,28 @@
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/spacing_normal</item>
+    </style>
+
+    <style name="ExtendedFab" parent="Widget.Material3.ExtendedFloatingActionButton.Primary">
+        <item name="android:layout_gravity">bottom|end</item>
+        <item name="android:layout_margin">@dimen/spacing_normal</item>
+        <item name="android:textColor">?attr/notoBackgroundColor</item>
+        <item name="backgroundTint">?attr/notoPrimaryColor</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="Slider" parent="Widget.Material3.Slider">
+        <item name="haloColor">?attr/notoSurfaceColor</item>
+        <item name="labelStyle">@style/SliderLabel</item>
+        <item name="thumbColor">?attr/notoPrimaryColor</item>
+        <item name="thumbRadius">12dp</item>
+        <item name="thumbStrokeColor">?attr/notoPrimaryColor</item>
+        <item name="thumbStrokeWidth">0dp</item>
+        <item name="tickColorActive">?attr/notoBackgroundColor</item>
+        <item name="tickColorInactive">?attr/notoPrimaryColor</item>
+        <item name="trackColorActive">?attr/notoPrimaryColor</item>
+        <item name="trackColorInactive">?attr/notoSurfaceColor</item>
+        <item name="trackHeight">@dimen/spacing_normal</item>
     </style>
 
 </resources>

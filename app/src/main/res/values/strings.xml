@@ -277,6 +277,7 @@
 
     <!-- Widget -->
     <string name="create_widget">Create widget</string>
+    <string name="update_widget">Update widget</string>
     <string name="new_notes_widget">New notes widget</string>
     <string name="edit_notes_widget">Edit notes widget</string>
     <string name="new_folders_widget">New folders widget</string>

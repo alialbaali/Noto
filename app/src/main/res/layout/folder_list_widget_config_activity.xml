@@ -45,6 +45,7 @@
 
         <LinearLayout
             android:id="@+id/ll"
+            android:paddingBottom="@dimen/padding_bottom"
             android:animateLayoutChanges="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -99,6 +100,7 @@
 
             <com.google.android.material.slider.Slider
                 android:id="@+id/s_widget_radius"
+                style="@style/Slider"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:valueFrom="8"
@@ -106,33 +108,15 @@
                 android:value="16"
                 android:stepSize="8"
                 android:contentDescription="@string/widget_radius"
-                android:layout_marginHorizontal="@dimen/spacing_normal"
-                app:haloColor="?attr/notoSurfaceColor"
-                app:labelStyle="@style/SliderLabel"
-                app:thumbColor="?attr/notoPrimaryColor"
-                app:thumbRadius="12dp"
-                app:thumbStrokeColor="?attr/notoPrimaryColor"
-                app:thumbStrokeWidth="0dp"
-                app:tickColorActive="?attr/notoBackgroundColor"
-                app:tickColorInactive="?attr/notoPrimaryColor"
-                app:trackColorActive="?attr/notoPrimaryColor"
-                app:trackColorInactive="?attr/notoBackgroundColor"
-                app:trackHeight="@dimen/spacing_normal" />
-
-            <LinearLayout
-                android:gravity="bottom"
-                android:layout_margin="@dimen/spacing_normal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_create"
-                    style="@style/MaterialButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/spacing_normal"
-                    android:text="@string/create_widget" />
-            </LinearLayout>
+                android:layout_marginHorizontal="@dimen/spacing_normal" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_create"
+        style="@style/ExtendedFab"
+        android:text="@string/create_widget"
+        android:contentDescription="@string/create_widget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
