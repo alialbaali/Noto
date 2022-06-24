@@ -16,7 +16,8 @@
         android:id="@+id/iv_folder_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:src="@drawable/ic_round_inbox_24" />
+        android:contentDescription="@string/general"
+        tools:src="@drawable/ic_round_folder_general_24" />
 
     <TextView
         android:id="@+id/tv_folder_title"
@@ -26,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal"
         android:layout_marginEnd="@dimen/spacing_small"
-        tools:text="@string/inbox" />
+        tools:text="@string/general" />
 
     <TextView
         android:id="@+id/tv_folder_notes_count"

@@ -67,6 +67,7 @@ class FolderRemoteViewsFactory(private val context: Context, intent: Intent?) : 
             setTextViewText(R.id.tv_folder_notes_count, notesCount.toString())
             setTextViewText(R.id.tv_folder_title, folder.getTitle(context))
             setContentDescription(R.id.ll, folder.getTitle(context))
+            setContentDescription(R.id.iv_folder_icon, folder.getTitle(context))
             setTextColor(R.id.tv_folder_title, color)
             setTextColor(R.id.tv_folder_notes_count, color)
             setImageViewResource(R.id.iv_folder_icon, iconResource)
