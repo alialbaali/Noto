@@ -26,6 +26,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import java.util.concurrent.TimeUnit
 
+private val AppIntents = listOf(
+    Intent.ACTION_SEND,
+    Intent.ACTION_PROCESS_TEXT,
+    Constants.Intent.ActionCreateFolder,
+    Constants.Intent.ActionCreateNote,
+    Constants.Intent.ActionOpenFolder,
+    Constants.Intent.ActionOpenNote,
+    Constants.Intent.ActionSettings,
+)
+
 class AppActivity : BaseActivity() {
 
     private val viewModel by viewModel<AppViewModel>()
@@ -58,21 +68,25 @@ class AppActivity : BaseActivity() {
     }
 
     private fun setupNavigation() {
-        when (val interfaceId = viewModel.mainInterfaceId.value) {
-            AllNotesItemId -> inflateGraphAndSetStartDestination(R.id.allNotesFragment)
-            RecentNotesItemId -> inflateGraphAndSetStartDestination(R.id.recentNotesFragment)
-            AllFoldersId -> {
-                val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
-                inflateGraphAndSetStartDestination(R.id.folderFragment, args)
-                if (navController.currentDestination?.id != R.id.mainFragment && viewModel.shouldNavigateToMainFragment) {
-                    navController.navigate(R.id.mainFragment)
-                    viewModel.shouldNavigateToMainFragment = false
+        if (intent?.action !in AppIntents) {
+            when (val interfaceId = viewModel.mainInterfaceId.value) {
+                AllNotesItemId -> inflateGraphAndSetStartDestination(R.id.allNotesFragment)
+                RecentNotesItemId -> inflateGraphAndSetStartDestination(R.id.recentNotesFragment)
+                AllFoldersId -> {
+                    val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
+                    inflateGraphAndSetStartDestination(R.id.folderFragment, args)
+                    if (navController.currentDestination?.id != R.id.mainFragment && viewModel.shouldNavigateToMainFragment) {
+                        navController.navigate(R.id.mainFragment)
+                        viewModel.shouldNavigateToMainFragment = false
+                    }
+                }
+                else -> {
+                    val args = bundleOf(Constants.FolderId to interfaceId)
+                    inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                 }
             }
-            else -> {
-                val args = bundleOf(Constants.FolderId to interfaceId)
-                inflateGraphAndSetStartDestination(R.id.folderFragment, args)
-            }
+        } else {
+            inflateGraphAndSetStartDestination(R.id.folderFragment)
         }
     }
 
