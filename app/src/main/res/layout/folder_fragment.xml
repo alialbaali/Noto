@@ -41,6 +41,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_folder_title"
                     style="@style/ToolbarTitleTextAppearance"
+                    android:gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="@string/title"

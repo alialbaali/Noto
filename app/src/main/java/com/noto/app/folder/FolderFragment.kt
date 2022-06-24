@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.*
 import androidx.activity.addCallback
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
@@ -306,6 +308,19 @@ class FolderFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
                 fab.outlineSpotShadowColor = color
+            }
+            if (folder.isArchived || folder.isVaulted) {
+                val drawableId = if (folder.isVaulted) R.drawable.ic_round_lock_24 else R.drawable.ic_round_archive_24
+                val bitmapDrawable = context.drawableResource(drawableId)
+                    ?.mutate()
+                    ?.toBitmap(20.dp, 20.dp)
+                    ?.toDrawable(resources)
+                    ?.also { it.setTint(color) }
+                tvFolderTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, bitmapDrawable, null)
+                tvFolderTitle.compoundDrawablePadding = context.dimenResource(R.dimen.spacing_small).toInt()
+            } else {
+                tvFolderTitle.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, null, null)
+                tvFolderTitle.compoundDrawablePadding = 0
             }
         }
         rv.post {

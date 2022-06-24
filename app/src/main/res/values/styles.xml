@@ -62,7 +62,7 @@
         <item name="android:animateLayoutChanges">true</item>
     </style>
 
-    <style name="Toolbar" parent="Widget.MaterialComponents.TextView">
+    <style name="Toolbar" parent="Widget.Material3.Toolbar">
         <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="titleMarginEnd">@dimen/spacing_normal</item>
         <item name="titleTextAppearance">@style/ToolbarTitleTextAppearance</item>
@@ -71,11 +71,6 @@
     </style>
 
     <style name="ToolbarWithSubtitle" parent="Toolbar">
-        <item name="contentInsetStartWithNavigation">0dp</item>
-        <item name="titleMarginEnd">@dimen/spacing_normal</item>
-        <item name="titleTextAppearance">@style/ToolbarTitleTextAppearance</item>
-        <item name="layout_collapseMode">pin</item>
-        <item name="titleTextColor">?attr/notoPrimaryColor</item>
         <item name="android:padding">@dimen/spacing_small</item>
     </style>
 
