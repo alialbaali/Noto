@@ -101,6 +101,7 @@ fun View.snackbar(
     @IdRes anchorViewId: Int? = null,
     color: NotoColor? = null,
     vararg formatArgs: Any? = emptyArray(),
+    vibrate: Boolean = true,
 ) = Snackbar.make(this, context.stringResource(stringId, *formatArgs), Snackbar.LENGTH_SHORT).apply {
     animationMode = Snackbar.ANIMATION_MODE_SLIDE
     val textView = view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
@@ -123,6 +124,7 @@ fun View.snackbar(
         setTextColor(contentColor)
         textView?.compoundDrawablesRelative?.get(0)?.mutate()?.setTint(contentColor)
     }
+    if (vibrate) performClickHapticFeedback()
     show()
 }
 
@@ -373,3 +375,9 @@ fun NestedScrollView.isScrollingAsFlow() = callbackFlow {
     setOnScrollChangeListener(listener)
     awaitClose { setOnScrollChangeListener(null as NestedScrollView.OnScrollChangeListener?) }
 }
+
+fun View.performClickHapticFeedback() =
+    performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
+
+fun View.performLongClickHapticFeedback() =
+    performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
