@@ -68,7 +68,6 @@
     <string name="folders_archive">Folders archive</string>
     <string name="change_main_interface">Change main interface</string>
     <string name="general">General</string>
-    <string name="collapse_toolbar">Collapse toolbar by default</string>
     <string name="all_notes">All notes</string>
     <string name="all_folders">All folders</string>
     <string name="clear">Clear</string>
@@ -173,7 +172,6 @@
     <string name="redo">Redo</string>
     <string name="redo_history">Redo history</string>
     <string name="share_note">Share note</string>
-    <string name="notes_sorting">Notes sorting</string>
     <string name="sorting_type">Sorting type</string>
     <string name="notes_view">Notes view</string>
     <string name="sorting_order">Sorting order</string>
@@ -181,7 +179,6 @@
     <string name="grouping_order">Grouping order</string>
     <string name="save_to_noto">Save to Noto</string>
     <string name="no_notes_found">No notes found.</string>
-    <string name="unarchive_note">Unarchive note</string>
     <string name="notes">Notes</string>
     <string name="note_is_archived">Note has been archived.</string>
     <string name="note_is_pinned">Note has been pinned.</string>
@@ -191,7 +188,6 @@
     <string name="reminder">Reminder</string>
     <string name="reminders">Reminders</string>
     <string name="new_note_reminder">New note reminder</string>
-    <string name="archive_count">%s archive</string>
     <string name="copy">Copy</string>
     <string name="copy_to">Copy to…</string>
     <string name="note_is_copied">Note has been copied.</string>
@@ -207,13 +203,8 @@
     <string name="note_is_deleted">Note has been deleted.</string>
     <string name="note_is_duplicated">Note has been duplicated.</string>
     <string name="move_to">Move to…</string>
-    <string name="change_parent_folder">Change parent folder</string>
     <string name="note_is_moved">Note has been moved.</string>
     <string name="note_preview_size">Note preview size</string>
-    <string name="title_line_spacing">Title line spacing</string>
-    <string name="title_letter_spacing">Title letter spacing</string>
-    <string name="body_line_spacing">Body line spacing</string>
-    <string name="body_letter_spacing">Body letter spacing</string>
     <string name="show_note_creation_date">Show note creation date</string>
     <string name="show_folders_notes_count">Show folders notes count</string>
     <string name="remember_scrolling_position">Remember scrolling position</string>

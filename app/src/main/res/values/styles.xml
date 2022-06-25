@@ -81,25 +81,6 @@
         <item name="android:textColor">?attr/notoPrimaryColor</item>
     </style>
 
-    <style name="CollapsingToolbarExpandedTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
-        <item name="android:maxLines">1</item>
-        <item name="android:textSize">@dimen/collapsing_toolbar_expanded_text</item>
-        <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textColor">?attr/notoPrimaryColor</item>
-    </style>
-
-    <style name="CollapsingToolbar" parent="Widget.Design.CollapsingToolbar">
-        <item name="android:fitsSystemWindows">false</item>
-        <item name="collapsedTitleTextAppearance">@style/ToolbarTitleTextAppearance</item>
-        <item name="expandedTitleTextAppearance">@style/CollapsingToolbarExpandedTitleTextAppearance</item>
-        <item name="layout_scrollFlags">scroll|snap|exitUntilCollapsed</item>
-        <item name="expandedTitleGravity">center</item>
-        <item name="expandedTitleMarginStart">@dimen/spacing_normal</item>
-        <item name="expandedTitleMarginEnd">@dimen/spacing_normal</item>
-        <item name="expandedTitleMarginTop">@dimen/spacing_normal</item>
-        <item name="expandedTitleMarginBottom">@dimen/spacing_normal</item>
-    </style>
-
     <style name="SubtitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:textColor">?attr/notoSecondaryColor</item>
