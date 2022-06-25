@@ -22,6 +22,7 @@ import com.noto.app.main.SelectFolderDialogFragment
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -83,7 +84,10 @@ class NewFolderFragment : Fragment() {
         }
 
         tvParentFolderOption.setOnClickListener {
-            SelectFolderDialogFragment { folderId -> viewModel.setFolderParentId(folderId) }.apply {
+            SelectFolderDialogFragment { folderId ->
+                viewModel.setFolderParentId(folderId)
+                setFolderParent(folderId)
+            }.apply {
                 arguments = bundleOf(
                     Constants.FilteredFolderIds to longArrayOf(Folder.GeneralFolderId, args.folderId),
                     Constants.SelectedFolderId to (viewModel.folder.value.parentId ?: 0L),
@@ -132,7 +136,7 @@ class NewFolderFragment : Fragment() {
         }
     }
 
-    private suspend fun NewFolderFragmentBinding.setupFolder(folder: Folder) {
+    private fun NewFolderFragmentBinding.setupFolder(folder: Folder) {
         rv.smoothScrollToPosition(folder.color.ordinal)
         val layoutTab = when (folder.layout) {
             Layout.Linear -> tlFolderLayout.getTabAt(0)
@@ -147,6 +151,7 @@ class NewFolderFragment : Fragment() {
         swShowNoteCreationDate.isChecked = folder.isShowNoteCreationDate
         swShowNoteCreationDate.setupColors()
         sNotePreviewSize.value = folder.notePreviewSize.toFloat()
+        setFolderParent(folder.parentId)
         context?.let { context ->
             et.setText(folder.getTitle(context))
             et.setSelection(folder.getTitle(context).length)
@@ -156,8 +161,13 @@ class NewFolderFragment : Fragment() {
                 tb.setNavigationIconTint(color)
                 fab.setBackgroundColor(color)
             }
-            if (folder.parentId != null) {
-                val parentFolder = viewModel.getFolderById(folder.parentId ?: 0L)
+        }
+    }
+
+    private fun NewFolderFragmentBinding.setFolderParent(parentId: Long?) = lifecycleScope.launch {
+        context?.let { context ->
+            if (parentId != null) {
+                val parentFolder = viewModel.getFolderById(parentId)
                 if (parentFolder != null) {
                     tvParentFolderOption.text = parentFolder.getTitle(context)
                     tvParentFolderOption.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_folder_24, 0, 0, 0)

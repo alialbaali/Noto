@@ -24,6 +24,8 @@ class FolderViewModel(
     private val mutableFolder = MutableStateFlow(Folder(folderId, position = 0))
     val folder get() = mutableFolder.asStateFlow()
 
+    private var selectedParentId: Long? = null
+
     private val mutableNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
 
@@ -91,8 +93,8 @@ class FolderViewModel(
 
     suspend fun getFolderById(id: Long) = folderRepository.getFolderById(id).firstOrNull()
 
-    fun setFolderParentId(parentId: Long) {
-        mutableFolder.value = folder.value.copy(parentId = parentId.takeUnless { it == 0L })
+    fun setFolderParentId(parentId: Long?) {
+        selectedParentId = parentId.takeUnless { it == 0L }
     }
 
     fun createOrUpdateFolder(
@@ -107,6 +109,7 @@ class FolderViewModel(
 
         val folder = folder.value.copy(
             title = title.trim(),
+            parentId = selectedParentId,
             color = color,
             layout = layout,
             notePreviewSize = notePreviewSize,
