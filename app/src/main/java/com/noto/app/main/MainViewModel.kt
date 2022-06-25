@@ -12,10 +12,7 @@ import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.getOrDefault
 import com.noto.app.util.sorted
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -90,9 +87,8 @@ class MainViewModel(
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
     val allNotes = noteRepository.getAllMainNotes()
-        .combine(folders) { notes, state ->
-            val folders = state.getOrDefault(emptyList())
-            notes.filter { note -> folders.any { folder -> folder.first.id == note.folderId } }
+        .combine(folderRepository.getFolders()) { notes, folders ->
+            notes.filter { note -> folders.any { folder -> folder.id == note.folderId } }
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
