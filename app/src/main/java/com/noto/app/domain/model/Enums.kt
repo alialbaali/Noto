@@ -26,7 +26,7 @@ enum class Font { Nunito, Monospace, }
 
 enum class Grouping { Default, CreationDate, Label, }
 
-enum class Language { System, English, Turkish, Arabic, Indonesian, Russian, Tamil, Spanish, French, }
+enum class Language { System, English, Turkish, Arabic, Indonesian, Russian, Tamil, Spanish, French, German, }
 
 enum class VaultTimeout { Immediately, OnAppClose, After1Hour, After4Hours, After12Hours, }
 

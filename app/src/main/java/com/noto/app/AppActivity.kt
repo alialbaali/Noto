@@ -236,6 +236,7 @@ class AppActivity : BaseActivity() {
             Language.Tamil -> Locale("ta")
             Language.Spanish -> Locale("es")
             Language.French -> Locale("fr")
+            Language.German -> Locale("de")
         }
         if (resources.configuration.locale != locale) {
             Locale.setDefault(locale)

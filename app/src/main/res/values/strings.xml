@@ -40,7 +40,7 @@
         App icons use <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> published
         by <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
         \n\nSpecial thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a>,
-        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a> for Turkish, Spanish and French localizations respectively,
+        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a>, and Uli N for Turkish, Spanish, French, and German localizations respectively,
         and everyone who has helped and contributed in the development.</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Export/Import data</string>
@@ -251,6 +251,7 @@
     <string name="russian">Russian</string>
     <string name="spanish">Spanish</string>
     <string name="french">French</string>
+    <string name="german">German</string>
 
     <!-- Icon -->
     <string name="icon">Icon</string>

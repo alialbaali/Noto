@@ -82,6 +82,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/french" />
+
+            <RadioButton
+                android:id="@+id/rb_german"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/german" />
         </RadioGroup>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
