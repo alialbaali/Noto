@@ -24,7 +24,8 @@ class FolderViewModel(
     private val mutableFolder = MutableStateFlow(Folder(folderId, position = 0))
     val folder get() = mutableFolder.asStateFlow()
 
-    private var selectedParentId: Long? = null
+    var selectedParentId: Long? = null
+        private set
 
     private val mutableNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
@@ -57,6 +58,7 @@ class FolderViewModel(
                 .onStart { emit(Folder(folderId, position = 0)) },
             folderRepository.getAllFolders(),
         ) { folder, folders ->
+            selectedParentId = folder.parentId
             mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(folder.color)
             mutableFolder.value = folder.mapRecursively(folders)
         }.launchIn(viewModelScope)

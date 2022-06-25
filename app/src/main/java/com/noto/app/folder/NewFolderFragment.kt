@@ -90,7 +90,7 @@ class NewFolderFragment : Fragment() {
             }.apply {
                 arguments = bundleOf(
                     Constants.FilteredFolderIds to longArrayOf(Folder.GeneralFolderId, args.folderId),
-                    Constants.SelectedFolderId to (viewModel.folder.value.parentId ?: 0L),
+                    Constants.SelectedFolderId to (viewModel.selectedParentId ?: 0L),
                     Constants.IsNotParentEnabled to true,
                 )
             }.show(parentFragmentManager, null)
