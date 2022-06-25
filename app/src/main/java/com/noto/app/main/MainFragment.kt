@@ -132,7 +132,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                 val folders = state.value.filterNot { it.first.isGeneral }
                 val generalFolder = state.value.firstOrNull { it.first.isGeneral }
                 val isManualSorting = sortingType == FolderListSortingType.Manual
-                val foldersCount = folders.count()
+                val foldersCount = folders.countRecursively()
 
                 tvFoldersCount.text = context?.quantityStringResource(R.plurals.folders_count, foldersCount, foldersCount)?.lowercase()
 
