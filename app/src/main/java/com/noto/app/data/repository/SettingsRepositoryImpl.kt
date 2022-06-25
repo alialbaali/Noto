@@ -116,7 +116,7 @@ class SettingsRepositoryImpl(
 
     override val isShowNotesCount: Flow<Boolean> = storage.data
         .map { preferences -> preferences[SettingsKeys.ShowNotesCount] }
-        .map { it.toBoolean() }
+        .map { it?.toBoolean() ?: true }
         .flowOn(dispatcher)
 
     override val mainInterfaceId: Flow<Long> = storage.data
