@@ -39,7 +39,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_edit_label"
-                    style="@style/DialogQuickItem"
+                    style="@style/DialogItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/edit"
@@ -59,7 +59,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_reorder_label"
-                    style="@style/DialogQuickItem"
+                    style="@style/DialogItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -68,7 +68,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_delete_label"
-                    style="@style/DialogQuickItem"
+                    style="@style/DialogItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

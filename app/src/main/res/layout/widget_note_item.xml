@@ -43,7 +43,7 @@
 
     <TextView
         android:id="@+id/tv_creation_date"
-        style="@style/WidgetNoteCreationDateTextView"
+        style="@style/WidgetNoteDateTextView"
         android:layout_marginTop="@dimen/spacing_small"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

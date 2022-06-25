@@ -14,7 +14,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="?attr/notoSecondaryColor"
-        app:fontFamily="@font/nunito_bold"
+        app:fontFamily="@font/nunito_semibold"
         tools:text="Libraries" />
 
     <ImageButton

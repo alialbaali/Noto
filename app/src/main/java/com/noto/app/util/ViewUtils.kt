@@ -145,16 +145,16 @@ fun View.showKeyboardUsingImm() {
     imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 }
 
-fun TextView.setBoldFont(font: Font) {
+fun TextView.setSemiboldFont(font: Font) {
     when (font) {
-        Font.Nunito -> context.tryLoadingFontResource(R.font.nunito_bold)?.let { typeface = it }
+        Font.Nunito -> context.tryLoadingFontResource(R.font.nunito_semibold)?.let { typeface = it }
         Font.Monospace -> setTypeface(Typeface.MONOSPACE, Typeface.BOLD)
     }
 }
 
-fun TextView.setSemiboldFont(font: Font) {
+fun TextView.setMediumFont(font: Font) {
     when (font) {
-        Font.Nunito -> context.tryLoadingFontResource(R.font.nunito_semibold)?.let { typeface = it }
+        Font.Nunito -> context.tryLoadingFontResource(R.font.nunito_medium)?.let { typeface = it }
         Font.Monospace -> typeface = Typeface.MONOSPACE
     }
 }

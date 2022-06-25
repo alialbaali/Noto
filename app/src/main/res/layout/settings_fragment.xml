@@ -217,7 +217,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_version"
-                style="@style/DialogItem"
+                style="@style/SettingsItem"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="bottom"

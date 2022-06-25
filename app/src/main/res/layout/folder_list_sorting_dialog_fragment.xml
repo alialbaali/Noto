@@ -26,7 +26,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_sorting_type"
-                style="@style/DialogQuickItem"
+                style="@style/DialogItem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -35,7 +35,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_sorting_order"
-                style="@style/DialogQuickItem"
+                style="@style/DialogItem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

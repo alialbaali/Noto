@@ -26,7 +26,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_folders_vault"
-                style="@style/DialogQuickItem"
+                style="@style/DialogItem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -35,7 +35,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_folders_archive"
-                style="@style/DialogQuickItem"
+                style="@style/DialogItem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -54,7 +54,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_settings"
-                style="@style/DialogQuickItem"
+                style="@style/DialogItem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/settings"

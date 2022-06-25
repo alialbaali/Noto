@@ -108,8 +108,8 @@ class NoteFragment : Fragment() {
 
         viewModel.font
             .onEach { font ->
-                etNoteTitle.setBoldFont(font)
-                etNoteBody.setSemiboldFont(font)
+                etNoteTitle.setSemiboldFont(font)
+                etNoteBody.setMediumFont(font)
             }
             .launchIn(lifecycleScope)
 

@@ -108,7 +108,6 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:fontFamily="@font/nunito_bold_italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

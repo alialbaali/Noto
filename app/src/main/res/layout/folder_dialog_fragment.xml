@@ -38,7 +38,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_edit_folder"
-                    style="@style/DialogQuickItem"
+                    style="@style/DialogItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@string/edit"
@@ -57,7 +57,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_pin_folder"
-                    style="@style/DialogQuickItem"
+                    style="@style/DialogItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -66,7 +66,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_vault_folder"
-                    style="@style/DialogQuickItem"
+                    style="@style/DialogItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -89,7 +89,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_archive_folder"
-                    style="@style/DialogQuickItem"
+                    style="@style/DialogItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -98,7 +98,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_new_note_shortcut"
-                    style="@style/DialogQuickItem"
+                    style="@style/DialogItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -107,7 +107,7 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_delete_folder"
-                    style="@style/DialogQuickItem"
+                    style="@style/DialogItem"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

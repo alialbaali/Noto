@@ -24,7 +24,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_export"
-                style="@style/DialogQuickItem"
+                style="@style/DialogItem"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -33,7 +33,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_import"
-                style="@style/DialogQuickItem"
+                style="@style/DialogItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

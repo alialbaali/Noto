@@ -12,6 +12,7 @@
     <LinearLayout
         android:id="@+id/ll_header"
         android:background="@drawable/widget_header_shape_medium"
+        android:gravity="center"
         android:elevation="@dimen/elevation_normal"
         android:animateLayoutChanges="true"
         android:layout_width="match_parent"

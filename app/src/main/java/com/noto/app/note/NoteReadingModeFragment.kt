@@ -138,8 +138,8 @@ class NoteReadingModeFragment : Fragment() {
         tvNoteBody.text = note.body
         tvNoteTitle.isVisible = note.title.isNotBlank()
         tvNoteBody.isVisible = note.body.isNotBlank()
-        tvNoteTitle.setBoldFont(font)
-        tvNoteBody.setSemiboldFont(font)
+        tvNoteTitle.setSemiboldFont(font)
+        tvNoteBody.setMediumFont(font)
     }
 
     private fun NoteReadingModeFragmentBinding.setupFolder(folder: Folder) {

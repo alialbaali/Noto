@@ -23,8 +23,8 @@
         <item name="android:textColorHint">?attr/notoSecondaryColor</item>
         <item name="hintTextColor">?attr/notoSecondaryColor</item>
 
-        <item name="android:fontFamily">@font/nunito_semibold</item>
-        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="android:fontFamily">@font/nunito_medium</item>
+        <item name="fontFamily">@font/nunito_medium</item>
 
         <item name="notoPrimaryColor">@color/colorPrimary</item>
         <item name="notoSecondaryColor">@color/colorSecondary</item>
@@ -76,15 +76,15 @@
 
     <style name="ToolbarTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:maxLines">1</item>
-        <item name="android:textSize">@dimen/size_large</item>
-        <item name="fontFamily">@font/nunito_extrabold</item>
+        <item name="android:textSize">@dimen/size_extra_large</item>
+        <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
     </style>
 
     <style name="CollapsingToolbarExpandedTitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
         <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/collapsing_toolbar_expanded_text</item>
-        <item name="fontFamily">@font/nunito_extrabold</item>
+        <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
     </style>
 
@@ -103,6 +103,7 @@
     <style name="SubtitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:textColor">?attr/notoSecondaryColor</item>
+        <item name="fontFamily">@font/nunito_semibold_italic</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>
@@ -117,32 +118,21 @@
     </style>
 
     <style name="DialogTitle" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_extrabold</item>
+        <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:textSize">@dimen/size_large</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="WidgetTitle" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_extrabold</item>
+        <item name="fontFamily">@font/nunito_bold</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">@dimen/size_large</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="DialogItem" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">@dimen/size_small</item>
-        <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="android:background">@drawable/dialog_item_shape</item>
-        <item name="android:padding">@dimen/spacing_normal</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
-        <item name="android:drawablePadding">@dimen/spacing_normal</item>
-    </style>
-
-    <style name="DialogQuickItem" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:background">@drawable/dialog_quick_item_shape</item>
@@ -154,14 +144,14 @@
     </style>
 
     <style name="DialogSectionItem" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">@dimen/size_extra_small</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
     </style>
 
     <style name="DialogRadioButtonItem" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">@dimen/size_extra_small</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:button">@null</item>
         <item name="android:padding">@dimen/spacing_normal</item>
@@ -171,7 +161,7 @@
     </style>
 
     <style name="IconItem" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:padding">@dimen/spacing_normal</item>
@@ -220,7 +210,7 @@
         <item name="android:textColor">?attr/notoBackgroundColor</item>
         <item name="android:textSize">20sp</item>
         <item name="cornerRadius">@dimen/spacing_small</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_medium</item>
     </style>
 
     <style name="MaterialSecondaryButton" parent="Widget.Material3.Button.OutlinedButton">
@@ -230,39 +220,38 @@
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:textSize">20sp</item>
         <item name="cornerRadius">@dimen/spacing_small</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_medium</item>
     </style>
 
     <style name="FolderTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="android:textSize">@dimen/size_small</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:textSize">@dimen/size_normal</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
     </style>
 
     <style name="WidgetFolderTitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorPrimary</item>
-        <item name="android:textSize">@dimen/size_small</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/size_normal</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
     </style>
 
     <style name="FolderNotesCountTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:textSize">@dimen/size_extra_small</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_medium</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
     </style>
 
     <style name="WidgetFolderNotesCountTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorSecondary</item>
-        <item name="android:textSize">@dimen/size_tiny</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:ellipsize">end</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:maxLines">1</item>
     </style>
 
     <style name="NoteTitleEditText" parent="Widget.AppCompat.EditText">
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">@dimen/size_huge</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:textColorHint">?attr/notoSecondaryColor</item>
@@ -271,7 +260,7 @@
     </style>
 
     <style name="NoteBodyEditText" parent="Widget.AppCompat.EditText">
-        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="fontFamily">@font/nunito_medium</item>
         <item name="android:background">@android:color/transparent</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:gravity">top</item>
@@ -281,30 +270,30 @@
     </style>
 
     <style name="NoteTitleTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">@dimen/size_small</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/size_normal</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:ellipsize">end</item>
     </style>
 
     <style name="WidgetNoteTitleTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_bold</item>
-        <item name="android:textSize">@dimen/size_small</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/size_normal</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:ellipsize">end</item>
     </style>
 
     <style name="NoteBodyTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_semibold</item>
-        <item name="android:textSize">@dimen/size_tiny</item>
+        <item name="fontFamily">@font/nunito_medium</item>
+        <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:lineSpacingMultiplier">1</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:ellipsize">end</item>
     </style>
 
     <style name="WidgetNoteBodyTextView" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_semibold</item>
-        <item name="android:textSize">@dimen/size_tiny</item>
+        <item name="fontFamily">@font/nunito_medium</item>
+        <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:lineSpacingMultiplier">1</item>
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:ellipsize">end</item>
@@ -313,27 +302,27 @@
     <style name="NoteDateTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">?attr/notoSecondaryColor</item>
         <item name="android:textSize">@dimen/size_extra_tiny</item>
-        <item name="fontFamily">@font/nunito_semibold_italic</item>
+        <item name="fontFamily">@font/nunito_regular_italic</item>
         <item name="android:visibility">gone</item>
     </style>
 
-    <style name="WidgetNoteCreationDateTextView" parent="Widget.MaterialComponents.TextView">
+    <style name="WidgetNoteDateTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/colorSecondary</item>
         <item name="android:textSize">@dimen/size_extra_tiny</item>
-        <item name="fontFamily">@font/nunito_semibold_italic</item>
+        <item name="fontFamily">@font/nunito_regular_italic</item>
     </style>
 
     <style name="PlaceholderTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_extra_huge</item>
         <item name="android:textColor">?attr/notoSecondaryColor</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="WidgetPlaceholderTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_extra_huge</item>
         <item name="android:textColor">@color/colorSecondary</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -344,7 +333,7 @@
     </style>
 
     <style name="SliderLabelTextAppearance" parent="TextAppearance.MaterialComponents.Tooltip">
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textColor">?attr/notoBackgroundColor</item>
         <item name="android:textSize">@dimen/size_small</item>
     </style>
@@ -354,19 +343,27 @@
         <item name="cornerSize">@dimen/spacing_small</item>
     </style>
 
-    <style name="SettingsItem" parent="DialogItem">
-        <item name="drawableTint">?attr/notoSecondaryColor</item>
+    <style name="SettingsItem" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">?attr/notoPrimaryColor</item>
+        <item name="android:background">@drawable/dialog_item_shape</item>
+        <item name="android:padding">@dimen/spacing_normal</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:drawablePadding">@dimen/spacing_normal</item>
     </style>
 
     <style name="LabelItem" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:textSize">@dimen/size_normal</item>
         <item name="android:background">@drawable/label_item_shape</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
     </style>
 
     <style name="TabItemTextAppearance" parent="TextAppearance.MaterialComponents.Headline1">
-        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="fontFamily">@font/nunito_medium</item>
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:textAllCaps">false</item>
     </style>
@@ -377,7 +374,7 @@
         <item name="android:focusable">true</item>
         <item name="android:background">@drawable/sorting_item_shape</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_medium</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -410,12 +407,12 @@
     </style>
 
     <style name="SnackbarTextView" parent="Widget.Material3.Snackbar.TextView">
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_medium</item>
     </style>
 
     <style name="ClickableView" parent="Widget.MaterialComponents.TextView">
         <item name="android:background">@drawable/generic_clickable_shape</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_medium</item>
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:gravity">center</item>
@@ -427,7 +424,7 @@
         <item name="android:layout_margin">@dimen/spacing_normal</item>
         <item name="android:textColor">?attr/notoBackgroundColor</item>
         <item name="backgroundTint">?attr/notoPrimaryColor</item>
-        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
     </style>
 
     <style name="Slider" parent="Widget.Material3.Slider">

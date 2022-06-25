@@ -100,8 +100,8 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         llReminder.isVisible = note.reminderDate != null
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
-        tvNoteTitle.setBoldFont(font)
-        tvNoteBody.setSemiboldFont(font)
+        tvNoteTitle.setSemiboldFont(font)
+        tvNoteBody.setMediumFont(font)
         ibDrag.isVisible = isManualSorting
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
         rv.isVisible = labels.isNotEmpty()

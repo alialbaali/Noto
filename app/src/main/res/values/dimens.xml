@@ -18,15 +18,15 @@
     <dimen name="elevation_extra_large">16dp</dimen>
 
     <!-- Text Size -->
-    <dimen name="size_extra_tiny">12sp</dimen>
-    <dimen name="size_tiny">14sp</dimen>
-    <dimen name="size_extra_small">16sp</dimen>
-    <dimen name="size_small">18sp</dimen>
-    <dimen name="size_normal">20sp</dimen>
-    <dimen name="size_large">22sp</dimen>
-    <dimen name="size_extra_large">24sp</dimen>
-    <dimen name="size_huge">26sp</dimen>
-    <dimen name="size_extra_huge">28sp</dimen>
+    <dimen name="size_extra_tiny">10sp</dimen>
+    <dimen name="size_tiny">12sp</dimen>
+    <dimen name="size_extra_small">14sp</dimen>
+    <dimen name="size_small">16sp</dimen>
+    <dimen name="size_normal">17sp</dimen>
+    <dimen name="size_large">20sp</dimen>
+    <dimen name="size_extra_large">22sp</dimen>
+    <dimen name="size_huge">24sp</dimen>
+    <dimen name="size_extra_huge">26sp</dimen>
 
     <!-- Custom -->
     <dimen name="padding_bottom">100dp</dimen>
