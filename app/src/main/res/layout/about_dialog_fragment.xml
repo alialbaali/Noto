@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/about_message"
-            app:fontFamily="@font/nunito_bold" />
+            app:fontFamily="@font/nunito_semibold" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_okay"
