@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll"
+    android:background="@drawable/widget_shape_medium"
+    android:animateLayoutChanges="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_header"
+        android:background="@drawable/widget_header_shape_medium"
+        android:elevation="@dimen/elevation_normal"
+        android:animateLayoutChanges="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_app_icon"
+            android:src="@mipmap/ic_launcher_futuristic"
+            android:layout_width="30dp"
+            android:layout_margin="@dimen/spacing_normal"
+            android:background="@drawable/ic_widget_btn_shape"
+            android:layout_height="30dp"
+            android:contentDescription="@string/app_icon" />
+
+        <TextView
+            android:id="@+id/tv_folder_title"
+            style="@style/WidgetTitle"
+            android:paddingVertical="@dimen/spacing_normal"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:textColor="@color/colorAccentRed"
+            android:maxLines="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recipes"
+            tools:ignore="HardcodedText" />
+
+        <LinearLayout
+            android:id="@+id/ll_edit_widget"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="end|center_vertical"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/iv_edit_widget"
+                android:src="@drawable/ic_round_settings_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_normal"
+                android:background="@drawable/ic_widget_btn_shape"
+                android:backgroundTint="@color/colorBackground"
+                android:tint="@color/colorPrimary"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:contentDescription="@string/edit_widget" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl"
+        android:animateLayoutChanges="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/spacing_normal"
+                android:layout_margin="@dimen/spacing_small"
+                android:stateListAnimator="@animator/elevation_animator"
+                android:background="@drawable/note_item_shape"
+                android:backgroundTint="@color/colorSurface"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_extra_small"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/spacing_extra_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textSize="@dimen/size_extra_tiny"
+                        android:layout_marginEnd="@dimen/spacing_extra_small"
+                        android:layout_marginBottom="@dimen/spacing_extra_small"
+                        android:paddingHorizontal="@dimen/spacing_extra_small"
+                        android:background="@drawable/note_label_item_shape"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lunch"
+                        android:textColor="@color/colorBackground"
+                        android:backgroundTint="@color/colorAccentRed"
+                        app:fontFamily="@font/nunito_bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:textSize="@dimen/size_extra_tiny"
+                        android:layout_marginEnd="@dimen/spacing_extra_small"
+                        android:layout_marginBottom="@dimen/spacing_extra_small"
+                        android:paddingHorizontal="@dimen/spacing_extra_small"
+                        android:background="@drawable/note_label_item_shape"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Breakfast"
+                        android:textColor="@color/colorBackground"
+                        android:backgroundTint="@color/colorAccentRed"
+                        app:fontFamily="@font/nunito_bold"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/NoteTitleTextView"
+                    android:textColor="@color/colorPrimary"
+                    android:autoLink="all"
+                    android:linksClickable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_extra_small"
+                    android:text="Spinach Lasagna Roll-Ups"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    style="@style/NoteBodyTextView"
+                    android:textColor="@color/colorSecondary"
+                    android:autoLink="all"
+                    android:linksClickable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_extra_small"
+                    android:maxLines="3"
+                    android:text="Ingredients
+ \n\n Produce
+ \n\n 2 cups Baby spinach
+ \n\n 2 Garlic cloves
+ \n\n Condiments
+ \n\n 1 cup Spaghetti sauce
+ \n\n Pasta &amp; Grains
+ \n\n 8 Lasagna noodles
+ \n\n Baking &amp; Spices
+ \n\n 1 Black pepper, Freshly ground
+ \n\n 1/2 tsp Salt
+ \n\n Dairy
+ \n\n 2/3 cup Cheese
+ \n\n 1 cup Cottage cheese, low-fat
+ \n\n 1/3 cup Parmesan cheese, grated"
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:padding="@dimen/spacing_normal"
+                android:layout_margin="@dimen/spacing_small"
+                android:stateListAnimator="@animator/elevation_animator"
+                android:background="@drawable/note_item_shape"
+                android:backgroundTint="@color/colorSurface"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_extra_small"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/spacing_extra_small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textSize="@dimen/size_extra_tiny"
+                        android:layout_marginEnd="@dimen/spacing_extra_small"
+                        android:layout_marginBottom="@dimen/spacing_extra_small"
+                        android:paddingHorizontal="@dimen/spacing_extra_small"
+                        android:background="@drawable/note_label_item_shape"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dinner"
+                        android:textColor="@color/colorBackground"
+                        android:backgroundTint="@color/colorAccentRed"
+                        app:fontFamily="@font/nunito_bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:textSize="@dimen/size_extra_tiny"
+                        android:layout_marginEnd="@dimen/spacing_extra_small"
+                        android:layout_marginBottom="@dimen/spacing_extra_small"
+                        android:paddingHorizontal="@dimen/spacing_extra_small"
+                        android:background="@drawable/note_label_item_shape"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Snack"
+                        android:textColor="@color/colorBackground"
+                        android:backgroundTint="@color/colorAccentRed"
+                        app:fontFamily="@font/nunito_bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:textSize="@dimen/size_extra_tiny"
+                        android:layout_marginEnd="@dimen/spacing_extra_small"
+                        android:layout_marginBottom="@dimen/spacing_extra_small"
+                        android:paddingHorizontal="@dimen/spacing_extra_small"
+                        android:background="@drawable/note_label_item_shape"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Easy"
+                        android:textColor="@color/colorBackground"
+                        android:backgroundTint="@color/colorAccentRed"
+                        app:fontFamily="@font/nunito_bold"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+                <TextView
+                    style="@style/NoteTitleTextView"
+                    android:textColor="@color/colorPrimary"
+                    android:autoLink="all"
+                    android:linksClickable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_extra_small"
+                    android:text="Mini beef pies"
+                    tools:ignore="HardcodedText" />
+
+                <TextView
+                    style="@style/NoteBodyTextView"
+                    android:textColor="@color/colorSecondary"
+                    android:autoLink="all"
+                    android:linksClickable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_extra_small"
+                    android:maxLines="3"
+                    android:text="Preheat oven to 200°C. Heat oil in a frypan over medium heat. Cook onion, stirring, for 2-3 minutes until softened. Add bacon and cook, stirring, for 2-3 minutes until crisp. Add mince and cook, breaking up any lumps with a spoon, for 3-4 minutes until browned. Stir in sauces, Vegemite, curry powder, nutmeg and flour, then season. Add stock and cook for 5 minutes, then reduce heat to low and simmer for 10 minutes or until thick. Cool."
+                    tools:ignore="HardcodedText" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fab"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="@dimen/spacing_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_fab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/create_note"
+                android:src="@drawable/ic_widget_btn_shape"
+                android:tint="@color/colorAccentRed" />
+
+            <ImageButton
+                android:id="@+id/ib_fab"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:src="@drawable/ic_round_edit_24"
+                android:background="@null"
+                android:padding="@dimen/spacing_normal"
+                android:tint="@color/colorBackground"
+                android:contentDescription="@string/create_note" />
+        </FrameLayout>
+    </FrameLayout>
+</LinearLayout>
