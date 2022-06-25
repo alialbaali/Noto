@@ -29,11 +29,12 @@ import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
-    private val viewModel by viewModel<MainViewModel>()
+    private val viewModel by sharedViewModel<MainViewModel>()
 
     private val args by navArgs<MainFragmentArgs>()
 

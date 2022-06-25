@@ -75,11 +75,6 @@ class MainViewModel(
     val vaultPasscode = settingsRepository.vaultPasscode
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
 
-    /**
-     * Temporary fix due to Koin creating multiple instances of [MainViewModel].
-     * */
-    val settingsVaultPasscode = settingsRepository.vaultPasscode
-
     val isBioAuthEnabled = settingsRepository.isBioAuthEnabled
         .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
