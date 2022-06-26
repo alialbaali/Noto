@@ -24,8 +24,8 @@ class FolderViewModel(
     private val mutableFolder = MutableStateFlow(Folder(folderId, position = 0))
     val folder get() = mutableFolder.asStateFlow()
 
-    var selectedParentId: Long? = null
-        private set
+    private val mutableParentFolder = MutableStateFlow<Folder?>(null)
+    val parentFolder get() = mutableParentFolder.asStateFlow()
 
     private val mutableNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
@@ -58,9 +58,10 @@ class FolderViewModel(
                 .onStart { emit(Folder(folderId, position = 0)) },
             folderRepository.getAllFolders(),
         ) { folder, folders ->
-            selectedParentId = folder.parentId
             mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(folder.color)
             mutableFolder.value = folder.mapRecursively(folders)
+            if (folder.parentId != null)
+                mutableParentFolder.value = folderRepository.getFolderById(folder.parentId).firstOrNull()
         }.launchIn(viewModelScope)
 
         combine(
@@ -95,8 +96,11 @@ class FolderViewModel(
 
     suspend fun getFolderById(id: Long) = folderRepository.getFolderById(id).firstOrNull()
 
-    fun setFolderParentId(parentId: Long?) {
-        selectedParentId = parentId.takeUnless { it == 0L }
+    fun setParentFolder(parentId: Long?) = viewModelScope.launch {
+        mutableParentFolder.value = if (parentId != null && parentId != 0L)
+            folderRepository.getFolderById(parentId).firstOrNull()
+        else
+            null
     }
 
     fun createOrUpdateFolder(
@@ -111,7 +115,7 @@ class FolderViewModel(
 
         val folder = folder.value.copy(
             title = title.trim(),
-            parentId = selectedParentId,
+            parentId = parentFolder.value?.id,
             color = color,
             layout = layout,
             notePreviewSize = notePreviewSize,
