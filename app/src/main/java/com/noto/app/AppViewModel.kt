@@ -22,11 +22,11 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
 
     val theme = settingsRepository.theme
         .distinctUntilChanged()
-        .shareIn(viewModelScope, SharingStarted.Lazily, replay = 1)
+        .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
     val language = settingsRepository.language
         .map { it.takeIf { it != Language.Tamil } ?: Language.System }
-        .stateIn(viewModelScope, SharingStarted.Lazily, Language.System)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Language.System)
 
     val icon = settingsRepository.icon
         .stateIn(viewModelScope, SharingStarted.Eagerly, Icon.Futuristic)
