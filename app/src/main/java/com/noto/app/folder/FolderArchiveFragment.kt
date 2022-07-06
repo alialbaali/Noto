@@ -8,14 +8,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.noto.app.BaseDialogFragment
-import com.noto.app.R
-import com.noto.app.UiState
+import com.noto.app.*
 import com.noto.app.databinding.FolderArchiveFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Layout
-import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -74,67 +71,72 @@ class FolderArchiveFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun FolderArchiveFragmentBinding.setupArchivedNotes(state: UiState<List<NoteWithLabels>>, font: Font, folder: Folder) {
-        if (state is UiState.Success) {
-            val archivedNotes = state.value
-            rv.withModels {
-                context?.let { context ->
-                    if (archivedNotes.isEmpty())
-                        placeholderItem {
-                            id("placeholder")
-                            placeholder(context.stringResource(R.string.archive_is_empty))
-                        }
-                    else
-                        buildNotesModels(
-                            context,
-                            folder,
-                            archivedNotes,
-                            onCreateClick = {
-                                navController?.navigateSafely(
-                                    FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteFragment(
-                                        args.folderId,
-                                        labelsIds = it.toLongArray()
-                                    )
-                                )
+    private fun FolderArchiveFragmentBinding.setupArchivedNotes(
+        state: UiState<List<NoteWithLabels>>,
+        font: Font,
+        folder: Folder,
+    ) {
+        state.fold(
+            onSuccess = { archivedNotes ->
+                rv.withModels {
+                    context?.let { context ->
+                        if (archivedNotes.isEmpty())
+                            placeholderItem {
+                                id("placeholder")
+                                placeholder(context.stringResource(R.string.archive_is_empty))
                             }
-                        ) { notes ->
-                            notes.forEach { archivedNote ->
-                                noteItem {
-                                    id(archivedNote.first.id)
-                                    note(archivedNote.first)
-                                    font(font)
-                                    searchTerm("")
-                                    previewSize(folder.notePreviewSize)
-                                    isShowCreationDate(folder.isShowNoteCreationDate)
-                                    color(folder.color)
-                                    labels(archivedNote.second)
-                                    isManualSorting(false)
-                                    onClickListener { _ ->
-                                        navController
-                                            ?.navigateSafely(
-                                                FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteFragment(
-                                                    archivedNote.first.folderId,
-                                                    archivedNote.first.id
+                        else
+                            buildNotesModels(
+                                context,
+                                folder,
+                                archivedNotes,
+                                onCreateClick = {
+                                    navController?.navigateSafely(
+                                        FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteFragment(
+                                            args.folderId,
+                                            labelsIds = it.toLongArray()
+                                        )
+                                    )
+                                }
+                            ) { notes ->
+                                notes.forEach { archivedNote ->
+                                    noteItem {
+                                        id(archivedNote.first.id)
+                                        note(archivedNote.first)
+                                        font(font)
+                                        searchTerm("")
+                                        previewSize(folder.notePreviewSize)
+                                        isShowCreationDate(folder.isShowNoteCreationDate)
+                                        color(folder.color)
+                                        labels(archivedNote.second)
+                                        isManualSorting(false)
+                                        onClickListener { _ ->
+                                            navController
+                                                ?.navigateSafely(
+                                                    FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteFragment(
+                                                        archivedNote.first.folderId,
+                                                        archivedNote.first.id
+                                                    )
                                                 )
-                                            )
-                                    }
-                                    onLongClickListener { _ ->
-                                        navController
-                                            ?.navigateSafely(
-                                                FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteDialogFragment(
-                                                    archivedNote.first.folderId,
-                                                    archivedNote.first.id,
-                                                    R.id.folderArchiveFragment
+                                        }
+                                        onLongClickListener { _ ->
+                                            navController
+                                                ?.navigateSafely(
+                                                    FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteDialogFragment(
+                                                        archivedNote.first.folderId,
+                                                        archivedNote.first.id,
+                                                        R.id.folderArchiveFragment
+                                                    )
                                                 )
-                                            )
-                                        true
+                                            true
+                                        }
+                                        onDragHandleTouchListener { _, _ -> false }
                                     }
-                                    onDragHandleTouchListener { _, _ -> false }
                                 }
                             }
-                        }
+                    }
                 }
             }
-        }
+        )
     }
 }

@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.noto.app.BaseDialogFragment
-import com.noto.app.R
-import com.noto.app.UiState
+import com.noto.app.*
 import com.noto.app.databinding.SelectFolderDialogFragmentBinding
 import com.noto.app.domain.model.Folder
-import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -45,7 +42,8 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.itemAnimator = VerticalListItemAnimator()
-        tb.tvDialogTitle.text = context?.stringResource(if (args.isMainInterface) R.string.select_main_interface else R.string.select_folder)
+        tb.tvDialogTitle.text =
+            context?.stringResource(if (args.isMainInterface) R.string.select_main_interface else R.string.select_folder)
 
         combine(
             viewModel.folders,
@@ -63,12 +61,15 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun SelectFolderDialogFragmentBinding.setupFolders(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean) {
-        when (state) {
-            is UiState.Loading -> rv.setupProgressIndicator()
-            is UiState.Success -> {
-                val folders = state.value.filterNot { it.first.isGeneral }
-                val generalFolder = state.value.firstOrNull { it.first.isGeneral }
+    private fun SelectFolderDialogFragmentBinding.setupFolders(
+        state: UiState<List<Pair<Folder, Int>>>,
+        isShowNotesCount: Boolean,
+    ) {
+        state.fold(
+            onLoading = { rv.setupProgressIndicator() },
+            onSuccess = { allFolders ->
+                val folders = allFolders.filterNot { it.first.isGeneral }
+                val generalFolder = allFolders.firstOrNull { it.first.isGeneral }
                 val callback = { id: Long ->
                     try {
                         navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.FolderId, id)
@@ -164,6 +165,6 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                     }
                 }
             }
-        }
+        )
     }
 }

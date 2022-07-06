@@ -19,6 +19,7 @@ import com.noto.app.UiState
 import com.noto.app.databinding.AllNotesFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
+import com.noto.app.fold
 import com.noto.app.domain.model.Language
 import com.noto.app.folder.noteItem
 import com.noto.app.util.*
@@ -197,10 +198,9 @@ class AllNotesFragment : Fragment() {
         font: Font,
         searchTerm: String,
     ) {
-        when (state) {
-            is UiState.Loading -> rv.setupProgressIndicator()
-            is UiState.Success -> {
-                val notes = state.value
+        state.fold(
+            onLoading = { rv.setupProgressIndicator() },
+            onSuccess = { notes ->
                 val notesCount = notes.map { it.value.count() }.sum()
                 tvNotesCount.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)?.lowercase()
                 tvNotesCountRtl.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)?.lowercase()
@@ -268,7 +268,7 @@ class AllNotesFragment : Fragment() {
                     }
                 }
             }
-        }
+        )
     }
 
     private fun AllNotesFragmentBinding.enableSearch() {

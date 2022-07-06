@@ -18,13 +18,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
-import com.noto.app.R
-import com.noto.app.UiState
+import com.noto.app.*
 import com.noto.app.databinding.FolderFragmentBinding
 import com.noto.app.domain.model.*
-import com.noto.app.getOrDefault
 import com.noto.app.label.labelListItem
-import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
@@ -64,7 +61,8 @@ class FolderFragment : Fragment() {
             viewModel.labels,
             viewModel.isRememberScrollingPosition,
         ) { folder, notes, labels, isRememberScrollingPosition ->
-            val notesCount = notes.getOrDefault(emptyList()).filterSelectedLabels(labels.filterSelected(), folder.filteringType).count()
+            val notesCount =
+                notes.getOrDefault(emptyList()).filterSelectedLabels(labels.filterSelected(), folder.filteringType).count()
             setupFolder(folder, notesCount, isRememberScrollingPosition)
             context?.let { context ->
                 val text = context.stringResource(R.string.archive, folder.getTitle(context))
@@ -198,11 +196,9 @@ class FolderFragment : Fragment() {
         folder: Folder,
         searchTerm: String,
     ) {
-        when (state) {
-            is UiState.Loading -> rv.setupProgressIndicator(folder.color)
-            is UiState.Success -> {
-                val notes = state.value
-
+        state.fold(
+            onLoading = { rv.setupProgressIndicator(folder.color) },
+            onSuccess = { notes ->
                 rv.withModels {
                     epoxyController = this
 
@@ -220,12 +216,14 @@ class FolderFragment : Fragment() {
                                 viewModel.selectLabel(label.id)
                         }
                         onLabelLongClickListener { label ->
-                            navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToLabelDialogFragment(args.folderId,
+                            navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToLabelDialogFragment(
+                                args.folderId,
                                 label.id))
                             true
                         }
                         onNewLabelClickListener { _ ->
-                            navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNewLabelDialogFragment(args.folderId))
+                            navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNewLabelDialogFragment(
+                                args.folderId))
                         }
                     }
 
@@ -262,7 +260,8 @@ class FolderFragment : Fragment() {
                                         isManualSorting(folder.sortingType == NoteListSortingType.Manual)
                                         onClickListener { _ ->
                                             navController
-                                                ?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteFragment(entry.first.folderId,
+                                                ?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteFragment(
+                                                    entry.first.folderId,
                                                     entry.first.id))
                                         }
                                         onLongClickListener { _ ->
@@ -289,8 +288,8 @@ class FolderFragment : Fragment() {
                             }
                     }
                 }
-            }
-        }
+            },
+        )
     }
 
     private fun FolderFragmentBinding.setupArchivedNotesMenuItem(): Boolean {
@@ -317,7 +316,8 @@ class FolderFragment : Fragment() {
             val colorStateList = color.toColorStateList()
             tvFolderTitle.text = folder.getTitle(context)
             tvFolderTitle.setTextColor(colorStateList)
-            tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
+            tvFolderNotesCount.text =
+                context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
             tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_semibold_italic)
             tvFolderNotesCountRtl.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
             fab.backgroundTintList = colorStateList

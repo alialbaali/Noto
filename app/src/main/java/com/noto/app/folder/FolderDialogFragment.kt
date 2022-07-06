@@ -14,9 +14,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.navigation.navOptions
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
-import com.noto.app.UiState
 import com.noto.app.databinding.FolderDialogFragmentBinding
 import com.noto.app.domain.model.Folder
+import com.noto.app.getOrDefault
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -59,7 +59,9 @@ class FolderDialogFragment : BaseDialogFragment() {
         tvNewNoteShortcut.setOnClickListener {
             context?.let { context ->
                 if (ShortcutManagerCompat.isRequestPinShortcutSupported(context))
-                    ShortcutManagerCompat.requestPinShortcut(context, context.createPinnedShortcut(viewModel.folder.value), null)
+                    ShortcutManagerCompat.requestPinShortcut(context,
+                        context.createPinnedShortcut(viewModel.folder.value),
+                        null)
             }
             dismiss()
         }
@@ -209,7 +211,8 @@ class FolderDialogFragment : BaseDialogFragment() {
             ?.observe(viewLifecycleOwner) {
                 val stringId = R.string.folder_is_deleted
                 val drawableId = R.drawable.ic_round_delete_sweep_24
-                val selectedFolderId = navController?.getBackStackEntry(R.id.folderFragment)?.arguments?.getLong(Constants.FolderId)
+                val selectedFolderId =
+                    navController?.getBackStackEntry(R.id.folderFragment)?.arguments?.getLong(Constants.FolderId)
                 if (selectedFolderId == viewModel.folder.value.id) {
                     val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
                     val options = navOptions {
@@ -223,11 +226,10 @@ class FolderDialogFragment : BaseDialogFragment() {
                 parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                 context?.updateAllWidgetsData()
                 context?.updateFolderListWidgets()
-                val notes = viewModel.notes.value as? UiState.Success
+                val notes = viewModel.notes.value.getOrDefault(emptyList())
                 context?.let { context ->
-                    notes?.value
-                        ?.filter { entry -> entry.first.reminderDate != null }
-                        ?.forEach { entry -> alarmManager?.cancelAlarm(context, entry.first.id) }
+                    notes.filter { entry -> entry.first.reminderDate != null }
+                        .forEach { entry -> alarmManager?.cancelAlarm(context, entry.first.id) }
                 }
                 viewModel.deleteFolder().invokeOnCompletion { dismiss() }
             }

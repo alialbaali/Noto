@@ -12,6 +12,7 @@ import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.MainVaultFragmentBinding
 import com.noto.app.domain.model.Folder
+import com.noto.app.fold
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -59,52 +60,53 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainVaultFragmentBinding.setupFolders(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean) {
-        if (state is UiState.Success) {
-            val folders = state.value
-            rv.withModels {
-                context?.let { context ->
-                    if (folders.isEmpty()) {
-                        placeholderItem {
-                            id("placeholder")
-                            placeholder(context.stringResource(R.string.vault_is_empty))
-                        }
-                    } else {
-                        buildFoldersModels(context, folders) { folders ->
-                            folders.forEachRecursively { entry, depth ->
-                                folderItem {
-                                    id(entry.first.id)
-                                    folder(entry.first)
-                                    notesCount(entry.second)
-                                    isManualSorting(false)
-                                    isSelected(entry.first.id == selectedDestinationId)
-                                    isShowNotesCount(isShowNotesCount)
-                                    depth(depth)
-                                    onClickListener { _ ->
-                                        dismiss()
-                                        if (entry.first.id != selectedDestinationId)
-                                            navController?.navigateSafely(
-                                                MainVaultFragmentDirections.actionMainVaultFragmentToFolderFragment(
-                                                    entry.first.id
-                                                )
-                                            )
+    private fun MainVaultFragmentBinding.setupFolders(
+        state: UiState<List<Pair<Folder, Int>>>,
+        isShowNotesCount: Boolean,
+        isVaultOpen: Boolean,
+    ) {
+        state.fold(
+            onSuccess = { folders ->
+                rv.withModels {
+                    context?.let { context ->
+                        if (folders.isEmpty()) {
+                            placeholderItem {
+                                id("placeholder")
+                                placeholder(context.stringResource(R.string.vault_is_empty))
+                            }
+                        } else {
+                            buildFoldersModels(context, folders) { folders ->
+                                folders.forEachRecursively { entry, depth ->
+                                    folderItem {
+                                        id(entry.first.id)
+                                        folder(entry.first)
+                                        notesCount(entry.second)
+                                        isManualSorting(false)
+                                        isSelected(entry.first.id == selectedDestinationId)
+                                        isShowNotesCount(isShowNotesCount)
+                                        depth(depth)
+                                        isClickable(isVaultOpen)
+                                        isLongClickable(isVaultOpen)
+                                        onClickListener { _ ->
+                                            dismiss()
+                                            if (entry.first.id != selectedDestinationId)
+                                                navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToFolderFragment(
+                                                    entry.first.id))
+                                        }
+                                        onLongClickListener { _ ->
+                                            dismiss()
+                                            navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToFolderDialogFragment(
+                                                entry.first.id))
+                                            true
+                                        }
+                                        onDragHandleTouchListener { _, _ -> false }
                                     }
-                                    onLongClickListener { _ ->
-                                        dismiss()
-                                        navController?.navigateSafely(
-                                            MainVaultFragmentDirections.actionMainVaultFragmentToFolderDialogFragment(
-                                                entry.first.id
-                                            )
-                                        )
-                                        true
-                                    }
-                                    onDragHandleTouchListener { _, _ -> false }
                                 }
                             }
                         }
                     }
                 }
             }
-        }
+        )
     }
 }
