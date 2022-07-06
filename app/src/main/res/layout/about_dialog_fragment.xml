@@ -28,6 +28,34 @@
             android:text="@string/about_message"
             app:fontFamily="@font/nunito_semibold" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_source_code"
+                style="@style/DialogItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/source_code"
+                android:drawableTop="@drawable/ic_github_logo" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_reddit_community"
+                style="@style/DialogItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/reddit_community"
+                android:drawableTop="@drawable/ic_reddit_logo" />
+
+        </LinearLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_okay"
             style="@style/MaterialButton"
