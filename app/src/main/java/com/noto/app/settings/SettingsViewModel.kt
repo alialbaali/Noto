@@ -23,8 +23,7 @@ class SettingsViewModel(
 ) : ViewModel() {
 
     val theme = settingsRepository.theme
-        .distinctUntilChanged()
-        .shareIn(viewModelScope, SharingStarted.Lazily, replay = 1)
+        .stateIn(viewModelScope, SharingStarted.Lazily, Theme.System)
 
     val font = settingsRepository.font
         .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
@@ -170,4 +169,6 @@ class SettingsViewModel(
     fun emitIsImportFinished() = viewModelScope.launch {
         mutableIsImportFinished.emit(Unit)
     }
+
+    fun getFolderById(folderId: Long) = folderRepository.getFolderById(folderId)
 }

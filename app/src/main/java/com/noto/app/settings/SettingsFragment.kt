@@ -1,238 +1,211 @@
 package com.noto.app.settings
 
-import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.biometric.BiometricManager
-import androidx.core.view.isVisible
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
-import com.google.android.material.switchmaterial.SwitchMaterial
+import com.noto.app.NotoTheme
 import com.noto.app.R
-import com.noto.app.databinding.SettingsFragmentBinding
-import com.noto.app.util.*
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import com.noto.app.components.NotoTopAppbar
+import com.noto.app.util.navController
+import com.noto.app.util.navigateSafely
+import com.noto.app.util.setupMixedTransitions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val PlayStoreUrl = "https://play.google.com/store/apps/details?id=com.noto"
-private const val GithubUrl = "https://github.com/alialbaali/Noto"
-private const val RedditUrl = "https://reddit.com/r/notoapp"
 private const val GithubIssueUrl = "https://github.com/alialbaali/Noto/issues/new"
 
 class SettingsFragment : Fragment() {
 
     private val viewModel by viewModel<SettingsViewModel>()
 
-    private val notificationManager by lazy {
-        context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
-    }
-
-    private val doNotDisturbResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (notificationManager?.isNotificationPolicyAccessGranted == true) {
-                viewModel.toggleDoNotDisturb()
-            } else {
-                view?.findViewById<SwitchMaterial>(R.id.sw_do_not_disturb)?.isChecked = false
-                context?.let { context ->
-                    view?.snackbar(context.stringResource(R.string.permission_not_granted), R.drawable.ic_round_warning_24)
-                }
-            }
-        }
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
-        SettingsFragmentBinding.inflate(inflater, container, false).withBinding {
-            setupMixedTransitions()
-            setupState()
-            setupListeners()
-        }
-
-    private fun SettingsFragmentBinding.setupState() {
-        /**
-         * Navigate to [SettingsFragment] when restarting activity due to configuration change.
-         * */
-        activity?.intent?.action = Constants.Intent.ActionSettings
-        swDoNotDisturb.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-
-        context?.let { context ->
-            val version = context.packageManager
-                ?.getPackageInfo(context.packageName, 0)
-                ?.versionName
-            tvVersion.text = context.stringResource(R.string.version, version)
-            swShowNotesCount.setupColors()
-            swBioAuth.setupColors()
-            swDoNotDisturb.setupColors()
-            swScreenOn.setupColors()
-            swFullScreen.setupColors()
-            swRememberScrollingPosition.setupColors()
-
-            when (BiometricManager.from(context).canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK)) {
-                BiometricManager.BIOMETRIC_SUCCESS -> swBioAuth.isVisible = true
-                else -> swBioAuth.isVisible = false
-            }
-        }
-
-        viewModel.isShowNotesCount
-            .onEach { isShowNotesCount -> swShowNotesCount.isChecked = isShowNotesCount }
-            .launchIn(lifecycleScope)
-
-        viewModel.isDoNotDisturb
-            .onEach { isDoNotDisturb -> swDoNotDisturb.isChecked = isDoNotDisturb }
-            .launchIn(lifecycleScope)
-
-        viewModel.isScreenOn
-            .onEach { isScreenOn -> swScreenOn.isChecked = isScreenOn }
-            .launchIn(lifecycleScope)
-
-        viewModel.isFullScreen
-            .onEach { isFullScreen -> swFullScreen.isChecked = isFullScreen }
-            .launchIn(lifecycleScope)
-
-        viewModel.isBioAuthEnabled
-            .onEach { isBioAuthEnabled -> swBioAuth.isChecked = isBioAuthEnabled }
-            .launchIn(lifecycleScope)
-
-        viewModel.isRememberScrollingPosition
-            .onEach { isRemember -> swRememberScrollingPosition.isChecked = isRemember }
-            .launchIn(lifecycleScope)
-
-        navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Long>(Constants.FolderId)
-            ?.observe(viewLifecycleOwner, viewModel::setMainInterfaceId)
-    }
-
-    private fun SettingsFragmentBinding.setupListeners() {
+    @OptIn(ExperimentalMaterial3Api::class)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? = context?.let { context ->
         activity?.onBackPressedDispatcher?.addCallback {
             navController?.navigateUp()
         }
-
-        tb.setNavigationOnClickListener {
-            navController?.navigateUp()
-        }
-
-        tvChangeMainInterface.setOnClickListener {
-            navController?.navigateSafely(
-                SettingsFragmentDirections.actionSettingsFragmentToSelectFolderDialogFragment(
-                    longArrayOf(),
-                    selectedFolderId = viewModel.mainInterfaceId.value,
-                    isMainInterface = true,
-                )
-            )
-        }
-
-        tvChangeTheme.setOnClickListener {
-            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToThemeDialogFragment())
-        }
-
-        tvChangeNotesFont.setOnClickListener {
-            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToFontDialogFragment())
-        }
-
-        tvChangeLanguage.setOnClickListener {
-            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToLanguageDialogFragment())
-        }
-
-        tvChangeIcon.setOnClickListener {
-            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToIconDialogFragment())
-        }
-
-        tvChangeVaultPasscode.setOnClickListener {
-            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultPasscodeDialogFragment())
-        }
-
-        tvChangeVaultTimeout.setOnClickListener {
-            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultTimeoutDialogFragment())
-        }
-
-        swBioAuth.setOnClickListener {
-            viewModel.toggleIsBioAuthEnabled()
-        }
-
-        tvExportImport.setOnClickListener {
-            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToExportImportDialogFragment())
-        }
-
-        tvAbout.setOnClickListener {
-            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToAboutDialogFragment())
-        }
-
-        swShowNotesCount.setOnClickListener {
-            viewModel.toggleShowNotesCount()
-        }
-
-        swRememberScrollingPosition.setOnClickListener {
-            viewModel.toggleRememberScrollingPosition()
-        }
-
-        swDoNotDisturb.setOnClickListener {
-            if (viewModel.isDoNotDisturb.value) {
-                viewModel.toggleDoNotDisturb()
-            } else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (notificationManager?.isNotificationPolicyAccessGranted == true) {
-                        viewModel.toggleDoNotDisturb()
-                    } else {
-                        val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-                        doNotDisturbResult.launch(intent)
+        setupMixedTransitions()
+        ComposeView(context).apply {
+            isTransitionGroup = true
+            setContent {
+                val scrollState = rememberScrollState()
+                val theme by viewModel.theme.collectAsState()
+                val version = context.packageManager?.getPackageInfo(context.packageName, 0)?.versionName
+                NotoTheme(theme = theme) {
+                    Scaffold(
+                        Modifier.fillMaxSize(),
+                        topBar = {
+                            NotoTopAppbar(
+                                title = stringResource(id = R.string.settings),
+                                onNavigationIconClick = { navController?.navigateUp() },
+                            )
+                        }
+                    ) { contentPadding ->
+                        Column(
+                            Modifier
+                                .fillMaxSize()
+                                .verticalScroll(scrollState)
+                                .padding(contentPadding),
+                        ) {
+                            FirstSection()
+                            SecondSection()
+                            ThirdSection()
+                            ForthSection()
+                            version?.let {
+                                Box(
+                                    modifier = Modifier
+                                        .align(Alignment.CenterHorizontally)
+                                        .padding(NotoTheme.dimensions.medium)
+                                        .weight(1F),
+                                    contentAlignment = Alignment.BottomCenter
+                                ) {
+                                    Text(
+                                        text = stringResource(R.string.version, version),
+                                        style = MaterialTheme.typography.labelLarge,
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
+    }
 
-        swScreenOn.setOnClickListener {
-            viewModel.toggleScreenOn()
+    @Composable
+    private fun FirstSection(modifier: Modifier = Modifier) {
+        SettingsSection(modifier) {
+            SettingsItem(
+                title = stringResource(id = R.string.general),
+                type = SettingsItemType.None,
+                onClick = {
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToGeneralSettingsFragment())
+                },
+                painter = painterResource(id = R.drawable.ic_round_settings_24),
+            )
+
+            SettingsItem(
+                title = stringResource(id = R.string.reading_mode),
+                type = SettingsItemType.None,
+                onClick = {
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToReadingModeSettingsFragment())
+                },
+                painter = painterResource(id = R.drawable.ic_round_reading_mode_24),
+            )
+
+            SettingsItem(
+                title = stringResource(id = R.string.vault),
+                type = SettingsItemType.None,
+                onClick = {
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultSettingsFragment())
+                },
+                painter = painterResource(id = R.drawable.ic_round_inventory_24),
+            )
         }
+    }
 
-        swFullScreen.setOnClickListener {
-            viewModel.toggleFullScreen()
+    @Composable
+    private fun ThirdSection(modifier: Modifier = Modifier) {
+        val shareContentText = stringResource(id = R.string.invite_text)
+        val shareText = stringResource(id = R.string.share_with)
+        val rateText = stringResource(id = R.string.open_with)
+        SettingsSection(modifier) {
+            SettingsItem(
+                title = stringResource(id = R.string.share_app_with_others),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(
+                            Intent.EXTRA_TEXT,
+                            "$shareContentText $PlayStoreUrl"
+                        )
+                    }
+
+                    val chooser = Intent.createChooser(intent, shareText)
+                    startActivity(chooser)
+                },
+                painter = painterResource(id = R.drawable.ic_round_share_24),
+            )
+
+            SettingsItem(
+                title = stringResource(id = R.string.rate_app_on_play_store),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(PlayStoreUrl))
+                    val chooser = Intent.createChooser(intent, rateText)
+                    startActivity(chooser)
+                },
+                painter = painterResource(id = R.drawable.ic_round_star_rate_24),
+            )
         }
+    }
 
-        tvShareWithOthers.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain"
-                putExtra(
-                    Intent.EXTRA_TEXT,
-                    "${context?.stringResource(R.string.invite_text)} $PlayStoreUrl"
-                )
-            }
+    @Composable
+    private fun ForthSection(modifier: Modifier = Modifier) {
+        SettingsSection(modifier) {
+            SettingsItem(
+                title = stringResource(id = R.string.report_issue),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubIssueUrl))
+                    startActivity(intent)
+                },
+                painter = painterResource(id = R.drawable.ic_round_report_problem_24),
+            )
 
-            val chooser = Intent.createChooser(intent, context?.stringResource(R.string.share_with))
-            startActivity(chooser)
+            SettingsItem(
+                title = stringResource(id = R.string.whats_new),
+                type = SettingsItemType.None,
+                onClick = {
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewFragment())
+                },
+                painter = painterResource(id = R.drawable.ic_round_new_releases_24),
+            )
+
+            SettingsItem(
+                title = stringResource(id = R.string.about),
+                type = SettingsItemType.None,
+                onClick = {},
+                painter = painterResource(id = R.drawable.ic_round_info_24),
+            )
         }
+    }
 
-        tvViewCode.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubUrl))
-            startActivity(intent)
-        }
-
-        tvJoinCommunity.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(RedditUrl))
-            startActivity(intent)
-        }
-
-        tvRateApp.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(PlayStoreUrl))
-            val chooser = Intent.createChooser(intent, context?.stringResource(R.string.open_with))
-            startActivity(chooser)
-        }
-
-        tvReportIssue.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubIssueUrl))
-            startActivity(intent)
-        }
-
-        tvWhatsNew.setOnClickListener {
-            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewFragment())
+    @Composable
+    private fun SecondSection(modifier: Modifier = Modifier) {
+        SettingsSection(modifier) {
+            SettingsItem(
+                title = stringResource(id = R.string.export_import_data),
+                type = SettingsItemType.None,
+                onClick = {
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToExportImportDialogFragment())
+                },
+                painter = painterResource(id = R.drawable.ic_round_import_export_24),
+            )
         }
     }
 }
