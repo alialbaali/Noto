@@ -6,7 +6,7 @@ plugins {
     kotlin(Plugins.KotlinKapt)
     id(Plugins.NavigationSafeArgs)
     kotlin("plugin.serialization") version "1.7.0"
-    id("com.google.devtools.ksp") version "1.7.0-RC2-1.0.5"
+    id("com.google.devtools.ksp") version "1.7.0-1.0.6"
 }
 
 android {
@@ -70,6 +70,7 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 
     compileOptions {
@@ -80,6 +81,10 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.2.0"
     }
 
     testOptions {
@@ -132,6 +137,9 @@ dependencies {
     implementation("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation("com.robinhood.ticker:ticker:2.0.4")
     implementation("androidx.core:core-splashscreen:1.0.0-beta02")
+
+    implementation(AndroidX.Compose.material3)
+    implementation(AndroidX.Compose.animation)
 
     testImplementation(Testing.Kotest.Runner.junit5)
     testImplementation(Testing.Kotest.Assertions.core)
