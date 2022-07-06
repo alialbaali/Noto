@@ -252,32 +252,20 @@
         android:name="com.noto.app.settings.SettingsFragment"
         android:label="SettingsFragment">
         <action
-            android:id="@+id/action_settingsFragment_to_fontDialogFragment"
-            app:destination="@id/fontDialogFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_themeDialogFragment"
-            app:destination="@id/themeDialogFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_languageDialogFragment"
-            app:destination="@id/languageDialogFragment" />
-        <action
             android:id="@+id/action_settingsFragment_to_aboutDialogFragment"
             app:destination="@id/aboutDialogFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_exportImportDialogFragment"
             app:destination="@id/exportImportDialogFragment" />
         <action
-            android:id="@+id/action_settingsFragment_to_vaultPasscodeDialogFragment"
-            app:destination="@id/vaultPasscodeDialogFragment" />
+            android:id="@+id/action_settingsFragment_to_generalSettingsFragment"
+            app:destination="@id/generalSettingsFragment" />
         <action
-            android:id="@+id/action_settingsFragment_to_vaultTimeoutDialogFragment"
-            app:destination="@id/vaultTimeoutDialogFragment" />
+            android:id="@+id/action_settingsFragment_to_vaultSettingsFragment"
+            app:destination="@id/vaultSettingsFragment" />
         <action
-            android:id="@+id/action_settingsFragment_to_selectFolderDialogFragment"
-            app:destination="@id/selectFolderDialogFragment" />
-        <action
-            android:id="@+id/action_settingsFragment_to_iconDialogFragment"
-            app:destination="@id/iconDialogFragment" />
+            android:id="@+id/action_settingsFragment_to_readingModeSettingsFragment"
+            app:destination="@id/readingModeSettingsFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_whatsNewFragment"
             app:destination="@id/whatsNewFragment" />
@@ -587,6 +575,41 @@
         android:id="@+id/iconDialogFragment"
         android:name="com.noto.app.settings.IconDialogFragment"
         android:label="IconDialogFragment" />
+    <fragment
+        android:id="@+id/generalSettingsFragment"
+        android:name="com.noto.app.settings.GeneralSettingsFragment"
+        android:label="GeneralSettingsFragment" >
+        <action
+            android:id="@+id/action_generalSettingsFragment_to_selectFolderDialogFragment"
+            app:destination="@id/selectFolderDialogFragment" />
+        <action
+            android:id="@+id/action_generalSettingsFragment_to_fontDialogFragment"
+            app:destination="@id/fontDialogFragment" />
+        <action
+            android:id="@+id/action_generalSettingsFragment_to_iconDialogFragment"
+            app:destination="@id/iconDialogFragment" />
+        <action
+            android:id="@+id/action_generalSettingsFragment_to_themeDialogFragment"
+            app:destination="@id/themeDialogFragment" />
+        <action
+            android:id="@+id/action_generalSettingsFragment_to_languageDialogFragment"
+            app:destination="@id/languageDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vaultSettingsFragment"
+        android:name="com.noto.app.settings.VaultSettingsFragment"
+        android:label="VaultSettingsFragment" >
+        <action
+            android:id="@+id/action_vaultSettingsFragment_to_vaultTimeoutDialogFragment"
+            app:destination="@id/vaultTimeoutDialogFragment" />
+        <action
+            android:id="@+id/action_vaultSettingsFragment_to_vaultPasscodeDialogFragment"
+            app:destination="@id/vaultPasscodeDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/readingModeSettingsFragment"
+        android:name="com.noto.app.settings.ReadingModeSettingsFragment"
+        android:label="ReadingModeSettingsFragment" />
     <fragment
         android:id="@+id/whatsNewFragment"
         android:name="com.noto.app.settings.WhatsNewFragment"
