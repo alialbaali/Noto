@@ -127,56 +127,48 @@ private val typography
             fontFamily = NunitoFontFamily,
             fontWeight = FontWeight.Bold,
             fontSize = 22.sp,
-            color = MaterialTheme.colorScheme.onBackground,
         ),
         initialTypography.titleMedium.copy(
             // Dialog Title, Widget Title, Button
             fontFamily = NunitoFontFamily,
             fontWeight = FontWeight.Bold, // Or SemiBold
             fontSize = 20.sp,
-            color = MaterialTheme.colorScheme.onBackground,
         ),
         initialTypography.titleSmall.copy(
             // Folder Title, Note Title, Label Title,
             fontFamily = NunitoFontFamily,
             fontWeight = FontWeight.SemiBold,
             fontSize = 17.sp,
-            color = MaterialTheme.colorScheme.onBackground,
         ),
         initialTypography.bodyLarge.copy(
             // Dialog Section, Dialog RadioButton Item, Icon Item, Slider Label, Settings Item
             fontFamily = NunitoFontFamily,
             fontWeight = FontWeight.SemiBold,
             fontSize = 16.sp,
-            color = MaterialTheme.colorScheme.onBackground,
         ),
         initialTypography.bodyMedium.copy(
             // Note Body TextField, Tab Item,
             fontFamily = NunitoFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp,
-            color = MaterialTheme.colorScheme.onBackground,
         ),
         initialTypography.bodySmall.copy(
             // Folder Notes Count, Note Body, Settings Item Value, ClickableView,
             fontFamily = NunitoFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onBackground,
         ),
         initialTypography.labelLarge.copy(
             // SubTitle in Toolbar, Dialog Item,
             fontFamily = NunitoFontFamily,
             fontWeight = FontWeight.SemiBold,
             fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.onBackground,
         ),
         initialTypography.labelMedium.copy(
             // Note Label, Note Reminder,
             fontFamily = NunitoFontFamily,
             fontWeight = FontWeight.Medium,
             fontSize = 12.sp,
-            color = MaterialTheme.colorScheme.onBackground
         ),
         initialTypography.labelSmall.copy(
             // Note Date
