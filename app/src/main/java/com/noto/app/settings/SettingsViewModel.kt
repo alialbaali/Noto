@@ -4,16 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
+import com.noto.app.util.NotoDefaultJson
 import com.noto.app.util.hash
 import com.noto.app.util.isGeneral
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 
 class SettingsViewModel(
     private val folderRepository: FolderRepository,
@@ -92,14 +91,14 @@ class SettingsViewModel(
         val noteLabels = noteLabelRepository.getNoteLabels().first()
         val settings = settingsRepository.config.first()
         val data = NotoData(folders, notes, labels, noteLabels, settings)
-        DefaultJson.encodeToString(data)
+        NotoDefaultJson.encodeToString(data)
     }
 
     suspend fun importJson(json: String) = withContext(Dispatchers.IO) {
         val folderIds = mutableMapOf<Long, Long>()
         val noteIds = mutableMapOf<Long, Long>()
         val labelIds = mutableMapOf<Long, Long>()
-        val data = DefaultJson.decodeFromString<NotoData>(json)
+        val data = NotoDefaultJson.decodeFromString<NotoData>(json)
         data.apply {
             folders.forEach { folder ->
                 if (folder.isGeneral) {
@@ -178,15 +177,4 @@ class SettingsViewModel(
     fun emitIsImportFinished() = viewModelScope.launch {
         mutableIsImportFinished.emit(Unit)
     }
-}
-
-@OptIn(ExperimentalSerializationApi::class)
-private val DefaultJson = Json {
-    isLenient = true
-    allowStructuredMapKeys = true
-    coerceInputValues = true
-    encodeDefaults = true
-    ignoreUnknownKeys = true
-    explicitNulls = false
-    prettyPrint = true
 }
