@@ -170,7 +170,7 @@ class SettingsFragment : Fragment() {
     }
 
     @Composable
-    private fun ThirdSection(paddingValues: PaddingValues, modifier: Modifier = Modifier) {
+    private fun ThirdSection(paddingValues: PaddingValues,modifier: Modifier = Modifier) {
         val shareContentText = stringResource(id = R.string.invite_text)
         val shareText = stringResource(id = R.string.share_with)
         val rateText = stringResource(id = R.string.open_with)
@@ -223,7 +223,7 @@ class SettingsFragment : Fragment() {
                 title = stringResource(id = R.string.whats_new),
                 type = SettingsItemType.None,
                 onClick = {
-                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewFragment())
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewDialogFragment())
                 },
                 painter = painterResource(id = R.drawable.ic_round_new_releases_24),
             )
