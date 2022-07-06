@@ -25,7 +25,7 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
     val language = settingsRepository.language
-        .map { it.takeIf { it != Language.Tamil } ?: Language.System }
+        .map { if (it in Language.Deprecated) Language.System else it }
         .stateIn(viewModelScope, SharingStarted.Eagerly, Language.System)
 
     val icon = settingsRepository.icon

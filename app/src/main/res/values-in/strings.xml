@@ -6,13 +6,17 @@
     <string name="okay">Baik</string>
     <string name="search">Cari</string>
     <!-- More options for folder, note, etc -->
-    <string name="more">Lainnya</string>
+    <string name="more_options">Pilihan lain</string>
     <string name="back">Kembali</string>
     <string name="folder_layout">Tata letak map</string>
+    <string name="filtering_type">Jenis penyaringan</string>
     <string name="layout">Tata letak</string>
     <string name="list">Daftar</string>
+    <string name="inclusive">Inklusif</string>
+    <string name="exclusive">Ekslusif</string>
     <string name="grid">Kisi</string>
     <string name="created">Dibuat %s</string>
+    <string name="accessed">Diakses %s</string>
     <string name="alphabetical">Alfabetis</string>
     <string name="alphabetical_sorting">Secara abjad</string>
     <string name="creation_date">Tanggal dibuat</string>
@@ -33,10 +37,12 @@
     <string name="whats_new">Apa yang baru</string>
     <string name="about_message">Noto dikembangkan dan dikelola oleh <a href="https://www.alialbaali.com/">Ali Albaali</a>.
          \n\nAplikasi ini didistribusikan di bawah persyaratan <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Lisensi Apache 2.0</a>.
-         \n\nTerima kasih kepada <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> dan <a href="https://sakci.me">Alparslan Şakçi</a>,
-         <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a> untuk lokalisasi bahasa Turki, Spanyol, dan Prancis,
-         dan semua pihak yang telah membantu dan berkontribusi dalam pengembangan.</string>
-    <string name="share_with">Bagikan dengan</string>
+         Ikon aplikasi menggunakan <a href="https://www.figma.com/community/file/830405806109119447/">Koleksi Gradien</a> diterbitkan
+         oleh <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> berlisensi <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+         \n\nTerima kasih khusus kepada <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> dan <a href="https://sakci.me">Alparslan akçi</a>,
+         <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a>, dan Uli N untuk bahasa Turki, Lokalisasi Spanyol, Prancis, dan Jerman masing-masing,
+         dan semua pihak yang telah membantu dan berkontribusi dalam pembangunan.</string>
+    <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Cadangkan/Pulihkan data</string>
     <string name="exporting_failed">Gagal mencadangkan data.</string>
     <string name="importing_failed">Gagal memulihkan data.</string>
@@ -60,32 +66,40 @@
     <string name="monospace">Monospace</string>
     <string name="font">Fon</string>
     <string name="folders_archive">Arsip map</string>
-    <string name="change_main_interface">Ubah map utama</string>
+    <string name="change_main_interface">Ubah antarmuka utama</string>
     <string name="general">Umum</string>
-    <string name="collapse_toolbar">Ciutkan bilah alat secara asali</string>
     <string name="all_notes">Semua catatan</string>
+    <string name="all_folders">Semua folder</string>
     <string name="clear">Bersihkan</string>
     <string name="recent_notes">Catatan terbaru</string>
     <string name="collapse">Ciutkan</string>
     <string name="expand">Perluas</string>
     <string name="no_parent">Tidak ada induk</string>
+    <string name="parent_folder">Folder induk</string>
     <string name="new_note_cursor_position">Posisi kursor catatan baru</string>
+    <string name="archive">Arsip</string>
+    <string name="unarchive">Batalkan arsip</string>
+    <string name="edit">Sunting</string>
+    <string name="pin">Sematkan</string>
+    <string name="unpin">Lepas sematan</string>
+    <string name="delete">Hapus</string>
+    <string name="just_now">baru saja</string>
     <!-- Folder -->
     <string name="folders">Map</string>
     <plurals name="folders_count">
         <item quantity="other">%d Map</item>
     </plurals>
     <string name="create_folder">Buat map</string>
-    <string name="new_folder">Map baru</string>
-    <string name="folder_options">Opsi map</string>
-    <string name="edit_folder">Sunting map</string>
+    <string name="update_folder">Perbaharui Folder</string>
     <string name="archive_folder">Arsipkan map</string>
-    <string name="unarchive_folder">Batalkan pengarsipan map</string>
-    <string name="add_new_note_shortcut">Tambahkan pintasan catatan baru</string>
+    <string name="new_folder">Map baru</string>
+    <string name="edit_folder">Sunting map</string>
+    <string name="folder_options">Opsi map</string>
+    <string name="add_new_note_shortcut">Tambah pintasan catatan</string>
     <string name="delete_folder_description">Tindakan ini tidak dapat diurungkan dan akan menghapus map dan semua kontennya secara permanen.</string>
     <string name="folder_title">Judul map</string>
     <string name="folder_color">Warna map</string>
-    <string name="delete_folder">Hapus map</string>
+    <string name="delete_folder">Hapus</string>
     <string name="delete_folder_confirmation">Apakah Anda yakin ingin menghapus map ini?</string>
     <string name="folders_sorting">Sortir map</string>
     <string name="empty_title">Judul tidak boleh kosong.</string>
@@ -96,16 +110,15 @@
     <string name="folder_is_unpinned">Penyemat map telah dilepas.</string>
     <string name="no_folders_found">Tidak ada map yang ditemukan.</string>
     <string name="select_folder">Pilih map</string>
+    <string name="select_main_interface">Pilih antarmuka utama</string>
     <string name="pinned">Disematkan</string>
-    <string name="pin_folder">Sematkan map</string>
-    <string name="unpin_folder">Lepas sematan map</string>
     <!-- Vault -->
     <string name="folders_vault">Brankas map</string>
     <string name="enter_vault_passcode">Masukkan kode akses brankas</string>
-    <string name="vault_folder">Masukkan map ke brankas</string>
-    <string name="unvault_folder">Keluarkan map dari brankas</string>
-    <string name="folder_is_vaulted">Map telah dimasukkan ke brankas.</string>
-    <string name="folder_is_unvaulted">Map telah dikeluarkan dari brankas.</string>
+    <string name="add_to_vault">Tambah ke brankas</string>
+    <string name="remove_from_vault">Keluarkan dari brankas</string>
+    <string name="folder_is_vaulted">Folder telah ditambahkan ke brankas.</string>
+    <string name="folder_is_unvaulted">Folder telah dikeluarkan dari brankas.</string>
     <string name="vault_is_empty">Brankas kosong.</string>
     <string name="archive_vaulted_folder_confirmation">Apakah Anda yakin ingin menghapus map ini?</string>
     <string name="archive_vaulted_folder_description">Mengarsipkan map ini juga akan menghapusnya dari brankas.</string>
@@ -147,15 +160,19 @@
     <string name="title">Judul</string>
     <string name="create_note">Buat catatan</string>
     <string name="delete_note">Hapus catatan</string>
-    <string name="archive_note">Arsipkan catatan</string>
-    <string name="duplicate_note">Gandakan catatan</string>
+    <string name="duplicate">Duplikasi</string>
+    <string name="undo">Undo</string>
+    <string name="undo_history">Urungkan hirtory</string>
+    <string name="redo">Redo</string>
+    <string name="redo_history">Mengembalikan history</string>
+    <string name="share_note">Berbagi catatan</string>
     <string name="sorting_type">Jenis penyortiran</string>
-    <string name="notes_sorting">Penyortiran catatan</string>
-    <string name="grouping_type">Pengelompokan</string>
+    <string name="notes_view">Tampilan catatan</string>
     <string name="sorting_order">Urutan penyortiran</string>
+    <string name="grouping_type">Jenis pengelompokan</string>
+    <string name="grouping_order">Urutan pengelompokan</string>
     <string name="save_to_noto">Simpan ke Noto</string>
     <string name="no_notes_found">Tidak ada catatan ditemukan.</string>
-    <string name="unarchive_note">Batalkan pengarsipan catatan</string>
     <string name="notes">Catatan</string>
     <string name="note_is_archived">Catatan telah diarsipkan.</string>
     <string name="note_is_pinned">Catatan telah disematkan.</string>
@@ -165,30 +182,34 @@
     <string name="reminder">Pengingat</string>
     <string name="reminders">Pengingat</string>
     <string name="new_note_reminder">Pengingat catatan baru</string>
-    <string name="archive">%s arsip</string>
-    <string name="copy_note_to_clipboard">Salin catatan ke papan klip</string>
-    <string name="copy_note_to">Salin catatan ke…</string>
+    <string name="copy">Salin</string>
+    <string name="copy_to">Salin ke…</string>
     <string name="note_is_copied">Catatan telah di salin.</string>
     <string name="note_copied_to_clipboard">Catatan telah di salin ke papan klip.</string>
+    <string name="text_copied">Teks telah disalin ke papan klip.</string>
     <string name="delete_note_confirmation">Apakah kamu yakin ingin menghapus catatan ini?</string>
-    <string name="share_note">Bagikan catatan dengan…</string>
-    <string name="add_note_reminder">Tambahkan pengingat catatan</string>
+    <string name="share_with">Bagikan dengan…</string>
+    <string name="add_note_reminder">Tambah pengingat</string>
     <string name="delete_note_description">Tindakan ini tidak dapat diurungkan dan akan menghapus catatan dan pengingatnya secara permanen.</string>
-    <string name="pin_note">Sematkan catatan</string>
-    <string name="unpin_note">Lepas penyemat catatan</string>
-    <string name="open_note_in_reading_mode">Buka catatan di mode baca</string>
-    <string name="edit_note_reminder">Sunting pengingat catatan</string>
+    <string name="reading_mode">Mode membaca</string>
+    <string name="edit_note_reminder">Sunting pengingat</string>
     <string name="note_options">Pengaturan catatan</string>
     <string name="note_is_deleted">Catatan telah dihapus.</string>
     <string name="note_is_duplicated">Catatan telah digandakan.</string>
-    <string name="move_note">Pindah catatan ke…</string>
-    <string name="change_parent_folder">Ubah map induk</string>
+    <string name="move_to">Pindahkan ke…</string>
     <string name="note_is_moved">Catatan telah dipindahkan.</string>
     <string name="note_preview_size">Ukuran pratinjau catatan</string>
     <string name="show_note_creation_date">Tampilkan tanggal pembuatan catatan</string>
     <string name="show_folders_notes_count">Tampilkan jumlah catatan map</string>
+    <string name="remember_scrolling_position">Ingat posisi gulir</string>
+    <string name="do_not_disturb">Aktifkan Jangan Ganggu selama Mode Membaca</string>
+    <string name="screen_on">Tetap aktifkan layar selama Mode Membaca</string>
+    <string name="full_screen">Buka layar penuh selama Mode Membaca</string>
+    <string name="show">Tampilkan</string>
+    <string name="hide">Sembunyikan</string>
+    <string name="permission_not_granted">Izin belum diberikan</string>
     <!-- Label -->
-    <string name="reorder_label">Susun ulang tanda</string>
+    <string name="reorder_label">Susun ulang</string>
     <string name="create_label">Buat tanda</string>
     <string name="label_title">Judul tanda</string>
     <string name="label">Tanda</string>
@@ -221,8 +242,13 @@
     <string name="russian">Rusia</string>
     <string name="spanish">Spanyol</string>
     <string name="french">Prancis</string>
+    <string name="german">Jerman</string>
+    <!-- Icon -->
+    <string name="icon">Ikon</string>
+    <string name="change_icon">Ubah ikon</string>
     <!-- Widget -->
     <string name="create_widget">Buat widget</string>
+    <string name="update_widget">Perbarui widget</string>
     <string name="new_notes_widget">Widget catatan baru</string>
     <string name="edit_notes_widget">Widget sunting catatan</string>
     <string name="new_folders_widget">Widget map baru</string>
@@ -264,4 +290,30 @@
         \n• Perbaikan bug dan peningkatan desain lainnya.
     </string>
     <string name="release_2_0_1">• Perbaikan bug.</string>
+    <string name="release_2_1_0">• Dukungan untuk membatalkan/mengulang dan melihat history.
+        \n• Mendesain ulang label.
+        \n• Mendesain ulang bilah aplikasi bawah dan atas di semua tata letak.
+        \n• Mendesain ulang banyak menu.
+        \n• Mendesain ulang baru/mengedit tata letak folder.
+        \n• Tambahkan urutan pengelompokan untuk catatan.
+        \n• Tambahkan elevasi saat menyeret label atau catatan.
+        \n• Sertakan pratinjau dalam menu folder, catatan, dan label.
+        \n• Format tanggal dengan cara yang lebih baik.
+        \n• Ubah warna sorotan di catatan.
+        \n• Navigasikan ke tata letak folder sebelum keluar dari aplikasi.
+        \n• Dukungan untuk Material You (Material 3).
+        \n• Mendesain ulang layar pembuka.
+        \n• Peningkatan Mode Membaca.
+        \n• Mendukung mengingat posisi gulir untuk folder dan catatan.
+        \n• Nonaktifkan animasi untuk label dan warna folder.
+        \n• Perbaiki pengimporan data.
+        \n• Memperbaiki bug saat membuka vault di Android 11 dan yang lebih baru.
+        \n• Terapkan gerakan menggesek untuk undo/redo.
+        \n• Mendukung label pemfilteran secara inklusif atau eksklusif.
+        \n• Mendesain ulang ikon aplikasi.
+        \n• Mendukung perubahan ikon aplikasi.
+        \n• Ubah berat font dan ukuran teks dalam tata letak yang berbeda.
+        \n• Mendukung bahasa Jerman.
+        \n• Perbaikan bug dan peningkatan desain lainnya.
+    </string>
 </resources>

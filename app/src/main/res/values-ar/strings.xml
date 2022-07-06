@@ -6,13 +6,17 @@
     <string name="okay">حسنا</string>
     <string name="search">بحث</string>
     <!-- More options for folder, note, etc -->
-    <string name="more">المزيد</string>
+    <string name="more_options">المزيد من الخيارات</string>
     <string name="back">رجوع</string>
     <string name="folder_layout">تصميم المجلد</string>
+    <string name="filtering_type">نوع التصفية</string>
     <string name="layout">تصميم</string>
     <string name="list">قائمة</string>
+    <string name="inclusive">شامل</string>
+    <string name="exclusive">محدود</string>
     <string name="grid">شبكة</string>
     <string name="created">أنشئت %s</string>
+    <string name="accessed">تم الوصول %s</string>
     <string name="alphabetical">أبجدي</string>
     <string name="alphabetical_sorting">فرز أبجديا</string>
     <string name="creation_date">تاريخ الإنشاء</string>
@@ -31,8 +35,14 @@
     <string name="report_issue">الإبلاغ عن مشكلة</string>
     <string name="about">حول</string>
     <string name="whats_new">ما هو الجديد</string>
-    <string name="about_message">Noto يتم تطويره وصيانته من قبل <a href="https://www.alialbaali.com/">Ali Albaali</a>.\n\n يتم نشر التطبيق بموجب شروط <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.\n\n شكر خاص لـ <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> و <a href="https://sakci.me">Alparslan Şakçi</a> و <a href="https://github.com/faus32">Faus AM</a> و <a href="https://github.com/kernoeb">Kernoeb</a> لترجمة التطبيق إلى اللغة التركية و الأسبانية و الفرنسية على التوالي، وكل من ساعد وأسهم في التنمية.</string>
-    <string name="share_with">مشاركة مع</string>
+    <string name="about_message">Noto يتم تطويره وصيانته من قبل <a href="https://www.alialbaali.com/">Ali Albaali</a>.
+        \n\nيتم توزيع التطبيق بموجب شروط <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.</a>.
+        التطبيق يستخدم ايقونات <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> نشرت
+        بواسطة <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> مرخصة بموجب <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.</a>.
+        \n\nشكرًا خاصًا على <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> و <a href="https://sakci.me">Alparslan Şakçi</a>،
+        <a href="https://github.com/faus32">Faus AM</a>، <a href="https://github.com/kernoeb">Kernoeb</a>و Uli N للترجمه التطبيق الى التركية والإسبانية والفرنسية والألمانية، على التوالي،
+        وكل من ساعد وأسهم في التنمية.</string>
+    <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">تصدير/استيراد البيانات</string>
     <string name="exporting_failed">فشل في تصدير البيانات.</string>
     <string name="importing_failed">فشل في استيراد البيانات.</string>
@@ -56,16 +66,24 @@
     <string name="monospace">Monospace</string>
     <string name="font">الخط</string>
     <string name="folders_archive">أرشيف المجلدات</string>
-    <string name="change_main_interface">تغيير المجلد الرئيسي</string>
+    <string name="change_main_interface">تغيير الواجهة الرئيسية</string>
     <string name="general">عام</string>
-    <string name="collapse_toolbar">إغلاق شريط الأدوات افتراضياً</string>
     <string name="all_notes">جميع الملاحظات</string>
+    <string name="all_folders">جميع المجلدات</string>
     <string name="clear">محو</string>
     <string name="recent_notes">الملاحظات الحديثة</string>
     <string name="collapse">تصغير</string>
     <string name="expand">إظهار</string>
     <string name="no_parent">لا يوجد أصل</string>
+    <string name="parent_folder">المجلد الأصلي</string>
     <string name="new_note_cursor_position">موضع مؤشر الملاحظة الجديدة</string>
+    <string name="archive">أرشف</string>
+    <string name="unarchive">إلغاء الأرشفة</string>
+    <string name="edit">تعديل</string>
+    <string name="pin">تثبيت</string>
+    <string name="unpin">إلغاء التثبيت</string>
+    <string name="delete">حذف</string>
+    <string name="just_now">قبل لحظات</string>
     <!-- Folder -->
     <string name="folders">المجلدات</string>
     <plurals name="folders_count">
@@ -77,16 +95,16 @@
         <item quantity="other">مجلدات %d</item>
     </plurals>
     <string name="create_folder">إنشاء مجلد</string>
-    <string name="new_folder">مجلد جديد</string>
-    <string name="folder_options">خيارات المجلد</string>
-    <string name="edit_folder">تعديل المجلد</string>
+    <string name="update_folder">تحديث المجلد</string>
     <string name="archive_folder">أرشيف المجلد</string>
-    <string name="unarchive_folder">إلغاء أرشفة المجلد</string>
-    <string name="add_new_note_shortcut">إضافة اختصار لملاحظة جديدة</string>
+    <string name="new_folder">مجلد جديد</string>
+    <string name="edit_folder">تعديل المجلد</string>
+    <string name="folder_options">خيارات المجلد</string>
+    <string name="add_new_note_shortcut">اختصار ملاحظة جديدة</string>
     <string name="delete_folder_description">لا يمكن التراجع عن هذا الإجراء وسيتم حذف المجلد وجميع محتوياته بشكل دائم.</string>
     <string name="folder_title">عنوان المجلد</string>
     <string name="folder_color">لون المجلد</string>
-    <string name="delete_folder">حذف المجلد</string>
+    <string name="delete_folder">حذف</string>
     <string name="delete_folder_confirmation">هل أنت متأكد من حذف هذا المجلد؟</string>
     <string name="folders_sorting">فرز المجلدات</string>
     <string name="empty_title">العنوان لا يمكن أن يكون فارغاً.</string>
@@ -97,16 +115,15 @@
     <string name="folder_is_unpinned">تم إلغاء تثبيت المجلد.</string>
     <string name="no_folders_found">لم يتم العثور على أي مجلدات.</string>
     <string name="select_folder">اختر مجلدا</string>
+    <string name="select_main_interface">اختر الواجهة الرئيسية</string>
     <string name="pinned">مثبت</string>
-    <string name="pin_folder">تثبيت المجلد</string>
-    <string name="unpin_folder">إلغاء تثبيت المجلد</string>
     <!-- Vault -->
     <string name="folders_vault">مخزن المجلدات</string>
     <string name="enter_vault_passcode">أدخل رمز المرور</string>
-    <string name="vault_folder">خزن المجلد</string>
-    <string name="unvault_folder">إلغاء خزن المجلد</string>
-    <string name="folder_is_vaulted">تم خزن المجلد.</string>
-    <string name="folder_is_unvaulted">تم إلغاء خزن المجلد.</string>
+    <string name="add_to_vault">أضف إلى المخزن</string>
+    <string name="remove_from_vault">إزالة من المخزن</string>
+    <string name="folder_is_vaulted">تم إضافة المجلد إلى المخزن.</string>
+    <string name="folder_is_unvaulted">تم إزالة المجلد من المخزن.</string>
     <string name="vault_is_empty">الخزينة فارغة.</string>
     <string name="archive_vaulted_folder_confirmation">هل أنت متأكد من أنك تريد أرشفة هذا المجلد؟</string>
     <string name="archive_vaulted_folder_description">أرشفة هذا المجلد سيؤدي أيضا إلى إزالته من الخزانة.</string>
@@ -158,15 +175,19 @@
     <string name="title">العنوان</string>
     <string name="create_note">إنشاء ملاحظة</string>
     <string name="delete_note">حذف الملاحظة</string>
-    <string name="archive_note">إرشاف الملاحظة</string>
-    <string name="duplicate_note">تكرار الملاحظة</string>
+    <string name="duplicate">كرر</string>
+    <string name="undo">تراجع</string>
+    <string name="undo_history">تاريخ التراجع</string>
+    <string name="redo">إعادة</string>
+    <string name="redo_history">تاريخ الإعادة</string>
+    <string name="share_note">شارك الملاحظة</string>
     <string name="sorting_type">نوع الفرز</string>
-    <string name="notes_sorting">فرز الملاحظات</string>
-    <string name="grouping_type">التجميع</string>
+    <string name="notes_view">عرض الملاحظات</string>
     <string name="sorting_order">ترتيب الفرز</string>
+    <string name="grouping_type">نوع التجميع</string>
+    <string name="grouping_order">ترتيب التجميع</string>
     <string name="save_to_noto">حفظ في Noto</string>
     <string name="no_notes_found">لا توجد أي ملاحظات.</string>
-    <string name="unarchive_note">إلغاء إرشاف الملاحظة</string>
     <string name="notes">الملاحظات</string>
     <string name="note_is_archived">تم إرشاف الملاحظة.</string>
     <string name="note_is_pinned">تم تثبيت الملاحظة.</string>
@@ -176,30 +197,34 @@
     <string name="reminder">تنبيه</string>
     <string name="reminders">التنبيهات</string>
     <string name="new_note_reminder">تنبيه ملاحظة جديد</string>
-    <string name="archive">أرشيف %s</string>
-    <string name="copy_note_to_clipboard">نسخ الملاحظة إلى الحافظة</string>
-    <string name="copy_note_to">نسخ الملاحظة إلى…</string>
+    <string name="copy">نسخ</string>
+    <string name="copy_to">نسخ إلى…</string>
     <string name="note_is_copied">تم نسخ الملاحظة.</string>
     <string name="note_copied_to_clipboard">تم نسخ الملاحظة إلى الحافظة.</string>
+    <string name="text_copied">تم نسخ النص إلى الحافظة.</string>
     <string name="delete_note_confirmation">هل أنت متأكد من أنك تريد حذف هذه الملاحظة؟</string>
-    <string name="share_note">مشاركة الملاحظة مع…</string>
-    <string name="add_note_reminder">إضافة تنبيه إلى الملاحظة</string>
+    <string name="share_with">شارك مع…</string>
+    <string name="add_note_reminder">إضافة منبه</string>
     <string name="delete_note_description">لا يمكن التراجع عن هذا الإجراء وسيتم حذف الملاحظة والتنبيه الخاص بها بشكل دائم.</string>
-    <string name="pin_note">تثبيت ملاحظة</string>
-    <string name="unpin_note">إلغاء تثبيت الملاحظة</string>
-    <string name="open_note_in_reading_mode">فتح الملاحظة في وضع القراءة</string>
-    <string name="edit_note_reminder">تعديل تنبيه الملاحظة</string>
+    <string name="reading_mode">وضع القراءة</string>
+    <string name="edit_note_reminder">تعديل المنبه</string>
     <string name="note_options">خيارات الملاحظة</string>
     <string name="note_is_deleted">تم حذف الملاحظة.</string>
     <string name="note_is_duplicated">تم نسخ الملاحظة.</string>
-    <string name="move_note">نقل الملاحظة إلى…</string>
-    <string name="change_parent_folder">تغيير المجلد الأصلي</string>
+    <string name="move_to">نقل إلى…</string>
     <string name="note_is_moved">تم نقل الملاحظة.</string>
     <string name="note_preview_size">حجم معاينة الملاحظة</string>
     <string name="show_note_creation_date">عرض تاريخ إنشاء الملاحظة</string>
     <string name="show_folders_notes_count">عرض عدد ملاحظات المجلدات</string>
+    <string name="remember_scrolling_position">تذكر موضع التمرير</string>
+    <string name="do_not_disturb">تفعيل وضع عدم الإزعاج أثناء وضع القراءة</string>
+    <string name="screen_on">إبقاء الشاشة قيد التشغيل أثناء وضع القراءة</string>
+    <string name="full_screen">ملء الشاشة أثناء وضع القراءة</string>
+    <string name="show">إظهار</string>
+    <string name="hide">إخفاء</string>
+    <string name="permission_not_granted">لم يتم منح الإذن</string>
     <!-- Label -->
-    <string name="reorder_label">ترتيب الملصق</string>
+    <string name="reorder_label">اعادة ترتيب</string>
     <string name="create_label">إنشاء ملصق</string>
     <string name="label_title">عنوان الملصق</string>
     <string name="label">ملصق</string>
@@ -232,8 +257,13 @@
     <string name="russian">اللغة الروسية</string>
     <string name="spanish">اللغة الإسبانية</string>
     <string name="french">الفرنسية</string>
+    <string name="german">اللغة الألمانية</string>
+    <!-- Icon -->
+    <string name="icon">الأيقونة</string>
+    <string name="change_icon">تغيير الأيقونة</string>
     <!-- Widget -->
     <string name="create_widget">إنشاء قطعة</string>
+    <string name="update_widget">تحديث القطعة</string>
     <string name="new_notes_widget">ملاحظات ملصق جديد</string>
     <string name="edit_notes_widget">تعديل قطعة الملاحظات</string>
     <string name="new_folders_widget">واجهة مجلدات جديدة</string>
@@ -275,4 +305,27 @@
         \n• إصلاحات الأخطاء الأخرى وتحسين التصميم.
     </string>
     <string name="release_2_0_1">• إصلاح الأخطاء.</string>
+    <string name="release_2_1_0">• دعم التراجع/إعادة عرض السجل الخاص بهم.
+        \n• إعادة تصميم الملصقات.
+        \n• إعادة تصميم شريط التطبيقات أسفل وأعلى.
+        \n• إعادة تصميم الكثير من القوائم.
+        \n• إعادة تصميم تعديل المجلد.
+        \n• إضافة ترتيب تجميع للمذكرات.
+        \n• إضافة ارتفاع عند سحب العلامات أو الملاحظات.
+        \n• تضمين المعاينة في قوائم المجلدات والمذكرات والملصقات.
+        \n• إضهار التواريخ بطريقة أفضل.
+        \n• تغيير اللون الأبرز في الملاحظات.
+        \n• الانتقال إلى المجلدات قبل الخروج من التطبيق.
+        \n• تحسين وضع القراءة.
+        \n• دعم تذكر مواقف التمرير للمجلدات والملاحظات.
+        \n• تعطيل الرسوم المتحركة للتسميات.
+        \n- إصلاح استيراد البيانات.
+        \n• إصلاح خلل عند فتح مخزن يعطل على أندرويد 11 وما فوق.
+        \n• تنفيذ إيماءات السحب للتراجع / للتقدم.
+        \n• دعم فرز الملصقات بشكل شامل أو حصري.
+        \n• إعادة تصميم أيقونة التطبيق.
+        \n• دعم تغيير أيقونة التطبيق.
+        \n• تغيير وزن الخط وحجم النص.
+        \n• دعم الألمانية.
+        \n• إصلاح الأخطاء وتحسين التصميم.    </string>
 </resources>

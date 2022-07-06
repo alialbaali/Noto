@@ -314,4 +314,30 @@
     </string>
 
     <string name="release_2_0_1">• Bug fixes.</string>
+    <string name="release_2_1_0">• Support for undo/redo and viewing their history.
+        \n• Redesign labels.
+        \n• Redesign bottom and top app bar in all layouts.
+        \n• Redesign many menus.
+        \n• Redesign new/edit folder layout.
+        \n• Add grouping order for notes.
+        \n• Add elevation when dragging labels or notes.
+        \n• Include preview in folder, note, and label menus.
+        \n• Format dates in a better way.
+        \n• Change highlight color in notes.
+        \n• Navigate to folders layout before exiting the app.
+        \n• Support for Material You (Material 3).
+        \n• Redesign splash screen.
+        \n• Reading Mode improvements.
+        \n• Support remembering scrolling positions for folders and notes.
+        \n• Disable animations for labels and folder colors.
+        \n• Fix importing data.
+        \n• Fix a bug when opening a vault crashes on Android 11 and above.
+        \n• Implement swiping gestures to undo/redo.
+        \n• Support filtering labels inclusively or exclusively.
+        \n• Redesign app icon.
+        \n• Support changing app icon.
+        \n• Change font weight and text size in different layouts.
+        \n• Support German.
+        \n• Other bug fixes and design improvements.
+    </string>
 </resources>

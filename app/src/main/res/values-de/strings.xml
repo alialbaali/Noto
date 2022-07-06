@@ -6,13 +6,17 @@
     <string name="okay">OK</string>
     <string name="search">Suchen</string>
     <!-- More options for folder, note, etc -->
-    <string name="more">Mehr</string>
+    <string name="more_options">Weitere Optionen</string>
     <string name="back">Zurück</string>
     <string name="folder_layout">Ordnerlayout</string>
+    <string name="filtering_type">Filterart</string>
     <string name="layout">Layout</string>
     <string name="list">Liste</string>
+    <string name="inclusive">Einschließend</string>
+    <string name="exclusive">Ausschließend</string>
     <string name="grid">Raster</string>
     <string name="created">Erstellt %s</string>
+    <string name="accessed">Accessed %s</string>
     <string name="alphabetical">Alphabetisch</string>
     <string name="alphabetical_sorting">Alphabetische Sortierung</string>
     <string name="creation_date">Erstellungsdatum</string>
@@ -32,11 +36,13 @@
     <string name="about">Über</string>
     <string name="whats_new">Was ist neu?</string>
     <string name="about_message">Noto wird von <a href="https://www.alialbaali.com/">Ali Albaali</a>entwickelt und gepflegt.
-        \n\nDie App wird unter den Bedingungen der <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a> distribuiert.
+        \n\nDie App wird unter den Bedingungen der <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2 verteilt.</a>.
+        Die App-Icons verwenden eine <a href="https://www.figma.com/community/file/830405806109119447/">Sammlung von Verläufen</a> veröffentlicht
+        von <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> und lizenziert unter <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.</a>.
         \n\nBesonderen Dank an <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> und <a href="https://sakci.me">Alparslan Şakçi</a>,
-        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a> für türkische, spanische und französische Lokalisierungen
-        und alle, die bei der Entwicklung geholfen und mitgewirkt haben.</string>
-    <string name="share_with">Freigeben für</string>
+        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a>, und Uli N für türkische, spanische, französische und deutsche Lokalisierungen
+        sowie alle, die an der Entwicklung mitgewirkt und mitgewirkt haben.</string>
+    <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Daten exportieren/importieren</string>
     <string name="exporting_failed">Export der Daten fehlgeschlagen.</string>
     <string name="importing_failed">Import der Daten fehlgeschlagen.</string>
@@ -60,16 +66,24 @@
     <string name="monospace">Monospace</string>
     <string name="font">Schriftart</string>
     <string name="folders_archive">Ordnerarchiv</string>
-    <string name="change_main_interface">Hauptordner ändern</string>
+    <string name="change_main_interface">Haupt-Schnittstelle ändern</string>
     <string name="general">Allgemein</string>
-    <string name="collapse_toolbar">Werkzeugleiste standardmäßig einklappen</string>
     <string name="all_notes">Alle Notizen</string>
+    <string name="all_folders">Alle Ordner</string>
     <string name="clear">Löschen</string>
     <string name="recent_notes">Zuletzt erstellte Notizen</string>
     <string name="collapse">Einklappen</string>
     <string name="expand">Ausklappen</string>
     <string name="no_parent">Kein Elternelement</string>
+    <string name="parent_folder">Übergeordneter Ordner</string>
     <string name="new_note_cursor_position">Cursorposition für neue Notiz</string>
+    <string name="archive">Archivieren</string>
+    <string name="unarchive">Dearchivieren</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="pin">Anheften</string>
+    <string name="unpin">Loslösen</string>
+    <string name="delete">Löschen</string>
+    <string name="just_now">gerade eben</string>
     <!-- Folder -->
     <string name="folders">Ordner</string>
     <plurals name="folders_count">
@@ -77,16 +91,16 @@
         <item quantity="other">%d Ordner</item>
     </plurals>
     <string name="create_folder">Ordner anlegen</string>
-    <string name="new_folder">Neuer Ordner</string>
-    <string name="folder_options">Ordneroptionen</string>
-    <string name="edit_folder">Ordner bearbeiten</string>
+    <string name="update_folder">Ordner aktualisieren</string>
     <string name="archive_folder">Ordner archivieren</string>
-    <string name="unarchive_folder">Ordner dearchivieren</string>
-    <string name="add_new_note_shortcut">Desktopverknüpfung für neue Notiz erstellen</string>
+    <string name="new_folder">Neuer Ordner</string>
+    <string name="edit_folder">Ordner bearbeiten</string>
+    <string name="folder_options">Ordneroptionen</string>
+    <string name="add_new_note_shortcut">Verknüpfung für neue Notiz</string>
     <string name="delete_folder_description">Diese Aktion kann nicht rückgängig gemacht werden und wird Notiz und Erinnerung dauerhaft löschen.</string>
     <string name="folder_title">Ordnername</string>
     <string name="folder_color">Ordnerfarbe</string>
-    <string name="delete_folder">Ordner löschen</string>
+    <string name="delete_folder">Löschen</string>
     <string name="delete_folder_confirmation">Soll dieser Ordner wirklich gelöscht werden?</string>
     <string name="folders_sorting">Sortierung der Ordner</string>
     <string name="empty_title">Der Titel darf nicht leer sein.</string>
@@ -97,16 +111,15 @@
     <string name="folder_is_unpinned">Ordner wurde losgelöst.</string>
     <string name="no_folders_found">Keine Ordner gefunden.</string>
     <string name="select_folder">Ordner auswählen</string>
+    <string name="select_main_interface">Haupt-Schnittstelle wählen</string>
     <string name="pinned">Angepinnt</string>
-    <string name="pin_folder">Ordner anheften</string>
-    <string name="unpin_folder">Ordner loslösen</string>
     <!-- Vault -->
     <string name="folders_vault">Ordnerschutz</string>
     <string name="enter_vault_passcode">Zugangscode eingeben</string>
-    <string name="vault_folder">Ordner mit Tresor schützen</string>
-    <string name="unvault_folder">Ordnerschutz aufheben</string>
-    <string name="folder_is_vaulted">Ordner wurde mit Passcode geschützt.</string>
-    <string name="folder_is_unvaulted">Ordner wurde aus dem Tresor geholt.</string>
+    <string name="add_to_vault">Zum Ordnerschutz hinzufügen</string>
+    <string name="remove_from_vault">Vom Ordnerschutz ausnehmen</string>
+    <string name="folder_is_vaulted">Ordner wurde zum Ordnerschutz hinzugefügt.</string>
+    <string name="folder_is_unvaulted">Ordner wurde vom Ordnerschutz ausgenommen.</string>
     <string name="vault_is_empty">Keine Ordner enthalten.</string>
     <string name="archive_vaulted_folder_confirmation">Soll dieser Ordner wirklich archiviert werden?</string>
     <string name="archive_vaulted_folder_description">Das Archivieren dieses Ordners entfernt auch aus den Passcodeschutz.</string>
@@ -150,15 +163,19 @@
     <string name="title">Überschrift</string>
     <string name="create_note">Notiz erstellen</string>
     <string name="delete_note">Notiz löschen</string>
-    <string name="archive_note">Notiz archivieren</string>
-    <string name="duplicate_note">Notiz duplizieren</string>
+    <string name="duplicate">Duplizieren</string>
+    <string name="undo">Rückgängig</string>
+    <string name="undo_history">Verlauf zurücksetzen</string>
+    <string name="redo">Wiederherstellen</string>
+    <string name="redo_history">Verlauf wiederherstellen</string>
+    <string name="share_note">Notiz teilen</string>
     <string name="sorting_type">Sortierungsart</string>
-    <string name="notes_sorting">Notizen-Sortierung</string>
-    <string name="grouping_type">Gruppierung</string>
+    <string name="notes_view">Notizansicht</string>
     <string name="sorting_order">Sortierreihenfolge</string>
+    <string name="grouping_type">Gruppierungstyp</string>
+    <string name="grouping_order">Gruppierungsreihenfolge</string>
     <string name="save_to_noto">In Noto speichern</string>
     <string name="no_notes_found">Keine Notizen gefunden.</string>
-    <string name="unarchive_note">Notiz dearchivieren</string>
     <string name="notes">Notizen</string>
     <string name="note_is_archived">Notiz wurde archiviert.</string>
     <string name="note_is_pinned">Notiz wurde angepinnt.</string>
@@ -168,30 +185,34 @@
     <string name="reminder">Erinnerung</string>
     <string name="reminders">Erinnerungen</string>
     <string name="new_note_reminder">Neue Notiz-Erinnerung</string>
-    <string name="archive">%s Archiv</string>
-    <string name="copy_note_to_clipboard">Notiz in die Zwischenablage kopieren</string>
-    <string name="copy_note_to">Notiz kopieren nach…</string>
+    <string name="copy">Kopieren</string>
+    <string name="copy_to">Kopieren nach…</string>
     <string name="note_is_copied">Notiz wurde kopiert.</string>
     <string name="note_copied_to_clipboard">Notiz wurde in die Zwischenablage kopiert.</string>
+    <string name="text_copied">Der Text wurde in die Zwischenablage kopiert.</string>
     <string name="delete_note_confirmation">Willst du diese Notiz wirklich löschen?</string>
-    <string name="share_note">Notiz teilen mit…</string>
-    <string name="add_note_reminder">Erinnerung zur Notiz hinzufügen</string>
+    <string name="share_with">Freigeben für…</string>
+    <string name="add_note_reminder">Erinnerung hinzufügen</string>
     <string name="delete_note_description">Diese Aktion kann nicht rückgängig gemacht werden und wird Notiz und Erinnerung dauerhaft löschen.</string>
-    <string name="pin_note">Notiz anheften</string>
-    <string name="unpin_note">Notiz loslösen</string>
-    <string name="open_note_in_reading_mode">Notiz im Lesemodus öffnen</string>
-    <string name="edit_note_reminder">Erinnerung zur Notiz hinzufügen</string>
+    <string name="reading_mode">Lesemodus</string>
+    <string name="edit_note_reminder">Erinnerung bearbeiten</string>
     <string name="note_options">Noitzoptionen</string>
     <string name="note_is_deleted">Notiz wurde gelöscht.</string>
     <string name="note_is_duplicated">Notiz wurde dupliziert.</string>
-    <string name="move_note">Notiz verschieben nach…</string>
-    <string name="change_parent_folder">Übergeordneten Ordner ändern</string>
+    <string name="move_to">Verschieben nach…</string>
     <string name="note_is_moved">Notiz wurde verschoben.</string>
     <string name="note_preview_size">Größe der Notizvorschau</string>
     <string name="show_note_creation_date">Datum der Notizerstellung anzeigen</string>
     <string name="show_folders_notes_count">Anzahl der Notizen für Ordner anzeigen</string>
+    <string name="remember_scrolling_position">Scrollposition beibehalten</string>
+    <string name="do_not_disturb">\"Nicht stören\" während des Lesemodus aktivieren</string>
+    <string name="screen_on">Bildschirm im Lesemodus nicht abschalten</string>
+    <string name="full_screen">Im Lesemodus Vollbild verwenden</string>
+    <string name="show">Zeigen</string>
+    <string name="hide">Verbergen</string>
+    <string name="permission_not_granted">Berechtigung wurde nicht gewährt</string>
     <!-- Label -->
-    <string name="reorder_label">Label umsortieren</string>
+    <string name="reorder_label">Umsortieren</string>
     <string name="create_label">Label erstellen</string>
     <string name="label_title">Label-Titel</string>
     <string name="label">Label</string>
@@ -224,8 +245,13 @@
     <string name="russian">Russisch</string>
     <string name="spanish">Spanisch</string>
     <string name="french">Französisch</string>
+    <string name="german">Deutsch</string>
+    <!-- Icon -->
+    <string name="icon">Icon</string>
+    <string name="change_icon">Icon ändern</string>
     <!-- Widget -->
     <string name="create_widget">Widget erstellen</string>
+    <string name="update_widget">Widget aktualisieren</string>
     <string name="new_notes_widget">Neues Notiz-Widget</string>
     <string name="edit_notes_widget">Notiz-Widget bearbeiten</string>
     <string name="new_folders_widget">Neues Ordner-Widget</string>
@@ -267,4 +293,30 @@
         \n• Weitere Bugfixes und Design-Verbesserungen.
     </string>
     <string name="release_2_0_1">• Fehlerbehebungen.</string>
+    <string name="release_2_1_0">• Unterstützung für Rückgängig/Wiederholen sowie Anzeige des Verlaufs hierbei.
+        \n• Beschriftungen neu designt.
+        \n• Neudesign der unteren und oberen App-Leiste in allen Layouts.
+        \n• Viele Menüs neu designt.
+        \n• Bereich \"Neuerstellung/Bearbeiten des Ordnerlayouts\" neu designt.
+        \n• Gruppierungsreihenfolge für Notizen hinzugefügt.
+        \n• Vertikalen Versatz beim Ziehen von Bezeichnungen oder Notizen hinzugefügt.
+        \n• Vorschau in Ordner, Notiz und Label-Menüs eingefügt.
+        \n• Datum wird nun besser formatiert.
+        \n• Hervorhebungsfarbe in Notizen verändert.
+        \n• Vor dem Verlassen der App wird zum Ordnerlayout navigiert.
+        \n• Unterstützung für Material You (Material 3).
+        \n• Startbildschirm neu designt.
+        \n• Verbesserungen des Lesemodus.
+        \n• Speichern von Scrollpositionen für Ordner und Notizen.
+        \n• Animationen für Labels und Ordnerfarben deaktiviert.
+        \n• Datenimport korrigiert.
+        \n• Fehler behoben, wenn ein geschützter Ordner unter Android 11 oder höher abstürzt.
+        \n• Durchführen von Wischgesten zum Rückgängig machen/Wiederholen.
+        \n• Die Filterung durch Anwahl mehrerer Labels kann nun ausschließend oder einschließend durchgeführt werden.
+        \n• App-Icon neu designt.
+        \n• Support für Änderung das App-Icons.
+        \n• Schriftstärke und Textgröße in verschiedenen Layouts geändert.
+        \n• Deutsche Übersetzung.
+        \n• Weitere Bugfixes und Design-Verbesserungen.
+    </string>
 </resources>

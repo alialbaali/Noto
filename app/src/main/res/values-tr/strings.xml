@@ -6,13 +6,17 @@
     <string name="okay">Tamam</string>
     <string name="search">Ara</string>
     <!-- More options for folder, note, etc -->
-    <string name="more">Diğer seçenekler</string>
+    <string name="more_options">Diğer seçenekler</string>
     <string name="back">Geri</string>
     <string name="folder_layout">Klasör düzeni</string>
+    <string name="filtering_type">Filtre türü</string>
     <string name="layout">Düzen</string>
     <string name="list">Tek sütun</string>
+    <string name="inclusive">Dahil</string>
+    <string name="exclusive">Hariç</string>
     <string name="grid">Çift sütun</string>
     <string name="created">Oluşturma tarihi: %s</string>
+    <string name="accessed">%s tarihinde erişildi</string>
     <string name="alphabetical">Alfabetik</string>
     <string name="alphabetical_sorting">Alfabetik sıralama</string>
     <string name="creation_date">Oluşturma tarihi</string>
@@ -31,8 +35,8 @@
     <string name="report_issue">Sorun bildir</string>
     <string name="about">Hakkında</string>
     <string name="whats_new">Yenilikler</string>
-    <string name="about_message">Noto <a href="https://www.alialbaali.com/">Ali Albaali</a> tarafından geliştirilen bir uygulamadır.\n\nUygulama <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Lisansı 2.0</a> koşulları altında dağıtılmaktadır.\n\nTürkçe, İspanyoca ve Fransızca yerelleştirme için sırasıyla <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> ve <a href="https://sakci.me/tr">Alparslan Şakçi</a>, <a href="https://github.com/faus32">Faus AM</a>, <a href="https://noewen.com">Noéwen Boisnard</a>\'a, ayrıca geliştirme sürecinde emeği geçen herkese teşekkürler.</string>
-    <string name="share_with">Paylaşılacak uygulama</string>
+    <string name="about_message">Noto <a href="https://www.alialbaali.com/">Ali Albaali</a> tarafından geliştirilen bir uygulamadır.\n\nUygulama <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Lisansı 2.0</a> koşulları altında dağıtılmaktadır. Uygulama simgesi <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> tarafından <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> lisansı altında yayınlanan <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> paketini kullanmaktadır.\n\nTürkçe, İspanyoca, Fransızca ve Almanca yerelleştirme için sırasıyla <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> ve <a href="https://sakci.me/tr">Alparslan Şakçi</a>, <a href="https://github.com/faus32">Faus AM</a>, <a href="https://noewen.com">Noéwen Boisnard</a>, Uli N\'ye; ayrıca geliştirme sürecinde emeği geçen herkese teşekkürler.</string>
+    <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Verileri içe/dışa aktar</string>
     <string name="exporting_failed">Dışa aktarma başarısız.</string>
     <string name="importing_failed">İçe aktarma başarısız.</string>
@@ -56,16 +60,24 @@
     <string name="monospace">Monospace</string>
     <string name="font">Yazı tipi</string>
     <string name="folders_archive">Klasör arşivi</string>
-    <string name="change_main_interface">Ana klasörü değiştir</string>
+    <string name="change_main_interface">Temel arayüzü değiştir</string>
     <string name="general">Genel</string>
-    <string name="collapse_toolbar">Araç çubuğunu varsayılan olarak daralt</string>
     <string name="all_notes">Tüm notlar</string>
+    <string name="all_folders">Tüm klasörler</string>
     <string name="clear">Temizle</string>
     <string name="recent_notes">Yeni notlar</string>
     <string name="collapse">Daralt</string>
     <string name="expand">Genişlet</string>
     <string name="no_parent">Üst dizin yok</string>
+    <string name="parent_folder">Üst klasör</string>
     <string name="new_note_cursor_position">Yeni bir not oluştururken başlanacak yer</string>
+    <string name="archive">Arşivle</string>
+    <string name="unarchive">Arşivden çıkar</string>
+    <string name="edit">Düzenle</string>
+    <string name="pin">Sabitle</string>
+    <string name="unpin">Sabitlemeyi kaldır</string>
+    <string name="delete">Sil</string>
+    <string name="just_now">az önce</string>
     <!-- Folder -->
     <string name="folders">Klasörler</string>
     <plurals name="folders_count">
@@ -73,16 +85,16 @@
         <item quantity="other">%d klasör</item>
     </plurals>
     <string name="create_folder">Klasör oluştur</string>
-    <string name="new_folder">Yeni klasör</string>
-    <string name="folder_options">Klasör seçenekleri</string>
-    <string name="edit_folder">Klasörü düzenle</string>
+    <string name="update_folder">Klasörü güncelle</string>
     <string name="archive_folder">Klasörü arşivle</string>
-    <string name="unarchive_folder">Klasörü arşivden çıkar</string>
-    <string name="add_new_note_shortcut">Yeni not kısayolu ekle</string>
+    <string name="new_folder">Yeni klasör</string>
+    <string name="edit_folder">Klasörü düzenle</string>
+    <string name="folder_options">Klasör seçenekleri</string>
+    <string name="add_new_note_shortcut">Yeni not kısayolu</string>
     <string name="delete_folder_description">Bu işlem geri alınamaz. Klasör ve içindeki her şey kalıcı olarak silinecektir.</string>
     <string name="folder_title">Klasör başlığı</string>
     <string name="folder_color">Klasör rengi</string>
-    <string name="delete_folder">Klasörü sil</string>
+    <string name="delete_folder">Sil</string>
     <string name="delete_folder_confirmation">Bu klasörü silmek istediğinizden emin misiniz?</string>
     <string name="folders_sorting">Klasör sıralaması</string>
     <string name="empty_title">Başlık boş bırakılamaz.</string>
@@ -93,16 +105,15 @@
     <string name="folder_is_unpinned">Sabitleme kaldırıldı.</string>
     <string name="no_folders_found">Klasör bulunamadı.</string>
     <string name="select_folder">Klasör seç</string>
+    <string name="select_main_interface">Temel arayüzü seç</string>
     <string name="pinned">Sabitlenmiş</string>
-    <string name="pin_folder">Klasörü sabitle</string>
-    <string name="unpin_folder">Sabitlemeyi kaldır</string>
     <!-- Vault -->
     <string name="folders_vault">Klasör kasası</string>
     <string name="enter_vault_passcode">Kasa şifresini gir</string>
-    <string name="vault_folder">Klasörü kasaya koy</string>
-    <string name="unvault_folder">Klasörü kasadan çıkar</string>
+    <string name="add_to_vault">Kasaya ekle</string>
+    <string name="remove_from_vault">Kasadan çıkar</string>
     <string name="folder_is_vaulted">Klasör kasaya yerleştirildi.</string>
-    <string name="folder_is_unvaulted">Klasör kasadan çıkartıldı.</string>
+    <string name="folder_is_unvaulted">Klasör kasadan çıkarıldı.</string>
     <string name="vault_is_empty">Kasa boş.</string>
     <string name="archive_vaulted_folder_confirmation">Bu klasörü arşivlemek istediğinizden emin misiniz?</string>
     <string name="archive_vaulted_folder_description">Arşivlenen klasörler kasadan çıkartılır.</string>
@@ -146,15 +157,19 @@
     <string name="title">Başlık</string>
     <string name="create_note">Not oluştur</string>
     <string name="delete_note">Notu sil</string>
-    <string name="archive_note">Notu arşivle</string>
-    <string name="duplicate_note">Notu çoğalt</string>
+    <string name="duplicate">Çoğalt</string>
+    <string name="undo">Geri al</string>
+    <string name="undo_history">Geri al geçmişi</string>
+    <string name="redo">Yeniden yaz</string>
+    <string name="redo_history">Yeniden yaz geçmişi</string>
+    <string name="share_note">Notu paylaş</string>
     <string name="sorting_type">Sıralama türü</string>
-    <string name="notes_sorting">Not sıralaması</string>
-    <string name="grouping_type">Gruplandırma</string>
+    <string name="notes_view">Not görünümü</string>
     <string name="sorting_order">Sıralama düzeni</string>
+    <string name="grouping_type">Gruplandırma türü</string>
+    <string name="grouping_order">Gruplandırma düzeni</string>
     <string name="save_to_noto">Noto\'ya kaydet</string>
     <string name="no_notes_found">Not bulunamadı.</string>
-    <string name="unarchive_note">Notu arşivden çıkar</string>
     <string name="notes">Notlar</string>
     <string name="note_is_archived">Not arşivlendi.</string>
     <string name="note_is_pinned">Not sabitlendi.</string>
@@ -164,30 +179,34 @@
     <string name="reminder">Hatırlatıcı</string>
     <string name="reminders">Hatırlatıcılar</string>
     <string name="new_note_reminder">Yeni hatırlatıcı</string>
-    <string name="archive">%s arşivi</string>
-    <string name="copy_note_to_clipboard">Panoya kopyala</string>
-    <string name="copy_note_to">Notu kopyala</string>
+    <string name="copy">Kopyala</string>
+    <string name="copy_to">Kopyala…</string>
     <string name="note_is_copied">Not kopyalandı.</string>
     <string name="note_copied_to_clipboard">Not panoya kopyalandı.</string>
+    <string name="text_copied">Metin panoya kopyalandı.</string>
     <string name="delete_note_confirmation">Bu notu silmek istediğinizden emin misiniz?</string>
-    <string name="share_note">Notu paylaş</string>
+    <string name="share_with">Paylaşılacak uygulama</string>
     <string name="add_note_reminder">Hatırlatıcı ekle</string>
     <string name="delete_note_description">Bu işlem geri alınamaz. Not ve hatırlatıcı kalıcı olarak silinecektir.</string>
-    <string name="pin_note">Notu sabitle</string>
-    <string name="unpin_note">Sabitlemeyi kaldır</string>
-    <string name="open_note_in_reading_mode">Notu okuma modunda aç</string>
+    <string name="reading_mode">Okuma modu</string>
     <string name="edit_note_reminder">Hatırlatıcıyı düzenle</string>
     <string name="note_options">Not seçenekleri</string>
     <string name="note_is_deleted">Not silindi.</string>
     <string name="note_is_duplicated">Not çoğaltıldı.</string>
-    <string name="move_note">Notu taşı</string>
-    <string name="change_parent_folder">Üst klasörü değiştir</string>
+    <string name="move_to">Taşı...</string>
     <string name="note_is_moved">Not taşındı.</string>
     <string name="note_preview_size">Not önizleme boyutu</string>
     <string name="show_note_creation_date">Not oluşturma tarihini göster</string>
     <string name="show_folders_notes_count">Not sayısını göster</string>
+    <string name="remember_scrolling_position">Kaydırma konumunu hatırla</string>
+    <string name="do_not_disturb">Okuma modundayken Rahatsız Etmeyin ayarını etkinleştir</string>
+    <string name="screen_on">Okuma modundayken ekranı açık tut</string>
+    <string name="full_screen">Okuma modundayken tam ekrana geç</string>
+    <string name="show">Göster</string>
+    <string name="hide">Gizle</string>
+    <string name="permission_not_granted">İzin verme işlemi başarısız</string>
     <!-- Label -->
-    <string name="reorder_label">Etiketleri yeniden sırala</string>
+    <string name="reorder_label">Yeniden sırala</string>
     <string name="create_label">Etiket oluştur</string>
     <string name="label_title">Etiket başlığı</string>
     <string name="label">Etiket</string>
@@ -220,8 +239,13 @@
     <string name="russian">Rusça</string>
     <string name="spanish">İspanyolca</string>
     <string name="french">Fransızca</string>
+    <string name="german">Almanca</string>
+    <!-- Icon -->
+    <string name="icon">Simge</string>
+    <string name="change_icon">Simgeyi değiştir</string>
     <!-- Widget -->
     <string name="create_widget">Widget oluştur</string>
+    <string name="update_widget">Widget\'ı güncelle</string>
     <string name="new_notes_widget">Yeni not widget\'ı</string>
     <string name="edit_notes_widget">Not widget\'ını düzenle</string>
     <string name="new_folders_widget">Yeni klasör widget\'ı</string>
@@ -264,4 +288,5 @@
         \n• Diğer hata düzeltmeleri ve tasarım iyileştirmeleri
     </string>
     <string name="release_2_0_1">• Hata düzeltmeleri.</string>
+    <string name="release_2_1_0">• Geri alma/yeniden yazma özelliği ve geri al/yeniden yaz geçmişi eklendi.\n• Etiketler yeniden tasarlandı.\n• Tüm düzen türlerinde alt ve üst uygulama çubuğu yeniden tasarlandı.\n• Ana menü yeniden tasarlandı.\n• Klasör oluşturma/düzenleme arayüzü yeniden tasarlandı.\n• Notlar için gruplandırma düzeni özelliği eklendi.\n• Etiketleri veya notları sürüklerken yükseklik eklendi.\n• Klasör, not ve etiket menülerinde önizleme desteği eklendi.\n• Tarih formatı iyileştirildi.\n• Notlarda vurgu rengi değiştirildi.\n• Uygulamadan çıkmadan önce klasör ekranında gezinilecek.\n• Material You desteği (Material 3).\n• Başlangıç ekranı yeniden tasarlandı.\n• Okuma modu iyileştirildi.\n• Klasör ve notlarda kaydırma pozisyonunu hatırlama desteği eklendi.\n• Etiket ve klasör renkleri için kullanılan animasyonları devre dışı bırakabilme desteği eklendi.\n• Verileri içeri aktarmada yaşanan sorunlar giderildi.\n• Android 11 ve üzerinde kasayı açınca yaşanan çökme sorunu giderildi.\n• Geri al/yeniden yaz özelliklerini kaydırma hareketleriyle kullanabilme desteği eklendi.\n• Etiketleri dahil veya hariç olarak filtreleme desteği eklendi.\n• Uygulama simgesi yeniden tasarlandı.\n• Uygulama simgesi artık değiştirilebilir.\n• Farklı düzenlerde yazı tipi şeklini ve yazı boyutunu değiştirebilme desteği eklendi.\n• Almanca yerelleştirme eklendi.\n• Diğer hata düzeltmeleri ve tasarım iyileştirmeleri.</string>
 </resources>

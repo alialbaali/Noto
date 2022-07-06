@@ -55,12 +55,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/indonesian" />
 
-            <RadioButton
-                android:id="@+id/rb_russian"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/russian" />
+            <!--            <RadioButton-->
+            <!--                android:id="@+id/rb_russian"-->
+            <!--                style="@style/DialogRadioButtonItem"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="@string/russian" />-->
 
             <!--            <RadioButton-->
             <!--                android:id="@+id/rb_tamil"-->
