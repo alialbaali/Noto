@@ -243,7 +243,7 @@ class AppActivity : BaseActivity() {
             resources.configuration.locale = locale
             resources.configuration.setLayoutDirection(locale)
             resources.updateConfiguration(resources.configuration, resources.displayMetrics)
-            recreate()
+//            recreate()
         }
     }
 
