@@ -13,6 +13,16 @@ object Constants {
     const val IsNotParentEnabled = "is_no_parent_enabled"
     const val MainInterfaceId = ""
     const val IsPasscodeValid = "IsPasscodeValid"
+    const val ApiKey = "apikey"
+    const val Id = "id"
+    const val Name = "name"
+    const val Email = "email"
+    const val Password = "password"
+    const val NameMaxLength = 32
+    const val GrantType = "grant_type"
+    const val RefreshToken = "refresh_token"
+    val EmailRegex = Regex(".+@.+\\..+")
+    val PasswordRegex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#^])[A-Za-z\\d@$!%*?&#^]{8,}$")
 
     object Intent {
         const val ActionCreateFolder = "com.noto.intent.action.CREATE_FOLDER"
