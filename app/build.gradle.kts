@@ -14,9 +14,6 @@ android {
     buildToolsVersion = App.BuildTools
     signingConfigs {
         create("release") {
-            val properties = Properties().apply {
-                load(project.rootProject.file("local.properties").inputStream())
-            }
             storeFile = file(properties["store.file"] as String)
             storePassword = properties["store.password"] as String
             keyAlias = properties["key.alias"] as String
@@ -140,6 +137,13 @@ dependencies {
 
     implementation(AndroidX.Compose.material3)
     implementation(AndroidX.Compose.animation)
+
+    implementation(Ktor.Client.core)
+    implementation(Ktor.Client.auth)
+    implementation(Ktor.Client.okHttp)
+    implementation(Ktor.Client.logging)
+    implementation("io.ktor:ktor-client-content-negotiation:2.0.2")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:2.0.2")
 
     testImplementation(Testing.Kotest.Runner.junit5)
     testImplementation(Testing.Kotest.Assertions.core)
