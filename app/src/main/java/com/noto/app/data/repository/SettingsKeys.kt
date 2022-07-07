@@ -37,6 +37,9 @@ object SettingsKeys {
     val IsRememberScrollingPosition = booleanPreferencesKey(Keys.IsRememberScrollingPosition)
     val AllNotesScrollingPosition = intPreferencesKey(Keys.AllNotesScrollingPosition)
     val RecentNotesScrollingPosition = intPreferencesKey(Keys.RecentNotesScrollingPosition)
+    val AccessToken = stringPreferencesKey(Keys.AccessToken)
+    val RefreshToken = stringPreferencesKey(Keys.RefreshToken)
+    val UserStatus = stringPreferencesKey(Keys.UserStatus)
 
     @Suppress("FunctionName")
     object Widget {
@@ -73,6 +76,9 @@ object SettingsKeys {
         const val IsRememberScrollingPosition = "IsRememberScrollingPosition"
         const val AllNotesScrollingPosition = "AllNotesScrollingPosition"
         const val RecentNotesScrollingPosition = "RecentNotesScrollingPosition"
+        const val AccessToken = "AccessToken"
+        const val RefreshToken = "RefreshToken"
+        const val UserStatus = "UserStatus"
 
         object Widget {
             val Int.Id get() = "Widget_Id_$this"

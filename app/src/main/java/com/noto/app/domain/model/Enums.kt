@@ -50,3 +50,7 @@ enum class NewNoteCursorPosition { Body, Title, }
 enum class GroupingOrder { Ascending, Descending, }
 
 enum class FilteringType { Inclusive, Exclusive, }
+
+enum class UserStatus {
+    None, LoggedIn, NotLoggedIn,
+}

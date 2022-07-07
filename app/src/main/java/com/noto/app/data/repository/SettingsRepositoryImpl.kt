@@ -139,6 +139,19 @@ class SettingsRepositoryImpl(
         .map { it ?: 0 }
         .flowOn(dispatcher)
 
+    override val accessToken: Flow<String?> = storage.data
+        .map { preferences -> preferences[SettingsKeys.AccessToken] }
+        .flowOn(dispatcher)
+
+    override val refreshToken: Flow<String?> = storage.data
+        .map { preferences -> preferences[SettingsKeys.RefreshToken] }
+        .flowOn(dispatcher)
+
+    override val userStatus: Flow<UserStatus> = storage.data
+        .map { preferences -> preferences[SettingsKeys.UserStatus] }
+        .map { if (it != null) UserStatus.valueOf(it) else UserStatus.NotLoggedIn }
+        .flowOn(dispatcher)
+
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
         return storage.data
             .map { preferences -> preferences[SettingsKeys.Widget.FolderId(widgetId)] }
@@ -356,7 +369,9 @@ class SettingsRepositoryImpl(
 
     override suspend fun updateIsRememberScrollingPosition(isRememberScrollingPosition: Boolean) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.IsRememberScrollingPosition] = isRememberScrollingPosition }
+            storage.edit { preferences ->
+                preferences[SettingsKeys.IsRememberScrollingPosition] = isRememberScrollingPosition
+            }
         }
     }
 
@@ -410,13 +425,35 @@ class SettingsRepositoryImpl(
 
     override suspend fun updateWidgetSelectedLabelIds(widgetId: Int, folderId: Long, labelIds: List<Long>) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.Widget.SelectedLabelIds(widgetId, folderId)] = labelIds.joinToString() }
+            storage.edit { preferences ->
+                preferences[SettingsKeys.Widget.SelectedLabelIds(widgetId, folderId)] = labelIds.joinToString()
+            }
         }
     }
 
     override suspend fun updateWidgetFilteringType(widgetId: Int, filteringType: FilteringType) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.Widget.FilteringType(widgetId)] = filteringType.toString() }
+            storage.edit { preferences ->
+                preferences[SettingsKeys.Widget.FilteringType(widgetId)] = filteringType.toString()
+            }
+        }
+    }
+
+    override suspend fun updateAccessToken(accessToken: String) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.AccessToken] = accessToken }
+        }
+    }
+
+    override suspend fun updateRefreshToken(refreshToken: String) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.RefreshToken] = refreshToken }
+        }
+    }
+
+    override suspend fun updateUserStatus(userStatus: UserStatus) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.UserStatus] = userStatus.toString() }
         }
     }
 
