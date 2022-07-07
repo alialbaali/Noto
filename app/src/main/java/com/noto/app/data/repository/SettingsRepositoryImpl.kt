@@ -8,10 +8,7 @@ import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.AllFoldersId
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 
 class SettingsRepositoryImpl(
@@ -150,6 +147,14 @@ class SettingsRepositoryImpl(
     override val userStatus: Flow<UserStatus> = storage.data
         .map { preferences -> preferences[SettingsKeys.UserStatus] }
         .map { if (it != null) UserStatus.valueOf(it) else UserStatus.NotLoggedIn }
+        .flowOn(dispatcher)
+
+    override val name: Flow<String> = storage.data
+        .mapNotNull { preferences -> preferences[SettingsKeys.Name] }
+        .flowOn(dispatcher)
+
+    override val email: Flow<String> = storage.data
+        .mapNotNull { preferences -> preferences[SettingsKeys.Email] }
         .flowOn(dispatcher)
 
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
@@ -454,6 +459,18 @@ class SettingsRepositoryImpl(
     override suspend fun updateUserStatus(userStatus: UserStatus) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.UserStatus] = userStatus.toString() }
+        }
+    }
+
+    override suspend fun updateName(name: String) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.Name] = name }
+        }
+    }
+
+    override suspend fun updateEmail(email: String) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.Email] = email }
         }
     }
 

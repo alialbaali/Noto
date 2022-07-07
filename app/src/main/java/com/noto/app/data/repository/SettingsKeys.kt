@@ -40,6 +40,8 @@ object SettingsKeys {
     val AccessToken = stringPreferencesKey(Keys.AccessToken)
     val RefreshToken = stringPreferencesKey(Keys.RefreshToken)
     val UserStatus = stringPreferencesKey(Keys.UserStatus)
+    val Name = stringPreferencesKey(Keys.Name)
+    val Email = stringPreferencesKey(Keys.Email)
 
     @Suppress("FunctionName")
     object Widget {
@@ -79,6 +81,8 @@ object SettingsKeys {
         const val AccessToken = "AccessToken"
         const val RefreshToken = "RefreshToken"
         const val UserStatus = "UserStatus"
+        const val Name = "Name"
+        const val Email = "Email"
 
         object Widget {
             val Int.Id get() = "Widget_Id_$this"

@@ -53,6 +53,10 @@ interface SettingsRepository {
 
     val userStatus: Flow<UserStatus>
 
+    val name: Flow<String>
+
+    val email: Flow<String>
+
     fun getWidgetFolderId(widgetId: Int): Flow<Long>
 
     fun getIsWidgetCreated(widgetId: Int): Flow<Boolean>
@@ -140,4 +144,8 @@ interface SettingsRepository {
     suspend fun updateRefreshToken(refreshToken: String)
 
     suspend fun updateUserStatus(userStatus: UserStatus)
+
+    suspend fun updateName(name: String)
+
+    suspend fun updateEmail(email: String)
 }
