@@ -50,6 +50,10 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
         .distinctUntilChanged()
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
+    val userStatus = settingsRepository.userStatus
+        .distinctUntilChanged()
+        .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
+
     val mainInterfaceId = settingsRepository.mainInterfaceId
         .stateIn(viewModelScope, SharingStarted.Eagerly, AllFoldersId)
 

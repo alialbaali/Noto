@@ -624,4 +624,26 @@
         android:id="@+id/validateVaultPasscodeDialogFragment"
         android:name="com.noto.app.settings.ValidateVaultPasscodeDialogFragment"
         android:label="ValidateVaultPasscodeDialogFragment" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.noto.app.login.RegisterFragment"
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_progressIndicatorDialogFragment"
+            app:destination="@id/progressIndicatorDialogFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_folderFragment"
+            app:destination="@id/folderFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.noto.app.StartFragment"
+        android:label="StartFragment" >
+        <action
+            android:id="@+id/action_startFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_folderFragment"
+            app:destination="@id/folderFragment" />
+    </fragment>
 </navigation>

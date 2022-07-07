@@ -88,6 +88,28 @@
     <string name="delete">Delete</string>
     <string name="just_now">just now</string>
 
+    <!-- Login -->
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="register">Register</string>
+    <string name="register_intro">Creating an account would let you back up your notes to the cloud and encrypt all of your data with Client-Side Encryption.</string>
+    <string name="creating_account">Creating an account…</string>
+    <string name="register_for_free">Register for Free</string>
+    <string name="welcome">Welcome!</string>
+    <string name="skip_for_now">Skip for now</string>
+    <string name="login">Login</string>
+    <string name="invalid_name">Name is invalid.</string>
+    <string name="invalid_email">Email is invalid.</string>
+    <string name="invalid_password">Password is invalid. Password must contain at least 8 characters, including 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.</string>
+    <string name="password_info">Password must contain at least 8 characters, including 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.</string>
+    <string name="invalid_confirm_password">Passwords don\'t match.</string>
+    <string name="user_already_registered">User with this email is already registered.</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="something_went_wrong">Something went wrong.</string>
+    <string name="show_info">Show info</string>
+
     <!-- Folder -->
     <string name="folders">Folders</string>
     <plurals name="folders_count">

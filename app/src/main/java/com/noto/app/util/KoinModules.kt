@@ -15,6 +15,7 @@ import com.noto.app.domain.repository.*
 import com.noto.app.domain.source.*
 import com.noto.app.folder.FolderViewModel
 import com.noto.app.label.LabelViewModel
+import com.noto.app.login.LoginViewModel
 import com.noto.app.main.MainViewModel
 import com.noto.app.note.NoteViewModel
 import com.noto.app.recentnotes.RecentNotesViewModel
@@ -73,6 +74,8 @@ val appModule = module {
     viewModel { AllNotesViewModel(get(), get(), get(), get(), get()) }
 
     viewModel { RecentNotesViewModel(get(), get(), get(), get(), get()) }
+
+    viewModel { LoginViewModel(get(), get()) }
 }
 
 val repositoryModule = module {
@@ -86,6 +89,8 @@ val repositoryModule = module {
     single<NoteLabelRepository> { NoteLabelRepositoryImpl(get()) }
 
     single<SettingsRepository> { SettingsRepositoryImpl(get()) }
+
+    single<UserRepository> { UserRepositoryImpl(get(), get(), get()) }
 
 }
 
@@ -138,7 +143,7 @@ val remoteDataSourceModule = module {
         }
     }
 
-    single<RemoteAuthDataSource> { RemoteAuthClient(get(ClientQualifier)) }
+    single<RemoteAuthDataSource> { RemoteAuthClient(get(AuthClientQualifier)) }
 
     single<RemoteUserDataSource> { RemoteUserClient(get(ClientQualifier)) }
 }
