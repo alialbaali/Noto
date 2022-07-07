@@ -53,6 +53,8 @@ interface SettingsRepository {
 
     val userStatus: Flow<UserStatus>
 
+    val id: Flow<String>
+
     val name: Flow<String>
 
     val email: Flow<String>
@@ -144,6 +146,8 @@ interface SettingsRepository {
     suspend fun updateRefreshToken(refreshToken: String)
 
     suspend fun updateUserStatus(userStatus: UserStatus)
+
+    suspend fun updateId(id: String)
 
     suspend fun updateName(name: String)
 

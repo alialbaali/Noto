@@ -149,6 +149,10 @@ class SettingsRepositoryImpl(
         .map { if (it != null) UserStatus.valueOf(it) else UserStatus.NotLoggedIn }
         .flowOn(dispatcher)
 
+    override val id: Flow<String> = storage.data
+        .mapNotNull { preferences -> preferences[SettingsKeys.Id] }
+        .flowOn(dispatcher)
+
     override val name: Flow<String> = storage.data
         .mapNotNull { preferences -> preferences[SettingsKeys.Name] }
         .flowOn(dispatcher)
@@ -459,6 +463,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateUserStatus(userStatus: UserStatus) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.UserStatus] = userStatus.toString() }
+        }
+    }
+
+    override suspend fun updateId(id: String) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.Id] = id }
         }
     }
 

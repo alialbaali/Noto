@@ -28,6 +28,7 @@ class UserRepositoryImpl(
         settingsRepository.updateAccessToken(response.accessToken)
         settingsRepository.updateRefreshToken(response.refreshToken)
         remoteUserDataSource.createUser(response.user.id, name, email)
+        settingsRepository.updateId(response.user.id)
         settingsRepository.updateName(name)
         settingsRepository.updateEmail(email)
     }

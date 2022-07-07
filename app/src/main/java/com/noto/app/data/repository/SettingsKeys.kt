@@ -40,6 +40,7 @@ object SettingsKeys {
     val AccessToken = stringPreferencesKey(Keys.AccessToken)
     val RefreshToken = stringPreferencesKey(Keys.RefreshToken)
     val UserStatus = stringPreferencesKey(Keys.UserStatus)
+    val Id = stringPreferencesKey(Keys.Id)
     val Name = stringPreferencesKey(Keys.Name)
     val Email = stringPreferencesKey(Keys.Email)
 
@@ -81,6 +82,7 @@ object SettingsKeys {
         const val AccessToken = "AccessToken"
         const val RefreshToken = "RefreshToken"
         const val UserStatus = "UserStatus"
+        const val Id = "Id"
         const val Name = "Name"
         const val Email = "Email"
 
