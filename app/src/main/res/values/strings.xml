@@ -87,6 +87,7 @@
     <string name="unpin">Unpin</string>
     <string name="delete">Delete</string>
     <string name="just_now">just now</string>
+    <string name="account">Account</string>
 
     <!-- Login -->
     <string name="name">Name</string>

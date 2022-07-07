@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment
 import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.NotoTopAppbar
+import com.noto.app.domain.model.UserStatus
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
@@ -135,7 +136,19 @@ class SettingsFragment : Fragment() {
 
     @Composable
     private fun FirstSection(paddingValues: PaddingValues, modifier: Modifier = Modifier) {
+        val userStatus by viewModel.userStatus.collectAsState()
         SettingsSection(modifier, paddingValues) {
+            SettingsItem(
+                title = stringResource(id = R.string.account),
+                type = SettingsItemType.None,
+                onClick = {
+                    when (userStatus) {
+                        UserStatus.None, UserStatus.NotLoggedIn -> navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToRegisterFragment())
+                        UserStatus.LoggedIn -> navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToAccountSettingsFragment())
+                    }
+                },
+                painter = painterResource(id = R.drawable.ic_round_account_24),
+            )
             SettingsItem(
                 title = stringResource(id = R.string.general),
                 type = SettingsItemType.None,
@@ -170,7 +183,7 @@ class SettingsFragment : Fragment() {
     }
 
     @Composable
-    private fun ThirdSection(paddingValues: PaddingValues,modifier: Modifier = Modifier) {
+    private fun ThirdSection(paddingValues: PaddingValues, modifier: Modifier = Modifier) {
         val shareContentText = stringResource(id = R.string.invite_text)
         val shareText = stringResource(id = R.string.share_with)
         val rateText = stringResource(id = R.string.open_with)

@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.dp
 import com.noto.app.NotoTheme
 
@@ -39,8 +38,7 @@ fun SettingsItem(
             .fillMaxWidth()
             .clickable(onClick = onClick)
             .background(MaterialTheme.colorScheme.surface)
-            .padding(NotoTheme.dimensions.medium)
-            .onSizeChanged { println(it.height) },
+            .padding(NotoTheme.dimensions.medium),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         if (painter != null) {

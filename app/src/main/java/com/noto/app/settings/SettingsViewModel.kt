@@ -2,8 +2,10 @@ package com.noto.app.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.noto.app.UiState
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
+import com.noto.app.toUiState
 import com.noto.app.util.NotoDefaultJson
 import com.noto.app.util.hash
 import com.noto.app.util.isGeneral
@@ -15,12 +17,20 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 
 class SettingsViewModel(
+    private val userRepository: UserRepository,
     private val folderRepository: FolderRepository,
     private val noteRepository: NoteRepository,
     private val labelRepository: LabelRepository,
     private val noteLabelRepository: NoteLabelRepository,
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
+
+    val userState = userRepository.user
+        .map { it.toUiState() }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, UiState.Loading)
+
+    val userStatus = settingsRepository.userStatus
+        .stateIn(viewModelScope, SharingStarted.Eagerly, UserStatus.NotLoggedIn)
 
     val theme = settingsRepository.theme
         .stateIn(viewModelScope, SharingStarted.Lazily, Theme.System)
