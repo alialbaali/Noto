@@ -114,7 +114,7 @@ val remoteDataSourceModule = module {
 
     single(ClientQualifier) {
         val settingsRepository by inject<SettingsRepository>()
-        val authDataSource by inject<RemoteAuthDataSource>(AuthClientQualifier)
+        val authDataSource by inject<RemoteAuthDataSource>()
         DefaultHttpClient {
             Auth {
                 bearer {
