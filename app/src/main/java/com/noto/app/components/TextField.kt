@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -59,7 +58,7 @@ fun NotoTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     status: TextFieldStatus = TextFieldStatus.Empty,
 ) {
-    var isPlaceholderVisible by rememberSaveable { mutableStateOf(true) }
+    var isPlaceholderVisible by rememberSaveable { mutableStateOf(value.isNotEmpty()) }
     val textColor by animateColorAsState(
         targetValue = if (status.isError)
             MaterialTheme.colorScheme.onErrorContainer
