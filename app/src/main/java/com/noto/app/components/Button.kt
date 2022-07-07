@@ -18,7 +18,7 @@ fun NotoFilledButton(
         shape = MaterialTheme.shapes.small,
         contentPadding = PaddingValues(NotoTheme.dimensions.medium)
     ) {
-        Text(text)
+        Text(text, style = MaterialTheme.typography.titleSmall)
     }
 }
 
@@ -34,7 +34,7 @@ fun NotoOutlinedButton(
         shape = MaterialTheme.shapes.small,
         contentPadding = PaddingValues(NotoTheme.dimensions.medium)
     ) {
-        Text(text)
+        Text(text, style = MaterialTheme.typography.titleSmall)
     }
 }
 
@@ -50,6 +50,6 @@ fun NotoTextButton(
         shape = MaterialTheme.shapes.small,
         contentPadding = PaddingValues(NotoTheme.dimensions.medium)
     ) {
-        Text(text)
+        Text(text, style = MaterialTheme.typography.titleSmall)
     }
 }
