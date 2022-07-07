@@ -7,6 +7,18 @@ sealed interface UiState<out T> {
     object Loading : UiState<Nothing>
     data class Success<T>(val value: T) : UiState<T>
     data class Failure(val exception: Throwable) : UiState<Nothing>
+
+    val isEmpty: Boolean
+        get() = this is Empty
+
+    val isLoading: Boolean
+        get() = this is Loading
+
+    val isSuccess: Boolean
+        get() = this is Success
+
+    val isFailure: Boolean
+        get() = this is Failure
 }
 
 inline fun <T, R> UiState<T>.map(transform: (value: T) -> R): UiState<R> = when (this) {
