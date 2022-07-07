@@ -9,6 +9,10 @@ plugins {
     id("com.google.devtools.ksp") version "1.7.0-1.0.6"
 }
 
+val properties = Properties().apply {
+    load(project.rootProject.file("local.properties").inputStream())
+}
+
 android {
     compileSdk = App.CompileSDK
     buildToolsVersion = App.BuildTools
@@ -50,6 +54,7 @@ android {
             versionNameSuffix = "-debug"
             applicationIdSuffix = ".debug"
             isDebuggable = true
+            buildConfigField("String", "SupabaseApiKey", properties["supabase.apikey"] as String)
         }
         create("release-candidate") {
             versionNameSuffix = "-rc"
