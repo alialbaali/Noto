@@ -4,24 +4,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.components.TextFieldStatus
-import com.noto.app.domain.model.Theme
 import com.noto.app.domain.model.UserStatus
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.domain.repository.UserRepository
 import com.noto.app.toUiState
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
     private val userRepository: UserRepository,
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
-
-    val theme = settingsRepository.theme
-        .stateIn(viewModelScope, SharingStarted.Eagerly, Theme.System)
 
     private val mutableState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
     val state get() = mutableState.asStateFlow()

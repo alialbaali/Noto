@@ -5,22 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.NotoTheme
 import com.noto.app.R
-import com.noto.app.components.NotoTopAppbar
+import com.noto.app.components.Screen
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.Language
@@ -33,7 +25,6 @@ class GeneralSettingsFragment : Fragment() {
 
     private val viewModel by viewModel<SettingsViewModel>()
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -100,7 +91,6 @@ class GeneralSettingsFragment : Fragment() {
 
                 val notesCountEnabled by viewModel.isShowNotesCount.collectAsState()
                 val rememberScrollingPositionEnabled by viewModel.isRememberScrollingPosition.collectAsState()
-                val scrollState = rememberScrollState()
 
                 LaunchedEffect(key1 = mainInterfaceId) {
                     mainInterfaceText = when (mainInterfaceId) {
@@ -111,99 +101,81 @@ class GeneralSettingsFragment : Fragment() {
                     }
                 }
 
-                NotoTheme(theme = theme) {
-                    Scaffold(
-                        modifier = Modifier.fillMaxSize(),
-                        topBar = {
-                            NotoTopAppbar(
-                                title = stringResource(id = R.string.general),
-                                onNavigationIconClick = { navController?.navigateUp() },
-                            )
-                        }
-                    ) { contentPadding ->
-                        Column(
-                            modifier = Modifier
-                                .verticalScroll(scrollState)
-                                .fillMaxSize()
-                                .padding(contentPadding)
-                        ) {
+                Screen(title = stringResource(id = R.string.general)) {
+                    SettingsSection(
+                        paddingValues = PaddingValues(
+                            start = NotoTheme.dimensions.medium,
+                            top = NotoTheme.dimensions.medium,
+                            end = NotoTheme.dimensions.medium,
+                            bottom = NotoTheme.dimensions.small,
+                        )
+                    ) {
+                        SettingsItem(
+                            title = stringResource(id = R.string.main_interface),
+                            type = SettingsItemType.Text(mainInterfaceText),
+                            onClick = {
+                                navController?.navigateSafely(
+                                    GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToSelectFolderDialogFragment(
+                                        longArrayOf(),
+                                        selectedFolderId = mainInterfaceId,
+                                        isMainInterface = true
+                                    )
+                                )
+                            },
+                        )
+                    }
+                    SettingsSection(
+                        paddingValues = PaddingValues(
+                            start = NotoTheme.dimensions.medium,
+                            top = NotoTheme.dimensions.small,
+                            end = NotoTheme.dimensions.medium,
+                            bottom = NotoTheme.dimensions.small,
+                        )
+                    ) {
+                        SettingsItem(
+                            title = stringResource(id = R.string.theme),
+                            type = SettingsItemType.Text(themeText),
+                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToThemeDialogFragment()) }
+                        )
 
-                            SettingsSection(
-                                paddingValues = PaddingValues(
-                                    start = NotoTheme.dimensions.medium,
-                                    top = NotoTheme.dimensions.medium,
-                                    end = NotoTheme.dimensions.medium,
-                                    bottom = NotoTheme.dimensions.small,
-                                )
-                            ) {
-                                SettingsItem(
-                                    title = stringResource(id = R.string.main_interface),
-                                    type = SettingsItemType.Text(mainInterfaceText),
-                                    onClick = {
-                                        navController?.navigateSafely(
-                                            GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToSelectFolderDialogFragment(
-                                                longArrayOf(),
-                                                selectedFolderId = mainInterfaceId,
-                                                isMainInterface = true
-                                            )
-                                        )
-                                    },
-                                )
-                            }
-                            SettingsSection(
-                                paddingValues = PaddingValues(
-                                    start = NotoTheme.dimensions.medium,
-                                    top = NotoTheme.dimensions.small,
-                                    end = NotoTheme.dimensions.medium,
-                                    bottom = NotoTheme.dimensions.small,
-                                )
-                            ) {
-                                SettingsItem(
-                                    title = stringResource(id = R.string.theme),
-                                    type = SettingsItemType.Text(themeText),
-                                    onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToThemeDialogFragment()) }
-                                )
+                        SettingsItem(
+                            title = stringResource(id = R.string.language),
+                            type = if (languageText != null) SettingsItemType.Text(languageText) else SettingsItemType.None,
+                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToLanguageDialogFragment()) }
+                        )
 
-                                SettingsItem(
-                                    title = stringResource(id = R.string.language),
-                                    type = if (languageText != null) SettingsItemType.Text(languageText) else SettingsItemType.None,
-                                    onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToLanguageDialogFragment()) }
-                                )
+                        SettingsItem(
+                            title = stringResource(id = R.string.icon),
+                            type = SettingsItemType.Text(iconText),
+                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToIconDialogFragment()) }
+                        )
+                    }
 
-                                SettingsItem(
-                                    title = stringResource(id = R.string.icon),
-                                    type = SettingsItemType.Text(iconText),
-                                    onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToIconDialogFragment()) }
-                                )
-                            }
+                    SettingsSection(
+                        paddingValues = PaddingValues(
+                            start = NotoTheme.dimensions.medium,
+                            top = NotoTheme.dimensions.small,
+                            end = NotoTheme.dimensions.medium,
+                            bottom = NotoTheme.dimensions.medium,
+                        )
+                    ) {
+                        SettingsItem(
+                            title = stringResource(id = R.string.notes_font),
+                            type = SettingsItemType.Text(fontText),
+                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToFontDialogFragment()) }
+                        )
 
-                            SettingsSection(
-                                paddingValues = PaddingValues(
-                                    start = NotoTheme.dimensions.medium,
-                                    top = NotoTheme.dimensions.small,
-                                    end = NotoTheme.dimensions.medium,
-                                    bottom = NotoTheme.dimensions.medium,
-                                )
-                            ) {
-                                SettingsItem(
-                                    title = stringResource(id = R.string.notes_font),
-                                    type = SettingsItemType.Text(fontText),
-                                    onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToFontDialogFragment()) }
-                                )
+                        SettingsItem(
+                            title = stringResource(id = R.string.notes_count),
+                            type = SettingsItemType.Switch(notesCountEnabled),
+                            onClick = { viewModel.toggleShowNotesCount() }
+                        )
 
-                                SettingsItem(
-                                    title = stringResource(id = R.string.notes_count),
-                                    type = SettingsItemType.Switch(notesCountEnabled),
-                                    onClick = { viewModel.toggleShowNotesCount() }
-                                )
-
-                                SettingsItem(
-                                    title = stringResource(id = R.string.remember_scrolling_position),
-                                    type = SettingsItemType.Switch(rememberScrollingPositionEnabled),
-                                    onClick = { viewModel.toggleRememberScrollingPosition() }
-                                )
-                            }
-                        }
+                        SettingsItem(
+                            title = stringResource(id = R.string.remember_scrolling_position),
+                            type = SettingsItemType.Switch(rememberScrollingPositionEnabled),
+                            onClick = { viewModel.toggleRememberScrollingPosition() }
+                        )
                     }
                 }
             }

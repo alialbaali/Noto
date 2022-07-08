@@ -7,12 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -25,7 +23,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.NotoTheme
 import com.noto.app.R
-import com.noto.app.components.NotoTopAppbar
+import com.noto.app.components.Screen
 import com.noto.app.domain.model.UserStatus
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
@@ -40,7 +38,6 @@ class SettingsFragment : Fragment() {
 
     private val viewModel by viewModel<SettingsViewModel>()
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -61,72 +58,53 @@ class SettingsFragment : Fragment() {
         ComposeView(context).apply {
             isTransitionGroup = true
             setContent {
-                val scrollState = rememberScrollState()
-                val theme by viewModel.theme.collectAsState()
                 val version = context.packageManager?.getPackageInfo(context.packageName, 0)?.versionName
-                NotoTheme(theme = theme) {
-                    Scaffold(
-                        Modifier.fillMaxSize(),
-                        topBar = {
-                            NotoTopAppbar(
-                                title = stringResource(id = R.string.settings),
-                                onNavigationIconClick = { navController?.navigateUp() },
-                            )
-                        }
-                    ) { contentPadding ->
-                        Column(
-                            Modifier
-                                .fillMaxSize()
-                                .verticalScroll(scrollState)
-                                .padding(contentPadding),
-                        ) {
-                            FirstSection(
-                                paddingValues = PaddingValues(
-                                    start = NotoTheme.dimensions.medium,
-                                    top = NotoTheme.dimensions.medium,
-                                    end = NotoTheme.dimensions.medium,
-                                    bottom = NotoTheme.dimensions.small,
-                                )
-                            )
-                            SecondSection(
-                                paddingValues = PaddingValues(
-                                    start = NotoTheme.dimensions.medium,
-                                    top = NotoTheme.dimensions.small,
-                                    end = NotoTheme.dimensions.medium,
-                                    bottom = NotoTheme.dimensions.small,
-                                )
-                            )
-                            ThirdSection(
-                                paddingValues = PaddingValues(
-                                    start = NotoTheme.dimensions.medium,
-                                    top = NotoTheme.dimensions.small,
-                                    end = NotoTheme.dimensions.medium,
-                                    bottom = NotoTheme.dimensions.small,
-                                )
-                            )
-                            ForthSection(
-                                paddingValues = PaddingValues(
-                                    start = NotoTheme.dimensions.medium,
-                                    top = NotoTheme.dimensions.small,
-                                    end = NotoTheme.dimensions.medium,
-                                    bottom = NotoTheme.dimensions.medium,
-                                )
-                            )
+                Screen(title = stringResource(id = R.string.settings)) {
+                    FirstSection(
+                        paddingValues = PaddingValues(
+                            start = NotoTheme.dimensions.medium,
+                            top = NotoTheme.dimensions.medium,
+                            end = NotoTheme.dimensions.medium,
+                            bottom = NotoTheme.dimensions.small,
+                        )
+                    )
+                    SecondSection(
+                        paddingValues = PaddingValues(
+                            start = NotoTheme.dimensions.medium,
+                            top = NotoTheme.dimensions.small,
+                            end = NotoTheme.dimensions.medium,
+                            bottom = NotoTheme.dimensions.small,
+                        )
+                    )
+                    ThirdSection(
+                        paddingValues = PaddingValues(
+                            start = NotoTheme.dimensions.medium,
+                            top = NotoTheme.dimensions.small,
+                            end = NotoTheme.dimensions.medium,
+                            bottom = NotoTheme.dimensions.small,
+                        )
+                    )
+                    ForthSection(
+                        paddingValues = PaddingValues(
+                            start = NotoTheme.dimensions.medium,
+                            top = NotoTheme.dimensions.small,
+                            end = NotoTheme.dimensions.medium,
+                            bottom = NotoTheme.dimensions.medium,
+                        )
+                    )
 
-                            version?.let {
-                                Box(
-                                    modifier = Modifier
-                                        .align(Alignment.CenterHorizontally)
-                                        .padding(NotoTheme.dimensions.medium)
-                                        .weight(1F),
-                                    contentAlignment = Alignment.BottomCenter
-                                ) {
-                                    Text(
-                                        text = stringResource(R.string.version, version),
-                                        style = MaterialTheme.typography.labelLarge,
-                                    )
-                                }
-                            }
+                    version?.let {
+                        Box(
+                            modifier = Modifier
+                                .align(Alignment.CenterHorizontally)
+                                .padding(NotoTheme.dimensions.medium)
+                                .weight(1F),
+                            contentAlignment = Alignment.BottomCenter
+                        ) {
+                            Text(
+                                text = stringResource(R.string.version, version),
+                                style = MaterialTheme.typography.labelLarge,
+                            )
                         }
                     }
                 }
@@ -143,7 +121,8 @@ class SettingsFragment : Fragment() {
                 type = SettingsItemType.None,
                 onClick = {
                     when (userStatus) {
-                        UserStatus.None, UserStatus.NotLoggedIn -> navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToRegisterFragment())
+                        UserStatus.None, UserStatus.NotLoggedIn -> navController?.navigateSafely(
+                            SettingsFragmentDirections.actionSettingsFragmentToRegisterFragment())
                         UserStatus.LoggedIn -> navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToAccountSettingsFragment())
                     }
                 },
