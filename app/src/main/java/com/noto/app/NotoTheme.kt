@@ -95,6 +95,9 @@ private val shapes = Shapes(
     extraLarge = RoundedCornerShape(32.dp)
 )
 
+val Shapes.dialog
+    get() = RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)
+
 private val NunitoFontFamily = FontFamily(
     Font(R.font.nunito_regular, FontWeight.Normal, FontStyle.Normal),
     Font(R.font.nunito_regular_italic, FontWeight.Normal, FontStyle.Italic),
