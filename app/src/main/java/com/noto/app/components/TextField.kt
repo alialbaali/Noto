@@ -58,7 +58,7 @@ fun NotoTextField(
     visualTransformation: VisualTransformation = VisualTransformation.None,
     status: TextFieldStatus = TextFieldStatus.Empty,
 ) {
-    var isPlaceholderVisible by rememberSaveable { mutableStateOf(value.isNotEmpty()) }
+    var isPlaceholderVisible by rememberSaveable(value) { mutableStateOf(value.isEmpty()) }
     val textColor by animateColorAsState(
         targetValue = if (status.isError)
             MaterialTheme.colorScheme.onErrorContainer
