@@ -5,10 +5,7 @@ import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.domain.repository.UserRepository
 import com.noto.app.domain.source.RemoteAuthDataSource
 import com.noto.app.domain.source.RemoteUserDataSource
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 
 class UserRepositoryImpl(
     private val remoteAuthDataSource: RemoteAuthDataSource,
@@ -37,6 +34,12 @@ class UserRepositoryImpl(
         val response = remoteAuthDataSource.login(email, password)
         settingsRepository.updateAccessToken(response.accessToken)
         settingsRepository.updateRefreshToken(response.refreshToken)
+    }
+
+    override suspend fun updateName(name: String): Result<Unit> = runCatching {
+        val id = settingsRepository.id.first()
+        remoteUserDataSource.updateName(id, name)
+        settingsRepository.updateName(name)
     }
 
 }

@@ -11,4 +11,6 @@ interface UserRepository {
 
     suspend fun loginUser(email: String, password: String): Result<Unit>
 
+    suspend fun updateName(name: String): Result<Unit>
+
 }

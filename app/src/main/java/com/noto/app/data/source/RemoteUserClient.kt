@@ -25,4 +25,16 @@ class RemoteUserClient(private val client: HttpClient) : RemoteUserDataSource {
             unhandledError(errorResponse.message)
         }
     }
+
+    override suspend fun updateName(id: String, name: String) {
+        return client.patch("/rest/v1/users") {
+            parameter(Constants.Id, FilterKeys eq id)
+            setBody(
+                mapOf(Constants.Name to name)
+            )
+        }.getOrElse { response ->
+            val errorResponse = response.body<RestErrorResponse>()
+            unhandledError(errorResponse.message)
+        }
+    }
 }
