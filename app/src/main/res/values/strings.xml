@@ -110,6 +110,10 @@
     <string name="already_have_an_account">Already have an account?</string>
     <string name="something_went_wrong">Something went wrong.</string>
     <string name="show_info">Show info</string>
+    <string name="update_name">Update name</string>
+    <string name="updating_name">Updating name…</string>
+    <string name="edit_name">Edit name</string>
+    <string name="name_is_updated">Name has been updated.</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>

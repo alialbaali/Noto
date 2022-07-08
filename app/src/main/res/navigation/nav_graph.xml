@@ -655,5 +655,17 @@
     <fragment
         android:id="@+id/accountSettingsFragment"
         android:name="com.noto.app.settings.AccountSettingsFragment"
-        android:label="AccountSettingsFragment" />
+        android:label="AccountSettingsFragment" >
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_editNameDialogFragment"
+            app:destination="@id/editNameDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/editNameDialogFragment"
+        android:name="com.noto.app.settings.EditNameDialogFragment"
+        android:label="EditNameDialogFragment" >
+        <action
+            android:id="@+id/action_editNameDialogFragment_to_progressIndicatorDialogFragment"
+            app:destination="@id/progressIndicatorDialogFragment" />
+    </dialog>
 </navigation>

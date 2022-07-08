@@ -28,6 +28,7 @@ import com.noto.app.components.NotoProgressIndicator
 import com.noto.app.components.NotoTopAppbar
 import com.noto.app.fold
 import com.noto.app.util.navController
+import com.noto.app.util.navigateSafely
 import com.noto.app.util.setupMixedTransitions
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -79,7 +80,7 @@ class AccountSettingsFragment : Fragment() {
                                         SettingsItem(
                                             title = stringResource(id = R.string.name),
                                             type = SettingsItemType.Text(user.name),
-                                            onClick = { /*TODO*/ },
+                                            onClick = { navController?.navigateSafely(AccountSettingsFragmentDirections.actionAccountSettingsFragmentToEditNameDialogFragment()) },
                                         )
                                         SettingsItem(
                                             title = stringResource(id = R.string.email),

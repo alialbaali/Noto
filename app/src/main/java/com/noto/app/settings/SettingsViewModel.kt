@@ -3,8 +3,11 @@ package com.noto.app.settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
+import com.noto.app.components.TextFieldStatus
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
+import com.noto.app.getOrDefault
+import com.noto.app.map
 import com.noto.app.toUiState
 import com.noto.app.util.NotoDefaultJson
 import com.noto.app.util.hash
@@ -71,8 +74,27 @@ class SettingsViewModel(
     val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
+    private val mutableName = MutableStateFlow("")
+    val name get() = mutableName.asStateFlow()
+
+    private val mutableNameStatus = MutableStateFlow<TextFieldStatus>(TextFieldStatus.Empty)
+    val nameStatus get() = mutableNameStatus.asStateFlow()
+
+    private val mutableNameState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
+    val nameState get() = mutableNameState.asStateFlow()
+
+    private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
+    val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
+
     private val mutableIsImportFinished = MutableSharedFlow<Unit>(replay = Int.MAX_VALUE)
     val isImportFinished get() = mutableIsImportFinished.asSharedFlow()
+
+    init {
+        userState
+            .map { it.map { user -> user.name }.getOrDefault("") }
+            .onEach { mutableName.value = it }
+            .launchIn(viewModelScope)
+    }
 
     fun toggleShowNotesCount() = viewModelScope.launch {
         settingsRepository.updateIsShowNotesCount(!isShowNotesCount.value)
@@ -181,4 +203,17 @@ class SettingsViewModel(
     }
 
     fun getFolderById(folderId: Long) = folderRepository.getFolderById(folderId)
+
+    fun setName(name: String) {
+        mutableName.value = name
+    }
+
+    fun setNameStatus(status: TextFieldStatus) {
+        mutableNameStatus.value = status
+    }
+
+    fun updateName() = viewModelScope.launch {
+        mutableNameState.value = UiState.Loading
+        mutableNameState.value = userRepository.updateName(name.value.trim()).toUiState()
+    }
 }
