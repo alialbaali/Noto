@@ -5,12 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.Screen
 import com.noto.app.domain.model.Font
@@ -102,14 +100,7 @@ class GeneralSettingsFragment : Fragment() {
                 }
 
                 Screen(title = stringResource(id = R.string.general)) {
-                    SettingsSection(
-                        paddingValues = PaddingValues(
-                            start = NotoTheme.dimensions.medium,
-                            top = NotoTheme.dimensions.medium,
-                            end = NotoTheme.dimensions.medium,
-                            bottom = NotoTheme.dimensions.small,
-                        )
-                    ) {
+                    SettingsSection {
                         SettingsItem(
                             title = stringResource(id = R.string.main_interface),
                             type = SettingsItemType.Text(mainInterfaceText),
@@ -124,14 +115,7 @@ class GeneralSettingsFragment : Fragment() {
                             },
                         )
                     }
-                    SettingsSection(
-                        paddingValues = PaddingValues(
-                            start = NotoTheme.dimensions.medium,
-                            top = NotoTheme.dimensions.small,
-                            end = NotoTheme.dimensions.medium,
-                            bottom = NotoTheme.dimensions.small,
-                        )
-                    ) {
+                    SettingsSection {
                         SettingsItem(
                             title = stringResource(id = R.string.theme),
                             type = SettingsItemType.Text(themeText),
@@ -151,14 +135,7 @@ class GeneralSettingsFragment : Fragment() {
                         )
                     }
 
-                    SettingsSection(
-                        paddingValues = PaddingValues(
-                            start = NotoTheme.dimensions.medium,
-                            top = NotoTheme.dimensions.small,
-                            end = NotoTheme.dimensions.medium,
-                            bottom = NotoTheme.dimensions.medium,
-                        )
-                    ) {
+                    SettingsSection {
                         SettingsItem(
                             title = stringResource(id = R.string.notes_font),
                             type = SettingsItemType.Text(fontText),

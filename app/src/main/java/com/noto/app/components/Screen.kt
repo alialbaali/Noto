@@ -23,8 +23,8 @@ fun Fragment.Screen(
     modifier: Modifier = Modifier,
     onNavigationIconClick: (() -> Unit)? = { navController?.navigateUp() },
     snackbarHost: @Composable () -> Unit = {},
-    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
-    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(NotoTheme.dimensions.medium),
+    horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     val scrollState = rememberScrollState()
@@ -44,6 +44,7 @@ fun Fragment.Screen(
                 modifier = modifier
                     .verticalScroll(scrollState)
                     .fillMaxSize()
+                    .padding(NotoTheme.dimensions.medium)
                     .padding(contentPadding),
                 verticalArrangement,
                 horizontalAlignment,

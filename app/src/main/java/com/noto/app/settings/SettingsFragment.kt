@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -60,39 +59,10 @@ class SettingsFragment : Fragment() {
             setContent {
                 val version = context.packageManager?.getPackageInfo(context.packageName, 0)?.versionName
                 Screen(title = stringResource(id = R.string.settings)) {
-                    FirstSection(
-                        paddingValues = PaddingValues(
-                            start = NotoTheme.dimensions.medium,
-                            top = NotoTheme.dimensions.medium,
-                            end = NotoTheme.dimensions.medium,
-                            bottom = NotoTheme.dimensions.small,
-                        )
-                    )
-                    SecondSection(
-                        paddingValues = PaddingValues(
-                            start = NotoTheme.dimensions.medium,
-                            top = NotoTheme.dimensions.small,
-                            end = NotoTheme.dimensions.medium,
-                            bottom = NotoTheme.dimensions.small,
-                        )
-                    )
-                    ThirdSection(
-                        paddingValues = PaddingValues(
-                            start = NotoTheme.dimensions.medium,
-                            top = NotoTheme.dimensions.small,
-                            end = NotoTheme.dimensions.medium,
-                            bottom = NotoTheme.dimensions.small,
-                        )
-                    )
-                    ForthSection(
-                        paddingValues = PaddingValues(
-                            start = NotoTheme.dimensions.medium,
-                            top = NotoTheme.dimensions.small,
-                            end = NotoTheme.dimensions.medium,
-                            bottom = NotoTheme.dimensions.medium,
-                        )
-                    )
-
+                    FirstSection()
+                    SecondSection()
+                    ThirdSection()
+                    ForthSection()
                     version?.let {
                         Box(
                             modifier = Modifier
@@ -113,9 +83,9 @@ class SettingsFragment : Fragment() {
     }
 
     @Composable
-    private fun FirstSection(paddingValues: PaddingValues, modifier: Modifier = Modifier) {
+    private fun FirstSection(modifier: Modifier = Modifier) {
         val userStatus by viewModel.userStatus.collectAsState()
-        SettingsSection(modifier, paddingValues) {
+        SettingsSection(modifier) {
             SettingsItem(
                 title = stringResource(id = R.string.account),
                 type = SettingsItemType.None,
@@ -162,11 +132,11 @@ class SettingsFragment : Fragment() {
     }
 
     @Composable
-    private fun ThirdSection(paddingValues: PaddingValues, modifier: Modifier = Modifier) {
+    private fun ThirdSection(modifier: Modifier = Modifier) {
         val shareContentText = stringResource(id = R.string.invite_text)
         val shareText = stringResource(id = R.string.share_with)
         val rateText = stringResource(id = R.string.open_with)
-        SettingsSection(modifier, paddingValues) {
+        SettingsSection(modifier) {
             SettingsItem(
                 title = stringResource(id = R.string.share_app_with_others),
                 type = SettingsItemType.None,
@@ -199,8 +169,8 @@ class SettingsFragment : Fragment() {
     }
 
     @Composable
-    private fun ForthSection(paddingValues: PaddingValues, modifier: Modifier = Modifier) {
-        SettingsSection(modifier, paddingValues) {
+    private fun ForthSection(modifier: Modifier = Modifier) {
+        SettingsSection(modifier) {
             SettingsItem(
                 title = stringResource(id = R.string.report_issue),
                 type = SettingsItemType.None,
@@ -232,8 +202,8 @@ class SettingsFragment : Fragment() {
     }
 
     @Composable
-    private fun SecondSection(paddingValues: PaddingValues, modifier: Modifier = Modifier) {
-        SettingsSection(modifier, paddingValues) {
+    private fun SecondSection(modifier: Modifier = Modifier) {
+        SettingsSection(modifier) {
             SettingsItem(
                 title = stringResource(id = R.string.export_import_data),
                 type = SettingsItemType.None,
