@@ -502,6 +502,9 @@ class NoteFragment : Fragment() {
                 if (replayCache.size > 1) {
                     ibRedo.enable()
                     ibRedoHistory.enable()
+                } else {
+                    ibRedo.disable()
+                    ibRedoHistory.disable()
                 }
             }
             replayCache.last() == currentText -> {
@@ -510,6 +513,9 @@ class NoteFragment : Fragment() {
                 if (replayCache.size > 1) {
                     ibUndo.enable()
                     ibUndoHistory.enable()
+                } else {
+                    ibUndo.disable()
+                    ibUndoHistory.disable()
                 }
             }
             else -> {
