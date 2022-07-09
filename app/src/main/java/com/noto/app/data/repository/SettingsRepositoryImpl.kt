@@ -3,6 +3,7 @@ package com.noto.app.data.repository
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.AllFoldersId
@@ -481,6 +482,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateEmail(email: String) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.Email] = email }
+        }
+    }
+
+    override suspend fun clearSettings() {
+        withContext(dispatcher) {
+            storage.edit { it.clear() }
         }
     }
 

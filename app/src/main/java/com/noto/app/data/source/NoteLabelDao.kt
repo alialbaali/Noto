@@ -22,4 +22,6 @@ interface NoteLabelDao : LocalNoteLabelDataSource {
     @Query("DELETE FROM note_labels WHERE note_id = :noteId AND label_id = :labelId")
     override suspend fun deleteNoteLabel(noteId: Long, labelId: Long)
 
+    @Query("DELETE FROM note_labels")
+    override suspend fun clearNoteLabels()
 }

@@ -152,4 +152,6 @@ interface SettingsRepository {
     suspend fun updateName(name: String)
 
     suspend fun updateEmail(email: String)
+
+    suspend fun clearSettings()
 }

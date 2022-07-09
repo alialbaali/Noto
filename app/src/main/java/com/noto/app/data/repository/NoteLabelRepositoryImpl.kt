@@ -10,7 +10,7 @@ import kotlinx.coroutines.withContext
 
 class NoteLabelRepositoryImpl(
     private val source: LocalNoteLabelDataSource,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : NoteLabelRepository {
 
     override fun getNoteLabelsByNoteId(noteId: Long): Flow<List<NoteLabel>> = source.getNoteLabelsByNoteId(noteId)
@@ -23,5 +23,9 @@ class NoteLabelRepositoryImpl(
 
     override suspend fun deleteNoteLabel(noteId: Long, labelId: Long) = withContext(dispatcher) {
         source.deleteNoteLabel(noteId, labelId)
+    }
+
+    override suspend fun clearNoteLabels() = withContext(dispatcher) {
+        source.clearNoteLabels()
     }
 }

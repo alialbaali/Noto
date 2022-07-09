@@ -13,4 +13,6 @@ interface LocalNoteLabelDataSource {
 
     suspend fun deleteNoteLabel(noteId: Long, labelId: Long)
 
+    suspend fun clearNoteLabels()
+
 }

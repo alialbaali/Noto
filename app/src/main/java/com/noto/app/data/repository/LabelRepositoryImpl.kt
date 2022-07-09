@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 
 class LabelRepositoryImpl(
     private val dataSource: LocalLabelDataSource,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : LabelRepository {
 
     override fun getAllLabels(): Flow<List<Label>> = dataSource.getAllLabels()
@@ -32,6 +32,10 @@ class LabelRepositoryImpl(
 
     override suspend fun deleteLabel(label: Label) = withContext(dispatcher) {
         dataSource.deleteLabel(label)
+    }
+
+    override suspend fun clearLabels() = withContext(dispatcher) {
+        dataSource.clearLabels()
     }
 
     private suspend fun getLabelPosition(folderId: Long) = dataSource.getLabelsByFolderId(folderId)

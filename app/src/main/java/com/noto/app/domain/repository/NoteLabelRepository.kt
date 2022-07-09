@@ -12,4 +12,6 @@ interface NoteLabelRepository {
     suspend fun createNoteLabel(noteLabel: NoteLabel)
 
     suspend fun deleteNoteLabel(noteId: Long, labelId: Long)
+
+    suspend fun clearNoteLabels()
 }
