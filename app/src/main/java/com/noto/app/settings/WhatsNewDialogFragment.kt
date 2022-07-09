@@ -41,11 +41,12 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
 
     private val previousReleases: List<Release> by lazy {
         context?.let { context ->
-            val changelog180 = Changelog(context.stringResource(R.string.release_1_8_0))
-            val changelog200 = Changelog(context.stringResource(R.string.release_2_0_0))
-            val changelog201 = Changelog(context.stringResource(R.string.release_2_0_1))
-            val changelog210 = Changelog(context.stringResource(R.string.release_2_1_0))
-            listOf(Release_2_0_1(changelog201), Release_2_0_0(changelog200), Release_1_8_0(changelog180))
+            listOf(
+                Release_2_1_0(Changelog(context.stringResource(R.string.release_2_1_0))),
+                Release_2_0_1(Changelog(context.stringResource(R.string.release_2_0_1))),
+                Release_2_0_0(Changelog(context.stringResource(R.string.release_2_0_0))),
+                Release_1_8_0(Changelog(context.stringResource(R.string.release_1_8_0))),
+            )
         } ?: emptyList()
     }
 
