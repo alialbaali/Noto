@@ -42,8 +42,8 @@ fun Fragment.Screen(
         ) { contentPadding ->
             Column(
                 modifier = modifier
-                    .verticalScroll(scrollState)
                     .fillMaxSize()
+                    .verticalScroll(scrollState)
                     .padding(NotoTheme.dimensions.medium)
                     .padding(contentPadding),
                 verticalArrangement,
