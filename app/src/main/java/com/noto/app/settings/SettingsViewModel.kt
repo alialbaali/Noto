@@ -217,12 +217,17 @@ class SettingsViewModel(
         mutableNameState.value = userRepository.updateName(name.value.trim()).toUiState()
     }
 
-    fun logout() = viewModelScope.launch {
-        userRepository.logOut()
+    fun logOutUser() = viewModelScope.launch {
+        userRepository.logOutUser()
         folderRepository.clearFolders()
         noteRepository.clearNotes()
         labelRepository.clearLabels()
         noteLabelRepository.clearNoteLabels()
         settingsRepository.clearSettings()
+    }
+
+    fun deleteUser() = viewModelScope.launch {
+        logOutUser().join()
+        userRepository.deleteUser()
     }
 }

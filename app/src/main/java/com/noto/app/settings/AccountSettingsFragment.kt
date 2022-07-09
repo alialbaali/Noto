@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -12,10 +15,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
+import com.noto.app.components.NotoFilledButton
 import com.noto.app.components.NotoProgressIndicator
 import com.noto.app.components.Screen
 import com.noto.app.fold
@@ -23,6 +28,9 @@ import com.noto.app.util.*
 import com.noto.app.warning
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
+private const val LogOutCode = 0
+private const val DeleteAccountCode = 1
 
 class AccountSettingsFragment : Fragment() {
 
@@ -39,16 +47,10 @@ class AccountSettingsFragment : Fragment() {
 
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Int>(Constants.ClickListener)
-            ?.observe(viewLifecycleOwner) {
-                navController?.popBackStack()
-                navController?.navigateSafely(
-                    AccountSettingsFragmentDirections.actionAccountSettingsFragmentToProgressIndicatorDialogFragment(
-                        context.stringResource(R.string.loggin_out)
-                    )
-                )
-                viewModel.logout().invokeOnCompletion {
-                    navController?.popBackStack()
-                    navController?.navigateSafely(AccountSettingsFragmentDirections.actionAccountSettingsFragmentToStartFragment())
+            ?.observe(viewLifecycleOwner) { code ->
+                when (code) {
+                    LogOutCode -> logOut()
+                    DeleteAccountCode -> deleteUser()
                 }
             }
 
@@ -79,6 +81,7 @@ class AccountSettingsFragment : Fragment() {
                                     onClick = { /*TODO*/ },
                                 )
                             }
+
                             SettingsSection {
                                 val confirmationText = stringResource(id = R.string.logout_confirmation)
                                 val descriptionText = stringResource(id = R.string.logout_description)
@@ -91,13 +94,38 @@ class AccountSettingsFragment : Fragment() {
                                             AccountSettingsFragmentDirections.actionAccountSettingsFragmentToConfirmationDialogFragment(
                                                 confirmation = confirmationText,
                                                 description = descriptionText,
-                                                btnText = logOutText
+                                                btnText = logOutText,
+                                                code = LogOutCode,
                                             )
                                         )
                                     },
                                     titleColor = MaterialTheme.colorScheme.warning,
                                 )
                             }
+
+                            Spacer(Modifier.weight(1F))
+
+                            val confirmationText = stringResource(id = R.string.delete_account_confirmation)
+                            val descriptionText = stringResource(id = R.string.delete_account_description)
+                            val deleteText = stringResource(id = R.string.delete_account)
+                            NotoFilledButton(
+                                text = deleteText,
+                                onClick = {
+                                    navController?.navigateSafely(
+                                        AccountSettingsFragmentDirections.actionAccountSettingsFragmentToConfirmationDialogFragment(
+                                            confirmation = confirmationText,
+                                            description = descriptionText,
+                                            btnText = deleteText,
+                                            code = DeleteAccountCode,
+                                        )
+                                    )
+                                },
+                                modifier = Modifier.fillMaxWidth(),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = MaterialTheme.colorScheme.errorContainer,
+                                    contentColor = MaterialTheme.colorScheme.onErrorContainer,
+                                )
+                            )
                         },
                         onFailure = {
                             val text = stringResource(id = R.string.something_went_wrong)
@@ -106,6 +134,37 @@ class AccountSettingsFragment : Fragment() {
                     )
                 }
             }
+        }
+    }
+
+    private fun logOut() {
+        navController?.popBackStack()
+        context?.let { context ->
+            navController?.navigateSafely(
+                AccountSettingsFragmentDirections.actionAccountSettingsFragmentToProgressIndicatorDialogFragment(
+                    context.stringResource(R.string.loggin_out)
+                )
+            )
+        }
+
+        viewModel.logOutUser().invokeOnCompletion {
+            navController?.popBackStack()
+            navController?.navigateSafely(AccountSettingsFragmentDirections.actionAccountSettingsFragmentToStartFragment())
+        }
+    }
+
+    private fun deleteUser() {
+        navController?.popBackStack()
+        context?.let { context ->
+            navController?.navigateSafely(
+                AccountSettingsFragmentDirections.actionAccountSettingsFragmentToProgressIndicatorDialogFragment(
+                    context.stringResource(R.string.deleting_account)
+                )
+            )
+        }
+        viewModel.deleteUser().invokeOnCompletion {
+            navController?.popBackStack()
+            navController?.navigateSafely(AccountSettingsFragmentDirections.actionAccountSettingsFragmentToStartFragment())
         }
     }
 }

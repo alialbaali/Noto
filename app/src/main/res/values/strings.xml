@@ -87,7 +87,6 @@
     <string name="unpin">Unpin</string>
     <string name="delete">Delete</string>
     <string name="just_now">just now</string>
-    <string name="account">Account</string>
 
     <!-- Login -->
     <string name="name">Name</string>
@@ -118,7 +117,11 @@
     <string name="loggin_out">Logging Out…</string>
     <string name="logout_confirmation">Are you sure you want to log out?</string>
     <string name="logout_description">Logging out will remove all the data stored locally.</string>
-
+    <string name="account">Account</string>
+    <string name="delete_account">Delete Account</string>
+    <string name="deleting_account">Deleting Account…</string>
+    <string name="delete_account_confirmation">Are you sure you want to delete your account?</string>
+    <string name="delete_account_description">This action can\'t be undone and will delete your account and all of its data permanently.</string>
     <!-- Folder -->
     <string name="folders">Folders</string>
     <plurals name="folders_count">

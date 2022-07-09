@@ -246,6 +246,10 @@
         <argument
             android:name="btn_text"
             app:argType="string" />
+        <argument
+            android:name="code"
+            app:argType="integer"
+            android:defaultValue="0" />
     </dialog>
     <fragment
         android:id="@+id/settingsFragment"

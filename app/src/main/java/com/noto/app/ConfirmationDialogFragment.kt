@@ -29,7 +29,7 @@ class ConfirmationDialogFragment : BaseDialogFragment() {
 
     private fun ConfirmationDialogFragmentBinding.setupListeners() {
         btnConfirm.setOnClickListener {
-            navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.ClickListener, 0)
+            navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.ClickListener, args.code)
             dismiss()
         }
     }
