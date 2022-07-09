@@ -160,10 +160,11 @@ fun TextView.setMediumFont(font: Font) {
 }
 
 fun EditText.textAsFlow(emitInitialText: Boolean = false): Flow<CharSequence?> = callbackFlow {
+    if (emitInitialText) trySend(text)
     val listener = doOnTextChanged { text, _, _, _ -> trySend(text) }
     addTextChangedListener(listener)
     awaitClose { removeTextChangedListener(listener) }
-}.onStart { if (emitInitialText) emit(text) }
+}
 
 fun TextView.removeLinksUnderline() {
     val spannable = SpannableString(text)
