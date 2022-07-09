@@ -12,4 +12,6 @@ interface RemoteAuthDataSource {
 
     suspend fun logOut()
 
+    suspend fun delete()
+
 }

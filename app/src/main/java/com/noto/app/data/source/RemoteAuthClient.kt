@@ -79,4 +79,11 @@ class RemoteAuthClient(private val authClient: HttpClient, private val client: H
         }
     }
 
+    override suspend fun delete() {
+        return client.post("/rest/v1/rpc/delete_user").getOrElse { response ->
+            val errorResponse = response.body<AuthErrorResponse>()
+            unhandledError(errorResponse.error)
+        }
+    }
+
 }
