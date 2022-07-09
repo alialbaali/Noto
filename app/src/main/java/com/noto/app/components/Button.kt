@@ -11,12 +11,14 @@ fun NotoFilledButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    colors: ButtonColors = ButtonDefaults.buttonColors(),
 ) {
     Button(
         onClick = onClick,
         modifier = modifier,
         shape = MaterialTheme.shapes.small,
-        contentPadding = PaddingValues(NotoTheme.dimensions.medium)
+        contentPadding = PaddingValues(NotoTheme.dimensions.medium),
+        colors = colors,
     ) {
         Text(text, style = MaterialTheme.typography.titleSmall)
     }
@@ -27,12 +29,14 @@ fun NotoOutlinedButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    colors: ButtonColors = ButtonDefaults.outlinedButtonColors(),
 ) {
     OutlinedButton(
         onClick = onClick,
         modifier = modifier,
         shape = MaterialTheme.shapes.small,
-        contentPadding = PaddingValues(NotoTheme.dimensions.medium)
+        contentPadding = PaddingValues(NotoTheme.dimensions.medium),
+        colors = colors,
     ) {
         Text(text, style = MaterialTheme.typography.titleSmall)
     }
@@ -43,12 +47,14 @@ fun NotoTextButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    colors: ButtonColors = ButtonDefaults.textButtonColors(),
 ) {
     TextButton(
         onClick = onClick,
         modifier = modifier,
         shape = MaterialTheme.shapes.small,
-        contentPadding = PaddingValues(NotoTheme.dimensions.medium)
+        contentPadding = PaddingValues(NotoTheme.dimensions.medium),
+        colors = colors,
     ) {
         Text(text, style = MaterialTheme.typography.titleSmall)
     }
