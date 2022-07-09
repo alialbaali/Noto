@@ -42,4 +42,8 @@ class UserRepositoryImpl(
         settingsRepository.updateName(name)
     }
 
+    override suspend fun logOut(): Result<Unit> = runCatching {
+        remoteAuthDataSource.logOut()
+    }
+
 }

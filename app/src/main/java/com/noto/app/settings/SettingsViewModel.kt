@@ -216,4 +216,13 @@ class SettingsViewModel(
         mutableNameState.value = UiState.Loading
         mutableNameState.value = userRepository.updateName(name.value.trim()).toUiState()
     }
+
+    fun logout() = viewModelScope.launch {
+        userRepository.logOut()
+        folderRepository.clearFolders()
+        noteRepository.clearNotes()
+        labelRepository.clearLabels()
+        noteLabelRepository.clearNoteLabels()
+        settingsRepository.clearSettings()
+    }
 }

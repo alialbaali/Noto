@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import com.noto.app.NotoTheme
@@ -30,6 +31,7 @@ fun SettingsItem(
     type: SettingsItemType,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    titleColor: Color = MaterialTheme.colorScheme.onSurface,
     painter: Painter? = null,
     summary: String? = null,
 ) {
@@ -50,7 +52,7 @@ fun SettingsItem(
             Spacer(modifier = Modifier.width(NotoTheme.dimensions.medium))
         }
         Column(Modifier.weight(1F)) {
-            Text(text = title, style = MaterialTheme.typography.bodyLarge)
+            Text(text = title, style = MaterialTheme.typography.bodyLarge, color = titleColor)
             if (summary != null) {
                 Text(text = summary, style = MaterialTheme.typography.labelSmall)
             }

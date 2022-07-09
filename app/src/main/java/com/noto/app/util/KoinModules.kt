@@ -143,7 +143,7 @@ val remoteDataSourceModule = module {
         }
     }
 
-    single<RemoteAuthDataSource> { RemoteAuthClient(get(AuthClientQualifier)) }
+    single<RemoteAuthDataSource> { RemoteAuthClient(get(AuthClientQualifier), get(ClientQualifier)) }
 
     single<RemoteUserDataSource> { RemoteUserClient(get(ClientQualifier)) }
 }

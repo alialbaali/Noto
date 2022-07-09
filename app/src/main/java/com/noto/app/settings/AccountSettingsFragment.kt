@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.collectAsState
@@ -18,9 +19,8 @@ import com.noto.app.R
 import com.noto.app.components.NotoProgressIndicator
 import com.noto.app.components.Screen
 import com.noto.app.fold
-import com.noto.app.util.navController
-import com.noto.app.util.navigateSafely
-import com.noto.app.util.setupMixedTransitions
+import com.noto.app.util.*
+import com.noto.app.warning
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +36,22 @@ class AccountSettingsFragment : Fragment() {
         activity?.onBackPressedDispatcher?.addCallback {
             navController?.navigateUp()
         }
+
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<Int>(Constants.ClickListener)
+            ?.observe(viewLifecycleOwner) {
+                navController?.popBackStack()
+                navController?.navigateSafely(
+                    AccountSettingsFragmentDirections.actionAccountSettingsFragmentToProgressIndicatorDialogFragment(
+                        context.stringResource(R.string.loggin_out)
+                    )
+                )
+                viewModel.logout().invokeOnCompletion {
+                    navController?.popBackStack()
+                    navController?.navigateSafely(AccountSettingsFragmentDirections.actionAccountSettingsFragmentToStartFragment())
+                }
+            }
+
         setupMixedTransitions()
         ComposeView(context).apply {
             isTransitionGroup = true
@@ -61,6 +77,25 @@ class AccountSettingsFragment : Fragment() {
                                     title = stringResource(id = R.string.email),
                                     type = SettingsItemType.Text(user.email),
                                     onClick = { /*TODO*/ },
+                                )
+                            }
+                            SettingsSection {
+                                val confirmationText = stringResource(id = R.string.logout_confirmation)
+                                val descriptionText = stringResource(id = R.string.logout_description)
+                                val logOutText = stringResource(id = R.string.logout)
+                                SettingsItem(
+                                    title = logOutText,
+                                    type = SettingsItemType.None,
+                                    onClick = {
+                                        navController?.navigateSafely(
+                                            AccountSettingsFragmentDirections.actionAccountSettingsFragmentToConfirmationDialogFragment(
+                                                confirmation = confirmationText,
+                                                description = descriptionText,
+                                                btnText = logOutText
+                                            )
+                                        )
+                                    },
+                                    titleColor = MaterialTheme.colorScheme.warning,
                                 )
                             }
                         },

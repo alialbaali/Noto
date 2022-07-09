@@ -114,6 +114,10 @@
     <string name="updating_name">Updating name…</string>
     <string name="edit_name">Edit name</string>
     <string name="name_is_updated">Name has been updated.</string>
+    <string name="logout">Log Out</string>
+    <string name="loggin_out">Logging Out…</string>
+    <string name="logout_confirmation">Are you sure you want to log out?</string>
+    <string name="logout_description">Logging out will remove all the data stored locally.</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>

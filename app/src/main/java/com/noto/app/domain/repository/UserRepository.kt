@@ -13,4 +13,6 @@ interface UserRepository {
 
     suspend fun updateName(name: String): Result<Unit>
 
+    suspend fun logOut(): Result<Unit>
+
 }

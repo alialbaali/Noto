@@ -659,6 +659,15 @@
         <action
             android:id="@+id/action_accountSettingsFragment_to_editNameDialogFragment"
             app:destination="@id/editNameDialogFragment" />
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_confirmationDialogFragment"
+            app:destination="@id/confirmationDialogFragment" />
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_progressIndicatorDialogFragment"
+            app:destination="@id/progressIndicatorDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/editNameDialogFragment"
