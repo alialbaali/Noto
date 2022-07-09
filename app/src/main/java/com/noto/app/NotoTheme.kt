@@ -61,6 +61,8 @@ private val lightColorScheme = lightColorScheme(
     surfaceVariant = Color(0xFFF7F7F7),
     onSurfaceVariant = Color.Black,
     outline = Color(0xFF707070),
+    errorContainer = Color(red = 179, green = 38, blue = 30),
+    onErrorContainer = Color(red = 255, green = 255, blue = 255),
 )
 
 private val darkColorScheme = darkColorScheme(
