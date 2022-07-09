@@ -10,4 +10,6 @@ interface RemoteAuthDataSource {
 
     suspend fun refreshToken(refreshToken: String): AuthResponse
 
+    suspend fun logOut()
+
 }

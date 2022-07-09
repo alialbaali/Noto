@@ -13,10 +13,10 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 
-class RemoteAuthClient(private val client: HttpClient) : RemoteAuthDataSource {
+class RemoteAuthClient(private val authClient: HttpClient, private val client: HttpClient) : RemoteAuthDataSource {
 
     override suspend fun signUp(email: String, password: String): AuthResponse {
-        return client.post("/auth/v1/signup") {
+        return authClient.post("/auth/v1/signup") {
             setBody(
                 mapOf(
                     Constants.Email to email,
@@ -38,7 +38,7 @@ class RemoteAuthClient(private val client: HttpClient) : RemoteAuthDataSource {
     }
 
     override suspend fun login(email: String, password: String): AuthResponse {
-        return client.post("/auth/v1/token") {
+        return authClient.post("/auth/v1/token") {
             parameter(Constants.GrantType, Constants.Password)
             setBody(
                 mapOf(
@@ -56,7 +56,7 @@ class RemoteAuthClient(private val client: HttpClient) : RemoteAuthDataSource {
     }
 
     override suspend fun refreshToken(refreshToken: String): AuthResponse {
-        return client.post("auth/v1/token") {
+        return authClient.post("auth/v1/token") {
             parameter(Constants.GrantType, Constants.RefreshToken)
             setBody(
                 mapOf(
@@ -71,4 +71,12 @@ class RemoteAuthClient(private val client: HttpClient) : RemoteAuthDataSource {
             }
         }
     }
+
+    override suspend fun logOut() {
+        return client.post("/auth/v1/logout").getOrElse { response ->
+            val errorResponse = response.body<AuthErrorResponse>()
+            unhandledError(errorResponse.error)
+        }
+    }
+
 }
