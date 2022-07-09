@@ -7,20 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.Screen
 import com.noto.app.domain.model.UserStatus
@@ -63,19 +60,12 @@ class SettingsFragment : Fragment() {
                     SecondSection()
                     ThirdSection()
                     ForthSection()
+                    Spacer(Modifier.weight(1F))
                     version?.let {
-                        Box(
-                            modifier = Modifier
-                                .align(Alignment.CenterHorizontally)
-                                .padding(NotoTheme.dimensions.medium)
-                                .weight(1F),
-                            contentAlignment = Alignment.BottomCenter
-                        ) {
-                            Text(
-                                text = stringResource(R.string.version, version),
-                                style = MaterialTheme.typography.labelLarge,
-                            )
-                        }
+                        Text(
+                            text = stringResource(R.string.version, version),
+                            style = MaterialTheme.typography.labelLarge,
+                        )
                     }
                 }
             }
