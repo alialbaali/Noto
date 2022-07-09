@@ -164,13 +164,14 @@ class AppActivity : BaseActivity() {
                 .launchIn(lifecycleScope)
         }
 
-        viewModel.lastVersion
-            .onEach {
-                if (it != Release.Version.Current)
-                    if (navController.currentDestination?.id != R.id.whatsNewDialogFragment)
-                        navController.navigate(R.id.whatsNewDialogFragment)
-            }
-            .launchIn(lifecycleScope)
+        combine(
+            viewModel.lastVersion,
+            navController.destinationAsFlow(),
+        ) { lastVersion, _ ->
+            if (lastVersion != Release.Version.Current)
+                if (navController.currentDestination?.id != R.id.whatsNewDialogFragment)
+                    navController.navigate(R.id.whatsNewDialogFragment)
+        }.launchIn(lifecycleScope)
 
         viewModel.isVaultOpen
             .onEach { isVaultOpen ->

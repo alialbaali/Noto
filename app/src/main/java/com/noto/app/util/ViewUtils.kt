@@ -382,3 +382,12 @@ fun View.performClickHapticFeedback() =
 
 fun View.performLongClickHapticFeedback() =
     performHapticFeedback(HapticFeedbackConstants.LONG_PRESS, HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING)
+
+
+fun NavController.destinationAsFlow() = callbackFlow {
+    val listener = NavController.OnDestinationChangedListener { controller, destination, arguments ->
+        trySend(destination)
+    }
+    addOnDestinationChangedListener(listener)
+    awaitClose { removeOnDestinationChangedListener(listener) }
+}
