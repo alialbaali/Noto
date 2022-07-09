@@ -276,8 +276,8 @@ fun View.isLayoutVisible(rootView: View): Boolean {
 }
 
 fun TextView.getDisplayedTextIndex(scrollPosition: Int): Int {
-    val lineNumber = layout.getLineForVertical(scrollPosition)
-    val start: Int = layout.getLineStart(lineNumber)
+    val lineNumber = layout?.getLineForVertical(scrollPosition) ?: 0
+    val start = layout?.getLineStart(lineNumber) ?: 0
     val displayed: String = text.toString().substring(start)
     return text.toString().indexOf(displayed)
 }
