@@ -151,7 +151,8 @@ class RegisterFragment : Fragment() {
 
                         Spacer(modifier = Modifier.height(NotoTheme.dimensions.extraLarge))
 
-                        Button(
+                        NotoFilledButton(
+                            text = stringResource(id = R.string.register),
                             onClick = {
                                 val isNameInvalid = name.isBlank()
                                 val isEmailInvalid = !email.matches(Constants.EmailRegex) || email.any { it.isWhitespace() }
@@ -173,13 +174,8 @@ class RegisterFragment : Fragment() {
                                     viewModel.registerUser(name, email, password)
                                 }
                             },
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            shape = MaterialTheme.shapes.extraSmall,
-                            contentPadding = PaddingValues(NotoTheme.dimensions.medium)
-                        ) {
-                            Text(text = stringResource(id = R.string.register))
-                        }
+                            modifier = Modifier.fillMaxWidth(),
+                        )
                     }
 
                     Box(
