@@ -4,6 +4,7 @@ import com.noto.app.data.model.remote.AuthErrorResponse
 import com.noto.app.data.model.remote.AuthResponse
 import com.noto.app.data.model.remote.ResponseException.Auth
 import com.noto.app.data.model.remote.SignUpErrorResponse
+import com.noto.app.data.model.remote.User
 import com.noto.app.domain.source.RemoteAuthDataSource
 import com.noto.app.util.Constants
 import com.noto.app.util.getOrElse
@@ -56,7 +57,7 @@ class RemoteAuthClient(private val authClient: HttpClient, private val client: H
     }
 
     override suspend fun refreshToken(refreshToken: String): AuthResponse {
-        return authClient.post("auth/v1/token") {
+        return authClient.post("/auth/v1/token") {
             parameter(Constants.GrantType, Constants.RefreshToken)
             setBody(
                 mapOf(
@@ -69,6 +70,13 @@ class RemoteAuthClient(private val authClient: HttpClient, private val client: H
                 HttpStatusCode.BadRequest -> Auth.InvalidRefreshToken()
                 else -> unhandledError(errorResponse.error)
             }
+        }
+    }
+
+    override suspend fun get(): User {
+        return client.get("/auth/v1/user").getOrElse { response ->
+            val errorResponse = response.body<AuthErrorResponse>()
+            unhandledError(errorResponse.error)
         }
     }
 
