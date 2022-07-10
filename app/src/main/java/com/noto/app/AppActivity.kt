@@ -68,26 +68,33 @@ class AppActivity : BaseActivity() {
     }
 
     private fun setupNavigation() {
-        if (intent?.action !in AppIntents) {
-            when (val interfaceId = viewModel.mainInterfaceId.value) {
-                AllNotesItemId -> inflateGraphAndSetStartDestination(R.id.allNotesFragment)
-                RecentNotesItemId -> inflateGraphAndSetStartDestination(R.id.recentNotesFragment)
-                AllFoldersId -> {
-                    val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
-                    inflateGraphAndSetStartDestination(R.id.folderFragment, args)
-                    if (navController.currentDestination?.id != R.id.mainFragment && viewModel.shouldNavigateToMainFragment) {
-                        navController.navigate(R.id.mainFragment)
-                        viewModel.shouldNavigateToMainFragment = false
+        viewModel.userStatus
+            .onEach { userStatus ->
+                when (userStatus) {
+                    UserStatus.None, UserStatus.LoggedIn -> if (intent?.action !in AppIntents) {
+                        when (val interfaceId = viewModel.mainInterfaceId.value) {
+                            AllNotesItemId -> inflateGraphAndSetStartDestination(R.id.allNotesFragment)
+                            RecentNotesItemId -> inflateGraphAndSetStartDestination(R.id.recentNotesFragment)
+                            AllFoldersId -> {
+                                val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
+                                inflateGraphAndSetStartDestination(R.id.folderFragment, args)
+                                if (navController.currentDestination?.id != R.id.mainFragment && viewModel.shouldNavigateToMainFragment) {
+                                    navController.navigate(R.id.mainFragment)
+                                    viewModel.shouldNavigateToMainFragment = false
+                                }
+                            }
+                            else -> {
+                                val args = bundleOf(Constants.FolderId to interfaceId)
+                                inflateGraphAndSetStartDestination(R.id.folderFragment, args)
+                            }
+                        }
+                    } else {
+                        inflateGraphAndSetStartDestination(R.id.folderFragment)
                     }
-                }
-                else -> {
-                    val args = bundleOf(Constants.FolderId to interfaceId)
-                    inflateGraphAndSetStartDestination(R.id.folderFragment, args)
+                    UserStatus.NotLoggedIn -> inflateGraphAndSetStartDestination(R.id.startFragment)
                 }
             }
-        } else {
-            inflateGraphAndSetStartDestination(R.id.folderFragment)
-        }
+            .launchIn(lifecycleScope)
     }
 
     private fun AppActivityBinding.handleIntentContent() {
