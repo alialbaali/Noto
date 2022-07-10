@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -33,9 +32,6 @@ class StartFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? = context?.let { context ->
-        activity?.onBackPressedDispatcher?.addCallback {
-            activity?.finish()
-        }
         setupMixedTransitions()
         ComposeView(context).apply {
             isTransitionGroup = true
