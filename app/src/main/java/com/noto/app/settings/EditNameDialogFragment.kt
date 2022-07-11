@@ -47,47 +47,44 @@ class EditNameDialogFragment : BaseDialogFragment() {
                 val nameStatus by viewModel.nameStatus.collectAsState()
                 val nameState by viewModel.nameState.collectAsState()
                 val invalidNameText = stringResource(id = R.string.invalid_name)
-                val theme by viewModel.theme.collectAsState()
                 val loadingText = stringResource(id = R.string.updating_name)
 
-                NotoTheme(theme = theme) {
-                    BottomSheetDialog(title = stringResource(id = R.string.edit_name)) {
-                        NotoTextField(
-                            value = name,
-                            onValueChange = {
-                                if (it.length <= Constants.NameMaxLength) {
-                                    viewModel.setName(it)
-                                }
-                                viewModel.setNameStatus(TextFieldStatus.Empty)
-                            },
-                            placeholder = stringResource(id = R.string.name),
-                            leadingIcon = {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.ic_round_person_24),
-                                    contentDescription = stringResource(id = R.string.name)
-                                )
-                            },
-                            status = nameStatus,
-                            keyboardOptions = KeyboardOptions(
-                                capitalization = KeyboardCapitalization.Words,
-                                imeAction = ImeAction.Next,
-                            ),
-                        )
+                BottomSheetDialog(title = stringResource(id = R.string.edit_name)) {
+                    NotoTextField(
+                        value = name,
+                        onValueChange = {
+                            if (it.length <= Constants.NameMaxLength) {
+                                viewModel.setName(it)
+                            }
+                            viewModel.setNameStatus(TextFieldStatus.Empty)
+                        },
+                        placeholder = stringResource(id = R.string.name),
+                        leadingIcon = {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_round_person_24),
+                                contentDescription = stringResource(id = R.string.name)
+                            )
+                        },
+                        status = nameStatus,
+                        keyboardOptions = KeyboardOptions(
+                            capitalization = KeyboardCapitalization.Words,
+                            imeAction = ImeAction.Next,
+                        ),
+                    )
 
-                        Spacer(modifier = Modifier.height(NotoTheme.dimensions.medium))
+                    Spacer(modifier = Modifier.height(NotoTheme.dimensions.medium))
 
-                        NotoFilledButton(
-                            text = stringResource(id = R.string.update_name),
-                            onClick = {
-                                if (name.isBlank()) {
-                                    viewModel.setNameStatus(TextFieldStatus.Error(invalidNameText))
-                                } else {
-                                    viewModel.updateName()
-                                }
-                            },
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
+                    NotoFilledButton(
+                        text = stringResource(id = R.string.update_name),
+                        onClick = {
+                            if (name.isBlank()) {
+                                viewModel.setNameStatus(TextFieldStatus.Error(invalidNameText))
+                            } else {
+                                viewModel.updateName()
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth()
+                    )
                 }
                 nameState.fold(
                     onEmpty = {},
