@@ -61,8 +61,6 @@ private val lightColorScheme = lightColorScheme(
     surfaceVariant = Color(0xFFF7F7F7),
     onSurfaceVariant = Color.Black,
     outline = Color(0xFF707070),
-    errorContainer = Color(red = 179, green = 38, blue = 30),
-    onErrorContainer = Color(red = 255, green = 255, blue = 255),
 )
 
 private val darkColorScheme = darkColorScheme(
@@ -77,6 +75,8 @@ private val darkColorScheme = darkColorScheme(
     surfaceVariant = Color(0xFF1E1E1E),
     onSurfaceVariant = Color.White,
     outline = Color(0xFFBDBDBD),
+    error = Color(red = 140, green = 29, blue = 24),
+    onError = Color(red = 242, green = 184, blue = 181),
 )
 
 private val blackColorScheme = darkColorScheme(
@@ -91,6 +91,8 @@ private val blackColorScheme = darkColorScheme(
     surfaceVariant = Color(0xFF121212),
     onSurfaceVariant = Color.White,
     outline = Color(0xFFBDBDBD),
+    error = Color(red = 140, green = 29, blue = 24),
+    onError = Color(red = 242, green = 184, blue = 181),
 )
 
 private val shapes = Shapes(
