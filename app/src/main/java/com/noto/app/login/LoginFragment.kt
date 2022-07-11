@@ -56,6 +56,7 @@ class LoginFragment : Fragment() {
                 val snackbarMessage = stringResource(id = R.string.something_went_wrong)
                 val snackbarActionLabelText = stringResource(id = R.string.show_info)
                 val loggingInText = stringResource(id = R.string.logging_in)
+                val emailNotConfirmedText = stringResource(id = R.string.email_not_confirmed)
 
                 Screen(
                     title = stringResource(id = R.string.login),
@@ -66,7 +67,10 @@ class LoginFragment : Fragment() {
                     Column {
                         NotoTextField(
                             value = email,
-                            onValueChange = { viewModel.setEmail(it) },
+                            onValueChange = {
+                                viewModel.setEmail(it)
+                                viewModel.setEmailStatus(TextFieldStatus.Empty)
+                            },
                             placeholder = stringResource(id = R.string.email),
                             modifier = Modifier.fillMaxWidth(),
                             leadingIcon = {
@@ -155,6 +159,12 @@ class LoginFragment : Fragment() {
                                             // TODO Navigate to info dialog and show the exception.
                                         }
                                     }
+                                }
+                                ResponseException.Auth.EmailNotConfirmed -> {
+                                    snackbarHostState.showSnackbar(
+                                        message = emailNotConfirmedText,
+                                        actionLabel = snackbarActionLabelText,
+                                    )
                                 }
                                 else -> {
                                     val result = snackbarHostState.showSnackbar(

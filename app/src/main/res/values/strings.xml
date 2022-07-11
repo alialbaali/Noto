@@ -125,6 +125,7 @@
     <string name="delete_account_description">This action can\'t be undone and will delete your account and all of its data permanently.</string>
     <string name="invalid_credentials">Invalid credentials</string>
     <string name="logging_in">Logging in…</string>
+    <string name="email_not_confirmed">Email not confirmed.</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>
