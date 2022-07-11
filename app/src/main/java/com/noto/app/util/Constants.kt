@@ -21,6 +21,7 @@ object Constants {
     const val NameMaxLength = 32
     const val GrantType = "grant_type"
     const val RefreshToken = "refresh_token"
+    const val Select = "select"
     val EmailRegex = Regex(".+@.+\\..+")
     val PasswordRegex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#^])[A-Za-z\\d@$!%*?&#^]{8,}$")
 

@@ -1,5 +1,6 @@
 package com.noto.app.data.source
 
+import com.noto.app.data.model.remote.RemoteUser
 import com.noto.app.data.model.remote.RestErrorResponse
 import com.noto.app.domain.source.RemoteUserDataSource
 import com.noto.app.util.Constants
@@ -10,6 +11,15 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 
 class RemoteUserClient(private val client: HttpClient) : RemoteUserDataSource {
+
+    override suspend fun getUser(): RemoteUser {
+        return client.get("/rest/v1/users") {
+            parameter(Constants.Select, "*")
+        }.getOrElse<List<RemoteUser>> { response ->
+            val errorResponse = response.body<RestErrorResponse>()
+            unhandledError(errorResponse.message)
+        }.first()
+    }
 
     override suspend fun createUser(id: String, name: String, email: String) {
         return client.post("/rest/v1/users") {
