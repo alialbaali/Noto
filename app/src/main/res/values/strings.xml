@@ -102,7 +102,7 @@
     <string name="login">Login</string>
     <string name="invalid_name">Name is invalid.</string>
     <string name="invalid_email">Email is invalid.</string>
-    <string name="invalid_password">Password is invalid. Password must contain at least 8 characters, including 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.</string>
+    <string name="invalid_password">Password is invalid.</string>
     <string name="password_info">Password must contain at least 8 characters, including 1 uppercase letter, 1 lowercase letter, 1 number, and 1 special character.</string>
     <string name="invalid_confirm_password">Passwords don\'t match.</string>
     <string name="user_already_registered">User with this email is already registered.</string>

@@ -58,7 +58,7 @@ class RegisterFragment : Fragment() {
                 val snackbarHostState = remember { SnackbarHostState() }
                 val passwordInfoText = stringResource(id = R.string.password_info)
                 val invalidEmailText = stringResource(id = R.string.invalid_email)
-                val invalidPasswordText = stringResource(id = R.string.invalid_password)
+                val invalidPasswordText = "${stringResource(id = R.string.invalid_password)} $passwordInfoText"
                 val invalidNameText = stringResource(id = R.string.invalid_name)
                 val invalidConfirmPasswordText = stringResource(id = R.string.invalid_confirm_password)
                 val userAlreadyRegisteredText = stringResource(id = R.string.user_already_registered)

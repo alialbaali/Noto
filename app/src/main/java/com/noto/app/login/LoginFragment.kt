@@ -51,6 +51,7 @@ class LoginFragment : Fragment() {
                 val passwordStatus by viewModel.passwordStatus.collectAsState()
                 val snackbarHostState = remember { SnackbarHostState() }
                 val invalidEmailText = stringResource(id = R.string.invalid_email)
+                val invalidPasswordText = stringResource(id = R.string.invalid_password)
                 val invalidCredentialsText = stringResource(id = R.string.invalid_credentials)
                 val snackbarMessage = stringResource(id = R.string.something_went_wrong)
                 val snackbarActionLabelText = stringResource(id = R.string.show_info)
@@ -85,7 +86,10 @@ class LoginFragment : Fragment() {
 
                         NotoPasswordTextField(
                             value = password,
-                            onValueChange = { viewModel.setPassword(it) },
+                            onValueChange = {
+                                viewModel.setPassword(it)
+                                viewModel.setPasswordStatus(TextFieldStatus.Empty)
+                            },
                             modifier = Modifier.fillMaxWidth(),
                             status = passwordStatus,
                         )
@@ -96,9 +100,14 @@ class LoginFragment : Fragment() {
                             text = stringResource(id = R.string.login),
                             onClick = {
                                 val isEmailInvalid = !email.matches(Constants.EmailRegex) || email.any { it.isWhitespace() }
+                                val isPasswordInvalid = password.isBlank()
                                 if (isEmailInvalid) {
                                     viewModel.setEmailStatus(TextFieldStatus.Error(invalidEmailText))
-                                } else {
+                                }
+                                if (isPasswordInvalid) {
+                                    viewModel.setPasswordStatus(TextFieldStatus.Error(invalidPasswordText))
+                                }
+                                if (!isEmailInvalid && !isPasswordInvalid) {
                                     viewModel.loginUser(email, password)
                                 }
                             },
