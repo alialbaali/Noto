@@ -47,6 +47,7 @@ class LoginFragment : Fragment() {
                 val state by viewModel.state.collectAsState()
                 val email by viewModel.email.collectAsState()
                 val password by viewModel.password.collectAsState()
+                val emailStatus by viewModel.emailStatus.collectAsState()
                 val passwordStatus by viewModel.passwordStatus.collectAsState()
                 val snackbarHostState = remember { SnackbarHostState() }
                 val invalidEmailText = stringResource(id = R.string.invalid_email)
@@ -73,6 +74,7 @@ class LoginFragment : Fragment() {
                                     contentDescription = stringResource(id = R.string.email),
                                 )
                             },
+                            status = emailStatus,
                             keyboardOptions = KeyboardOptions(
                                 keyboardType = KeyboardType.Email,
                                 imeAction = ImeAction.Next,
