@@ -126,6 +126,10 @@
     <string name="invalid_credentials">Invalid credentials</string>
     <string name="logging_in">Logging in…</string>
     <string name="email_not_confirmed">Email not confirmed.</string>
+    <string name="verify_email">Verify email</string>
+    <string name="verify_email_info">Verification email has been sent to your Inbox.\n\nMake sure to check Junk and Spam folders if you can\'t find in the Inbox folder.</string>
+    <string name="open_inbox">Open Inbox</string>
+    <string name="edit_email">Edit email</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>

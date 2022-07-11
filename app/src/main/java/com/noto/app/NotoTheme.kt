@@ -150,7 +150,7 @@ private val typography
             fontSize = 17.sp,
         ),
         initialTypography.bodyLarge.copy(
-            // Dialog Section, Dialog RadioButton Item, Icon Item, Slider Label, Settings Item
+            // Dialog Section, Dialog RadioButton Item, Icon Item, Slider Label, Settings Item, Dialog Content
             fontFamily = NunitoFontFamily,
             fontWeight = FontWeight.SemiBold,
             fontSize = 16.sp,
