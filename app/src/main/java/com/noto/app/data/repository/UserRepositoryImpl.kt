@@ -21,11 +21,8 @@ class UserRepositoryImpl(
         .catch { emit(Result.failure(it)) }
 
     override suspend fun registerUser(name: String, email: String, password: String): Result<Unit> = runCatching {
-        val response = remoteAuthDataSource.signUp(email, password)
-        settingsRepository.updateId(response.user.id)
-        settingsRepository.updateAccessToken(response.accessToken)
-        settingsRepository.updateRefreshToken(response.refreshToken)
-        remoteUserDataSource.createUser(response.user.id, name, email)
+        val remoteAuthUser = remoteAuthDataSource.signUp(email, password)
+        settingsRepository.updateId(remoteAuthUser.id)
         settingsRepository.updateName(name)
         settingsRepository.updateEmail(email)
     }
@@ -38,6 +35,15 @@ class UserRepositoryImpl(
         val user = remoteUserDataSource.getUser()
         settingsRepository.updateName(user.name)
         settingsRepository.updateEmail(user.email)
+    }
+
+    override suspend fun completeUserRegistration(accessToken: String, refreshToken: String): Result<Unit> = runCatching {
+        val id = settingsRepository.id.first()
+        val name = settingsRepository.name.first()
+        val email = settingsRepository.email.first()
+        settingsRepository.updateAccessToken(accessToken)
+        settingsRepository.updateRefreshToken(refreshToken)
+        remoteUserDataSource.createUser(id, name, email)
     }
 
     override suspend fun updateName(name: String): Result<Unit> = runCatching {

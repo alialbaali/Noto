@@ -15,5 +15,5 @@ data class AuthResponse(
     @SerialName("refresh_token")
     val refreshToken: String = "", // 6LLVAZOGqauglkoP2z6j_w
     @SerialName("user")
-    val user: User = User(),
+    val user: RemoteAuthUser = RemoteAuthUser(),
 )

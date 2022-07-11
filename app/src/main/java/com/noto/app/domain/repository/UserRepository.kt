@@ -11,6 +11,8 @@ interface UserRepository {
 
     suspend fun loginUser(email: String, password: String): Result<Unit>
 
+    suspend fun completeUserRegistration(accessToken: String, refreshToken: String): Result<Unit>
+
     suspend fun updateName(name: String): Result<Unit>
 
     suspend fun logOutUser(): Result<Unit>

@@ -2,9 +2,9 @@ package com.noto.app.data.source
 
 import com.noto.app.data.model.remote.AuthErrorResponse
 import com.noto.app.data.model.remote.AuthResponse
+import com.noto.app.data.model.remote.RemoteAuthUser
 import com.noto.app.data.model.remote.ResponseException.Auth
 import com.noto.app.data.model.remote.SignUpErrorResponse
-import com.noto.app.data.model.remote.User
 import com.noto.app.domain.source.RemoteAuthDataSource
 import com.noto.app.util.Constants
 import com.noto.app.util.getOrElse
@@ -16,7 +16,7 @@ import io.ktor.http.*
 
 class RemoteAuthClient(private val authClient: HttpClient, private val client: HttpClient) : RemoteAuthDataSource {
 
-    override suspend fun signUp(email: String, password: String): AuthResponse {
+    override suspend fun signUp(email: String, password: String): RemoteAuthUser {
         return authClient.post("/auth/v1/signup") {
             setBody(
                 mapOf(
@@ -81,7 +81,7 @@ class RemoteAuthClient(private val authClient: HttpClient, private val client: H
         }
     }
 
-    override suspend fun get(): User {
+    override suspend fun get(): RemoteAuthUser {
         return client.get("/auth/v1/user").getOrElse { response ->
             val errorResponse = response.body<AuthErrorResponse>()
             unhandledError(errorResponse.error)
