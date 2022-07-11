@@ -6,7 +6,7 @@ interface RemoteUserDataSource {
 
     suspend fun getUser(): RemoteUser
 
-    suspend fun createUser(id: String, name: String, email: String)
+    suspend fun createUser(id: String, name: String)
 
     suspend fun updateName(id: String, name: String)
 

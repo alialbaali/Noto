@@ -10,6 +10,4 @@ data class RemoteUser(
     val id: String = "", // e3154659-7d55-401a-8ba0-a09e91f0bf4e
     @SerialName("name")
     val name: String = "", // Name Surname
-    @SerialName("email")
-    val email: String = "", // test@mail.com
 )

@@ -21,13 +21,12 @@ class RemoteUserClient(private val client: HttpClient) : RemoteUserDataSource {
         }.first()
     }
 
-    override suspend fun createUser(id: String, name: String, email: String) {
+    override suspend fun createUser(id: String, name: String) {
         return client.post("/rest/v1/users") {
             setBody(
                 mapOf(
                     Constants.Id to id,
                     Constants.Name to name,
-                    Constants.Email to email,
                 )
             )
         }.getOrElse { response ->
