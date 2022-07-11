@@ -22,18 +22,22 @@ class UserRepositoryImpl(
 
     override suspend fun registerUser(name: String, email: String, password: String): Result<Unit> = runCatching {
         val response = remoteAuthDataSource.signUp(email, password)
+        settingsRepository.updateId(response.user.id)
         settingsRepository.updateAccessToken(response.accessToken)
         settingsRepository.updateRefreshToken(response.refreshToken)
         remoteUserDataSource.createUser(response.user.id, name, email)
-        settingsRepository.updateId(response.user.id)
         settingsRepository.updateName(name)
         settingsRepository.updateEmail(email)
     }
 
     override suspend fun loginUser(email: String, password: String): Result<Unit> = runCatching {
         val response = remoteAuthDataSource.login(email, password)
+        settingsRepository.updateId(response.user.id)
         settingsRepository.updateAccessToken(response.accessToken)
         settingsRepository.updateRefreshToken(response.refreshToken)
+        val user = remoteUserDataSource.getUser()
+        settingsRepository.updateName(user.name)
+        settingsRepository.updateEmail(user.email)
     }
 
     override suspend fun updateName(name: String): Result<Unit> = runCatching {

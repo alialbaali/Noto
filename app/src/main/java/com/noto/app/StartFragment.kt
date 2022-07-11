@@ -53,7 +53,7 @@ class StartFragment : Fragment() {
                         NotoOutlinedButton(
                             text = stringResource(id = R.string.login),
                             onClick = {
-
+                                navController?.navigateSafely(StartFragmentDirections.actionStartFragmentToLoginFragment())
                             },
                             modifier = Modifier.fillMaxWidth(),
                         )

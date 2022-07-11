@@ -107,6 +107,7 @@
     <string name="invalid_confirm_password">Passwords don\'t match.</string>
     <string name="user_already_registered">User with this email is already registered.</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
     <string name="something_went_wrong">Something went wrong.</string>
     <string name="show_info">Show info</string>
     <string name="update_name">Update name</string>
@@ -122,6 +123,9 @@
     <string name="deleting_account">Deleting Account…</string>
     <string name="delete_account_confirmation">Are you sure you want to delete your account?</string>
     <string name="delete_account_description">This action can\'t be undone and will delete your account and all of its data permanently.</string>
+    <string name="invalid_credentials">Invalid credentials</string>
+    <string name="logging_in">Logging in…</string>
+
     <!-- Folder -->
     <string name="folders">Folders</string>
     <plurals name="folders_count">

@@ -655,6 +655,9 @@
         <action
             android:id="@+id/action_startFragment_to_folderFragment"
             app:destination="@id/folderFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountSettingsFragment"
@@ -681,4 +684,8 @@
             android:id="@+id/action_editNameDialogFragment_to_progressIndicatorDialogFragment"
             app:destination="@id/progressIndicatorDialogFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.noto.app.login.LoginFragment"
+        android:label="LoginFragment" />
 </navigation>
