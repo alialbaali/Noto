@@ -9,7 +9,7 @@ sealed class ResponseException : RuntimeException() {
         object InvalidEmail : Auth()
         object InvalidPassword : Auth()
         object InvalidLoginCredentials : Auth()
-        object EmailNotConfirmed : Auth()
+        object EmailNotVerified : Auth()
         object InvalidRefreshToken : Auth()
     }
 

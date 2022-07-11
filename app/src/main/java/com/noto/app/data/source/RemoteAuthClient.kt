@@ -54,7 +54,7 @@ class RemoteAuthClient(private val authClient: HttpClient, private val client: H
                 HttpStatusCode.BadRequest -> {
                     val errorDescription = errorResponse.errorDescription
                     if (errorDescription.contains("email", ignoreCase = true))
-                        Auth.EmailNotConfirmed()
+                        Auth.EmailNotVerified()
                     else if (errorDescription.contains("credentials", ignoreCase = true))
                         Auth.InvalidLoginCredentials()
                     else

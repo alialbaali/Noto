@@ -55,7 +55,7 @@ class LoginFragment : Fragment() {
                 val snackbarMessage = stringResource(id = R.string.something_went_wrong)
                 val snackbarActionLabelText = stringResource(id = R.string.show_info)
                 val loggingInText = stringResource(id = R.string.logging_in)
-                val emailNotConfirmedText = stringResource(id = R.string.email_not_confirmed)
+                val emailNotVerifiedText = stringResource(id = R.string.email_not_verified)
 
                 Screen(
                     title = stringResource(id = R.string.login),
@@ -155,9 +155,9 @@ class LoginFragment : Fragment() {
                                         }
                                     }
                                 }
-                                ResponseException.Auth.EmailNotConfirmed -> {
+                                ResponseException.Auth.EmailNotVerified -> {
                                     snackbarHostState.showSnackbar(
-                                        message = emailNotConfirmedText,
+                                        message = emailNotVerifiedText,
                                         actionLabel = snackbarActionLabelText,
                                     )
                                 }

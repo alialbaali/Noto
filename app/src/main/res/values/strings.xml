@@ -125,7 +125,7 @@
     <string name="delete_account_description">This action can\'t be undone and will delete your account and all of its data permanently.</string>
     <string name="invalid_credentials">Invalid credentials</string>
     <string name="logging_in">Logging in…</string>
-    <string name="email_not_confirmed">Email not confirmed.</string>
+    <string name="email_not_verified">Email is not verified. Please register again.</string>
     <string name="verify_email">Verify email</string>
     <string name="verify_email_info">Verification email has been sent to your Inbox.\n\nMake sure to check Junk and Spam folders if you can\'t find in the Inbox folder.</string>
     <string name="open_inbox">Open Inbox</string>
