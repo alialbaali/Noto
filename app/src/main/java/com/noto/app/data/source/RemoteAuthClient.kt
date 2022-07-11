@@ -82,6 +82,30 @@ class RemoteAuthClient(private val authClient: HttpClient, private val client: H
         }
     }
 
+    override suspend fun updateEmail(email: String): RemoteAuthUser {
+        return client.put("/auth/v1/user") {
+            parameter(Constants.RedirectTo, "https://noto.dev/verify")
+            setBody(
+                mapOf(
+                    Constants.Email to email
+                )
+            )
+        }.getOrElse { response ->
+            val errorResponse = response.body<SignUpErrorResponse>()
+            when (response.status) {
+                HttpStatusCode.UnprocessableEntity -> {
+                    if (errorResponse.msg.contains("format"))
+                        Auth.InvalidEmail()
+                    else if (errorResponse.msg.contains("registered"))
+                        Auth.UserAlreadyRegistered()
+                    else
+                        unhandledError(errorResponse.msg)
+                }
+                else -> unhandledError(errorResponse.msg)
+            }
+        }
+    }
+
     override suspend fun get(): RemoteAuthUser {
         return client.get("/auth/v1/user").getOrElse { response ->
             val errorResponse = response.body<AuthErrorResponse>()

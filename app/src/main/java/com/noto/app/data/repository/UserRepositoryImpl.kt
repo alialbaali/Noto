@@ -51,6 +51,16 @@ class UserRepositoryImpl(
         settingsRepository.updateName(name)
     }
 
+    override suspend fun updateEmail(email: String): Result<Unit> = runCatching {
+        remoteAuthDataSource.updateEmail(email)
+    }
+
+    override suspend fun completeUpdatingEmail(
+        email: String,
+        accessToken: String,
+        refreshToken: String,
+    ): Result<Unit> = runCatching { settingsRepository.updateEmail(email) }
+
     override suspend fun logOutUser(): Result<Unit> = runCatching {
         remoteAuthDataSource.logOut()
     }

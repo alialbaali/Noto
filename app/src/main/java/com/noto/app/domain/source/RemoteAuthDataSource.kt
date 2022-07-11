@@ -11,6 +11,8 @@ interface RemoteAuthDataSource {
 
     suspend fun refreshToken(refreshToken: String): AuthResponse
 
+    suspend fun updateEmail(email: String): RemoteAuthUser
+
     suspend fun get(): RemoteAuthUser
 
     suspend fun logOut()

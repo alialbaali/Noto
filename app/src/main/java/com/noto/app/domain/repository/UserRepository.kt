@@ -15,6 +15,10 @@ interface UserRepository {
 
     suspend fun updateName(name: String): Result<Unit>
 
+    suspend fun updateEmail(email: String): Result<Unit>
+
+    suspend fun completeUpdatingEmail(email: String, accessToken: String, refreshToken: String): Result<Unit>
+
     suspend fun logOutUser(): Result<Unit>
 
     suspend fun deleteUser(): Result<Unit>
