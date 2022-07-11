@@ -14,12 +14,16 @@ object Constants {
     const val MainInterfaceId = ""
     const val IsPasscodeValid = "IsPasscodeValid"
     const val ApiKey = "apikey"
+    const val RedirectTo = "redirect_to"
     const val Id = "id"
     const val Name = "name"
     const val Email = "email"
     const val Password = "password"
     const val NameMaxLength = 32
     const val GrantType = "grant_type"
+    const val AccessToken = "access_token"
+    const val VerifyPath = "/verify"
+    const val Host = "noto.dev"
     const val RefreshToken = "refresh_token"
     const val Select = "select"
     val EmailRegex = Regex(".+@.+\\..+")

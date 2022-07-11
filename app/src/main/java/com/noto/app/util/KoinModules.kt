@@ -61,7 +61,7 @@ val appModule = module {
             it.getOrNull() ?: longArrayOf())
     }
 
-    viewModel { AppViewModel(get(), get()) }
+    viewModel { AppViewModel(get(), get(), get()) }
 
     viewModel { SettingsViewModel(get(), get(), get(), get(), get(), get()) }
 

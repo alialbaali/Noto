@@ -25,7 +25,6 @@ import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.*
 import com.noto.app.data.model.remote.ResponseException
-import com.noto.app.domain.model.Folder
 import com.noto.app.fold
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
@@ -199,9 +198,7 @@ class RegisterFragment : Fragment() {
                             if (navController?.currentDestination?.id == R.id.progressIndicatorDialogFragment)
                                 navController?.navigateUp()
 
-                            navController?.navigateSafely(RegisterFragmentDirections.actionRegisterFragmentToFolderFragment(
-                                Folder.GeneralFolderId))
-                            navController?.navigate(R.id.mainFragment)
+                            navController?.navigateSafely(RegisterFragmentDirections.actionRegisterFragmentToVerifyEmailDialogFragment())
                         },
                         onFailure = { exception ->
                             if (navController?.currentDestination?.id == R.id.progressIndicatorDialogFragment)

@@ -2,12 +2,10 @@ package com.noto.app
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.Folder
-import com.noto.app.domain.model.Icon
-import com.noto.app.domain.model.Language
-import com.noto.app.domain.model.VaultTimeout
+import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.SettingsRepository
+import com.noto.app.domain.repository.UserRepository
 import com.noto.app.util.AllFoldersId
 import com.noto.app.util.isGeneral
 import kotlinx.coroutines.async
@@ -19,7 +17,11 @@ import kotlinx.coroutines.launch
  * a value, it will re-emit every value to every flow that uses [Flow.shareIn].
  * */
 
-class AppViewModel(private val folderRepository: FolderRepository, private val settingsRepository: SettingsRepository) : ViewModel() {
+class AppViewModel(
+    private val userRepository: UserRepository,
+    private val folderRepository: FolderRepository,
+    private val settingsRepository: SettingsRepository,
+) : ViewModel() {
 
     val theme = settingsRepository.theme
         .distinctUntilChanged()
@@ -80,5 +82,17 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
         folderRepository.getFolders()
             .firstOrNull()
             ?.also { folders -> if (folders.none { it.isGeneral }) folderRepository.createFolder(Folder.GeneralFolder()) }
+    }
+
+    fun completeUserRegistration(
+        accessToken: String,
+        refreshToken: String,
+        onSuccess: (Unit) -> Unit,
+        onFailure: (Throwable) -> Unit,
+    ) = viewModelScope.launch {
+        userRepository.completeUserRegistration(accessToken, refreshToken)
+            .onSuccess { settingsRepository.updateUserStatus(UserStatus.LoggedIn) }
+            .onSuccess(onSuccess)
+            .onFailure(onFailure)
     }
 }

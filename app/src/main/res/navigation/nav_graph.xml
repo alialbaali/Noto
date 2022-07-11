@@ -248,8 +248,8 @@
             app:argType="string" />
         <argument
             android:name="code"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:defaultValue="0"
+            app:argType="integer" />
     </dialog>
     <fragment
         android:id="@+id/settingsFragment"
@@ -594,7 +594,7 @@
     <fragment
         android:id="@+id/generalSettingsFragment"
         android:name="com.noto.app.settings.GeneralSettingsFragment"
-        android:label="GeneralSettingsFragment" >
+        android:label="GeneralSettingsFragment">
         <action
             android:id="@+id/action_generalSettingsFragment_to_selectFolderDialogFragment"
             app:destination="@id/selectFolderDialogFragment" />
@@ -614,7 +614,7 @@
     <fragment
         android:id="@+id/vaultSettingsFragment"
         android:name="com.noto.app.settings.VaultSettingsFragment"
-        android:label="VaultSettingsFragment" >
+        android:label="VaultSettingsFragment">
         <action
             android:id="@+id/action_vaultSettingsFragment_to_vaultTimeoutDialogFragment"
             app:destination="@id/vaultTimeoutDialogFragment" />
@@ -637,15 +637,18 @@
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.noto.app.login.RegisterFragment"
-        android:label="RegisterFragment" >
+        android:label="RegisterFragment">
         <action
             android:id="@+id/action_registerFragment_to_progressIndicatorDialogFragment"
             app:destination="@id/progressIndicatorDialogFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_verifyEmailDialogFragment"
+            app:destination="@id/verifyEmailDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/startFragment"
         android:name="com.noto.app.StartFragment"
-        android:label="StartFragment" >
+        android:label="StartFragment">
         <action
             android:id="@+id/action_startFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
@@ -659,7 +662,7 @@
     <fragment
         android:id="@+id/accountSettingsFragment"
         android:name="com.noto.app.settings.AccountSettingsFragment"
-        android:label="AccountSettingsFragment" >
+        android:label="AccountSettingsFragment">
         <action
             android:id="@+id/action_accountSettingsFragment_to_editNameDialogFragment"
             app:destination="@id/editNameDialogFragment" />
@@ -676,7 +679,7 @@
     <dialog
         android:id="@+id/editNameDialogFragment"
         android:name="com.noto.app.settings.EditNameDialogFragment"
-        android:label="EditNameDialogFragment" >
+        android:label="EditNameDialogFragment">
         <action
             android:id="@+id/action_editNameDialogFragment_to_progressIndicatorDialogFragment"
             app:destination="@id/progressIndicatorDialogFragment" />
@@ -684,9 +687,13 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.noto.app.login.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment">
         <action
             android:id="@+id/action_loginFragment_to_progressIndicatorDialogFragment"
             app:destination="@id/progressIndicatorDialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/verifyEmailDialogFragment"
+        android:name="com.noto.app.login.VerifyEmailDialogFragment"
+        android:label="VerifyEmailDialogFragment" />
 </navigation>

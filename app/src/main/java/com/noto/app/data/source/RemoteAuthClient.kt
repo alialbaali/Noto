@@ -18,6 +18,7 @@ class RemoteAuthClient(private val authClient: HttpClient, private val client: H
 
     override suspend fun signUp(email: String, password: String): RemoteAuthUser {
         return authClient.post("/auth/v1/signup") {
+            parameter(Constants.RedirectTo, "https://noto.dev/verify")
             setBody(
                 mapOf(
                     Constants.Email to email,

@@ -5,6 +5,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -47,6 +48,10 @@ class AppActivity : BaseActivity() {
     private val navController by lazy { navHostFragment.navController }
 
     private val workManager by lazy { WorkManager.getInstance(this) }
+
+    private val currentFragment
+        get() = navHostFragment.parentFragmentManager.fragments
+            .firstOrNull { it != null && it.isVisible }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -137,9 +142,24 @@ class AppActivity : BaseActivity() {
                 if (navController.currentDestination?.id != R.id.settingsFragment)
                     navController.navigate(R.id.settingsFragment)
             }
+            Intent.ACTION_VIEW -> handleActionViewIntent(intent)
         }
         /** Set [intent] to null, so that the code above doesn't run again after a configuration change.*/
         intent = null
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        if (intent?.action == Intent.ACTION_VIEW) handleActionViewIntent(intent)
+    }
+
+    private fun handleActionViewIntent(intent: Intent) {
+        val uri = intent.data
+        if (uri?.host == Constants.Host) {
+            when (uri.path) {
+                Constants.VerifyPath -> completeUserRegistration(uri)
+            }
+        }
     }
 
     private fun AppActivityBinding.showSelectFolderDialog(content: String?) {
@@ -255,10 +275,11 @@ class AppActivity : BaseActivity() {
         }
     }
 
-    private fun createVaultTimeoutWorkRequest(duration: Long, timeUnit: TimeUnit) = OneTimeWorkRequestBuilder<VaultTimeoutWorker>()
-        .setInitialDelay(duration, timeUnit)
-        .addTag(Constants.VaultTimeout)
-        .build()
+    private fun createVaultTimeoutWorkRequest(duration: Long, timeUnit: TimeUnit) =
+        OneTimeWorkRequestBuilder<VaultTimeoutWorker>()
+            .setInitialDelay(duration, timeUnit)
+            .addTag(Constants.VaultTimeout)
+            .build()
 
     private fun inflateGraphAndSetStartDestination(startDestination: Int, args: Bundle? = null) {
         val graph = navController.navInflater.inflate(R.navigation.nav_graph)
@@ -293,5 +314,53 @@ class AppActivity : BaseActivity() {
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             PackageManager.DONT_KILL_APP,
         )
+    }
+
+    private fun Icon.toActivityAliasName() = when (this) {
+        Icon.Futuristic -> "Futuristic"
+        Icon.DarkRain -> "DarkRain"
+        Icon.Airplane -> "Airplane"
+        Icon.BlossomIce -> "BlossomIce"
+        Icon.DarkAlpine -> "DarkAlpine"
+        Icon.DarkSide -> "DarkSide"
+        Icon.Earth -> "Earth"
+        Icon.Fire -> "Fire"
+        Icon.Purpleberry -> "Purpleberry"
+        Icon.SanguineSun -> "SanguineSun"
+    }.let { "com.noto.app.$it" }
+
+    private fun completeUserRegistration(uri: Uri) {
+        val parameters = uri.fragment?.asUrlParameters() ?: emptyMap()
+        val accessToken = parameters[Constants.AccessToken]
+        val refreshToken = parameters[Constants.RefreshToken]
+        if (accessToken != null && refreshToken != null) {
+            viewModel.completeUserRegistration(
+                accessToken,
+                refreshToken,
+                onSuccess = {
+                    if (navController.currentDestination?.id == R.id.verifyEmailDialogFragment)
+                        navController.navigateUp()
+                },
+                onFailure = {
+                    if (navController.currentDestination?.id == R.id.verifyEmailDialogFragment)
+                        navController.navigateUp()
+                    currentFragment?.view?.snackbar(R.string.something_went_wrong)
+                }
+            )
+        } else {
+            if (navController.currentDestination?.id == R.id.verifyEmailDialogFragment)
+                navController.navigateUp()
+            currentFragment?.view?.snackbar(R.string.something_went_wrong)
+        }
+    }
+
+    private fun String.asUrlParameters(): Map<String, String> {
+        val parameterDelimiter = '&'
+        val keyValueDelimiter = '='
+        return split(parameterDelimiter).associate { parameter ->
+            val key = parameter.substringBefore(keyValueDelimiter)
+            val value = parameter.substringAfter(keyValueDelimiter)
+            key to value
+        }
     }
 }
