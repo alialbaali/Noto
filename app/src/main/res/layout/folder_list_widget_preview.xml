@@ -12,7 +12,7 @@
         android:id="@+id/ll_header"
         android:background="@drawable/widget_header_shape_medium"
         android:elevation="@dimen/elevation_normal"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:animateLayoutChanges="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
