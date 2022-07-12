@@ -7,7 +7,6 @@ import android.content.Intent
 import android.net.Uri
 import android.view.View
 import android.widget.RemoteViews
-import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.Icon
 import com.noto.app.widget.FolderListWidgetConfigActivity
@@ -23,6 +22,7 @@ fun Context.createFolderListWidgetRemoteViews(
     isEmpty: Boolean,
     icon: Icon,
 ): RemoteViews {
+    val activityName = icon.toActivityAliasName()
     return RemoteViews(packageName, R.layout.folder_list_widget).apply {
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_edit_widget, if (isEditWidgetButtonEnabled) View.VISIBLE else View.GONE)
@@ -31,11 +31,11 @@ fun Context.createFolderListWidgetRemoteViews(
         setViewVisibility(R.id.tv_placeholder, if (isEmpty) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.lv, if (isEmpty) View.GONE else View.VISIBLE)
         setOnClickPendingIntent(R.id.iv_edit_widget, createEditWidgetButtonPendingIntent(appWidgetId))
-        setOnClickPendingIntent(R.id.fab, createNewFolderButtonPendingIntent(appWidgetId))
-        setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId))
-        setOnClickPendingIntent(R.id.tv_app_name, createAppLauncherPendingIntent(appWidgetId))
+        setOnClickPendingIntent(R.id.fab, createNewFolderButtonPendingIntent(appWidgetId, activityName))
+        setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId, activityName))
+        setOnClickPendingIntent(R.id.tv_app_name, createAppLauncherPendingIntent(appWidgetId, activityName))
         setRemoteAdapter(R.id.lv, createFolderListServiceIntent(appWidgetId))
-        setPendingIntentTemplate(R.id.lv, createFolderItemPendingIntent(appWidgetId))
+        setPendingIntentTemplate(R.id.lv, createFolderItemPendingIntent(appWidgetId, activityName))
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())
         setInt(R.id.iv_app_icon, SetImageResource, icon.toResource())
@@ -59,13 +59,9 @@ private fun Context.createEditWidgetButtonPendingIntent(appWidgetId: Int): Pendi
     return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
 }
 
-private fun Context.createNewFolderButtonPendingIntent(appWidgetId: Int): PendingIntent? {
-    val intent = Intent(
-        Constants.Intent.ActionCreateFolder,
-        null,
-        this,
-        AppActivity::class.java
-    )
+private fun Context.createNewFolderButtonPendingIntent(appWidgetId: Int, activityName: String): PendingIntent? {
+    val intent = Intent(Constants.Intent.ActionCreateFolder, null)
+        .setClassName(this, activityName)
     return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
 }
 
@@ -76,13 +72,9 @@ private fun Context.createFolderListServiceIntent(appWidgetId: Int): Intent {
     }
 }
 
-private fun Context.createFolderItemPendingIntent(appWidgetId: Int): PendingIntent? {
-    val intent = Intent(
-        Constants.Intent.ActionOpenFolder,
-        null,
-        this,
-        AppActivity::class.java
-    ).apply {
+private fun Context.createFolderItemPendingIntent(appWidgetId: Int, activityName: String): PendingIntent? {
+    val intent = Intent(Constants.Intent.ActionOpenFolder, null).apply {
+        setClassName(this@createFolderItemPendingIntent, activityName)
         putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         data = Uri.parse(this.toUri(Intent.URI_INTENT_SCHEME))
     }

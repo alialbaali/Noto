@@ -290,17 +290,4 @@ class AppActivity : BaseActivity() {
             PackageManager.DONT_KILL_APP,
         )
     }
-
-    private fun Icon.toActivityAliasName() = when (this) {
-        Icon.Futuristic -> "Futuristic"
-        Icon.DarkRain -> "DarkRain"
-        Icon.Airplane -> "Airplane"
-        Icon.BlossomIce -> "BlossomIce"
-        Icon.DarkAlpine -> "DarkAlpine"
-        Icon.DarkSide -> "DarkSide"
-        Icon.Earth -> "Earth"
-        Icon.Fire -> "Fire"
-        Icon.Purpleberry -> "Purpleberry"
-        Icon.SanguineSun -> "SanguineSun"
-    }.let { "com.noto.app.$it" }
 }

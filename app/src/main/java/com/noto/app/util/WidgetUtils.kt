@@ -5,13 +5,12 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.widget.FolderListWidgetProvider
 import com.noto.app.widget.NoteListWidgetProvider
 
-fun Context.createAppLauncherPendingIntent(appWidgetId: Int): PendingIntent? {
-    val intent = Intent(this, AppActivity::class.java)
+fun Context.createAppLauncherPendingIntent(appWidgetId: Int, activityName: String): PendingIntent? {
+    val intent = Intent().setClassName(this, activityName)
     return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
 }
 
