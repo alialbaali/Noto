@@ -5,36 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/abl"
-        android:stateListAnimator="@animator/elevation_animator"
-        android:orientation="vertical"
-        android:background="@drawable/dialog_shape"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include
-            android:id="@+id/tb"
-            layout="@layout/dialog_fragment_toolbar" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_whats_new"
-            style="@style/TabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_normal">
-
-            <com.google.android.material.tabs.TabItem
-                android:text="@string/current_release"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <com.google.android.material.tabs.TabItem
-                android:text="@string/previous_releases"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.tabs.TabLayout>
-    </LinearLayout>
+    <include
+        android:id="@+id/tb"
+        layout="@layout/dialog_fragment_toolbar" />
 
     <FrameLayout
         android:layout_width="wrap_content"

@@ -7,47 +7,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.tabs.TabLayout
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.WhatsNewDialogFragmentBinding
-import com.noto.app.domain.model.*
+import com.noto.app.domain.model.Release
 import com.noto.app.domain.model.Release.Changelog
+import com.noto.app.domain.model.Release_2_1_1
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
-
-enum class WhatsNewTab {
-    CurrentRelease, PreviousReleases;
-
-    companion object {
-        val Default = CurrentRelease
-    }
-}
 
 class WhatsNewDialogFragment : BaseDialogFragment() {
 
     private val viewModel by viewModel<SettingsViewModel>()
 
-    private val currentRelease: List<Release> by lazy {
+    private val currentRelease: Release? by lazy {
         context?.let { context ->
             val changelog = Changelog(context.stringResource(R.string.release_2_1_1))
-            listOf(Release_2_1_1(changelog))
-        } ?: emptyList()
-    }
-
-    private val previousReleases: List<Release> by lazy {
-        context?.let { context ->
-            listOf(
-                Release_2_1_0(Changelog(context.stringResource(R.string.release_2_1_0))),
-                Release_2_0_1(Changelog(context.stringResource(R.string.release_2_0_1))),
-                Release_2_0_0(Changelog(context.stringResource(R.string.release_2_0_0))),
-                Release_1_8_0(Changelog(context.stringResource(R.string.release_1_8_0))),
-            )
-        } ?: emptyList()
+            Release_2_1_1(changelog)
+        }
     }
 
     override fun onCreateView(
@@ -65,59 +44,21 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         tb.tvDialogTitle.text = context?.stringResource(R.string.whats_new)
 
-        viewModel.whatsNewTab
-            .mapNotNull { tab ->
-                when (tab) {
-                    WhatsNewTab.CurrentRelease -> currentRelease
-                    WhatsNewTab.PreviousReleases -> previousReleases
+        rv.withModels {
+            currentRelease?.let { currentRelease ->
+                releaseItem {
+                    id(currentRelease.version.toString())
+                    release(currentRelease)
                 }
             }
-            .onEach { releases ->
-                rv.withModels {
-                    releases.forEach { release ->
-                        releaseItem {
-                            id(release.version.toString())
-                            release(release)
-                        }
-                    }
-                }
-            }
-            .launchIn(lifecycleScope)
+        }
 
         rv.isScrollingAsFlow()
-            .onEach { isScrolling ->
-                abl.isSelected = isScrolling
-                tlWhatsNew.isSelected = false
-                tb.root.isSelected = false
-                resetTabColors()
-            }
+            .onEach { isScrolling -> tb.root.isSelected = isScrolling }
             .launchIn(lifecycleScope)
-
-    }
-
-    private fun WhatsNewDialogFragmentBinding.resetTabColors() {
-        context?.let { context ->
-            val selectedColor = context.colorAttributeResource(R.attr.notoPrimaryColor)
-            val color = context.colorAttributeResource(R.attr.notoBackgroundColor)
-            tlWhatsNew.setTabTextColors(selectedColor, color)
-        }
     }
 
     private fun WhatsNewDialogFragmentBinding.setupListeners() {
-        tlWhatsNew.addOnTabSelectedListener(
-            object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    if (tab?.position == 0)
-                        viewModel.setWhatsNewTab(WhatsNewTab.CurrentRelease)
-                    else
-                        viewModel.setWhatsNewTab(WhatsNewTab.PreviousReleases)
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            }
-        )
-
         btnOkay.setOnClickListener {
             viewModel.updateLastVersion().invokeOnCompletion {
                 dismiss()

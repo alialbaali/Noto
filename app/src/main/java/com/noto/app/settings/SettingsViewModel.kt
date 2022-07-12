@@ -62,9 +62,6 @@ class SettingsViewModel(
     val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
-    private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
-    val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
-
     private val mutableIsImportFinished = MutableSharedFlow<Unit>(replay = Int.MAX_VALUE)
     val isImportFinished get() = mutableIsImportFinished.asSharedFlow()
 
@@ -140,10 +137,6 @@ class SettingsViewModel(
 
     fun toggleIsBioAuthEnabled() = viewModelScope.launch {
         settingsRepository.updateIsBioAuthEnabled(!isBioAuthEnabled.value)
-    }
-
-    fun setWhatsNewTab(tab: WhatsNewTab) {
-        mutableWhatsNewTab.value = tab
     }
 
     fun updateLastVersion() = viewModelScope.launch {
