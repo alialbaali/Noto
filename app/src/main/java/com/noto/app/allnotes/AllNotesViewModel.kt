@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
+import com.noto.app.domain.model.Language
 import com.noto.app.domain.repository.*
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
@@ -38,6 +39,9 @@ class AllNotesViewModel(
 
     val scrollingPosition = settingsRepository.allNotesScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
+
+    val language = settingsRepository.language
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Language.System)
 
     init {
         combine(

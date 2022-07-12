@@ -8,6 +8,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.forEach
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -20,10 +21,7 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.MainFragmentBinding
-import com.noto.app.domain.model.Folder
-import com.noto.app.domain.model.FolderListSortingType
-import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.SortingOrder
+import com.noto.app.domain.model.*
 import com.noto.app.getOrDefault
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -116,6 +114,21 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         rv.isScrollingAsFlow()
             .onEach { isScrolling -> tb.isSelected = isScrolling }
             .launchIn(lifecycleScope)
+
+        viewModel.language
+            .onEach { language ->
+                when (language) {
+                    Language.Arabic -> {
+                        tvFoldersCount.isVisible = false
+                        tvFoldersCountRtl.isVisible = true
+                    }
+                    else -> {
+                        tvFoldersCount.isVisible = true
+                        tvFoldersCountRtl.isVisible = false
+                    }
+                }
+            }
+            .launchIn(lifecycleScope)
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -136,6 +149,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                 val foldersCount = folders.countRecursively()
 
                 tvFoldersCount.text = context?.quantityStringResource(R.plurals.folders_count, foldersCount, foldersCount)?.lowercase()
+                tvFoldersCountRtl.text = context?.quantityStringResource(R.plurals.folders_count, foldersCount, foldersCount)?.lowercase()
 
                 generalFolder?.let {
                     folderItem {

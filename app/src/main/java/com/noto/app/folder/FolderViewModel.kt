@@ -51,6 +51,9 @@ class FolderViewModel(
     val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
+    val language = settingsRepository.language
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Language.System)
+
     init {
         combine(
             folderRepository.getFolderById(folderId)

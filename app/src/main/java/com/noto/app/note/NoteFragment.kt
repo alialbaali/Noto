@@ -20,6 +20,7 @@ import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.NewNoteCursorPosition
 import com.noto.app.domain.model.Note
 import com.noto.app.label.labelItem
@@ -388,6 +389,21 @@ class NoteFragment : Fragment() {
             gestureDetector.onTouchEvent(event)
             v.performClick()
         }
+
+        viewModel.language
+            .onEach { language ->
+                when (language) {
+                    Language.Arabic -> {
+                        tvWordCount.isVisible = false
+                        tvWordCountRtl.isVisible = true
+                    }
+                    else -> {
+                        tvWordCount.isVisible = true
+                        tvWordCountRtl.isVisible = false
+                    }
+                }
+            }
+            .launchIn(lifecycleScope)
     }
 
     private fun NoteFragmentBinding.setupFolder(folder: Folder) {
@@ -420,6 +436,7 @@ class NoteFragment : Fragment() {
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
         tvWordCount.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)?.lowercase()
+        tvWordCountRtl.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)?.lowercase()
         context?.let { context ->
             tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
         }

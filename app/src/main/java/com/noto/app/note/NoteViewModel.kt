@@ -58,6 +58,9 @@ class NoteViewModel(
     val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
+    val language = settingsRepository.language
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Language.System)
+
     init {
         noteRepository.getNoteById(noteId)
             .onStart { emit(Note(noteId, folderId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }

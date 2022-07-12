@@ -43,6 +43,15 @@
                     app:ticker_animationDuration="@integer/animation_duration"
                     app:ticker_defaultCharacterList="number"
                     tools:text="30 words" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_word_count_rtl"
+                    style="@style/SubtitleTextView"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:fontFamily="@font/nunito_semibold"
+                    tools:text="7 notes" />
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>

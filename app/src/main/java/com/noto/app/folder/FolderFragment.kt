@@ -120,6 +120,21 @@ class FolderFragment : Fragment() {
                 }
             }
             .launchIn(lifecycleScope)
+
+        viewModel.language
+            .onEach { language ->
+                when (language) {
+                    Language.Arabic -> {
+                        tvFolderNotesCount.isVisible = false
+                        tvFolderNotesCountRtl.isVisible = true
+                    }
+                    else -> {
+                        tvFolderNotesCount.isVisible = true
+                        tvFolderNotesCountRtl.isVisible = false
+                    }
+                }
+            }
+            .launchIn(lifecycleScope)
     }
 
     private fun FolderFragmentBinding.setupListeners() {
@@ -304,6 +319,7 @@ class FolderFragment : Fragment() {
             tvFolderTitle.setTextColor(colorStateList)
             tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
             tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_semibold_italic)
+            tvFolderNotesCountRtl.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
             fab.backgroundTintList = colorStateList
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color

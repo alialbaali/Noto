@@ -3,10 +3,7 @@ package com.noto.app.main
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
-import com.noto.app.domain.model.Folder
-import com.noto.app.domain.model.FolderIdWithNotesCount
-import com.noto.app.domain.model.FolderListSortingType
-import com.noto.app.domain.model.SortingOrder
+import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
@@ -85,6 +82,9 @@ class MainViewModel(
             notes.filter { note -> folders.any { folder -> folder.id == note.folderId } }
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+
+    val language = settingsRepository.language
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Language.System)
 
     fun updateSortingType(value: FolderListSortingType) = viewModelScope.launch {
         settingsRepository.updateSortingType(value)
