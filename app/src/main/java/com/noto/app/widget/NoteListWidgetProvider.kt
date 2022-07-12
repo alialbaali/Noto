@@ -9,6 +9,7 @@ import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.createNoteListWidgetRemoteViews
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
@@ -24,20 +25,19 @@ class NoteListWidgetProvider : AppWidgetProvider(), KoinComponent {
         val coroutineScope = CoroutineScope(Dispatchers.Main.immediate)
         appWidgetIds?.forEach { appWidgetId ->
             coroutineScope.launch {
-                settingsRepository.getWidgetFolderId(appWidgetId).first().takeIf { it != 0L }?.let { folderId ->
-                    val remoteViews = context?.createNoteListWidgetRemoteViews(
-                        appWidgetId,
-                        settingsRepository.getIsWidgetHeaderEnabled(appWidgetId).first(),
-                        settingsRepository.getIsWidgetEditButtonEnabled(appWidgetId).first(),
-                        settingsRepository.getIsWidgetAppIconEnabled(appWidgetId).first(),
-                        settingsRepository.getIsWidgetNewItemButtonEnabled(appWidgetId).first(),
-                        settingsRepository.getWidgetRadius(appWidgetId).first(),
-                        folderRepository.getFolderById(folderId).first(),
-                        noteRepository.getNotesByFolderId(folderId).first().isEmpty(),
-                        settingsRepository.icon.first(),
-                    )
-                    appWidgetManager?.updateAppWidget(appWidgetId, remoteViews)
-                }
+                val folderId = settingsRepository.getWidgetFolderId(appWidgetId).filter { it != 0L }.first()
+                val remoteViews = context?.createNoteListWidgetRemoteViews(
+                    appWidgetId,
+                    settingsRepository.getIsWidgetHeaderEnabled(appWidgetId).first(),
+                    settingsRepository.getIsWidgetEditButtonEnabled(appWidgetId).first(),
+                    settingsRepository.getIsWidgetAppIconEnabled(appWidgetId).first(),
+                    settingsRepository.getIsWidgetNewItemButtonEnabled(appWidgetId).first(),
+                    settingsRepository.getWidgetRadius(appWidgetId).first(),
+                    folderRepository.getFolderById(folderId).first(),
+                    noteRepository.getNotesByFolderId(folderId).first().isEmpty(),
+                    settingsRepository.icon.first(),
+                )
+                appWidgetManager?.updateAppWidget(appWidgetId, remoteViews)
             }
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds)
