@@ -161,7 +161,7 @@ class AppActivity : BaseActivity() {
 
         if (!BuildConfig.DEBUG) {
             viewModel.icon
-                .onEach { icon -> setupIcon(icon) }
+                .onEach { icon -> if (icon != viewModel.currentIcon.await()) setupIcon(icon) }
                 .launchIn(lifecycleScope)
         }
 

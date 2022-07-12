@@ -10,6 +10,7 @@ import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.AllFoldersId
 import com.noto.app.util.isGeneral
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -53,6 +54,8 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
         .stateIn(viewModelScope, SharingStarted.Eagerly, AllFoldersId)
 
     var shouldNavigateToMainFragment = true
+
+    val currentIcon = viewModelScope.async { settingsRepository.icon.first() }
 
     init {
         createGeneralFolder()
