@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/nsv"
+    style="@style/BaseDialogFragment"
+    android:paddingHorizontal="@dimen/spacing_normal"
+    android:paddingBottom="@dimen/spacing_normal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/tb"
+            layout="@layout/dialog_fragment_toolbar" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til"
+            style="@style/TextInputLayout"
+            android:layout_marginVertical="@dimen/spacing_normal"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/TextInputLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et"
+                style="@style/TextInputEditText"
+                android:imeOptions="actionDone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/vault_passcode"
+                android:inputType="numberPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_open_using_passcode"
+            style="@style/MaterialButton"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:padding="@dimen/spacing_normal"
+            android:text="@string/open_vault_using_passcode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_open_using_bio"
+            style="@style/MaterialSecondaryButton"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:padding="@dimen/spacing_normal"
+            android:text="@string/open_vault_using_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
