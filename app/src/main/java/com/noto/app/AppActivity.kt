@@ -20,6 +20,7 @@ import com.noto.app.domain.model.*
 import com.noto.app.main.MainVaultFragment
 import com.noto.app.settings.VaultTimeoutWorker
 import com.noto.app.util.*
+import io.ktor.http.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -154,12 +155,14 @@ class AppActivity : BaseActivity() {
     }
 
     private fun handleActionViewIntent(intent: Intent) {
-        val uri = intent.data
-        if (uri?.host == Constants.Host) {
-            when (uri.path) {
-                Constants.VerifyPath -> completeUserRegistration(uri)
-            }
-        }
+        viewModel.handleIntentUri(
+            uri = intent.data ?: Uri.EMPTY,
+            onResult = { stringId ->
+                if (navController.currentDestination?.id == R.id.verifyEmailDialogFragment) navController.navigateUp()
+                if (navController.currentDestination?.id == R.id.changeEmailDialogFragment) navController.navigateUp()
+                if (stringId != null) currentFragment?.view?.snackbar(stringId)
+            },
+        )
     }
 
     private fun AppActivityBinding.showSelectFolderDialog(content: String?) {
@@ -329,38 +332,4 @@ class AppActivity : BaseActivity() {
         Icon.SanguineSun -> "SanguineSun"
     }.let { "com.noto.app.$it" }
 
-    private fun completeUserRegistration(uri: Uri) {
-        val parameters = uri.fragment?.asUrlParameters() ?: emptyMap()
-        val accessToken = parameters[Constants.AccessToken]
-        val refreshToken = parameters[Constants.RefreshToken]
-        if (accessToken != null && refreshToken != null) {
-            viewModel.completeUserRegistration(
-                accessToken,
-                refreshToken,
-                onSuccess = {
-                    if (navController.currentDestination?.id == R.id.verifyEmailDialogFragment)
-                        navController.navigateUp()
-                },
-                onFailure = {
-                    if (navController.currentDestination?.id == R.id.verifyEmailDialogFragment)
-                        navController.navigateUp()
-                    currentFragment?.view?.snackbar(R.string.something_went_wrong)
-                }
-            )
-        } else {
-            if (navController.currentDestination?.id == R.id.verifyEmailDialogFragment)
-                navController.navigateUp()
-            currentFragment?.view?.snackbar(R.string.something_went_wrong)
-        }
-    }
-
-    private fun String.asUrlParameters(): Map<String, String> {
-        val parameterDelimiter = '&'
-        val keyValueDelimiter = '='
-        return split(parameterDelimiter).associate { parameter ->
-            val key = parameter.substringBefore(keyValueDelimiter)
-            val value = parameter.substringAfter(keyValueDelimiter)
-            key to value
-        }
-    }
 }

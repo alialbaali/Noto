@@ -1,5 +1,6 @@
 package com.noto.app
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.*
@@ -7,6 +8,7 @@ import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.domain.repository.UserRepository
 import com.noto.app.util.AllFoldersId
+import com.noto.app.util.Constants
 import com.noto.app.util.isGeneral
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
@@ -84,7 +86,46 @@ class AppViewModel(
             ?.also { folders -> if (folders.none { it.isGeneral }) folderRepository.createFolder(Folder.GeneralFolder()) }
     }
 
-    fun completeUserRegistration(
+    fun handleIntentUri(
+        uri: Uri,
+        onResult: (Int?) -> Unit,
+    ) {
+        if (uri.host == Constants.Host) {
+            if (Constants.VerifyPath in uri.pathSegments) handleEmailVerification(uri, onResult)
+        }
+    }
+
+    private fun handleEmailVerification(
+        uri: Uri,
+        onResult: (Int?) -> Unit,
+    ) {
+        val fragmentParameters = uri.fragment?.asUrlParameters() ?: emptyMap()
+        val accessToken = fragmentParameters[Constants.AccessToken]
+        val refreshToken = fragmentParameters[Constants.RefreshToken]
+        val type = fragmentParameters[Constants.Type]
+        val email = uri.getQueryParameter(Constants.Email)
+        if (accessToken != null && refreshToken != null) {
+            when {
+                type == Constants.SignUp -> completeUserRegistration(
+                    accessToken,
+                    refreshToken,
+                    onSuccess = { onResult(null) },
+                    onFailure = { onResult(R.string.something_went_wrong) },
+                )
+                type == Constants.EmailChange && email != null -> completeUpdatingUserEmail(
+                    email,
+                    accessToken,
+                    refreshToken,
+                    onSuccess = { onResult(R.string.email_is_updated) },
+                    onFailure = { onResult(R.string.something_went_wrong) }
+                )
+            }
+        } else {
+            onResult(R.string.something_went_wrong)
+        }
+    }
+
+    private fun completeUserRegistration(
         accessToken: String,
         refreshToken: String,
         onSuccess: (Unit) -> Unit,
@@ -94,5 +135,27 @@ class AppViewModel(
             .onSuccess { settingsRepository.updateUserStatus(UserStatus.LoggedIn) }
             .onSuccess(onSuccess)
             .onFailure(onFailure)
+    }
+
+    private fun completeUpdatingUserEmail(
+        email: String,
+        accessToken: String,
+        refreshToken: String,
+        onSuccess: (Unit) -> Unit,
+        onFailure: (Throwable) -> Unit,
+    ) = viewModelScope.launch {
+        userRepository.completeUpdatingEmail(email, accessToken, refreshToken)
+            .onSuccess(onSuccess)
+            .onFailure(onFailure)
+    }
+
+    private fun String.asUrlParameters(): Map<String, String> {
+        val parameterDelimiter = '&'
+        val keyValueDelimiter = '='
+        return split(parameterDelimiter).associate { parameter ->
+            val key = parameter.substringBefore(keyValueDelimiter)
+            val value = parameter.substringAfter(keyValueDelimiter)
+            key to value
+        }
     }
 }

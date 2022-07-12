@@ -22,10 +22,13 @@ object Constants {
     const val NameMaxLength = 32
     const val GrantType = "grant_type"
     const val AccessToken = "access_token"
-    const val VerifyPath = "/verify"
+    const val VerifyPath = "verify"
     const val Host = "noto.dev"
     const val RefreshToken = "refresh_token"
     const val Select = "select"
+    const val Type = "type"
+    const val EmailChange = "email_change"
+    const val SignUp = "signup"
     val EmailRegex = Regex(".+@.+\\..+")
     val PasswordRegex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#^])[A-Za-z\\d@$!%*?&#^]{8,}$")
 
