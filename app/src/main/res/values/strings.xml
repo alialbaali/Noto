@@ -130,6 +130,10 @@
     <string name="verify_email_info">Verification email has been sent to your Inbox.\n\nMake sure to check Junk and Spam folders if you can\'t find in the Inbox folder.</string>
     <string name="open_inbox">Open Inbox</string>
     <string name="edit_email">Edit email</string>
+    <string name="change_email">Change email</string>
+    <string name="update_email">Update email</string>
+    <string name="updating_email">Updating email…</string>
+    <string name="email_is_updated">Email has been updated.</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>

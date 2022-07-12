@@ -78,7 +78,7 @@ class AccountSettingsFragment : Fragment() {
                                 SettingsItem(
                                     title = stringResource(id = R.string.email),
                                     type = SettingsItemType.Text(user.email),
-                                    onClick = { /*TODO*/ },
+                                    onClick = { navController?.navigateSafely(AccountSettingsFragmentDirections.actionAccountSettingsFragmentToChangeEmailDialogFragment()) },
                                 )
                             }
 

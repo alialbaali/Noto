@@ -83,6 +83,15 @@ class SettingsViewModel(
     private val mutableNameState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
     val nameState get() = mutableNameState.asStateFlow()
 
+    private val mutableEmail = MutableStateFlow("")
+    val email get() = mutableEmail.asStateFlow()
+
+    private val mutableEmailStatus = MutableStateFlow<TextFieldStatus>(TextFieldStatus.Empty)
+    val emailStatus get() = mutableEmailStatus.asStateFlow()
+
+    private val mutableEmailState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
+    val emailState get() = mutableEmailState.asStateFlow()
+
     private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
     val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
 
@@ -91,8 +100,10 @@ class SettingsViewModel(
 
     init {
         userState
-            .map { it.map { user -> user.name }.getOrDefault("") }
-            .onEach { mutableName.value = it }
+            .onEach {
+                mutableName.value = it.map { user -> user.name }.getOrDefault("")
+                mutableEmail.value = it.map { user -> user.email }.getOrDefault("")
+            }
             .launchIn(viewModelScope)
     }
 
@@ -215,6 +226,19 @@ class SettingsViewModel(
     fun updateName() = viewModelScope.launch {
         mutableNameState.value = UiState.Loading
         mutableNameState.value = userRepository.updateName(name.value.trim()).toUiState()
+    }
+
+    fun setEmail(email: String) {
+        mutableEmail.value = email
+    }
+
+    fun setEmailStatus(status: TextFieldStatus) {
+        mutableEmailStatus.value = status
+    }
+
+    fun updateEmail() = viewModelScope.launch {
+        mutableEmailState.value = UiState.Loading
+        mutableEmailState.value = userRepository.updateEmail(email.value.trim()).toUiState()
     }
 
     fun logOutUser() = viewModelScope.launch {

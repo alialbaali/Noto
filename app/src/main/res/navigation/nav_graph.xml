@@ -675,6 +675,9 @@
         <action
             android:id="@+id/action_accountSettingsFragment_to_progressIndicatorDialogFragment"
             app:destination="@id/progressIndicatorDialogFragment" />
+        <action
+            android:id="@+id/action_accountSettingsFragment_to_changeEmailDialogFragment"
+            app:destination="@id/changeEmailDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/editNameDialogFragment"
@@ -696,4 +699,15 @@
         android:id="@+id/verifyEmailDialogFragment"
         android:name="com.noto.app.login.VerifyEmailDialogFragment"
         android:label="VerifyEmailDialogFragment" />
+    <dialog
+        android:id="@+id/changeEmailDialogFragment"
+        android:name="com.noto.app.settings.ChangeEmailDialogFragment"
+        android:label="ChangeEmailDialogFragment" >
+        <action
+            android:id="@+id/action_changeEmailDialogFragment_to_progressIndicatorDialogFragment"
+            app:destination="@id/progressIndicatorDialogFragment" />
+        <action
+            android:id="@+id/action_changeEmailDialogFragment_to_verifyEmailDialogFragment"
+            app:destination="@id/verifyEmailDialogFragment" />
+    </dialog>
 </navigation>
