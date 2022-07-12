@@ -34,12 +34,6 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
     var notesCount: Int = 0
 
     @EpoxyAttribute
-    open var isClickable: Boolean = true
-
-    @EpoxyAttribute
-    open var isLongClickable: Boolean = true
-
-    @EpoxyAttribute
     open var isSelected: Boolean = false
 
     @EpoxyAttribute
@@ -90,8 +84,6 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
         ibFolderHandle.setOnTouchListener(onDragHandleTouchListener)
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
-        root.isClickable = isClickable
-        root.isLongClickable = isLongClickable
         tvFolderNotesCount.isVisible = isShowNotesCount
         root.updatePaddingRelative(depth * 16.dp)
         tvFolderTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {

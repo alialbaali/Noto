@@ -10,9 +10,11 @@ import com.noto.app.domain.model.SortingOrder
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
-import com.noto.app.getOrDefault
 import com.noto.app.util.sorted
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -70,13 +72,10 @@ class MainViewModel(
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
 
     val isVaultOpen = settingsRepository.isVaultOpen
-        .stateIn(viewModelScope, SharingStarted.Lazily, false)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
     val vaultPasscode = settingsRepository.vaultPasscode
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
-
-    val isBioAuthEnabled = settingsRepository.isBioAuthEnabled
-        .stateIn(viewModelScope, SharingStarted.Lazily, false)
 
     val isShowNotesCount = settingsRepository.isShowNotesCount
         .stateIn(viewModelScope, SharingStarted.Lazily, true)

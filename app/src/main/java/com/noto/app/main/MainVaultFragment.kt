@@ -5,11 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.EditorInfo
-import androidx.biometric.BiometricManager
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.BaseDialogFragment
@@ -18,7 +13,6 @@ import com.noto.app.UiState
 import com.noto.app.databinding.MainVaultFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.util.*
-import eightbitlab.com.blurview.RenderScriptBlur
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -30,8 +24,6 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val selectedDestinationId by lazy { navController?.lastDestinationId }
 
-    private var shouldAnimateBlur = false
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,28 +34,8 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     private fun MainVaultFragmentBinding.setupListeners() {
-        et.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                openVaultUsingPasscode()
-                true
-            } else {
-                false
-            }
-        }
-
-        btnOpenUsingPasscode.setOnClickListener {
-            openVaultUsingPasscode()
-        }
-
-        btnOpenUsingBio.setOnClickListener {
-            openVaultUsingBio()
-        }
-
         btnClose.setOnClickListener {
-            activity?.hideKeyboard(et)
             viewModel.closeVault()
-            et.setText("")
-            til.error = null
             navController?.navigateUp()
         }
     }
@@ -74,64 +46,11 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
         rv.itemAnimator = VerticalListItemAnimator()
         tb.tvDialogTitle.text = context?.stringResource(R.string.folders_vault)
 
-        combine(viewModel.isVaultOpen, viewModel.isBioAuthEnabled) { isVaultOpen, isBioAuthEnabled ->
-            if (isBioAuthEnabled) {
-                btnOpenUsingPasscode.text = context?.stringResource(R.string.open_vault_using_passcode)
-                btnOpenUsingBio.isVisible = true
-            } else {
-                btnOpenUsingPasscode.text = context?.stringResource(R.string.open_vault)
-                btnOpenUsingBio.isVisible = false
-            }
-            if (!isVaultOpen && isBioAuthEnabled)
-                openVaultUsingBio()
-        }.launchIn(lifecycleScope)
-
-        viewModel.isVaultOpen
-            .onEach { isVaultOpen ->
-                if (isVaultOpen) {
-                    et.clearFocus()
-                    activity?.hideKeyboard(et)
-                    btnClose.isVisible = true
-                    if (shouldAnimateBlur)
-                        blurView.animate()
-                            .alpha(0F)
-                            .withEndAction {
-                                shouldAnimateBlur = false
-                                blurView.isVisible = false
-                            }
-                    else
-                        blurView.isVisible = false
-                } else {
-                    if (shouldAnimateBlur)
-                        blurView.animate()
-                            .alpha(1F)
-                            .withEndAction {
-                                shouldAnimateBlur = false
-                                blurView.isVisible = true
-                            }
-                    else
-                        blurView.isVisible = true
-                    et.requestFocus()
-                    activity?.showKeyboard(et)
-                    btnClose.isVisible = false
-                    fl.post {
-                        blurView.setupWith(fl)
-                            .setFrameClearDrawable(activity?.window?.decorView?.background)
-                            .setBlurAlgorithm(RenderScriptBlur(context))
-                            .setBlurRadius(25F)
-                            .setBlurAutoUpdate(true)
-                            .setHasFixedTransformationMatrix(false)
-                    }
-                }
-            }
-            .launchIn(lifecycleScope)
-
         combine(
             viewModel.vaultedFolders,
             viewModel.isShowNotesCount,
-            viewModel.isVaultOpen,
-        ) { folders, isShowNotesCount, isVaultOpen ->
-            setupFolders(folders, isShowNotesCount, isVaultOpen)
+        ) { folders, isShowNotesCount ->
+            setupFolders(folders, isShowNotesCount)
         }.launchIn(lifecycleScope)
 
         rv.isScrollingAsFlow()
@@ -140,7 +59,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun MainVaultFragmentBinding.setupFolders(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean, isVaultOpen: Boolean) {
+    private fun MainVaultFragmentBinding.setupFolders(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean) {
         if (state is UiState.Success) {
             val folders = state.value
             rv.withModels {
@@ -161,17 +80,22 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
                                     isSelected(entry.first.id == selectedDestinationId)
                                     isShowNotesCount(isShowNotesCount)
                                     depth(depth)
-                                    isClickable(isVaultOpen)
-                                    isLongClickable(isVaultOpen)
                                     onClickListener { _ ->
                                         dismiss()
                                         if (entry.first.id != selectedDestinationId)
-                                            navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToFolderFragment(entry.first.id))
+                                            navController?.navigateSafely(
+                                                MainVaultFragmentDirections.actionMainVaultFragmentToFolderFragment(
+                                                    entry.first.id
+                                                )
+                                            )
                                     }
                                     onLongClickListener { _ ->
                                         dismiss()
-                                        navController?.navigateSafely(MainVaultFragmentDirections.actionMainVaultFragmentToFolderDialogFragment(
-                                            entry.first.id))
+                                        navController?.navigateSafely(
+                                            MainVaultFragmentDirections.actionMainVaultFragmentToFolderDialogFragment(
+                                                entry.first.id
+                                            )
+                                        )
                                         true
                                     }
                                     onDragHandleTouchListener { _, _ -> false }
@@ -181,44 +105,6 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
                     }
                 }
             }
-        }
-    }
-
-    private fun MainVaultFragmentBinding.openVault() {
-        activity?.hideKeyboard(et)
-        shouldAnimateBlur = true
-        viewModel.openVault()
-    }
-
-    private fun MainVaultFragmentBinding.openVaultUsingPasscode() {
-        val passcode = et.text.toString()
-        when {
-            passcode.isBlank() -> til.error = context?.stringResource(R.string.passcode_empty_message)
-            passcode.hash() == viewModel.vaultPasscode.value -> openVault()
-            else -> til.error = context?.stringResource(R.string.invalid_passcode)
-        }
-    }
-
-    private fun MainVaultFragmentBinding.openVaultUsingBio() {
-        context?.let { context ->
-            val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                .setTitle(context.stringResource(R.string.open_vault))
-                .setNegativeButtonText(context.stringResource(R.string.use_passcode))
-                .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
-                .build()
-
-            val biometricPrompt = BiometricPrompt(
-                this@MainVaultFragment,
-                ContextCompat.getMainExecutor(requireContext()),
-                object : BiometricPrompt.AuthenticationCallback() {
-                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-                        super.onAuthenticationSucceeded(result)
-                        openVault()
-                    }
-                }
-            )
-
-            biometricPrompt.authenticate(promptInfo)
         }
     }
 }

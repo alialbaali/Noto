@@ -554,6 +554,9 @@
             app:destination="@id/settingsFragment"
             app:popUpTo="@id/mainDialogFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mainDialogFragment_to_validateVaultPasscodeDialogFragment"
+            app:destination="@id/validateVaultPasscodeDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/noteListGroupingOrderDialogFragment"
@@ -588,4 +591,8 @@
         android:id="@+id/whatsNewFragment"
         android:name="com.noto.app.settings.WhatsNewFragment"
         android:label="WhatsNewFragment" />
+    <dialog
+        android:id="@+id/validateVaultPasscodeDialogFragment"
+        android:name="com.noto.app.settings.ValidateVaultPasscodeDialogFragment"
+        android:label="ValidateVaultPasscodeDialogFragment" />
 </navigation>

@@ -7,12 +7,8 @@ import android.view.ViewGroup
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.MainDialogFragmentBinding
-import com.noto.app.util.navController
-import com.noto.app.util.navigateSafely
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainDialogFragment : BaseDialogFragment() {
 
@@ -29,6 +25,16 @@ class MainDialogFragment : BaseDialogFragment() {
 
     private fun MainDialogFragmentBinding.setupState() {
         tb.tvDialogTitle.text = context?.stringResource(R.string.app_name)
+
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<Boolean>(Constants.IsVaultOpen)
+            ?.observe(viewLifecycleOwner) { isVaultOpen ->
+                if (isVaultOpen) {
+                    viewModel.openVault()
+                    if (navController?.currentDestination?.id == R.id.validateVaultPasscodeDialogFragment) navController?.navigateUp()
+                    navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainVaultFragment())
+                }
+            }
     }
 
     private fun MainDialogFragmentBinding.setupListeners() {
@@ -38,11 +44,11 @@ class MainDialogFragment : BaseDialogFragment() {
         }
 
         tvFoldersVault.setOnClickListener {
-            dismiss()
-            if (viewModel.vaultPasscode.value == null)
-                navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToVaultPasscodeDialogFragment())
-            else
-                navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainVaultFragment())
+            when {
+                viewModel.vaultPasscode.value == null -> navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToVaultPasscodeDialogFragment())
+                viewModel.isVaultOpen.value -> navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainVaultFragment())
+                else -> navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToValidateVaultPasscodeDialogFragment())
+            }
         }
 
         tvSettings.setOnClickListener {

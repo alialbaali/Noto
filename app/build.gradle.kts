@@ -129,7 +129,6 @@ dependencies {
     implementation(KotlinX.datetime)
     implementation("com.google.android:flexbox:2.0.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
-    implementation("com.eightbitlab:blurview:1.6.6")
     implementation("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation("com.robinhood.ticker:ticker:2.0.4")
     implementation("androidx.core:core-splashscreen:1.0.0-beta02")
