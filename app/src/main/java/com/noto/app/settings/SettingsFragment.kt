@@ -230,7 +230,7 @@ class SettingsFragment : Fragment() {
         }
 
         tvWhatsNew.setOnClickListener {
-            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewDialogFragment())
+            navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewFragment())
         }
     }
 }

@@ -273,14 +273,14 @@
             android:id="@+id/action_settingsFragment_to_vaultTimeoutDialogFragment"
             app:destination="@id/vaultTimeoutDialogFragment" />
         <action
-            android:id="@+id/action_settingsFragment_to_whatsNewDialogFragment"
-            app:destination="@id/whatsNewDialogFragment" />
-        <action
             android:id="@+id/action_settingsFragment_to_selectFolderDialogFragment"
             app:destination="@id/selectFolderDialogFragment" />
         <action
             android:id="@+id/action_settingsFragment_to_iconDialogFragment"
             app:destination="@id/iconDialogFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_whatsNewFragment"
+            app:destination="@id/whatsNewFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"
@@ -584,4 +584,8 @@
         android:id="@+id/iconDialogFragment"
         android:name="com.noto.app.settings.IconDialogFragment"
         android:label="IconDialogFragment" />
+    <fragment
+        android:id="@+id/whatsNewFragment"
+        android:name="com.noto.app.settings.WhatsNewFragment"
+        android:label="WhatsNewFragment" />
 </navigation>
