@@ -160,6 +160,11 @@ class NoteFragment : Fragment() {
                     body.wordsCount,
                     body.wordsCount
                 )?.lowercase()
+                tvWordCountRtl.text = context?.quantityStringResource(
+                    R.plurals.words_count,
+                    body.wordsCount,
+                    body.wordsCount
+                )?.lowercase()
             }
             .launchIn(lifecycleScope)
 
