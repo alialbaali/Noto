@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nsv"
     style="@style/BaseDialogFragment"
     android:paddingHorizontal="@dimen/spacing_normal"
@@ -37,22 +38,24 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_open_using_passcode"
+            android:id="@+id/btn_validate"
             style="@style/MaterialButton"
-            android:layout_marginTop="@dimen/spacing_normal"
             android:padding="@dimen/spacing_normal"
-            android:text="@string/open_vault_using_passcode"
+            android:text="@string/validate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_open_using_bio"
-            style="@style/MaterialSecondaryButton"
-            android:layout_marginTop="@dimen/spacing_small"
-            android:padding="@dimen/spacing_normal"
-            android:text="@string/open_vault_using_bio"
+            android:id="@+id/btn_use_bio"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:textColor="?attr/notoPrimaryColor"
+            android:textSize="@dimen/size_small"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:fontFamily="@font/nunito_medium"
+            android:text="@string/use_bio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:backgroundTint="?attr/notoBackgroundColor" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

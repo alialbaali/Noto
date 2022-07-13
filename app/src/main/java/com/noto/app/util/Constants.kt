@@ -12,7 +12,7 @@ object Constants {
     const val VaultTimeout = "VaultTimeout"
     const val IsNotParentEnabled = "is_no_parent_enabled"
     const val MainInterfaceId = ""
-    const val IsVaultOpen = "IsVaultOpen"
+    const val IsPasscodeValid = "IsPasscodeValid"
 
     object Intent {
         const val ActionCreateFolder = "com.noto.intent.action.CREATE_FOLDER"

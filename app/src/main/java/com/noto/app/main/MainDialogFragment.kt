@@ -27,9 +27,9 @@ class MainDialogFragment : BaseDialogFragment() {
         tb.tvDialogTitle.text = context?.stringResource(R.string.app_name)
 
         navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Boolean>(Constants.IsVaultOpen)
-            ?.observe(viewLifecycleOwner) { isVaultOpen ->
-                if (isVaultOpen) {
+            ?.getLiveData<Boolean>(Constants.IsPasscodeValid)
+            ?.observe(viewLifecycleOwner) { isPasscodeValid ->
+                if (isPasscodeValid) {
                     viewModel.openVault()
                     if (navController?.currentDestination?.id == R.id.validateVaultPasscodeDialogFragment) navController?.navigateUp()
                     navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainVaultFragment())

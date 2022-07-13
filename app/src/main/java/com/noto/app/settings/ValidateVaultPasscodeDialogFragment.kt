@@ -37,12 +37,10 @@ class ValidateVaultPasscodeDialogFragment : BaseDialogFragment() {
         viewModel.isBioAuthEnabled
             .onEach { isBioAuthEnabled ->
                 if (isBioAuthEnabled) {
-                    openVaultUsingBio()
-                    btnOpenUsingPasscode.text = context?.stringResource(R.string.open_vault_using_passcode)
-                    btnOpenUsingBio.isVisible = true
+                    btnUseBio.isVisible = true
+                    validateUsingBio()
                 } else {
-                    btnOpenUsingPasscode.text = context?.stringResource(R.string.open_vault)
-                    btnOpenUsingBio.isVisible = false
+                    btnUseBio.isVisible = false
                     activity?.showKeyboard(et)
                 }
             }
@@ -56,35 +54,35 @@ class ValidateVaultPasscodeDialogFragment : BaseDialogFragment() {
     private fun ValidateVaultPasscodeDialogFragmentBinding.setupListeners() {
         et.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
-                openVaultUsingPasscode()
+                validateUsingPasscode()
                 true
             } else {
                 false
             }
         }
 
-        btnOpenUsingPasscode.setOnClickListener {
-            openVaultUsingPasscode()
+        btnValidate.setOnClickListener {
+            validateUsingPasscode()
         }
 
-        btnOpenUsingBio.setOnClickListener {
-            openVaultUsingBio()
+        btnUseBio.setOnClickListener {
+            validateUsingBio()
         }
     }
 
-    private fun ValidateVaultPasscodeDialogFragmentBinding.openVaultUsingPasscode() {
+    private fun ValidateVaultPasscodeDialogFragmentBinding.validateUsingPasscode() {
         val passcode = et.text.toString()
         when {
             passcode.isBlank() -> til.error = context?.stringResource(R.string.passcode_empty_message)
-            passcode.hash() == viewModel.vaultPasscode.value -> openVault()
+            passcode.hash() == viewModel.vaultPasscode.value -> passcodeIsValid()
             else -> til.error = context?.stringResource(R.string.invalid_passcode)
         }
     }
 
-    private fun ValidateVaultPasscodeDialogFragmentBinding.openVaultUsingBio() {
+    private fun ValidateVaultPasscodeDialogFragmentBinding.validateUsingBio() {
         context?.let { context ->
             val promptInfo = BiometricPrompt.PromptInfo.Builder()
-                .setTitle(context.stringResource(R.string.open_vault))
+                .setTitle(context.stringResource(R.string.validate))
                 .setNegativeButtonText(context.stringResource(R.string.use_passcode))
                 .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_WEAK)
                 .build()
@@ -95,7 +93,7 @@ class ValidateVaultPasscodeDialogFragment : BaseDialogFragment() {
                 object : BiometricPrompt.AuthenticationCallback() {
                     override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                         super.onAuthenticationSucceeded(result)
-                        openVault()
+                        passcodeIsValid()
                     }
                 }
             )
@@ -104,8 +102,8 @@ class ValidateVaultPasscodeDialogFragment : BaseDialogFragment() {
         }
     }
 
-    private fun ValidateVaultPasscodeDialogFragmentBinding.openVault() {
+    private fun ValidateVaultPasscodeDialogFragmentBinding.passcodeIsValid() {
         activity?.hideKeyboard(et)
-        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.IsVaultOpen, true)
+        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.IsPasscodeValid, true)
     }
 }
