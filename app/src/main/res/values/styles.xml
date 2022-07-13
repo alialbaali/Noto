@@ -311,6 +311,9 @@
         <item name="android:textAppearance">@style/SliderLabelTextAppearance</item>
         <item name="shapeAppearance">@style/SliderLabelShapeAppearance</item>
         <item name="backgroundTint">?attr/notoPrimaryColor</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="android:textColor">?attr/notoBackgroundColor</item>
+        <item name="android:textSize">@dimen/size_small</item>
     </style>
 
     <style name="SliderLabelTextAppearance" parent="TextAppearance.MaterialComponents.Tooltip">
