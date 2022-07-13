@@ -60,10 +60,6 @@ class RegisterFragment : Fragment() {
                 val invalidPasswordText = "${stringResource(id = R.string.invalid_password)} $passwordInfoText"
                 val invalidNameText = stringResource(id = R.string.invalid_name)
                 val invalidConfirmPasswordText = stringResource(id = R.string.invalid_confirm_password)
-                val userAlreadyRegisteredText = stringResource(id = R.string.user_already_registered)
-                val snackbarMessage = stringResource(id = R.string.something_went_wrong)
-                val snackbarActionLabelText = stringResource(id = R.string.show_info)
-                val creatingAccountText = stringResource(id = R.string.creating_account)
 
                 Screen(
                     title = stringResource(id = R.string.register),
@@ -154,7 +150,8 @@ class RegisterFragment : Fragment() {
                             text = stringResource(id = R.string.register),
                             onClick = {
                                 val isNameInvalid = name.isBlank()
-                                val isEmailInvalid = !email.matches(Constants.EmailRegex) || email.any { it.isWhitespace() }
+                                val isEmailInvalid =
+                                    !email.matches(Constants.EmailRegex) || email.any { it.isWhitespace() }
                                 val isPasswordInvalid = !password.matches(Constants.PasswordRegex)
                                 val isConfirmPasswordInvalid = confirmPassword != password
                                 if (isNameInvalid) {
@@ -185,39 +182,50 @@ class RegisterFragment : Fragment() {
                     }
                 }
 
-                LaunchedEffect(key1 = state) {
-                    state.fold(
-                        onLoading = {
-                            navController?.navigateSafely(
-                                RegisterFragmentDirections.actionRegisterFragmentToProgressIndicatorDialogFragment(
-                                    creatingAccountText
-                                )
+                state.fold(
+                    onLoading = {
+                        navController?.navigateSafely(
+                            RegisterFragmentDirections.actionRegisterFragmentToProgressIndicatorDialogFragment(
+                                stringResource(id = R.string.creating_account)
                             )
-                        },
-                        onSuccess = {
-                            if (navController?.currentDestination?.id == R.id.progressIndicatorDialogFragment)
-                                navController?.navigateUp()
+                        )
+                    },
+                    onSuccess = {
+                        if (navController?.currentDestination?.id == R.id.progressIndicatorDialogFragment)
+                            navController?.navigateUp()
 
-                            navController?.navigateSafely(RegisterFragmentDirections.actionRegisterFragmentToVerifyEmailDialogFragment())
-                        },
-                        onFailure = { exception ->
-                            if (navController?.currentDestination?.id == R.id.progressIndicatorDialogFragment)
-                                navController?.navigateUp()
-                            when (exception) {
-                                ResponseException.Auth.UserAlreadyRegistered -> {
-                                    viewModel.setEmailStatus(TextFieldStatus.Error(
-                                        userAlreadyRegisteredText))
+                        navController?.navigateSafely(RegisterFragmentDirections.actionRegisterFragmentToVerifyEmailDialogFragment())
+                    },
+                    onFailure = { exception ->
+                        if (navController?.currentDestination?.id == R.id.progressIndicatorDialogFragment)
+                            navController?.navigateUp()
+                        when (exception) {
+                            ResponseException.Auth.UserAlreadyRegistered -> {
+                                viewModel.setEmailStatus(
+                                    TextFieldStatus.Error(
+                                        stringResource(id = R.string.user_already_registered)
+                                    )
+                                )
+                            }
+                            ResponseException.Auth.InvalidEmail -> {
+                                viewModel.setEmailStatus(TextFieldStatus.Error(invalidEmailText))
+                            }
+                            ResponseException.Auth.InvalidPassword -> {
+                                viewModel.setPasswordStatus(TextFieldStatus.Error(invalidPasswordText))
+                            }
+                            is ResponseException.Auth.TooManyRequests -> {
+                                val message = stringResource(id = R.string.try_again_in, exception.seconds)
+                                LaunchedEffect(key1 = exception) {
+                                    snackbarHostState.showSnackbar(message = message)
                                 }
-                                ResponseException.Auth.InvalidEmail -> {
-                                    viewModel.setEmailStatus(TextFieldStatus.Error(invalidEmailText))
-                                }
-                                ResponseException.Auth.InvalidPassword -> {
-                                    viewModel.setPasswordStatus(TextFieldStatus.Error(invalidPasswordText))
-                                }
-                                else -> {
+                            }
+                            else -> {
+                                val message = stringResource(id = R.string.something_went_wrong)
+                                val actionLabel = stringResource(id = R.string.show_info)
+                                LaunchedEffect(key1 = exception) {
                                     val result = snackbarHostState.showSnackbar(
-                                        message = snackbarMessage,
-                                        actionLabel = snackbarActionLabelText,
+                                        message = message,
+                                        actionLabel = actionLabel,
                                     )
                                     when (result) {
                                         SnackbarResult.Dismissed -> {}
@@ -228,8 +236,8 @@ class RegisterFragment : Fragment() {
                                 }
                             }
                         }
-                    )
-                }
+                    }
+                )
             }
         }
     }

@@ -51,11 +51,6 @@ class LoginFragment : Fragment() {
                 val snackbarHostState = remember { SnackbarHostState() }
                 val invalidEmailText = stringResource(id = R.string.invalid_email)
                 val invalidPasswordText = stringResource(id = R.string.invalid_password)
-                val invalidCredentialsText = stringResource(id = R.string.invalid_credentials)
-                val snackbarMessage = stringResource(id = R.string.something_went_wrong)
-                val snackbarActionLabelText = stringResource(id = R.string.show_info)
-                val loggingInText = stringResource(id = R.string.logging_in)
-                val emailNotVerifiedText = stringResource(id = R.string.email_not_verified)
 
                 Screen(
                     title = stringResource(id = R.string.login),
@@ -126,45 +121,41 @@ class LoginFragment : Fragment() {
                     }
                 }
 
-                LaunchedEffect(key1 = state) {
-                    state.fold(
-                        onLoading = {
-                            navController?.navigateSafely(
-                                LoginFragmentDirections.actionLoginFragmentToProgressIndicatorDialogFragment(
-                                    loggingInText
-                                )
+                state.fold(
+                    onLoading = {
+                        navController?.navigateSafely(
+                            LoginFragmentDirections.actionLoginFragmentToProgressIndicatorDialogFragment(
+                                stringResource(id = R.string.logging_in)
                             )
-                        },
-                        onSuccess = {
-                            if (navController?.currentDestination?.id == R.id.progressIndicatorDialogFragment)
-                                navController?.navigateUp()
-                        },
-                        onFailure = { exception ->
-                            if (navController?.currentDestination?.id == R.id.progressIndicatorDialogFragment)
-                                navController?.navigateUp()
-                            when (exception) {
-                                ResponseException.Auth.InvalidLoginCredentials -> {
-                                    val result = snackbarHostState.showSnackbar(
-                                        message = invalidCredentialsText,
-                                        actionLabel = snackbarActionLabelText,
-                                    )
-                                    when (result) {
-                                        SnackbarResult.Dismissed -> {}
-                                        SnackbarResult.ActionPerformed -> {
-                                            // TODO Navigate to info dialog and show the exception.
-                                        }
-                                    }
+                        )
+                    },
+                    onSuccess = {
+                        if (navController?.currentDestination?.id == R.id.progressIndicatorDialogFragment)
+                            navController?.navigateUp()
+                    },
+                    onFailure = { exception ->
+                        if (navController?.currentDestination?.id == R.id.progressIndicatorDialogFragment)
+                            navController?.navigateUp()
+                        when (exception) {
+                            ResponseException.Auth.InvalidLoginCredentials -> {
+                                val message = stringResource(id = R.string.invalid_credentials)
+                                LaunchedEffect(key1 = exception) {
+                                    snackbarHostState.showSnackbar(message = message)
                                 }
-                                ResponseException.Auth.EmailNotVerified -> {
-                                    snackbarHostState.showSnackbar(
-                                        message = emailNotVerifiedText,
-                                        actionLabel = snackbarActionLabelText,
-                                    )
+                            }
+                            ResponseException.Auth.EmailNotVerified -> {
+                                val message = stringResource(id = R.string.email_not_verified)
+                                LaunchedEffect(key1 = exception) {
+                                    snackbarHostState.showSnackbar(message = message)
                                 }
-                                else -> {
+                            }
+                            else -> {
+                                val message = stringResource(id = R.string.something_went_wrong)
+                                val actionLabel = stringResource(id = R.string.show_info)
+                                LaunchedEffect(key1 = exception) {
                                     val result = snackbarHostState.showSnackbar(
-                                        message = snackbarMessage,
-                                        actionLabel = snackbarActionLabelText,
+                                        message = message,
+                                        actionLabel = actionLabel,
                                     )
                                     when (result) {
                                         SnackbarResult.Dismissed -> {}
@@ -175,8 +166,8 @@ class LoginFragment : Fragment() {
                                 }
                             }
                         }
-                    )
-                }
+                    }
+                )
             }
         }
     }

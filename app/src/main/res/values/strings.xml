@@ -134,6 +134,7 @@
     <string name="update_email">Update email</string>
     <string name="updating_email">Updating email…</string>
     <string name="email_is_updated">Email has been updated.</string>
+    <string name="try_again_in">Please try again in %d seconds.</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>

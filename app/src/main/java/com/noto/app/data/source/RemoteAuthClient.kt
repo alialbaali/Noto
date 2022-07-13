@@ -34,6 +34,13 @@ class RemoteAuthClient(private val authClient: HttpClient, private val client: H
                     errorResponse.msg.contains("password", ignoreCase = true) -> Auth.InvalidPassword()
                     else -> unhandledError(errorResponse.msg)
                 }
+                HttpStatusCode.TooManyRequests -> {
+                    val seconds = errorResponse.msg.substringAfter("after ")
+                        .substringBefore("seconds")
+                        .trim()
+                        .toInt()
+                    Auth.TooManyRequests(seconds).invoke()
+                }
                 else -> unhandledError(errorResponse.msg)
             }
         }

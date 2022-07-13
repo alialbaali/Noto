@@ -11,6 +11,7 @@ sealed class ResponseException : RuntimeException() {
         object InvalidLoginCredentials : Auth()
         object EmailNotVerified : Auth()
         object InvalidRefreshToken : Auth()
+        class TooManyRequests(val seconds: Int) : Auth()
     }
 
     object NetworkErrorException : ResponseException()
