@@ -92,9 +92,6 @@ class SettingsViewModel(
     private val mutableEmailState = MutableStateFlow<UiState<Unit>>(UiState.Empty)
     val emailState get() = mutableEmailState.asStateFlow()
 
-    private val mutableWhatsNewTab = MutableStateFlow(WhatsNewTab.Default)
-    val whatsNewTab get() = mutableWhatsNewTab.asStateFlow()
-
     private val mutableIsImportFinished = MutableSharedFlow<Unit>(replay = Int.MAX_VALUE)
     val isImportFinished get() = mutableIsImportFinished.asSharedFlow()
 

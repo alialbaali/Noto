@@ -63,7 +63,6 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainVaultFragmentBinding.setupFolders(
         state: UiState<List<Pair<Folder, Int>>>,
         isShowNotesCount: Boolean,
-        isVaultOpen: Boolean,
     ) {
         state.fold(
             onSuccess = { folders ->
@@ -85,8 +84,6 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
                                         isSelected(entry.first.id == selectedDestinationId)
                                         isShowNotesCount(isShowNotesCount)
                                         depth(depth)
-                                        isClickable(isVaultOpen)
-                                        isLongClickable(isVaultOpen)
                                         onClickListener { _ ->
                                             dismiss()
                                             if (entry.first.id != selectedDestinationId)

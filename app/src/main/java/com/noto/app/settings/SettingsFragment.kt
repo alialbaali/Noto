@@ -175,7 +175,7 @@ class SettingsFragment : Fragment() {
                 title = stringResource(id = R.string.whats_new),
                 type = SettingsItemType.None,
                 onClick = {
-                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewDialogFragment())
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewFragment())
                 },
                 painter = painterResource(id = R.drawable.ic_round_new_releases_24),
             )
