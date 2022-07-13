@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment
 import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.NotoTopAppbar
+import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
 import com.noto.app.util.setupMixedTransitions
@@ -47,6 +48,14 @@ class SettingsFragment : Fragment() {
         activity?.onBackPressedDispatcher?.addCallback {
             navController?.navigateUp()
         }
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<Boolean>(Constants.IsPasscodeValid)
+            ?.observe(viewLifecycleOwner) { isPasscodeValid ->
+                if (isPasscodeValid) {
+                    if (navController?.currentDestination?.id == R.id.validateVaultPasscodeDialogFragment) navController?.navigateUp()
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultSettingsFragment())
+                }
+            }
         setupMixedTransitions()
         ComposeView(context).apply {
             isTransitionGroup = true
@@ -120,7 +129,7 @@ class SettingsFragment : Fragment() {
                 title = stringResource(id = R.string.vault),
                 type = SettingsItemType.None,
                 onClick = {
-                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultSettingsFragment())
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToValidateVaultPasscodeDialogFragment2())
                 },
                 painter = painterResource(id = R.drawable.ic_round_inventory_24),
             )

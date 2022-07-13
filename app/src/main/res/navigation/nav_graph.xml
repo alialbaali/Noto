@@ -279,6 +279,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_whatsNewFragment"
             app:destination="@id/whatsNewFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_validateVaultPasscodeDialogFragment2"
+            app:destination="@id/validateVaultPasscodeDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"
