@@ -202,8 +202,8 @@ class AllNotesFragment : Fragment() {
             is UiState.Success -> {
                 val notes = state.value
                 val notesCount = notes.map { it.value.count() }.sum()
-                tvNotesCount.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)?.lowercase()
-                tvNotesCountRtl.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)?.lowercase()
+                tvNotesCount.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
+                tvNotesCountRtl.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
 
                 rv.withModels {
 

@@ -317,9 +317,9 @@ class FolderFragment : Fragment() {
             val colorStateList = color.toColorStateList()
             tvFolderTitle.text = folder.getTitle(context)
             tvFolderTitle.setTextColor(colorStateList)
-            tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
+            tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
             tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_semibold_italic)
-            tvFolderNotesCountRtl.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount).lowercase()
+            tvFolderNotesCountRtl.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
             fab.backgroundTintList = colorStateList
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color

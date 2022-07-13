@@ -159,12 +159,12 @@ class NoteFragment : Fragment() {
                     R.plurals.words_count,
                     body.wordsCount,
                     body.wordsCount
-                )?.lowercase()
+                )
                 tvWordCountRtl.text = context?.quantityStringResource(
                     R.plurals.words_count,
                     body.wordsCount,
                     body.wordsCount
-                )?.lowercase()
+                )
             }
             .launchIn(lifecycleScope)
 
@@ -440,8 +440,8 @@ class NoteFragment : Fragment() {
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
-        tvWordCount.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)?.lowercase()
-        tvWordCountRtl.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)?.lowercase()
+        tvWordCount.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)
+        tvWordCountRtl.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)
         context?.let { context ->
             tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
         }
