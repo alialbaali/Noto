@@ -129,7 +129,11 @@ class SettingsFragment : Fragment() {
                 title = stringResource(id = R.string.vault),
                 type = SettingsItemType.None,
                 onClick = {
-                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToValidateVaultPasscodeDialogFragment2())
+                    if (viewModel.vaultPasscode.value == null) {
+                        navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultPasscodeDialogFragment())
+                    } else {
+                        navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToValidateVaultPasscodeDialogFragment())
+                    }
                 },
                 painter = painterResource(id = R.drawable.ic_round_inventory_24),
             )
