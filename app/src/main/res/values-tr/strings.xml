@@ -35,7 +35,7 @@
     <string name="report_issue">Sorun bildir</string>
     <string name="about">Hakkında</string>
     <string name="whats_new">Yenilikler</string>
-    <string name="about_message">Noto <a href="https://www.alialbaali.com/">Ali Albaali</a> tarafından geliştirilen bir uygulamadır.\n\nUygulama <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Lisansı 2.0</a> koşulları altında dağıtılmaktadır. Uygulama simgesi <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> tarafından <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> lisansı altında yayınlanan <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> paketini kullanmaktadır.\n\nTürkçe, İspanyoca, Fransızca ve Almanca yerelleştirme için sırasıyla <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> ve <a href="https://sakci.me/tr">Alparslan Şakçi</a>, <a href="https://github.com/faus32">Faus AM</a>, <a href="https://noewen.com">Noéwen Boisnard</a>, Uli N\'ye; ayrıca geliştirme sürecinde emeği geçen herkese teşekkürler.</string>
+    <string name="about_message">Noto <a href="https://www.alialbaali.com/">Ali Albaali</a> tarafından geliştirilen bir uygulamadır.\n\nUygulama <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Lisansı 2.0</a> koşulları altında dağıtılmaktadır. Uygulama simgesi <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> tarafından <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> lisansı altında yayınlanan <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> paketini kullanmaktadır.\n\nTürkçe, Fransızca ve Almanca yerelleştirme için sırasıyla <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> ve <a href="https://sakci.me/tr">Alparslan Şakçi</a>, <a href="https://noewen.com">Noéwen Boisnard</a>, Uli N\'ye; ayrıca geliştirme sürecinde emeği geçen herkese teşekkürler.</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Verileri içe/dışa aktar</string>
     <string name="exporting_failed">Dışa aktarma başarısız.</string>
@@ -130,8 +130,8 @@
     <string name="vault_passcode_has_changed">Kasa şifresi güncellendi.</string>
     <string name="vault_passcode_message">Mevcut şifreyi unutursanız kasa şifresini tekrar değiştiremezsiniz, bu yüzden şifrenizi lütfen güvenli bir yere kaydedin.</string>
     <string name="open_vault">Kasayı aç</string>
-    <string name="open_vault_using_passcode">Şifre kullanarak aç</string>
-    <string name="open_vault_using_bio">Biyometrik doğrulama ile aç</string>
+    <string name="use_bio">Biyometri kullan</string>
+    <string name="validate">Doğrula</string>
     <string name="vault">Kasa</string>
     <string name="vault_is_open">Kasa açık</string>
     <string name="immediately">Hemen</string>
@@ -290,4 +290,5 @@
     <string name="release_2_0_1">• Hata düzeltmeleri.</string>
     <string name="release_2_1_0">• Geri alma/yeniden yazma özelliği ve geri al/yeniden yaz geçmişi eklendi.\n• Etiketler yeniden tasarlandı.\n• Tüm düzen türlerinde alt ve üst uygulama çubuğu yeniden tasarlandı.\n• Ana menü yeniden tasarlandı.\n• Klasör oluşturma/düzenleme arayüzü yeniden tasarlandı.\n• Notlar için gruplandırma düzeni özelliği eklendi.\n• Etiketleri veya notları sürüklerken yükseklik eklendi.\n• Klasör, not ve etiket menülerinde önizleme desteği eklendi.\n• Tarih formatı iyileştirildi.\n• Notlarda vurgu rengi değiştirildi.\n• Uygulamadan çıkmadan önce klasör ekranında gezinilecek.\n• Material You desteği (Material 3).\n• Başlangıç ekranı yeniden tasarlandı.\n• Okuma modu iyileştirildi.\n• Klasör ve notlarda kaydırma pozisyonunu hatırlama desteği eklendi.\n• Etiket ve klasör renkleri için kullanılan animasyonları devre dışı bırakabilme desteği eklendi.\n• Verileri içeri aktarmada yaşanan sorunlar giderildi.\n• Android 11 ve üzerinde kasayı açınca yaşanan çökme sorunu giderildi.\n• Geri al/yeniden yaz özelliklerini kaydırma hareketleriyle kullanabilme desteği eklendi.\n• Etiketleri dahil veya hariç olarak filtreleme desteği eklendi.\n• Uygulama simgesi yeniden tasarlandı.\n• Uygulama simgesi artık değiştirilebilir.\n• Farklı düzenlerde yazı tipi şeklini ve yazı boyutunu değiştirebilme desteği eklendi.\n• Almanca yerelleştirme eklendi.\n• Diğer hata düzeltmeleri ve tasarım iyileştirmeleri.</string>
     <string name="release_2_1_1">• Hata düzeltmeleri.</string>
+    <string name="release_2_1_2">• Hata düzeltmeleri.</string>
 </resources>

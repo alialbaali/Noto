@@ -136,8 +136,8 @@
     <string name="vault_passcode_has_changed">Le code d\'accès au coffre-fort a été mis à jour.</string>
     <string name="vault_passcode_message">Le code d\'accès au coffre-fort ne peut pas être modifié si vous perdez le code actuel, alors assurez-vous de le stocker dans un endroit sûr.</string>
     <string name="open_vault">Ouvrir le coffre-fort</string>
-    <string name="open_vault_using_passcode">Ouvrir avec le code d\'accès</string>
-    <string name="open_vault_using_bio">Ouvrir en utilisant la biométrie</string>
+    <string name="use_bio">Utiliser la biométrie</string>
+    <string name="validate">Valider</string>
     <string name="vault">Coffre-fort</string>
     <string name="vault_is_open">Le coffre-fort est déverrouillé</string>
     <string name="immediately">Immédiatement</string>
@@ -320,4 +320,5 @@
         \n• Autres corrections de bugs et améliorations de conception.
     </string>
     <string name="release_2_1_1">• Corrections de bugs.</string>
+    <string name="release_2_1_2">• Corrections de bugs.</string>
 </resources>

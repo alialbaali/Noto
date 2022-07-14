@@ -87,12 +87,12 @@
     <!-- Folder -->
     <string name="folders">المجلدات</string>
     <plurals name="folders_count">
-        <item quantity="zero">مجلدات %d</item>
-        <item quantity="one">مجلدات %d</item>
-        <item quantity="two">مجلدات %d</item>
-        <item quantity="few">مجلدات %d</item>
-        <item quantity="many">مجلدات %d</item>
-        <item quantity="other">مجلدات %d</item>
+        <item quantity="zero">%d مجلدات</item>
+        <item quantity="one">مجلد واحد</item>
+        <item quantity="two">مجلدين</item>
+        <item quantity="few">%d مجلدات</item>
+        <item quantity="many">%d مجلد</item>
+        <item quantity="other">%d مجلد</item>
     </plurals>
     <string name="create_folder">إنشاء مجلد</string>
     <string name="update_folder">تحديث المجلد</string>
@@ -140,8 +140,8 @@
     <string name="vault_passcode_has_changed">تم تحديث رمز مرور الخزينة.</string>
     <string name="vault_passcode_message">لا يمكن تغيير رمز مرور الخزينة إذا فقدت الرمز الحالي، لذا يرجى التأكد من تخزينه في مكان آمن.</string>
     <string name="open_vault">فتح الخزينة</string>
-    <string name="open_vault_using_passcode">فتح باستخدام رمز المرور</string>
-    <string name="open_vault_using_bio">فتح باستخدام القياسات الحيوية</string>
+    <string name="use_bio">استخدام المقاييس الحيوية</string>
+    <string name="validate">تحقق</string>
     <string name="vault">الخزينة</string>
     <string name="vault_is_open">الخزينة مفتوحة</string>
     <string name="immediately">على الفور</string>
@@ -156,18 +156,18 @@
     <string name="all">الكل</string>
     <string name="archive_is_empty">الأرشيف فارغ.</string>
     <plurals name="notes_count">
-        <item quantity="zero">%d ملاحظة</item>
-        <item quantity="one">%d ملاحظة</item>
-        <item quantity="two">%d ملاحظة</item>
-        <item quantity="few">%d ملاحظة</item>
+        <item quantity="zero">%d ملاحظات</item>
+        <item quantity="one">ملاحظة واحدة</item>
+        <item quantity="two">ملاحظتين</item>
+        <item quantity="few">%d ملاحظات</item>
         <item quantity="many">%d ملاحظة</item>
         <item quantity="other">%d ملاحظة</item>
     </plurals>
     <plurals name="words_count">
-        <item quantity="zero">%d كلمة</item>
-        <item quantity="one">%d كلمة</item>
-        <item quantity="two">%d كلمة</item>
-        <item quantity="few">%d كلمة</item>
+        <item quantity="zero">%d كلمات</item>
+        <item quantity="one">كلمة واحدة</item>
+        <item quantity="two">كلمتين</item>
+        <item quantity="few">%d كلمات</item>
         <item quantity="many">%d كلمة</item>
         <item quantity="other">%d كلمة</item>
     </plurals>
@@ -329,4 +329,5 @@
         \n• دعم الألمانية.
         \n• إصلاح الأخطاء وتحسين التصميم.    </string>
     <string name="release_2_1_1">• إصلاح الأخطاء.</string>
+    <string name="release_2_1_2">• إصلاح الأخطاء.</string>
 </resources>

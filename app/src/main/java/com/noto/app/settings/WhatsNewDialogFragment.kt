@@ -13,6 +13,7 @@ import com.noto.app.databinding.WhatsNewDialogFragmentBinding
 import com.noto.app.domain.model.Release
 import com.noto.app.domain.model.Release.Changelog
 import com.noto.app.domain.model.Release_2_1_1
+import com.noto.app.domain.model.Release_2_1_2
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -24,8 +25,8 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
 
     private val currentRelease: Release? by lazy {
         context?.let { context ->
-            val changelog = Changelog(context.stringResource(R.string.release_2_1_1))
-            Release_2_1_1(changelog)
+            val changelog = Changelog(context.stringResource(R.string.release_2_1_2))
+            Release_2_1_2(changelog)
         }
     }
 

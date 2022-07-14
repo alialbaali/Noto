@@ -39,7 +39,7 @@
         \n\nLa aplicación se distribuye bajo los términos de la <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Licencia Apache 2.</a>.
         Los iconos de aplicaciones utilizan <a href="https://www.figma.com/community/file/830405806109119447/">Colección de degradados</a> publicada
         por <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> con licencia <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.</a>.
-        \n\nAgradecimientos especiales a <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> y <a href="https://sakci.me">Alparslan Scope akc.Ui</a>,
+        \n\nAgradecimientos especiales a <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> y <a href="https://sakci.me">Alparslan Şakçi</a>,
         <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a>y Uli N para localizaciones respectivas en turco, español, francés y alemán,
         y todos los que han ayudado y contribuido en el desarrollo.</string>
     <!--    <string name="share_with">Share with</string>-->
@@ -136,8 +136,8 @@
     <string name="vault_passcode_has_changed">La contraseña de bóveda ha sido actualizada.</string>
     <string name="vault_passcode_message">La contraseña de la bóveda no se puede cambiar si pierde la actual, así que asegúrese de guardarla en un lugar seguro.</string>
     <string name="open_vault">Abrir bóveda</string>
-    <string name="open_vault_using_passcode">Abrir usando contraseña</string>
-    <string name="open_vault_using_bio">Abrir usando biométricos</string>
+    <string name="use_bio">Activar biometría</string>
+    <string name="validate">Validar</string>
     <string name="vault">Bóveda</string>
     <string name="vault_is_open">Bóveda abierta</string>
     <string name="immediately">Inmediatamente</string>
@@ -320,4 +320,5 @@
         \n• Otras correcciones de errores y mejoras de diseño
     </string>
     <string name="release_2_1_1">• Corrección de errores.</string>
+    <string name="release_2_1_2">• Corrección de errores.</string>
 </resources>
