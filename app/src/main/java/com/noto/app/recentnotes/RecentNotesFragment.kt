@@ -94,6 +94,7 @@ class RecentNotesFragment : Fragment() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
         tvNotesCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold)
+        tvNotesCount.animationInterpolator = DefaultInterpolator()
         val layoutManager = rv.layoutManager as LinearLayoutManager
 
         combine(

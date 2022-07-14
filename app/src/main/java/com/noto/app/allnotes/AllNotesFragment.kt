@@ -91,6 +91,7 @@ class AllNotesFragment : Fragment() {
     private fun AllNotesFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
+        tvNotesCount.animationInterpolator = DefaultInterpolator()
         tvNotesCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold)
         val layoutManager = rv.layoutManager as LinearLayoutManager
 
