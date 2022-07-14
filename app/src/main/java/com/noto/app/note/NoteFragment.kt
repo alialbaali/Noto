@@ -54,7 +54,7 @@ class NoteFragment : Fragment() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         abl.bringToFront()
         tvWordCount.animationInterpolator = DefaultInterpolator()
-        tvWordCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
+        tvWordCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold)
         viewModel.updateNoteAccessDate()
 
         viewModel.folder

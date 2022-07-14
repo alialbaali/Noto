@@ -84,7 +84,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.setupState() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        tvFoldersCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
+        tvFoldersCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold)
 
         combine(
             viewModel.folders,

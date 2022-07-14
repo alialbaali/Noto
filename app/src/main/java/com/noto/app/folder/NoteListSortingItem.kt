@@ -46,7 +46,7 @@ abstract class NoteListSortingItem : EpoxyModelWithHolder<NoteListSortingItem.Ho
                 NoteListSortingType.Alphabetical -> context.stringResource(R.string.alphabetical_sorting)
             }
             tvFolderNotesCount.animationInterpolator = DefaultInterpolator()
-            tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_semibold_italic)
+            tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_semibold)
         }
         tvSorting.setOnClickListener(onClickListener)
     }

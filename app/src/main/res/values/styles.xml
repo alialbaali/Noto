@@ -84,7 +84,7 @@
     <style name="SubtitleTextView" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:textColor">?attr/notoSecondaryColor</item>
-        <item name="fontFamily">@font/nunito_semibold_italic</item>
+        <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
     </style>
