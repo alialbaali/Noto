@@ -37,7 +37,7 @@ open class BaseActivity : AppCompatActivity() {
         applySystemBarsColorsForApiLessThan23(window)
     }
 
-    private fun setupTheme(theme: Theme) {
+    protected open fun setupTheme(theme: Theme) {
         when (theme) {
             Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
             Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
