@@ -34,7 +34,7 @@ fun Context.createFolderListWidgetRemoteViews(
         setOnClickPendingIntent(R.id.fab, createNewFolderButtonPendingIntent(appWidgetId, activityName))
         setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId, activityName))
         setOnClickPendingIntent(R.id.tv_app_name, createAppLauncherPendingIntent(appWidgetId, activityName))
-        setRemoteAdapter(R.id.lv, createFolderListServiceIntent(appWidgetId))
+        setRemoteAdapter(R.id.lv, createFolderListServiceIntent(appWidgetId, widgetRadius))
         setPendingIntentTemplate(R.id.lv, createFolderItemPendingIntent(appWidgetId, activityName))
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())
@@ -65,10 +65,11 @@ private fun Context.createNewFolderButtonPendingIntent(appWidgetId: Int, activit
     return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
 }
 
-private fun Context.createFolderListServiceIntent(appWidgetId: Int): Intent {
+private fun Context.createFolderListServiceIntent(appWidgetId: Int, widgetRadius: Int): Intent {
     return Intent(this, FolderListWidgetService::class.java).apply {
         putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         data = Uri.parse(this.toUri(Intent.URI_INTENT_SCHEME))
+        putExtra(Constants.WidgetRadius, widgetRadius)
     }
 }
 

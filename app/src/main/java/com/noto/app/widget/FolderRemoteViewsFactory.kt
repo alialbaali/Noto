@@ -29,6 +29,7 @@ class FolderRemoteViewsFactory(private val context: Context, intent: Intent?) : 
         ?: AppWidgetManager.INVALID_APPWIDGET_ID
     private lateinit var folders: List<Pair<Folder, Int>>
     private var isShowNotesCount: Boolean = true
+    private val widgetRadius = intent?.getIntExtra(Constants.WidgetRadius, 0)
 
     override fun onCreate() {}
 
@@ -74,6 +75,9 @@ class FolderRemoteViewsFactory(private val context: Context, intent: Intent?) : 
             setInt(R.id.iv_folder_icon, SetColorFilterMethodName, color)
             setOnClickFillInIntent(R.id.ll, intent)
             setViewVisibility(R.id.tv_folder_notes_count, if (isShowNotesCount) View.VISIBLE else View.GONE)
+            widgetRadius?.toWidgetShapeId()?.let { widgetRadius ->
+                setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius)
+            }
         }
         return remoteViews
     }
