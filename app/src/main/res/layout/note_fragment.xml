@@ -113,16 +113,24 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_created_at"
                 style="@style/SubtitleTextView"
-                android:layout_margin="@dimen/spacing_normal"
-                android:gravity="center"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_extra_small"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:fontFamily="@font/nunito_semibold_italic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/et_note_body"
                 tools:text="Created Tue, Aug 8" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_accessed_at"
+                style="@style/SubtitleTextView"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_extra_small"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:fontFamily="@font/nunito_semibold_italic"
+                tools:text="Accessed Tue, Aug 8" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

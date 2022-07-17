@@ -444,6 +444,7 @@ class NoteFragment : Fragment() {
         tvWordCountRtl.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)
         context?.let { context ->
             tvCreatedAt.text = context.stringResource(R.string.created, note.creationDate.format(context))
+            tvAccessedAt.text = context.stringResource(R.string.accessed, note.accessDate.format(context))
         }
         nsv.post {
             if (isRememberScrollingPosition) {
