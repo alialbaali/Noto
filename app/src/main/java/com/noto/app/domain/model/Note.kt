@@ -51,8 +51,8 @@ data class Note(
     @ColumnInfo(name = "is_vaulted", defaultValue = "0")
     val isVaulted: Boolean = false,
 
-    @ColumnInfo(name = "access_date", defaultValue = "NULL")
-    val accessDate: Instant? = null,
+    @ColumnInfo(name = "access_date", defaultValue = "creation_date")
+    val accessDate: Instant = creationDate,
 
     @ColumnInfo(name = "scrolling_position", defaultValue = "0")
     val scrollingPosition: Int = 0,

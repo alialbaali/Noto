@@ -50,17 +50,15 @@ class RecentNotesViewModel(
             noteLabelRepository.getNoteLabels(),
             searchTerm,
         ) { folders, notes, labels, noteLabels, searchTerm ->
-            mutableNotesVisibility.value = notes.mapNotNull { it.accessDate?.toLocalDate() }.map {
-                val isVisible = notesVisibility.value[it] ?: true
-                it to isVisible
-            }.toMap()
+            mutableNotesVisibility.value = notes
+                .map { it.accessDate.toLocalDate() }
+                .associateWith { notesVisibility.value[it] ?: true }
             mutableNotes.value = notes
                 .filter { note -> folders.any { folder -> folder.id == note.folderId } }
                 .filterRecentlyAccessed()
                 .mapWithLabels(labels, noteLabels)
                 .filterContent(searchTerm)
-                .groupBy { noteWithLabels -> noteWithLabels.first.accessDate?.toLocalDate() }
-                .filterNotNullKeys()
+                .groupBy { noteWithLabels -> noteWithLabels.first.accessDate.toLocalDate() }
                 .filterValues { it.isNotEmpty() }
                 .mapValues { it.value.sortedByDescending { it.first.accessDate } }
                 .toSortedMap(compareByDescending { it })

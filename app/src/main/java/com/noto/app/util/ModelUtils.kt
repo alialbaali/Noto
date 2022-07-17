@@ -129,7 +129,7 @@ fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): 
     }
 }
 
-fun List<Note>.filterRecentlyAccessed() = filter { it.accessDate != null && it.accessDate >= Clock.System.now().minus(7.days) }
+fun List<Note>.filterRecentlyAccessed() = filter { it.accessDate >= Clock.System.now().minus(7.days) }
 
 @Suppress("UNCHECKED_CAST")
 fun <K, V> Map<K?, V>.filterNotNullKeys() = filterKeys { it != null } as Map<K, V>

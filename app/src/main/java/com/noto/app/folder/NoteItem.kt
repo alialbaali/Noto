@@ -88,7 +88,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             if (isShowCreationDate)
                 tvCreationDate.text = context.stringResource(R.string.created, note.creationDate.format(root.context))
             if (isShowAccessDate)
-                tvAccessDate.text = context.stringResource(R.string.accessed, note.accessDate?.format(root.context))
+                tvAccessDate.text = context.stringResource(R.string.accessed, note.accessDate.format(root.context))
             if (note.reminderDate != null) {
                 llReminder.background?.mutate()?.setTint(colorResource)
                 tvReminder.text = note.reminderDate?.format(context)

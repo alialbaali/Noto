@@ -89,7 +89,6 @@ class NoteViewModel(
         val note = note.value.copy(
             title = title.takeUnless { trimContent } ?: title.trim(),
             body = body.takeUnless { trimContent } ?: body.trim(),
-            accessDate = Clock.System.now(),
         )
         if (note.isValid)
             if (note.id == 0L)

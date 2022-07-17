@@ -246,7 +246,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             }
             vNote.tvCreationDate.text = context.stringResource(R.string.created, note.creationDate.format(context))
             vNote.tvCreationDate.isVisible = true
-            vNote.tvAccessDate.text = context.stringResource(R.string.accessed, note.accessDate?.format(context))
+            vNote.tvAccessDate.text = context.stringResource(R.string.accessed, note.accessDate.format(context))
             vNote.tvAccessDate.isVisible = true
             if (note.reminderDate != null) {
                 vNote.llReminder.background?.mutate()?.setTint(colorResource)

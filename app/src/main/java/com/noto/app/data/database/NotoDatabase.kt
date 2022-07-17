@@ -26,7 +26,7 @@ private const val NOTO_DATABASE = "Noto Database"
 )
 @Database(
     entities = [Folder::class, Note::class, Label::class, NoteLabel::class],
-    version = 30,
+    version = 31,
     autoMigrations = [
         AutoMigration(from = 6, to = 7),
         AutoMigration(from = 7, to = 8),
@@ -84,6 +84,7 @@ abstract class NotoDatabase : RoomDatabase() {
 
         private fun buildDatabase(context: Context) = Room
             .databaseBuilder(context.applicationContext, NotoDatabase::class.java, NOTO_DATABASE)
+            .addMigrations(Migrations.SetAccessDateToCreationDate)
             .build()
     }
 }
