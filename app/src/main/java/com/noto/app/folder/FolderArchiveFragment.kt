@@ -67,7 +67,7 @@ class FolderArchiveFragment : BaseDialogFragment(isCollapsable = true) {
     private fun FolderArchiveFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
-            tb.tvDialogTitle.text = context.stringResource(R.string.archive, folder.getTitle(context))
+            tb.tvDialogTitle.text = context.stringResource(R.string.folder_archive, folder.getTitle(context))
             tb.tvDialogTitle.setTextColor(color)
             tb.vHead.background?.mutate()?.setTint(color)
         }

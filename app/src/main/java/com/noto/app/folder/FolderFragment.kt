@@ -67,7 +67,7 @@ class FolderFragment : Fragment() {
             val notesCount = notes.getOrDefault(emptyList()).filterSelectedLabels(labels.filterSelected(), folder.filteringType).count()
             setupFolder(folder, notesCount, isRememberScrollingPosition)
             context?.let { context ->
-                val text = context.stringResource(R.string.archive, folder.getTitle(context))
+                val text = context.stringResource(R.string.folder_archive, folder.getTitle(context))
                 MenuItemCompat.setTooltipText(archiveMenuItem, text)
                 MenuItemCompat.setContentDescription(archiveMenuItem, text)
             }

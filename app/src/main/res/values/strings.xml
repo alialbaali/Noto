@@ -78,6 +78,7 @@
     <string name="parent_folder">Parent folder</string>
     <string name="new_note_cursor_position">New note cursor position</string>
     <string name="archive">Archive</string>
+    <string name="folder_archive">%s archive</string>
     <string name="unarchive">Unarchive</string>
     <string name="edit">Edit</string>
     <string name="pin">Pin</string>
