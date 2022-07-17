@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.activity.addCallback
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -51,6 +52,10 @@ class NoteReadingModeFragment : Fragment() {
         }
 
     private fun NoteReadingModeFragmentBinding.setupListeners() {
+        activity?.onBackPressedDispatcher?.addCallback {
+            navController?.navigateUp()
+        }
+
         tb.setNavigationOnClickListener {
             navController?.navigateUp()
         }
