@@ -1,6 +1,5 @@
 package com.noto.app
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
@@ -18,12 +17,12 @@ open class BaseActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<AppViewModel>()
 
-    private var currentTheme = Theme.System
+    private val currentTheme
+        get() = intent?.getStringExtra(Constants.Theme)?.let(Theme::valueOf)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
-        currentTheme = intent?.getStringExtra(Constants.Theme)?.let(Theme::valueOf) ?: Theme.System
-        currentTheme.toAndroidTheme().also(::setTheme)
+        currentTheme?.toAndroidTheme()?.also(::setTheme)
         super.onCreate(savedInstanceState)
         setupState()
     }
@@ -37,16 +36,16 @@ open class BaseActivity : AppCompatActivity() {
         applySystemBarsColorsForApiLessThan23(window)
     }
 
-    protected open fun setupTheme(theme: Theme) {
-        when (theme) {
-            Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            Theme.Dark -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            Theme.SystemBlack -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            Theme.Black -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-        if (theme != currentTheme) {
-            intent = Intent().apply { putExtra(Constants.Theme, theme.name) }
+    private fun setupTheme(theme: Theme) {
+        if (currentTheme != theme) {
+            intent?.putExtra(Constants.Theme, theme.name)
+            when (theme) {
+                Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                Theme.Dark -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                Theme.SystemBlack -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                Theme.Black -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
             recreate()
         }
     }

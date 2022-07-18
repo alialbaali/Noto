@@ -4,7 +4,6 @@ import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
@@ -14,7 +13,6 @@ import com.noto.app.BaseActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteListWidgetConfigActivityBinding
 import com.noto.app.domain.model.FilteringType
-import com.noto.app.domain.model.Theme
 import com.noto.app.label.labelItem
 import com.noto.app.main.SelectFolderDialogFragment
 import com.noto.app.util.*
@@ -240,15 +238,5 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                 arguments = args
                 show(supportFragmentManager, null)
             }
-    }
-
-    override fun setupTheme(theme: Theme) {
-        when (theme) {
-            Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            Theme.Dark -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            Theme.SystemBlack -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
-            Theme.Black -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
     }
 }
