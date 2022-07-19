@@ -45,7 +45,9 @@ object Migrations {
 
     object SetAccessDateToCreationDate : Migration(30, 31) {
         override fun migrate(database: SupportSQLiteDatabase) {
-            database.execSQL("""
+            database.beginTransaction()
+            try {
+                database.execSQL("""
                 CREATE TABLE notes_tmp(
                    id INTEGER NOT NULL PRIMARY KEY, 
                    folder_id INTEGER NOT NULL REFERENCES folders(id) ON DELETE CASCADE,
@@ -61,17 +63,21 @@ object Migrations {
                    scrolling_position INTEGER NOT NULL DEFAULT 0
                 );
                 """.trimIndent())
-            database.execSQL(
-                """INSERT INTO notes_tmp 
+                database.execSQL(
+                    """INSERT INTO notes_tmp 
                     |SELECT 
                     | id, folder_id, title, body, position, creation_date,
                     | is_pinned, is_archived, reminder_date,
                     | is_vaulted,
                     | CASE WHEN access_date IS NULL THEN creation_date ELSE access_date END,
                     | scrolling_position FROM notes;""".trimMargin()
-            )
-            database.execSQL("""DROP TABLE notes;""")
-            database.execSQL("""ALTER TABLE notes_tmp RENAME TO notes;""")
+                )
+                database.execSQL("""DROP TABLE notes;""")
+                database.execSQL("""ALTER TABLE notes_tmp RENAME TO notes;""")
+                database.setTransactionSuccessful()
+            } finally {
+                database.endTransaction()
+            }
         }
     }
 }
