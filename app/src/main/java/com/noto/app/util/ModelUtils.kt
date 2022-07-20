@@ -75,7 +75,8 @@ fun List<NoteWithLabels>.filterSelectedLabels(selectedLabels: List<Label>, filte
     if (selectedLabels.isNotEmpty()) {
         when (filteringType) {
             FilteringType.Inclusive -> pair.second.any { label -> selectedLabels.any { it == label } }
-            FilteringType.Exclusive -> pair.second == selectedLabels
+            FilteringType.Exclusive -> pair.second.containsAll(selectedLabels)
+            FilteringType.Strict -> pair.second == selectedLabels
         }
     } else {
         true

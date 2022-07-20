@@ -41,6 +41,11 @@
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
                 android:text="@string/exclusive" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/strict" />
         </com.google.android.material.tabs.TabLayout>
 
         <LinearLayout

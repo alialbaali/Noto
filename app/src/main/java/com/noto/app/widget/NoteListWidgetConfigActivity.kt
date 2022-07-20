@@ -169,6 +169,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                 when (filteringType) {
                     FilteringType.Inclusive -> tlFilteringType.getTabAt(0)?.select()
                     FilteringType.Exclusive -> tlFilteringType.getTabAt(1)?.select()
+                    FilteringType.Strict -> tlFilteringType.getTabAt(2)?.select()
                 }
             }
             .launchIn(lifecycleScope)
@@ -208,7 +209,8 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
                     val filteringType = when (tab?.position) {
                         0 -> FilteringType.Inclusive
-                        else -> FilteringType.Exclusive
+                        1 -> FilteringType.Exclusive
+                        else -> FilteringType.Strict
                     }
                     viewModel.setFilteringType(filteringType)
                 }

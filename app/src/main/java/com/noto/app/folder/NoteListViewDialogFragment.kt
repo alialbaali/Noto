@@ -49,6 +49,7 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                 when (folder.filteringType) {
                     FilteringType.Inclusive -> tlFilteringType.getTabAt(0)?.select()
                     FilteringType.Exclusive -> tlFilteringType.getTabAt(1)?.select()
+                    FilteringType.Strict -> tlFilteringType.getTabAt(2)?.select()
                 }
             }
             .launchIn(lifecycleScope)
@@ -88,7 +89,8 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
         btnDone.setOnClickListener {
             val filteringType = when (tlFilteringType.selectedTabPosition) {
                 0 -> FilteringType.Inclusive
-                else -> FilteringType.Exclusive
+                1 -> FilteringType.Exclusive
+                else -> FilteringType.Strict
             }
             viewModel.updateFolderFilteringType(filteringType)
                 .invokeOnCompletion { dismiss() }
