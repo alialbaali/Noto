@@ -46,13 +46,13 @@ class LoginViewModel(
 
     fun registerUser(name: String, email: String, password: String) = viewModelScope.launch {
         mutableState.value = UiState.Loading
-        mutableState.value = userRepository.registerUser(name.trim(), email.trim(), password.trim())
+        mutableState.value = userRepository.registerUser(name.trim(), email.trim().lowercase(), password.trim())
             .toUiState()
     }
 
     fun loginUser(email: String, password: String) = viewModelScope.launch {
         mutableState.value = UiState.Loading
-        mutableState.value = userRepository.loginUser(email.trim(), password.trim())
+        mutableState.value = userRepository.loginUser(email.trim().lowercase(), password.trim())
             .onSuccess { settingsRepository.updateUserStatus(UserStatus.LoggedIn) }
             .toUiState()
     }
