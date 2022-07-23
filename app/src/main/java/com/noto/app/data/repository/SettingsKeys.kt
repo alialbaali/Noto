@@ -4,89 +4,42 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import com.noto.app.data.repository.SettingsKeys.Keys.Widget.AppIcon
-import com.noto.app.data.repository.SettingsKeys.Keys.Widget.EditButton
-import com.noto.app.data.repository.SettingsKeys.Keys.Widget.FilteringType
-import com.noto.app.data.repository.SettingsKeys.Keys.Widget.FolderId
-import com.noto.app.data.repository.SettingsKeys.Keys.Widget.Header
-import com.noto.app.data.repository.SettingsKeys.Keys.Widget.Id
-import com.noto.app.data.repository.SettingsKeys.Keys.Widget.NewItemButton
-import com.noto.app.data.repository.SettingsKeys.Keys.Widget.NotesCount
-import com.noto.app.data.repository.SettingsKeys.Keys.Widget.Radius
-import com.noto.app.data.repository.SettingsKeys.Keys.Widget.SelectedLabelIds
 import com.noto.app.util.Constants
 
 object SettingsKeys {
-    val Theme = stringPreferencesKey(Keys.Theme)
-    val Font = stringPreferencesKey(Keys.Font)
-    val Language = stringPreferencesKey(Keys.Language)
-    val Icon = stringPreferencesKey(Keys.Icon)
-    val FolderListSortingType = stringPreferencesKey(Keys.FolderListSortingType)
-    val FolderListSortingOrder = stringPreferencesKey(Keys.FolderListSortingOrder)
-    val ShowNotesCount = stringPreferencesKey(Keys.ShowNotesCount)
-    val IsVaultOpen = stringPreferencesKey(Keys.IsVaultOpen)
-    val VaultPasscode = stringPreferencesKey(Keys.VaultPasscode)
-    val VaultTimeout = stringPreferencesKey(Keys.VaultTimeout)
-    val ScheduledVaultTimeout = stringPreferencesKey(Keys.ScheduledVaultTimeout)
-    val LastVersion = stringPreferencesKey(Keys.LastVersion)
-    val IsDoNotDisturb = booleanPreferencesKey(Keys.IsDoNotDisturb)
-    val IsScreenOn = booleanPreferencesKey(Keys.IsScreenOn)
-    val IsFullScreen = booleanPreferencesKey(Keys.IsFullScreen)
-    val IsBioAuthEnabled = stringPreferencesKey(Keys.IsBioAuthEnabled)
-    val MainInterfaceId = longPreferencesKey(Keys.MainInterfaceId)
-    val IsRememberScrollingPosition = booleanPreferencesKey(Keys.IsRememberScrollingPosition)
-    val AllNotesScrollingPosition = intPreferencesKey(Keys.AllNotesScrollingPosition)
-    val RecentNotesScrollingPosition = intPreferencesKey(Keys.RecentNotesScrollingPosition)
+    val Theme = stringPreferencesKey("Theme")
+    val Font = stringPreferencesKey("Font")
+    val Language = stringPreferencesKey("Language")
+    val Icon = stringPreferencesKey("Icon")
+    val FolderListSortingType = stringPreferencesKey("Library_List_Sorting_Type")
+    val FolderListSortingOrder = stringPreferencesKey("Library_List_Sorting_Order")
+    val ShowNotesCount = stringPreferencesKey("Show_Notes_Count")
+    val IsVaultOpen = stringPreferencesKey("IsVaultOpen")
+    val VaultPasscode = stringPreferencesKey("VaultPasscode")
+    val VaultTimeout = stringPreferencesKey("VaultTimeout")
+    val ScheduledVaultTimeout = stringPreferencesKey("ScheduledVaultTimeout")
+    val LastVersion = stringPreferencesKey("LastVersion")
+    val IsDoNotDisturb = booleanPreferencesKey("IsDoNotDisturb")
+    val IsScreenOn = booleanPreferencesKey("IsScreenOn")
+    val IsFullScreen = booleanPreferencesKey("IsFullScreen")
+    val IsBioAuthEnabled = stringPreferencesKey("IsBioAuthEnabled")
+    val MainInterfaceId = longPreferencesKey("MainFolderId")
+    val IsRememberScrollingPosition = booleanPreferencesKey("IsRememberScrollingPosition")
+    val AllNotesScrollingPosition = intPreferencesKey("AllNotesScrollingPosition")
+    val RecentNotesScrollingPosition = intPreferencesKey("RecentNotesScrollingPosition")
 
     @Suppress("FunctionName")
     object Widget {
-        fun Id(widgetId: Int) = stringPreferencesKey(widgetId.Id)
-        fun FolderId(widgetId: Int) = longPreferencesKey(widgetId.FolderId)
-        fun Header(widgetId: Int) = stringPreferencesKey(widgetId.Header)
-        fun EditButton(widgetId: Int) = stringPreferencesKey(widgetId.EditButton)
-        fun AppIcon(widgetId: Int) = stringPreferencesKey(widgetId.AppIcon)
-        fun NewItemButton(widgetId: Int) = stringPreferencesKey(widgetId.NewItemButton)
-        fun NotesCount(widgetId: Int) = stringPreferencesKey(widgetId.NotesCount)
-        fun Radius(widgetId: Int) = stringPreferencesKey(widgetId.Radius)
-        fun SelectedLabelIds(widgetId: Int, folderId: Long) = stringPreferencesKey(widgetId.SelectedLabelIds(folderId))
-        fun FilteringType(widgetId: Int) = stringPreferencesKey(widgetId.FilteringType)
-    }
-
-    private object Keys {
-        const val Theme = "Theme"
-        const val Font = "Font"
-        const val Language = "Language"
-        const val Icon = "Icon"
-        const val FolderListSortingType = "Library_List_Sorting_Type"
-        const val FolderListSortingOrder = "Library_List_Sorting_Order"
-        const val ShowNotesCount = "Show_Notes_Count"
-        const val IsVaultOpen = "IsVaultOpen"
-        const val VaultPasscode = "VaultPasscode"
-        const val VaultTimeout = "VaultTimeout"
-        const val ScheduledVaultTimeout = "ScheduledVaultTimeout"
-        const val LastVersion = "LastVersion"
-        const val IsBioAuthEnabled = "IsBioAuthEnabled"
-        const val MainInterfaceId = "MainFolderId"
-        const val IsDoNotDisturb = "IsDoNotDisturb"
-        const val IsScreenOn = "IsScreenOn"
-        const val IsFullScreen = "IsFullScreen"
-        const val IsRememberScrollingPosition = "IsRememberScrollingPosition"
-        const val AllNotesScrollingPosition = "AllNotesScrollingPosition"
-        const val RecentNotesScrollingPosition = "RecentNotesScrollingPosition"
-
-        object Widget {
-            val Int.Id get() = "Widget_Id_$this"
-            val Int.FolderId get() = "Widget_Id_Folder_Id_$this"
-            val Int.Header get() = "Widget_Header_$this"
-            val Int.EditButton get() = "Widget_Edit_Button$this"
-            val Int.AppIcon get() = "Widget_App_Icon_$this"
-            val Int.NewItemButton get() = "Widget_New_Item_Button_$this"
-            val Int.NotesCount get() = "Widget_Notes_Count_$this"
-            val Int.Radius get() = "Widget_Radius_$this"
-            val Int.FilteringType get() = "Widget_Filtering_Type_$this"
-
-            @Suppress("FunctionName")
-            fun Int.SelectedLabelIds(folderId: Long) = Id + "_" + Constants.FolderId + folderId.toString()
-        }
+        fun Id(widgetId: Int) = stringPreferencesKey("Widget_Id_$widgetId")
+        fun FolderId(widgetId: Int) = longPreferencesKey("Widget_Id_Folder_Id_$widgetId")
+        fun Header(widgetId: Int) = stringPreferencesKey("Widget_Header_$widgetId")
+        fun EditButton(widgetId: Int) = stringPreferencesKey("Widget_Edit_Button$widgetId")
+        fun AppIcon(widgetId: Int) = stringPreferencesKey("Widget_App_Icon_$widgetId")
+        fun NewItemButton(widgetId: Int) = stringPreferencesKey("Widget_New_Item_Button_$widgetId")
+        fun NotesCount(widgetId: Int) = stringPreferencesKey("Widget_Notes_Count_$widgetId")
+        fun Radius(widgetId: Int) = stringPreferencesKey("Widget_Radius_$widgetId")
+        fun FilteringType(widgetId: Int) = stringPreferencesKey("Widget_Filtering_Type_$widgetId")
+        fun SelectedLabelIds(widgetId: Int, folderId: Long) =
+            stringPreferencesKey("Widget_Id_$widgetId" + "_" + Constants.FolderId + folderId.toString())
     }
 }
