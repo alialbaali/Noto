@@ -18,6 +18,7 @@ object Constants {
     const val Id = "id"
     const val Name = "name"
     const val Email = "email"
+    const val UserEmail = "user_email"
     const val Password = "password"
     const val NameMaxLength = 32
     const val GrantType = "grant_type"

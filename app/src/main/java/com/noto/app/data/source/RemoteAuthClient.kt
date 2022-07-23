@@ -1,10 +1,7 @@
 package com.noto.app.data.source
 
-import com.noto.app.data.model.remote.AuthErrorResponse
-import com.noto.app.data.model.remote.AuthResponse
-import com.noto.app.data.model.remote.RemoteAuthUser
+import com.noto.app.data.model.remote.*
 import com.noto.app.data.model.remote.ResponseException.Auth
-import com.noto.app.data.model.remote.SignUpErrorResponse
 import com.noto.app.domain.source.RemoteAuthDataSource
 import com.noto.app.util.Constants
 import com.noto.app.util.getOrElse
@@ -132,6 +129,16 @@ class RemoteAuthClient(private val authClient: HttpClient, private val client: H
             val errorResponse = response.body<AuthErrorResponse>()
             unhandledError(errorResponse.error)
         }
+    }
+
+    override suspend fun getPasswordParameters(email: String): PasswordParametersResponse {
+        return authClient.post("/rest/v1/rpc/get_password_parameters") {
+            setBody(
+                mapOf(
+                    Constants.UserEmail to email
+                )
+            )
+        }.getOrElse { Auth.InvalidLoginCredentials() }
     }
 
 }
