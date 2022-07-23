@@ -37,7 +37,7 @@ fun String?.takeAfterFirstLineOrEmpty() = this?.lines()?.drop(1)?.joinToString("
 fun String.takeLines(n: Int) = lines().take(n).joinToString("\n")
 
 val CharSequence.wordsCount
-    get() = if (isBlank()) 0 else split("\\s+".toRegex()).size
+    get() = if (isBlank()) 0 else split("\\s+".toRegex()).filter { it.isNotBlank() }.size
 
 inline fun <T : ViewBinding> T.withBinding(crossinline block: T.() -> Unit): View {
     block()
