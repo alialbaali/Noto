@@ -30,6 +30,7 @@ object Constants {
     const val Type = "type"
     const val EmailChange = "email_change"
     const val SignUp = "signup"
+    const val PasswordParameters = "password_parameters"
     val EmailRegex = Regex(".+@.+\\..+")
     val PasswordRegex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#^])[A-Za-z\\d@$!%*?&#^]{8,}$")
 

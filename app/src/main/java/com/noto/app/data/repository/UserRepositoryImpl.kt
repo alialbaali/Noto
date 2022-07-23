@@ -5,6 +5,7 @@ import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.domain.repository.UserRepository
 import com.noto.app.domain.source.RemoteAuthDataSource
 import com.noto.app.domain.source.RemoteUserDataSource
+import com.noto.app.util.PasswordCryptoUtils
 import kotlinx.coroutines.flow.*
 
 class UserRepositoryImpl(
@@ -21,14 +22,22 @@ class UserRepositoryImpl(
         .catch { emit(Result.failure(it)) }
 
     override suspend fun registerUser(name: String, email: String, password: String): Result<Unit> = runCatching {
-        val remoteAuthUser = remoteAuthDataSource.signUp(email, password)
+        val passwordData = PasswordCryptoUtils.hashPassword(password)
+        val remoteAuthUser = remoteAuthDataSource.signUp(email, passwordData.encodedHashedPassword)
         settingsRepository.updateId(remoteAuthUser.id)
         settingsRepository.updateName(name)
         settingsRepository.updateEmail(email)
+        settingsRepository.updatePasswordParameters(passwordData.encodedParameters)
     }
 
     override suspend fun loginUser(email: String, password: String): Result<Unit> = runCatching {
-        val response = remoteAuthDataSource.login(email, password)
+        val passwordData = remoteAuthDataSource.getPasswordParameters(email).run {
+            PasswordCryptoUtils.hashPassword(
+                password = password,
+                encodedParameters = passwordParameters,
+            )
+        }
+        val response = remoteAuthDataSource.login(email, passwordData.encodedHashedPassword)
         settingsRepository.updateId(response.user.id)
         settingsRepository.updateEmail(response.user.email)
         settingsRepository.updateAccessToken(response.accessToken)
@@ -40,9 +49,11 @@ class UserRepositoryImpl(
     override suspend fun completeUserRegistration(accessToken: String, refreshToken: String): Result<Unit> = runCatching {
         val id = settingsRepository.id.first()
         val name = settingsRepository.name.first()
+        val passwordParameters = settingsRepository.passwordParameters.first()
         settingsRepository.updateAccessToken(accessToken)
         settingsRepository.updateRefreshToken(refreshToken)
-        remoteUserDataSource.createUser(id, name)
+        remoteUserDataSource.createUser(id, name, passwordParameters)
+        settingsRepository.clearPasswordParameters()
     }
 
     override suspend fun updateName(name: String): Result<Unit> = runCatching {
