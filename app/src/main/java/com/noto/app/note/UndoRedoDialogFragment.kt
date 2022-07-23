@@ -49,45 +49,49 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
         if (args.isTitle) {
             if (args.isUndo) {
                 val currentText = viewModel.note.value.title
-                val items = viewModel.titleHistory.replayCache.subListOld(currentText)
+                val items = viewModel.titleHistory.replayCache.subListOld(currentText).filter { it.isNotBlank() }
                 setupItems(items, currentText) { title ->
                     viewModel.setIsUndoOrRedo()
                     viewModel.setNoteTitle(title)
                     dismiss()
                 }
+                rv.smoothScrollToPosition(items.lastIndex)
             } else {
                 val currentText = viewModel.note.value.title
-                val items = viewModel.titleHistory.replayCache.subListNew(currentText)
+                val items = viewModel.titleHistory.replayCache.subListNew(currentText).filter { it.isNotBlank() }
                 setupItems(items, currentText) { title ->
                     viewModel.setIsUndoOrRedo()
                     viewModel.setNoteTitle(title)
                     dismiss()
                 }
+                rv.smoothScrollToPosition(0)
             }
         } else {
             if (args.isUndo) {
                 val currentText = viewModel.note.value.body
-                val items = viewModel.bodyHistory.replayCache.subListOld(currentText)
+                val items = viewModel.bodyHistory.replayCache.subListOld(currentText).filter { it.isNotBlank() }
                 setupItems(items, currentText) { body ->
                     viewModel.setIsUndoOrRedo()
                     viewModel.setNoteBody(body)
                     dismiss()
                 }
+                rv.smoothScrollToPosition(items.lastIndex)
             } else {
                 val currentText = viewModel.note.value.body
-                val items = viewModel.bodyHistory.replayCache.subListNew(currentText)
+                val items = viewModel.bodyHistory.replayCache.subListNew(currentText).filter { it.isNotBlank() }
                 setupItems(items, currentText) { body ->
                     viewModel.setIsUndoOrRedo()
                     viewModel.setNoteBody(body)
                     dismiss()
                 }
+                rv.smoothScrollToPosition(0)
             }
         }
     }
 
     private fun UndoRedoDialogFragmentBinding.setupItems(items: List<String>, currentItem: String, onClick: (String) -> Unit) {
         rv.withModels {
-            items.filter { it.isNotBlank() }.forEach { item ->
+            items.forEach { item ->
                 undoRedoItem {
                     id(item)
                     text(item)
