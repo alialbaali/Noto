@@ -3,7 +3,6 @@ package com.noto.app.data.repository
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.AllFoldersId
@@ -160,6 +159,10 @@ class SettingsRepositoryImpl(
 
     override val email: Flow<String> = storage.data
         .mapNotNull { preferences -> preferences[SettingsKeys.Email] }
+        .flowOn(dispatcher)
+
+    override val passwordParameters: Flow<String> = storage.data
+        .mapNotNull { preferences -> preferences[SettingsKeys.PasswordParameters] }
         .flowOn(dispatcher)
 
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
@@ -482,6 +485,20 @@ class SettingsRepositoryImpl(
     override suspend fun updateEmail(email: String) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.Email] = email }
+        }
+    }
+
+    override suspend fun updatePasswordParameters(parameters: String) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.PasswordParameters] = parameters }
+        }
+    }
+
+    override suspend fun clearPasswordParameters() {
+        withContext(dispatcher) {
+            storage.edit { preferences ->
+                preferences.remove(SettingsKeys.PasswordParameters)
+            }
         }
     }
 

@@ -43,6 +43,7 @@ object SettingsKeys {
     val Id = stringPreferencesKey(Keys.Id)
     val Name = stringPreferencesKey(Keys.Name)
     val Email = stringPreferencesKey(Keys.Email)
+    val PasswordParameters = stringPreferencesKey(Keys.PasswordParameters)
 
     @Suppress("FunctionName")
     object Widget {
@@ -85,6 +86,7 @@ object SettingsKeys {
         const val Id = "Id"
         const val Name = "Name"
         const val Email = "Email"
+        const val PasswordParameters = "PasswordParameters"
 
         object Widget {
             val Int.Id get() = "Widget_Id_$this"

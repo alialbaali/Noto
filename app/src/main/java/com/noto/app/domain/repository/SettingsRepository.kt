@@ -59,6 +59,8 @@ interface SettingsRepository {
 
     val email: Flow<String>
 
+    val passwordParameters: Flow<String>
+
     fun getWidgetFolderId(widgetId: Int): Flow<Long>
 
     fun getIsWidgetCreated(widgetId: Int): Flow<Boolean>
@@ -152,6 +154,10 @@ interface SettingsRepository {
     suspend fun updateName(name: String)
 
     suspend fun updateEmail(email: String)
+
+    suspend fun updatePasswordParameters(parameters: String)
+
+    suspend fun clearPasswordParameters()
 
     suspend fun clearSettings()
 }
