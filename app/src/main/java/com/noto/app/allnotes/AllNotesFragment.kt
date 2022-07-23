@@ -285,5 +285,6 @@ class AllNotesFragment : Fragment() {
     private fun AllNotesFragmentBinding.disableSearch() {
         tilSearch.isVisible = false
         activity?.hideKeyboard(etSearch)
+        etSearch.text = null
     }
 }

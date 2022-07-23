@@ -374,5 +374,6 @@ class FolderFragment : Fragment() {
     private fun FolderFragmentBinding.disableSearch() {
         tilSearch.isVisible = false
         activity?.hideKeyboard(etSearch)
+        etSearch.text = null
     }
 }
