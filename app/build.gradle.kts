@@ -149,6 +149,7 @@ dependencies {
     implementation(Ktor.Client.logging)
     implementation("io.ktor:ktor-client-content-negotiation:2.0.2")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.0.2")
+    implementation("org.bouncycastle:bcprov-jdk18on:1.71")
 
     testImplementation(Testing.Kotest.Runner.junit5)
     testImplementation(Testing.Kotest.Assertions.core)
