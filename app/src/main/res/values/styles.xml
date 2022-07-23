@@ -18,7 +18,7 @@
 
         <item name="android:colorControlActivated">?attr/notoPrimaryColor</item>
         <item name="android:colorControlHighlight">?attr/notoSurfaceColor</item>
-        <item name="android:textColorHighlight">?attr/notoSurfaceColor</item>
+        <item name="android:textColorHighlight">@color/colorTextHighlight</item>
         <item name="android:colorControlNormal">?attr/notoPrimaryColor</item>
         <item name="android:textColorHint">?attr/notoSecondaryColor</item>
         <item name="hintTextColor">?attr/notoSecondaryColor</item>
@@ -164,7 +164,7 @@
         <item name="boxCornerRadiusTopStart">@dimen/spacing_small</item>
         <item name="hintEnabled">false</item>
         <item name="android:textColorHint">?attr/notoSecondaryColor</item>
-        <item name="android:textColorHighlight">?attr/notoSecondaryColor</item>
+        <item name="android:textColorHighlight">@color/colorTextHighlight</item>
         <item name="android:colorControlActivated">?attr/notoPrimaryColor</item>
     </style>
 

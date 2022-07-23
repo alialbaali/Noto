@@ -20,6 +20,7 @@ import com.noto.app.databinding.NoteReadingModeFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.NotoColor
 import com.noto.app.label.labelItem
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -150,7 +151,7 @@ class NoteReadingModeFragment : Fragment() {
     private fun NoteReadingModeFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
-            val highlightColor = color.withDefaultAlpha()
+            val highlightColor = color.withDefaultAlpha(alpha = if (folder.color == NotoColor.Black) 32 else 128)
             tb.title = folder.getTitle(context)
             tb.setTitleTextColor(color)
             tvNoteTitle.setLinkTextColor(color)

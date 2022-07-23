@@ -6,6 +6,7 @@
     <color name="colorSurfaceVariant">#121212</color>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorSecondary">#BDBDBD</color>
+    <color name="colorTextHighlight">#33FFFFFF</color>
 
     <color name="colorAccentGray">#BDBDBD</color>
     <color name="colorAccentBlack">#FFFFFF</color>

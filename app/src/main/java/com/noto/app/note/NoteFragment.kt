@@ -19,10 +19,7 @@ import androidx.recyclerview.widget.ListUpdateCallback
 import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
-import com.noto.app.domain.model.Folder
-import com.noto.app.domain.model.Language
-import com.noto.app.domain.model.NewNoteCursorPosition
-import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.*
 import com.noto.app.label.labelItem
 import com.noto.app.label.newLabelItem
 import com.noto.app.util.*
@@ -415,7 +412,7 @@ class NoteFragment : Fragment() {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
-            val highlightColor = color.withDefaultAlpha()
+            val highlightColor = color.withDefaultAlpha(alpha = if (folder.color == NotoColor.Black) 32 else 128)
             tvFolderTitle.text = folder.getTitle(context)
             tvFolderTitle.setTextColor(color)
             tb.navigationIcon?.mutate()?.setTint(color)
