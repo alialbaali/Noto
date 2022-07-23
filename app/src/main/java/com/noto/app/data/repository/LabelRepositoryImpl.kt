@@ -8,18 +8,20 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 
 class LabelRepositoryImpl(
     private val dataSource: LocalLabelDataSource,
-    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : LabelRepository {
 
-    override fun getAllLabels(): Flow<List<Label>> = dataSource.getAllLabels()
+    override fun getAllLabels(): Flow<List<Label>> = dataSource.getAllLabels().flowOn(dispatcher)
 
-    override fun getLabelsByFolderId(folderId: Long): Flow<List<Label>> = dataSource.getLabelsByFolderId(folderId)
+    override fun getLabelsByFolderId(folderId: Long): Flow<List<Label>> =
+        dataSource.getLabelsByFolderId(folderId).flowOn(dispatcher)
 
-    override fun getLabelById(id: Long): Flow<Label> = dataSource.getLabelById(id)
+    override fun getLabelById(id: Long): Flow<Label> = dataSource.getLabelById(id).flowOn(dispatcher)
 
     override suspend fun createLabel(label: Label) = withContext(dispatcher) {
         val position = getLabelPosition(label.folderId)
@@ -34,8 +36,10 @@ class LabelRepositoryImpl(
         dataSource.deleteLabel(label)
     }
 
-    private suspend fun getLabelPosition(folderId: Long) = dataSource.getLabelsByFolderId(folderId)
-        .filterNotNull()
-        .first()
-        .count()
+    private suspend fun getLabelPosition(folderId: Long) = withContext(dispatcher) {
+        dataSource.getLabelsByFolderId(folderId)
+            .filterNotNull()
+            .first()
+            .count()
+    }
 }

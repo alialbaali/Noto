@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 
 class FolderRepositoryImpl(
@@ -15,15 +16,15 @@ class FolderRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : FolderRepository {
 
-    override fun getAllFolders(): Flow<List<Folder>> = dataSource.getAllFolders()
+    override fun getAllFolders(): Flow<List<Folder>> = dataSource.getAllFolders().flowOn(dispatcher)
 
-    override fun getFolders(): Flow<List<Folder>> = dataSource.getFolders()
+    override fun getFolders(): Flow<List<Folder>> = dataSource.getFolders().flowOn(dispatcher)
 
-    override fun getArchivedFolders(): Flow<List<Folder>> = dataSource.getArchivedFolders()
+    override fun getArchivedFolders(): Flow<List<Folder>> = dataSource.getArchivedFolders().flowOn(dispatcher)
 
-    override fun getVaultedFolders(): Flow<List<Folder>> = dataSource.getVaultedFolders()
+    override fun getVaultedFolders(): Flow<List<Folder>> = dataSource.getVaultedFolders().flowOn(dispatcher)
 
-    override fun getFolderById(folderId: Long): Flow<Folder> = dataSource.getFolderById(folderId)
+    override fun getFolderById(folderId: Long): Flow<Folder> = dataSource.getFolderById(folderId).flowOn(dispatcher)
 
     override suspend fun createFolder(folder: Folder) = withContext(dispatcher) {
         val position = getFolderPosition()
@@ -38,10 +39,14 @@ class FolderRepositoryImpl(
         dataSource.deleteFolder(folder)
     }
 
-    override suspend fun clearFolders() = dataSource.clearFolders()
+    override suspend fun clearFolders() = withContext(dispatcher) {
+        dataSource.clearFolders()
+    }
 
-    private suspend fun getFolderPosition() = dataSource.getFolders()
-        .filterNotNull()
-        .first()
-        .count()
+    private suspend fun getFolderPosition() = withContext(dispatcher) {
+        dataSource.getFolders()
+            .filterNotNull()
+            .first()
+            .count()
+    }
 }

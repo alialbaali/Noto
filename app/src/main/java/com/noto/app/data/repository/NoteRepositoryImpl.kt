@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 
 class NoteRepositoryImpl(
@@ -16,17 +17,20 @@ class NoteRepositoryImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) : NoteRepository {
 
-    override fun getAllNotes(): Flow<List<Note>> = dataSource.getAllNotes()
+    override fun getAllNotes(): Flow<List<Note>> = dataSource.getAllNotes().flowOn(dispatcher)
 
-    override fun getAllMainNotes(): Flow<List<Note>> = dataSource.getAllMainNotes()
+    override fun getAllMainNotes(): Flow<List<Note>> = dataSource.getAllMainNotes().flowOn(dispatcher)
 
-    override fun getNotesByFolderId(folderId: Long): Flow<List<Note>> = dataSource.getNotesByFolderId(folderId)
+    override fun getNotesByFolderId(folderId: Long): Flow<List<Note>> =
+        dataSource.getNotesByFolderId(folderId).flowOn(dispatcher)
 
-    override fun getArchivedNotesByFolderId(folderId: Long): Flow<List<Note>> = dataSource.getArchivedNotesByFolderId(folderId)
+    override fun getArchivedNotesByFolderId(folderId: Long): Flow<List<Note>> =
+        dataSource.getArchivedNotesByFolderId(folderId).flowOn(dispatcher)
 
-    override fun getNoteById(noteId: Long): Flow<Note> = dataSource.getNoteById(noteId)
+    override fun getNoteById(noteId: Long): Flow<Note> = dataSource.getNoteById(noteId).flowOn(dispatcher)
 
-    override fun getFolderNotesCount(): Flow<List<FolderIdWithNotesCount>> = dataSource.getFoldersNotesCount()
+    override fun getFolderNotesCount(): Flow<List<FolderIdWithNotesCount>> =
+        dataSource.getFoldersNotesCount().flowOn(dispatcher)
 
     override suspend fun createNote(note: Note) = withContext(dispatcher) {
         val position = getNotePosition(note.folderId)
@@ -41,10 +45,14 @@ class NoteRepositoryImpl(
         dataSource.deleteNote(note)
     }
 
-    override suspend fun clearNotes() = dataSource.clearNotes()
+    override suspend fun clearNotes() = withContext(dispatcher) {
+        dataSource.clearNotes()
+    }
 
-    private suspend fun getNotePosition(folderId: Long) = dataSource.getNotesByFolderId(folderId)
-        .filterNotNull()
-        .first()
-        .count()
+    private suspend fun getNotePosition(folderId: Long) = withContext(dispatcher) {
+        dataSource.getNotesByFolderId(folderId)
+            .filterNotNull()
+            .first()
+            .count()
+    }
 }
