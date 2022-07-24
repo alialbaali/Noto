@@ -25,7 +25,7 @@ object App {
     const val MinSDK = 21
     const val CompileSDK = 32
     const val BuildTools = "33.0.0"
-    const val TargetSDK = CompileSDK
+    const val TargetSDK = 33
 }
 
 object Plugins {
