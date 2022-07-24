@@ -14,6 +14,8 @@
     <string name="list">Lista</string>
     <string name="inclusive">Inclusivo</string>
     <string name="exclusive">Exclusivo</string>
+    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <string name="strict">Estricto</string>
     <string name="grid">Mosaico</string>
     <string name="created">Creado %s</string>
     <string name="accessed">Último acceso</string>
@@ -78,6 +80,8 @@
     <string name="parent_folder">Carpeta principal</string>
     <string name="new_note_cursor_position">Posición del cursor en notas nuevas</string>
     <string name="archive">Archivo</string>
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive -->
+    <string name="folder_archive">%s archivo</string>
     <string name="unarchive">Desarchivar</string>
     <string name="edit">Editar</string>
     <string name="pin">Anclar</string>
@@ -320,5 +324,6 @@
         \n• Otras correcciones de errores y mejoras de diseño
     </string>
     <string name="release_2_1_1">• Corrección de errores.</string>
-    <string name="release_2_1_2">• Corrección de errores.</string>
+    <string name="release_2_1_2">• Corrección de errores y mejoras de diseño.</string>
+    <string name="release_2_1_3">• Corrección de errores y mejoras de diseño.</string>
 </resources>
