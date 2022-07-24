@@ -9,14 +9,16 @@
     <string name="more_options">Weitere Optionen</string>
     <string name="back">Zurück</string>
     <string name="folder_layout">Ordnerlayout</string>
-    <string name="filtering_type">Label anwenden zum</string>
+    <string name="filtering_type">Label-Filter anwenden im Modus</string>
     <string name="layout">Layout</string>
     <string name="list">Liste</string>
-    <string name="inclusive">Einschließen</string>
-    <string name="exclusive">Ausschließen</string>
+    <string name="inclusive">Hinzunehmen</string>
+    <string name="exclusive">Reduzieren</string>
+    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <string name="strict">Genaue Übereinstimmung</string>
     <string name="grid">Raster</string>
-    <string name="created">Erstellt %s</string>
-    <string name="accessed">Letzter Zugriff am %s</string>
+    <string name="created">Erstellt: %s</string>
+    <string name="accessed">Letzter Zugriff: %s</string>
     <string name="alphabetical">Alphabetisch</string>
     <string name="alphabetical_sorting">Alphabetische Sortierung</string>
     <string name="creation_date">Erstellungsdatum</string>
@@ -71,13 +73,15 @@
     <string name="all_notes">Alle Notizen</string>
     <string name="all_folders">Alle Ordner</string>
     <string name="clear">Löschen</string>
-    <string name="recent_notes">Zuletzt erstellte Notizen</string>
+    <string name="recent_notes">Zuletzt geöffnete Notizen</string>
     <string name="collapse">Einklappen</string>
     <string name="expand">Ausklappen</string>
     <string name="no_parent">Kein Elternelement</string>
     <string name="parent_folder">Übergeordneter Ordner</string>
     <string name="new_note_cursor_position">Cursorposition für neue Notiz</string>
     <string name="archive">Archivieren</string>
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive -->
+    <string name="folder_archive">Archiv für %s</string>
     <string name="unarchive">Dearchivieren</string>
     <string name="edit">Bearbeiten</string>
     <string name="pin">Anheften</string>
@@ -111,7 +115,7 @@
     <string name="folder_is_unpinned">Ordner wurde losgelöst.</string>
     <string name="no_folders_found">Keine Ordner gefunden.</string>
     <string name="select_folder">Ordner auswählen</string>
-    <string name="select_main_interface">Haupt-Schnittstelle wählen</string>
+    <string name="select_main_interface">Hauptordner wählen</string>
     <string name="pinned">Angepinnt</string>
     <!-- Vault -->
     <string name="folders_vault">Ordnerschutz</string>
@@ -122,7 +126,7 @@
     <string name="folder_is_unvaulted">Ordner wurde vom Ordnerschutz ausgenommen.</string>
     <string name="vault_is_empty">Keine Ordner enthalten.</string>
     <string name="archive_vaulted_folder_confirmation">Soll dieser Ordner wirklich archiviert werden?</string>
-    <string name="archive_vaulted_folder_description">Das Archivieren dieses Ordners entfernt auch aus den Passcodeschutz.</string>
+    <string name="archive_vaulted_folder_description">Das Archivieren dieses Ordners entfernt auch den Ordnerschutz.</string>
     <string name="vault_passcode">Zugangscode</string>
     <string name="current_vault_passcode">Momentaner Zugangscode</string>
     <string name="new_vault_passcode">Neuer Zugangscode</string>
@@ -196,7 +200,7 @@
     <string name="delete_note_description">Diese Aktion kann nicht rückgängig gemacht werden und wird Notiz und Erinnerung dauerhaft löschen.</string>
     <string name="reading_mode">Lesemodus</string>
     <string name="edit_note_reminder">Erinnerung bearbeiten</string>
-    <string name="note_options">Noitzoptionen</string>
+    <string name="note_options">Notizoptionen</string>
     <string name="note_is_deleted">Notiz wurde gelöscht.</string>
     <string name="note_is_duplicated">Notiz wurde dupliziert.</string>
     <string name="move_to">Verschieben nach…</string>
@@ -320,5 +324,6 @@
         \n• Weitere Bugfixes und Design-Verbesserungen.
     </string>
     <string name="release_2_1_1">• Fehlerbehebungen.</string>
-    <string name="release_2_1_2">• Fehlerbehebungen.</string>
+    <string name="release_2_1_2">• Fehlerbehebungen und Verbesserungen des Designs.</string>
+    <string name="release_2_1_3">• Fehlerbehebungen und Verbesserungen des Designs.</string>
 </resources>

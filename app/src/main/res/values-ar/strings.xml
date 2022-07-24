@@ -14,6 +14,8 @@
     <string name="list">قائمة</string>
     <string name="inclusive">شامل</string>
     <string name="exclusive">محدود</string>
+    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <string name="strict">صارم</string>
     <string name="grid">شبكة</string>
     <string name="created">أنشئت %s</string>
     <string name="accessed">تم الوصول %s</string>
@@ -78,6 +80,8 @@
     <string name="parent_folder">المجلد الأصلي</string>
     <string name="new_note_cursor_position">موضع مؤشر الملاحظة الجديدة</string>
     <string name="archive">أرشف</string>
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive -->
+    <string name="folder_archive">أرشيف %s</string>
     <string name="unarchive">إلغاء الأرشفة</string>
     <string name="edit">تعديل</string>
     <string name="pin">تثبيت</string>
@@ -329,5 +333,6 @@
         \n• دعم الألمانية.
         \n• إصلاح الأخطاء وتحسين التصميم.    </string>
     <string name="release_2_1_1">• إصلاح الأخطاء.</string>
-    <string name="release_2_1_2">• إصلاح الأخطاء.</string>
+    <string name="release_2_1_2">• إصلاح الأخطاء وتحسين التصميم.</string>
+    <string name="release_2_1_3">• إصلاح الأخطاء وتحسين التصميم.</string>
 </resources>

@@ -14,6 +14,8 @@
     <string name="list">Daftar</string>
     <string name="inclusive">Inklusif</string>
     <string name="exclusive">Ekslusif</string>
+    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <string name="strict">Ketat</string>
     <string name="grid">Kisi</string>
     <string name="created">Dibuat %s</string>
     <string name="accessed">Diakses %s</string>
@@ -78,6 +80,8 @@
     <string name="parent_folder">Folder induk</string>
     <string name="new_note_cursor_position">Posisi kursor catatan baru</string>
     <string name="archive">Arsip</string>
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive -->
+    <string name="folder_archive">Arsip %s</string>
     <string name="unarchive">Batalkan arsip</string>
     <string name="edit">Sunting</string>
     <string name="pin">Sematkan</string>
@@ -317,5 +321,6 @@
         \n• Perbaikan bug dan peningkatan desain lainnya.
     </string>
     <string name="release_2_1_1">• Perbaikan bug.</string>
-    <string name="release_2_1_2">• Perbaikan bug.</string>
+    <string name="release_2_1_2">• Perbaikan bug dan peningkatan desain.</string>
+    <string name="release_2_1_3">• Perbaikan bug dan peningkatan desain.</string>
 </resources>
