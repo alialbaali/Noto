@@ -44,6 +44,19 @@
         </activity>
 
         <activity-alias
+            android:name=".Futuristic"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher_futuristic"
+            android:roundIcon="@mipmap/ic_launcher_futuristic_round"
+            android:enabled="false"
+            android:targetActivity=".AppActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <activity-alias
             android:name=".DarkRain"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_dark_rain"

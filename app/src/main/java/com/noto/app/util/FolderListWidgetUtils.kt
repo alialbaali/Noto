@@ -22,7 +22,7 @@ fun Context.createFolderListWidgetRemoteViews(
     isEmpty: Boolean,
     icon: Icon,
 ): RemoteViews {
-    val activityName = icon.toActivityAliasName()
+    val activityName = icon.toActivityAliasName(isAppActivityIconEnabled())
     return RemoteViews(packageName, R.layout.folder_list_widget).apply {
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_edit_widget, if (isEditWidgetButtonEnabled) View.VISIBLE else View.GONE)

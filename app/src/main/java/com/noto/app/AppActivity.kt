@@ -269,7 +269,7 @@ class AppActivity : BaseActivity() {
 
         // Disable old icons.
         Icon.values().forEach { oldIcon ->
-            val activityAliasName = oldIcon.toActivityAliasName()
+            val activityAliasName = oldIcon.toActivityAliasName(isAppActivityIconEnabled())
             val componentName = ComponentName(this@AppActivity, activityAliasName)
             packageManager?.setComponentEnabledSetting(
                 componentName,
@@ -279,7 +279,7 @@ class AppActivity : BaseActivity() {
         }
 
         // Enable new icon.
-        val activityAliasName = icon.toActivityAliasName()
+        val activityAliasName = icon.toActivityAliasName(isAppActivityIconEnabled())
         val componentName = ComponentName(this@AppActivity, activityAliasName)
         packageManager?.setComponentEnabledSetting(
             componentName,

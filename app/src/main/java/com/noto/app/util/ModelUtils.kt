@@ -193,8 +193,8 @@ fun Flow<CharSequence?>.asSearchFlow() = filterNotNull()
     .map { it.trim().toString() }
 
 
-fun Icon.toActivityAliasName() = when (this) {
-    Icon.Futuristic -> "AppActivity"
+fun Icon.toActivityAliasName(isAppActivityIconEnabled: Boolean) = when (this) {
+    Icon.Futuristic -> if (isAppActivityIconEnabled) "AppActivity" else "Futuristic"
     Icon.DarkRain -> "DarkRain"
     Icon.Airplane -> "Airplane"
     Icon.BlossomIce -> "BlossomIce"

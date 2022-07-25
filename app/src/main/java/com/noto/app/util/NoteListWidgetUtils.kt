@@ -25,7 +25,7 @@ fun Context.createNoteListWidgetRemoteViews(
     icon: Icon,
 ): RemoteViews {
     val color = colorResource(folder.color.toResource())
-    val activityName = icon.toActivityAliasName()
+    val activityName = icon.toActivityAliasName(isAppActivityIconEnabled())
     return RemoteViews(packageName, R.layout.note_list_widget).apply {
         setTextViewText(R.id.tv_folder_title, folder.getTitle(this@createNoteListWidgetRemoteViews))
         setTextColor(R.id.tv_folder_title, color)
