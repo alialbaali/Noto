@@ -55,7 +55,7 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                     viewModel.setNoteTitle(title)
                     dismiss()
                 }
-                rv.smoothScrollToPosition(items.lastIndex)
+                rv.smoothScrollToPosition(items.lastIndexSafely)
             } else {
                 val currentText = viewModel.note.value.title
                 val items = viewModel.titleHistory.replayCache.subListNew(currentText).filter { it.isNotBlank() }
@@ -75,7 +75,7 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                     viewModel.setNoteBody(body)
                     dismiss()
                 }
-                rv.smoothScrollToPosition(items.lastIndex)
+                rv.smoothScrollToPosition(items.lastIndexSafely)
             } else {
                 val currentText = viewModel.note.value.body
                 val items = viewModel.bodyHistory.replayCache.subListNew(currentText).filter { it.isNotBlank() }
@@ -123,4 +123,7 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
         val indexOfCurrentText = indexOf(currentText)
         return subList(indexOfCurrentText, size)
     }
+
+    private val <T> List<T>.lastIndexSafely
+        get() = lastIndex.takeUnless { it == -1 } ?: 0
 }
