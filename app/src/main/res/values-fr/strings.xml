@@ -9,7 +9,7 @@
     <string name="more_options">Plus d\'options</string>
     <string name="back">Retour</string>
     <string name="folder_layout">Disposition du dossier</string>
-    <string name="filtering_type">Type de filtre</string>
+    <string name="label_filtering_type">Type de filtre</string>
     <string name="layout">Disposition</string>
     <string name="list">Liste</string>
     <string name="inclusive">Inclusif</string>

@@ -9,7 +9,7 @@
     <string name="more_options">المزيد من الخيارات</string>
     <string name="back">رجوع</string>
     <string name="folder_layout">تصميم المجلد</string>
-    <string name="filtering_type">نوع التصفية</string>
+    <string name="label_filtering_type">نوع التصفية</string>
     <string name="layout">تصميم</string>
     <string name="list">قائمة</string>
     <string name="inclusive">شامل</string>

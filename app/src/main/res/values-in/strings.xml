@@ -9,7 +9,7 @@
     <string name="more_options">Pilihan lain</string>
     <string name="back">Kembali</string>
     <string name="folder_layout">Tata letak map</string>
-    <string name="filtering_type">Jenis penyaringan</string>
+    <string name="label_filtering_type">Jenis penyaringan</string>
     <string name="layout">Tata letak</string>
     <string name="list">Daftar</string>
     <string name="inclusive">Inklusif</string>

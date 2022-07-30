@@ -9,7 +9,7 @@
     <string name="more_options">More options</string>
     <string name="back">Back</string>
     <string name="folder_layout">Folder layout</string>
-    <string name="filtering_type">Filtering type</string>
+    <string name="label_filtering_type">Label filtering type</string>
     <string name="layout">Layout</string>
     <string name="list">List</string>
     <string name="inclusive">Inclusive</string>

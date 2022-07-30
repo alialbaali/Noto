@@ -9,7 +9,7 @@
     <string name="more_options">Weitere Optionen</string>
     <string name="back">Zurück</string>
     <string name="folder_layout">Ordnerlayout</string>
-    <string name="filtering_type">Label-Filter anwenden im Modus</string>
+    <string name="label_filtering_type">Label-Filter anwenden im Modus</string>
     <string name="layout">Layout</string>
     <string name="list">Liste</string>
     <string name="inclusive">Hinzunehmen</string>

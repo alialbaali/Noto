@@ -9,7 +9,7 @@
     <string name="more_options">Diğer seçenekler</string>
     <string name="back">Geri</string>
     <string name="folder_layout">Klasör düzeni</string>
-    <string name="filtering_type">Filtre türü</string>
+    <string name="label_filtering_type">Filtre türü</string>
     <string name="layout">Düzen</string>
     <string name="list">Tek sütun</string>
     <string name="inclusive">Dahil</string>

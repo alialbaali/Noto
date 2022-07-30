@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:padding="@dimen/spacing_normal"
-                android:text="@string/filtering_type" />
+                android:text="@string/label_filtering_type" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tl_filtering_type"
