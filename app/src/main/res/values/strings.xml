@@ -207,7 +207,7 @@
     <string name="note_is_deleted">Note has been deleted.</string>
     <string name="note_is_duplicated">Note has been duplicated.</string>
     <string name="move_to">Move to…</string>
-    <string name="note_is_moved">Note has been moved.</string>
+    <string name="note_is_moved">Note has been moved to %s.</string>
     <string name="note_preview_size">Note preview size</string>
     <string name="show_note_creation_date">Show note creation date</string>
     <string name="show_folders_notes_count">Show folders notes count</string>

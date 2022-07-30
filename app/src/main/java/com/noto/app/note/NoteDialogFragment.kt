@@ -178,9 +178,12 @@ class NoteDialogFragment : BaseDialogFragment() {
                     viewModel.moveNote(folderId).invokeOnCompletion {
                         val stringId = R.string.note_is_moved
                         val drawableId = R.drawable.ic_round_move_24
+                        context?.let { context ->
+                            val folderTitle = viewModel.folder.value.getTitle(context)
+                            parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor, folderTitle)
+                        }
                         context?.updateAllWidgetsData()
                         context?.updateNoteListWidgets()
-                        parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
                         navController?.popBackStack(args.destination, false)
                         dismiss()
                     }
