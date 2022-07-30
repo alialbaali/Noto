@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.*
 import android.widget.EditText
 import androidx.activity.addCallback
@@ -72,7 +73,7 @@ class NoteFragment : Fragment() {
             viewModel.isRememberScrollingPosition,
             viewModel.isUndoOrRedo,
         ) { note, isRememberScrollingPosition, isUndoOrRedo ->
-            setupShortcut(note)
+            createOrUpdateShortcut(note)
             val isTextNullOrBlank = etNoteTitle.text.isNullOrBlank() && etNoteBody.text.isNullOrBlank()
             if (isTextNullOrBlank || isUndoOrRedo) {
                 setupNote(note, isRememberScrollingPosition)
@@ -436,6 +437,8 @@ class NoteFragment : Fragment() {
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
+        etNoteTitle.movementMethod = LinkMovementMethod.getInstance()
+        etNoteBody.movementMethod = LinkMovementMethod.getInstance()
         tvWordCount.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)
         tvWordCountRtl.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)
         context?.let { context ->
@@ -466,7 +469,7 @@ class NoteFragment : Fragment() {
         }
     }
 
-    private fun NoteFragmentBinding.setupShortcut(note: Note) {
+    private fun createOrUpdateShortcut(note: Note) {
         if (note.id != 0L && note.isValid) {
             context?.let { context ->
                 val intent = Intent(Constants.Intent.ActionOpenNote, null).apply {
