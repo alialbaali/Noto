@@ -1,7 +1,6 @@
 package com.noto.app
 
 import android.app.NotificationManager
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -260,29 +259,16 @@ class AppActivity : BaseActivity() {
     }
 
     private fun setupIcon(icon: Icon) {
-        // Disable activity icon.
+        // Disable current icon.
         packageManager?.setComponentEnabledSetting(
-            componentName,
+            enabledComponentName,
             PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
             PackageManager.DONT_KILL_APP,
         )
 
-        // Disable old icons.
-        Icon.values().forEach { oldIcon ->
-            val activityAliasName = oldIcon.toActivityAliasName(isAppActivityIconEnabled())
-            val componentName = ComponentName(this@AppActivity, activityAliasName)
-            packageManager?.setComponentEnabledSetting(
-                componentName,
-                PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
-                PackageManager.DONT_KILL_APP,
-            )
-        }
-
         // Enable new icon.
-        val activityAliasName = icon.toActivityAliasName(isAppActivityIconEnabled())
-        val componentName = ComponentName(this@AppActivity, activityAliasName)
         packageManager?.setComponentEnabledSetting(
-            componentName,
+            getComponentNameForIcon(icon),
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             PackageManager.DONT_KILL_APP,
         )
