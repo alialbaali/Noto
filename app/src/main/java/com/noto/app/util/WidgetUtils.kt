@@ -9,8 +9,8 @@ import com.noto.app.R
 import com.noto.app.widget.FolderListWidgetProvider
 import com.noto.app.widget.NoteListWidgetProvider
 
-fun Context.createAppLauncherPendingIntent(appWidgetId: Int, activityName: String): PendingIntent? {
-    val intent = Intent().setClassName(this, activityName)
+fun Context.createAppLauncherPendingIntent(appWidgetId: Int): PendingIntent? {
+    val intent = Intent().setComponent(enabledComponentName)
     return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
 }
 

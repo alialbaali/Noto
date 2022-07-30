@@ -2,10 +2,8 @@ package com.noto.app.util
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Rect
 import android.graphics.Typeface
@@ -43,7 +41,6 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
-import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
@@ -393,9 +390,4 @@ fun NavController.destinationAsFlow() = callbackFlow {
     }
     addOnDestinationChangedListener(listener)
     awaitClose { removeOnDestinationChangedListener(listener) }
-}
-
-fun Context.isAppActivityIconEnabled(): Boolean {
-    val activityComponentName = ComponentName(this, AppActivity::class.java)
-    return packageManager?.getComponentEnabledSetting(activityComponentName) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
 }

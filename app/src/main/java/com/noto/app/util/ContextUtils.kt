@@ -72,7 +72,7 @@ val Context.enabledComponentName: ComponentName
     get() {
         val appActivityComponentName = ComponentName(this, AppActivity::class.java)
         val iconsComponentNames = Icon.values()
-            .map { it.toActivityAliasName(false) }
+            .map { it.toActivityAliasName(isAppActivityIconEnabled = false) }
             .map { ComponentName(this, it) }
         val enabledComponentName = iconsComponentNames
             .firstOrNull {
@@ -80,3 +80,10 @@ val Context.enabledComponentName: ComponentName
             } ?: appActivityComponentName
         return enabledComponentName
     }
+
+fun Context.getComponentNameForIcon(icon: Icon): ComponentName {
+    val activityComponentName = ComponentName(this, AppActivity::class.java)
+    val isAppActivityEnabled = enabledComponentName == activityComponentName
+    val iconClassName = icon.toActivityAliasName(isAppActivityEnabled)
+    return ComponentName(this, iconClassName)
+}
