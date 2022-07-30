@@ -89,7 +89,7 @@ class AppActivity : BaseActivity() {
         }
     }
 
-    private fun AppActivityBinding.handleIntentContent() {
+    private fun handleIntentContent() {
         when (intent?.action) {
             Intent.ACTION_SEND -> {
                 val content = intent.getStringExtra(Intent.EXTRA_TEXT)
@@ -99,7 +99,10 @@ class AppActivity : BaseActivity() {
                 val content = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
                 showSelectFolderDialog(content)
             }
-            Constants.Intent.ActionCreateFolder -> navController.navigate(R.id.newFolderFragment)
+            Constants.Intent.ActionCreateFolder -> {
+                if (navController.currentDestination?.id != R.id.newFolderFragment)
+                    navController.navigate(R.id.newFolderFragment)
+            }
             Constants.Intent.ActionCreateNote -> {
                 val folderId = intent.getLongExtra(Constants.FolderId, 0)
                 if (folderId == 0L) {
@@ -134,22 +137,24 @@ class AppActivity : BaseActivity() {
         intent = null
     }
 
-    private fun AppActivityBinding.showSelectFolderDialog(content: String?) {
-        navController.currentBackStackEntry
-            ?.savedStateHandle
-            ?.getLiveData<Long>(Constants.FolderId)
-            ?.observe(this@AppActivity) { folderId ->
-                val options = navOptions {
-                    popUpTo(R.id.folderFragment) {
-                        inclusive = true
+    private fun showSelectFolderDialog(content: String?) {
+        if (navController.currentDestination?.id != R.id.selectFolderDialogFragment) {
+            navController.currentBackStackEntry
+                ?.savedStateHandle
+                ?.getLiveData<Long>(Constants.FolderId)
+                ?.observe(this@AppActivity) { folderId ->
+                    val options = navOptions {
+                        popUpTo(R.id.folderFragment) {
+                            inclusive = true
+                        }
                     }
+                    val args = bundleOf(Constants.FolderId to folderId, Constants.Body to content)
+                    navController.navigate(R.id.folderFragment, args, options)
+                    navController.navigate(R.id.noteFragment, args)
                 }
-                val args = bundleOf(Constants.FolderId to folderId, Constants.Body to content)
-                navController.navigate(R.id.folderFragment, args, options)
-                navController.navigate(R.id.noteFragment, args)
-            }
-        val args = bundleOf(Constants.FilteredFolderIds to longArrayOf())
-        navController.navigate(R.id.selectFolderDialogFragment, args)
+            val args = bundleOf(Constants.FilteredFolderIds to longArrayOf())
+            navController.navigate(R.id.selectFolderDialogFragment, args)
+        }
     }
 
     private fun AppActivityBinding.setupState() {
@@ -225,7 +230,7 @@ class AppActivity : BaseActivity() {
     }
 
     @Suppress("DEPRECATION")
-    private fun AppActivityBinding.setupLanguage(language: Language) {
+    private fun setupLanguage(language: Language) {
         val locale = when (language) {
             Language.System -> Locale.getDefault()
             Language.English -> Locale("en")
