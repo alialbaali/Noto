@@ -19,7 +19,6 @@ import com.noto.app.UiState
 import com.noto.app.databinding.AllNotesFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.Language
 import com.noto.app.folder.noteItem
 import com.noto.app.util.*
 import kotlinx.coroutines.FlowPreview
@@ -175,20 +174,13 @@ class AllNotesFragment : Fragment() {
                 }
             }
 
-        viewModel.language
-            .onEach { language ->
-                when (language) {
-                    Language.Arabic -> {
-                        tvNotesCount.isVisible = false
-                        tvNotesCountRtl.isVisible = true
-                    }
-                    else -> {
-                        tvNotesCount.isVisible = true
-                        tvNotesCountRtl.isVisible = false
-                    }
-                }
-            }
-            .launchIn(lifecycleScope)
+        if (isCurrentLocaleArabic()) {
+            tvNotesCount.isVisible = false
+            tvNotesCountRtl.isVisible = true
+        } else {
+            tvNotesCount.isVisible = true
+            tvNotesCountRtl.isVisible = false
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -47,6 +47,7 @@ import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
+import java.util.*
 import kotlin.math.absoluteValue
 
 const val SetColorFilterMethodName = "setColorFilter"
@@ -391,3 +392,5 @@ fun NavController.destinationAsFlow() = callbackFlow {
     addOnDestinationChangedListener(listener)
     awaitClose { removeOnDestinationChangedListener(listener) }
 }
+
+fun isCurrentLocaleArabic() = Locale.getDefault() == Locale("ar")

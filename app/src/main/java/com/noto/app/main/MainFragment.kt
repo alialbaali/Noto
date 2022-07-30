@@ -21,14 +21,16 @@ import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.MainFragmentBinding
-import com.noto.app.domain.model.*
+import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.FolderListSortingType
+import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.SortingOrder
 import com.noto.app.getOrDefault
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
@@ -116,20 +118,13 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
             .onEach { isScrolling -> tb.isSelected = isScrolling }
             .launchIn(lifecycleScope)
 
-        viewModel.language
-            .onEach { language ->
-                when (language) {
-                    Language.Arabic -> {
-                        tvFoldersCount.isVisible = false
-                        tvFoldersCountRtl.isVisible = true
-                    }
-                    else -> {
-                        tvFoldersCount.isVisible = true
-                        tvFoldersCountRtl.isVisible = false
-                    }
-                }
-            }
-            .launchIn(lifecycleScope)
+        if (isCurrentLocaleArabic()) {
+            tvFoldersCount.isVisible = false
+            tvFoldersCountRtl.isVisible = true
+        } else {
+            tvFoldersCount.isVisible = true
+            tvFoldersCountRtl.isVisible = false
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")

@@ -19,7 +19,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ListUpdateCallback
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
-import com.noto.app.domain.model.*
+import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.NewNoteCursorPosition
+import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.NotoColor
 import com.noto.app.label.labelItem
 import com.noto.app.label.newLabelItem
 import com.noto.app.util.*
@@ -392,20 +395,13 @@ class NoteFragment : Fragment() {
             v.performClick()
         }
 
-        viewModel.language
-            .onEach { language ->
-                when (language) {
-                    Language.Arabic -> {
-                        tvWordCount.isVisible = false
-                        tvWordCountRtl.isVisible = true
-                    }
-                    else -> {
-                        tvWordCount.isVisible = true
-                        tvWordCountRtl.isVisible = false
-                    }
-                }
-            }
-            .launchIn(lifecycleScope)
+        if (isCurrentLocaleArabic()) {
+            tvWordCount.isVisible = false
+            tvWordCountRtl.isVisible = true
+        } else {
+            tvWordCount.isVisible = true
+            tvWordCountRtl.isVisible = false
+        }
     }
 
     private fun NoteFragmentBinding.setupFolder(folder: Folder) {

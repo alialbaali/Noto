@@ -40,9 +40,6 @@ class AllNotesViewModel(
     val scrollingPosition = settingsRepository.allNotesScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
-    val language = settingsRepository.language
-        .stateIn(viewModelScope, SharingStarted.Eagerly, Language.System)
-
     init {
         combine(
             folderRepository.getFolders(),

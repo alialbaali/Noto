@@ -121,20 +121,13 @@ class FolderFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        viewModel.language
-            .onEach { language ->
-                when (language) {
-                    Language.Arabic -> {
-                        tvFolderNotesCount.isVisible = false
-                        tvFolderNotesCountRtl.isVisible = true
-                    }
-                    else -> {
-                        tvFolderNotesCount.isVisible = true
-                        tvFolderNotesCountRtl.isVisible = false
-                    }
-                }
-            }
-            .launchIn(lifecycleScope)
+        if (isCurrentLocaleArabic()) {
+            tvFolderNotesCount.isVisible = false
+            tvFolderNotesCountRtl.isVisible = true
+        } else {
+            tvFolderNotesCount.isVisible = true
+            tvFolderNotesCountRtl.isVisible = false
+        }
     }
 
     private fun FolderFragmentBinding.setupListeners() {

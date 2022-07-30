@@ -18,7 +18,6 @@ import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.RecentNotesFragmentBinding
 import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.folder.noteItem
 import com.noto.app.util.*
@@ -178,20 +177,13 @@ class RecentNotesFragment : Fragment() {
                 }
             }
 
-        viewModel.language
-            .onEach { language ->
-                when (language) {
-                    Language.Arabic -> {
-                        tvNotesCount.isVisible = false
-                        tvNotesCountRtl.isVisible = true
-                    }
-                    else -> {
-                        tvNotesCount.isVisible = true
-                        tvNotesCountRtl.isVisible = false
-                    }
-                }
-            }
-            .launchIn(lifecycleScope)
+        if (isCurrentLocaleArabic()) {
+            tvNotesCount.isVisible = false
+            tvNotesCountRtl.isVisible = true
+        } else {
+            tvNotesCount.isVisible = true
+            tvNotesCountRtl.isVisible = false
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
