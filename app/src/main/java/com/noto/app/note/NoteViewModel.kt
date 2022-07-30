@@ -104,20 +104,21 @@ class NoteViewModel(
             title = title.takeUnless { trimContent } ?: title.trim(),
             body = body.takeUnless { trimContent } ?: body.trim(),
         )
-        if (note.isValid)
-            if (note.id == 0L)
-                noteRepository.createNote(note).also { id ->
-                    noteRepository.getNoteById(id)
-                        .filterNotNull()
-                        .onEach { createdNote -> mutableNote.value = createdNote }
-                        .launchIn(viewModelScope)
+        if (note.isValid) {
+            if (note.id == 0L) {
+                val newNoteId = noteRepository.createNote(note)
+                noteRepository.getNoteById(newNoteId)
+                    .filterNotNull()
+                    .onEach { createdNote -> mutableNote.value = createdNote }
+                    .launchIn(viewModelScope)
 
-                    labels.value.filterValues { it }
-                        .keys
-                        .forEach { label -> noteLabelRepository.createNoteLabel(NoteLabel(noteId = id, labelId = label.id)) }
-                }
-            else
+                labels.value.filterValues { it }.keys
+                    .map { label -> NoteLabel(noteId = newNoteId, labelId = label.id) }
+                    .forEach { noteLabel -> noteLabelRepository.createNoteLabel(noteLabel) }
+            } else {
                 noteRepository.updateNote(note)
+            }
+        }
     }
 
     fun deleteNote() = viewModelScope.launch {
