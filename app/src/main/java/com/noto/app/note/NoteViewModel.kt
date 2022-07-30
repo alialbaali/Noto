@@ -174,7 +174,7 @@ class NoteViewModel(
 
     fun selectLabel(id: Long) = viewModelScope.launch {
         if (note.value.id == 0L)
-            mutableLabels.value = mutableLabels.value.mapValues { if (it.key.id == id) true else it.value }
+            mutableLabels.value = labels.value.mapValues { if (it.key.id == id) true else it.value }
         else
             noteLabelRepository.createNoteLabel(NoteLabel(noteId = note.value.id, labelId = id))
 
@@ -182,7 +182,7 @@ class NoteViewModel(
 
     fun unselectLabel(id: Long) = viewModelScope.launch {
         if (note.value.id == 0L)
-            mutableLabels.value = mutableLabels.value.mapValues { if (it.key.id == id) false else it.value }
+            mutableLabels.value = labels.value.mapValues { if (it.key.id == id) false else it.value }
         else
             noteLabelRepository.deleteNoteLabel(note.value.id, id)
     }
