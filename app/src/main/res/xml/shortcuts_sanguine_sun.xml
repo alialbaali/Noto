@@ -10,7 +10,7 @@
         <intent
             android:action="com.noto.intent.action.CREATE_NOTE"
             android:targetPackage="com.noto"
-            android:targetClass="com.noto.app.AppActivity" />
+            android:targetClass="com.noto.app.SanguineSun" />
     </shortcut>
     <shortcut
         android:shortcutId="create_folder"
@@ -21,6 +21,6 @@
         <intent
             android:action="com.noto.intent.action.CREATE_FOLDER"
             android:targetPackage="com.noto"
-            android:targetClass="com.noto.app.AppActivity" />
+            android:targetClass="com.noto.app.SanguineSun" />
     </shortcut>
 </shortcuts>

@@ -50,10 +50,16 @@
             android:roundIcon="@mipmap/ic_launcher_futuristic_round"
             android:enabled="false"
             android:targetActivity=".AppActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_futuristic" />
+
         </activity-alias>
 
         <activity-alias
@@ -63,10 +69,16 @@
             android:roundIcon="@mipmap/ic_launcher_dark_rain_round"
             android:enabled="false"
             android:targetActivity=".AppActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_dark_rain" />
+
         </activity-alias>
 
         <activity-alias
@@ -76,10 +88,16 @@
             android:roundIcon="@mipmap/ic_launcher_airplane_round"
             android:enabled="false"
             android:targetActivity=".AppActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_airplane" />
+
         </activity-alias>
 
         <activity-alias
@@ -89,10 +107,16 @@
             android:roundIcon="@mipmap/ic_launcher_blossom_ice_round"
             android:enabled="false"
             android:targetActivity=".AppActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_blossom_ice" />
+
         </activity-alias>
 
         <activity-alias
@@ -102,10 +126,16 @@
             android:roundIcon="@mipmap/ic_launcher_dark_alpine_round"
             android:enabled="false"
             android:targetActivity=".AppActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_dark_alpine" />
+
         </activity-alias>
 
         <activity-alias
@@ -115,10 +145,16 @@
             android:roundIcon="@mipmap/ic_launcher_dark_side_round"
             android:enabled="false"
             android:targetActivity=".AppActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_dark_side" />
+
         </activity-alias>
 
         <activity-alias
@@ -128,10 +164,16 @@
             android:roundIcon="@mipmap/ic_launcher_earth_round"
             android:enabled="false"
             android:targetActivity=".AppActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_earth" />
+
         </activity-alias>
 
         <activity-alias
@@ -141,10 +183,16 @@
             android:roundIcon="@mipmap/ic_launcher_fire_round"
             android:enabled="false"
             android:targetActivity=".AppActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_fire" />
+
         </activity-alias>
 
         <activity-alias
@@ -154,10 +202,16 @@
             android:roundIcon="@mipmap/ic_launcher_purpleberry_round"
             android:enabled="false"
             android:targetActivity=".AppActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_purpleberry" />
+
         </activity-alias>
 
         <activity-alias
@@ -167,10 +221,16 @@
             android:roundIcon="@mipmap/ic_launcher_sanguine_sun_round"
             android:enabled="false"
             android:targetActivity=".AppActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts_sanguine_sun" />
+
         </activity-alias>
 
         <activity
