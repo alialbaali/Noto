@@ -1,7 +1,9 @@
 package com.noto.app.util
 
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
 import android.view.Window
@@ -13,13 +15,15 @@ import androidx.core.view.WindowInsetsControllerCompat
 import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Icon
 
 private const val IconSize = 512
 private const val IconSpacing = 128
 
 fun Context.createPinnedShortcut(folder: Folder): ShortcutInfoCompat {
-    val intent = Intent(Constants.Intent.ActionCreateNote, null, this, AppActivity::class.java).apply {
+    val intent = Intent(Constants.Intent.ActionCreateNote, null).apply {
         putExtra(Constants.FolderId, folder.id)
+        component = enabledComponentName
     }
     val backgroundColor = folder.color.toResource().let(this::colorResource)
     val iconColor = colorResource(android.R.color.white)
@@ -63,3 +67,16 @@ fun Context.applySystemBarsColorsForApiLessThan23(window: Window) {
         window.navigationBarColor = colorResource(android.R.color.black)
     }
 }
+
+val Context.enabledComponentName: ComponentName
+    get() {
+        val appActivityComponentName = ComponentName(this, AppActivity::class.java)
+        val iconsComponentNames = Icon.values()
+            .map { it.toActivityAliasName(false) }
+            .map { ComponentName(this, it) }
+        val enabledComponentName = iconsComponentNames
+            .firstOrNull {
+                packageManager?.getComponentEnabledSetting(it) == PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+            } ?: appActivityComponentName
+        return enabledComponentName
+    }

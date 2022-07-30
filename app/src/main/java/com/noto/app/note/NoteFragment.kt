@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.ListUpdateCallback
-import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.databinding.NoteFragmentBinding
 import com.noto.app.domain.model.*
@@ -469,14 +468,13 @@ class NoteFragment : Fragment() {
 
     private fun NoteFragmentBinding.setupShortcut(note: Note) {
         if (note.id != 0L && note.isValid) {
-            val intent = Intent(Constants.Intent.ActionOpenNote, null, context, AppActivity::class.java).apply {
-                putExtra(Constants.FolderId, note.folderId)
-                putExtra(Constants.NoteId, note.id)
-            }
-
-            val label = note.title.ifBlank { note.body }
-
             context?.let { context ->
+                val intent = Intent(Constants.Intent.ActionOpenNote, null).apply {
+                    putExtra(Constants.FolderId, note.folderId)
+                    putExtra(Constants.NoteId, note.id)
+                    component = context.enabledComponentName
+                }
+                val label = note.title.ifBlank { note.body }
                 val shortcut = ShortcutInfoCompat.Builder(context, note.id.toString())
                     .setIntent(intent)
                     .setShortLabel(label)

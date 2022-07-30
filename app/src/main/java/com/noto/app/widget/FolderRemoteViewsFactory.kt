@@ -6,7 +6,6 @@ import android.content.Intent
 import android.view.View
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.repository.FolderRepository
@@ -61,8 +60,9 @@ class FolderRemoteViewsFactory(private val context: Context, intent: Intent?) : 
         val notesCount = entry.second
         val color = context.colorResource(folder.color.toResource())
         val iconResource = if (folder.isGeneral) R.drawable.ic_round_folder_general_24 else R.drawable.ic_round_folder_24
-        val intent = Intent(Constants.Intent.ActionOpenFolder, null, context, AppActivity::class.java).apply {
+        val intent = Intent(Constants.Intent.ActionOpenFolder, null).apply {
             putExtra(Constants.FolderId, folder.id)
+            component = context.enabledComponentName
         }
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_folder_item).apply {
             setTextViewText(R.id.tv_folder_notes_count, notesCount.toString())

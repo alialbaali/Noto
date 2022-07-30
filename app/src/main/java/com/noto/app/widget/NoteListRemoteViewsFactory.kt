@@ -6,7 +6,6 @@ import android.content.Intent
 import android.view.View
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
-import com.noto.app.AppActivity
 import com.noto.app.R
 import com.noto.app.domain.model.FilteringType
 import com.noto.app.domain.model.Folder
@@ -69,9 +68,10 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
     override fun getViewAt(position: Int): RemoteViews {
         val remoteViews = RemoteViews(context.packageName, R.layout.widget_note_item).apply {
             val pair = notes[position]
-            val intent = Intent(Constants.Intent.ActionOpenNote, null, context, AppActivity::class.java).apply {
+            val intent = Intent(Constants.Intent.ActionOpenNote, null).apply {
                 putExtra(Constants.FolderId, folder.id)
                 putExtra(Constants.NoteId, pair.first.id)
+                component = context.enabledComponentName
             }
             val color = context.colorResource(folder.color.toResource())
             removeAllViews(R.id.ll_labels)
