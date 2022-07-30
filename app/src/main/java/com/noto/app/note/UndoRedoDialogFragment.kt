@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,6 +42,8 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.itemAnimator = VerticalListItemAnimator()
         tb.tvDialogTitle.text = context?.stringResource(if (args.isUndo) R.string.undo_history else R.string.redo_history)
+        val etNoteTitle = parentFragment?.view?.findViewById<EditText>(R.id.et_note_title)
+        val etNoteBody = parentFragment?.view?.findViewById<EditText>(R.id.et_note_body)
 
         rv.isScrollingAsFlow()
             .onEach { isScrolling -> tb.ll.isSelected = isScrolling }
@@ -53,6 +56,7 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                 setupItems(items, currentText) { title ->
                     viewModel.setIsUndoOrRedo()
                     viewModel.setNoteTitle(title)
+                    etNoteTitle?.let { activity?.showKeyboard(it) }
                     dismiss()
                 }
                 rv.smoothScrollToPosition(items.lastIndexSafely)
@@ -62,6 +66,7 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                 setupItems(items, currentText) { title ->
                     viewModel.setIsUndoOrRedo()
                     viewModel.setNoteTitle(title)
+                    etNoteTitle?.let { activity?.showKeyboard(it) }
                     dismiss()
                 }
                 rv.smoothScrollToPosition(0)
@@ -73,6 +78,7 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                 setupItems(items, currentText) { body ->
                     viewModel.setIsUndoOrRedo()
                     viewModel.setNoteBody(body)
+                    etNoteBody?.let { activity?.showKeyboard(it) }
                     dismiss()
                 }
                 rv.smoothScrollToPosition(items.lastIndexSafely)
@@ -82,6 +88,7 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                 setupItems(items, currentText) { body ->
                     viewModel.setIsUndoOrRedo()
                     viewModel.setNoteBody(body)
+                    etNoteBody?.let { activity?.showKeyboard(it) }
                     dismiss()
                 }
                 rv.smoothScrollToPosition(0)
