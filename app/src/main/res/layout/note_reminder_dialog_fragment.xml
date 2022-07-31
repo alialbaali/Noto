@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
             android:padding="@dimen/spacing_normal"
-            android:text="@string/done" />
+            android:text="@string/update_reminder" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

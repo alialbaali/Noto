@@ -121,6 +121,7 @@
 
     <!-- Vault -->
     <string name="folders_vault">Folders vault</string>
+    <string name="update_passcode">Update passcode</string>
     <string name="enter_vault_passcode">Enter vault passcode</string>
     <string name="add_to_vault">Add to vault</string>
     <string name="remove_from_vault">Remove from vault</string>
@@ -157,6 +158,7 @@
 
     <!-- Note -->
     <string name="all">All</string>
+    <string name="update_reminder">Update reminder</string>
     <string name="archive_is_empty">Archive is empty.</string>
     <plurals name="notes_count">
         <item quantity="one">%d Note</item>
@@ -221,6 +223,7 @@
 
     <!-- Label -->
     <string name="reorder_label">Reorder</string>
+    <string name="update_label">Update label</string>
     <string name="create_label">Create label</string>
     <string name="label_title">Label title</string>
     <string name="label">Label</string>

@@ -35,9 +35,10 @@ class NewLabelDialogFragment : BaseDialogFragment() {
         activity?.showKeyboard(root)
         if (args.labelId == 0L) {
             tb.tvDialogTitle.text = context?.stringResource(R.string.new_label)
+            btnCreate.text = context?.stringResource(R.string.create_label)
         } else {
             tb.tvDialogTitle.text = context?.stringResource(R.string.edit_label)
-            btnCreate.text = context?.stringResource(R.string.done)
+            btnCreate.text = context?.stringResource(R.string.update_label)
         }
 
         viewModel.folder
