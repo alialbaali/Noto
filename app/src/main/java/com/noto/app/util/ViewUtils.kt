@@ -323,13 +323,17 @@ fun View.isFocusedAsFlow() = callbackFlow {
 }.onStart { emit(isFocused) }
 
 fun View.disable() {
-    alpha = 0.5F
-    isEnabled = false
+    animate()
+        .setDuration(DefaultAnimationDuration)
+        .alpha(0.5F)
+        .withEndAction { isEnabled = false }
 }
 
 fun View.enable() {
-    alpha = 1F
-    isEnabled = true
+    animate()
+        .setDuration(DefaultAnimationDuration)
+        .alpha(1F)
+        .withEndAction { isEnabled = true }
 }
 
 @SuppressLint("ClickableViewAccessibility")
