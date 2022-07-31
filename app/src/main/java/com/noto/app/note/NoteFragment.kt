@@ -66,10 +66,15 @@ class NoteFragment : Fragment() {
             .distinctUntilChangedBy { it.newNoteCursorPosition }
             .onEach { folder ->
                 if (args.noteId == 0L) {
-                    activity?.showKeyboard(root)
                     when (folder.newNoteCursorPosition) {
-                        NewNoteCursorPosition.Body -> etNoteBody.requestFocus()
-                        NewNoteCursorPosition.Title -> etNoteTitle.requestFocus()
+                        NewNoteCursorPosition.Body -> etNoteBody.post {
+                            etNoteBody.requestFocus()
+                            activity?.showKeyboard(etNoteBody)
+                        }
+                        NewNoteCursorPosition.Title -> etNoteTitle.post {
+                            etNoteTitle.requestFocus()
+                            activity?.showKeyboard(etNoteTitle)
+                        }
                     }
                 }
             }
