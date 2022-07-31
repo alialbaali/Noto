@@ -556,6 +556,10 @@ class NoteFragment : Fragment() {
                 ibRedoHistory.enable()
             }
         }
+        ibUndo.background = context?.drawableResource(R.drawable.generic_clickable_shape)
+        ibRedo.background = context?.drawableResource(R.drawable.generic_clickable_shape)
+        ibUndoHistory.background = context?.drawableResource(R.drawable.generic_clickable_shape)
+        ibRedoHistory.background = context?.drawableResource(R.drawable.generic_clickable_shape)
     }
 }
 
