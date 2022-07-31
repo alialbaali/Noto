@@ -187,11 +187,11 @@
     <string name="note_is_archived">Note has been archived.</string>
     <string name="note_is_pinned">Note has been pinned.</string>
     <string name="note_is_unpinned">Note has been unpinned.</string>
-    <string name="no_note_reminder">No note reminder is setup.</string>
+    <string name="no_note_reminder">No reminder is setup.</string>
     <string name="note_is_unarchived">Note has been unarchived.</string>
     <string name="reminder">Reminder</string>
     <string name="reminders">Reminders</string>
-    <string name="new_note_reminder">New note reminder</string>
+    <string name="new_note_reminder">New reminder</string>
     <string name="copy">Copy</string>
     <string name="copy_to">Copy to…</string>
     <string name="note_is_copied">Note has been copied to %s.</string>
