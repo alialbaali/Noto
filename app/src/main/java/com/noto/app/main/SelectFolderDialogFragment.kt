@@ -22,9 +22,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsable = true) {
 
-    private var onClick: (Long) -> Unit = {}
+    private var onClick: (Long, String) -> Unit = { _, _ -> }
 
-    constructor(onClick: (Long) -> Unit = {}) : this() {
+    constructor(onClick: (Long, String) -> Unit = { _, _ -> }) : this() {
         this.onClick = onClick
     }
 
@@ -69,28 +69,29 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
             is UiState.Success -> {
                 val folders = state.value.filterNot { it.first.isGeneral }
                 val generalFolder = state.value.firstOrNull { it.first.isGeneral }
-                val callback = { id: Long ->
+                val callback = { id: Long, title: String ->
                     try {
                         navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.FolderId, id)
-                        onClick(id)
+                        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.FolderTitle, title)
+                        onClick(id, title)
                     } catch (exception: IllegalStateException) {
-                        onClick(id)
+                        onClick(id, title)
                     }
                     dismiss()
                 }
 
                 rv.withModels {
 
-                    if (args.isNoParentEnabled) {
-                        noParentItem {
-                            id("no_parent")
-                            isSelected(args.selectedFolderId == 0L)
-                            onClickListener { _ -> callback(0L) }
+                    context?.let { context ->
+                        if (args.isNoParentEnabled) {
+                            noParentItem {
+                                id("no_parent")
+                                isSelected(args.selectedFolderId == 0L)
+                                onClickListener { _ -> callback(0L, context.stringResource(R.string.no_parent)) }
+                            }
                         }
-                    }
 
-                    if (args.isMainInterface) {
-                        context?.let { context ->
+                        if (args.isMainInterface) {
                             genericItem {
                                 id("all_folders")
                                 title(context.stringResource(R.string.all_folders))
@@ -98,7 +99,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                                 isManualSorting(false)
                                 isShowNotesCount(false)
                                 isSelected(args.selectedFolderId == AllFoldersId)
-                                onClickListener { _ -> callback(AllFoldersId) }
+                                onClickListener { _ -> callback(AllFoldersId, context.stringResource(R.string.all_folders)) }
                             }
 
                             genericItem {
@@ -108,7 +109,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                                 isManualSorting(false)
                                 isShowNotesCount(false)
                                 isSelected(args.selectedFolderId == AllNotesItemId)
-                                onClickListener { _ -> callback(AllNotesItemId) }
+                                onClickListener { _ -> callback(AllNotesItemId, context.stringResource(R.string.all_notes)) }
                             }
 
                             genericItem {
@@ -118,34 +119,32 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                                 isManualSorting(false)
                                 isShowNotesCount(false)
                                 isSelected(args.selectedFolderId == RecentNotesItemId)
-                                onClickListener { _ -> callback(RecentNotesItemId) }
+                                onClickListener { _ -> callback(RecentNotesItemId, context.stringResource(R.string.recent_notes)) }
                             }
                         }
-                    }
 
-                    generalFolder?.let {
-                        folderItem {
-                            id(generalFolder.first.id)
-                            folder(generalFolder.first)
-                            notesCount(generalFolder.second)
-                            isSelected(generalFolder.first.id == args.selectedFolderId)
-                            isManualSorting(false)
-                            isShowNotesCount(isShowNotesCount && !args.isMainInterface)
-                            onClickListener { _ -> callback(generalFolder.first.id) }
-                            onLongClickListener { _ -> false }
-                            onDragHandleTouchListener { _, _ -> false }
+                        generalFolder?.let {
+                            folderItem {
+                                id(generalFolder.first.id)
+                                folder(generalFolder.first)
+                                notesCount(generalFolder.second)
+                                isSelected(generalFolder.first.id == args.selectedFolderId)
+                                isManualSorting(false)
+                                isShowNotesCount(isShowNotesCount && !args.isMainInterface)
+                                onClickListener { _ -> callback(generalFolder.first.id, generalFolder.first.getTitle(context)) }
+                                onLongClickListener { _ -> false }
+                                onDragHandleTouchListener { _, _ -> false }
+                            }
                         }
-                    }
 
-                    context?.let { context ->
                         if (folders.isEmpty() && generalFolder == null && !args.isNoParentEnabled) {
                             placeholderItem {
                                 id("placeholder")
                                 placeholder(context.stringResource(R.string.no_folders_found))
                             }
                         } else {
-                            buildFoldersModels(context, folders) { libraries ->
-                                libraries.forEachRecursively { entry, depth ->
+                            buildFoldersModels(context, folders) { folders ->
+                                folders.forEachRecursively { entry, depth ->
                                     folderItem {
                                         id(entry.first.id)
                                         folder(entry.first)
@@ -154,7 +153,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                                         isSelected(entry.first.id == args.selectedFolderId)
                                         isManualSorting(false)
                                         depth(depth)
-                                        onClickListener { _ -> callback(entry.first.id) }
+                                        onClickListener { _ -> callback(entry.first.id, entry.first.getTitle(context)) }
                                         onLongClickListener { _ -> false }
                                         onDragHandleTouchListener { _, _ -> false }
                                     }

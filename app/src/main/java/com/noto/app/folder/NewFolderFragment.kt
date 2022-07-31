@@ -87,7 +87,7 @@ class NewFolderFragment : Fragment() {
         }
 
         tvParentFolderOption.setOnClickListener {
-            SelectFolderDialogFragment { folderId -> viewModel.setParentFolder(folderId) }.apply {
+            SelectFolderDialogFragment { folderId, _ -> viewModel.setParentFolder(folderId) }.apply {
                 arguments = bundleOf(
                     Constants.FilteredFolderIds to longArrayOf(Folder.GeneralFolderId, args.folderId),
                     Constants.SelectedFolderId to (viewModel.parentFolder.value?.id ?: 0L),

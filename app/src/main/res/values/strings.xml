@@ -194,7 +194,7 @@
     <string name="new_note_reminder">New note reminder</string>
     <string name="copy">Copy</string>
     <string name="copy_to">Copy to…</string>
-    <string name="note_is_copied">Note has been copied.</string>
+    <string name="note_is_copied">Note has been copied to %s.</string>
     <string name="note_copied_to_clipboard">Note has been copied to clipboard.</string>
     <string name="text_copied">Text has been copied to clipboard.</string>
     <string name="delete_note_confirmation">Are you sure you want to delete this note?</string>

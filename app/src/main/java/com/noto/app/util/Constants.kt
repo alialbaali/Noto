@@ -3,6 +3,7 @@ package com.noto.app.util
 object Constants {
     const val Theme = "Theme"
     const val FolderId = "folder_id"
+    const val FolderTitle = "folder_title"
     const val FilteredFolderIds = "filtered_folder_ids"
     const val SelectedFolderId = "selected_folder_id"
     const val NoteId = "note_id"
