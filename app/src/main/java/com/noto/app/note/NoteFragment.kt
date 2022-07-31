@@ -398,9 +398,13 @@ class NoteFragment : Fragment() {
         if (isCurrentLocaleArabic()) {
             tvWordCount.isVisible = false
             tvWordCountRtl.isVisible = true
+            tvCreatedAt.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold)
+            tvAccessedAt.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold)
         } else {
             tvWordCount.isVisible = true
             tvWordCountRtl.isVisible = false
+            tvCreatedAt.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
+            tvAccessedAt.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
         }
     }
 
