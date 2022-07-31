@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:enabled="false"
                 android:hint="@string/reminder"
-                android:inputType="text|textPersonName|textCapWords" />
+                android:inputType="text|textPersonName|textCapWords|textMultiLine" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
