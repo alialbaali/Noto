@@ -37,6 +37,10 @@ class NoteFragment : Fragment() {
 
     private val args by navArgs<NoteFragmentArgs>()
 
+    private val undoRedoBackgroundDrawable by lazy {
+        context?.drawableResource(R.drawable.generic_clickable_shape)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteFragmentBinding.inflate(inflater, container, false).withBinding {
 //            setupMixedTransitions() // Temporally disabled due to focus isn't being set to the title.
@@ -204,9 +208,12 @@ class NoteFragment : Fragment() {
                 .filterNotNull()
                 .map { it.toString() },
             etNoteTitle.isFocusedAsFlow(),
-        ) { _, title, isFocused ->
-            if (isFocused) handleUndoRedo(viewModel.titleHistory.replayCache, title)
-        }.launchIn(lifecycleScope)
+        ) { _, title, isFocused -> isFocused to title }
+            .debounce(DebounceTimeoutMillis)
+            .onEach { (isFocused, title) ->
+                if (isFocused) handleUndoRedo(viewModel.titleHistory.replayCache, title)
+            }
+            .launchIn(lifecycleScope)
 
         combine(
             viewModel.bodyHistory,
@@ -214,9 +221,12 @@ class NoteFragment : Fragment() {
                 .filterNotNull()
                 .map { it.toString() },
             etNoteBody.isFocusedAsFlow(),
-        ) { _, body, isFocused ->
-            if (isFocused) handleUndoRedo(viewModel.bodyHistory.replayCache, body)
-        }.launchIn(lifecycleScope)
+        ) { _, body, isFocused -> isFocused to body }
+            .debounce(DebounceTimeoutMillis)
+            .onEach { (isFocused, body) ->
+                if (isFocused) handleUndoRedo(viewModel.bodyHistory.replayCache, body)
+            }
+            .launchIn(lifecycleScope)
 
         nsv.scrollPositionAsFlow()
             .debounce(DebounceTimeoutMillis)
