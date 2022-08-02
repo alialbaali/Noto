@@ -252,9 +252,6 @@
         android:name="com.noto.app.settings.SettingsFragment"
         android:label="SettingsFragment">
         <action
-            android:id="@+id/action_settingsFragment_to_aboutDialogFragment"
-            app:destination="@id/aboutDialogFragment" />
-        <action
             android:id="@+id/action_settingsFragment_to_exportImportDialogFragment"
             app:destination="@id/exportImportDialogFragment" />
         <action
@@ -275,6 +272,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_vaultPasscodeDialogFragment"
             app:destination="@id/vaultPasscodeDialogFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_aboutSettingsFragment"
+            app:destination="@id/aboutSettingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/noteReadingModeFragment"
@@ -584,7 +584,7 @@
     <fragment
         android:id="@+id/generalSettingsFragment"
         android:name="com.noto.app.settings.GeneralSettingsFragment"
-        android:label="GeneralSettingsFragment" >
+        android:label="GeneralSettingsFragment">
         <action
             android:id="@+id/action_generalSettingsFragment_to_selectFolderDialogFragment"
             app:destination="@id/selectFolderDialogFragment" />
@@ -604,7 +604,7 @@
     <fragment
         android:id="@+id/vaultSettingsFragment"
         android:name="com.noto.app.settings.VaultSettingsFragment"
-        android:label="VaultSettingsFragment" >
+        android:label="VaultSettingsFragment">
         <action
             android:id="@+id/action_vaultSettingsFragment_to_vaultTimeoutDialogFragment"
             app:destination="@id/vaultTimeoutDialogFragment" />
@@ -624,4 +624,8 @@
         android:id="@+id/validateVaultPasscodeDialogFragment"
         android:name="com.noto.app.settings.ValidateVaultPasscodeDialogFragment"
         android:label="ValidateVaultPasscodeDialogFragment" />
+    <fragment
+        android:id="@+id/aboutSettingsFragment"
+        android:name="com.noto.app.settings.AboutSettingsFragment"
+        android:label="AboutSettingsFragment" />
 </navigation>
