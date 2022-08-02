@@ -12,6 +12,8 @@ import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
+private val LabelsComparator = compareByDescending<Pair<Label, Boolean>> { it.second }.thenBy { it.first.position }
+
 class NoteViewModel(
     private val folderRepository: FolderRepository,
     private val noteRepository: NoteRepository,
@@ -81,7 +83,7 @@ class NoteViewModel(
                 }
                 .let {
                     if (sortedLabelIds.isEmpty()) {
-                        val sortedLabels = it.sortedByDescending { it.second }
+                        val sortedLabels = it.sortedWith(LabelsComparator)
                         sortedLabelIds = sortedLabels.withIndex().associate { indexedValue ->
                             indexedValue.value.first.id to indexedValue.index
                         }
