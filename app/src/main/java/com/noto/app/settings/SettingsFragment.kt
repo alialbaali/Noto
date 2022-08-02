@@ -7,9 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
@@ -51,19 +48,11 @@ class SettingsFragment : Fragment() {
         ComposeView(context).apply {
             isTransitionGroup = true
             setContent {
-                val version = context.packageManager?.getPackageInfo(context.packageName, 0)?.versionName
                 Screen(title = stringResource(id = R.string.settings)) {
                     FirstSection()
                     SecondSection()
                     ThirdSection()
                     ForthSection()
-                    Spacer(Modifier.weight(1F))
-                    version?.let {
-                        Text(
-                            text = stringResource(R.string.version, version),
-                            style = MaterialTheme.typography.labelLarge,
-                        )
-                    }
                 }
             }
         }
@@ -167,7 +156,9 @@ class SettingsFragment : Fragment() {
             SettingsItem(
                 title = stringResource(id = R.string.about),
                 type = SettingsItemType.None,
-                onClick = {},
+                onClick = {
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToAboutSettingsFragment())
+                },
                 painter = painterResource(id = R.drawable.ic_round_info_24),
             )
         }

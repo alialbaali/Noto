@@ -64,7 +64,8 @@
     <!-- Open with an app such as Signal -->
     <string name="open_with">Open with</string>
     <string name="invite_text">Check out Noto!</string>
-    <string name="version">Version %s</string>
+    <string name="version">Version</string>
+    <string name="version_is_copied">Version has been copied to clipboard.</string>
     <string name="empty_version">Version</string>
     <string name="date">Date</string>
     <string name="drag">Drag</string>
@@ -96,6 +97,7 @@
     <string name="just_now">just now</string>
     <string name="select">Select</string>
     <string name="select_all">Select all</string>
+    <string name="translations">Translations</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>
