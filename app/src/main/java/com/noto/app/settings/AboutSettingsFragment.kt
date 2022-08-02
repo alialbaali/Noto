@@ -1,5 +1,7 @@
 package com.noto.app.settings
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +20,9 @@ import com.noto.app.util.navController
 import com.noto.app.util.setupMixedTransitions
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
+private const val DeveloperWebsite = "https://www.alialbaali.com"
+private const val LicenseWebsite = "https://www.apache.org/licenses/LICENSE-2.0"
 
 class AboutSettingsFragment : Fragment() {
 
@@ -60,6 +65,24 @@ class AboutSettingsFragment : Fragment() {
                                     snackbarHostState.showSnackbar(versionIsCopiedText)
                                 }
                             },
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.developer),
+                            type = SettingsItemType.Text(stringResource(id = R.string.developer_name)),
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DeveloperWebsite))
+                                startActivity(intent)
+                            },
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.license),
+                            type = SettingsItemType.Text(stringResource(id = R.string.license_value)),
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(LicenseWebsite))
+                                startActivity(intent)
+                            }
                         )
                     }
                 }

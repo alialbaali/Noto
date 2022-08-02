@@ -66,6 +66,10 @@
     <string name="invite_text">Check out Noto!</string>
     <string name="version">Version</string>
     <string name="version_is_copied">Version has been copied to clipboard.</string>
+    <string name="developer">Developer</string>
+    <string name="developer_name">Ali Albaali</string>
+    <string name="license">License</string>
+    <string name="license_value">Apache License 2.0</string>
     <string name="empty_version">Version</string>
     <string name="date">Date</string>
     <string name="drag">Drag</string>
