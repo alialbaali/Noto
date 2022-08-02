@@ -7,25 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
-import com.noto.app.NotoTheme
 import com.noto.app.R
-import com.noto.app.components.NotoTopAppbar
+import com.noto.app.components.Screen
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
@@ -39,7 +31,6 @@ class SettingsFragment : Fragment() {
 
     private val viewModel by viewModel<SettingsViewModel>()
 
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -60,44 +51,18 @@ class SettingsFragment : Fragment() {
         ComposeView(context).apply {
             isTransitionGroup = true
             setContent {
-                val scrollState = rememberScrollState()
-                val theme by viewModel.theme.collectAsState()
                 val version = context.packageManager?.getPackageInfo(context.packageName, 0)?.versionName
-                NotoTheme(theme = theme) {
-                    Scaffold(
-                        Modifier.fillMaxSize(),
-                        topBar = {
-                            NotoTopAppbar(
-                                title = stringResource(id = R.string.settings),
-                                onNavigationIconClick = { navController?.navigateUp() },
-                            )
-                        }
-                    ) { contentPadding ->
-                        Column(
-                            Modifier
-                                .fillMaxSize()
-                                .verticalScroll(scrollState)
-                                .padding(contentPadding),
-                        ) {
-                            FirstSection()
-                            SecondSection()
-                            ThirdSection()
-                            ForthSection()
-                            version?.let {
-                                Box(
-                                    modifier = Modifier
-                                        .align(Alignment.CenterHorizontally)
-                                        .padding(NotoTheme.dimensions.medium)
-                                        .weight(1F),
-                                    contentAlignment = Alignment.BottomCenter
-                                ) {
-                                    Text(
-                                        text = stringResource(R.string.version, version),
-                                        style = MaterialTheme.typography.labelLarge,
-                                    )
-                                }
-                            }
-                        }
+                Screen(title = stringResource(id = R.string.settings)) {
+                    FirstSection()
+                    SecondSection()
+                    ThirdSection()
+                    ForthSection()
+                    Spacer(Modifier.weight(1F))
+                    version?.let {
+                        Text(
+                            text = stringResource(R.string.version, version),
+                            style = MaterialTheme.typography.labelLarge,
+                        )
                     }
                 }
             }
