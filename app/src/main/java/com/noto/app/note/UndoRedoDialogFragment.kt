@@ -3,6 +3,7 @@ package com.noto.app.note
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,6 +30,10 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
 
     private val clipboardManager by lazy { context?.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager? }
 
+    private val etNoteTitle by lazy { parentFragment?.view?.findViewById<EditText>(R.id.et_note_title) }
+
+    private val etNoteBody by lazy { parentFragment?.view?.findViewById<EditText>(R.id.et_note_body) }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,68 +47,48 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.itemAnimator = VerticalListItemAnimator()
         tb.tvDialogTitle.text = context?.stringResource(if (args.isUndo) R.string.undo_history else R.string.redo_history)
-        val etNoteTitle = parentFragment?.view?.findViewById<EditText>(R.id.et_note_title)
-        val etNoteBody = parentFragment?.view?.findViewById<EditText>(R.id.et_note_body)
 
         rv.isScrollingAsFlow()
             .onEach { isScrolling -> tb.ll.isSelected = isScrolling }
             .launchIn(lifecycleScope)
 
         if (args.isTitle) {
+            val currentText = viewModel.note.value.title
             if (args.isUndo) {
-                val currentText = viewModel.note.value.title
                 val items = viewModel.titleHistory.replayCache.subListOld(currentText).filter { it.isNotBlank() }
-                setupItems(items, currentText) { title ->
-                    viewModel.setIsUndoOrRedo()
-                    viewModel.setNoteTitle(title)
-                    etNoteTitle?.let { activity?.showKeyboard(it) }
-                    dismiss()
-                }
+                setupItems(items, currentText, isTitle = true)
                 rv.smoothScrollToPosition(items.lastIndexSafely)
             } else {
-                val currentText = viewModel.note.value.title
                 val items = viewModel.titleHistory.replayCache.subListNew(currentText).filter { it.isNotBlank() }
-                setupItems(items, currentText) { title ->
-                    viewModel.setIsUndoOrRedo()
-                    viewModel.setNoteTitle(title)
-                    etNoteTitle?.let { activity?.showKeyboard(it) }
-                    dismiss()
-                }
+                setupItems(items, currentText, isTitle = true)
                 rv.smoothScrollToPosition(0)
             }
         } else {
+            val currentText = viewModel.note.value.body
             if (args.isUndo) {
-                val currentText = viewModel.note.value.body
                 val items = viewModel.bodyHistory.replayCache.subListOld(currentText).filter { it.isNotBlank() }
-                setupItems(items, currentText) { body ->
-                    viewModel.setIsUndoOrRedo()
-                    viewModel.setNoteBody(body)
-                    etNoteBody?.let { activity?.showKeyboard(it) }
-                    dismiss()
-                }
+                setupItems(items, currentText, isTitle = false)
                 rv.smoothScrollToPosition(items.lastIndexSafely)
             } else {
-                val currentText = viewModel.note.value.body
                 val items = viewModel.bodyHistory.replayCache.subListNew(currentText).filter { it.isNotBlank() }
-                setupItems(items, currentText) { body ->
-                    viewModel.setIsUndoOrRedo()
-                    viewModel.setNoteBody(body)
-                    etNoteBody?.let { activity?.showKeyboard(it) }
-                    dismiss()
-                }
+                setupItems(items, currentText, isTitle = false)
                 rv.smoothScrollToPosition(0)
             }
         }
     }
 
-    private fun UndoRedoDialogFragmentBinding.setupItems(items: List<String>, currentItem: String, onClick: (String) -> Unit) {
+    private fun UndoRedoDialogFragmentBinding.setupItems(items: List<String>, currentItem: String, isTitle: Boolean) {
         rv.withModels {
             items.forEach { item ->
                 undoRedoItem {
                     id(item)
                     text(item)
                     isSelected(item == currentItem)
-                    onClickListener { _ -> onClick(item) }
+                    onClickListener { _ ->
+                        viewModel.setIsUndoOrRedo()
+                        if (isTitle) viewModel.setNoteTitle(item) else viewModel.setNoteBody(item)
+                        dismiss()
+                    }
                     onCopyClickListener { _ ->
                         val clipData = ClipData.newPlainText(viewModel.note.value.title, item)
                         clipboardManager?.setPrimaryClip(clipData)
@@ -118,6 +103,15 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                     }
                 }
             }
+        }
+    }
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        if (args.isTitle) {
+            etNoteTitle?.let { activity?.showKeyboard(it) }
+        } else {
+            etNoteBody?.let { activity?.showKeyboard(it) }
         }
     }
 
