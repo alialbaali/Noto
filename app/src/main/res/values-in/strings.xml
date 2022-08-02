@@ -9,7 +9,7 @@
     <string name="more_options">Pilihan lain</string>
     <string name="back">Kembali</string>
     <string name="folder_layout">Tata letak map</string>
-    <string name="label_filtering_type">Jenis penyaringan</string>
+    <string name="label_filtering_type">Jenis penyaringan label</string>
     <string name="layout">Tata letak</string>
     <string name="list">Daftar</string>
     <string name="inclusive">Inklusif</string>
@@ -118,6 +118,7 @@
     <string name="pinned">Disematkan</string>
     <!-- Vault -->
     <string name="folders_vault">Brankas map</string>
+    <string name="update_passcode">Perbarui kode akses</string>
     <string name="enter_vault_passcode">Masukkan kode akses brankas</string>
     <string name="add_to_vault">Tambah ke brankas</string>
     <string name="remove_from_vault">Keluarkan dari brankas</string>
@@ -153,6 +154,7 @@
     <string name="use_passcode">Gunakan kode akses</string>
     <!-- Note -->
     <string name="all">Semua</string>
+    <string name="update_reminder">Perbarui pengingat</string>
     <string name="archive_is_empty">Arsip kosong.</string>
     <plurals name="notes_count">
         <item quantity="other">%d Catatan</item>
@@ -181,14 +183,14 @@
     <string name="note_is_archived">Catatan telah diarsipkan.</string>
     <string name="note_is_pinned">Catatan telah disematkan.</string>
     <string name="note_is_unpinned">Penyemat catatan telah dilepas.</string>
-    <string name="no_note_reminder">Tidak ada pengingat catatan yang diatur.</string>
+    <string name="no_note_reminder">Tidak ada pengingat yang diatur.</string>
     <string name="note_is_unarchived">Catatan telah dikeluarkan dari arsip.</string>
     <string name="reminder">Pengingat</string>
     <string name="reminders">Pengingat</string>
-    <string name="new_note_reminder">Pengingat catatan baru</string>
+    <string name="new_note_reminder">Pengingat baru</string>
     <string name="copy">Salin</string>
     <string name="copy_to">Salin ke…</string>
-    <string name="note_is_copied">Catatan telah di salin.</string>
+    <string name="note_is_copied">Catatan telah disalin ke %s.</string>
     <string name="note_copied_to_clipboard">Catatan telah di salin ke papan klip.</string>
     <string name="text_copied">Teks telah disalin ke papan klip.</string>
     <string name="delete_note_confirmation">Apakah kamu yakin ingin menghapus catatan ini?</string>
@@ -201,7 +203,7 @@
     <string name="note_is_deleted">Catatan telah dihapus.</string>
     <string name="note_is_duplicated">Catatan telah digandakan.</string>
     <string name="move_to">Pindahkan ke…</string>
-    <string name="note_is_moved">Catatan telah dipindahkan.</string>
+    <string name="note_is_moved">Catatan telah dipindahkan ke %s.</string>
     <string name="note_preview_size">Ukuran pratinjau catatan</string>
     <string name="show_note_creation_date">Tampilkan tanggal pembuatan catatan</string>
     <string name="show_folders_notes_count">Tampilkan jumlah catatan map</string>
@@ -214,6 +216,7 @@
     <string name="permission_not_granted">Izin belum diberikan</string>
     <!-- Label -->
     <string name="reorder_label">Susun ulang</string>
+    <string name="update_label">Perbarui label</string>
     <string name="create_label">Buat tanda</string>
     <string name="label_title">Judul tanda</string>
     <string name="label">Tanda</string>
@@ -323,4 +326,8 @@
     <string name="release_2_1_1">• Perbaikan bug.</string>
     <string name="release_2_1_2">• Perbaikan bug dan peningkatan desain.</string>
     <string name="release_2_1_3">• Perbaikan bug dan peningkatan desain.</string>
+    <string name="release_2_1_4">• Memperbaiki pintasan yang tidak berfungsi saat menggunakan ikon yang berbeda.
+        \n• Label yang dipilih sekarang muncul pertama kali di tata letak catatan.
+        \n• Perbaikan bug dan peningkatan desain lainnya.
+    </string>
 </resources>

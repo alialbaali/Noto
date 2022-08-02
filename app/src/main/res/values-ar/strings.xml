@@ -9,7 +9,7 @@
     <string name="more_options">المزيد من الخيارات</string>
     <string name="back">رجوع</string>
     <string name="folder_layout">تصميم المجلد</string>
-    <string name="label_filtering_type">نوع التصفية</string>
+    <string name="label_filtering_type">نوع تصفية الملصقات</string>
     <string name="layout">تصميم</string>
     <string name="list">قائمة</string>
     <string name="inclusive">شامل</string>
@@ -123,6 +123,7 @@
     <string name="pinned">مثبت</string>
     <!-- Vault -->
     <string name="folders_vault">مخزن المجلدات</string>
+    <string name="update_passcode">تحديث رمز المرور</string>
     <string name="enter_vault_passcode">أدخل رمز المرور</string>
     <string name="add_to_vault">أضف إلى المخزن</string>
     <string name="remove_from_vault">إزالة من المخزن</string>
@@ -158,6 +159,7 @@
     <string name="use_passcode">استخدام رمز مرور</string>
     <!-- Note -->
     <string name="all">الكل</string>
+    <string name="update_reminder">تحديث التنبيه</string>
     <string name="archive_is_empty">الأرشيف فارغ.</string>
     <plurals name="notes_count">
         <item quantity="zero">%d ملاحظات</item>
@@ -196,14 +198,14 @@
     <string name="note_is_archived">تم إرشاف الملاحظة.</string>
     <string name="note_is_pinned">تم تثبيت الملاحظة.</string>
     <string name="note_is_unpinned">تم إلغاء تثبيت الملاحظة.</string>
-    <string name="no_note_reminder">لم يتم إعداد أي تنبيه إلى الملاحظة.</string>
+    <string name="no_note_reminder">لم يتم إعداد أي تنبيه.</string>
     <string name="note_is_unarchived">تم إلغاء إرشاف الملاحظة.</string>
     <string name="reminder">تنبيه</string>
     <string name="reminders">التنبيهات</string>
-    <string name="new_note_reminder">تنبيه ملاحظة جديد</string>
+    <string name="new_note_reminder">تنبيه جديد</string>
     <string name="copy">نسخ</string>
     <string name="copy_to">نسخ إلى…</string>
-    <string name="note_is_copied">تم نسخ الملاحظة.</string>
+    <string name="note_is_copied">تم نسخ الملاحظة إلى %s.</string>
     <string name="note_copied_to_clipboard">تم نسخ الملاحظة إلى الحافظة.</string>
     <string name="text_copied">تم نسخ النص إلى الحافظة.</string>
     <string name="delete_note_confirmation">هل أنت متأكد من أنك تريد حذف هذه الملاحظة؟</string>
@@ -216,7 +218,7 @@
     <string name="note_is_deleted">تم حذف الملاحظة.</string>
     <string name="note_is_duplicated">تم نسخ الملاحظة.</string>
     <string name="move_to">نقل إلى…</string>
-    <string name="note_is_moved">تم نقل الملاحظة.</string>
+    <string name="note_is_moved">تم نقل الملاحظة إلى %s.</string>
     <string name="note_preview_size">حجم معاينة الملاحظة</string>
     <string name="show_note_creation_date">عرض تاريخ إنشاء الملاحظة</string>
     <string name="show_folders_notes_count">عرض عدد ملاحظات المجلدات</string>
@@ -229,6 +231,7 @@
     <string name="permission_not_granted">لم يتم منح الإذن</string>
     <!-- Label -->
     <string name="reorder_label">اعادة ترتيب</string>
+    <string name="update_label">تحديث الملصق</string>
     <string name="create_label">إنشاء ملصق</string>
     <string name="label_title">عنوان الملصق</string>
     <string name="label">ملصق</string>
@@ -335,4 +338,8 @@
     <string name="release_2_1_1">• إصلاح الأخطاء.</string>
     <string name="release_2_1_2">• إصلاح الأخطاء وتحسين التصميم.</string>
     <string name="release_2_1_3">• إصلاح الأخطاء وتحسين التصميم.</string>
+    <string name="release_2_1_4">• تم أصلاح الاختصارات لا تعمل عند استخدام أيقونة مختلفة.
+        \n• التسميات المحددة تظهر الآن أولا في تخطيط الملاحظة.
+        \n• إصلاحات الأخطاء الأخرى وتحسين التصميم.
+    </string>
 </resources>

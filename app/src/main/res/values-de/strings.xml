@@ -37,13 +37,11 @@
     <string name="report_issue">Einen Fehler melden</string>
     <string name="about">Über</string>
     <string name="whats_new">Was ist neu?</string>
-    <string name="about_message">Noto wird von <a href="https://www.alialbaali.com/">Ali Albaali</a>entwickelt und gepflegt.
-        \n\nDie App wird unter den Bedingungen der <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2 verteilt.</a>.
-        Die App-Icons verwenden eine <a href="https://www.figma.com/community/file/830405806109119447/">Sammlung von Verläufen</a> veröffentlicht
-        von <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> und lizenziert unter <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.</a>.
+    <string name="about_message">Noto wird von <a href="https://www.alialbaali.com/">Ali Albaali</a> entwickelt und betreut.
+        \n\nDie App wird unter den Bedingungen der <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache-Lizenz Version 2</a> verbreitet.
+        Die App-Icons verwenden eine <a href="https://www.figma.com/community/file/830405806109119447/">Sammlung von Verläufen</a>, die von <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> veröffentlicht wurde und unter <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4</a> lizenziert ist.
         \n\nBesonderen Dank an <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> und <a href="https://sakci.me">Alparslan Şakçi</a>,
-        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a>, und Uli N für türkische, spanische, französische und deutsche Lokalisierungen
-        sowie alle, die an der Entwicklung mitgewirkt und mitgewirkt haben.</string>
+        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a> und Uli N für die türkische, spanische, französische und deutsche Übersetzung, sowie an alle, die an der Entwicklung mitgewirkt oder auf andere Weise dazu beigetragen haben.</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Daten exportieren/importieren</string>
     <string name="exporting_failed">Export der Daten fehlgeschlagen.</string>
@@ -119,6 +117,7 @@
     <string name="pinned">Angepinnt</string>
     <!-- Vault -->
     <string name="folders_vault">Ordnerschutz</string>
+    <string name="update_passcode">Zugangscode aktualisieren</string>
     <string name="enter_vault_passcode">Zugangscode eingeben</string>
     <string name="add_to_vault">Zum Ordnerschutz hinzufügen</string>
     <string name="remove_from_vault">Vom Ordnerschutz ausnehmen</string>
@@ -154,6 +153,7 @@
     <string name="use_passcode">Passcode verwenden</string>
     <!-- Note -->
     <string name="all">Alle</string>
+    <string name="update_reminder">Erinnerung aktualisieren</string>
     <string name="archive_is_empty">Archiv ist leer.</string>
     <plurals name="notes_count">
         <item quantity="one">%d Notiz</item>
@@ -184,14 +184,14 @@
     <string name="note_is_archived">Notiz wurde archiviert.</string>
     <string name="note_is_pinned">Notiz wurde angepinnt.</string>
     <string name="note_is_unpinned">Notiz wurde losgelöst.</string>
-    <string name="no_note_reminder">Es wurde keine Notiz-Erinnerung eingerichtet.</string>
+    <string name="no_note_reminder">Keine Notiz-Erinnerung angelegt.</string>
     <string name="note_is_unarchived">Notiz wurde dearchiviert.</string>
     <string name="reminder">Erinnerung</string>
     <string name="reminders">Erinnerungen</string>
     <string name="new_note_reminder">Neue Notiz-Erinnerung</string>
     <string name="copy">Kopieren</string>
     <string name="copy_to">Kopieren nach…</string>
-    <string name="note_is_copied">Notiz wurde kopiert.</string>
+    <string name="note_is_copied">Notiz wurde nach %s kopiert.</string>
     <string name="note_copied_to_clipboard">Notiz wurde in die Zwischenablage kopiert.</string>
     <string name="text_copied">Der Text wurde in die Zwischenablage kopiert.</string>
     <string name="delete_note_confirmation">Willst du diese Notiz wirklich löschen?</string>
@@ -204,7 +204,7 @@
     <string name="note_is_deleted">Notiz wurde gelöscht.</string>
     <string name="note_is_duplicated">Notiz wurde dupliziert.</string>
     <string name="move_to">Verschieben nach…</string>
-    <string name="note_is_moved">Notiz wurde verschoben.</string>
+    <string name="note_is_moved">Notiz wurde nach %s verschoben.</string>
     <string name="note_preview_size">Größe der Notizvorschau</string>
     <string name="show_note_creation_date">Datum der Notizerstellung anzeigen</string>
     <string name="show_folders_notes_count">Anzahl der Notizen für Ordner anzeigen</string>
@@ -217,6 +217,7 @@
     <string name="permission_not_granted">Berechtigung wurde nicht gewährt</string>
     <!-- Label -->
     <string name="reorder_label">Umsortieren</string>
+    <string name="update_label">Label aktualisieren</string>
     <string name="create_label">Label erstellen</string>
     <string name="label_title">Label-Titel</string>
     <string name="label">Label</string>
@@ -326,4 +327,8 @@
     <string name="release_2_1_1">• Fehlerbehebungen.</string>
     <string name="release_2_1_2">• Fehlerbehebungen und Verbesserungen des Designs.</string>
     <string name="release_2_1_3">• Fehlerbehebungen und Verbesserungen des Designs.</string>
+    <string name="release_2_1_4">• Behoben, dass Verknüpfungen bei Verwendung eines anderen Icons nicht funktionierten.
+        \n• Ausgewählte Labels erscheinen jetzt in der Notiz an erster Stelle.
+        \n• Weitere Bugfixes und Design-Verbesserungen.
+    </string>
 </resources>

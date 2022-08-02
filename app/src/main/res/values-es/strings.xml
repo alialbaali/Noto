@@ -9,7 +9,7 @@
     <string name="more_options">Más opciones</string>
     <string name="back">Volver</string>
     <string name="folder_layout">Diseño de carpeta</string>
-    <string name="label_filtering_type">Filtrar por tipo</string>
+    <string name="label_filtering_type">Tipo de filtrado de etiqueta</string>
     <string name="layout">Diseño</string>
     <string name="list">Lista</string>
     <string name="inclusive">Inclusivo</string>
@@ -119,6 +119,7 @@
     <string name="pinned">Anclado</string>
     <!-- Vault -->
     <string name="folders_vault">Bóveda de carpetas</string>
+    <string name="update_passcode">Actualizar contraseña</string>
     <string name="enter_vault_passcode">Introduzca contraseña de bóveda</string>
     <string name="add_to_vault">Añadir a bóveda</string>
     <string name="remove_from_vault">Eliminar de la bóveda</string>
@@ -154,6 +155,7 @@
     <string name="use_passcode">Usar contraseña</string>
     <!-- Note -->
     <string name="all">Todos</string>
+    <string name="update_reminder">Actualizar recordatorio</string>
     <string name="archive_is_empty">El archivo está vacío.</string>
     <plurals name="notes_count">
         <item quantity="one">%d nota</item>
@@ -184,11 +186,11 @@
     <string name="note_is_archived">La nota ha sido archivada.</string>
     <string name="note_is_pinned">La nota ha sido anclada.</string>
     <string name="note_is_unpinned">La nota ha sido desanclada.</string>
-    <string name="no_note_reminder">No hay recordatorio de nota configurado.</string>
+    <string name="no_note_reminder">No se ha definido ningún recordatorio.</string>
     <string name="note_is_unarchived">La nota se ha desarchivado.</string>
     <string name="reminder">Recordatorio</string>
     <string name="reminders">Recordatorios</string>
-    <string name="new_note_reminder">Nuevo recordatorio de nota</string>
+    <string name="new_note_reminder">Nuevo Recordatorio</string>
     <string name="copy">Copiar</string>
     <string name="copy_to">Copiar a…</string>
     <string name="note_is_copied">Se ha copiado la nota.</string>
@@ -217,6 +219,7 @@
     <string name="permission_not_granted">No se ha concedido permiso</string>
     <!-- Label -->
     <string name="reorder_label">Reordenar</string>
+    <string name="update_label">Actualizar etiqueta</string>
     <string name="create_label">Crear etiqueta</string>
     <string name="label_title">Título de la etiqueta</string>
     <string name="label">Etiqueta</string>
@@ -326,4 +329,8 @@
     <string name="release_2_1_1">• Corrección de errores.</string>
     <string name="release_2_1_2">• Corrección de errores y mejoras de diseño.</string>
     <string name="release_2_1_3">• Corrección de errores y mejoras de diseño.</string>
+    <string name="release_2_1_4">• Corregidos atajos que no funcionan cuando se utiliza un icono diferente.
+        \n• Etiquetas seleccionadas ahora aparecen primero en el diseño de nota.
+        \n• Otras correcciones de errores y mejoras de diseño.
+    </string>
 </resources>

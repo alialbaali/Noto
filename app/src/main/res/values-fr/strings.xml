@@ -9,7 +9,7 @@
     <string name="more_options">Plus d\'options</string>
     <string name="back">Retour</string>
     <string name="folder_layout">Disposition du dossier</string>
-    <string name="label_filtering_type">Type de filtre</string>
+    <string name="label_filtering_type">Type de filtrage d\'étiquette</string>
     <string name="layout">Disposition</string>
     <string name="list">Liste</string>
     <string name="inclusive">Inclusif</string>
@@ -18,7 +18,7 @@
     <string name="strict">Strict</string>
     <string name="grid">Grille</string>
     <string name="created">Créé %s</string>
-    <string name="accessed">Accédé le %s</string>
+    <string name="accessed">Dernier accès : %s</string>
     <string name="alphabetical">Alphabétique</string>
     <string name="alphabetical_sorting">Tri par ordre alphabétique</string>
     <string name="creation_date">Date de création</string>
@@ -119,6 +119,7 @@
     <string name="pinned">Épinglé</string>
     <!-- Vault -->
     <string name="folders_vault">Coffre-fort des dossiers</string>
+    <string name="update_passcode">Mettre à jour le code d\'accès</string>
     <string name="enter_vault_passcode">Saisissez le code d\'accès du coffre-fort</string>
     <string name="add_to_vault">Ajouter au coffre</string>
     <string name="remove_from_vault">Retirer du coffre</string>
@@ -154,6 +155,7 @@
     <string name="use_passcode">Utiliser le code d\'accès</string>
     <!-- Note -->
     <string name="all">Toutes</string>
+    <string name="update_reminder">Mettre à jour le rappel</string>
     <string name="archive_is_empty">Aucune archive.</string>
     <plurals name="notes_count">
         <item quantity="one">%d Note</item>
@@ -184,14 +186,14 @@
     <string name="note_is_archived">La note a été archivée.</string>
     <string name="note_is_pinned">La note a été épinglée.</string>
     <string name="note_is_unpinned">La note a été désépinglée.</string>
-    <string name="no_note_reminder">Aucun rappel de note n\'est configuré.</string>
+    <string name="no_note_reminder">Aucun rappel n\'est configuré.</string>
     <string name="note_is_unarchived">La note a été désarchivée.</string>
     <string name="reminder">Rappel</string>
     <string name="reminders">Rappels</string>
-    <string name="new_note_reminder">Nouveau rappel de note</string>
+    <string name="new_note_reminder">Nouveau rappel</string>
     <string name="copy">Copier</string>
     <string name="copy_to">Copier vers…</string>
-    <string name="note_is_copied">La note a été copiée.</string>
+    <string name="note_is_copied">La note a été copiée vers %s.</string>
     <string name="note_copied_to_clipboard">La note a été copiée dans le presse-papiers.</string>
     <string name="text_copied">Le texte a été copié dans le presse-papiers.</string>
     <string name="delete_note_confirmation">Êtes-vous sûr de vouloir supprimer cette note ?</string>
@@ -204,7 +206,7 @@
     <string name="note_is_deleted">La note a bien été supprimée.</string>
     <string name="note_is_duplicated">La note a bien été dupliquée.</string>
     <string name="move_to">Déplacer vers…</string>
-    <string name="note_is_moved">La note a bien été déplacée.</string>
+    <string name="note_is_moved">La note a été déplacée vers %s.</string>
     <string name="note_preview_size">Taille de l\'aperçu de la note</string>
     <string name="show_note_creation_date">Afficher la date de création de la note</string>
     <string name="show_folders_notes_count">Afficher le nombre de notes des dossiers</string>
@@ -217,6 +219,7 @@
     <string name="permission_not_granted">Autorisation non accordée</string>
     <!-- Label -->
     <string name="reorder_label">Réordonner</string>
+    <string name="update_label">Mettre à jour l\'étiquette</string>
     <string name="create_label">Créer une étiquette</string>
     <string name="label_title">Titre de l\'étiquette</string>
     <string name="label">Étiquette</string>
@@ -326,4 +329,7 @@
     <string name="release_2_1_1">• Corrections de bugs.</string>
     <string name="release_2_1_2">• Corrections de bugs et améliorations mineures.</string>
     <string name="release_2_1_3">• Corrections de bugs et améliorations mineures.</string>
+    <string name="release_2_1_4">• Correction des raccourcis non fonctionnels lors de l\'utilisation d\'une icône différente
+\n• Les étiquettes sélectionnées apparaissent en premier sur une note
+\n• Autres corrections de bugs et améliorations mineures.    </string>
 </resources>

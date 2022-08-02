@@ -17,6 +17,7 @@ class WhatsNewFragment : Fragment() {
     private val releases: List<Release> by lazy {
         context?.let { context ->
             listOf(
+                Release_2_1_3(Release.Changelog(context.stringResource(R.string.release_2_1_4))),
                 Release_2_1_3(Release.Changelog(context.stringResource(R.string.release_2_1_3))),
                 Release_2_1_2(Release.Changelog(context.stringResource(R.string.release_2_1_2))),
                 Release_2_1_1(Release.Changelog(context.stringResource(R.string.release_2_1_1))),
