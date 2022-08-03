@@ -23,6 +23,9 @@ sealed interface SettingsItemType {
 
     @JvmInline
     value class Switch(val isChecked: Boolean) : SettingsItemType
+
+    @JvmInline
+    value class Icon(val painter: Painter) : SettingsItemType
 }
 
 @Composable
@@ -70,6 +73,7 @@ fun SettingsItem(
                 onCheckedChange = null,
                 modifier = Modifier.height(24.dp),
             )
+            is SettingsItemType.Icon -> Icon(type.painter, title, tint = Color.Unspecified)
         }
     }
 }
