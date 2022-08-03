@@ -33,7 +33,7 @@ fun SettingsItem(
     modifier: Modifier = Modifier,
     titleColor: Color = MaterialTheme.colorScheme.onSurface,
     painter: Painter? = null,
-    summary: String? = null,
+    description: String? = null,
 ) {
     Row(
         modifier
@@ -53,8 +53,8 @@ fun SettingsItem(
         }
         Column(Modifier.weight(1F)) {
             Text(text = title, style = MaterialTheme.typography.bodyLarge, color = titleColor)
-            if (summary != null) {
-                Text(text = summary, style = MaterialTheme.typography.labelSmall)
+            if (description != null) {
+                Text(text = description, style = MaterialTheme.typography.labelSmall)
             }
         }
         when (type) {
