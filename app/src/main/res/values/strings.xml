@@ -109,6 +109,7 @@
     <string name="select">Select</string>
     <string name="select_all">Select all</string>
     <string name="translations">Translations</string>
+    <string name="credits">Credits</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>
