@@ -23,6 +23,9 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val DeveloperWebsite = "https://www.alialbaali.com"
 private const val LicenseWebsite = "https://www.apache.org/licenses/LICENSE-2.0"
+private const val CollectionOfGradientsWebsite = "https://www.figma.com/community/file/830405806109119447"
+private const val CreatorWebsite = "https://geoffreycrofte.com"
+private const val AppIconsLicenseWebsite = "https://creativecommons.org/licenses/by/4.0/"
 
 class AboutSettingsFragment : Fragment() {
 
@@ -83,6 +86,35 @@ class AboutSettingsFragment : Fragment() {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(LicenseWebsite))
                                 startActivity(intent)
                             }
+                        )
+                    }
+
+                    SettingsSection {
+                        SettingsItem(
+                            title = stringResource(id = R.string.app_icons),
+                            type = SettingsItemType.Text(stringResource(id = R.string.app_icons_value)),
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CollectionOfGradientsWebsite))
+                                startActivity(intent)
+                            },
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.creator),
+                            type = SettingsItemType.Text(stringResource(id = R.string.creator_name)),
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CreatorWebsite))
+                                startActivity(intent)
+                            },
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.license),
+                            type = SettingsItemType.Text(stringResource(id = R.string.app_icons_license_value)),
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(AppIconsLicenseWebsite))
+                                startActivity(intent)
+                            },
                         )
                     }
                 }

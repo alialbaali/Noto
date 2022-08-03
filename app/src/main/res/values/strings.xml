@@ -67,9 +67,14 @@
     <string name="version">Version</string>
     <string name="version_is_copied">Version has been copied to clipboard.</string>
     <string name="developer">Developer</string>
-    <string name="developer_name">Ali Albaali</string>
+    <string name="creator">Creator</string>
+    <string name="creator_name" translatable="false">Geoffrey Crofte</string>
+    <string name="app_icons">App Icons</string>
+    <string name="app_icons_value" translatable="false">Collections of Gradients</string>
+    <string name="developer_name" translatable="false">Ali Albaali</string>
     <string name="license">License</string>
-    <string name="license_value">Apache License 2.0</string>
+    <string name="license_value" translatable="false">Apache License 2.0</string>
+    <string name="app_icons_license_value" translatable="false">CC BY 4.0</string>
     <string name="empty_version">Version</string>
     <string name="date">Date</string>
     <string name="drag">Drag</string>
