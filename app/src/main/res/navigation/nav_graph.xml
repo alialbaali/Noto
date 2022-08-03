@@ -627,5 +627,20 @@
     <fragment
         android:id="@+id/aboutSettingsFragment"
         android:name="com.noto.app.settings.AboutSettingsFragment"
-        android:label="AboutSettingsFragment" />
+        android:label="AboutSettingsFragment" >
+        <action
+            android:id="@+id/action_aboutSettingsFragment_to_translationsSettingsFragment"
+            app:destination="@id/translationsSettingsFragment" />
+        <action
+            android:id="@+id/action_aboutSettingsFragment_to_creditsSettingsFragment"
+            app:destination="@id/creditsSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/translationsSettingsFragment"
+        android:name="com.noto.app.settings.TranslationsSettingsFragment"
+        android:label="TranslationsSettingsFragment" />
+    <fragment
+        android:id="@+id/creditsSettingsFragment"
+        android:name="com.noto.app.settings.CreditsSettingsFragment"
+        android:label="CreditsSettingsFragment" />
 </navigation>

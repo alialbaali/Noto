@@ -104,6 +104,7 @@
     <string name="delete">Delete</string>
     <string name="just_now">just now</string>
     <string name="translations">Translations</string>
+    <string name="credits">Credits</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>
