@@ -42,6 +42,7 @@ fun SettingsItem(
             .background(MaterialTheme.colorScheme.surface)
             .padding(NotoTheme.dimensions.medium),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = if (painter != null) Arrangement.Start else Arrangement.SpaceBetween,
     ) {
         if (painter != null) {
             Icon(
@@ -59,12 +60,16 @@ fun SettingsItem(
         }
         when (type) {
             is SettingsItemType.None -> {}
-            is SettingsItemType.Text -> {
-                Text(text = type.value, style = MaterialTheme.typography.bodySmall)
-            }
-            is SettingsItemType.Switch -> {
-                Switch(checked = type.isChecked, onCheckedChange = null, modifier = Modifier.height(24.dp))
-            }
+            is SettingsItemType.Text -> Text(
+                text = type.value,
+                style = MaterialTheme.typography.bodySmall,
+                modifier = Modifier.weight(1F, fill = false),
+            )
+            is SettingsItemType.Switch -> Switch(
+                checked = type.isChecked,
+                onCheckedChange = null,
+                modifier = Modifier.height(24.dp),
+            )
         }
     }
 }
