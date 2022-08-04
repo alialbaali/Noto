@@ -22,8 +22,6 @@ import com.google.android.flexbox.FlexboxLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.NoteItemBinding
 import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.Label
-import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.label.noteLabelItem
 import com.noto.app.util.*
@@ -118,6 +116,15 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
             updateMarginsRelative(top = if (model.note.title.isBlank()) 0.dp else 4.dp)
         }
+
+        if (isCurrentLocaleArabic()) {
+            tvCreationDate.typeface = root.context?.tryLoadingFontResource(R.font.nunito_semibold)
+            tvAccessDate.typeface = root.context?.tryLoadingFontResource(R.font.nunito_semibold)
+        } else {
+            tvCreationDate.typeface = root.context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
+            tvAccessDate.typeface = root.context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
+        }
+
         val gestureDetectorListener = object : GestureDetector.SimpleOnGestureListener() {
             override fun onLongPress(e: MotionEvent?) {
                 onLongClickListener.onLongClick(root)
