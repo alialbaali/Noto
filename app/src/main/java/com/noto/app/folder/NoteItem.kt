@@ -76,7 +76,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         root.context?.let { context ->
             val colorResource = context.colorResource(color.toResource())
             val isBlack = color == NotoColor.Black
-            root.background?.setRippleColor(colorResource.toColorStateList())
+            ll.background?.setRippleColor(colorResource.toColorStateList())
             tvNoteTitle.setLinkTextColor(colorResource)
             tvNoteBody.setLinkTextColor(colorResource)
             tvNoteTitle.text = model.note.title.highlightText(colorResource, isBlack)
@@ -97,11 +97,14 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
                 llReminder.background?.mutate()?.setTint(colorResource)
                 tvReminder.text = model.note.reminderDate?.format(context)
             }
+            ivSelected.imageTintList = colorResource.toColorStateList()
         }
         tvCreationDate.isVisible = isShowCreationDate
         tvAccessDate.isVisible = isShowAccessDate
         tvNoteTitle.isVisible = model.note.title.isNotBlank()
         llReminder.isVisible = model.note.reminderDate != null
+        ivSelected.isVisible = model.isSelected
+        ivSelected.isSelected = model.isSelected
         if (isSelection) {
             if (model.isSelected) {
                 root.setOnClickListener(onDeselectListener)
@@ -124,7 +127,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         tvNoteBody.setMediumFont(font)
         ibDrag.isVisible = isManualSorting
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
-        root.isSelected = model.isSelected
+        ll.isSelected = model.isSelected
         rv.isVisible = model.labels.isNotEmpty()
         rv.layoutManager = FlexboxLayoutManager(root.context, FlexDirection.ROW, FlexWrap.WRAP)
         rv.withModels {
@@ -173,9 +176,9 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         rv.setOnTouchListener { _, motionEvent ->
             gestureDetector.onTouchEvent(motionEvent)
             if (motionEvent.action == MotionEvent.ACTION_DOWN)
-                root.background?.state = intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled)
+                ll.background?.state = intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled)
             else if (motionEvent.action == MotionEvent.ACTION_UP || motionEvent.action == MotionEvent.ACTION_CANCEL)
-                root.background?.state = intArrayOf(-android.R.attr.state_pressed, -android.R.attr.state_enabled)
+                ll.background?.state = intArrayOf(-android.R.attr.state_pressed, -android.R.attr.state_enabled)
             false
         }
     }
