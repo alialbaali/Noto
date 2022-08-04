@@ -6,9 +6,11 @@ import android.view.View
 import androidx.viewbinding.ViewBinding
 import com.noto.app.R
 import com.noto.app.domain.model.*
+import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.folder.NoteItemModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
@@ -118,7 +120,7 @@ fun List<NoteItemModel>.groupByLabels(
             it.sortedBy { it.first.firstOrNull()?.position }
     }
 
-fun List<Note>.mapToNoteItemModel(labels: List<Label>, noteLabels: List<NoteLabel>, isSelected: Boolean): List<NoteItemModel> {
+fun List<Note>.mapToNoteItemModel(labels: List<Label>, noteLabels: List<NoteLabel>, selectedNoteIds: LongArray = longArrayOf()): List<NoteItemModel> {
     return map { note ->
         NoteItemModel(
             note,
@@ -128,7 +130,7 @@ fun List<Note>.mapToNoteItemModel(labels: List<Label>, noteLabels: List<NoteLabe
                         noteLabel.labelId == label.id
                     }
                 },
-            isSelected = isSelected,
+            isSelected = selectedNoteIds.contains(note.id),
         )
     }
 }
@@ -208,3 +210,9 @@ fun Icon.toActivityAliasName(isAppActivityIconEnabled: Boolean) = when (this) {
     Icon.Purpleberry -> "Purpleberry"
     Icon.SanguineSun -> "SanguineSun"
 }.let { "com.noto.app.$it" }
+
+suspend fun LabelRepository.getOrCreateLabel(folderId: Long, label: Label): Long {
+    val folderLabels = getLabelsByFolderId(folderId).first()
+    val existingLabel = folderLabels.firstOrNull { it.title == label.title }?.id
+    return existingLabel ?: createLabel(label.copy(id = 0, folderId = folderId))
+}

@@ -4,9 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
-import com.noto.app.util.firstLineOrEmpty
-import com.noto.app.util.isValid
-import com.noto.app.util.takeAfterFirstLineOrEmpty
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
@@ -141,52 +139,32 @@ class NoteViewModel(
 
     fun moveNote(folderId: Long) = viewModelScope.launch {
         noteRepository.updateNote(note.value.copy(folderId = folderId))
-        val folderLabels = labelRepository.getLabelsByFolderId(folderId).first()
-        labels.value
-            .filterValues { it }
-            .keys
-            .forEach { label ->
-                launch {
-                    if (folderLabels.any { it.title == label.title }) {
-                        val labelId = folderLabels.first { it.title == label.title }.id
-                        noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id))
-                    } else {
-                        val labelId = labelRepository.createLabel(label.copy(id = 0, folderId = folderId))
-                        noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id))
-                    }
-                }
+        labels.value.filterSelected().forEach { label ->
+            launch {
+                val labelId = labelRepository.getOrCreateLabel(folderId, label)
+                noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id))
+                noteLabelRepository.deleteNoteLabel(note.value.id, label.id)
             }
+        }
     }
 
     fun copyNote(folderId: Long) = viewModelScope.launch {
         val noteId = noteRepository.createNote(note.value.copy(id = 0, folderId = folderId))
-        val folderLabels = labelRepository.getLabelsByFolderId(folderId).first()
-        labels.value
-            .filterValues { it }
-            .keys
-            .forEach { label ->
-                launch {
-                    if (folderLabels.any { it.title == label.title }) {
-                        val labelId = folderLabels.first { it.title == label.title }.id
-                        noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
-                    } else {
-                        val labelId = labelRepository.createLabel(label.copy(id = 0, folderId = folderId))
-                        noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
-                    }
-                }
+        labels.value.filterSelected().forEach { label ->
+            launch {
+                val labelId = labelRepository.getOrCreateLabel(folderId, label)
+                noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
             }
+        }
     }
 
     fun duplicateNote() = viewModelScope.launch {
         val noteId = noteRepository.createNote(note.value.copy(id = 0, reminderDate = null))
-        labels.value
-            .filterValues { it }
-            .keys
-            .forEach { label ->
-                launch {
-                    noteLabelRepository.createNoteLabel(NoteLabel(noteId = noteId, labelId = label.id))
-                }
+        labels.value.filterSelected().forEach { label ->
+            launch {
+                noteLabelRepository.createNoteLabel(NoteLabel(noteId = noteId, labelId = label.id))
             }
+        }
     }
 
     fun selectLabel(id: Long) = viewModelScope.launch {
