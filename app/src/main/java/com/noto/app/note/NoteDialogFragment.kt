@@ -225,6 +225,11 @@ class NoteDialogFragment : BaseDialogFragment() {
                 )
             }
         }
+
+        tvSelectNote.setOnClickListener {
+            navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.IsSelection, args.noteId)
+            dismiss()
+        }
     }
 
     private fun NoteDialogFragmentBinding.setupNote(folder: Folder, note: Note, labels: List<Label>) {
