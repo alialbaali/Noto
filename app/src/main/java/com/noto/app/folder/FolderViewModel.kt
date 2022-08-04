@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
+import com.noto.app.map
 import com.noto.app.util.filterContent
 import com.noto.app.util.forEachRecursively
 import com.noto.app.util.mapToNoteItemModel
@@ -230,8 +231,39 @@ class FolderViewModel(
         folderRepository.updateFolder(folder.value.copy(filteringType = filteringType))
     }
 
-    fun setIsSelection(isSelection: Boolean) {
-        mutableIsSelection.value = isSelection
+    fun enableSelection() {
+        mutableIsSelection.value = true
+    }
+
+    fun disableSelection() {
+        mutableIsSelection.value = false
+        mutableNotes.value = notes.value.map {
+            it.map { model ->
+                model.copy(isSelected = false)
+            }
+        }
+    }
+
+    fun selectNote(id: Long) {
+        mutableNotes.value = notes.value.map {
+            it.map { model ->
+                if (model.note.id == id)
+                    model.copy(isSelected = true)
+                else
+                    model
+            }
+        }
+    }
+
+    fun deselectNote(id: Long) {
+        mutableNotes.value = notes.value.map {
+            it.map { model ->
+                if (model.note.id == id)
+                    model.copy(isSelected = false)
+                else
+                    model
+            }
+        }
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }

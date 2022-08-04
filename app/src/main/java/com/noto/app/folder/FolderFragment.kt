@@ -64,9 +64,10 @@ class FolderFragment : Fragment() {
             viewModel.notes,
             viewModel.labels,
             viewModel.isRememberScrollingPosition,
-        ) { folder, notes, labels, isRememberScrollingPosition ->
-            val notesCount = notes.getOrDefault(emptyList()).filterSelectedLabels(labels.filterSelected(), folder.filteringType).count()
-            setupFolder(folder, notesCount, isRememberScrollingPosition)
+        ) { folder, notesState, labels, isRememberScrollingPosition ->
+            val notes = notesState.getOrDefault(emptyList()).filterSelectedLabels(labels.filterSelected(), folder.filteringType)
+            val selectedNotes = notes.filter { it.isSelected }
+            setupFolder(folder, notes.count(), selectedNotes.count(), isRememberScrollingPosition)
             context?.let { context ->
                 val text = context.stringResource(R.string.folder_archive, folder.getTitle(context))
                 MenuItemCompat.setTooltipText(archiveMenuItem, text)
@@ -153,7 +154,12 @@ class FolderFragment : Fragment() {
         tb.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.notes_view -> navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteListViewDialogFragment(args.folderId))
-                R.id.select -> viewModel.setIsSelection(true)
+                R.id.select -> {
+                    if (viewModel.isSelection.value)
+                        viewModel.disableSelection()
+                    else
+                        viewModel.enableSelection()
+                }
             }
             false
         }
@@ -274,6 +280,7 @@ class FolderFragment : Fragment() {
                                         isShowCreationDate(folder.isShowNoteCreationDate)
                                         searchTerm(searchTerm)
                                         isManualSorting(folder.sortingType == NoteListSortingType.Manual)
+                                        isSelection(isSelection)
                                         onClickListener { _ ->
                                             navController
                                                 ?.navigateSafely(
@@ -302,6 +309,8 @@ class FolderFragment : Fragment() {
                                                 }
                                             view.performClick()
                                         }
+                                        onSelectListener { _ -> viewModel.selectNote(model.note.id) }
+                                        onDeselectListener { _ -> viewModel.deselectNote(model.note.id) }
                                     }
                                 }
                             }
@@ -329,16 +338,22 @@ class FolderFragment : Fragment() {
         return true
     }
 
-    private fun FolderFragmentBinding.setupFolder(folder: Folder, notesCount: Int, isRememberScrollingPosition: Boolean) {
+    private fun FolderFragmentBinding.setupFolder(folder: Folder, notesCount: Int, selectedNotesCount: Int, isRememberScrollingPosition: Boolean) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
             tvFolderTitle.text = folder.getTitle(context)
             tvFolderTitle.setTextColor(colorStateList)
-            tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
             tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_semibold)
             tvFolderNotesCount.animationInterpolator = DefaultInterpolator()
-            tvFolderNotesCountRtl.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
+            if (selectedNotesCount > 0) {
+                tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_selected_count, notesCount, notesCount, selectedNotesCount)
+                tvFolderNotesCountRtl.text =
+                    context.quantityStringResource(R.plurals.notes_selected_count, notesCount, notesCount, selectedNotesCount)
+            } else {
+                tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
+                tvFolderNotesCountRtl.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
+            }
             fab.backgroundTintList = colorStateList
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
