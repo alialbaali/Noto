@@ -96,7 +96,7 @@ class NoteListWidgetConfigViewModel(
             noteLabelRepository.getNoteLabels()
                 .filterNotNull()
         ) { notes, labels, noteLabels ->
-            mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, isSelected = false)
+            mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels)
         }.launchIn(viewModelScope)
 
         combine(

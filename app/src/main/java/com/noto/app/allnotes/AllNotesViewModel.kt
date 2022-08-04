@@ -54,7 +54,7 @@ class AllNotesViewModel(
             }.toMap()
             mutableNotes.value = notes
                 .filter { note -> folders.any { folder -> folder.id == note.folderId } }
-                .mapToNoteItemModel(labels, noteLabels, isSelected = false)
+                .mapToNoteItemModel(labels, noteLabels)
                 .filterContent(searchTerm)
                 .groupBy { model ->
                     folders.firstOrNull { folder ->
