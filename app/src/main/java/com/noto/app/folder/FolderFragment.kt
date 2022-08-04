@@ -86,11 +86,11 @@ class FolderFragment : Fragment() {
             viewModel.isSelection,
         ) { values ->
             val notes = values[0] as UiState<List<NoteItemModel>>
-            val labels = values[0] as Map<Label, Boolean>
-            val font = values[0] as Font
-            val folder = values[0] as Folder
-            val searchTerm = values[0] as String
-            val isSelection = values[0] as Boolean
+            val labels = values[1] as Map<Label, Boolean>
+            val font = values[2] as Font
+            val folder = values[3] as Folder
+            val searchTerm = values[4] as String
+            val isSelection = values[5] as Boolean
             setupNotesAndLabels(
                 notes.map { it.filterSelectedLabels(labels.filterSelected(), folder.filteringType) },
                 labels,
