@@ -32,7 +32,7 @@ val appModule = module {
 
     viewModel { MainViewModel(get(), get(), get()) }
 
-    viewModel { FolderViewModel(get(), get(), get(), get(), get(), it.get()) }
+    viewModel { FolderViewModel(get(), get(), get(), get(), get(), it.get(), it.getOrNull() ?: longArrayOf()) }
 
     viewModel { NoteViewModel(get(), get(), get(), get(), get(), it[0], it[1], it.getOrNull(), it.getOrNull() ?: longArrayOf()) }
 

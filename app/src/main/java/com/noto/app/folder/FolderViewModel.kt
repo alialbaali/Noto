@@ -5,9 +5,11 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
+import com.noto.app.getOrDefault
 import com.noto.app.map
 import com.noto.app.util.filterContent
 import com.noto.app.util.forEachRecursively
+import com.noto.app.util.getOrCreateLabel
 import com.noto.app.util.mapToNoteItemModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -19,6 +21,7 @@ class FolderViewModel(
     private val noteLabelRepository: NoteLabelRepository,
     private val settingsRepository: SettingsRepository,
     private val folderId: Long,
+    private var selectedNoteIds: LongArray = longArrayOf(),
 ) : ViewModel() {
 
     private val mutableFolder = MutableStateFlow(Folder(folderId, position = 0))
@@ -78,11 +81,12 @@ class FolderViewModel(
                 .filterNotNull(),
             searchTerm,
         ) { notes, archivedNotes, labels, noteLabels, searchTerm ->
-            mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, isSelected = false)
+            mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, selectedNoteIds)
                 .filterContent(searchTerm)
                 .let { UiState.Success(it) }
-            mutableArchivedNotes.value = archivedNotes.mapToNoteItemModel(labels, noteLabels, isSelected = false)
+            mutableArchivedNotes.value = archivedNotes.mapToNoteItemModel(labels, noteLabels)
                 .let { UiState.Success(it) }
+            selectedNoteIds = longArrayOf()
         }.launchIn(viewModelScope)
 
         labelRepository.getLabelsByFolderId(folderId)
@@ -264,6 +268,92 @@ class FolderViewModel(
                     model
             }
         }
+    }
+
+    fun pinSelectedNotes() = viewModelScope.launch {
+        notes.value.getOrDefault(emptyList())
+            .filter { model -> model.isSelected }
+            .forEach { model ->
+                launch {
+                    noteRepository.updateNote(model.note.copy(isPinned = true))
+                }
+            }
+    }
+
+    fun unpinSelectedNotes() = viewModelScope.launch {
+        notes.value.getOrDefault(emptyList())
+            .filter { model -> model.isSelected }
+            .forEach { model ->
+                launch {
+                    noteRepository.updateNote(model.note.copy(isPinned = false))
+                }
+            }
+    }
+
+    fun archiveSelectedNotes() = viewModelScope.launch {
+        notes.value.getOrDefault(emptyList())
+            .filter { model -> model.isSelected }
+            .forEach { model ->
+                launch {
+                    noteRepository.updateNote(model.note.copy(isArchived = true))
+                }
+            }
+    }
+
+    fun duplicateSelectedNotes() = viewModelScope.launch {
+        notes.value.getOrDefault(emptyList())
+            .filter { model -> model.isSelected }
+            .forEach { model ->
+                launch {
+                    val noteId = noteRepository.createNote(model.note.copy(id = 0, reminderDate = null))
+                    model.labels.forEach { label ->
+                        launch {
+                            noteLabelRepository.createNoteLabel(NoteLabel(noteId = noteId, labelId = label.id))
+                        }
+                    }
+                }
+            }
+    }
+
+    fun moveSelectedNotes(folderId: Long) = viewModelScope.launch {
+        notes.value.getOrDefault(emptyList())
+            .filter { model -> model.isSelected }
+            .forEach { model ->
+                launch {
+                    noteRepository.updateNote(model.note.copy(folderId = folderId))
+                    model.labels.forEach { label ->
+                        launch {
+                            val labelId = labelRepository.getOrCreateLabel(folderId, label)
+                            noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = model.note.id))
+                            noteLabelRepository.deleteNoteLabel(model.note.id, label.id)
+                        }
+                    }
+                }
+            }
+    }
+
+    fun copySelectedNotes(folderId: Long) = viewModelScope.launch {
+        notes.value.getOrDefault(emptyList())
+            .filter { model -> model.isSelected }
+            .forEach { model ->
+                val noteId = noteRepository.createNote(model.note.copy(id = 0, folderId = folderId))
+                model.labels.forEach { label ->
+                    launch {
+                        val labelId = labelRepository.getOrCreateLabel(folderId, label)
+                        noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
+                    }
+                }
+            }
+    }
+
+    fun deleteSelectedNotes() = viewModelScope.launch {
+        notes.value.getOrDefault(emptyList())
+            .filter { model -> model.isSelected }
+            .forEach { model ->
+                launch {
+                    noteRepository.deleteNote(model.note)
+                }
+            }
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }
