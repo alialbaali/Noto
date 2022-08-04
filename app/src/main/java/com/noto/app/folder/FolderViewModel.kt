@@ -102,6 +102,13 @@ class FolderViewModel(
             }
             .onEach { mutableLabels.value = it }
             .launchIn(viewModelScope)
+
+        notes
+            .onEach { notesState ->
+                val isNoneSelected = notesState.getOrDefault(emptyList()).none { it.isSelected }
+                if (isNoneSelected) disableSelection()
+            }
+            .launchIn(viewModelScope)
     }
 
     suspend fun getFolderById(id: Long) = folderRepository.getFolderById(id).firstOrNull()
