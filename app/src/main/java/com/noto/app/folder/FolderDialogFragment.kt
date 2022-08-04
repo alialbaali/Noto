@@ -90,8 +90,10 @@ class FolderDialogFragment : BaseDialogFragment() {
                         R.drawable.ic_round_unarchive_24
                     else
                         R.drawable.ic_round_archive_24
-                    context?.updateAllWidgetsData()
-                    parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
+                    context?.let { context ->
+                        context.updateAllWidgetsData()
+                        parentView?.snackbar(context.stringResource(stringId), drawableId, anchorViewId, folderColor)
+                    }
                     dismiss()
                 }
             }
@@ -108,8 +110,10 @@ class FolderDialogFragment : BaseDialogFragment() {
                     R.drawable.ic_round_lock_open_24
                 else
                     R.drawable.ic_round_lock_24
-                context?.updateAllWidgetsData()
-                parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
+                context?.let { context ->
+                    parentView?.snackbar(context.stringResource(stringId), drawableId, anchorViewId, folderColor)
+                    context.updateAllWidgetsData()
+                }
                 dismiss()
             }
         }
@@ -125,9 +129,10 @@ class FolderDialogFragment : BaseDialogFragment() {
                     R.drawable.ic_round_pin_off_24
                 else
                     R.drawable.ic_round_pin_24
-
-                context?.updateAllWidgetsData()
-                parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
+                context?.let { context ->
+                    context.updateAllWidgetsData()
+                    parentView?.snackbar(context.stringResource(stringId), drawableId, anchorViewId, folderColor)
+                }
                 dismiss()
             }
         }
@@ -219,12 +224,11 @@ class FolderDialogFragment : BaseDialogFragment() {
                     }
                     navController?.navigate(R.id.folderFragment, args, options)
                 }
-
-                parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
-                context?.updateAllWidgetsData()
-                context?.updateFolderListWidgets()
                 val notes = viewModel.notes.value as? UiState.Success
                 context?.let { context ->
+                    context.updateAllWidgetsData()
+                    context.updateFolderListWidgets()
+                    parentView?.snackbar(context.stringResource(stringId), drawableId, anchorViewId, folderColor)
                     notes?.value
                         ?.filter { model -> model.note.reminderDate != null }
                         ?.forEach { model -> alarmManager?.cancelAlarm(context, model.note.id) }
@@ -251,9 +255,11 @@ class FolderDialogFragment : BaseDialogFragment() {
                     else
                         R.drawable.ic_round_archive_24
 
-                    context?.updateAllWidgetsData()
-                    context?.updateFolderListWidgets()
-                    parentView?.snackbar(stringId, drawableId, anchorViewId, color)
+                    context?.let { context ->
+                        context.updateAllWidgetsData()
+                        context.updateFolderListWidgets()
+                        parentView?.snackbar(context.stringResource(stringId), drawableId, anchorViewId, color)
+                    }
                     dismiss()
                 }
             }

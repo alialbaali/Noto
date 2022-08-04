@@ -97,7 +97,9 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                             val drawableId = R.drawable.ic_round_copy_24
                             val anchorViewId = R.id.fab
                             val folderColor = viewModel.folder.value.color
-                            parentFragment?.view?.snackbar(stringId, drawableId, anchorViewId, folderColor)
+                            context?.let { context ->
+                                parentFragment?.view?.snackbar(context.stringResource(stringId), drawableId, anchorViewId, folderColor)
+                            }
                         }
                         dismiss()
                     }

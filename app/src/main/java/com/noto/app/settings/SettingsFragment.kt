@@ -43,7 +43,9 @@ class SettingsFragment : Fragment() {
                 viewModel.toggleDoNotDisturb()
             } else {
                 view?.findViewById<SwitchMaterial>(R.id.sw_do_not_disturb)?.isChecked = false
-                view?.snackbar(R.string.permission_not_granted, R.drawable.ic_round_warning_24)
+                context?.let { context ->
+                    view?.snackbar(context.stringResource(R.string.permission_not_granted), R.drawable.ic_round_warning_24)
+                }
             }
         }
     }

@@ -86,7 +86,7 @@ class LabelDialogFragment : BaseDialogFragment() {
                         val drawableId = R.drawable.ic_round_delete_24
                         val anchorViewId = R.id.fab
                         val folderColor = viewModel.folder.value.color
-                        parentView?.snackbar(stringId, drawableId, anchorViewId, folderColor)
+                        parentView?.snackbar(context.stringResource(stringId), drawableId, anchorViewId, folderColor)
                         viewModel.deleteLabel().invokeOnCompletion { dismiss() }
                     }
                 navController?.navigateSafely(

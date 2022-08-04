@@ -75,7 +75,9 @@ class VaultPasscodeDialogFragment : BaseDialogFragment() {
         viewModel.setVaultPasscode(passcode)
             .invokeOnCompletion {
                 val parentView = parentFragment?.view
-                parentView?.snackbar(R.string.vault_passcode_has_changed, R.drawable.ic_round_password_24)
+                context?.let { context ->
+                    parentView?.snackbar(context.stringResource(R.string.vault_passcode_has_changed), R.drawable.ic_round_password_24)
+                }
                 activity?.hideKeyboard(etNewPasscode)
                 activity?.hideKeyboard(etCurrentPasscode)
                 dismiss()

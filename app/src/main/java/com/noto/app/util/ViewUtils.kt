@@ -22,7 +22,6 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
-import androidx.annotation.StringRes
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -97,13 +96,12 @@ private fun Note.createShareIntent() = Intent(Intent.ACTION_SEND).apply {
 }
 
 fun View.snackbar(
-    @StringRes stringId: Int,
+    text: String,
     @DrawableRes drawableId: Int? = null,
     @IdRes anchorViewId: Int? = null,
     color: NotoColor? = null,
-    vararg formatArgs: Any? = emptyArray(),
     vibrate: Boolean = true,
-) = Snackbar.make(this, context.stringResource(stringId, *formatArgs), Snackbar.LENGTH_SHORT).apply {
+) = Snackbar.make(this, text, Snackbar.LENGTH_SHORT).apply {
     animationMode = Snackbar.ANIMATION_MODE_SLIDE
     val textView = view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
     if (anchorViewId != null) setAnchorView(anchorViewId)
