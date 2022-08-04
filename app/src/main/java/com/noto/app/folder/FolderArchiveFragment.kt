@@ -74,7 +74,7 @@ class FolderArchiveFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun FolderArchiveFragmentBinding.setupArchivedNotes(state: UiState<List<NoteWithLabels>>, font: Font, folder: Folder) {
+    private fun FolderArchiveFragmentBinding.setupArchivedNotes(state: UiState<List<NoteItemModel>>, font: Font, folder: Folder) {
         if (state is UiState.Success) {
             val archivedNotes = state.value
             rv.withModels {
@@ -98,23 +98,22 @@ class FolderArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                                 )
                             }
                         ) { notes ->
-                            notes.forEach { archivedNote ->
+                            notes.forEach { archivedNoteModel ->
                                 noteItem {
-                                    id(archivedNote.first.id)
-                                    note(archivedNote.first)
+                                    id(archivedNoteModel.note.id)
+                                    model(archivedNoteModel)
                                     font(font)
                                     searchTerm("")
                                     previewSize(folder.notePreviewSize)
                                     isShowCreationDate(folder.isShowNoteCreationDate)
                                     color(folder.color)
-                                    labels(archivedNote.second)
                                     isManualSorting(false)
                                     onClickListener { _ ->
                                         navController
                                             ?.navigateSafely(
                                                 FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteFragment(
-                                                    archivedNote.first.folderId,
-                                                    archivedNote.first.id
+                                                    archivedNoteModel.note.folderId,
+                                                    archivedNoteModel.note.id
                                                 )
                                             )
                                     }
@@ -122,8 +121,8 @@ class FolderArchiveFragment : BaseDialogFragment(isCollapsable = true) {
                                         navController
                                             ?.navigateSafely(
                                                 FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteDialogFragment(
-                                                    archivedNote.first.folderId,
-                                                    archivedNote.first.id,
+                                                    archivedNoteModel.note.folderId,
+                                                    archivedNoteModel.note.id,
                                                     R.id.folderArchiveFragment
                                                 )
                                             )

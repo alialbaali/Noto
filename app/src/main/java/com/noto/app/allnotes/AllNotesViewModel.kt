@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.Language
 import com.noto.app.domain.repository.*
+import com.noto.app.folder.NoteItemModel
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -19,7 +19,7 @@ class AllNotesViewModel(
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
 
-    private val mutableNotes = MutableStateFlow<UiState<Map<Folder, List<NoteWithLabels>>>>(UiState.Loading)
+    private val mutableNotes = MutableStateFlow<UiState<Map<Folder, List<NoteItemModel>>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
 
     private val mutableNotesVisibility = MutableStateFlow(emptyMap<Folder, Boolean>())
@@ -54,11 +54,11 @@ class AllNotesViewModel(
             }.toMap()
             mutableNotes.value = notes
                 .filter { note -> folders.any { folder -> folder.id == note.folderId } }
-                .mapWithLabels(labels, noteLabels)
+                .mapToNoteItemModel(labels, noteLabels, isSelected = false)
                 .filterContent(searchTerm)
-                .groupBy { noteWithLabels ->
+                .groupBy { model ->
                     folders.firstOrNull { folder ->
-                        folder.id == noteWithLabels.first.folderId
+                        folder.id == model.note.folderId
                     }
                 }
                 .filterNotNullKeys()

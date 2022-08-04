@@ -32,13 +32,10 @@ import com.noto.app.util.*
 @EpoxyModelClass(layout = R.layout.note_item)
 abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute
-    lateinit var note: Note
+    lateinit var model: NoteItemModel
 
     @EpoxyAttribute
     lateinit var font: Font
-
-    @EpoxyAttribute
-    lateinit var labels: List<Label>
 
     @EpoxyAttribute
     lateinit var color: NotoColor
@@ -75,39 +72,39 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             root.background?.setRippleColor(colorResource.toColorStateList())
             tvNoteTitle.setLinkTextColor(colorResource)
             tvNoteBody.setLinkTextColor(colorResource)
-            tvNoteTitle.text = note.title.highlightText(colorResource, isBlack)
-            if (note.title.isBlank() && previewSize == 0) {
-                tvNoteBody.text = note.body.takeLines(1).highlightText(colorResource, isBlack)
+            tvNoteTitle.text = model.note.title.highlightText(colorResource, isBlack)
+            if (model.note.title.isBlank() && previewSize == 0) {
+                tvNoteBody.text = model.note.body.takeLines(1).highlightText(colorResource, isBlack)
                 tvNoteBody.maxLines = 1
                 tvNoteBody.isVisible = true
             } else {
-                tvNoteBody.text = note.body.takeLines(previewSize).highlightText(colorResource, isBlack)
+                tvNoteBody.text = model.note.body.takeLines(previewSize).highlightText(colorResource, isBlack)
                 tvNoteBody.maxLines = previewSize
-                tvNoteBody.isVisible = previewSize != 0 && note.body.isNotBlank()
+                tvNoteBody.isVisible = previewSize != 0 && model.note.body.isNotBlank()
             }
             if (isShowCreationDate)
-                tvCreationDate.text = context.stringResource(R.string.created, note.creationDate.format(root.context))
+                tvCreationDate.text = context.stringResource(R.string.created, model.note.creationDate.format(root.context))
             if (isShowAccessDate)
-                tvAccessDate.text = context.stringResource(R.string.accessed, note.accessDate.format(root.context))
-            if (note.reminderDate != null) {
+                tvAccessDate.text = context.stringResource(R.string.accessed, model.note.accessDate.format(root.context))
+            if (model.note.reminderDate != null) {
                 llReminder.background?.mutate()?.setTint(colorResource)
-                tvReminder.text = note.reminderDate?.format(context)
+                tvReminder.text = model.note.reminderDate?.format(context)
             }
         }
         tvCreationDate.isVisible = isShowCreationDate
         tvAccessDate.isVisible = isShowAccessDate
-        tvNoteTitle.isVisible = note.title.isNotBlank()
-        llReminder.isVisible = note.reminderDate != null
+        tvNoteTitle.isVisible = model.note.title.isNotBlank()
+        llReminder.isVisible = model.note.reminderDate != null
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
         tvNoteTitle.setSemiboldFont(font)
         tvNoteBody.setMediumFont(font)
         ibDrag.isVisible = isManualSorting
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
-        rv.isVisible = labels.isNotEmpty()
+        rv.isVisible = model.labels.isNotEmpty()
         rv.layoutManager = FlexboxLayoutManager(root.context, FlexDirection.ROW, FlexWrap.WRAP)
         rv.withModels {
-            labels.forEach { label ->
+            model.labels.forEach { label ->
                 noteLabelItem {
                     id(label.id)
                     label(label)
@@ -116,10 +113,10 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             }
         }
         tvNoteTitle.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-            updateMarginsRelative(bottom = if (note.body.isBlank() || previewSize == 0) 0.dp else 4.dp)
+            updateMarginsRelative(bottom = if (model.note.body.isBlank() || previewSize == 0) 0.dp else 4.dp)
         }
         tvNoteBody.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-            updateMarginsRelative(top = if (note.title.isBlank()) 0.dp else 4.dp)
+            updateMarginsRelative(top = if (model.note.title.isBlank()) 0.dp else 4.dp)
         }
         val gestureDetectorListener = object : GestureDetector.SimpleOnGestureListener() {
             override fun onLongPress(e: MotionEvent?) {

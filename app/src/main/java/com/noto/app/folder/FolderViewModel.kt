@@ -5,10 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
-import com.noto.app.util.NoteWithLabels
 import com.noto.app.util.filterContent
 import com.noto.app.util.forEachRecursively
-import com.noto.app.util.mapWithLabels
+import com.noto.app.util.mapToNoteItemModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -27,10 +26,10 @@ class FolderViewModel(
     private val mutableParentFolder = MutableStateFlow<Folder?>(null)
     val parentFolder get() = mutableParentFolder.asStateFlow()
 
-    private val mutableNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
+    private val mutableNotes = MutableStateFlow<UiState<List<NoteItemModel>>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
 
-    private val mutableArchivedNotes = MutableStateFlow<UiState<List<NoteWithLabels>>>(UiState.Loading)
+    private val mutableArchivedNotes = MutableStateFlow<UiState<List<NoteItemModel>>>(UiState.Loading)
     val archivedNotes get() = mutableArchivedNotes.asStateFlow()
 
     private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())
@@ -50,6 +49,9 @@ class FolderViewModel(
 
     val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
+    private val mutableIsSelection = MutableStateFlow(false)
+    val isSelection get() = mutableIsSelection.asStateFlow()
 
     init {
         combine(
@@ -75,8 +77,11 @@ class FolderViewModel(
                 .filterNotNull(),
             searchTerm,
         ) { notes, archivedNotes, labels, noteLabels, searchTerm ->
-            mutableNotes.value = notes.mapWithLabels(labels, noteLabels).filterContent(searchTerm).let { UiState.Success(it) }
-            mutableArchivedNotes.value = archivedNotes.mapWithLabels(labels, noteLabels).let { UiState.Success(it) }
+            mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, isSelected = false)
+                .filterContent(searchTerm)
+                .let { UiState.Success(it) }
+            mutableArchivedNotes.value = archivedNotes.mapToNoteItemModel(labels, noteLabels, isSelected = false)
+                .let { UiState.Success(it) }
         }.launchIn(viewModelScope)
 
         labelRepository.getLabelsByFolderId(folderId)
@@ -223,6 +228,10 @@ class FolderViewModel(
 
     fun updateFolderFilteringType(filteringType: FilteringType) = viewModelScope.launch {
         folderRepository.updateFolder(folder.value.copy(filteringType = filteringType))
+    }
+
+    fun setIsSelection(isSelection: Boolean) {
+        mutableIsSelection.value = isSelection
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }

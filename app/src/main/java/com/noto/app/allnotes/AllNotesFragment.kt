@@ -19,6 +19,7 @@ import com.noto.app.UiState
 import com.noto.app.databinding.AllNotesFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
+import com.noto.app.folder.NoteItemModel
 import com.noto.app.folder.noteItem
 import com.noto.app.util.*
 import kotlinx.coroutines.FlowPreview
@@ -185,7 +186,7 @@ class AllNotesFragment : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun AllNotesFragmentBinding.setupNotes(
-        state: UiState<Map<Folder, List<NoteWithLabels>>>,
+        state: UiState<Map<Folder, List<NoteItemModel>>>,
         notesVisibility: Map<Folder, Boolean>,
         font: Font,
         searchTerm: String,
@@ -222,12 +223,11 @@ class AllNotesFragment : Fragment() {
                                 }
 
                                 if (isVisible)
-                                    notes.forEach { entry ->
+                                    notes.forEach { model ->
                                         noteItem {
-                                            id(entry.first.id)
-                                            note(entry.first)
+                                            id(model.note.id)
+                                            model(model)
                                             font(font)
-                                            labels(entry.second)
                                             color(folder.color)
                                             searchTerm(searchTerm)
                                             previewSize(folder.notePreviewSize)
@@ -237,8 +237,8 @@ class AllNotesFragment : Fragment() {
                                                 navController
                                                     ?.navigateSafely(
                                                         AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
-                                                            entry.first.folderId,
-                                                            entry.first.id
+                                                            model.note.folderId,
+                                                            model.note.id
                                                         )
                                                     )
                                             }
@@ -246,8 +246,8 @@ class AllNotesFragment : Fragment() {
                                                 navController
                                                     ?.navigateSafely(
                                                         AllNotesFragmentDirections.actionAllNotesFragmentToNoteDialogFragment(
-                                                            entry.first.folderId,
-                                                            entry.first.id,
+                                                            model.note.folderId,
+                                                            model.note.id,
                                                             R.id.folderFragment
                                                         )
                                                     )

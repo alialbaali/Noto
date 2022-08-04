@@ -19,6 +19,7 @@ import com.noto.app.UiState
 import com.noto.app.databinding.RecentNotesFragmentBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.NotoColor
+import com.noto.app.folder.NoteItemModel
 import com.noto.app.folder.noteItem
 import com.noto.app.util.*
 import kotlinx.coroutines.FlowPreview
@@ -188,7 +189,7 @@ class RecentNotesFragment : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun RecentNotesFragmentBinding.setupNotes(
-        state: UiState<Map<LocalDate, List<NoteWithLabels>>>,
+        state: UiState<Map<LocalDate, List<NoteItemModel>>>,
         notesVisibility: Map<LocalDate, Boolean>,
         font: Font,
         searchTerm: String,
@@ -221,12 +222,11 @@ class RecentNotesFragment : Fragment() {
                                 }
 
                                 if (isVisible)
-                                    notes.forEach { entry ->
+                                    notes.forEach { model ->
                                         noteItem {
-                                            id(entry.first.id)
-                                            note(entry.first)
+                                            id(model.note.id)
+                                            model(model)
                                             font(font)
-                                            labels(entry.second)
                                             color(NotoColor.Black)
                                             previewSize(15)
                                             isShowCreationDate(false)
@@ -237,8 +237,8 @@ class RecentNotesFragment : Fragment() {
                                                 navController
                                                     ?.navigateSafely(
                                                         RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteFragment(
-                                                            entry.first.folderId,
-                                                            entry.first.id
+                                                            model.note.folderId,
+                                                            model.note.id
                                                         )
                                                     )
                                             }
@@ -246,8 +246,8 @@ class RecentNotesFragment : Fragment() {
                                                 navController
                                                     ?.navigateSafely(
                                                         RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteDialogFragment(
-                                                            entry.first.folderId,
-                                                            entry.first.id,
+                                                            model.note.folderId,
+                                                            model.note.id,
                                                             R.id.folderFragment
                                                         )
                                                     )

@@ -54,6 +54,7 @@ class FolderFragment : Fragment() {
     @Suppress("UNCHECKED_CAST")
     private fun FolderFragmentBinding.setupState() {
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
+        val selectMenuItem = tb.menu.findItem(R.id.select)
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
@@ -82,13 +83,21 @@ class FolderFragment : Fragment() {
             viewModel.font,
             viewModel.folder,
             viewModel.searchTerm,
-        ) { notes, labels, font, folder, searchTerm ->
+            viewModel.isSelection,
+        ) { values ->
+            val notes = values[0] as UiState<List<NoteItemModel>>
+            val labels = values[0] as Map<Label, Boolean>
+            val font = values[0] as Font
+            val folder = values[0] as Folder
+            val searchTerm = values[0] as String
+            val isSelection = values[0] as Boolean
             setupNotesAndLabels(
                 notes.map { it.filterSelectedLabels(labels.filterSelected(), folder.filteringType) },
                 labels,
                 font,
                 folder,
                 searchTerm,
+                isSelection,
             )
             setupItemTouchHelper(folder.layout)
         }.launchIn(lifecycleScope)
@@ -128,12 +137,24 @@ class FolderFragment : Fragment() {
             tvFolderNotesCount.isVisible = true
             tvFolderNotesCountRtl.isVisible = false
         }
+
+        viewModel.isSelection
+            .onEach { isSelection ->
+                if (isSelection) {
+                    selectMenuItem.title = context?.stringResource(R.string.done)
+                } else {
+                    selectMenuItem.title = context?.stringResource(R.string.select)
+                }
+            }
+            .launchIn(lifecycleScope)
     }
 
     private fun FolderFragmentBinding.setupListeners() {
-        tb.setOnMenuItemClickListener {
-            if (it.itemId == R.id.notes_view) navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteListViewDialogFragment(
-                args.folderId))
+        tb.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.notes_view -> navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteListViewDialogFragment(args.folderId))
+                R.id.select -> viewModel.setIsSelection(true)
+            }
             false
         }
 
@@ -185,11 +206,12 @@ class FolderFragment : Fragment() {
     }
 
     private fun FolderFragmentBinding.setupNotesAndLabels(
-        state: UiState<List<NoteWithLabels>>,
+        state: UiState<List<NoteItemModel>>,
         labels: Map<Label, Boolean>,
         font: Font,
         folder: Folder,
         searchTerm: String,
+        isSelection: Boolean,
     ) {
         when (state) {
             is UiState.Loading -> rv.setupProgressIndicator(folder.color)
@@ -242,12 +264,11 @@ class FolderFragment : Fragment() {
                                     )
                                 }
                             ) { notes ->
-                                notes.forEach { entry ->
+                                notes.forEach { model ->
                                     noteItem {
-                                        id(entry.first.id)
-                                        note(entry.first)
+                                        id(model.note.id)
+                                        model(model)
                                         font(font)
-                                        labels(entry.second)
                                         color(folder.color)
                                         previewSize(folder.notePreviewSize)
                                         isShowCreationDate(folder.isShowNoteCreationDate)
@@ -255,15 +276,19 @@ class FolderFragment : Fragment() {
                                         isManualSorting(folder.sortingType == NoteListSortingType.Manual)
                                         onClickListener { _ ->
                                             navController
-                                                ?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteFragment(entry.first.folderId,
-                                                    entry.first.id))
+                                                ?.navigateSafely(
+                                                    FolderFragmentDirections.actionFolderFragmentToNoteFragment(
+                                                        model.note.folderId,
+                                                        model.note.id
+                                                    )
+                                                )
                                         }
                                         onLongClickListener { _ ->
                                             navController
                                                 ?.navigateSafely(
                                                     FolderFragmentDirections.actionFolderFragmentToNoteDialogFragment(
-                                                        entry.first.folderId,
-                                                        entry.first.id,
+                                                        model.note.folderId,
+                                                        model.note.id,
                                                         R.id.folderFragment
                                                     )
                                                 )
@@ -345,8 +370,8 @@ class FolderFragment : Fragment() {
             val itemTouchHelperCallback = NoteItemTouchHelperCallback(epoxyController, layout) {
                 rv.forEach { view ->
                     val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
-                    val model = viewHolder.model as? NoteItem
-                    if (model != null) viewModel.updateNotePosition(model.note, viewHolder.bindingAdapterPosition)
+                    val item = viewHolder.model as? NoteItem
+                    if (item != null) viewModel.updateNotePosition(item.model.note, viewHolder.bindingAdapterPosition)
                 }
             }
             itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)

@@ -7,8 +7,9 @@ import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.repository.*
+import com.noto.app.folder.NoteItemModel
 import com.noto.app.util.NoteWithLabels
-import com.noto.app.util.mapWithLabels
+import com.noto.app.util.mapToNoteItemModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
@@ -24,7 +25,7 @@ class NoteListWidgetConfigViewModel(
     private val mutableFolder = MutableStateFlow(Folder(position = 0))
     val folder get() = mutableFolder.asStateFlow()
 
-    private val mutableNotes = MutableStateFlow(emptyList<NoteWithLabels>())
+    private val mutableNotes = MutableStateFlow(emptyList<NoteItemModel>())
     val notes get() = mutableNotes.asStateFlow()
 
     private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())
@@ -95,7 +96,7 @@ class NoteListWidgetConfigViewModel(
             noteLabelRepository.getNoteLabels()
                 .filterNotNull()
         ) { notes, labels, noteLabels ->
-            mutableNotes.value = notes.mapWithLabels(labels, noteLabels)
+            mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, isSelected = false)
         }.launchIn(viewModelScope)
 
         combine(

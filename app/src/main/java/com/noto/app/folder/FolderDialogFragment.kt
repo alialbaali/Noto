@@ -226,8 +226,8 @@ class FolderDialogFragment : BaseDialogFragment() {
                 val notes = viewModel.notes.value as? UiState.Success
                 context?.let { context ->
                     notes?.value
-                        ?.filter { entry -> entry.first.reminderDate != null }
-                        ?.forEach { entry -> alarmManager?.cancelAlarm(context, entry.first.id) }
+                        ?.filter { model -> model.note.reminderDate != null }
+                        ?.forEach { model -> alarmManager?.cancelAlarm(context, model.note.id) }
                 }
                 viewModel.deleteFolder().invokeOnCompletion { dismiss() }
             }

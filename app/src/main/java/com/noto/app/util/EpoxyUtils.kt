@@ -7,6 +7,7 @@ import com.noto.app.R
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Grouping
 import com.noto.app.domain.model.NotoColor
+import com.noto.app.folder.NoteItemModel
 
 fun EpoxyRecyclerView.setupProgressIndicator(color: NotoColor? = null) {
     withModels {
@@ -20,14 +21,14 @@ fun EpoxyRecyclerView.setupProgressIndicator(color: NotoColor? = null) {
 inline fun EpoxyController.buildNotesModels(
     context: Context,
     folder: Folder,
-    notes: List<NoteWithLabels>,
+    notes: List<NoteItemModel>,
     crossinline onCreateClick: (List<Long>) -> Unit,
-    content: (List<NoteWithLabels>) -> Unit,
+    content: (List<NoteItemModel>) -> Unit,
 ) {
     when (folder.grouping) {
         Grouping.Default -> {
-            val pinnedNotes = notes.filter { it.first.isPinned }.sorted(folder.sortingType, folder.sortingOrder)
-            val notPinnedNotes = notes.filterNot { it.first.isPinned }.sorted(folder.sortingType, folder.sortingOrder)
+            val pinnedNotes = notes.filter { it.note.isPinned }.sorted(folder.sortingType, folder.sortingOrder)
+            val notPinnedNotes = notes.filterNot { it.note.isPinned }.sorted(folder.sortingType, folder.sortingOrder)
 
             if (pinnedNotes.isNotEmpty()) {
                 headerItem {

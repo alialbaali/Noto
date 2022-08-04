@@ -6,10 +6,12 @@ import android.view.View
 import androidx.viewbinding.ViewBinding
 import com.noto.app.R
 import com.noto.app.domain.model.*
+import com.noto.app.folder.NoteItemModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDate
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
 import kotlin.time.Duration.Companion.days
@@ -63,70 +65,71 @@ fun List<Pair<Folder, Int>>.sorted(sortingType: FolderListSortingType, sortingOr
     }
 }
 
-fun List<NoteWithLabels>.sorted(sortingType: NoteListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
+fun List<NoteItemModel>.sorted(sortingType: NoteListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { model ->
     when (sortingType) {
-        NoteListSortingType.Manual -> pair.first.position
-        NoteListSortingType.CreationDate -> pair.first.creationDate
-        NoteListSortingType.Alphabetical -> pair.first.title.ifBlank { pair.first.body }
+        NoteListSortingType.Manual -> model.note.position
+        NoteListSortingType.CreationDate -> model.note.creationDate
+        NoteListSortingType.Alphabetical -> model.note.title.ifBlank { model.note.body }
     }
 }
 
-fun List<NoteWithLabels>.filterSelectedLabels(selectedLabels: List<Label>, filteringType: FilteringType) = filter { pair ->
+fun List<NoteItemModel>.filterSelectedLabels(selectedLabels: List<Label>, filteringType: FilteringType) = filter { model ->
     if (selectedLabels.isNotEmpty()) {
         when (filteringType) {
-            FilteringType.Inclusive -> pair.second.any { label -> selectedLabels.any { it == label } }
-            FilteringType.Exclusive -> pair.second.containsAll(selectedLabels)
-            FilteringType.Strict -> pair.second == selectedLabels
+            FilteringType.Inclusive -> model.labels.any { label -> selectedLabels.any { it == label } }
+            FilteringType.Exclusive -> model.labels.containsAll(selectedLabels)
+            FilteringType.Strict -> model.labels == selectedLabels
         }
     } else {
         true
     }
 }
 
-fun List<NoteWithLabels>.filterContent(content: CharSequence) = filter { entry ->
-    entry.first.title.contains(content, ignoreCase = true) || entry.first.body.contains(content, ignoreCase = true)
+fun List<NoteItemModel>.filterContent(content: CharSequence) = filter { model ->
+    model.note.title.contains(content, ignoreCase = true) || model.note.body.contains(content, ignoreCase = true)
 }
 
-fun List<NoteWithLabels>.groupByDate(
+fun List<NoteItemModel>.groupByDate(
     sortingType: NoteListSortingType,
     sortingOrder: SortingOrder,
     groupingOrder: GroupingOrder,
-) =
-    groupBy { it.first.creationDate.toLocalDate() }
-        .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.first.isPinned } }
-        .map { it.toPair() }
-        .let {
-            if (groupingOrder == GroupingOrder.Descending)
-                it.sortedByDescending { it.first }
-            else
-                it.sortedBy { it.first }
-        }
+): List<Pair<LocalDate, List<NoteItemModel>>> = groupBy { model -> model.note.creationDate.toLocalDate() }
+    .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { model -> model.note.isPinned } }
+    .map { it.toPair() }
+    .let {
+        if (groupingOrder == GroupingOrder.Descending)
+            it.sortedByDescending { it.first }
+        else
+            it.sortedBy { it.first }
+    }
 
-fun List<NoteWithLabels>.groupByLabels(
+fun List<NoteItemModel>.groupByLabels(
     sortingType: NoteListSortingType,
     sortingOrder: SortingOrder,
     groupingOrder: GroupingOrder,
-) =
-    map { it.second to (it.first to emptyList<Label>()) }
-        .groupBy({ it.first }, { it.second })
-        .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.first.isPinned } }
-        .map { it.toPair() }
-        .let {
-            if (groupingOrder == GroupingOrder.Descending)
-                it.sortedByDescending { it.first.firstOrNull()?.position }
-            else
-                it.sortedBy { it.first.firstOrNull()?.position }
-        }
+): List<Pair<List<Label>, List<NoteItemModel>>> = map { model -> model.labels to model.copy(labels = emptyList()) }
+    .groupBy({ it.first }, { it.second })
+    .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.note.isPinned } }
+    .map { it.toPair() }
+    .let {
+        if (groupingOrder == GroupingOrder.Descending)
+            it.sortedByDescending { it.first.firstOrNull()?.position }
+        else
+            it.sortedBy { it.first.firstOrNull()?.position }
+    }
 
-fun List<Note>.mapWithLabels(labels: List<Label>, noteLabels: List<NoteLabel>): List<NoteWithLabels> {
+fun List<Note>.mapToNoteItemModel(labels: List<Label>, noteLabels: List<NoteLabel>, isSelected: Boolean): List<NoteItemModel> {
     return map { note ->
-        note to labels
-            .sortedBy { it.position }
-            .filter { label ->
-                noteLabels.filter { it.noteId == note.id }.any { noteLabel ->
-                    noteLabel.labelId == label.id
-                }
-            }
+        NoteItemModel(
+            note,
+            labels.sortedBy { it.position }
+                .filter { label ->
+                    noteLabels.filter { it.noteId == note.id }.any { noteLabel ->
+                        noteLabel.labelId == label.id
+                    }
+                },
+            isSelected = isSelected,
+        )
     }
 }
 
