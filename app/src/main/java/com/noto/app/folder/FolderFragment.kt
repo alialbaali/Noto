@@ -65,7 +65,7 @@ class FolderFragment : Fragment() {
             viewModel.isRememberScrollingPosition,
         ) { folder, notesState, labels, isRememberScrollingPosition ->
             val notes = notesState.getOrDefault(emptyList()).filterSelectedLabels(labels.filterSelected(), folder.filteringType)
-            val selectedNotes = notes.filter { it.isSelected }
+            val selectedNotes = notesState.getOrDefault(emptyList()).filter { it.isSelected }
             setupFolder(folder, notes.count(), selectedNotes.count(), isRememberScrollingPosition)
             context?.let { context ->
                 val text = context.stringResource(R.string.folder_archive, folder.getTitle(context))
