@@ -7,6 +7,7 @@ import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
 import com.noto.app.getOrDefault
 import com.noto.app.map
+import com.noto.app.util.LineSeparator
 import com.noto.app.util.forEachRecursively
 import com.noto.app.util.getOrCreateLabel
 import com.noto.app.util.mapToNoteItemModel
@@ -257,6 +258,23 @@ class FolderViewModel(
                     model.copy(isSelected = true)
                 else
                     model
+            }
+        }
+    }
+
+    fun mergeSelectedNotes() = viewModelScope.launch {
+        val selectedNotes = notes.value.getOrDefault(emptyList())
+            .filter { model -> model.isSelected }
+        val title = selectedNotes.joinToString(LineSeparator) { it.note.title }.trim()
+        val body = selectedNotes.joinToString(LineSeparator) { it.note.body }.trim()
+        val isPinned = selectedNotes.any { it.note.isPinned }
+        val labels = selectedNotes.map { it.labels }.flatten()
+        val note = Note(folderId = folderId, title = title, body = body, isPinned = isPinned, position = 0)
+        val noteId = noteRepository.createNote(note)
+        labels.forEach { label ->
+            launch {
+                val noteLabel = NoteLabel(noteId = noteId, labelId = label.id)
+                noteLabelRepository.createNoteLabel(noteLabel)
             }
         }
     }

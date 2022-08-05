@@ -86,6 +86,7 @@
     <string name="unarchive">Unarchive</string>
     <string name="edit">Edit</string>
     <string name="pin">Pin</string>
+    <string name="merge">Merge</string>
     <string name="unpin">Unpin</string>
     <string name="delete">Delete</string>
     <string name="just_now">just now</string>
@@ -203,6 +204,7 @@
     <string name="save_to_noto">Save to Noto</string>
     <string name="no_notes_found">No notes found.</string>
     <string name="notes">Notes</string>
+    <string name="notes_are_merged">Notes have been merged into new note.</string>
     <plurals name="note_is_archived">
         <item quantity="one">Note has been archived.</item>
         <item quantity="other">%d Notes have been archived.</item>

@@ -22,6 +22,7 @@ const val AllNotesItemId = -2L
 const val RecentNotesItemId = -3L
 const val AllFoldersId = -4L
 val LabelDefaultStrokeWidth = 2.dp
+const val LineSeparator = "\n\n"
 
 private const val HashAlgorithm = "PBKDF2WithHmacSHA1"
 private const val HashIterationCount = 65536
