@@ -15,8 +15,7 @@
         <include
             android:id="@+id/v_folder"
             layout="@layout/folder_item"
-            android:layout_marginHorizontal="@dimen/spacing_small"
-            android:layout_marginVertical="@dimen/spacing_normal"
+            android:layout_margin="@dimen/spacing_normal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
