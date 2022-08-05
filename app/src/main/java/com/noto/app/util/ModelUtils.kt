@@ -22,8 +22,6 @@ const val AllNotesItemId = -2L
 const val RecentNotesItemId = -3L
 const val AllFoldersId = -4L
 val LabelDefaultStrokeWidth = 2.dp
-val LabelDefaultCornerRadius = 8.dp.toFloat()
-typealias NoteWithLabels = Pair<Note, List<Label>>
 
 private const val HashAlgorithm = "PBKDF2WithHmacSHA1"
 private const val HashIterationCount = 65536

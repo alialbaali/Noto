@@ -8,7 +8,6 @@ import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.repository.*
 import com.noto.app.folder.NoteItemModel
-import com.noto.app.util.NoteWithLabels
 import com.noto.app.util.mapToNoteItemModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
