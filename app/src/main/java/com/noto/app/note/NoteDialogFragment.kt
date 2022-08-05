@@ -61,6 +61,8 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private fun NoteDialogFragmentBinding.setupState() {
         tb.tvDialogTitle.text = context?.stringResource(R.string.note_options)
+        tvSelectNote.isVisible = args.isSelectionEnabled
+        divider2.root.isVisible = args.isSelectionEnabled
 
         viewModel.folder
             .onEach { folder -> setupFolder(folder) }
@@ -73,10 +75,6 @@ class NoteDialogFragment : BaseDialogFragment() {
         ) { folder, note, labels ->
             setupNote(folder, note, labels)
         }.launchIn(lifecycleScope)
-
-        val isSelectionVisible = navController?.previousBackStackEntry?.destination?.id == R.id.folderFragment
-        tvSelectNote.isVisible = isSelectionVisible
-        divider2.root.isVisible = isSelectionVisible
     }
 
     private fun NoteDialogFragmentBinding.setupListeners() {

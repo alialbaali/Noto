@@ -216,6 +216,10 @@
         <action
             android:id="@+id/action_noteDialogFragment_to_selectFolderDialogFragment"
             app:destination="@id/selectFolderDialogFragment" />
+        <argument
+            android:name="is_selection_enabled"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"
