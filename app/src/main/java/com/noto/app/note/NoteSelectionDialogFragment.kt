@@ -92,8 +92,8 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
 
     fun NoteSelectionDialogFragmentBinding.setupListeners() {
         tvShareNotes.setOnClickListener {
-            val notesText = viewModel.notes.value.getOrDefault(emptyList())
-                .joinToString(LineSeparator) { it.note.format() }
+            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }.map { it.note }
+            val notesText = selectedNotes.joinToString(LineSeparator) { it.format() }
             val intent = Intent(Intent.ACTION_SEND).apply {
                 type = "text/plain"
                 putExtra(Intent.EXTRA_TEXT, notesText)
@@ -104,7 +104,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvArchiveNotes.setOnClickListener {
-            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }
+            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }.map { it.note }
             viewModel.archiveSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
                     val text = context.quantityStringResource(R.plurals.note_is_archived, selectedNotes.count(), selectedNotes.count())
@@ -119,7 +119,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvDuplicateNotes.setOnClickListener {
-            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }
+            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }.map { it.note }
             viewModel.duplicateSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
                     val text = context.quantityStringResource(R.plurals.note_is_duplicated, selectedNotes.count(), selectedNotes.count())
@@ -132,10 +132,9 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyToClipboard.setOnClickListener {
-            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }
+            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }.map { it.note }
             context?.let { context ->
-                val notesText = viewModel.notes.value.getOrDefault(emptyList())
-                    .joinToString(LineSeparator) { it.note.format() }
+                val notesText = selectedNotes.joinToString(LineSeparator) { it.format() }
                 val clipData = ClipData.newPlainText(viewModel.folder.value.getTitle(context), notesText)
                 clipboardManager?.setPrimaryClip(clipData)
                 if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
@@ -148,7 +147,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyNotes.setOnClickListener {
-            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }
+            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }.map { it.note }
             navController?.currentBackStackEntry
                 ?.savedStateHandle
                 ?.getLiveData<Long>(Constants.FolderId)
@@ -180,7 +179,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvMoveNotes.setOnClickListener {
-            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }
+            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }.map { it.note }
             navController?.currentBackStackEntry
                 ?.savedStateHandle
                 ?.getLiveData<Long>(Constants.FolderId)
@@ -212,12 +211,11 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvDeleteNotes.setOnClickListener {
-            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }
+            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }.map { it.note }
             context?.let { context ->
                 val confirmationText = context.stringResource(R.string.delete_note_confirmation)
                 val descriptionText = context.stringResource(R.string.delete_note_description)
                 val btnText = context.stringResource(R.string.delete_note)
-                val notes = viewModel.notes.value.getOrDefault(emptyList()).map { it.note }
                 navController?.currentBackStackEntry
                     ?.savedStateHandle
                     ?.getLiveData<Int>(Constants.ClickListener)
@@ -226,7 +224,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                             val text = context.quantityStringResource(R.plurals.note_is_deleted, selectedNotes.count(), selectedNotes.count())
                             val drawableId = R.drawable.ic_round_delete_24
                             parentView?.snackbar(text, drawableId, anchorViewId, folderColor)
-                            notes.forEach { note ->
+                            selectedNotes.forEach { note ->
                                 if (note.reminderDate != null)
                                     alarmManager?.cancelAlarm(context, note.id)
                             }
