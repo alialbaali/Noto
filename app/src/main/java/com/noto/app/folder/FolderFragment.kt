@@ -214,10 +214,14 @@ class FolderFragment : Fragment() {
         }
 
         activity?.onBackPressedDispatcher?.addCallback {
-            if (viewModel.isSearchEnabled.value) {
+            if (viewModel.isSelection.value) {
+                if (viewModel.isSearchEnabled.value) {
+                    viewModel.disableSearch()
+                } else {
+                    viewModel.disableSelection()
+                }
+            } else if (viewModel.isSearchEnabled.value) {
                 viewModel.disableSearch()
-            } else if (viewModel.isSelection.value) {
-                viewModel.disableSelection()
             } else {
                 navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment(exit = true))
             }

@@ -119,6 +119,7 @@
         android:text="@string/options"
         android:layout_gravity="end|bottom"
         android:textColor="?attr/notoBackgroundColor"
+        android:visibility="gone"
         app:backgroundTint="?attr/notoPrimaryColor"
         app:icon="@drawable/ic_round_settings_24"
         app:iconTint="?attr/notoBackgroundColor"
