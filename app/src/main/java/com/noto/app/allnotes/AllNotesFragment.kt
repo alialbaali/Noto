@@ -83,7 +83,11 @@ class AllNotesFragment : Fragment() {
         }
 
         activity?.onBackPressedDispatcher?.addCallback {
-            navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToMainFragment(exit = true))
+            if (viewModel.isSearchEnabled.value) {
+                viewModel.disableSearch()
+            } else {
+                navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToMainFragment(exit = true))
+            }
         }
     }
 
@@ -268,10 +272,6 @@ class AllNotesFragment : Fragment() {
         tilSearch.isVisible = true
         tilSearch.postDelayed({ etSearch.requestFocus() }, DefaultAnimationDuration)
         activity?.showKeyboard(etSearch)
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
-            viewModel.disableSearch()
-            if (isEnabled) isEnabled = false
-        }
     }
 
     private fun AllNotesFragmentBinding.disableSearch() {

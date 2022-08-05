@@ -85,7 +85,11 @@ class RecentNotesFragment : Fragment() {
         }
 
         activity?.onBackPressedDispatcher?.addCallback {
-            navController?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToMainFragment(exit = true))
+            if (viewModel.isSearchEnabled.value) {
+                viewModel.disableSearch()
+            } else {
+                navController?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToMainFragment(exit = true))
+            }
         }
     }
 
@@ -268,10 +272,6 @@ class RecentNotesFragment : Fragment() {
         tilSearch.isVisible = true
         tilSearch.postDelayed({ etSearch.requestFocus() }, DefaultAnimationDuration)
         activity?.showKeyboard(etSearch)
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
-            viewModel.disableSearch()
-            if (isEnabled) isEnabled = false
-        }
     }
 
     private fun RecentNotesFragmentBinding.disableSearch() {
