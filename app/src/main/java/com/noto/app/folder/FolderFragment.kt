@@ -205,7 +205,9 @@ class FolderFragment : Fragment() {
         }
 
         activity?.onBackPressedDispatcher?.addCallback {
-            if (viewModel.isSelection.value) {
+            if (viewModel.isSearchEnabled.value) {
+                viewModel.disableSearch()
+            } else if (viewModel.isSelection.value) {
                 viewModel.disableSelection()
             } else {
                 navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment(exit = true))
@@ -447,10 +449,6 @@ class FolderFragment : Fragment() {
         tilSearch.isVisible = true
         tilSearch.postDelayed({ etSearch.requestFocus() }, DefaultAnimationDuration)
         activity?.showKeyboard(etSearch)
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner) {
-            viewModel.disableSearch()
-            if (isEnabled) isEnabled = false
-        }
     }
 
     private fun FolderFragmentBinding.disableSearch() {
