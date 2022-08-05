@@ -185,7 +185,10 @@
     <string name="body">Body</string>
     <string name="title">Title</string>
     <string name="create_note">Create note</string>
-    <string name="delete_note">Delete note</string>
+    <plurals name="delete_note">
+        <item quantity="one">Delete note</item>
+        <item quantity="other">Delete notes</item>
+    </plurals>
     <string name="duplicate">Duplicate</string>
     <string name="undo">Undo</string>
     <string name="undo_history">Undo history</string>
@@ -228,10 +231,16 @@
         <item quantity="other">%d Notes have been copied to clipboard.</item>
     </plurals>
     <string name="text_copied">Text has been copied to clipboard.</string>
-    <string name="delete_note_confirmation">Are you sure you want to delete this note?</string>
+    <plurals name="delete_note_confirmation">
+        <item quantity="one">Are you sure you want to delete this note?</item>
+        <item quantity="other">Are you sure you want to delete these notes?</item>
+    </plurals>
     <string name="share_with">Share with…</string>
     <string name="add_note_reminder">Add reminder</string>
-    <string name="delete_note_description">This action can\'t be undone and will delete the note and its reminder permanently.</string>
+    <plurals name="delete_note_description">
+        <item quantity="one">This action can\'t be undone and will delete the note and its reminder permanently.</item>
+        <item quantity="other">This action can\'t be undone and will delete the notes and their reminders permanently.</item>
+    </plurals>
     <string name="reading_mode">Reading mode</string>
     <string name="edit_note_reminder">Edit reminder</string>
     <string name="note_options">Note options</string>

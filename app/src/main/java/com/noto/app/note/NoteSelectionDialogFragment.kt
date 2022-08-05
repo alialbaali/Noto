@@ -213,9 +213,9 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         tvDeleteNotes.setOnClickListener {
             val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }.map { it.note }
             context?.let { context ->
-                val confirmationText = context.stringResource(R.string.delete_note_confirmation)
-                val descriptionText = context.stringResource(R.string.delete_note_description)
-                val btnText = context.stringResource(R.string.delete_note)
+                val confirmationText = context.quantityStringResource(R.plurals.delete_note_confirmation, selectedNotes.count())
+                val descriptionText = context.quantityStringResource(R.plurals.delete_note_description, selectedNotes.count())
+                val btnText = context.quantityStringResource(R.plurals.delete_note, selectedNotes.count())
                 navController?.currentBackStackEntry
                     ?.savedStateHandle
                     ?.getLiveData<Int>(Constants.ClickListener)
