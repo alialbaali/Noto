@@ -59,14 +59,22 @@ class FolderFragment : Fragment() {
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
 
         combine(
-            viewModel.folder,
+            viewModel.folder
+                .map { it.filteringType }
+                .distinctUntilChanged(),
             viewModel.notes,
             viewModel.labels,
+            viewModel.searchTerm,
+        ) { filteringType, notesState, labels, searchTerm ->
+            val notes = notesState.getOrDefault(emptyList())
+            setupNotesCount(notes, labels, filteringType, searchTerm)
+        }.launchIn(lifecycleScope)
+
+        combine(
+            viewModel.folder,
             viewModel.isRememberScrollingPosition,
-        ) { folder, notesState, labels, isRememberScrollingPosition ->
-            val notes = notesState.getOrDefault(emptyList()).filterSelectedLabels(labels.filterSelected(), folder.filteringType)
-            val selectedNotes = notesState.getOrDefault(emptyList()).filter { it.isSelected }
-            setupFolder(folder, notes.count(), selectedNotes.count(), isRememberScrollingPosition)
+        ) { folder, isRememberScrollingPosition ->
+            setupFolder(folder, isRememberScrollingPosition)
             context?.let { context ->
                 val text = context.stringResource(R.string.folder_archive, folder.getTitle(context))
                 MenuItemCompat.setTooltipText(archiveMenuItem, text)
@@ -91,8 +99,11 @@ class FolderFragment : Fragment() {
             val folder = values[3] as Folder
             val searchTerm = values[4] as String
             val isSelection = values[5] as Boolean
+            val filteredNotes = notes.map {
+                it.filterSelectedLabels(labels.filterSelected(), folder.filteringType).filterContent(searchTerm)
+            }
             setupNotesAndLabels(
-                notes.map { it.filterSelectedLabels(labels.filterSelected(), folder.filteringType) },
+                filteredNotes,
                 labels,
                 font,
                 folder,
@@ -145,21 +156,19 @@ class FolderFragment : Fragment() {
                 viewModel.selectNote(noteId)
             }
 
-        combine(
-            viewModel.isSelection,
-            viewModel.notes,
-        ) { isSelection, notesState ->
-            val selectedNotesCount = notesState.getOrDefault(emptyList()).count { it.isSelected }
-            if (isSelection) {
-                fabOptions.isVisible = true
-                fab.isVisible = false
-                bab.isVisible = false
-            } else {
-                fabOptions.isVisible = false
-                fab.isVisible = true
-                bab.isVisible = true
+        viewModel.isSelection
+            .onEach { isSelection ->
+                if (isSelection) {
+                    fabOptions.isVisible = true
+                    fab.isVisible = false
+                    bab.isVisible = false
+                } else {
+                    fabOptions.isVisible = false
+                    fab.isVisible = true
+                    bab.isVisible = true
+                }
             }
-        }.launchIn(lifecycleScope)
+            .launchIn(lifecycleScope)
     }
 
     private fun FolderFragmentBinding.setupListeners() {
@@ -375,7 +384,7 @@ class FolderFragment : Fragment() {
         return true
     }
 
-    private fun FolderFragmentBinding.setupFolder(folder: Folder, notesCount: Int, selectedNotesCount: Int, isRememberScrollingPosition: Boolean) {
+    private fun FolderFragmentBinding.setupFolder(folder: Folder, isRememberScrollingPosition: Boolean) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
@@ -383,23 +392,6 @@ class FolderFragment : Fragment() {
             tvFolderTitle.setTextColor(colorStateList)
             tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_semibold)
             tvFolderNotesCount.animationInterpolator = DefaultInterpolator()
-            if (selectedNotesCount > 0) {
-                tvFolderNotesCount.text = context.quantityStringResource(
-                    R.plurals.notes_selected_count,
-                    notesCount,
-                    notesCount,
-                    selectedNotesCount
-                )
-                tvFolderNotesCountRtl.text = context.quantityStringResource(
-                    R.plurals.notes_selected_count,
-                    notesCount,
-                    notesCount,
-                    selectedNotesCount
-                )
-            } else {
-                tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
-                tvFolderNotesCountRtl.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
-            }
             fab.backgroundTintList = colorStateList
             fabOptions.backgroundTintList = colorStateList
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -427,6 +419,75 @@ class FolderFragment : Fragment() {
                 if (isRememberScrollingPosition) {
                     layoutManager.scrollToPosition(folder.scrollingPosition)
                 }
+            }
+        }
+    }
+
+    private fun FolderFragmentBinding.setupNotesCount(
+        notes: List<NoteItemModel>,
+        labels: Map<Label, Boolean>,
+        filteringType: FilteringType,
+        searchTerm: String,
+    ) {
+        val selectedLabels = labels.filterSelected()
+        val filteredNotes = notes.filterSelectedLabels(selectedLabels, filteringType).filterContent(searchTerm)
+        val isFiltering = selectedLabels.isNotEmpty() || searchTerm.isNotBlank()
+        val selectedNotes = notes.filter { it.isSelected }
+        val notesCount = notes.count()
+        val filteredNotesCount = filteredNotes.count()
+        val selectedNotesCount = selectedNotes.count()
+        when {
+            // Filtering and selection.
+            isFiltering && selectedNotes.isNotEmpty() -> {
+                tvFolderNotesCount.text = context?.quantityStringResource(
+                    R.plurals.notes_filtered_selected_count,
+                    notesCount,
+                    notesCount,
+                    filteredNotesCount,
+                    selectedNotesCount,
+                )
+                tvFolderNotesCountRtl.text = context?.quantityStringResource(
+                    R.plurals.notes_filtered_selected_count,
+                    notesCount,
+                    notesCount,
+                    filteredNotesCount,
+                    selectedNotesCount,
+                )
+            }
+            // Filtering only without selection.
+            isFiltering && selectedNotes.isEmpty() -> {
+                tvFolderNotesCount.text = context?.quantityStringResource(
+                    R.plurals.notes_filtered_count,
+                    notesCount,
+                    notesCount,
+                    filteredNotesCount,
+                )
+                tvFolderNotesCountRtl.text = context?.quantityStringResource(
+                    R.plurals.notes_filtered_count,
+                    notesCount,
+                    notesCount,
+                    filteredNotesCount,
+                )
+            }
+            // Selection only without filtering.
+            !isFiltering && selectedNotes.isNotEmpty() -> {
+                tvFolderNotesCount.text = context?.quantityStringResource(
+                    R.plurals.notes_selected_count,
+                    notesCount,
+                    notesCount,
+                    selectedNotesCount,
+                )
+                tvFolderNotesCountRtl.text = context?.quantityStringResource(
+                    R.plurals.notes_selected_count,
+                    notesCount,
+                    notesCount,
+                    selectedNotesCount,
+                )
+            }
+            // Without filtering or selection.
+            else -> {
+                tvFolderNotesCount.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
+                tvFolderNotesCountRtl.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
             }
         }
     }

@@ -7,7 +7,6 @@ import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
 import com.noto.app.getOrDefault
 import com.noto.app.map
-import com.noto.app.util.filterContent
 import com.noto.app.util.forEachRecursively
 import com.noto.app.util.getOrCreateLabel
 import com.noto.app.util.mapToNoteItemModel
@@ -79,13 +78,9 @@ class FolderViewModel(
                 .filterNotNull(),
             noteLabelRepository.getNoteLabels()
                 .filterNotNull(),
-            searchTerm,
-        ) { notes, archivedNotes, labels, noteLabels, searchTerm ->
-            mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, selectedNoteIds)
-                .filterContent(searchTerm)
-                .let { UiState.Success(it) }
-            mutableArchivedNotes.value = archivedNotes.mapToNoteItemModel(labels, noteLabels)
-                .let { UiState.Success(it) }
+        ) { notes, archivedNotes, labels, noteLabels ->
+            mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, selectedNoteIds).let { UiState.Success(it) }
+            mutableArchivedNotes.value = archivedNotes.mapToNoteItemModel(labels, noteLabels).let { UiState.Success(it) }
             selectedNoteIds = longArrayOf()
         }.launchIn(viewModelScope)
 

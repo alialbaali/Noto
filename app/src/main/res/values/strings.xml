@@ -166,9 +166,17 @@
         <item quantity="one">%d Note</item>
         <item quantity="other">%d Notes</item>
     </plurals>
+    <plurals name="notes_filtered_count">
+        <item quantity="one">%1$d Note • %2$d Filtered</item>
+        <item quantity="other">%1$d Notes • %2$d Filtered</item>
+    </plurals>
     <plurals name="notes_selected_count">
         <item quantity="one">%1$d Note • %2$d Selected</item>
         <item quantity="other">%1$d Notes • %2$d Selected</item>
+    </plurals>
+    <plurals name="notes_filtered_selected_count">
+        <item quantity="one">%1$d Note • %2$d Filtered • %3$d Selected</item>
+        <item quantity="other">%1$d Notes • %2$d Filtered • %3$d Selected</item>
     </plurals>
     <plurals name="words_count">
         <item quantity="one">%d Word</item>
