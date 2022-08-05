@@ -73,6 +73,10 @@ class NoteDialogFragment : BaseDialogFragment() {
         ) { folder, note, labels ->
             setupNote(folder, note, labels)
         }.launchIn(lifecycleScope)
+
+        val isSelectionVisible = navController?.previousBackStackEntry?.destination?.id == R.id.folderFragment
+        tvSelectNote.isVisible = isSelectionVisible
+        divider2.root.isVisible = isSelectionVisible
     }
 
     private fun NoteDialogFragmentBinding.setupListeners() {
