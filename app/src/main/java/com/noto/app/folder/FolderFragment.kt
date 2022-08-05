@@ -217,12 +217,23 @@ class FolderFragment : Fragment() {
                 .filter { model -> model.isSelected }
                 .map { model -> model.note.id }
                 .toLongArray()
-            navController?.navigateSafely(
-                FolderFragmentDirections.actionFolderFragmentToNoteSelectionDialogFragment(
-                    folderId = args.folderId,
-                    selectedNoteIds = selectedNoteIds,
+            if (selectedNoteIds.count() == 1) {
+                navController
+                    ?.navigateSafely(
+                        FolderFragmentDirections.actionFolderFragmentToNoteDialogFragment(
+                            args.folderId,
+                            selectedNoteIds.first(),
+                            R.id.folderFragment,
+                        )
+                    )
+            } else {
+                navController?.navigateSafely(
+                    FolderFragmentDirections.actionFolderFragmentToNoteSelectionDialogFragment(
+                        folderId = args.folderId,
+                        selectedNoteIds = selectedNoteIds,
+                    )
                 )
-            )
+            }
         }
     }
 
@@ -319,7 +330,8 @@ class FolderFragment : Fragment() {
                                                     FolderFragmentDirections.actionFolderFragmentToNoteDialogFragment(
                                                         model.note.folderId,
                                                         model.note.id,
-                                                        R.id.folderFragment
+                                                        R.id.folderFragment,
+                                                        isSelectionEnabled = true,
                                                     )
                                                 )
                                             true
