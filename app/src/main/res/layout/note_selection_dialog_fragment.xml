@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layoutDirection="ltr"
+    android:layout_gravity="bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        style="@style/BaseDialogFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/tb"
+            layout="@layout/dialog_fragment_toolbar" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_pin_notes"
+                style="@style/DialogItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/pin"
+                app:drawableTopCompat="@drawable/ic_round_pin_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_share_notes"
+                style="@style/DialogItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/share_with"
+                app:drawableTopCompat="@drawable/ic_round_share_24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:showDividers="middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_archive_notes"
+                style="@style/DialogItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/archive"
+                app:drawableTopCompat="@drawable/ic_round_archive_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_duplicate_notes"
+                style="@style/DialogItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/duplicate"
+                app:drawableTopCompat="@drawable/ic_round_control_point_duplicate_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_copy_to_clipboard"
+                style="@style/DialogItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/copy"
+                app:drawableTopCompat="@drawable/ic_round_copy_24" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:divider="@drawable/spacing_normal_divider"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:showDividers="middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_copy_notes"
+                style="@style/DialogItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/copy_to"
+                app:drawableTopCompat="@drawable/ic_round_file_copy_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_move_notes"
+                style="@style/DialogItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/move_to"
+                app:drawableTopCompat="@drawable/ic_round_move_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_delete_notes"
+                style="@style/DialogItem"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/delete"
+                app:drawableTopCompat="@drawable/ic_round_delete_24" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

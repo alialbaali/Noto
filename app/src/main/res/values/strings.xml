@@ -7,6 +7,7 @@
     <string name="search">Search</string>
     <!-- More options for folder, note, etc -->
     <string name="more_options">More options</string>
+    <string name="options">Options</string>
     <string name="back">Back</string>
     <string name="folder_layout">Folder layout</string>
     <string name="label_filtering_type">Label filtering type</string>
@@ -191,9 +192,18 @@
     <string name="save_to_noto">Save to Noto</string>
     <string name="no_notes_found">No notes found.</string>
     <string name="notes">Notes</string>
-    <string name="note_is_archived">Note has been archived.</string>
-    <string name="note_is_pinned">Note has been pinned.</string>
-    <string name="note_is_unpinned">Note has been unpinned.</string>
+    <plurals name="note_is_archived">
+        <item quantity="one">Note has been archived.</item>
+        <item quantity="other">%d Notes have been archived.</item>
+    </plurals>
+    <plurals name="note_is_pinned">
+        <item quantity="one">Note has been pinned.</item>
+        <item quantity="other">%d Notes have been pinned.</item>
+    </plurals>
+    <plurals name="note_is_unpinned">
+        <item quantity="one">Note has been unpinned.</item>
+        <item quantity="other">%d Notes have been unpinned.</item>
+    </plurals>
     <string name="no_note_reminder">No reminder is setup.</string>
     <string name="note_is_unarchived">Note has been unarchived.</string>
     <string name="reminder">Reminder</string>
@@ -201,8 +211,14 @@
     <string name="new_note_reminder">New reminder</string>
     <string name="copy">Copy</string>
     <string name="copy_to">Copy to…</string>
-    <string name="note_is_copied">Note has been copied to %s.</string>
-    <string name="note_copied_to_clipboard">Note has been copied to clipboard.</string>
+    <plurals name="note_is_copied">
+        <item quantity="one">Note has been copied to %s.</item>
+        <item quantity="other">%d Notes have been copied to %s.</item>
+    </plurals>
+    <plurals name="note_copied_to_clipboard">
+        <item quantity="one">Note has been copied to clipboard.</item>
+        <item quantity="other">%d Notes have been copied to clipboard.</item>
+    </plurals>
     <string name="text_copied">Text has been copied to clipboard.</string>
     <string name="delete_note_confirmation">Are you sure you want to delete this note?</string>
     <string name="share_with">Share with…</string>
@@ -211,10 +227,19 @@
     <string name="reading_mode">Reading mode</string>
     <string name="edit_note_reminder">Edit reminder</string>
     <string name="note_options">Note options</string>
-    <string name="note_is_deleted">Note has been deleted.</string>
-    <string name="note_is_duplicated">Note has been duplicated.</string>
+    <plurals name="note_is_deleted">
+        <item quantity="one">Note has been deleted.</item>
+        <item quantity="other">%d Notes have been deleted.</item>
+    </plurals>
+    <plurals name="note_is_duplicated">
+        <item quantity="one">Note has been duplicated.</item>
+        <item quantity="other">%d Notes have been duplicated.</item>
+    </plurals>
     <string name="move_to">Move to…</string>
-    <string name="note_is_moved">Note has been moved to %s.</string>
+    <plurals name="note_is_moved">
+        <item quantity="one">Note has been moved to %s.</item>
+        <item quantity="other">%d Notes have been moved to %s.</item>
+    </plurals>
     <string name="note_preview_size">Note preview size</string>
     <string name="show_note_creation_date">Show note creation date</string>
     <string name="show_folders_notes_count">Show folders notes count</string>

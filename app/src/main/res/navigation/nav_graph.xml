@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_folderFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_folderFragment_to_noteSelectionDialogFragment"
+            app:destination="@id/noteSelectionDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/newFolderFragment"
@@ -595,4 +598,21 @@
         android:id="@+id/validateVaultPasscodeDialogFragment"
         android:name="com.noto.app.settings.ValidateVaultPasscodeDialogFragment"
         android:label="ValidateVaultPasscodeDialogFragment" />
+    <dialog
+        android:id="@+id/noteSelectionDialogFragment"
+        android:name="com.noto.app.note.NoteSelectionDialogFragment"
+        android:label="NoteSelectionDialogFragment">
+        <argument
+            android:name="folder_id"
+            app:argType="long" />
+        <argument
+            android:name="selected_note_ids"
+            app:argType="long[]" />
+        <action
+            android:id="@+id/action_noteSelectionDialogFragment_to_confirmationDialogFragment"
+            app:destination="@id/confirmationDialogFragment" />
+        <action
+            android:id="@+id/action_noteSelectionDialogFragment_to_selectFolderDialogFragment"
+            app:destination="@id/selectFolderDialogFragment" />
+    </dialog>
 </navigation>

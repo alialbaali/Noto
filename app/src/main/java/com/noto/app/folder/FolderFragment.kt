@@ -54,7 +54,6 @@ class FolderFragment : Fragment() {
     @Suppress("UNCHECKED_CAST")
     private fun FolderFragmentBinding.setupState() {
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
-        val selectMenuItem = tb.menu.findItem(R.id.select)
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
@@ -139,27 +138,34 @@ class FolderFragment : Fragment() {
             tvFolderNotesCountRtl.isVisible = false
         }
 
-        viewModel.isSelection
-            .onEach { isSelection ->
-                if (isSelection) {
-                    selectMenuItem.title = context?.stringResource(R.string.done)
-                } else {
-                    selectMenuItem.title = context?.stringResource(R.string.select)
-                }
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<Long>(Constants.IsSelection)
+            ?.observe(viewLifecycleOwner) { noteId ->
+                viewModel.enableSelection()
+                viewModel.selectNote(noteId)
             }
-            .launchIn(lifecycleScope)
+
+        combine(
+            viewModel.isSelection,
+            viewModel.notes,
+        ) { isSelection, notesState ->
+            val selectedNotesCount = notesState.getOrDefault(emptyList()).count { it.isSelected }
+            if (isSelection) {
+                fabOptions.isVisible = true
+                fab.isVisible = false
+                bab.isVisible = false
+            } else {
+                fabOptions.isVisible = false
+                fab.isVisible = true
+                bab.isVisible = true
+            }
+        }.launchIn(lifecycleScope)
     }
 
     private fun FolderFragmentBinding.setupListeners() {
         tb.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.notes_view -> navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToNoteListViewDialogFragment(args.folderId))
-                R.id.select -> {
-                    if (viewModel.isSelection.value)
-                        viewModel.disableSelection()
-                    else
-                        viewModel.enableSelection()
-                }
             }
             false
         }
@@ -199,7 +205,24 @@ class FolderFragment : Fragment() {
         }
 
         activity?.onBackPressedDispatcher?.addCallback {
-            navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment(exit = true))
+            if (viewModel.isSelection.value) {
+                viewModel.disableSelection()
+            } else {
+                navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment(exit = true))
+            }
+        }
+
+        fabOptions.setOnClickListener {
+            val selectedNoteIds = viewModel.notes.value.getOrDefault(emptyList())
+                .filter { model -> model.isSelected }
+                .map { model -> model.note.id }
+                .toLongArray()
+            navController?.navigateSafely(
+                FolderFragmentDirections.actionFolderFragmentToNoteSelectionDialogFragment(
+                    folderId = args.folderId,
+                    selectedNoteIds = selectedNoteIds,
+                )
+            )
         }
     }
 
@@ -347,17 +370,29 @@ class FolderFragment : Fragment() {
             tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_semibold)
             tvFolderNotesCount.animationInterpolator = DefaultInterpolator()
             if (selectedNotesCount > 0) {
-                tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_selected_count, notesCount, notesCount, selectedNotesCount)
-                tvFolderNotesCountRtl.text =
-                    context.quantityStringResource(R.plurals.notes_selected_count, notesCount, notesCount, selectedNotesCount)
+                tvFolderNotesCount.text = context.quantityStringResource(
+                    R.plurals.notes_selected_count,
+                    notesCount,
+                    notesCount,
+                    selectedNotesCount
+                )
+                tvFolderNotesCountRtl.text = context.quantityStringResource(
+                    R.plurals.notes_selected_count,
+                    notesCount,
+                    notesCount,
+                    selectedNotesCount
+                )
             } else {
                 tvFolderNotesCount.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
                 tvFolderNotesCountRtl.text = context.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
             }
             fab.backgroundTintList = colorStateList
+            fabOptions.backgroundTintList = colorStateList
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
                 fab.outlineSpotShadowColor = color
+                fabOptions.outlineAmbientShadowColor = color
+                fabOptions.outlineSpotShadowColor = color
             }
             if (folder.isArchived || folder.isVaulted) {
                 val drawableId = if (folder.isVaulted) R.drawable.ic_round_lock_24 else R.drawable.ic_round_archive_24
@@ -374,8 +409,10 @@ class FolderFragment : Fragment() {
             }
         }
         rv.post {
-            if (isRememberScrollingPosition) {
-                layoutManager.scrollToPosition(folder.scrollingPosition)
+            if (!viewModel.isSelection.value) {
+                if (isRememberScrollingPosition) {
+                    layoutManager.scrollToPosition(folder.scrollingPosition)
+                }
             }
         }
     }
