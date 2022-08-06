@@ -145,11 +145,13 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:icon="@drawable/ic_round_body_24"
                     android:text="@string/body" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
+                    android:icon="@drawable/ic_round_title_24"
                     android:text="@string/title" />
             </com.google.android.material.tabs.TabLayout>
 
