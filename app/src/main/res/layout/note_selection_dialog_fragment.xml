@@ -33,6 +33,15 @@
                 android:id="@+id/tb"
                 layout="@layout/dialog_fragment_toolbar" />
 
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rv_labels"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:padding="@dimen/spacing_small"
+                tools:listitem="@layout/label_item" />
+
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_marginBottom="@dimen/spacing_small"

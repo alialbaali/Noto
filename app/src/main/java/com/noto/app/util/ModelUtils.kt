@@ -23,6 +23,7 @@ const val RecentNotesItemId = -3L
 const val AllFoldersId = -4L
 val LabelDefaultStrokeWidth = 2.dp
 const val LineSeparator = "\n\n"
+val SelectedLabelsComparator = compareByDescending<Pair<Label, Boolean>> { it.second }.thenBy { it.first.position }
 
 private const val HashAlgorithm = "PBKDF2WithHmacSHA1"
 private const val HashIterationCount = 65536

@@ -7,10 +7,7 @@ import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
 import com.noto.app.getOrDefault
 import com.noto.app.map
-import com.noto.app.util.LineSeparator
-import com.noto.app.util.forEachRecursively
-import com.noto.app.util.getOrCreateLabel
-import com.noto.app.util.mapToNoteItemModel
+import com.noto.app.util.*
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -60,6 +57,22 @@ class FolderViewModel(
     private val mutableIsSelection = MutableStateFlow(false)
     val isSelection get() = mutableIsSelection.asStateFlow()
 
+    private var sortSelectedLabels = true
+
+    val selectionLabels = combine(notes, labels) { notes, labels ->
+        val selectedLabels = notes.getOrDefault(emptyList()).filter { it.isSelected }.map { it.labels }.flatten()
+        labels.map { entry -> entry.key to selectedLabels.contains(entry.key) }
+            .let {
+                if (it.isNotEmpty() && sortSelectedLabels) {
+                    sortSelectedLabels = false
+                    it.sortedWith(SelectedLabelsComparator)
+                } else {
+                    it
+                }
+            }
+            .toMap()
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+
     private val mutablePreviewNotePosition = MutableStateFlow(0)
     val previewNotePosition get() = mutablePreviewNotePosition.asStateFlow()
 
@@ -92,7 +105,6 @@ class FolderViewModel(
         ) { notes, archivedNotes, labels, noteLabels ->
             mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, selectedNoteIds).let { UiState.Success(it) }
             mutableArchivedNotes.value = archivedNotes.mapToNoteItemModel(labels, noteLabels).let { UiState.Success(it) }
-            selectedNoteIds = longArrayOf()
         }.launchIn(viewModelScope)
 
         labelRepository.getLabelsByFolderId(folderId)
@@ -421,6 +433,23 @@ class FolderViewModel(
 
     fun setIsUserScrolling(isScrolling: Boolean) {
         isUserScrolling = isScrolling
+    }
+
+    fun selectLabelForSelectedNotes(id: Long) = viewModelScope.launch {
+        notes.value.getOrDefault(emptyList())
+            .filter { model -> model.isSelected }
+            .forEach { model ->
+                val noteLabel = NoteLabel(noteId = model.note.id, labelId = id)
+                launch { noteLabelRepository.createNoteLabel(noteLabel) }
+            }
+    }
+
+    fun deselectLabelForSelectedNotes(id: Long) = viewModelScope.launch {
+        notes.value.getOrDefault(emptyList())
+            .filter { model -> model.isSelected }
+            .forEach { model ->
+                launch { noteLabelRepository.deleteNoteLabel(model.note.id, labelId = id) }
+            }
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }

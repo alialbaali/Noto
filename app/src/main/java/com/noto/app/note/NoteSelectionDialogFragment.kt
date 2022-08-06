@@ -23,6 +23,7 @@ import com.noto.app.databinding.NoteSelectionDialogFragmentBinding
 import com.noto.app.folder.FolderViewModel
 import com.noto.app.folder.noteItem
 import com.noto.app.getOrDefault
+import com.noto.app.label.labelItem
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filter
@@ -127,6 +128,32 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                 }
             }
             .launchIn(lifecycleScope)
+
+        combine(viewModel.folder, viewModel.selectionLabels) { folder, labels ->
+            rvLabels.withModels {
+                labels.forEach { entry ->
+                    labelItem {
+                        id(entry.key.id)
+                        label(entry.key)
+                        isSelected(entry.value)
+                        color(folder.color)
+                        onClickListener { _ ->
+                            if (entry.value)
+                                viewModel.deselectLabelForSelectedNotes(entry.key.id)
+                            else
+                                viewModel.selectLabelForSelectedNotes(entry.key.id)
+                        }
+                        onLongClickListener { _ ->
+                            if (entry.value)
+                                viewModel.deselectLabelForSelectedNotes(entry.key.id)
+                            else
+                                viewModel.selectLabelForSelectedNotes(entry.key.id)
+                            true
+                        }
+                    }
+                }
+            }
+        }.launchIn(lifecycleScope)
 
         viewModel.previewNotePosition
             .filter { it != -1 }
