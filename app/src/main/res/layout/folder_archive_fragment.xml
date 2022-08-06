@@ -1,19 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/BaseDialogFragment"
+    android:id="@+id/cool"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <include
-        android:id="@+id/tb"
-        layout="@layout/dialog_fragment_toolbar" />
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="?attr/notoBackgroundColor">
 
     <com.airbnb.epoxy.EpoxyRecyclerView
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:padding="@dimen/spacing_small"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/note_item" />
 
-</LinearLayout>
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl"
+        style="@style/AppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            style="@style/ToolbarWithSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_folder_title"
+                    style="@style/ToolbarTitleTextAppearance"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="@string/title"
+                    tools:textColor="@color/colorAccentTeal" />
+
+                <com.robinhood.ticker.TickerView
+                    android:id="@+id/tv_folder_notes_count"
+                    style="@style/SubtitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:ticker_animationDuration="@integer/animation_duration"
+                    app:ticker_defaultCharacterList="number"
+                    tools:text="7 notes" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_folder_notes_count_rtl"
+                    style="@style/SubtitleTextView"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:fontFamily="@font/nunito_semibold"
+                    tools:text="7 notes" />
+
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -44,7 +44,12 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private val alarmManager by lazy { context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager? }
 
-    private val anchorViewId by lazy { R.id.fab }
+    private val anchorViewId by lazy {
+        if (navController?.previousBackStackEntry?.destination?.id != R.id.folderArchiveFragment)
+            R.id.fab
+        else
+            null
+    }
 
     private val parentView by lazy { parentFragment?.view }
 
