@@ -28,18 +28,14 @@ import com.noto.app.label.newLabelItem
 import com.noto.app.util.*
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class NoteFragment : Fragment() {
 
-    private val viewModel by sharedViewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId, args.body, args.labelsIds) }
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId, args.body, args.labelsIds) }
 
     private val args by navArgs<NoteFragmentArgs>()
-
-    private val undoRedoBackgroundDrawable by lazy {
-        context?.drawableResource(R.drawable.generic_clickable_shape)
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteFragmentBinding.inflate(inflater, container, false).withBinding {
@@ -47,11 +43,6 @@ class NoteFragment : Fragment() {
             setupState()
             setupListeners()
         }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        activity?.viewModelStore?.clear()
-    }
 
     @OptIn(FlowPreview::class)
     private fun NoteFragmentBinding.setupState() {
@@ -245,6 +236,20 @@ class NoteFragment : Fragment() {
                 llToolbar.isVisible = isVisible
             }
             .launchIn(lifecycleScope)
+
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<String>(Constants.NoteTitle)
+            ?.observe(viewLifecycleOwner) { title ->
+                viewModel.setIsUndoOrRedo()
+                viewModel.setNoteTitle(title)
+            }
+
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<String>(Constants.NoteBody)
+            ?.observe(viewLifecycleOwner) { body ->
+                viewModel.setIsUndoOrRedo()
+                viewModel.setNoteBody(body)
+            }
     }
 
     private fun NoteFragmentBinding.enableBottomAppBarActions() {
@@ -344,13 +349,21 @@ class NoteFragment : Fragment() {
         }
 
         ibUndoHistory.setOnClickListener {
+            val currentTitleText = viewModel.note.value.title
+            val currentBodyText = viewModel.note.value.body
             when {
                 etNoteTitle.isFocused -> navController?.navigateSafely(
                     NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
                         args.folderId,
                         args.noteId,
                         isUndo = true,
-                        isTitle = true
+                        isTitle = true,
+                        currentTitleText = currentTitleText,
+                        currentBodyText = currentBodyText,
+                        content = viewModel.titleHistory.replayCache
+                            .subListOld(currentTitleText)
+                            .filter { it.isNotBlank() }
+                            .toTypedArray(),
                     )
                 )
                 etNoteBody.isFocused -> navController?.navigateSafely(
@@ -358,20 +371,34 @@ class NoteFragment : Fragment() {
                         args.folderId,
                         args.noteId,
                         isUndo = true,
-                        isTitle = false
+                        isTitle = false,
+                        currentTitleText = currentTitleText,
+                        currentBodyText = currentBodyText,
+                        content = viewModel.bodyHistory.replayCache
+                            .subListOld(currentBodyText)
+                            .filter { it.isNotBlank() }
+                            .toTypedArray()
                     )
                 )
             }
         }
 
         ibRedoHistory.setOnClickListener {
+            val currentTitleText = viewModel.note.value.title
+            val currentBodyText = viewModel.note.value.body
             when {
                 etNoteTitle.isFocused -> navController?.navigateSafely(
                     NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
                         args.folderId,
                         args.noteId,
                         isUndo = false,
-                        isTitle = true
+                        isTitle = true,
+                        currentTitleText = currentTitleText,
+                        currentBodyText = currentBodyText,
+                        content = viewModel.titleHistory.replayCache
+                            .subListNew(currentTitleText)
+                            .filter { it.isNotBlank() }
+                            .toTypedArray()
                     )
                 )
                 etNoteBody.isFocused -> navController?.navigateSafely(
@@ -379,7 +406,13 @@ class NoteFragment : Fragment() {
                         args.folderId,
                         args.noteId,
                         isUndo = false,
-                        isTitle = false
+                        isTitle = false,
+                        currentTitleText = currentTitleText,
+                        currentBodyText = currentBodyText,
+                        content = viewModel.bodyHistory.replayCache
+                            .subListNew(currentBodyText)
+                            .filter { it.isNotBlank() }
+                            .toTypedArray()
                     )
                 )
             }
@@ -565,6 +598,16 @@ class NoteFragment : Fragment() {
         ibRedo.background = context?.drawableResource(R.drawable.generic_clickable_shape)
         ibUndoHistory.background = context?.drawableResource(R.drawable.generic_clickable_shape)
         ibRedoHistory.background = context?.drawableResource(R.drawable.generic_clickable_shape)
+    }
+
+    private fun List<String>.subListOld(currentText: String): List<String> {
+        val indexOfCurrentText = indexOf(currentText)
+        return subList(0, indexOfCurrentText + 1)
+    }
+
+    private fun List<String>.subListNew(currentText: String): List<String> {
+        val indexOfCurrentText = indexOf(currentText)
+        return subList(indexOfCurrentText, size)
     }
 }
 

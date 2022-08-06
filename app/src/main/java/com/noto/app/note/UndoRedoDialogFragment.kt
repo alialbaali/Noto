@@ -19,12 +19,12 @@ import com.noto.app.databinding.UndoRedoDialogFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class UndoRedoDialogFragment : BaseDialogFragment() {
 
-    private val viewModel by sharedViewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId) }
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId) }
 
     private val args by navArgs<UndoRedoDialogFragmentArgs>()
 
@@ -52,25 +52,22 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
             .onEach { isScrolling -> tb.ll.isSelected = isScrolling }
             .launchIn(lifecycleScope)
 
+        val items = args.content.toList()
         if (args.isTitle) {
-            val currentText = viewModel.note.value.title
+            val currentText = args.currentTitleText
             if (args.isUndo) {
-                val items = viewModel.titleHistory.replayCache.subListOld(currentText).filter { it.isNotBlank() }
                 setupItems(items, currentText, isTitle = true)
                 rv.smoothScrollToPosition(items.lastIndexSafely)
             } else {
-                val items = viewModel.titleHistory.replayCache.subListNew(currentText).filter { it.isNotBlank() }
                 setupItems(items, currentText, isTitle = true)
                 rv.smoothScrollToPosition(0)
             }
         } else {
-            val currentText = viewModel.note.value.body
+            val currentText = args.currentBodyText
             if (args.isUndo) {
-                val items = viewModel.bodyHistory.replayCache.subListOld(currentText).filter { it.isNotBlank() }
                 setupItems(items, currentText, isTitle = false)
                 rv.smoothScrollToPosition(items.lastIndexSafely)
             } else {
-                val items = viewModel.bodyHistory.replayCache.subListNew(currentText).filter { it.isNotBlank() }
                 setupItems(items, currentText, isTitle = false)
                 rv.smoothScrollToPosition(0)
             }
@@ -85,12 +82,12 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                     text(item)
                     isSelected(item == currentItem)
                     onClickListener { _ ->
-                        viewModel.setIsUndoOrRedo()
-                        if (isTitle) viewModel.setNoteTitle(item) else viewModel.setNoteBody(item)
+                        val key = if (isTitle) Constants.NoteTitle else Constants.NoteBody
+                        navController?.previousBackStackEntry?.savedStateHandle?.set(key, item)
                         dismiss()
                     }
                     onCopyClickListener { _ ->
-                        val clipData = ClipData.newPlainText(viewModel.note.value.title, item)
+                        val clipData = ClipData.newPlainText(args.currentTitleText, item)
                         clipboardManager?.setPrimaryClip(clipData)
                         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
                             val stringId = R.string.text_copied
@@ -113,16 +110,6 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
         } else {
             etNoteBody?.let { activity?.showKeyboard(it) }
         }
-    }
-
-    private fun List<String>.subListOld(currentText: String): List<String> {
-        val indexOfCurrentText = indexOf(currentText)
-        return subList(0, indexOfCurrentText + 1)
-    }
-
-    private fun List<String>.subListNew(currentText: String): List<String> {
-        val indexOfCurrentText = indexOf(currentText)
-        return subList(indexOfCurrentText, size)
     }
 
     private val <T> List<T>.lastIndexSafely

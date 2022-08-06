@@ -582,6 +582,15 @@
         <argument
             android:name="is_title"
             app:argType="boolean" />
+        <argument
+            android:name="current_title_text"
+            app:argType="string" />
+        <argument
+            android:name="current_body_text"
+            app:argType="string" />
+        <argument
+            android:name="content"
+            app:argType="string[]" />
     </dialog>
     <dialog
         android:id="@+id/iconDialogFragment"

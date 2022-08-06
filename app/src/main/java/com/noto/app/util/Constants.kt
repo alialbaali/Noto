@@ -15,6 +15,8 @@ object Constants {
     const val MainInterfaceId = ""
     const val IsPasscodeValid = "IsPasscodeValid"
     const val WidgetRadius = "WidgetRadius"
+    const val NoteTitle = "NoteTitle"
+    const val NoteBody = "NoteBody"
 
     object Intent {
         const val ActionCreateFolder = "com.noto.intent.action.CREATE_FOLDER"
