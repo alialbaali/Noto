@@ -292,6 +292,14 @@ class NoteDialogFragment : BaseDialogFragment() {
                 }
             }
 
+            if (isCurrentLocaleArabic()) {
+                vNote.tvCreationDate.typeface = root.context?.tryLoadingFontResource(R.font.nunito_semibold)
+                vNote.tvAccessDate.typeface = root.context?.tryLoadingFontResource(R.font.nunito_semibold)
+            } else {
+                vNote.tvCreationDate.typeface = root.context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
+                vNote.tvAccessDate.typeface = root.context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
+            }
+
             if (note.isPinned) {
                 tvPinNote.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_pin_off_24, 0, 0)
                 tvPinNote.text = context.stringResource(R.string.unpin)

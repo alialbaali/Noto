@@ -58,6 +58,12 @@ class NoteListWidgetAdapter(
                         llLabels.addView(root)
                     }
                 }
+
+                if (isCurrentLocaleArabic()) {
+                    tvCreationDate.typeface = root.context?.tryLoadingFontResource(R.font.nunito_semibold)
+                } else {
+                    tvCreationDate.typeface = root.context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
+                }
             }
         }
     }
