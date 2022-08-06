@@ -156,6 +156,33 @@
             </com.google.android.material.tabs.TabLayout>
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_open_notes_in"
+                style="@style/DialogSectionItem"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:paddingVertical="@dimen/spacing_normal"
+                android:text="@string/open_notes_in" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tl_open_notes_in"
+                style="@style/TabLayout"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:icon="@drawable/ic_round_editor_24"
+                    android:text="@string/editor" />
+
+                <com.google.android.material.tabs.TabItem
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:icon="@drawable/ic_round_reading_mode_24"
+                    android:text="@string/reading_mode" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_note_preview_size"
                 style="@style/DialogSectionItem"
                 android:layout_height="wrap_content"

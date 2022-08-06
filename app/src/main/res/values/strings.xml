@@ -80,6 +80,7 @@
     <string name="no_parent">No parent</string>
     <string name="parent_folder">Parent folder</string>
     <string name="new_note_cursor_position">New note cursor position</string>
+    <string name="open_notes_in">Open notes in</string>
     <string name="archive">Archive</string>
     <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive -->
     <string name="folder_archive">%s archive</string>
@@ -186,6 +187,7 @@
     </plurals>
     <string name="body">Body</string>
     <string name="title">Title</string>
+    <string name="editor">Editor</string>
     <string name="create_note">Create note</string>
     <plurals name="delete_note">
         <item quantity="one">Delete note</item>
