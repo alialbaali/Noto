@@ -15,7 +15,6 @@ object Constants {
     const val MainInterfaceId = ""
     const val IsPasscodeValid = "IsPasscodeValid"
     const val WidgetRadius = "WidgetRadius"
-    const val IsSelection = "IsSelection"
     const val SelectAll = "SelectAll"
     const val NoteTitle = "NoteTitle"
     const val NoteBody = "NoteBody"
