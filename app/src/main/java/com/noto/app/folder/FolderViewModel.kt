@@ -11,8 +11,11 @@ import com.noto.app.util.LineSeparator
 import com.noto.app.util.forEachRecursively
 import com.noto.app.util.getOrCreateLabel
 import com.noto.app.util.mapToNoteItemModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+
+private const val AutoScrollDuration = 2000L
 
 class FolderViewModel(
     private val folderRepository: FolderRepository,
@@ -56,6 +59,13 @@ class FolderViewModel(
 
     private val mutableIsSelection = MutableStateFlow(false)
     val isSelection get() = mutableIsSelection.asStateFlow()
+
+    private val mutablePreviewNotePosition = MutableStateFlow(0)
+    val previewNotePosition get() = mutablePreviewNotePosition.asStateFlow()
+
+    private var currentPosition = mutablePreviewNotePosition.value
+
+    private var isUserScrolling = false
 
     init {
         combine(
@@ -103,6 +113,27 @@ class FolderViewModel(
             .onEach { notesState ->
                 val isNoneSelected = notesState.getOrDefault(emptyList()).none { it.isSelected }
                 if (isNoneSelected) disableSelection()
+            }
+            .launchIn(viewModelScope)
+
+        notes
+            .onEach { state ->
+                val models = state.getOrDefault(emptyList()).filter { it.isSelected }
+                if (models.isNotEmpty()) {
+                    while (true) {
+                        if (isUserScrolling) {
+                            delay(1000L)
+                            isUserScrolling = false
+                        }
+                        delay(AutoScrollDuration)
+                        val nextPosition = if (currentPosition == models.lastIndex) {
+                            0
+                        } else {
+                            currentPosition + 1
+                        }
+                        mutablePreviewNotePosition.value = nextPosition
+                    }
+                }
             }
             .launchIn(viewModelScope)
     }
@@ -374,6 +405,14 @@ class FolderViewModel(
                     noteRepository.deleteNote(model.note)
                 }
             }
+    }
+
+    fun setCurrentNotePosition(position: Int) {
+        currentPosition = position
+    }
+
+    fun setIsUserScrolling(isScrolling: Boolean) {
+        isUserScrolling = isScrolling
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) = map { it.first to (it.first == notoColor) }

@@ -26,6 +26,8 @@ import com.noto.app.domain.model.NotoColor
 import com.noto.app.label.noteLabelItem
 import com.noto.app.util.*
 
+private const val WidthRatio = 0.9F
+
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass(layout = R.layout.note_item)
 abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
@@ -56,20 +58,26 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute
     open var isSelection: Boolean = false
 
-    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    lateinit var onClickListener: View.OnClickListener
+    @EpoxyAttribute
+    open var isPreview: Boolean = false
+
+    @EpoxyAttribute
+    var parentWidth: Int = 0
 
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    lateinit var onLongClickListener: View.OnLongClickListener
+    var onClickListener: View.OnClickListener? = null
 
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    lateinit var onDragHandleTouchListener: View.OnTouchListener
+    var onLongClickListener: View.OnLongClickListener? = null
 
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    lateinit var onSelectListener: View.OnClickListener
+    var onDragHandleTouchListener: View.OnTouchListener? = null
 
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    lateinit var onDeselectListener: View.OnClickListener
+    var onSelectListener: View.OnClickListener? = null
+
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var onDeselectListener: View.OnClickListener? = null
 
     @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
@@ -109,13 +117,13 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             if (model.isSelected) {
                 root.setOnClickListener(onDeselectListener)
                 root.setOnLongClickListener {
-                    onDeselectListener.onClick(it)
+                    onDeselectListener?.onClick(it)
                     true
                 }
             } else {
                 root.setOnClickListener(onSelectListener)
                 root.setOnLongClickListener {
-                    onSelectListener.onClick(it)
+                    onSelectListener?.onClick(it)
                     true
                 }
             }
@@ -156,18 +164,18 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
 
         val gestureDetectorListener = object : GestureDetector.SimpleOnGestureListener() {
             override fun onLongPress(e: MotionEvent?) {
-                onLongClickListener.onLongClick(root)
+                onLongClickListener?.onLongClick(root)
             }
 
             override fun onSingleTapUp(e: MotionEvent?): Boolean {
                 if (isSelection) {
                     if (model.isSelected) {
-                        onDeselectListener.onClick(root)
+                        onDeselectListener?.onClick(root)
                     } else {
-                        onSelectListener.onClick(root)
+                        onSelectListener?.onClick(root)
                     }
                 } else {
-                    onClickListener.onClick(root)
+                    onClickListener?.onClick(root)
                 }
                 return true
             }
@@ -180,6 +188,12 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             else if (motionEvent.action == MotionEvent.ACTION_UP || motionEvent.action == MotionEvent.ACTION_CANCEL)
                 ll.background?.state = intArrayOf(-android.R.attr.state_pressed, -android.R.attr.state_enabled)
             false
+        }
+        if (isPreview) {
+            tvNoteTitle.maxLines = 3
+            tvNoteBody.maxLines = 5
+            root.layoutParams.width = (parentWidth * WidthRatio).toInt()
+            root.isEnabled = false
         }
     }
 

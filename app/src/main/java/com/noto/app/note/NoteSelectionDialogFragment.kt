@@ -12,15 +12,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.NoteSelectionDialogFragmentBinding
 import com.noto.app.folder.FolderViewModel
+import com.noto.app.folder.noteItem
 import com.noto.app.getOrDefault
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -51,6 +54,37 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
 
     fun NoteSelectionDialogFragmentBinding.setupState() {
         tb.tvDialogTitle.text = context?.stringResource(R.string.options)
+        rv.layoutManager = SmoothLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        val snapHelper = PagerSnapHelper()
+        snapHelper.attachToRecyclerView(rv)
+
+        combine(
+            viewModel.folder,
+            viewModel.notes,
+            viewModel.font,
+        ) { folder, notesState, font ->
+            if (notesState is UiState.Success) {
+                val selectedNotes = notesState.value.filter { it.isSelected }.map { it.copy(isSelected = false) }
+                rv.withModels {
+                    selectedNotes.forEach { model ->
+                        noteItem {
+                            id(model.note.id)
+                            model(model)
+                            isPreview(true)
+                            parentWidth(rv.width)
+                            font(font)
+                            color(folder.color)
+                            previewSize(folder.notePreviewSize)
+                            isShowCreationDate(folder.isShowNoteCreationDate)
+                            searchTerm("")
+                            isManualSorting(false)
+                            isSelection(false)
+                        }
+                    }
+                }
+            }
+        }.launchIn(lifecycleScope)
+
         viewModel.notes
             .onEach {
                 if (it is UiState.Success) {
@@ -86,6 +120,24 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                 }
             }
             .launchIn(lifecycleScope)
+
+        viewModel.previewNotePosition
+            .filter { it != -1 }
+            .onEach { position -> rv.smoothScrollToPosition(position) }
+            .launchIn(lifecycleScope)
+
+        rv.addOnScrollListener(
+            object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    val currentView = snapHelper.findSnapView(rv.layoutManager)
+                    if (currentView != null) {
+                        val position = rv.getChildAdapterPosition(currentView)
+                        viewModel.setCurrentNotePosition(position)
+                    }
+                    viewModel.setIsUserScrolling(dx > 0 || dx < 0)
+                }
+            }
+        )
     }
 
     fun NoteSelectionDialogFragmentBinding.setupListeners() {
