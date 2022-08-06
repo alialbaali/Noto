@@ -169,6 +169,10 @@ class FolderFragment : Fragment() {
                 }
             }
             .launchIn(lifecycleScope)
+
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<Boolean>(Constants.SelectAll)
+            ?.observe(viewLifecycleOwner) { viewModel.selectAllNotes() }
     }
 
     private fun FolderFragmentBinding.setupListeners() {

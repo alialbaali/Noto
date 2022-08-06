@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +24,10 @@ import com.noto.app.folder.FolderViewModel
 import com.noto.app.folder.noteItem
 import com.noto.app.getOrDefault
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -88,6 +92,9 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         viewModel.notes
             .onEach {
                 if (it is UiState.Success) {
+                    val isAllSelected = it.value.all { it.isSelected }
+                    tvSelectAllNotes.isVisible = !isAllSelected
+                    divider2.root.isVisible = !isAllSelected
                     val selectedNotesCount = it.value.count { it.isSelected }
                     if (it.value.none { it.note.isPinned }) {
                         tvPinNotes.text = context?.stringResource(R.string.pin)
@@ -141,6 +148,11 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
     }
 
     fun NoteSelectionDialogFragmentBinding.setupListeners() {
+        tvSelectAllNotes.setOnClickListener {
+            navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.SelectAll, true)
+            dismiss()
+        }
+
         tvMergeNotes.setOnClickListener {
             viewModel.mergeSelectedNotes().invokeOnCompletion {
                 context?.let { context ->

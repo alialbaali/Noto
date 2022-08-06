@@ -91,6 +91,7 @@
     <string name="delete">Delete</string>
     <string name="just_now">just now</string>
     <string name="select">Select</string>
+    <string name="select_all">Select all</string>
 
     <!-- Folder -->
     <string name="folders">Folders</string>

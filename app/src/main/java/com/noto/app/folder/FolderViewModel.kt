@@ -293,6 +293,14 @@ class FolderViewModel(
         }
     }
 
+    fun selectAllNotes() {
+        mutableNotes.value = notes.value.map {
+            it.map { model ->
+                model.copy(isSelected = true)
+            }
+        }
+    }
+
     fun mergeSelectedNotes() = viewModelScope.launch {
         val selectedNotes = notes.value.getOrDefault(emptyList())
             .filter { model -> model.isSelected }
