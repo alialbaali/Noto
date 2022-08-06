@@ -94,8 +94,14 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
                 tvNoteBody.isVisible = true
             } else {
                 tvNoteBody.text = model.note.body.takeLines(previewSize).highlightText(colorResource, isBlack)
-                tvNoteBody.maxLines = previewSize
                 tvNoteBody.isVisible = previewSize != 0 && model.note.body.isNotBlank()
+                if (isPreview) {
+                    tvNoteTitle.maxLines = 3
+                    tvNoteBody.maxLines = 5
+                } else {
+                    tvNoteTitle.maxLines = Int.MAX_VALUE
+                    tvNoteBody.maxLines = previewSize
+                }
             }
             if (isShowCreationDate)
                 tvCreationDate.text = context.stringResource(R.string.created, model.note.creationDate.format(root.context))
@@ -190,10 +196,11 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             false
         }
         if (isPreview) {
-            tvNoteTitle.maxLines = 3
-            tvNoteBody.maxLines = 5
             root.layoutParams.width = (parentWidth * WidthRatio).toInt()
             root.isEnabled = false
+        } else {
+            root.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+            root.isEnabled = true
         }
     }
 
