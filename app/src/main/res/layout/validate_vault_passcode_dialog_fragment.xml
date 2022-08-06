@@ -51,11 +51,11 @@
             android:textColor="?attr/notoPrimaryColor"
             android:textSize="@dimen/size_small"
             android:paddingHorizontal="@dimen/spacing_normal"
-            android:fontFamily="@font/nunito_medium"
             android:text="@string/use_bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:backgroundTint="?attr/notoBackgroundColor" />
+            app:backgroundTint="?attr/notoBackgroundColor"
+            app:fontFamily="@font/nunito_medium" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
