@@ -14,10 +14,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
 import com.noto.app.databinding.NewFolderFragmentBinding
-import com.noto.app.domain.model.Folder
-import com.noto.app.domain.model.Layout
-import com.noto.app.domain.model.NewNoteCursorPosition
-import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.*
 import com.noto.app.main.SelectFolderDialogFragment
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -114,6 +111,12 @@ class NewFolderFragment : Fragment() {
                         else -> NewNoteCursorPosition.Title
                     }
                 }
+                val openNotesIn = tlOpenNotesIn.selectedTabPosition.let {
+                    when (it) {
+                        0 -> OpenNotesIn.Editor
+                        else -> OpenNotesIn.ReadingMode
+                    }
+                }
                 activity?.hideKeyboard(root)
                 updatePinnedShortcut(title)
                 viewModel.createOrUpdateFolder(
@@ -121,6 +124,7 @@ class NewFolderFragment : Fragment() {
                     layout,
                     sNotePreviewSize.value.toInt(),
                     cursorPosition,
+                    openNotesIn,
                     swShowNoteCreationDate.isChecked,
                     onCreateFolder = { folderId ->
                         navController?.navigateSafely(NewFolderFragmentDirections.actionNewFolderFragmentToFolderFragment(folderId))
@@ -146,8 +150,13 @@ class NewFolderFragment : Fragment() {
             NewNoteCursorPosition.Body -> tlNewNoteCursorPosition.getTabAt(0)
             NewNoteCursorPosition.Title -> tlNewNoteCursorPosition.getTabAt(1)
         }
+        val openNotesInTab = when (folder.openNotesIn) {
+            OpenNotesIn.Editor -> tlOpenNotesIn.getTabAt(0)
+            OpenNotesIn.ReadingMode -> tlOpenNotesIn.getTabAt(1)
+        }
         tlFolderLayout.selectTab(layoutTab)
         tlNewNoteCursorPosition.selectTab(cursorPositionTab)
+        tlOpenNotesIn.selectTab(openNotesInTab)
         swShowNoteCreationDate.isChecked = folder.isShowNoteCreationDate
         swShowNoteCreationDate.setupColors()
         sNotePreviewSize.value = folder.notePreviewSize.toFloat()

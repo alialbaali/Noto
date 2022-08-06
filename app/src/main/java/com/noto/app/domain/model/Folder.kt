@@ -75,6 +75,9 @@ data class Folder @Ignore constructor(
     @ColumnInfo(name = "filtering_type", defaultValue = "0")
     val filteringType: FilteringType = FilteringType.Inclusive,
 
+    @ColumnInfo(name = "open_notes_in", defaultValue = "0")
+    val openNotesIn: OpenNotesIn = OpenNotesIn.Editor,
+
     @Ignore
     @Transient
     val folders: List<Pair<Folder, Int>> = emptyList(),
@@ -101,6 +104,7 @@ data class Folder @Ignore constructor(
         isVaulted: Boolean = false,
         filteringType: FilteringType,
         scrollingPosition: Int = 0,
+        openNotesIn: OpenNotesIn = OpenNotesIn.Editor,
     ) : this(
         id,
         parentId,
@@ -121,6 +125,7 @@ data class Folder @Ignore constructor(
         isVaulted,
         scrollingPosition,
         filteringType,
+        openNotesIn,
         emptyList(),
     )
 

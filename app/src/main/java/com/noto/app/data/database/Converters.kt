@@ -3,6 +3,7 @@ package com.noto.app.data.database
 import android.annotation.SuppressLint
 import androidx.room.TypeConverter
 import com.noto.app.domain.model.*
+import com.noto.app.domain.model.OpenNotesIn
 import kotlinx.datetime.Instant
 
 object NotoColorConverter {
@@ -110,5 +111,17 @@ object FilteringTypeConverter {
     @TypeConverter
     @JvmStatic
     fun toEnum(ordinal: Int): FilteringType = FilteringType.values().first { filteringType -> filteringType.ordinal == ordinal }
+
+}
+
+object OpenNotesInConverter {
+
+    @TypeConverter
+    @JvmStatic
+    fun toOrdinal(openNotesIn: OpenNotesIn): Int = openNotesIn.ordinal
+
+    @TypeConverter
+    @JvmStatic
+    fun toEnum(ordinal: Int): OpenNotesIn = OpenNotesIn.values().first { openNotesIn -> openNotesIn.ordinal == ordinal }
 
 }

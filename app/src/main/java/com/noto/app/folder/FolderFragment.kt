@@ -335,13 +335,20 @@ class FolderFragment : Fragment() {
                                         isManualSorting(folder.sortingType == NoteListSortingType.Manual)
                                         isSelection(isSelection)
                                         onClickListener { _ ->
-                                            navController
-                                                ?.navigateSafely(
+                                            when (folder.openNotesIn) {
+                                                OpenNotesIn.Editor -> navController?.navigateSafely(
                                                     FolderFragmentDirections.actionFolderFragmentToNoteFragment(
                                                         model.note.folderId,
                                                         model.note.id
                                                     )
                                                 )
+                                                OpenNotesIn.ReadingMode -> navController?.navigateSafely(
+                                                    FolderFragmentDirections.actionFolderFragmentToNoteReadingModeFragment(
+                                                        model.note.folderId,
+                                                        model.note.id
+                                                    )
+                                                )
+                                            }
                                         }
                                         onLongClickListener { _ ->
                                             navController

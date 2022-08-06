@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_folderFragment_to_noteSelectionDialogFragment"
             app:destination="@id/noteSelectionDialogFragment" />
+        <action
+            android:id="@+id/action_folderFragment_to_noteReadingModeFragment"
+            app:destination="@id/noteReadingModeFragment" />
     </fragment>
     <fragment
         android:id="@+id/newFolderFragment"

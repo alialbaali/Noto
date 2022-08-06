@@ -164,6 +164,7 @@ class FolderViewModel(
         layout: Layout,
         notePreviewSize: Int,
         newNoteCursorPosition: NewNoteCursorPosition,
+        openNotesIn: OpenNotesIn,
         isShowNoteCreationDate: Boolean,
         onCreateFolder: (Long) -> Unit,
     ) = viewModelScope.launch {
@@ -177,6 +178,7 @@ class FolderViewModel(
             notePreviewSize = notePreviewSize,
             isShowNoteCreationDate = isShowNoteCreationDate,
             newNoteCursorPosition = newNoteCursorPosition,
+            openNotesIn = openNotesIn,
         )
 
         if (folderId == 0L)

@@ -23,10 +23,11 @@ private const val NOTO_DATABASE = "Noto Database"
     NewNoteCursorPositionConvertor::class,
     GroupingOrderConverter::class,
     FilteringTypeConverter::class,
+    OpenNotesInConverter::class,
 )
 @Database(
     entities = [Folder::class, Note::class, Label::class, NoteLabel::class],
-    version = 31,
+    version = 32,
     autoMigrations = [
         AutoMigration(from = 6, to = 7),
         AutoMigration(from = 7, to = 8),
@@ -60,6 +61,8 @@ private const val NOTO_DATABASE = "Noto Database"
         AutoMigration(from = 28, to = 29),
         /** Add [FilteringType] to [Folder] */
         AutoMigration(from = 29, to = 30),
+//        /** Add [Folder.openNotesIn] */
+        AutoMigration(from = 31, to = 32),
     ],
 )
 abstract class NotoDatabase : RoomDatabase() {
