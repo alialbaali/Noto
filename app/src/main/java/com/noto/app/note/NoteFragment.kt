@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.*
 import android.widget.EditText
 import androidx.activity.addCallback
@@ -501,10 +500,6 @@ class NoteFragment : Fragment() {
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
-        if (args.noteId != 0L) {
-            etNoteTitle.movementMethod = LinkMovementMethod.getInstance()
-            etNoteBody.movementMethod = LinkMovementMethod.getInstance()
-        }
         tvWordCount.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)
         tvWordCountRtl.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)
         context?.let { context ->
