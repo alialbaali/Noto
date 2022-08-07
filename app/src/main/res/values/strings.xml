@@ -185,6 +185,10 @@
         <item quantity="one">%d Word</item>
         <item quantity="other">%d Words</item>
     </plurals>
+    <plurals name="words_selected_count">
+        <item quantity="one">%1$d Word • %2$d Selected</item>
+        <item quantity="other">%1$d Words • %2$d Selected</item>
+    </plurals>
     <string name="body">Body</string>
     <string name="title">Title</string>
     <string name="editor">Editor</string>

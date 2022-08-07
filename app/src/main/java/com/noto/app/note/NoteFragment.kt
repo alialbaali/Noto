@@ -151,22 +151,38 @@ class NoteFragment : Fragment() {
             }
         }.launchIn(lifecycleScope)
 
-        etNoteBody.textAsFlow(emitInitialText = true)
-            .filterNotNull()
-            .map { it.toString() }
-            .onEach { body ->
+        combine(
+            etNoteBody.textAsFlow(emitInitialText = true)
+                .filterNotNull()
+                .map { it.toString() },
+            etNoteBody.textSelectionAsFlow(),
+        ) { body, selectedText ->
+            if (selectedText != null && selectedText.isNotBlank()) {
+                tvWordCount.text = context?.quantityStringResource(
+                    R.plurals.words_selected_count,
+                    body.wordsCount,
+                    body.wordsCount,
+                    selectedText.wordsCount,
+                )
+                tvWordCountRtl.text = context?.quantityStringResource(
+                    R.plurals.words_selected_count,
+                    body.wordsCount,
+                    body.wordsCount,
+                    selectedText.wordsCount,
+                )
+            } else {
                 tvWordCount.text = context?.quantityStringResource(
                     R.plurals.words_count,
                     body.wordsCount,
-                    body.wordsCount
+                    body.wordsCount,
                 )
                 tvWordCountRtl.text = context?.quantityStringResource(
                     R.plurals.words_count,
                     body.wordsCount,
-                    body.wordsCount
+                    body.wordsCount,
                 )
             }
-            .launchIn(lifecycleScope)
+        }.launchIn(lifecycleScope)
 
         combine(
             etNoteTitle.textAsFlow(emitInitialText = true)

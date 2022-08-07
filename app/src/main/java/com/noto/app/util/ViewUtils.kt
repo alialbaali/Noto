@@ -396,3 +396,9 @@ fun NavController.destinationAsFlow() = callbackFlow {
 }
 
 fun isCurrentLocaleArabic() = Locale.getDefault() == Locale("ar")
+
+fun EditTextWithSelectionChangedListener.textSelectionAsFlow() = callbackFlow {
+    val listener: (String?) -> Unit = { selectedText -> trySend(selectedText) }
+    setOnSelectionChangedListener(listener)
+    awaitClose { setOnSelectionChangedListener(null) }
+}
