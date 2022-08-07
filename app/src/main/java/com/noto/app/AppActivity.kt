@@ -138,20 +138,19 @@ class AppActivity : BaseActivity() {
     }
 
     private fun showSelectFolderDialog(content: String?) {
-        if (navController.currentDestination?.id != R.id.selectFolderDialogFragment) {
-            navController.currentBackStackEntry
-                ?.savedStateHandle
-                ?.getLiveData<Long>(Constants.FolderId)
-                ?.observe(this@AppActivity) { folderId ->
-                    val options = navOptions {
-                        popUpTo(R.id.folderFragment) {
-                            inclusive = true
-                        }
+        navController.getBackStackEntry(R.id.folderFragment).savedStateHandle
+            .getLiveData<Long>(Constants.FolderId)
+            .observe(this) { folderId ->
+                val options = navOptions {
+                    popUpTo(R.id.folderFragment) {
+                        inclusive = true
                     }
-                    val args = bundleOf(Constants.FolderId to folderId, Constants.Body to content)
-                    navController.navigate(R.id.folderFragment, args, options)
-                    navController.navigate(R.id.noteFragment, args)
                 }
+                val args = bundleOf(Constants.FolderId to folderId, Constants.Body to content)
+                navController.navigate(R.id.folderFragment, args, options)
+                navController.navigate(R.id.noteFragment, args)
+            }
+        if (navController.currentDestination?.id != R.id.selectFolderDialogFragment) {
             val args = bundleOf(Constants.FilteredFolderIds to longArrayOf())
             navController.navigate(R.id.selectFolderDialogFragment, args)
         }
