@@ -21,6 +21,7 @@ import com.noto.app.components.Screen
 import com.noto.app.util.navController
 import com.noto.app.util.setupMixedTransitions
 import com.noto.app.util.snackbar
+import com.noto.app.util.stringResource
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ReadingModeSettingsFragment : Fragment() {
@@ -36,7 +37,9 @@ class ReadingModeSettingsFragment : Fragment() {
             if (notificationManager?.isNotificationPolicyAccessGranted == true) {
                 viewModel.toggleDoNotDisturb()
             } else {
-                view?.snackbar(R.string.permission_not_granted, R.drawable.ic_round_warning_24)
+                context?.let { context ->
+                    view?.snackbar(context.stringResource(R.string.permission_not_granted), R.drawable.ic_round_warning_24)
+                }
             }
         }
     }
