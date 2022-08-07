@@ -501,8 +501,10 @@ class NoteFragment : Fragment() {
         etNoteBody.setText(note.body)
         etNoteTitle.setSelection(note.title.length)
         etNoteBody.setSelection(note.body.length)
-        etNoteTitle.movementMethod = LinkMovementMethod.getInstance()
-        etNoteBody.movementMethod = LinkMovementMethod.getInstance()
+        if (args.noteId != 0L) {
+            etNoteTitle.movementMethod = LinkMovementMethod.getInstance()
+            etNoteBody.movementMethod = LinkMovementMethod.getInstance()
+        }
         tvWordCount.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)
         tvWordCountRtl.text = context?.quantityStringResource(R.plurals.words_count, note.body.wordsCount, note.body.wordsCount)
         context?.let { context ->
