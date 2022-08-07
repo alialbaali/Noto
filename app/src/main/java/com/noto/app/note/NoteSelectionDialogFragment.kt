@@ -181,9 +181,10 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvMergeNotes.setOnClickListener {
+            val selectedNotes = viewModel.notes.value.getOrDefault(emptyList()).filter { it.isSelected }.map { it.note }
             viewModel.mergeSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
-                    val text = context.stringResource(R.string.notes_are_merged)
+                    val text = context.stringResource(R.string.notes_are_merged, selectedNotes.count())
                     val drawableId = R.drawable.ic_round_merge_24
                     parentView?.snackbar(text, drawableId, anchorViewId, folderColor)
                     context.updateAllWidgetsData()

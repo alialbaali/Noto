@@ -211,7 +211,7 @@
     <string name="save_to_noto">Save to Noto</string>
     <string name="no_notes_found">No notes found.</string>
     <string name="notes">Notes</string>
-    <string name="notes_are_merged">Notes have been merged into new note.</string>
+    <string name="notes_are_merged">%d Notes have been merged into new note.</string>
     <plurals name="note_is_archived">
         <item quantity="one">Note has been archived.</item>
         <item quantity="other">%d Notes have been archived.</item>
