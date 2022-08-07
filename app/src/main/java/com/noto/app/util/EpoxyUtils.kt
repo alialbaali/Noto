@@ -49,7 +49,7 @@ inline fun EpoxyController.buildNotesModels(
             content(notPinnedNotes)
         }
         Grouping.CreationDate -> {
-            notes.groupByDate(folder.sortingType, folder.sortingOrder, folder.groupingOrder).forEach { (date, notes) ->
+            notes.groupByCreationDate(folder.sortingType, folder.sortingOrder, folder.groupingOrder).forEach { (date, notes) ->
                 headerItem {
                     id(date.dayOfYear)
                     title(date.format())
@@ -74,6 +74,16 @@ inline fun EpoxyController.buildNotesModels(
                         color(folder.color)
                         onCreateClickListener { _ -> onCreateClick(labels.map { it.id }) }
                     }
+                content(notes)
+            }
+        }
+        Grouping.AccessDate -> {
+            notes.groupByAccessDate(folder.sortingType, folder.sortingOrder, folder.groupingOrder).forEach { (date, notes) ->
+                headerItem {
+                    id(date.dayOfYear)
+                    title(date.format())
+                    color(folder.color)
+                }
                 content(notes)
             }
         }

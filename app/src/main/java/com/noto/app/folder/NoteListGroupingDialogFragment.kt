@@ -42,6 +42,7 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
                         Grouping.Default -> rbDefault.isChecked = true
                         Grouping.CreationDate -> rbCreationDate.isChecked = true
                         Grouping.Label -> rbLabel.isChecked = true
+                        Grouping.AccessDate -> rbAccessDate.isChecked = true
                     }
                 }
             }
@@ -57,6 +58,10 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
 
         rbLabel.setOnClickListener {
             viewModel.updateGrouping(Grouping.Label).invokeOnCompletion { dismiss() }
+        }
+
+        rbAccessDate.setOnClickListener {
+            viewModel.updateGrouping(Grouping.AccessDate).invokeOnCompletion { dismiss() }
         }
     }
 }

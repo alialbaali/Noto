@@ -24,7 +24,7 @@ enum class Layout { Linear, Grid, }
 
 enum class Font { Nunito, Monospace, }
 
-enum class Grouping { Default, CreationDate, Label, }
+enum class Grouping { Default, CreationDate, Label, AccessDate }
 
 enum class Language {
     System, English, Turkish, Arabic, Indonesian,

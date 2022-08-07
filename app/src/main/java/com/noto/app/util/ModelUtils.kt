@@ -92,19 +92,33 @@ fun List<NoteItemModel>.filterContent(content: CharSequence) = filter { model ->
     model.note.title.contains(content, ignoreCase = true) || model.note.body.contains(content, ignoreCase = true)
 }
 
-fun List<NoteItemModel>.groupByDate(
+fun List<NoteItemModel>.groupByCreationDate(
     sortingType: NoteListSortingType,
     sortingOrder: SortingOrder,
     groupingOrder: GroupingOrder,
 ): List<Pair<LocalDate, List<NoteItemModel>>> = groupBy { model -> model.note.creationDate.toLocalDate() }
-    .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { model -> model.note.isPinned } }
-    .map { it.toPair() }
-    .let {
-        if (groupingOrder == GroupingOrder.Descending)
-            it.sortedByDescending { it.first }
-        else
-            it.sortedBy { it.first }
-    }
+    .sorted(sortingType, sortingOrder, groupingOrder)
+
+fun List<NoteItemModel>.groupByAccessDate(
+    sortingType: NoteListSortingType,
+    sortingOrder: SortingOrder,
+    groupingOrder: GroupingOrder,
+): List<Pair<LocalDate, List<NoteItemModel>>> = groupBy { model -> model.note.accessDate.toLocalDate() }
+    .sorted(sortingType, sortingOrder, groupingOrder)
+
+private fun Map<LocalDate, List<NoteItemModel>>.sorted(
+    sortingType: NoteListSortingType,
+    sortingOrder: SortingOrder,
+    groupingOrder: GroupingOrder,
+): List<Pair<LocalDate, List<NoteItemModel>>> =
+    mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { model -> model.note.isPinned } }
+        .map { it.toPair() }
+        .let {
+            if (groupingOrder == GroupingOrder.Descending)
+                it.sortedByDescending { it.first }
+            else
+                it.sortedBy { it.first }
+        }
 
 fun List<NoteItemModel>.groupByLabels(
     sortingType: NoteListSortingType,
