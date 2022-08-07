@@ -22,6 +22,7 @@
     <string name="accessed">Accessed %s</string>
     <string name="alphabetical">Alphabetical</string>
     <string name="alphabetical_sorting">Alphabetical sorting</string>
+    <string name="access_date">Access date</string>
     <string name="creation_date">Creation date</string>
     <string name="creation_date_sorting">Creation date sorting</string>
     <string name="manual">Manual</string>

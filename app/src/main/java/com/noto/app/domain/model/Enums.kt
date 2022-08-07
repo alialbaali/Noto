@@ -14,7 +14,7 @@ enum class Icon {
 
 enum class FolderListSortingType { Manual, CreationDate, Alphabetical, }
 
-enum class NoteListSortingType { Manual, CreationDate, Alphabetical, }
+enum class NoteListSortingType { Manual, CreationDate, Alphabetical, AccessDate, }
 
 enum class SortingOrder { Ascending, Descending, }
 

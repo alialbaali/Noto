@@ -72,6 +72,7 @@ fun List<NoteItemModel>.sorted(sortingType: NoteListSortingType, sortingOrder: S
         NoteListSortingType.Manual -> model.note.position
         NoteListSortingType.CreationDate -> model.note.creationDate
         NoteListSortingType.Alphabetical -> model.note.title.ifBlank { model.note.body }
+        NoteListSortingType.AccessDate -> model.note.accessDate
     }
 }
 

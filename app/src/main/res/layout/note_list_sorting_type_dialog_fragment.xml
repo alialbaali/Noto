@@ -41,6 +41,13 @@
                 android:checked="true"
                 android:text="@string/alphabetical" />
 
+            <com.google.android.material.radiobutton.MaterialRadioButton
+                android:id="@+id/rb_access_date"
+                style="@style/DialogRadioButtonItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/access_date" />
+
         </RadioGroup>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

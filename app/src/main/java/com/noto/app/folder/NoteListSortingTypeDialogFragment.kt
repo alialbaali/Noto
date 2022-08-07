@@ -42,6 +42,7 @@ class NoteListSortingTypeDialogFragment : BaseDialogFragment() {
                         NoteListSortingType.Alphabetical -> rbAlphabetical.isChecked = true
                         NoteListSortingType.CreationDate -> rbCreationDate.isChecked = true
                         NoteListSortingType.Manual -> rbManual.isChecked = true
+                        NoteListSortingType.AccessDate -> rbAccessDate.isChecked = true
                     }
                 }
             }
@@ -57,6 +58,10 @@ class NoteListSortingTypeDialogFragment : BaseDialogFragment() {
 
         rbAlphabetical.setOnClickListener {
             viewModel.updateSortingType(NoteListSortingType.Alphabetical).invokeOnCompletion { dismiss() }
+        }
+
+        rbAccessDate.setOnClickListener {
+            viewModel.updateSortingType(NoteListSortingType.AccessDate).invokeOnCompletion { dismiss() }
         }
     }
 }
