@@ -76,7 +76,7 @@ class AppActivity : BaseActivity() {
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                     if (navController.currentDestination?.id != R.id.mainFragment && viewModel.shouldNavigateToMainFragment) {
                         navController.navigate(R.id.mainFragment)
-                        viewModel.shouldNavigateToMainFragment = false
+                        viewModel.setShouldNavigateToMainFragment(false)
                     }
                 }
                 else -> {

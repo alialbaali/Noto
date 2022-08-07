@@ -54,6 +54,7 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
         .stateIn(viewModelScope, SharingStarted.Eagerly, AllFoldersId)
 
     var shouldNavigateToMainFragment = true
+        private set
 
     val currentIcon = viewModelScope.async { settingsRepository.icon.first() }
 
@@ -76,5 +77,9 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
         folderRepository.getFolders()
             .firstOrNull()
             ?.also { folders -> if (folders.none { it.isGeneral }) folderRepository.createFolder(Folder.GeneralFolder()) }
+    }
+
+    fun setShouldNavigateToMainFragment(value: Boolean) {
+        shouldNavigateToMainFragment = value
     }
 }
