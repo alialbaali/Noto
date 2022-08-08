@@ -49,17 +49,17 @@ class SettingsFragment : Fragment() {
             isTransitionGroup = true
             setContent {
                 Screen(title = stringResource(id = R.string.settings)) {
-                    FirstSection()
-                    SecondSection()
-                    ThirdSection()
-                    ForthSection()
+                    MainSection()
+                    ExportImportSection()
+                    ShareAndRateSection()
+                    AboutSection()
                 }
             }
         }
     }
 
     @Composable
-    private fun FirstSection(modifier: Modifier = Modifier) {
+    private fun MainSection(modifier: Modifier = Modifier) {
         SettingsSection(modifier) {
             SettingsItem(
                 title = stringResource(id = R.string.general),
@@ -94,8 +94,9 @@ class SettingsFragment : Fragment() {
         }
     }
 
+
     @Composable
-    private fun ThirdSection(modifier: Modifier = Modifier) {
+    private fun ShareAndRateSection(modifier: Modifier = Modifier) {
         val shareContentText = stringResource(id = R.string.invite_text)
         val shareText = stringResource(id = R.string.share_with)
         val rateText = stringResource(id = R.string.open_with)
@@ -132,7 +133,7 @@ class SettingsFragment : Fragment() {
     }
 
     @Composable
-    private fun ForthSection(modifier: Modifier = Modifier) {
+    private fun AboutSection(modifier: Modifier = Modifier) {
         SettingsSection(modifier) {
             SettingsItem(
                 title = stringResource(id = R.string.report_issue),
@@ -165,7 +166,7 @@ class SettingsFragment : Fragment() {
     }
 
     @Composable
-    private fun SecondSection(modifier: Modifier = Modifier) {
+    private fun ExportImportSection(modifier: Modifier = Modifier) {
         SettingsSection(modifier) {
             SettingsItem(
                 title = stringResource(id = R.string.export_import_data),
