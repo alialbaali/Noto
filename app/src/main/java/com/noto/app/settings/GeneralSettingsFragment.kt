@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.compose.runtime.*
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
@@ -16,7 +18,7 @@ import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.Theme
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.first
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GeneralSettingsFragment : Fragment() {
@@ -50,7 +52,14 @@ class GeneralSettingsFragment : Fragment() {
                 val allNotesText = stringResource(id = R.string.all_notes)
                 val allFoldersText = stringResource(id = R.string.all_folders)
                 val mainInterfaceId by viewModel.mainInterfaceId.collectAsState()
-                var mainInterfaceText by remember { mutableStateOf(allFoldersText) }
+                val mainInterfaceText by produceState(initialValue = allFoldersText, mainInterfaceId) {
+                    value = when (mainInterfaceId) {
+                        AllNotesItemId -> allNotesText
+                        AllFoldersId -> allFoldersText
+                        RecentNotesItemId -> recentNotesText
+                        else -> viewModel.getFolderById(mainInterfaceId).first().getTitle(context)
+                    }
+                }
                 val theme by viewModel.theme.collectAsState()
                 val themeText = when (theme) {
                     Theme.System -> stringResource(id = R.string.system_dark_theme)
@@ -98,15 +107,6 @@ class GeneralSettingsFragment : Fragment() {
                 val quickNoteFolderTitle by produceState(stringResource(id = R.string.general), quickNoteFolderId) {
                     viewModel.getFolderById(quickNoteFolderId)
                         .collect { value = it.getTitle(context) }
-                }
-
-                LaunchedEffect(key1 = mainInterfaceId) {
-                    mainInterfaceText = when (mainInterfaceId) {
-                        AllNotesItemId -> allNotesText
-                        AllFoldersId -> allFoldersText
-                        RecentNotesItemId -> recentNotesText
-                        else -> viewModel.getFolderById(mainInterfaceId).firstOrNull()?.getTitle(context) ?: ""
-                    }
                 }
 
                 Screen(title = stringResource(id = R.string.general)) {
