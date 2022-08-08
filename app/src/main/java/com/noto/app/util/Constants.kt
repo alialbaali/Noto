@@ -12,7 +12,6 @@ object Constants {
     const val ClickListener = "click_listener"
     const val VaultTimeout = "VaultTimeout"
     const val IsNotParentEnabled = "is_no_parent_enabled"
-    const val MainInterfaceId = ""
     const val IsPasscodeValid = "IsPasscodeValid"
     const val WidgetRadius = "WidgetRadius"
     const val SelectAll = "SelectAll"
