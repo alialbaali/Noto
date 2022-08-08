@@ -139,6 +139,11 @@ class SettingsRepositoryImpl(
         .map { it ?: 0 }
         .flowOn(dispatcher)
 
+    override val quickNoteFolderId: Flow<Long> = storage.data
+        .map { preferences -> preferences[SettingsKeys.QuickNoteFolderId] }
+        .map { it ?: Folder.GeneralFolderId }
+        .flowOn(dispatcher)
+
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
         return storage.data
             .map { preferences -> preferences[SettingsKeys.Widget.FolderId(widgetId)] }
@@ -417,6 +422,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateWidgetFilteringType(widgetId: Int, filteringType: FilteringType) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.Widget.FilteringType(widgetId)] = filteringType.toString() }
+        }
+    }
+
+    override suspend fun updateQuickNoteFolderId(folderId: Long) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.QuickNoteFolderId] = folderId }
         }
     }
 

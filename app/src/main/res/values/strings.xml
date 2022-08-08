@@ -86,6 +86,7 @@
     <string name="font">Font</string>
     <string name="folders_archive">Folders archive</string>
     <string name="main_interface">Main Interface</string>
+    <string name="quick_note_folder">Quick Note Folder</string>
     <string name="general">General</string>
     <string name="all_notes">All notes</string>
     <string name="all_folders">All folders</string>

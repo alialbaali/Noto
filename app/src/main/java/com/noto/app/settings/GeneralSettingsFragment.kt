@@ -16,7 +16,7 @@ import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.Theme
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GeneralSettingsFragment : Fragment() {
@@ -36,7 +36,12 @@ class GeneralSettingsFragment : Fragment() {
 
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Long>(Constants.FolderId)
-            ?.observe(viewLifecycleOwner, viewModel::setMainInterfaceId)
+            ?.observe(viewLifecycleOwner) { id ->
+                when (viewModel.folderIdType) {
+                    FolderIdType.MainInterface -> viewModel.setMainInterfaceId(id)
+                    FolderIdType.QuickNote -> viewModel.setQuickNoteFolderId(id)
+                }
+            }
 
         ComposeView(context).apply {
             isTransitionGroup = true
@@ -89,13 +94,18 @@ class GeneralSettingsFragment : Fragment() {
 
                 val notesCountEnabled by viewModel.isShowNotesCount.collectAsState()
                 val rememberScrollingPositionEnabled by viewModel.isRememberScrollingPosition.collectAsState()
+                val quickNoteFolderId by viewModel.quickNoteFolderId.collectAsState()
+                val quickNoteFolderTitle by produceState(stringResource(id = R.string.general), quickNoteFolderId) {
+                    viewModel.getFolderById(quickNoteFolderId)
+                        .collect { value = it.getTitle(context) }
+                }
 
                 LaunchedEffect(key1 = mainInterfaceId) {
                     mainInterfaceText = when (mainInterfaceId) {
                         AllNotesItemId -> allNotesText
                         AllFoldersId -> allFoldersText
                         RecentNotesItemId -> recentNotesText
-                        else -> viewModel.getFolderById(mainInterfaceId).first().getTitle(context)
+                        else -> viewModel.getFolderById(mainInterfaceId).firstOrNull()?.getTitle(context) ?: ""
                     }
                 }
 
@@ -105,11 +115,26 @@ class GeneralSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.main_interface),
                             type = SettingsItemType.Text(mainInterfaceText),
                             onClick = {
+                                viewModel.setFolderIdType(FolderIdType.MainInterface)
                                 navController?.navigateSafely(
                                     GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToSelectFolderDialogFragment(
                                         longArrayOf(),
                                         selectedFolderId = mainInterfaceId,
-                                        isMainInterface = true
+                                        isMainInterface = true,
+                                    )
+                                )
+                            },
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.quick_note_folder),
+                            type = SettingsItemType.Text(quickNoteFolderTitle),
+                            onClick = {
+                                viewModel.setFolderIdType(FolderIdType.QuickNote)
+                                navController?.navigateSafely(
+                                    GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToSelectFolderDialogFragment(
+                                        longArrayOf(),
+                                        selectedFolderId = quickNoteFolderId,
                                     )
                                 )
                             },

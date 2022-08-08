@@ -47,6 +47,8 @@ interface SettingsRepository {
 
     val recentNotesScrollingPosition: Flow<Int>
 
+    val quickNoteFolderId: Flow<Long>
+
     fun getWidgetFolderId(widgetId: Int): Flow<Long>
 
     fun getIsWidgetCreated(widgetId: Int): Flow<Boolean>
@@ -128,4 +130,6 @@ interface SettingsRepository {
     suspend fun updateWidgetSelectedLabelIds(widgetId: Int, folderId: Long, labelIds: List<Long>)
 
     suspend fun updateWidgetFilteringType(widgetId: Int, filteringType: FilteringType)
+
+    suspend fun updateQuickNoteFolderId(folderId: Long)
 }

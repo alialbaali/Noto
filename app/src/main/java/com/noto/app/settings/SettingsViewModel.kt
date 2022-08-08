@@ -14,6 +14,10 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 
+enum class FolderIdType {
+    MainInterface, QuickNote,
+}
+
 class SettingsViewModel(
     private val folderRepository: FolderRepository,
     private val noteRepository: NoteRepository,
@@ -63,6 +67,12 @@ class SettingsViewModel(
 
     private val mutableIsImportFinished = MutableSharedFlow<Unit>(replay = Int.MAX_VALUE)
     val isImportFinished get() = mutableIsImportFinished.asSharedFlow()
+
+    val quickNoteFolderId = settingsRepository.quickNoteFolderId
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.GeneralFolderId)
+
+    var folderIdType = FolderIdType.MainInterface
+        private set
 
     fun toggleShowNotesCount() = viewModelScope.launch {
         settingsRepository.updateIsShowNotesCount(!isShowNotesCount.value)
@@ -171,4 +181,12 @@ class SettingsViewModel(
     }
 
     fun getFolderById(folderId: Long) = folderRepository.getFolderById(folderId)
+
+    fun setQuickNoteFolderId(folderId: Long) = viewModelScope.launch {
+        settingsRepository.updateQuickNoteFolderId(folderId)
+    }
+
+    fun setFolderIdType(type: FolderIdType) {
+        folderIdType = type
+    }
 }
