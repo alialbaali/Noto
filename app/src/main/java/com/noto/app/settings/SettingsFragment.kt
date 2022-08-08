@@ -7,11 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.noto.app.R
 import com.noto.app.components.Screen
@@ -23,6 +29,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val PlayStoreUrl = "https://play.google.com/store/apps/details?id=com.noto"
 private const val GithubIssueUrl = "https://github.com/alialbaali/Noto/issues/new"
+private const val BuyMeACoffeeUrl = "https://www.buymeacoffee.com/alialbaali"
 
 class SettingsFragment : Fragment() {
 
@@ -53,6 +60,8 @@ class SettingsFragment : Fragment() {
                     ExportImportSection()
                     ShareAndRateSection()
                     AboutSection()
+                    Spacer(modifier = Modifier.weight(1F))
+                    BuyMeACoffeeImage()
                 }
             }
         }
@@ -177,5 +186,22 @@ class SettingsFragment : Fragment() {
                 painter = painterResource(id = R.drawable.ic_round_import_export_24),
             )
         }
+    }
+
+    @Composable
+    private fun BuyMeACoffeeImage(modifier: Modifier = Modifier) {
+        val openWithText = stringResource(id = R.string.open_with)
+        Image(
+            painter = painterResource(id = R.drawable.ic_bmc_button),
+            contentDescription = stringResource(id = R.string.buy_me_a_coffee),
+            modifier = modifier
+                .height(50.dp)
+                .fillMaxWidth(0.5F)
+                .clickable {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BuyMeACoffeeUrl))
+                    val chooser = Intent.createChooser(intent, openWithText)
+                    startActivity(chooser)
+                },
+        )
     }
 }
