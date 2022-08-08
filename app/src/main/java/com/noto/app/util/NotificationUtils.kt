@@ -71,6 +71,7 @@ private fun Context.createVaultNotificationPendingIntent(): PendingIntent? {
     return NavDeepLinkBuilder(this)
         .setGraph(R.navigation.nav_graph)
         .setDestination(R.id.mainVaultFragment)
+        .setComponentName(enabledComponentName)
         .createTaskStackBuilder()
         .getPendingIntent(RequestCode, PendingIntentFlags)
 }
@@ -83,6 +84,7 @@ private fun Context.createNotificationPendingIntent(noteId: Long, folderId: Long
         .setGraph(R.navigation.nav_graph)
         .setDestination(R.id.noteFragment)
         .setArguments(args)
+        .setComponentName(enabledComponentName)
         .createTaskStackBuilder()
         .getPendingIntent(RequestCode, PendingIntentFlags)
 }
