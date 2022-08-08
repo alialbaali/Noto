@@ -18,6 +18,7 @@ import com.noto.app.receiver.VaultReceiver
 
 private const val RemindersChannelId = "Reminders"
 private const val VaultChannelId = "Vault"
+private const val QuickNoteChannelId = "Quick Note"
 private const val VaultNotificationId = -1
 private const val RequestCode = 0
 
@@ -67,6 +68,27 @@ fun NotificationManager.createVaultNotification(context: Context) {
     notify(VaultNotificationId, notification)
 }
 
+fun NotificationManager.createQuickNoteNotification(context: Context, folder: Folder, note: Note, icon: Icon?) {
+
+    val pendingIntent = context.createNotificationPendingIntent(note.id, note.folderId)
+
+    val notification = NotificationCompat.Builder(context, QuickNoteChannelId)
+        .setContentTitle(context.stringResource(R.string.note_is_saved, folder.getTitle(context)))
+        .setContentIntent(pendingIntent)
+        .setSubText(folder.getTitle(context))
+        .setColor(context.colorResource(folder.color.toResource()))
+        .setColorized(true)
+        .setCategory(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) Notification.CATEGORY_STATUS else null)
+        .setSmallIcon(icon?.toResource() ?: R.mipmap.ic_launcher_futuristic)
+        .setPriority(NotificationCompat.PRIORITY_HIGH)
+        .setAutoCancel(true)
+        .setGroup(folder.getTitle(context))
+        .setGroupSummary(true)
+        .build()
+
+    notify(folder.getTitle(context), note.id.toInt(), notification)
+}
+
 private fun Context.createVaultNotificationPendingIntent(): PendingIntent? {
     return NavDeepLinkBuilder(this)
         .setGraph(R.navigation.nav_graph)
@@ -94,6 +116,8 @@ fun NotificationManager.createNotificationChannels(context: Context) {
         NotificationChannel(RemindersChannelId, context.stringResource(R.string.reminders), NotificationManager.IMPORTANCE_HIGH)
             .also(this::createNotificationChannel)
         NotificationChannel(VaultChannelId, context.stringResource(R.string.vault), NotificationManager.IMPORTANCE_LOW)
+            .also(this::createNotificationChannel)
+        NotificationChannel(QuickNoteChannelId, context.stringResource(R.string.quick_note), NotificationManager.IMPORTANCE_HIGH)
             .also(this::createNotificationChannel)
     }
 }

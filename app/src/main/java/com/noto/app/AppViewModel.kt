@@ -2,14 +2,14 @@ package com.noto.app
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.Folder
-import com.noto.app.domain.model.Icon
-import com.noto.app.domain.model.Language
-import com.noto.app.domain.model.VaultTimeout
+import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.FolderRepository
+import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.AllFoldersId
+import com.noto.app.util.firstLineOrEmpty
 import com.noto.app.util.isGeneral
+import com.noto.app.util.takeAfterFirstLineOrEmpty
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -19,7 +19,11 @@ import kotlinx.coroutines.launch
  * a value, it will re-emit every value to every flow that uses [Flow.shareIn].
  * */
 
-class AppViewModel(private val folderRepository: FolderRepository, private val settingsRepository: SettingsRepository) : ViewModel() {
+class AppViewModel(
+    private val folderRepository: FolderRepository,
+    private val noteRepository: NoteRepository,
+    private val settingsRepository: SettingsRepository,
+) : ViewModel() {
 
     val theme = settingsRepository.theme
         .distinctUntilChanged()
@@ -81,5 +85,15 @@ class AppViewModel(private val folderRepository: FolderRepository, private val s
 
     fun setShouldNavigateToMainFragment(value: Boolean) {
         shouldNavigateToMainFragment = value
+    }
+
+    fun createQuickNote(content: String, onSuccess: (Folder, Note) -> Unit) = viewModelScope.launch {
+        val title = content.firstLineOrEmpty()
+        val body = content.takeAfterFirstLineOrEmpty()
+        val folderId = settingsRepository.quickNoteFolderId.first()
+        val note = Note(folderId = folderId, title = title, body = body, position = 0)
+        val noteId = noteRepository.createNote(note)
+        val folder = folderRepository.getFolderById(folderId).first()
+        onSuccess(folder, note.copy(id = noteId))
     }
 }

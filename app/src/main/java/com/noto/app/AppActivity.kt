@@ -27,7 +27,6 @@ import java.util.concurrent.TimeUnit
 
 private val AppIntents = listOf(
     Intent.ACTION_SEND,
-    Intent.ACTION_PROCESS_TEXT,
     Constants.Intent.ActionCreateFolder,
     Constants.Intent.ActionCreateNote,
     Constants.Intent.ActionOpenFolder,
@@ -93,10 +92,6 @@ class AppActivity : BaseActivity() {
         when (intent?.action) {
             Intent.ACTION_SEND -> {
                 val content = intent.getStringExtra(Intent.EXTRA_TEXT)
-                showSelectFolderDialog(content)
-            }
-            Intent.ACTION_PROCESS_TEXT -> {
-                val content = intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT)?.toString()
                 showSelectFolderDialog(content)
             }
             Constants.Intent.ActionCreateFolder -> {

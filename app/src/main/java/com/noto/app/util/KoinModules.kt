@@ -36,7 +36,7 @@ val appModule = module {
 
     viewModel { NoteViewModel(get(), get(), get(), get(), get(), it[0], it[1], it.getOrNull(), it.getOrNull() ?: longArrayOf()) }
 
-    viewModel { AppViewModel(get(), get()) }
+    viewModel { AppViewModel(get(), get(), get()) }
 
     viewModel { SettingsViewModel(get(), get(), get(), get(), get()) }
 

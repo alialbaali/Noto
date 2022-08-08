@@ -32,15 +32,22 @@
                 <data android:mimeType="text/*" />
             </intent-filter>
 
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+
+        </activity>
+
+        <activity
+            android:name=".TransparentActivity"
+            android:theme="@style/TransparentTheme"
+            android:exported="true">
+
             <intent-filter android:label="@string/save_to_noto">
                 <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/*" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
 
         </activity>
 
@@ -59,12 +66,6 @@
 
             <intent-filter android:label="@string/save_to_noto">
                 <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-            </intent-filter>
-
-            <intent-filter android:label="@string/save_to_noto">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/*" />
             </intent-filter>
@@ -94,12 +95,6 @@
                 <data android:mimeType="text/*" />
             </intent-filter>
 
-            <intent-filter android:label="@string/save_to_noto">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-            </intent-filter>
-
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts_dark_rain" />
@@ -121,12 +116,6 @@
 
             <intent-filter android:label="@string/save_to_noto">
                 <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-            </intent-filter>
-
-            <intent-filter android:label="@string/save_to_noto">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/*" />
             </intent-filter>
@@ -156,12 +145,6 @@
                 <data android:mimeType="text/*" />
             </intent-filter>
 
-            <intent-filter android:label="@string/save_to_noto">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-            </intent-filter>
-
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts_blossom_ice" />
@@ -183,12 +166,6 @@
 
             <intent-filter android:label="@string/save_to_noto">
                 <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-            </intent-filter>
-
-            <intent-filter android:label="@string/save_to_noto">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/*" />
             </intent-filter>
@@ -218,12 +195,6 @@
                 <data android:mimeType="text/*" />
             </intent-filter>
 
-            <intent-filter android:label="@string/save_to_noto">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-            </intent-filter>
-
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts_dark_side" />
@@ -245,12 +216,6 @@
 
             <intent-filter android:label="@string/save_to_noto">
                 <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-            </intent-filter>
-
-            <intent-filter android:label="@string/save_to_noto">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/*" />
             </intent-filter>
@@ -280,12 +245,6 @@
                 <data android:mimeType="text/*" />
             </intent-filter>
 
-            <intent-filter android:label="@string/save_to_noto">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-            </intent-filter>
-
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts_fire" />
@@ -311,12 +270,6 @@
                 <data android:mimeType="text/*" />
             </intent-filter>
 
-            <intent-filter android:label="@string/save_to_noto">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-            </intent-filter>
-
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts_purpleberry" />
@@ -338,12 +291,6 @@
 
             <intent-filter android:label="@string/save_to_noto">
                 <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/*" />
-            </intent-filter>
-
-            <intent-filter android:label="@string/save_to_noto">
-                <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/*" />
             </intent-filter>

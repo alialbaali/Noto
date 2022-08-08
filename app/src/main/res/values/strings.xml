@@ -87,6 +87,7 @@
     <string name="folders_archive">Folders archive</string>
     <string name="main_interface">Main Interface</string>
     <string name="quick_note_folder">Quick Note Folder</string>
+    <string name="quick_note">Quick Note</string>
     <string name="general">General</string>
     <string name="all_notes">All notes</string>
     <string name="all_folders">All folders</string>
@@ -228,6 +229,7 @@
     <string name="grouping_type">Grouping type</string>
     <string name="grouping_order">Grouping order</string>
     <string name="save_to_noto">Save to Noto</string>
+    <string name="note_is_saved">Note has been saved to %s.</string>
     <string name="no_notes_found">No notes found.</string>
     <string name="notes">Notes</string>
     <string name="notes_are_merged">%d Notes have been merged into new note.</string>
