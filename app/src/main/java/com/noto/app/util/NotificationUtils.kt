@@ -21,6 +21,7 @@ private const val VaultChannelId = "Vault"
 private const val QuickNoteChannelId = "Quick Note"
 private const val VaultNotificationId = -1
 private const val RequestCode = 0
+private const val QuickNoteTimeout = 5000L
 
 fun NotificationManager.createNotification(context: Context, folder: Folder, note: Note, icon: Icon?) {
 
@@ -81,6 +82,9 @@ fun NotificationManager.createQuickNoteNotification(context: Context, folder: Fo
         .setCategory(Notification.CATEGORY_STATUS)
         .setSmallIcon(icon?.toResource() ?: R.mipmap.ic_launcher_futuristic)
         .setPriority(NotificationCompat.PRIORITY_HIGH)
+        .setVibrate(null)
+        .setSound(null)
+        .setTimeoutAfter(QuickNoteTimeout)
         .setAutoCancel(true)
         .setGroup(folder.getTitle(context))
         .setGroupSummary(true)
@@ -118,6 +122,11 @@ fun NotificationManager.createNotificationChannels(context: Context) {
         NotificationChannel(VaultChannelId, context.stringResource(R.string.vault), NotificationManager.IMPORTANCE_LOW)
             .also(this::createNotificationChannel)
         NotificationChannel(QuickNoteChannelId, context.stringResource(R.string.quick_note), NotificationManager.IMPORTANCE_HIGH)
+            .apply {
+                enableVibration(false)
+                enableLights(false)
+                setSound(null, null)
+            }
             .also(this::createNotificationChannel)
     }
 }
