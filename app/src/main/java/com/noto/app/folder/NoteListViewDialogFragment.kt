@@ -38,7 +38,7 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                     val colorStateList = color.toColorStateList()
                     tb.tvDialogTitle.setTextColor(color)
                     tb.vHead.background?.mutate()?.setTint(color)
-                    listOf(tvGrouping, tvSortingType, tvSortingOrder).onEach { tv ->
+                    listOf(tvGrouping, tvGroupingOrder, tvSortingType, tvSortingOrder).onEach { tv ->
                         tv.background.setRippleColor(colorStateList)
                     }
                 }
