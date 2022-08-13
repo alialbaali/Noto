@@ -74,7 +74,7 @@ fun SettingsItem(
                 onCheckedChange = null,
                 modifier = Modifier.height(24.dp),
             )
-            is SettingsItemType.Icon -> Icon(type.painter, title, tint = Color.Unspecified)
+            is SettingsItemType.Icon -> Icon(type.painter, title, Modifier.size(24.dp), Color.Unspecified)
         }
     }
 }
