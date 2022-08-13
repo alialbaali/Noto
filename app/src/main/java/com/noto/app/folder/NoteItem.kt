@@ -1,9 +1,11 @@
 package com.noto.app.folder
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.graphics.Typeface
 import android.text.Spannable
-import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
@@ -83,17 +85,16 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
             val colorResource = context.colorResource(color.toResource())
-            val isBlack = color == NotoColor.Black
             ll.background?.setRippleColor(colorResource.toColorStateList())
             tvNoteTitle.setLinkTextColor(colorResource)
             tvNoteBody.setLinkTextColor(colorResource)
-            tvNoteTitle.text = model.note.title.highlightText(colorResource, isBlack)
+            tvNoteTitle.text = model.note.title.highlightText(colorResource, context)
             if (model.note.title.isBlank() && previewSize == 0) {
-                tvNoteBody.text = model.note.body.takeLines(1).highlightText(colorResource, isBlack)
+                tvNoteBody.text = model.note.body.takeLines(1).highlightText(colorResource, context)
                 tvNoteBody.maxLines = 1
                 tvNoteBody.isVisible = true
             } else {
-                tvNoteBody.text = model.note.body.takeLines(previewSize).highlightText(colorResource, isBlack)
+                tvNoteBody.text = model.note.body.takeLines(previewSize).highlightText(colorResource, context)
                 tvNoteBody.isVisible = previewSize != 0 && model.note.body.isNotBlank()
                 if (isPreview) {
                     tvNoteTitle.maxLines = 3
@@ -204,16 +205,20 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         }
     }
 
-    private fun String.highlightText(color: Int, isBlack: Boolean): Spannable {
+    private fun String.highlightText(color: Int, context: Context): Spannable {
         return this.toSpannable().apply {
             val startIndex = this.indexOf(searchTerm, ignoreCase = true)
             val endIndex = startIndex + searchTerm.length
-            val colorSpan = if (isBlack)
-                BackgroundColorSpan(color.withDefaultAlpha())
-            else
-                ForegroundColorSpan(color)
-            if (startIndex != -1)
+            val colorSpan = ForegroundColorSpan(color)
+            val boldFontSpan = context.tryLoadingFontResource(R.font.nunito_black)?.style?.let(::StyleSpan)
+            val boldSpan = StyleSpan(Typeface.BOLD)
+            if (startIndex != -1) {
                 setSpan(colorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                setSpan(boldSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                if (boldFontSpan != null) {
+                    setSpan(boldFontSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
+            }
         }
     }
 
