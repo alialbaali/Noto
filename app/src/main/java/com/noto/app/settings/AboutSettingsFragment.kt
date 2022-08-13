@@ -27,6 +27,8 @@ private const val LicenseWebsite = "https://www.apache.org/licenses/LICENSE-2.0"
 private const val GithubUrl = "https://github.com/alialbaali/Noto"
 private const val RedditUrl = "https://reddit.com/r/notoapp"
 private const val TranslationInviteUrl = "https://crwd.in/notoapp"
+private const val BuyMeACoffeeUrl = "https://www.buymeacoffee.com/alialbaali"
+private const val BecomeAPatronUrl = "https://www.patreon.com/alialbaali"
 
 class AboutSettingsFragment : Fragment() {
 
@@ -64,6 +66,24 @@ class AboutSettingsFragment : Fragment() {
                             type = SettingsItemType.Text(stringResource(id = R.string.developer_name)),
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DeveloperWebsite))
+                                startActivity(intent)
+                            },
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.buy_me_a_coffee),
+                            type = SettingsItemType.Icon(painterResource(id = R.drawable.ic_bmc_logo)),
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BuyMeACoffeeUrl))
+                                startActivity(intent)
+                            },
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.become_a_patron),
+                            type = SettingsItemType.Icon(painterResource(id = R.drawable.patreon_logo)),
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BecomeAPatronUrl))
                                 startActivity(intent)
                             },
                         )

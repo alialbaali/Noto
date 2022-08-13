@@ -18,6 +18,7 @@ import android.text.style.URLSpan
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
@@ -40,6 +41,7 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.android.material.tabs.TabLayout
 import com.noto.app.R
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
@@ -401,4 +403,14 @@ fun EditTextWithSelectionChangedListener.textSelectionAsFlow() = callbackFlow {
     val listener: (String?) -> Unit = { selectedText -> trySend(selectedText) }
     setOnSelectionChangedListener(listener)
     awaitClose { setOnSelectionChangedListener(null) }
+}
+
+fun TabLayout.applyEqualWeightForTabs() {
+    val viewGroup = getChildAt(0) as ViewGroup?
+    for (index in 0 until tabCount) {
+        val tab = viewGroup?.getChildAt(index)
+        val layoutParams = tab?.layoutParams as? LinearLayout.LayoutParams
+        layoutParams?.weight = 1F
+        tab?.layoutParams = layoutParams
+    }
 }

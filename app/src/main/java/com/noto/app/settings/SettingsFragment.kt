@@ -12,13 +12,17 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
+import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.Screen
 import com.noto.app.util.Constants
@@ -190,18 +194,18 @@ class SettingsFragment : Fragment() {
 
     @Composable
     private fun BuyMeACoffeeImage(modifier: Modifier = Modifier) {
-        val openWithText = stringResource(id = R.string.open_with)
         Image(
-            painter = painterResource(id = R.drawable.ic_bmc_button),
+            painter = painterResource(id = R.drawable.ic_bmc_full_logo),
             contentDescription = stringResource(id = R.string.buy_me_a_coffee),
             modifier = modifier
-                .height(50.dp)
-                .fillMaxWidth(0.5F)
+                .clip(MaterialTheme.shapes.small)
                 .clickable {
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BuyMeACoffeeUrl))
-                    val chooser = Intent.createChooser(intent, openWithText)
-                    startActivity(chooser)
-                },
+                    startActivity(intent)
+                }
+                .padding(NotoTheme.dimensions.medium)
+                .height(30.dp)
+                .fillMaxWidth(),
         )
     }
 }
