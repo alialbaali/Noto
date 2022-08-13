@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.noto.app.NotoTheme
 
@@ -65,7 +66,7 @@ fun SettingsItem(
             is SettingsItemType.None -> {}
             is SettingsItemType.Text -> Text(
                 text = type.value,
-                style = MaterialTheme.typography.bodySmall,
+                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
                 modifier = Modifier.weight(1F, fill = false),
             )
             is SettingsItemType.Switch -> Switch(
