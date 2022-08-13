@@ -329,6 +329,7 @@
 
     <!-- Language -->
     <string name="language">Language</string>
+    <string name="translate_noto">Translate Noto</string>
     <string name="change_language">Change language</string>
     <string name="system_language">System language</string>
     <string name="english">English</string>

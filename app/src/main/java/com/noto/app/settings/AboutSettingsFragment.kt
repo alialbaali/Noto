@@ -26,6 +26,7 @@ private const val DeveloperWebsite = "https://www.alialbaali.com"
 private const val LicenseWebsite = "https://www.apache.org/licenses/LICENSE-2.0"
 private const val GithubUrl = "https://github.com/alialbaali/Noto"
 private const val RedditUrl = "https://reddit.com/r/notoapp"
+private const val TranslationInviteUrl = "https://crwd.in/notoapp"
 
 class AboutSettingsFragment : Fragment() {
 
@@ -69,6 +70,15 @@ class AboutSettingsFragment : Fragment() {
                     }
 
                     SettingsSection {
+                        SettingsItem(
+                            title = stringResource(id = R.string.translate_noto),
+                            type = SettingsItemType.None,
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TranslationInviteUrl))
+                                startActivity(intent)
+                            }
+                        )
+
                         SettingsItem(
                             title = stringResource(id = R.string.translations),
                             type = SettingsItemType.None,
