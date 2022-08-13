@@ -5,7 +5,8 @@
     <string name="done">Done</string>
     <string name="okay">Okay</string>
     <string name="search">Search</string>
-    <string name="buy_me_a_coffee">Buy Me a Coffee</string>
+    <string name="buy_me_a_coffee">Buy me a coffee</string>
+    <string name="become_a_patron">Become a patron</string>
     <!-- More options for folder, note, etc -->
     <string name="more_options">More options</string>
     <string name="options">Options</string>
@@ -33,16 +34,16 @@
     <string name="ascending">Ascending</string>
     <string name="settings">Settings</string>
     <string name="view_code">View Source Code on GitHub</string>
-    <string name="source_code">Source Code</string>
+    <string name="source_code">Source code</string>
     <string name="join_community">Join Community on Reddit</string>
-    <string name="reddit_community">Reddit Community</string>
-    <string name="notes_font">Notes Font</string>
-    <string name="share_app_with_others">Share Noto with Others</string>
+    <string name="reddit_community">Reddit community</string>
+    <string name="notes_font">Notes font</string>
+    <string name="share_app_with_others">Share Noto with others</string>
     <string name="rate_app_on_play_store">Rate Noto on Play Store</string>
-    <string name="report_issue">Report an Issue</string>
+    <string name="report_issue">Report an issue</string>
     <string name="about">About</string>
     <string name="about_noto">About Noto</string>
-    <string name="whats_new">What\'s New</string>
+    <string name="whats_new">What\'s new</string>
     <string name="about_message">Noto is developed and maintained by <a href="https://www.alialbaali.com/">Ali Albaali</a>.
         \n\nThe app is distributed under the terms of the <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.
         App icons use <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> published
@@ -51,7 +52,7 @@
         <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a>, and Uli N for Turkish, Spanish, French, and German localizations respectively,
         and everyone who has helped and contributed in the development.</string>
     <!--    <string name="share_with">Share with</string>-->
-    <string name="export_import_data">Export/Import Data</string>
+    <string name="export_import_data">Export/Import data</string>
     <string name="exporting_failed">Failed to export the data.</string>
     <string name="importing_failed">Failed to import the data.</string>
     <string name="data_is_exported">Data has been exported to %s</string>
@@ -86,8 +87,8 @@
     <string name="monospace">Monospace</string>
     <string name="font">Font</string>
     <string name="folders_archive">Folders archive</string>
-    <string name="main_interface">Main Interface</string>
-    <string name="quick_note_folder">Quick Note Folder</string>
+    <string name="main_interface">Main interface</string>
+    <string name="quick_note_folder">Quick note folder</string>
     <string name="quick_note">Quick Note</string>
     <string name="general">General</string>
     <string name="all_notes">All notes</string>
@@ -159,7 +160,7 @@
     <string name="vault_passcode">Vault passcode</string>
     <string name="current_vault_passcode">Current vault passcode</string>
     <string name="new_vault_passcode">New vault passcode</string>
-    <string name="change_passcode">Change Passcode</string>
+    <string name="change_passcode">Change passcode</string>
     <string name="timeout">Timeout</string>
     <string name="vault_timeout">Vault Timeout</string>
     <string name="invalid_passcode">Invalid passcode</string>
@@ -179,7 +180,7 @@
     <string name="after_4_hours">After 4 hours</string>
     <string name="after_12_hours">After 12 hours</string>
     <string name="close_vault">Close vault</string>
-    <string name="bio_auth">Biometric Authentication</string>
+    <string name="bio_auth">Enable biometric authentication</string>
     <string name="use_passcode">Use passcode</string>
 
     <!-- Note -->
@@ -290,12 +291,12 @@
     </plurals>
     <string name="note_preview_size">Note preview size</string>
     <string name="show_note_creation_date">Show note creation date</string>
-    <string name="notes_count">Notes Count</string>
-    <string name="remember_scrolling_position">Remember Scrolling Position</string>
+    <string name="show_notes_count">Show notes count</string>
+    <string name="remember_scrolling_position">Remember scrolling position</string>
     <string name="do_not_disturb_summary">Enable Do Not Disturb during Reading Mode</string>
     <string name="do_not_disturb">Do Not Disturb</string>
-    <string name="keep_screen_on">Keep Screen on</string>
-    <string name="full_screen">Go Full Screen</string>
+    <string name="keep_screen_on">Keep screen on</string>
+    <string name="full_screen">Go full screen</string>
     <string name="show">Show</string>
     <string name="hide">Hide</string>
     <string name="permission_not_granted">Permission hasn\'t been granted</string>

@@ -168,7 +168,7 @@ class GeneralSettingsFragment : Fragment() {
                         )
 
                         SettingsItem(
-                            title = stringResource(id = R.string.notes_count),
+                            title = stringResource(id = R.string.show_notes_count),
                             type = SettingsItemType.Switch(notesCountEnabled),
                             onClick = { viewModel.toggleShowNotesCount() }
                         )
