@@ -5,10 +5,13 @@
     <string name="done">Done</string>
     <string name="okay">Okay</string>
     <string name="search">Search</string>
+    <!-- A way to support the project. -->
     <string name="buy_me_a_coffee">Buy me a coffee</string>
+    <!-- A way to support the project. -->
     <string name="become_a_patron">Become a patron</string>
-    <!-- More options for folder, note, etc -->
+    <!-- More options for folder, note, etc... -->
     <string name="more_options">More options</string>
+    <!-- Options for multi-selected notes. -->
     <string name="options">Options</string>
     <string name="back">Back</string>
     <string name="folder_layout">Folder layout</string>
@@ -24,6 +27,7 @@
     <string name="accessed">Accessed %s</string>
     <string name="alphabetical">Alphabetical</string>
     <string name="alphabetical_sorting">Alphabetical sorting</string>
+    <!-- Sorting/Grouping notes by access date. -->
     <string name="access_date">Access date</string>
     <string name="creation_date">Creation date</string>
     <string name="creation_date_sorting">Creation date sorting</string>
@@ -34,9 +38,12 @@
     <string name="ascending">Ascending</string>
     <string name="settings">Settings</string>
     <string name="view_code">View Source Code on GitHub</string>
+    <!-- The link of the source code of the project. -->
     <string name="source_code">Source code</string>
     <string name="join_community">Join Community on Reddit</string>
+    <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Reddit community</string>
+    <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Notes font</string>
     <string name="share_app_with_others">Share Noto with others</string>
     <string name="rate_app_on_play_store">Rate Noto on Play Store</string>
@@ -68,15 +75,21 @@
     <string name="open_with">Open with</string>
     <string name="invite_text">Check out Noto!</string>
     <string name="version">Version</string>
+    <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">Version has been copied to clipboard.</string>
+    <!-- Me -->
     <string name="developer">Developer</string>
+    <!-- Creator of app icons. -->
     <string name="creator">Creator</string>
+    <!-- Translator of a language. -->
     <string name="translator">Translator</string>
+    <!-- Proofreader of a language. -->
     <string name="proofreader">Proofreader</string>
     <string name="creator_name" translatable="false">Geoffrey Crofte</string>
     <string name="app_icons">App Icons</string>
     <string name="app_icons_value" translatable="false">Collections of Gradients</string>
     <string name="developer_name" translatable="false">Ali Albaali</string>
+    <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">License</string>
     <string name="license_value" translatable="false">Apache License 2.0</string>
     <string name="app_icons_license_value" translatable="false">CC BY 4.0</string>
@@ -87,8 +100,11 @@
     <string name="monospace">Monospace</string>
     <string name="font">Font</string>
     <string name="folders_archive">Folders archive</string>
+    <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">Main interface</string>
+    <!-- The default folder of "Save to Noto" text selection option. -->
     <string name="quick_note_folder">Quick note folder</string>
+    <!-- AKA "Save to Noto". -->
     <string name="quick_note">Quick Note</string>
     <string name="general">General</string>
     <string name="all_notes">All notes</string>
@@ -100,20 +116,26 @@
     <string name="no_parent">No parent</string>
     <string name="parent_folder">Parent folder</string>
     <string name="new_note_cursor_position">New note cursor position</string>
+    <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
     <string name="open_notes_in">Open notes in</string>
     <string name="archive">Archive</string>
-    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive -->
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
     <string name="folder_archive">%s archive</string>
     <string name="unarchive">Unarchive</string>
     <string name="edit">Edit</string>
     <string name="pin">Pin</string>
+    <!-- Merge multiple notes into a new note. -->
     <string name="merge">Merge</string>
     <string name="unpin">Unpin</string>
     <string name="delete">Delete</string>
     <string name="just_now">just now</string>
+    <!--Select a note. -->
     <string name="select">Select</string>
+    <!--Select all notes. -->
     <string name="select_all">Select all</string>
+    <!-- List of translations. -->
     <string name="translations">Translations</string>
+    <!-- List of credits. -->
     <string name="credits">Credits</string>
 
     <!-- Folder -->
@@ -160,7 +182,9 @@
     <string name="vault_passcode">Vault passcode</string>
     <string name="current_vault_passcode">Current vault passcode</string>
     <string name="new_vault_passcode">New vault passcode</string>
+    <!-- Change vault passcode option. -->
     <string name="change_passcode">Change passcode</string>
+    <!-- Vault timeout. -->
     <string name="timeout">Timeout</string>
     <string name="vault_timeout">Vault Timeout</string>
     <string name="invalid_passcode">Invalid passcode</string>
@@ -180,6 +204,7 @@
     <string name="after_4_hours">After 4 hours</string>
     <string name="after_12_hours">After 12 hours</string>
     <string name="close_vault">Close vault</string>
+    <!-- Enabling biometric authentication for the app. -->
     <string name="bio_auth">Enable biometric authentication</string>
     <string name="use_passcode">Use passcode</string>
 
@@ -191,14 +216,23 @@
         <item quantity="one">%d Note</item>
         <item quantity="other">%d Notes</item>
     </plurals>
+    <!-- Filtered notes count is shown when a label is selected, or text is searched.
+         Such as "30 Notes • 5 Filtered".
+     -->
     <plurals name="notes_filtered_count">
         <item quantity="one">%1$d Note • %2$d Filtered</item>
         <item quantity="other">%1$d Notes • %2$d Filtered</item>
     </plurals>
+    <!-- Selected notes count is shown when a note or multiple notes are selected.
+         Such as "30 Notes • 5 Selected".
+     -->
     <plurals name="notes_selected_count">
         <item quantity="one">%1$d Note • %2$d Selected</item>
         <item quantity="other">%1$d Notes • %2$d Selected</item>
     </plurals>
+    <!--  Filtered notes count is shown when a label is selected, or text is searched. Selected notes count is shown when a note or multiple notes are selected.
+          Such as, "30 Notes • 3 Filtered • 8 Selected".
+     -->
     <plurals name="notes_filtered_selected_count">
         <item quantity="one">%1$d Note • %2$d Filtered • %3$d Selected</item>
         <item quantity="other">%1$d Notes • %2$d Filtered • %3$d Selected</item>
@@ -207,12 +241,14 @@
         <item quantity="one">%d Word</item>
         <item quantity="other">%d Words</item>
     </plurals>
+    <!-- Selected words count is shown when text is selected in a note. -->
     <plurals name="words_selected_count">
         <item quantity="one">%1$d Word • %2$d Selected</item>
         <item quantity="other">%1$d Words • %2$d Selected</item>
     </plurals>
     <string name="body">Body</string>
     <string name="title">Title</string>
+    <!-- Note's editor, opposite of Reading Mode. -->
     <string name="editor">Editor</string>
     <string name="create_note">Create note</string>
     <plurals name="delete_note">
@@ -231,18 +267,22 @@
     <string name="grouping_type">Grouping type</string>
     <string name="grouping_order">Grouping order</string>
     <string name="save_to_noto">Save to Noto</string>
+    <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">Note has been saved to %s.</string>
     <string name="no_notes_found">No notes found.</string>
     <string name="notes">Notes</string>
+    <!-- The count of the selected notes that have been merged. -->
     <string name="notes_are_merged">%d Notes have been merged into new note.</string>
     <plurals name="note_is_archived">
         <item quantity="one">Note has been archived.</item>
         <item quantity="other">%d Notes have been archived.</item>
     </plurals>
+    <!-- The count of the selected notes that have been pinned. -->
     <plurals name="note_is_pinned">
         <item quantity="one">Note has been pinned.</item>
         <item quantity="other">%d Notes have been pinned.</item>
     </plurals>
+    <!-- The count of the selected notes that have been unpinned. -->
     <plurals name="note_is_unpinned">
         <item quantity="one">Note has been unpinned.</item>
         <item quantity="other">%d Notes have been unpinned.</item>
@@ -254,10 +294,12 @@
     <string name="new_note_reminder">New reminder</string>
     <string name="copy">Copy</string>
     <string name="copy_to">Copy to…</string>
+    <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="one">Note has been copied to %s.</item>
         <item quantity="other">%d Notes have been copied to %s.</item>
     </plurals>
+    <!-- The count of the selected notes that have been copied to clipboard. -->
     <plurals name="note_copied_to_clipboard">
         <item quantity="one">Note has been copied to clipboard.</item>
         <item quantity="other">%d Notes have been copied to clipboard.</item>
@@ -276,25 +318,30 @@
     <string name="reading_mode">Reading Mode</string>
     <string name="edit_note_reminder">Edit reminder</string>
     <string name="note_options">Note options</string>
+    <!-- The count of the selected notes that have been deleted. -->
     <plurals name="note_is_deleted">
         <item quantity="one">Note has been deleted.</item>
         <item quantity="other">%d Notes have been deleted.</item>
     </plurals>
+    <!-- The count of the selected notes that have been duplicated. -->
     <plurals name="note_is_duplicated">
         <item quantity="one">Note has been duplicated.</item>
         <item quantity="other">%d Notes have been duplicated.</item>
     </plurals>
     <string name="move_to">Move to…</string>
+    <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="one">Note has been moved to %s.</item>
         <item quantity="other">%d Notes have been moved to %s.</item>
     </plurals>
     <string name="note_preview_size">Note preview size</string>
     <string name="show_note_creation_date">Show note creation date</string>
+    <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Show notes count</string>
     <string name="remember_scrolling_position">Remember scrolling position</string>
     <string name="do_not_disturb_summary">Enable Do Not Disturb during Reading Mode</string>
     <string name="do_not_disturb">Do Not Disturb</string>
+    <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Keep screen on</string>
     <string name="full_screen">Go full screen</string>
     <string name="show">Show</string>
@@ -329,6 +376,7 @@
 
     <!-- Language -->
     <string name="language">Language</string>
+    <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Translate Noto</string>
     <string name="change_language">Change language</string>
     <string name="system_language">System language</string>
