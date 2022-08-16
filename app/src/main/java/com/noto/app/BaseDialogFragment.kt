@@ -6,7 +6,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.noto.app.util.applyNightModeConfiguration
-import com.noto.app.util.applySystemBarsColorsForApiLessThan23
+import com.noto.app.util.applySystemBarsColors
 import com.noto.app.util.dp
 
 open class BaseDialogFragment(private val isCollapsable: Boolean = false) : BottomSheetDialogFragment() {
@@ -28,7 +28,7 @@ open class BaseDialogFragment(private val isCollapsable: Boolean = false) : Bott
         super.onResume()
         dialog?.window?.let { window ->
             context?.applyNightModeConfiguration(window)
-            context?.applySystemBarsColorsForApiLessThan23(window)
+            context?.applySystemBarsColors(window)
         }
     }
 }

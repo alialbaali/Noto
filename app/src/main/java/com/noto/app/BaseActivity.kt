@@ -7,7 +7,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.domain.model.Theme
 import com.noto.app.util.applyNightModeConfiguration
-import com.noto.app.util.applySystemBarsColorsForApiLessThan23
+import com.noto.app.util.applySystemBarsColors
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,7 +29,7 @@ open class BaseActivity : AppCompatActivity() {
             .launchIn(lifecycleScope)
 
         applyNightModeConfiguration(window)
-        applySystemBarsColorsForApiLessThan23(window)
+        applySystemBarsColors(window)
     }
 
     private fun setupTheme(theme: Theme) {
