@@ -1,5 +1,7 @@
 package com.noto.app.settings
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,8 @@ import com.noto.app.R
 import com.noto.app.databinding.WhatsNewFragmentBinding
 import com.noto.app.domain.model.*
 import com.noto.app.util.*
+
+private const val GitHubReleasesUrl = "https://github.com/alialbaali/Noto/releases"
 
 class WhatsNewFragment : Fragment() {
 
@@ -59,6 +63,11 @@ class WhatsNewFragment : Fragment() {
     private fun WhatsNewFragmentBinding.setupListeners() {
         activity?.onBackPressedDispatcher?.addCallback {
             navController?.navigateUp()
+        }
+
+        tvMoreDetails.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GitHubReleasesUrl))
+            startActivity(intent)
         }
 
         tb.setOnClickListener {
