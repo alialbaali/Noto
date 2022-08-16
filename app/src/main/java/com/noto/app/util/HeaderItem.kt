@@ -28,6 +28,9 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
     var onClickListener: View.OnClickListener? = null
 
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    var onLongClickListener: View.OnLongClickListener? = null
+
+    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     var onCreateClickListener: View.OnClickListener? = null
 
     override fun bind(holder: Holder) = with(holder.binding) {
@@ -37,6 +40,7 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
         ibVisibility.setOnClickListener(onClickListener)
         ibCreate.setOnClickListener(onCreateClickListener)
         root.setOnClickListener(onClickListener)
+        root.setOnLongClickListener(onLongClickListener)
         root.isClickable = onClickListener != null
         ibVisibility.isVisible = onClickListener != null
         ibCreate.isVisible = onCreateClickListener != null

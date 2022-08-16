@@ -516,6 +516,9 @@
         <action
             android:id="@+id/action_allNotesFragment_to_noteDialogFragment"
             app:destination="@id/noteDialogFragment" />
+        <action
+            android:id="@+id/action_allNotesFragment_to_folderFragment"
+            app:destination="@id/folderFragment" />
     </fragment>
     <fragment
         android:id="@+id/recentNotesFragment"

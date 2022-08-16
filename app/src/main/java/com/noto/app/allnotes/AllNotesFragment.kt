@@ -224,6 +224,10 @@ class AllNotesFragment : Fragment() {
                                     onCreateClickListener { _ ->
                                         navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(folder.id))
                                     }
+                                    onLongClickListener { _ ->
+                                        navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToFolderFragment(folder.id))
+                                        true
+                                    }
                                 }
 
                                 if (isVisible)
