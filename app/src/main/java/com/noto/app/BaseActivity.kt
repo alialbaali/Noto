@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.noto.app.domain.model.Theme
-import com.noto.app.util.Constants
 import com.noto.app.util.applyNightModeConfiguration
 import com.noto.app.util.applySystemBarsColorsForApiLessThan23
 import kotlinx.coroutines.flow.launchIn
@@ -17,12 +16,9 @@ open class BaseActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<AppViewModel>()
 
-    private val currentTheme
-        get() = intent?.getStringExtra(Constants.Theme)?.let(Theme::valueOf)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
-        currentTheme?.toAndroidTheme()?.also(::setTheme)
+        viewModel.currentTheme?.toAndroidTheme()?.also(::setTheme)
         super.onCreate(savedInstanceState)
         setupState()
     }
@@ -37,8 +33,8 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun setupTheme(theme: Theme) {
-        if (currentTheme != theme) {
-            intent?.putExtra(Constants.Theme, theme.name)
+        if (viewModel.currentTheme != theme) {
+            viewModel.setCurrentTheme(theme)
             when (theme) {
                 Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

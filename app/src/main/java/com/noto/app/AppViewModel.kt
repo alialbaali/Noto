@@ -62,6 +62,9 @@ class AppViewModel(
 
     val currentIcon = viewModelScope.async { settingsRepository.icon.first() }
 
+    var currentTheme: Theme? = null
+        private set
+
     init {
         createGeneralFolder()
         vaultTimeout
@@ -85,6 +88,10 @@ class AppViewModel(
 
     fun setShouldNavigateToMainFragment(value: Boolean) {
         shouldNavigateToMainFragment = value
+    }
+
+    fun setCurrentTheme(theme: Theme) {
+        currentTheme = theme
     }
 
     fun createQuickNote(content: String, onSuccess: (Folder, Note) -> Unit) = viewModelScope.launch {
