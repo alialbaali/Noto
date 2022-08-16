@@ -64,7 +64,11 @@ class FolderArchiveFragment : Fragment() {
         }.launchIn(lifecycleScope)
     }
 
-    private fun setupListeners() {
+    private fun FolderArchiveFragmentBinding.setupListeners() {
+        tb.setOnClickListener {
+            rv.smoothScrollToPosition(0)
+        }
+
         activity?.onBackPressedDispatcher?.addCallback {
             navController?.navigateUp()
         }

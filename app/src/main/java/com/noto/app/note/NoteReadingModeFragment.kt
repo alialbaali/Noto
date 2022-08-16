@@ -53,6 +53,10 @@ class NoteReadingModeFragment : Fragment() {
         }
 
     private fun NoteReadingModeFragmentBinding.setupListeners() {
+        tb.setOnClickListener {
+            nsv.smoothScrollTo(0, 0)
+        }
+
         activity?.onBackPressedDispatcher?.addCallback {
             navController?.navigateUp()
         }

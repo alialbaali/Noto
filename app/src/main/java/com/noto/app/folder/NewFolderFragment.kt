@@ -75,6 +75,10 @@ class NewFolderFragment : Fragment() {
     }
 
     private fun NewFolderFragmentBinding.setupListeners() {
+        tb.setOnClickListener {
+            nsv.smoothScrollTo(0, 0)
+        }
+
         activity?.onBackPressedDispatcher?.addCallback {
             navController?.navigateUp()
         }

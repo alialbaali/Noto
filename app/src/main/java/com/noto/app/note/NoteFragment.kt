@@ -287,6 +287,10 @@ class NoteFragment : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun NoteFragmentBinding.setupListeners() {
+        tb.setOnClickListener {
+            nsv.smoothScrollTo(0, 0)
+        }
+
         fab.setOnClickListener {
             navController
                 ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.folderId, viewModel.note.value.id))

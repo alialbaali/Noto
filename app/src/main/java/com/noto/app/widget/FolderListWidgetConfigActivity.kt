@@ -121,6 +121,10 @@ class FolderListWidgetConfigActivity : BaseActivity() {
     }
 
     private fun FolderListWidgetConfigActivityBinding.setupListeners() {
+        tb.setOnClickListener {
+            nsv.smoothScrollTo(0, 0)
+        }
+
         swWidgetHeader.setOnCheckedChangeListener { _, isChecked ->
             viewModel.setIsWidgetHeaderEnabled(isChecked)
         }

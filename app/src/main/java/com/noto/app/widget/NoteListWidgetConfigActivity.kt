@@ -180,6 +180,10 @@ class NoteListWidgetConfigActivity : BaseActivity() {
     }
 
     private fun NoteListWidgetConfigActivityBinding.setupListeners() {
+        tb.setOnClickListener {
+            nsv.smoothScrollTo(0, 0)
+        }
+
         tvSelectFolder.setOnClickListener {
             showSelectFolderDialog(true)
         }

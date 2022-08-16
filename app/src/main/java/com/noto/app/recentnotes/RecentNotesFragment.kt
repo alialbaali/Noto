@@ -48,7 +48,7 @@ class RecentNotesFragment : Fragment() {
 
     private fun RecentNotesFragmentBinding.setupListeners() {
         tb.setOnClickListener {
-            navController?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToMainFragment())
+            rv.smoothScrollToPosition(0)
         }
 
         fab.setOnClickListener {

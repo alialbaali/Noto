@@ -61,6 +61,10 @@ class WhatsNewFragment : Fragment() {
             navController?.navigateUp()
         }
 
+        tb.setOnClickListener {
+            rv.smoothScrollToPosition(0)
+        }
+
         tb.setNavigationOnClickListener {
             navController?.navigateUp()
         }

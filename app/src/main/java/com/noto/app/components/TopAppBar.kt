@@ -1,5 +1,6 @@
 package com.noto.app.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,12 +11,14 @@ import com.noto.app.R
 @Composable
 fun NotoTopAppbar(
     title: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     onNavigationIconClick: (() -> Unit)? = null,
 ) {
     SmallTopAppBar(
         title = { Text(text = title) },
-        modifier = modifier,
+        modifier = modifier
+            .clickable(onClick = onClick),
         navigationIcon = {
             if (onNavigationIconClick != null) {
                 IconButton(onClick = onNavigationIconClick) {

@@ -184,7 +184,7 @@ class FolderFragment : Fragment() {
         }
 
         tb.setOnClickListener {
-            navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment())
+            rv.smoothScrollToPosition(0)
         }
 
         fab.setOnClickListener {
