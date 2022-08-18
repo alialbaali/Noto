@@ -61,13 +61,15 @@ fun Context.applyNightModeConfiguration(window: Window) {
     }
 }
 
-fun Context.applySystemBarsColors(window: Window) {
+fun Context.applySystemBarsColors(window: Window, applyDefaults: Boolean = true) {
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
         window.statusBarColor = colorResource(android.R.color.black)
         window.navigationBarColor = colorResource(android.R.color.black)
     } else {
-        window.statusBarColor = colorAttributeResource(R.attr.notoBackgroundColor)
-        window.navigationBarColor = colorAttributeResource(R.attr.notoBackgroundColor)
+        if (applyDefaults) {
+            window.statusBarColor = colorAttributeResource(R.attr.notoBackgroundColor)
+            window.navigationBarColor = colorAttributeResource(R.attr.notoBackgroundColor)
+        }
     }
 }
 

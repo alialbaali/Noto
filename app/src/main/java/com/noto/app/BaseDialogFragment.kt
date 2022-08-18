@@ -28,7 +28,7 @@ open class BaseDialogFragment(private val isCollapsable: Boolean = false) : Bott
         super.onResume()
         dialog?.window?.let { window ->
             context?.applyNightModeConfiguration(window)
-            context?.applySystemBarsColors(window)
+            context?.applySystemBarsColors(window, applyDefaults = false)
         }
     }
 }
