@@ -397,7 +397,8 @@
     <string name="french_translator" translatable="false">Kernoeb</string>
     <string name="french_translator2" translatable="false">Geoffrey Crofte</string>
     <string name="german_translator" translatable="false">Uli N</string>
-    <string name="arabic_translator" translatable="false">Ali Albaali</string>
+    <string name="arabic_translator" translatable="false">Dr.Ohm</string>
+    <string name="arabic_proofreader" translatable="false">Ali Albaali</string>
 
     <!-- Icon -->
     <string name="icon">Icon</string>

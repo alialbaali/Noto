@@ -21,7 +21,8 @@ private const val SpanishTranslatorWebsite = "https://github.com/faus32"
 private const val FrenchTranslatorWebsite = "https://github.com/kernoeb"
 private const val FrenchTranslator2Website = "https://geoffreycrofte.com"
 private const val CrowdinWebsite = "https://crowdin.com/project/notoapp"
-private const val ArabicTranslatorWebsite = "https://www.alialbaali.com"
+private const val ArabicTranslatorWebsite = "https://twitter.com/trjman_en"
+private const val ArabicProofreaderWebsite = "https://www.alialbaali.com"
 
 class TranslationsSettingsFragment : Fragment() {
 
@@ -55,6 +56,15 @@ class TranslationsSettingsFragment : Fragment() {
                             type = SettingsItemType.Text(stringResource(id = R.string.arabic_translator)),
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ArabicTranslatorWebsite))
+                                startActivity(intent)
+                            }
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.proofreader),
+                            type = SettingsItemType.Text(stringResource(id = R.string.arabic_proofreader)),
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ArabicProofreaderWebsite))
                                 startActivity(intent)
                             }
                         )
