@@ -2,11 +2,17 @@
 <resources>
     <!-- App -->
     <string name="app_name">Noto</string>
-    <string name="done">Erledigt</string>
+    <string name="done">Fertig</string>
     <string name="okay">OK</string>
     <string name="search">Suchen</string>
-    <!-- More options for folder, note, etc -->
+    <!-- A way to support the project. -->
+    <string name="buy_me_a_coffee">Spendier\' mir einen Kaffee</string>
+    <!-- A way to support the project. -->
+    <string name="become_a_patron">Werde Förderer/in</string>
+    <!-- More options for folder, note, etc... -->
     <string name="more_options">Weitere Optionen</string>
+    <!-- Options for multi-selected notes. -->
+    <string name="options">Optionen</string>
     <string name="back">Zurück</string>
     <string name="folder_layout">Ordnerlayout</string>
     <string name="label_filtering_type">Label-Filter anwenden im Modus</string>
@@ -21,6 +27,8 @@
     <string name="accessed">Letzter Zugriff: %s</string>
     <string name="alphabetical">Alphabetisch</string>
     <string name="alphabetical_sorting">Alphabetische Sortierung</string>
+    <!-- Sorting/Grouping notes by access date. -->
+    <string name="access_date">Zugriffsdatum</string>
     <string name="creation_date">Erstellungsdatum</string>
     <string name="creation_date_sorting">Sortierung nach Erstellungsdatum</string>
     <string name="manual">Manuell</string>
@@ -29,13 +37,19 @@
     <string name="descending">Absteigend</string>
     <string name="ascending">Aufsteigend</string>
     <string name="settings">Einstellungen</string>
-    <string name="view_code">Code auf GitHub ansehen</string>
-    <string name="join_community">Community auf Reddit beitreten</string>
-    <string name="change_notes_font">Schriftart der Notizen ändern</string>
-    <string name="share_app_with_others">App mit Freunden teilen</string>
-    <string name="rate_app_on_play_store">App im Play Store bewerten</string>
+    <string name="view_code">Quell-Code auf GitHub ansehen</string>
+    <!-- The link of the source code of the project. -->
+    <string name="source_code">Quell-Code</string>
+    <string name="join_community">Der Community auf Reddit beitreten</string>
+    <!-- The link of the reddit community of Noto. -->
+    <string name="reddit_community">Reddit-Community</string>
+    <!-- The font used in notes, such as Monospace, or Nunito. -->
+    <string name="notes_font">Schriftart der Notizen</string>
+    <string name="share_app_with_others">Noto mit anderen teilen</string>
+    <string name="rate_app_on_play_store">Noto im Play Store bewerten</string>
     <string name="report_issue">Einen Fehler melden</string>
     <string name="about">Über</string>
+    <string name="about_noto">Über Noto</string>
     <string name="whats_new">Was ist neu?</string>
     <string name="about_message">Noto wird von <a href="https://www.alialbaali.com/">Ali Albaali</a> entwickelt und betreut.
         \n\nDie App wird unter den Bedingungen der <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache-Lizenz Version 2</a> verbreitet.
@@ -57,8 +71,21 @@
     <string name="no_file_is_selected">Es wurde keine Datei gewählt.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Öffnen mit</string>
-    <string name="invite_text">Sieh dir Noto an!</string>
-    <string name="version">Version %s</string>
+    <string name="invite_text">Sieh dir mal Noto an!</string>
+    <string name="version">Version</string>
+    <!-- A message shown when clicking on the app version. -->
+    <string name="version_is_copied">Die Versionsnummer wurde in die Zwischenablage kopiert.</string>
+    <!-- Me -->
+    <string name="developer">Entwickler</string>
+    <!-- Creator of app icons. -->
+    <string name="creator">Urheber</string>
+    <!-- Translator of a language. -->
+    <string name="translator">Übersetzer:in</string>
+    <!-- Proofreader of a language. -->
+    <string name="proofreader">Korrekturleser:in</string>
+    <string name="app_icons">App-Icons</string>
+    <!-- License of the project, or app icons. Example: Apache 2.0. -->
+    <string name="license">Lizenz</string>
     <string name="empty_version">Version</string>
     <string name="date">Datum</string>
     <string name="drag">Ziehen</string>
@@ -66,7 +93,12 @@
     <string name="monospace">Monospace</string>
     <string name="font">Schriftart</string>
     <string name="folders_archive">Ordnerarchiv</string>
-    <string name="change_main_interface">Hauptordner ändern</string>
+    <!-- The first screen user sees when opening the app. -->
+    <string name="main_interface">Standard-Sammlung</string>
+    <!-- The default folder of "Save to Noto" text selection option. -->
+    <string name="quick_note_folder">Ordner für Schnellnotizen</string>
+    <!-- AKA "Save to Noto". -->
+    <string name="quick_note">Schnellnotiz</string>
     <string name="general">Allgemein</string>
     <string name="all_notes">Alle Notizen</string>
     <string name="all_folders">Alle Ordner</string>
@@ -77,15 +109,27 @@
     <string name="no_parent">Kein Elternelement</string>
     <string name="parent_folder">Übergeordneter Ordner</string>
     <string name="new_note_cursor_position">Cursorposition für neue Notiz</string>
+    <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
+    <string name="open_notes_in">Notizen öffnen in</string>
     <string name="archive">Archivieren</string>
-    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive -->
-    <string name="folder_archive">Archiv für %s</string>
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
+    <string name="folder_archive">Archiv von „%s“</string>
     <string name="unarchive">Dearchivieren</string>
     <string name="edit">Bearbeiten</string>
     <string name="pin">Anheften</string>
+    <!-- Merge multiple notes into a new note. -->
+    <string name="merge">Zusammenführen</string>
     <string name="unpin">Loslösen</string>
     <string name="delete">Löschen</string>
     <string name="just_now">gerade eben</string>
+    <!--Select a note. -->
+    <string name="select">Auswählen</string>
+    <!--Select all notes. -->
+    <string name="select_all">Alle auswählen</string>
+    <!-- List of translations. -->
+    <string name="translations">Übersetzungen</string>
+    <!-- List of credits. -->
+    <string name="credits">Danksagung</string>
     <!-- Folder -->
     <string name="folders">Ordner</string>
     <plurals name="folders_count">
@@ -99,7 +143,7 @@
     <string name="edit_folder">Ordner bearbeiten</string>
     <string name="folder_options">Ordneroptionen</string>
     <string name="add_new_note_shortcut">Verknüpfung für neue Notiz</string>
-    <string name="delete_folder_description">Diese Aktion kann nicht rückgängig gemacht werden und wird Notiz und Erinnerung dauerhaft löschen.</string>
+    <string name="delete_folder_description">Diese Aktion kann nicht rückgängig gemacht werden und wird den Ordner und all seine Inhalte dauerhaft löschen.</string>
     <string name="folder_title">Ordnername</string>
     <string name="folder_color">Ordnerfarbe</string>
     <string name="delete_folder">Löschen</string>
@@ -129,8 +173,10 @@
     <string name="vault_passcode">Zugangscode</string>
     <string name="current_vault_passcode">Momentaner Zugangscode</string>
     <string name="new_vault_passcode">Neuer Zugangscode</string>
-    <string name="change_vault_passcode">Zugangscode ändern</string>
-    <string name="change_vault_timeout">Ablaufzeit des Ordnerschutzes ändern</string>
+    <!-- Change vault passcode option. -->
+    <string name="change_passcode">Zugangscode ändern</string>
+    <!-- Vault timeout. -->
+    <string name="timeout">Ablaufzeit für Ordnerschutz</string>
     <string name="vault_timeout">Ablaufzeit für Ordnerschutz</string>
     <string name="invalid_passcode">Ungültiger Zugangscode</string>
     <string name="passcode_length_message">Zugangscode muss mindestens sechs Ziffern enthalten</string>
@@ -149,8 +195,9 @@
     <string name="after_4_hours">Nach 4 Stunden</string>
     <string name="after_12_hours">Nach 12 Stunden</string>
     <string name="close_vault">Ordnerschutz herstellen</string>
-    <string name="enable_bio_auth">Biometrische Authentifizierung aktivieren</string>
-    <string name="use_passcode">Passcode verwenden</string>
+    <!-- Enabling biometric authentication for the app. -->
+    <string name="bio_auth">Biometrische Authentifizierung aktivieren</string>
+    <string name="use_passcode">Zugangscode verwenden</string>
     <!-- Note -->
     <string name="all">Alle</string>
     <string name="update_reminder">Erinnerung aktualisieren</string>
@@ -159,14 +206,45 @@
         <item quantity="one">%d Notiz</item>
         <item quantity="other">%d Notizen</item>
     </plurals>
+    <!-- Filtered notes count is shown when a label is selected, or text is searched.
+         Such as "30 Notes • 5 Filtered".
+     -->
+    <plurals name="notes_filtered_count">
+        <item quantity="one">%1$d Notiz • %2$d verbleibend</item>
+        <item quantity="other">%1$d Notizen • %2$d verbleibend</item>
+    </plurals>
+    <!-- Selected notes count is shown when a note or multiple notes are selected.
+         Such as "30 Notes • 5 Selected".
+     -->
+    <plurals name="notes_selected_count">
+        <item quantity="one">%1$d Notiz • %2$d ausgewählt</item>
+        <item quantity="other">%1$d Notizen • %2$d ausgewählt</item>
+    </plurals>
+    <!--  Filtered notes count is shown when a label is selected, or text is searched. Selected notes count is shown when a note or multiple notes are selected.
+          Such as, "30 Notes • 3 Filtered • 8 Selected".
+     -->
+    <plurals name="notes_filtered_selected_count">
+        <item quantity="one">%1$d Notiz • %2$d verbleibend • %3$d ausgewählt</item>
+        <item quantity="other">%1$d Notizen • %2$d verbleibend • %3$d ausgewählt</item>
+    </plurals>
     <plurals name="words_count">
         <item quantity="one">%d Wort</item>
         <item quantity="other">%d Wörter</item>
     </plurals>
+    <!-- Selected words count is shown when text is selected in a note. -->
+    <plurals name="words_selected_count">
+        <item quantity="one">%1$d Wort • %2$d ausgewählt</item>
+        <item quantity="other">%1$d Wörter • %2$d ausgewählt</item>
+    </plurals>
     <string name="body">Haupttext</string>
     <string name="title">Überschrift</string>
+    <!-- Note's editor, opposite of Reading Mode. -->
+    <string name="editor">Editor</string>
     <string name="create_note">Notiz erstellen</string>
-    <string name="delete_note">Notiz löschen</string>
+    <plurals name="delete_note">
+        <item quantity="one">Notiz löschen</item>
+        <item quantity="other">Notizen löschen</item>
+    </plurals>
     <string name="duplicate">Duplizieren</string>
     <string name="undo">Rückgängig</string>
     <string name="undo_history">Verlauf fürs Zurücksetzen</string>
@@ -174,16 +252,31 @@
     <string name="redo_history">Verlauf fürs Wiederherstellen</string>
     <string name="share_note">Notiz teilen</string>
     <string name="sorting_type">Sortierungsart</string>
-    <string name="notes_view">Notizansicht</string>
+    <string name="notes_view">Notizen filtern und sortieren</string>
     <string name="sorting_order">Sortierreihenfolge</string>
     <string name="grouping_type">Gruppierungsart</string>
     <string name="grouping_order">Gruppierungsreihenfolge</string>
     <string name="save_to_noto">In Noto speichern</string>
+    <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
+    <string name="note_is_saved">Notiz wurde in %s gespeichert.</string>
     <string name="no_notes_found">Keine Notizen gefunden.</string>
     <string name="notes">Notizen</string>
-    <string name="note_is_archived">Notiz wurde archiviert.</string>
-    <string name="note_is_pinned">Notiz wurde angepinnt.</string>
-    <string name="note_is_unpinned">Notiz wurde losgelöst.</string>
+    <!-- The count of the selected notes that have been merged. -->
+    <string name="notes_are_merged">%d Notizen wurden in einer neuen Notiz zusammengeführt.</string>
+    <plurals name="note_is_archived">
+        <item quantity="one">Die Notiz wurde archiviert.</item>
+        <item quantity="other">%d Notizen wurden archiviert.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been pinned. -->
+    <plurals name="note_is_pinned">
+        <item quantity="one">Die Notiz wurde angepinnt.</item>
+        <item quantity="other">%d Notizen wurden angepinnt.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been unpinned. -->
+    <plurals name="note_is_unpinned">
+        <item quantity="one">Die Notiz wurde losgelöst.</item>
+        <item quantity="other">%d Notizen wurden losgelöst.</item>
+    </plurals>
     <string name="no_note_reminder">Keine Notiz-Erinnerung angelegt.</string>
     <string name="note_is_unarchived">Notiz wurde dearchiviert.</string>
     <string name="reminder">Erinnerung</string>
@@ -191,27 +284,56 @@
     <string name="new_note_reminder">Neue Notiz-Erinnerung</string>
     <string name="copy">Kopieren</string>
     <string name="copy_to">Kopieren nach…</string>
-    <string name="note_is_copied">Notiz wurde nach %s kopiert.</string>
-    <string name="note_copied_to_clipboard">Notiz wurde in die Zwischenablage kopiert.</string>
+    <!-- The count of the selected notes that have been copied to a folder. -->
+    <plurals name="note_is_copied">
+        <item quantity="one">Die Notiz wurde nach %s kopiert.</item>
+        <item quantity="other">%d Notizen wurden nach %s kopiert.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been copied to clipboard. -->
+    <plurals name="note_copied_to_clipboard">
+        <item quantity="one">Die Notiz wurde in die Zwischenablage kopiert.</item>
+        <item quantity="other">%d Notizen wurden in die Zwischenablage kopiert.</item>
+    </plurals>
     <string name="text_copied">Der Text wurde in die Zwischenablage kopiert.</string>
-    <string name="delete_note_confirmation">Willst du diese Notiz wirklich löschen?</string>
+    <plurals name="delete_note_confirmation">
+        <item quantity="one">Soll diese Notiz wirklich gelöscht werden?</item>
+        <item quantity="other">Sollen diese Notizen wirklich gelöscht werden?</item>
+    </plurals>
     <string name="share_with">Freigeben für…</string>
     <string name="add_note_reminder">Erinnerung hinzufügen</string>
-    <string name="delete_note_description">Diese Aktion kann nicht rückgängig gemacht werden und wird Notiz und Erinnerung dauerhaft löschen.</string>
+    <plurals name="delete_note_description">
+        <item quantity="one">Diese Aktion kann nicht rückgängig gemacht werden und wird Notiz und Erinnerung dauerhaft löschen.</item>
+        <item quantity="other">Diese Aktion kann nicht rückgängig gemacht werden und wird die Notizen und die zugehörigen Erinnerungen dauerhaft löschen.</item>
+    </plurals>
     <string name="reading_mode">Lesemodus</string>
     <string name="edit_note_reminder">Erinnerung bearbeiten</string>
     <string name="note_options">Notizoptionen</string>
-    <string name="note_is_deleted">Notiz wurde gelöscht.</string>
-    <string name="note_is_duplicated">Notiz wurde dupliziert.</string>
+    <!-- The count of the selected notes that have been deleted. -->
+    <plurals name="note_is_deleted">
+        <item quantity="one">Die Notiz wurde gelöscht.</item>
+        <item quantity="other">%d Notizen wurden gelöscht.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been duplicated. -->
+    <plurals name="note_is_duplicated">
+        <item quantity="one">Die Notiz wurde dupliziert.</item>
+        <item quantity="other">%d Notizen wurden dupliziert.</item>
+    </plurals>
     <string name="move_to">Verschieben nach…</string>
-    <string name="note_is_moved">Notiz wurde nach %s verschoben.</string>
+    <!-- The count of the selected notes that have been moved to a folder. -->
+    <plurals name="note_is_moved">
+        <item quantity="one">Die Notiz wurde nach %s verschoben.</item>
+        <item quantity="other">%d Notizen wurden nach %s verschoben.</item>
+    </plurals>
     <string name="note_preview_size">Größe der Notizvorschau</string>
     <string name="show_note_creation_date">Datum der Notizerstellung anzeigen</string>
-    <string name="show_folders_notes_count">Anzahl der Notizen für Ordner anzeigen</string>
+    <!-- Whether to show notes count in "All Folders" view. -->
+    <string name="show_notes_count">Anzahl der Notizen anzeigen</string>
     <string name="remember_scrolling_position">Scrollposition beibehalten</string>
-    <string name="do_not_disturb">\"Nicht stören\" während des Lesemodus aktivieren</string>
-    <string name="screen_on">Bildschirm im Lesemodus nicht abschalten</string>
-    <string name="full_screen">Im Lesemodus Vollbild verwenden</string>
+    <string name="do_not_disturb_summary">\"Bitte nicht stören\" im Lesemodus aktivieren</string>
+    <string name="do_not_disturb">Bitte nicht stören</string>
+    <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
+    <string name="keep_screen_on">Display eingeschaltet lassen</string>
+    <string name="full_screen">Zum Vollbildmodus wechseln</string>
     <string name="show">Zeigen</string>
     <string name="hide">Verbergen</string>
     <string name="permission_not_granted">Berechtigung wurde nicht gewährt</string>
@@ -229,7 +351,7 @@
     <string name="labels_order">Label-Reihenfolge</string>
     <string name="delete_label_confirmation">Möchten Sie dieses Label wirklich löschen?</string>
     <string name="label_is_deleted">Label wurde gelöscht.</string>
-    <string name="delete_label_description">Diese Aktion kann nicht rückgängig gemacht werden und wird das Label löschen und das Label von den zugehörigen Notizen dauerhaft entfernen.</string>
+    <string name="delete_label_description">Diese Aktion kann nicht rückgängig gemacht werden und wird das Label löschen und es zugleich dauerhaft von den zugehörigen Notizen entfernen.</string>
     <string name="filter_labels">Nach Labels filtern</string>
     <!-- Theme -->
     <string name="theme">Farbschema</string>
@@ -241,6 +363,8 @@
     <string name="black_theme">Schwarzes Farbschema</string>
     <!-- Language -->
     <string name="language">Sprache</string>
+    <!-- An option in settings to invite users to translate Noto. -->
+    <string name="translate_noto">Noto übersetzen</string>
     <string name="change_language">Sprache ändern</string>
     <string name="system_language">Systemsprache</string>
     <string name="english">Englisch</string>
@@ -253,7 +377,7 @@
     <string name="german">Deutsch</string>
     <!-- Icon -->
     <string name="icon">Icon</string>
-    <string name="change_icon">Icon ändern</string>
+    <string name="change_icon">Icon wechseln</string>
     <!-- Widget -->
     <string name="create_widget">Widget erstellen</string>
     <string name="update_widget">Widget aktualisieren</string>
@@ -331,6 +455,6 @@
         \n• Ausgewählte Labels erscheinen jetzt in der Notiz an erster Stelle.
         \n• Weitere Bugfixes und Design-Verbesserungen.
     </string>
-    <string name="release_2_1_5">• Fehlerbehebungen und Verbesserungen des Designs.</string>
-    <string name="release_2_1_6">• Fehlerbehebungen und Verbesserungen des Designs.</string>
+    <string name="release_2_1_5">• Fehlerkorrekturen und Verbesserungen des Designs.</string>
+    <string name="release_2_1_6">• Fehlerkorrekturen und Verbesserungen des Designs.</string>
 </resources>

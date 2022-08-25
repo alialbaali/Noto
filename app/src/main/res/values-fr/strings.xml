@@ -5,8 +5,14 @@
     <string name="done">Terminé</string>
     <string name="okay">Ok</string>
     <string name="search">Rechercher</string>
-    <!-- More options for folder, note, etc -->
+    <!-- A way to support the project. -->
+    <string name="buy_me_a_coffee">Offrez-moi un café</string>
+    <!-- A way to support the project. -->
+    <string name="become_a_patron">Soutenez-nous</string>
+    <!-- More options for folder, note, etc... -->
     <string name="more_options">Plus d\'options</string>
+    <!-- Options for multi-selected notes. -->
+    <string name="options">Options</string>
     <string name="back">Retour</string>
     <string name="folder_layout">Disposition du dossier</string>
     <string name="label_filtering_type">Type de filtrage d\'étiquette</string>
@@ -21,6 +27,8 @@
     <string name="accessed">Dernier accès : %s</string>
     <string name="alphabetical">Alphabétique</string>
     <string name="alphabetical_sorting">Tri par ordre alphabétique</string>
+    <!-- Sorting/Grouping notes by access date. -->
+    <string name="access_date">Date d\'accès</string>
     <string name="creation_date">Date de création</string>
     <string name="creation_date_sorting">Tri par date de création</string>
     <string name="manual">Manuel</string>
@@ -29,13 +37,19 @@
     <string name="descending">Décroissant</string>
     <string name="ascending">Croissant</string>
     <string name="settings">Réglages</string>
-    <string name="view_code">Voir le code sur GitHub</string>
-    <string name="join_community">Rejoignez la communauté sur Reddit</string>
-    <string name="change_notes_font">Changer la police de caractère des notes</string>
+    <string name="view_code">Voir le code source sur GitHub</string>
+    <!-- The link of the source code of the project. -->
+    <string name="source_code">Code source</string>
+    <string name="join_community">Rejoindre la communauté sur Reddit</string>
+    <!-- The link of the reddit community of Noto. -->
+    <string name="reddit_community">Communauté Reddit</string>
+    <!-- The font used in notes, such as Monospace, or Nunito. -->
+    <string name="notes_font">Police des notes</string>
     <string name="share_app_with_others">Partager l\'application</string>
-    <string name="rate_app_on_play_store">Évaluez l\'application sur le Play Store</string>
+    <string name="rate_app_on_play_store">Évaluez Noto sur le Play Store</string>
     <string name="report_issue">Signaler une anomalie</string>
     <string name="about">À propos</string>
+    <string name="about_noto">À propos de Noto</string>
     <string name="whats_new">Nouveautés</string>
     <string name="about_message">Noto est développé et maintenu par <a href="https://www.alialbaali.com/">Ali Albaali</a>.
         \n\nL\'application est distribuée sous les termes de la <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Licence Apache 2.</a>.
@@ -60,7 +74,20 @@
     <!-- Open with an app such as Signal -->
     <string name="open_with">Ouvrir avec</string>
     <string name="invite_text">Découvrez Noto !</string>
-    <string name="version">Version %s</string>
+    <string name="version">Version</string>
+    <!-- A message shown when clicking on the app version. -->
+    <string name="version_is_copied">La version a été copiée dans le presse-papiers.</string>
+    <!-- Me -->
+    <string name="developer">Développeur</string>
+    <!-- Creator of app icons. -->
+    <string name="creator">Créateur</string>
+    <!-- Translator of a language. -->
+    <string name="translator">Traducteur</string>
+    <!-- Proofreader of a language. -->
+    <string name="proofreader">Correcteur</string>
+    <string name="app_icons">Icônes d\'application</string>
+    <!-- License of the project, or app icons. Example: Apache 2.0. -->
+    <string name="license">Licence</string>
     <string name="empty_version">Version</string>
     <string name="date">Date</string>
     <string name="drag">Faire glisser</string>
@@ -68,7 +95,12 @@
     <string name="monospace">Monospace</string>
     <string name="font">Police de caractères</string>
     <string name="folders_archive">Archive des dossiers</string>
-    <string name="change_main_interface">Changer l\'interface principale</string>
+    <!-- The first screen user sees when opening the app. -->
+    <string name="main_interface">Interface principale</string>
+    <!-- The default folder of "Save to Noto" text selection option. -->
+    <string name="quick_note_folder">Simple dossier de notes</string>
+    <!-- AKA "Save to Noto". -->
+    <string name="quick_note">Simple note</string>
     <string name="general">Général</string>
     <string name="all_notes">Toutes les notes</string>
     <string name="all_folders">Tous les dossiers</string>
@@ -79,15 +111,27 @@
     <string name="no_parent">Aucun parent</string>
     <string name="parent_folder">Dossier parent</string>
     <string name="new_note_cursor_position">Position du curseur pour une nouvelle note</string>
+    <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
+    <string name="open_notes_in">Ouvrir les notes dans</string>
     <string name="archive">Archiver</string>
-    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive -->
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
     <string name="folder_archive">Archives du dossier %s</string>
     <string name="unarchive">Désarchiver</string>
     <string name="edit">Modifier</string>
     <string name="pin">Épingler</string>
+    <!-- Merge multiple notes into a new note. -->
+    <string name="merge">Fusionner</string>
     <string name="unpin">Désépingler</string>
     <string name="delete">Supprimer</string>
     <string name="just_now">à l’instant</string>
+    <!--Select a note. -->
+    <string name="select">Sélectionner</string>
+    <!--Select all notes. -->
+    <string name="select_all">Tout sélectionner</string>
+    <!-- List of translations. -->
+    <string name="translations">Traductions</string>
+    <!-- List of credits. -->
+    <string name="credits">Crédits</string>
     <!-- Folder -->
     <string name="folders">Dossiers</string>
     <plurals name="folders_count">
@@ -131,9 +175,11 @@
     <string name="vault_passcode">Code d\'accès du coffre-fort</string>
     <string name="current_vault_passcode">Code d\'accès actuel du coffre-fort</string>
     <string name="new_vault_passcode">Nouveau code d\'accès du coffre-fort</string>
-    <string name="change_vault_passcode">Modifier le code d\'accès au coffre-fort</string>
-    <string name="change_vault_timeout">Modifier le délai d\'expiration du coffre-fort</string>
-    <string name="vault_timeout">Délai d\'expiration du coffre-fort</string>
+    <!-- Change vault passcode option. -->
+    <string name="change_passcode">Modifier le code d\'accès</string>
+    <!-- Vault timeout. -->
+    <string name="timeout">Expiration</string>
+    <string name="vault_timeout">Délai d\'expiration du coffre</string>
     <string name="invalid_passcode">Code d’accès invalide</string>
     <string name="passcode_length_message">Le code d\'accès doit contenir au moins 6 chiffres</string>
     <string name="passcode_empty_message">Le code d\'accès ne peut être vide</string>
@@ -151,7 +197,8 @@
     <string name="after_4_hours">Après 4 heures</string>
     <string name="after_12_hours">Après 12 heures</string>
     <string name="close_vault">Fermer le coffre-fort</string>
-    <string name="enable_bio_auth">Activer l\'authentification biométrique</string>
+    <!-- Enabling biometric authentication for the app. -->
+    <string name="bio_auth">Activer l\'authentification biométrique</string>
     <string name="use_passcode">Utiliser le code d\'accès</string>
     <!-- Note -->
     <string name="all">Toutes</string>
@@ -161,14 +208,45 @@
         <item quantity="one">%d Note</item>
         <item quantity="other">%d Notes</item>
     </plurals>
+    <!-- Filtered notes count is shown when a label is selected, or text is searched.
+         Such as "30 Notes • 5 Filtered".
+     -->
+    <plurals name="notes_filtered_count">
+        <item quantity="one">%1$d note • %2$d filtrée</item>
+        <item quantity="other">%1$d • %2$d filtrées</item>
+    </plurals>
+    <!-- Selected notes count is shown when a note or multiple notes are selected.
+         Such as "30 Notes • 5 Selected".
+     -->
+    <plurals name="notes_selected_count">
+        <item quantity="one">%1$d note • %2$d sélectionnée</item>
+        <item quantity="other">%1$d notes • %2$d sélectionnées</item>
+    </plurals>
+    <!--  Filtered notes count is shown when a label is selected, or text is searched. Selected notes count is shown when a note or multiple notes are selected.
+          Such as, "30 Notes • 3 Filtered • 8 Selected".
+     -->
+    <plurals name="notes_filtered_selected_count">
+        <item quantity="one">%1$d note • %2$d filtrée • %3$d sélectionnée</item>
+        <item quantity="other">%1$d notes • %2$d filtrées • %3$d sélectionnées</item>
+    </plurals>
     <plurals name="words_count">
         <item quantity="one">%d Mot</item>
         <item quantity="other">%d Mots</item>
     </plurals>
+    <!-- Selected words count is shown when text is selected in a note. -->
+    <plurals name="words_selected_count">
+        <item quantity="one">%1$d mot • %2$d sélectionnée</item>
+        <item quantity="other">%1$d mots • %2$d sélectionnées</item>
+    </plurals>
     <string name="body">Corps du message</string>
     <string name="title">Titre</string>
+    <!-- Note's editor, opposite of Reading Mode. -->
+    <string name="editor">Éditeur</string>
     <string name="create_note">Créer une note</string>
-    <string name="delete_note">Supprimer la note</string>
+    <plurals name="delete_note">
+        <item quantity="one">Supprimer la note</item>
+        <item quantity="other">Supprimer les notes</item>
+    </plurals>
     <string name="duplicate">Dupliquer</string>
     <string name="undo">Annuler</string>
     <string name="undo_history">Historique d\'annulations</string>
@@ -181,11 +259,26 @@
     <string name="grouping_type">Type de groupement</string>
     <string name="grouping_order">Ordre de regroupement</string>
     <string name="save_to_noto">Enregistrer dans Noto</string>
+    <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
+    <string name="note_is_saved">La note a été enregistrée vers %s.</string>
     <string name="no_notes_found">Aucune note trouvée.</string>
     <string name="notes">Notes</string>
-    <string name="note_is_archived">La note a été archivée.</string>
-    <string name="note_is_pinned">La note a été épinglée.</string>
-    <string name="note_is_unpinned">La note a été désépinglée.</string>
+    <!-- The count of the selected notes that have been merged. -->
+    <string name="notes_are_merged">%d notes ont été fusionnées dans une nouvelle note.</string>
+    <plurals name="note_is_archived">
+        <item quantity="one">La note a été archivée.</item>
+        <item quantity="other">%d notes ont été archivées.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been pinned. -->
+    <plurals name="note_is_pinned">
+        <item quantity="one">La note a été épinglée.</item>
+        <item quantity="other">%d notes ont été épinglées.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been unpinned. -->
+    <plurals name="note_is_unpinned">
+        <item quantity="one">La note a été désépinglée.</item>
+        <item quantity="other">%d notes ont été désépinglées.</item>
+    </plurals>
     <string name="no_note_reminder">Aucun rappel n\'est configuré.</string>
     <string name="note_is_unarchived">La note a été désarchivée.</string>
     <string name="reminder">Rappel</string>
@@ -193,27 +286,56 @@
     <string name="new_note_reminder">Nouveau rappel</string>
     <string name="copy">Copier</string>
     <string name="copy_to">Copier vers…</string>
-    <string name="note_is_copied">La note a été copiée vers %s.</string>
-    <string name="note_copied_to_clipboard">La note a été copiée dans le presse-papiers.</string>
+    <!-- The count of the selected notes that have been copied to a folder. -->
+    <plurals name="note_is_copied">
+        <item quantity="one">La note a été copiée vers %s.</item>
+        <item quantity="other">%d notes ont été copiées vers %s.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been copied to clipboard. -->
+    <plurals name="note_copied_to_clipboard">
+        <item quantity="one">La note a été copiée dans le presse-papiers.</item>
+        <item quantity="other">%d notes ont été copiées dans le presse-papiers.</item>
+    </plurals>
     <string name="text_copied">Le texte a été copié dans le presse-papiers.</string>
-    <string name="delete_note_confirmation">Êtes-vous sûr de vouloir supprimer cette note ?</string>
+    <plurals name="delete_note_confirmation">
+        <item quantity="one">Êtes-vous sûr de vouloir supprimer cette note ?</item>
+        <item quantity="other">Êtes-vous sûr de vouloir supprimer ces notes ?</item>
+    </plurals>
     <string name="share_with">Partager avec…</string>
     <string name="add_note_reminder">Ajouter rappel</string>
-    <string name="delete_note_description">Cette action ne peut pas être annulée et supprimera définitivement la note et son rappel.</string>
-    <string name="reading_mode">Mode de lecture</string>
+    <plurals name="delete_note_description">
+        <item quantity="one">Cette action ne peut pas être annulée et supprimera définitivement la note et ses rappels.</item>
+        <item quantity="other">Cette action ne peut pas être annulée et supprimera définitivement les notes et leurs rappels.</item>
+    </plurals>
+    <string name="reading_mode">Mode Lecture</string>
     <string name="edit_note_reminder">Modifier le rappel</string>
     <string name="note_options">Options de la note</string>
-    <string name="note_is_deleted">La note a bien été supprimée.</string>
-    <string name="note_is_duplicated">La note a bien été dupliquée.</string>
+    <!-- The count of the selected notes that have been deleted. -->
+    <plurals name="note_is_deleted">
+        <item quantity="one">La note a bien été supprimée.</item>
+        <item quantity="other">%d notes ont bien été supprimées.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been duplicated. -->
+    <plurals name="note_is_duplicated">
+        <item quantity="one">La note a été dupliquée.</item>
+        <item quantity="other">%d notes ont été dupliquées.</item>
+    </plurals>
     <string name="move_to">Déplacer vers…</string>
-    <string name="note_is_moved">La note a été déplacée vers %s.</string>
+    <!-- The count of the selected notes that have been moved to a folder. -->
+    <plurals name="note_is_moved">
+        <item quantity="one">La note a été déplacée vers %s.</item>
+        <item quantity="other">%d notes ont été déplacées vers %s.</item>
+    </plurals>
     <string name="note_preview_size">Taille de l\'aperçu de la note</string>
     <string name="show_note_creation_date">Afficher la date de création de la note</string>
-    <string name="show_folders_notes_count">Afficher le nombre de notes des dossiers</string>
+    <!-- Whether to show notes count in "All Folders" view. -->
+    <string name="show_notes_count">Afficher le nombre de notes</string>
     <string name="remember_scrolling_position">Mémoriser la position de défilement</string>
-    <string name="do_not_disturb">Activer \"Ne pas déranger\" pendant le mode lecture</string>
-    <string name="screen_on">Garder l\'écran allumé durant le mode lecture</string>
-    <string name="full_screen">Afficher en plein écran durant le mode lecture</string>
+    <string name="do_not_disturb_summary">Entrer dans le mode Ne pas déranger en mode lecture</string>
+    <string name="do_not_disturb">Ne pas déranger</string>
+    <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
+    <string name="keep_screen_on">Garder l\'écran allumé</string>
+    <string name="full_screen">Plein écran</string>
     <string name="show">Afficher</string>
     <string name="hide">Masquer</string>
     <string name="permission_not_granted">Autorisation non accordée</string>
@@ -243,6 +365,8 @@
     <string name="black_theme">Thème noir</string>
     <!-- Language -->
     <string name="language">Langue</string>
+    <!-- An option in settings to invite users to translate Noto. -->
+    <string name="translate_noto">Traduire Noto</string>
     <string name="change_language">Modifier la langue</string>
     <string name="system_language">Langue du système</string>
     <string name="english">Anglais</string>
