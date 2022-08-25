@@ -139,7 +139,7 @@
     <string name="credits">Credits</string>
 
     <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
-    <string name="releases_details">For more details, click here.</string>
+<!--    <string name="releases_details">For more details, click here.</string>-->
 
     <!-- Folder -->
     <string name="folders">Folders</string>

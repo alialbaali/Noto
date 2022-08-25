@@ -65,10 +65,10 @@ class WhatsNewFragment : Fragment() {
             navController?.navigateUp()
         }
 
-        tvMoreDetails.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GitHubReleasesUrl))
-            startActivity(intent)
-        }
+//        tvMoreDetails.setOnClickListener {
+//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GitHubReleasesUrl))
+//            startActivity(intent)
+//        }
 
         tb.setOnClickListener {
             rv.smoothScrollToPosition(0)
