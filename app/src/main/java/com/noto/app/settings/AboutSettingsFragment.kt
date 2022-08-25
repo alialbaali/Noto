@@ -11,12 +11,17 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.core.graphics.drawable.toBitmap
+import androidx.core.graphics.drawable.toBitmapOrNull
 import androidx.fragment.app.Fragment
 import com.noto.app.R
 import com.noto.app.components.Screen
+import com.noto.app.util.drawableResource
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
 import com.noto.app.util.setupMixedTransitions
@@ -81,7 +86,7 @@ class AboutSettingsFragment : Fragment() {
 
                         SettingsItem(
                             title = stringResource(id = R.string.become_a_patron),
-                            type = SettingsItemType.Icon(painterResource(id = R.drawable.patreon_logo)),
+                            type = SettingsItemType.Icon(painterResource(id = R.drawable.ic_patreon_logo)),
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BecomeAPatronUrl))
                                 startActivity(intent)
