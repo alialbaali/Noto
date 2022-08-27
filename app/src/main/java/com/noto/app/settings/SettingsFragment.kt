@@ -102,7 +102,7 @@ class SettingsFragment : Fragment() {
                         navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToValidateVaultPasscodeDialogFragment())
                     }
                 },
-                painter = painterResource(id = R.drawable.ic_round_inventory_24),
+                painter = painterResource(id = R.drawable.ic_round_shield_24),
             )
         }
     }
