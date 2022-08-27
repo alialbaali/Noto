@@ -78,6 +78,10 @@ class FolderArchiveFragment : Fragment() {
             rv.smoothScrollToPosition(0)
         }
 
+        tb.setNavigationOnClickListener {
+            navController?.navigateUp()
+        }
+
         activity?.onBackPressedDispatcher?.addCallback {
             navController?.navigateUp()
         }
@@ -95,6 +99,7 @@ class FolderArchiveFragment : Fragment() {
             val color = context.colorResource(folder.color.toResource())
             tvFolderTitle.text = context.stringResource(R.string.folder_archive, folder.getTitle(context))
             tvFolderTitle.setTextColor(color)
+            tb.setNavigationIconTint(color)
         }
     }
 
