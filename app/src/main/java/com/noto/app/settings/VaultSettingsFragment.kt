@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.biometric.BiometricManager
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
@@ -14,9 +15,8 @@ import androidx.fragment.app.Fragment
 import com.noto.app.R
 import com.noto.app.components.Screen
 import com.noto.app.domain.model.VaultTimeout
-import com.noto.app.util.navController
-import com.noto.app.util.navigateSafely
-import com.noto.app.util.setupMixedTransitions
+import com.noto.app.util.*
+import com.noto.app.warning
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VaultSettingsFragment : Fragment() {
@@ -34,6 +34,20 @@ class VaultSettingsFragment : Fragment() {
         setupMixedTransitions()
         ComposeView(context).apply {
             isTransitionGroup = true
+
+            navController?.currentBackStackEntry?.savedStateHandle
+                ?.getLiveData<Int>(Constants.ClickListener)
+                ?.observe(viewLifecycleOwner) {
+                    viewModel.disableVault()
+                        .invokeOnCompletion {
+                            snackbar(context.stringResource(R.string.vault_is_disabled), R.drawable.ic_round_shield_24)
+                            navController?.navigateUp()
+                        }
+                }
+
+            val isBioAuthSupported = BiometricManager.from(context)
+                .canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK) == BiometricManager.BIOMETRIC_SUCCESS
+
             setContent {
                 val timeout by viewModel.vaultTimeout.collectAsState()
                 val timeoutText = when (timeout) {
@@ -43,8 +57,6 @@ class VaultSettingsFragment : Fragment() {
                     VaultTimeout.After4Hours -> stringResource(id = R.string.after_4_hours)
                     VaultTimeout.After12Hours -> stringResource(id = R.string.after_12_hours)
                 }
-                val isBioAuthSupported = BiometricManager.from(context)
-                    .canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_WEAK) == BiometricManager.BIOMETRIC_SUCCESS
                 val isBioAuthEnabled by viewModel.isBioAuthEnabled.collectAsState()
                 Screen(title = stringResource(id = R.string.vault)) {
                     SettingsSection {
@@ -67,6 +79,27 @@ class VaultSettingsFragment : Fragment() {
                                 onClick = { viewModel.toggleIsBioAuthEnabled() }
                             )
                         }
+                    }
+
+                    SettingsSection {
+                        val disableVaultConfirmation = stringResource(id = R.string.disable_vault_confirmation)
+                        val disableVaultDescription = stringResource(id = R.string.disable_vault_description)
+                        val disableVaultText = stringResource(id = R.string.disable_vault)
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.disable),
+                            type = SettingsItemType.None,
+                            onClick = {
+                                navController?.navigateSafely(
+                                    VaultSettingsFragmentDirections.actionVaultSettingsFragmentToConfirmationDialogFragment(
+                                        confirmation = disableVaultConfirmation,
+                                        description = disableVaultDescription,
+                                        btnText = disableVaultText,
+                                    )
+                                )
+                            },
+                            titleColor = MaterialTheme.colorScheme.warning
+                        )
                     }
                 }
             }

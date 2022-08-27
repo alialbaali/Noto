@@ -264,9 +264,14 @@ class SettingsRepositoryImpl(
         }
     }
 
-    override suspend fun updateVaultPasscode(passcode: String) {
+    override suspend fun updateVaultPasscode(passcode: String?) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.VaultPasscode] = passcode }
+            storage.edit { preferences ->
+                if (passcode != null)
+                    preferences[SettingsKeys.VaultPasscode] = passcode
+                else
+                    preferences.remove(SettingsKeys.VaultPasscode)
+            }
         }
     }
 

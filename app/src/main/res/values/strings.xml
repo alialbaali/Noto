@@ -139,7 +139,7 @@
     <string name="credits">Credits</string>
 
     <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
-<!--    <string name="releases_details">For more details, click here.</string>-->
+    <!--    <string name="releases_details">For more details, click here.</string>-->
 
     <!-- Folder -->
     <string name="folders">Folders</string>
@@ -200,6 +200,12 @@
     <string name="use_bio">Use biometrics</string>
     <string name="validate">Validate</string>
     <string name="vault">Vault</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">Disable vault</string>
+    <string name="vault_is_disabled">Vault has been disabled.</string>
+    <string name="disable">Disable</string>
+    <string name="disable_vault_confirmation">Are you sure you want to disable the vault?</string>
+    <string name="disable_vault_description">This action can\'t be undone and will disable the vault and move all of the folders outside the vault.</string>
     <string name="vault_is_open">Vault is open</string>
     <string name="immediately">Immediately</string>
     <string name="on_app_close">On app close</string>

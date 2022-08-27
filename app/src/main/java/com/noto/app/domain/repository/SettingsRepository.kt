@@ -79,7 +79,7 @@ interface SettingsRepository {
 
     suspend fun updateIcon(icon: Icon)
 
-    suspend fun updateVaultPasscode(passcode: String)
+    suspend fun updateVaultPasscode(passcode: String?)
 
     suspend fun updateVaultTimeout(timeout: VaultTimeout)
 

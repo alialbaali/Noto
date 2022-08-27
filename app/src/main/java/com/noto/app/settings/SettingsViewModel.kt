@@ -189,4 +189,15 @@ class SettingsViewModel(
     fun setFolderIdType(type: FolderIdType) {
         folderIdType = type
     }
+
+    fun disableVault() = viewModelScope.launch {
+        folderRepository.getAllFolders().first()
+            .map { it.copy(isVaulted = false) }
+            .forEach { folderRepository.updateFolder(it) }
+        settingsRepository.updateVaultPasscode(passcode = null)
+        settingsRepository.updateVaultTimeout(timeout = VaultTimeout.Immediately)
+        settingsRepository.updateScheduledVaultTimeout(timeout = null)
+        settingsRepository.updateIsBioAuthEnabled(isEnabled = false)
+        settingsRepository.updateIsVaultOpen(isOpen = false)
+    }
 }

@@ -45,6 +45,9 @@ private val Theme.colorScheme: ColorScheme
         }
     }
 
+val ColorScheme.warning: Color
+    get() = Color(0xFFFFA726)
+
 private val lightColorScheme = lightColorScheme(
     primary = Color.Black,
     onPrimary = Color.White,
