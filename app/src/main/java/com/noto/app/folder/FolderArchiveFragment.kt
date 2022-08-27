@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -62,6 +63,14 @@ class FolderArchiveFragment : Fragment() {
             tvFolderNotesCountRtl.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
             setupArchivedNotes(archivedNotes.map { it.sorted(folder.sortingType, folder.sortingOrder) }, font, folder)
         }.launchIn(lifecycleScope)
+
+        if (isCurrentLocaleArabic()) {
+            tvFolderNotesCount.isVisible = false
+            tvFolderNotesCountRtl.isVisible = true
+        } else {
+            tvFolderNotesCount.isVisible = true
+            tvFolderNotesCountRtl.isVisible = false
+        }
     }
 
     private fun FolderArchiveFragmentBinding.setupListeners() {
