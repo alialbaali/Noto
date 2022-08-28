@@ -11,17 +11,12 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.core.graphics.drawable.toBitmap
-import androidx.core.graphics.drawable.toBitmapOrNull
 import androidx.fragment.app.Fragment
 import com.noto.app.R
 import com.noto.app.components.Screen
-import com.noto.app.util.drawableResource
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
 import com.noto.app.util.setupMixedTransitions
@@ -34,6 +29,7 @@ private const val RedditUrl = "https://reddit.com/r/notoapp"
 private const val TranslationInviteUrl = "https://crwd.in/notoapp"
 private const val BuyMeACoffeeUrl = "https://www.buymeacoffee.com/alialbaali"
 private const val BecomeAPatronUrl = "https://www.patreon.com/alialbaali"
+private const val PrivacyPolicyUrl = "https://github.com/alialbaali/Noto/blob/master/PrivacyPolicy.md"
 
 class AboutSettingsFragment : Fragment() {
 
@@ -145,6 +141,15 @@ class AboutSettingsFragment : Fragment() {
 
                     SettingsSection {
                         SettingsItem(
+                            title = stringResource(id = R.string.privacy_policy),
+                            type = SettingsItemType.Icon(painterResource(id = R.drawable.ic_round_policy_24)),
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(PrivacyPolicyUrl))
+                                startActivity(intent)
+                            }
+                        )
+
+                        SettingsItem(
                             title = stringResource(id = R.string.license),
                             type = SettingsItemType.Text(stringResource(id = R.string.license_value)),
                             onClick = {
@@ -152,9 +157,7 @@ class AboutSettingsFragment : Fragment() {
                                 startActivity(intent)
                             }
                         )
-                    }
 
-                    SettingsSection {
                         SettingsItem(
                             title = stringResource(id = R.string.version),
                             type = version?.let { SettingsItemType.Text(it) } ?: SettingsItemType.None,

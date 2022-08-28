@@ -89,6 +89,7 @@
     <string name="app_icons">App Icons</string>
     <string name="app_icons_value" translatable="false">Collections of Gradients</string>
     <string name="developer_name" translatable="false">Ali Albaali</string>
+    <string name="privacy_policy">Privacy policy</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">License</string>
     <string name="license_value" translatable="false">Apache License 2.0</string>
