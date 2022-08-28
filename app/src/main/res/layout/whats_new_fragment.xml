@@ -21,18 +21,18 @@
             app:navigationIcon="@drawable/ic_round_back_24"
             app:title="@string/whats_new" />
 
-<!--        <com.google.android.material.textview.MaterialTextView-->
-<!--            android:id="@+id/tv_more_details"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:padding="@dimen/spacing_normal"-->
-<!--            android:layout_margin="@dimen/spacing_normal"-->
-<!--            android:background="@drawable/generic_shape"-->
-<!--            android:text="@string/releases_details"-->
-<!--            android:textSize="@dimen/size_small"-->
-<!--            android:textColor="?attr/notoPrimaryColor"-->
-<!--            app:fontFamily="@font/nunito_semibold"-->
-<!--            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />-->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_more_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_normal"
+            android:layout_margin="@dimen/spacing_normal"
+            android:background="@drawable/generic_shape"
+            android:text="@string/releases_details"
+            android:textSize="@dimen/size_small"
+            android:textColor="?attr/notoPrimaryColor"
+            app:fontFamily="@font/nunito_semibold"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
