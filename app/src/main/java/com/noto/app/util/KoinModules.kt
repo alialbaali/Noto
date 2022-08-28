@@ -9,13 +9,14 @@ import com.noto.app.allnotes.AllNotesViewModel
 import com.noto.app.data.database.NotoDatabase
 import com.noto.app.data.repository.*
 import com.noto.app.domain.repository.*
-import com.noto.app.domain.source.LocalLabelDataSource
 import com.noto.app.domain.source.LocalFolderDataSource
+import com.noto.app.domain.source.LocalLabelDataSource
 import com.noto.app.domain.source.LocalNoteDataSource
 import com.noto.app.domain.source.LocalNoteLabelDataSource
-import com.noto.app.label.LabelViewModel
 import com.noto.app.folder.FolderViewModel
+import com.noto.app.label.LabelViewModel
 import com.noto.app.main.MainViewModel
+import com.noto.app.note.NotePagerViewModel
 import com.noto.app.note.NoteViewModel
 import com.noto.app.recentnotes.RecentNotesViewModel
 import com.noto.app.settings.SettingsViewModel
@@ -49,6 +50,8 @@ val appModule = module {
     viewModel { AllNotesViewModel(get(), get(), get(), get(), get()) }
 
     viewModel { RecentNotesViewModel(get(), get(), get(), get(), get()) }
+
+    viewModel { NotePagerViewModel(get(), get(), get(), it[0], it[1]) }
 }
 
 val repositoryModule = module {

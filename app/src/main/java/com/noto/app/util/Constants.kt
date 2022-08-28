@@ -18,6 +18,9 @@ object Constants {
     const val NoteTitle = "NoteTitle"
     const val NoteBody = "NoteBody"
     const val IsSelection = "IsSelection"
+    const val ScrollPosition = "ScrollPosition"
+    const val IsTitleVisible = "IsTitleVisible"
+    const val IsBodyVisible = "IsBodyVisible"
 
     object Intent {
         const val ActionCreateFolder = "com.noto.intent.action.CREATE_FOLDER"

@@ -116,7 +116,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvOpenInReadingMode.setOnClickListener {
             dismiss()
             navController?.navigateSafely(
-                NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReadingModeFragment(
+                NoteDialogFragmentDirections.actionNoteDialogFragmentToNotePagerFragment(
                     args.folderId,
                     args.noteId
                 )

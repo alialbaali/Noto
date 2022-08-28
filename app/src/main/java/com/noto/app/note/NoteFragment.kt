@@ -336,7 +336,7 @@ class NoteFragment : Fragment() {
                 R.id.reading_mode -> {
                     setupFadeTransition()
                     navController
-                        ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReadingModeFragment(args.folderId, viewModel.note.value.id))
+                        ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNotePagerFragment(args.folderId, viewModel.note.value.id))
                     true
                 }
                 R.id.more -> {

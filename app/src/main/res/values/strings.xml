@@ -124,6 +124,8 @@
     <string name="folder_archive">%s archive</string>
     <string name="unarchive">Unarchive</string>
     <string name="edit">Edit</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
     <string name="pin">Pin</string>
     <!-- Merge multiple notes into a new note. -->
     <string name="merge">Merge</string>

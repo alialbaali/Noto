@@ -7,26 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/abl"
-        style="@style/AppBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/tb"
-            style="@style/Toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:navigationContentDescription="@string/back"
-            app:navigationIcon="@drawable/ic_round_back_24"
-            tools:title="General" />
-    </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nsv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="64dp"
         android:scrollbarThumbVertical="@drawable/scrollbars_shape"
         android:scrollbars="vertical"
         android:scrollbarSize="@dimen/spacing_extra_small"
@@ -75,17 +60,5 @@
                 tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/spacing_normal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/edit"
-        android:src="@drawable/ic_round_edit_24"
-        app:backgroundTint="@color/colorPrimary"
-        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-        app:tint="?attr/notoBackgroundColor" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

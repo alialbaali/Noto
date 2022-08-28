@@ -92,8 +92,8 @@
             android:id="@+id/action_folderFragment_to_noteSelectionDialogFragment"
             app:destination="@id/noteSelectionDialogFragment" />
         <action
-            android:id="@+id/action_folderFragment_to_noteReadingModeFragment"
-            app:destination="@id/noteReadingModeFragment" />
+            android:id="@+id/action_folderFragment_to_notePagerFragment"
+            app:destination="@id/notePagerFragment" />
     </fragment>
     <fragment
         android:id="@+id/newFolderFragment"
@@ -135,9 +135,6 @@
             app:argType="string"
             app:nullable="true" />
         <action
-            android:id="@+id/action_noteFragment_to_noteReadingModeFragment"
-            app:destination="@id/noteReadingModeFragment" />
-        <action
             android:id="@+id/action_noteFragment_to_newLabelDialogFragment"
             app:destination="@id/newLabelDialogFragment" />
         <action
@@ -166,6 +163,11 @@
         <action
             android:id="@+id/action_noteFragment_to_undoRedoDialogFragment"
             app:destination="@id/undoRedoDialogFragment" />
+        <action
+            android:id="@+id/action_noteFragment_to_notePagerFragment"
+            app:destination="@id/notePagerFragment"
+            app:popUpTo="@id/notePagerFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/folderArchiveFragment"
@@ -214,15 +216,15 @@
             android:name="destination"
             app:argType="reference" />
         <action
-            android:id="@+id/action_noteDialogFragment_to_noteReadingModeFragment"
-            app:destination="@id/noteReadingModeFragment" />
-        <action
             android:id="@+id/action_noteDialogFragment_to_selectFolderDialogFragment"
             app:destination="@id/selectFolderDialogFragment" />
         <argument
             android:name="is_selection_enabled"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_noteDialogFragment_to_notePagerFragment"
+            app:destination="@id/notePagerFragment" />
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"
@@ -296,11 +298,6 @@
         <argument
             android:name="note_id"
             app:argType="long" />
-        <action
-            android:id="@+id/action_noteReadingModeFragment_to_noteFragment"
-            app:destination="@id/noteFragment"
-            app:popUpTo="@id/noteFragment"
-            app:popUpToInclusive="true" />
     </fragment>
     <dialog
         android:id="@+id/selectFolderDialogFragment"
@@ -669,7 +666,7 @@
     <fragment
         android:id="@+id/aboutSettingsFragment"
         android:name="com.noto.app.settings.AboutSettingsFragment"
-        android:label="AboutSettingsFragment" >
+        android:label="AboutSettingsFragment">
         <action
             android:id="@+id/action_aboutSettingsFragment_to_translationsSettingsFragment"
             app:destination="@id/translationsSettingsFragment" />
@@ -685,4 +682,18 @@
         android:id="@+id/creditsSettingsFragment"
         android:name="com.noto.app.settings.CreditsSettingsFragment"
         android:label="CreditsSettingsFragment" />
+    <fragment
+        android:id="@+id/notePagerFragment"
+        android:name="com.noto.app.note.NotePagerFragment"
+        android:label="NotePagerFragment">
+        <argument
+            android:name="folder_id"
+            app:argType="long" />
+        <argument
+            android:name="note_id"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_notePagerFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </fragment>
 </navigation>

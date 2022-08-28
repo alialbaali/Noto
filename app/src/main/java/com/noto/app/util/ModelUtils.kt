@@ -76,6 +76,16 @@ fun List<NoteItemModel>.sorted(sortingType: NoteListSortingType, sortingOrder: S
     }
 }
 
+@JvmName("sortedWith")
+fun List<Note>.sorted(sortingType: NoteListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { note ->
+    when (sortingType) {
+        NoteListSortingType.Manual -> note.position
+        NoteListSortingType.CreationDate -> note.creationDate
+        NoteListSortingType.Alphabetical -> note.title.ifBlank { note.body }
+        NoteListSortingType.AccessDate -> note.accessDate
+    }
+}
+
 fun List<NoteItemModel>.filterSelectedLabels(selectedLabels: List<Label>, filteringType: FilteringType) = filter { model ->
     if (selectedLabels.isNotEmpty()) {
         when (filteringType) {

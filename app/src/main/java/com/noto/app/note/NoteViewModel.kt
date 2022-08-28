@@ -44,15 +44,6 @@ class NoteViewModel(
     private val mutableLabels = MutableStateFlow<Map<Label, Boolean>>(emptyMap())
     val labels get() = mutableLabels.asStateFlow()
 
-    val isDoNotDisturb = settingsRepository.isDoNotDisturb
-        .stateIn(viewModelScope, SharingStarted.Lazily, false)
-
-    val isScreenOn = settingsRepository.isScreenOn
-        .stateIn(viewModelScope, SharingStarted.Lazily, true)
-
-    val isFullScreen = settingsRepository.isFullScreen
-        .stateIn(viewModelScope, SharingStarted.Lazily, true)
-
     val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
