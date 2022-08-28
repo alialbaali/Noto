@@ -35,6 +35,9 @@ class NotePagerViewModel(
     val isFullScreen = settingsRepository.isFullScreen
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
+    val isDimScreen = settingsRepository.isDimScreen
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
     private val mutableSelectedId = MutableStateFlow(noteId)
     val selectedId get() = mutableSelectedId.asStateFlow()
 

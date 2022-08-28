@@ -144,6 +144,11 @@ class SettingsRepositoryImpl(
         .map { it ?: Folder.GeneralFolderId }
         .flowOn(dispatcher)
 
+    override val isDimScreen: Flow<Boolean> = storage.data
+        .map { preferences -> preferences[SettingsKeys.IsDimScreen] }
+        .map { it ?: false }
+        .flowOn(dispatcher)
+
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
         return storage.data
             .map { preferences -> preferences[SettingsKeys.Widget.FolderId(widgetId)] }
@@ -433,6 +438,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateQuickNoteFolderId(folderId: Long) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.QuickNoteFolderId] = folderId }
+        }
+    }
+
+    override suspend fun updateIsDimScreen(isDimScreen: Boolean) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.IsDimScreen] = isDimScreen }
         }
     }
 

@@ -123,6 +123,17 @@ class NotePagerFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
+        viewModel.isDimScreen
+            .onEach { isDimScreen ->
+                val layoutParams = activity?.window?.attributes
+                activity?.window?.attributes = if (isDimScreen) {
+                    layoutParams?.apply { screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_OFF }
+                } else {
+                    layoutParams?.apply { screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE }
+                }
+            }
+            .launchIn(lifecycleScope)
+
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Int>(Constants.ScrollPosition)
             ?.observe(viewLifecycleOwner) { scrollPosition -> abl.isLifted = scrollPosition != 0 }
@@ -190,6 +201,7 @@ class NotePagerFragment : Fragment() {
         super.onDetach()
         windowInsetsController?.show(WindowInsetsCompat.Type.systemBars())
         activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        activity?.window?.attributes = activity?.window?.attributes?.apply { screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notificationManager.isNotificationPolicyAccessGranted)
             notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
     }

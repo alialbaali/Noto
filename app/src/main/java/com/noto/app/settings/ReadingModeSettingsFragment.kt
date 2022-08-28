@@ -61,6 +61,7 @@ class ReadingModeSettingsFragment : Fragment() {
                 val doNotDisturbEnabled by viewModel.isDoNotDisturb.collectAsState()
                 val keepScreenOnEnabled by viewModel.isScreenOn.collectAsState()
                 val fullScreenEnabled by viewModel.isFullScreen.collectAsState()
+                val dimScreenEnabled by viewModel.isDimScreen.collectAsState()
                 Screen(title = stringResource(id = R.string.reading_mode)) {
                     SettingsSection {
                         if (isDoNotDisturbSupported) {
@@ -81,6 +82,12 @@ class ReadingModeSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.full_screen),
                             type = SettingsItemType.Switch(isChecked = fullScreenEnabled),
                             onClick = { viewModel.toggleFullScreen() }
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.dim_screen),
+                            type = SettingsItemType.Switch(isChecked = dimScreenEnabled),
+                            onClick = { viewModel.toggleDimScreen() }
                         )
                     }
                 }

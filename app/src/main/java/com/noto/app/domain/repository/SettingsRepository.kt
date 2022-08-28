@@ -49,6 +49,8 @@ interface SettingsRepository {
 
     val quickNoteFolderId: Flow<Long>
 
+    val isDimScreen: Flow<Boolean>
+
     fun getWidgetFolderId(widgetId: Int): Flow<Long>
 
     fun getIsWidgetCreated(widgetId: Int): Flow<Boolean>
@@ -132,4 +134,6 @@ interface SettingsRepository {
     suspend fun updateWidgetFilteringType(widgetId: Int, filteringType: FilteringType)
 
     suspend fun updateQuickNoteFolderId(folderId: Long)
+
+    suspend fun updateIsDimScreen(isDimScreen: Boolean)
 }

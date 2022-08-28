@@ -28,6 +28,7 @@ object SettingsKeys {
     val AllNotesScrollingPosition = intPreferencesKey("AllNotesScrollingPosition")
     val RecentNotesScrollingPosition = intPreferencesKey("RecentNotesScrollingPosition")
     val QuickNoteFolderId = longPreferencesKey("QuickNoteFolderId")
+    val IsDimScreen = booleanPreferencesKey("IsDimScreen")
 
     @Suppress("FunctionName")
     object Widget {

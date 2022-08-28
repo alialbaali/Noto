@@ -356,6 +356,7 @@
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Keep screen on</string>
     <string name="full_screen">Go full screen</string>
+    <string name="dim_screen">Dim screen</string>
     <string name="show">Show</string>
     <string name="hide">Hide</string>
     <string name="permission_not_granted">Permission hasn\'t been granted</string>

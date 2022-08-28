@@ -49,6 +49,9 @@ class SettingsViewModel(
 
     val isFullScreen = settingsRepository.isFullScreen
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
+    
+    val isDimScreen = settingsRepository.isDimScreen
+        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
     val vaultPasscode = settingsRepository.vaultPasscode
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
@@ -88,6 +91,10 @@ class SettingsViewModel(
 
     fun toggleFullScreen() = viewModelScope.launch {
         settingsRepository.updateIsFullScreen(!isFullScreen.value)
+    }
+
+    fun toggleDimScreen() = viewModelScope.launch {
+        settingsRepository.updateIsDimScreen(!isDimScreen.value)
     }
 
     suspend fun exportJson(): String = withContext(Dispatchers.IO) {
