@@ -2,21 +2,48 @@ package com.noto.app.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.unit.sp
 import com.noto.app.NotoTheme
 
 @Composable
 fun SettingsSection(
     modifier: Modifier = Modifier,
     title: String? = null,
+    painter: Painter? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.medium)) {
-        if (title != null) Text(text = title, modifier = Modifier.padding(horizontal = NotoTheme.dimensions.medium), style = MaterialTheme.typography.titleSmall)
+        if (title != null) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text(
+                    text = title,
+                    modifier = Modifier.padding(horizontal = NotoTheme.dimensions.medium),
+                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
+                )
+
+                if (painter != null) {
+                    Icon(
+                        painter = painter,
+                        contentDescription = title,
+                        modifier = Modifier.clip(MaterialTheme.shapes.extraSmall),
+                        tint = Color.Unspecified,
+                    )
+                }
+            }
+        }
 
         Column(
             modifier = Modifier
