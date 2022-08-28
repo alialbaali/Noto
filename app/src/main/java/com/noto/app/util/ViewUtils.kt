@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.content.res.Resources
 import android.graphics.Rect
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
@@ -24,6 +25,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.core.graphics.ColorUtils
+import androidx.core.os.ConfigurationCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -48,7 +50,6 @@ import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
-import java.util.*
 import kotlin.math.absoluteValue
 
 const val SetColorFilterMethodName = "setColorFilter"
@@ -397,7 +398,12 @@ fun NavController.destinationAsFlow() = callbackFlow {
     awaitClose { removeOnDestinationChangedListener(listener) }
 }
 
-fun isCurrentLocaleArabic() = Locale.getDefault() == Locale("ar")
+fun isCurrentLocaleArabic(): Boolean {
+    val configuration = Resources.getSystem().configuration
+    val locales = ConfigurationCompat.getLocales(configuration)
+    val selectedLocale = locales[0]
+    return selectedLocale?.language == "ar"
+}
 
 fun EditTextWithSelectionChangedListener.textSelectionAsFlow() = callbackFlow {
     val listener: (String?) -> Unit = { selectedText -> trySend(selectedText) }
