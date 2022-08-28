@@ -133,6 +133,7 @@ dependencies {
     kapt(Libraries.Main.EpoxyProcessor)
     implementation(AndroidX.Room.runtime)
     implementation(AndroidX.Room.ktx)
+    implementation(AndroidX.viewPager2)
     ksp(AndroidX.Room.compiler)
     implementation(KotlinX.datetime)
     implementation("com.google.android:flexbox:2.0.1")

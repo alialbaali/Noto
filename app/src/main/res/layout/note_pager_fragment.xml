@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cool"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/abl"
+        style="@style/AppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/tb"
+            style="@style/Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationContentDescription="@string/back"
+            app:navigationIcon="@drawable/ic_round_back_24"
+            tools:title="General" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_gravity="top|end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:translationY="-16dp"
+        android:translationX="-16dp"
+        android:contentDescription="@string/edit"
+        android:src="@drawable/ic_round_edit_24"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_anchor="@id/fab_next"
+        app:layout_anchorGravity="end"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:tint="?attr/notoBackgroundColor" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_next"
+        style="@style/ExtendedFab"
+        android:layout_gravity="end|bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal"
+        android:contentDescription="@string/next"
+        android:text="@string/next"
+        android:textColor="?attr/notoPrimaryColor"
+        app:backgroundTint="?attr/notoBackgroundColor"
+        app:icon="@drawable/ic_round_arrow_forward_24"
+        app:iconGravity="end"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:tint="?attr/notoPrimaryColor" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fab_previous"
+        style="@style/ExtendedFab"
+        android:layout_gravity="start|bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_normal"
+        android:contentDescription="@string/next"
+        android:text="@string/previous"
+        android:textColor="?attr/notoPrimaryColor"
+        app:backgroundTint="?attr/notoBackgroundColor"
+        app:icon="@drawable/ic_round_arrow_back_24"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:tint="?attr/notoPrimaryColor" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
