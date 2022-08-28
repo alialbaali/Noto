@@ -4,6 +4,9 @@
 
 ## Download
 
+You can download Noto from [Github](https://github.com/alialbaali/Noto/releases/latest) or Google Play using the
+following link:
+
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="80">](https://play.google.com/store/apps/details?id=com.noto)
 
 ## Motivation
@@ -123,6 +126,16 @@ Contains all the UI logic.
 <img src="images/Frame%207.png" height="400"  alt="screenshot"/>
 <img src="images/Frame%208.png" height="400"  alt="screenshot"/>
 </p>
+
+## Support
+
+<a href="https://www.patreon.com/alialbaali">
+  <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="235"/>
+</a>
+
+<a href="https://www.buymeacoffee.com/alialbaali" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="200">
+</a>
 
 ## License
 
