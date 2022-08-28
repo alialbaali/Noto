@@ -80,6 +80,7 @@ class GeneralSettingsFragment : Fragment() {
                     Language.Spanish -> stringResource(id = R.string.spanish)
                     Language.French -> stringResource(id = R.string.french)
                     Language.German -> stringResource(id = R.string.german)
+                    Language.Italian -> stringResource(id = R.string.italian)
                 }
                 val icon by viewModel.icon.collectAsState()
                 val iconText = when (icon) {

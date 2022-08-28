@@ -19,6 +19,7 @@ import com.noto.app.util.setupMixedTransitions
 private const val TurkishTranslatorWebsite = "https://linkedin.com/in/nuraysabri"
 private const val TurkishProofreaderWebsite = "https://sakci.me"
 private const val SpanishTranslatorWebsite = "https://github.com/faus32"
+private const val ItalianTranslatorWebsite = "https://github.com/matteolomba"
 private const val FrenchTranslatorWebsite = "https://github.com/kernoeb"
 private const val FrenchTranslator2Website = "https://geoffreycrofte.com"
 private const val ArabicTranslatorWebsite = "https://twitter.com/trjman_en"
@@ -115,6 +116,17 @@ class TranslationsSettingsFragment : Fragment() {
                             type = SettingsItemType.None,
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(FrenchTranslator2Website))
+                                startActivity(intent)
+                            }
+                        )
+                    }
+
+                    SettingsSection(title = stringResource(id = R.string.italian), painter = painterResource(id = R.drawable.ic_italy)) {
+                        SettingsItem(
+                            title = stringResource(id = R.string.italian_translator),
+                            type = SettingsItemType.None,
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ItalianTranslatorWebsite))
                                 startActivity(intent)
                             }
                         )
