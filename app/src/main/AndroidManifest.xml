@@ -42,7 +42,7 @@
             android:theme="@style/TransparentTheme"
             android:exported="true">
 
-            <intent-filter android:label="@string/save_to_noto">
+            <intent-filter android:label="@string/quick_note">
                 <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/*" />
