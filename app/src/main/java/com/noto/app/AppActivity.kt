@@ -1,10 +1,13 @@
 package com.noto.app
 
+import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.core.content.pm.ShortcutInfoCompat
+import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -156,11 +159,11 @@ class AppActivity : BaseActivity() {
             .onEach { language -> setupLanguage(language) }
             .launchIn(lifecycleScope)
 
-        if (!BuildConfig.DEBUG) {
-            viewModel.icon
-                .onEach { icon -> if (icon != viewModel.currentIcon.await()) setupIcon(icon) }
-                .launchIn(lifecycleScope)
-        }
+//        if (!BuildConfig.DEBUG) {
+        viewModel.icon
+            .onEach { icon -> if (icon != viewModel.currentIcon.await()) setupIcon(icon) }
+            .launchIn(lifecycleScope)
+//        }
 
         combine(
             viewModel.lastVersion,
@@ -258,6 +261,7 @@ class AppActivity : BaseActivity() {
         navController.setGraph(graph, args)
     }
 
+    @SuppressLint("RestrictedApi")
     private fun setupIcon(icon: Icon) {
         // Disable current icon.
         packageManager?.setComponentEnabledSetting(
@@ -272,5 +276,21 @@ class AppActivity : BaseActivity() {
             PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
             PackageManager.DONT_KILL_APP,
         )
+
+        updatePinnedShortcuts()
+    }
+
+    private fun updatePinnedShortcuts() {
+        ShortcutManagerCompat.getShortcuts(this, ShortcutManagerCompat.FLAG_MATCH_PINNED)
+            .map {
+                val intent = it.intent.setComponent(enabledComponentName)
+                ShortcutInfoCompat.Builder(it)
+                    .setActivity(enabledComponentName)
+                    .setIntent(intent)
+                    .build()
+            }
+            .also { shortcuts ->
+                ShortcutManagerCompat.updateShortcuts(this, shortcuts)
+            }
     }
 }
