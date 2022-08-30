@@ -18,7 +18,6 @@ import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Layout
 import com.noto.app.getOrDefault
-import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -61,7 +60,7 @@ class FolderArchiveFragment : Fragment() {
             val notesCount = archivedNotes.getOrDefault(emptyList()).count()
             tvFolderNotesCount.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
             tvFolderNotesCountRtl.text = context?.quantityStringResource(R.plurals.notes_count, notesCount, notesCount)
-            setupArchivedNotes(archivedNotes.map { it.sorted(folder.sortingType, folder.sortingOrder) }, font, folder)
+            setupArchivedNotes(archivedNotes, font, folder)
         }.launchIn(lifecycleScope)
 
         if (isCurrentLocaleArabic()) {
