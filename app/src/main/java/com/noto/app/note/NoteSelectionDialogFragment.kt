@@ -22,7 +22,6 @@ import com.noto.app.UiState
 import com.noto.app.databinding.NoteSelectionDialogFragmentBinding
 import com.noto.app.folder.FolderViewModel
 import com.noto.app.folder.noteItem
-import com.noto.app.getOrDefault
 import com.noto.app.label.labelItem
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -49,7 +48,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
     private val folderColor by lazy { viewModel.folder.value.color }
 
     private val selectedNotes
-        get() = viewModel.notes.value.getOrDefault(emptyList()).map { it.note }
+        get() = viewModel.selectedNotes.map { it.note }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,7 +71,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
             viewModel.font,
         ) { folder, notesState, font ->
             if (notesState is UiState.Success) {
-                val notes = notesState.value.map { it.copy(isSelected = false) }
+                val notes = notesState.value.filter { it.isSelected }.map { it.copy(isSelected = false) }
                 rv.withModels {
                     notes.forEach { model ->
                         noteItem {
