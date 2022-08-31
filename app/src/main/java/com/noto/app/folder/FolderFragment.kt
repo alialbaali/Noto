@@ -234,6 +234,7 @@ class FolderFragment : Fragment() {
         fabOptions.setOnClickListener {
             val selectedNoteIds = viewModel.notes.value.getOrDefault(emptyList())
                 .filter { model -> model.isSelected }
+                .sortedBy { it.selectionOrder }
                 .map { model -> model.note.id }
                 .toLongArray()
             if (selectedNoteIds.count() == 1) {

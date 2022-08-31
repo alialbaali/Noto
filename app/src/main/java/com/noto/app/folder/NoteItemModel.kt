@@ -7,4 +7,5 @@ data class NoteItemModel(
     val note: Note,
     val labels: List<Label>,
     val isSelected: Boolean,
+    val selectionOrder: Int = -1,
 )

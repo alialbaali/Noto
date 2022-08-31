@@ -105,6 +105,7 @@ class FolderViewModel(
         ) { notes, archivedNotes, labels, noteLabels ->
             mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, selectedNoteIds)
                 .filter { if (selectedNoteIds.isEmpty()) true else it.isSelected }
+                .sortedBy { selectedNoteIds.indexOf(it.note.id) }
                 .let { UiState.Success(it) }
             mutableArchivedNotes.value = archivedNotes.mapToNoteItemModel(labels, noteLabels).let { UiState.Success(it) }
         }.launchIn(viewModelScope)
@@ -293,16 +294,17 @@ class FolderViewModel(
         mutableIsSelection.value = false
         mutableNotes.value = notes.value.map {
             it.map { model ->
-                model.copy(isSelected = false)
+                model.copy(isSelected = false, selectionOrder = -1)
             }
         }
     }
 
     fun selectNote(id: Long) {
         mutableNotes.value = notes.value.map {
+            val selectionOrder = it.maxOf { it.selectionOrder }.plus(1)
             it.map { model ->
                 if (model.note.id == id)
-                    model.copy(isSelected = true)
+                    model.copy(isSelected = true, selectionOrder = selectionOrder)
                 else
                     model
             }
@@ -310,9 +312,10 @@ class FolderViewModel(
     }
 
     fun selectAllNotes() {
+        var selectionOrder = -1
         mutableNotes.value = notes.value.map {
             it.map { model ->
-                model.copy(isSelected = true)
+                model.copy(isSelected = true, selectionOrder = selectionOrder++)
             }
         }
     }
@@ -337,7 +340,7 @@ class FolderViewModel(
         mutableNotes.value = notes.value.map {
             it.map { model ->
                 if (model.note.id == id)
-                    model.copy(isSelected = false)
+                    model.copy(isSelected = false, selectionOrder = -1)
                 else
                     model
             }
