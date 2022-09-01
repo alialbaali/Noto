@@ -662,6 +662,9 @@
         <action
             android:id="@+id/action_noteSelectionDialogFragment_to_selectFolderDialogFragment"
             app:destination="@id/selectFolderDialogFragment" />
+        <action
+            android:id="@+id/action_noteSelectionDialogFragment_to_notePagerFragment"
+            app:destination="@id/notePagerFragment" />
     </dialog>
     <fragment
         android:id="@+id/aboutSettingsFragment"
@@ -692,6 +695,9 @@
         <argument
             android:name="note_id"
             app:argType="long" />
+        <argument
+            android:name="selected_note_ids"
+            app:argType="long[]" />
         <action
             android:id="@+id/action_notePagerFragment_to_noteFragment"
             app:destination="@id/noteFragment" />

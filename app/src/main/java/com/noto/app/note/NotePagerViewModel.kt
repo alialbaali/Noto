@@ -15,6 +15,7 @@ class NotePagerViewModel(
     private val settingsRepository: SettingsRepository,
     private val folderId: Long,
     private val noteId: Long,
+    private val selectedNoteIds: LongArray,
 ) : ViewModel() {
 
     val folder = folderRepository.getFolderById(folderId)
@@ -23,7 +24,11 @@ class NotePagerViewModel(
 
     val noteIds = noteRepository.getNotesByFolderId(folderId)
         .combine(folder) { notes, folder -> notes.sorted(folder.sortingType, folder.sortingOrder) }
-        .map { it.map { note -> note.id } }
+        .map {
+            it.map { note -> note.id }
+                .filter { id -> if (selectedNoteIds.isEmpty()) true else selectedNoteIds.contains(id) }
+                .sortedBy { id -> selectedNoteIds.indexOf(id) }
+        }
         .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     val isDoNotDisturb = settingsRepository.isDoNotDisturb

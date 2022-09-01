@@ -54,11 +54,20 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_merge_notes"
                     style="@style/DialogItem"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:text="@string/merge"
                     app:drawableTopCompat="@drawable/ic_round_merge_24" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_reading_mode"
+                    style="@style/DialogItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/reading_mode"
+                    app:drawableTopCompat="@drawable/ic_round_reading_mode_24" />
             </LinearLayout>
 
             <LinearLayout

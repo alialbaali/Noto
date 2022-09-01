@@ -51,7 +51,7 @@ val appModule = module {
 
     viewModel { RecentNotesViewModel(get(), get(), get(), get(), get()) }
 
-    viewModel { NotePagerViewModel(get(), get(), get(), it[0], it[1]) }
+    viewModel { NotePagerViewModel(get(), get(), get(), it[0], it[1], it[2]) }
 }
 
 val repositoryModule = module {

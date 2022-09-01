@@ -118,7 +118,8 @@ class NoteDialogFragment : BaseDialogFragment() {
             navController?.navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToNotePagerFragment(
                     args.folderId,
-                    args.noteId
+                    args.noteId,
+                    longArrayOf(),
                 )
             )
         }

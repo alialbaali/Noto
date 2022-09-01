@@ -28,7 +28,7 @@ import org.koin.core.parameter.parametersOf
 
 class NotePagerFragment : Fragment() {
 
-    private val viewModel by viewModel<NotePagerViewModel> { parametersOf(args.folderId, args.noteId) }
+    private val viewModel by viewModel<NotePagerViewModel> { parametersOf(args.folderId, args.noteId, args.selectedNoteIds) }
 
     private val args by navArgs<NotePagerFragmentArgs>()
 

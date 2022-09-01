@@ -351,7 +351,8 @@ class FolderFragment : Fragment() {
                                                 OpenNotesIn.ReadingMode -> navController?.navigateSafely(
                                                     FolderFragmentDirections.actionFolderFragmentToNotePagerFragment(
                                                         model.note.folderId,
-                                                        model.note.id
+                                                        model.note.id,
+                                                        longArrayOf()
                                                     )
                                                 )
                                             }

@@ -177,6 +177,17 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
     }
 
     fun NoteSelectionDialogFragmentBinding.setupListeners() {
+        tvReadingMode.setOnClickListener {
+            navController?.navigateSafely(
+                NoteSelectionDialogFragmentDirections.actionNoteSelectionDialogFragmentToNotePagerFragment(
+                    folderId = args.folderId,
+                    noteId = selectedNotes.first().id,
+                    selectedNoteIds = selectedNotes.map { it.id }.toLongArray()
+                )
+            )
+            dismiss()
+        }
+
         tvSelectAllNotes.setOnClickListener {
             navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.SelectAll, true)
             dismiss()
