@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.databinding.NoteReadingModeFragmentBinding
 import com.noto.app.domain.model.Folder
@@ -26,9 +25,11 @@ import org.koin.core.parameter.parametersOf
 
 class NoteReadingModeFragment : Fragment() {
 
-    private val viewModel by viewModel<NoteViewModel> { parametersOf(args.folderId, args.noteId) }
+    private val viewModel by viewModel<NoteViewModel> { parametersOf(folderId, noteId) }
 
-    private val args by navArgs<NoteReadingModeFragmentArgs>()
+    private val folderId by lazy { arguments?.getLong(Constants.FolderId) }
+
+    private val noteId by lazy { arguments?.getLong(Constants.NoteId) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteReadingModeFragmentBinding.inflate(inflater, container, false).withBinding {

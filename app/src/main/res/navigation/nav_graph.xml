@@ -288,17 +288,6 @@
             android:id="@+id/action_settingsFragment_to_aboutSettingsFragment"
             app:destination="@id/aboutSettingsFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/noteReadingModeFragment"
-        android:name="com.noto.app.note.NoteReadingModeFragment"
-        android:label="NoteReadModeFragment">
-        <argument
-            android:name="folder_id"
-            app:argType="long" />
-        <argument
-            android:name="note_id"
-            app:argType="long" />
-    </fragment>
     <dialog
         android:id="@+id/selectFolderDialogFragment"
         android:name="com.noto.app.main.SelectFolderDialogFragment"
