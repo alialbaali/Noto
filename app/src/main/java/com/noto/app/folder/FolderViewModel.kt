@@ -21,7 +21,7 @@ class FolderViewModel(
     private val noteLabelRepository: NoteLabelRepository,
     private val settingsRepository: SettingsRepository,
     private val folderId: Long,
-    private var selectedNoteIds: LongArray = longArrayOf(),
+    private val selectedNoteIds: LongArray = longArrayOf(),
 ) : ViewModel() {
 
     private val mutableFolder = MutableStateFlow(Folder(folderId, position = 0))

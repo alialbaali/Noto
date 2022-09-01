@@ -151,9 +151,14 @@ class FolderFragment : Fragment() {
 
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Long>(Constants.IsSelection)
-            ?.observe(viewLifecycleOwner) { noteId ->
-                viewModel.enableSelection()
-                viewModel.selectNote(noteId)
+            ?.run {
+                observe(viewLifecycleOwner) { noteId ->
+                    if (noteId != null) {
+                        viewModel.enableSelection()
+                        viewModel.selectNote(noteId)
+                        value = null
+                    }
+                }
             }
 
         viewModel.isSelection
