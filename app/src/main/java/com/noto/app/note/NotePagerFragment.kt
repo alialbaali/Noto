@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
-import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
@@ -33,8 +33,12 @@ class NotePagerFragment : Fragment() {
     private val args by navArgs<NotePagerFragmentArgs>()
 
     private val windowInsetsController by lazy {
-        activity?.window?.decorView?.let { view ->
-            ViewCompat.getWindowInsetsController(view)
+        val window = activity?.window
+        val view = window?.decorView
+        if (window != null && view != null) {
+            WindowCompat.getInsetsController(window, view)
+        } else {
+            null
         }
     }
 
