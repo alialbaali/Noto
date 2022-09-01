@@ -255,7 +255,7 @@ class FolderViewModel(
 
     fun selectLabel(id: Long) {
         mutableLabels.value = labels.value
-            .map { it.key to if (it.value) true else (it.key.id == id) }
+            .map { it.key to if (it.key.id == id) true else it.value }
             .toMap()
     }
 
