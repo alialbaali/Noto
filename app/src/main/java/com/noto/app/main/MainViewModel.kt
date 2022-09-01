@@ -124,7 +124,6 @@ class MainViewModel(
                 .filter { it.parentId == folder.id }
                 .mapRecursively(allFolders, foldersNotesCount, sortingType, sortingOrder)
                 .sorted(sortingType, sortingOrder)
-                .sortedByDescending { it.first.isPinned }
             folder.copy(folders = childLibraries) to notesCount
         }
     }

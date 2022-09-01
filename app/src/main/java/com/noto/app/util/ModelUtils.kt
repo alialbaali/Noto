@@ -29,9 +29,13 @@ private const val HashAlgorithm = "PBKDF2WithHmacSHA1"
 private const val HashIterationCount = 65536
 private const val HashKeyLength = 128
 
-inline fun <T> List<T>.sortByOrder(sortingOrder: SortingOrder, crossinline selector: (T) -> Comparable<*>?): List<T> = when (sortingOrder) {
-    SortingOrder.Ascending -> sortedWith(compareBy(selector))
-    SortingOrder.Descending -> sortedWith(compareByDescending(selector))
+inline fun <T> List<T>.sortByOrder(
+    sortingOrder: SortingOrder,
+    comparator: Comparator<T>,
+    crossinline selector: (T) -> Comparable<*>?,
+): List<T> = when (sortingOrder) {
+    SortingOrder.Ascending -> sortedWith(comparator.thenBy(selector))
+    SortingOrder.Descending -> sortedWith(comparator.thenByDescending(selector))
 }
 
 fun String?.firstLineOrEmpty() = this?.lines()?.firstOrNull()?.trim().orEmpty()
@@ -59,7 +63,10 @@ val Note.isValid
     get() = title.isNotBlank() || body.isNotBlank()
 
 @Suppress("DEPRECATION")
-fun List<Pair<Folder, Int>>.sorted(sortingType: FolderListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { pair ->
+fun List<Pair<Folder, Int>>.sorted(
+    sortingType: FolderListSortingType,
+    sortingOrder: SortingOrder,
+) = sortByOrder(sortingOrder, comparator = compareByDescending { it.first.isPinned }) { pair ->
     when (sortingType) {
         FolderListSortingType.Manual -> pair.first.position
         FolderListSortingType.CreationDate -> pair.first.creationDate
@@ -67,7 +74,10 @@ fun List<Pair<Folder, Int>>.sorted(sortingType: FolderListSortingType, sortingOr
     }
 }
 
-fun List<NoteItemModel>.sorted(sortingType: NoteListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { model ->
+fun List<NoteItemModel>.sorted(
+    sortingType: NoteListSortingType,
+    sortingOrder: SortingOrder,
+) = sortByOrder(sortingOrder, comparator = compareByDescending { it.note.isPinned }) { model ->
     when (sortingType) {
         NoteListSortingType.Manual -> model.note.position
         NoteListSortingType.CreationDate -> model.note.creationDate
@@ -77,7 +87,10 @@ fun List<NoteItemModel>.sorted(sortingType: NoteListSortingType, sortingOrder: S
 }
 
 @JvmName("sortedWith")
-fun List<Note>.sorted(sortingType: NoteListSortingType, sortingOrder: SortingOrder) = sortByOrder(sortingOrder) { note ->
+fun List<Note>.sorted(
+    sortingType: NoteListSortingType,
+    sortingOrder: SortingOrder,
+) = sortByOrder(sortingOrder, comparator = compareByDescending { it.isPinned }) { note ->
     when (sortingType) {
         NoteListSortingType.Manual -> note.position
         NoteListSortingType.CreationDate -> note.creationDate
