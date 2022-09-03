@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.noto.app.R
 import com.noto.app.UiState
+import com.noto.app.components.placeholderItem
 import com.noto.app.databinding.FolderArchiveFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font

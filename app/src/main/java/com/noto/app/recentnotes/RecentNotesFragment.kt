@@ -16,6 +16,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
 import com.noto.app.UiState
+import com.noto.app.components.headerItem
+import com.noto.app.components.placeholderItem
 import com.noto.app.databinding.RecentNotesFragmentBinding
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.NotoColor

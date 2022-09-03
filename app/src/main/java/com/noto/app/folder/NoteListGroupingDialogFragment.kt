@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.noto.app.BaseDialogFragment
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.NoteListGroupingDialogFragmentBinding
 import com.noto.app.domain.model.Grouping

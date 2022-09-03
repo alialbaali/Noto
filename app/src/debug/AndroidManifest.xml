@@ -39,7 +39,7 @@
         </activity>
 
         <activity
-            android:name=".TransparentActivity"
+            android:name=".components.TransparentActivity"
             android:theme="@style/TransparentTheme"
             android:exported="true">
 
@@ -317,7 +317,7 @@
         </activity>
 
         <receiver
-            android:name=".receiver.AlarmReceiver"
+            android:name=".note.NoteReminderReceiver"
             android:enabled="true"
             android:exported="false" />
 
@@ -357,12 +357,12 @@
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <receiver
-            android:name=".receiver.VaultReceiver"
+            android:name=".vault.VaultReceiver"
             android:enabled="true"
             android:exported="false" />
 
         <service
-            android:name=".tile.CreateNoteTileService"
+            android:name=".note.CreateNoteTileService"
             android:exported="true"
             android:icon="@drawable/ic_round_edit_24"
             android:roundIcon="@drawable/ic_round_edit_24"

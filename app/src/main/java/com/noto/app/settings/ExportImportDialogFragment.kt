@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.lifecycleScope
-import com.noto.app.BaseDialogFragment
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.ExportImportDialogFragmentBinding
 import com.noto.app.util.*

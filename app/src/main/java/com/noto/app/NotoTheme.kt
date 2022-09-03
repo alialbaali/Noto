@@ -5,11 +5,14 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.noto.app.domain.model.NotoColor
@@ -205,3 +208,14 @@ fun NotoColor.toColor() = when (this) {
     NotoColor.LightPink -> Color(0xFFFF80AB)
     NotoColor.Black -> if (isSystemInDarkTheme()) Color.White else Color.Black
 }
+
+@Immutable
+data class Dimensions(
+    val extraSmall: Dp = 4.dp,
+    val small: Dp = 8.dp,
+    val medium: Dp = 16.dp,
+    val large: Dp = 24.dp,
+    val extraLarge: Dp = 32.dp,
+)
+
+val LocalDimensions = staticCompositionLocalOf { Dimensions() }

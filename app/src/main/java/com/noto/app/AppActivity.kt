@@ -16,10 +16,11 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
+import com.noto.app.components.BaseActivity
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.*
 import com.noto.app.main.MainVaultFragment
-import com.noto.app.settings.VaultTimeoutWorker
+import com.noto.app.vault.VaultTimeoutWorker
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn

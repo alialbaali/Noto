@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.noto.app.BaseDialogFragment
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.MainDialogFragmentBinding
 import com.noto.app.util.*

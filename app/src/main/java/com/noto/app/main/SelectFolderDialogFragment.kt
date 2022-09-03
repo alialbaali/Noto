@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
+import com.noto.app.components.BaseDialogFragment
+import com.noto.app.components.genericItem
+import com.noto.app.components.placeholderItem
 import com.noto.app.databinding.SelectFolderDialogFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.map

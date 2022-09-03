@@ -20,6 +20,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
 import com.noto.app.R
 import com.noto.app.UiState
+import com.noto.app.components.placeholderItem
 import com.noto.app.databinding.FolderFragmentBinding
 import com.noto.app.domain.model.*
 import com.noto.app.getOrDefault

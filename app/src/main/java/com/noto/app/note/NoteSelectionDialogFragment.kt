@@ -16,7 +16,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.noto.app.BaseDialogFragment
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.databinding.NoteSelectionDialogFragmentBinding

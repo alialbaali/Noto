@@ -14,7 +14,7 @@ import com.noto.app.R
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.Note
-import com.noto.app.receiver.VaultReceiver
+import com.noto.app.vault.VaultReceiver
 
 private const val RemindersChannelId = "Reminders"
 private const val VaultChannelId = "Vault"

@@ -228,7 +228,7 @@
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"
-        android:name="com.noto.app.settings.ThemeDialogFragment"
+        android:name="com.noto.app.settings.general.ThemeDialogFragment"
         android:label="ThemeDialogFragment" />
     <dialog
         android:id="@+id/folderDialogFragment"
@@ -247,7 +247,7 @@
     </dialog>
     <dialog
         android:id="@+id/confirmationDialogFragment"
-        android:name="com.noto.app.ConfirmationDialogFragment"
+        android:name="com.noto.app.components.ConfirmationDialogFragment"
         android:label="ConfirmationDialogFragment">
         <argument
             android:name="confirmation"
@@ -325,7 +325,7 @@
     </dialog>
     <dialog
         android:id="@+id/fontDialogFragment"
-        android:name="com.noto.app.settings.FontDialogFragment"
+        android:name="com.noto.app.settings.general.FontDialogFragment"
         android:label="FontDialogFragment" />
     <dialog
         android:id="@+id/mainArchiveFragment"
@@ -431,7 +431,7 @@
     </dialog>
     <dialog
         android:id="@+id/languageDialogFragment"
-        android:name="com.noto.app.settings.LanguageDialogFragment"
+        android:name="com.noto.app.settings.general.LanguageDialogFragment"
         android:label="LanguageDialogFragment" />
     <dialog
         android:id="@+id/aboutDialogFragment"
@@ -447,7 +447,7 @@
     </dialog>
     <dialog
         android:id="@+id/progressIndicatorDialogFragment"
-        android:name="com.noto.app.ProgressIndicatorDialogFragment"
+        android:name="com.noto.app.components.ProgressIndicatorDialogFragment"
         android:label="ProgressIndicatorDialogFragment">
         <argument
             android:name="title"
@@ -476,15 +476,15 @@
     </dialog>
     <dialog
         android:id="@+id/vaultPasscodeDialogFragment"
-        android:name="com.noto.app.settings.VaultPasscodeDialogFragment"
+        android:name="com.noto.app.vault.VaultPasscodeDialogFragment"
         android:label="VaultPasscodeDialogFragment" />
     <dialog
         android:id="@+id/vaultTimeoutDialogFragment"
-        android:name="com.noto.app.settings.VaultTimeoutDialogFragment"
+        android:name="com.noto.app.settings.vault.VaultTimeoutDialogFragment"
         android:label="VaultTimeoutDialogFragment" />
     <dialog
         android:id="@+id/whatsNewDialogFragment"
-        android:name="com.noto.app.settings.WhatsNewDialogFragment"
+        android:name="com.noto.app.settings.whatsnew.WhatsNewDialogFragment"
         android:label="WhatsNewDialogFragment" />
     <fragment
         android:id="@+id/allNotesFragment"
@@ -587,11 +587,11 @@
     </dialog>
     <dialog
         android:id="@+id/iconDialogFragment"
-        android:name="com.noto.app.settings.IconDialogFragment"
+        android:name="com.noto.app.settings.general.IconDialogFragment"
         android:label="IconDialogFragment" />
     <fragment
         android:id="@+id/generalSettingsFragment"
-        android:name="com.noto.app.settings.GeneralSettingsFragment"
+        android:name="com.noto.app.settings.general.GeneralSettingsFragment"
         android:label="GeneralSettingsFragment">
         <action
             android:id="@+id/action_generalSettingsFragment_to_selectFolderDialogFragment"
@@ -611,7 +611,7 @@
     </fragment>
     <fragment
         android:id="@+id/vaultSettingsFragment"
-        android:name="com.noto.app.settings.VaultSettingsFragment"
+        android:name="com.noto.app.settings.vault.VaultSettingsFragment"
         android:label="VaultSettingsFragment">
         <action
             android:id="@+id/action_vaultSettingsFragment_to_vaultTimeoutDialogFragment"
@@ -629,11 +629,11 @@
         android:label="ReadingModeSettingsFragment" />
     <fragment
         android:id="@+id/whatsNewFragment"
-        android:name="com.noto.app.settings.WhatsNewFragment"
+        android:name="com.noto.app.settings.whatsnew.WhatsNewFragment"
         android:label="WhatsNewFragment" />
     <dialog
         android:id="@+id/validateVaultPasscodeDialogFragment"
-        android:name="com.noto.app.settings.ValidateVaultPasscodeDialogFragment"
+        android:name="com.noto.app.vault.ValidateVaultPasscodeDialogFragment"
         android:label="ValidateVaultPasscodeDialogFragment" />
     <dialog
         android:id="@+id/noteSelectionDialogFragment"

@@ -13,7 +13,7 @@ import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.noto.app.BaseDialogFragment
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.UndoRedoDialogFragmentBinding
 import com.noto.app.util.*

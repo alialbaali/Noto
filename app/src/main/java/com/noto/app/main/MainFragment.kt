@@ -17,9 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.noto.app.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
+import com.noto.app.components.BaseDialogFragment
+import com.noto.app.components.genericItem
 import com.noto.app.databinding.MainFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.FolderListSortingType

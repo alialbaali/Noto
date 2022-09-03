@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
-import com.noto.app.BaseDialogFragment
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.databinding.ReorderLabelDialogFragmentBinding
 import com.noto.app.domain.model.Label
