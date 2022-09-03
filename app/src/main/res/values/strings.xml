@@ -109,7 +109,9 @@
     <string name="folder_archive">%s archive</string>
     <string name="unarchive">Unarchive</string>
     <string name="edit">Edit</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
     <string name="next">Next</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
     <string name="previous">Previous</string>
     <string name="pin">Pin</string>
     <!-- Merge multiple notes into a new note. -->
@@ -189,9 +191,13 @@
     <string name="vault">Vault</string>
     <!-- An option to disable the vault in vault settings. -->
     <string name="disable_vault">Disable vault</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
     <string name="vault_is_disabled">Vault has been disabled.</string>
+    <!-- An option to disable the vault in vault settings. -->
     <string name="disable">Disable</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
     <string name="disable_vault_confirmation">Are you sure you want to disable the vault?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
     <string name="disable_vault_description">This action can\'t be undone and will disable the vault and move all of the folders outside the vault.</string>
     <string name="vault_is_open">Vault is open</string>
     <string name="immediately">Immediately</string>
@@ -339,6 +345,7 @@
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Keep screen on</string>
     <string name="full_screen">Go full screen</string>
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
     <string name="dim_screen">Dim screen</string>
     <string name="show">Show</string>
     <string name="hide">Hide</string>
@@ -363,8 +370,8 @@
 
     <!-- Theme -->
     <string name="theme">Theme</string>
-    <string name="system_dark_theme">System + Dark</string>
-    <string name="system_black_theme">System + Black</string>
+    <string name="system_dark_theme">Follow system + Dark</string>
+    <string name="system_black_theme">Follow system + Black</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
     <string name="black_theme">Black</string>
@@ -373,6 +380,7 @@
     <string name="language">Language</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Translate Noto</string>
+    <!-- Replacement for "System language" in settings. -->
     <string name="follow_system">Follow system</string>
     <string name="english">English</string>
     <string name="turkish">Turkish</string>
