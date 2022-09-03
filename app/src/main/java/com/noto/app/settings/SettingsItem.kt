@@ -8,11 +8,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.noto.app.NotoTheme
 
@@ -45,7 +45,6 @@ fun SettingsItem(
             .clickable(onClick = onClick)
             .background(MaterialTheme.colorScheme.surface)
             .padding(NotoTheme.dimensions.medium),
-        verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = if (painter != null) Arrangement.Start else Arrangement.SpaceBetween,
     ) {
         if (painter != null) {
@@ -56,18 +55,28 @@ fun SettingsItem(
             )
             Spacer(modifier = Modifier.width(NotoTheme.dimensions.medium))
         }
-        Column(Modifier.weight(1F)) {
+
+        val titleModifier = if (type is SettingsItemType.Text) {
+            Modifier
+        } else {
+            Modifier.weight(weight = 1F, fill = true)
+        }
+
+        Column(titleModifier) {
             Text(text = title, style = MaterialTheme.typography.bodyLarge, color = titleColor)
             if (description != null) {
                 Text(text = description, style = MaterialTheme.typography.labelSmall)
             }
         }
+
+        if (type !is SettingsItemType.None) Spacer(Modifier.width(NotoTheme.dimensions.small))
+
         when (type) {
             is SettingsItemType.None -> {}
             is SettingsItemType.Text -> Text(
                 text = type.value,
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
-                modifier = Modifier.weight(1F, fill = false),
+                textAlign = TextAlign.End
             )
             is SettingsItemType.Switch -> Switch(
                 checked = type.isChecked,
