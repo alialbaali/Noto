@@ -43,6 +43,7 @@ fun Fragment.Screen(
                             scrollState.animateScrollTo(0)
                         }
                     },
+                    scrollState.value,
                     onNavigationIconClick = onNavigationIconClick,
                 )
             },
