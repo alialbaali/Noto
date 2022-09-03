@@ -26,13 +26,10 @@
     <string name="created">Creato il %s</string>
     <string name="accessed">Ultimo accesso %s</string>
     <string name="alphabetical">Alfabetico</string>
-    <string name="alphabetical_sorting">Ordine alfabetico</string>
     <!-- Sorting/Grouping notes by access date. -->
     <string name="access_date">Data di accesso</string>
     <string name="creation_date">Data di creazione</string>
-    <string name="creation_date_sorting">Ordina per data di creazione</string>
     <string name="manual">Manuale</string>
-    <string name="manual_sorting">Ordinamento manuale</string>
     <string name="default_grouping">Predefinito</string>
     <string name="descending">Discendente</string>
     <string name="ascending">Ascendente</string>
@@ -48,13 +45,6 @@
     <string name="report_issue">Segnala un problema</string>
     <string name="about">Informazioni</string>
     <string name="whats_new">Novità</string>
-    <string name="about_message">Noto è sviluppato e mantenuto da <a href="https://www.alialbaali.com/">Ali Albaali</a>.
-        \n\nL\'app è distribuita secondo i termini della <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Licenze 2.0</a>.
-        Le icone dell\'app utilizzano <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> pubblicato
-        da <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> con licenza <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
-        \n\nRingraziamenti speciali a <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> e <a href="https://sakci.me">Alparslan Şakçi</a>
-        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a>e Uli N rispettivamente per le traduzioni in Turco, Spagnolo, Francese e Tedesco,
-        e tutti coloro che hanno aiutato e contribuito allo sviluppo.</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Esporta / Importa</string>
     <string name="exporting_failed">Errore nell\'esportazione dei dati.</string>

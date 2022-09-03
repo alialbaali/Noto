@@ -26,13 +26,10 @@
     <string name="created">أنشئت %s</string>
     <string name="accessed">تم الوصول %s</string>
     <string name="alphabetical">أبجدي</string>
-    <string name="alphabetical_sorting">فرز أبجديا</string>
     <!-- Sorting/Grouping notes by access date. -->
     <string name="access_date">تاريخ الوصول</string>
     <string name="creation_date">تاريخ الإنشاء</string>
-    <string name="creation_date_sorting">فرز حسب تاريخ الإنشاء</string>
     <string name="manual">يدوي</string>
-    <string name="manual_sorting">فرز يدوي</string>
     <string name="default_grouping">إفتراضي</string>
     <string name="descending">تنازلي</string>
     <string name="ascending">تصاعدي</string>
@@ -48,13 +45,6 @@
     <string name="report_issue">الإبلاغ عن مشكلة</string>
     <string name="about">حول</string>
     <string name="whats_new">ما هو الجديد</string>
-    <string name="about_message">Noto يتم تطويره وصيانته من قبل <a href="https://www.alialbaali.com/">Ali Albaali</a>.
-        \n\nيتم توزيع التطبيق بموجب شروط <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.</a>.
-        التطبيق يستخدم ايقونات <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> نشرت
-        بواسطة <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> مرخصة بموجب <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.</a>.
-        \n\nشكرًا خاصًا على <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> و <a href="https://sakci.me">Alparslan Şakçi</a>،
-        <a href="https://github.com/faus32">Faus AM</a>، <a href="https://github.com/kernoeb">Kernoeb</a>و Uli N للترجمه التطبيق الى التركية والإسبانية والفرنسية والألمانية، على التوالي،
-        وكل من ساعد وأسهم في التنمية.</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">تصدير/استيراد البيانات</string>
     <string name="exporting_failed">فشل في تصدير البيانات.</string>

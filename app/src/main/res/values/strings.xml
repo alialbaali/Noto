@@ -26,13 +26,10 @@
     <string name="created">Created %s</string>
     <string name="accessed">Accessed %s</string>
     <string name="alphabetical">Alphabetical</string>
-    <string name="alphabetical_sorting">Alphabetical sorting</string>
     <!-- Sorting/Grouping notes by access date. -->
     <string name="access_date">Access date</string>
     <string name="creation_date">Creation date</string>
-    <string name="creation_date_sorting">Creation date sorting</string>
     <string name="manual">Manual</string>
-    <string name="manual_sorting">Manual sorting</string>
     <string name="default_grouping">Default</string>
     <string name="descending">Descending</string>
     <string name="ascending">Ascending</string>
@@ -48,13 +45,6 @@
     <string name="report_issue">Report an issue</string>
     <string name="about">About</string>
     <string name="whats_new">What\'s new</string>
-    <string name="about_message">Noto is developed and maintained by <a href="https://www.alialbaali.com/">Ali Albaali</a>.
-        \n\nThe app is distributed under the terms of the <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.
-        App icons use <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> published
-        by <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
-        \n\nSpecial thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a>,
-        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a>, and Uli N for Turkish, Spanish, French, and German localizations respectively,
-        and everyone who has helped and contributed in the development.</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Export/Import data</string>
     <string name="exporting_failed">Failed to export the data.</string>

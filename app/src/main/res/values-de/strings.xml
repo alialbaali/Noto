@@ -26,13 +26,10 @@
     <string name="created">Erstellt: %s</string>
     <string name="accessed">Letzter Zugriff: %s</string>
     <string name="alphabetical">Alphabetisch</string>
-    <string name="alphabetical_sorting">Alphabetische Sortierung</string>
     <!-- Sorting/Grouping notes by access date. -->
     <string name="access_date">Zugriffsdatum</string>
     <string name="creation_date">Erstellungsdatum</string>
-    <string name="creation_date_sorting">Sortierung nach Erstellungsdatum</string>
     <string name="manual">Manuell</string>
-    <string name="manual_sorting">Manuelle Sortierung</string>
     <string name="default_grouping">Standard</string>
     <string name="descending">Absteigend</string>
     <string name="ascending">Aufsteigend</string>
@@ -48,11 +45,6 @@
     <string name="report_issue">Einen Fehler melden</string>
     <string name="about">Über</string>
     <string name="whats_new">Was ist neu?</string>
-    <string name="about_message">Noto wird von <a href="https://www.alialbaali.com/">Ali Albaali</a> entwickelt und betreut.
-        \n\nDie App wird unter den Bedingungen der <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache-Lizenz Version 2</a> verbreitet.
-        Die App-Icons verwenden eine <a href="https://www.figma.com/community/file/830405806109119447/">Sammlung von Verläufen</a>, die von <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> veröffentlicht wurde und unter <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4</a> lizenziert ist.
-        \n\nBesonderen Dank an <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> und <a href="https://sakci.me">Alparslan Şakçi</a>,
-        <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a> und Uli N für die türkische, spanische, französische und deutsche Übersetzung, sowie an alle, die an der Entwicklung mitgewirkt oder auf andere Weise dazu beigetragen haben.</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Daten exportieren/importieren</string>
     <string name="exporting_failed">Export der Daten fehlgeschlagen.</string>

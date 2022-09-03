@@ -26,13 +26,10 @@
     <string name="created">Oluşturma tarihi: %s</string>
     <string name="accessed">%s tarihinde erişildi</string>
     <string name="alphabetical">Alfabetik</string>
-    <string name="alphabetical_sorting">Alfabetik sıralama</string>
     <!-- Sorting/Grouping notes by access date. -->
     <string name="access_date">Erişim tarihi</string>
     <string name="creation_date">Oluşturma tarihi</string>
-    <string name="creation_date_sorting">Oluşturma tarihi sıralaması</string>
     <string name="manual">Özel</string>
-    <string name="manual_sorting">Özel sıralama</string>
     <string name="default_grouping">Varsayılan</string>
     <string name="descending">Azalan</string>
     <string name="ascending">Artan</string>
@@ -48,7 +45,6 @@
     <string name="report_issue">Sorun bildir</string>
     <string name="about">Hakkında</string>
     <string name="whats_new">Yenilikler</string>
-    <string name="about_message">Noto <a href="https://www.alialbaali.com/">Ali Albaali</a> tarafından geliştirilen bir uygulamadır.\n\nUygulama <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Lisansı 2.0</a> koşulları altında dağıtılmaktadır. Uygulama simgesi <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> tarafından <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> lisansı altında yayınlanan <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> paketini kullanmaktadır.\n\nTürkçe, Fransızca ve Almanca yerelleştirme için sırasıyla <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> ve <a href="https://sakci.me/tr">Alparslan Şakçi</a>, <a href="https://noewen.com">Noéwen Boisnard</a>, Uli N\'ye; ayrıca geliştirme sürecinde emeği geçen herkese teşekkürler.</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Verileri içe/dışa aktar</string>
     <string name="exporting_failed">Dışa aktarma başarısız.</string>

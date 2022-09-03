@@ -26,13 +26,10 @@
     <string name="created">Dibuat %s</string>
     <string name="accessed">Diakses %s</string>
     <string name="alphabetical">Alfabetis</string>
-    <string name="alphabetical_sorting">Secara abjad</string>
     <!-- Sorting/Grouping notes by access date. -->
     <string name="access_date">Tanggal akses</string>
     <string name="creation_date">Tanggal dibuat</string>
-    <string name="creation_date_sorting">Menurut tanggal</string>
     <string name="manual">Manual</string>
-    <string name="manual_sorting">Sortir manual</string>
     <string name="default_grouping">Bawaan</string>
     <string name="descending">Menurun</string>
     <string name="ascending">Menaik</string>
@@ -48,13 +45,6 @@
     <string name="report_issue">Laporkan masalah</string>
     <string name="about">Tentang</string>
     <string name="whats_new">Apa yang baru</string>
-    <string name="about_message">Noto dikembangkan dan dikelola oleh <a href="https://www.alialbaali.com/">Ali Albaali</a>.
-         \n\nAplikasi ini didistribusikan di bawah persyaratan <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Lisensi Apache 2.0</a>.
-         Ikon aplikasi menggunakan <a href="https://www.figma.com/community/file/830405806109119447/">Koleksi Gradien</a> diterbitkan
-         oleh <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> berlisensi <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
-         \n\nTerima kasih khusus kepada <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> dan <a href="https://sakci.me">Alparslan Şakçi</a>,
-         <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a>, dan Uli N untuk bahasa Turki, Lokalisasi Spanyol, Prancis, dan Jerman masing-masing,
-         dan semua pihak yang telah membantu dan berkontribusi dalam pembangunan.</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Cadangkan/Pulihkan data</string>
     <string name="exporting_failed">Gagal mencadangkan data.</string>
