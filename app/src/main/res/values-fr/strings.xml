@@ -37,10 +37,8 @@
     <string name="descending">Décroissant</string>
     <string name="ascending">Croissant</string>
     <string name="settings">Réglages</string>
-    <string name="view_code">Voir le code source sur GitHub</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">Code source</string>
-    <string name="join_community">Rejoindre la communauté sur Reddit</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Communauté Reddit</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
@@ -49,7 +47,6 @@
     <string name="rate_app_on_play_store">Évaluez Noto sur le Play Store</string>
     <string name="report_issue">Signaler une anomalie</string>
     <string name="about">À propos</string>
-    <string name="about_noto">À propos de Noto</string>
     <string name="whats_new">Nouveautés</string>
     <string name="about_message">Noto est développé et maintenu par <a href="https://www.alialbaali.com/">Ali Albaali</a>.
         \n\nL\'application est distribuée sous les termes de la <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Licence Apache 2.</a>.
@@ -82,9 +79,7 @@
     <!-- Creator of app icons. -->
     <string name="creator">Créateur</string>
     <!-- Translator of a language. -->
-    <string name="translator">Traducteur</string>
     <!-- Proofreader of a language. -->
-    <string name="proofreader">Correcteur</string>
     <string name="app_icons">Icônes d\'application</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Licence</string>
@@ -186,7 +181,6 @@
     <string name="passcode_doesnt_match">Le code d\'accès ne correspond pas au code actuel</string>
     <string name="vault_passcode_has_changed">Le code d\'accès au coffre-fort a été mis à jour.</string>
     <string name="vault_passcode_message">Le code d\'accès au coffre-fort ne peut pas être modifié si vous perdez le code actuel, alors assurez-vous de le stocker dans un endroit sûr.</string>
-    <string name="open_vault">Ouvrir le coffre-fort</string>
     <string name="use_bio">Utiliser la biométrie</string>
     <string name="validate">Valider</string>
     <string name="vault">Coffre-fort</string>
@@ -331,7 +325,6 @@
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Afficher le nombre de notes</string>
     <string name="remember_scrolling_position">Mémoriser la position de défilement</string>
-    <string name="do_not_disturb_summary">Entrer dans le mode Ne pas déranger en mode lecture</string>
     <string name="do_not_disturb">Ne pas déranger</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Garder l\'écran allumé</string>
@@ -357,7 +350,6 @@
     <string name="filter_labels">Filtrer les étiquettes</string>
     <!-- Theme -->
     <string name="theme">Thème</string>
-    <string name="change_theme">Modifier le thème</string>
     <string name="system_dark_theme">Système + Thème sombre</string>
     <string name="system_black_theme">Système + Thème noir</string>
     <string name="light_theme">Thème clair</string>
@@ -367,8 +359,6 @@
     <string name="language">Langue</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Traduire Noto</string>
-    <string name="change_language">Modifier la langue</string>
-    <string name="system_language">Langue du système</string>
     <string name="english">Anglais</string>
     <string name="turkish">Turc</string>
     <string name="arabic">Arabe</string>
@@ -379,7 +369,6 @@
     <string name="german">Allemand</string>
     <!-- Icon -->
     <string name="icon">Icône</string>
-    <string name="change_icon">Changer d\'icône</string>
     <!-- Widget -->
     <string name="create_widget">Créer un widget</string>
     <string name="update_widget">Mettre à jour le widget</string>
@@ -397,8 +386,6 @@
     <string name="folders_notes_count">Nombre de notes des dossiers</string>
     <string name="loading_content">Chargement du contenu</string>
     <!-- Releases -->
-    <string name="current_release">Version actuelle</string>
-    <string name="previous_releases">Versions précédentes</string>
     <string name="release_1_8_0">• Prise en charge du coffre-fort des bibliothèques protégées par un code d\'accès.
         \n• Prise en charge des options d\'expiration du coffre-fort.
         \n• Prise en charge de l\'authentification biométriques sur les périphériques pris en charge pour le coffre-fort.

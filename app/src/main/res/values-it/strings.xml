@@ -37,10 +37,8 @@
     <string name="descending">Discendente</string>
     <string name="ascending">Ascendente</string>
     <string name="settings">Impostazioni</string>
-    <string name="view_code">Guarda il codice sorgente su GitHub</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">Codice sorgente</string>
-    <string name="join_community">Unisciti alla community su Reddit</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Community su Reddit</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
@@ -49,7 +47,6 @@
     <string name="rate_app_on_play_store">Valuta Noto sul Play Store</string>
     <string name="report_issue">Segnala un problema</string>
     <string name="about">Informazioni</string>
-    <string name="about_noto">Informazioni su Noto</string>
     <string name="whats_new">Novità</string>
     <string name="about_message">Noto è sviluppato e mantenuto da <a href="https://www.alialbaali.com/">Ali Albaali</a>.
         \n\nL\'app è distribuita secondo i termini della <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Licenze 2.0</a>.
@@ -82,9 +79,7 @@
     <!-- Creator of app icons. -->
     <string name="creator">Autore</string>
     <!-- Translator of a language. -->
-    <string name="translator">Traduttore</string>
     <!-- Proofreader of a language. -->
-    <string name="proofreader">Revisore</string>
     <string name="app_icons">Icone dell\'app</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Licenza</string>
@@ -186,7 +181,6 @@
     <string name="passcode_doesnt_match">Il codice non corrisponde con quello attuale</string>
     <string name="vault_passcode_has_changed">Il codice della cassaforte è stato aggiornato.</string>
     <string name="vault_passcode_message">Il codice della cassaforte non può essere cambiato se dimentichi quello attuale, quindi salvalo in un luogo sicuro.</string>
-    <string name="open_vault">Apri cassaforte</string>
     <string name="use_bio">Usa dati biometrici</string>
     <string name="validate">Convalida</string>
     <string name="vault">Cassaforte</string>
@@ -331,7 +325,6 @@
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Mostra il numero di note</string>
     <string name="remember_scrolling_position">Ricorda posizione dello scorrimento</string>
-    <string name="do_not_disturb_summary">Abilita modalità Non Disturbare durante la modalità lettura</string>
     <string name="do_not_disturb">Non disturbare</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Mantieni lo schermo acceso</string>
@@ -357,7 +350,6 @@
     <string name="filter_labels">Filtra etichette</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
-    <string name="change_theme">Cambia tema</string>
     <string name="system_dark_theme">Sistema + Tema scuro</string>
     <string name="system_black_theme">Sistema + Tema nero</string>
     <string name="light_theme">Tema chiaro</string>
@@ -367,8 +359,6 @@
     <string name="language">Lingua</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Traduci Noto</string>
-    <string name="change_language">Cambia lingua</string>
-    <string name="system_language">Lingua di sistema</string>
     <string name="english">Inglese</string>
     <string name="turkish">Turco</string>
     <string name="arabic">Arabo</string>
@@ -379,7 +369,6 @@
     <string name="german">Tedesco</string>
     <!-- Icon -->
     <string name="icon">Icona</string>
-    <string name="change_icon">Cambia icona</string>
     <!-- Widget -->
     <string name="create_widget">Crea widget</string>
     <string name="update_widget">Aggiorna widget</string>
@@ -397,8 +386,6 @@
     <string name="folders_notes_count">Contatore note delle cartelle</string>
     <string name="loading_content">Caricamento contenuti</string>
     <!-- Releases -->
-    <string name="current_release">Release attuale</string>
-    <string name="previous_releases">Release precedente</string>
     <string name="release_1_8_0">• Aggiunto supporto per librerie della cassaforte protette da passcode.
         \n• Aggiunte opzioni per la chiusura automatica della cassaforte.
         \n• Aggiunto supporto per autenticazione della cassaforte tramite dati biometrici per i dispositivi supportati.

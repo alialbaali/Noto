@@ -37,10 +37,8 @@
     <string name="descending">تنازلي</string>
     <string name="ascending">تصاعدي</string>
     <string name="settings">الإعدادات</string>
-    <string name="view_code">عرض رمز المصدر على GitHub</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">رمز المصدر</string>
-    <string name="join_community">الانضمام إلى مجموعة Reddit</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">مجموعة Reddit</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
@@ -49,7 +47,6 @@
     <string name="rate_app_on_play_store">قيم Noto على متجر بلي</string>
     <string name="report_issue">الإبلاغ عن مشكلة</string>
     <string name="about">حول</string>
-    <string name="about_noto">حول Noto</string>
     <string name="whats_new">ما هو الجديد</string>
     <string name="about_message">Noto يتم تطويره وصيانته من قبل <a href="https://www.alialbaali.com/">Ali Albaali</a>.
         \n\nيتم توزيع التطبيق بموجب شروط <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.</a>.
@@ -82,9 +79,7 @@
     <!-- Creator of app icons. -->
     <string name="creator">المُنشئ</string>
     <!-- Translator of a language. -->
-    <string name="translator">المترجم</string>
     <!-- Proofreader of a language. -->
-    <string name="proofreader">المدقّق</string>
     <string name="app_icons">أيقونات التطبيق</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">الرخصة</string>
@@ -190,7 +185,6 @@
     <string name="passcode_doesnt_match">رمز المرور لا يتطابق مع الرمز الحالي</string>
     <string name="vault_passcode_has_changed">تم تحديث رمز مرور الخزينة.</string>
     <string name="vault_passcode_message">لا يمكن تغيير رمز مرور الخزينة إذا فقدت الرمز الحالي، لذا يرجى التأكد من تخزينه في مكان آمن.</string>
-    <string name="open_vault">فتح الخزينة</string>
     <string name="use_bio">استخدام المقاييس الحيوية</string>
     <string name="validate">تحقق</string>
     <string name="vault">الخزينة</string>
@@ -403,7 +397,6 @@
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">عرض عدد الملاحظات</string>
     <string name="remember_scrolling_position">تذكر موضع التمرير</string>
-    <string name="do_not_disturb_summary">تفعيل وضع عدم الإزعاج أثناء وضع القراءة</string>
     <string name="do_not_disturb">وضع عدم الإزعاج</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
@@ -429,7 +422,6 @@
     <string name="filter_labels">تصفية الملصقات</string>
     <!-- Theme -->
     <string name="theme">المظهر</string>
-    <string name="change_theme">تغيير المظهر</string>
     <string name="system_dark_theme">مظهر النظام + داكن</string>
     <string name="system_black_theme">مظهر النظام + أسود</string>
     <string name="light_theme">مظهر فاتح</string>
@@ -439,8 +431,6 @@
     <string name="language">اللغة</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">ترجم Noto</string>
-    <string name="change_language">تغيير اللغة</string>
-    <string name="system_language">لغة النظام</string>
     <string name="english">اللغة الإنجليزية</string>
     <string name="turkish">اللغة التركية</string>
     <string name="arabic">اللغة العربية</string>
@@ -451,7 +441,6 @@
     <string name="german">اللغة الألمانية</string>
     <!-- Icon -->
     <string name="icon">الأيقونة</string>
-    <string name="change_icon">تغيير الأيقونة</string>
     <!-- Widget -->
     <string name="create_widget">إنشاء قطعة</string>
     <string name="update_widget">تحديث القطعة</string>
@@ -469,8 +458,6 @@
     <string name="folders_notes_count">عدد ملاحظات المجلدات</string>
     <string name="loading_content">جاري تحميل المحتوى</string>
     <!-- Releases -->
-    <string name="current_release">الإصدار الحالي</string>
-    <string name="previous_releases">الإصدارات السابقة</string>
     <string name="release_1_8_0">• دعم خزينة الدفاتر المحمية برمز المرور.
         \n• دعم خيارات مهلة الخزينة.
         \n• دعم  تفعيل توثيق البصمة على الأجهزة المدعومة.

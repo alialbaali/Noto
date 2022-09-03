@@ -37,10 +37,8 @@
     <string name="descending">Absteigend</string>
     <string name="ascending">Aufsteigend</string>
     <string name="settings">Einstellungen</string>
-    <string name="view_code">Quell-Code auf GitHub ansehen</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">Quell-Code</string>
-    <string name="join_community">Der Community auf Reddit beitreten</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Reddit-Community</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
@@ -49,7 +47,6 @@
     <string name="rate_app_on_play_store">Noto im Play Store bewerten</string>
     <string name="report_issue">Einen Fehler melden</string>
     <string name="about">Über</string>
-    <string name="about_noto">Über Noto</string>
     <string name="whats_new">Was ist neu?</string>
     <string name="about_message">Noto wird von <a href="https://www.alialbaali.com/">Ali Albaali</a> entwickelt und betreut.
         \n\nDie App wird unter den Bedingungen der <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache-Lizenz Version 2</a> verbreitet.
@@ -80,9 +77,7 @@
     <!-- Creator of app icons. -->
     <string name="creator">Urheber</string>
     <!-- Translator of a language. -->
-    <string name="translator">Übersetzer:in</string>
     <!-- Proofreader of a language. -->
-    <string name="proofreader">Korrekturleser:in</string>
     <string name="app_icons">App-Icons</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Lizenz</string>
@@ -184,7 +179,6 @@
     <string name="passcode_doesnt_match">Zugangscode stimmt nicht mit dem aktuellen überein</string>
     <string name="vault_passcode_has_changed">Zugangscode wurde aktualisiert.</string>
     <string name="vault_passcode_message">Der Zugangscode kann nicht geändert werden, wenn du den aktuellen verlierst. Bitte speichere ihn an einem sicheren Ort.</string>
-    <string name="open_vault">Ordnerschutz aufheben</string>
     <string name="use_bio">Biometrische Authentifizierung verwenden</string>
     <string name="validate">Validieren</string>
     <string name="vault">Ordnerschutz</string>
@@ -329,7 +323,6 @@
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Anzahl der Notizen anzeigen</string>
     <string name="remember_scrolling_position">Scrollposition beibehalten</string>
-    <string name="do_not_disturb_summary">\"Bitte nicht stören\" im Lesemodus aktivieren</string>
     <string name="do_not_disturb">Bitte nicht stören</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Display eingeschaltet lassen</string>
@@ -355,7 +348,6 @@
     <string name="filter_labels">Nach Labels filtern</string>
     <!-- Theme -->
     <string name="theme">Farbschema</string>
-    <string name="change_theme">Farbschema ändern</string>
     <string name="system_dark_theme">System + Dunkles Farbschema</string>
     <string name="system_black_theme">System + Schwarzes Farbschema</string>
     <string name="light_theme">Helles Farbschema</string>
@@ -365,8 +357,6 @@
     <string name="language">Sprache</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Noto übersetzen</string>
-    <string name="change_language">Sprache ändern</string>
-    <string name="system_language">Systemsprache</string>
     <string name="english">Englisch</string>
     <string name="turkish">Türkisch</string>
     <string name="arabic">Arabisch</string>
@@ -377,7 +367,6 @@
     <string name="german">Deutsch</string>
     <!-- Icon -->
     <string name="icon">Icon</string>
-    <string name="change_icon">Icon wechseln</string>
     <!-- Widget -->
     <string name="create_widget">Widget erstellen</string>
     <string name="update_widget">Widget aktualisieren</string>
@@ -395,8 +384,6 @@
     <string name="folders_notes_count">Anzahl der Notizen im Ordner</string>
     <string name="loading_content">Inhalt wird geladen</string>
     <!-- Releases -->
-    <string name="current_release">Aktuelle Version</string>
-    <string name="previous_releases">Vorherige Versionen</string>
     <string name="release_1_8_0">• Unterstützung für durch Zugangscode geschützte Ordner.
         \n• Option für Unterstützung von Zeitüberschreitung bei geschützten Ordnern.
         \n• Unterstützung für biometrische Authentifizierung auf unterstützten Geräten.

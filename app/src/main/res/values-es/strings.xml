@@ -37,10 +37,8 @@
     <string name="descending">Descendente</string>
     <string name="ascending">Ascendente</string>
     <string name="settings">Preferencias</string>
-    <string name="view_code">Ver código fuente en GitHub</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">Código fuente</string>
-    <string name="join_community">Únete a la comunidad en Reddit</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Comunidad de Reddit</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
@@ -49,7 +47,6 @@
     <string name="rate_app_on_play_store">Valorar Noto en Play Store</string>
     <string name="report_issue">Reportar un problema</string>
     <string name="about">Acerca de</string>
-    <string name="about_noto">Acerca de Noto</string>
     <string name="whats_new">Novedades</string>
     <string name="about_message">Noto es desarrollado y mantenido por <a href="https://www.alialbaali.com/">Ali Albaali</a>.
         \n\nLa aplicación se distribuye bajo los términos de la <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Licencia Apache 2.</a>.
@@ -82,9 +79,7 @@
     <!-- Creator of app icons. -->
     <string name="creator">Autor</string>
     <!-- Translator of a language. -->
-    <string name="translator">Traductor</string>
     <!-- Proofreader of a language. -->
-    <string name="proofreader">Corrector de pruebas</string>
     <string name="app_icons">Iconos de aplicación</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Licencia</string>
@@ -186,7 +181,6 @@
     <string name="passcode_doesnt_match">La contraseña no coincide con la actual</string>
     <string name="vault_passcode_has_changed">La contraseña de bóveda ha sido actualizada.</string>
     <string name="vault_passcode_message">La contraseña de la bóveda no se puede cambiar si pierde la actual, así que asegúrese de guardarla en un lugar seguro.</string>
-    <string name="open_vault">Abrir bóveda</string>
     <string name="use_bio">Activar biometría</string>
     <string name="validate">Validar</string>
     <string name="vault">Bóveda</string>
@@ -331,7 +325,6 @@
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Mostrar contador de notas</string>
     <string name="remember_scrolling_position">Recordar posición de desplazamiento</string>
-    <string name="do_not_disturb_summary">Activar no molestar durante el modo de lectura</string>
     <string name="do_not_disturb">No Molestar</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Mantener pantalla encendida</string>
@@ -357,7 +350,6 @@
     <string name="filter_labels">Filtrar etiquetas</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
-    <string name="change_theme">Cambiar tema</string>
     <string name="system_dark_theme">Sistema + Tema oscuro</string>
     <string name="system_black_theme">Sistema + Tema Negro</string>
     <string name="light_theme">Tema claro</string>
@@ -367,8 +359,6 @@
     <string name="language">Idioma</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Traducir Noto</string>
-    <string name="change_language">Cambiar idioma</string>
-    <string name="system_language">Idioma del sistema</string>
     <string name="english">Inglés</string>
     <string name="turkish">Turco</string>
     <string name="arabic">Árabe</string>
@@ -379,7 +369,6 @@
     <string name="german">Alemán</string>
     <!-- Icon -->
     <string name="icon">Icono</string>
-    <string name="change_icon">Cambiar icono</string>
     <!-- Widget -->
     <string name="create_widget">Crear Widget</string>
     <string name="update_widget">Actualizar Widget</string>
@@ -397,8 +386,6 @@
     <string name="folders_notes_count">Contador de notas de carpetas</string>
     <string name="loading_content">Cargando contenido</string>
     <!-- Releases -->
-    <string name="current_release">Versión actual: {0}</string>
-    <string name="previous_releases">Versiones anteriores</string>
     <string name="release_1_8_0">• Soporte para librerías protegidas con código de acceso.
         \n• Soporte para opciones de tiempo de espera de bóveda.
         \n• Soporte para autenticación de bóveda biométrica en dispositivos compatibles.

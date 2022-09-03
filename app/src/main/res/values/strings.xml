@@ -37,10 +37,8 @@
     <string name="descending">Descending</string>
     <string name="ascending">Ascending</string>
     <string name="settings">Settings</string>
-    <string name="view_code">View Source Code on GitHub</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">Source code</string>
-    <string name="join_community">Join Community on Reddit</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Reddit community</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
@@ -49,7 +47,6 @@
     <string name="rate_app_on_play_store">Rate Noto on Play Store</string>
     <string name="report_issue">Report an issue</string>
     <string name="about">About</string>
-    <string name="about_noto">About Noto</string>
     <string name="whats_new">What\'s new</string>
     <string name="about_message">Noto is developed and maintained by <a href="https://www.alialbaali.com/">Ali Albaali</a>.
         \n\nThe app is distributed under the terms of the <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache License 2.0</a>.
@@ -82,9 +79,7 @@
     <!-- Creator of app icons. -->
     <string name="creator">Creator</string>
     <!-- Translator of a language. -->
-    <string name="translator">Translator</string>
     <!-- Proofreader of a language. -->
-    <string name="proofreader">Proofreader</string>
     <string name="creator_name" translatable="false">Geoffrey Crofte</string>
     <string name="app_icons">App Icons</string>
     <string name="app_icons_value" translatable="false">Collections of Gradients</string>
@@ -199,7 +194,6 @@
     <string name="passcode_doesnt_match">Passcode doesn\'t match the current one</string>
     <string name="vault_passcode_has_changed">Vault passcode has been updated.</string>
     <string name="vault_passcode_message">Vault passcode can\'t be changed if you lose the current one, so please make sure to store it in somewhere safe.</string>
-    <string name="open_vault">Open vault</string>
     <string name="use_bio">Use biometrics</string>
     <string name="validate">Validate</string>
     <string name="vault">Vault</string>
@@ -351,7 +345,6 @@
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Show notes count</string>
     <string name="remember_scrolling_position">Remember scrolling position</string>
-    <string name="do_not_disturb_summary">Enable Do Not Disturb during Reading Mode</string>
     <string name="do_not_disturb">Do Not Disturb</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Keep screen on</string>
@@ -380,7 +373,6 @@
 
     <!-- Theme -->
     <string name="theme">Theme</string>
-    <string name="change_theme">Change theme</string>
     <string name="system_dark_theme">System + Dark</string>
     <string name="system_black_theme">System + Black</string>
     <string name="light_theme">Light</string>
@@ -391,8 +383,6 @@
     <string name="language">Language</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Translate Noto</string>
-    <string name="change_language">Change language</string>
-    <string name="system_language">System language</string>
     <string name="follow_system">Follow system</string>
     <string name="english">English</string>
     <string name="turkish">Turkish</string>
@@ -415,7 +405,6 @@
 
     <!-- Icon -->
     <string name="icon">Icon</string>
-    <string name="change_icon">Change icon</string>
     <string name="futuristic" translatable="false">Futuristic</string>
     <string name="airplane" translatable="false">Airplane</string>
     <string name="dark_rain" translatable="false">Dark Rain</string>
@@ -445,8 +434,6 @@
     <string name="loading_content">Loading content</string>
 
     <!-- Releases -->
-    <string name="current_release">Current release</string>
-    <string name="previous_releases">Previous releases</string>
     <string name="release_1_8_0">• Support for passcode protected libraries vault.
         \n• Support for vault timeout options.
         \n• Support for biometric vault authentication on supported devices.

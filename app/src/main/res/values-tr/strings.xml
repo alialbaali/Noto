@@ -37,10 +37,8 @@
     <string name="descending">Azalan</string>
     <string name="ascending">Artan</string>
     <string name="settings">Ayarlar</string>
-    <string name="view_code">Kaynak kodunu Github\'da görüntüle</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">Kaynak kodu</string>
-    <string name="join_community">Reddit topluluğuna katıl</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Reddit topluluğu</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
@@ -49,7 +47,6 @@
     <string name="rate_app_on_play_store">Uygulamayı Play Store\'da değerlendir</string>
     <string name="report_issue">Sorun bildir</string>
     <string name="about">Hakkında</string>
-    <string name="about_noto">Noto hakkında</string>
     <string name="whats_new">Yenilikler</string>
     <string name="about_message">Noto <a href="https://www.alialbaali.com/">Ali Albaali</a> tarafından geliştirilen bir uygulamadır.\n\nUygulama <a href="https://github.com/alialbaali/Noto/blob/master/LICENSE.md/">Apache Lisansı 2.0</a> koşulları altında dağıtılmaktadır. Uygulama simgesi <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> tarafından <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> lisansı altında yayınlanan <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> paketini kullanmaktadır.\n\nTürkçe, Fransızca ve Almanca yerelleştirme için sırasıyla <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> ve <a href="https://sakci.me/tr">Alparslan Şakçi</a>, <a href="https://noewen.com">Noéwen Boisnard</a>, Uli N\'ye; ayrıca geliştirme sürecinde emeği geçen herkese teşekkürler.</string>
     <!--    <string name="share_with">Share with</string>-->
@@ -76,9 +73,7 @@
     <!-- Creator of app icons. -->
     <string name="creator">Çizer</string>
     <!-- Translator of a language. -->
-    <string name="translator">Çevirmen</string>
     <!-- Proofreader of a language. -->
-    <string name="proofreader">Editör</string>
     <string name="app_icons">Uygulama simgeleri</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Lisans</string>
@@ -180,7 +175,6 @@
     <string name="passcode_doesnt_match">Girdiğiniz şifre mevcut şifreyle uyuşmuyor</string>
     <string name="vault_passcode_has_changed">Kasa şifresi güncellendi.</string>
     <string name="vault_passcode_message">Mevcut şifreyi unutursanız kasa şifresini tekrar değiştiremezsiniz, bu yüzden şifrenizi lütfen güvenli bir yere kaydedin.</string>
-    <string name="open_vault">Kasayı aç</string>
     <string name="use_bio">Biyometri kullan</string>
     <string name="validate">Doğrula</string>
     <string name="vault">Kasa</string>
@@ -325,7 +319,6 @@
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Not sayısını göster</string>
     <string name="remember_scrolling_position">Kaydırma konumunu hatırla</string>
-    <string name="do_not_disturb_summary">Okuma modundayken Rahatsız Etmeyin ayarını etkinleştir</string>
     <string name="do_not_disturb">Rahatsız Etmeyin</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Ekranı açık tut</string>
@@ -351,7 +344,6 @@
     <string name="filter_labels">Etiketleri filtrele</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
-    <string name="change_theme">Temayı değiştir</string>
     <string name="system_dark_theme">Sistem + Koyu tema</string>
     <string name="system_black_theme">Sistem + Siyah tema</string>
     <string name="light_theme">Açık tema</string>
@@ -361,8 +353,6 @@
     <string name="language">Dil</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Noto\'yu başka bir dile çevir</string>
-    <string name="change_language">Dili değiştir</string>
-    <string name="system_language">Sistem dili</string>
     <string name="english">İngilizce</string>
     <string name="turkish">Türkçe</string>
     <string name="arabic">Arapça</string>
@@ -373,7 +363,6 @@
     <string name="german">Almanca</string>
     <!-- Icon -->
     <string name="icon">Simge</string>
-    <string name="change_icon">Simgeyi değiştir</string>
     <!-- Widget -->
     <string name="create_widget">Widget oluştur</string>
     <string name="update_widget">Widget\'ı güncelle</string>
@@ -391,8 +380,6 @@
     <string name="folders_notes_count">Not sayısı</string>
     <string name="loading_content">İçerik yükleniyor</string>
     <!-- Releases -->
-    <string name="current_release">Mevcut sürüm</string>
-    <string name="previous_releases">Eski sürümler</string>
     <string name="release_1_8_0">• Şifre korumalı kitaplık kasası desteği
         \n• Kasa zaman aşımı ayarları
         \n• Desteklenen cihazlar için biyometrik doğrulama özelliği
