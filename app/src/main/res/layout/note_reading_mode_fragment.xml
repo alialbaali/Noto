@@ -23,7 +23,7 @@
             android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/padding_bottom"
+            android:paddingBottom="200dp"
             android:orientation="vertical">
 
             <com.airbnb.epoxy.EpoxyRecyclerView
