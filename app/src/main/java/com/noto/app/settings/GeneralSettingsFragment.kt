@@ -70,7 +70,7 @@ class GeneralSettingsFragment : Fragment() {
                 }
                 val language by viewModel.language.collectAsState()
                 val languageText = when (language) {
-                    Language.System -> stringResource(id = R.string.system_language)
+                    Language.System -> stringResource(id = R.string.follow_system)
                     Language.English -> stringResource(id = R.string.english)
                     Language.Turkish -> stringResource(id = R.string.turkish)
                     Language.Arabic -> stringResource(id = R.string.arabic)

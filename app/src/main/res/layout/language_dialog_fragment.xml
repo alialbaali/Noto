@@ -25,7 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/system_language" />
+                android:text="@string/follow_system" />
 
             <RadioButton
                 android:id="@+id/rb_english"
