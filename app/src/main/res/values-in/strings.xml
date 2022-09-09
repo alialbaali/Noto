@@ -71,6 +71,7 @@
     <!-- Translator of a language. -->
     <!-- Proofreader of a language. -->
     <string name="app_icons">Ikon Aplikasi</string>
+    <string name="privacy_policy">Kebijakan privasi</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Lisensi</string>
     <string name="empty_version">Versi</string>
@@ -103,6 +104,10 @@
     <string name="folder_archive">Arsip %s</string>
     <string name="unarchive">Batalkan arsip</string>
     <string name="edit">Sunting</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">Berikutnya</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">Sebelumnya</string>
     <string name="pin">Sematkan</string>
     <!-- Merge multiple notes into a new note. -->
     <string name="merge">Gabungkan</string>
@@ -117,6 +122,8 @@
     <string name="translations">Terjemahan</string>
     <!-- List of credits. -->
     <string name="credits">Kredit</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">Untuk informasi lebih lanjut, klik di sini.</string>
     <!-- Folder -->
     <string name="folders">Map</string>
     <plurals name="folders_count">
@@ -173,6 +180,16 @@
     <string name="use_bio">Gunakan biometrik</string>
     <string name="validate">Mengsahkan</string>
     <string name="vault">Brankas</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">Nonaktifkan brankas</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">Brankas telah dinonaktifkan.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">Nonaktifkan</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">Apakah anda yakin ingin menonaktifkan brankas?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">Tindakan ini tidak dapat diurungkan dan akan menonaktifkan brankas dan memindahkan semua folder di luar brankas.</string>
     <string name="vault_is_open">Brankas terbuka</string>
     <string name="immediately">Segera</string>
     <string name="on_app_close">Pada saat aplikasi ditutup</string>
@@ -301,6 +318,8 @@
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Biarkan layar tetap menyala</string>
     <string name="full_screen">Layar penuh</string>
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
+    <string name="dim_screen">Layar redup</string>
     <string name="show">Tampilkan</string>
     <string name="hide">Sembunyikan</string>
     <string name="permission_not_granted">Izin belum diberikan</string>
@@ -322,15 +341,17 @@
     <string name="filter_labels">Saring label</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
-    <string name="system_dark_theme">Sistem + Tema gelap</string>
-    <string name="system_black_theme">Sistem + Tema hitam</string>
-    <string name="light_theme">Tema terang</string>
-    <string name="dark_theme">Tema gelap</string>
-    <string name="black_theme">Tema hitam</string>
+    <string name="system_dark_theme">Mengikuti sistem + Gelap</string>
+    <string name="system_black_theme">Mengikuti sistem + Hitam</string>
+    <string name="light_theme">Terang</string>
+    <string name="dark_theme">Gelap</string>
+    <string name="black_theme">Hitam</string>
     <!-- Language -->
     <string name="language">Bahasa</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Terjemahkan Noto</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">Mengikuti sistem</string>
     <string name="english">Inggris</string>
     <string name="turkish">Turki</string>
     <string name="arabic">Arab</string>
@@ -339,6 +360,7 @@
     <string name="spanish">Spanyol</string>
     <string name="french">Prancis</string>
     <string name="german">Jerman</string>
+    <string name="italian">Italia</string>
     <!-- Icon -->
     <string name="icon">Ikon</string>
     <!-- Widget -->

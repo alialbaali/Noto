@@ -71,6 +71,7 @@
     <!-- Translator of a language. -->
     <!-- Proofreader of a language. -->
     <string name="app_icons">App-Icons</string>
+    <string name="privacy_policy">Datenschutzrichtlinie</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Lizenz</string>
     <string name="empty_version">Version</string>
@@ -103,6 +104,10 @@
     <string name="folder_archive">Archiv von „%s“</string>
     <string name="unarchive">Dearchivieren</string>
     <string name="edit">Bearbeiten</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">Nächste</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">Vorherige</string>
     <string name="pin">Anheften</string>
     <!-- Merge multiple notes into a new note. -->
     <string name="merge">Zusammenführen</string>
@@ -117,6 +122,8 @@
     <string name="translations">Übersetzungen</string>
     <!-- List of credits. -->
     <string name="credits">Danksagung</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">Für weitere Informationen klicken Sie hier.</string>
     <!-- Folder -->
     <string name="folders">Ordner</string>
     <plurals name="folders_count">
@@ -174,6 +181,16 @@
     <string name="use_bio">Biometrische Authentifizierung verwenden</string>
     <string name="validate">Validieren</string>
     <string name="vault">Ordnerschutz</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">Ordnerschutz deaktivieren</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">Ordnerschutz wurde deaktiviert.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">Deaktivieren</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">Möchten Sie den Ordnerschutz wirklich deaktivieren?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">Diese Aktion kann nicht rückgängig gemacht werden. Sie deaktiviert den Ordnerschutz und verschiebt alle Ordner aus dem geschützten Bereich heraus.</string>
     <string name="vault_is_open">Ordnerschutz ist nicht aktiv</string>
     <string name="immediately">Sofort</string>
     <string name="on_app_close">Beim Schließen der App</string>
@@ -319,6 +336,8 @@
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Display eingeschaltet lassen</string>
     <string name="full_screen">Zum Vollbildmodus wechseln</string>
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
+    <string name="dim_screen">Display dimmen</string>
     <string name="show">Zeigen</string>
     <string name="hide">Verbergen</string>
     <string name="permission_not_granted">Berechtigung wurde nicht gewährt</string>
@@ -340,15 +359,17 @@
     <string name="filter_labels">Nach Labels filtern</string>
     <!-- Theme -->
     <string name="theme">Farbschema</string>
-    <string name="system_dark_theme">System + Dunkles Farbschema</string>
-    <string name="system_black_theme">System + Schwarzes Farbschema</string>
-    <string name="light_theme">Helles Farbschema</string>
-    <string name="dark_theme">Dunkles Farbschema</string>
-    <string name="black_theme">Schwarzes Farbschema</string>
+    <string name="system_dark_theme">Wie System + dunkel</string>
+    <string name="system_black_theme">Wie System + schwarz</string>
+    <string name="light_theme">Hell</string>
+    <string name="dark_theme">Dunkel</string>
+    <string name="black_theme">Schwarz</string>
     <!-- Language -->
     <string name="language">Sprache</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Noto übersetzen</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">Wie System</string>
     <string name="english">Englisch</string>
     <string name="turkish">Türkisch</string>
     <string name="arabic">Arabisch</string>
@@ -357,6 +378,7 @@
     <string name="spanish">Spanisch</string>
     <string name="french">Französisch</string>
     <string name="german">Deutsch</string>
+    <string name="italian">Italienisch</string>
     <!-- Icon -->
     <string name="icon">Icon</string>
     <!-- Widget -->

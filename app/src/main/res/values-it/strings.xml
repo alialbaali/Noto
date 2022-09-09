@@ -71,6 +71,7 @@
     <!-- Translator of a language. -->
     <!-- Proofreader of a language. -->
     <string name="app_icons">Icone dell\'app</string>
+    <string name="privacy_policy">Informativa sulla privacy</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Licenza</string>
     <string name="empty_version">Versione</string>
@@ -103,6 +104,10 @@
     <string name="folder_archive">Archivio %s</string>
     <string name="unarchive">Rimuovi dall\'archivio</string>
     <string name="edit">Modifica</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">Successiva</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">Precedente</string>
     <string name="pin">Fissa</string>
     <!-- Merge multiple notes into a new note. -->
     <string name="merge">Unisci</string>
@@ -117,6 +122,8 @@
     <string name="translations">Traduzioni</string>
     <!-- List of credits. -->
     <string name="credits">Riconoscimenti</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">Per ulteriori informazioni, clicca qui.</string>
     <!-- Folder -->
     <string name="folders">Cartelle</string>
     <plurals name="folders_count">
@@ -174,6 +181,16 @@
     <string name="use_bio">Usa dati biometrici</string>
     <string name="validate">Convalida</string>
     <string name="vault">Cassaforte</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">Disabilita cassaforte</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">Cassaforte disabilitata.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">Disabilita</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">Sei sicuro di voler disabilitare la cassaforte?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">Questa azione non può essere annullata, disabiliterà la cassaforte e sposterà tutte le cartelle fuori da essa.</string>
     <string name="vault_is_open">La cassaforte è aperta</string>
     <string name="immediately">Immediatamente</string>
     <string name="on_app_close">Alla chiusura dell\'app</string>
@@ -319,6 +336,8 @@
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Mantieni lo schermo acceso</string>
     <string name="full_screen">Schermo intero</string>
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
+    <string name="dim_screen">Abbassa luminosità</string>
     <string name="show">Mostra</string>
     <string name="hide">Nascondi</string>
     <string name="permission_not_granted">L\'autorizzazione non è stata concessa</string>
@@ -340,15 +359,17 @@
     <string name="filter_labels">Filtra etichette</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
-    <string name="system_dark_theme">Sistema + Tema scuro</string>
-    <string name="system_black_theme">Sistema + Tema nero</string>
-    <string name="light_theme">Tema chiaro</string>
-    <string name="dark_theme">Tema scuro</string>
-    <string name="black_theme">Tema nero</string>
+    <string name="system_dark_theme">Segui sistema + Scuro</string>
+    <string name="system_black_theme">Segui sistema + Nero</string>
+    <string name="light_theme">Chiaro</string>
+    <string name="dark_theme">Scuro</string>
+    <string name="black_theme">Nero</string>
     <!-- Language -->
     <string name="language">Lingua</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Traduci Noto</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">Segui sistema</string>
     <string name="english">Inglese</string>
     <string name="turkish">Turco</string>
     <string name="arabic">Arabo</string>
@@ -357,6 +378,7 @@
     <string name="spanish">Spagnolo</string>
     <string name="french">Francese</string>
     <string name="german">Tedesco</string>
+    <string name="italian">Italiano</string>
     <!-- Icon -->
     <string name="icon">Icona</string>
     <!-- Widget -->

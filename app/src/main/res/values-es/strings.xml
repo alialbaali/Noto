@@ -71,6 +71,7 @@
     <!-- Translator of a language. -->
     <!-- Proofreader of a language. -->
     <string name="app_icons">Iconos de aplicación</string>
+    <string name="privacy_policy">Política de Privacidad</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Licencia</string>
     <string name="empty_version">Versión</string>
@@ -103,6 +104,10 @@
     <string name="folder_archive">%s archivo</string>
     <string name="unarchive">Desarchivar</string>
     <string name="edit">Editar</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">Próximo</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">Anterior</string>
     <string name="pin">Anclar</string>
     <!-- Merge multiple notes into a new note. -->
     <string name="merge">Fusionar</string>
@@ -117,6 +122,8 @@
     <string name="translations">Traducciones</string>
     <!-- List of credits. -->
     <string name="credits">Créditos</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">Para más detalles haga click.</string>
     <!-- Folder -->
     <string name="folders">Carpetas</string>
     <plurals name="folders_count">
@@ -174,6 +181,16 @@
     <string name="use_bio">Activar biometría</string>
     <string name="validate">Validar</string>
     <string name="vault">Bóveda</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">Desactivar bóveda</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">La bóveda ha sido desactivada.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">Inhabilitar</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">¿Está seguro de que desea desactivar la bóveda?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">Esta acción no se puede deshacer y deshabilitará la bóveda y moverá todas las carpetas fuera de la bóveda.</string>
     <string name="vault_is_open">Bóveda abierta</string>
     <string name="immediately">Inmediatamente</string>
     <string name="on_app_close">Al cerrar la aplicación</string>
@@ -319,6 +336,8 @@
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Mantener pantalla encendida</string>
     <string name="full_screen">Ir a pantalla completa</string>
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
+    <string name="dim_screen">Atenuar pantalla</string>
     <string name="show">Mostrar</string>
     <string name="hide">Ocultar</string>
     <string name="permission_not_granted">No se ha concedido permiso</string>
@@ -340,15 +359,17 @@
     <string name="filter_labels">Filtrar etiquetas</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
-    <string name="system_dark_theme">Sistema + Tema oscuro</string>
-    <string name="system_black_theme">Sistema + Tema Negro</string>
-    <string name="light_theme">Tema claro</string>
-    <string name="dark_theme">Tema oscuro</string>
-    <string name="black_theme">Tema negro</string>
+    <string name="system_dark_theme">Seguir sistema + Oscuro</string>
+    <string name="system_black_theme">Seguir sistema + Negro</string>
+    <string name="light_theme">Claro</string>
+    <string name="dark_theme">Oscuro</string>
+    <string name="black_theme">Negro</string>
     <!-- Language -->
     <string name="language">Idioma</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Traducir Noto</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">Seguir el sistema</string>
     <string name="english">Inglés</string>
     <string name="turkish">Turco</string>
     <string name="arabic">Árabe</string>
@@ -357,6 +378,7 @@
     <string name="spanish">Español</string>
     <string name="french">Francés</string>
     <string name="german">Alemán</string>
+    <string name="italian">Italiano</string>
     <!-- Icon -->
     <string name="icon">Icono</string>
     <!-- Widget -->

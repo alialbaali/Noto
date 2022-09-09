@@ -71,6 +71,7 @@
     <!-- Translator of a language. -->
     <!-- Proofreader of a language. -->
     <string name="app_icons">Uygulama simgeleri</string>
+    <string name="privacy_policy">Gizlilik politikası</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Lisans</string>
     <string name="empty_version">Sürüm</string>
@@ -103,6 +104,10 @@
     <string name="folder_archive">%s (arşiv)</string>
     <string name="unarchive">Arşivden çıkar</string>
     <string name="edit">Düzenle</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">Sonraki</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">Önceki</string>
     <string name="pin">Sabitle</string>
     <!-- Merge multiple notes into a new note. -->
     <string name="merge">Birleştir</string>
@@ -117,6 +122,8 @@
     <string name="translations">Çeviriler</string>
     <!-- List of credits. -->
     <string name="credits">Katkıda bulunanlar</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">Detaylı bilgi için buraya tıklayın.</string>
     <!-- Folder -->
     <string name="folders">Klasörler</string>
     <plurals name="folders_count">
@@ -174,6 +181,16 @@
     <string name="use_bio">Biyometri kullan</string>
     <string name="validate">Doğrula</string>
     <string name="vault">Kasa</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">Kasa özelliğini kapat</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">Kasa özelliği devre dışı bırakıldı.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">Devre dışı bırak</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">Kasa özelliğini devre dışı bırakmak istediğinizden emin misiniz?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">Bu işlem geri alınamaz. Kasa özelliği devre dışı bırakılacak ve içindeki tüm klasörler kasanın dışına taşınacak.</string>
     <string name="vault_is_open">Kasa açık</string>
     <string name="immediately">Hemen</string>
     <string name="on_app_close">Uygulama kapatıldığında</string>
@@ -244,7 +261,7 @@
     <string name="grouping_order">Gruplandırma düzeni</string>
     <string name="save_to_noto">Noto\'ya kaydet</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
-    <string name="note_is_saved">Not başarıyla %s dizinine kaydedildi.</string>
+    <string name="note_is_saved">Not başarıyla %s klasörüne kaydedildi.</string>
     <string name="no_notes_found">Not bulunamadı.</string>
     <string name="notes">Notlar</string>
     <!-- The count of the selected notes that have been merged. -->
@@ -268,12 +285,12 @@
     <string name="reminder">Hatırlatıcı</string>
     <string name="reminders">Hatırlatıcılar</string>
     <string name="new_note_reminder">Yeni hatırlatıcı</string>
-    <string name="copy">Kopyala</string>
-    <string name="copy_to">Kopyala…</string>
+    <string name="copy">Panoya kopyala</string>
+    <string name="copy_to">Klasöre kopyala</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
-        <item quantity="one">Not başarıyla %s dizinine kopyalandı.</item>
-        <item quantity="other">%d not başarıyla %s dizinine kopyalandı.</item>
+        <item quantity="one">Not başarıyla %s klasörüne kopyalandı.</item>
+        <item quantity="other">%d not başarıyla %s klasörüne kopyalandı.</item>
     </plurals>
     <!-- The count of the selected notes that have been copied to clipboard. -->
     <plurals name="note_copied_to_clipboard">
@@ -285,7 +302,7 @@
         <item quantity="one">Bu notu silmek istediğinizden emin misiniz?</item>
         <item quantity="other">Bu notları silmek istediğinizden emin misiniz?</item>
     </plurals>
-    <string name="share_with">Paylaşılacak uygulama</string>
+    <string name="share_with">Paylaş</string>
     <string name="add_note_reminder">Hatırlatıcı ekle</string>
     <plurals name="delete_note_description">
         <item quantity="one">Bu işlem geri alınamaz. Not ve hatırlatıcı kalıcı olarak silinecektir.</item>
@@ -304,11 +321,11 @@
         <item quantity="one">Not çoğaltıldı.</item>
         <item quantity="other">%d not çoğaltıldı.</item>
     </plurals>
-    <string name="move_to">Taşı...</string>
+    <string name="move_to">Klasöre taşı</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
-        <item quantity="one">Not başarıyla %s dizinine taşındı.</item>
-        <item quantity="other">%d not başarıyla %s dizinine taşındı.</item>
+        <item quantity="one">Not başarıyla %s klasörüne taşındı.</item>
+        <item quantity="other">%d not başarıyla %s klasörüne taşındı.</item>
     </plurals>
     <string name="note_preview_size">Not önizleme boyutu</string>
     <string name="show_note_creation_date">Not oluşturma tarihini göster</string>
@@ -319,9 +336,11 @@
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Ekranı açık tut</string>
     <string name="full_screen">Tam ekran modunu etkinleştir</string>
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
+    <string name="dim_screen">Ekran parlaklığını azalt</string>
     <string name="show">Göster</string>
     <string name="hide">Gizle</string>
-    <string name="permission_not_granted">İzin verme işlemi başarısız</string>
+    <string name="permission_not_granted">İzin alma işlemi başarısız</string>
     <!-- Label -->
     <string name="reorder_label">Yeniden sırala</string>
     <string name="update_label">Etiketi güncelle</string>
@@ -340,15 +359,17 @@
     <string name="filter_labels">Etiketleri filtrele</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
-    <string name="system_dark_theme">Sistem + Koyu tema</string>
-    <string name="system_black_theme">Sistem + Siyah tema</string>
-    <string name="light_theme">Açık tema</string>
-    <string name="dark_theme">Koyu tema</string>
-    <string name="black_theme">Siyah tema</string>
+    <string name="system_dark_theme">Sistem varsayılanı + Koyu</string>
+    <string name="system_black_theme">Sistem varsayılanı + Siyah</string>
+    <string name="light_theme">Açık</string>
+    <string name="dark_theme">Koyu</string>
+    <string name="black_theme">Siyah</string>
     <!-- Language -->
     <string name="language">Dil</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Noto\'yu başka bir dile çevir</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">Sistem varsayılanı</string>
     <string name="english">İngilizce</string>
     <string name="turkish">Türkçe</string>
     <string name="arabic">Arapça</string>
@@ -357,6 +378,7 @@
     <string name="spanish">İspanyolca</string>
     <string name="french">Fransızca</string>
     <string name="german">Almanca</string>
+    <string name="italian">İtalyanca</string>
     <!-- Icon -->
     <string name="icon">Simge</string>
     <!-- Widget -->

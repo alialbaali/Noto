@@ -71,6 +71,7 @@
     <!-- Translator of a language. -->
     <!-- Proofreader of a language. -->
     <string name="app_icons">Icônes d\'application</string>
+    <string name="privacy_policy">Politique de confidentialité</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Licence</string>
     <string name="empty_version">Version</string>
@@ -103,6 +104,10 @@
     <string name="folder_archive">Archives du dossier %s</string>
     <string name="unarchive">Désarchiver</string>
     <string name="edit">Modifier</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">Suivant</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">Précédent</string>
     <string name="pin">Épingler</string>
     <!-- Merge multiple notes into a new note. -->
     <string name="merge">Fusionner</string>
@@ -117,6 +122,8 @@
     <string name="translations">Traductions</string>
     <!-- List of credits. -->
     <string name="credits">Crédits</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">Pour plus de détails, cliquez ici.</string>
     <!-- Folder -->
     <string name="folders">Dossiers</string>
     <plurals name="folders_count">
@@ -174,6 +181,16 @@
     <string name="use_bio">Utiliser la biométrie</string>
     <string name="validate">Valider</string>
     <string name="vault">Coffre-fort</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">Désactiver le coffre-fort</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">Le coffre-fort a été désactivé.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">Désactiver</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">Êtes-vous sûr de vouloir désactiver le coffre-fort ?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">Cette action ne peut pas être annulée et désactivera le coffre-fort et déplacera tous les dossiers en dehors.</string>
     <string name="vault_is_open">Le coffre-fort est déverrouillé</string>
     <string name="immediately">Immédiatement</string>
     <string name="on_app_close">À la fermeture de l\'application</string>
@@ -319,6 +336,8 @@
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Garder l\'écran allumé</string>
     <string name="full_screen">Plein écran</string>
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
+    <string name="dim_screen">Assombrir l\'écran</string>
     <string name="show">Afficher</string>
     <string name="hide">Masquer</string>
     <string name="permission_not_granted">Autorisation non accordée</string>
@@ -340,15 +359,17 @@
     <string name="filter_labels">Filtrer les étiquettes</string>
     <!-- Theme -->
     <string name="theme">Thème</string>
-    <string name="system_dark_theme">Système + Thème sombre</string>
-    <string name="system_black_theme">Système + Thème noir</string>
-    <string name="light_theme">Thème clair</string>
-    <string name="dark_theme">Thème sombre</string>
-    <string name="black_theme">Thème noir</string>
+    <string name="system_dark_theme">Suivre le système + Sombre</string>
+    <string name="system_black_theme">Suivre le système + Noir</string>
+    <string name="light_theme">Clair</string>
+    <string name="dark_theme">Sombre</string>
+    <string name="black_theme">Noir</string>
     <!-- Language -->
     <string name="language">Langue</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Traduire Noto</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">Suivre le système</string>
     <string name="english">Anglais</string>
     <string name="turkish">Turc</string>
     <string name="arabic">Arabe</string>
@@ -357,6 +378,7 @@
     <string name="spanish">Espagnol</string>
     <string name="french">Français</string>
     <string name="german">Allemand</string>
+    <string name="italian">Italien</string>
     <!-- Icon -->
     <string name="icon">Icône</string>
     <!-- Widget -->

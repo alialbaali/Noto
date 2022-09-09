@@ -71,6 +71,7 @@
     <!-- Translator of a language. -->
     <!-- Proofreader of a language. -->
     <string name="app_icons">أيقونات التطبيق</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">الرخصة</string>
     <string name="empty_version">الإصدار</string>
@@ -103,6 +104,10 @@
     <string name="folder_archive">أرشيف %s</string>
     <string name="unarchive">إلغاء الأرشفة</string>
     <string name="edit">تعديل</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">التالي</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">السابق</string>
     <string name="pin">تثبيت</string>
     <!-- Merge multiple notes into a new note. -->
     <string name="merge">دمج</string>
@@ -117,6 +122,8 @@
     <string name="translations">الترجمة</string>
     <!-- List of credits. -->
     <string name="credits">الاعتمادات</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">للمزيد من التفاصيل، انقر هنا.</string>
     <!-- Folder -->
     <string name="folders">المجلدات</string>
     <plurals name="folders_count">
@@ -178,6 +185,16 @@
     <string name="use_bio">استخدام المقاييس الحيوية</string>
     <string name="validate">تحقق</string>
     <string name="vault">الخزينة</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">تعطيل المخزن</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">تم تعطيل المخزن.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">تعطيل</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">هل أنت متأكد من أنك تريد تعطل المخزن؟</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">لا يمكن التراجع عن هذا الإجراء وسيتم تعطيل المخزن ونقل جميع المجلدات خارج المخزن.</string>
     <string name="vault_is_open">الخزينة مفتوحة</string>
     <string name="immediately">على الفور</string>
     <string name="on_app_close">عند إغلاق التطبيق</string>
@@ -391,6 +408,8 @@
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
     <string name="full_screen">الذهاب إلى ملء الشاشة</string>
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
+    <string name="dim_screen">تعتيم الشاشة</string>
     <string name="show">إظهار</string>
     <string name="hide">إخفاء</string>
     <string name="permission_not_granted">لم يتم منح الإذن</string>
@@ -412,15 +431,17 @@
     <string name="filter_labels">تصفية الملصقات</string>
     <!-- Theme -->
     <string name="theme">المظهر</string>
-    <string name="system_dark_theme">مظهر النظام + داكن</string>
-    <string name="system_black_theme">مظهر النظام + أسود</string>
-    <string name="light_theme">مظهر فاتح</string>
-    <string name="dark_theme">مظهر داكن</string>
-    <string name="black_theme">مظهر أسود</string>
+    <string name="system_dark_theme">اتبع النظام + داكن</string>
+    <string name="system_black_theme">اتبع النظام + أسود</string>
+    <string name="light_theme">فاتح</string>
+    <string name="dark_theme">داكن</string>
+    <string name="black_theme">أسود</string>
     <!-- Language -->
     <string name="language">اللغة</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">ترجم Noto</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">اتبع النظام</string>
     <string name="english">اللغة الإنجليزية</string>
     <string name="turkish">اللغة التركية</string>
     <string name="arabic">اللغة العربية</string>
@@ -429,6 +450,7 @@
     <string name="spanish">اللغة الإسبانية</string>
     <string name="french">الفرنسية</string>
     <string name="german">اللغة الألمانية</string>
+    <string name="italian">الإيطالية</string>
     <!-- Icon -->
     <string name="icon">الأيقونة</string>
     <!-- Widget -->
