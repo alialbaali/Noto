@@ -16,9 +16,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.NoteSelectionDialogFragmentBinding
 import com.noto.app.folder.FolderViewModel
 import com.noto.app.folder.noteItem
@@ -93,13 +93,14 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }.launchIn(lifecycleScope)
 
         viewModel.notes
-            .onEach {
-                if (it is UiState.Success) {
-                    val isAllSelected = it.value.all { it.isSelected }
+            .onEach { state ->
+                if (state is UiState.Success) {
+                    val isAllSelected = state.value.all { it.isSelected }
+                    val selectedNotes = state.value.filter { it.isSelected }
+                    val selectedNotesCount = selectedNotes.count()
                     tvSelectAllNotes.isVisible = !isAllSelected
                     divider2.root.isVisible = !isAllSelected
-                    val selectedNotesCount = it.value.count { it.isSelected }
-                    if (it.value.none { it.note.isPinned }) {
+                    if (selectedNotes.none { it.note.isPinned }) {
                         tvPinNotes.text = context?.stringResource(R.string.pin)
                         tvPinNotes.setOnClickListener {
                             viewModel.pinSelectedNotes().invokeOnCompletion {
