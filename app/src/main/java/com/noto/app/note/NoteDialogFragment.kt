@@ -17,8 +17,8 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.NoteDialogFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Label
@@ -45,7 +45,13 @@ class NoteDialogFragment : BaseDialogFragment() {
     private val alarmManager by lazy { context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager? }
 
     private val anchorViewId by lazy {
-        if (navController?.previousBackStackEntry?.destination?.id != R.id.folderArchiveFragment)
+        val folderArchiveFragmentEntry = try {
+            navController?.getBackStackEntry(R.id.folderArchiveFragment)
+        } catch (exception: Throwable) {
+            null
+        }
+
+        if (folderArchiveFragmentEntry?.destination?.id == null)
             R.id.fab
         else
             null
