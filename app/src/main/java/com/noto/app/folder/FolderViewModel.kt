@@ -24,7 +24,7 @@ class FolderViewModel(
     private val selectedNoteIds: LongArray = longArrayOf(),
 ) : ViewModel() {
 
-    private val mutableFolder = MutableStateFlow(Folder(folderId, position = 0))
+    private val mutableFolder = MutableStateFlow(Folder(position = 0))
     val folder get() = mutableFolder.asStateFlow()
 
     private val mutableParentFolder = MutableStateFlow<Folder?>(null)
@@ -85,9 +85,7 @@ class FolderViewModel(
 
     init {
         combine(
-            folderRepository.getFolderById(folderId)
-                .filterNotNull()
-                .onStart { emit(Folder(folderId, position = 0)) },
+            folderRepository.getFolderById(folderId).filterNotNull(),
             folderRepository.getAllFolders(),
         ) { folder, folders ->
             mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(folder.color)
@@ -193,7 +191,9 @@ class FolderViewModel(
     }
 
     fun updateFolderScrollingPosition(scrollingPosition: Int) = viewModelScope.launch {
-        folderRepository.updateFolder(folder.value.copy(scrollingPosition = scrollingPosition))
+        if (folder.value.id != 0L) {
+            folderRepository.updateFolder(folder.value.copy(scrollingPosition = scrollingPosition))
+        }
     }
 
     fun deleteFolder() = viewModelScope.launch {
