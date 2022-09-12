@@ -178,7 +178,14 @@ class FolderFragment : Fragment() {
 
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Boolean>(Constants.SelectAll)
-            ?.observe(viewLifecycleOwner) { viewModel.selectAllNotes() }
+            ?.run {
+                observe(viewLifecycleOwner) {
+                    if (it) {
+                        viewModel.selectAllNotes()
+                        value = false
+                    }
+                }
+            }
     }
 
     private fun FolderFragmentBinding.setupListeners() {
