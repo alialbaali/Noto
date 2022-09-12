@@ -54,7 +54,7 @@ class NoteViewModel(
             .onEach { mutableNote.value = it }
             .launchIn(viewModelScope)
 
-        var selectedLabels: List<Pair<Label, Boolean>> = emptyList()
+        var selectedLabels: List<Pair<Label, Boolean>>? = null
 
         combine(
             labelRepository.getLabelsByFolderId(folderId)
@@ -69,19 +69,18 @@ class NoteViewModel(
                     label to isSelected
                 }
                 .let { selectableLabels ->
-                    val isReordered = selectedLabels.any { selectedLabel ->
+                    val isReordered = selectedLabels.orEmpty().any { selectedLabel ->
                         val label = selectableLabels.first { it.first.id == selectedLabel.first.id }
                         selectedLabel.first.position != label.first.position
                     }
-                    selectedLabels = if (selectedLabels.isEmpty() || isReordered) {
-                        selectableLabels.filter { it.second }
-                    } else {
-                        selectedLabels.map { label ->
+                    selectedLabels = when {
+                        selectedLabels == null || isReordered -> selectableLabels.filter { it.second }
+                        else -> selectedLabels.orEmpty().map { label ->
                             selectableLabels.first { it.first.id == label.first.id }
                         }
                     }.sortedBy { it.first.position }
-                    selectedLabels + selectableLabels
-                        .filterNot { label -> selectedLabels.any { it.first.id == label.first.id } }
+                    selectedLabels.orEmpty() + selectableLabels
+                        .filterNot { label -> selectedLabels.orEmpty().any { it.first.id == label.first.id } }
                         .sortedBy { it.first.position }
                 }
                 .toMap()
