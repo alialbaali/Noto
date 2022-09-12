@@ -224,16 +224,17 @@ class FolderFragment : Fragment() {
         }
 
         activity?.onBackPressedDispatcher?.addCallback {
-            if (viewModel.isSelection.value) {
-                if (viewModel.isSearchEnabled.value) {
+            when {
+                viewModel.isSelection.value -> if (viewModel.isSearchEnabled.value) {
                     viewModel.disableSearch()
                 } else {
                     viewModel.disableSelection()
                 }
-            } else if (viewModel.isSearchEnabled.value) {
-                viewModel.disableSearch()
-            } else {
-                navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment(exit = true))
+                viewModel.isSearchEnabled.value -> viewModel.disableSearch()
+                viewModel.labels.value.any { it.value } -> viewModel.clearLabelSelection()
+                else -> {
+                    navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment(exit = true))
+                }
             }
         }
 
