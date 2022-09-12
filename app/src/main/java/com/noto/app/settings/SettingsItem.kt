@@ -8,6 +8,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
@@ -46,6 +47,7 @@ fun SettingsItem(
             .background(MaterialTheme.colorScheme.surface)
             .padding(NotoTheme.dimensions.medium),
         horizontalArrangement = if (painter != null) Arrangement.Start else Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         if (painter != null) {
             Icon(
