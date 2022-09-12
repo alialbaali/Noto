@@ -399,9 +399,9 @@ fun NavController.destinationAsFlow() = callbackFlow {
 }
 
 fun isCurrentLocaleArabic(): Boolean {
-    val configuration = Resources.getSystem().configuration
+    val configuration = Resources.getSystem()?.configuration ?: return false
     val locales = ConfigurationCompat.getLocales(configuration)
-    val selectedLocale = locales[0]
+    val selectedLocale = locales.get(0)
     return selectedLocale?.language == "ar"
 }
 
