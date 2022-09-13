@@ -34,16 +34,17 @@ sealed interface SettingsItemType {
 fun SettingsItem(
     title: String,
     type: SettingsItemType,
-    onClick: () -> Unit,
+    onClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
     titleColor: Color = MaterialTheme.colorScheme.onSurface,
     painter: Painter? = null,
     description: String? = null,
 ) {
+    val clickableModifier = if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier
     Row(
         modifier
             .fillMaxWidth()
-            .clickable(onClick = onClick)
+            .then(clickableModifier)
             .background(MaterialTheme.colorScheme.surface)
             .padding(NotoTheme.dimensions.medium),
         horizontalArrangement = if (painter != null) Arrangement.Start else Arrangement.SpaceBetween,

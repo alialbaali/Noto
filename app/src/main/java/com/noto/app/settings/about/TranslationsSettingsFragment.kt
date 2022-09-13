@@ -89,7 +89,7 @@ class TranslationsSettingsFragment : Fragment() {
                         SettingsItem(
                             title = stringResource(id = R.string.german_translator),
                             type = SettingsItemType.None,
-                            onClick = {}
+                            onClick = null,
                         )
                     }
 
