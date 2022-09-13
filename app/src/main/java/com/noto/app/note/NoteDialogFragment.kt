@@ -23,6 +23,7 @@ import com.noto.app.databinding.NoteDialogFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.OpenNotesIn
 import com.noto.app.label.noteLabelItem
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -120,15 +121,23 @@ class NoteDialogFragment : BaseDialogFragment() {
             )
         }
 
-        tvOpenInReadingMode.setOnClickListener {
-            dismiss()
-            navController?.navigateSafely(
-                NoteDialogFragmentDirections.actionNoteDialogFragmentToNotePagerFragment(
-                    args.folderId,
-                    args.noteId,
-                    longArrayOf(),
+        tvOpenIn.setOnClickListener {
+            when (viewModel.folder.value.openNotesIn) {
+                OpenNotesIn.Editor -> navController?.navigateSafely(
+                    NoteDialogFragmentDirections.actionNoteDialogFragmentToNotePagerFragment(
+                        args.folderId,
+                        args.noteId,
+                        longArrayOf(),
+                    )
                 )
-            )
+                OpenNotesIn.ReadingMode -> navController?.navigateSafely(
+                    NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteFragment(
+                        args.folderId,
+                        args.noteId,
+                    )
+                )
+            }
+            dismiss()
         }
 
         tvDuplicateNote.setOnClickListener {
@@ -349,8 +358,18 @@ class NoteDialogFragment : BaseDialogFragment() {
             val colorStateList = color.toColorStateList()
             tb.tvDialogTitle.setTextColor(color)
             tb.vHead.backgroundTintList = colorStateList
+            when (folder.openNotesIn) {
+                OpenNotesIn.Editor -> {
+                    tvOpenIn.text = context.stringResource(R.string.reading_mode)
+                    tvOpenIn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_reading_mode_24, 0, 0)
+                }
+                OpenNotesIn.ReadingMode -> {
+                    tvOpenIn.text = context.stringResource(R.string.edit)
+                    tvOpenIn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_edit_24, 0, 0)
+                }
+            }
             listOf(
-                tvCopyToClipboard, tvCopyNote, tvOpenInReadingMode, tvShareNote, tvArchiveNote,
+                tvCopyToClipboard, tvCopyNote, tvOpenIn, tvShareNote, tvArchiveNote,
                 tvDuplicateNote, tvPinNote, tvRemindMe, tvDeleteNote, tvMoveNote,
             ).forEach { tv ->
                 tv.background.setRippleColor(colorStateList)

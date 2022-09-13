@@ -229,6 +229,9 @@
             android:name="is_select_all_enabled"
             app:argType="boolean"
             android:defaultValue="false" />
+        <action
+            android:id="@+id/action_noteDialogFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"
