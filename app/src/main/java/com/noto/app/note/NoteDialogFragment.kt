@@ -72,8 +72,9 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private fun NoteDialogFragmentBinding.setupState() {
         tb.tvDialogTitle.text = context?.stringResource(R.string.note_options)
-        tvSelectNote.isVisible = args.isSelectionEnabled
-        divider2.root.isVisible = args.isSelectionEnabled
+        tvSelectNote.isVisible = args.isSelectionEnabled || args.isSelectAllEnabled
+        divider2.root.isVisible = args.isSelectionEnabled || args.isSelectAllEnabled
+        tvSelectNote.text = if (args.isSelectAllEnabled) context?.stringResource(R.string.select_all) else context?.stringResource(R.string.select)
 
         viewModel.folder
             .onEach { folder -> setupFolder(folder) }
@@ -259,7 +260,11 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvSelectNote.setOnClickListener {
-            navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.IsSelection, args.noteId)
+            if (args.isSelectAllEnabled) {
+                navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.SelectAll, true)
+            } else {
+                navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.IsSelection, args.noteId)
+            }
             dismiss()
         }
     }

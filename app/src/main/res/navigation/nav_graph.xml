@@ -225,6 +225,10 @@
         <action
             android:id="@+id/action_noteDialogFragment_to_notePagerFragment"
             app:destination="@id/notePagerFragment" />
+        <argument
+            android:name="is_select_all_enabled"
+            app:argType="boolean"
+            android:defaultValue="false" />
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"

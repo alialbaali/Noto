@@ -246,7 +246,8 @@ class FolderFragment : Fragment() {
         }
 
         fabOptions.setOnClickListener {
-            val selectedNoteIds = viewModel.notes.value.getOrDefault(emptyList())
+            val notes = viewModel.notes.value.getOrDefault(emptyList())
+            val selectedNoteIds = notes
                 .filter { model -> model.isSelected }
                 .sortedBy { it.selectionOrder }
                 .map { model -> model.note.id }
@@ -258,6 +259,7 @@ class FolderFragment : Fragment() {
                             args.folderId,
                             selectedNoteIds.first(),
                             R.id.folderFragment,
+                            isSelectAllEnabled = notes.size != 1
                         )
                     )
             } else {
