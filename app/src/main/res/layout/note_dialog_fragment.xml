@@ -33,6 +33,28 @@
 
             <LinearLayout
                 android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/spacing_normal"
+                android:divider="@drawable/spacing_normal_divider"
+                android:showDividers="middle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_select_note"
+                    style="@style/DialogItem"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/select"
+                    app:drawableTopCompat="@drawable/ic_round_check_circle_outline_24" />
+            </LinearLayout>
+
+            <include
+                android:id="@+id/divider2"
+                layout="@layout/divider_item" />
+
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_marginBottom="@dimen/spacing_small"
                 android:paddingHorizontal="@dimen/spacing_normal"
                 android:divider="@drawable/spacing_normal_divider"
@@ -135,6 +157,7 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="@dimen/spacing_normal"
                 android:divider="@drawable/spacing_normal_divider"
+                android:layout_marginBottom="@dimen/spacing_normal"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:showDividers="middle"
                 android:layout_width="match_parent"
@@ -166,30 +189,6 @@
                     android:layout_weight="1"
                     android:text="@string/delete"
                     app:drawableTopCompat="@drawable/ic_round_delete_24" />
-            </LinearLayout>
-
-            <include
-                android:id="@+id/divider2"
-                layout="@layout/divider_item" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/spacing_normal"
-                android:layout_marginBottom="@dimen/spacing_normal"
-                android:divider="@drawable/spacing_normal_divider"
-                android:showDividers="middle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_select_note"
-                    style="@style/DialogItem"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/select"
-                    app:drawableTopCompat="@drawable/ic_round_check_circle_outline_24" />
-
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
