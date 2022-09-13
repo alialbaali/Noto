@@ -127,14 +127,10 @@ class NotePagerFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        viewModel.isDimScreen
-            .onEach { isDimScreen ->
-                val layoutParams = activity?.window?.attributes
-                activity?.window?.attributes = if (isDimScreen) {
-                    layoutParams?.apply { screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_OFF }
-                } else {
-                    layoutParams?.apply { screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE }
-                }
+        viewModel.screenBrightnessLevel
+            .onEach { level ->
+                activity?.window?.attributes = activity?.window?.attributes
+                    ?.apply { screenBrightness = level.value }
             }
             .launchIn(lifecycleScope)
 

@@ -345,8 +345,16 @@
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Keep screen on</string>
     <string name="full_screen">Go full screen</string>
-    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
-    <string name="dim_screen">Dim screen</string>
+    <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
+    <string name="screen_brightness_level">Screen brightness level</string>
+    <string name="min">Min</string>
+    <string name="very_low">Very low</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="very_high">Very high</string>
+    <string name="max">Max</string>
+
     <string name="show">Show</string>
     <string name="hide">Hide</string>
     <string name="permission_not_granted">Permission hasn\'t been granted</string>

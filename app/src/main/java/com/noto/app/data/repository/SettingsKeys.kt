@@ -1,9 +1,6 @@
 package com.noto.app.data.repository
 
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.intPreferencesKey
-import androidx.datastore.preferences.core.longPreferencesKey
-import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.core.*
 import com.noto.app.util.Constants
 
 object SettingsKeys {
@@ -28,7 +25,7 @@ object SettingsKeys {
     val AllNotesScrollingPosition = intPreferencesKey("AllNotesScrollingPosition")
     val RecentNotesScrollingPosition = intPreferencesKey("RecentNotesScrollingPosition")
     val QuickNoteFolderId = longPreferencesKey("QuickNoteFolderId")
-    val IsDimScreen = booleanPreferencesKey("IsDimScreen")
+    val ScreenBrightnessLevel = floatPreferencesKey("ScreenBrightnessLevel")
 
     @Suppress("FunctionName")
     object Widget {

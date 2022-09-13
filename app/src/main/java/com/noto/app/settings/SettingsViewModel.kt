@@ -49,9 +49,9 @@ class SettingsViewModel(
 
     val isFullScreen = settingsRepository.isFullScreen
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
-    
-    val isDimScreen = settingsRepository.isDimScreen
-        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
+    val screenBrightnessLevel = settingsRepository.screenBrightnessLevel
+        .stateIn(viewModelScope, SharingStarted.Eagerly, ScreenBrightnessLevel.System)
 
     val vaultPasscode = settingsRepository.vaultPasscode
         .stateIn(viewModelScope, SharingStarted.Eagerly, null)
@@ -93,8 +93,8 @@ class SettingsViewModel(
         settingsRepository.updateIsFullScreen(!isFullScreen.value)
     }
 
-    fun toggleDimScreen() = viewModelScope.launch {
-        settingsRepository.updateIsDimScreen(!isDimScreen.value)
+    fun updateScreenBrightnessLevel(level: ScreenBrightnessLevel) = viewModelScope.launch {
+        settingsRepository.updateScreenBrightnessLevel(level)
     }
 
     suspend fun exportJson(): String = withContext(Dispatchers.IO) {

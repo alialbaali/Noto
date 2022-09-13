@@ -3,6 +3,7 @@ package com.noto.app.note
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.ScreenBrightnessLevel
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
@@ -40,8 +41,8 @@ class NotePagerViewModel(
     val isFullScreen = settingsRepository.isFullScreen
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
-    val isDimScreen = settingsRepository.isDimScreen
-        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+    val screenBrightnessLevel = settingsRepository.screenBrightnessLevel
+        .stateIn(viewModelScope, SharingStarted.Eagerly, ScreenBrightnessLevel.System)
 
     private val mutableSelectedId = MutableStateFlow(noteId)
     val selectedId get() = mutableSelectedId.asStateFlow()

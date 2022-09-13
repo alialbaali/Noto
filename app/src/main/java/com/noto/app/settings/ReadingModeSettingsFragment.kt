@@ -18,10 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
 import com.noto.app.components.Screen
-import com.noto.app.util.navController
-import com.noto.app.util.setupMixedTransitions
-import com.noto.app.util.snackbar
-import com.noto.app.util.stringResource
+import com.noto.app.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ReadingModeSettingsFragment : Fragment() {
@@ -61,7 +58,7 @@ class ReadingModeSettingsFragment : Fragment() {
                 val doNotDisturbEnabled by viewModel.isDoNotDisturb.collectAsState()
                 val keepScreenOnEnabled by viewModel.isScreenOn.collectAsState()
                 val fullScreenEnabled by viewModel.isFullScreen.collectAsState()
-                val dimScreenEnabled by viewModel.isDimScreen.collectAsState()
+                val screenBrightnessLevel by viewModel.screenBrightnessLevel.collectAsState()
                 Screen(title = stringResource(id = R.string.reading_mode)) {
                     SettingsSection {
                         if (isDoNotDisturbSupported) {
@@ -85,9 +82,9 @@ class ReadingModeSettingsFragment : Fragment() {
                         )
 
                         SettingsItem(
-                            title = stringResource(id = R.string.dim_screen),
-                            type = SettingsItemType.Switch(isChecked = dimScreenEnabled),
-                            onClick = { viewModel.toggleDimScreen() }
+                            title = stringResource(id = R.string.screen_brightness_level),
+                            type = SettingsItemType.Text(screenBrightnessLevel.asString()),
+                            onClick = { navController?.navigate(ReadingModeSettingsFragmentDirections.actionReadingModeSettingsFragmentToScreenBrightnessLevelDialogFragment()) }
                         )
                     }
                 }

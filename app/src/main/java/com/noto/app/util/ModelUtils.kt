@@ -3,6 +3,8 @@ package com.noto.app.util
 import android.content.Context
 import android.util.Base64
 import android.view.View
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import androidx.viewbinding.ViewBinding
 import com.noto.app.R
 import com.noto.app.domain.model.*
@@ -253,4 +255,18 @@ suspend fun LabelRepository.getOrCreateLabel(folderId: Long, label: Label): Long
     val folderLabels = getLabelsByFolderId(folderId).first()
     val existingLabel = folderLabels.firstOrNull { it.title == label.title }?.id
     return existingLabel ?: createLabel(label.copy(id = 0, folderId = folderId))
+}
+
+@Composable
+fun ScreenBrightnessLevel.asString(): String {
+    return when (this) {
+        ScreenBrightnessLevel.System -> stringResource(id = R.string.follow_system)
+        ScreenBrightnessLevel.Min -> stringResource(id = R.string.min)
+        ScreenBrightnessLevel.VeryLow -> stringResource(id = R.string.very_low)
+        ScreenBrightnessLevel.Low -> stringResource(id = R.string.low)
+        ScreenBrightnessLevel.Medium -> stringResource(id = R.string.medium)
+        ScreenBrightnessLevel.High -> stringResource(id = R.string.high)
+        ScreenBrightnessLevel.VeryHigh -> stringResource(id = R.string.very_high)
+        ScreenBrightnessLevel.Max -> stringResource(id = R.string.max)
+    }
 }

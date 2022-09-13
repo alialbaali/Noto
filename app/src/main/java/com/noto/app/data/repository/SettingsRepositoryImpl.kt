@@ -144,9 +144,13 @@ class SettingsRepositoryImpl(
         .map { it ?: Folder.GeneralFolderId }
         .flowOn(dispatcher)
 
-    override val isDimScreen: Flow<Boolean> = storage.data
-        .map { preferences -> preferences[SettingsKeys.IsDimScreen] }
-        .map { it ?: false }
+    override val screenBrightnessLevel: Flow<ScreenBrightnessLevel> = storage.data
+        .map { preferences -> preferences[SettingsKeys.ScreenBrightnessLevel] }
+        .map {
+            ScreenBrightnessLevel.values().firstOrNull { level ->
+                level.value == it
+            } ?: ScreenBrightnessLevel.System
+        }
         .flowOn(dispatcher)
 
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
@@ -441,9 +445,9 @@ class SettingsRepositoryImpl(
         }
     }
 
-    override suspend fun updateIsDimScreen(isDimScreen: Boolean) {
+    override suspend fun updateScreenBrightnessLevel(level: ScreenBrightnessLevel) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.IsDimScreen] = isDimScreen }
+            storage.edit { preferences -> preferences[SettingsKeys.ScreenBrightnessLevel] = level.value }
         }
     }
 

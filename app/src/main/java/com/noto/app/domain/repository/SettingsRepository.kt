@@ -49,7 +49,7 @@ interface SettingsRepository {
 
     val quickNoteFolderId: Flow<Long>
 
-    val isDimScreen: Flow<Boolean>
+    val screenBrightnessLevel: Flow<ScreenBrightnessLevel>
 
     fun getWidgetFolderId(widgetId: Int): Flow<Long>
 
@@ -135,5 +135,6 @@ interface SettingsRepository {
 
     suspend fun updateQuickNoteFolderId(folderId: Long)
 
-    suspend fun updateIsDimScreen(isDimScreen: Boolean)
+    suspend fun updateScreenBrightnessLevel(level: ScreenBrightnessLevel)
+
 }

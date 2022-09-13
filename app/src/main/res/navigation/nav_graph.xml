@@ -622,7 +622,11 @@
     <fragment
         android:id="@+id/readingModeSettingsFragment"
         android:name="com.noto.app.settings.ReadingModeSettingsFragment"
-        android:label="ReadingModeSettingsFragment" />
+        android:label="ReadingModeSettingsFragment">
+        <action
+            android:id="@+id/action_readingModeSettingsFragment_to_screenBrightnessLevelDialogFragment"
+            app:destination="@id/screenBrightnessLevelDialogFragment" />
+    </fragment>
     <fragment
         android:id="@+id/whatsNewFragment"
         android:name="com.noto.app.settings.whatsnew.WhatsNewFragment"
@@ -687,4 +691,8 @@
             android:id="@+id/action_notePagerFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/screenBrightnessLevelDialogFragment"
+        android:name="com.noto.app.settings.ScreenBrightnessLevelDialogFragment"
+        android:label="ScreenBrightnessLevelDialogFragment" />
 </navigation>
