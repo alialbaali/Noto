@@ -52,3 +52,9 @@ enum class GroupingOrder { Ascending, Descending, }
 enum class FilteringType { Inclusive, Exclusive, Strict, }
 
 enum class OpenNotesIn { Editor, ReadingMode, }
+
+enum class ScreenBrightnessLevel(val value: Float) {
+    System(-1F), Min(0F), VeryLow(0.10F),
+    Low(0.25F), Medium(0.50F), High(0.75F),
+    VeryHigh(0.90F), Max(1F),
+}
