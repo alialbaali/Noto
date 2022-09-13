@@ -144,6 +144,7 @@ dependencies {
 
     implementation(AndroidX.Compose.material3)
     implementation(AndroidX.Compose.animation)
+    implementation(AndroidX.Compose.Ui.viewBinding)
 
     testImplementation(Testing.Kotest.Runner.junit5)
     testImplementation(Testing.Kotest.Assertions.core)
