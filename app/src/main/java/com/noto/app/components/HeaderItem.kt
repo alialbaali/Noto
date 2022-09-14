@@ -36,14 +36,15 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
 
     override fun bind(holder: Holder) = with(holder.binding) {
         tvTitle.text = title
-        ibVisibility.animate().setDuration(DefaultAnimationDuration).rotation(if (isVisible) 180F else 0F)
-        ibVisibility.contentDescription = root.context?.stringResource(if (isVisible) R.string.hide else R.string.show)
-        ibVisibility.setOnClickListener(onClickListener)
-        ibCreate.setOnClickListener(onCreateClickListener)
         root.setOnClickListener(onClickListener)
         root.setOnLongClickListener(onLongClickListener)
         root.isClickable = onClickListener != null
+        root.isLongClickable = onLongClickListener != null
+        ibVisibility.animate().setDuration(DefaultAnimationDuration).rotation(if (isVisible) 180F else 0F)
+        ibVisibility.contentDescription = root.context?.stringResource(if (isVisible) R.string.hide else R.string.show)
+        ibVisibility.setOnClickListener(onClickListener)
         ibVisibility.isVisible = onClickListener != null
+        ibCreate.setOnClickListener(onCreateClickListener)
         ibCreate.isVisible = onCreateClickListener != null
         if (color != null) {
             val colorResource = root.context.colorResource(color!!.toResource())
