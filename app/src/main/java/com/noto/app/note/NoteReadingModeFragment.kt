@@ -83,7 +83,7 @@ class NoteReadingModeFragment : Fragment() {
 
         navController?.getBackStackEntry(R.id.notePagerFragment)?.savedStateHandle
             ?.getLiveData<Int>(Constants.ClickListener)
-            ?.observe(viewLifecycleOwner) { nsv.smoothScrollTo(0, 0) }
+            ?.observe(viewLifecycleOwner) { if (isVisible) nsv.smoothScrollTo(0, 0) }
     }
 
     private fun NoteReadingModeFragmentBinding.setupNote(note: Note, font: Font) {
