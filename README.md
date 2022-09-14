@@ -4,22 +4,17 @@
 
 ## Download
 
-You can download Noto from [Github](https://github.com/alialbaali/Noto/releases/latest) or Google Play using the
-following link:
+You can download Noto from [Github](https://github.com/alialbaali/Noto/releases/latest) or Google Play using the following link:
 
 [<img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="80">](https://play.google.com/store/apps/details?id=com.noto)
 
 ## Motivation
 
-There are a lot of notes app available out-there but few apps who do it well.
-Well, Noto is one of them.
+There are a lot of notes app available out-there but few apps who do it well. Well, Noto is one of them.
 
-The goal of Noto, is to create a minimalistic, free, open-source note-taking application that meets customer
-expectations
-with privacy in mind.
+The goal of Noto, is to create a minimalistic, free, open-source note-taking application that meets customer expectations with privacy in mind.
 
-Noto is also part of my [portfolio](https://alialbaali.com) projects.
-It showcases my skills regarding developing Android apps.
+Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcases my skills regarding developing Android apps.
 
 ## Features
 
@@ -90,7 +85,14 @@ Contributions are always welcome! If you would like to contribute, please feel f
 
 If you would like to translate the app, please contact me via [email](mailto:ali@albaali.com).
 
-#### Special thanks to <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a> and <a href="https://sakci.me">Alparslan Şakçi</a>, <a href="https://github.com/faus32">Faus AM</a>, <a href="https://github.com/kernoeb">Kernoeb</a>, and Uli N for Turkish, Spanish, French, and German localizations respectively.
+#### Special thanks to:
+
+- <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a>, and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization.
+- <a href="https://github.com/faus32">Faus AM</a> for the Spanish localization.
+- <a href="https://github.com/kernoeb">Kernoeb</a>, and <a href="https://geoffreycrofte.com">Geoffrey Crofte</a> for the French localization.
+- Uli N for the German localization.
+- <a href="https://github.com/matteolomba">Matteo Lombardi</a> for the Italian localization.
+- <a href="https://twitter.com/trjman_en">Dr.Ohm</a> for the Italian localization.
 
 ## App Icons
 
