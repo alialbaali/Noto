@@ -74,6 +74,12 @@ class NotePagerFragment : Fragment() {
                     fabPrevious.iconTint = color.toColorStateList()
                     fabNext.setTextColor(color)
                     fabPrevious.setTextColor(color)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                        listOf(fabPrevious, fabNext, fab).forEach {
+                            it.outlineAmbientShadowColor = color
+                            it.outlineSpotShadowColor = color
+                        }
+                    }
                 }
             }
             .launchIn(lifecycleScope)
