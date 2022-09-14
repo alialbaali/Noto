@@ -1,5 +1,6 @@
 package com.noto.app.folder
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -172,6 +173,10 @@ class NewFolderFragment : Fragment() {
                 tb.setTitleTextColor(color)
                 tb.setNavigationIconTint(color)
                 fab.setBackgroundColor(color)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    fab.outlineAmbientShadowColor = color
+                    fab.outlineSpotShadowColor = color
+                }
             }
         }
     }
