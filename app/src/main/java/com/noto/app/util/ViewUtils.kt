@@ -50,6 +50,7 @@ import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
+import java.util.*
 import kotlin.math.absoluteValue
 
 const val SetColorFilterMethodName = "setColorFilter"
@@ -399,10 +400,11 @@ fun NavController.destinationAsFlow() = callbackFlow {
 }
 
 fun isCurrentLocaleArabic(): Boolean {
+    val appLocale = Locale.getDefault()
     val configuration = Resources.getSystem()?.configuration ?: return false
     val locales = ConfigurationCompat.getLocales(configuration)
-    val selectedLocale = locales.get(0)
-    return selectedLocale?.language == "ar"
+    val deviceLocale = locales.get(0)
+    return (deviceLocale?.language == "ar" && appLocale.language == "ar") || appLocale.language == "ar"
 }
 
 fun EditTextWithSelectionChangedListener.textSelectionAsFlow() = callbackFlow {
