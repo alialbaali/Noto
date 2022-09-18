@@ -59,27 +59,28 @@ fun SettingsItem(
             Spacer(modifier = Modifier.width(NotoTheme.dimensions.medium))
         }
 
-        val titleModifier = if (type is SettingsItemType.Text) {
-            Modifier
+        val textModifier = if (type is SettingsItemType.Text) {
+            Modifier.weight(weight = 1F, fill = false)
         } else {
-            Modifier.weight(weight = 1F, fill = true)
+            Modifier
         }
 
-        Column(titleModifier) {
+        Column(textModifier) {
             Text(text = title, style = MaterialTheme.typography.bodyLarge, color = titleColor)
             if (description != null) {
                 Text(text = description, style = MaterialTheme.typography.labelSmall)
             }
         }
 
-        if (type !is SettingsItemType.None) Spacer(Modifier.width(NotoTheme.dimensions.small))
+        if (type !is SettingsItemType.None) Spacer(Modifier.width(NotoTheme.dimensions.medium))
 
         when (type) {
             is SettingsItemType.None -> {}
             is SettingsItemType.Text -> Text(
                 text = type.value,
                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
-                textAlign = TextAlign.End
+                textAlign = TextAlign.End,
+                modifier = textModifier,
             )
             is SettingsItemType.Switch -> Switch(
                 checked = type.isChecked,
