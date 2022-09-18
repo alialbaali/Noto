@@ -126,6 +126,7 @@ class GeneralSettingsFragment : Fragment() {
                                     )
                                 )
                             },
+                            description = stringResource(id = R.string.main_interface_description)
                         )
 
                         SettingsItem(
@@ -140,6 +141,7 @@ class GeneralSettingsFragment : Fragment() {
                                     )
                                 )
                             },
+                            description = stringResource(id = R.string.quick_note_folder_description)
                         )
                     }
                     SettingsSection {
@@ -172,13 +174,15 @@ class GeneralSettingsFragment : Fragment() {
                         SettingsItem(
                             title = stringResource(id = R.string.show_notes_count),
                             type = SettingsItemType.Switch(notesCountEnabled),
-                            onClick = { viewModel.toggleShowNotesCount() }
+                            onClick = { viewModel.toggleShowNotesCount() },
+                            description = stringResource(id = R.string.show_notes_count_description)
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.remember_scrolling_position),
                             type = SettingsItemType.Switch(rememberScrollingPositionEnabled),
-                            onClick = { viewModel.toggleRememberScrollingPosition() }
+                            onClick = { viewModel.toggleRememberScrollingPosition() },
+                            description = stringResource(id = R.string.remember_scrolling_position_description)
                         )
                     }
                 }

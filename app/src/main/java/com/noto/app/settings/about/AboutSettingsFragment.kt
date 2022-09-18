@@ -17,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
 import com.noto.app.components.Screen
-import com.noto.app.settings.about.AboutSettingsFragmentDirections
 import com.noto.app.settings.SettingsItem
 import com.noto.app.settings.SettingsItemType
 import com.noto.app.settings.SettingsSection
@@ -82,6 +81,7 @@ class AboutSettingsFragment : Fragment() {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BuyMeACoffeeUrl))
                                 startActivity(intent)
                             },
+                            description = stringResource(id = R.string.buy_me_a_coffee_description),
                         )
 
                         SettingsItem(
@@ -91,6 +91,7 @@ class AboutSettingsFragment : Fragment() {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BecomeAPatronUrl))
                                 startActivity(intent)
                             },
+                            description = stringResource(id = R.string.become_a_patron_description),
                         )
                     }
 
@@ -101,7 +102,8 @@ class AboutSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TranslationInviteUrl))
                                 startActivity(intent)
-                            }
+                            },
+                            description = stringResource(id = R.string.translate_noto_description)
                         )
 
                         SettingsItem(
@@ -110,6 +112,7 @@ class AboutSettingsFragment : Fragment() {
                             onClick = {
                                 navController?.navigateSafely(AboutSettingsFragmentDirections.actionAboutSettingsFragmentToTranslationsSettingsFragment())
                             },
+                            description = stringResource(id = R.string.translations_description)
                         )
                     }
 
@@ -130,7 +133,8 @@ class AboutSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubUrl))
                                 startActivity(intent)
-                            }
+                            },
+                            description = stringResource(id = R.string.source_code_description),
                         )
 
                         SettingsItem(
@@ -139,7 +143,8 @@ class AboutSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(RedditUrl))
                                 startActivity(intent)
-                            }
+                            },
+                            description = stringResource(id = R.string.reddit_community_description),
                         )
                     }
 
@@ -150,7 +155,8 @@ class AboutSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(PrivacyPolicyUrl))
                                 startActivity(intent)
-                            }
+                            },
+                            description = stringResource(id = R.string.privacy_policy_description),
                         )
 
                         SettingsItem(

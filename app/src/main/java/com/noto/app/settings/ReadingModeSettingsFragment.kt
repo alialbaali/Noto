@@ -65,26 +65,30 @@ class ReadingModeSettingsFragment : Fragment() {
                             SettingsItem(
                                 title = stringResource(id = R.string.do_not_disturb),
                                 type = SettingsItemType.Switch(isChecked = doNotDisturbEnabled),
-                                onClick = { toggleDoNotDisturb() }
+                                onClick = { toggleDoNotDisturb() },
+                                description = stringResource(id = R.string.do_not_disturb_description)
                             )
                         }
 
                         SettingsItem(
                             title = stringResource(id = R.string.keep_screen_on),
                             type = SettingsItemType.Switch(isChecked = keepScreenOnEnabled),
-                            onClick = { viewModel.toggleScreenOn() }
+                            onClick = { viewModel.toggleScreenOn() },
+                            description = stringResource(id = R.string.keep_screen_on_description)
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.full_screen),
                             type = SettingsItemType.Switch(isChecked = fullScreenEnabled),
-                            onClick = { viewModel.toggleFullScreen() }
+                            onClick = { viewModel.toggleFullScreen() },
+                            description = stringResource(id = R.string.full_screen_description)
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.screen_brightness_level),
                             type = SettingsItemType.Text(screenBrightnessLevel.asString()),
-                            onClick = { navController?.navigate(ReadingModeSettingsFragmentDirections.actionReadingModeSettingsFragmentToScreenBrightnessLevelDialogFragment()) }
+                            onClick = { navController?.navigate(ReadingModeSettingsFragmentDirections.actionReadingModeSettingsFragmentToScreenBrightnessLevelDialogFragment()) },
+                            description = stringResource(id = R.string.screen_brightness_level_description)
                         )
                     }
                 }

@@ -73,14 +73,16 @@ class VaultSettingsFragment : Fragment() {
                         SettingsItem(
                             title = stringResource(id = R.string.timeout),
                             type = SettingsItemType.Text(timeoutText),
-                            onClick = { navController?.navigateSafely(VaultSettingsFragmentDirections.actionVaultSettingsFragmentToVaultTimeoutDialogFragment()) }
+                            onClick = { navController?.navigateSafely(VaultSettingsFragmentDirections.actionVaultSettingsFragmentToVaultTimeoutDialogFragment()) },
+                            description = stringResource(id = R.string.timeout_description)
                         )
 
                         if (isBioAuthSupported) {
                             SettingsItem(
                                 title = stringResource(id = R.string.bio_auth),
                                 type = SettingsItemType.Switch(isBioAuthEnabled),
-                                onClick = { viewModel.toggleIsBioAuthEnabled() }
+                                onClick = { viewModel.toggleIsBioAuthEnabled() },
+                                description = stringResource(id = R.string.bio_auth_description)
                             )
                         }
                     }
