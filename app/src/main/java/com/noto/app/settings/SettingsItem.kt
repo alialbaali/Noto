@@ -41,53 +41,66 @@ fun SettingsItem(
     description: String? = null,
 ) {
     val clickableModifier = if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier
-    Row(
-        modifier
+    Column(
+        modifier = modifier
             .fillMaxWidth()
             .then(clickableModifier)
             .background(MaterialTheme.colorScheme.surface)
             .padding(NotoTheme.dimensions.medium),
-        horizontalArrangement = if (painter != null) Arrangement.Start else Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
+        verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.small)
     ) {
-        if (painter != null) {
-            Icon(
-                painter = painter,
-                contentDescription = title,
-                tint = MaterialTheme.colorScheme.onBackground,
+        Row(
+            Modifier.fillMaxWidth(),
+            horizontalArrangement = if (painter != null) Arrangement.Start else Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (painter != null) {
+                Icon(
+                    painter = painter,
+                    contentDescription = title,
+                    tint = MaterialTheme.colorScheme.onBackground,
+                )
+                Spacer(modifier = Modifier.width(NotoTheme.dimensions.medium))
+            }
+
+            val textModifier = if (type is SettingsItemType.Text) {
+                Modifier.weight(weight = 1F, fill = false)
+            } else {
+                Modifier
+            }
+
+            Text(
+                text = title,
+                style = MaterialTheme.typography.bodyLarge,
+                color = titleColor,
+                modifier = textModifier
             )
-            Spacer(modifier = Modifier.width(NotoTheme.dimensions.medium))
-        }
 
-        val textModifier = if (type is SettingsItemType.Text) {
-            Modifier.weight(weight = 1F, fill = false)
-        } else {
-            Modifier
-        }
+            if (type !is SettingsItemType.None) Spacer(Modifier.width(NotoTheme.dimensions.medium))
 
-        Column(textModifier) {
-            Text(text = title, style = MaterialTheme.typography.bodyLarge, color = titleColor)
-            if (description != null) {
-                Text(text = description, style = MaterialTheme.typography.labelSmall)
+            when (type) {
+                is SettingsItemType.None -> {}
+                is SettingsItemType.Text -> Text(
+                    text = type.value,
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
+                    textAlign = TextAlign.End,
+                    modifier = textModifier,
+                )
+                is SettingsItemType.Switch -> Switch(
+                    checked = type.isChecked,
+                    onCheckedChange = null,
+                    modifier = Modifier.height(24.dp),
+                )
+                is SettingsItemType.Icon -> Icon(type.painter, title, Modifier.size(24.dp), Color.Unspecified)
             }
         }
 
-        if (type !is SettingsItemType.None) Spacer(Modifier.width(NotoTheme.dimensions.medium))
-
-        when (type) {
-            is SettingsItemType.None -> {}
-            is SettingsItemType.Text -> Text(
-                text = type.value,
-                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
-                textAlign = TextAlign.End,
-                modifier = textModifier,
+        if (description != null) {
+            Text(
+                text = description,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.secondary,
             )
-            is SettingsItemType.Switch -> Switch(
-                checked = type.isChecked,
-                onCheckedChange = null,
-                modifier = Modifier.height(24.dp),
-            )
-            is SettingsItemType.Icon -> Icon(type.painter, title, Modifier.size(24.dp), Color.Unspecified)
         }
     }
 }
