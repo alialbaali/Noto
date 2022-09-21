@@ -10,6 +10,7 @@ import com.noto.app.R
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.LabelRepository
 import com.noto.app.folder.NoteItemModel
+import com.noto.app.label.LabelItemModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
@@ -25,7 +26,7 @@ const val RecentNotesItemId = -3L
 const val AllFoldersId = -4L
 val LabelDefaultStrokeWidth = 2.dp
 const val LineSeparator = "\n\n"
-val SelectedLabelsComparator = compareByDescending<Pair<Label, Boolean>> { it.second }.thenBy { it.first.position }
+val SelectedLabelsComparator = compareByDescending<LabelItemModel> { it.isSelected }.thenBy { it.label.position }
 
 private const val HashAlgorithm = "PBKDF2WithHmacSHA1"
 private const val HashIterationCount = 65536
@@ -181,6 +182,7 @@ fun List<Note>.filterRecentlyAccessed() = filter { it.accessDate >= Clock.System
 fun <K, V> Map<K?, V>.filterNotNullKeys() = filterKeys { it != null } as Map<K, V>
 
 fun Map<Label, Boolean>.filterSelected() = filterValues { it }.map { it.key }
+fun List<LabelItemModel>.filterSelected() = filter { it.isSelected }.map { it.label }
 
 fun String.toLongList() = split(", ").mapNotNull { it.toLongOrNull() }
 

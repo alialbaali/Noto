@@ -24,6 +24,7 @@ import com.noto.app.components.placeholderItem
 import com.noto.app.databinding.FolderFragmentBinding
 import com.noto.app.domain.model.*
 import com.noto.app.getOrDefault
+import com.noto.app.label.LabelItemModel
 import com.noto.app.label.labelListItem
 import com.noto.app.map
 import com.noto.app.util.*
@@ -95,7 +96,7 @@ class FolderFragment : Fragment() {
             viewModel.isSelection,
         ) { values ->
             val notes = values[0] as UiState<List<NoteItemModel>>
-            val labels = values[1] as Map<Label, Boolean>
+            val labels = values[1] as List<LabelItemModel>
             val font = values[2] as Font
             val folder = values[3] as Folder
             val searchTerm = values[4] as String
@@ -202,8 +203,8 @@ class FolderFragment : Fragment() {
 
         fab.setOnClickListener {
             val selectedLabelsIds = viewModel.labels.value
-                .filter { it.value }
-                .map { it.key.id }
+                .filter { it.isSelected }
+                .map { it.label.id }
                 .toLongArray()
             navController?.navigateSafely(
                 FolderFragmentDirections.actionFolderFragmentToNoteFragment(
@@ -238,7 +239,7 @@ class FolderFragment : Fragment() {
                     viewModel.disableSelection()
                 }
                 viewModel.isSearchEnabled.value -> viewModel.disableSearch()
-                viewModel.labels.value.any { it.value } -> viewModel.clearLabelSelection()
+                viewModel.labels.value.any { it.isSelected } -> viewModel.clearLabelSelection()
                 else -> {
                     navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment(exit = true))
                 }
@@ -283,7 +284,7 @@ class FolderFragment : Fragment() {
 
     private fun FolderFragmentBinding.setupNotesAndLabels(
         state: UiState<List<NoteItemModel>>,
-        labels: Map<Label, Boolean>,
+        labels: List<LabelItemModel>,
         font: Font,
         folder: Folder,
         searchTerm: String,
@@ -305,14 +306,18 @@ class FolderFragment : Fragment() {
                             viewModel.clearLabelSelection()
                         }
                         onLabelClickListener { label ->
-                            if (labels.toList().first { it.first == label }.second)
+                            if (labels.first { it.label.id == label.id }.isSelected)
                                 viewModel.deselectLabel(label.id)
                             else
                                 viewModel.selectLabel(label.id)
                         }
                         onLabelLongClickListener { label ->
-                            navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToLabelDialogFragment(args.folderId,
-                                label.id))
+                            navController?.navigateSafely(
+                                FolderFragmentDirections.actionFolderFragmentToLabelDialogFragment(
+                                    args.folderId,
+                                    label.id
+                                )
+                            )
                             true
                         }
                         onNewLabelClickListener { _ ->
@@ -458,7 +463,7 @@ class FolderFragment : Fragment() {
 
     private fun FolderFragmentBinding.setupNotesCount(
         notes: List<NoteItemModel>,
-        labels: Map<Label, Boolean>,
+        labels: List<LabelItemModel>,
         filteringType: FilteringType,
         searchTerm: String,
     ) {

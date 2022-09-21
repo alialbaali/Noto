@@ -134,23 +134,23 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
 
         combine(viewModel.folder, viewModel.selectionLabels) { folder, labels ->
             rvLabels.withModels {
-                labels.forEach { entry ->
+                labels.forEach { model ->
                     labelItem {
-                        id(entry.key.id)
-                        label(entry.key)
-                        isSelected(entry.value)
+                        id(model.label.id)
+                        label(model.label)
+                        isSelected(model.isSelected)
                         color(folder.color)
                         onClickListener { _ ->
-                            if (entry.value)
-                                viewModel.deselectLabelForSelectedNotes(entry.key.id)
+                            if (model.isSelected)
+                                viewModel.deselectLabelForSelectedNotes(model.label.id)
                             else
-                                viewModel.selectLabelForSelectedNotes(entry.key.id)
+                                viewModel.selectLabelForSelectedNotes(model.label.id)
                         }
                         onLongClickListener { _ ->
-                            if (entry.value)
-                                viewModel.deselectLabelForSelectedNotes(entry.key.id)
+                            if (model.isSelected)
+                                viewModel.deselectLabelForSelectedNotes(model.label.id)
                             else
-                                viewModel.selectLabelForSelectedNotes(entry.key.id)
+                                viewModel.selectLabelForSelectedNotes(model.label.id)
                             true
                         }
                     }

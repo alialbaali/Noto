@@ -6,6 +6,7 @@ import com.noto.app.UiState
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.*
 import com.noto.app.getOrDefault
+import com.noto.app.label.LabelItemModel
 import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.delay
@@ -36,7 +37,7 @@ class FolderViewModel(
     private val mutableArchivedNotes = MutableStateFlow<UiState<List<NoteItemModel>>>(UiState.Loading)
     val archivedNotes get() = mutableArchivedNotes.asStateFlow()
 
-    private val mutableLabels = MutableStateFlow(emptyMap<Label, Boolean>())
+    private val mutableLabels = MutableStateFlow(emptyList<LabelItemModel>())
     val labels get() = mutableLabels.asStateFlow()
 
     val font = settingsRepository.font
@@ -61,7 +62,7 @@ class FolderViewModel(
 
     val selectionLabels = combine(notes, labels) { notes, labels ->
         val selectedLabels = notes.getOrDefault(emptyList()).filter { it.isSelected }.map { it.labels }.flatten()
-        labels.map { entry -> entry.key to selectedLabels.contains(entry.key) }
+        labels.map { model -> LabelItemModel(model.label, selectedLabels.contains(model.label)) }
             .let {
                 if (it.isNotEmpty() && sortSelectedLabels) {
                     sortSelectedLabels = false
@@ -70,8 +71,7 @@ class FolderViewModel(
                     it
                 }
             }
-            .toMap()
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyMap())
+    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
 
     private val mutablePreviewNotePosition = MutableStateFlow(0)
     val previewNotePosition get() = mutablePreviewNotePosition.asStateFlow()
@@ -114,12 +114,9 @@ class FolderViewModel(
             .filterNotNull()
             .map {
                 it.sortedBy { it.position }.map { label ->
-                    val value = labels.value
-                        .toList()
-                        .find { pair -> pair.first.id == label.id }
-                        ?.second ?: false
-                    label to value
-                }.toMap()
+                    val isSelected = labels.value.find { model -> model.label.id == label.id }?.isSelected ?: false
+                    LabelItemModel(label, isSelected)
+                }
             }
             .onEach { mutableLabels.value = it }
             .launchIn(viewModelScope)
@@ -255,20 +252,17 @@ class FolderViewModel(
 
     fun selectLabel(id: Long) {
         mutableLabels.value = labels.value
-            .map { it.key to if (it.key.id == id) true else it.value }
-            .toMap()
+            .map { model -> if (model.label.id == id) model.copy(isSelected = true) else model }
     }
 
     fun deselectLabel(id: Long) {
         mutableLabels.value = labels.value
-            .map { it.key to if (it.key.id == id) false else it.value }
-            .toMap()
+            .map { model -> if (model.label.id == id) model.copy(isSelected = false) else model }
     }
 
     fun clearLabelSelection() {
         mutableLabels.value = labels.value
-            .map { it.key to false }
-            .toMap()
+            .map { model -> model.copy(isSelected = false) }
     }
 
     fun enableSearch() {

@@ -18,7 +18,7 @@ import com.noto.app.util.setFullSpan
 abstract class LabelListItem : EpoxyModelWithHolder<LabelListItem.Holder>() {
 
     @EpoxyAttribute
-    lateinit var labels: Map<Label, Boolean>
+    lateinit var labels: List<LabelItemModel>
 
     @EpoxyAttribute
     lateinit var color: NotoColor
@@ -40,22 +40,22 @@ abstract class LabelListItem : EpoxyModelWithHolder<LabelListItem.Holder>() {
         rv.withModels {
             allLabelItem {
                 id("all")
-                isSelected(labels.none { it.value })
+                isSelected(labels.none { it.isSelected })
                 color(color)
                 onClickListener(onAllLabelClickListener)
             }
 
-            labels.forEach { entry ->
+            labels.forEach { model ->
                 labelItem {
-                    id(entry.key.id)
-                    label(entry.key)
-                    isSelected(entry.value)
+                    id(model.label.id)
+                    label(model.label)
+                    isSelected(model.isSelected)
                     color(color)
                     onClickListener { _ ->
-                        onLabelClickListener(entry.key)
+                        onLabelClickListener(model.label)
                     }
                     onLongClickListener { _ ->
-                        onLabelLongClickListener(entry.key)
+                        onLabelLongClickListener(model.label)
                     }
                 }
             }
