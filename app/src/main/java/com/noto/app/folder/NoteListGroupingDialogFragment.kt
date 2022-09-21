@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.NoteListGroupingDialogFragmentBinding
 import com.noto.app.domain.model.Grouping
+import com.noto.app.domain.model.GroupingOrder
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -27,7 +28,7 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View = NoteListGroupingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        tb.tvDialogTitle.text = context?.stringResource(R.string.grouping_type)
+        tb.tvDialogTitle.text = context?.stringResource(R.string.grouping)
 
         viewModel.folder
             .onEach { folder ->
@@ -38,30 +39,48 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
                     rbDefault.background = context.createDialogItemStateListDrawable(folder.color)
                     rbCreationDate.background = context.createDialogItemStateListDrawable(folder.color)
                     rbLabel.background = context.createDialogItemStateListDrawable(folder.color)
+                    rbGroupingAsc.background = context.createDialogItemStateListDrawable(folder.color)
+                    rbGroupingDesc.background = context.createDialogItemStateListDrawable(folder.color)
                     when (folder.grouping) {
                         Grouping.Default -> rbDefault.isChecked = true
                         Grouping.CreationDate -> rbCreationDate.isChecked = true
                         Grouping.Label -> rbLabel.isChecked = true
                         Grouping.AccessDate -> rbAccessDate.isChecked = true
                     }
+                    when (folder.groupingOrder) {
+                        GroupingOrder.Ascending -> rbGroupingAsc.isChecked = true
+                        GroupingOrder.Descending -> rbGroupingDesc.isChecked = true
+                    }
                 }
             }
             .launchIn(lifecycleScope)
 
         rbDefault.setOnClickListener {
-            viewModel.updateGrouping(Grouping.Default).invokeOnCompletion { dismiss() }
+            viewModel.updateGrouping(Grouping.Default)
         }
 
         rbCreationDate.setOnClickListener {
-            viewModel.updateGrouping(Grouping.CreationDate).invokeOnCompletion { dismiss() }
+            viewModel.updateGrouping(Grouping.CreationDate)
         }
 
         rbLabel.setOnClickListener {
-            viewModel.updateGrouping(Grouping.Label).invokeOnCompletion { dismiss() }
+            viewModel.updateGrouping(Grouping.Label)
         }
 
         rbAccessDate.setOnClickListener {
-            viewModel.updateGrouping(Grouping.AccessDate).invokeOnCompletion { dismiss() }
+            viewModel.updateGrouping(Grouping.AccessDate)
+        }
+
+        rbGroupingAsc.setOnClickListener {
+            viewModel.updateGroupingOrder(GroupingOrder.Ascending)
+        }
+
+        rbGroupingDesc.setOnClickListener {
+            viewModel.updateGroupingOrder(GroupingOrder.Descending)
+        }
+
+        btnApply.setOnClickListener {
+            dismiss()
         }
     }
 }

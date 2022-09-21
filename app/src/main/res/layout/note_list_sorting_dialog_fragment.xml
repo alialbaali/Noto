@@ -30,11 +30,11 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_default"
+                android:id="@+id/rb_manual"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/default_grouping" />
+                android:text="@string/manual" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_creation_date"
@@ -44,21 +44,19 @@
                 android:text="@string/creation_date" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_label"
+                android:id="@+id/rb_alphabetical"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/label" />
+                android:text="@string/alphabetical" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_access_date"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
                 android:text="@string/access_date" />
-
         </RadioGroup>
 
         <com.google.android.material.textview.MaterialTextView
@@ -76,7 +74,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_grouping_asc"
+                android:id="@+id/rb_sorting_asc"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -84,12 +82,11 @@
                 android:text="@string/ascending" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_grouping_desc"
+                android:id="@+id/rb_sorting_desc"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/descending" />
-
         </RadioGroup>
 
         <com.google.android.material.button.MaterialButton
@@ -100,5 +97,6 @@
             android:layout_margin="@dimen/spacing_normal"
             android:paddingVertical="@dimen/spacing_normal"
             android:text="@string/apply" />
+
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

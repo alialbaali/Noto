@@ -348,9 +348,9 @@
             app:destination="@id/folderFragment" />
     </dialog>
     <dialog
-        android:id="@+id/noteListSortingTypeDialogFragment"
-        android:name="com.noto.app.folder.NoteListSortingTypeDialogFragment"
-        android:label="NoteListSortingTypeDialogFragment">
+        android:id="@+id/noteListSortingDialogFragment"
+        android:name="com.noto.app.folder.NoteListSortingDialogFragment"
+        android:label="NoteListSortingDialogFragment">
         <argument
             android:name="folder_id"
             app:argType="long" />
@@ -401,14 +401,6 @@
             app:argType="long" />
     </dialog>
     <dialog
-        android:id="@+id/noteListSortingOrderDialogFragment"
-        android:name="com.noto.app.folder.NoteListSortingOrderDialogFragment"
-        android:label="NoteListSortingOrderDialogFragment">
-        <argument
-            android:name="folder_id"
-            app:argType="long" />
-    </dialog>
-    <dialog
         android:id="@+id/noteListGroupingDialogFragment"
         android:name="com.noto.app.folder.NoteListGroupingDialogFragment"
         android:label="NoteListGroupingDialogFragment">
@@ -424,17 +416,11 @@
             android:name="folder_id"
             app:argType="long" />
         <action
-            android:id="@+id/action_noteListViewDialogFragment_to_noteListSortingOrderDialogFragment"
-            app:destination="@id/noteListSortingOrderDialogFragment" />
-        <action
             android:id="@+id/action_noteListViewDialogFragment_to_noteListGroupingDialogFragment"
             app:destination="@id/noteListGroupingDialogFragment" />
         <action
-            android:id="@+id/action_noteListViewDialogFragment_to_noteListSortingTypeDialogFragment"
-            app:destination="@id/noteListSortingTypeDialogFragment" />
-        <action
-            android:id="@+id/action_noteListViewDialogFragment_to_noteListGroupingOrderDialogFragment"
-            app:destination="@id/noteListGroupingOrderDialogFragment" />
+            android:id="@+id/action_noteListViewDialogFragment_to_noteListSortingDialogFragment"
+            app:destination="@id/noteListSortingDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/languageDialogFragment"
@@ -553,14 +539,6 @@
         <action
             android:id="@+id/action_mainDialogFragment_to_validateVaultPasscodeDialogFragment"
             app:destination="@id/validateVaultPasscodeDialogFragment" />
-    </dialog>
-    <dialog
-        android:id="@+id/noteListGroupingOrderDialogFragment"
-        android:name="com.noto.app.folder.NoteListGroupingOrderDialogFragment"
-        android:label="NoteListGroupingOrderDialogFragment">
-        <argument
-            android:name="folder_id"
-            app:argType="long" />
     </dialog>
     <dialog
         android:id="@+id/undoRedoDialogFragment"

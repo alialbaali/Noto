@@ -123,6 +123,20 @@
         <item name="android:textDirection">anyRtl</item>
     </style>
 
+    <style name="ListDialogItem" parent="Widget.MaterialComponents.TextView">
+        <item name="fontFamily">@font/nunito_semibold</item>
+        <item name="android:textSize">@dimen/size_small</item>
+        <item name="android:textColor">?attr/notoPrimaryColor</item>
+        <item name="android:padding">@dimen/spacing_normal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">@dimen/spacing_normal</item>
+    </style>
+
+    <style name="ListDialogItemValue" parent="ListDialogItem">
+        <item name="android:textColor">?attr/notoSecondaryColor</item>
+        <item name="drawableTint">?attr/notoSecondaryColor</item>
+    </style>
+
     <style name="DialogItem" parent="Widget.MaterialComponents.TextView">
         <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">@dimen/size_extra_small</item>

@@ -3,6 +3,7 @@
     <!-- App -->
     <string name="app_name">Noto</string>
     <string name="done">Done</string>
+    <string name="apply">Apply</string>
     <string name="okay">Okay</string>
     <string name="search">Search</string>
     <!-- A way to support the project. -->
@@ -284,9 +285,13 @@
     <string name="redo_history">Redo history</string>
     <string name="share_note">Share note</string>
     <string name="sorting_type">Sorting type</string>
+    <string name="sorting">Sorting</string>
+    <string name="type">Type</string>
+    <string name="order">Order</string>
     <string name="notes_view">Notes view</string>
     <string name="sorting_order">Sorting order</string>
     <string name="grouping_type">Grouping type</string>
+    <string name="grouping">Grouping</string>
     <string name="grouping_order">Grouping order</string>
     <string name="save_to_noto">Save to Noto</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
