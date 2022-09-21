@@ -369,7 +369,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 }
             }
             listOf(
-                tvCopyToClipboard, tvCopyNote, tvOpenIn, tvShareNote, tvArchiveNote,
+                tvSelectNote, tvCopyToClipboard, tvCopyNote, tvOpenIn, tvShareNote, tvArchiveNote,
                 tvDuplicateNote, tvPinNote, tvRemindMe, tvDeleteNote, tvMoveNote,
             ).forEach { tv ->
                 tv.background.setRippleColor(colorStateList)
