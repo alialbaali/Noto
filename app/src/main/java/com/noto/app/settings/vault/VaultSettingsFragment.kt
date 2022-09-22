@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
@@ -67,14 +68,16 @@ class VaultSettingsFragment : Fragment() {
                         SettingsItem(
                             title = stringResource(id = R.string.change_passcode),
                             type = SettingsItemType.None,
-                            onClick = { navController?.navigateSafely(VaultSettingsFragmentDirections.actionVaultSettingsFragmentToVaultPasscodeDialogFragment()) }
+                            onClick = { navController?.navigateSafely(VaultSettingsFragmentDirections.actionVaultSettingsFragmentToVaultPasscodeDialogFragment()) },
+                            painter = painterResource(id = R.drawable.ic_round_key_24)
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.timeout),
                             type = SettingsItemType.Text(timeoutText),
                             onClick = { navController?.navigateSafely(VaultSettingsFragmentDirections.actionVaultSettingsFragmentToVaultTimeoutDialogFragment()) },
-                            description = stringResource(id = R.string.timeout_description)
+                            description = stringResource(id = R.string.timeout_description),
+                            painter = painterResource(id = R.drawable.ic_round_timer_24)
                         )
 
                         if (isBioAuthSupported) {
@@ -82,7 +85,8 @@ class VaultSettingsFragment : Fragment() {
                                 title = stringResource(id = R.string.bio_auth),
                                 type = SettingsItemType.Switch(isBioAuthEnabled),
                                 onClick = { viewModel.toggleIsBioAuthEnabled() },
-                                description = stringResource(id = R.string.bio_auth_description)
+                                description = stringResource(id = R.string.bio_auth_description),
+                                painter = painterResource(id = R.drawable.ic_round_fingerprint_24)
                             )
                         }
                     }
@@ -104,7 +108,9 @@ class VaultSettingsFragment : Fragment() {
                                     )
                                 )
                             },
-                            titleColor = MaterialTheme.colorScheme.warning
+                            titleColor = MaterialTheme.colorScheme.warning,
+                            painter = painterResource(id = R.drawable.ic_round_key_off_24),
+                            painterColor = MaterialTheme.colorScheme.warning,
                         )
                     }
                 }

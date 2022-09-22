@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
+import com.noto.app.components.EmptyPainter
 import com.noto.app.components.Screen
 import com.noto.app.settings.SettingsItem
 import com.noto.app.settings.SettingsItemType
@@ -72,26 +73,29 @@ class AboutSettingsFragment : Fragment() {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DeveloperWebsite))
                                 startActivity(intent)
                             },
+                            painter = painterResource(id = R.drawable.ic_round_person_24),
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.buy_me_a_coffee),
-                            type = SettingsItemType.Icon(painterResource(id = R.drawable.ic_bmc_logo)),
+                            type = SettingsItemType.None,
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BuyMeACoffeeUrl))
                                 startActivity(intent)
                             },
                             description = stringResource(id = R.string.buy_me_a_coffee_description),
+                            painter = painterResource(id = R.drawable.ic_bmc_logo)
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.become_a_patron),
-                            type = SettingsItemType.Icon(painterResource(id = R.drawable.ic_patreon_logo)),
+                            type = SettingsItemType.None,
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BecomeAPatronUrl))
                                 startActivity(intent)
                             },
                             description = stringResource(id = R.string.become_a_patron_description),
+                            painter = painterResource(id = R.drawable.ic_patreon_logo)
                         )
                     }
 
@@ -103,7 +107,8 @@ class AboutSettingsFragment : Fragment() {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TranslationInviteUrl))
                                 startActivity(intent)
                             },
-                            description = stringResource(id = R.string.translate_noto_description)
+                            description = stringResource(id = R.string.translate_noto_description),
+                            painter = painterResource(id = R.drawable.ic_round_translate_24),
                         )
 
                         SettingsItem(
@@ -112,7 +117,8 @@ class AboutSettingsFragment : Fragment() {
                             onClick = {
                                 navController?.navigateSafely(AboutSettingsFragmentDirections.actionAboutSettingsFragmentToTranslationsSettingsFragment())
                             },
-                            description = stringResource(id = R.string.translations_description)
+                            description = stringResource(id = R.string.translations_description),
+                            painter = painterResource(id = R.drawable.ic_round_language_24),
                         )
                     }
 
@@ -123,40 +129,44 @@ class AboutSettingsFragment : Fragment() {
                             onClick = {
                                 navController?.navigateSafely(AboutSettingsFragmentDirections.actionAboutSettingsFragmentToCreditsSettingsFragment())
                             },
+                            painter = painterResource(id = R.drawable.ic_round_attribution_24),
                         )
                     }
 
                     SettingsSection {
                         SettingsItem(
                             title = stringResource(id = R.string.source_code),
-                            type = SettingsItemType.Icon(painterResource(id = R.drawable.ic_github_logo)),
+                            type = SettingsItemType.None,
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubUrl))
                                 startActivity(intent)
                             },
                             description = stringResource(id = R.string.source_code_description),
+                            painter = painterResource(id = R.drawable.ic_github_logo),
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.reddit_community),
-                            type = SettingsItemType.Icon(painterResource(id = R.drawable.ic_reddit_logo)),
+                            type = SettingsItemType.None,
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(RedditUrl))
                                 startActivity(intent)
                             },
                             description = stringResource(id = R.string.reddit_community_description),
+                            painter = painterResource(id = R.drawable.ic_reddit_logo),
                         )
                     }
 
                     SettingsSection {
                         SettingsItem(
                             title = stringResource(id = R.string.privacy_policy),
-                            type = SettingsItemType.Icon(painterResource(id = R.drawable.ic_round_policy_24)),
+                            type = SettingsItemType.None,
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(PrivacyPolicyUrl))
                                 startActivity(intent)
                             },
                             description = stringResource(id = R.string.privacy_policy_description),
+                            painter = painterResource(id = R.drawable.ic_round_policy_24),
                         )
 
                         SettingsItem(
@@ -165,7 +175,8 @@ class AboutSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(LicenseWebsite))
                                 startActivity(intent)
-                            }
+                            },
+                            painter = painterResource(id = R.drawable.ic_round_assignment_24),
                         )
 
                         SettingsItem(
@@ -176,6 +187,7 @@ class AboutSettingsFragment : Fragment() {
                                     snackbarHostState.showSnackbar(versionIsCopiedText)
                                 }
                             },
+                            painter = painterResource(id = R.drawable.ic_round_tag_24),
                         )
                     }
 

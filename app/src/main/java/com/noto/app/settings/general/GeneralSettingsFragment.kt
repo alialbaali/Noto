@@ -9,9 +9,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
+import com.noto.app.components.EmptyPainter
 import com.noto.app.components.Screen
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Icon
@@ -126,7 +128,8 @@ class GeneralSettingsFragment : Fragment() {
                                     )
                                 )
                             },
-                            description = stringResource(id = R.string.main_interface_description)
+                            description = stringResource(id = R.string.main_interface_description),
+                            painter = painterResource(id = R.drawable.ic_round_home_24),
                         )
 
                         SettingsItem(
@@ -141,26 +144,30 @@ class GeneralSettingsFragment : Fragment() {
                                     )
                                 )
                             },
-                            description = stringResource(id = R.string.quick_note_folder_description)
+                            description = stringResource(id = R.string.quick_note_folder_description),
+                            painter = painterResource(id = R.drawable.ic_round_folder_24),
                         )
                     }
                     SettingsSection {
                         SettingsItem(
                             title = stringResource(id = R.string.theme),
                             type = SettingsItemType.Text(themeText),
-                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToThemeDialogFragment()) }
+                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToThemeDialogFragment()) },
+                            painter = painterResource(id = R.drawable.ic_round_theme_24),
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.language),
                             type = if (languageText != null) SettingsItemType.Text(languageText) else SettingsItemType.None,
-                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToLanguageDialogFragment()) }
+                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToLanguageDialogFragment()) },
+                            painter = painterResource(id = R.drawable.ic_round_language_24),
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.icon),
                             type = SettingsItemType.Text(iconText),
-                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToIconDialogFragment()) }
+                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToIconDialogFragment()) },
+                            painter = painterResource(id = R.drawable.ic_round_noto_24)
                         )
                     }
 
@@ -168,21 +175,24 @@ class GeneralSettingsFragment : Fragment() {
                         SettingsItem(
                             title = stringResource(id = R.string.notes_font),
                             type = SettingsItemType.Text(fontText),
-                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToFontDialogFragment()) }
+                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToFontDialogFragment()) },
+                            painter = EmptyPainter,
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.show_notes_count),
                             type = SettingsItemType.Switch(notesCountEnabled),
                             onClick = { viewModel.toggleShowNotesCount() },
-                            description = stringResource(id = R.string.show_notes_count_description)
+                            description = stringResource(id = R.string.show_notes_count_description),
+                            painter = painterResource(id = R.drawable.ic_round_tag_24),
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.remember_scrolling_position),
                             type = SettingsItemType.Switch(rememberScrollingPositionEnabled),
                             onClick = { viewModel.toggleRememberScrollingPosition() },
-                            description = stringResource(id = R.string.remember_scrolling_position_description)
+                            description = stringResource(id = R.string.remember_scrolling_position_description),
+                            painter = EmptyPainter,
                         )
                     }
                 }

@@ -14,9 +14,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
+import com.noto.app.components.EmptyPainter
 import com.noto.app.components.Screen
 import com.noto.app.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -66,7 +68,8 @@ class ReadingModeSettingsFragment : Fragment() {
                                 title = stringResource(id = R.string.do_not_disturb),
                                 type = SettingsItemType.Switch(isChecked = doNotDisturbEnabled),
                                 onClick = { toggleDoNotDisturb() },
-                                description = stringResource(id = R.string.do_not_disturb_description)
+                                description = stringResource(id = R.string.do_not_disturb_description),
+                                painter = painterResource(id = R.drawable.ic_round_do_not_disturb_24)
                             )
                         }
 
@@ -74,21 +77,24 @@ class ReadingModeSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.keep_screen_on),
                             type = SettingsItemType.Switch(isChecked = keepScreenOnEnabled),
                             onClick = { viewModel.toggleScreenOn() },
-                            description = stringResource(id = R.string.keep_screen_on_description)
+                            description = stringResource(id = R.string.keep_screen_on_description),
+                            painter = painterResource(id = R.drawable.ic_round_visibility_24)
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.full_screen),
                             type = SettingsItemType.Switch(isChecked = fullScreenEnabled),
                             onClick = { viewModel.toggleFullScreen() },
-                            description = stringResource(id = R.string.full_screen_description)
+                            description = stringResource(id = R.string.full_screen_description),
+                            painter = EmptyPainter,
                         )
 
                         SettingsItem(
                             title = stringResource(id = R.string.screen_brightness_level),
                             type = SettingsItemType.Text(screenBrightnessLevel.asString()),
                             onClick = { navController?.navigate(ReadingModeSettingsFragmentDirections.actionReadingModeSettingsFragmentToScreenBrightnessLevelDialogFragment()) },
-                            description = stringResource(id = R.string.screen_brightness_level_description)
+                            description = stringResource(id = R.string.screen_brightness_level_description),
+                            painter = painterResource(id = R.drawable.ic_round_brightness_24)
                         )
                     }
                 }
