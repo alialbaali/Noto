@@ -20,8 +20,8 @@ import com.noto.app.components.BaseActivity
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.*
 import com.noto.app.main.MainVaultFragment
-import com.noto.app.vault.VaultTimeoutWorker
 import com.noto.app.util.*
+import com.noto.app.vault.VaultTimeoutWorker
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -229,19 +229,7 @@ class AppActivity : BaseActivity() {
 
     @Suppress("DEPRECATION")
     private fun setupLanguage(language: Language) {
-        val locale = when (language) {
-            Language.System -> Locale.getDefault()
-            Language.English -> Locale("en")
-            Language.Turkish -> Locale("tr")
-            Language.Arabic -> Locale("ar")
-            Language.Indonesian -> Locale("in")
-            Language.Russian -> Locale("ru")
-            Language.Tamil -> Locale("ta")
-            Language.Spanish -> Locale("es")
-            Language.French -> Locale("fr")
-            Language.German -> Locale("de")
-            Language.Italian -> Locale("it")
-        }
+        val locale = language.toLocale()
         if (resources.configuration.locale != locale) {
             Locale.setDefault(locale)
             resources.configuration.locale = locale

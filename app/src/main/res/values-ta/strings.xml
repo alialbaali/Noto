@@ -1,75 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- App -->
     <string name="app_name">Noto</string>
-    <string name="done">Done</string>
-    <string name="apply">Apply</string>
-    <string name="okay">Okay</string>
-    <string name="search">Search</string>
+    <string name="done">முடிந்தது</string>
+    <string name="okay">சரி</string>
+    <string name="search">தேடு</string>
     <!-- A way to support the project. -->
     <string name="buy_me_a_coffee">Buy me a coffee</string>
-    <!-- Description of the "Buy me a coffee" settings options. -->
-    <string name="buy_me_a_coffee_description">If you\'d like to show support.</string>
-    <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">If you\'d like to make sure Noto remains maintained.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Become a patron</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">More options</string>
     <!-- Options for multi-selected notes. -->
     <string name="options">Options</string>
-    <string name="back">Back</string>
-    <string name="folder_layout">Folder layout</string>
+    <string name="back">பின்செல்க</string>
+    <string name="folder_layout">கோப்புறை அமைப்பு</string>
     <string name="label_filtering_type">Label filtering type</string>
-    <string name="layout">Layout</string>
-    <string name="list">List</string>
+    <string name="layout">அமைப்பு</string>
+    <string name="list">பட்டியல்</string>
     <string name="inclusive">Inclusive</string>
     <string name="exclusive">Exclusive</string>
     <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
     <string name="strict">Strict</string>
-    <string name="grid">Grid</string>
-    <string name="created">Created %s</string>
+    <string name="grid">கட்டம்</string>
+    <string name="created">%s உருவாக்கப்பட்டது</string>
     <string name="accessed">Accessed %s</string>
-    <string name="alphabetical">Alphabetical</string>
+    <string name="alphabetical">அகரவரிசைப்படி</string>
     <!-- Sorting/Grouping notes by access date. -->
     <string name="access_date">Access date</string>
-    <string name="creation_date">Creation date</string>
-    <string name="manual">Manual</string>
-    <string name="default_grouping">Default</string>
-    <string name="descending">Descending</string>
-    <string name="ascending">Ascending</string>
-    <string name="settings">Settings</string>
+    <string name="creation_date">உருவாக்கிய நாள்</string>
+    <string name="manual">கைமுறை</string>
+    <string name="default_grouping">இயல்புநிலை</string>
+    <string name="descending">இறங்கு வரிசை</string>
+    <string name="ascending">ஏறுவரிசை</string>
+    <string name="settings">அமைப்புகள்</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">Source code</string>
-    <!-- Description of the "Source code" settings option. -->
-    <string name="source_code_description">Noto is an open-source application, and the code is published on GitHub.</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Reddit community</string>
-    <!-- Description of the "Reddit community" settings option. -->
-    <string name="reddit_community_description">Join the community to engage with other Noto users, and get the latest news.</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Notes font</string>
     <string name="share_app_with_others">Share Noto with others</string>
     <string name="rate_app_on_play_store">Rate Noto on Play Store</string>
-    <string name="report_issue">Report an issue</string>
-    <string name="about">About</string>
-    <string name="whats_new">What\'s new</string>
+    <string name="report_issue">பிரச்சினையைப் புகாரளிக்கவும்</string>
+    <string name="about">எம்மைப் பற்றி</string>
+    <string name="whats_new">புதியவை என்ன</string>
     <!--    <string name="share_with">Share with</string>-->
-    <string name="export_import_data">Export/Import data</string>
-    <string name="exporting_failed">Failed to export the data.</string>
-    <string name="importing_failed">Failed to import the data.</string>
-    <string name="data_is_exported">Data has been exported to %s</string>
-    <string name="data_is_imported">Data has been imported.</string>
-    <string name="export_data">Export data</string>
-    <string name="import_data">Import data</string>
-    <string name="importing_data">Importing data…</string>
-    <string name="exporting_data">Exporting data…</string>
-    <string name="create_file_failed">Failed to create a file.</string>
-    <string name="no_folder_is_selected">No folder has been selected.</string>
-    <string name="no_file_is_selected">No file has been selected.</string>
+    <string name="export_import_data">தரவு ஏற்றுமதி/இறக்குமதி</string>
+    <string name="exporting_failed">தரவை ஏற்றுமதி செய்ய முடியவில்லை.</string>
+    <string name="importing_failed">தரவை இறக்குமதி செய்ய முடியவில்லை.</string>
+    <string name="data_is_exported">தரவு %s க்கு ஏற்றுமதி செய்யப்பட்டது</string>
+    <string name="data_is_imported">தரவு இறக்குமதி செய்யப்பட்டது.</string>
+    <string name="export_data">தரவை ஏற்றுமதி செய்</string>
+    <string name="import_data">தரவை இறக்குமதி செய்</string>
+    <string name="importing_data">தரவை இறக்குமதி செய்கிறது…</string>
+    <string name="exporting_data">தரவை ஏற்றுமதி செய்கிறது…</string>
+    <string name="create_file_failed">கோப்பை உருவாக்க முடியவில்லை.</string>
+    <string name="no_folder_is_selected">எந்த கோப்பும் தேர்ந்தெடுக்கப்படவில்லை.</string>
+    <string name="no_file_is_selected">கோப்பு எதுவும் தேர்ந்தெடுக்கப்படவில்லை.</string>
     <!-- Open with an app such as Signal -->
-    <string name="open_with">Open with</string>
-    <string name="invite_text">Check out Noto!</string>
+    <string name="open_with">இதன்மூலம் திற</string>
+    <string name="invite_text">Noto-வைப் பாருங்கள்!</string>
     <string name="version">Version</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">Version has been copied to clipboard.</string>
@@ -79,38 +70,27 @@
     <string name="creator">Creator</string>
     <!-- Translator of a language. -->
     <!-- Proofreader of a language. -->
-    <string name="creator_name" translatable="false">Geoffrey Crofte</string>
     <string name="app_icons">App Icons</string>
-    <string name="app_icons_value" translatable="false">Collections of Gradients</string>
-    <string name="developer_name" translatable="false">Ali Albaali</string>
     <string name="privacy_policy">Privacy policy</string>
-    <!-- Description of the "Privacy policy" settings option. -->
-    <string name="privacy_policy_description">Last updated on August 25, 2022.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">License</string>
-    <string name="license_value" translatable="false">Apache License 2.0</string>
-    <string name="app_icons_license_value" translatable="false">CC BY 4.0</string>
-    <string name="empty_version">Version</string>
-    <string name="date">Date</string>
-    <string name="drag">Drag</string>
-    <string name="nunito">Nunito (default)</string>
+    <string name="empty_version">பதிப்பு</string>
+    <string name="date">தேதி</string>
+    <string name="drag">இழுக்கவும்</string>
+    <string name="nunito">Nunito (இயல்புநிலை)</string>
     <string name="monospace">Monospace</string>
-    <string name="font">Font</string>
-    <string name="folders_archive">Folders archive</string>
+    <string name="font">எழுத்துரு</string>
+    <string name="folders_archive">கோப்புறை காப்பகம்</string>
     <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">Main interface</string>
-    <!-- Description of the "Main interface" settings option. -->
-    <string name="main_interface_description">The first screen displayed when launching the app.</string>
     <!-- The default folder of "Save to Noto" text selection option. -->
     <string name="quick_note_folder">Quick note folder</string>
     <!-- AKA "Save to Noto". -->
     <string name="quick_note">Quick Note</string>
-    <!-- Description of the "Quick note folder" settings option. -->
-    <string name="quick_note_folder_description">The default folder when saving a note using \"Quick note\" text selection option.</string>
-    <string name="general">General</string>
-    <string name="all_notes">All notes</string>
+    <string name="general">பொது</string>
+    <string name="all_notes">அனைத்து குறிப்புகள்</string>
     <string name="all_folders">All folders</string>
-    <string name="clear">Clear</string>
+    <string name="clear">அழி</string>
     <string name="recent_notes">Recent notes</string>
     <string name="collapse">Collapse</string>
     <string name="expand">Expand</string>
@@ -140,14 +120,10 @@
     <string name="select_all">Select all</string>
     <!-- List of translations. -->
     <string name="translations">Translations</string>
-    <!-- Description of the "Translations" settings option. -->
-    <string name="translations_description">Special thanks to all the translators who helped make Noto available in different localizations.</string>
     <!-- List of credits. -->
     <string name="credits">Credits</string>
-
     <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
     <string name="releases_details">For more details, click here.</string>
-
     <!-- Folder -->
     <string name="folders">Folders</string>
     <plurals name="folders_count">
@@ -167,7 +143,7 @@
     <string name="delete_folder">Delete</string>
     <string name="delete_folder_confirmation">Are you sure you want to delete this folder?</string>
     <string name="folders_sorting">Folders sorting</string>
-    <string name="empty_title">Title can\'t be empty.</string>
+    <string name="empty_title">தலைப்பு காலியாக இருக்கக்கூடாது.</string>
     <string name="folder_is_deleted">Folder has been deleted.</string>
     <string name="folder_is_archived">Folder has been archived.</string>
     <string name="folder_is_unarchived">Folder has been unarchived.</string>
@@ -176,8 +152,7 @@
     <string name="no_folders_found">No folders found.</string>
     <string name="select_folder">Select folder</string>
     <string name="select_main_interface">Select main interface</string>
-    <string name="pinned">Pinned</string>
-
+    <string name="pinned">Pin செய்யப்பட்டது</string>
     <!-- Vault -->
     <string name="folders_vault">Folders vault</string>
     <string name="update_passcode">Update passcode</string>
@@ -196,8 +171,6 @@
     <string name="change_passcode">Change passcode</string>
     <!-- Vault timeout. -->
     <string name="timeout">Timeout</string>
-    <!-- Description of the "Timeout" settings option. -->
-    <string name="timeout_description">The time it takes to close the vault after being opened.</string>
     <string name="vault_timeout">Vault Timeout</string>
     <string name="invalid_passcode">Invalid passcode</string>
     <string name="passcode_length_message">Passcode must contain at least 6 numbers</string>
@@ -227,17 +200,14 @@
     <string name="close_vault">Close vault</string>
     <!-- Enabling biometric authentication for the app. -->
     <string name="bio_auth">Enable biometric authentication</string>
-    <!-- Description of the "Enable biometric authentication" settings option. -->
-    <string name="bio_auth_description">Whether to allow accessing the vault using biometric authentications methods, such as Facial Recognition or Fingerprint.</string>
     <string name="use_passcode">Use passcode</string>
-
     <!-- Note -->
-    <string name="all">All</string>
+    <string name="all">அனைத்தும்</string>
     <string name="update_reminder">Update reminder</string>
-    <string name="archive_is_empty">Archive is empty.</string>
+    <string name="archive_is_empty">காப்பகம் காலியாக உள்ளது.</string>
     <plurals name="notes_count">
-        <item quantity="one">%d Note</item>
-        <item quantity="other">%d Notes</item>
+        <item quantity="one">%d குறிப்பு</item>
+        <item quantity="other">%d குறிப்புகள்</item>
     </plurals>
     <!-- Filtered notes count is shown when a label is selected, or text is searched.
          Such as "30 Notes • 5 Filtered".
@@ -261,19 +231,19 @@
         <item quantity="other">%1$d Notes • %2$d Filtered • %3$d Selected</item>
     </plurals>
     <plurals name="words_count">
-        <item quantity="one">%d Word</item>
-        <item quantity="other">%d Words</item>
+        <item quantity="one">%d வார்த்தை</item>
+        <item quantity="other">%d வார்த்தைகள்</item>
     </plurals>
     <!-- Selected words count is shown when text is selected in a note. -->
     <plurals name="words_selected_count">
         <item quantity="one">%1$d Word • %2$d Selected</item>
         <item quantity="other">%1$d Words • %2$d Selected</item>
     </plurals>
-    <string name="body">Body</string>
-    <string name="title">Title</string>
+    <string name="body">உடல்</string>
+    <string name="title">தலைப்பு</string>
     <!-- Note's editor, opposite of Reading Mode. -->
     <string name="editor">Editor</string>
-    <string name="create_note">Create note</string>
+    <string name="create_note">குறிப்பை உருவாக்கு</string>
     <plurals name="delete_note">
         <item quantity="one">Delete note</item>
         <item quantity="other">Delete notes</item>
@@ -284,20 +254,16 @@
     <string name="redo">Redo</string>
     <string name="redo_history">Redo history</string>
     <string name="share_note">Share note</string>
-    <string name="sorting_type">Sorting type</string>
-    <string name="sorting">Sorting</string>
-    <string name="type">Type</string>
-    <string name="order">Order</string>
+    <string name="sorting_type">வரிசையாக்க வகை</string>
     <string name="notes_view">Notes view</string>
-    <string name="sorting_order">Sorting order</string>
+    <string name="sorting_order">வரிசையாக்க வரிசை</string>
     <string name="grouping_type">Grouping type</string>
-    <string name="grouping">Grouping</string>
     <string name="grouping_order">Grouping order</string>
-    <string name="save_to_noto">Save to Noto</string>
+    <string name="save_to_noto">Noto-வில் சேமிக்கவும்</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">Note has been saved to %s.</string>
-    <string name="no_notes_found">No notes found.</string>
-    <string name="notes">Notes</string>
+    <string name="no_notes_found">குறிப்புகள் எதுவும் கிடைக்கவில்லை.</string>
+    <string name="notes">குறிப்புகள்</string>
     <!-- The count of the selected notes that have been merged. -->
     <string name="notes_are_merged">%d Notes have been merged into new note.</string>
     <plurals name="note_is_archived">
@@ -315,8 +281,8 @@
         <item quantity="other">%d Notes have been unpinned.</item>
     </plurals>
     <string name="no_note_reminder">No reminder is setup.</string>
-    <string name="note_is_unarchived">Note has been unarchived.</string>
-    <string name="reminder">Reminder</string>
+    <string name="note_is_unarchived">குறிப்பு மீட்டெடுக்கப்பட்டது.</string>
+    <string name="reminder">நினைவூட்டி</string>
     <string name="reminders">Reminders</string>
     <string name="new_note_reminder">New reminder</string>
     <string name="copy">Copy</string>
@@ -344,7 +310,7 @@
     </plurals>
     <string name="reading_mode">Reading Mode</string>
     <string name="edit_note_reminder">Edit reminder</string>
-    <string name="note_options">Note options</string>
+    <string name="note_options">குறிப்பு விருப்பங்கள்</string>
     <!-- The count of the selected notes that have been deleted. -->
     <plurals name="note_is_deleted">
         <item quantity="one">Note has been deleted.</item>
@@ -361,126 +327,77 @@
         <item quantity="one">Note has been moved to %s.</item>
         <item quantity="other">%d Notes have been moved to %s.</item>
     </plurals>
-    <string name="note_preview_size">Note preview size</string>
-    <string name="show_note_creation_date">Show note creation date</string>
+    <string name="note_preview_size">குறிப்பின் முன்னோட்ட அளவு</string>
+    <string name="show_note_creation_date">குறிப்பை உருவாக்கிய தேதியைக் காட்டு</string>
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Show notes count</string>
-    <!-- Description of the "Show notes count" settings option. -->
-    <string name="show_notes_count_description">Whether to display the count of notes in the folders dialog.</string>
     <string name="remember_scrolling_position">Remember scrolling position</string>
-    <!-- Description of the "Remember scrolling position" settings option. -->
-    <string name="remember_scrolling_position_description">Whether to store the scrolling position in folders, and notes.</string>
     <string name="do_not_disturb">Do Not Disturb</string>
-    <!-- Description of the "Do Not Disturb" settings option. -->
-    <string name="do_not_disturb_description">Whether to enable Do Not Disturb mode during Reading Mode.</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Keep screen on</string>
-    <!-- Description of the "Keep screen on" settings option. -->
-    <string name="keep_screen_on_description">Whether to prevent screen from turning off during Reading Mode.</string>
     <string name="full_screen">Go full screen</string>
-    <!-- Description of the "Go full screen" settings option. -->
-    <string name="full_screen_description">Whether to hide status and navigation bars during Reading Mode.</string>
-    <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
-    <string name="screen_brightness_level">Screen brightness level</string>
-    <!-- Description of the "Screen brightness level" settings option. -->
-    <string name="screen_brightness_level_description">Brightness level of the screen during Reading Mode.</string>
-    <string name="min">Min</string>
-    <string name="very_low">Very low</string>
-    <string name="low">Low</string>
-    <string name="medium">Medium</string>
-    <string name="high">High</string>
-    <string name="very_high">Very high</string>
-    <string name="max">Max</string>
-
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
+    <string name="dim_screen">Dim screen</string>
     <string name="show">Show</string>
     <string name="hide">Hide</string>
     <string name="permission_not_granted">Permission hasn\'t been granted</string>
-
     <!-- Label -->
     <string name="reorder_label">Reorder</string>
     <string name="update_label">Update label</string>
-    <string name="create_label">Create label</string>
-    <string name="label_title">Label title</string>
-    <string name="label">Label</string>
-    <string name="without_label">Without label</string>
-    <string name="label_options">Label options</string>
-    <string name="delete_label">Delete label</string>
-    <string name="new_label">New label</string>
-    <string name="edit_label">Edit label</string>
-    <string name="labels_order">Labels order</string>
-    <string name="delete_label_confirmation">Are you sure you want to delete this label?</string>
-    <string name="label_is_deleted">Label has been deleted.</string>
-    <string name="delete_label_description">This action can\'t be undone and will delete the label and remove the label from the associated notes permanently.</string>
-    <string name="filter_labels">Filter labels</string>
-
+    <string name="create_label">லேபிளை உருவாக்கவும்</string>
+    <string name="label_title">லேபிளின் தலைப்பு</string>
+    <string name="label">லேபிள்</string>
+    <string name="without_label">லேபிள் இல்லை</string>
+    <string name="label_options">லேபிள் விருப்பங்கள்</string>
+    <string name="delete_label">லேபிளை நீக்கு</string>
+    <string name="new_label">புதிய லேபிள்</string>
+    <string name="edit_label">லேபிளைத் திருத்து</string>
+    <string name="labels_order">லேபிள்கள் வரிசை</string>
+    <string name="delete_label_confirmation">இந்த லேபிளை நிச்சயமாக நீக்க விரும்புகிறீர்களா?</string>
+    <string name="label_is_deleted">லேபிள் நீக்கப்பட்டது.</string>
+    <string name="delete_label_description">இந்தச் செயலைச் செயல்தவிர்க்க முடியாது மேலும் லேபிளை நீக்கிவிடும் மற்றும் தொடர்புடைய குறிப்புகளில் இருந்து லேபிளை நிரந்தரமாக அகற்றும்.</string>
+    <string name="filter_labels">லேபிள்களை வடிகட்டவும்</string>
     <!-- Theme -->
-    <string name="theme">Theme</string>
+    <string name="theme">நிற அமைப்பு</string>
     <string name="system_dark_theme">Follow system + Dark</string>
     <string name="system_black_theme">Follow system + Black</string>
     <string name="light_theme">Light</string>
     <string name="dark_theme">Dark</string>
     <string name="black_theme">Black</string>
-
     <!-- Language -->
-    <string name="language">Language</string>
-    <!-- A text next to the non-finished language. -->
-    <string name="not_finished">Not finished</string>
+    <string name="language">மொழி</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Translate Noto</string>
-    <!-- Description of the "Translate Noto" settings option. -->
-    <string name="translate_noto_description">Translations are done in Crowdin.</string>
     <!-- Replacement for "System language" in settings. -->
     <string name="follow_system">Follow system</string>
-    <string name="english">English</string>
-    <string name="turkish">Turkish</string>
-    <string name="arabic">Arabic</string>
-    <string name="indonesian">Indonesian</string>
-    <string name="russian">Russian</string>
+    <string name="english">ஆங்கிலம்</string>
+    <string name="turkish">துருக்கிய</string>
+    <string name="arabic">அரபிக்</string>
+    <string name="indonesian">இந்தோனேசியன்</string>
+    <string name="russian">ரஷியன்</string>
     <string name="spanish">Spanish</string>
     <string name="french">French</string>
     <string name="german">German</string>
     <string name="italian">Italian</string>
-    <string name="tamil">Tamil</string>
-    <string name="turkish_translator" translatable="false">Nuray Sabri</string>
-    <string name="turkish_proofreader" translatable="false">Alparslan Şakçi</string>
-    <string name="spanish_translator" translatable="false">Faus AM</string>
-    <string name="french_translator" translatable="false">Kernoeb</string>
-    <string name="french_translator2" translatable="false">Geoffrey Crofte</string>
-    <string name="german_translator" translatable="false">Uli N</string>
-    <string name="arabic_translator" translatable="false">Dr.Ohm</string>
-    <string name="arabic_proofreader" translatable="false">Ali Albaali</string>
-    <string name="italian_translator" translatable="false">Matteo Lombardi</string>
-
+    <string name="tamil">தமிழ்</string>
     <!-- Icon -->
     <string name="icon">Icon</string>
-    <string name="futuristic" translatable="false">Futuristic</string>
-    <string name="airplane" translatable="false">Airplane</string>
-    <string name="dark_rain" translatable="false">Dark Rain</string>
-    <string name="blossom_ice" translatable="false">Blossom Ice</string>
-    <string name="dark_alpine" translatable="false">Dark Alpine</string>
-    <string name="dark_side" translatable="false">Dark Side</string>
-    <string name="earth" translatable="false">Earth</string>
-    <string name="fire" translatable="false">Fire</string>
-    <string name="purpleberry" translatable="false">Purpleberry</string>
-    <string name="sanguine_sun" translatable="false">Sanguine Sun</string>
-
     <!-- Widget -->
-    <string name="create_widget">Create widget</string>
+    <string name="create_widget">விட்ஜெட்டை உருவாக்கவும்</string>
     <string name="update_widget">Update widget</string>
-    <string name="new_notes_widget">New notes widget</string>
-    <string name="edit_notes_widget">Edit notes widget</string>
+    <string name="new_notes_widget">புதிய குறிப்புகள் விட்ஜெட்</string>
+    <string name="edit_notes_widget">குறிப்புகள் விட்ஜெட்டைத் திருத்தவும்</string>
     <string name="new_folders_widget">New folders widget</string>
     <string name="edit_folders_widget">Edit folders widget</string>
     <string name="new_folder_button">New folder button</string>
-    <string name="new_note_button">New note button</string>
-    <string name="widget_header">Widget header</string>
-    <string name="app_icon">App icon</string>
-    <string name="widget_radius">Widget radius</string>
-    <string name="edit_widget">Edit widget</string>
-    <string name="edit_widget_button">Edit widget button</string>
+    <string name="new_note_button">புதிய குறிப்பு பொத்தான்</string>
+    <string name="widget_header">விட்ஜெட் தலைப்பு</string>
+    <string name="app_icon">செயலி ஐகான்</string>
+    <string name="widget_radius">விட்ஜெட் ஆரம்</string>
+    <string name="edit_widget">விட்ஜெட்டைத் திருத்து</string>
+    <string name="edit_widget_button">விட்ஜெட் பொத்தானை திருத்து</string>
     <string name="folders_notes_count">Folders notes count</string>
-    <string name="loading_content">Loading content</string>
-
+    <string name="loading_content">உள்ளடக்கத்தை ஏற்றுகிறது</string>
     <!-- Releases -->
     <string name="release_1_8_0">• Support for passcode protected libraries vault.
         \n• Support for vault timeout options.
@@ -489,13 +406,12 @@
         \n• Add a link for the new <a href="https://www.reddit.com/r/notoapp">Reddit</a> community.
         \n• Other bug fixes and design improvements.
     </string>
-
     <string name="release_2_0_0">• New year, new look!
         \n• Libraries are gone. Welcome folders!
         \n• Improve animations across the whole app.
         \n• Experimental support for nested folders.
         \n• Experimental support for swiping horizontally to nest a folder when sorting is manual.
-        \n• Add a default "General" folder for y\'know general notes.
+        \n• Add a default \"General\" folder for y\'know general notes.
         \n• Support viewing all notes and recent notes and the ability to search through them.
         \n• Highlight note content when searching.
         \n• Implement collapsing toolbar for better usability and hand reachability.
@@ -507,7 +423,6 @@
         \n• Fix static shortcuts icons on older Android devices.
         \n• Other bug fixes and design improvements.
     </string>
-
     <string name="release_2_0_1">• Bug fixes.</string>
     <string name="release_2_1_0">• Support for undo/redo and viewing their history.
         \n• Redesign labels.

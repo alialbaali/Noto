@@ -442,14 +442,14 @@
     <string name="translate_noto">ترجم Noto</string>
     <!-- Replacement for "System language" in settings. -->
     <string name="follow_system">اتبع النظام</string>
-    <string name="english">اللغة الإنجليزية</string>
-    <string name="turkish">اللغة التركية</string>
-    <string name="arabic">اللغة العربية</string>
-    <string name="indonesian">اللغة الأندونيسية</string>
-    <string name="russian">اللغة الروسية</string>
-    <string name="spanish">اللغة الإسبانية</string>
+    <string name="english">الإنجليزية</string>
+    <string name="turkish">التركية</string>
+    <string name="arabic">العربية</string>
+    <string name="indonesian">الأندونيسية</string>
+    <string name="russian">الروسية</string>
+    <string name="spanish">الإسبانية</string>
     <string name="french">الفرنسية</string>
-    <string name="german">اللغة الألمانية</string>
+    <string name="german">الألمانية</string>
     <string name="italian">الإيطالية</string>
     <!-- Icon -->
     <string name="icon">الأيقونة</string>

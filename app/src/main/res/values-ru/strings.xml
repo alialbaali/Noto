@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Noto</string>
+    <string name="done">Готово</string>
+    <string name="okay">Ок</string>
+    <string name="search">Поиск</string>
+    <!-- A way to support the project. -->
+    <string name="buy_me_a_coffee">Buy me a coffee</string>
+    <!-- A way to support the project. -->
+    <string name="become_a_patron">Become a patron</string>
+    <!-- More options for folder, note, etc... -->
+    <string name="more_options">Больше опций</string>
+    <!-- Options for multi-selected notes. -->
+    <string name="options">Options</string>
+    <string name="back">Назад</string>
+    <string name="folder_layout">Вид папки</string>
+    <string name="label_filtering_type">Label filtering type</string>
+    <string name="layout">Вид</string>
+    <string name="list">Список</string>
+    <string name="inclusive">Inclusive</string>
+    <string name="exclusive">Exclusive</string>
+    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <string name="strict">Strict</string>
+    <string name="grid">Сетка</string>
+    <string name="created">Создано %s</string>
+    <string name="accessed">Доступно %s</string>
+    <string name="alphabetical">По алфавиту</string>
+    <!-- Sorting/Grouping notes by access date. -->
+    <string name="access_date">Access date</string>
+    <string name="creation_date">По дате</string>
+    <string name="manual">Ручная</string>
+    <string name="default_grouping">По умолчанию</string>
+    <string name="descending">По убыванию</string>
+    <string name="ascending">По возрастанию</string>
+    <string name="settings">Настройки</string>
+    <!-- The link of the source code of the project. -->
+    <string name="source_code">Source code</string>
+    <!-- The link of the reddit community of Noto. -->
+    <string name="reddit_community">Reddit community</string>
+    <!-- The font used in notes, such as Monospace, or Nunito. -->
+    <string name="notes_font">Notes font</string>
+    <string name="share_app_with_others">Share Noto with others</string>
+    <string name="rate_app_on_play_store">Rate Noto on Play Store</string>
+    <string name="report_issue">Сообщить об ошибке</string>
+    <string name="about">О приложении</string>
+    <string name="whats_new">Что нового</string>
+    <!--    <string name="share_with">Share with</string>-->
+    <string name="export_import_data">Экспорт/Импорт данных</string>
+    <string name="exporting_failed">Ошибка экспорта данных.</string>
+    <string name="importing_failed">Ошибка импорта данных.</string>
+    <string name="data_is_exported">Данные экспортированы в %s</string>
+    <string name="data_is_imported">Данные импортированы.</string>
+    <string name="export_data">Экспортировать данные</string>
+    <string name="import_data">Импортировать данные</string>
+    <string name="importing_data">Импорт данных…</string>
+    <string name="exporting_data">Экспорт данных…</string>
+    <string name="create_file_failed">Ошибка при создании файла.</string>
+    <string name="no_folder_is_selected">Папка не выбрана.</string>
+    <string name="no_file_is_selected">Файл не выбран.</string>
+    <!-- Open with an app such as Signal -->
+    <string name="open_with">Открыть в</string>
+    <string name="invite_text">Посмотрите Noto!</string>
+    <string name="version">Version</string>
+    <!-- A message shown when clicking on the app version. -->
+    <string name="version_is_copied">Version has been copied to clipboard.</string>
+    <!-- Me -->
+    <string name="developer">Developer</string>
+    <!-- Creator of app icons. -->
+    <string name="creator">Creator</string>
+    <!-- Translator of a language. -->
+    <!-- Proofreader of a language. -->
+    <string name="app_icons">App Icons</string>
+    <string name="privacy_policy">Privacy policy</string>
+    <!-- License of the project, or app icons. Example: Apache 2.0. -->
+    <string name="license">License</string>
+    <string name="empty_version">Версия</string>
+    <string name="date">Дата</string>
+    <string name="drag">Перетащить</string>
+    <string name="nunito">Nunito (по умолчанию)</string>
+    <string name="monospace">Monospace</string>
+    <string name="font">Шрифт</string>
+    <string name="folders_archive">Архив папок</string>
+    <!-- The first screen user sees when opening the app. -->
+    <string name="main_interface">Main interface</string>
+    <!-- The default folder of "Save to Noto" text selection option. -->
+    <string name="quick_note_folder">Quick note folder</string>
+    <!-- AKA "Save to Noto". -->
+    <string name="quick_note">Quick Note</string>
+    <string name="general">Общие</string>
+    <string name="all_notes">Все заметки</string>
+    <string name="all_folders">Все папки</string>
+    <string name="clear">Очистить</string>
+    <string name="recent_notes">Недавние заметки</string>
+    <string name="collapse">Свернуть</string>
+    <string name="expand">Развернуть</string>
+    <string name="no_parent">Нет привязки</string>
+    <string name="parent_folder">Родительская папка</string>
+    <string name="new_note_cursor_position">Позиция курсора новой заметки</string>
+    <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
+    <string name="open_notes_in">Open notes in</string>
+    <string name="archive">Архивировать</string>
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
+    <string name="folder_archive">%s archive</string>
+    <string name="unarchive">Разархивировать</string>
+    <string name="edit">Редактировать</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">Next</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">Previous</string>
+    <string name="pin">Закрепить</string>
+    <!-- Merge multiple notes into a new note. -->
+    <string name="merge">Merge</string>
+    <string name="unpin">Открепить</string>
+    <string name="delete">Удалить</string>
+    <string name="just_now">только что</string>
+    <!--Select a note. -->
+    <string name="select">Select</string>
+    <!--Select all notes. -->
+    <string name="select_all">Select all</string>
+    <!-- List of translations. -->
+    <string name="translations">Translations</string>
+    <!-- List of credits. -->
+    <string name="credits">Credits</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">For more details, click here.</string>
+    <!-- Folder -->
+    <string name="folders">Папки</string>
+    <plurals name="folders_count">
+        <item quantity="one">%d папка</item>
+        <item quantity="few">%d папок</item>
+        <item quantity="many">%d папок</item>
+        <item quantity="other">%d папок</item>
+    </plurals>
+    <string name="create_folder">Создать папку</string>
+    <string name="update_folder">Обновить папку</string>
+    <string name="archive_folder">Архивировать</string>
+    <string name="new_folder">Новая папка</string>
+    <string name="edit_folder">Редактировать</string>
+    <string name="folder_options">Опции папки</string>
+    <string name="add_new_note_shortcut">Новый ярлык</string>
+    <string name="delete_folder_description">Это действие нельзя отменить, и папка и все ее содержимое будут удалены навсегда.</string>
+    <string name="folder_title">Название</string>
+    <string name="folder_color">Цвет</string>
+    <string name="delete_folder">Удалить</string>
+    <string name="delete_folder_confirmation">Вы уверены, что хотите удалить эту папку?</string>
+    <string name="folders_sorting">Сортировка</string>
+    <string name="empty_title">Название не может быть пустым.</string>
+    <string name="folder_is_deleted">Папка удалена.</string>
+    <string name="folder_is_archived">Папка архивирована.</string>
+    <string name="folder_is_unarchived">Папка разархивирована.</string>
+    <string name="folder_is_pinned">Папка закреплена.</string>
+    <string name="folder_is_unpinned">Папка откреплена.</string>
+    <string name="no_folders_found">Папки не найдены.</string>
+    <string name="select_folder">Выбрать папку</string>
+    <string name="select_main_interface">Выберите интерфейс</string>
+    <string name="pinned">Закреплено</string>
+    <!-- Vault -->
+    <string name="folders_vault">Хранилище папок</string>
+    <string name="update_passcode">Update passcode</string>
+    <string name="enter_vault_passcode">Введите код</string>
+    <string name="add_to_vault">Добавить в хранилище</string>
+    <string name="remove_from_vault">Удалить из хранилища</string>
+    <string name="folder_is_vaulted">Папка добавлена в хранилище.</string>
+    <string name="folder_is_unvaulted">Папка удалена из хранилища.</string>
+    <string name="vault_is_empty">Хранилище пусто.</string>
+    <string name="archive_vaulted_folder_confirmation">Вы уверены, что хотите архивировать эту папку?</string>
+    <string name="archive_vaulted_folder_description">Архивирование этой папки также удалит ее из хранилища.</string>
+    <string name="vault_passcode">Код хранилища</string>
+    <string name="current_vault_passcode">Текущий код</string>
+    <string name="new_vault_passcode">Новый код</string>
+    <!-- Change vault passcode option. -->
+    <string name="change_passcode">Change passcode</string>
+    <!-- Vault timeout. -->
+    <string name="timeout">Timeout</string>
+    <string name="vault_timeout">Vault Timeout</string>
+    <string name="invalid_passcode">Неверный код</string>
+    <string name="passcode_length_message">Код должен содержать не менее 6 цифр</string>
+    <string name="passcode_empty_message">Код не может быть пустым</string>
+    <string name="passcode_doesnt_match">Код не совпадает с текущим</string>
+    <string name="vault_passcode_has_changed">Код хранилища обновлён.</string>
+    <string name="vault_passcode_message">Код не может быть изменен, если вы его потеряете, поэтому не забудьте сохранить его в безопасном месте.</string>
+    <string name="use_bio">Use biometrics</string>
+    <string name="validate">Validate</string>
+    <string name="vault">Хранилище</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">Disable vault</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">Vault has been disabled.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">Disable</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">Are you sure you want to disable the vault?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">This action can\'t be undone and will disable the vault and move all of the folders outside the vault.</string>
+    <string name="vault_is_open">Хранилище открыто</string>
+    <string name="immediately">Сразу</string>
+    <string name="on_app_close">При закрытии</string>
+    <string name="after_1_hour">Через 1 час</string>
+    <string name="after_4_hours">Через 4 часа</string>
+    <string name="after_12_hours">Через 12 часов</string>
+    <string name="close_vault">Закрыть хранилище</string>
+    <!-- Enabling biometric authentication for the app. -->
+    <string name="bio_auth">Enable biometric authentication</string>
+    <string name="use_passcode">Использовать код</string>
+    <!-- Note -->
+    <string name="all">Все</string>
+    <string name="update_reminder">Update reminder</string>
+    <string name="archive_is_empty">Архив пуст.</string>
+    <plurals name="notes_count">
+        <item quantity="one">%d Заметка</item>
+        <item quantity="few">%d Заметок</item>
+        <item quantity="many">%d Заметок</item>
+        <item quantity="other">%d Заметок</item>
+    </plurals>
+    <!-- Filtered notes count is shown when a label is selected, or text is searched.
+         Such as "30 Notes • 5 Filtered".
+     -->
+    <plurals name="notes_filtered_count">
+        <item quantity="one">%1$d Note • %2$d Filtered</item>
+        <item quantity="few">%1$d Notes • %2$d Filtered</item>
+        <item quantity="many">%1$d Notes • %2$d Filtered</item>
+        <item quantity="other">%1$d Notes • %2$d Filtered</item>
+    </plurals>
+    <!-- Selected notes count is shown when a note or multiple notes are selected.
+         Such as "30 Notes • 5 Selected".
+     -->
+    <plurals name="notes_selected_count">
+        <item quantity="one">%1$d Note • %2$d Selected</item>
+        <item quantity="few">%1$d Notes • %2$d Selected</item>
+        <item quantity="many">%1$d Notes • %2$d Selected</item>
+        <item quantity="other">%1$d Notes • %2$d Selected</item>
+    </plurals>
+    <!--  Filtered notes count is shown when a label is selected, or text is searched. Selected notes count is shown when a note or multiple notes are selected.
+          Such as, "30 Notes • 3 Filtered • 8 Selected".
+     -->
+    <plurals name="notes_filtered_selected_count">
+        <item quantity="one">%1$d Note • %2$d Filtered • %3$d Selected</item>
+        <item quantity="few">%1$d Notes • %2$d Filtered • %3$d Selected</item>
+        <item quantity="many">%1$d Notes • %2$d Filtered • %3$d Selected</item>
+        <item quantity="other">%1$d Notes • %2$d Filtered • %3$d Selected</item>
+    </plurals>
+    <plurals name="words_count">
+        <item quantity="one">%d Слово</item>
+        <item quantity="few">%d Слов</item>
+        <item quantity="many">%d Слов</item>
+        <item quantity="other">%d Слов</item>
+    </plurals>
+    <!-- Selected words count is shown when text is selected in a note. -->
+    <plurals name="words_selected_count">
+        <item quantity="one">%1$d Word • %2$d Selected</item>
+        <item quantity="few">%1$d Words • %2$d Selected</item>
+        <item quantity="many">%1$d Words • %2$d Selected</item>
+        <item quantity="other">%1$d Words • %2$d Selected</item>
+    </plurals>
+    <string name="body">Содержимое</string>
+    <string name="title">Заголовок</string>
+    <!-- Note's editor, opposite of Reading Mode. -->
+    <string name="editor">Editor</string>
+    <string name="create_note">Создать заметку</string>
+    <plurals name="delete_note">
+        <item quantity="one">Delete note</item>
+        <item quantity="few">Delete notes</item>
+        <item quantity="many">Delete notes</item>
+        <item quantity="other">Delete notes</item>
+    </plurals>
+    <string name="duplicate">Дублировать</string>
+    <string name="undo">Отменить</string>
+    <string name="undo_history">История действий</string>
+    <string name="redo">Вернуть</string>
+    <string name="redo_history">Redo history</string>
+    <string name="share_note">Поделиться заметкой</string>
+    <string name="sorting_type">Тип сортировки</string>
+    <string name="notes_view">Вид заметок</string>
+    <string name="sorting_order">Порядок сортировки</string>
+    <string name="grouping_type">Тип группировки</string>
+    <string name="grouping_order">Порядок группировки</string>
+    <string name="save_to_noto">Сохранить в Noto</string>
+    <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
+    <string name="note_is_saved">Note has been saved to %s.</string>
+    <string name="no_notes_found">Заметки не найдены.</string>
+    <string name="notes">Заметки</string>
+    <!-- The count of the selected notes that have been merged. -->
+    <string name="notes_are_merged">%d Notes have been merged into new note.</string>
+    <plurals name="note_is_archived">
+        <item quantity="one">Note has been archived.</item>
+        <item quantity="few">%d Notes have been archived.</item>
+        <item quantity="many">%d Notes have been archived.</item>
+        <item quantity="other">%d Notes have been archived.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been pinned. -->
+    <plurals name="note_is_pinned">
+        <item quantity="one">Note has been pinned.</item>
+        <item quantity="few">%d Notes have been pinned.</item>
+        <item quantity="many">%d Notes have been pinned.</item>
+        <item quantity="other">%d Notes have been pinned.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been unpinned. -->
+    <plurals name="note_is_unpinned">
+        <item quantity="one">Note has been unpinned.</item>
+        <item quantity="few">%d Notes have been unpinned.</item>
+        <item quantity="many">%d Notes have been unpinned.</item>
+        <item quantity="other">%d Notes have been unpinned.</item>
+    </plurals>
+    <string name="no_note_reminder">No reminder is setup.</string>
+    <string name="note_is_unarchived">Заметка разархивирована.</string>
+    <string name="reminder">Напоминание</string>
+    <string name="reminders">Напоминания</string>
+    <string name="new_note_reminder">New reminder</string>
+    <string name="copy">Копировать</string>
+    <string name="copy_to">Копировать в…</string>
+    <!-- The count of the selected notes that have been copied to a folder. -->
+    <plurals name="note_is_copied">
+        <item quantity="one">Note has been copied to %s.</item>
+        <item quantity="few">%d Notes have been copied to %s.</item>
+        <item quantity="many">%d Notes have been copied to %s.</item>
+        <item quantity="other">%d Notes have been copied to %s.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been copied to clipboard. -->
+    <plurals name="note_copied_to_clipboard">
+        <item quantity="one">Note has been copied to clipboard.</item>
+        <item quantity="few">%d Notes have been copied to clipboard.</item>
+        <item quantity="many">%d Notes have been copied to clipboard.</item>
+        <item quantity="other">%d Notes have been copied to clipboard.</item>
+    </plurals>
+    <string name="text_copied">Текст скопирован в буфер обмена.</string>
+    <plurals name="delete_note_confirmation">
+        <item quantity="one">Are you sure you want to delete this note?</item>
+        <item quantity="few">Are you sure you want to delete these notes?</item>
+        <item quantity="many">Are you sure you want to delete these notes?</item>
+        <item quantity="other">Are you sure you want to delete these notes?</item>
+    </plurals>
+    <string name="share_with">Поделиться с…</string>
+    <string name="add_note_reminder">Добавить напоминание</string>
+    <plurals name="delete_note_description">
+        <item quantity="one">This action can\'t be undone and will delete the note and its reminder permanently.</item>
+        <item quantity="few">This action can\'t be undone and will delete the notes and their reminders permanently.</item>
+        <item quantity="many">This action can\'t be undone and will delete the notes and their reminders permanently.</item>
+        <item quantity="other">This action can\'t be undone and will delete the notes and their reminders permanently.</item>
+    </plurals>
+    <string name="reading_mode">Reading Mode</string>
+    <string name="edit_note_reminder">Редактировать напоминание</string>
+    <string name="note_options">Параметры заметки</string>
+    <!-- The count of the selected notes that have been deleted. -->
+    <plurals name="note_is_deleted">
+        <item quantity="one">Note has been deleted.</item>
+        <item quantity="few">%d Notes have been deleted.</item>
+        <item quantity="many">%d Notes have been deleted.</item>
+        <item quantity="other">%d Notes have been deleted.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been duplicated. -->
+    <plurals name="note_is_duplicated">
+        <item quantity="one">Note has been duplicated.</item>
+        <item quantity="few">%d Notes have been duplicated.</item>
+        <item quantity="many">%d Notes have been duplicated.</item>
+        <item quantity="other">%d Notes have been duplicated.</item>
+    </plurals>
+    <string name="move_to">Переместить в…</string>
+    <!-- The count of the selected notes that have been moved to a folder. -->
+    <plurals name="note_is_moved">
+        <item quantity="one">Note has been moved to %s.</item>
+        <item quantity="few">%d Notes have been moved to %s.</item>
+        <item quantity="many">%d Notes have been moved to %s.</item>
+        <item quantity="other">%d Notes have been moved to %s.</item>
+    </plurals>
+    <string name="note_preview_size">Размер предпросмотра заметки</string>
+    <string name="show_note_creation_date">Показывать дату создания заметки</string>
+    <!-- Whether to show notes count in "All Folders" view. -->
+    <string name="show_notes_count">Show notes count</string>
+    <string name="remember_scrolling_position">Запомнить положение прокрутки</string>
+    <string name="do_not_disturb">Do Not Disturb</string>
+    <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
+    <string name="keep_screen_on">Keep screen on</string>
+    <string name="full_screen">Go full screen</string>
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
+    <string name="dim_screen">Dim screen</string>
+    <string name="show">Показать</string>
+    <string name="hide">Скрыть</string>
+    <string name="permission_not_granted">Разрешение не предоставлено</string>
+    <!-- Label -->
+    <string name="reorder_label">Reorder</string>
+    <string name="update_label">Update label</string>
+    <string name="create_label">Создать метку</string>
+    <string name="label_title">Название</string>
+    <string name="label">По метке</string>
+    <string name="without_label">Без метки</string>
+    <string name="label_options">Параметры метки</string>
+    <string name="delete_label">Удалить</string>
+    <string name="new_label">Новая метка</string>
+    <string name="edit_label">Редактировать</string>
+    <string name="labels_order">Порядок меток</string>
+    <string name="delete_label_confirmation">Вы уверены, что хотите удалить эту метку?</string>
+    <string name="label_is_deleted">Метка удалена.</string>
+    <string name="delete_label_description">Это действие не может быть отменено и метка будет безвозвратно удалена из связанных заметок.</string>
+    <string name="filter_labels">Фильтр меток</string>
+    <!-- Theme -->
+    <string name="theme">Тема</string>
+    <string name="system_dark_theme">Follow system + Dark</string>
+    <string name="system_black_theme">Follow system + Black</string>
+    <string name="light_theme">Light</string>
+    <string name="dark_theme">Dark</string>
+    <string name="black_theme">Black</string>
+    <!-- Language -->
+    <string name="language">Язык</string>
+    <!-- An option in settings to invite users to translate Noto. -->
+    <string name="translate_noto">Translate Noto</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">Follow system</string>
+    <string name="english">Английский</string>
+    <string name="turkish">Турецкий</string>
+    <string name="arabic">Арабский</string>
+    <string name="indonesian">Индонезийский</string>
+    <string name="russian">Русский</string>
+    <string name="spanish">Испанский</string>
+    <string name="french">Французский</string>
+    <string name="german">Немецкий</string>
+    <string name="italian">Italian</string>
+    <!-- Icon -->
+    <string name="icon">Иконка</string>
+    <!-- Widget -->
+    <string name="create_widget">Создать виджет</string>
+    <string name="update_widget">Обновить виджет</string>
+    <string name="new_notes_widget">Новый виджет заметок</string>
+    <string name="edit_notes_widget">Изменить виджет заметок</string>
+    <string name="new_folders_widget">Виджет новой папки</string>
+    <string name="edit_folders_widget">Изменить виджет папок</string>
+    <string name="new_folder_button">Кнопка \"Новая папка\"</string>
+    <string name="new_note_button">Кнопка \"Новая заметка\"</string>
+    <string name="widget_header">Центр виджетов</string>
+    <string name="app_icon">Иконка приложения</string>
+    <string name="widget_radius">Радиус виджета</string>
+    <string name="edit_widget">Изменить Виджет</string>
+    <string name="edit_widget_button">Изменить кнопку виджета</string>
+    <string name="folders_notes_count">Количество заметок в папках</string>
+    <string name="loading_content">Загрузка контента</string>
+    <!-- Releases -->
+    <string name="release_1_8_0">• Поддержка хранилища библиотек защищенных кодом.
+        \n• Поддержка таймаута хранилища.
+        \n• Поддержка биометрической аутентификации хранилищ на поддерживаемых устройствах.
+        \n• Поддержка испанского языка.
+        \n• Добавлена ссылка сообщества <a href="https://www.reddit.com/r/notoapp">Reddit</a>.
+        \n• Исправление ошибок и улучшение дизайна.
+    </string>
+    <string name="release_2_0_0">• Новый год, новый вид!
+        \n• Библиотеки исчезли. Приветствуем папки!
+        \n• Улучшение анимаций всего приложения.
+        \n• Экспериментальная поддержка вложенных папок.
+        \n• Экспериментальная поддержка перемещения по горизонтали при ручной сортировке.
+        \n• По умолчанию добавлена папка \"Общие\" для общих заметок.
+        \n• Поддержка просмотра всех заметок и последних заметок, а также возможность поиска по ним.
+        \n• Выделение содержимого заметки при поиске.
+        \n• Внедрение свертывающейся панели инструментов.
+        \n• Поддержка французского языка.
+        \n• Поддержка свайпа вверх по панели приложений для просмотра папок.
+        \n• Переход в хранилище при нажатии на уведомление «хранилище открыто».
+        \n• Добавлена опция выбора расположения основной папки.
+        \n• Добавлена опция свертывания панели инструментов по умолчанию.
+        \n• Исправление статических ярлыков на старых устройствах Android.
+        \n• Исправления ошибок и улучшение дизайна.
+    </string>
+    <string name="release_2_0_1">• Исправление ошибок.</string>
+    <string name="release_2_1_0">• Support for undo/redo and viewing their history.
+        \n• Redesign labels.
+        \n• Redesign bottom and top app bar in all layouts.
+        \n• Redesign many menus.
+        \n• Redesign new/edit folder layout.
+        \n• Add grouping order for notes.
+        \n• Add elevation when dragging labels or notes.
+        \n• Include preview in folder, note, and label menus.
+        \n• Format dates in a better way.
+        \n• Change highlight color in notes.
+        \n• Navigate to folders layout before exiting the app.
+        \n• Support for Material You (Material 3).
+        \n• Redesign splash screen.
+        \n• Reading Mode improvements.
+        \n• Support remembering scrolling positions for folders and notes.
+        \n• Disable animations for labels and folder colors.
+        \n• Fix importing data.
+        \n• Fix a bug when opening a vault crashes on Android 11 and above.
+        \n• Implement swiping gestures to undo/redo.
+        \n• Support filtering labels inclusively or exclusively.
+        \n• Redesign app icon.
+        \n• Support changing app icon.
+        \n• Change font weight and text size in different layouts.
+        \n• Support German.
+        \n• Other bug fixes and design improvements.
+    </string>
+    <string name="release_2_1_1">• Bug fixes.</string>
+    <string name="release_2_1_2">• Bug fixes and design improvements.</string>
+    <string name="release_2_1_3">• Bug fixes and design improvements.</string>
+    <string name="release_2_1_4">• Fixed shortcuts not working when using a different icon.
+        \n• Selected labels now appear first in note\'s layout.
+        \n• Other bug fixes and design improvements.
+    </string>
+    <string name="release_2_1_5">• Bug fixes and design improvements.</string>
+    <string name="release_2_1_6">• Bug fixes and design improvements.</string>
+</resources>
