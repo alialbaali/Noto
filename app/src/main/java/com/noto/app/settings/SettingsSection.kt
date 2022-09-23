@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.FontWeight
 import com.noto.app.NotoTheme
 
 @Composable
@@ -24,7 +24,9 @@ fun SettingsSection(
     Column(modifier, verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.medium)) {
         if (title != null) {
             Row(
-                modifier = Modifier.fillMaxWidth().padding(horizontal = NotoTheme.dimensions.small),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = NotoTheme.dimensions.small),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.medium),
             ) {
@@ -39,7 +41,7 @@ fun SettingsSection(
 
                 Text(
                     text = title,
-                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
+                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                 )
             }
         }
