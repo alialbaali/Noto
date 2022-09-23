@@ -16,7 +16,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
-import com.noto.app.components.EmptyPainter
 import com.noto.app.components.Screen
 import com.noto.app.settings.SettingsItem
 import com.noto.app.settings.SettingsItemType
@@ -30,7 +29,20 @@ private const val DeveloperWebsite = "https://www.alialbaali.com"
 private const val LicenseWebsite = "https://www.apache.org/licenses/LICENSE-2.0"
 private const val GithubUrl = "https://github.com/alialbaali/Noto"
 private const val RedditUrl = "https://reddit.com/r/notoapp"
-private const val TranslationInviteUrl = "https://crwd.in/notoapp"
+private const val TranslationEmailType = "mailto:"
+private const val TranslationEmail = "noto@albaali.com"
+private const val TranslationEmailSubject = "Noto Translation"
+private val TranslationEmailBody = """
+    Hi there,
+    
+    I would like to translate Noto to [LANGUAGE].
+    
+    I want to be credited as (optional):
+    Name: [NAME]
+    Link (optional): [LINK]
+    
+    Regards,
+""".trimIndent()
 private const val BuyMeACoffeeUrl = "https://www.buymeacoffee.com/alialbaali"
 private const val BecomeAPatronUrl = "https://www.patreon.com/alialbaali"
 private const val PrivacyPolicyUrl = "https://github.com/alialbaali/Noto/blob/master/PrivacyPolicy.md"
@@ -104,7 +116,11 @@ class AboutSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.translate_noto),
                             type = SettingsItemType.None,
                             onClick = {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TranslationInviteUrl))
+                                val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(TranslationEmailType)).apply {
+                                    putExtra(Intent.EXTRA_EMAIL, arrayOf(TranslationEmail))
+                                    putExtra(Intent.EXTRA_SUBJECT, TranslationEmailSubject)
+                                    putExtra(Intent.EXTRA_TEXT, TranslationEmailBody)
+                                }
                                 startActivity(intent)
                             },
                             description = stringResource(id = R.string.translate_noto_description),
