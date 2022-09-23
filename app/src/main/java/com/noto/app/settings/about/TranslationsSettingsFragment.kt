@@ -12,6 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
+import com.noto.app.components.EmptyPainter
 import com.noto.app.components.Screen
 import com.noto.app.settings.SettingsItem
 import com.noto.app.settings.SettingsItemType
@@ -52,7 +53,8 @@ class TranslationsSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ArabicTranslatorWebsite))
                                 startActivity(intent)
-                            }
+                            },
+                            painter = EmptyPainter,
                         )
 
                         SettingsItem(
@@ -61,7 +63,8 @@ class TranslationsSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ArabicProofreaderWebsite))
                                 startActivity(intent)
-                            }
+                            },
+                            painter = EmptyPainter,
                         )
                     }
 
@@ -72,7 +75,8 @@ class TranslationsSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TurkishTranslatorWebsite))
                                 startActivity(intent)
-                            }
+                            },
+                            painter = EmptyPainter,
                         )
 
                         SettingsItem(
@@ -81,7 +85,8 @@ class TranslationsSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TurkishProofreaderWebsite))
                                 startActivity(intent)
-                            }
+                            },
+                            painter = EmptyPainter,
                         )
                     }
 
@@ -90,6 +95,7 @@ class TranslationsSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.german_translator),
                             type = SettingsItemType.None,
                             onClick = null,
+                            painter = EmptyPainter,
                         )
                     }
 
@@ -100,7 +106,8 @@ class TranslationsSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SpanishTranslatorWebsite))
                                 startActivity(intent)
-                            }
+                            },
+                            painter = EmptyPainter,
                         )
                     }
 
@@ -111,7 +118,8 @@ class TranslationsSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(FrenchTranslatorWebsite))
                                 startActivity(intent)
-                            }
+                            },
+                            painter = EmptyPainter,
                         )
 
                         SettingsItem(
@@ -120,7 +128,8 @@ class TranslationsSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(FrenchTranslator2Website))
                                 startActivity(intent)
-                            }
+                            },
+                            painter = EmptyPainter,
                         )
                     }
 
@@ -131,7 +140,8 @@ class TranslationsSettingsFragment : Fragment() {
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ItalianTranslatorWebsite))
                                 startActivity(intent)
-                            }
+                            },
+                            painter = EmptyPainter,
                         )
                     }
                 }

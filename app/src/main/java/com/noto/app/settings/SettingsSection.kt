@@ -24,16 +24,10 @@ fun SettingsSection(
     Column(modifier, verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.medium)) {
         if (title != null) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = NotoTheme.dimensions.small),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.medium),
             ) {
-                Text(
-                    text = title,
-                    modifier = Modifier.padding(horizontal = NotoTheme.dimensions.medium),
-                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
-                )
-
                 if (painter != null) {
                     Icon(
                         painter = painter,
@@ -42,6 +36,11 @@ fun SettingsSection(
                         tint = Color.Unspecified,
                     )
                 }
+
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp),
+                )
             }
         }
 
