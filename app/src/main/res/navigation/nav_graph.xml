@@ -227,8 +227,8 @@
             app:destination="@id/notePagerFragment" />
         <argument
             android:name="is_select_all_enabled"
-            app:argType="boolean"
-            android:defaultValue="false" />
+            android:defaultValue="false"
+            app:argType="boolean" />
         <action
             android:id="@+id/action_noteDialogFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
@@ -322,14 +322,7 @@
     <dialog
         android:id="@+id/folderListSortingDialogFragment"
         android:name="com.noto.app.main.FolderListSortingDialogFragment"
-        android:label="FolderListSortingDialogFragment">
-        <action
-            android:id="@+id/action_folderListSortingDialogFragment_to_folderListSortingOrderDialogFragment"
-            app:destination="@id/folderListSortingOrderDialogFragment" />
-        <action
-            android:id="@+id/action_folderListSortingDialogFragment_to_folderListSortingTypeDialogFragment"
-            app:destination="@id/folderListSortingTypeDialogFragment" />
-    </dialog>
+        android:label="FolderListSortingDialogFragment" />
     <dialog
         android:id="@+id/fontDialogFragment"
         android:name="com.noto.app.settings.general.FontDialogFragment"
@@ -442,14 +435,6 @@
             android:name="title"
             app:argType="string" />
     </dialog>
-    <dialog
-        android:id="@+id/folderListSortingOrderDialogFragment"
-        android:name="com.noto.app.main.FolderListSortingOrderDialogFragment"
-        android:label="folderListSortingOrderDialogFragment" />
-    <dialog
-        android:id="@+id/folderListSortingTypeDialogFragment"
-        android:name="com.noto.app.main.FolderListSortingTypeDialogFragment"
-        android:label="folderListSortingTypeDialogFragment" />
     <dialog
         android:id="@+id/mainVaultFragment"
         android:name="com.noto.app.main.MainVaultFragment"

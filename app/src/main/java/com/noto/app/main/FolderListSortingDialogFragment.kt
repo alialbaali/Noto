@@ -4,14 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.FolderListSortingDialogFragmentBinding
 import com.noto.app.domain.model.FolderListSortingType
-import com.noto.app.util.navController
-import com.noto.app.util.navigateSafely
+import com.noto.app.domain.model.SortingOrder
+import com.noto.app.util.disable
+import com.noto.app.util.enable
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -32,24 +32,56 @@ class FolderListSortingDialogFragment : BaseDialogFragment() {
         viewModel.sortingType
             .onEach { sortingType ->
                 when (sortingType) {
-                    FolderListSortingType.Manual -> tvSortingOrder.isVisible = false
-                    else -> tvSortingOrder.isVisible = true
+                    FolderListSortingType.Alphabetical -> rbAlphabetical.isChecked = true
+                    FolderListSortingType.CreationDate -> rbCreationDate.isChecked = true
+                    FolderListSortingType.Manual -> rbManual.isChecked = true
+                }
+                if (sortingType == FolderListSortingType.Manual) {
+                    rbSortingAsc.isClickable = false
+                    rbSortingDesc.isClickable = false
+                    rgOrder.disable()
+                    tvOrder.disable()
+                } else {
+                    rbSortingAsc.isClickable = true
+                    rbSortingDesc.isClickable = true
+                    rgOrder.enable()
+                    tvOrder.enable()
                 }
             }
             .launchIn(lifecycleScope)
 
-        tvSortingType.setOnClickListener {
-            navController
-                ?.navigateSafely(FolderListSortingDialogFragmentDirections.actionFolderListSortingDialogFragmentToFolderListSortingTypeDialogFragment())
+        viewModel.sortingOrder
+            .onEach { sortingOrder ->
+                when (sortingOrder) {
+                    SortingOrder.Ascending -> rbSortingAsc.isChecked = true
+                    SortingOrder.Descending -> rbSortingDesc.isChecked = true
+                }
+            }
+            .launchIn(lifecycleScope)
+
+        rbManual.setOnClickListener {
+            viewModel.updateSortingType(FolderListSortingType.Manual)
         }
 
-        tvSortingOrder.setOnClickListener {
-            navController
-                ?.navigateSafely(FolderListSortingDialogFragmentDirections.actionFolderListSortingDialogFragmentToFolderListSortingOrderDialogFragment())
+        rbCreationDate.setOnClickListener {
+            viewModel.updateSortingType(FolderListSortingType.CreationDate)
         }
 
-        btnDone.setOnClickListener {
+        rbAlphabetical.setOnClickListener {
+            viewModel.updateSortingType(FolderListSortingType.Alphabetical)
+        }
+
+        rbSortingAsc.setOnClickListener {
+            viewModel.updateSortingOrder(SortingOrder.Ascending)
+        }
+
+        rbSortingDesc.setOnClickListener {
+            viewModel.updateSortingOrder(SortingOrder.Descending)
+        }
+
+        btnApply.setOnClickListener {
             dismiss()
         }
+
     }
 }
