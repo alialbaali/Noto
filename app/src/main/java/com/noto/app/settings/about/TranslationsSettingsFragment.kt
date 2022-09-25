@@ -28,6 +28,7 @@ private const val FrenchTranslatorWebsite = "https://github.com/kernoeb"
 private const val FrenchTranslator2Website = "https://geoffreycrofte.com"
 private const val ArabicTranslatorWebsite = "https://twitter.com/trjman_en"
 private const val ArabicProofreaderWebsite = "https://www.alialbaali.com"
+private const val CzechTranslatorWebsite = "https://github.com/vikdevelop"
 
 class TranslationsSettingsFragment : Fragment() {
 
@@ -139,6 +140,18 @@ class TranslationsSettingsFragment : Fragment() {
                             type = SettingsItemType.None,
                             onClick = {
                                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ItalianTranslatorWebsite))
+                                startActivity(intent)
+                            },
+                            painter = EmptyPainter,
+                        )
+                    }
+
+                    SettingsSection(title = stringResource(id = R.string.czech), painter = painterResource(id = R.drawable.ic_czech)) {
+                        SettingsItem(
+                            title = stringResource(id = R.string.czech_translator),
+                            type = SettingsItemType.None,
+                            onClick = {
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CzechTranslatorWebsite))
                                 startActivity(intent)
                             },
                             painter = EmptyPainter,

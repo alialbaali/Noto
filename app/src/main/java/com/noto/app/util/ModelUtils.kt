@@ -291,6 +291,7 @@ fun Language.asString(): String {
         Language.French -> stringResource(id = R.string.french)
         Language.German -> stringResource(id = R.string.german)
         Language.Italian -> stringResource(id = R.string.italian)
+        Language.Czech -> stringResource(id = R.string.czech)
     }
 }
 
@@ -318,4 +319,5 @@ fun Language.toLocale(): Locale = when (this) {
     Language.French -> Locale("fr")
     Language.German -> Locale("de")
     Language.Italian -> Locale("it")
+    Language.Czech -> Locale("cs")
 }

@@ -441,6 +441,7 @@
     <string name="german">German</string>
     <string name="italian">Italian</string>
     <string name="tamil">Tamil</string>
+    <string name="czech">Czech</string>
     <string name="turkish_translator" translatable="false">Nuray Sabri</string>
     <string name="turkish_proofreader" translatable="false">Alparslan Şakçi</string>
     <string name="spanish_translator" translatable="false">Faus AM</string>
@@ -450,6 +451,7 @@
     <string name="arabic_translator" translatable="false">Dr.Ohm</string>
     <string name="arabic_proofreader" translatable="false">Ali Albaali</string>
     <string name="italian_translator" translatable="false">Matteo Lombardi</string>
+    <string name="czech_translator" translatable="false">Viktor Novák</string>
 
     <!-- Icon -->
     <string name="icon">Icon</string>

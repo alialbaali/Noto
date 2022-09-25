@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Noto</string>
+    <string name="done">Hotovo</string>
+    <string name="okay">Ok</string>
+    <string name="search">Hledat</string>
+    <!-- A way to support the project. -->
+    <string name="buy_me_a_coffee">Kupte mi kávu</string>
+    <!-- A way to support the project. -->
+    <string name="become_a_patron">Staňte se patronem</string>
+    <!-- More options for folder, note, etc... -->
+    <string name="more_options">Více možností</string>
+    <!-- Options for multi-selected notes. -->
+    <string name="options">Možnosti</string>
+    <string name="back">Zpět</string>
+    <string name="folder_layout">Rozvržení složek</string>
+    <string name="label_filtering_type">Typ filtrování popisku</string>
+    <string name="layout">Rozvržení</string>
+    <string name="list">Seznam</string>
+    <string name="inclusive">Inkluzivní</string>
+    <string name="exclusive">Exkluzivní</string>
+    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <string name="strict">Přísný</string>
+    <string name="grid">Mřížka</string>
+    <string name="created">Vytvořeno %s</string>
+    <string name="accessed">Otevřeno %s</string>
+    <string name="alphabetical">Podle abecedy</string>
+    <!-- Sorting/Grouping notes by access date. -->
+    <string name="access_date">Datum přístupu</string>
+    <string name="creation_date">Datum vytvoření</string>
+    <string name="manual">Ručně</string>
+    <string name="default_grouping">Výchozí</string>
+    <string name="descending">Sestupně</string>
+    <string name="ascending">Vzestupně</string>
+    <string name="settings">Nastavení</string>
+    <!-- The link of the source code of the project. -->
+    <string name="source_code">Zdrojový kód</string>
+    <!-- The link of the reddit community of Noto. -->
+    <string name="reddit_community">Reddit komunita</string>
+    <!-- The font used in notes, such as Monospace, or Nunito. -->
+    <string name="notes_font">Styl písma poznámek</string>
+    <string name="share_app_with_others">Sdílet Noto s ostatními</string>
+    <string name="rate_app_on_play_store">Ohodnotit Noto na Google Play</string>
+    <string name="report_issue">Nahlásit problém</string>
+    <string name="about">O aplikaci</string>
+    <string name="whats_new">Co je nového</string>
+    <!--    <string name="share_with">Share with</string>-->
+    <string name="export_import_data">Exportovat/Importovat data</string>
+    <string name="exporting_failed">Nezdařilo se exportovat data.</string>
+    <string name="importing_failed">Nezdařilo se importovat data.</string>
+    <string name="data_is_exported">Data byla exportována do %s</string>
+    <string name="data_is_imported">Data byla importována.</string>
+    <string name="export_data">Exportovat data</string>
+    <string name="import_data">Importovat data</string>
+    <string name="importing_data">Importování dat…</string>
+    <string name="exporting_data">Exportování data…</string>
+    <string name="create_file_failed">Nezdařilo se vytvořit soubor.</string>
+    <string name="no_folder_is_selected">Žádná složka nebyla vybrána.</string>
+    <string name="no_file_is_selected">Nebyl vybrán žádný soubor.</string>
+    <!-- Open with an app such as Signal -->
+    <string name="open_with">Otevřít pomocí</string>
+    <string name="invite_text">Podívejte se na Noto!</string>
+    <string name="version">Verze</string>
+    <!-- A message shown when clicking on the app version. -->
+    <string name="version_is_copied">Verze byla zkopírována do schránky.</string>
+    <!-- Me -->
+    <string name="developer">Vývojář</string>
+    <!-- Creator of app icons. -->
+    <string name="creator">Tvůrce</string>
+    <!-- Translator of a language. -->
+    <!-- Proofreader of a language. -->
+    <string name="app_icons">Ikony aplikace</string>
+    <string name="privacy_policy">Zásady ochrany osobních údajů</string>
+    <!-- License of the project, or app icons. Example: Apache 2.0. -->
+    <string name="license">Licence</string>
+    <string name="empty_version">Verze</string>
+    <string name="date">Datum</string>
+    <string name="drag">Táhnout</string>
+    <string name="nunito">Nunito (výchozí)</string>
+    <string name="monospace">Monospace</string>
+    <string name="font">Písmo</string>
+    <string name="folders_archive">Archive složek</string>
+    <!-- The first screen user sees when opening the app. -->
+    <string name="main_interface">Hlavní rozhraní</string>
+    <!-- The default folder of "Save to Noto" text selection option. -->
+    <string name="quick_note_folder">Složka s rychlými poznámkami</string>
+    <!-- AKA "Save to Noto". -->
+    <string name="quick_note">Rychlé poznámky</string>
+    <string name="general">Obecné</string>
+    <string name="all_notes">Všechny poznámky</string>
+    <string name="all_folders">Všechny složky</string>
+    <string name="clear">Odstranit</string>
+    <string name="recent_notes">Poslední poznámky</string>
+    <string name="collapse">Sbalit</string>
+    <string name="expand">Rozbalit</string>
+    <string name="no_parent">Žádné nadřazené</string>
+    <string name="parent_folder">Nadřazená složka</string>
+    <string name="new_note_cursor_position">Nová pozice kurzoru poznámky</string>
+    <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
+    <string name="open_notes_in">Otevřít poznámky v</string>
+    <string name="archive">Archiv</string>
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
+    <string name="folder_archive">%s archiv</string>
+    <string name="unarchive">Obnovit z archivu</string>
+    <string name="edit">Upravit</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">Další</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">Předchozí</string>
+    <string name="pin">Připnout</string>
+    <!-- Merge multiple notes into a new note. -->
+    <string name="merge">Sloučit</string>
+    <string name="unpin">Odepnout</string>
+    <string name="delete">Odstranit</string>
+    <string name="just_now">právě teď</string>
+    <!--Select a note. -->
+    <string name="select">Vybrat</string>
+    <!--Select all notes. -->
+    <string name="select_all">Vybrat vše</string>
+    <!-- List of translations. -->
+    <string name="translations">Překlady</string>
+    <!-- List of credits. -->
+    <string name="credits">Poděkování</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">Pro více informací klikněte zde.</string>
+    <!-- Folder -->
+    <string name="folders">Složky</string>
+    <plurals name="folders_count">
+        <item quantity="one">%d složka</item>
+        <item quantity="few">%d Složek</item>
+        <item quantity="many">%d Složek</item>
+        <item quantity="other">%d Složek</item>
+    </plurals>
+    <string name="create_folder">Vytvořit složku</string>
+    <string name="update_folder">Aktualizovat složku</string>
+    <string name="archive_folder">Archivní složka</string>
+    <string name="new_folder">Nová složka</string>
+    <string name="edit_folder">Upravit složku</string>
+    <string name="folder_options">Možnosti složky</string>
+    <string name="add_new_note_shortcut">Nová zkratka pro složku</string>
+    <string name="delete_folder_description">Tuto akci nelze vrátit zpět a odstraní složku a veškerý její obsah trvale.</string>
+    <string name="folder_title">Titulek složky</string>
+    <string name="folder_color">Barva složky</string>
+    <string name="delete_folder">Odstranit</string>
+    <string name="delete_folder_confirmation">Opravdu chcete smazat tuto složku?</string>
+    <string name="folders_sorting">Řazení složek</string>
+    <string name="empty_title">Titulek nesmí být prázdný.</string>
+    <string name="folder_is_deleted">Složka byla odstraněna.</string>
+    <string name="folder_is_archived">Složka byla archivována.</string>
+    <string name="folder_is_unarchived">Složka byla dearchivována.</string>
+    <string name="folder_is_pinned">Složka byla připnuta.</string>
+    <string name="folder_is_unpinned">Složka byla odepnuta.</string>
+    <string name="no_folders_found">Žádné složky nenalezeny.</string>
+    <string name="select_folder">Vybrat složku</string>
+    <string name="select_main_interface">Vybrat hlavní rozhraní</string>
+    <string name="pinned">Připnuto</string>
+    <!-- Vault -->
+    <string name="folders_vault">Trezor složek</string>
+    <string name="update_passcode">Aktualizovat přístupový kód</string>
+    <string name="enter_vault_passcode">Zadejte svůj přístupový kód</string>
+    <string name="add_to_vault">Přidat do trezoru</string>
+    <string name="remove_from_vault">Odebrat z trezoru</string>
+    <string name="folder_is_vaulted">Složka byla přidána do trezoru.</string>
+    <string name="folder_is_unvaulted">Složka byla přidána do trezoru.</string>
+    <string name="vault_is_empty">Trezor je prázdný.</string>
+    <string name="archive_vaulted_folder_confirmation">Opravdu chcete odstranit tuto složku?</string>
+    <string name="archive_vaulted_folder_description">Archivací této složky ji také odebere z trezoru.</string>
+    <string name="vault_passcode">Heslo trezoru</string>
+    <string name="current_vault_passcode">Aktuální kód trezoru</string>
+    <string name="new_vault_passcode">Nové heslo trezoru</string>
+    <!-- Change vault passcode option. -->
+    <string name="change_passcode">Změnit přístupový kód</string>
+    <!-- Vault timeout. -->
+    <string name="timeout">Časový limit</string>
+    <string name="vault_timeout">Časový limit trezoru</string>
+    <string name="invalid_passcode">Neplatný přístupový kód</string>
+    <string name="passcode_length_message">Heslo musí obsahovat nejméně 6 čísel</string>
+    <string name="passcode_empty_message">Heslo nesmí být prázdné</string>
+    <string name="passcode_doesnt_match">Heslo se neshoduje se stávajícím heslem</string>
+    <string name="vault_passcode_has_changed">Kód trezoru byl aktualizován.</string>
+    <string name="vault_passcode_message">Přístupový kód trezoru není možné změnit, pokud ztratíte heslo, ujištěte se, že je uloženou někde v bezpečí.</string>
+    <string name="use_bio">Použít biometriku</string>
+    <string name="validate">Ověřit</string>
+    <string name="vault">Trezor</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">Zakázat trezor</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">Trezor byl zakázán.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">Zakázat</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">Opravdu chcete zakázat trezor?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">Tuto akci nelze vrátit zpět a zakáže trezor a přesune všechny složky mimo trezor.</string>
+    <string name="vault_is_open">Trezor je otevřený</string>
+    <string name="immediately">Ihned</string>
+    <string name="on_app_close">Při zavření aplikace</string>
+    <string name="after_1_hour">Po 1 hodině</string>
+    <string name="after_4_hours">Po 4 hodinách</string>
+    <string name="after_12_hours">Po 12 hodinách</string>
+    <string name="close_vault">Zavřít trezor</string>
+    <!-- Enabling biometric authentication for the app. -->
+    <string name="bio_auth">Povolit biometrické ověření</string>
+    <string name="use_passcode">Použít přístupový kód</string>
+    <!-- Note -->
+    <string name="all">Vše</string>
+    <string name="update_reminder">Změnit upozornění</string>
+    <string name="archive_is_empty">Archiv je prázdný.</string>
+    <plurals name="notes_count">
+        <item quantity="one">%d Poznámka</item>
+        <item quantity="few">%d Poznámek</item>
+        <item quantity="many">%d Poznámek</item>
+        <item quantity="other">%d Poznámek</item>
+    </plurals>
+    <!-- Filtered notes count is shown when a label is selected, or text is searched.
+         Such as "30 Notes • 5 Filtered".
+     -->
+    <plurals name="notes_filtered_count">
+        <item quantity="one">%1$d Poznámka • %2$d Filtrována</item>
+        <item quantity="few">%1$d Poznámek • %2$d Filtrováných</item>
+        <item quantity="many">%1$d Poznámek • %2$d Filtrováných</item>
+        <item quantity="other">%1$d poznámek • %2$d filtrováných</item>
+    </plurals>
+    <!-- Selected notes count is shown when a note or multiple notes are selected.
+         Such as "30 Notes • 5 Selected".
+     -->
+    <plurals name="notes_selected_count">
+        <item quantity="one">%1$d Poznámka • %2$d Vybrána</item>
+        <item quantity="few">%1$d Poznámek • %2$d Vybraných</item>
+        <item quantity="many">%1$d Poznámek • %2$d Vybraných</item>
+        <item quantity="other">%1$d Poznámek • %2$d Vybraných</item>
+    </plurals>
+    <!--  Filtered notes count is shown when a label is selected, or text is searched. Selected notes count is shown when a note or multiple notes are selected.
+          Such as, "30 Notes • 3 Filtered • 8 Selected".
+     -->
+    <plurals name="notes_filtered_selected_count">
+        <item quantity="one">%1$d Poznámka • %2$d Filtrována • %3$d Vybrána</item>
+        <item quantity="few">%1$d Poznámek • %2$d Filtrováných • %3$d Vybraných</item>
+        <item quantity="many">%1$d Poznámek • %2$d Filtrováných • %3$d Vybraných</item>
+        <item quantity="other">%1$d Poznámek • %2$d Filtrováných • %3$d Vybraných</item>
+    </plurals>
+    <plurals name="words_count">
+        <item quantity="one">%d Slovo</item>
+        <item quantity="few">%d Slov</item>
+        <item quantity="many">%d Slov</item>
+        <item quantity="other">%d Slov</item>
+    </plurals>
+    <!-- Selected words count is shown when text is selected in a note. -->
+    <plurals name="words_selected_count">
+        <item quantity="one">%1$d Slovo • %2$d Vybráno</item>
+        <item quantity="few">%1$d Slov • %2$d Vybraných</item>
+        <item quantity="many">%1$d Sslov • %2$d Vybraných</item>
+        <item quantity="other">%1$d Slov • %2$d Vybraných</item>
+    </plurals>
+    <string name="body">Text</string>
+    <string name="title">Titulek</string>
+    <!-- Note's editor, opposite of Reading Mode. -->
+    <string name="editor">Tvůrce</string>
+    <string name="create_note">Vytvořit poznámku</string>
+    <plurals name="delete_note">
+        <item quantity="one">Odstranit poznámku</item>
+        <item quantity="few">Odstranit poznámky</item>
+        <item quantity="many">Odstranit poznámky</item>
+        <item quantity="other">Odstranit Poznámky</item>
+    </plurals>
+    <string name="duplicate">Duplikovat</string>
+    <string name="undo">Zpět</string>
+    <string name="undo_history">Vrátit historii</string>
+    <string name="redo">Vpřed</string>
+    <string name="redo_history">Opakovat historii</string>
+    <string name="share_note">Sdílet poznámku</string>
+    <string name="sorting_type">Typ řazení</string>
+    <string name="notes_view">Náhled poznámek</string>
+    <string name="sorting_order">Způsob řazení</string>
+    <string name="grouping_type">Typ seskupování</string>
+    <string name="grouping_order">Způsob řazení</string>
+    <string name="save_to_noto">Uložit do Noto</string>
+    <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
+    <string name="note_is_saved">Poznámka byla uložena do %s.</string>
+    <string name="no_notes_found">Žádné poznámky k nalezení.</string>
+    <string name="notes">Poznámky</string>
+    <!-- The count of the selected notes that have been merged. -->
+    <string name="notes_are_merged">%d Poznámky byly sloučeny do nové poznámky.</string>
+    <plurals name="note_is_archived">
+        <item quantity="one">Poznámka byla archivována.</item>
+        <item quantity="few">%d Poznámka byla archivována.</item>
+        <item quantity="many">%d poznámka byla archivována.</item>
+        <item quantity="other">%d poznámek bylo archivováno.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been pinned. -->
+    <plurals name="note_is_pinned">
+        <item quantity="one">Poznámka byla připnuta.</item>
+        <item quantity="few">%d poznámek bylo připnuto.</item>
+        <item quantity="many">%d poznámek bylo připnuto.</item>
+        <item quantity="other">%d poznámek bylo připnuto.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been unpinned. -->
+    <plurals name="note_is_unpinned">
+        <item quantity="one">Poznámka byla odepnuta.</item>
+        <item quantity="few">%d poznámek bylo odepnuto.</item>
+        <item quantity="many">%d poznámek bylo odepnuto.</item>
+        <item quantity="other">%d poznámek bylo odepnuto.</item>
+    </plurals>
+    <string name="no_note_reminder">Není nastaveno zádné připomenutí.</string>
+    <string name="note_is_unarchived">Složka byla dearchivována.</string>
+    <string name="reminder">Upomínka</string>
+    <string name="reminders">Upomínky</string>
+    <string name="new_note_reminder">Nová upomínka</string>
+    <string name="copy">Kopírovat</string>
+    <string name="copy_to">Kopírovat do…</string>
+    <!-- The count of the selected notes that have been copied to a folder. -->
+    <plurals name="note_is_copied">
+        <item quantity="one">Poznámka byla zkopírována do %s.</item>
+        <item quantity="few">%d poznámek bylo zkopírováno do %s.</item>
+        <item quantity="many">%d poznámek bylo zkopírováno do %s.</item>
+        <item quantity="other">%d poznámek bylo zkopírováno do %s.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been copied to clipboard. -->
+    <plurals name="note_copied_to_clipboard">
+        <item quantity="one">Poznámka byla zkopírována do schránky.</item>
+        <item quantity="few">%d poznámek bylo zkopírováno do schránky.</item>
+        <item quantity="many">%d poznámek bylo zkopírováno do schránky.</item>
+        <item quantity="other">%d poznámek bylo zkopírováno do schránky.</item>
+    </plurals>
+    <string name="text_copied">Text byl zkopírován do schránky.</string>
+    <plurals name="delete_note_confirmation">
+        <item quantity="one">Opravdu chcete odstranit tuto poznámku?</item>
+        <item quantity="few">Opravdu chcete odstranit tyto poznámky?</item>
+        <item quantity="many">Opravdu chcete odstranit tyto poznámky?</item>
+        <item quantity="other">Opravdu chcete odstranit tyto poznámky?</item>
+    </plurals>
+    <string name="share_with">Sdílet s…</string>
+    <string name="add_note_reminder">Přidat upomínku</string>
+    <plurals name="delete_note_description">
+        <item quantity="one">Tuto akci není možné vrátit zpět a odstraní poznámku a její připomenutí trvale.</item>
+        <item quantity="few">Tuto akci není možné vrátit zpět a odstraní poznámky a jejich připomenutí trvale.</item>
+        <item quantity="many">Tuto akci není možné vrátit zpět a odstraní poznámky a jejich připomenutí trvale.</item>
+        <item quantity="other">Tuto akci není možné vrátit zpět a odstraní poznámky a jejich připomenutí trvale.</item>
+    </plurals>
+    <string name="reading_mode">Čtecí režim</string>
+    <string name="edit_note_reminder">Upravit upomínku</string>
+    <string name="note_options">Možnosti poznámky</string>
+    <!-- The count of the selected notes that have been deleted. -->
+    <plurals name="note_is_deleted">
+        <item quantity="one">Poznámka byla odstraněna.</item>
+        <item quantity="few">%d poznámek bylo odstraněno.</item>
+        <item quantity="many">%d poznámek bylo odstraněno.</item>
+        <item quantity="other">%d poznámek bylo odstraněno.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been duplicated. -->
+    <plurals name="note_is_duplicated">
+        <item quantity="one">Poznámka byla duplikována.</item>
+        <item quantity="few">%d poznámek bylo dublikováno.</item>
+        <item quantity="many">%d poznámek bylo dublikováno.</item>
+        <item quantity="other">%d poznámek bylo duplikováno.</item>
+    </plurals>
+    <string name="move_to">Přesunout do…</string>
+    <!-- The count of the selected notes that have been moved to a folder. -->
+    <plurals name="note_is_moved">
+        <item quantity="one">Poznámka byla přesunuta do %s.</item>
+        <item quantity="few">%d poznámek bylo přesunuto do %s.</item>
+        <item quantity="many">%d Poznámek bylo přesunuto do %s.</item>
+        <item quantity="other">%d poznámek bylo přesunuto do %s.</item>
+    </plurals>
+    <string name="note_preview_size">Velikost náhledu poznámky</string>
+    <string name="show_note_creation_date">Zobrazit datum vytvoření poznámky</string>
+    <!-- Whether to show notes count in "All Folders" view. -->
+    <string name="show_notes_count">Zobrazit celkový počet poznámek</string>
+    <string name="remember_scrolling_position">Zachovat pozici rolování</string>
+    <string name="do_not_disturb">Nerušit</string>
+    <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
+    <string name="keep_screen_on">Nevypínat obrazovku</string>
+    <string name="full_screen">Přejít na celou obrazovku</string>
+    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
+    <string name="dim_screen">Ztmavit obrazovku</string>
+    <string name="show">Zobrazit</string>
+    <string name="hide">Skrýt</string>
+    <string name="permission_not_granted">Oprávnění nebylo uděleno</string>
+    <!-- Label -->
+    <string name="reorder_label">Změna pořadí</string>
+    <string name="update_label">Aktualizovat popisek</string>
+    <string name="create_label">Vytvořit popisek</string>
+    <string name="label_title">Titulek popisku</string>
+    <string name="label">Popisek</string>
+    <string name="without_label">Bez popisku</string>
+    <string name="label_options">Možnosti popisku</string>
+    <string name="delete_label">Odstranit popisek</string>
+    <string name="new_label">Nový popisek</string>
+    <string name="edit_label">Upravit popisek</string>
+    <string name="labels_order">Pořadí popisků</string>
+    <string name="delete_label_confirmation">Jste si jisti, že chcete odstranit tento popisek?</string>
+    <string name="label_is_deleted">Popisek byl odebrán.</string>
+    <string name="delete_label_description">Tuto akci nelze vrátit zpět a bude smazán popiske a trvale odstraněn z přidružených poznámek.</string>
+    <string name="filter_labels">Filtrovat popisky</string>
+    <!-- Theme -->
+    <string name="theme">Motiv</string>
+    <string name="system_dark_theme">Podle systému + tmavý</string>
+    <string name="system_black_theme">Podle systému + černý</string>
+    <string name="light_theme">Světlý</string>
+    <string name="dark_theme">Tmavý</string>
+    <string name="black_theme">Černý</string>
+    <!-- Language -->
+    <string name="language">Jazyk</string>
+    <!-- An option in settings to invite users to translate Noto. -->
+    <string name="translate_noto">Přeložit Noto</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">Podle systému</string>
+    <string name="english">Angličtina</string>
+    <string name="turkish">Turečtina</string>
+    <string name="arabic">Arabština</string>
+    <string name="indonesian">Indonéština</string>
+    <string name="russian">Ruština</string>
+    <string name="spanish">Španělština</string>
+    <string name="french">Francouzština</string>
+    <string name="german">Němčina</string>
+    <string name="italian">Italština</string>
+    <!-- Icon -->
+    <string name="icon">Ikona</string>
+    <!-- Widget -->
+    <string name="create_widget">Vytvořit widget</string>
+    <string name="update_widget">Aktualizovat widget</string>
+    <string name="new_notes_widget">Nový widget poznámek</string>
+    <string name="edit_notes_widget">Upravit widget poznámek</string>
+    <string name="new_folders_widget">Nová složka widgetu</string>
+    <string name="edit_folders_widget">Upravit složku widgetu</string>
+    <string name="new_folder_button">Nové tlačítko složky</string>
+    <string name="new_note_button">Nové tlačítko poznámek</string>
+    <string name="widget_header">Záhlaví widgetu</string>
+    <string name="app_icon">Ikona aplikace</string>
+    <string name="widget_radius">Rádius widgetu</string>
+    <string name="edit_widget">Upravit widget</string>
+    <string name="edit_widget_button">Upravit tlačítko widgetu</string>
+    <string name="folders_notes_count">Počet položek</string>
+    <string name="loading_content">Načítání obsahu</string>
+    <!-- Releases -->
+    <string name="release_1_8_0">• Podpora pro knihovny chráněné přístupovým kódem.
+        \n• Podpora pro možnosti časového limitu trezoru.
+        \n• Podpora biometrického ověření trezoru na podporovaných zařízeních.
+        \n• Podpora pro španělský jazyk.
+        \n• Přidejte odkaz pro novou komunitu <a href="https://www.reddit.com/r/notoapp">Reddit</a>.
+        \n• Další opravy chyb a vylepšení designu.
+    </string>
+    <string name="release_2_0_0">• Nový rok, nový vzhled!
+        \n• Knihovny jsou pryč. Uvítací složky!
+        \n• Zlepšit animace v celé aplikaci.
+        \n• Experimentální podpora vnořených složek.
+        \n• Experimentální podpora posunutí vodorovně do hnízdění složky při třídění je manuální.
+        \n• Přidejte výchozí složku \"Obecný\" pro \"znát obecné poznámky\".
+        \n• Podpora prohlížení všech poznámek a nedávných poznámek a možnosti jejich vyhledání.
+        \n• Zvýraznit obsah poznámek při vyhledávání.
+        \n• Zavedení hroutící se nástrojové lišty pro lepší použitelnost a dosažitelnost ruky.
+        \n• Podpora francouzského jazyka.
+        \n• Podpora přejetím dolů do panelu aplikací pro zobrazení složek.
+        \n• Přejděte do trezoru při kliknutí na oznámení \'trezor je otevřené\'.
+        \n• Přidat možnost nastavení pro výběr destinace hlavní složky.
+        \n• Přidat nastavení pro výchozí sbalení nástrojové lišty.
+        \n• Opravte statické ikony zástupců na starších zařízeních s Androidem.
+        \n• Další opravy chyb a vylepšení.
+    </string>
+    <string name="release_2_0_1">• Opravy chyb.</string>
+    <string name="release_2_1_0">• Podpora pro vrácení/obnovení a prohlížení jejich historie.
+        \n• Zrušit popisky.
+        \n• Přesunout dolní a horní panel aplikací ve všech rozloženích.
+        \n• Odměňte mnoho menu.
+        \n• Přesunout nové/upravit rozložení složek.
+        \n• Přidat seskupování poznámek.
+        \n• Přidat nadmořskou výšku při přetažení štítků nebo poznámek.
+        \n• Včetně náhledu do menu složky, poznámky a popisku.
+        \n• Lepší formátování.
+        \n• Změna barvy zvýraznění v poznámkách.
+        \n• Přejděte do rozložení složek před ukončením aplikace.
+        \n• Podpora pro Váš materiál (Materiál 3).
+        \n• Přesunout úvodní obrazovku.
+        \n• Zlepšení režimu čtení.
+        \n• Podpora zapamatování pozic posouvání složek a poznámek.
+        \n• Zakázat animace pro popisky a barvy složek.
+        \n• Oprava importu dat.
+        \n• Opravit chybu při otevření trezoru na Android 11 a vyšší.
+        \n• Zavést gesta přejetím k zrušení/obnovení.
+        \n• Podpora filtrování štítků včetně, nebo výhradně.
+        \n• Přesunout ikonu aplikace.
+        \n• Podpora změny ikony aplikace.
+        \n• Změňte váhu písma a velikost textu v různých rozloženích.
+        \n• Podpora němčiny.
+        \n• Další opravy chyb a vylepšení.
+    </string>
+    <string name="release_2_1_1">• Opravy chyb.</string>
+    <string name="release_2_1_2">• Oprava chyb a vylepšení designu.</string>
+    <string name="release_2_1_3">• Opravy chyb a vylepšení designu.</string>
+    <string name="release_2_1_4">• Opravené zkratky nefungují při použití jiné ikony.
+        \n• Vybrané štítky se nyní zobrazí jako první v rozvržení poznámky.
+        \n• Další opravy chyb a vylepšení.
+    </string>
+    <string name="release_2_1_5">• Opravy chyb a vylepšení designu.</string>
+    <string name="release_2_1_6">• Opravy chyb a vylepšení designu.</string>
+</resources>

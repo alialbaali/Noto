@@ -17,7 +17,6 @@ import com.noto.app.components.EmptyPainter
 import com.noto.app.components.Screen
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Icon
-import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.Theme
 import com.noto.app.settings.*
 import com.noto.app.util.*
@@ -72,19 +71,7 @@ class GeneralSettingsFragment : Fragment() {
                     Theme.Black -> stringResource(id = R.string.black_theme)
                 }
                 val language by viewModel.language.collectAsState()
-                val languageText = when (language) {
-                    Language.System -> stringResource(id = R.string.follow_system)
-                    Language.English -> stringResource(id = R.string.english)
-                    Language.Turkish -> stringResource(id = R.string.turkish)
-                    Language.Arabic -> stringResource(id = R.string.arabic)
-                    Language.Indonesian -> stringResource(id = R.string.indonesian)
-                    Language.Russian -> stringResource(id = R.string.russian)
-                    Language.Tamil -> null
-                    Language.Spanish -> stringResource(id = R.string.spanish)
-                    Language.French -> stringResource(id = R.string.french)
-                    Language.German -> stringResource(id = R.string.german)
-                    Language.Italian -> stringResource(id = R.string.italian)
-                }
+                val languageText = language.asString()
                 val icon by viewModel.icon.collectAsState()
                 val iconText = when (icon) {
                     Icon.Futuristic -> stringResource(id = R.string.futuristic)
@@ -158,7 +145,7 @@ class GeneralSettingsFragment : Fragment() {
 
                         SettingsItem(
                             title = stringResource(id = R.string.language),
-                            type = if (languageText != null) SettingsItemType.Text(languageText) else SettingsItemType.None,
+                            type = SettingsItemType.Text(languageText),
                             onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToLanguageDialogFragment()) },
                             painter = painterResource(id = R.drawable.ic_round_language_24),
                         )
