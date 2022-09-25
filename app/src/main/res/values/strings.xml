@@ -3,6 +3,7 @@
     <!-- App -->
     <string name="app_name">Noto</string>
     <string name="done">Done</string>
+    <!-- Button text for sorting/ordering/filtering notes options. -->
     <string name="apply">Apply</string>
     <string name="okay">Okay</string>
     <string name="search">Search</string>
@@ -285,12 +286,16 @@
     <string name="redo_history">Redo history</string>
     <string name="share_note">Share note</string>
     <string name="sorting_type">Sorting type</string>
+    <!-- Sorting for notes/folders -->
     <string name="sorting">Sorting</string>
+    <!-- Type of sorting for notes/folders -->
     <string name="type">Type</string>
+    <!-- Order of sorting for notes/folders -->
     <string name="order">Order</string>
     <string name="notes_view">Notes view</string>
     <string name="sorting_order">Sorting order</string>
     <string name="grouping_type">Grouping type</string>
+    <!-- Grouping for notes/folders -->
     <string name="grouping">Grouping</string>
     <string name="grouping_order">Grouping order</string>
     <string name="save_to_noto">Save to Noto</string>
@@ -384,12 +389,19 @@
     <string name="screen_brightness_level">Screen brightness level</string>
     <!-- Description of the "Screen brightness level" settings option. -->
     <string name="screen_brightness_level_description">Brightness level of the screen during Reading Mode.</string>
+    <!-- "Screen brightness level" option. -->
     <string name="min">Min</string>
+    <!-- "Screen brightness level" option. -->
     <string name="very_low">Very low</string>
+    <!-- "Screen brightness level" option. -->
     <string name="low">Low</string>
+    <!-- "Screen brightness level" option. -->
     <string name="medium">Medium</string>
+    <!-- "Screen brightness level" option. -->
     <string name="high">High</string>
+    <!-- "Screen brightness level" option. -->
     <string name="very_high">Very high</string>
+    <!-- "Screen brightness level" option. -->
     <string name="max">Max</string>
 
     <string name="show">Show</string>
