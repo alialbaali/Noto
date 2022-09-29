@@ -123,7 +123,8 @@ class FolderArchiveFragment : Fragment() {
                                 navController?.navigateSafely(
                                     FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteFragment(
                                         args.folderId,
-                                        labelsIds = it.toLongArray()
+                                        labelsIds = it.toLongArray(),
+                                        selectedNoteIds = longArrayOf(),
                                     )
                                 )
                             }
@@ -143,7 +144,8 @@ class FolderArchiveFragment : Fragment() {
                                             ?.navigateSafely(
                                                 FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteFragment(
                                                     archivedNoteModel.note.folderId,
-                                                    archivedNoteModel.note.id
+                                                    archivedNoteModel.note.id,
+                                                    selectedNoteIds = longArrayOf()
                                                 )
                                             )
                                     }
@@ -153,7 +155,8 @@ class FolderArchiveFragment : Fragment() {
                                                 FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteDialogFragment(
                                                     archivedNoteModel.note.folderId,
                                                     archivedNoteModel.note.id,
-                                                    R.id.folderArchiveFragment
+                                                    R.id.folderArchiveFragment,
+                                                    selectedNoteIds = longArrayOf(),
                                                 )
                                             )
                                         true

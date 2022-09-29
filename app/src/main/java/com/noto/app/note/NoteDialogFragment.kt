@@ -123,17 +123,20 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvOpenIn.setOnClickListener {
             when (viewModel.folder.value.openNotesIn) {
-                OpenNotesIn.Editor -> navController?.navigateSafely(
-                    NoteDialogFragmentDirections.actionNoteDialogFragmentToNotePagerFragment(
-                        args.folderId,
-                        args.noteId,
-                        longArrayOf(),
+                OpenNotesIn.Editor -> {
+                    navController?.navigateSafely(
+                        NoteDialogFragmentDirections.actionNoteDialogFragmentToNotePagerFragment(
+                            args.folderId,
+                            args.noteId,
+                            selectedNoteIds = args.selectedNoteIds,
+                        )
                     )
-                )
+                }
                 OpenNotesIn.ReadingMode -> navController?.navigateSafely(
                     NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteFragment(
                         args.folderId,
                         args.noteId,
+                        selectedNoteIds = args.selectedNoteIds,
                     )
                 )
             }

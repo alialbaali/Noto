@@ -203,13 +203,14 @@ class FolderFragment : Fragment() {
 
         fab.setOnClickListener {
             val selectedLabelsIds = viewModel.labels.value
-                .filter { it.isSelected }
-                .map { it.label.id }
+                .filterSelected()
+                .map { it.id }
                 .toLongArray()
             navController?.navigateSafely(
                 FolderFragmentDirections.actionFolderFragmentToNoteFragment(
                     args.folderId,
-                    labelsIds = selectedLabelsIds
+                    labelsIds = selectedLabelsIds,
+                    selectedNoteIds = longArrayOf(),
                 )
             )
         }
@@ -260,7 +261,8 @@ class FolderFragment : Fragment() {
                             args.folderId,
                             selectedNoteIds.first(),
                             R.id.folderFragment,
-                            isSelectAllEnabled = notes.size != 1
+                            isSelectAllEnabled = notes.size != 1,
+                            selectedNoteIds = selectedNoteIds,
                         )
                     )
             } else {
@@ -340,11 +342,13 @@ class FolderFragment : Fragment() {
                                     navController?.navigateSafely(
                                         FolderFragmentDirections.actionFolderFragmentToNoteFragment(
                                             args.folderId,
-                                            labelsIds = it.toLongArray()
+                                            labelsIds = it.toLongArray(),
+                                            selectedNoteIds = longArrayOf(),
                                         )
                                     )
                                 }
                             ) { notes ->
+                                val noteIds = notes.map { it.note.id }.toLongArray()
                                 notes.forEach { model ->
                                     noteItem {
                                         id(model.note.id)
@@ -361,28 +365,29 @@ class FolderFragment : Fragment() {
                                                 OpenNotesIn.Editor -> navController?.navigateSafely(
                                                     FolderFragmentDirections.actionFolderFragmentToNoteFragment(
                                                         model.note.folderId,
-                                                        model.note.id
+                                                        model.note.id,
+                                                        selectedNoteIds = noteIds,
                                                     )
                                                 )
                                                 OpenNotesIn.ReadingMode -> navController?.navigateSafely(
                                                     FolderFragmentDirections.actionFolderFragmentToNotePagerFragment(
                                                         model.note.folderId,
                                                         model.note.id,
-                                                        longArrayOf()
+                                                        noteIds
                                                     )
                                                 )
                                             }
                                         }
                                         onLongClickListener { _ ->
-                                            navController
-                                                ?.navigateSafely(
-                                                    FolderFragmentDirections.actionFolderFragmentToNoteDialogFragment(
-                                                        model.note.folderId,
-                                                        model.note.id,
-                                                        R.id.folderFragment,
-                                                        isSelectionEnabled = true,
-                                                    )
+                                            navController?.navigateSafely(
+                                                FolderFragmentDirections.actionFolderFragmentToNoteDialogFragment(
+                                                    model.note.folderId,
+                                                    model.note.id,
+                                                    R.id.folderFragment,
+                                                    isSelectionEnabled = true,
+                                                    selectedNoteIds = noteIds,
                                                 )
+                                            )
                                             true
                                         }
                                         onDragHandleTouchListener { view, event ->

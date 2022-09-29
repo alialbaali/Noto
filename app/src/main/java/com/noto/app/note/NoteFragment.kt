@@ -340,7 +340,7 @@ class NoteFragment : Fragment() {
                             NoteFragmentDirections.actionNoteFragmentToNotePagerFragment(
                                 args.folderId,
                                 viewModel.note.value.id,
-                                longArrayOf()
+                                selectedNoteIds = args.selectedNoteIds,
                             )
                         )
                     true
@@ -350,7 +350,8 @@ class NoteFragment : Fragment() {
                         NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
                             args.folderId,
                             viewModel.note.value.id,
-                            R.id.folderFragment
+                            R.id.folderFragment,
+                            selectedNoteIds = args.selectedNoteIds,
                         )
                     )
                     true

@@ -168,6 +168,9 @@
             app:destination="@id/notePagerFragment"
             app:popUpTo="@id/notePagerFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="selected_note_ids"
+            app:argType="long[]" />
     </fragment>
     <fragment
         android:id="@+id/folderArchiveFragment"
@@ -232,6 +235,9 @@
         <action
             android:id="@+id/action_noteDialogFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <argument
+            android:name="selected_note_ids"
+            app:argType="long[]" />
     </dialog>
     <dialog
         android:id="@+id/themeDialogFragment"

@@ -178,6 +178,7 @@ class NotePagerFragment : Fragment() {
                     scrollPosition = scrollPosition,
                     isTitleVisible = isTitleVisible,
                     isBodyVisible = isBodyVisible,
+                    selectedNoteIds = args.selectedNoteIds,
                 )
             )
         }

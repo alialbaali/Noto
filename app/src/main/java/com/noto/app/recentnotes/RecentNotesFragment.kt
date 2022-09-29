@@ -178,8 +178,12 @@ class RecentNotesFragment : Fragment() {
                     lifecycleScope.launch {
                         delay(150) // Wait for the fragment to be destroyed
                         navController?.currentBackStackEntry?.savedStateHandle?.remove<Long>(Constants.FolderId)
-                        navController?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteFragment(
-                            folderId))
+                        navController?.navigateSafely(
+                            RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteFragment(
+                                folderId,
+                                selectedNoteIds = longArrayOf()
+                            )
+                        )
                     }
                 }
             }
@@ -219,6 +223,7 @@ class RecentNotesFragment : Fragment() {
                         } else {
                             notes.forEach { (date, notes) ->
                                 val isVisible = notesVisibility[date] ?: true
+                                val noteIds = notes.map { it.note.id }.toLongArray()
 
                                 headerItem {
                                     id(date.dayOfYear)
@@ -244,7 +249,8 @@ class RecentNotesFragment : Fragment() {
                                                     ?.navigateSafely(
                                                         RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteFragment(
                                                             model.note.folderId,
-                                                            model.note.id
+                                                            model.note.id,
+                                                            selectedNoteIds = noteIds,
                                                         )
                                                     )
                                             }
@@ -254,7 +260,8 @@ class RecentNotesFragment : Fragment() {
                                                         RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteDialogFragment(
                                                             model.note.folderId,
                                                             model.note.id,
-                                                            R.id.folderFragment
+                                                            R.id.folderFragment,
+                                                            selectedNoteIds = noteIds,
                                                         )
                                                     )
                                                 true

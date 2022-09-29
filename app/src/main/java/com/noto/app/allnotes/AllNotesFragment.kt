@@ -176,7 +176,10 @@ class AllNotesFragment : Fragment() {
                     lifecycleScope.launch {
                         delay(150) // Wait for the fragment to be destroyed
                         navController?.currentBackStackEntry?.savedStateHandle?.remove<Long>(Constants.FolderId)
-                        navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(folderId))
+                        navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
+                            folderId,
+                            selectedNoteIds = longArrayOf()
+                        ))
                     }
                 }
             }
@@ -216,6 +219,7 @@ class AllNotesFragment : Fragment() {
                         } else {
                             notes.forEach { (folder, notes) ->
                                 val isVisible = notesVisibility[folder] ?: true
+                                val noteIds = notes.map { it.note.id }.toLongArray()
 
                                 headerItem {
                                     id("folder ${folder.id}")
@@ -224,7 +228,10 @@ class AllNotesFragment : Fragment() {
                                     isVisible(isVisible)
                                     onClickListener { _ -> viewModel.toggleVisibilityForFolder(folder.id) }
                                     onCreateClickListener { _ ->
-                                        navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(folder.id))
+                                        navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
+                                            folder.id,
+                                            selectedNoteIds = longArrayOf()
+                                        ))
                                     }
                                     onLongClickListener { _ ->
                                         navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToFolderFragment(folder.id))
@@ -248,7 +255,8 @@ class AllNotesFragment : Fragment() {
                                                     ?.navigateSafely(
                                                         AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
                                                             model.note.folderId,
-                                                            model.note.id
+                                                            model.note.id,
+                                                            selectedNoteIds = noteIds,
                                                         )
                                                     )
                                             }
@@ -258,7 +266,8 @@ class AllNotesFragment : Fragment() {
                                                         AllNotesFragmentDirections.actionAllNotesFragmentToNoteDialogFragment(
                                                             model.note.folderId,
                                                             model.note.id,
-                                                            R.id.folderFragment
+                                                            R.id.folderFragment,
+                                                            selectedNoteIds = noteIds,
                                                         )
                                                     )
                                                 true
