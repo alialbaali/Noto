@@ -32,8 +32,8 @@ class NoteRepositoryImpl(
     override fun getFolderNotesCount(): Flow<List<FolderIdWithNotesCount>> =
         dataSource.getFoldersNotesCount().flowOn(dispatcher)
 
-    override suspend fun createNote(note: Note) = withContext(dispatcher) {
-        val position = getNotePosition(note.folderId)
+    override suspend fun createNote(note: Note, overridePosition: Boolean) = withContext(dispatcher) {
+        val position = if (overridePosition) getNotePosition(note.folderId) else note.position
         dataSource.createNote(note.copy(position = position))
     }
 

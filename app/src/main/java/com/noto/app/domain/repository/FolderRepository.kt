@@ -15,7 +15,7 @@ interface FolderRepository {
 
     fun getFolderById(folderId: Long): Flow<Folder>
 
-    suspend fun createFolder(folder: Folder): Long
+    suspend fun createFolder(folder: Folder, overridePosition: Boolean = true): Long
 
     suspend fun updateFolder(folder: Folder)
 

@@ -11,7 +11,7 @@ interface LabelRepository {
 
     fun getLabelById(id: Long): Flow<Label>
 
-    suspend fun createLabel(label: Label): Long
+    suspend fun createLabel(label: Label, overridePosition: Boolean = true): Long
 
     suspend fun updateLabel(label: Label)
 

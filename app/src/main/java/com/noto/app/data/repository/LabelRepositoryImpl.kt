@@ -23,8 +23,8 @@ class LabelRepositoryImpl(
 
     override fun getLabelById(id: Long): Flow<Label> = dataSource.getLabelById(id).flowOn(dispatcher)
 
-    override suspend fun createLabel(label: Label) = withContext(dispatcher) {
-        val position = getLabelPosition(label.folderId)
+    override suspend fun createLabel(label: Label, overridePosition: Boolean) = withContext(dispatcher) {
+        val position = if (overridePosition) getLabelPosition(label.folderId) else label.position
         dataSource.createLabel(label.copy(position = position))
     }
 

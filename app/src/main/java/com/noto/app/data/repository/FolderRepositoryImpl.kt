@@ -26,8 +26,8 @@ class FolderRepositoryImpl(
 
     override fun getFolderById(folderId: Long): Flow<Folder> = dataSource.getFolderById(folderId).flowOn(dispatcher)
 
-    override suspend fun createFolder(folder: Folder) = withContext(dispatcher) {
-        val position = getFolderPosition()
+    override suspend fun createFolder(folder: Folder, overridePosition: Boolean) = withContext(dispatcher) {
+        val position = if (overridePosition) getFolderPosition() else folder.position
         dataSource.createFolder(folder.copy(position = position))
     }
 

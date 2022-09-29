@@ -120,18 +120,18 @@ class SettingsViewModel(
                 } else {
                     val parentFolder = folders.firstOrNull { it.id == folder.parentId }
                     val parentId = folderIds.getOrDefault(parentFolder?.id ?: 0L, 0L).takeUnless { it == 0L }
-                    val newFolderId = folderRepository.createFolder(folder.copy(id = 0, parentId = parentId))
+                    val newFolderId = folderRepository.createFolder(folder.copy(id = 0, parentId = parentId), overridePosition = false)
                     folderIds[folder.id] = newFolderId
                 }
             }
             notes.forEach { note ->
                 val folderId = folderIds.getValue(note.folderId)
-                val newNoteId = noteRepository.createNote(note.copy(id = 0, folderId = folderId))
+                val newNoteId = noteRepository.createNote(note.copy(id = 0, folderId = folderId), overridePosition = false)
                 noteIds[note.id] = newNoteId
             }
             labels.forEach { label ->
                 val folderId = folderIds.getValue(label.folderId)
-                val newLabelId = labelRepository.createLabel(label.copy(id = 0, folderId = folderId))
+                val newLabelId = labelRepository.createLabel(label.copy(id = 0, folderId = folderId), overridePosition = false)
                 labelIds[label.id] = newLabelId
             }
             noteLabels.forEach { noteLabel ->
