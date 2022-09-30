@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val FileType = "application/json"
-private const val FileName = "Noto"
+private const val FileName = "Noto.json"
 
 class ExportImportDialogFragment : BaseDialogFragment() {
 
