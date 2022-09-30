@@ -45,6 +45,12 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private val alarmManager by lazy { context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager? }
 
+    private val isParentReadingMode
+        get() = navController?.previousBackStackEntry?.destination?.id == R.id.notePagerFragment
+
+    private val isParentEditor
+        get() = navController?.previousBackStackEntry?.destination?.id == R.id.noteFragment
+
     private val anchorViewId by lazy {
         val folderArchiveFragmentEntry = try {
             navController?.getBackStackEntry(R.id.folderArchiveFragment)
@@ -122,17 +128,18 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvOpenIn.setOnClickListener {
-            when (viewModel.folder.value.openNotesIn) {
-                OpenNotesIn.Editor -> {
+            val openNotesIn = viewModel.folder.value.openNotesIn
+            when {
+                openNotesIn == OpenNotesIn.Editor || isParentEditor -> {
                     navController?.navigateSafely(
                         NoteDialogFragmentDirections.actionNoteDialogFragmentToNotePagerFragment(
                             args.folderId,
                             args.noteId,
-                            selectedNoteIds = args.selectedNoteIds,
+                            args.selectedNoteIds,
                         )
                     )
                 }
-                OpenNotesIn.ReadingMode -> navController?.navigateSafely(
+                openNotesIn == OpenNotesIn.ReadingMode || isParentReadingMode -> navController?.navigateSafely(
                     NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteFragment(
                         args.folderId,
                         args.noteId,
@@ -361,12 +368,12 @@ class NoteDialogFragment : BaseDialogFragment() {
             val colorStateList = color.toColorStateList()
             tb.tvDialogTitle.setTextColor(color)
             tb.vHead.backgroundTintList = colorStateList
-            when (folder.openNotesIn) {
-                OpenNotesIn.Editor -> {
+            when {
+                folder.openNotesIn == OpenNotesIn.Editor || isParentEditor -> {
                     tvOpenIn.text = context.stringResource(R.string.reading_mode)
                     tvOpenIn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_reading_mode_24, 0, 0)
                 }
-                OpenNotesIn.ReadingMode -> {
+                folder.openNotesIn == OpenNotesIn.ReadingMode || isParentReadingMode -> {
                     tvOpenIn.text = context.stringResource(R.string.edit)
                     tvOpenIn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_edit_24, 0, 0)
                 }
