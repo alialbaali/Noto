@@ -3,10 +3,16 @@
     <!-- App -->
     <string name="app_name">Noto</string>
     <string name="done">Selesai</string>
+    <!-- Button text for sorting/ordering/filtering notes options. -->
+    <string name="apply">Terapkan</string>
     <string name="okay">Baik</string>
     <string name="search">Cari</string>
     <!-- A way to support the project. -->
     <string name="buy_me_a_coffee">Belikan saya kopi</string>
+    <!-- Description of the "Buy me a coffee" settings options. -->
+    <string name="buy_me_a_coffee_description">Jika kamu ingin menunjukan dukungan.</string>
+    <!-- Description of the "Become a patron" settings options. -->
+    <string name="become_a_patron_description">Jika kamu ingin memastikan Noto tetap terawat.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Jadilah patron</string>
     <!-- More options for folder, note, etc... -->
@@ -36,8 +42,12 @@
     <string name="settings">Pengaturan</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">Kode Sumber</string>
+    <!-- Description of the "Source code" settings option. -->
+    <string name="source_code_description">Noto adalah aplikasi sumber terbuka, dan kodenya dipublikasikan di GitHub.</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Komunitas Reddit</string>
+    <!-- Description of the "Reddit community" settings option. -->
+    <string name="reddit_community_description">Bergabunglah dengan komunitas untuk terlibat dengan pengguna Noto lainnya, dan dapatkan berita terbaru.</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Fon catatan</string>
     <string name="share_app_with_others">Bagikan Noto dengan yang lain</string>
@@ -72,6 +82,8 @@
     <!-- Proofreader of a language. -->
     <string name="app_icons">Ikon Aplikasi</string>
     <string name="privacy_policy">Kebijakan privasi</string>
+    <!-- Description of the "Privacy policy" settings option. -->
+    <string name="privacy_policy_description">Pembaharuan terakhir pada Agustus 25, 2022.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Lisensi</string>
     <string name="empty_version">Versi</string>
@@ -83,10 +95,14 @@
     <string name="folders_archive">Arsip map</string>
     <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">Antarmuka utama</string>
+    <!-- Description of the "Main interface" settings option. -->
+    <string name="main_interface_description">Layar pertama yang ditampilkan saat meluncurkan aplikasi.</string>
     <!-- The default folder of "Save to Noto" text selection option. -->
     <string name="quick_note_folder">Folder catatan cepat</string>
     <!-- AKA "Save to Noto". -->
     <string name="quick_note">Catatan cepat</string>
+    <!-- Description of the "Quick note folder" settings option. -->
+    <string name="quick_note_folder_description">Folder default saat menyimpan catatan menggunakan opsi pemilihan teks \"Catatan cepat\".</string>
     <string name="general">Umum</string>
     <string name="all_notes">Semua catatan</string>
     <string name="all_folders">Semua folder</string>
@@ -120,6 +136,8 @@
     <string name="select_all">Pilih semua</string>
     <!-- List of translations. -->
     <string name="translations">Terjemahan</string>
+    <!-- Description of the "Translations" settings option. -->
+    <string name="translations_description">Terima kasih khusus kepada semua penerjemah yang membantu membuat Noto tersedia di berbagai lokalisasi.</string>
     <!-- List of credits. -->
     <string name="credits">Kredit</string>
     <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
@@ -170,6 +188,8 @@
     <string name="change_passcode">Ubah kode sandi</string>
     <!-- Vault timeout. -->
     <string name="timeout">Batar Waktu</string>
+    <!-- Description of the "Timeout" settings option. -->
+    <string name="timeout_description">Waktu yang dibutuhkan untuk menutup brankas setelah dibuka.</string>
     <string name="vault_timeout">Batas Waktu Berangkas</string>
     <string name="invalid_passcode">Kode akses tidak valid</string>
     <string name="passcode_length_message">Kode akses harus berisi setidaknya 6 angka</string>
@@ -199,6 +219,8 @@
     <string name="close_vault">Tutup brankas</string>
     <!-- Enabling biometric authentication for the app. -->
     <string name="bio_auth">Aktifkan autentikasi biometrik</string>
+    <!-- Description of the "Enable biometric authentication" settings option. -->
+    <string name="bio_auth_description">Menentukan apakah mengizinkan mengakses brankas menggunakan metode autentikasi biometrik, seperti Pengenalan Wajah atau Sidik Jari.</string>
     <string name="use_passcode">Gunakan kode akses</string>
     <!-- Note -->
     <string name="all">Semua</string>
@@ -247,9 +269,17 @@
     <string name="redo_history">Mengembalikan history</string>
     <string name="share_note">Berbagi catatan</string>
     <string name="sorting_type">Jenis penyortiran</string>
+    <!-- Sorting for notes/folders -->
+    <string name="sorting">Penyortiran</string>
+    <!-- Type of sorting for notes/folders -->
+    <string name="type">Tipe</string>
+    <!-- Order of sorting for notes/folders -->
+    <string name="order">Urutan</string>
     <string name="notes_view">Tampilan catatan</string>
     <string name="sorting_order">Urutan penyortiran</string>
     <string name="grouping_type">Jenis pengelompokan</string>
+    <!-- Grouping for notes/folders -->
+    <string name="grouping">Pengelompokan</string>
     <string name="grouping_order">Urutan pengelompokan</string>
     <string name="save_to_noto">Simpan ke Noto</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
@@ -313,13 +343,39 @@
     <string name="show_note_creation_date">Tampilkan tanggal pembuatan catatan</string>
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Tampilkan jumlah catatan</string>
+    <!-- Description of the "Show notes count" settings option. -->
+    <string name="show_notes_count_description">Menentukan apakah akan menampilkan hitungan catatan dalam dialog folder.</string>
     <string name="remember_scrolling_position">Ingat posisi gulir</string>
+    <!-- Description of the "Remember scrolling position" settings option. -->
+    <string name="remember_scrolling_position_description">Menentukan apakah akan menyimpan posisi scrolling di folder, dan catatan.</string>
     <string name="do_not_disturb">Jangan Ganggu</string>
+    <!-- Description of the "Do Not Disturb" settings option. -->
+    <string name="do_not_disturb_description">Menentukan apakah mengaktifkan mode Jangan Ganggu selama Mode Membaca.</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Biarkan layar tetap menyala</string>
+    <!-- Description of the "Keep screen on" settings option. -->
+    <string name="keep_screen_on_description">Menentukan apakah akan mencegah layar mati selama Mode Membaca.</string>
     <string name="full_screen">Layar penuh</string>
-    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
-    <string name="dim_screen">Layar redup</string>
+    <!-- Description of the "Go full screen" settings option. -->
+    <string name="full_screen_description">Menentukan apakah akan menyembunyikan status dan bilah navigasi selama Mode Membaca.</string>
+    <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
+    <string name="screen_brightness_level">Tingkat kecerahan layar</string>
+    <!-- Description of the "Screen brightness level" settings option. -->
+    <string name="screen_brightness_level_description">Tingkat kecerahan layar selama Mode Membaca.</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="min">Minimal</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_low">Sangat rendah</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="low">Rendah</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="medium">Sedang</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="high">Tinggi</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_high">Sangat tinggi</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="max">Maksimal</string>
     <string name="show">Tampilkan</string>
     <string name="hide">Sembunyikan</string>
     <string name="permission_not_granted">Izin belum diberikan</string>
@@ -348,8 +404,12 @@
     <string name="black_theme">Hitam</string>
     <!-- Language -->
     <string name="language">Bahasa</string>
+    <!-- A text next to the non-finished language. -->
+    <string name="not_finished">Belum Selesai</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Terjemahkan Noto</string>
+    <!-- Description of the "Translate Noto" settings option. -->
+    <string name="translate_noto_description">Terjemahan telah selesai di Crowdin.</string>
     <!-- Replacement for "System language" in settings. -->
     <string name="follow_system">Mengikuti sistem</string>
     <string name="english">Inggris</string>
@@ -361,6 +421,8 @@
     <string name="french">Prancis</string>
     <string name="german">Jerman</string>
     <string name="italian">Italia</string>
+    <string name="tamil">Tamil</string>
+    <string name="czech">Ceko</string>
     <!-- Icon -->
     <string name="icon">Ikon</string>
     <!-- Widget -->

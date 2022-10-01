@@ -3,10 +3,16 @@
     <!-- App -->
     <string name="app_name">Noto</string>
     <string name="done">Fatto</string>
+    <!-- Button text for sorting/ordering/filtering notes options. -->
+    <string name="apply">Apply</string>
     <string name="okay">Okay</string>
     <string name="search">Cerca</string>
     <!-- A way to support the project. -->
     <string name="buy_me_a_coffee">Offrimi un caffè</string>
+    <!-- Description of the "Buy me a coffee" settings options. -->
+    <string name="buy_me_a_coffee_description">If you\'d like to show support.</string>
+    <!-- Description of the "Become a patron" settings options. -->
+    <string name="become_a_patron_description">If you\'d like to make sure Noto remains maintained.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Diventa un sostenitore su Patreon</string>
     <!-- More options for folder, note, etc... -->
@@ -36,8 +42,12 @@
     <string name="settings">Impostazioni</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">Codice sorgente</string>
+    <!-- Description of the "Source code" settings option. -->
+    <string name="source_code_description">Noto is an open-source application, and the code is published on GitHub.</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Community su Reddit</string>
+    <!-- Description of the "Reddit community" settings option. -->
+    <string name="reddit_community_description">Join the community to engage with other Noto users, and get the latest news.</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Carattere delle note</string>
     <string name="share_app_with_others">Condividi Noto</string>
@@ -72,6 +82,8 @@
     <!-- Proofreader of a language. -->
     <string name="app_icons">Icone dell\'app</string>
     <string name="privacy_policy">Informativa sulla privacy</string>
+    <!-- Description of the "Privacy policy" settings option. -->
+    <string name="privacy_policy_description">Last updated on August 25, 2022.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Licenza</string>
     <string name="empty_version">Versione</string>
@@ -83,10 +95,14 @@
     <string name="folders_archive">Archivio cartelle</string>
     <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">Interfaccia principale</string>
+    <!-- Description of the "Main interface" settings option. -->
+    <string name="main_interface_description">The first screen displayed when launching the app.</string>
     <!-- The default folder of "Save to Noto" text selection option. -->
     <string name="quick_note_folder">Cartella note rapide</string>
     <!-- AKA "Save to Noto". -->
     <string name="quick_note">Nota rapida</string>
+    <!-- Description of the "Quick note folder" settings option. -->
+    <string name="quick_note_folder_description">The default folder when saving a note using \"Quick note\" text selection option.</string>
     <string name="general">Generale</string>
     <string name="all_notes">Tutte le note</string>
     <string name="all_folders">Tutte le cartelle</string>
@@ -120,6 +136,8 @@
     <string name="select_all">Seleziona tutto</string>
     <!-- List of translations. -->
     <string name="translations">Traduzioni</string>
+    <!-- Description of the "Translations" settings option. -->
+    <string name="translations_description">Special thanks to all the translators who helped make Noto available in different localizations.</string>
     <!-- List of credits. -->
     <string name="credits">Riconoscimenti</string>
     <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
@@ -171,6 +189,8 @@
     <string name="change_passcode">Cambia codice della cassaforte</string>
     <!-- Vault timeout. -->
     <string name="timeout">Timeout</string>
+    <!-- Description of the "Timeout" settings option. -->
+    <string name="timeout_description">The time it takes to close the vault after being opened.</string>
     <string name="vault_timeout">Timeout della cassaforte</string>
     <string name="invalid_passcode">Codice non valido</string>
     <string name="passcode_length_message">Il codice deve contenere almeno 6 numeri</string>
@@ -200,6 +220,8 @@
     <string name="close_vault">Chiudi cassaforte</string>
     <!-- Enabling biometric authentication for the app. -->
     <string name="bio_auth">Abilita autenticazione biometrica</string>
+    <!-- Description of the "Enable biometric authentication" settings option. -->
+    <string name="bio_auth_description">Whether to allow accessing the vault using biometric authentications methods, such as Facial Recognition or Fingerprint.</string>
     <string name="use_passcode">Usa codice</string>
     <!-- Note -->
     <string name="all">Tutto</string>
@@ -255,9 +277,17 @@
     <string name="redo_history">Ripeti storico</string>
     <string name="share_note">Condividi nota</string>
     <string name="sorting_type">Tipo di ordinamento</string>
+    <!-- Sorting for notes/folders -->
+    <string name="sorting">Sorting</string>
+    <!-- Type of sorting for notes/folders -->
+    <string name="type">Type</string>
+    <!-- Order of sorting for notes/folders -->
+    <string name="order">Order</string>
     <string name="notes_view">Visualizzazione note</string>
     <string name="sorting_order">Ordina per</string>
     <string name="grouping_type">Tipo di raggruppamento</string>
+    <!-- Grouping for notes/folders -->
+    <string name="grouping">Grouping</string>
     <string name="grouping_order">Ordine di raggruppamento</string>
     <string name="save_to_noto">Salva su Noto</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
@@ -331,13 +361,39 @@
     <string name="show_note_creation_date">Mostra data di creazione della nota</string>
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Mostra il numero di note</string>
+    <!-- Description of the "Show notes count" settings option. -->
+    <string name="show_notes_count_description">Whether to display the count of notes in the folders dialog.</string>
     <string name="remember_scrolling_position">Ricorda posizione dello scorrimento</string>
+    <!-- Description of the "Remember scrolling position" settings option. -->
+    <string name="remember_scrolling_position_description">Whether to store the scrolling position in folders, and notes.</string>
     <string name="do_not_disturb">Non disturbare</string>
+    <!-- Description of the "Do Not Disturb" settings option. -->
+    <string name="do_not_disturb_description">Whether to enable Do Not Disturb mode during Reading Mode.</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Mantieni lo schermo acceso</string>
+    <!-- Description of the "Keep screen on" settings option. -->
+    <string name="keep_screen_on_description">Whether to prevent screen from turning off during Reading Mode.</string>
     <string name="full_screen">Schermo intero</string>
-    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
-    <string name="dim_screen">Abbassa luminosità</string>
+    <!-- Description of the "Go full screen" settings option. -->
+    <string name="full_screen_description">Whether to hide status and navigation bars during Reading Mode.</string>
+    <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
+    <string name="screen_brightness_level">Screen brightness level</string>
+    <!-- Description of the "Screen brightness level" settings option. -->
+    <string name="screen_brightness_level_description">Brightness level of the screen during Reading Mode.</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="min">Min</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_low">Very low</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="low">Low</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="medium">Medium</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="high">High</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_high">Very high</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="max">Max</string>
     <string name="show">Mostra</string>
     <string name="hide">Nascondi</string>
     <string name="permission_not_granted">L\'autorizzazione non è stata concessa</string>
@@ -366,8 +422,12 @@
     <string name="black_theme">Nero</string>
     <!-- Language -->
     <string name="language">Lingua</string>
+    <!-- A text next to the non-finished language. -->
+    <string name="not_finished">Not finished</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Traduci Noto</string>
+    <!-- Description of the "Translate Noto" settings option. -->
+    <string name="translate_noto_description">Translations are done in Crowdin.</string>
     <!-- Replacement for "System language" in settings. -->
     <string name="follow_system">Segui sistema</string>
     <string name="english">Inglese</string>
@@ -379,6 +439,8 @@
     <string name="french">Francese</string>
     <string name="german">Tedesco</string>
     <string name="italian">Italiano</string>
+    <string name="tamil">Tamil</string>
+    <string name="czech">Czech</string>
     <!-- Icon -->
     <string name="icon">Icona</string>
     <!-- Widget -->

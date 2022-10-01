@@ -3,10 +3,16 @@
     <!-- App -->
     <string name="app_name">Noto</string>
     <string name="done">Kaydet</string>
+    <!-- Button text for sorting/ordering/filtering notes options. -->
+    <string name="apply">Uygula</string>
     <string name="okay">Tamam</string>
     <string name="search">Ara</string>
     <!-- A way to support the project. -->
     <string name="buy_me_a_coffee">Bana bir kahve ısmarla</string>
+    <!-- Description of the "Buy me a coffee" settings options. -->
+    <string name="buy_me_a_coffee_description">Ne de olsa bir fincan kahvenin kırk yıl hatırı var.</string>
+    <!-- Description of the "Become a patron" settings options. -->
+    <string name="become_a_patron_description">Beni Patreon üzerinden destekle!</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Destekçim ol</string>
     <!-- More options for folder, note, etc... -->
@@ -36,8 +42,12 @@
     <string name="settings">Ayarlar</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">Kaynak kodu</string>
+    <!-- Description of the "Source code" settings option. -->
+    <string name="source_code_description">Noto açık kaynaklı bir uygulamadır ve kaynak kodu Github\'da mevcuttur.</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Reddit topluluğu</string>
+    <!-- Description of the "Reddit community" settings option. -->
+    <string name="reddit_community_description">Diğer kullanıcılarla etkileşim kurmak ve tüm gelişmelerden haberdar olmak için Reddit topluluğuna katılın.</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Yazı tipi</string>
     <string name="share_app_with_others">Noto\'yu başkalarıyla paylaş</string>
@@ -72,6 +82,8 @@
     <!-- Proofreader of a language. -->
     <string name="app_icons">Uygulama simgeleri</string>
     <string name="privacy_policy">Gizlilik politikası</string>
+    <!-- Description of the "Privacy policy" settings option. -->
+    <string name="privacy_policy_description">Son güncelleme 25 Ağustos 2022 tarihinde yapıldı.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Lisans</string>
     <string name="empty_version">Sürüm</string>
@@ -83,10 +95,14 @@
     <string name="folders_archive">Klasör arşivi</string>
     <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">Ana sayfa</string>
+    <!-- Description of the "Main interface" settings option. -->
+    <string name="main_interface_description">Uygulama açılınca gösterilecek ilk sayfayı belirleyin.</string>
     <!-- The default folder of "Save to Noto" text selection option. -->
     <string name="quick_note_folder">Hızlı not klasörü</string>
     <!-- AKA "Save to Noto". -->
     <string name="quick_note">Hızlı not</string>
+    <!-- Description of the "Quick note folder" settings option. -->
+    <string name="quick_note_folder_description">\"Hızlı not\" özelliği kullanılarak oluşturulan notların kaydedileceği klasörü belirleyin.</string>
     <string name="general">Genel</string>
     <string name="all_notes">Tüm notlar</string>
     <string name="all_folders">Tüm klasörler</string>
@@ -120,6 +136,8 @@
     <string name="select_all">Tümünü seç</string>
     <!-- List of translations. -->
     <string name="translations">Çeviriler</string>
+    <!-- Description of the "Translations" settings option. -->
+    <string name="translations_description">Noto\'nun farklı dillerde kullanılabilmesine olanak sağlayan bütün çevirmenlere teşekkürler.</string>
     <!-- List of credits. -->
     <string name="credits">Katkıda bulunanlar</string>
     <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
@@ -171,6 +189,8 @@
     <string name="change_passcode">Şifreyi değiştir</string>
     <!-- Vault timeout. -->
     <string name="timeout">Zaman aşımı</string>
+    <!-- Description of the "Timeout" settings option. -->
+    <string name="timeout_description">Kasanın otomatik olarak tekrar kilitlenmesi için geçmesi gereken süreyi belirleyin.</string>
     <string name="vault_timeout">Kasa zaman aşımı</string>
     <string name="invalid_passcode">Geçersiz şifre</string>
     <string name="passcode_length_message">Şifre en az 6 rakamdan oluşmalıdır</string>
@@ -200,6 +220,8 @@
     <string name="close_vault">Kasayı kilitle</string>
     <!-- Enabling biometric authentication for the app. -->
     <string name="bio_auth">Biyometrik doğrulamayı etkinleştir</string>
+    <!-- Description of the "Enable biometric authentication" settings option. -->
+    <string name="bio_auth_description">Yüz Tanıma veya Parmak İzi gibi biyometrik kimlik doğrulama yöntemleriyle kasanın korunup korunmayacağını belirleyin.</string>
     <string name="use_passcode">Şifre kullan</string>
     <!-- Note -->
     <string name="all">Tümü</string>
@@ -255,9 +277,17 @@
     <string name="redo_history">Yeniden yaz geçmişi</string>
     <string name="share_note">Notu paylaş</string>
     <string name="sorting_type">Sıralama türü</string>
+    <!-- Sorting for notes/folders -->
+    <string name="sorting">Sıralama</string>
+    <!-- Type of sorting for notes/folders -->
+    <string name="type">Tür</string>
+    <!-- Order of sorting for notes/folders -->
+    <string name="order">Düzen</string>
     <string name="notes_view">Not görünümü</string>
     <string name="sorting_order">Sıralama düzeni</string>
     <string name="grouping_type">Gruplandırma türü</string>
+    <!-- Grouping for notes/folders -->
+    <string name="grouping">Gruplandırma</string>
     <string name="grouping_order">Gruplandırma düzeni</string>
     <string name="save_to_noto">Noto\'ya kaydet</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
@@ -331,13 +361,39 @@
     <string name="show_note_creation_date">Not oluşturma tarihini göster</string>
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Not sayısını göster</string>
+    <!-- Description of the "Show notes count" settings option. -->
+    <string name="show_notes_count_description">Klasörlerde kaç not bulunduğunun gösterilip gösterilmeyeceğini belirleyin.</string>
     <string name="remember_scrolling_position">Kaydırma konumunu hatırla</string>
+    <!-- Description of the "Remember scrolling position" settings option. -->
+    <string name="remember_scrolling_position_description">Klasörlerde ve notlardaki kaydırma konumunun hatırlanıp hatırlanmayacağını belirleyin.</string>
     <string name="do_not_disturb">Rahatsız Etmeyin</string>
+    <!-- Description of the "Do Not Disturb" settings option. -->
+    <string name="do_not_disturb_description">Okuma Modu sırasında Rahatsız Etmeyin ayarının etkinleştirilip etkinleştirilmeyeceğini belirleyin.</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">Ekranı açık tut</string>
+    <!-- Description of the "Keep screen on" settings option. -->
+    <string name="keep_screen_on_description">Okuma Modu sırasında ekranın kapanmasının engellenip engellenmeyeceğini belirleyin.</string>
     <string name="full_screen">Tam ekran modunu etkinleştir</string>
-    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
-    <string name="dim_screen">Ekran parlaklığını azalt</string>
+    <!-- Description of the "Go full screen" settings option. -->
+    <string name="full_screen_description">Okuma Modu sırasında durum ve gezinme çubuklarının gizlenip gizlenmeyeceğini belirleyin.</string>
+    <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
+    <string name="screen_brightness_level">Ekran parlaklığı seviyesi</string>
+    <!-- Description of the "Screen brightness level" settings option. -->
+    <string name="screen_brightness_level_description">Okuma Modu etkinken uygulancak ekran parlaklık seviyesi.</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="min">Minimum</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_low">Çok az</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="low">Az</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="medium">Orta</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="high">Yüksek</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_high">Çok yüksek</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="max">Maksimum</string>
     <string name="show">Göster</string>
     <string name="hide">Gizle</string>
     <string name="permission_not_granted">İzin alma işlemi başarısız</string>
@@ -366,8 +422,12 @@
     <string name="black_theme">Siyah</string>
     <!-- Language -->
     <string name="language">Dil</string>
+    <!-- A text next to the non-finished language. -->
+    <string name="not_finished">Henüz tamamlanmadı</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">Noto\'yu başka bir dile çevir</string>
+    <!-- Description of the "Translate Noto" settings option. -->
+    <string name="translate_noto_description">Çeviriler Crowdin üzerinden yapılır.</string>
     <!-- Replacement for "System language" in settings. -->
     <string name="follow_system">Sistem varsayılanı</string>
     <string name="english">İngilizce</string>
@@ -379,6 +439,8 @@
     <string name="french">Fransızca</string>
     <string name="german">Almanca</string>
     <string name="italian">İtalyanca</string>
+    <string name="tamil">Tamilce</string>
+    <string name="czech">Çekçe</string>
     <!-- Icon -->
     <string name="icon">Simge</string>
     <!-- Widget -->

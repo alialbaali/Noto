@@ -3,10 +3,16 @@
     <!-- App -->
     <string name="app_name">Noto</string>
     <string name="done">تم</string>
+    <!-- Button text for sorting/ordering/filtering notes options. -->
+    <string name="apply">طبّق</string>
     <string name="okay">حسنا</string>
     <string name="search">البحث</string>
     <!-- A way to support the project. -->
     <string name="buy_me_a_coffee">اشتري لي قهوة</string>
+    <!-- Description of the "Buy me a coffee" settings options. -->
+    <string name="buy_me_a_coffee_description">إذا كنت ترغب في عرض الدعم.</string>
+    <!-- Description of the "Become a patron" settings options. -->
+    <string name="become_a_patron_description">إذا كنت ترغب في التأكد من أن Noto يبقى قائما.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">اصبح راعياً</string>
     <!-- More options for folder, note, etc... -->
@@ -36,8 +42,12 @@
     <string name="settings">الإعدادات</string>
     <!-- The link of the source code of the project. -->
     <string name="source_code">رمز المصدر</string>
+    <!-- Description of the "Source code" settings option. -->
+    <string name="source_code_description">Noto هو تطبيق مفتوح المصدر، والرمز منشور على GitHub.</string>
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">مجموعة Reddit</string>
+    <!-- Description of the "Reddit community" settings option. -->
+    <string name="reddit_community_description">انضم إلى المجتمع للمشاركة مع مستخدمي Noto الآخرين، والحصول على آخر الأخبار.</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">خط الملاحظات</string>
     <string name="share_app_with_others">شارك Noto مع الآخرين</string>
@@ -72,6 +82,8 @@
     <!-- Proofreader of a language. -->
     <string name="app_icons">أيقونات التطبيق</string>
     <string name="privacy_policy">سياسة الخصوصية</string>
+    <!-- Description of the "Privacy policy" settings option. -->
+    <string name="privacy_policy_description">آخر تحديث في ٢٥ أغسطس ٢٠٢٢.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">الرخصة</string>
     <string name="empty_version">الإصدار</string>
@@ -83,10 +95,14 @@
     <string name="folders_archive">أرشيف المجلدات</string>
     <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">الواجهة الرئيسية</string>
+    <!-- Description of the "Main interface" settings option. -->
+    <string name="main_interface_description">الشاشة الأولى المعروضة عند فتح التطبيق.</string>
     <!-- The default folder of "Save to Noto" text selection option. -->
     <string name="quick_note_folder">مجلد الملاحظة السريعة</string>
     <!-- AKA "Save to Noto". -->
     <string name="quick_note">ملاحظة سريعة</string>
+    <!-- Description of the "Quick note folder" settings option. -->
+    <string name="quick_note_folder_description">المجلد الافتراضي عند حفظ الملاحظة باستخدام خيار اختيار النص \"ملاحظة سريعة\".</string>
     <string name="general">عام</string>
     <string name="all_notes">جميع الملاحظات</string>
     <string name="all_folders">جميع المجلدات</string>
@@ -120,6 +136,8 @@
     <string name="select_all">تحديد الكل</string>
     <!-- List of translations. -->
     <string name="translations">الترجمة</string>
+    <!-- Description of the "Translations" settings option. -->
+    <string name="translations_description">شكر خاص لجميع المترجمين الذين ساعدوا في جعل Noto موجود في لغات مختلفة.</string>
     <!-- List of credits. -->
     <string name="credits">الاعتمادات</string>
     <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
@@ -175,6 +193,8 @@
     <string name="change_passcode">تغيير رمز المرور</string>
     <!-- Vault timeout. -->
     <string name="timeout">المُهلة</string>
+    <!-- Description of the "Timeout" settings option. -->
+    <string name="timeout_description">الوقت الذي يستغرقه لإغلاق المخزن بعد فتحه.</string>
     <string name="vault_timeout">مهلة المخزن</string>
     <string name="invalid_passcode">رمز مرور غير صالح</string>
     <string name="passcode_length_message">يجب أن يحتوي رمز المرور على 6 أرقام على الأقل</string>
@@ -204,6 +224,8 @@
     <string name="close_vault">إغلاق الخزينة</string>
     <!-- Enabling biometric authentication for the app. -->
     <string name="bio_auth">تفعيل توثيق البصمة</string>
+    <!-- Description of the "Enable biometric authentication" settings option. -->
+    <string name="bio_auth_description">ما إذا كان ينبغي السماح بالوصول إلى الخزانة باستخدام أساليب التوثيق الحيوي مثل التعرف على الوجه أو البصمة.</string>
     <string name="use_passcode">استخدام رمز مرور</string>
     <!-- Note -->
     <string name="all">الكل</string>
@@ -287,9 +309,17 @@
     <string name="redo_history">تاريخ الإعادة</string>
     <string name="share_note">شارك الملاحظة</string>
     <string name="sorting_type">نوع الفرز</string>
+    <!-- Sorting for notes/folders -->
+    <string name="sorting">الفرز</string>
+    <!-- Type of sorting for notes/folders -->
+    <string name="type">النوع</string>
+    <!-- Order of sorting for notes/folders -->
+    <string name="order">الترتيب</string>
     <string name="notes_view">عرض الملاحظات</string>
     <string name="sorting_order">ترتيب الفرز</string>
     <string name="grouping_type">نوع التجميع</string>
+    <!-- Grouping for notes/folders -->
+    <string name="grouping">التجميع</string>
     <string name="grouping_order">ترتيب التجميع</string>
     <string name="save_to_noto">حفظ في Noto</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
@@ -403,13 +433,39 @@
     <string name="show_note_creation_date">عرض تاريخ إنشاء الملاحظة</string>
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">عرض عدد الملاحظات</string>
+    <!-- Description of the "Show notes count" settings option. -->
+    <string name="show_notes_count_description">ما إذا كان سيتم عرض عدد الملاحظات في حوار المجلدات.</string>
     <string name="remember_scrolling_position">تذكر موضع التمرير</string>
+    <!-- Description of the "Remember scrolling position" settings option. -->
+    <string name="remember_scrolling_position_description">ما إذا كان سيتم تخزين موضع التمرير في المجلدات والملاحظات.</string>
     <string name="do_not_disturb">وضع عدم الإزعاج</string>
+    <!-- Description of the "Do Not Disturb" settings option. -->
+    <string name="do_not_disturb_description">ما إذا كان لتمكين وضع عدم الإزعاج أثناء وضع القراءة.</string>
     <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
     <string name="keep_screen_on">إبقاء الشاشة قيد التشغيل</string>
+    <!-- Description of the "Keep screen on" settings option. -->
+    <string name="keep_screen_on_description">ما إذا كان سيتم منع إيقاف تشغيل الشاشة أثناء وضع القراءة.</string>
     <string name="full_screen">الذهاب إلى ملء الشاشة</string>
-    <!-- An option for Reading Mode settings to dim screen while in Reading Mode. -->
-    <string name="dim_screen">تعتيم الشاشة</string>
+    <!-- Description of the "Go full screen" settings option. -->
+    <string name="full_screen_description">ما إذا كان سيتم إخفاء الحالة وأشرطة التنقل أثناء وضع القراءة.</string>
+    <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
+    <string name="screen_brightness_level">مستوى سطوع الشاشة</string>
+    <!-- Description of the "Screen brightness level" settings option. -->
+    <string name="screen_brightness_level_description">مستوى سطوع الشاشة أثناء وضع القراءة.</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="min">الحد الأدنى</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_low">منخفض جدًا</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="low">منخفض</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="medium">متوسط</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="high">مرتفع</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_high">مرتفع جدًا</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="max">الحد الأقصى</string>
     <string name="show">إظهار</string>
     <string name="hide">إخفاء</string>
     <string name="permission_not_granted">لم يتم منح الإذن</string>
@@ -438,8 +494,12 @@
     <string name="black_theme">أسود</string>
     <!-- Language -->
     <string name="language">اللغة</string>
+    <!-- A text next to the non-finished language. -->
+    <string name="not_finished">غير منتهي</string>
     <!-- An option in settings to invite users to translate Noto. -->
     <string name="translate_noto">ترجم Noto</string>
+    <!-- Description of the "Translate Noto" settings option. -->
+    <string name="translate_noto_description">تتم الترجمة في Crowdin.</string>
     <!-- Replacement for "System language" in settings. -->
     <string name="follow_system">اتبع النظام</string>
     <string name="english">الإنجليزية</string>
@@ -451,6 +511,8 @@
     <string name="french">الفرنسية</string>
     <string name="german">الألمانية</string>
     <string name="italian">الإيطالية</string>
+    <string name="tamil">التاميلية</string>
+    <string name="czech">التشيكية</string>
     <!-- Icon -->
     <string name="icon">الأيقونة</string>
     <!-- Widget -->
