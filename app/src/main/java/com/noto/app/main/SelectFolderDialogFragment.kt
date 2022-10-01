@@ -73,8 +73,10 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                 val generalFolder = state.value.firstOrNull { it.first.isGeneral }
                 val callback = { id: Long, title: String ->
                     try {
-                        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.FolderId, id)
-                        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.FolderTitle, title)
+                        navController?.previousBackStackEntry?.savedStateHandle?.apply {
+                            set(Constants.FolderTitle, title)
+                            set(Constants.FolderId, id)
+                        }
                         onClick(id, title)
                     } catch (exception: IllegalStateException) {
                         onClick(id, title)
