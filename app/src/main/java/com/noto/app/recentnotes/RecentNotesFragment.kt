@@ -20,8 +20,6 @@ import com.noto.app.components.headerItem
 import com.noto.app.components.placeholderItem
 import com.noto.app.databinding.RecentNotesFragmentBinding
 import com.noto.app.domain.model.Font
-import com.noto.app.domain.model.NotoColor
-import com.noto.app.folder.NoteItemModel
 import com.noto.app.folder.noteItem
 import com.noto.app.util.*
 import kotlinx.coroutines.FlowPreview
@@ -199,7 +197,7 @@ class RecentNotesFragment : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun RecentNotesFragmentBinding.setupNotes(
-        state: UiState<Map<LocalDate, List<NoteItemModel>>>,
+        state: UiState<RecentNotesModel>,
         notesVisibility: Map<LocalDate, Boolean>,
         font: Font,
         searchTerm: String,
@@ -223,7 +221,7 @@ class RecentNotesFragment : Fragment() {
                         } else {
                             notes.forEach { (date, notes) ->
                                 val isVisible = notesVisibility[date] ?: true
-                                val noteIds = notes.map { it.note.id }.toLongArray()
+                                val noteIds = notes.map { it.second.note.id }.toLongArray()
 
                                 headerItem {
                                     id(date.dayOfYear)
@@ -233,23 +231,23 @@ class RecentNotesFragment : Fragment() {
                                 }
 
                                 if (isVisible)
-                                    notes.forEach { model ->
+                                    notes.forEach { pair ->
                                         noteItem {
-                                            id(model.note.id)
-                                            model(model)
+                                            id(pair.second.note.id)
+                                            model(pair.second)
                                             font(font)
-                                            color(NotoColor.Black)
-                                            previewSize(15)
-                                            isShowCreationDate(false)
+                                            color(pair.first.color)
+                                            searchTerm(searchTerm)
+                                            previewSize(pair.first.notePreviewSize)
+                                            isShowCreationDate(pair.first.isShowNoteCreationDate)
                                             isShowAccessDate(true)
                                             isManualSorting(false)
-                                            searchTerm(searchTerm)
                                             onClickListener { _ ->
                                                 navController
                                                     ?.navigateSafely(
                                                         RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteFragment(
-                                                            model.note.folderId,
-                                                            model.note.id,
+                                                            pair.second.note.folderId,
+                                                            pair.second.note.id,
                                                             selectedNoteIds = noteIds,
                                                         )
                                                     )
@@ -258,8 +256,8 @@ class RecentNotesFragment : Fragment() {
                                                 navController
                                                     ?.navigateSafely(
                                                         RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteDialogFragment(
-                                                            model.note.folderId,
-                                                            model.note.id,
+                                                            pair.second.note.folderId,
+                                                            pair.second.note.id,
                                                             R.id.folderFragment,
                                                             selectedNoteIds = noteIds,
                                                         )

@@ -3,6 +3,7 @@ package com.noto.app.recentnotes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
+import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.repository.*
 import com.noto.app.folder.NoteItemModel
@@ -14,6 +15,8 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 
+typealias RecentNotesModel = Map<LocalDate, List<Pair<Folder, NoteItemModel>>>
+
 class RecentNotesViewModel(
     private val folderRepository: FolderRepository,
     private val noteRepository: NoteRepository,
@@ -21,7 +24,7 @@ class RecentNotesViewModel(
     private val noteLabelRepository: NoteLabelRepository,
     private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
-    private val mutableNotes = MutableStateFlow<UiState<Map<LocalDate, List<NoteItemModel>>>>(UiState.Loading)
+    private val mutableNotes = MutableStateFlow<UiState<RecentNotesModel>>(UiState.Loading)
     val notes get() = mutableNotes.asStateFlow()
 
     private val mutableNotesVisibility = MutableStateFlow(emptyMap<LocalDate, Boolean>())
@@ -58,9 +61,10 @@ class RecentNotesViewModel(
                 .filterRecentlyAccessed()
                 .mapToNoteItemModel(labels, noteLabels)
                 .filterContent(searchTerm)
-                .groupBy { model -> model.note.accessDate.toLocalDate() }
+                .map { model -> folders.first { it.id == model.note.folderId } to model }
+                .groupBy { pair -> pair.second.note.accessDate.toLocalDate() }
                 .filterValues { it.isNotEmpty() }
-                .mapValues { it.value.sortedByDescending { it.note.accessDate } }
+                .mapValues { it.value.sortedByDescending { it.second.note.accessDate } }
                 .toSortedMap(compareByDescending { it })
                 .let { UiState.Success(it) }
         }.launchIn(viewModelScope)
