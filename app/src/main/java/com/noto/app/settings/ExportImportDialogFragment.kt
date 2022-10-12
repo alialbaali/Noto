@@ -16,7 +16,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private const val FileType = "application/json"
+private const val JsonFileType = "application/json"
+private const val OctetStreamFileType = "application/octet-stream"
+private val FileTypes = arrayOf(JsonFileType, OctetStreamFileType)
 private const val FileName = "Noto.json"
 
 class ExportImportDialogFragment : BaseDialogFragment() {
@@ -76,7 +78,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
         }
 
         tvImport.setOnClickListener {
-            importLauncher.launch(arrayOf(FileType))
+            importLauncher.launch(FileTypes)
         }
     }
 
@@ -87,7 +89,7 @@ class ExportImportDialogFragment : BaseDialogFragment() {
                     context.stringResource(R.string.exporting_data)
                 )
             )
-            val file = DocumentFile.fromTreeUri(context, uri)?.createFile(FileType, FileName)
+            val file = DocumentFile.fromTreeUri(context, uri)?.createFile(JsonFileType, FileName)
             if (file != null) {
                 val fileOutputStream = context.contentResolver?.openOutputStream(file.uri)
                 if (fileOutputStream != null) {
