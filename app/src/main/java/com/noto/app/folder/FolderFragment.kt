@@ -59,6 +59,7 @@ class FolderFragment : Fragment() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
+        val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
 
         combine(
             viewModel.folder
@@ -151,8 +152,7 @@ class FolderFragment : Fragment() {
             tvFolderNotesCountRtl.isVisible = false
         }
 
-        navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Long>(Constants.IsSelection)
+        savedStateHandle?.getLiveData<Long>(Constants.IsSelection)
             ?.run {
                 observe(viewLifecycleOwner) { noteId ->
                     if (noteId != null) {
@@ -177,8 +177,7 @@ class FolderFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Boolean>(Constants.SelectAll)
+        savedStateHandle?.getLiveData<Boolean>(Constants.SelectAll)
             ?.run {
                 observe(viewLifecycleOwner) {
                     if (it) {

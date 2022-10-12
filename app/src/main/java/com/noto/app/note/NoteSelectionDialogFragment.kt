@@ -178,6 +178,8 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
     }
 
     fun NoteSelectionDialogFragmentBinding.setupListeners() {
+        val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
+
         tvReadingMode.setOnClickListener {
             navController?.navigateSafely(
                 NoteSelectionDialogFragmentDirections.actionNoteSelectionDialogFragmentToNotePagerFragment(
@@ -258,13 +260,11 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyNotes.setOnClickListener {
-            navController?.currentBackStackEntry
-                ?.savedStateHandle
-                ?.getLiveData<Long>(Constants.FolderId)
+            savedStateHandle?.getLiveData<Long>(Constants.FolderId)
                 ?.observe(viewLifecycleOwner) { folderId ->
                     viewModel.copySelectedNotes(folderId).invokeOnCompletion {
                         context?.let { context ->
-                            val folderTitle = navController?.currentBackStackEntry?.savedStateHandle?.get<String>(Constants.FolderTitle)
+                            val folderTitle = savedStateHandle.get<String>(Constants.FolderTitle)
                             val text = context.quantityStringResource(
                                 R.plurals.note_is_copied,
                                 selectedNotes.count(),
@@ -289,13 +289,11 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvMoveNotes.setOnClickListener {
-            navController?.currentBackStackEntry
-                ?.savedStateHandle
-                ?.getLiveData<Long>(Constants.FolderId)
+            savedStateHandle?.getLiveData<Long>(Constants.FolderId)
                 ?.observe(viewLifecycleOwner) { folderId ->
                     viewModel.moveSelectedNotes(folderId).invokeOnCompletion {
                         context?.let { context ->
-                            val folderTitle = navController?.currentBackStackEntry?.savedStateHandle?.get<String>(Constants.FolderTitle)
+                            val folderTitle = savedStateHandle.get<String>(Constants.FolderTitle)
                             val text = context.quantityStringResource(
                                 R.plurals.note_is_moved,
                                 selectedNotes.count(),
@@ -324,9 +322,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                 val confirmationText = context.quantityStringResource(R.plurals.delete_note_confirmation, selectedNotes.count())
                 val descriptionText = context.quantityStringResource(R.plurals.delete_note_description, selectedNotes.count())
                 val btnText = context.quantityStringResource(R.plurals.delete_note, selectedNotes.count())
-                navController?.currentBackStackEntry
-                    ?.savedStateHandle
-                    ?.getLiveData<Int>(Constants.ClickListener)
+                savedStateHandle?.getLiveData<Int>(Constants.ClickListener)
                     ?.observe(viewLifecycleOwner) {
                         viewModel.deleteSelectedNotes().invokeOnCompletion {
                             val text = context.quantityStringResource(R.plurals.note_is_deleted, selectedNotes.count(), selectedNotes.count())

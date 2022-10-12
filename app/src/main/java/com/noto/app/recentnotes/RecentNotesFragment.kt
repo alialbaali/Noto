@@ -100,6 +100,7 @@ class RecentNotesFragment : Fragment() {
         tvNotesCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold)
         tvNotesCount.animationInterpolator = DefaultInterpolator()
         val layoutManager = rv.layoutManager as LinearLayoutManager
+        val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
 
         combine(
             viewModel.notes,
@@ -169,13 +170,12 @@ class RecentNotesFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Long>(Constants.FolderId)
+        savedStateHandle?.getLiveData<Long>(Constants.FolderId)
             ?.observe(viewLifecycleOwner) { folderId ->
                 if (folderId != null) {
                     lifecycleScope.launch {
                         delay(150) // Wait for the fragment to be destroyed
-                        navController?.currentBackStackEntry?.savedStateHandle?.remove<Long>(Constants.FolderId)
+                        savedStateHandle.remove<Long>(Constants.FolderId)
                         navController?.navigateSafely(
                             RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteFragment(
                                 folderId,

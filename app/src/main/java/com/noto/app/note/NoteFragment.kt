@@ -50,6 +50,7 @@ class NoteFragment : Fragment() {
         tvWordCount.animationInterpolator = DefaultInterpolator()
         tvWordCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold)
         viewModel.updateNoteAccessDate()
+        val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
 
         viewModel.folder
             .onEach { folder -> setupFolder(folder) }
@@ -252,15 +253,13 @@ class NoteFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<String>(Constants.NoteTitle)
+        savedStateHandle?.getLiveData<String>(Constants.NoteTitle)
             ?.observe(viewLifecycleOwner) { title ->
                 viewModel.setIsUndoOrRedo()
                 viewModel.setNoteTitle(title)
             }
 
-        navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<String>(Constants.NoteBody)
+        savedStateHandle?.getLiveData<String>(Constants.NoteBody)
             ?.observe(viewLifecycleOwner) { body ->
                 viewModel.setIsUndoOrRedo()
                 viewModel.setNoteBody(body)
