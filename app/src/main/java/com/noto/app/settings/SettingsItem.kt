@@ -62,6 +62,7 @@ fun SettingsItem(
             ) {
                 Text(
                     text = title,
+                    modifier = if (type is SettingsItemType.None) Modifier.weight(1F) else Modifier,
                     style = MaterialTheme.typography.bodyLarge,
                     color = titleColor,
                 )
