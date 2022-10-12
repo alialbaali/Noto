@@ -54,7 +54,7 @@ class LanguageDialogFragment : BaseDialogFragment() {
                                 Modifier.fillMaxWidth(),
                                 Arrangement.SpaceBetween
                             ) {
-                                Column(verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.extraSmall)) {
+                                Column(Modifier.weight(1F), verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.extraSmall)) {
                                     CompositionLocalProvider(LocalContext provides language.toLocalizedContext()) {
                                         Text(text = language.asString())
                                     }
