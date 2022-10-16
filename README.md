@@ -28,8 +28,9 @@ Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcas
 * Support for devices with API 21 (Lollipop) and up.
 * No explicit permissions are required.
 * All data are stored locally on the device.
-* Support for English, Turkish, Arabic, Indonesian, Russian, Spanish, and French languages.
+* Support for English, Turkish, Arabic, Indonesian, Czech, German, Italian, Spanish, and French languages.
 * Material You (Material 3) support.
+* Navigating to the top when clicking on the top app bar.
 
 ### Folders
 
@@ -42,6 +43,8 @@ Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcas
 
 ### Notes
 
+* Multi sequential selection for notes.
+* Option to merge selected notes.
 * Notes archive.
 * List and grid layouts.
 * Auto save.
@@ -51,16 +54,17 @@ Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcas
 * Copy/Move/Duplicate note options.
 * Word-count.
 * Pinned notes.
-* Sorting alphabetically, by creation date, or manually.
-* Grouping notes by label, or by creation date.
+* Sorting alphabetically, by access date, by creation date, or manually.
+* Grouping notes by label, by access date, or by creation date.
 * Notes widget.
 * All notes view with search functionality.
 * Recently accessed notes view with search functionality.
+* Saving selected text by using Quick note option. Default folder is General, can be overridden in Settings.
 
 ### Labels
 
 * Filtering notes using labels unique for each folder.
-* Inclusive/Exclusive labels filtering.
+* Inclusive/Exclusive/Strict labels filtering.
 
 ### Reading Mode
 
@@ -68,6 +72,10 @@ Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcas
 * Do Not Disturb mode option.
 * Keep screen on option.
 * Quick edit (Jumping to the scrolled text).
+* Custom screen brightness level option.
+* Paging notes support, like reading a book.
+* Support for paging only selected/filtered notes.
+* Option to open notes in Reading Mode by default.
 
 ### Settings
 
@@ -92,7 +100,8 @@ If you would like to translate the app, please contact me via [email](mailto:ali
 - <a href="https://github.com/kernoeb">Kernoeb</a>, and <a href="https://geoffreycrofte.com">Geoffrey Crofte</a> for the French localization.
 - Uli N for the German localization.
 - <a href="https://github.com/matteolomba">Matteo Lombardi</a> for the Italian localization.
-- <a href="https://twitter.com/trjman_en">Dr.Ohm</a> for the Italian localization.
+- <a href="https://twitter.com/trjman_en">Dr.Ohm</a> for the Arabic localization.
+- <a href="https://github.com/vikdevelop">Viktor Novák</a> for the Czech localization.
 
 ## App Icons
 
