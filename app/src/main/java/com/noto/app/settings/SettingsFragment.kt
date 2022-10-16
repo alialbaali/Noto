@@ -48,11 +48,14 @@ class SettingsFragment : Fragment() {
             navController?.navigateUp()
         }
         navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Boolean>(Constants.IsPasscodeValid)
-            ?.observe(viewLifecycleOwner) { isPasscodeValid ->
-                if (isPasscodeValid) {
-                    if (navController?.currentDestination?.id == R.id.validateVaultPasscodeDialogFragment) navController?.navigateUp()
-                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultSettingsFragment())
+            ?.getLiveData<Boolean?>(Constants.IsPasscodeValid)
+            ?.run {
+                observe(viewLifecycleOwner) { isPasscodeValid: Boolean? ->
+                    if (isPasscodeValid == true) {
+                        if (navController?.currentDestination?.id == R.id.validateVaultPasscodeDialogFragment) navController?.navigateUp()
+                        navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultSettingsFragment())
+                        value = null
+                    }
                 }
             }
         setupMixedTransitions()
