@@ -70,7 +70,7 @@
     <string name="no_file_is_selected">No file has been selected.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Open with</string>
-    <string name="invite_text">Check out Noto!</string>
+    <string name="invite_text">Check out Noto, a minimal open-source note-taking application.</string>
     <string name="version">Version</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">Version has been copied to clipboard.</string>
