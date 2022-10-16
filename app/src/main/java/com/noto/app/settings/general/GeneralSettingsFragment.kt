@@ -112,6 +112,7 @@ class GeneralSettingsFragment : Fragment() {
                                         longArrayOf(),
                                         selectedFolderId = mainInterfaceId,
                                         isMainInterface = true,
+                                        title = context.stringResource(R.string.select_main_interface),
                                     )
                                 )
                             },
@@ -128,6 +129,7 @@ class GeneralSettingsFragment : Fragment() {
                                     GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToSelectFolderDialogFragment(
                                         longArrayOf(),
                                         selectedFolderId = quickNoteFolderId,
+                                        title = context.stringResource(R.string.select_quick_note_folder)
                                     )
                                 )
                             },

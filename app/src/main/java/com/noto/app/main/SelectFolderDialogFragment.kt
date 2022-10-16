@@ -47,7 +47,10 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.itemAnimator = VerticalListItemAnimator()
-        tb.tvDialogTitle.text = context?.stringResource(if (args.isMainInterface) R.string.select_main_interface else R.string.select_folder)
+        tb.tvDialogTitle.text = when {
+            args.title != null -> args.title
+            else -> context?.stringResource(R.string.select_folder)
+        }
 
         combine(
             viewModel.folders,

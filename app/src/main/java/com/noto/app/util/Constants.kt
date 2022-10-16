@@ -21,6 +21,7 @@ object Constants {
     const val ScrollPosition = "ScrollPosition"
     const val IsTitleVisible = "IsTitleVisible"
     const val IsBodyVisible = "IsBodyVisible"
+    const val Title = "title"
 
     object Intent {
         const val ActionCreateFolder = "com.noto.intent.action.CREATE_FOLDER"

@@ -176,6 +176,9 @@
     <string name="folder_is_unpinned">Folder has been unpinned.</string>
     <string name="no_folders_found">No folders found.</string>
     <string name="select_folder">Select folder</string>
+    <string name="select_folder_archive">Select folder archive</string>
+    <string name="select_parent_folder">Select parent folder</string>
+    <string name="select_quick_note_folder">Select quick note folder</string>
     <string name="select_main_interface">Select main interface</string>
     <string name="pinned">Pinned</string>
 

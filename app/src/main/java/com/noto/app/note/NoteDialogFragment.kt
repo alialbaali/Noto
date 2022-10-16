@@ -68,6 +68,13 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private val folderColor by lazy { viewModel.folder.value.color }
 
+    private val selectFolderTitle by lazy {
+        when (navController?.previousBackStackEntry?.destination?.id) {
+            R.id.folderArchiveFragment -> context?.stringResource(R.string.select_folder_archive)
+            else -> context?.stringResource(R.string.select_folder)
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -215,7 +222,12 @@ class NoteDialogFragment : BaseDialogFragment() {
                         dismiss()
                     }
                 }
-            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectFolderDialogFragment(longArrayOf(args.folderId)))
+            navController?.navigateSafely(
+                NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectFolderDialogFragment(
+                    longArrayOf(args.folderId),
+                    title = selectFolderTitle
+                )
+            )
         }
 
         tvMoveNote.setOnClickListener {
@@ -237,7 +249,12 @@ class NoteDialogFragment : BaseDialogFragment() {
                         dismiss()
                     }
                 }
-            navController?.navigateSafely(NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectFolderDialogFragment(longArrayOf(args.folderId)))
+            navController?.navigateSafely(
+                NoteDialogFragmentDirections.actionNoteDialogFragmentToSelectFolderDialogFragment(
+                    longArrayOf(args.folderId),
+                    title = selectFolderTitle,
+                )
+            )
         }
 
         tvShareNote.setOnClickListener {

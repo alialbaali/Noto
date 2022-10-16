@@ -324,6 +324,11 @@
             android:name="is_main_interface"
             android:defaultValue="false"
             app:argType="boolean" />
+        <argument
+            android:name="title"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </dialog>
     <dialog
         android:id="@+id/folderListSortingDialogFragment"
