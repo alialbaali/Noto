@@ -122,7 +122,7 @@ class AppActivity : BaseActivity() {
             Constants.Intent.ActionOpenNote -> {
                 val folderId = intent.getLongExtra(Constants.FolderId, 0)
                 val noteId = intent.getLongExtra(Constants.NoteId, 0)
-                val args = bundleOf(Constants.FolderId to folderId, Constants.NoteId to noteId)
+                val args = bundleOf(Constants.FolderId to folderId, Constants.NoteId to noteId, Constants.SelectedNoteIds to longArrayOf())
                 navController.popBackStack(R.id.folderFragment, true)
                 navController.navigate(R.id.folderFragment, args)
                 navController.navigate(R.id.noteFragment, args)
@@ -269,6 +269,7 @@ class AppActivity : BaseActivity() {
         updatePinnedShortcuts()
     }
 
+    @SuppressLint("RestrictedApi")
     private fun updatePinnedShortcuts() {
         ShortcutManagerCompat.getShortcuts(this, ShortcutManagerCompat.FLAG_MATCH_PINNED)
             .map {
