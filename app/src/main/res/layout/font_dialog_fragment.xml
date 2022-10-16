@@ -24,6 +24,7 @@
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textDirection="locale"
                 android:checked="true"
                 android:text="@string/nunito" />
 
@@ -32,6 +33,7 @@
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textDirection="locale"
                 android:text="@string/monospace" />
         </RadioGroup>
     </LinearLayout>
