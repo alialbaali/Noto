@@ -10,8 +10,8 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
-import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.ValidateVaultPasscodeDialogFragmentBinding
 import com.noto.app.settings.SettingsViewModel
 import com.noto.app.util.*
@@ -42,6 +42,7 @@ class ValidateVaultPasscodeDialogFragment : BaseDialogFragment() {
                     validateUsingBio()
                 } else {
                     btnUseBio.isVisible = false
+                    et.requestFocus()
                     activity?.showKeyboard(et)
                 }
             }
