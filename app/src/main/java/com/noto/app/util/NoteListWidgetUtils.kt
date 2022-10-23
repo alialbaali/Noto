@@ -96,5 +96,5 @@ private fun Context.createNoteItemPendingIntent(appWidgetId: Int): PendingIntent
         putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
         data = Uri.parse(this.toUri(Intent.URI_INTENT_SCHEME))
     }
-    return PendingIntent.getActivity(this, appWidgetId, intent, PendingIntentFlags)
+    return PendingIntent.getActivity(this, appWidgetId, intent, MutablePendingIntentFlags)
 }
