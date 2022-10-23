@@ -85,7 +85,9 @@ class FolderViewModel(
 
     init {
         combine(
-            folderRepository.getFolderById(folderId).filterNotNull(),
+            folderRepository.getFolderById(folderId)
+                .filterNotNull()
+                .onStart { emit(Folder(position = 0)) },
             folderRepository.getAllFolders(),
         ) { folder, folders ->
             mutableNotoColors.value = notoColors.value.mapTrueIfSameColor(folder.color)
