@@ -107,7 +107,7 @@ class AppActivity : BaseActivity() {
                 if (folderId == 0L) {
                     showSelectFolderDialog(null)
                 } else {
-                    val args = bundleOf(Constants.FolderId to folderId)
+                    val args = bundleOf(Constants.FolderId to folderId, Constants.SelectedNoteIds to longArrayOf())
                     navController.popBackStack(R.id.folderFragment, true)
                     navController.navigate(R.id.folderFragment, args)
                     navController.navigate(R.id.noteFragment, args)
