@@ -145,7 +145,7 @@ class AppActivity : BaseActivity() {
                         inclusive = true
                     }
                 }
-                val args = bundleOf(Constants.FolderId to folderId, Constants.Body to content)
+                val args = bundleOf(Constants.FolderId to folderId, Constants.Body to content, Constants.SelectedNoteIds to longArrayOf())
                 navController.navigate(R.id.folderFragment, args, options)
                 navController.navigate(R.id.noteFragment, args)
             }
