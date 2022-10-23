@@ -62,7 +62,7 @@ fun SettingsItem(
             ) {
                 Text(
                     text = title,
-                    modifier = if (type is SettingsItemType.None) Modifier.weight(1F) else Modifier,
+                    modifier = Modifier.weight(1F),
                     style = MaterialTheme.typography.bodyLarge,
                     color = titleColor,
                 )
@@ -75,7 +75,7 @@ fun SettingsItem(
                             text = type.value,
                             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
                             textAlign = TextAlign.End,
-                            modifier = Modifier.weight(1F, fill = false)
+                            modifier = Modifier.weight(1F)
                         )
                     }
                     is SettingsItemType.Switch -> {
