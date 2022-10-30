@@ -100,7 +100,6 @@ If you would like to translate the app, please contact me via [email](mailto:ali
 - <a href="https://github.com/kernoeb">Kernoeb</a>, and <a href="https://geoffreycrofte.com">Geoffrey Crofte</a> for the French localization.
 - Uli N for the German localization.
 - <a href="https://github.com/matteolomba">Matteo Lombardi</a> for the Italian localization.
-- <a href="https://twitter.com/trjman_en">Dr.Ohm</a> for the Arabic localization.
 - <a href="https://github.com/vikdevelop">Viktor Novák</a> for the Czech localization.
 
 ## App Icons

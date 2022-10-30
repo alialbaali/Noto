@@ -30,7 +30,7 @@ private const val SpanishTranslatorWebsite = "https://github.com/faus32"
 private const val ItalianTranslatorWebsite = "https://github.com/matteolomba"
 private const val FrenchTranslatorWebsite = "https://github.com/kernoeb"
 private const val FrenchTranslator2Website = "https://geoffreycrofte.com"
-private const val ArabicTranslatorWebsite = "https://twitter.com/trjman_en"
+//private const val ArabicTranslatorWebsite = "https://twitter.com/trjman_en"
 private const val ArabicProofreaderWebsite = "https://www.alialbaali.com"
 private const val CzechTranslatorWebsite = "https://github.com/vikdevelop"
 
@@ -53,15 +53,15 @@ class TranslationsSettingsFragment : Fragment() {
                 Screen(title = stringResource(id = R.string.translations)) {
                     CompositionLocalProvider(LocalContext provides Language.Arabic.toLocalizedContext()) {
                         SettingsSection(title = stringResource(id = R.string.arabic), painter = painterResource(id = R.drawable.ic_uae)) {
-                            SettingsItem(
-                                title = stringResource(id = R.string.arabic_translator),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ArabicTranslatorWebsite))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
+//                            SettingsItem(
+//                                title = stringResource(id = R.string.arabic_translator),
+//                                type = SettingsItemType.None,
+//                                onClick = {
+//                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ArabicTranslatorWebsite))
+//                                    startActivity(intent)
+//                                },
+//                                painter = EmptyPainter,
+//                            )
 
                             SettingsItem(
                                 title = stringResource(id = R.string.arabic_proofreader),
