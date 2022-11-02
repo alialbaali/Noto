@@ -70,7 +70,7 @@
     <string name="no_file_is_selected">Файл не выбран.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Открыть в</string>
-    <string name="invite_text">Посмотрите Noto!</string>
+    <string name="invite_text">Check out Noto, a minimal open-source note-taking application.</string>
     <string name="version">Version</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">Version has been copied to clipboard.</string>
@@ -171,6 +171,9 @@
     <string name="folder_is_unpinned">Папка откреплена.</string>
     <string name="no_folders_found">Папки не найдены.</string>
     <string name="select_folder">Выбрать папку</string>
+    <string name="select_folder_archive">Select folder archive</string>
+    <string name="select_parent_folder">Select parent folder</string>
+    <string name="select_quick_note_folder">Select quick note folder</string>
     <string name="select_main_interface">Выберите интерфейс</string>
     <string name="pinned">Закреплено</string>
     <!-- Vault -->

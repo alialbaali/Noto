@@ -70,7 +70,7 @@
     <string name="no_file_is_selected">கோப்பு எதுவும் தேர்ந்தெடுக்கப்படவில்லை.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">இதன்மூலம் திற</string>
-    <string name="invite_text">Noto-வைப் பாருங்கள்!</string>
+    <string name="invite_text">Check out Noto, a minimal open-source note-taking application.</string>
     <string name="version">Version</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">Version has been copied to clipboard.</string>
@@ -169,6 +169,9 @@
     <string name="folder_is_unpinned">Folder has been unpinned.</string>
     <string name="no_folders_found">No folders found.</string>
     <string name="select_folder">Select folder</string>
+    <string name="select_folder_archive">Select folder archive</string>
+    <string name="select_parent_folder">Select parent folder</string>
+    <string name="select_quick_note_folder">Select quick note folder</string>
     <string name="select_main_interface">Select main interface</string>
     <string name="pinned">Pin செய்யப்பட்டது</string>
     <!-- Vault -->

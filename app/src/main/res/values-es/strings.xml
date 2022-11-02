@@ -70,7 +70,7 @@
     <string name="no_file_is_selected">No se ha seleccionado ningún archivo.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Abrir con</string>
-    <string name="invite_text">¡Echa un vistazo a Noto!</string>
+    <string name="invite_text">Echa un vistazo a Noto, una aplicación mínima de toma de notas de código abierto.</string>
     <string name="version">Versión</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">La versión ha sido copiada al portapapeles.</string>
@@ -169,6 +169,9 @@
     <string name="folder_is_unpinned">La carpeta ha sido desanclada.</string>
     <string name="no_folders_found">No se encontraron carpetas.</string>
     <string name="select_folder">Seleccionar carpeta</string>
+    <string name="select_folder_archive">Seleccione archivo de carpeta</string>
+    <string name="select_parent_folder">Seleccionar carpeta padre</string>
+    <string name="select_quick_note_folder">Seleccionar carpeta de notas rápidas</string>
     <string name="select_main_interface">Cambiar interfaz principal</string>
     <string name="pinned">Anclado</string>
     <!-- Vault -->

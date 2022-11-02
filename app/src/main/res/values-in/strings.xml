@@ -66,11 +66,11 @@
     <string name="importing_data">Memulihkan data…</string>
     <string name="exporting_data">Mencadangkan data…</string>
     <string name="create_file_failed">Gagal membuat berkas.</string>
-    <string name="no_folder_is_selected">Tidak ada folder yang dipilih.</string>
+    <string name="no_folder_is_selected">Tidak ada map yang dipilih.</string>
     <string name="no_file_is_selected">Tidak ada berkas yang dipilih.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Buka dengan</string>
-    <string name="invite_text">Lihat Noto!</string>
+    <string name="invite_text">Periksa Noto, aplikasi pencatat minimal sumber terbuka.</string>
     <string name="version">Versi</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">Versi telah disalin ke papan klip.</string>
@@ -98,20 +98,20 @@
     <!-- Description of the "Main interface" settings option. -->
     <string name="main_interface_description">Layar pertama yang ditampilkan saat meluncurkan aplikasi.</string>
     <!-- The default folder of "Save to Noto" text selection option. -->
-    <string name="quick_note_folder">Folder catatan cepat</string>
+    <string name="quick_note_folder">Map catatan cepat</string>
     <!-- AKA "Save to Noto". -->
     <string name="quick_note">Catatan cepat</string>
     <!-- Description of the "Quick note folder" settings option. -->
-    <string name="quick_note_folder_description">Folder default saat menyimpan catatan menggunakan opsi pemilihan teks \"Catatan cepat\".</string>
+    <string name="quick_note_folder_description">Map default saat menyimpan catatan menggunakan opsi pemilihan teks \"Catatan cepat\".</string>
     <string name="general">Umum</string>
     <string name="all_notes">Semua catatan</string>
-    <string name="all_folders">Semua folder</string>
+    <string name="all_folders">Semua map</string>
     <string name="clear">Bersihkan</string>
     <string name="recent_notes">Catatan terbaru</string>
     <string name="collapse">Ciutkan</string>
     <string name="expand">Perluas</string>
     <string name="no_parent">Tidak ada induk</string>
-    <string name="parent_folder">Folder induk</string>
+    <string name="parent_folder">Map induk</string>
     <string name="new_note_cursor_position">Posisi kursor catatan baru</string>
     <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
     <string name="open_notes_in">Buka catatan pada</string>
@@ -148,7 +148,7 @@
         <item quantity="other">%d Map</item>
     </plurals>
     <string name="create_folder">Buat map</string>
-    <string name="update_folder">Perbaharui Folder</string>
+    <string name="update_folder">Perbaharui map</string>
     <string name="archive_folder">Arsipkan map</string>
     <string name="new_folder">Map baru</string>
     <string name="edit_folder">Sunting map</string>
@@ -168,6 +168,9 @@
     <string name="folder_is_unpinned">Penyemat map telah dilepas.</string>
     <string name="no_folders_found">Tidak ada map yang ditemukan.</string>
     <string name="select_folder">Pilih map</string>
+    <string name="select_folder_archive">Pilih map arsip</string>
+    <string name="select_parent_folder">Pilih map utama</string>
+    <string name="select_quick_note_folder">Pilih map catatan cepat</string>
     <string name="select_main_interface">Pilih antarmuka utama</string>
     <string name="pinned">Disematkan</string>
     <!-- Vault -->
@@ -176,8 +179,8 @@
     <string name="enter_vault_passcode">Masukkan kode akses brankas</string>
     <string name="add_to_vault">Tambah ke brankas</string>
     <string name="remove_from_vault">Keluarkan dari brankas</string>
-    <string name="folder_is_vaulted">Folder telah ditambahkan ke brankas.</string>
-    <string name="folder_is_unvaulted">Folder telah dikeluarkan dari brankas.</string>
+    <string name="folder_is_vaulted">Map telah ditambahkan ke brankas.</string>
+    <string name="folder_is_unvaulted">Map telah dikeluarkan dari brankas.</string>
     <string name="vault_is_empty">Brankas kosong.</string>
     <string name="archive_vaulted_folder_confirmation">Apakah Anda yakin ingin menghapus map ini?</string>
     <string name="archive_vaulted_folder_description">Mengarsipkan map ini juga akan menghapusnya dari brankas.</string>
@@ -209,7 +212,7 @@
     <!-- A confirmation message shown when disabling the vault in vault settings. -->
     <string name="disable_vault_confirmation">Apakah anda yakin ingin menonaktifkan brankas?</string>
     <!-- A description message shown when disabling the vault in vault settings. -->
-    <string name="disable_vault_description">Tindakan ini tidak dapat diurungkan dan akan menonaktifkan brankas dan memindahkan semua folder di luar brankas.</string>
+    <string name="disable_vault_description">Tindakan ini tidak dapat diurungkan dan akan menonaktifkan brankas dan memindahkan semua map di luar brankas.</string>
     <string name="vault_is_open">Brankas terbuka</string>
     <string name="immediately">Segera</string>
     <string name="on_app_close">Pada saat aplikasi ditutup</string>
@@ -344,10 +347,10 @@
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Tampilkan jumlah catatan</string>
     <!-- Description of the "Show notes count" settings option. -->
-    <string name="show_notes_count_description">Menentukan apakah akan menampilkan hitungan catatan dalam dialog folder.</string>
+    <string name="show_notes_count_description">Menentukan apakah akan menampilkan hitungan catatan dalam dialog map.</string>
     <string name="remember_scrolling_position">Ingat posisi gulir</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
-    <string name="remember_scrolling_position_description">Menentukan apakah akan menyimpan posisi scrolling di folder, dan catatan.</string>
+    <string name="remember_scrolling_position_description">Menentukan apakah akan menyimpan posisi scrolling di map, dan catatan.</string>
     <string name="do_not_disturb">Jangan Ganggu</string>
     <!-- Description of the "Do Not Disturb" settings option. -->
     <string name="do_not_disturb_description">Menentukan apakah mengaktifkan mode Jangan Ganggu selama Mode Membaca.</string>

@@ -70,7 +70,7 @@
     <string name="no_file_is_selected">Es wurde keine Datei gewählt.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Öffnen mit</string>
-    <string name="invite_text">Sieh dir mal Noto an!</string>
+    <string name="invite_text">Schauen Sie sich Noto an, eine minimale Open-Source-App für Ihre Notizen.</string>
     <string name="version">Version</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">Die Versionsnummer wurde in die Zwischenablage kopiert.</string>
@@ -169,6 +169,9 @@
     <string name="folder_is_unpinned">Ordner wurde losgelöst.</string>
     <string name="no_folders_found">Keine Ordner gefunden.</string>
     <string name="select_folder">Ordner auswählen</string>
+    <string name="select_folder_archive">Ordner des Zielarchivs wählen</string>
+    <string name="select_parent_folder">Übergeordneten Ordner wählen</string>
+    <string name="select_quick_note_folder">Ordner für Schnellnotizen wählen</string>
     <string name="select_main_interface">Hauptordner wählen</string>
     <string name="pinned">Angepinnt</string>
     <!-- Vault -->

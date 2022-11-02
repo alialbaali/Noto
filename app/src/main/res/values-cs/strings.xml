@@ -70,7 +70,7 @@
     <string name="no_file_is_selected">Nebyl vybrán žádný soubor.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Otevřít pomocí</string>
-    <string name="invite_text">Podívejte se na Noto!</string>
+    <string name="invite_text">Podívejte se na Noto, minimalistickou open-source aplikaci pro psaní poznámek.</string>
     <string name="version">Verze</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">Verze byla zkopírována do schránky.</string>
@@ -171,6 +171,9 @@
     <string name="folder_is_unpinned">Složka byla odepnuta.</string>
     <string name="no_folders_found">Žádné složky nenalezeny.</string>
     <string name="select_folder">Vybrat složku</string>
+    <string name="select_folder_archive">Vybrat archivní složku</string>
+    <string name="select_parent_folder">Vybrat nadřazenou složku</string>
+    <string name="select_quick_note_folder">Vybrat složku pro rychlé poznámky</string>
     <string name="select_main_interface">Vybrat hlavní rozhraní</string>
     <string name="pinned">Připnuto</string>
     <!-- Vault -->
@@ -230,9 +233,9 @@
     <string name="update_reminder">Změnit upozornění</string>
     <string name="archive_is_empty">Archiv je prázdný.</string>
     <plurals name="notes_count">
-        <item quantity="one">%d Poznámka</item>
-        <item quantity="few">%d Poznámek</item>
-        <item quantity="many">%d Poznámek</item>
+        <item quantity="one">%d poznámka</item>
+        <item quantity="few">%d poznámek</item>
+        <item quantity="many">%d poznámky</item>
         <item quantity="other">%d Poznámek</item>
     </plurals>
     <!-- Filtered notes count is shown when a label is selected, or text is searched.

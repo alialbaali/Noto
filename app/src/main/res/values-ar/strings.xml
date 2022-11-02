@@ -70,7 +70,7 @@
     <string name="no_file_is_selected">لم يتم اختيار أي ملف.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">فتح باستخدام</string>
-    <string name="invite_text">تحقق من Noto!</string>
+    <string name="invite_text">تحقق من Noto، وهو تطبيق مفتوح المصدر لأخذ الملاحظات.</string>
     <string name="version">الإصدار</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">تم نسخ الإصدار إلى الحافظة.</string>
@@ -173,6 +173,9 @@
     <string name="folder_is_unpinned">تم إلغاء تثبيت المجلد.</string>
     <string name="no_folders_found">لم يتم العثور على أي مجلدات.</string>
     <string name="select_folder">اختر مجلدا</string>
+    <string name="select_folder_archive">اختر أرشيف المجلد</string>
+    <string name="select_parent_folder">اختر المجلد الرئيسي</string>
+    <string name="select_quick_note_folder">اختر مجلد الملاحظة السريعة</string>
     <string name="select_main_interface">اختر الواجهة الرئيسية</string>
     <string name="pinned">مثبت</string>
     <!-- Vault -->

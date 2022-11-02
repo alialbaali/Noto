@@ -8,13 +8,13 @@
     <string name="okay">Tamam</string>
     <string name="search">Ara</string>
     <!-- A way to support the project. -->
-    <string name="buy_me_a_coffee">Bana bir kahve ısmarla</string>
+    <string name="buy_me_a_coffee">Bana bir kahve ısmarlayın</string>
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">Ne de olsa bir fincan kahvenin kırk yıl hatırı var.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">Beni Patreon üzerinden destekle!</string>
+    <string name="become_a_patron_description">Beni Patreon üzerinden destekleyin!</string>
     <!-- A way to support the project. -->
-    <string name="become_a_patron">Destekçim ol</string>
+    <string name="become_a_patron">Destekçim olun</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">Diğer seçenekler</string>
     <!-- Options for multi-selected notes. -->
@@ -70,7 +70,7 @@
     <string name="no_file_is_selected">Herhangi bir dosya seçilmedi.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Açılacak uygulama</string>
-    <string name="invite_text">Noto\'ya göz at!</string>
+    <string name="invite_text">Minimal ve açık kaynaklı bir not alma uygulaması olan Noto\'ya göz at.</string>
     <string name="version">Sürüm</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">Sürüm panoya kopyalandı.</string>
@@ -169,6 +169,9 @@
     <string name="folder_is_unpinned">Sabitleme kaldırıldı.</string>
     <string name="no_folders_found">Klasör bulunamadı.</string>
     <string name="select_folder">Klasör seç</string>
+    <string name="select_folder_archive">Klasör arşivini seç</string>
+    <string name="select_parent_folder">Üst klasörü seç</string>
+    <string name="select_quick_note_folder">Hızlı not klasörünü seç</string>
     <string name="select_main_interface">Temel arayüzü seç</string>
     <string name="pinned">Sabitlenmiş</string>
     <!-- Vault -->
