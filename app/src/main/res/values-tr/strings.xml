@@ -499,4 +499,14 @@
     </string>
     <string name="release_2_1_5">- Hata düzeltmeleri ve tasarımda iyileştirmeler.</string>
     <string name="release_2_1_6">- Hata düzeltmeleri ve tasarımda iyileştirmeler.</string>
+    <string name="release_2_2_0">• Çekçe ve İtalyanca desteği getirildi.
+        \n• Notlar için çoklu seçim desteği getirildi.
+        \n• Notları her zaman Okuma Modu\'nda açabilme seçeneği getirildi.
+        \n• Ayarlar ekranı baştan tasarlandı.
+        \n• Okuma Modu\'nda açılan notlar için sayfalandırma desteği getirildi.
+        \n• Uygulamanın ilk çalıştırma hızı iyileştirildi.
+        \n• JSON dosyaları içeri aktarımında yaşanan sorunlar giderildi.
+        \n• Android 12 ve üstü cihazlar için siyah tema rengi düzeltildi.
+        \n• Çeşitli hata düzeltmeleri ve tasarım iyileştirmeleri yapıldı.
+    </string>
 </resources>

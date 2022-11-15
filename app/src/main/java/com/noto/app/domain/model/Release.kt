@@ -13,8 +13,8 @@ sealed interface Release {
     data class Version(val major: Int, val minor: Int, val patch: Int) {
 
         companion object {
-            const val Current = "2.1.6"
-            const val Last = "2.1.5"
+            const val Current = "2.2.0"
+            const val Last = "2.1.6"
         }
 
         override fun toString(): String = "$major.$minor.$patch"
@@ -82,4 +82,10 @@ data class Release_2_1_5(override val changelog: Changelog) : Release {
 data class Release_2_1_6(override val changelog: Changelog) : Release {
     override val version: Version = Version(2, 1, 6)
     override val date: LocalDate = LocalDate(2022, Month.AUGUST, 7)
+}
+
+@Suppress("ClassName")
+data class Release_2_2_0(override val changelog: Changelog) : Release {
+    override val version: Version = Version(2, 2, 0)
+    override val date: LocalDate = LocalDate(2022, Month.NOVEMBER, 15)
 }

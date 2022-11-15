@@ -523,4 +523,14 @@
     </string>
     <string name="release_2_1_5">• Corrección de errores y mejoras de diseño.</string>
     <string name="release_2_1_6">• Corrección de errores y mejoras de diseño.</string>
+    <string name="release_2_2_0">• Compatible con Checo e Italiano.
+        \n• Multiselección de notas soportada.
+        \n• Soportó una opción para abrir notas en modo lectura por defecto.
+        \n• Pantalla de configuración reasignada.
+        \n• Soporte de paginación implementado para notas en Modo Lectura.
+        \n• Velocidad de inicio de la aplicación mejorada.
+        \n• Corregido importando archivos JSON.
+        \n• Corregido color de tema negro en Android 12 y dispositivos más nuevos.
+        \n• Otras correcciones de errores y mejoras de diseño.
+    </string>
 </resources>

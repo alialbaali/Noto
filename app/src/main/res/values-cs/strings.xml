@@ -559,4 +559,14 @@
     </string>
     <string name="release_2_1_5">• Opravy chyb a vylepšení designu.</string>
     <string name="release_2_1_6">• Opravy chyb a vylepšení designu.</string>
+    <string name="release_2_2_0">• Podporované české a italské překlady.
+        \n• Podpora vícenásobného výběru poznámek.
+        \n• Podporována možnost otevřít poznámky ve výchozím nastavení v režimu čtení.
+        \n• Obrazovka s přeřazeným nastavením.
+        \n• Podpora implementovaných stránek pro poznámky v režimu čtení.
+        \n• Vylepšená rychlost spouštění aplikace.
+        \n• Opraven import souborů JSON.
+        \n• Opravená barva černého motivu v Android 12 a novějších zařízeních.
+        \n• Další opravy chyb a konstrukční vylepšení.
+    </string>
 </resources>

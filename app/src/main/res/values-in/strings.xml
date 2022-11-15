@@ -505,4 +505,14 @@
     </string>
     <string name="release_2_1_5">• Perbaikan bug dan peningkatan desain.</string>
     <string name="release_2_1_6">• Perbaikan bug dan peningkatan desain.</string>
+    <string name="release_2_2_0">• Mendukung bahasa Ceko dan Italia.
+         \n• Mendukung multi-pilihan untuk catatan.
+         \n• Mendukung opsi untuk membuka catatan dalam Mode Membaca secara default.
+         \n• Layar setelan didesain ulang.
+         \n• Menerapkan dukungan paging untuk catatan dalam Mode Membaca.
+         \n• Peningkatan kecepatan peluncuran aplikasi.
+         \n• Memperbaiki pengimporan file JSON.
+         \n• Memperbaiki warna tema hitam di Android 12 dan perangkat yang lebih baru.
+         \n• Perbaikan bug dan peningkatan desain lainnya.
+    </string>
 </resources>

@@ -519,4 +519,13 @@
         \n• Risoluzione bug e altri miglioramenti del design.    </string>
     <string name="release_2_1_5">• Correzione bug e miglioramenti dell\'interfaccia.</string>
     <string name="release_2_1_6">• Correzione bug e miglioramenti dell\'interfaccia.</string>
+    <string name="release_2_2_0">• Sono adesso disponibili le traduzioni in Ceco ed Italiano.
+        \n• Adesso possono essere selezionate più note contemporaneamente.
+        \n• Aggiunta opzione per aprire le note direttamente in modalità lettura.
+        \n• Rinnovato il menù delle impostazioni.
+        \n• Implementata la paginazione delle note in modalità lettura.
+        \n• Migliorati i tempi di avvio dell\'app.
+        \n• Risolti i problemi legati all\'importazione dei file JSON.
+        \n• Risolto problema con il tema scuro in dispositivi con Android 12+.
+        \n• Altri bug fix e miglioramenti di design.    </string>
 </resources>

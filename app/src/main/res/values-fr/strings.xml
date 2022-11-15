@@ -522,4 +522,14 @@
 \n• Autres corrections de bugs et améliorations mineures.    </string>
     <string name="release_2_1_5">• Corrections de bugs et améliorations mineures.</string>
     <string name="release_2_1_6">• Corrections de bugs et améliorations mineures.</string>
+    <string name="release_2_2_0">• Prise en charge du tchèque et de l\'italien.
+        \n• Support de la sélection multiple pour les notes.
+        \n• Prise en charge d\'une option pour ouvrir des notes en Mode Lecture par défaut.
+        \n• Refonte de l\'écran de paramètres.
+        \n• Pagination des notes en mode lecture.
+        \n• Amélioration de la vitesse de lancement de l\'application.
+        \n• Correction lors de l\'importation de fichiers JSON.
+        \n• Couleur du thème noir fixe dans Android 12 et les appareils plus récents.
+        \n• Autres corrections de bugs et améliorations de conception.
+    </string>
 </resources>

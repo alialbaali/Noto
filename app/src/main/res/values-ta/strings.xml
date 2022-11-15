@@ -523,4 +523,14 @@
     </string>
     <string name="release_2_1_5">• Bug fixes and design improvements.</string>
     <string name="release_2_1_6">• Bug fixes and design improvements.</string>
+    <string name="release_2_2_0">• Supported Czech and Italian.
+        \n• Supported multi-selection for notes.
+        \n• Supported an option to open notes in Reading Mode by default.
+        \n• Redesigned settings screen.
+        \n• Implemented paging support for notes in Reading Mode.
+        \n• Improved app launching speed.
+        \n• Fixed importing JSON files.
+        \n• Fixed black theme color in Android 12 and newer devices.
+        \n• Other bug fixes and design improvements.
+    </string>
 </resources>
