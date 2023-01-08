@@ -466,6 +466,7 @@
     <string name="arabic_translator" translatable="false">Dr.Ohm</string>
     <string name="arabic_proofreader" translatable="false">Ali Albaali</string>
     <string name="italian_translator" translatable="false">Matteo Lombardi</string>
+    <string name="italian_translator2" translatable="false">SimoneG</string>
     <string name="czech_translator" translatable="false">Viktor Novák</string>
 
     <!-- Icon -->

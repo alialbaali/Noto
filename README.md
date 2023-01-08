@@ -98,9 +98,9 @@ If you would like to translate the app, please contact me via [email](mailto:ali
 - <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a>, and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization.
 - <a href="https://github.com/faus32">Faus AM</a> for the Spanish localization.
 - <a href="https://github.com/kernoeb">Kernoeb</a>, and <a href="https://geoffreycrofte.com">Geoffrey Crofte</a> for the French localization.
-- Uli N for the German localization.
-- <a href="https://github.com/matteolomba">Matteo Lombardi</a> for the Italian localization.
+- <a href="https://github.com/matteolomba">Matteo Lombardi</a>, and <a href="https://github.com/SimoneG97">SimoneG</a> for the Italian localization.
 - <a href="https://github.com/vikdevelop">Viktor Novák</a> for the Czech localization.
+- Uli N for the German localization.
 
 ## App Icons
 
