@@ -187,6 +187,7 @@
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
+        style="@style/Widget.Material3.BottomAppBar.Legacy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

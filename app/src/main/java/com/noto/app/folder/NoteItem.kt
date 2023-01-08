@@ -170,11 +170,11 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         }
 
         val gestureDetectorListener = object : GestureDetector.SimpleOnGestureListener() {
-            override fun onLongPress(e: MotionEvent?) {
+            override fun onLongPress(e: MotionEvent) {
                 onLongClickListener?.onLongClick(root)
             }
 
-            override fun onSingleTapUp(e: MotionEvent?): Boolean {
+            override fun onSingleTapUp(e: MotionEvent): Boolean {
                 if (isSelection) {
                     if (model.isSelected) {
                         onDeselectListener?.onClick(root)

@@ -41,8 +41,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomappbar.BottomAppBar
+import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.switchmaterial.SwitchMaterial
 import com.google.android.material.tabs.TabLayout
 import com.noto.app.R
 import com.noto.app.domain.model.Font
@@ -187,18 +187,15 @@ fun TextView.removeLinksUnderline() {
     text = spannable
 }
 
-fun SwitchMaterial.setupColors(
-    thumbCheckedColor: Int = context.colorAttributeResource(R.attr.notoPrimaryColor),
-    thumbUnCheckedColor: Int = context.colorAttributeResource(R.attr.notoSurfaceColor),
+fun MaterialSwitch.setupColors(
+    thumbCheckedColor: Int = context.colorAttributeResource(R.attr.notoBackgroundColor),
+    thumbUnCheckedColor: Int = context.colorAttributeResource(R.attr.notoSecondaryColor),
     trackCheckedColor: Int = context.colorAttributeResource(R.attr.notoPrimaryColor),
-    trackUnCheckedColor: Int = context.colorAttributeResource(R.attr.notoSecondaryColor),
+    trackUnCheckedColor: Int = context.colorAttributeResource(R.attr.notoSurfaceColor),
 ) {
     val state = arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf(-android.R.attr.state_checked))
     val thumbColors = intArrayOf(thumbCheckedColor, thumbUnCheckedColor)
-    val trackColors = intArrayOf(
-        ColorUtils.setAlphaComponent(trackCheckedColor, 128),
-        ColorUtils.setAlphaComponent(trackUnCheckedColor, 128)
-    )
+    val trackColors = intArrayOf(trackCheckedColor, trackUnCheckedColor)
     thumbTintList = ColorStateList(state, thumbColors)
     trackTintList = ColorStateList(state, trackColors)
 }
@@ -208,8 +205,8 @@ fun @receiver:ColorInt Int.withDefaultAlpha(alpha: Int = 32): Int = ColorUtils.s
 @SuppressLint("ClickableViewAccessibility")
 inline fun BottomAppBar.setOnSwipeGestureListener(crossinline callback: () -> Unit) {
     val gestureListener = object : GestureDetector.SimpleOnGestureListener() {
-        override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
-            val diffY = (e2?.y ?: 0F) - (e1?.y ?: 0F)
+        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+            val diffY = e2.y - e1.y
             return if (diffY.absoluteValue > SwipeGestureThreshold) {
                 callback()
                 true
@@ -345,9 +342,9 @@ inline fun View.setOnSwipeGestureListener(
     threshold: Float = SwipeGestureThreshold,
 ) {
     val gestureListener = object : GestureDetector.SimpleOnGestureListener() {
-        override fun onFling(e1: MotionEvent?, e2: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
-            val x1 = e1?.x ?: 0F
-            val x2 = e2?.x ?: 0F
+        override fun onFling(e1: MotionEvent, e2: MotionEvent, velocityX: Float, velocityY: Float): Boolean {
+            val x1 = e1.x
+            val x2 = e2.x
             val diffX = x2 - x1
             return if (diffX.absoluteValue > threshold) {
                 if (x2 > x1) onSwipeRight() else onSwipeLeft()

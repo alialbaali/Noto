@@ -18,6 +18,7 @@ import com.noto.app.R
 
 private const val ElevationAnimationDuration = 150
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NotoTopAppbar(
     title: String,
@@ -31,7 +32,7 @@ fun NotoTopAppbar(
         targetValue = if (scrollPosition > 0) NotoTheme.dimensions.extraSmall else 0.dp,
         animationSpec = tween(ElevationAnimationDuration)
     )
-    SmallTopAppBar(
+    TopAppBar(
         title = { Text(text = title) },
         modifier = modifier
             .clickable(

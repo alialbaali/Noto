@@ -117,21 +117,21 @@
                 android:id="@+id/divider2"
                 layout="@layout/divider_item" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/sw_widget_header"
                 style="@style/SettingsItem"
                 android:text="@string/widget_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/sw_edit_widget"
                 style="@style/SettingsItem"
                 android:text="@string/edit_widget_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/sw_app_icon"
                 style="@style/SettingsItem"
                 android:text="@string/app_icon"
@@ -142,7 +142,7 @@
                 android:id="@+id/divider3"
                 layout="@layout/divider_item" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/sw_new_folder"
                 style="@style/SettingsItem"
                 android:text="@string/new_note_button"

@@ -456,7 +456,7 @@ class NoteFragment : Fragment() {
         )
 
         val nsvClickListener = object : GestureDetector.SimpleOnGestureListener() {
-            override fun onSingleTapUp(e: MotionEvent?): Boolean {
+            override fun onSingleTapUp(e: MotionEvent): Boolean {
                 etNoteBody.requestFocus()
                 etNoteBody.showKeyboardUsingImm()
                 return super.onSingleTapUp(e)

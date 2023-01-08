@@ -180,7 +180,9 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         id("all_notes")
                         notesCount(allNotes.count())
                         title(context.stringResource(R.string.all_notes))
-                        icon(context.drawableResource(R.drawable.ic_round_all_notes_24))
+                        context.drawableResource(R.drawable.ic_round_all_notes_24)?.let { drawable ->
+                            icon(drawable)
+                        }
                         isManualSorting(isManualSorting)
                         isShowNotesCount(isShowNotesCount)
                         isSelected(AllNotesItemId == selectedDestinationId)
@@ -198,7 +200,9 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                     genericItem {
                         id("recent_notes")
                         title(context.getString(R.string.recent_notes))
-                        icon(context.drawableResource(R.drawable.ic_round_schedule_24))
+                        context.drawableResource(R.drawable.ic_round_schedule_24)?.let { drawable ->
+                            icon(drawable)
+                        }
                         notesCount(allNotes.filterRecentlyAccessed().count())
                         isManualSorting(isManualSorting)
                         isShowNotesCount(isShowNotesCount)

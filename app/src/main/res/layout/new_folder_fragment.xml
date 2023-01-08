@@ -202,7 +202,7 @@
                 android:valueFrom="0"
                 android:valueTo="30" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
+            <com.google.android.material.materialswitch.MaterialSwitch
                 android:id="@+id/sw_show_note_creation_date"
                 style="@style/DialogSectionItem"
                 android:layout_height="wrap_content"

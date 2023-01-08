@@ -102,7 +102,9 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                             genericItem {
                                 id("all_folders")
                                 title(context.stringResource(R.string.all_folders))
-                                icon(context.drawableResource(R.drawable.ic_round_all_folders_24))
+                                context.drawableResource(R.drawable.ic_round_all_folders_24)?.let { drawable ->
+                                    icon(drawable)
+                                }
                                 isManualSorting(false)
                                 isShowNotesCount(false)
                                 isSelected(args.selectedFolderId == AllFoldersId)
@@ -112,7 +114,9 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                             genericItem {
                                 id("all_notes")
                                 title(context.stringResource(R.string.all_notes))
-                                icon(context.drawableResource(R.drawable.ic_round_all_notes_24))
+                                context.drawableResource(R.drawable.ic_round_all_notes_24)?.let { drawable ->
+                                    icon(drawable)
+                                }
                                 isManualSorting(false)
                                 isShowNotesCount(false)
                                 isSelected(args.selectedFolderId == AllNotesItemId)
@@ -122,7 +126,9 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                             genericItem {
                                 id("recent_notes")
                                 title(context.getString(R.string.recent_notes))
-                                icon(context.drawableResource(R.drawable.ic_round_schedule_24))
+                                context.drawableResource(R.drawable.ic_round_schedule_24)?.let { drawable ->
+                                    icon(drawable)
+                                }
                                 isManualSorting(false)
                                 isShowNotesCount(false)
                                 isSelected(args.selectedFolderId == RecentNotesItemId)

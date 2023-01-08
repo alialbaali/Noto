@@ -6,7 +6,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.noto.app.AppViewModel
-import com.noto.app.util.createQuickNoteNotification
+import com.noto.app.util.sendQuickNoteNotification
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class TransparentActivity : AppCompatActivity() {
@@ -23,7 +23,7 @@ class TransparentActivity : AppCompatActivity() {
                 if (content != null) {
                     viewModel.createQuickNote(content) { folder, note ->
                         val icon = viewModel.icon.value
-                        notificationManager.createQuickNoteNotification(this, folder, note, icon)
+                        notificationManager.sendQuickNoteNotification(this, folder, note, icon)
                         finish()
                     }
                 }

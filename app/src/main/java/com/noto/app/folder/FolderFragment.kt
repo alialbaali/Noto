@@ -364,7 +364,7 @@ class FolderFragment : Fragment() {
                                                 OpenNotesIn.Editor -> navController?.navigateSafely(
                                                     FolderFragmentDirections.actionFolderFragmentToNoteFragment(
                                                         model.note.folderId,
-                                                        model.note.id,
+                                                        noteId = model.note.id,
                                                         selectedNoteIds = noteIds,
                                                     )
                                                 )

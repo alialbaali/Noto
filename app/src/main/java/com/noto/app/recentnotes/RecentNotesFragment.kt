@@ -247,7 +247,7 @@ class RecentNotesFragment : Fragment() {
                                                     ?.navigateSafely(
                                                         RecentNotesFragmentDirections.actionRecentNotesFragmentToNoteFragment(
                                                             pair.second.note.folderId,
-                                                            pair.second.note.id,
+                                                            noteId = pair.second.note.id,
                                                             selectedNoteIds = noteIds,
                                                         )
                                                     )

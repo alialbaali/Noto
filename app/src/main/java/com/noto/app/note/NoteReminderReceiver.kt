@@ -8,7 +8,7 @@ import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.util.Constants
-import com.noto.app.util.createNotification
+import com.noto.app.util.sendReminderNotification
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.runBlocking
 import org.koin.core.component.KoinComponent
@@ -38,7 +38,7 @@ class NoteReminderReceiver : BroadcastReceiver(), KoinComponent {
                     .firstOrNull()
 
                 if (note != null && folder != null && context != null) {
-                    notificationManager?.createNotification(context, folder, note, icon)
+                    notificationManager?.sendReminderNotification(context, folder, note, icon)
                     noteRepository.updateNote(note.copy(reminderDate = null))
                 }
             }

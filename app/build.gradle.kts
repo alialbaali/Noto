@@ -3,10 +3,9 @@ import java.util.*
 plugins {
     id(Plugins.AndroidApplication)
     kotlin(Plugins.KotlinAndroid)
-    kotlin(Plugins.KotlinKapt)
     id(Plugins.NavigationSafeArgs)
-    kotlin("plugin.serialization") version "1.7.0"
-    id("com.google.devtools.ksp") version "1.7.0-1.0.6"
+    kotlin("plugin.serialization") version "1.7.20"
+    id("com.google.devtools.ksp") version "1.7.20-1.0.7"
 }
 
 android {
@@ -87,7 +86,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.2.0"
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 
     testOptions {
@@ -102,9 +101,6 @@ android {
         resources.excludes.add("META-INF/LGPL2.1")
         resources.excludes.add("META-INF/LICENSE.md")
         resources.excludes.add("META-INF/LICENSE-notice.md")
-    }
-    kapt {
-        correctErrorTypes = true
     }
 }
 
@@ -130,7 +126,7 @@ dependencies {
     implementation(AndroidX.DataStore.preferences)
     implementation(Koin.android)
     implementation(Libraries.Main.Epoxy)
-    kapt(Libraries.Main.EpoxyProcessor)
+    ksp(Libraries.Main.EpoxyProcessor)
     implementation(AndroidX.Room.runtime)
     implementation(AndroidX.Room.ktx)
     implementation(AndroidX.viewPager2)

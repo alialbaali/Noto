@@ -23,7 +23,7 @@ private const val VaultNotificationId = -1
 private const val RequestCode = 0
 private const val QuickNoteTimeout = 5000L
 
-fun NotificationManager.createNotification(context: Context, folder: Folder, note: Note, icon: Icon?) {
+fun NotificationManager.sendReminderNotification(context: Context, folder: Folder, note: Note, icon: Icon?) {
 
     val pendingIntent = context.createNotificationPendingIntent(note.id, note.folderId)
 
@@ -49,7 +49,7 @@ fun NotificationManager.createNotification(context: Context, folder: Folder, not
     notify(folder.getTitle(context), note.id.toInt(), notification)
 }
 
-fun NotificationManager.createVaultNotification(context: Context) {
+fun NotificationManager.sendVaultNotification(context: Context) {
 
     val intent = Intent(context, VaultReceiver::class.java)
     val actionPendingIntent = PendingIntent.getBroadcast(context, RequestCode, intent, PendingIntentFlags)
@@ -69,7 +69,7 @@ fun NotificationManager.createVaultNotification(context: Context) {
     notify(VaultNotificationId, notification)
 }
 
-fun NotificationManager.createQuickNoteNotification(context: Context, folder: Folder, note: Note, icon: Icon?) {
+fun NotificationManager.sendQuickNoteNotification(context: Context, folder: Folder, note: Note, icon: Icon?) {
 
     val pendingIntent = context.createNotificationPendingIntent(note.id, note.folderId)
 

@@ -151,7 +151,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                 openNotesIn == OpenNotesIn.ReadingMode || isParentReadingMode -> navController?.navigateSafely(
                     NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteFragment(
                         args.folderId,
-                        args.noteId,
+                        noteId = args.noteId,
                         selectedNoteIds = args.selectedNoteIds,
                     )
                 )

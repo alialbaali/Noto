@@ -144,7 +144,7 @@ class FolderArchiveFragment : Fragment() {
                                             ?.navigateSafely(
                                                 FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNoteFragment(
                                                     archivedNoteModel.note.folderId,
-                                                    archivedNoteModel.note.id,
+                                                    noteId = archivedNoteModel.note.id,
                                                     selectedNoteIds = longArrayOf()
                                                 )
                                             )

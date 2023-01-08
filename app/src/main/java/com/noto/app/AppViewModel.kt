@@ -65,6 +65,9 @@ class AppViewModel(
     var currentTheme: Theme? = null
         private set
 
+    private val mutableIsNotificationPermissionGranted = MutableStateFlow<Boolean?>(null)
+    val isNotificationPermissionGranted get() = mutableIsNotificationPermissionGranted.asStateFlow()
+
     init {
         createGeneralFolder()
         vaultTimeout
@@ -102,5 +105,9 @@ class AppViewModel(
         val noteId = noteRepository.createNote(note)
         val folder = folderRepository.getFolderById(folderId).first()
         onSuccess(folder, note.copy(id = noteId))
+    }
+
+    fun setNotificationPermissionResult(isGranted: Boolean?) {
+        mutableIsNotificationPermissionGranted.value = isGranted
     }
 }

@@ -1,11 +1,15 @@
 package com.noto.app
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.os.bundleOf
@@ -50,8 +54,13 @@ class AppActivity : BaseActivity() {
 
     private val workManager by lazy { WorkManager.getInstance(this) }
 
+    private val notificationPermissionLauncher = registerForActivityResult(RequestPermission()) { isGranted ->
+        viewModel.setNotificationPermissionResult(isGranted)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (viewModel.currentTheme != null) requestNotificationsPermissionIfRequired() // Check required otherwise the callback runs twice.
         notificationManager.createNotificationChannels(this)
         AppActivityBinding.inflate(layoutInflater).withBinding {
             setContentView(root)
@@ -160,11 +169,9 @@ class AppActivity : BaseActivity() {
             .onEach { language -> setupLanguage(language) }
             .launchIn(lifecycleScope)
 
-//        if (!BuildConfig.DEBUG) {
         viewModel.icon
             .onEach { icon -> if (icon != viewModel.currentIcon.await()) setupIcon(icon) }
             .launchIn(lifecycleScope)
-//        }
 
         combine(
             viewModel.lastVersion,
@@ -178,7 +185,7 @@ class AppActivity : BaseActivity() {
         viewModel.isVaultOpen
             .onEach { isVaultOpen ->
                 if (isVaultOpen)
-                    notificationManager.createVaultNotification(this@AppActivity)
+                    notificationManager.sendVaultNotification(this@AppActivity)
                 else
                     notificationManager.cancelVaultNotification()
             }
@@ -282,5 +289,14 @@ class AppActivity : BaseActivity() {
             .also { shortcuts ->
                 ShortcutManagerCompat.updateShortcuts(this, shortcuts)
             }
+    }
+
+    private fun requestNotificationsPermissionIfRequired() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val notificationPermissionStatus = ContextCompat.checkSelfPermission(this@AppActivity, Manifest.permission.POST_NOTIFICATIONS)
+            if (notificationPermissionStatus == PackageManager.PERMISSION_DENIED) {
+                notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
     }
 }

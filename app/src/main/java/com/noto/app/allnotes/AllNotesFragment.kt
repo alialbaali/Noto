@@ -255,7 +255,7 @@ class AllNotesFragment : Fragment() {
                                                     ?.navigateSafely(
                                                         AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
                                                             model.note.folderId,
-                                                            model.note.id,
+                                                            noteId = model.note.id,
                                                             selectedNoteIds = noteIds,
                                                         )
                                                     )
