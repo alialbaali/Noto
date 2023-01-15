@@ -48,17 +48,17 @@ class NewFolderFragment : Fragment() {
                 tb.title = context?.stringResource(R.string.new_folder)
                 et.requestFocus()
                 activity?.showKeyboard(root)
-                fab.text = context?.stringResource(R.string.create_folder)
+                btnCreate.text = context?.stringResource(R.string.create_folder)
             }
             Folder.GeneralFolderId -> {
                 tb.title = context?.stringResource(R.string.edit_folder)
                 til.isVisible = false
                 tvFolderTitle.isVisible = false
-                fab.text = context?.stringResource(R.string.update_folder)
+                btnCreate.text = context?.stringResource(R.string.update_folder)
             }
             else -> {
                 tb.title = context?.stringResource(R.string.edit_folder)
-                fab.text = context?.stringResource(R.string.update_folder)
+                btnCreate.text = context?.stringResource(R.string.update_folder)
             }
         }
 
@@ -100,7 +100,7 @@ class NewFolderFragment : Fragment() {
             }.show(parentFragmentManager, null)
         }
 
-        fab.setOnClickListener {
+        btnCreate.setOnClickListener {
             val title = et.text.toString()
             if (title.isBlank()) {
                 til.isErrorEnabled = true
@@ -174,10 +174,10 @@ class NewFolderFragment : Fragment() {
                 val color = context.colorResource(folder.color.toResource())
                 tb.setTitleTextColor(color)
                 tb.setNavigationIconTint(color)
-                fab.setBackgroundColor(color)
+                btnCreate.setBackgroundColor(color)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    fab.outlineAmbientShadowColor = color
-                    fab.outlineSpotShadowColor = color
+                    btnCreate.outlineAmbientShadowColor = color
+                    btnCreate.outlineSpotShadowColor = color
                 }
             }
         }

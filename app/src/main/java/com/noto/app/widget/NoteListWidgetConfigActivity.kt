@@ -66,7 +66,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             .onEach { isCreated ->
                 if (isCreated) {
                     tb.title = stringResource(R.string.edit_notes_widget)
-                    fabCreate.text = stringResource(R.string.update_widget)
+                    btnCreate.text = stringResource(R.string.update_widget)
                 }
             }
             .launchIn(lifecycleScope)
@@ -82,7 +82,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             tvFilterLabels.isVisible = labels.isNotEmpty()
             rv.isVisible = labels.isNotEmpty()
             divider2.root.isVisible = labels.isNotEmpty()
-            fabCreate.setBackgroundColor(color)
+            btnCreate.setBackgroundColor(color)
             widget.tvFolderTitle.text = folder.getTitle(this@NoteListWidgetConfigActivity)
             widget.tvFolderTitle.setTextColor(color)
             widget.fab.background?.setTint(color)
@@ -224,7 +224,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             }
         )
 
-        fabCreate.setOnClickListener {
+        btnCreate.setOnClickListener {
             viewModel.createOrUpdateWidget()
             updateNoteWidget(appWidgetId)
             val resultValue = Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)

@@ -214,11 +214,15 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab"
-        style="@style/ExtendedFab"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_create"
+        style="@style/MaterialButton"
+        android:padding="@dimen/spacing_normal"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="@dimen/spacing_normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/create_folder"
-        android:contentDescription="@string/create_folder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:contentDescription="@string/create_folder" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

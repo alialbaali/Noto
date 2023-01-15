@@ -68,7 +68,7 @@ class FolderListWidgetConfigActivity : BaseActivity() {
             .onEach { isCreated ->
                 if (isCreated) {
                     tb.title = stringResource(R.string.edit_folders_widget)
-                    fabCreate.text = stringResource(R.string.update_widget)
+                    btnCreate.text = stringResource(R.string.update_widget)
                 }
             }
             .launchIn(lifecycleScope)
@@ -149,7 +149,7 @@ class FolderListWidgetConfigActivity : BaseActivity() {
             viewModel.setWidgetRadius(value.toInt())
         }
 
-        fabCreate.setOnClickListener {
+        btnCreate.setOnClickListener {
             viewModel.createOrUpdateWidget()
             updateFolderWidget(appWidgetId)
             val resultValue = Intent().putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
