@@ -62,7 +62,7 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                 tvSortingValue.text = context?.stringResource(sortingStringId)
                 tvSortingValue.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, sortingDrawableId, 0)
                 val groupingStringId = when (folder.grouping) {
-                    Grouping.Default -> R.string.default_grouping
+                    Grouping.None -> R.string.none
                     Grouping.CreationDate -> R.string.creation_date
                     Grouping.Label -> R.string.label
                     Grouping.AccessDate -> R.string.access_date

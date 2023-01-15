@@ -30,11 +30,11 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_default"
+                android:id="@+id/rb_none"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/default_grouping" />
+                android:text="@string/none" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/rb_creation_date"

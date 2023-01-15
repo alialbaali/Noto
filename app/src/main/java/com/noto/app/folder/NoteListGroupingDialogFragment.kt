@@ -36,13 +36,13 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
                     val color = context.colorResource(folder.color.toResource())
                     tb.tvDialogTitle.setTextColor(color)
                     tb.vHead.background?.mutate()?.setTint(color)
-                    rbDefault.background = context.createDialogItemStateListDrawable(folder.color)
+                    rbNone.background = context.createDialogItemStateListDrawable(folder.color)
                     rbCreationDate.background = context.createDialogItemStateListDrawable(folder.color)
                     rbLabel.background = context.createDialogItemStateListDrawable(folder.color)
                     rbGroupingAsc.background = context.createDialogItemStateListDrawable(folder.color)
                     rbGroupingDesc.background = context.createDialogItemStateListDrawable(folder.color)
                     when (folder.grouping) {
-                        Grouping.Default -> rbDefault.isChecked = true
+                        Grouping.None -> rbNone.isChecked = true
                         Grouping.CreationDate -> rbCreationDate.isChecked = true
                         Grouping.Label -> rbLabel.isChecked = true
                         Grouping.AccessDate -> rbAccessDate.isChecked = true
@@ -55,8 +55,8 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
             }
             .launchIn(lifecycleScope)
 
-        rbDefault.setOnClickListener {
-            viewModel.updateGrouping(Grouping.Default)
+        rbNone.setOnClickListener {
+            viewModel.updateGrouping(Grouping.None)
         }
 
         rbCreationDate.setOnClickListener {

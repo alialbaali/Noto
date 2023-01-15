@@ -36,7 +36,7 @@
     <string name="access_date">Access date</string>
     <string name="creation_date">Creation date</string>
     <string name="manual">Manual</string>
-    <string name="default_grouping">Default</string>
+    <string name="none">None</string>
     <string name="descending">Descending</string>
     <string name="ascending">Ascending</string>
     <string name="settings">Settings</string>

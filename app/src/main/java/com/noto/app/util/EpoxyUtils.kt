@@ -28,7 +28,7 @@ inline fun EpoxyController.buildNotesModels(
     content: (List<NoteItemModel>) -> Unit,
 ) {
     when (folder.grouping) {
-        Grouping.Default -> {
+        Grouping.None -> {
             val pinnedNotes = notes.filter { it.note.isPinned }.sorted(folder.sortingType, folder.sortingOrder)
             val notPinnedNotes = notes.filterNot { it.note.isPinned }.sorted(folder.sortingType, folder.sortingOrder)
 

@@ -61,7 +61,7 @@ data class Folder @Ignore constructor(
     val sortingOrder: SortingOrder = SortingOrder.Descending,
 
     @ColumnInfo(name = "grouping", defaultValue = "0")
-    val grouping: Grouping = Grouping.Default,
+    val grouping: Grouping = Grouping.None,
 
     @ColumnInfo(name = "grouping_order", defaultValue = "1")
     val groupingOrder: GroupingOrder = GroupingOrder.Descending,
@@ -99,7 +99,7 @@ data class Folder @Ignore constructor(
         newNoteCursorPosition: NewNoteCursorPosition,
         sortingType: NoteListSortingType = NoteListSortingType.CreationDate,
         sortingOrder: SortingOrder = SortingOrder.Descending,
-        grouping: Grouping = Grouping.Default,
+        grouping: Grouping = Grouping.None,
         groupingOrder: GroupingOrder = GroupingOrder.Descending,
         isVaulted: Boolean = false,
         filteringType: FilteringType,
