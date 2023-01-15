@@ -376,6 +376,10 @@
     <string name="show_notes_count">Show notes count</string>
     <!-- Description of the "Show notes count" settings option. -->
     <string name="show_notes_count_description">Whether to display the count of notes in the folders dialog.</string>
+    <!-- Whether to exit app immediately without showing folders dialog -->
+    <string name="quick_exit">Quick exit</string>
+    <!-- Description of the "Quick exit" settings option. -->
+    <string name="quick_exit_description">Whether to exit the app immediately when pressing the back button.</string>
     <string name="remember_scrolling_position">Remember scrolling position</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Whether to store the scrolling position in folders, and notes.</string>

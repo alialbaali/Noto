@@ -58,6 +58,9 @@ class FolderViewModel(
     private val mutableIsSelection = MutableStateFlow(false)
     val isSelection get() = mutableIsSelection.asStateFlow()
 
+    val quickExit = settingsRepository.quickExit
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
     private var sortSelectedLabels = true
 
     val selectionLabels = combine(notes, labels) { notes, labels ->

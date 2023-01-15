@@ -40,6 +40,9 @@ class AllNotesViewModel(
     val scrollingPosition = settingsRepository.allNotesScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
+    val quickExit = settingsRepository.quickExit
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
     init {
         combine(
             folderRepository.getFolders(),

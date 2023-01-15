@@ -85,10 +85,10 @@ class RecentNotesFragment : Fragment() {
         }
 
         activity?.onBackPressedDispatcher?.addCallback {
-            if (viewModel.isSearchEnabled.value) {
-                viewModel.disableSearch()
-            } else {
-                navController?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToMainFragment(exit = true))
+            when {
+                viewModel.isSearchEnabled.value -> viewModel.disableSearch()
+                viewModel.quickExit.value -> activity?.finish()
+                else -> navController?.navigateSafely(RecentNotesFragmentDirections.actionRecentNotesFragmentToMainFragment(exit = true))
             }
         }
     }

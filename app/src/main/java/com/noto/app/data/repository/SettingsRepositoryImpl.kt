@@ -153,6 +153,11 @@ class SettingsRepositoryImpl(
         }
         .flowOn(dispatcher)
 
+    override val quickExit: Flow<Boolean> = storage.data
+        .map { preferences -> preferences[SettingsKeys.QuickExit] }
+        .map { it ?: false }
+        .flowOn(dispatcher)
+
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
         return storage.data
             .map { preferences -> preferences[SettingsKeys.Widget.FolderId(widgetId)] }
@@ -448,6 +453,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateScreenBrightnessLevel(level: ScreenBrightnessLevel) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.ScreenBrightnessLevel] = level.value }
+        }
+    }
+
+    override suspend fun updateQuickExit(enabled: Boolean) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.QuickExit] = enabled }
         }
     }
 

@@ -51,6 +51,8 @@ interface SettingsRepository {
 
     val screenBrightnessLevel: Flow<ScreenBrightnessLevel>
 
+    val quickExit: Flow<Boolean>
+
     fun getWidgetFolderId(widgetId: Int): Flow<Long>
 
     fun getIsWidgetCreated(widgetId: Int): Flow<Boolean>
@@ -136,5 +138,7 @@ interface SettingsRepository {
     suspend fun updateQuickNoteFolderId(folderId: Long)
 
     suspend fun updateScreenBrightnessLevel(level: ScreenBrightnessLevel)
+
+    suspend fun updateQuickExit(enabled: Boolean)
 
 }

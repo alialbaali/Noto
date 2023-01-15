@@ -26,6 +26,7 @@ object SettingsKeys {
     val RecentNotesScrollingPosition = intPreferencesKey("RecentNotesScrollingPosition")
     val QuickNoteFolderId = longPreferencesKey("QuickNoteFolderId")
     val ScreenBrightnessLevel = floatPreferencesKey("ScreenBrightnessLevel")
+    val QuickExit = booleanPreferencesKey("QuickExit")
 
     @Suppress("FunctionName")
     object Widget {

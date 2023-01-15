@@ -94,6 +94,7 @@ class GeneralSettingsFragment : Fragment() {
 
                 val notesCountEnabled by viewModel.isShowNotesCount.collectAsState()
                 val rememberScrollingPositionEnabled by viewModel.isRememberScrollingPosition.collectAsState()
+                val quickExit by viewModel.quickExit.collectAsState()
                 val quickNoteFolderId by viewModel.quickNoteFolderId.collectAsState()
                 val quickNoteFolderTitle by produceState(stringResource(id = R.string.general), quickNoteFolderId) {
                     viewModel.getFolderById(quickNoteFolderId)
@@ -181,6 +182,14 @@ class GeneralSettingsFragment : Fragment() {
                             type = SettingsItemType.Switch(rememberScrollingPositionEnabled),
                             onClick = { viewModel.toggleRememberScrollingPosition() },
                             description = stringResource(id = R.string.remember_scrolling_position_description),
+                            painter = EmptyPainter,
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.quick_exit),
+                            type = SettingsItemType.Switch(quickExit),
+                            onClick = { viewModel.toggleQuickExit() },
+                            description = stringResource(id = R.string.quick_exit_description),
                             painter = EmptyPainter,
                         )
                     }

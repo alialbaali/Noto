@@ -74,6 +74,9 @@ class SettingsViewModel(
     val quickNoteFolderId = settingsRepository.quickNoteFolderId
         .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.GeneralFolderId)
 
+    val quickExit = settingsRepository.quickExit
+        .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
     var folderIdType = FolderIdType.MainInterface
         private set
 
@@ -181,6 +184,10 @@ class SettingsViewModel(
 
     fun toggleRememberScrollingPosition() = viewModelScope.launch {
         settingsRepository.updateIsRememberScrollingPosition(!isRememberScrollingPosition.value)
+    }
+
+    fun toggleQuickExit() = viewModelScope.launch {
+        settingsRepository.updateQuickExit(!quickExit.value)
     }
 
     fun emitIsImportFinished() = viewModelScope.launch {

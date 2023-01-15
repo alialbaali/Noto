@@ -240,9 +240,8 @@ class FolderFragment : Fragment() {
                 }
                 viewModel.isSearchEnabled.value -> viewModel.disableSearch()
                 viewModel.labels.value.any { it.isSelected } -> viewModel.clearLabelSelection()
-                else -> {
-                    navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment(exit = true))
-                }
+                viewModel.quickExit.value -> activity?.finish()
+                else -> navController?.navigateSafely(FolderFragmentDirections.actionFolderFragmentToMainFragment(exit = true))
             }
         }
 

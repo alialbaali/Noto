@@ -85,10 +85,10 @@ class AllNotesFragment : Fragment() {
         }
 
         activity?.onBackPressedDispatcher?.addCallback {
-            if (viewModel.isSearchEnabled.value) {
-                viewModel.disableSearch()
-            } else {
-                navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToMainFragment(exit = true))
+            when {
+                viewModel.isSearchEnabled.value -> viewModel.disableSearch()
+                viewModel.quickExit.value -> activity?.finish()
+                else -> navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToMainFragment(exit = true))
             }
         }
     }
@@ -176,10 +176,12 @@ class AllNotesFragment : Fragment() {
                     lifecycleScope.launch {
                         delay(150) // Wait for the fragment to be destroyed
                         savedStateHandle.remove<Long>(Constants.FolderId)
-                        navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
-                            folderId,
-                            selectedNoteIds = longArrayOf()
-                        ))
+                        navController?.navigateSafely(
+                            AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
+                                folderId,
+                                selectedNoteIds = longArrayOf()
+                            )
+                        )
                     }
                 }
             }
@@ -228,10 +230,12 @@ class AllNotesFragment : Fragment() {
                                     isVisible(isVisible)
                                     onClickListener { _ -> viewModel.toggleVisibilityForFolder(folder.id) }
                                     onCreateClickListener { _ ->
-                                        navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
-                                            folder.id,
-                                            selectedNoteIds = longArrayOf()
-                                        ))
+                                        navController?.navigateSafely(
+                                            AllNotesFragmentDirections.actionAllNotesFragmentToNoteFragment(
+                                                folder.id,
+                                                selectedNoteIds = longArrayOf()
+                                            )
+                                        )
                                     }
                                     onLongClickListener { _ ->
                                         navController?.navigateSafely(AllNotesFragmentDirections.actionAllNotesFragmentToFolderFragment(folder.id))
