@@ -176,6 +176,7 @@
     <string name="folder_is_unpinned">Folder has been unpinned.</string>
     <string name="no_folders_found">No folders found.</string>
     <string name="select_folder">Select folder</string>
+    <string name="folder">Folder</string>
     <string name="select_folder_archive">Select folder archive</string>
     <string name="select_parent_folder">Select parent folder</string>
     <string name="select_quick_note_folder">Select quick note folder</string>
@@ -426,7 +427,7 @@
     <string name="delete_label_confirmation">Are you sure you want to delete this label?</string>
     <string name="label_is_deleted">Label has been deleted.</string>
     <string name="delete_label_description">This action can\'t be undone and will delete the label and remove the label from the associated notes permanently.</string>
-    <string name="filter_labels">Filter labels</string>
+    <string name="filtered_labels">Filtered labels</string>
 
     <!-- Theme -->
     <string name="theme">Theme</string>

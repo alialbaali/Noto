@@ -9,10 +9,11 @@ import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayout
-import com.noto.app.components.BaseActivity
 import com.noto.app.R
+import com.noto.app.components.BaseActivity
 import com.noto.app.databinding.NoteListWidgetConfigActivityBinding
 import com.noto.app.domain.model.FilteringType
+import com.noto.app.domain.model.NotoColor
 import com.noto.app.label.labelItem
 import com.noto.app.main.SelectFolderDialogFragment
 import com.noto.app.util.*
@@ -79,10 +80,11 @@ class NoteListWidgetConfigActivity : BaseActivity() {
         ) { folder, notes, labels, filteringType ->
             val filteredNotes = notes.filterSelectedLabels(labels.filterSelected(), filteringType)
             val color = colorResource(folder.color.toResource())
-            tvFilterLabels.isVisible = labels.isNotEmpty()
+            tvFilteredLabels.isVisible = labels.isNotEmpty()
             rv.isVisible = labels.isNotEmpty()
-            divider2.root.isVisible = labels.isNotEmpty()
+//            divider2.root.isVisible = labels.isNotEmpty()
             btnCreate.setBackgroundColor(color)
+            tvFolderValue.text = folder.getTitle(this@NoteListWidgetConfigActivity)
             widget.tvFolderTitle.text = folder.getTitle(this@NoteListWidgetConfigActivity)
             widget.tvFolderTitle.setTextColor(color)
             widget.fab.background?.setTint(color)
@@ -109,7 +111,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                         id(entry.key.id)
                         label(entry.key)
                         isSelected(entry.value)
-                        color(folder.color)
+                        color(NotoColor.Black)
                         onClickListener { _ ->
                             if (entry.value)
                                 viewModel.deselectLabel(entry.key.id)
@@ -117,6 +119,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                                 viewModel.selectLabel(entry.key.id)
                         }
                         onLongClickListener { _ -> false }
+                        backgroundColor(colorAttributeResource(R.attr.notoBackgroundColor))
                     }
                 }
             }
@@ -184,7 +187,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             nsv.smoothScrollTo(0, 0)
         }
 
-        tvSelectFolder.setOnClickListener {
+        llFolder.setOnClickListener {
             showSelectFolderDialog(true)
         }
 

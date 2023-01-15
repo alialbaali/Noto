@@ -53,125 +53,162 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_select_folder"
-                style="@style/SettingsItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/select_folder" />
-
-            <include
-                android:id="@+id/divider1"
-                layout="@layout/divider_item" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_filter_labels"
-                style="@style/SettingsItem"
-                android:clickable="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/filter_labels" />
-
-            <com.airbnb.epoxy.EpoxyRecyclerView
-                android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                android:paddingHorizontal="@dimen/spacing_small"
-                android:paddingBottom="@dimen/spacing_small"
-                tools:listitem="@layout/label_item" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_filtering_type"
-                style="@style/SettingsItem"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:padding="@dimen/spacing_normal"
-                android:text="@string/label_filtering_type" />
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tl_filtering_type"
-                style="@style/TabLayout"
+            <LinearLayout
+                android:id="@+id/ll_folder"
                 android:layout_marginHorizontal="@dimen/spacing_normal"
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent">
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="@string/inclusive" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="@string/exclusive" />
-
-                <com.google.android.material.tabs.TabItem
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:text="@string/strict" />
-            </com.google.android.material.tabs.TabLayout>
-
-            <include
-                android:id="@+id/divider2"
-                layout="@layout/divider_item" />
-
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/sw_widget_header"
-                style="@style/SettingsItem"
-                android:text="@string/widget_header"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/sw_edit_widget"
-                style="@style/SettingsItem"
-                android:text="@string/edit_widget_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/sw_app_icon"
-                style="@style/SettingsItem"
-                android:text="@string/app_icon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                android:id="@+id/divider3"
-                layout="@layout/divider_item" />
-
-            <com.google.android.material.materialswitch.MaterialSwitch
-                android:id="@+id/sw_new_folder"
-                style="@style/SettingsItem"
-                android:text="@string/new_note_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <include
-                android:id="@+id/divider4"
-                layout="@layout/divider_item" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_widget_radius"
-                style="@style/SettingsItem"
-                android:clickable="false"
+                android:layout_marginTop="@dimen/spacing_normal"
+                android:layout_marginBottom="@dimen/spacing_small"
+                android:background="@drawable/settings_item_shape"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/widget_radius" />
+                android:orientation="horizontal">
 
-            <com.google.android.material.slider.Slider
-                android:id="@+id/s_widget_radius"
-                style="@style/Slider"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_folder"
+                    style="@style/SettingsItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/folder" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_folder_value"
+                    style="@style/SettingsItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@string/general" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginVertical="@dimen/spacing_small"
+                android:background="@drawable/settings_item_shape"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:valueFrom="8"
-                android:valueTo="24"
-                android:value="16"
-                android:stepSize="8"
-                android:contentDescription="@string/widget_radius"
-                android:layout_marginHorizontal="@dimen/spacing_normal" />
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_filtered_labels"
+                    style="@style/SettingsItem"
+                    android:clickable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filtered_labels" />
+
+                <com.airbnb.epoxy.EpoxyRecyclerView
+                    android:id="@+id/rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="@dimen/spacing_small"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/label_item" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_filtering_type"
+                    style="@style/SettingsItem"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:padding="@dimen/spacing_normal"
+                    android:text="@string/label_filtering_type" />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tl_filtering_type"
+                    style="@style/TabLayout"
+                    android:backgroundTint="?attr/notoBackgroundColor"
+                    android:layout_margin="@dimen/spacing_normal"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent">
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/inclusive" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/exclusive" />
+
+                    <com.google.android.material.tabs.TabItem
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:text="@string/strict" />
+                </com.google.android.material.tabs.TabLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginVertical="@dimen/spacing_small"
+                android:background="@drawable/settings_item_shape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical">
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/sw_widget_header"
+                    style="@style/SettingsItem"
+                    android:text="@string/widget_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/sw_edit_widget"
+                    style="@style/SettingsItem"
+                    android:text="@string/edit_widget_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/sw_app_icon"
+                    style="@style/SettingsItem"
+                    android:text="@string/app_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:layout_marginBottom="@dimen/spacing_normal"
+                android:background="@drawable/settings_item_shape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/sw_new_folder"
+                    style="@style/SettingsItem"
+                    android:text="@string/new_note_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_widget_radius"
+                    style="@style/SettingsItem"
+                    android:clickable="false"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/widget_radius" />
+
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/s_widget_radius"
+                    style="@style/Slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:valueFrom="8"
+                    android:valueTo="24"
+                    android:value="16"
+                    android:stepSize="8"
+                    android:contentDescription="@string/widget_radius"
+                    android:layout_marginHorizontal="@dimen/spacing_normal"
+                    app:trackColorInactive="?attr/notoBackgroundColor" />
+            </LinearLayout>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

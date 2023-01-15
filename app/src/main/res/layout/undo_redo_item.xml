@@ -23,7 +23,7 @@
     <ImageButton
         android:id="@+id/ib_copy"
         android:src="@drawable/ic_round_copy_24"
-        android:background="@drawable/dialog_quick_item_shape"
+        android:background="@drawable/dialog_item_shape"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="@dimen/spacing_normal"

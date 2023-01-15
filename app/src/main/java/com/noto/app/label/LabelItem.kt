@@ -31,11 +31,14 @@ abstract class LabelItem : EpoxyModelWithHolder<LabelItem.Holder>() {
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onLongClickListener: View.OnLongClickListener
 
+    @EpoxyAttribute
+    var backgroundColor: Int = 0
+
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
             val selectedBackgroundColor = context.colorResource(color.toResource())
             val selectedTextColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
-            val backgroundColor = context.colorAttributeResource(R.attr.notoSurfaceColor)
+            val backgroundColor = if (backgroundColor == 0) context.colorAttributeResource(R.attr.notoSurfaceColor) else backgroundColor
             val textColor = context.colorAttributeResource(R.attr.notoPrimaryColor)
             if (isSelected) {
                 tvLabel.animateBackgroundColor(backgroundColor, selectedBackgroundColor)

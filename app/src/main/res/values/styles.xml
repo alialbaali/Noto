@@ -141,7 +141,7 @@
         <item name="fontFamily">@font/nunito_semibold</item>
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="android:background">@drawable/dialog_quick_item_shape</item>
+        <item name="android:background">@drawable/dialog_item_shape</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">@dimen/spacing_small</item>
         <item name="android:clickable">true</item>
@@ -368,10 +368,9 @@
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="android:background">@drawable/dialog_item_shape</item>
+        <item name="android:background">@drawable/settings_item_shape</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
         <item name="android:padding">@dimen/spacing_normal</item>
-        <item name="android:clickable">true</item>
-        <item name="android:focusable">true</item>
         <item name="android:drawablePadding">@dimen/spacing_normal</item>
     </style>
 
