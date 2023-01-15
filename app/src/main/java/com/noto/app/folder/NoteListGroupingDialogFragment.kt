@@ -47,6 +47,17 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
                         Grouping.Label -> rbLabel.isChecked = true
                         Grouping.AccessDate -> rbAccessDate.isChecked = true
                     }
+                    if (folder.grouping == Grouping.None) {
+                        rbGroupingAsc.isClickable = false
+                        rbGroupingDesc.isClickable = false
+                        rgOrder.disable()
+                        tvOrder.disable()
+                    } else {
+                        rbGroupingAsc.isClickable = true
+                        rbGroupingDesc.isClickable = true
+                        rgOrder.enable()
+                        tvOrder.enable()
+                    }
                     when (folder.groupingOrder) {
                         GroupingOrder.Ascending -> rbGroupingAsc.isChecked = true
                         GroupingOrder.Descending -> rbGroupingDesc.isChecked = true
