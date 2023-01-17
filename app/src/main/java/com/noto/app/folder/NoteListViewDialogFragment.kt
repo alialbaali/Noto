@@ -36,47 +36,61 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                     val colorStateList = color.toColorStateList()
                     tb.tvDialogTitle.setTextColor(color)
                     tb.vHead.background?.mutate()?.setTint(color)
-                    listOf(llSorting, llGrouping).onEach { ll ->
-                        ll.background?.setRippleColor(colorStateList)
-                    }
+                    btnApply.background?.mutate()?.setTint(color)
+                    listOf(llSortingType, llGroupingType, llFiltering, llSortingOrder, llGroupingOrder)
+                        .onEach { ll -> ll.background?.setRippleColor(colorStateList) }
+                    tvFilteringValue.text = when (folder.filteringType) {
+                        FilteringType.Inclusive -> R.string.inclusive
+                        FilteringType.Exclusive -> R.string.exclusive
+                        FilteringType.Strict -> R.string.strict
+                    }.let(context::stringResource)
+                    tvSortingTypeValue.text = when (folder.sortingType) {
+                        NoteListSortingType.Manual -> R.string.manual
+                        NoteListSortingType.CreationDate -> R.string.creation_date
+                        NoteListSortingType.Alphabetical -> R.string.alphabetical
+                        NoteListSortingType.AccessDate -> R.string.access_date
+                    }.let(context::stringResource)
+                    tvSortingOrderValue.text = when (folder.sortingOrder) {
+                        SortingOrder.Ascending -> R.string.ascending
+                        SortingOrder.Descending -> R.string.descending
+                    }.let(context::stringResource)
+                    tvGroupingTypeValue.text = when (folder.grouping) {
+                        Grouping.None -> R.string.none
+                        Grouping.CreationDate -> R.string.creation_date
+                        Grouping.Label -> R.string.label
+                        Grouping.AccessDate -> R.string.access_date
+                    }.let(context::stringResource)
+                    tvGroupingOrderValue.text = when (folder.groupingOrder) {
+                        GroupingOrder.Ascending -> R.string.ascending
+                        GroupingOrder.Descending -> R.string.descending
+                    }.let(context::stringResource)
                 }
-                when (folder.filteringType) {
-                    FilteringType.Inclusive -> tlFilteringType.getTabAt(0)?.select()
-                    FilteringType.Exclusive -> tlFilteringType.getTabAt(1)?.select()
-                    FilteringType.Strict -> tlFilteringType.getTabAt(2)?.select()
-                }
-                val sortingStringId = when (folder.sortingType) {
-                    NoteListSortingType.Manual -> R.string.manual
-                    NoteListSortingType.CreationDate -> R.string.creation_date
-                    NoteListSortingType.Alphabetical -> R.string.alphabetical
-                    NoteListSortingType.AccessDate -> R.string.access_date
-                }
-                val sortingDrawableId = if (folder.sortingType != NoteListSortingType.Manual) {
-                    when (folder.sortingOrder) {
-                        SortingOrder.Ascending -> R.drawable.ic_round_arrow_upward_24
-                        SortingOrder.Descending -> R.drawable.ic_round_arrow_downward_24
-                    }
+                if (folder.sortingType == NoteListSortingType.Manual) {
+                    llSortingOrder.isClickable = false
+                    llSortingOrder.disable()
                 } else {
-                    0
+                    llSortingOrder.isClickable = true
+                    llSortingOrder.enable()
                 }
-                tvSortingValue.text = context?.stringResource(sortingStringId)
-                tvSortingValue.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, sortingDrawableId, 0)
-                val groupingStringId = when (folder.grouping) {
-                    Grouping.None -> R.string.none
-                    Grouping.CreationDate -> R.string.creation_date
-                    Grouping.Label -> R.string.label
-                    Grouping.AccessDate -> R.string.access_date
+                if (folder.grouping == Grouping.None) {
+                    llGroupingOrder.isClickable = false
+                    llGroupingOrder.disable()
+                } else {
+                    llGroupingOrder.isClickable = true
+                    llGroupingOrder.enable()
                 }
-                val groupingDrawableId = when (folder.groupingOrder) {
-                    GroupingOrder.Ascending -> R.drawable.ic_round_arrow_upward_24
-                    GroupingOrder.Descending -> R.drawable.ic_round_arrow_downward_24
-                }
-                tvGroupingValue.text = context?.stringResource(groupingStringId)
-                tvGroupingValue.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, groupingDrawableId, 0)
             }
             .launchIn(lifecycleScope)
 
-        llSorting.setOnClickListener {
+        llFiltering.setOnClickListener {
+            navController?.navigateSafely(
+                NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListFilteringDialogFragment(
+                    args.folderId
+                )
+            )
+        }
+
+        llSortingType.setOnClickListener {
             navController?.navigateSafely(
                 NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListSortingDialogFragment(
                     args.folderId
@@ -84,7 +98,15 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
             )
         }
 
-        llGrouping.setOnClickListener {
+        llSortingOrder.setOnClickListener {
+            navController?.navigateSafely(
+                NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListOrderingDialogFragment(
+                    args.folderId, isSorting = true,
+                )
+            )
+        }
+
+        llGroupingType.setOnClickListener {
             navController?.navigateSafely(
                 NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListGroupingDialogFragment(
                     args.folderId
@@ -92,14 +114,16 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
             )
         }
 
+        llGroupingOrder.setOnClickListener {
+            navController?.navigateSafely(
+                NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListOrderingDialogFragment(
+                    args.folderId, isSorting = false,
+                )
+            )
+        }
+
         btnApply.setOnClickListener {
-            val filteringType = when (tlFilteringType.selectedTabPosition) {
-                0 -> FilteringType.Inclusive
-                1 -> FilteringType.Exclusive
-                else -> FilteringType.Strict
-            }
-            viewModel.updateFolderFilteringType(filteringType)
-                .invokeOnCompletion { dismiss() }
+            dismiss()
         }
     }
 }

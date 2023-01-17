@@ -15,40 +15,24 @@
             layout="@layout/dialog_fragment_toolbar" />
 
         <RadioGroup
-            android:id="@+id/rg_type"
+            android:id="@+id/rg_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_none"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/none" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_creation_date"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/creation_date" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_label"
+                android:id="@+id/rb_ascending"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/label" />
+                android:text="@string/ascending" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_access_date"
+                android:id="@+id/rb_descending"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/access_date" />
-
+                android:text="@string/descending" />
         </RadioGroup>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

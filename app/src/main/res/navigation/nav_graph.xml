@@ -425,6 +425,12 @@
         <action
             android:id="@+id/action_noteListViewDialogFragment_to_noteListSortingDialogFragment"
             app:destination="@id/noteListSortingDialogFragment" />
+        <action
+            android:id="@+id/action_noteListViewDialogFragment_to_noteListFilteringDialogFragment"
+            app:destination="@id/noteListFilteringDialogFragment" />
+        <action
+            android:id="@+id/action_noteListViewDialogFragment_to_noteListOrderingDialogFragment"
+            app:destination="@id/noteListOrderingDialogFragment" />
     </dialog>
     <dialog
         android:id="@+id/languageDialogFragment"
@@ -679,4 +685,23 @@
         android:id="@+id/screenBrightnessLevelDialogFragment"
         android:name="com.noto.app.settings.ScreenBrightnessLevelDialogFragment"
         android:label="ScreenBrightnessLevelDialogFragment" />
+    <dialog
+        android:id="@+id/noteListFilteringDialogFragment"
+        android:name="com.noto.app.folder.NoteListFilteringDialogFragment"
+        android:label="NoteListFilteringDialogFragment">
+        <argument
+            android:name="folder_id"
+            app:argType="long" />
+    </dialog>
+    <dialog
+        android:id="@+id/noteListOrderingDialogFragment"
+        android:name="com.noto.app.folder.NoteListOrderingDialogFragment"
+        android:label="NoteListOrderingDialogFragment">
+        <argument
+            android:name="folder_id"
+            app:argType="long" />
+        <argument
+            android:name="is_sorting"
+            app:argType="boolean" />
+    </dialog>
 </navigation>

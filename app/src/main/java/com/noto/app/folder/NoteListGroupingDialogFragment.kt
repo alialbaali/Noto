@@ -10,7 +10,6 @@ import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.NoteListGroupingDialogFragmentBinding
 import com.noto.app.domain.model.Grouping
-import com.noto.app.domain.model.GroupingOrder
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -36,62 +35,37 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
                     val color = context.colorResource(folder.color.toResource())
                     tb.tvDialogTitle.setTextColor(color)
                     tb.vHead.background?.mutate()?.setTint(color)
-                    rbNone.background = context.createDialogItemStateListDrawable(folder.color)
-                    rbCreationDate.background = context.createDialogItemStateListDrawable(folder.color)
-                    rbLabel.background = context.createDialogItemStateListDrawable(folder.color)
-                    rbGroupingAsc.background = context.createDialogItemStateListDrawable(folder.color)
-                    rbGroupingDesc.background = context.createDialogItemStateListDrawable(folder.color)
+                    rbNone.background = context.createDialogItemStateListDrawable()
+                    rbCreationDate.background = context.createDialogItemStateListDrawable()
+                    rbLabel.background = context.createDialogItemStateListDrawable()
                     when (folder.grouping) {
                         Grouping.None -> rbNone.isChecked = true
                         Grouping.CreationDate -> rbCreationDate.isChecked = true
                         Grouping.Label -> rbLabel.isChecked = true
                         Grouping.AccessDate -> rbAccessDate.isChecked = true
                     }
-                    if (folder.grouping == Grouping.None) {
-                        rbGroupingAsc.isClickable = false
-                        rbGroupingDesc.isClickable = false
-                        rgOrder.disable()
-                        tvOrder.disable()
-                    } else {
-                        rbGroupingAsc.isClickable = true
-                        rbGroupingDesc.isClickable = true
-                        rgOrder.enable()
-                        tvOrder.enable()
-                    }
-                    when (folder.groupingOrder) {
-                        GroupingOrder.Ascending -> rbGroupingAsc.isChecked = true
-                        GroupingOrder.Descending -> rbGroupingDesc.isChecked = true
-                    }
                 }
             }
             .launchIn(lifecycleScope)
 
         rbNone.setOnClickListener {
-            viewModel.updateGrouping(Grouping.None)
+            viewModel.updateGroupingType(Grouping.None)
+                .invokeOnCompletion { dismiss() }
         }
 
         rbCreationDate.setOnClickListener {
-            viewModel.updateGrouping(Grouping.CreationDate)
+            viewModel.updateGroupingType(Grouping.CreationDate)
+                .invokeOnCompletion { dismiss() }
         }
 
         rbLabel.setOnClickListener {
-            viewModel.updateGrouping(Grouping.Label)
+            viewModel.updateGroupingType(Grouping.Label)
+                .invokeOnCompletion { dismiss() }
         }
 
         rbAccessDate.setOnClickListener {
-            viewModel.updateGrouping(Grouping.AccessDate)
-        }
-
-        rbGroupingAsc.setOnClickListener {
-            viewModel.updateGroupingOrder(GroupingOrder.Ascending)
-        }
-
-        rbGroupingDesc.setOnClickListener {
-            viewModel.updateGroupingOrder(GroupingOrder.Descending)
-        }
-
-        btnApply.setOnClickListener {
-            dismiss()
+            viewModel.updateGroupingType(Grouping.AccessDate)
+                .invokeOnCompletion { dismiss() }
         }
     }
 }

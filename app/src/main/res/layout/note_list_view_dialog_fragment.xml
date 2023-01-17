@@ -15,55 +15,51 @@
             android:id="@+id/tb"
             layout="@layout/dialog_fragment_toolbar" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_filtering_type"
-            style="@style/DialogSectionItem"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:padding="@dimen/spacing_normal"
-            android:text="@string/label_filtering_type" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tl_filtering_type"
-            style="@style/TabLayout"
+        <LinearLayout
+            android:id="@+id/ll_filtering"
+            android:background="@drawable/generic_ripple_shape"
             android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_normal"
             android:layout_marginBottom="@dimen/spacing_small"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.tabs.TabItem
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_filtering"
+                style="@style/ListDialogItem"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:text="@string/filtering"
+                android:layout_weight="1"
+                app:drawableStartCompat="@drawable/ic_round_filtering_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_filtering_value"
+                style="@style/ListDialogItemValue"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/inclusive" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/exclusive" />
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="@string/strict" />
-        </com.google.android.material.tabs.TabLayout>
+        </LinearLayout>
 
         <LinearLayout
-            android:background="@drawable/generic_shape"
-            android:layout_marginTop="@dimen/spacing_small"
+            android:id="@+id/ll_sorting"
+            android:background="@drawable/generic_ripple_shape"
+            android:layout_marginVertical="@dimen/spacing_small"
             android:layout_marginHorizontal="@dimen/spacing_normal"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/ll_sorting"
+                android:id="@+id/ll_sorting_type"
                 android:background="@drawable/generic_ripple_shape"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_sorting"
+                    android:id="@+id/tv_sorting_type"
                     style="@style/ListDialogItem"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -72,7 +68,7 @@
                     app:drawableStartCompat="@drawable/ic_round_sorting_24" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_sorting_value"
+                    android:id="@+id/tv_sorting_type_value"
                     style="@style/ListDialogItemValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -80,14 +76,50 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_grouping"
+                android:id="@+id/ll_sorting_order"
                 android:background="@drawable/generic_ripple_shape"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_grouping"
+                    android:id="@+id/tv_sorting_order"
+                    style="@style/ListDialogItem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ordering"
+                    android:layout_weight="1"
+                    app:drawableStartCompat="@drawable/ic_round_ordering_24" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_sorting_order_value"
+                    style="@style/ListDialogItemValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/descending" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_grouping"
+            android:background="@drawable/generic_ripple_shape"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ll_grouping_type"
+                android:background="@drawable/generic_ripple_shape"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_grouping_type"
                     style="@style/ListDialogItem"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -96,11 +128,35 @@
                     app:drawableStartCompat="@drawable/ic_round_table_view_24" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_grouping_value"
+                    android:id="@+id/tv_grouping_type_value"
                     style="@style/ListDialogItemValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/none" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_grouping_order"
+                android:background="@drawable/generic_ripple_shape"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_grouping_order"
+                    style="@style/ListDialogItem"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ordering"
+                    android:layout_weight="1"
+                    app:drawableStartCompat="@drawable/ic_round_ordering_24" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_grouping_order_value"
+                    style="@style/ListDialogItemValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ascending" />
             </LinearLayout>
 
         </LinearLayout>

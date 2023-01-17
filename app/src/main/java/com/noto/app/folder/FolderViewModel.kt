@@ -242,7 +242,7 @@ class FolderViewModel(
         folderRepository.updateFolder(folder.value.copy(sortingOrder = value))
     }
 
-    fun updateGrouping(value: Grouping) = viewModelScope.launch {
+    fun updateGroupingType(value: Grouping) = viewModelScope.launch {
         folderRepository.updateFolder(folder.value.copy(grouping = value))
     }
 
@@ -283,7 +283,7 @@ class FolderViewModel(
         mutableSearchTerm.value = searchTerm
     }
 
-    fun updateFolderFilteringType(filteringType: FilteringType) = viewModelScope.launch {
+    fun updateFiltering(filteringType: FilteringType) = viewModelScope.launch {
         folderRepository.updateFolder(folder.value.copy(filteringType = filteringType))
     }
 

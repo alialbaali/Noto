@@ -20,35 +20,26 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_none"
+                android:id="@+id/rb_inclusive"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/none" />
+                android:text="@string/inclusive" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_creation_date"
+                android:id="@+id/rb_exclusive"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/creation_date" />
+                android:text="@string/exclusive" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_label"
+                android:id="@+id/rb_strict"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/label" />
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_access_date"
-                style="@style/DialogRadioButtonItem"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/access_date" />
-
+                android:text="@string/strict" />
         </RadioGroup>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -22,6 +22,8 @@
     <string name="back">Back</string>
     <string name="folder_layout">Folder layout</string>
     <string name="label_filtering_type">Label filtering type</string>
+    <!-- Replacements for "Label filtering type". -->
+    <string name="filtering">Filtering</string>
     <string name="layout">Layout</string>
     <string name="list">List</string>
     <string name="inclusive">Inclusive</string>
@@ -296,6 +298,8 @@
     <string name="type">Type</string>
     <!-- Order of sorting for notes/folders -->
     <string name="order">Order</string>
+    <!-- Ordering for sorting/grouping of notes/folders -->
+    <string name="ordering">Ordering</string>
     <string name="notes_view">Notes view</string>
     <string name="sorting_order">Sorting order</string>
     <string name="grouping_type">Grouping type</string>
