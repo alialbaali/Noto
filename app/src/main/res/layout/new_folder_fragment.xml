@@ -121,13 +121,13 @@
                 android:id="@+id/tv_parent_folder_option"
                 style="@style/FolderTitleTextView"
                 android:background="@drawable/generic_shape"
-                android:contentDescription="@string/no_parent"
+                android:contentDescription="@string/none"
                 android:drawablePadding="@dimen/spacing_normal"
-                android:drawableStart="@drawable/ic_round_no_parent_24"
+                android:drawableStart="@drawable/ic_round_none_24"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:padding="@dimen/spacing_normal"
-                android:text="@string/no_parent" />
+                android:text="@string/none" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_new_note_cursor_position"

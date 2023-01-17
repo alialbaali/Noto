@@ -94,7 +94,7 @@ class NewFolderFragment : Fragment() {
                 arguments = bundleOf(
                     Constants.FilteredFolderIds to longArrayOf(Folder.GeneralFolderId, args.folderId),
                     Constants.SelectedFolderId to (viewModel.parentFolder.value?.id ?: 0L),
-                    Constants.IsNotParentEnabled to true,
+                    Constants.IsNoneEnabled to true,
                     Constants.Title to folderTitle,
                 )
             }.show(parentFragmentManager, null)
@@ -189,8 +189,8 @@ class NewFolderFragment : Fragment() {
                 tvParentFolderOption.text = parentFolder.getTitle(context)
                 tvParentFolderOption.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_folder_24, 0, 0, 0)
             } else {
-                tvParentFolderOption.text = context.stringResource(R.string.no_parent)
-                tvParentFolderOption.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_no_parent_24, 0, 0, 0)
+                tvParentFolderOption.text = context.stringResource(R.string.none)
+                tvParentFolderOption.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_round_none_24, 0, 0, 0)
             }
         }
     }

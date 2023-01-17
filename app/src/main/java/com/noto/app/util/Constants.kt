@@ -12,7 +12,7 @@ object Constants {
     const val IsDismissible = "is_dismissible"
     const val ClickListener = "click_listener"
     const val VaultTimeout = "VaultTimeout"
-    const val IsNotParentEnabled = "is_no_parent_enabled"
+    const val IsNoneEnabled = "is_none_enabled"
     const val IsPasscodeValid = "IsPasscodeValid"
     const val WidgetRadius = "WidgetRadius"
     const val SelectAll = "SelectAll"

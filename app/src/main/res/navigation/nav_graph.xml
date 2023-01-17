@@ -317,7 +317,7 @@
             android:defaultValue="0L"
             app:argType="long" />
         <argument
-            android:name="is_no_parent_enabled"
+            android:name="is_none_enabled"
             android:defaultValue="false"
             app:argType="boolean" />
         <argument

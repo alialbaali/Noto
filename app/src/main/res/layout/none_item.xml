@@ -12,10 +12,10 @@
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:contentDescription="@string/no_parent"
+        android:contentDescription="@string/none"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_round_no_parent_24" />
+        android:src="@drawable/ic_round_none_24" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_title"
@@ -23,6 +23,6 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="@string/no_parent"
+        android:text="@string/none"
         android:layout_marginHorizontal="@dimen/spacing_normal" />
 </LinearLayout>

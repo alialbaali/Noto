@@ -90,11 +90,11 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                 rv.withModels {
 
                     context?.let { context ->
-                        if (args.isNoParentEnabled) {
-                            noParentItem {
-                                id("no_parent")
+                        if (args.isNoneEnabled) {
+                            noneItem {
+                                id("none")
                                 isSelected(args.selectedFolderId == 0L)
-                                onClickListener { _ -> callback(0L, context.stringResource(R.string.no_parent)) }
+                                onClickListener { _ -> callback(0L, context.stringResource(R.string.none)) }
                             }
                         }
 
@@ -150,7 +150,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                             }
                         }
 
-                        if (folders.isEmpty() && generalFolder == null && !args.isNoParentEnabled) {
+                        if (folders.isEmpty() && generalFolder == null && !args.isNoneEnabled) {
                             placeholderItem {
                                 id("placeholder")
                                 placeholder(context.stringResource(R.string.no_folders_found))
