@@ -157,7 +157,7 @@
     <string name="add_new_note_shortcut">Nuevo acceso directo</string>
     <string name="delete_folder_description">Esta acción no se puede deshacer y eliminará la carpeta y todo su contenido de forma permanente.</string>
     <string name="folder_title">Título de la carpeta</string>
-    <string name="folder_color">Color de la carpeta</string>
+    <string name="color">Color de la carpeta</string>
     <string name="delete_folder">Borrar</string>
     <string name="delete_folder_confirmation">¿Está seguro de que desea eliminar esta carpeta?</string>
     <string name="folders_sorting">Ordenando carpetas</string>

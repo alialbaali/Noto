@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="@dimen/spacing_normal"
-            android:text="@string/label_title" />
+            android:text="@string/title" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til"
@@ -36,7 +36,7 @@
                 android:imeOptions="actionDone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/label_title"
+                android:hint="@string/title"
                 android:inputType="text|textAutoCorrect|textCapSentences" />
         </com.google.android.material.textfield.TextInputLayout>
 

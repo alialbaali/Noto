@@ -157,7 +157,7 @@
     <string name="add_new_note_shortcut">Yeni not kısayolu</string>
     <string name="delete_folder_description">Bu işlem geri alınamaz. Klasör ve içindeki her şey kalıcı olarak silinecektir.</string>
     <string name="folder_title">Klasör başlığı</string>
-    <string name="folder_color">Klasör rengi</string>
+    <string name="color">Klasör rengi</string>
     <string name="delete_folder">Sil</string>
     <string name="delete_folder_confirmation">Bu klasörü silmek istediğinizden emin misiniz?</string>
     <string name="folders_sorting">Klasör sıralaması</string>

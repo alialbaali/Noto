@@ -166,7 +166,7 @@
     <string name="add_new_note_shortcut">New note shortcut</string>
     <string name="delete_folder_description">This action can\'t be undone and will delete the folder and all of its content permanently.</string>
     <string name="folder_title">Folder title</string>
-    <string name="folder_color">Folder color</string>
+    <string name="color">Color</string>
     <string name="delete_folder">Delete</string>
     <string name="delete_folder_confirmation">Are you sure you want to delete this folder?</string>
     <string name="folders_sorting">Folders sorting</string>

@@ -157,7 +157,7 @@
     <string name="add_new_note_shortcut">Scorciatoia nuova nota</string>
     <string name="delete_folder_description">Questa azione non può essere annullata ed eliminerà la cartella con tutti i suoi contenuti permanentemente.</string>
     <string name="folder_title">Titolo cartella</string>
-    <string name="folder_color">Colore cartella</string>
+    <string name="color">Colore cartella</string>
     <string name="delete_folder">Elimina</string>
     <string name="delete_folder_confirmation">Sei sicuro di voler eliminare questa cartella?</string>
     <string name="folders_sorting">Ordinamento cartelle</string>

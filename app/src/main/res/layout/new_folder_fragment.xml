@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:paddingVertical="@dimen/spacing_normal"
-                android:text="@string/folder_title" />
+                android:text="@string/title" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til"
@@ -58,7 +58,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et"
                     style="@style/TextInputEditText"
-                    android:hint="@string/folder_title"
+                    android:hint="@string/title"
                     android:imeOptions="actionDone"
                     android:inputType="text|textAutoCorrect|textCapSentences"
                     android:layout_height="match_parent"
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:paddingVertical="@dimen/spacing_normal"
-                android:text="@string/folder_color" />
+                android:text="@string/color" />
 
             <com.airbnb.epoxy.EpoxyRecyclerView
                 android:id="@+id/rv"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:paddingVertical="@dimen/spacing_normal"
-                android:text="@string/folder_layout" />
+                android:text="@string/layout" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tl_folder_layout"

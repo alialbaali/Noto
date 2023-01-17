@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.NewLabelDialogFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -47,6 +47,7 @@ class NewLabelDialogFragment : BaseDialogFragment() {
                     val color = context.colorResource(folder.color.toResource())
                     tb.tvDialogTitle.setTextColor(color)
                     tb.vHead.background?.mutate()?.setTint(color)
+                    btnCreate.background?.mutate()?.setTint(color)
                 }
             }
             .launchIn(lifecycleScope)

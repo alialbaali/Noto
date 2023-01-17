@@ -157,7 +157,7 @@
     <string name="add_new_note_shortcut">Nouveau raccourci de note</string>
     <string name="delete_folder_description">Cette action ne peut pas être annulée et supprimera définitivement le dossier et son contenu.</string>
     <string name="folder_title">Titre du dossier</string>
-    <string name="folder_color">Couleur du dossier</string>
+    <string name="color">Couleur du dossier</string>
     <string name="delete_folder">Supprimer</string>
     <string name="delete_folder_confirmation">Êtes-vous sûr de vouloir supprimer ce dossier ?</string>
     <string name="folders_sorting">Tri des dossiers</string>

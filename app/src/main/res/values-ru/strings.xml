@@ -159,7 +159,7 @@
     <string name="add_new_note_shortcut">Новый ярлык</string>
     <string name="delete_folder_description">Это действие нельзя отменить, и папка и все ее содержимое будут удалены навсегда.</string>
     <string name="folder_title">Название</string>
-    <string name="folder_color">Цвет</string>
+    <string name="color">Цвет</string>
     <string name="delete_folder">Удалить</string>
     <string name="delete_folder_confirmation">Вы уверены, что хотите удалить эту папку?</string>
     <string name="folders_sorting">Сортировка</string>

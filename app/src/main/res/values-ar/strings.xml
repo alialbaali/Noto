@@ -161,7 +161,7 @@
     <string name="add_new_note_shortcut">اختصار ملاحظة جديدة</string>
     <string name="delete_folder_description">لا يمكن التراجع عن هذا الإجراء وسيتم حذف المجلد وجميع محتوياته بشكل دائم.</string>
     <string name="folder_title">عنوان المجلد</string>
-    <string name="folder_color">لون المجلد</string>
+    <string name="color">لون المجلد</string>
     <string name="delete_folder">حذف</string>
     <string name="delete_folder_confirmation">هل أنت متأكد من حذف هذا المجلد؟</string>
     <string name="folders_sorting">فرز المجلدات</string>

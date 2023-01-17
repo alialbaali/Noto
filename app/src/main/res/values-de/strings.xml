@@ -157,7 +157,7 @@
     <string name="add_new_note_shortcut">Verknüpfung für neue Notiz</string>
     <string name="delete_folder_description">Diese Aktion kann nicht rückgängig gemacht werden und wird den Ordner und all seine Inhalte dauerhaft löschen.</string>
     <string name="folder_title">Ordnername</string>
-    <string name="folder_color">Ordnerfarbe</string>
+    <string name="color">Ordnerfarbe</string>
     <string name="delete_folder">Löschen</string>
     <string name="delete_folder_confirmation">Soll dieser Ordner wirklich gelöscht werden?</string>
     <string name="folders_sorting">Sortierung der Ordner</string>

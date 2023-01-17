@@ -159,7 +159,7 @@
     <string name="add_new_note_shortcut">Nová zkratka pro složku</string>
     <string name="delete_folder_description">Tuto akci nelze vrátit zpět a odstraní složku a veškerý její obsah trvale.</string>
     <string name="folder_title">Titulek složky</string>
-    <string name="folder_color">Barva složky</string>
+    <string name="color">Barva složky</string>
     <string name="delete_folder">Odstranit</string>
     <string name="delete_folder_confirmation">Opravdu chcete smazat tuto složku?</string>
     <string name="folders_sorting">Řazení složek</string>
