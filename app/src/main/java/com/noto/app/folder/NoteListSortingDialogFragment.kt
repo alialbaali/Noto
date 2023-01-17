@@ -10,7 +10,10 @@ import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.NoteListSortingDialogFragmentBinding
 import com.noto.app.domain.model.NoteListSortingType
-import com.noto.app.util.*
+import com.noto.app.util.colorResource
+import com.noto.app.util.stringResource
+import com.noto.app.util.toResource
+import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,9 +38,6 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
                     val color = context.colorResource(folder.color.toResource())
                     tb.tvDialogTitle.setTextColor(color)
                     tb.vHead.background?.mutate()?.setTint(color)
-                    rbAlphabetical.background = context.createDialogItemStateListDrawable()
-                    rbCreationDate.background = context.createDialogItemStateListDrawable()
-                    rbManual.background = context.createDialogItemStateListDrawable()
                     when (folder.sortingType) {
                         NoteListSortingType.Alphabetical -> rbAlphabetical.isChecked = true
                         NoteListSortingType.CreationDate -> rbCreationDate.isChecked = true

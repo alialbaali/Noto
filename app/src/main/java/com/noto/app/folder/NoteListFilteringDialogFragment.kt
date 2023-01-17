@@ -10,7 +10,10 @@ import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.NoteListFilteringDialogFragmentBinding
 import com.noto.app.domain.model.FilteringType
-import com.noto.app.util.*
+import com.noto.app.util.colorResource
+import com.noto.app.util.stringResource
+import com.noto.app.util.toResource
+import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -35,9 +38,6 @@ class NoteListFilteringDialogFragment : BaseDialogFragment() {
                     val color = context.colorResource(folder.color.toResource())
                     tb.tvDialogTitle.setTextColor(color)
                     tb.vHead.background?.mutate()?.setTint(color)
-                    rbInclusive.background = context.createDialogItemStateListDrawable()
-                    rbExclusive.background = context.createDialogItemStateListDrawable()
-                    rbStrict.background = context.createDialogItemStateListDrawable()
                     when (folder.filteringType) {
                         FilteringType.Inclusive -> rbInclusive.isChecked = true
                         FilteringType.Exclusive -> rbExclusive.isChecked = true

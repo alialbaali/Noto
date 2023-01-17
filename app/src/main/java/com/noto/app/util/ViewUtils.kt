@@ -11,7 +11,6 @@ import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
-import android.graphics.drawable.StateListDrawable
 import android.net.Uri
 import android.text.SpannableString
 import android.text.TextPaint
@@ -235,38 +234,6 @@ fun RecyclerView.resetAdapter() {
 
 val AppBarLayout.isExpanded
     get() = (height - bottom) == 0
-
-fun Context.createDialogItemStateListDrawable(): StateListDrawable {
-    val checkedDrawable = createCheckedDrawable()
-    val uncheckedDrawable = createUncheckedDrawable()
-    val stateDrawable = StateListDrawable().apply {
-        addState(intArrayOf(android.R.attr.state_checked), checkedDrawable)
-        addState(intArrayOf(-android.R.attr.state_checked), uncheckedDrawable)
-    }
-    return stateDrawable
-}
-
-private fun Context.createUncheckedDrawable(): RippleDrawable {
-    val colorStateList = colorAttributeResource(R.attr.notoSurfaceColor).toColorStateList()
-    val backgroundColorStateList = colorAttributeResource(R.attr.notoBackgroundColor).toColorStateList()
-    val gradientDrawable = GradientDrawable().apply {
-        shape = GradientDrawable.RECTANGLE
-        this.color = backgroundColorStateList
-        cornerRadius = dimenResource(R.dimen.spacing_small)
-    }
-    return RippleDrawable(colorStateList, gradientDrawable, null)
-}
-
-private fun Context.createCheckedDrawable(): RippleDrawable {
-    val colorStateList = colorAttributeResource(R.attr.notoSurfaceColor).toColorStateList()
-    val backgroundColorStateList = colorAttributeResource(R.attr.notoSecondaryColor).toColorStateList()
-    val gradientDrawable = GradientDrawable().apply {
-        shape = GradientDrawable.RECTANGLE
-        color = colorStateList
-        cornerRadius = dimenResource(R.dimen.spacing_small)
-    }
-    return RippleDrawable(backgroundColorStateList, gradientDrawable, null)
-}
 
 fun View.isLayoutVisible(rootView: View): Boolean {
     val rect = Rect()

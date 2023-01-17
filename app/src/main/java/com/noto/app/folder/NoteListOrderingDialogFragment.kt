@@ -11,7 +11,10 @@ import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.NoteListOrderingDialogFragmentBinding
 import com.noto.app.domain.model.GroupingOrder
 import com.noto.app.domain.model.SortingOrder
-import com.noto.app.util.*
+import com.noto.app.util.colorResource
+import com.noto.app.util.stringResource
+import com.noto.app.util.toResource
+import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -36,8 +39,6 @@ class NoteListOrderingDialogFragment : BaseDialogFragment() {
                     val color = context.colorResource(folder.color.toResource())
                     tb.tvDialogTitle.setTextColor(color)
                     tb.vHead.background?.mutate()?.setTint(color)
-                    rbAscending.background = context.createDialogItemStateListDrawable()
-                    rbDescending.background = context.createDialogItemStateListDrawable()
                 }
 
                 if (args.isSorting) {
