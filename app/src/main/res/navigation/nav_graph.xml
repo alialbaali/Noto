@@ -704,4 +704,12 @@
             android:name="is_sorting"
             app:argType="boolean" />
     </dialog>
+    <dialog
+        android:id="@+id/quickNoteDialogFragment"
+        android:name="com.noto.app.note.QuickNoteDialogFragment"
+        android:label="QuickNoteDialogFragment">
+        <argument
+            android:name="folder_id"
+            app:argType="long" />
+    </dialog>
 </navigation>

@@ -5,7 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import com.noto.app.AppViewModel
+import com.noto.app.note.QuickNoteDialogFragment
+import com.noto.app.util.Constants
+import com.noto.app.util.isValid
 import com.noto.app.util.sendQuickNoteNotification
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -27,6 +31,14 @@ class TransparentActivity : AppCompatActivity() {
                         finish()
                     }
                 }
+            }
+            Constants.Intent.ActionQuickNote -> {
+                QuickNoteDialogFragment { folder, note ->
+                    val icon = viewModel.icon.value
+                    if (note.isValid) notificationManager.sendQuickNoteNotification(this, folder, note, icon)
+                    finish()
+                }.apply { arguments = bundleOf(Constants.FolderId to viewModel.quickNoteFolderId.value) }
+                    .show(supportFragmentManager, null)
             }
         }
     }

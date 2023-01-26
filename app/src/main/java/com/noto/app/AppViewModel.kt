@@ -68,6 +68,9 @@ class AppViewModel(
     private val mutableIsNotificationPermissionGranted = MutableStateFlow<Boolean?>(null)
     val isNotificationPermissionGranted get() = mutableIsNotificationPermissionGranted.asStateFlow()
 
+    val quickNoteFolderId = settingsRepository.quickNoteFolderId
+        .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.GeneralFolderId)
+
     init {
         createGeneralFolder()
         vaultTimeout

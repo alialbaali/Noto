@@ -55,7 +55,7 @@
         <item name="notoSurfaceColor">@color/colorSurfaceVariant</item>
     </style>
 
-    <style name="TransparentTheme" parent="Theme.AppCompat">
+    <style name="TransparentTheme" parent="BaseTheme">
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -277,6 +277,7 @@
         <item name="android:textSize">@dimen/size_small</item>
         <item name="android:gravity">top</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>
+        <item name="android:textColorHint">?attr/notoSecondaryColor</item>
         <item name="android:lineSpacingMultiplier">1.3</item>
         <item name="android:textCursorDrawable">@drawable/cursor_shape</item>
         <item name="android:textDirection">anyRtl</item>
@@ -454,6 +455,15 @@
         <item name="trackColorActive">?attr/notoPrimaryColor</item>
         <item name="trackColorInactive">?attr/notoSurfaceColor</item>
         <item name="trackHeight">@dimen/spacing_normal</item>
+    </style>
+
+    <style name="OverlayDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
+        <item name="shapeAppearanceOverlay">@style/OverlayDialogShape</item>
+    </style>
+
+    <style name="OverlayDialogShape">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/spacing_normal</item>
     </style>
 
 </resources>

@@ -363,11 +363,11 @@
             android:exported="false" />
 
         <service
-            android:name=".note.CreateNoteTileService"
+            android:name=".note.QuickNoteTileService"
             android:exported="true"
             android:icon="@drawable/ic_round_edit_24"
             android:roundIcon="@drawable/ic_round_edit_24"
-            android:label="@string/create_note"
+            android:label="@string/quick_note"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
