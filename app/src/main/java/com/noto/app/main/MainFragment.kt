@@ -80,7 +80,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         }
 
         ibSorting.setOnClickListener {
-            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderListSortingDialogFragment())
+            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderListViewDialogFragment())
         }
     }
 

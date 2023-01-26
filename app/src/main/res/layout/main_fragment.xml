@@ -53,10 +53,10 @@
             android:id="@+id/ib_sorting"
             android:background="@drawable/round_btn_surface_shape"
             android:padding="@dimen/spacing_normal"
-            android:src="@drawable/ic_round_sorting_24"
+            android:src="@drawable/ic_round_view_24"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/sorting_type" />
+            android:contentDescription="@string/folders_view" />
 
         <ImageButton
             android:id="@+id/ib_settings"

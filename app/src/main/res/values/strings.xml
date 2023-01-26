@@ -170,6 +170,7 @@
     <string name="delete_folder">Delete</string>
     <string name="delete_folder_confirmation">Are you sure you want to delete this folder?</string>
     <string name="folders_sorting">Folders sorting</string>
+    <string name="folders_ordering">Folders ordering</string>
     <string name="empty_title">Title can\'t be empty.</string>
     <string name="folder_is_deleted">Folder has been deleted.</string>
     <string name="folder_is_archived">Folder has been archived.</string>
@@ -301,6 +302,7 @@
     <!-- Ordering for sorting/grouping of notes/folders -->
     <string name="ordering">Ordering</string>
     <string name="notes_view">Notes view</string>
+    <string name="folders_view">Folders view</string>
     <string name="sorting_order">Sorting order</string>
     <string name="grouping_type">Grouping type</string>
     <!-- Grouping for notes/folders -->

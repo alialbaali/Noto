@@ -29,11 +29,6 @@
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_mainFragment_to_folderListSortingDialogFragment"
-            app:destination="@id/folderListSortingDialogFragment"
-            app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_mainFragment_to_allNotesFragment"
             app:destination="@id/allNotesFragment"
             app:popUpTo="@id/folderFragment"
@@ -55,6 +50,9 @@
         <action
             android:id="@+id/action_mainFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_folderListViewDialogFragment"
+            app:destination="@id/folderListViewDialogFragment" />
     </dialog>
     <fragment
         android:id="@+id/folderFragment"
@@ -712,4 +710,19 @@
             android:name="folder_id"
             app:argType="long" />
     </dialog>
+    <dialog
+        android:id="@+id/folderListViewDialogFragment"
+        android:name="com.noto.app.main.FolderListViewDialogFragment"
+        android:label="FolderListViewDialogFragment" >
+        <action
+            android:id="@+id/action_folderListViewDialogFragment_to_folderListOrderingDialogFragment"
+            app:destination="@id/folderListOrderingDialogFragment" />
+        <action
+            android:id="@+id/action_folderListViewDialogFragment_to_folderListSortingDialogFragment"
+            app:destination="@id/folderListSortingDialogFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/folderListOrderingDialogFragment"
+        android:name="com.noto.app.main.FolderListOrderingDialogFragment"
+        android:label="FolderListOrderingDialogFragment" />
 </navigation>

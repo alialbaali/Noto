@@ -15,12 +15,12 @@
             layout="@layout/dialog_fragment_toolbar" />
 
         <RadioGroup
-            android:id="@+id/rg_sorting_order"
+            android:id="@+id/rg_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_sorting_asc"
+                android:id="@+id/rb_ascending"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
                 android:text="@string/ascending" />
 
             <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rb_sorting_desc"
+                android:id="@+id/rb_descending"
                 style="@style/DialogRadioButtonItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

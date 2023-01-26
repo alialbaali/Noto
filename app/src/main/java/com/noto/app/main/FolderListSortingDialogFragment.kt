@@ -9,9 +9,6 @@ import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.FolderListSortingDialogFragmentBinding
 import com.noto.app.domain.model.FolderListSortingType
-import com.noto.app.domain.model.SortingOrder
-import com.noto.app.util.disable
-import com.noto.app.util.enable
 import com.noto.app.util.stringResource
 import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
@@ -36,52 +33,22 @@ class FolderListSortingDialogFragment : BaseDialogFragment() {
                     FolderListSortingType.CreationDate -> rbCreationDate.isChecked = true
                     FolderListSortingType.Manual -> rbManual.isChecked = true
                 }
-                if (sortingType == FolderListSortingType.Manual) {
-                    rbSortingAsc.isClickable = false
-                    rbSortingDesc.isClickable = false
-                    rgOrder.disable()
-                    tvOrder.disable()
-                } else {
-                    rbSortingAsc.isClickable = true
-                    rbSortingDesc.isClickable = true
-                    rgOrder.enable()
-                    tvOrder.enable()
-                }
-            }
-            .launchIn(lifecycleScope)
-
-        viewModel.sortingOrder
-            .onEach { sortingOrder ->
-                when (sortingOrder) {
-                    SortingOrder.Ascending -> rbSortingAsc.isChecked = true
-                    SortingOrder.Descending -> rbSortingDesc.isChecked = true
-                }
             }
             .launchIn(lifecycleScope)
 
         rbManual.setOnClickListener {
             viewModel.updateSortingType(FolderListSortingType.Manual)
+                .invokeOnCompletion { dismiss() }
         }
 
         rbCreationDate.setOnClickListener {
             viewModel.updateSortingType(FolderListSortingType.CreationDate)
+                .invokeOnCompletion { dismiss() }
         }
 
         rbAlphabetical.setOnClickListener {
             viewModel.updateSortingType(FolderListSortingType.Alphabetical)
+                .invokeOnCompletion { dismiss() }
         }
-
-        rbSortingAsc.setOnClickListener {
-            viewModel.updateSortingOrder(SortingOrder.Ascending)
-        }
-
-        rbSortingDesc.setOnClickListener {
-            viewModel.updateSortingOrder(SortingOrder.Descending)
-        }
-
-        btnApply.setOnClickListener {
-            dismiss()
-        }
-
     }
 }
