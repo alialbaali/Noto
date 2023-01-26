@@ -81,63 +81,39 @@
                     android:text="@string/general" />
             </LinearLayout>
 
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/spacing_small"
+                tools:itemCount="1"
+                tools:listitem="@layout/label_item" />
+
             <LinearLayout
+                android:id="@+id/ll_filtering"
                 android:layout_marginHorizontal="@dimen/spacing_normal"
                 android:layout_marginVertical="@dimen/spacing_small"
                 android:background="@drawable/settings_item_shape"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_filtered_labels"
-                    style="@style/SettingsItem"
-                    android:clickable="false"
-                    android:layout_width="match_parent"
+                    android:id="@+id/tv_filtering"
+                    style="@style/ListDialogItem"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/filtered_labels" />
-
-                <com.airbnb.epoxy.EpoxyRecyclerView
-                    android:id="@+id/rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipChildren="false"
-                    android:clipToPadding="false"
-                    android:paddingHorizontal="@dimen/spacing_small"
-                    tools:itemCount="1"
-                    tools:listitem="@layout/label_item" />
+                    android:text="@string/filtering"
+                    android:layout_weight="1" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_filtering_type"
-                    style="@style/SettingsItem"
+                    android:id="@+id/tv_filtering_value"
+                    style="@style/ListDialogItemValue"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:padding="@dimen/spacing_normal"
-                    android:text="@string/label_filtering_type" />
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/tl_filtering_type"
-                    style="@style/TabLayout"
-                    android:backgroundTint="?attr/notoBackgroundColor"
-                    android:layout_margin="@dimen/spacing_normal"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent">
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/inclusive" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/exclusive" />
-
-                    <com.google.android.material.tabs.TabItem
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:text="@string/strict" />
-                </com.google.android.material.tabs.TabLayout>
+                    android:text="@string/inclusive" />
             </LinearLayout>
 
             <LinearLayout

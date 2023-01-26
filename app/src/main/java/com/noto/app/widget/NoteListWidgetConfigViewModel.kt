@@ -50,7 +50,6 @@ class NoteListWidgetConfigViewModel(
 
     private val mutableWidgetFilteringType = MutableStateFlow(FilteringType.Inclusive)
     val widgetFilteringType get() = mutableWidgetFilteringType.asStateFlow()
-    val widgetFilteringTypeFlow = settingsRepository.getWidgetFilteringType(appWidgetId)
 
     val icon = settingsRepository.icon
         .stateIn(viewModelScope, SharingStarted.Eagerly, Icon.Futuristic)

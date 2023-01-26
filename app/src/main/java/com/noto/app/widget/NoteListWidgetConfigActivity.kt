@@ -8,7 +8,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.tabs.TabLayout
 import com.noto.app.R
 import com.noto.app.components.BaseActivity
 import com.noto.app.databinding.NoteListWidgetConfigActivityBinding
@@ -80,9 +79,9 @@ class NoteListWidgetConfigActivity : BaseActivity() {
         ) { folder, notes, labels, filteringType ->
             val filteredNotes = notes.filterSelectedLabels(labels.filterSelected(), filteringType)
             val color = colorResource(folder.color.toResource())
-            tvFilteredLabels.isVisible = labels.isNotEmpty()
+            tb.setTitleTextColor(color)
             rv.isVisible = labels.isNotEmpty()
-//            divider2.root.isVisible = labels.isNotEmpty()
+            llFiltering.isVisible = labels.isNotEmpty()
             btnCreate.setBackgroundColor(color)
             tvFolderValue.text = folder.getTitle(this@NoteListWidgetConfigActivity)
             widget.tvFolderTitle.text = folder.getTitle(this@NoteListWidgetConfigActivity)
@@ -119,7 +118,6 @@ class NoteListWidgetConfigActivity : BaseActivity() {
                                 viewModel.selectLabel(entry.key.id)
                         }
                         onLongClickListener { _ -> false }
-                        backgroundColor(colorAttributeResource(R.attr.notoBackgroundColor))
                     }
                 }
             }
@@ -167,13 +165,13 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             }
             .launchIn(lifecycleScope)
 
-        viewModel.widgetFilteringTypeFlow
+        viewModel.widgetFilteringType
             .onEach { filteringType ->
-                when (filteringType) {
-                    FilteringType.Inclusive -> tlFilteringType.getTabAt(0)?.select()
-                    FilteringType.Exclusive -> tlFilteringType.getTabAt(1)?.select()
-                    FilteringType.Strict -> tlFilteringType.getTabAt(2)?.select()
-                }
+                tvFilteringValue.text = when (filteringType) {
+                    FilteringType.Inclusive -> R.string.inclusive
+                    FilteringType.Exclusive -> R.string.exclusive
+                    FilteringType.Strict -> R.string.strict
+                }.let(this@NoteListWidgetConfigActivity::stringResource)
             }
             .launchIn(lifecycleScope)
 
@@ -211,21 +209,11 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             viewModel.setWidgetRadius(value.toInt())
         }
 
-        tlFilteringType.addOnTabSelectedListener(
-            object : TabLayout.OnTabSelectedListener {
-                override fun onTabSelected(tab: TabLayout.Tab?) {
-                    val filteringType = when (tab?.position) {
-                        0 -> FilteringType.Inclusive
-                        1 -> FilteringType.Exclusive
-                        else -> FilteringType.Strict
-                    }
-                    viewModel.setFilteringType(filteringType)
-                }
-
-                override fun onTabUnselected(tab: TabLayout.Tab?) {}
-                override fun onTabReselected(tab: TabLayout.Tab?) {}
-            }
-        )
+        llFiltering.setOnClickListener {
+            NoteListFilteringWidgetDialogFragment(viewModel.widgetFilteringType.value) { filteringType ->
+                viewModel.setFilteringType(filteringType)
+            }.show(supportFragmentManager, null)
+        }
 
         btnCreate.setOnClickListener {
             viewModel.createOrUpdateWidget()
