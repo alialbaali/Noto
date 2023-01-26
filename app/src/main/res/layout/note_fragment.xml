@@ -140,8 +140,8 @@
         android:id="@+id/ll_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/generic_top_shape"
         android:layout_gravity="bottom"
-        android:padding="@dimen/spacing_normal"
         android:visibility="gone"
         tools:layout_anchor="@id/fab"
         tools:layout_gravity="top"
@@ -152,7 +152,6 @@
             style="@style/ClickableView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_small"
             android:src="@drawable/ic_round_undo_history_24"
             android:contentDescription="@string/undo_history" />
 
@@ -162,7 +161,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="@dimen/spacing_small"
             android:contentDescription="@string/undo"
             android:src="@drawable/ic_round_undo_24" />
 
@@ -172,7 +170,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginHorizontal="@dimen/spacing_small"
             android:contentDescription="@string/redo"
             android:src="@drawable/ic_round_redo_24" />
 
@@ -181,7 +178,6 @@
             style="@style/ClickableView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_small"
             android:src="@drawable/ic_round_redo_history_24"
             android:contentDescription="@string/redo_history" />
     </LinearLayout>

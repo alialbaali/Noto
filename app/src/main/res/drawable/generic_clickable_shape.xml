@@ -3,7 +3,7 @@
     android:color="?attr/notoSecondaryColor">
     <item>
         <shape android:shape="rectangle">
-            <corners android:radius="1000dp" />
+            <corners android:radius="@dimen/spacing_extra_small" />
             <solid android:color="?attr/notoSurfaceColor" />
         </shape>
     </item>
