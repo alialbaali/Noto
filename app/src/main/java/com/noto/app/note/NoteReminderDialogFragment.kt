@@ -126,6 +126,7 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
             tb.vHead.background?.mutate()?.setTint(color)
             tb.tvDialogTitle.setTextColor(color)
             til.boxStrokeColor = color
+            btnDone.background?.setTint(color)
         }
     }
 
