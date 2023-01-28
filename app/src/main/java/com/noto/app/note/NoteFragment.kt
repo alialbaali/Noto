@@ -87,13 +87,11 @@ class NoteFragment : Fragment() {
         viewModel.note
             .distinctUntilChangedBy { note -> note.reminderDate }
             .onEach { note ->
-                val reminderDrawable = context?.drawableResource(
-                    if (note.reminderDate == null)
-                        R.drawable.ic_round_notification_add_24
-                    else
-                        R.drawable.ic_round_edit_notifications_24
-                )
-                fab.setImageDrawable(reminderDrawable)
+                val reminderDrawable = if (note.reminderDate == null)
+                    R.drawable.ic_round_notification_add_24
+                else
+                    R.drawable.ic_round_edit_notifications_24
+                bab.menu?.findItem(R.id.add_reminder)?.setIcon(reminderDrawable)
             }
             .launchIn(lifecycleScope)
 
@@ -247,7 +245,6 @@ class NoteFragment : Fragment() {
 
         root.keyboardVisibilityAsFlow()
             .onEach { isVisible ->
-                fab.isVisible = !isVisible
                 bab.isVisible = !isVisible
                 llToolbar.isVisible = isVisible
             }
@@ -267,8 +264,6 @@ class NoteFragment : Fragment() {
     }
 
     private fun NoteFragmentBinding.enableBottomAppBarActions() {
-        fab.imageAlpha = EnabledAlpha
-        fab.isEnabled = true
         bab.menu.forEach {
             it.isEnabled = true
             it.icon?.alpha = EnabledAlpha
@@ -276,8 +271,6 @@ class NoteFragment : Fragment() {
     }
 
     private fun NoteFragmentBinding.disableBottomAppBarActions() {
-        fab.imageAlpha = DisabledAlpha
-        fab.isEnabled = false
         bab.menu.forEach {
             it.isEnabled = false
             it.icon?.alpha = DisabledAlpha
@@ -288,11 +281,6 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupListeners() {
         tb.setOnClickListener {
             nsv.smoothScrollTo(0, 0)
-        }
-
-        fab.setOnClickListener {
-            navController
-                ?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(args.folderId, viewModel.note.value.id))
         }
 
         bab.setNavigationOnClickListener {
@@ -328,6 +316,15 @@ class NoteFragment : Fragment() {
 
         bab.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
+                R.id.add_reminder -> {
+                    navController?.navigateSafely(
+                        NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(
+                            args.folderId,
+                            viewModel.note.value.id
+                        )
+                    )
+                    true
+                }
                 R.id.share_note -> {
                     launchShareNoteIntent(viewModel.note.value)
                     true
@@ -489,15 +486,10 @@ class NoteFragment : Fragment() {
             tvFolderTitle.text = folder.getTitle(context)
             tvFolderTitle.setTextColor(color)
             tb.navigationIcon?.mutate()?.setTint(color)
-            fab.backgroundTintList = colorStateList
             etNoteTitle.setLinkTextColor(color)
             etNoteBody.setLinkTextColor(color)
             etNoteTitle.highlightColor = highlightColor
             etNoteBody.highlightColor = highlightColor
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                fab.outlineAmbientShadowColor = color
-                fab.outlineSpotShadowColor = color
-            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 etNoteTitle.textCursorDrawable?.mutate()?.setTint(color)
                 etNoteBody.textCursorDrawable?.mutate()?.setTint(color)

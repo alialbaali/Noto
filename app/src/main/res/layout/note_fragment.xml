@@ -143,7 +143,7 @@
         android:background="@drawable/generic_top_shape"
         android:layout_gravity="bottom"
         android:visibility="gone"
-        tools:layout_anchor="@id/fab"
+        tools:layout_anchor="@id/bab"
         tools:layout_gravity="top"
         tools:visibility="visible">
 
@@ -184,27 +184,16 @@
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
-        style="@style/Widget.Material3.BottomAppBar.Legacy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:backgroundTint="?attr/notoBackgroundColor"
-        app:fabAnimationMode="scale"
-        app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
+        app:elevation="@dimen/elevation_large"
         app:hideOnScroll="true"
         app:menu="@menu/note_menu"
+        app:menuAlignmentMode="auto"
         app:navigationContentDescription="@string/folders"
         app:navigationIcon="@drawable/ic_round_menu_24"
         app:navigationIconTint="?attr/notoPrimaryColor" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/add_note_reminder"
-        app:backgroundTint="@color/colorAccentTeal"
-        app:layout_anchor="@id/bab"
-        app:tint="?attr/notoBackgroundColor"
-        tools:src="@drawable/ic_round_notification_add_24" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
