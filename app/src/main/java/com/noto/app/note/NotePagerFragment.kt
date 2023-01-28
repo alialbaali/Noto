@@ -69,11 +69,8 @@ class NotePagerFragment : Fragment() {
                     tb.setTitleTextColor(color)
                     tb.navigationIcon?.mutate()?.setTint(color)
                     fab.backgroundTintList = color.toColorStateList()
-                    fab.setRippleColor(color.withDefaultAlpha().toColorStateList())
-                    fabNext.iconTint = color.toColorStateList()
-                    fabPrevious.iconTint = color.toColorStateList()
-                    fabNext.setTextColor(color)
-                    fabPrevious.setTextColor(color)
+                    fabPrevious.rippleColor = color
+                    fabNext.rippleColor = color
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         listOf(fabPrevious, fabNext, fab).forEach {
                             it.outlineAmbientShadowColor = color
@@ -142,7 +139,11 @@ class NotePagerFragment : Fragment() {
 
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Int>(Constants.ScrollPosition)
-            ?.observe(viewLifecycleOwner) { scrollPosition -> abl.isLifted = scrollPosition != 0 }
+            ?.observe(viewLifecycleOwner) { scrollPosition ->
+                abl.isLifted = scrollPosition != 0
+                if (viewModel.lastScrollPosition.value > scrollPosition) bab.performShow(true) else bab.performHide(true)
+                viewModel.setLastScrollPosition(scrollPosition)
+            }
     }
 
     private fun NotePagerFragmentBinding.setupListeners() {
@@ -162,6 +163,7 @@ class NotePagerFragment : Fragment() {
             object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageSelected(position: Int) {
                     viewModel.selectIdByIndex(position)
+                    bab.performShow(true)
                 }
             }
         )
@@ -183,23 +185,24 @@ class NotePagerFragment : Fragment() {
             )
         }
 
-        fabNext.setOnClickListener {
-            viewModel.selectNextId()
-        }
-
         fabPrevious.setOnClickListener {
             viewModel.selectPreviousId()
         }
 
-        fabNext.setOnLongClickListener {
-            adapter?.createFragment(viewModel.noteIds.value.lastIndex)
-            viewModel.selectLastId()
-            true
+        fabNext.setOnClickListener {
+            viewModel.selectNextId()
+
         }
 
         fabPrevious.setOnLongClickListener {
             adapter?.createFragment(0)
             viewModel.selectFirstId()
+            true
+        }
+
+        fabNext.setOnLongClickListener {
+            adapter?.createFragment(viewModel.noteIds.value.lastIndex)
+            viewModel.selectLastId()
             true
         }
     }

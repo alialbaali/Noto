@@ -47,6 +47,9 @@ class NotePagerViewModel(
     private val mutableSelectedId = MutableStateFlow(noteId)
     val selectedId get() = mutableSelectedId.asStateFlow()
 
+    private val mutableLastScrollPosition = MutableStateFlow(0)
+    val lastScrollPosition get() = mutableLastScrollPosition.asStateFlow()
+
     fun selectIdByIndex(index: Int) {
         mutableSelectedId.value = noteIds.value[index]
     }
@@ -69,6 +72,10 @@ class NotePagerViewModel(
 
     fun selectLastId() {
         mutableSelectedId.value = noteIds.value.last()
+    }
+
+    fun setLastScrollPosition(position: Int) {
+        mutableLastScrollPosition.value = position
     }
 
 }

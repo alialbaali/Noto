@@ -27,50 +27,67 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bab"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        app:backgroundTint="?attr/notoBackgroundColor"
+        app:contentInsetEnd="0dp"
+        app:contentInsetEndWithActions="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:elevation="@dimen/elevation_large"
+        app:fabAlignmentMode="center"
+        app:fabAnimationMode="scale"
+        app:hideOnScroll="true">
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:gravity="center">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_previous"
+                android:src="@drawable/ic_round_previous_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/previous"
+                app:backgroundTint="?attr/notoSurfaceColor"
+                app:elevation="0dp"
+                app:rippleColor="?attr/notoSecondaryColor" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_next"
+                android:src="@drawable/ic_round_next_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/next"
+                app:backgroundTint="?attr/notoSurfaceColor"
+                app:elevation="0dp"
+                app:rippleColor="?attr/notoSecondaryColor" />
+        </LinearLayout>
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_gravity="top|end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:translationY="-16dp"
         android:contentDescription="@string/edit"
-        android:layout_margin="@dimen/spacing_normal"
         android:src="@drawable/ic_round_edit_24"
         app:backgroundTint="@color/colorPrimary"
-        app:layout_anchor="@id/fab_next"
-        app:layout_anchorGravity="end"
-        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:layout_anchor="@id/bab"
         app:tint="?attr/notoBackgroundColor" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab_next"
-        style="@style/ExtendedFab"
-        android:layout_gravity="end|bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
-        android:contentDescription="@string/next"
-        android:text="@string/next"
-        android:textColor="?attr/notoPrimaryColor"
-        app:backgroundTint="?attr/notoBackgroundColor"
-        app:icon="@drawable/ic_round_arrow_forward_24"
-        app:iconGravity="end"
-        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-        app:tint="?attr/notoPrimaryColor" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab_previous"
-        style="@style/ExtendedFab"
-        android:layout_gravity="start|bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
-        android:contentDescription="@string/next"
-        android:text="@string/previous"
-        android:textColor="?attr/notoPrimaryColor"
-        app:backgroundTint="?attr/notoBackgroundColor"
-        app:icon="@drawable/ic_round_arrow_back_24"
-        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-        app:tint="?attr/notoPrimaryColor" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
