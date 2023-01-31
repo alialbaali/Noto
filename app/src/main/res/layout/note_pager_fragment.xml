@@ -44,7 +44,8 @@
         app:elevation="@dimen/elevation_large"
         app:fabAlignmentMode="center"
         app:fabAnimationMode="scale"
-        app:hideOnScroll="true">
+        app:hideOnScroll="true"
+        app:removeEmbeddedFabElevation="false">
 
         <LinearLayout
             android:id="@+id/ll"

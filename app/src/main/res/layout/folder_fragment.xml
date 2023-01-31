@@ -87,43 +87,54 @@
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
-        style="@style/Widget.Material3.BottomAppBar.Legacy"
         android:layout_gravity="bottom"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:backgroundTint="?attr/notoBackgroundColor"
+        app:elevation="@dimen/elevation_large"
+        app:fabAlignmentMode="center"
         app:fabAnimationMode="scale"
-        app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
         app:menu="@menu/folder_menu"
+        app:menuAlignmentMode="auto"
         app:navigationContentDescription="@string/folders"
         app:navigationIcon="@drawable/ic_round_menu_24"
-        app:navigationIconTint="?attr/notoPrimaryColor" />
+        app:navigationIconTint="?attr/notoPrimaryColor"
+        app:removeEmbeddedFabElevation="false" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bab_selection"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        app:backgroundTint="?attr/notoBackgroundColor"
+        app:elevation="@dimen/elevation_large"
+        app:fabAnimationMode="scale"
+        app:hideOnScroll="true"
+        app:menu="@menu/folder_single_selection_menu"
+        app:navigationContentDescription="@string/folders"
+        app:removeEmbeddedFabElevation="false" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:contentDescription="@string/create_note"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
         android:layout_width="wrap_content"
         android:src="@drawable/ic_round_edit_24"
         app:backgroundTint="?attr/notoPrimaryColor"
         app:layout_anchor="@id/bab"
         app:tint="?attr/notoBackgroundColor" />
 
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/fab_options"
-        android:contentDescription="@string/options"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_selection"
+        android:contentDescription="@string/more_options"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
-        android:text="@string/options"
-        android:layout_gravity="end|bottom"
-        android:textColor="?attr/notoBackgroundColor"
         android:visibility="gone"
+        android:src="@drawable/ic_round_tune_24"
         app:backgroundTint="?attr/notoPrimaryColor"
-        app:icon="@drawable/ic_round_settings_24"
-        app:iconTint="?attr/notoBackgroundColor"
-        tools:visibility="visible" />
+        app:layout_anchor="@id/bab_selection"
+        app:tint="?attr/notoBackgroundColor" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

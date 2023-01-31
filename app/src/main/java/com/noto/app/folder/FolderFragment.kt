@@ -45,6 +45,10 @@ class FolderFragment : Fragment() {
 
     private lateinit var layoutManager: StaggeredGridLayoutManager
 
+    private val anchorViewId by lazy { R.id.bab_selection }
+
+    private val folderColor by lazy { viewModel.folder.value.color }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         FolderFragmentBinding.inflate(inflater, container, false).withBinding {
             setupMixedTransitions()
@@ -166,13 +170,44 @@ class FolderFragment : Fragment() {
         viewModel.isSelection
             .onEach { isSelection ->
                 if (isSelection) {
-                    fabOptions.isVisible = true
-                    fab.isVisible = false
+                    fab.hide()
+                    bab.performHide(true)
                     bab.isVisible = false
+                    babSelection.isVisible = true
+                    babSelection.performShow(true)
+                    fabSelection.show()
                 } else {
-                    fabOptions.isVisible = false
-                    fab.isVisible = true
+                    fabSelection.hide()
+                    babSelection.performHide(true)
+                    babSelection.isVisible = false
                     bab.isVisible = true
+                    bab.performShow(true)
+                    fab.show()
+                }
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.notes
+            .map { it.getOrDefault(emptyList()).filter { model -> model.isSelected } }
+            .onEach { selectedModels ->
+                if (selectedModels.count() == 1) {
+                    val selectedModel = selectedModels.first()
+                    babSelection.replaceMenu(R.menu.folder_single_selection_menu)
+                    val reminderDrawable = if (selectedModel.note.reminderDate == null)
+                        R.drawable.ic_round_notification_add_24
+                    else
+                        R.drawable.ic_round_edit_notifications_24
+                    babSelection.menu?.findItem(R.id.add_reminder)?.setIcon(reminderDrawable)
+                } else {
+                    babSelection.replaceMenu(R.menu.folder_multi_selection_menu)
+                }
+                val pinMenuItem = babSelection.menu?.findItem(R.id.pin)
+                if (selectedModels.none { it.note.isPinned }) {
+                    pinMenuItem?.setTitle(R.string.pin)
+                    pinMenuItem?.setIcon(R.drawable.ic_round_pin_24)
+                } else {
+                    pinMenuItem?.setTitle(R.string.unpin)
+                    pinMenuItem?.setIcon(R.drawable.ic_round_pin_off_24)
                 }
             }
             .launchIn(lifecycleScope)
@@ -245,24 +280,21 @@ class FolderFragment : Fragment() {
             }
         }
 
-        fabOptions.setOnClickListener {
+        fabSelection.setOnClickListener {
             val notes = viewModel.notes.value.getOrDefault(emptyList())
-            val selectedNoteIds = notes
-                .filter { model -> model.isSelected }
-                .sortedBy { it.selectionOrder }
+            val selectedNoteIds = viewModel.selectedNotes
                 .map { model -> model.note.id }
                 .toLongArray()
             if (selectedNoteIds.count() == 1) {
-                navController
-                    ?.navigateSafely(
-                        FolderFragmentDirections.actionFolderFragmentToNoteDialogFragment(
-                            args.folderId,
-                            selectedNoteIds.first(),
-                            R.id.folderFragment,
-                            isSelectAllEnabled = notes.size != 1,
-                            selectedNoteIds = selectedNoteIds,
-                        )
+                navController?.navigateSafely(
+                    FolderFragmentDirections.actionFolderFragmentToNoteDialogFragment(
+                        args.folderId,
+                        selectedNoteIds.first(),
+                        R.id.folderFragment,
+                        isSelectAllEnabled = notes.size != 1,
+                        selectedNoteIds = selectedNoteIds,
                     )
+                )
             } else {
                 navController?.navigateSafely(
                     FolderFragmentDirections.actionFolderFragmentToNoteSelectionDialogFragment(
@@ -270,6 +302,70 @@ class FolderFragment : Fragment() {
                         selectedNoteIds = selectedNoteIds,
                     )
                 )
+            }
+        }
+
+        babSelection.setOnMenuItemClickListener { menuItem ->
+            val selectedNotes = viewModel.selectedNotes.map { model -> model.note }
+            val selectedNotesCount = selectedNotes.count()
+
+            when (menuItem.itemId) {
+                R.id.add_reminder -> {
+                    navController?.navigateSafely(
+                        FolderFragmentDirections.actionFolderFragmentToNoteReminderDialogFragment(
+                            args.folderId,
+                            selectedNotes.first().id,
+                        )
+                    )
+                    true
+                }
+                R.id.merge -> {
+                    viewModel.mergeSelectedNotes()
+                    context?.let { context ->
+                        val text = context.stringResource(R.string.notes_are_merged, selectedNotes.count())
+                        val drawableId = R.drawable.ic_round_merge_24
+                        root.snackbar(text, drawableId, anchorViewId, folderColor)
+                        context.updateAllWidgetsData()
+                        context.updateNoteListWidgets()
+                    }
+                    true
+                }
+                R.id.pin -> {
+                    if (selectedNotes.none { it.isPinned }) {
+                        viewModel.pinSelectedNotes()
+                        context?.let { context ->
+                            val text = context.quantityStringResource(R.plurals.note_is_pinned, selectedNotesCount, selectedNotesCount)
+                            val drawableId = R.drawable.ic_round_pin_24
+                            root.snackbar(text, drawableId, anchorViewId, folderColor)
+                            context.updateAllWidgetsData()
+                        }
+                    } else {
+                        viewModel.unpinSelectedNotes()
+                        context?.let { context ->
+                            val text = context.quantityStringResource(R.plurals.note_is_unpinned, selectedNotesCount, selectedNotesCount)
+                            val drawableId = R.drawable.ic_round_pin_off_24
+                            root.snackbar(text, drawableId, anchorViewId, folderColor)
+                            context.updateAllWidgetsData()
+                        }
+                    }
+                    true
+                }
+                R.id.share -> {
+                    launchShareNotesIntent(selectedNotes)
+                    true
+                }
+                R.id.archive -> {
+                    viewModel.archiveSelectedNotes()
+                    context?.let { context ->
+                        val text = context.quantityStringResource(R.plurals.note_is_archived, selectedNotesCount, selectedNotesCount)
+                        val drawableId = R.drawable.ic_round_archive_24
+                        root.snackbar(text, drawableId, anchorViewId, folderColor)
+                        context.updateAllWidgetsData()
+                        context.updateNoteListWidgets()
+                    }
+                    true
+                }
+                else -> false
             }
         }
     }
@@ -434,12 +530,12 @@ class FolderFragment : Fragment() {
             tvFolderNotesCount.typeface = context.tryLoadingFontResource(R.font.nunito_semibold)
             tvFolderNotesCount.animationInterpolator = DefaultInterpolator()
             fab.backgroundTintList = colorStateList
-            fabOptions.backgroundTintList = colorStateList
+            fabSelection.backgroundTintList = colorStateList
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
                 fab.outlineSpotShadowColor = color
-                fabOptions.outlineAmbientShadowColor = color
-                fabOptions.outlineSpotShadowColor = color
+                fabSelection.outlineAmbientShadowColor = color
+                fabSelection.outlineSpotShadowColor = color
             }
             if (folder.isArchived || folder.isVaulted) {
                 val drawableId = if (folder.isVaulted) R.drawable.ic_round_lock_24 else R.drawable.ic_round_archive_24

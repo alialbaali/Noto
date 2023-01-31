@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="AlwaysShowAction">
+
+    <item
+        android:id="@+id/add_reminder"
+        android:contentDescription="@string/add_note_reminder"
+        android:icon="@drawable/ic_round_notification_add_24"
+        android:title="@string/add_note_reminder"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/pin"
+        android:contentDescription="@string/pin"
+        android:icon="@drawable/ic_round_pin_24"
+        android:title="@string/pin"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/share"
+        android:contentDescription="@string/share_with"
+        android:icon="@drawable/ic_round_share_24"
+        android:title="@string/share_with"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/archive"
+        android:contentDescription="@string/archive"
+        android:icon="@drawable/ic_round_archive_24"
+        android:title="@string/archive"
+        app:showAsAction="always" />
+
+</menu>

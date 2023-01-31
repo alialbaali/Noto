@@ -92,6 +92,9 @@
         <action
             android:id="@+id/action_folderFragment_to_notePagerFragment"
             app:destination="@id/notePagerFragment" />
+        <action
+            android:id="@+id/action_folderFragment_to_noteReminderDialogFragment"
+            app:destination="@id/noteReminderDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/newFolderFragment"
