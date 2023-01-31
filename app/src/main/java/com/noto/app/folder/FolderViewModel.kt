@@ -84,7 +84,10 @@ class FolderViewModel(
     private var isUserScrolling = false
 
     val selectedNotes
-        get() = notes.value.getOrDefault(emptyList()).filter { it.isSelected }
+        get() = notes.value
+            .getOrDefault(emptyList())
+            .filter { it.isSelected }
+            .sortedBy { it.selectionOrder }
 
     init {
         combine(
