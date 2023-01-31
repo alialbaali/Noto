@@ -59,7 +59,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         if (folderArchiveFragmentEntry?.destination?.id == null)
-            R.id.fab
+            R.id.bab
         else
             null
     }
