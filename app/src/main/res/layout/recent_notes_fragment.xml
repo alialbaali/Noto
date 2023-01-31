@@ -84,18 +84,20 @@
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
-        style="@style/Widget.Material3.BottomAppBar.Legacy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         app:backgroundTint="?attr/notoBackgroundColor"
+        app:elevation="@dimen/elevation_large"
+        app:fabAlignmentMode="center"
         app:fabAnimationMode="scale"
-        app:fabCradleRoundedCornerRadius="@dimen/spacing_normal"
         app:hideOnScroll="true"
         app:menu="@menu/generic_menu"
+        app:menuAlignmentMode="auto"
         app:navigationContentDescription="@string/folders"
         app:navigationIcon="@drawable/ic_round_menu_24"
-        app:navigationIconTint="?attr/notoPrimaryColor" />
+        app:navigationIconTint="?attr/notoPrimaryColor"
+        app:removeEmbeddedFabElevation="false" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
