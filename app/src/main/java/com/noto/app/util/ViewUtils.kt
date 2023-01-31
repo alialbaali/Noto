@@ -87,15 +87,14 @@ val NavController.lastDestinationId: Long?
 val Uri.directoryPath
     get() = path?.substringAfterLast(':')
 
-fun Fragment.launchShareNoteIntent(note: Note) {
-    val intent = note.createShareIntent()
-    val chooser = Intent.createChooser(intent, context?.stringResource(R.string.share_note))
+fun Fragment.launchShareNotesIntent(notes: List<Note>) {
+    val notesText = notes.joinToString(LineSeparator) { it.format() }.trim()
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, notesText)
+    }
+    val chooser = Intent.createChooser(intent, context?.quantityStringResource(R.plurals.share_note, notes.count(), notes.count()))
     startActivity(chooser)
-}
-
-private fun Note.createShareIntent() = Intent(Intent.ACTION_SEND).apply {
-    type = "text/plain"
-    putExtra(Intent.EXTRA_TEXT, format())
 }
 
 fun View.snackbar(

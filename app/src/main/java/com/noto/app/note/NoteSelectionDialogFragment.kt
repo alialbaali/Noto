@@ -4,7 +4,6 @@ import android.app.AlarmManager
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -102,6 +101,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                     divider2.root.isVisible = !isAllSelected
                     if (selectedNotes.none { it.note.isPinned }) {
                         tvPinNotes.text = context?.stringResource(R.string.pin)
+                        tvPinNotes.compoundDrawablesRelative[1] = context?.drawableResource(R.drawable.ic_round_pin_24)
                         tvPinNotes.setOnClickListener {
                             viewModel.pinSelectedNotes().invokeOnCompletion {
                                 context?.let { context ->
@@ -115,6 +115,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                         }
                     } else {
                         tvPinNotes.text = context?.stringResource(R.string.unpin)
+                        tvPinNotes.compoundDrawablesRelative[1] = context?.drawableResource(R.drawable.ic_round_pin_off_24)
                         tvPinNotes.setOnClickListener {
                             viewModel.unpinSelectedNotes().invokeOnCompletion {
                                 context?.let { context ->
@@ -210,13 +211,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvShareNotes.setOnClickListener {
-            val notesText = selectedNotes.joinToString(LineSeparator) { it.format() }
-            val intent = Intent(Intent.ACTION_SEND).apply {
-                type = "text/plain"
-                putExtra(Intent.EXTRA_TEXT, notesText)
-            }
-            val chooser = Intent.createChooser(intent, context?.stringResource(R.string.share_note))
-            startActivity(chooser)
+            launchShareNotesIntent(selectedNotes)
             dismiss()
         }
 

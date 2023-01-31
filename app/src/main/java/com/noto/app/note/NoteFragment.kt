@@ -326,7 +326,7 @@ class NoteFragment : Fragment() {
                     true
                 }
                 R.id.share_note -> {
-                    launchShareNoteIntent(viewModel.note.value)
+                    launchShareNotesIntent(listOf(viewModel.note.value))
                     true
                 }
                 R.id.reading_mode -> {

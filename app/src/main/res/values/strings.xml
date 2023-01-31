@@ -291,7 +291,10 @@
     <string name="undo_history">Undo history</string>
     <string name="redo">Redo</string>
     <string name="redo_history">Redo history</string>
-    <string name="share_note">Share note</string>
+    <plurals name="share_note">
+        <item quantity="one">Share note</item>
+        <item quantity="other">Share %d notes</item>
+    </plurals>
     <string name="sorting_type">Sorting type</string>
     <!-- Sorting for notes/folders -->
     <string name="sorting">Sorting</string>

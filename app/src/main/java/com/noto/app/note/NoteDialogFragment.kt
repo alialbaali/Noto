@@ -213,10 +213,12 @@ class NoteDialogFragment : BaseDialogFragment() {
                         context?.let { context ->
                             context.updateAllWidgetsData()
                             context.updateNoteListWidgets()
-                            parentView?.snackbar(context.quantityStringResource(stringId, DefaultQuantity, folderTitle),
+                            parentView?.snackbar(
+                                context.quantityStringResource(stringId, DefaultQuantity, folderTitle),
                                 drawableId,
                                 anchorViewId,
-                                folderColor)
+                                folderColor
+                            )
                         }
                         navController?.popBackStack(args.destination, false)
                         dismiss()
@@ -238,10 +240,12 @@ class NoteDialogFragment : BaseDialogFragment() {
                         val drawableId = R.drawable.ic_round_move_24
                         val folderTitle = savedStateHandle.get<String>(Constants.FolderTitle)
                         context?.let { context ->
-                            parentView?.snackbar(context.quantityStringResource(stringId, DefaultQuantity, folderTitle),
+                            parentView?.snackbar(
+                                context.quantityStringResource(stringId, DefaultQuantity, folderTitle),
                                 drawableId,
                                 anchorViewId,
-                                folderColor)
+                                folderColor
+                            )
                             context.updateAllWidgetsData()
                             context.updateNoteListWidgets()
                         }
@@ -259,7 +263,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvShareNote.setOnClickListener {
             dismiss()
-            launchShareNoteIntent(viewModel.note.value)
+            launchShareNotesIntent(listOf(viewModel.note.value))
         }
 
         tvDeleteNote.setOnClickListener {

@@ -28,6 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_extra_small"
+                tools:itemCount="1"
                 tools:listitem="@layout/note_label_item" />
 
             <LinearLayout
