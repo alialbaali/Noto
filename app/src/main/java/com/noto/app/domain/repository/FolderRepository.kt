@@ -7,6 +7,8 @@ interface FolderRepository {
 
     fun getAllFolders(): Flow<List<Folder>>
 
+    fun getAllUnvaultedFolders(): Flow<List<Folder>>
+
     fun getFolders(): Flow<List<Folder>>
 
     fun getArchivedFolders(): Flow<List<Folder>>

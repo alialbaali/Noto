@@ -17,6 +17,7 @@ class FolderRepositoryImpl(
 ) : FolderRepository {
 
     override fun getAllFolders(): Flow<List<Folder>> = dataSource.getAllFolders().flowOn(dispatcher)
+    override fun getAllUnvaultedFolders(): Flow<List<Folder>> = dataSource.getAllUnvaultedFolders().flowOn(dispatcher)
 
     override fun getFolders(): Flow<List<Folder>> = dataSource.getFolders().flowOn(dispatcher)
 
