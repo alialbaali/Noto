@@ -3,6 +3,8 @@
     <!-- App -->
     <string name="app_name">Noto</string>
     <string name="done">Done</string>
+    <!-- Main menu dialog where it displays folders. -->
+    <string name="home">Home</string>
     <!-- Button text for sorting/ordering/filtering notes options. -->
     <string name="apply">Apply</string>
     <string name="okay">Okay</string>
@@ -115,6 +117,8 @@
     <string name="all_folders">All folders</string>
     <string name="clear">Clear</string>
     <string name="recent_notes">Recent notes</string>
+    <!-- Replacement for Recent Notes filtered view. -->
+    <string name="recent">Recent</string>
     <string name="collapse">Collapse</string>
     <string name="expand">Expand</string>
     <string name="no_parent">No parent</string>
@@ -123,6 +127,10 @@
     <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
     <string name="open_notes_in">Open notes in</string>
     <string name="archive">Archive</string>
+    <!-- Similar to Recent Notes filtered view but for archived notes. -->
+    <string name="archived">Archived</string>
+    <!-- Similar to Recent Notes filtered view but for notes that have reminders set. -->
+    <string name="scheduled">Scheduled</string>
     <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
     <string name="folder_archive">%s archive</string>
     <string name="unarchive">Unarchive</string>
