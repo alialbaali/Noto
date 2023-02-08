@@ -136,52 +136,6 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <LinearLayout
-        android:id="@+id/ll_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/generic_top_shape"
-        android:layout_gravity="bottom"
-        android:visibility="gone"
-        tools:layout_anchor="@id/bab"
-        tools:layout_gravity="top"
-        tools:visibility="visible">
-
-        <ImageButton
-            android:id="@+id/ib_undo_history"
-            style="@style/ClickableView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_round_undo_history_24"
-            android:contentDescription="@string/undo_history" />
-
-        <ImageButton
-            android:id="@+id/ib_undo"
-            style="@style/ClickableView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/undo"
-            android:src="@drawable/ic_round_undo_24" />
-
-        <ImageButton
-            android:id="@+id/ib_redo"
-            style="@style/ClickableView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:contentDescription="@string/redo"
-            android:src="@drawable/ic_round_redo_24" />
-
-        <ImageButton
-            android:id="@+id/ib_redo_history"
-            style="@style/ClickableView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_round_redo_history_24"
-            android:contentDescription="@string/redo_history" />
-    </LinearLayout>
-
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
         android:layout_width="match_parent"
@@ -195,5 +149,64 @@
         app:navigationContentDescription="@string/folders"
         app:navigationIcon="@drawable/ic_round_menu_24"
         app:navigationIconTint="?attr/notoPrimaryColor" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bab_toolbar"
+        android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:paddingStart="0dp"
+        android:paddingEnd="0dp"
+        android:visibility="gone"
+        app:backgroundTint="?attr/notoBackgroundColor"
+        app:contentInsetEnd="0dp"
+        app:contentInsetEndWithActions="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:elevation="@dimen/elevation_large"
+        app:hideOnScroll="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center">
+
+            <ImageButton
+                android:id="@+id/ib_undo_history"
+                style="@style/ClickableView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_round_undo_history_24"
+                android:contentDescription="@string/undo_history" />
+
+            <ImageButton
+                android:id="@+id/ib_undo"
+                style="@style/ClickableView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/undo"
+                android:src="@drawable/ic_round_undo_24" />
+
+            <ImageButton
+                android:id="@+id/ib_redo"
+                style="@style/ClickableView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:contentDescription="@string/redo"
+                android:src="@drawable/ic_round_redo_24" />
+
+            <ImageButton
+                android:id="@+id/ib_redo_history"
+                style="@style/ClickableView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_round_redo_history_24"
+                android:contentDescription="@string/redo_history" />
+        </LinearLayout>
+    </com.google.android.material.bottomappbar.BottomAppBar>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
