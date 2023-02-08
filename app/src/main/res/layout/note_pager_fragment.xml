@@ -63,7 +63,8 @@
                 android:contentDescription="@string/previous"
                 app:backgroundTint="?attr/notoSurfaceColor"
                 app:elevation="0dp"
-                app:rippleColor="?attr/notoSecondaryColor" />
+                app:rippleColor="?attr/notoSecondaryColor"
+                app:tint="?attr/notoPrimaryColor" />
 
             <Space
                 android:layout_width="0dp"
@@ -78,7 +79,8 @@
                 android:contentDescription="@string/next"
                 app:backgroundTint="?attr/notoSurfaceColor"
                 app:elevation="0dp"
-                app:rippleColor="?attr/notoSecondaryColor" />
+                app:rippleColor="?attr/notoSecondaryColor"
+                app:tint="?attr/notoPrimaryColor" />
         </LinearLayout>
     </com.google.android.material.bottomappbar.BottomAppBar>
 
