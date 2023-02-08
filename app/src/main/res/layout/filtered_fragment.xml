@@ -87,6 +87,7 @@
         android:layout_gravity="bottom"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        app:addElevationShadow="true"
         app:backgroundTint="?attr/notoBackgroundColor"
         app:elevation="@dimen/elevation_large"
         app:fabAlignmentMode="center"
