@@ -113,4 +113,8 @@ class AppViewModel(
     fun setNotificationPermissionResult(isGranted: Boolean?) {
         mutableIsNotificationPermissionGranted.value = isGranted
     }
+
+    fun updateLanguage(value: Language) = viewModelScope.launch {
+        settingsRepository.updateLanguage(value)
+    }
 }

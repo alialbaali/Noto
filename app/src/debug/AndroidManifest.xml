@@ -15,8 +15,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/BaseTheme"
+        android:localeConfig="@xml/locales_config"
         tools:replace="android:theme"
-        tools:targetApi="m">
+        tools:targetApi="tiramisu">
         <activity
             android:name=".AppActivity"
             android:windowSoftInputMode="adjustResize"

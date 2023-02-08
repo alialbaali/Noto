@@ -40,6 +40,20 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        resourceConfigurations.addAll(
+            listOf(
+                "en",
+                "ar",
+                "cs",
+                "de",
+                "fr",
+                "in",
+                "it",
+//                "ru",
+//                "ta",
+                "tr"
+            )
+        )
     }
     buildTypes {
         getByName("release") {

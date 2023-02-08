@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.core.os.LocaleListCompat
 import androidx.viewbinding.ViewBinding
 import com.noto.app.R
 import com.noto.app.domain.model.*
@@ -319,4 +320,28 @@ fun Language.toLocale(): Locale = when (this) {
     Language.German -> Locale("de")
     Language.Italian -> Locale("it")
     Language.Czech -> Locale("cs")
+}
+
+fun List<Language>.toLocalListCompat(): LocaleListCompat {
+    val locales = this.map { it.toLocale() }.toTypedArray()
+    return LocaleListCompat.create(*locales)
+}
+
+fun LocaleListCompat.toLanguages(): List<Language> {
+    return toLanguageTags().split(',').map { tag ->
+        when {
+            tag.startsWith("en", ignoreCase = true) -> Language.English
+            tag.startsWith("tr", ignoreCase = true) -> Language.Turkish
+            tag.startsWith("ar", ignoreCase = true) -> Language.Arabic
+            tag.startsWith("in", ignoreCase = true) -> Language.Indonesian
+            tag.startsWith("ru", ignoreCase = true) -> Language.Russian
+            tag.startsWith("ta", ignoreCase = true) -> Language.Tamil
+            tag.startsWith("es", ignoreCase = true) -> Language.Spanish
+            tag.startsWith("fr", ignoreCase = true) -> Language.French
+            tag.startsWith("de", ignoreCase = true) -> Language.German
+            tag.startsWith("it", ignoreCase = true) -> Language.Italian
+            tag.startsWith("cs", ignoreCase = true) -> Language.Czech
+            else -> Language.System
+        }
+    }
 }

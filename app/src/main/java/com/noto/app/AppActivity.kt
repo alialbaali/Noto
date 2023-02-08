@@ -180,10 +180,6 @@ class AppActivity : BaseActivity() {
     }
 
     private fun AppActivityBinding.setupState() {
-        viewModel.language
-            .onEach { language -> setupLanguage(language) }
-            .launchIn(lifecycleScope)
-
         viewModel.icon
             .onEach { icon -> if (icon != viewModel.currentIcon.await()) setupIcon(icon) }
             .launchIn(lifecycleScope)
@@ -247,18 +243,6 @@ class AppActivity : BaseActivity() {
                 },
                 false
             )
-    }
-
-    @Suppress("DEPRECATION")
-    private fun setupLanguage(language: Language) {
-        val locale = language.toLocale()
-        if (resources.configuration.locale != locale) {
-            Locale.setDefault(locale)
-            resources.configuration.locale = locale
-            resources.configuration.setLayoutDirection(locale)
-            resources.updateConfiguration(resources.configuration, resources.displayMetrics)
-            recreate()
-        }
     }
 
     private fun createVaultTimeoutWorkRequest(duration: Long, timeUnit: TimeUnit) = OneTimeWorkRequestBuilder<VaultTimeoutWorker>()

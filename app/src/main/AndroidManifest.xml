@@ -15,7 +15,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/SplashScreen"
-        tools:targetApi="m">
+        android:localeConfig="@xml/locales_config"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".AppActivity"
             android:windowSoftInputMode="adjustResize"
