@@ -165,7 +165,7 @@
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
         app:elevation="@dimen/elevation_large"
-        app:hideOnScroll="true"
+        app:hideOnScroll="false"
         tools:visibility="gone">
 
         <LinearLayout
