@@ -80,8 +80,8 @@ class MainViewModel(
     val isShowNotesCount = settingsRepository.isShowNotesCount
         .stateIn(viewModelScope, SharingStarted.Lazily, true)
 
-    val allNotes = noteRepository.getAllMainNotes()
-        .combine(folderRepository.getFolders()) { notes, folders ->
+    val allNotes = noteRepository.getAllNotes()
+        .combine(folderRepository.getAllUnvaultedFolders()) { notes, folders ->
             notes.filter { note -> folders.any { folder -> folder.id == note.folderId } }
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())

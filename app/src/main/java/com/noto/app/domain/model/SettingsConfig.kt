@@ -24,4 +24,6 @@ data class SettingsConfig(
     val isRememberScrollingPosition: Boolean = true,
     val allNotesScrollingPosition: Int = 0,
     val recentNotesScrollingPosition: Int = 0,
+    val scheduledNotesScrollingPosition: Int = 0,
+    val archivedNotesScrollingPosition: Int = 0,
 )

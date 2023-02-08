@@ -23,6 +23,7 @@ import androidx.work.WorkManager
 import com.noto.app.components.BaseActivity
 import com.noto.app.databinding.AppActivityBinding
 import com.noto.app.domain.model.*
+import com.noto.app.filtered.FilteredItemModel
 import com.noto.app.main.MainVaultFragment
 import com.noto.app.util.*
 import com.noto.app.vault.VaultTimeoutWorker
@@ -81,8 +82,22 @@ class AppActivity : BaseActivity() {
     private fun setupNavigation() {
         if (intent?.action !in AppIntents) {
             when (val interfaceId = viewModel.mainInterfaceId.value) {
-                AllNotesItemId -> inflateGraphAndSetStartDestination(R.id.allNotesFragment)
-                RecentNotesItemId -> inflateGraphAndSetStartDestination(R.id.recentNotesFragment)
+                FilteredItemModel.All.id -> inflateGraphAndSetStartDestination(
+                    R.id.filteredFragment,
+                    bundleOf(Constants.Model to FilteredItemModel.All)
+                )
+                FilteredItemModel.Recent.id -> inflateGraphAndSetStartDestination(
+                    R.id.filteredFragment,
+                    bundleOf(Constants.Model to FilteredItemModel.Recent)
+                )
+                FilteredItemModel.Scheduled.id -> inflateGraphAndSetStartDestination(
+                    R.id.filteredFragment,
+                    bundleOf(Constants.Model to FilteredItemModel.Scheduled)
+                )
+                FilteredItemModel.Archived.id -> inflateGraphAndSetStartDestination(
+                    R.id.filteredFragment,
+                    bundleOf(Constants.Model to FilteredItemModel.Archived)
+                )
                 AllFoldersId -> {
                     val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)

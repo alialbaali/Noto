@@ -1,6 +1,7 @@
 package com.noto.app.domain.repository
 
 import com.noto.app.domain.model.*
+import com.noto.app.filtered.FilteredItemModel
 import kotlinx.coroutines.flow.Flow
 
 interface SettingsRepository {
@@ -43,15 +44,13 @@ interface SettingsRepository {
 
     val isRememberScrollingPosition: Flow<Boolean>
 
-    val allNotesScrollingPosition: Flow<Int>
-
-    val recentNotesScrollingPosition: Flow<Int>
-
     val quickNoteFolderId: Flow<Long>
 
     val screenBrightnessLevel: Flow<ScreenBrightnessLevel>
 
     val quickExit: Flow<Boolean>
+
+    fun getFilteredNotesScrollingPosition(model: FilteredItemModel): Flow<Int>
 
     fun getWidgetFolderId(widgetId: Int): Flow<Long>
 
@@ -109,9 +108,7 @@ interface SettingsRepository {
 
     suspend fun updateMainInterfaceId(interfaceId: Long)
 
-    suspend fun updateAllNotesScrollingPosition(scrollingPosition: Int)
-
-    suspend fun updateRecentNotesScrollingPosition(scrollingPosition: Int)
+    suspend fun updateFilteredNotesScrollingPosition(model: FilteredItemModel, scrollingPosition: Int)
 
     suspend fun updateIsRememberScrollingPosition(isRememberScrollingPosition: Boolean)
 

@@ -48,7 +48,7 @@ class FilteredViewModel(
     val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
-    val scrollingPosition = settingsRepository.allNotesScrollingPosition
+    val scrollingPosition = settingsRepository.getFilteredNotesScrollingPosition(filteredItemModel)
         .stateIn(viewModelScope, SharingStarted.Eagerly, 0)
 
     val quickExit = settingsRepository.quickExit
@@ -192,6 +192,6 @@ class FilteredViewModel(
     }
 
     fun updateScrollingPosition(scrollingPosition: Int) = viewModelScope.launch {
-        settingsRepository.updateAllNotesScrollingPosition(scrollingPosition)
+        settingsRepository.updateFilteredNotesScrollingPosition(filteredItemModel, scrollingPosition)
     }
 }

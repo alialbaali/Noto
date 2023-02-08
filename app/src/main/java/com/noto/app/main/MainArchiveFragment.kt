@@ -23,7 +23,7 @@ class MainArchiveFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val viewModel by viewModel<MainViewModel>()
 
-    private val selectedDestinationId by lazy { navController?.lastDestinationId }
+    private val selectedDestinationId by lazy { navController?.lastDestinationIdOrNull }
 
     override fun onCreateView(
         inflater: LayoutInflater,

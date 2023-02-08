@@ -25,8 +25,6 @@ import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
 import kotlin.time.Duration.Companion.days
 
-const val AllNotesItemId = -2L
-const val RecentNotesItemId = -3L
 const val AllFoldersId = -4L
 val LabelDefaultStrokeWidth = 2.dp
 const val LineSeparator = "\n\n"
@@ -180,7 +178,8 @@ fun List<Note>.mapToNoteItemModel(labels: List<Label>, noteLabels: List<NoteLabe
     }
 }
 
-fun List<Note>.filterRecentlyAccessed() = filter { it.accessDate >= Clock.System.now().minus(7.days) }
+val Note.isRecent
+    get() = accessDate >= Clock.System.now().minus(7.days)
 
 @Suppress("UNCHECKED_CAST")
 fun <K, V> Map<K?, V>.filterNotNullKeys() = filterKeys { it != null } as Map<K, V>

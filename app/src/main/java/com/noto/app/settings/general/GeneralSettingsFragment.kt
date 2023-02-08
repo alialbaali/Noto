@@ -18,6 +18,7 @@ import com.noto.app.components.Screen
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Icon
 import com.noto.app.domain.model.Theme
+import com.noto.app.filtered.FilteredItemModel
 import com.noto.app.settings.*
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.first
@@ -50,15 +51,19 @@ class GeneralSettingsFragment : Fragment() {
         ComposeView(context).apply {
             isTransitionGroup = true
             setContent {
-                val recentNotesText = stringResource(id = R.string.recent_notes)
-                val allNotesText = stringResource(id = R.string.all_notes)
+                val recentNotesText = stringResource(id = R.string.recent)
+                val allNotesText = stringResource(id = R.string.all)
                 val allFoldersText = stringResource(id = R.string.all_folders)
+                val archivedText = stringResource(id = R.string.archived)
+                val scheduledText = stringResource(id = R.string.scheduled)
                 val mainInterfaceId by viewModel.mainInterfaceId.collectAsState()
                 val mainInterfaceText by produceState(initialValue = allFoldersText, mainInterfaceId) {
                     value = when (mainInterfaceId) {
-                        AllNotesItemId -> allNotesText
                         AllFoldersId -> allFoldersText
-                        RecentNotesItemId -> recentNotesText
+                        FilteredItemModel.All.id -> allNotesText
+                        FilteredItemModel.Recent.id -> recentNotesText
+                        FilteredItemModel.Scheduled.id -> scheduledText
+                        FilteredItemModel.Archived.id -> archivedText
                         else -> viewModel.getFolderById(mainInterfaceId).first().getTitle(context)
                     }
                 }

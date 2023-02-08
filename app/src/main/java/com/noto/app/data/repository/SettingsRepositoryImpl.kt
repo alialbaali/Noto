@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import com.noto.app.domain.model.*
 import com.noto.app.domain.repository.SettingsRepository
+import com.noto.app.filtered.FilteredItemModel
 import com.noto.app.util.AllFoldersId
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -38,8 +39,10 @@ class SettingsRepositoryImpl(
             isScreenOn.first(),
             mainInterfaceId.first(),
             isRememberScrollingPosition.first(),
-            allNotesScrollingPosition.first(),
-            recentNotesScrollingPosition.first(),
+            getFilteredNotesScrollingPosition(FilteredItemModel.All).first(),
+            getFilteredNotesScrollingPosition(FilteredItemModel.Recent).first(),
+            getFilteredNotesScrollingPosition(FilteredItemModel.Scheduled).first(),
+            getFilteredNotesScrollingPosition(FilteredItemModel.Archived).first(),
         )
     }.flowOn(dispatcher)
 
@@ -129,16 +132,6 @@ class SettingsRepositoryImpl(
         .map { it ?: true }
         .flowOn(dispatcher)
 
-    override val allNotesScrollingPosition: Flow<Int> = storage.data
-        .map { preferences -> preferences[SettingsKeys.AllNotesScrollingPosition] }
-        .map { it ?: 0 }
-        .flowOn(dispatcher)
-
-    override val recentNotesScrollingPosition: Flow<Int> = storage.data
-        .map { preferences -> preferences[SettingsKeys.RecentNotesScrollingPosition] }
-        .map { it ?: 0 }
-        .flowOn(dispatcher)
-
     override val quickNoteFolderId: Flow<Long> = storage.data
         .map { preferences -> preferences[SettingsKeys.QuickNoteFolderId] }
         .map { it ?: Folder.GeneralFolderId }
@@ -156,6 +149,11 @@ class SettingsRepositoryImpl(
     override val quickExit: Flow<Boolean> = storage.data
         .map { preferences -> preferences[SettingsKeys.QuickExit] }
         .map { it ?: false }
+        .flowOn(dispatcher)
+
+    override fun getFilteredNotesScrollingPosition(model: FilteredItemModel): Flow<Int> = storage.data
+        .map { preferences -> preferences[SettingsKeys.FilteredItemModel(model)] }
+        .map { it ?: 0 }
         .flowOn(dispatcher)
 
     override fun getWidgetFolderId(widgetId: Int): Flow<Long> {
@@ -248,8 +246,10 @@ class SettingsRepositoryImpl(
                 updateIsScreenOn(isScreenOn)
                 updateMainInterfaceId(mainInterfaceId)
                 updateIsRememberScrollingPosition(isRememberScrollingPosition)
-                updateAllNotesScrollingPosition(allNotesScrollingPosition)
-                updateRecentNotesScrollingPosition(recentNotesScrollingPosition)
+                updateFilteredNotesScrollingPosition(FilteredItemModel.All, allNotesScrollingPosition)
+                updateFilteredNotesScrollingPosition(FilteredItemModel.Recent, recentNotesScrollingPosition)
+                updateFilteredNotesScrollingPosition(FilteredItemModel.Scheduled, scheduledNotesScrollingPosition)
+                updateFilteredNotesScrollingPosition(FilteredItemModel.Archived, archivedNotesScrollingPosition)
             }
         }
     }
@@ -366,15 +366,9 @@ class SettingsRepositoryImpl(
         }
     }
 
-    override suspend fun updateAllNotesScrollingPosition(scrollingPosition: Int) {
+    override suspend fun updateFilteredNotesScrollingPosition(model: FilteredItemModel, scrollingPosition: Int) {
         withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.AllNotesScrollingPosition] = scrollingPosition }
-        }
-    }
-
-    override suspend fun updateRecentNotesScrollingPosition(scrollingPosition: Int) {
-        withContext(dispatcher) {
-            storage.edit { preferences -> preferences[SettingsKeys.RecentNotesScrollingPosition] = scrollingPosition }
+            storage.edit { preferences -> preferences[SettingsKeys.FilteredItemModel(model)] = scrollingPosition }
         }
     }
 

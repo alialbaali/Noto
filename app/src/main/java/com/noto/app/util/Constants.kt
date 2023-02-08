@@ -23,6 +23,7 @@ object Constants {
     const val IsTitleVisible = "IsTitleVisible"
     const val IsBodyVisible = "IsBodyVisible"
     const val Title = "title"
+    const val Model = "model"
 
     object Intent {
         const val ActionCreateFolder = "com.noto.intent.action.CREATE_FOLDER"

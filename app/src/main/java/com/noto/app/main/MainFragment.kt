@@ -16,16 +16,15 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyViewHolder
+import com.airbnb.epoxy.group
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.components.BaseDialogFragment
-import com.noto.app.components.genericItem
 import com.noto.app.databinding.MainFragmentBinding
-import com.noto.app.domain.model.Folder
-import com.noto.app.domain.model.FolderListSortingType
-import com.noto.app.domain.model.Note
-import com.noto.app.domain.model.SortingOrder
+import com.noto.app.domain.model.*
+import com.noto.app.filtered.FilteredItemModel
+import com.noto.app.filtered.filteredItem
 import com.noto.app.getOrDefault
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -43,12 +42,11 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     private lateinit var itemTouchHelper: ItemTouchHelper
 
-    private val selectedDestinationId by lazy { navController?.lastDestinationId }
+    private val selectedDestinationId by lazy { navController?.lastDestinationIdOrNull }
 
     private val popUpToDestinationId by lazy {
         when (selectedDestinationId) {
-            AllNotesItemId -> R.id.allNotesFragment
-            RecentNotesItemId -> R.id.recentNotesFragment
+            null -> R.id.filteredFragment
             else -> R.id.folderFragment
         }
     }
@@ -148,73 +146,118 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                 tvFoldersCount.text = context?.quantityStringResource(R.plurals.folders_count, foldersCount, foldersCount)
                 tvFoldersCountRtl.text = context?.quantityStringResource(R.plurals.folders_count, foldersCount, foldersCount)
 
-                generalFolder?.let {
-                    folderItem {
-                        id(generalFolder.first.id)
-                        folder(generalFolder.first)
-                        notesCount(generalFolder.second)
-                        isManualSorting(isManualSorting)
-                        isShowNotesCount(isShowNotesCount)
-                        isSelected(generalFolder.first.id == selectedDestinationId)
-                        onClickListener { _ ->
-                            dismiss()
-                            if (generalFolder.first.id != selectedDestinationId)
-                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderFragment(generalFolder.first.id)) {
-                                    popUpTo(popUpToDestinationId) {
-                                        inclusive = true
-                                    }
-                                }
-                        }
-                        onLongClickListener { _ ->
-                            dismiss()
-                            navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderDialogFragment(generalFolder.first.id))
-                            true
-                        }
-                        onDragHandleTouchListener { _, _ -> false }
-                    }
-                }
-
                 context?.let { context ->
 
-                    genericItem {
-                        id("all_notes")
-                        notesCount(allNotes.count())
-                        title(context.stringResource(R.string.all_notes))
-                        context.drawableResource(R.drawable.ic_round_all_notes_24)?.let { drawable ->
-                            icon(drawable)
-                        }
-                        isManualSorting(isManualSorting)
-                        isShowNotesCount(isShowNotesCount)
-                        isSelected(AllNotesItemId == selectedDestinationId)
-                        onClickListener { _ ->
-                            dismiss()
-                            if (selectedDestinationId != AllNotesItemId)
-                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToAllNotesFragment()) {
-                                    popUpTo(popUpToDestinationId) {
-                                        inclusive = true
-                                    }
+                    group(R.layout.vertical_linear_layout_group) {
+                        id("header")
+
+                        group(R.layout.horizontal_linear_layout_group) {
+                            id("sub_header_1")
+                            spanSizeOverride { _, _, _ -> 2 }
+
+                            filteredItem {
+                                id("all")
+                                model(FilteredItemModel.All)
+                                notesCount(allNotes.count { !it.isArchived })
+                                isShowNotesCount(isShowNotesCount)
+                                isSelected(FilteredItemModel.All.id == selectedDestinationId)
+                                onClickListener { _ ->
+                                    dismiss()
+                                    if (selectedDestinationId != FilteredItemModel.All.id)
+                                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFilteredFragment(FilteredItemModel.All)) {
+                                            popUpTo(popUpToDestinationId) {
+                                                inclusive = true
+                                            }
+                                        }
                                 }
+                            }
+
+                            filteredItem {
+                                id("recent")
+                                model(FilteredItemModel.Recent)
+                                notesCount(allNotes.count { it.isRecent })
+                                isShowNotesCount(isShowNotesCount)
+                                isSelected(FilteredItemModel.Recent.id == selectedDestinationId)
+                                onClickListener { _ ->
+                                    dismiss()
+                                    if (selectedDestinationId != FilteredItemModel.Recent.id)
+                                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFilteredFragment(FilteredItemModel.Recent)) {
+                                            popUpTo(popUpToDestinationId) {
+                                                inclusive = true
+                                            }
+                                        }
+                                }
+                            }
+                        }
+
+                        group(R.layout.horizontal_linear_layout_group) {
+                            id("sub_header_2")
+                            spanSizeOverride { _, _, _ -> 2 }
+
+                            filteredItem {
+                                id("scheduled")
+                                model(FilteredItemModel.Scheduled)
+                                notesCount(allNotes.count { it.reminderDate != null })
+                                isShowNotesCount(isShowNotesCount)
+                                isSelected(FilteredItemModel.Scheduled.id == selectedDestinationId)
+                                onClickListener { _ ->
+                                    dismiss()
+                                    if (selectedDestinationId != FilteredItemModel.Scheduled.id)
+                                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFilteredFragment(FilteredItemModel.Scheduled)) {
+                                            popUpTo(popUpToDestinationId) {
+                                                inclusive = true
+                                            }
+                                        }
+                                }
+                            }
+
+                            filteredItem {
+                                id("archived")
+                                model(FilteredItemModel.Archived)
+                                notesCount(allNotes.count { it.isArchived })
+                                isShowNotesCount(isShowNotesCount)
+                                isSelected(FilteredItemModel.Archived.id == selectedDestinationId)
+                                onClickListener { _ ->
+                                    dismiss()
+                                    if (selectedDestinationId != FilteredItemModel.Archived.id)
+                                        navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFilteredFragment(FilteredItemModel.Archived)) {
+                                            popUpTo(popUpToDestinationId) {
+                                                inclusive = true
+                                            }
+                                        }
+                                }
+                            }
                         }
                     }
 
-                    genericItem {
-                        id("recent_notes")
-                        title(context.getString(R.string.recent_notes))
-                        context.drawableResource(R.drawable.ic_round_schedule_24)?.let { drawable ->
-                            icon(drawable)
-                        }
-                        notesCount(allNotes.filterRecentlyAccessed().count())
-                        isManualSorting(isManualSorting)
-                        isShowNotesCount(isShowNotesCount)
-                        isSelected(RecentNotesItemId == selectedDestinationId)
-                        onClickListener { _ ->
-                            dismiss()
-                            if (selectedDestinationId != RecentNotesItemId)
-                                navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToRecentNotesFragment()) {
-                                    popUpTo(popUpToDestinationId) {
-                                        inclusive = true
+
+                    generalFolder?.let {
+                        folderItem {
+                            id(generalFolder.first.id)
+                            folder(generalFolder.first)
+                            notesCount(generalFolder.second)
+                            isManualSorting(isManualSorting)
+                            isShowNotesCount(isShowNotesCount)
+                            isSelected(generalFolder.first.id == selectedDestinationId)
+                            onClickListener { _ ->
+                                dismiss()
+                                if (generalFolder.first.id != selectedDestinationId)
+                                    navController?.navigateSafely(MainFragmentDirections.actionMainFragmentToFolderFragment(generalFolder.first.id)) {
+                                        popUpTo(popUpToDestinationId) {
+                                            inclusive = true
+                                        }
                                     }
-                                }
+                            }
+                            onLongClickListener { _ ->
+                                dismiss()
+                                navController?.navigateSafely(
+                                    MainFragmentDirections.actionMainFragmentToFolderDialogFragment(
+                                        generalFolder.first.id
+                                    )
+                                )
+                                true
+                            }
+                            onDragHandleTouchListener { _, _ -> false }
                         }
                     }
 

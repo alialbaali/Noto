@@ -11,6 +11,9 @@ interface FolderDao : LocalFolderDataSource {
     @Query("SELECT * FROM folders")
     override fun getAllFolders(): Flow<List<Folder>>
 
+    @Query("SELECT * FROM folders WHERE is_vaulted = 0")
+    override fun getAllUnvaultedFolders(): Flow<List<Folder>>
+
     @Query("SELECT * FROM folders WHERE is_archived = 0 AND is_vaulted = 0")
     override fun getFolders(): Flow<List<Folder>>
 

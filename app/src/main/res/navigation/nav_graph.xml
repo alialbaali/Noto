@@ -29,16 +29,6 @@
             app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_mainFragment_to_allNotesFragment"
-            app:destination="@id/allNotesFragment"
-            app:popUpTo="@id/folderFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_mainFragment_to_recentNotesFragment"
-            app:destination="@id/recentNotesFragment"
-            app:popUpTo="@id/folderFragment"
-            app:popUpToInclusive="true" />
-        <action
             android:id="@+id/action_mainFragment_to_mainDialogFragment"
             app:destination="@id/mainDialogFragment"
             app:popUpTo="@id/mainFragment"
@@ -53,6 +43,9 @@
         <action
             android:id="@+id/action_mainFragment_to_folderListViewDialogFragment"
             app:destination="@id/folderListViewDialogFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_filteredFragment"
+            app:destination="@id/filteredFragment" />
     </dialog>
     <fragment
         android:id="@+id/folderFragment"
@@ -478,43 +471,6 @@
         android:id="@+id/whatsNewDialogFragment"
         android:name="com.noto.app.settings.whatsnew.WhatsNewDialogFragment"
         android:label="WhatsNewDialogFragment" />
-    <fragment
-        android:id="@+id/allNotesFragment"
-        android:name="com.noto.app.allnotes.AllNotesFragment"
-        android:label="AllNotesFragment">
-        <action
-            android:id="@+id/action_allNotesFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-        <action
-            android:id="@+id/action_allNotesFragment_to_selectFolderDialogFragment"
-            app:destination="@id/selectFolderDialogFragment" />
-        <action
-            android:id="@+id/action_allNotesFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
-        <action
-            android:id="@+id/action_allNotesFragment_to_noteDialogFragment"
-            app:destination="@id/noteDialogFragment" />
-        <action
-            android:id="@+id/action_allNotesFragment_to_folderFragment"
-            app:destination="@id/folderFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/recentNotesFragment"
-        android:name="com.noto.app.recentnotes.RecentNotesFragment"
-        android:label="RecentNotesFragment">
-        <action
-            android:id="@+id/action_recentNotesFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
-        <action
-            android:id="@+id/action_recentNotesFragment_to_noteFragment"
-            app:destination="@id/noteFragment" />
-        <action
-            android:id="@+id/action_recentNotesFragment_to_noteDialogFragment"
-            app:destination="@id/noteDialogFragment" />
-        <action
-            android:id="@+id/action_recentNotesFragment_to_selectFolderDialogFragment"
-            app:destination="@id/selectFolderDialogFragment" />
-    </fragment>
     <dialog
         android:id="@+id/mainDialogFragment"
         android:name="com.noto.app.main.MainDialogFragment"
@@ -728,4 +684,27 @@
         android:id="@+id/folderListOrderingDialogFragment"
         android:name="com.noto.app.main.FolderListOrderingDialogFragment"
         android:label="FolderListOrderingDialogFragment" />
+    <fragment
+        android:id="@+id/filteredFragment"
+        android:name="com.noto.app.filtered.FilteredFragment"
+        android:label="FilteredFragment" >
+        <argument
+            android:name="model"
+            app:argType="com.noto.app.filtered.FilteredItemModel" />
+        <action
+            android:id="@+id/action_filteredFragment_to_selectFolderDialogFragment"
+            app:destination="@id/selectFolderDialogFragment" />
+        <action
+            android:id="@+id/action_filteredFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_filteredFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_filteredFragment_to_noteDialogFragment"
+            app:destination="@id/noteDialogFragment" />
+        <action
+            android:id="@+id/action_filteredFragment_to_folderFragment"
+            app:destination="@id/folderFragment" />
+    </fragment>
 </navigation>

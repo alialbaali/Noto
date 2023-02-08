@@ -1,6 +1,7 @@
 package com.noto.app.data.repository
 
 import androidx.datastore.preferences.core.*
+import com.noto.app.filtered.FilteredItemModel
 import com.noto.app.util.Constants
 
 object SettingsKeys {
@@ -27,6 +28,7 @@ object SettingsKeys {
     val QuickNoteFolderId = longPreferencesKey("QuickNoteFolderId")
     val ScreenBrightnessLevel = floatPreferencesKey("ScreenBrightnessLevel")
     val QuickExit = booleanPreferencesKey("QuickExit")
+    fun FilteredItemModel(model: FilteredItemModel) = intPreferencesKey("Filtered_Item_Model_${model.id}")
 
     @Suppress("FunctionName")
     object Widget {
