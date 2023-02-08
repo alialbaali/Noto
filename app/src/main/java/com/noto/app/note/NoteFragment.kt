@@ -246,7 +246,7 @@ class NoteFragment : Fragment() {
         root.keyboardVisibilityAsFlow()
             .onEach { isVisible ->
                 bab.isVisible = !isVisible
-                llToolbar.isVisible = isVisible
+                babToolbar.isVisible = isVisible
             }
             .launchIn(lifecycleScope)
 
@@ -384,7 +384,7 @@ class NoteFragment : Fragment() {
                         currentBodyText = currentBodyText,
                         content = viewModel.titleHistory.replayCache
                             .subListOld(currentTitleText)
-                            .filter { it.isNotBlank() }
+                            .filter { it.lastOrNull()?.isWhitespace() == true }
                             .toTypedArray(),
                     )
                 )
@@ -398,7 +398,7 @@ class NoteFragment : Fragment() {
                         currentBodyText = currentBodyText,
                         content = viewModel.bodyHistory.replayCache
                             .subListOld(currentBodyText)
-                            .filter { it.isNotBlank() }
+                            .filter { it.lastOrNull()?.isWhitespace() == true }
                             .toTypedArray()
                     )
                 )
@@ -419,7 +419,7 @@ class NoteFragment : Fragment() {
                         currentBodyText = currentBodyText,
                         content = viewModel.titleHistory.replayCache
                             .subListNew(currentTitleText)
-                            .filter { it.isNotBlank() }
+                            .filter { it.lastOrNull()?.isWhitespace() == true }
                             .toTypedArray()
                     )
                 )
@@ -433,7 +433,7 @@ class NoteFragment : Fragment() {
                         currentBodyText = currentBodyText,
                         content = viewModel.bodyHistory.replayCache
                             .subListNew(currentBodyText)
-                            .filter { it.isNotBlank() }
+                            .filter { it.lastOrNull()?.isWhitespace() == true }
                             .toTypedArray()
                     )
                 )
@@ -481,7 +481,6 @@ class NoteFragment : Fragment() {
     private fun NoteFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
-            val colorStateList = color.toColorStateList()
             val highlightColor = color.withDefaultAlpha(alpha = if (folder.color == NotoColor.Black) 32 else 128)
             tvFolderTitle.text = folder.getTitle(context)
             tvFolderTitle.setTextColor(color)
@@ -585,7 +584,11 @@ class NoteFragment : Fragment() {
                 ibUndoHistory.disable()
                 if (replayCache.size > 1) {
                     ibRedo.enable()
-                    ibRedoHistory.enable()
+                    if (currentText.lastOrNull()?.isWhitespace() == true) {
+                        ibRedoHistory.enable()
+                    } else {
+                        ibRedoHistory.disable()
+                    }
                 } else {
                     ibRedo.disable()
                     ibRedoHistory.disable()
@@ -596,7 +599,11 @@ class NoteFragment : Fragment() {
                 ibRedoHistory.disable()
                 if (replayCache.size > 1) {
                     ibUndo.enable()
-                    ibUndoHistory.enable()
+                    if (currentText.lastOrNull()?.isWhitespace() == true) {
+                        ibUndoHistory.enable()
+                    } else {
+                        ibUndoHistory.disable()
+                    }
                 } else {
                     ibUndo.disable()
                     ibUndoHistory.disable()
@@ -605,8 +612,13 @@ class NoteFragment : Fragment() {
             else -> {
                 ibUndo.enable()
                 ibRedo.enable()
-                ibUndoHistory.enable()
-                ibRedoHistory.enable()
+                if (currentText.lastOrNull()?.isWhitespace() == true) {
+                    ibUndoHistory.enable()
+                    ibRedoHistory.enable()
+                } else {
+                    ibUndoHistory.disable()
+                    ibRedoHistory.disable()
+                }
             }
         }
         ibUndo.background = context?.drawableResource(R.drawable.generic_clickable_shape)
