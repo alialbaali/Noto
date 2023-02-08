@@ -157,7 +157,6 @@
         android:layout_width="match_parent"
         android:paddingStart="0dp"
         android:paddingEnd="0dp"
-        android:visibility="gone"
         app:backgroundTint="?attr/notoBackgroundColor"
         app:contentInsetEnd="0dp"
         app:contentInsetEndWithActions="0dp"
@@ -166,7 +165,8 @@
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
         app:elevation="@dimen/elevation_large"
-        app:hideOnScroll="true">
+        app:hideOnScroll="true"
+        tools:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"

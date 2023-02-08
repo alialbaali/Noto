@@ -245,8 +245,13 @@ class NoteFragment : Fragment() {
 
         root.keyboardVisibilityAsFlow()
             .onEach { isVisible ->
-                bab.isVisible = !isVisible
-                babToolbar.isVisible = isVisible
+                if (isVisible) {
+                    bab.performHide(true)
+                    babToolbar.performShow(true)
+                } else {
+                    bab.performShow(true)
+                    babToolbar.performHide(true)
+                }
             }
             .launchIn(lifecycleScope)
 
