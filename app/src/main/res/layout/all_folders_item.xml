@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/cv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/spacing_small"
+    android:layout_weight="1"
+    android:animateLayoutChanges="true">
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:animateLayoutChanges="true"
+        android:padding="@dimen/spacing_normal"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/all_notes"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:src="@drawable/ic_round_all_inbox_24" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title"
+            style="@style/FolderTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/all_folders" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

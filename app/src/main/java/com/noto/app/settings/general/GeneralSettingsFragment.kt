@@ -51,10 +51,10 @@ class GeneralSettingsFragment : Fragment() {
         ComposeView(context).apply {
             isTransitionGroup = true
             setContent {
-                val recentNotesText = stringResource(id = R.string.recent)
-                val allNotesText = stringResource(id = R.string.all)
                 val allFoldersText = stringResource(id = R.string.all_folders)
+                val allNotesText = stringResource(id = R.string.all)
                 val archivedText = stringResource(id = R.string.archived)
+                val recentNotesText = stringResource(id = R.string.recent)
                 val scheduledText = stringResource(id = R.string.scheduled)
                 val mainInterfaceId by viewModel.mainInterfaceId.collectAsState()
                 val mainInterfaceText by produceState(initialValue = allFoldersText, mainInterfaceId) {

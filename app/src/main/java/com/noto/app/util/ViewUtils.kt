@@ -47,6 +47,7 @@ import com.noto.app.R
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.NotoColor
+import com.noto.app.filtered.FilteredItemModel
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import java.util.*
@@ -71,11 +72,19 @@ fun NavController.navigateSafely(directions: NavDirections, builder: (NavOptions
 val Fragment.navController: NavController?
     get() = if (isAdded) findNavController() else null
 
+@Suppress("DEPRECATION")
 val NavController.lastDestinationIdOrNull: Long?
     @SuppressLint("RestrictedApi")
-    get() = backStack.lastOrNull { it.destination.id == R.id.folderFragment }
-        ?.arguments
-        ?.getLong(Constants.FolderId)
+    get() {
+        val args = backStack.lastOrNull {
+            it.destination.id == R.id.folderFragment || it.destination.id == R.id.filteredFragment
+        }?.arguments
+
+        val folderId = args?.getLong(Constants.FolderId)?.takeUnless { it == 0L }
+        val model = args?.get(Constants.Model) as? FilteredItemModel
+
+        return folderId ?: model?.id
+    }
 
 val Uri.directoryPath
     get() = path?.substringAfterLast(':')

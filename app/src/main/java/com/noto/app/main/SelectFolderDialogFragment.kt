@@ -8,13 +8,14 @@ import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.airbnb.epoxy.group
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.components.BaseDialogFragment
-import com.noto.app.components.genericItem
 import com.noto.app.components.placeholderItem
 import com.noto.app.databinding.SelectFolderDialogFragmentBinding
 import com.noto.app.domain.model.Folder
+import com.noto.app.filtered.*
 import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -68,7 +69,10 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun SelectFolderDialogFragmentBinding.setupFolders(state: UiState<List<Pair<Folder, Int>>>, isShowNotesCount: Boolean) {
+    private fun SelectFolderDialogFragmentBinding.setupFolders(
+        state: UiState<List<Pair<Folder, Int>>>,
+        isShowNotesCount: Boolean,
+    ) {
         when (state) {
             is UiState.Loading -> rv.setupProgressIndicator()
             is UiState.Success -> {
@@ -99,40 +103,56 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                         }
 
                         if (args.isMainInterface) {
-                            genericItem {
-                                id("all_folders")
-                                title(context.stringResource(R.string.all_folders))
-                                context.drawableResource(R.drawable.ic_round_all_folders_24)?.let { drawable ->
-                                    icon(drawable)
-                                }
-                                isManualSorting(false)
-                                isShowNotesCount(false)
-                                isSelected(args.selectedFolderId == AllFoldersId)
-                                onClickListener { _ -> callback(AllFoldersId, context.stringResource(R.string.all_folders)) }
-                            }
+                            group(R.layout.vertical_linear_layout_group) {
+                                id("header")
 
-                            genericItem {
-                                id("all_notes")
-                                title(context.stringResource(R.string.all_notes))
-                                context.drawableResource(R.drawable.ic_round_all_notes_24)?.let { drawable ->
-                                    icon(drawable)
+                                allFoldersItem {
+                                    id("all_folders")
+                                    isSelected(args.selectedFolderId == AllFoldersId)
+                                    onClickListener { _ -> callback(AllFoldersId, context.stringResource(R.string.all_folders)) }
                                 }
-                                isManualSorting(false)
-                                isShowNotesCount(false)
-                                isSelected(args.selectedFolderId == AllNotesItemId)
-                                onClickListener { _ -> callback(AllNotesItemId, context.stringResource(R.string.all_notes)) }
-                            }
 
-                            genericItem {
-                                id("recent_notes")
-                                title(context.getString(R.string.recent_notes))
-                                context.drawableResource(R.drawable.ic_round_schedule_24)?.let { drawable ->
-                                    icon(drawable)
+                                group(R.layout.horizontal_linear_layout_group) {
+                                    id("sub_header_1")
+                                    spanSizeOverride { _, _, _ -> 2 }
+
+                                    filteredItem {
+                                        id("all")
+                                        model(FilteredItemModel.All)
+                                        isShowNotesCount(false)
+                                        isSelected(FilteredItemModel.All.id == args.selectedFolderId)
+                                        onClickListener { _ -> callback(FilteredItemModel.All.id, context.stringResource(R.string.all)) }
+                                    }
+
+                                    filteredItem {
+                                        id("recent")
+                                        model(FilteredItemModel.Recent)
+                                        isShowNotesCount(false)
+                                        isSelected(FilteredItemModel.Recent.id == args.selectedFolderId)
+                                        onClickListener { _ -> callback(FilteredItemModel.Recent.id, context.stringResource(R.string.recent)) }
+                                    }
                                 }
-                                isManualSorting(false)
-                                isShowNotesCount(false)
-                                isSelected(args.selectedFolderId == RecentNotesItemId)
-                                onClickListener { _ -> callback(RecentNotesItemId, context.stringResource(R.string.recent_notes)) }
+
+                                group(R.layout.horizontal_linear_layout_group) {
+                                    id("sub_header_2")
+                                    spanSizeOverride { _, _, _ -> 2 }
+
+                                    filteredItem {
+                                        id("scheduled")
+                                        model(FilteredItemModel.Scheduled)
+                                        isShowNotesCount(false)
+                                        isSelected(FilteredItemModel.Scheduled.id == args.selectedFolderId)
+                                        onClickListener { _ -> callback(FilteredItemModel.Scheduled.id, context.stringResource(R.string.scheduled)) }
+                                    }
+
+                                    filteredItem {
+                                        id("archived")
+                                        model(FilteredItemModel.Archived)
+                                        isShowNotesCount(false)
+                                        isSelected(FilteredItemModel.Archived.id == args.selectedFolderId)
+                                        onClickListener { _ -> callback(FilteredItemModel.Archived.id, context.stringResource(R.string.archived)) }
+                                    }
+                                }
                             }
                         }
 
