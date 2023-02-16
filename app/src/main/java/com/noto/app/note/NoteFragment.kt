@@ -198,8 +198,31 @@ class NoteFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
+        combine(
+            viewModel.isTrackingTitleCursorPosition,
+            etNoteTitle.cursorPositionAsFlow(),
+        ) { isTracking, cursorPosition ->
+            if (isTracking) {
+                viewModel.setTitleCursorEndPosition(cursorPosition)
+            } else {
+                viewModel.setTitleCursorStartPosition(cursorPosition)
+            }
+        }.launchIn(lifecycleScope)
+
+        combine(
+            viewModel.isTrackingBodyCursorPosition,
+            etNoteBody.cursorPositionAsFlow(),
+        ) { isTracking, cursorPosition ->
+            if (isTracking) {
+                viewModel.setBodyCursorEndPosition(cursorPosition)
+            } else {
+                viewModel.setBodyCursorStartPosition(cursorPosition)
+            }
+        }.launchIn(lifecycleScope)
+
         etNoteTitle.textAsFlow(emitInitialText = true)
             .filterNotNull()
+            .onEach { viewModel.setIsTrackingTitleCursorPosition(true) }
             .debounce(DebounceTimeoutMillis)
             .map { it.toString() }
             .onEach { title -> viewModel.emitNewTitleOnly(title) }
@@ -207,6 +230,7 @@ class NoteFragment : Fragment() {
 
         etNoteBody.textAsFlow(emitInitialText = true)
             .filterNotNull()
+            .onEach { viewModel.setIsTrackingBodyCursorPosition(true) }
             .debounce(DebounceTimeoutMillis)
             .map { it.toString() }
             .onEach { body -> viewModel.emitNewBodyOnly(body) }
@@ -221,7 +245,10 @@ class NoteFragment : Fragment() {
         ) { _, title, isFocused -> isFocused to title }
             .debounce(DebounceTimeoutMillis)
             .onEach { (isFocused, title) ->
-                if (isFocused) handleUndoRedo(viewModel.titleHistory.replayCache, title)
+                val replayCache = viewModel.titleHistory.replayCache.distinctBy { it.third }
+                    .filter { if (it.third.isNotBlank()) it.third.substring(it.first, it.second).lastOrNull()?.isWhitespace() == true else true }
+
+                if (isFocused) handleUndoRedo(replayCache, title)
             }
             .launchIn(lifecycleScope)
 
@@ -234,7 +261,10 @@ class NoteFragment : Fragment() {
         ) { _, body, isFocused -> isFocused to body }
             .debounce(DebounceTimeoutMillis)
             .onEach { (isFocused, body) ->
-                if (isFocused) handleUndoRedo(viewModel.bodyHistory.replayCache, body)
+                val replayCache = viewModel.bodyHistory.replayCache.distinctBy { it.third }
+                    .filter { if (it.third.isNotBlank()) it.third.substring(it.first, it.second).lastOrNull()?.isWhitespace() == true else true }
+
+                if (isFocused) handleUndoRedo(replayCache, body)
             }
             .launchIn(lifecycleScope)
 
@@ -363,21 +393,36 @@ class NoteFragment : Fragment() {
 
         ibUndo.setOnClickListener {
             when {
-                etNoteTitle.isFocused -> viewModel.undoTitle()
-                etNoteBody.isFocused -> viewModel.undoBody()
+                etNoteTitle.isFocused -> {
+                    val index = viewModel.undoTitle().second
+                    etNoteTitle.setSelection(index)
+                }
+                etNoteBody.isFocused -> {
+                    val index = viewModel.undoBody().second
+                    etNoteBody.setSelection(index)
+                }
             }
         }
 
         ibRedo.setOnClickListener {
             when {
-                etNoteTitle.isFocused -> viewModel.redoTitle()
-                etNoteBody.isFocused -> viewModel.redoBody()
+                etNoteTitle.isFocused -> {
+                    val index = viewModel.redoTitle().second
+                    etNoteTitle.setSelection(index)
+                }
+                etNoteBody.isFocused -> {
+                    val index = viewModel.redoBody().second
+                    etNoteBody.setSelection(index)
+                }
             }
         }
 
         ibUndoHistory.setOnClickListener {
             val currentTitleText = viewModel.note.value.title
             val currentBodyText = viewModel.note.value.body
+            val titleContent = viewModel.titleHistory.replayCache.subListOld(currentTitleText)
+            val bodyContent = viewModel.bodyHistory.replayCache.subListOld(currentBodyText)
+
             when {
                 etNoteTitle.isFocused -> navController?.navigateSafely(
                     NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
@@ -387,9 +432,16 @@ class NoteFragment : Fragment() {
                         isTitle = true,
                         currentTitleText = currentTitleText,
                         currentBodyText = currentBodyText,
-                        content = viewModel.titleHistory.replayCache
-                            .subListOld(currentTitleText)
-                            .filter { it.lastOrNull()?.isWhitespace() == true }
+                        startCursorIndices = titleContent
+                            .map { it.first }
+                            .toTypedArray()
+                            .toIntArray(),
+                        endCursorIndices = titleContent
+                            .map { it.second }
+                            .toTypedArray()
+                            .toIntArray(),
+                        content = titleContent
+                            .map { it.third }
                             .toTypedArray(),
                     )
                 )
@@ -401,10 +453,17 @@ class NoteFragment : Fragment() {
                         isTitle = false,
                         currentTitleText = currentTitleText,
                         currentBodyText = currentBodyText,
-                        content = viewModel.bodyHistory.replayCache
-                            .subListOld(currentBodyText)
-                            .filter { it.lastOrNull()?.isWhitespace() == true }
+                        startCursorIndices = bodyContent
+                            .map { it.first }
                             .toTypedArray()
+                            .toIntArray(),
+                        endCursorIndices = bodyContent
+                            .map { it.second }
+                            .toTypedArray()
+                            .toIntArray(),
+                        content = bodyContent
+                            .map { it.third }
+                            .toTypedArray(),
                     )
                 )
             }
@@ -413,6 +472,9 @@ class NoteFragment : Fragment() {
         ibRedoHistory.setOnClickListener {
             val currentTitleText = viewModel.note.value.title
             val currentBodyText = viewModel.note.value.body
+            val titleContent = viewModel.titleHistory.replayCache.subListNew(currentTitleText)
+            val bodyContent = viewModel.bodyHistory.replayCache.subListNew(currentBodyText)
+
             when {
                 etNoteTitle.isFocused -> navController?.navigateSafely(
                     NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
@@ -422,10 +484,17 @@ class NoteFragment : Fragment() {
                         isTitle = true,
                         currentTitleText = currentTitleText,
                         currentBodyText = currentBodyText,
-                        content = viewModel.titleHistory.replayCache
-                            .subListNew(currentTitleText)
-                            .filter { it.lastOrNull()?.isWhitespace() == true }
+                        startCursorIndices = titleContent
+                            .map { it.first }
                             .toTypedArray()
+                            .toIntArray(),
+                        endCursorIndices = titleContent
+                            .map { it.second }
+                            .toTypedArray()
+                            .toIntArray(),
+                        content = titleContent
+                            .map { it.third }
+                            .toTypedArray(),
                     )
                 )
                 etNoteBody.isFocused -> navController?.navigateSafely(
@@ -436,10 +505,17 @@ class NoteFragment : Fragment() {
                         isTitle = false,
                         currentTitleText = currentTitleText,
                         currentBodyText = currentBodyText,
-                        content = viewModel.bodyHistory.replayCache
-                            .subListNew(currentBodyText)
-                            .filter { it.lastOrNull()?.isWhitespace() == true }
+                        startCursorIndices = bodyContent
+                            .map { it.first }
                             .toTypedArray()
+                            .toIntArray(),
+                        endCursorIndices = bodyContent
+                            .map { it.second }
+                            .toTypedArray()
+                            .toIntArray(),
+                        content = bodyContent
+                            .map { it.third }
+                            .toTypedArray(),
                     )
                 )
             }
@@ -576,20 +652,23 @@ class NoteFragment : Fragment() {
         activity?.showKeyboard(this)
     }
 
-    private fun NoteFragmentBinding.handleUndoRedo(replayCache: List<String>, currentText: String) {
+    private fun NoteFragmentBinding.handleUndoRedo(replayCache: List<Triple<Int, Int, String>>, currentText: String) {
+        val value = replayCache.lastOrNull()
+        val isLastCharWhiteSpace = value?.third?.substring(value.first, value.second)?.lastOrNull()?.isWhitespace() == true
+
         when {
-            replayCache.none { it.isNotBlank() } -> {
+            replayCache.all { it.third.isBlank() } -> {
                 ibUndo.disable()
                 ibRedo.disable()
                 ibUndoHistory.disable()
                 ibRedoHistory.disable()
             }
-            replayCache.first() == currentText -> {
+            replayCache.first().third == currentText -> {
                 ibUndo.disable()
                 ibUndoHistory.disable()
                 if (replayCache.size > 1) {
                     ibRedo.enable()
-                    if (currentText.lastOrNull()?.isWhitespace() == true) {
+                    if (isLastCharWhiteSpace) {
                         ibRedoHistory.enable()
                     } else {
                         ibRedoHistory.disable()
@@ -599,12 +678,12 @@ class NoteFragment : Fragment() {
                     ibRedoHistory.disable()
                 }
             }
-            replayCache.last() == currentText -> {
+            replayCache.last().third == currentText -> {
                 ibRedo.disable()
                 ibRedoHistory.disable()
                 if (replayCache.size > 1) {
                     ibUndo.enable()
-                    if (currentText.lastOrNull()?.isWhitespace() == true) {
+                    if (isLastCharWhiteSpace) {
                         ibUndoHistory.enable()
                     } else {
                         ibUndoHistory.disable()
@@ -617,7 +696,7 @@ class NoteFragment : Fragment() {
             else -> {
                 ibUndo.enable()
                 ibRedo.enable()
-                if (currentText.lastOrNull()?.isWhitespace() == true) {
+                if (isLastCharWhiteSpace) {
                     ibUndoHistory.enable()
                     ibRedoHistory.enable()
                 } else {
@@ -632,13 +711,13 @@ class NoteFragment : Fragment() {
         ibRedoHistory.background = context?.drawableResource(R.drawable.generic_clickable_shape)
     }
 
-    private fun List<String>.subListOld(currentText: String): List<String> {
-        val indexOfCurrentText = indexOf(currentText)
+    private fun List<Triple<Int, Int, String>>.subListOld(currentText: String): List<Triple<Int, Int, String>> {
+        val indexOfCurrentText = indexOfFirst { it.third == currentText }
         return subList(0, indexOfCurrentText + 1)
     }
 
-    private fun List<String>.subListNew(currentText: String): List<String> {
-        val indexOfCurrentText = indexOf(currentText)
+    private fun List<Triple<Int, Int, String>>.subListNew(currentText: String): List<Triple<Int, Int, String>> {
+        val indexOfCurrentText = indexOfFirst { it.third == currentText }
         return subList(indexOfCurrentText, size)
     }
 }

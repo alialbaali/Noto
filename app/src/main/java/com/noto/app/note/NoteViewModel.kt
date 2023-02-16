@@ -25,10 +25,10 @@ class NoteViewModel(
     private val mutableNote = MutableStateFlow(Note(noteId, folderId, position = 0))
     val note get() = mutableNote.asStateFlow()
 
-    private val mutableTitleHistory = MutableSharedFlow<String>(replay = Int.MAX_VALUE)
+    private val mutableTitleHistory = MutableSharedFlow<Triple<Int, Int, String>>(replay = Int.MAX_VALUE)
     val titleHistory get() = mutableTitleHistory.asSharedFlow()
 
-    private val mutableBodyHistory = MutableSharedFlow<String>(replay = Int.MAX_VALUE)
+    private val mutableBodyHistory = MutableSharedFlow<Triple<Int, Int, String>>(replay = Int.MAX_VALUE)
     val bodyHistory get() = mutableBodyHistory.asSharedFlow()
 
     private val mutableIsUndoOrRedo = MutableStateFlow(false)
@@ -46,6 +46,18 @@ class NoteViewModel(
 
     val isRememberScrollingPosition = settingsRepository.isRememberScrollingPosition
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
+    private val mutableIsTrackingTitleCursorPosition = MutableStateFlow(false)
+    val isTrackingTitleCursorPosition get() = mutableIsTrackingTitleCursorPosition.asStateFlow()
+
+    private val mutableIsTrackingBodyCursorPosition = MutableStateFlow(false)
+    val isTrackingBodyCursorPosition get() = mutableIsTrackingBodyCursorPosition.asStateFlow()
+
+    private var titleCursorStartPosition = 0
+    private var titleCursorEndPosition = 0
+
+    private var bodyCursorStartPosition = 0
+    private var bodyCursorEndPosition = 0
 
     init {
         noteRepository.getNoteById(noteId)
@@ -186,37 +198,45 @@ class NoteViewModel(
     }
 
     fun emitNewTitleOnly(title: String) = viewModelScope.launch {
-        if (!titleHistory.replayCache.contains(title))
-            mutableTitleHistory.emit(title)
+        val value = Triple(titleCursorStartPosition, titleCursorEndPosition, title)
+        val isNew = bodyHistory.replayCache.none { it.third == title }
+        if (isNew) mutableTitleHistory.emit(value)
+        setIsTrackingTitleCursorPosition(false)
     }
 
     fun emitNewBodyOnly(body: String) = viewModelScope.launch {
-        if (!bodyHistory.replayCache.contains(body))
-            mutableBodyHistory.emit(body)
+        val value = Triple(bodyCursorStartPosition, bodyCursorEndPosition, body)
+        val isNew = bodyHistory.replayCache.none { it.third == body }
+        if (isNew) mutableBodyHistory.emit(value)
+        setIsTrackingBodyCursorPosition(false)
     }
 
-    fun undoTitle() {
+    fun undoTitle(): Triple<Int, Int, String> {
         val value = titleHistory.replayCache.getPreviousValueOrCurrent(note.value.title)
         setIsUndoOrRedo()
-        mutableNote.value = note.value.copy(title = value)
+        mutableNote.value = note.value.copy(title = value.third)
+        return value
     }
 
-    fun redoTitle() {
+    fun redoTitle(): Triple<Int, Int, String> {
         val value = titleHistory.replayCache.getNextValueOrCurrent(note.value.title)
         setIsUndoOrRedo()
-        mutableNote.value = note.value.copy(title = value)
+        mutableNote.value = note.value.copy(title = value.third)
+        return value
     }
 
-    fun undoBody() {
+    fun undoBody(): Triple<Int, Int, String> {
         val value = bodyHistory.replayCache.getPreviousValueOrCurrent(note.value.body)
         setIsUndoOrRedo()
-        mutableNote.value = note.value.copy(body = value)
+        mutableNote.value = note.value.copy(body = value.third)
+        return value
     }
 
-    fun redoBody() {
+    fun redoBody(): Triple<Int, Int, String> {
         val value = bodyHistory.replayCache.getNextValueOrCurrent(note.value.body)
         setIsUndoOrRedo()
-        mutableNote.value = note.value.copy(body = value)
+        mutableNote.value = note.value.copy(body = value.third)
+        return value
     }
 
     fun setIsUndoOrRedo() {
@@ -235,7 +255,37 @@ class NoteViewModel(
         mutableNote.value = note.value.copy(body = body)
     }
 
-    private fun List<String>.getPreviousValueOrCurrent(currentValue: String) = getOrElse(indexOf(currentValue) - 1) { currentValue }
+    fun setIsTrackingTitleCursorPosition(value: Boolean) {
+        mutableIsTrackingTitleCursorPosition.value = value
+    }
 
-    private fun List<String>.getNextValueOrCurrent(currentValue: String) = getOrElse(indexOf(currentValue) + 1) { currentValue }
+    fun setIsTrackingBodyCursorPosition(value: Boolean) {
+        mutableIsTrackingBodyCursorPosition.value = value
+    }
+
+    fun setTitleCursorStartPosition(position: Int) {
+        titleCursorStartPosition = position
+    }
+
+    fun setTitleCursorEndPosition(position: Int) {
+        titleCursorEndPosition = position
+    }
+
+    fun setBodyCursorStartPosition(position: Int) {
+        bodyCursorStartPosition = position
+    }
+
+    fun setBodyCursorEndPosition(position: Int) {
+        bodyCursorEndPosition = position
+    }
+
+    private fun List<Triple<Int, Int, String>>.getPreviousValueOrCurrent(currentValue: String): Triple<Int, Int, String> {
+        val index = indexOfFirst { it.third == currentValue }
+        return getOrElse(index - 1) { get(index) }
+    }
+
+    private fun List<Triple<Int, Int, String>>.getNextValueOrCurrent(currentValue: String): Triple<Int, Int, String> {
+        val index = indexOfFirst { it.third == currentValue }
+        return getOrElse(index + 1) { get(index) }
+    }
 }

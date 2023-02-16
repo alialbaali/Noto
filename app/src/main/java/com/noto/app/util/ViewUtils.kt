@@ -12,8 +12,11 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.RippleDrawable
 import android.net.Uri
+import android.text.Spannable
 import android.text.SpannableString
 import android.text.TextPaint
+import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.text.style.URLSpan
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -25,6 +28,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.core.graphics.ColorUtils
 import androidx.core.os.ConfigurationCompat
+import androidx.core.text.toSpannable
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -160,6 +164,13 @@ fun TextView.setMediumFont(font: Font) {
         Font.Nunito -> context.tryLoadingFontResource(R.font.nunito_medium)?.let { typeface = it }
         Font.Monospace -> typeface = Typeface.MONOSPACE
     }
+}
+
+fun CustomEditText.cursorPositionAsFlow() = callbackFlow {
+    trySend(0)
+    val listener: (Int) -> Unit = { trySend(it) }
+    setOnCursorPositionChangedListener(listener)
+    awaitClose { setOnCursorPositionChangedListener(null) }
 }
 
 fun EditText.textAsFlow(emitInitialText: Boolean = false): Flow<CharSequence?> = callbackFlow {
@@ -370,7 +381,7 @@ fun isCurrentLocaleArabic(): Boolean {
     return (deviceLocale?.language == "ar" && appLocale.language == "ar") || appLocale.language == "ar"
 }
 
-fun EditTextWithSelectionChangedListener.textSelectionAsFlow() = callbackFlow {
+fun CustomEditText.textSelectionAsFlow() = callbackFlow {
     val listener: (String?) -> Unit = { selectedText -> trySend(selectedText) }
     setOnSelectionChangedListener(listener)
     awaitClose { setOnSelectionChangedListener(null) }
@@ -384,4 +395,29 @@ fun TabLayout.applyEqualWeightForTabs() {
         layoutParams?.weight = 1F
         tab?.layoutParams = layoutParams
     }
+}
+
+fun Context.highlightText(
+    text: String,
+    match: String,
+    @ColorInt primaryColor: Int = colorAttributeResource(R.attr.notoPrimaryColor),
+    @ColorInt secondaryColor: Int = colorAttributeResource(R.attr.notoSecondaryColor),
+): Spannable {
+    val spannable = text.toSpannable()
+    val textStartIndex = 0
+    val textEndIndex = text.lastIndex.coerceAtLeast(0)
+    val matchStartIndex = spannable.indexOf(match, ignoreCase = true).coerceAtLeast(0)
+    val matchEndIndex = matchStartIndex + match.lastIndex.coerceAtLeast(0)
+    val primaryColorSpan = ForegroundColorSpan(primaryColor)
+    val secondaryColorSpan = ForegroundColorSpan(secondaryColor)
+    val boldFontSpan = tryLoadingFontResource(R.font.nunito_black)?.style?.let(::StyleSpan)
+    val boldSpan = StyleSpan(Typeface.BOLD)
+    spannable.apply {
+        setSpan(primaryColorSpan, textStartIndex, matchStartIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        setSpan(primaryColorSpan, matchEndIndex, textEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        setSpan(secondaryColorSpan, matchStartIndex, matchEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        setSpan(boldSpan, matchStartIndex, matchEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        if (boldFontSpan != null) setSpan(boldFontSpan, matchStartIndex, matchEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+    }
+    return spannable
 }

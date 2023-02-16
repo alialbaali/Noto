@@ -13,9 +13,10 @@ import android.widget.EditText
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.UndoRedoDialogFragmentBinding
+import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -52,42 +53,67 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
             .onEach { isScrolling -> tb.ll.isSelected = isScrolling }
             .launchIn(lifecycleScope)
 
-        val items = args.content.toList()
-        if (args.isTitle) {
-            val currentText = args.currentTitleText
-            if (args.isUndo) {
-                setupItems(items, currentText, isTitle = true)
-                rv.smoothScrollToPosition(items.lastIndexSafely)
-            } else {
-                setupItems(items, currentText, isTitle = true)
-                rv.smoothScrollToPosition(0)
+        viewModel.folder
+            .onEach { folder ->
+                context?.let { context ->
+                    val colorResource = context.colorResource(folder.color.toResource())
+                    tb.tvDialogTitle.setTextColor(colorResource)
+                    tb.vHead.background?.setTint(colorResource)
+                }
+
+                val items = args.startCursorIndices
+                    .zip(args.endCursorIndices)
+                    .zip(args.content)
+                    .map { Triple(it.first.first, it.first.second, it.second) }
+                    .distinctBy { it.third }
+                    .filter { it.third.isNotBlank() }
+                    .filter { it.third.substring(it.first, it.second).lastOrNull()?.isWhitespace() == true }
+
+                if (args.isTitle) {
+                    val currentText = args.currentTitleText
+                    if (args.isUndo) {
+                        setupItems(items, currentText, isTitle = true, folder.color)
+                        rv.scrollToPosition(items.lastIndexSafely)
+                    } else {
+                        setupItems(items, currentText, isTitle = true, folder.color)
+                        rv.scrollToPosition(0)
+                    }
+                } else {
+                    val currentText = args.currentBodyText
+                    if (args.isUndo) {
+                        setupItems(items, currentText, isTitle = false, folder.color)
+                        rv.scrollToPosition(items.lastIndexSafely)
+                    } else {
+                        setupItems(items, currentText, isTitle = false, folder.color)
+                        rv.scrollToPosition(0)
+                    }
+                }
             }
-        } else {
-            val currentText = args.currentBodyText
-            if (args.isUndo) {
-                setupItems(items, currentText, isTitle = false)
-                rv.smoothScrollToPosition(items.lastIndexSafely)
-            } else {
-                setupItems(items, currentText, isTitle = false)
-                rv.smoothScrollToPosition(0)
-            }
-        }
+            .launchIn(lifecycleScope)
     }
 
-    private fun UndoRedoDialogFragmentBinding.setupItems(items: List<String>, currentItem: String, isTitle: Boolean) {
+    private fun UndoRedoDialogFragmentBinding.setupItems(
+        items: List<Triple<Int, Int, String>>,
+        currentItem: String,
+        isTitle: Boolean,
+        color: NotoColor,
+    ) {
         rv.withModels {
             items.forEach { item ->
                 undoRedoItem {
-                    id(item)
-                    text(item)
-                    isSelected(item == currentItem)
+                    id("${item.first} ${item.second} ${item.third}")
+                    text(item.third)
+                    cursorStartPosition(item.first)
+                    cursorEndPosition(item.second)
+                    isSelected(item.third == currentItem)
+                    color(color)
                     onClickListener { _ ->
                         val key = if (isTitle) Constants.NoteTitle else Constants.NoteBody
-                        navController?.previousBackStackEntry?.savedStateHandle?.set(key, item)
+                        navController?.previousBackStackEntry?.savedStateHandle?.set(key, item.third)
                         dismiss()
                     }
                     onCopyClickListener { _ ->
-                        val clipData = ClipData.newPlainText(args.currentTitleText, item)
+                        val clipData = ClipData.newPlainText(args.currentTitleText, item.third)
                         clipboardManager?.setPrimaryClip(clipData)
                         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.S_V2) {
                             val stringId = R.string.text_copied

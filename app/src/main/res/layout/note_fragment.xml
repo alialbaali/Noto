@@ -80,7 +80,7 @@
                 tools:itemCount="1"
                 tools:listitem="@layout/label_item" />
 
-            <EditText
+            <com.noto.app.util.CustomEditText
                 android:id="@+id/et_note_title"
                 style="@style/NoteTitleEditText"
                 android:autoLink="all"
@@ -94,7 +94,7 @@
                 android:inputType="text|textCapSentences|textMultiLine"
                 tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry." />
 
-            <com.noto.app.util.EditTextWithSelectionChangedListener
+            <com.noto.app.util.CustomEditText
                 android:id="@+id/et_note_body"
                 style="@style/NoteBodyEditText"
                 android:autoLink="all"

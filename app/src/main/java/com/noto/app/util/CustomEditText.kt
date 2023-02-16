@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 
-class EditTextWithSelectionChangedListener : AppCompatEditText {
+class CustomEditText : AppCompatEditText {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
@@ -23,9 +23,12 @@ class EditTextWithSelectionChangedListener : AppCompatEditText {
             field = value
             field?.invoke(selectedText)
         }
+    
+    private var cursorPositionChangedListener: ((Int) -> Unit)? = null
 
     override fun onSelectionChanged(selStart: Int, selEnd: Int) {
         super.onSelectionChanged(selStart, selEnd)
+        cursorPositionChangedListener?.invoke(selStart)
         val startIndex = minOf(selStart, selEnd)
         val endIndex = maxOf(selStart, selEnd)
         selectedText = if (startIndex != -1 && endIndex != -1) {
@@ -37,5 +40,9 @@ class EditTextWithSelectionChangedListener : AppCompatEditText {
 
     fun setOnSelectionChangedListener(listener: ((String?) -> Unit)?) {
         this.selectionChangedListener = listener
+    }
+    
+    fun setOnCursorPositionChangedListener(listener: ((Int) -> Unit)?) {
+        this.cursorPositionChangedListener = listener
     }
 }

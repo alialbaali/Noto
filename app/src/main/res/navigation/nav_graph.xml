@@ -522,6 +522,12 @@
             android:name="current_body_text"
             app:argType="string" />
         <argument
+            android:name="start_cursor_indices"
+            app:argType="integer[]" />
+        <argument
+            android:name="end_cursor_indices"
+            app:argType="integer[]" />
+        <argument
             android:name="content"
             app:argType="string[]" />
     </dialog>

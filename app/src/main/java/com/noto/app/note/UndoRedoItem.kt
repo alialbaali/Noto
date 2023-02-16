@@ -2,14 +2,22 @@ package com.noto.app.note
 
 import android.annotation.SuppressLint
 import android.view.View
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
+import androidx.core.text.color
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.noto.app.R
 import com.noto.app.databinding.UndoRedoItemBinding
-import com.noto.app.util.colorAttributeResource
+import com.noto.app.domain.model.NotoColor
+import com.noto.app.util.*
 
+
+private const val ParagraphLength = 50
+private const val Delimiter = "..."
+private const val WhiteSpace = ' '
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass(layout = R.layout.undo_redo_item)
@@ -19,7 +27,16 @@ abstract class UndoRedoItem : EpoxyModelWithHolder<UndoRedoItem.Holder>() {
     lateinit var text: String
 
     @EpoxyAttribute
+    var cursorStartPosition: Int = 0
+
+    @EpoxyAttribute
+    var cursorEndPosition: Int = 0
+
+    @EpoxyAttribute
     open var isSelected: Boolean = false
+
+    @EpoxyAttribute
+    lateinit var color: NotoColor
 
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onClickListener: View.OnClickListener
@@ -27,12 +44,51 @@ abstract class UndoRedoItem : EpoxyModelWithHolder<UndoRedoItem.Holder>() {
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onCopyClickListener: View.OnClickListener
 
+    @SuppressLint("SetTextI18n")
     override fun bind(holder: Holder) = with(holder.binding) {
-        tvText.text = text
         root.context?.let { context ->
             val selectedColor = context.colorAttributeResource(R.attr.notoSurfaceColor)
-            val color = context.colorAttributeResource(R.attr.notoBackgroundColor)
-            ll.background?.mutate()?.setTint(if (isSelected) selectedColor else color)
+            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
+            val colorPrimary = context.colorResource(color.toResource())
+            val colorSecondary = context.colorAttributeResource(R.attr.notoSecondaryColor)
+            ll.background?.mutate()?.setTint(if (isSelected) selectedColor else backgroundColor)
+            tvText.text = buildSpannedString {
+                if (text.isNotBlank()) {
+                    val startIndex = 0
+                    val endIndex = text.lastIndex
+                    val diffStartIndex = cursorStartPosition.coerceIn(startIndex, endIndex)
+                    val diffEndIndex = cursorEndPosition.coerceIn(startIndex, endIndex)
+                    val startText = text.substring(startIndex until diffStartIndex)
+                    val diffText = text.substring(diffStartIndex until diffEndIndex)
+                    val endText = text.substring(diffEndIndex..endIndex)
+
+                    color(colorSecondary) {
+                        if (startText.length > ParagraphLength) {
+                            append(Delimiter)
+                            append(WhiteSpace)
+                            append(startText.takeLast(ParagraphLength))
+                        } else {
+                            append(startText)
+                        }
+                    }
+
+                    color(colorPrimary) {
+                        bold {
+                            append(diffText)
+                        }
+                    }
+
+                    color(colorSecondary) {
+                        if (endText.length > ParagraphLength) {
+                            append(endText.take(ParagraphLength))
+                            append(WhiteSpace)
+                            append(Delimiter)
+                        } else {
+                            append(endText)
+                        }
+                    }
+                }
+            }
         }
         ll.setOnClickListener(onClickListener)
         ibCopy.setOnClickListener(onCopyClickListener)
