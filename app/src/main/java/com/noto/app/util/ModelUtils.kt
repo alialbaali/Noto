@@ -292,6 +292,8 @@ fun Language.asString(): String {
         Language.German -> stringResource(id = R.string.german)
         Language.Italian -> stringResource(id = R.string.italian)
         Language.Czech -> stringResource(id = R.string.czech)
+        Language.Lithuanian -> stringResource(id = R.string.lithuanian)
+        Language.SimplifiedChinese -> stringResource(id = R.string.simplified_chinese)
     }
 }
 
@@ -320,6 +322,8 @@ fun Language.toLocale(): Locale = when (this) {
     Language.German -> Locale("de")
     Language.Italian -> Locale("it")
     Language.Czech -> Locale("cs")
+    Language.Lithuanian -> Locale("lt")
+    Language.SimplifiedChinese -> Locale("zh")
 }
 
 fun List<Language>.toLocalListCompat(): LocaleListCompat {
@@ -341,6 +345,8 @@ fun LocaleListCompat.toLanguages(): List<Language> {
             tag.startsWith("de", ignoreCase = true) -> Language.German
             tag.startsWith("it", ignoreCase = true) -> Language.Italian
             tag.startsWith("cs", ignoreCase = true) -> Language.Czech
+            tag.startsWith("lt", ignoreCase = true) -> Language.Lithuanian
+            tag.startsWith("zh", ignoreCase = true) -> Language.SimplifiedChinese
             else -> Language.System
         }
     }

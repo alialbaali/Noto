@@ -35,7 +35,8 @@ enum class Language {
     @Deprecated("Not supported anymore.")
     Tamil,
 
-    Spanish, French, German, Italian, Czech;
+    Spanish, French, German, Italian, Czech,
+    Lithuanian, SimplifiedChinese;
 
     companion object {
         @Suppress("DEPRECATION")

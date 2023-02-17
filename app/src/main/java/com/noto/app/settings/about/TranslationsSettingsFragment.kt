@@ -31,9 +31,12 @@ private const val ItalianTranslatorWebsite = "https://github.com/matteolomba"
 private const val ItalianTranslator2Website = "https://github.com/SimoneG97"
 private const val FrenchTranslatorWebsite = "https://github.com/kernoeb"
 private const val FrenchTranslator2Website = "https://geoffreycrofte.com"
+
 //private const val ArabicTranslatorWebsite = "https://twitter.com/trjman_en"
 private const val ArabicProofreaderWebsite = "https://www.alialbaali.com"
 private const val CzechTranslatorWebsite = "https://github.com/vikdevelop"
+private const val LithuanianTranslatorWebsite = "http://github.com/ErnestasKaralius"
+private const val SimplifiedChineseTranslatorWebsite = "https://steamcommunity.com/id/oliverberry"
 
 class TranslationsSettingsFragment : Fragment() {
 
@@ -53,7 +56,7 @@ class TranslationsSettingsFragment : Fragment() {
             setContent {
                 Screen(title = stringResource(id = R.string.translations)) {
                     CompositionLocalProvider(LocalContext provides Language.Arabic.toLocalizedContext()) {
-                        SettingsSection(title = stringResource(id = R.string.arabic), painter = painterResource(id = R.drawable.ic_uae)) {
+                        SettingsSection(title = stringResource(id = R.string.arabic), painter = painterResource(id = R.drawable.ic_saudi_arabia)) {
 //                            SettingsItem(
 //                                title = stringResource(id = R.string.arabic_translator),
 //                                type = SettingsItemType.None,
@@ -111,7 +114,7 @@ class TranslationsSettingsFragment : Fragment() {
                         }
                     }
 
-                    CompositionLocalProvider(LocalContext provides Language.German.toLocalizedContext()) {
+                    CompositionLocalProvider(LocalContext provides Language.Spanish.toLocalizedContext()) {
                         SettingsSection(title = stringResource(id = R.string.spanish), painter = painterResource(id = R.drawable.ic_spain)) {
                             SettingsItem(
                                 title = stringResource(id = R.string.spanish_translator),
@@ -148,6 +151,7 @@ class TranslationsSettingsFragment : Fragment() {
                             )
                         }
                     }
+
                     CompositionLocalProvider(LocalContext provides Language.Italian.toLocalizedContext()) {
                         SettingsSection(title = stringResource(id = R.string.italian), painter = painterResource(id = R.drawable.ic_italy)) {
                             SettingsItem(
@@ -179,6 +183,37 @@ class TranslationsSettingsFragment : Fragment() {
                                 type = SettingsItemType.None,
                                 onClick = {
                                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CzechTranslatorWebsite))
+                                    startActivity(intent)
+                                },
+                                painter = EmptyPainter,
+                            )
+                        }
+                    }
+
+                    CompositionLocalProvider(LocalContext provides Language.Lithuanian.toLocalizedContext()) {
+                        SettingsSection(title = stringResource(id = R.string.lithuanian), painter = painterResource(id = R.drawable.ic_lithuania)) {
+                            SettingsItem(
+                                title = stringResource(id = R.string.lithuanian_translator),
+                                type = SettingsItemType.None,
+                                onClick = {
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(LithuanianTranslatorWebsite))
+                                    startActivity(intent)
+                                },
+                                painter = EmptyPainter,
+                            )
+                        }
+                    }
+
+                    CompositionLocalProvider(LocalContext provides Language.SimplifiedChinese.toLocalizedContext()) {
+                        SettingsSection(
+                            title = stringResource(id = R.string.simplified_chinese),
+                            painter = painterResource(id = R.drawable.ic_china),
+                        ) {
+                            SettingsItem(
+                                title = stringResource(id = R.string.simplified_chinese_translator),
+                                type = SettingsItemType.None,
+                                onClick = {
+                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SimplifiedChineseTranslatorWebsite))
                                     startActivity(intent)
                                 },
                                 painter = EmptyPainter,

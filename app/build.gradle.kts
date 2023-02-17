@@ -51,7 +51,9 @@ android {
                 "it",
 //                "ru",
 //                "ta",
-                "tr"
+                "tr",
+                "lt",
+                "zh",
             )
         )
     }

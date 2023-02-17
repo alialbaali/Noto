@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Noto</string>
+    <string name="done">Baigta</string>
+    <!-- Button text for sorting/ordering/filtering notes options. -->
+    <string name="apply">Taikyti</string>
+    <string name="okay">Gerai</string>
+    <string name="search">Ieškoti</string>
+    <!-- A way to support the project. -->
+    <string name="buy_me_a_coffee">Nupirkite man kavos</string>
+    <!-- Description of the "Buy me a coffee" settings options. -->
+    <string name="buy_me_a_coffee_description">Jei norite parodyti paramą.</string>
+    <!-- Description of the "Become a patron" settings options. -->
+    <string name="become_a_patron_description">Jei norite palaikyti Noto kūrimą.</string>
+    <!-- A way to support the project. -->
+    <string name="become_a_patron">Tapkite nariu Patreon</string>
+    <!-- More options for folder, note, etc... -->
+    <string name="more_options">Daugiau parinkčių</string>
+    <!-- Options for multi-selected notes. -->
+    <string name="options">Parinktys</string>
+    <string name="back">Atgal</string>
+    <string name="folder_layout">Aplankų išsidėstymas</string>
+    <string name="label_filtering_type">Žymenų filtravimo rūšis</string>
+    <string name="layout">Išsidėstymas</string>
+    <string name="list">Sąrašas</string>
+    <string name="inclusive">Įtraukianti</string>
+    <string name="exclusive">Išskirtinė</string>
+    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <string name="strict">Griežta</string>
+    <string name="grid">Tinklelis</string>
+    <string name="created">Sukurta %s</string>
+    <string name="accessed">Atidaryta %s</string>
+    <string name="alphabetical">Abėcėlė</string>
+    <!-- Sorting/Grouping notes by access date. -->
+    <string name="access_date">Atidarymo data</string>
+    <string name="creation_date">Sukūrimo data</string>
+    <string name="manual">Rankinis</string>
+    <string name="default_grouping">Numatytasis</string>
+    <string name="descending">Mažėjanti</string>
+    <string name="ascending">Didėjanti</string>
+    <string name="settings">Nustatymai</string>
+    <!-- The link of the source code of the project. -->
+    <string name="source_code">Pirminis kodas</string>
+    <!-- Description of the "Source code" settings option. -->
+    <string name="source_code_description">Noto yra atvirojo kodo programėlė, kurios kodas yra skelbiamas GitHub.</string>
+    <!-- The link of the reddit community of Noto. -->
+    <string name="reddit_community">Reddit bendruomenė</string>
+    <!-- Description of the "Reddit community" settings option. -->
+    <string name="reddit_community_description">Prisijunkite prie bendruomenės, kad bendrautumėte su kitais Noto naudotojais ir gautumėte paskiausias naujienas.</string>
+    <!-- The font used in notes, such as Monospace, or Nunito. -->
+    <string name="notes_font">Užrašų šriftas</string>
+    <string name="share_app_with_others">Dalinkitės Noto su kitais</string>
+    <string name="rate_app_on_play_store">Įvertinkite Noto Play parduotuvėje</string>
+    <string name="report_issue">Pranešti apie problemą</string>
+    <string name="about">Apie</string>
+    <string name="whats_new">Kas naujo</string>
+    <!--    <string name="share_with">Share with</string>-->
+    <string name="export_import_data">Eksportuoti/Importuoti duomenis</string>
+    <string name="exporting_failed">Nepavyko eksportuoti duomenų.</string>
+    <string name="importing_failed">Nepavyko importuoti duomenų.</string>
+    <string name="data_is_exported">Duomenys eksportuoti į %s</string>
+    <string name="data_is_imported">Duomenys importuoti.</string>
+    <string name="export_data">Eksportuoti duomenis</string>
+    <string name="import_data">Importuoti duomenis</string>
+    <string name="importing_data">Importuojami duomenys…</string>
+    <string name="exporting_data">Exportuojami duomenys…</string>
+    <string name="create_file_failed">Nepavyko sukurti failo.</string>
+    <string name="no_folder_is_selected">Nepasirinktas aplankas.</string>
+    <string name="no_file_is_selected">Nepasirinktas failas.</string>
+    <!-- Open with an app such as Signal -->
+    <string name="open_with">Atidaryti su</string>
+    <string name="invite_text">Peržiūrėk Noto — minimalią atvirojo kodo užrašų programėlę.</string>
+    <string name="version">Versija</string>
+    <!-- A message shown when clicking on the app version. -->
+    <string name="version_is_copied">Versija nukopijuota į iškarpinę.</string>
+    <!-- Me -->
+    <string name="developer">Programuotojas</string>
+    <!-- Creator of app icons. -->
+    <string name="creator">Kūrėjas</string>
+    <!-- Translator of a language. -->
+    <!-- Proofreader of a language. -->
+    <string name="app_icons">Programėlės piktogramos</string>
+    <string name="privacy_policy">Privatumo politika</string>
+    <!-- Description of the "Privacy policy" settings option. -->
+    <string name="privacy_policy_description">Paskutinį kartą atnaujinta 2022 m. rugpjūčio 25 d.</string>
+    <!-- License of the project, or app icons. Example: Apache 2.0. -->
+    <string name="license">Licencija</string>
+    <string name="empty_version">Versija</string>
+    <string name="date">Data</string>
+    <string name="drag">Drag</string>
+    <string name="nunito">Nunito (numatytasis)</string>
+    <string name="monospace">Monospace</string>
+    <string name="font">Šriftas</string>
+    <string name="folders_archive">Aplankų archyvas</string>
+    <!-- The first screen user sees when opening the app. -->
+    <string name="main_interface">Pagrindinė sąsaja</string>
+    <!-- Description of the "Main interface" settings option. -->
+    <string name="main_interface_description">Pirmasis rodomas langas paleidžiant programėlę.</string>
+    <!-- The default folder of "Save to Noto" text selection option. -->
+    <string name="quick_note_folder">Sparčiųjų užrašų aplankas</string>
+    <!-- AKA "Save to Noto". -->
+    <string name="quick_note">Spartusis užrašas</string>
+    <!-- Description of the "Quick note folder" settings option. -->
+    <string name="quick_note_folder_description">Numatytasis aplankas išsaugant užrašus su parinktimi „Spartusis užrašas“.</string>
+    <string name="general">Bendrieji</string>
+    <string name="all_notes">Visi užrašai</string>
+    <string name="all_folders">Visi aplankai</string>
+    <string name="clear">Valyti</string>
+    <string name="recent_notes">Paskiausi užrašai</string>
+    <string name="collapse">Sutraukti</string>
+    <string name="expand">Išskleisti</string>
+    <string name="no_parent">Nėra viršaplankio</string>
+    <string name="parent_folder">Viršaplankis</string>
+    <string name="new_note_cursor_position">Naujo užrašo žymeklio padėtis</string>
+    <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
+    <string name="open_notes_in">Atidaryti užrašus</string>
+    <string name="archive">archyve</string>
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
+    <string name="folder_archive">%s archyvas</string>
+    <string name="unarchive">Išarchyvuoti</string>
+    <string name="edit">Redaguoti</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">Sekantis</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">Ankstesnis</string>
+    <string name="pin">Prisegti</string>
+    <!-- Merge multiple notes into a new note. -->
+    <string name="merge">Sujungti</string>
+    <string name="unpin">Atsegti</string>
+    <string name="delete">Naikinti</string>
+    <string name="just_now">ką tik</string>
+    <!--Select a note. -->
+    <string name="select">Pasirinkti</string>
+    <!--Select all notes. -->
+    <string name="select_all">Pasirinkti viską</string>
+    <!-- List of translations. -->
+    <string name="translations">Vertimai</string>
+    <!-- Description of the "Translations" settings option. -->
+    <string name="translations_description">Ypatinga padėka visiems vertėjams, kurie padarė Noto prieinamą skirtingose kalbose.</string>
+    <!-- List of credits. -->
+    <string name="credits">Padėka</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">Jei norite daugiau informacijos, spustelėkite čia.</string>
+    <!-- Folder -->
+    <string name="folders">Aplankai</string>
+    <plurals name="folders_count">
+        <item quantity="one">Aplankai: %d</item>
+        <item quantity="few">Aplankai: %d</item>
+        <item quantity="many">Aplankai: %d</item>
+        <item quantity="other">Aplankai: %d</item>
+    </plurals>
+    <string name="create_folder">Kurti aplanką</string>
+    <string name="update_folder">Naujinti aplanką</string>
+    <string name="archive_folder">Archyvuoti aplanką</string>
+    <string name="new_folder">Naujas aplankas</string>
+    <string name="edit_folder">Redaguoti aplanką</string>
+    <string name="folder_options">Aplanko parinktys</string>
+    <string name="add_new_note_shortcut">Naujo užrašo nuoroda</string>
+    <string name="delete_folder_description">Šis veiksmas yra negrįžtamas ir panaikins aplanką su visu jo turiniu visam laikui.</string>
+    <string name="folder_title">Aplanko antraštė</string>
+    <string name="folder_color">Aplanko spalva</string>
+    <string name="delete_folder">Naikinti</string>
+    <string name="delete_folder_confirmation">Tikrai norite panaikinti šį aplanką?</string>
+    <string name="folders_sorting">Aplankų rikiavimas</string>
+    <string name="empty_title">Antraštė negali būti tuščia.</string>
+    <string name="folder_is_deleted">Aplankas panaikintas.</string>
+    <string name="folder_is_archived">Aplankas suarchyvuotas.</string>
+    <string name="folder_is_unarchived">Aplankas išarchyvuotas.</string>
+    <string name="folder_is_pinned">Aplankas prisegtas.</string>
+    <string name="folder_is_unpinned">Aplankas atsegtas.</string>
+    <string name="no_folders_found">Nerasta aplankų.</string>
+    <string name="select_folder">Pasirinkti aplanką</string>
+    <string name="select_folder_archive">Pasirinkti aplanko archyvą</string>
+    <string name="select_parent_folder">Pasirinkti viršaplankį</string>
+    <string name="select_quick_note_folder">Pasirinkti sparčiųjų užrašų aplanką</string>
+    <string name="select_main_interface">Pasirinkti pagrindinę sąsają</string>
+    <string name="pinned">Prisegtas</string>
+    <!-- Vault -->
+    <string name="folders_vault">Aplankų saugykla</string>
+    <string name="update_passcode">Naujinti slaptažodį</string>
+    <string name="enter_vault_passcode">Įveskite saugyklos slaptažodį</string>
+    <string name="add_to_vault">Pridėti į saugyklą</string>
+    <string name="remove_from_vault">Šalinti iš saugyklos</string>
+    <string name="folder_is_vaulted">Aplankas pridėtas į saugyklą.</string>
+    <string name="folder_is_unvaulted">Aplankas pašalintas iš saugyklos.</string>
+    <string name="vault_is_empty">Saugykla tuščia.</string>
+    <string name="archive_vaulted_folder_confirmation">Tikrai norite suarchyvuoti šį aplanką?</string>
+    <string name="archive_vaulted_folder_description">Šio aplanko suarchyvinimas taip pat pašalins jį iš saugyklos.</string>
+    <string name="vault_passcode">Saugyklos slaptažodis</string>
+    <string name="current_vault_passcode">Dabartinis saugyklos slaptažodis</string>
+    <string name="new_vault_passcode">Naujas saugyklos slaptažodis</string>
+    <!-- Change vault passcode option. -->
+    <string name="change_passcode">Keisti slaptažodį</string>
+    <!-- Vault timeout. -->
+    <string name="timeout">Skirtasis laikas</string>
+    <!-- Description of the "Timeout" settings option. -->
+    <string name="timeout_description">Laikas, per kurį saugykla yra uždaroma po jos atidarymo.</string>
+    <string name="vault_timeout">Saugyklos skirtasis laikas</string>
+    <string name="invalid_passcode">Netinkamas slaptažodis</string>
+    <string name="passcode_length_message">Slaptažodį turi sudaryti bent 6 skaičiai</string>
+    <string name="passcode_empty_message">Slaptažodis negali būti tuščias</string>
+    <string name="passcode_doesnt_match">Slaptažodis neatitinka dabartinio</string>
+    <string name="vault_passcode_has_changed">Saugyklos slaptažodis atnaujintas.</string>
+    <string name="vault_passcode_message">Saugyklos slaptažodis negali būti pakeistas, jei prarasite dabartinį, todėl būtinai laikykite jį saugioje vietoje.</string>
+    <string name="use_bio">Naudoti biometriją</string>
+    <string name="validate">Patvirtinti</string>
+    <string name="vault">Saugykla</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">Išjungti saugyklą</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">Saugykla išjungta.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">Išjungti</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">Tikrai norite išjungti saugyklą?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">Šis veiksmas yra negrįžtamas ir išjungs saugyklą bei perkels visus jos aplankus.</string>
+    <string name="vault_is_open">Saugykla atidaryta</string>
+    <string name="immediately">Nedelsiant</string>
+    <string name="on_app_close">Uždarius programą</string>
+    <string name="after_1_hour">Po 1 valandos</string>
+    <string name="after_4_hours">Po 4 valandų</string>
+    <string name="after_12_hours">Po 12 valandų</string>
+    <string name="close_vault">Uždaryti saugyklą</string>
+    <!-- Enabling biometric authentication for the app. -->
+    <string name="bio_auth">Įjungti biometrinį autentifikavimą</string>
+    <!-- Description of the "Enable biometric authentication" settings option. -->
+    <string name="bio_auth_description">Leisti pasiekti saugyklą naudojant biometrinius autentifikavimo būdus, pavyzdžiui, veido atpažinimą ar pirštų atspaudus.</string>
+    <string name="use_passcode">Naudoti slaptažodį</string>
+    <!-- Note -->
+    <string name="all">Visi</string>
+    <string name="update_reminder">Naujinimų priminimai</string>
+    <string name="archive_is_empty">Archyvas tuščias.</string>
+    <plurals name="notes_count">
+        <item quantity="one">Užrašai: %d</item>
+        <item quantity="few">Užrašai: %d</item>
+        <item quantity="many">Užrašai: %d</item>
+        <item quantity="other">Užrašai: %d</item>
+    </plurals>
+    <!-- Filtered notes count is shown when a label is selected, or text is searched.
+         Such as "30 Notes • 5 Filtered".
+     -->
+    <plurals name="notes_filtered_count">
+        <item quantity="one">Užrašai: %1$d • Išfiltruoti %2$d</item>
+        <item quantity="few">Užrašai: %1$d • Išfiltruoti %2$d</item>
+        <item quantity="many">Užrašai: %1$d • Išfiltruoti %2$d</item>
+        <item quantity="other">Užrašai: %1$d • Išfiltruoti %2$d</item>
+    </plurals>
+    <!-- Selected notes count is shown when a note or multiple notes are selected.
+         Such as "30 Notes • 5 Selected".
+     -->
+    <plurals name="notes_selected_count">
+        <item quantity="one">Užrašai: %1$d • Pasirinkti %2$d</item>
+        <item quantity="few">Užrašai: %1$d • Pasirinkti %2$d</item>
+        <item quantity="many">Užrašai: %1$d • Pasirinkti %2$d</item>
+        <item quantity="other">Užrašai: %1$d • Pasirinkti %2$d</item>
+    </plurals>
+    <!--  Filtered notes count is shown when a label is selected, or text is searched. Selected notes count is shown when a note or multiple notes are selected.
+          Such as, "30 Notes • 3 Filtered • 8 Selected".
+     -->
+    <plurals name="notes_filtered_selected_count">
+        <item quantity="one">Užrašai: %1$d • Išfiltruoti %2$d • Pasirinkti %3$d</item>
+        <item quantity="few">Užrašai: %1$d • Išfiltruoti %2$d • Pasirinkti %3$d</item>
+        <item quantity="many">Užrašai: %1$d • Išfiltruoti %2$d • Pasirinkti %3$d</item>
+        <item quantity="other">Užrašai: %1$d • Išfiltruoti %2$d • Pasirinkti %3$d</item>
+    </plurals>
+    <plurals name="words_count">
+        <item quantity="one">Žodžiai: %d</item>
+        <item quantity="few">Žodžiai: %d</item>
+        <item quantity="many">Žodžiai: %d</item>
+        <item quantity="other">Žodžiai: %d</item>
+    </plurals>
+    <!-- Selected words count is shown when text is selected in a note. -->
+    <plurals name="words_selected_count">
+        <item quantity="one">Žodžiai: %1$d • Pasirinkti %2$d</item>
+        <item quantity="few">Žodžiai: %1$d • Pasirinkti %2$d</item>
+        <item quantity="many">Žodžiai: %1$d • Pasirinkti %2$d</item>
+        <item quantity="other">Žodžiai: %1$d • Pasirinkti %2$d</item>
+    </plurals>
+    <string name="body">Turinys</string>
+    <string name="title">Antraštė</string>
+    <!-- Note's editor, opposite of Reading Mode. -->
+    <string name="editor">Redaktorius</string>
+    <string name="create_note">Kurti užrašą</string>
+    <plurals name="delete_note">
+        <item quantity="one">Naikinti užrašą</item>
+        <item quantity="few">Naikinti užrašus</item>
+        <item quantity="many">Naikinti užrašus</item>
+        <item quantity="other">Naikinti užrašus</item>
+    </plurals>
+    <string name="duplicate">Dubliuoti</string>
+    <string name="undo">Atkurti</string>
+    <string name="undo_history">Atkurti istoriją</string>
+    <string name="redo">Perdaryti</string>
+    <string name="redo_history">Perdaryti istoriją</string>
+    <string name="share_note">Bendrinti užrašą</string>
+    <string name="sorting_type">Rikiavimo rūšis</string>
+    <!-- Sorting for notes/folders -->
+    <string name="sorting">Rikiavimas</string>
+    <!-- Type of sorting for notes/folders -->
+    <string name="type">Rūšis</string>
+    <!-- Order of sorting for notes/folders -->
+    <string name="order">Tvarka</string>
+    <string name="notes_view">Užrašų peržiūra</string>
+    <string name="sorting_order">Rikiavimo tvarka</string>
+    <string name="grouping_type">Grupavimo rūšis</string>
+    <!-- Grouping for notes/folders -->
+    <string name="grouping">Grupavimas</string>
+    <string name="grouping_order">Grupavimo tvarka</string>
+    <string name="save_to_noto">Išsaugoti Noto</string>
+    <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
+    <string name="note_is_saved">Užrašas išsaugotas į %s.</string>
+    <string name="no_notes_found">Nerasta užrašų.</string>
+    <string name="notes">Užrašai</string>
+    <!-- The count of the selected notes that have been merged. -->
+    <string name="notes_are_merged">%d užrašai sujungti į vieną.</string>
+    <plurals name="note_is_archived">
+        <item quantity="one">Užrašas suarchyvuotas.</item>
+        <item quantity="few">%d užrašai suarchyvuoti.</item>
+        <item quantity="many">%d užrašai suarchyvuoti.</item>
+        <item quantity="other">%d užrašai suarchyvuoti.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been pinned. -->
+    <plurals name="note_is_pinned">
+        <item quantity="one">Užrašas prisegtas.</item>
+        <item quantity="few">%d užrašai prisegti.</item>
+        <item quantity="many">%d užrašai prisegti.</item>
+        <item quantity="other">%d užrašai prisegti.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been unpinned. -->
+    <plurals name="note_is_unpinned">
+        <item quantity="one">Užrašas atsegtas.</item>
+        <item quantity="few">%d užrašai atsegti.</item>
+        <item quantity="many">%d užrašai atsegti.</item>
+        <item quantity="other">%d užrašai atsegti.</item>
+    </plurals>
+    <string name="no_note_reminder">Nenustatyti jokie priminimai.</string>
+    <string name="note_is_unarchived">Užrašas išarchyvuotas.</string>
+    <string name="reminder">Priminimas</string>
+    <string name="reminders">Priminimai</string>
+    <string name="new_note_reminder">Naujas priminimas</string>
+    <string name="copy">Kopijuoti</string>
+    <string name="copy_to">Kopijuoti į…</string>
+    <!-- The count of the selected notes that have been copied to a folder. -->
+    <plurals name="note_is_copied">
+        <item quantity="one">Užrašas nukopijuotas į %s.</item>
+        <item quantity="few">%d užrašai nukopijuoti į %s.</item>
+        <item quantity="many">%d užrašai nukopijuoti į %s.</item>
+        <item quantity="other">%d užrašai nukopijuoti į %s.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been copied to clipboard. -->
+    <plurals name="note_copied_to_clipboard">
+        <item quantity="one">Užrašas nukopijuotas į iškarpinę.</item>
+        <item quantity="few">%d užrašai nukopijuoti į iškarpinę.</item>
+        <item quantity="many">%d užrašai nukopijuoti į iškarpinę.</item>
+        <item quantity="other">%d užrašai nukopijuoti į iškarpinę.</item>
+    </plurals>
+    <string name="text_copied">Tekstas nukopijuotas į iškarpinę.</string>
+    <plurals name="delete_note_confirmation">
+        <item quantity="one">Tikrai norite panaikinti šį užrašą?</item>
+        <item quantity="few">Tikrai norite panaikinti šiuos užrašus?</item>
+        <item quantity="many">Tikrai norite panaikinti šiuos užrašus?</item>
+        <item quantity="other">Tikrai norite panaikinti šiuos užrašus?</item>
+    </plurals>
+    <string name="share_with">Bendrinti su…</string>
+    <string name="add_note_reminder">Pridėi priminimą</string>
+    <plurals name="delete_note_description">
+        <item quantity="one">Šis veiksmas yra negrįžtamas ir panaikins šį užrašą su jo priminimu visam laikui.</item>
+        <item quantity="few">Šis veiksmas yra negrįžtamas ir panaikins šiuos užrašus su jų priminimais visam laikui.</item>
+        <item quantity="many">Šis veiksmas yra negrįžtamas ir panaikins šiuos užrašus su jų priminimais visam laikui.</item>
+        <item quantity="other">Šis veiksmas yra negrįžtamas ir panaikins šiuos užrašus su jų priminimais visam laikui.</item>
+    </plurals>
+    <string name="reading_mode">Skaitymo režimas</string>
+    <string name="edit_note_reminder">Redaguoti priminimą</string>
+    <string name="note_options">Užrašo parinktys</string>
+    <!-- The count of the selected notes that have been deleted. -->
+    <plurals name="note_is_deleted">
+        <item quantity="one">Užrašas panaikintas.</item>
+        <item quantity="few">%d užrašai panaikinti.</item>
+        <item quantity="many">%d užrašai panaikinti.</item>
+        <item quantity="other">%d užrašai panaikinti.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been duplicated. -->
+    <plurals name="note_is_duplicated">
+        <item quantity="one">Užrašas dubliuotas.</item>
+        <item quantity="few">%d užrašai dubliuoti.</item>
+        <item quantity="many">%d užrašai dubliuoti.</item>
+        <item quantity="other">%d užrašai dubliuoti.</item>
+    </plurals>
+    <string name="move_to">Perkelti į…</string>
+    <!-- The count of the selected notes that have been moved to a folder. -->
+    <plurals name="note_is_moved">
+        <item quantity="one">Užrašas perkeltas į %s.</item>
+        <item quantity="few">%d užrašai perkelti į %s.</item>
+        <item quantity="many">%d užrašai perkelti į %s.</item>
+        <item quantity="other">%d užrašai perkelti į %s.</item>
+    </plurals>
+    <string name="note_preview_size">Užrašų peržiūros dydis</string>
+    <string name="show_note_creation_date">Rodyti užrašų sukūrimo datą</string>
+    <!-- Whether to show notes count in "All Folders" view. -->
+    <string name="show_notes_count">Rodyti uždarų skaičių</string>
+    <!-- Description of the "Show notes count" settings option. -->
+    <string name="show_notes_count_description">Rodyti užrašų skaičių aplanko dialoge.</string>
+    <string name="remember_scrolling_position">Įsiminti slinkimo padėtį</string>
+    <!-- Description of the "Remember scrolling position" settings option. -->
+    <string name="remember_scrolling_position_description">Išsaugoti aplankų ir užrašų slinkimo padėtis.</string>
+    <string name="do_not_disturb">Netrukdyti</string>
+    <!-- Description of the "Do Not Disturb" settings option. -->
+    <string name="do_not_disturb_description">Įjungti režimą „Netrukdyti“ skaitymo režimo metu.</string>
+    <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
+    <string name="keep_screen_on">Neišjungti ekrano</string>
+    <!-- Description of the "Keep screen on" settings option. -->
+    <string name="keep_screen_on_description">Neleisti ekranui išsijungti skaitymo režimo metu.</string>
+    <string name="full_screen">Visas ekranas</string>
+    <!-- Description of the "Go full screen" settings option. -->
+    <string name="full_screen_description">Slėpti būsenos ir naršymo juostas skaitymo režimo metu.</string>
+    <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
+    <string name="screen_brightness_level">Ekrano ryškumo lygis</string>
+    <!-- Description of the "Screen brightness level" settings option. -->
+    <string name="screen_brightness_level_description">Ekrano ryškumo lygis skaitymo režimo metu.</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="min">Minimalus</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_low">Labai žemas</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="low">Žemas</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="medium">Vidutinis</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="high">Aukštas</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_high">Labai aukštas</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="max">Maksimalus</string>
+    <string name="show">Rodyti</string>
+    <string name="hide">Slėpti</string>
+    <string name="permission_not_granted">Leidimas nesuteiktas</string>
+    <!-- Label -->
+    <string name="reorder_label">Perrikiuoti</string>
+    <string name="update_label">Naujinti žymeną</string>
+    <string name="create_label">Kurti žymeną</string>
+    <string name="label_title">Žymenos antraštė</string>
+    <string name="label">Žymena</string>
+    <string name="without_label">Be žymenos</string>
+    <string name="label_options">Žymenos parinktys</string>
+    <string name="delete_label">Naikinti žymeną</string>
+    <string name="new_label">Nauja žymena</string>
+    <string name="edit_label">Redaguoti žymeną</string>
+    <string name="labels_order">Žymenų tvarka</string>
+    <string name="delete_label_confirmation">Tikrai norite panaikinti šią žymeną?</string>
+    <string name="label_is_deleted">Žymena panaikinta.</string>
+    <string name="delete_label_description">Šis veiksmas yra negrįžtamas ir panaikins šią žymeną bei ją pašalins iš susijusių užrašų visam laikui.</string>
+    <string name="filter_labels">Filtruoti žymenas</string>
+    <!-- Theme -->
+    <string name="theme">Tema</string>
+    <string name="system_dark_theme">Sistemos + tamsi</string>
+    <string name="system_black_theme">Sistemos + juoda</string>
+    <string name="light_theme">Šviesi</string>
+    <string name="dark_theme">Tamsi</string>
+    <string name="black_theme">Juoda</string>
+    <!-- Language -->
+    <string name="language">Kalba</string>
+    <!-- A text next to the non-finished language. -->
+    <string name="not_finished">Nebaigta</string>
+    <!-- An option in settings to invite users to translate Noto. -->
+    <string name="translate_noto">Išverskite Noto</string>
+    <!-- Description of the "Translate Noto" settings option. -->
+    <string name="translate_noto_description">Vertimai atliekami Crowdin.</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">Sistemos</string>
+    <string name="english">Anglų (English)</string>
+    <string name="turkish">Turkų</string>
+    <string name="arabic">Arabų</string>
+    <string name="indonesian">Indoneziečių</string>
+    <string name="russian">Rusų</string>
+    <string name="spanish">Ispanų</string>
+    <string name="french">Prancūzų</string>
+    <string name="german">Vokiečių</string>
+    <string name="italian">Italų</string>
+    <string name="tamil">Tamilų</string>
+    <string name="czech">Čekų</string>
+    <!-- Icon -->
+    <string name="icon">Piktograma</string>
+    <!-- Widget -->
+    <string name="create_widget">Kurti valdiklį</string>
+    <string name="update_widget">Naujinti valdiklį</string>
+    <string name="new_notes_widget">Naujas užrašų valdiklis</string>
+    <string name="edit_notes_widget">Redaguoti užrašų valdiklį</string>
+    <string name="new_folders_widget">Naujas aplankų valdiklis</string>
+    <string name="edit_folders_widget">Redaguoti aplankų valdiklį</string>
+    <string name="new_folder_button">Naujas aplanko mygtukas</string>
+    <string name="new_note_button">Naujas užrašo mygtukas</string>
+    <string name="widget_header">Valdiklio antraštė</string>
+    <string name="app_icon">Programėlės piktograma</string>
+    <string name="widget_radius">Valdiklio spindulys</string>
+    <string name="edit_widget">Redaguoti valdiklį</string>
+    <string name="edit_widget_button">Redaguoti valdiklio mygtuką</string>
+    <string name="folders_notes_count">Aplankų užrašų skaičius</string>
+    <string name="loading_content">Įkeliamas turinys</string>
+    <!-- Releases -->
+    <string name="release_1_8_0">• Slaptažodžiu apsaugotos saugyklos.
+        \n• Saugyklų skiriamojo laiko parinktys.
+        \n• Biometrinis autentifikavimas palaikomuose įrenginiuose.
+        \n• Ispanų kalba.
+        \n• Pridėta nauja <a href="https://www.reddit.com/r/notoapp">Reddit</a> bendruomenės nuoroda.
+        \n• Klaidų taisymas ir kiti patobulinimai.
+    </string>
+    <string name="release_2_0_0">• Nauji metai, nauja išvaizda!
+        \n• Bibliotekų nebėra. Sveiki, aplankai!
+        \n• Patobulintos visos programėlės animacijos.
+        \n• Eksperimentinis įdėtinių aplankų palaikymas.
+        \n• Eksperimentinis aplanko įdėjimas su rankiniu rikiavimu braukiant horizontaliai palaikymas.
+        \n• Pridėtas numatytasis „Bendrasis“ aplankas bendriems užrašams.
+        \n• Visų ir paskiausių užrašų peržiūra bei gebėjimas per juos ieškoti.
+        \n• Užrašų turinio paryškinimas ieškant.
+        \n• Sutraukiama įrankių juosta geresniam naudojimui ir pasiekiamumui.
+        \n• Prancūzų kalba.
+        \n• Aplankų peržiūra braukiant į viršų apatinėje programėlės juostoje.
+        \n• Patekimas į saugyklą spustelėjus pranešimą „Saugykla atidaryta“.
+        \n• Parinktys, leidžiančios pasirinkti pagrindinio aplanko vietą.
+        \n• Parinktys, leidžiančios numatytai sutraukti įrankių juostą.
+        \n• Pataisytos statinės nuorodų piktogramos senesniuose Android įrenginiuose.
+        \n• Klaidų taisymas ir kiti patobulinimai.
+    </string>
+    <string name="release_2_0_1">• Klaidų taisymas.</string>
+    <string name="release_2_1_0">• Atkūrimo ir perdarymo palaikymas bei jų istorijos peržiūra.
+        \n• Perkurtos žymenos.
+        \n• Perkurtos apatinės ir viršutinės programėlės juostos visuose išsidėstymuose.
+        \n• Perkurta daug meniu.
+        \n• Perkurtas aplankų kūrimo ir redagavimo išsidėstymas.
+        \n• Pridėta grupavimo tvarka užrašams.
+        \n• Pridėtas pakilimas tempiant žymenas ar užrašus.
+        \n• Įtraukiama peržiūra aplankų, užrašų ir žymenų meniu.
+        \n• Geresnis datų formatavimas.
+        \n• Pakeista užrašų paryškinimo spalva.
+        \n• Ėjimas į aplankų išsidėstymą prieš programos uždarymą.
+        \n• Material You palaikymas (Material 3).
+        \n• Perkurtas pristatymo langas.
+        \n• Skaitymo režimo patobulinimai.
+        \n• Aplankų ir užrašų slinkimo padėties įsiminimas.
+        \n• Išjungtos užrašų ir aplankų spalvų animacijos.
+        \n• Pataisytas duomenų importavimas.
+        \n• Pataisytas strigtis atidarius saugykla Android 11 ir naujesniuose įrenginiuose.
+        \n• Įgyvendinti braukimo gestai atkūrimui/perdarymui.
+        \n• Žymenų įtraukiantis ir išskirtinis filtravimas.
+        \n• Perkurta programėlės piktograma.
+        \n• Programėlės piktogramas keitimas.
+        \n• Pakeistas šriftų svoris ir teksto dydis skirtinguose išsidėstymuose.
+        \n• Vokiečių kalba.
+        \n• Klaidų taisymas ir kiti patobulinimai.
+    </string>
+    <string name="release_2_1_1">• Klaidų taisymas.</string>
+    <string name="release_2_1_2">• Klaidų taisymas ir kiti patobulinimai.</string>
+    <string name="release_2_1_3">• Klaidų taisymas ir kiti patobulinimai.</string>
+    <string name="release_2_1_4">• Pataisytas nuorodų neveikimas naudojant kitą piktogramą.
+        \n• Pasirinktos žymenos užrašų išsidėstyme pasirodo pirmiausiai.
+        \n• Klaidų taisymas ir kiti patobulinimai.
+    </string>
+    <string name="release_2_1_5">• Klaidų taisymas ir kiti patobulinimai.</string>
+    <string name="release_2_1_6">• Klaidų taisymas ir kiti patobulinimai.</string>
+    <string name="release_2_2_0">• Čekų ir italų kalbos.
+        \n• Grupinis užrašų pasirinkimas.
+        \n• Parinktis numatytai atidaryti užrašus skaitymo režime.
+        \n• Perkurtas nustatymų langas.
+        \n• Įgyvendintas puslapiavimas užrašams skaitymo režime.
+        \n• Pagreitintas programėlės paleidimas.
+        \n• Pataisytas JSON failų importavimas.
+        \n• Pataisyta juodos temos spalva Android 12 ir naujesniuose įrenginiuose.
+        \n• Klaidų taisymas ir kiti patobulinimai.
+    </string>
+</resources>

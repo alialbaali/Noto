@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Noto 笔记</string>
+    <string name="done">完成</string>
+    <!-- Button text for sorting/ordering/filtering notes options. -->
+    <string name="apply">应用</string>
+    <string name="okay">确定</string>
+    <string name="search">搜索</string>
+    <!-- A way to support the project. -->
+    <string name="buy_me_a_coffee">请我喝杯咖啡吧~</string>
+    <!-- Description of the "Buy me a coffee" settings options. -->
+    <string name="buy_me_a_coffee_description">以表示您的支持。</string>
+    <!-- Description of the "Become a patron" settings options. -->
+    <string name="become_a_patron_description">希望 Noto 笔记能保持维护。</string>
+    <!-- A way to support the project. -->
+    <string name="become_a_patron">在 Patron 成为一名赞助者</string>
+    <!-- More options for folder, note, etc... -->
+    <string name="more_options">显示更多选项</string>
+    <!-- Options for multi-selected notes. -->
+    <string name="options">笔记设置</string>
+    <string name="back">返回</string>
+    <string name="folder_layout">文件夹内笔记视图</string>
+    <string name="label_filtering_type">标签筛选类型</string>
+    <string name="layout">布局</string>
+    <string name="list">列表</string>
+    <string name="inclusive">兼并</string>
+    <string name="exclusive">包含于</string>
+    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <string name="strict">精确对应</string>
+    <string name="grid">网格</string>
+    <string name="created">已创建: %s</string>
+    <string name="accessed">上次访问时间：%s</string>
+    <string name="alphabetical">字母顺序</string>
+    <!-- Sorting/Grouping notes by access date. -->
+    <string name="access_date">访问日期</string>
+    <string name="creation_date">创建日期</string>
+    <string name="manual">手动操作</string>
+    <string name="default_grouping">默认</string>
+    <string name="descending">降序</string>
+    <string name="ascending">升序</string>
+    <string name="settings">设置</string>
+    <!-- The link of the source code of the project. -->
+    <string name="source_code">源代码</string>
+    <!-- Description of the "Source code" settings option. -->
+    <string name="source_code_description">Noto 笔记是一个开源应用程序，代码发布在 GitHub 上。</string>
+    <!-- The link of the reddit community of Noto. -->
+    <string name="reddit_community">Reddit 社区</string>
+    <!-- Description of the "Reddit community" settings option. -->
+    <string name="reddit_community_description">加入社区，与其他 Noto 笔记用户接触，并获取最新消息。</string>
+    <!-- The font used in notes, such as Monospace, or Nunito. -->
+    <string name="notes_font">笔记字体</string>
+    <string name="share_app_with_others">与他人分享 Noto 笔记</string>
+    <string name="rate_app_on_play_store">在 Play 商店评价 Noto 笔记</string>
+    <string name="report_issue">反馈问题</string>
+    <string name="about">关于</string>
+    <string name="whats_new">更新内容</string>
+    <!--    <string name="share_with">Share with</string>-->
+    <string name="export_import_data">导出 / 导入数据</string>
+    <string name="exporting_failed">导出数据失败。</string>
+    <string name="importing_failed">导入数据失败。</string>
+    <string name="data_is_exported">文件已导出到此位置：%s</string>
+    <string name="data_is_imported">数据已被成功导入。</string>
+    <string name="export_data">导出数据</string>
+    <string name="import_data">导入数据</string>
+    <string name="importing_data">正在导入数据...</string>
+    <string name="exporting_data">正在导出数据...</string>
+    <string name="create_file_failed">创建文件失败。</string>
+    <string name="no_folder_is_selected">没有选择文件夹。</string>
+    <string name="no_file_is_selected">未选择任何文件。</string>
+    <!-- Open with an app such as Signal -->
+    <string name="open_with">打开方式</string>
+    <string name="invite_text">Noto 笔记是一个小巧轻便且开源的记事本应用。</string>
+    <string name="version">版本</string>
+    <!-- A message shown when clicking on the app version. -->
+    <string name="version_is_copied">版本号已复制到剪贴板。</string>
+    <!-- Me -->
+    <string name="developer">开发者</string>
+    <!-- Creator of app icons. -->
+    <string name="creator">创作者</string>
+    <!-- Translator of a language. -->
+    <!-- Proofreader of a language. -->
+    <string name="app_icons">应用图标</string>
+    <string name="privacy_policy">隐私政策</string>
+    <!-- Description of the "Privacy policy" settings option. -->
+    <string name="privacy_policy_description">最新更新时间: 2022年8月25日</string>
+    <!-- License of the project, or app icons. Example: Apache 2.0. -->
+    <string name="license">许可协议</string>
+    <string name="empty_version">版本</string>
+    <string name="date">日期</string>
+    <string name="drag">拖动</string>
+    <string name="nunito">Nunito (默认)</string>
+    <string name="monospace">等宽字体</string>
+    <string name="font">字体</string>
+    <string name="folders_archive">文件夹存档</string>
+    <!-- The first screen user sees when opening the app. -->
+    <string name="main_interface">主界面</string>
+    <!-- Description of the "Main interface" settings option. -->
+    <string name="main_interface_description">启动应用程序时显示的第一个界面。</string>
+    <!-- The default folder of "Save to Noto" text selection option. -->
+    <string name="quick_note_folder">快速笔记文件夹</string>
+    <!-- AKA "Save to Noto". -->
+    <string name="quick_note">快速笔记</string>
+    <!-- Description of the "Quick note folder" settings option. -->
+    <string name="quick_note_folder_description">使用“快速记事”文本选择的选项保存笔记时的默认文件夹。</string>
+    <string name="general">常规</string>
+    <string name="all_notes">所有笔记</string>
+    <string name="all_folders">所有文件夹</string>
+    <string name="clear">清除</string>
+    <string name="recent_notes">最近的笔记</string>
+    <string name="collapse">折叠</string>
+    <string name="expand">展开</string>
+    <string name="no_parent">没有父级</string>
+    <string name="parent_folder">上层文件夹</string>
+    <string name="new_note_cursor_position">新建笔记的光标位置</string>
+    <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
+    <string name="open_notes_in">打开笔记的模式</string>
+    <string name="archive">存档</string>
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
+    <string name="folder_archive">%s 的存档</string>
+    <string name="unarchive">取消存档</string>
+    <string name="edit">编辑</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">下一个笔记</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">上一个笔记</string>
+    <string name="pin">置顶</string>
+    <!-- Merge multiple notes into a new note. -->
+    <string name="merge">合并</string>
+    <string name="unpin">取消置顶</string>
+    <string name="delete">删除</string>
+    <string name="just_now">刚刚</string>
+    <!--Select a note. -->
+    <string name="select">选择</string>
+    <!--Select all notes. -->
+    <string name="select_all">全选</string>
+    <!-- List of translations. -->
+    <string name="translations">翻译</string>
+    <!-- Description of the "Translations" settings option. -->
+    <string name="translations_description">特别感谢所有帮助翻译 Noto 笔记的翻译者们。</string>
+    <!-- List of credits. -->
+    <string name="credits">鸣谢</string>
+    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
+    <string name="releases_details">如需了解详细信息，请单击此处。</string>
+    <!-- Folder -->
+    <string name="folders">文件夹</string>
+    <plurals name="folders_count">
+        <item quantity="other">%d 个文件夹</item>
+    </plurals>
+    <string name="create_folder">创建文件夹</string>
+    <string name="update_folder">更新文件夹</string>
+    <string name="archive_folder">归档文件夹</string>
+    <string name="new_folder">创建文件夹</string>
+    <string name="edit_folder">编辑文件夹</string>
+    <string name="folder_options">文件夹选项</string>
+    <string name="add_new_note_shortcut">新建笔记（桌面快捷方式）</string>
+    <string name="delete_folder_description">此操作不能撤消，并且将永久删除文件夹及其所有内容。</string>
+    <string name="folder_title">文件夹标题</string>
+    <string name="folder_color">文件夹颜色</string>
+    <string name="delete_folder">删除</string>
+    <string name="delete_folder_confirmation">您确定要删除此文件夹吗？</string>
+    <string name="folders_sorting">文件夹排序</string>
+    <string name="empty_title">标题不能留空。</string>
+    <string name="folder_is_deleted">文件夹已删除。</string>
+    <string name="folder_is_archived">文件夹已归档。</string>
+    <string name="folder_is_unarchived">文件夹已解除归档。</string>
+    <string name="folder_is_pinned">文件夹已固定。</string>
+    <string name="folder_is_unpinned">文件夹已解除固定。</string>
+    <string name="no_folders_found">找不到文件夹。</string>
+    <string name="select_folder">选择文件夹</string>
+    <string name="select_folder_archive">选择文件夹存档</string>
+    <string name="select_parent_folder">选择上级文件夹</string>
+    <string name="select_quick_note_folder">选择快速笔记文件夹</string>
+    <string name="select_main_interface">选择主界面</string>
+    <string name="pinned">已固定</string>
+    <!-- Vault -->
+    <string name="folders_vault">文件夹私密库</string>
+    <string name="update_passcode">更新密码</string>
+    <string name="enter_vault_passcode">请输入密码</string>
+    <string name="add_to_vault">存入私密库</string>
+    <string name="remove_from_vault">从私密库中移出</string>
+    <string name="folder_is_vaulted">文件夹已添加到私密库。</string>
+    <string name="folder_is_unvaulted">文件夹已从私密库中移出。</string>
+    <string name="vault_is_empty">私密库为空。</string>
+    <string name="archive_vaulted_folder_confirmation">您确定要归档所选文件夹吗？</string>
+    <string name="archive_vaulted_folder_description">归档此文件夹也会从私密库中移出。</string>
+    <string name="vault_passcode">私密库密码</string>
+    <string name="current_vault_passcode">当前私密库密码</string>
+    <string name="new_vault_passcode">新的私密库密码</string>
+    <!-- Change vault passcode option. -->
+    <string name="change_passcode">更改密码</string>
+    <!-- Vault timeout. -->
+    <string name="timeout">关闭后的保持时间</string>
+    <!-- Description of the "Timeout" settings option. -->
+    <string name="timeout_description">退出私密库后，保持多久才上锁</string>
+    <string name="vault_timeout">私密库打开时间超时</string>
+    <string name="invalid_passcode">密码无效</string>
+    <string name="passcode_length_message">密码必须包含至少 6 个数字</string>
+    <string name="passcode_empty_message">密码不能为空</string>
+    <string name="passcode_doesnt_match">密码不匹配</string>
+    <string name="vault_passcode_has_changed">私密库已更新。</string>
+    <string name="vault_passcode_message">如果您忘记了当前私密库的密码，后续就无法更改密码，所以请确保将密码存储在安全的地方。</string>
+    <string name="use_bio">使用生物识别验证</string>
+    <string name="validate">确认</string>
+    <string name="vault">私密库</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">停用私密库</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">私密库已停用。</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">停用</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">您确定要停用私密库吗？</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">此操作不能撤消，将停用私密库并将所有文件夹移出私密库之外。</string>
+    <string name="vault_is_open">私密库已打开</string>
+    <string name="immediately">立刻</string>
+    <string name="on_app_close">关闭应用时</string>
+    <string name="after_1_hour">1 小时之后</string>
+    <string name="after_4_hours">4 小时之后</string>
+    <string name="after_12_hours">12 小时之后</string>
+    <string name="close_vault">关闭私密库</string>
+    <!-- Enabling biometric authentication for the app. -->
+    <string name="bio_auth">开启生物识别认证</string>
+    <!-- Description of the "Enable biometric authentication" settings option. -->
+    <string name="bio_auth_description">是否允许使用生物鉴别认证方法访问私密库，如面部识别或指纹识别。</string>
+    <string name="use_passcode">使用密码</string>
+    <!-- Note -->
+    <string name="all">全部</string>
+    <string name="update_reminder">更新提醒</string>
+    <string name="archive_is_empty">存档为空。</string>
+    <plurals name="notes_count">
+        <item quantity="other">%d 篇笔记</item>
+    </plurals>
+    <!-- Filtered notes count is shown when a label is selected, or text is searched.
+         Such as "30 Notes • 5 Filtered".
+     -->
+    <plurals name="notes_filtered_count">
+        <item quantity="other">%1$d 篇笔记 • %2$d 篇已筛选出</item>
+    </plurals>
+    <!-- Selected notes count is shown when a note or multiple notes are selected.
+         Such as "30 Notes • 5 Selected".
+     -->
+    <plurals name="notes_selected_count">
+        <item quantity="other">%1$d 篇笔记 • %2$d 篇已选中</item>
+    </plurals>
+    <!--  Filtered notes count is shown when a label is selected, or text is searched. Selected notes count is shown when a note or multiple notes are selected.
+          Such as, "30 Notes • 3 Filtered • 8 Selected".
+     -->
+    <plurals name="notes_filtered_selected_count">
+        <item quantity="other">%1$d 篇笔记 • %2$d 篇已筛选出 • %3$d 篇已选择</item>
+    </plurals>
+    <plurals name="words_count">
+        <item quantity="other">%d个单词</item>
+    </plurals>
+    <!-- Selected words count is shown when text is selected in a note. -->
+    <plurals name="words_selected_count">
+        <item quantity="other">%1$d 个单词 • %2$d 个被选中</item>
+    </plurals>
+    <string name="body">正文内容</string>
+    <string name="title">标题内容</string>
+    <!-- Note's editor, opposite of Reading Mode. -->
+    <string name="editor">编辑</string>
+    <string name="create_note">创建笔记</string>
+    <plurals name="delete_note">
+        <item quantity="other">删除笔记</item>
+    </plurals>
+    <string name="duplicate">创建副本</string>
+    <string name="undo">撤销</string>
+    <string name="undo_history">撤销历史记录</string>
+    <string name="redo">恢复</string>
+    <string name="redo_history">重做历史记录</string>
+    <string name="share_note">分享笔记</string>
+    <string name="sorting_type">排序方式</string>
+    <!-- Sorting for notes/folders -->
+    <string name="sorting">排序</string>
+    <!-- Type of sorting for notes/folders -->
+    <string name="type">类型</string>
+    <!-- Order of sorting for notes/folders -->
+    <string name="order">顺序</string>
+    <string name="notes_view">笔记视图</string>
+    <string name="sorting_order">排序顺序</string>
+    <string name="grouping_type">分组方式</string>
+    <!-- Grouping for notes/folders -->
+    <string name="grouping">分组</string>
+    <string name="grouping_order">分组排序</string>
+    <string name="save_to_noto">保存到 Noto 笔记</string>
+    <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
+    <string name="note_is_saved">笔记已保存到 %s。</string>
+    <string name="no_notes_found">未找到笔记。</string>
+    <string name="notes">笔记</string>
+    <!-- The count of the selected notes that have been merged. -->
+    <string name="notes_are_merged">%d 篇笔记已被合并为新笔记。</string>
+    <plurals name="note_is_archived">
+        <item quantity="other">%d 篇笔记已被归档。</item>
+    </plurals>
+    <!-- The count of the selected notes that have been pinned. -->
+    <plurals name="note_is_pinned">
+        <item quantity="other">%d 篇笔记已被置顶。</item>
+    </plurals>
+    <!-- The count of the selected notes that have been unpinned. -->
+    <plurals name="note_is_unpinned">
+        <item quantity="other">%d 篇笔记已被解除置顶。</item>
+    </plurals>
+    <string name="no_note_reminder">还没有设置提醒。</string>
+    <string name="note_is_unarchived">笔记已被解除归档。</string>
+    <string name="reminder">提醒</string>
+    <string name="reminders">提醒</string>
+    <string name="new_note_reminder">新建提醒</string>
+    <string name="copy">复制</string>
+    <string name="copy_to">复制到…</string>
+    <!-- The count of the selected notes that have been copied to a folder. -->
+    <plurals name="note_is_copied">
+        <item quantity="other">%d 篇笔记已复制到 %s。</item>
+    </plurals>
+    <!-- The count of the selected notes that have been copied to clipboard. -->
+    <plurals name="note_copied_to_clipboard">
+        <item quantity="other">%d 篇笔记已复制到剪切板。</item>
+    </plurals>
+    <string name="text_copied">文本已复制到剪贴板。</string>
+    <plurals name="delete_note_confirmation">
+        <item quantity="other">您确定要删除这篇笔记吗？</item>
+    </plurals>
+    <string name="share_with">分享到...</string>
+    <string name="add_note_reminder">添加提醒</string>
+    <plurals name="delete_note_description">
+        <item quantity="other">此操作不能撤消，并且将永久删除笔记及其设置的提醒。</item>
+    </plurals>
+    <string name="reading_mode">阅读模式</string>
+    <string name="edit_note_reminder">编辑提醒</string>
+    <string name="note_options">笔记选项</string>
+    <!-- The count of the selected notes that have been deleted. -->
+    <plurals name="note_is_deleted">
+        <item quantity="other">%d 篇笔记已被删除。</item>
+    </plurals>
+    <!-- The count of the selected notes that have been duplicated. -->
+    <plurals name="note_is_duplicated">
+        <item quantity="other">已创建 %d 篇笔记副本。</item>
+    </plurals>
+    <string name="move_to">移动到...</string>
+    <!-- The count of the selected notes that have been moved to a folder. -->
+    <plurals name="note_is_moved">
+        <item quantity="other">%d 篇笔记已被移动到 %s。</item>
+    </plurals>
+    <string name="note_preview_size">笔记预览尺寸大小</string>
+    <string name="show_note_creation_date">显示笔记创建日期</string>
+    <!-- Whether to show notes count in "All Folders" view. -->
+    <string name="show_notes_count">显示笔记计数</string>
+    <!-- Description of the "Show notes count" settings option. -->
+    <string name="show_notes_count_description">是否在文件夹对话框中显示笔记数量。</string>
+    <string name="remember_scrolling_position">记住滚动位置</string>
+    <!-- Description of the "Remember scrolling position" settings option. -->
+    <string name="remember_scrolling_position_description">是否存储文件夹或笔记的滚动位置。</string>
+    <string name="do_not_disturb">勿扰模式</string>
+    <!-- Description of the "Do Not Disturb" settings option. -->
+    <string name="do_not_disturb_description">阅读模式期间，手机系统是否开启勿扰模式。</string>
+    <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
+    <string name="keep_screen_on">保持屏幕开启</string>
+    <!-- Description of the "Keep screen on" settings option. -->
+    <string name="keep_screen_on_description">在阅读模式下是否阻止屏幕关闭。</string>
+    <string name="full_screen">全屏模式</string>
+    <!-- Description of the "Go full screen" settings option. -->
+    <string name="full_screen_description">是否在阅读模式下隐藏状态栏和导航栏。</string>
+    <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
+    <string name="screen_brightness_level">屏幕亮度</string>
+    <!-- Description of the "Screen brightness level" settings option. -->
+    <string name="screen_brightness_level_description">阅读模式的屏幕亮度等级。</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="min">最低</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_low">非常低</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="low">低</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="medium">中等</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="high">高</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_high">非常高</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="max">最高</string>
+    <string name="show">显示</string>
+    <string name="hide">隐藏</string>
+    <string name="permission_not_granted">未授予权限</string>
+    <!-- Label -->
+    <string name="reorder_label">标签排序</string>
+    <string name="update_label">更新</string>
+    <string name="create_label">创建标签</string>
+    <string name="label_title">标签名称</string>
+    <string name="label">标签</string>
+    <string name="without_label">没有标签</string>
+    <string name="label_options">标签选项</string>
+    <string name="delete_label">删除标签</string>
+    <string name="new_label">新建标签</string>
+    <string name="edit_label">编辑标签</string>
+    <string name="labels_order">标签顺序</string>
+    <string name="delete_label_confirmation">您确定要删除此标签吗？</string>
+    <string name="label_is_deleted">标签已被删除。</string>
+    <string name="delete_label_description">此操作不能撤消，将永久删除标签，并从设置好标签的笔记中移除标签。</string>
+    <string name="filter_labels">筛选标签</string>
+    <!-- Theme -->
+    <string name="theme">主题</string>
+    <string name="system_dark_theme">跟随系统 + 深色</string>
+    <string name="system_black_theme">跟随系统 + 纯黑</string>
+    <string name="light_theme">浅色</string>
+    <string name="dark_theme">深色</string>
+    <string name="black_theme">纯黑色</string>
+    <!-- Language -->
+    <string name="language">语言</string>
+    <!-- A text next to the non-finished language. -->
+    <string name="not_finished">未完成</string>
+    <!-- An option in settings to invite users to translate Noto. -->
+    <string name="translate_noto">翻译 Noto 笔记</string>
+    <!-- Description of the "Translate Noto" settings option. -->
+    <string name="translate_noto_description">在 Crowdin 完成翻译。</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">跟随系统语言</string>
+    <string name="english">英语</string>
+    <string name="turkish">土耳其语</string>
+    <string name="arabic">阿拉伯语</string>
+    <string name="indonesian">印尼语</string>
+    <string name="russian">俄语</string>
+    <string name="spanish">西班牙语</string>
+    <string name="french">法语</string>
+    <string name="german">德语</string>
+    <string name="italian">意大利语</string>
+    <string name="tamil">泰米尔语</string>
+    <string name="czech">捷克语</string>
+    <!-- Icon -->
+    <string name="icon">图标</string>
+    <!-- Widget -->
+    <string name="create_widget">创建小部件</string>
+    <string name="update_widget">更新小部件</string>
+    <string name="new_notes_widget">新的小部件（笔记）</string>
+    <string name="edit_notes_widget">编辑小部件（笔记）</string>
+    <string name="new_folders_widget">新的小部件（文件夹）</string>
+    <string name="edit_folders_widget">编辑小部件（文件夹）</string>
+    <string name="new_folder_button">新建文件夹的按钮</string>
+    <string name="new_note_button">新建笔记按钮</string>
+    <string name="widget_header">小部件应用标题头</string>
+    <string name="app_icon">应用图标</string>
+    <string name="widget_radius">小部件的拐角半径</string>
+    <string name="edit_widget">编辑小部件</string>
+    <string name="edit_widget_button">编辑小部件按钮</string>
+    <string name="folders_notes_count">文件夹内的笔记数</string>
+    <string name="loading_content">加载内容</string>
+    <!-- Releases -->
+    <string name="release_1_8_0">• Support for passcode protected libraries vault.
+        \n• Support for vault timeout options.
+        \n• Support for biometric vault authentication on supported devices.
+        \n• Support for the Spanish language.
+        \n• Add a link for the new <a href="https://www.reddit.com/r/notoapp">Reddit</a> community.
+        \n• Other bug fixes and design improvements.
+    </string>
+    <string name="release_2_0_0">• New year, new look!
+        \n• Libraries are gone. Welcome folders!
+        \n• Improve animations across the whole app.
+        \n• Experimental support for nested folders.
+        \n• Experimental support for swiping horizontally to nest a folder when sorting is manual.
+        \n• Add a default \"General\" folder for y\'know general notes.
+        \n• Support viewing all notes and recent notes and the ability to search through them.
+        \n• Highlight note content when searching.
+        \n• Implement collapsing toolbar for better usability and hand reachability.
+        \n• Support for the French language.
+        \n• Support swiping up the bottom app bar to view the folders.
+        \n• Navigate to the vault when clicking on \'vault is open\' notification.
+        \n• Add settings option to choose main folder destination.
+        \n• Add settings option to collapse toolbar by default.
+        \n• Fix static shortcuts icons on older Android devices.
+        \n• Other bug fixes and design improvements.
+    </string>
+    <string name="release_2_0_1">• Bug fixes.</string>
+    <string name="release_2_1_0">• Support for undo/redo and viewing their history.
+        \n• Redesign labels.
+        \n• Redesign bottom and top app bar in all layouts.
+        \n• Redesign many menus.
+        \n• Redesign new/edit folder layout.
+        \n• Add grouping order for notes.
+        \n• Add elevation when dragging labels or notes.
+        \n• Include preview in folder, note, and label menus.
+        \n• Format dates in a better way.
+        \n• Change highlight color in notes.
+        \n• Navigate to folders layout before exiting the app.
+        \n• Support for Material You (Material 3).
+        \n• Redesign splash screen.
+        \n• Reading Mode improvements.
+        \n• Support remembering scrolling positions for folders and notes.
+        \n• Disable animations for labels and folder colors.
+        \n• Fix importing data.
+        \n• Fix a bug when opening a vault crashes on Android 11 and above.
+        \n• Implement swiping gestures to undo/redo.
+        \n• Support filtering labels inclusively or exclusively.
+        \n• Redesign app icon.
+        \n• Support changing app icon.
+        \n• Change font weight and text size in different layouts.
+        \n• Support German.
+        \n• Other bug fixes and design improvements.
+    </string>
+    <string name="release_2_1_1">• Bug fixes.</string>
+    <string name="release_2_1_2">• Bug fixes and design improvements.</string>
+    <string name="release_2_1_3">• Bug fixes and design improvements.</string>
+    <string name="release_2_1_4">• Fixed shortcuts not working when using a different icon.
+        \n• Selected labels now appear first in note\'s layout.
+        \n• Other bug fixes and design improvements.
+    </string>
+    <string name="release_2_1_5">• Bug fixes and design improvements.</string>
+    <string name="release_2_1_6">• Bug fixes and design improvements.</string>
+    <string name="release_2_2_0">• Supported Czech and Italian.
+        \n• Supported multi-selection for notes.
+        \n• Supported an option to open notes in Reading Mode by default.
+        \n• Redesigned settings screen.
+        \n• Implemented paging support for notes in Reading Mode.
+        \n• Improved app launching speed.
+        \n• Fixed importing JSON files.
+        \n• Fixed black theme color in Android 12 and newer devices.
+        \n• Other bug fixes and design improvements.
+    </string>
+</resources>

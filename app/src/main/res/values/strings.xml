@@ -479,6 +479,8 @@
     <string name="italian">Italian</string>
     <string name="tamil">Tamil</string>
     <string name="czech">Czech</string>
+    <string name="lithuanian">Lithuanian</string>
+    <string name="simplified_chinese">Simplified Chinese</string>
     <string name="turkish_translator" translatable="false">Nuray Sabri</string>
     <string name="turkish_proofreader" translatable="false">Alparslan Şakçi</string>
     <string name="spanish_translator" translatable="false">Faus AM</string>
@@ -490,6 +492,8 @@
     <string name="italian_translator" translatable="false">Matteo Lombardi</string>
     <string name="italian_translator2" translatable="false">SimoneG</string>
     <string name="czech_translator" translatable="false">Viktor Novák</string>
+    <string name="lithuanian_translator" translatable="false">Ernestas Karalius</string>
+    <string name="simplified_chinese_translator" translatable="false">李華</string>
 
     <!-- Icon -->
     <string name="icon">Icon</string>

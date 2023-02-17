@@ -99,6 +99,8 @@ If you would like to translate the app, please contact me via [email](mailto:ali
 - <a href="https://github.com/kernoeb">Kernoeb</a>, and <a href="https://geoffreycrofte.com">Geoffrey Crofte</a> for the French localization.
 - <a href="https://github.com/matteolomba">Matteo Lombardi</a>, and <a href="https://github.com/SimoneG97">SimoneG</a> for the Italian localization.
 - <a href="https://github.com/vikdevelop">Viktor Novák</a> for the Czech localization.
+- <a href="http://github.com/ErnestasKaralius">Ernestas Karalius</a> for the Lithuanian localization.
+- <a href="https://steamcommunity.com/id/oliverberry">李華</a> for the Simplified Chinese localization.
 - Uli N for the German localization.
 
 ## App Icons
