@@ -26,7 +26,6 @@ Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcas
 * Minimal, modern, and simplistic design.
 * Light/Dark/Black/System themes.
 * Support for devices with API 21 (Lollipop) and up.
-* No explicit permissions are required.
 * All data are stored locally on the device.
 * Support for English, Turkish, Arabic, Indonesian, Czech, German, Italian, Spanish, and French languages.
 * Material You (Material 3) support.
