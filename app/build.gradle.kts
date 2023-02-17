@@ -46,13 +46,14 @@ android {
                 "ar",
                 "cs",
                 "de",
+                "es",
                 "fr",
                 "in",
                 "it",
+                "lt",
 //                "ru",
 //                "ta",
                 "tr",
-                "lt",
                 "zh",
             )
         )
