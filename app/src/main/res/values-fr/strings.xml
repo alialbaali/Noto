@@ -2,7 +2,6 @@
 <resources>
     <!-- App -->
     <string name="app_name">Noto</string>
-    <string name="done">Terminé</string>
     <!-- Button text for sorting/ordering/filtering notes options. -->
     <string name="apply">Appliquer</string>
     <string name="okay">Ok</string>
@@ -20,8 +19,8 @@
     <!-- Options for multi-selected notes. -->
     <string name="options">Options</string>
     <string name="back">Retour</string>
-    <string name="folder_layout">Disposition du dossier</string>
-    <string name="label_filtering_type">Type de filtrage d\'étiquette</string>
+    <!-- Replacements for "Label filtering type". -->
+    <string name="filtering">Filtre</string>
     <string name="layout">Disposition</string>
     <string name="list">Liste</string>
     <string name="inclusive">Inclusif</string>
@@ -36,7 +35,7 @@
     <string name="access_date">Date d\'accès</string>
     <string name="creation_date">Date de création</string>
     <string name="manual">Manuel</string>
-    <string name="default_grouping">Par défaut</string>
+    <string name="none">Aucun</string>
     <string name="descending">Décroissant</string>
     <string name="ascending">Croissant</string>
     <string name="settings">Réglages</string>
@@ -107,15 +106,19 @@
     <string name="all_notes">Toutes les notes</string>
     <string name="all_folders">Tous les dossiers</string>
     <string name="clear">Effacer</string>
-    <string name="recent_notes">Notes récentes</string>
+    <!-- Replacement for Recent Notes filtered view. -->
+    <string name="recent">Récent</string>
     <string name="collapse">Réduire</string>
     <string name="expand">Agrandir</string>
-    <string name="no_parent">Aucun parent</string>
     <string name="parent_folder">Dossier parent</string>
     <string name="new_note_cursor_position">Position du curseur pour une nouvelle note</string>
     <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
     <string name="open_notes_in">Ouvrir les notes dans</string>
     <string name="archive">Archiver</string>
+    <!-- Similar to Recent Notes filtered view but for archived notes. -->
+    <string name="archived">Archivé</string>
+    <!-- Similar to Recent Notes filtered view but for notes that have reminders set. -->
+    <string name="scheduled">Programmé</string>
     <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
     <string name="folder_archive">Archives du dossier %s</string>
     <string name="unarchive">Désarchiver</string>
@@ -157,10 +160,12 @@
     <string name="add_new_note_shortcut">Nouveau raccourci de note</string>
     <string name="delete_folder_description">Cette action ne peut pas être annulée et supprimera définitivement le dossier et son contenu.</string>
     <string name="folder_title">Titre du dossier</string>
-    <string name="color">Couleur du dossier</string>
+    <!-- Folder color -->
+    <string name="color">Couleur </string>
     <string name="delete_folder">Supprimer</string>
     <string name="delete_folder_confirmation">Êtes-vous sûr de vouloir supprimer ce dossier ?</string>
     <string name="folders_sorting">Tri des dossiers</string>
+    <string name="folders_ordering">Tri des dossiers</string>
     <string name="empty_title">Le titre ne peut être vide.</string>
     <string name="folder_is_deleted">Le dossier a bien été supprimé.</string>
     <string name="folder_is_archived">Le dossier a bien été archivé.</string>
@@ -169,6 +174,7 @@
     <string name="folder_is_unpinned">Le dossier a été désépinglé.</string>
     <string name="no_folders_found">Aucun dossier trouvé.</string>
     <string name="select_folder">Sélectionnez un dossier</string>
+    <string name="folder">Dossier</string>
     <string name="select_folder_archive">Sélectionner le dossier d\'archive</string>
     <string name="select_parent_folder">Sélectionner le dossier parent</string>
     <string name="select_quick_note_folder">Sélectionnez le dossier des notes rapides</string>
@@ -278,20 +284,19 @@
     <string name="undo_history">Historique d\'annulations</string>
     <string name="redo">Rétablir</string>
     <string name="redo_history">Historique de rétablissement</string>
-    <string name="share_note">Partager la note</string>
-    <string name="sorting_type">Type de tri</string>
+    <plurals name="share_note">
+        <item quantity="one">Partager la note</item>
+        <item quantity="other">Partager %d notes</item>
+    </plurals>
     <!-- Sorting for notes/folders -->
     <string name="sorting">Tri</string>
-    <!-- Type of sorting for notes/folders -->
-    <string name="type">Type</string>
-    <!-- Order of sorting for notes/folders -->
-    <string name="order">Ordre</string>
+    <!-- Ordering for sorting/grouping of notes/folders -->
+    <string name="ordering">Ordonner</string>
     <string name="notes_view">Vue des notes</string>
-    <string name="sorting_order">Ordre de tri</string>
-    <string name="grouping_type">Type de groupement</string>
+    <!-- Dialog for how folders sorted. -->
+    <string name="folders_view">Vue par dossiers</string>
     <!-- Grouping for notes/folders -->
     <string name="grouping">Regroupement</string>
-    <string name="grouping_order">Ordre de regroupement</string>
     <string name="save_to_noto">Enregistrer dans Noto</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">La note a été enregistrée vers %s.</string>
@@ -366,6 +371,10 @@
     <string name="show_notes_count">Afficher le nombre de notes</string>
     <!-- Description of the "Show notes count" settings option. -->
     <string name="show_notes_count_description">Afficher/Masquer le nombre de notes dans la boîte de dialogue des dossiers.</string>
+    <!-- Whether to exit app immediately without showing folders dialog -->
+    <string name="quick_exit">Quitter rapidement</string>
+    <!-- Description of the "Quick exit" settings option. -->
+    <string name="quick_exit_description">Quitter l\'application immédiatement en appuyant sur le bouton retour.</string>
     <string name="remember_scrolling_position">Mémoriser la position de défilement</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Stocker la position de défilement dans les dossiers et les notes.</string>
@@ -404,7 +413,6 @@
     <string name="reorder_label">Réordonner</string>
     <string name="update_label">Mettre à jour l\'étiquette</string>
     <string name="create_label">Créer une étiquette</string>
-    <string name="label_title">Titre de l\'étiquette</string>
     <string name="label">Étiquette</string>
     <string name="without_label">Sans étiquette</string>
     <string name="label_options">Options de l\'étiquette</string>
@@ -415,7 +423,6 @@
     <string name="delete_label_confirmation">Êtes-vous sûr de vouloir supprimer cette étiquette ?</string>
     <string name="label_is_deleted">L\'étiquette a bien été supprimée.</string>
     <string name="delete_label_description">Cette action ne peut pas être annulée et supprimera définitivement l\'étiquette des notes associées.</string>
-    <string name="filter_labels">Filtrer les étiquettes</string>
     <!-- Theme -->
     <string name="theme">Thème</string>
     <string name="system_dark_theme">Suivre le système + Sombre</string>
@@ -444,6 +451,8 @@
     <string name="italian">Italien</string>
     <string name="tamil">Tamoul</string>
     <string name="czech">Tchèque</string>
+    <string name="lithuanian">Lituanien</string>
+    <string name="simplified_chinese">Chinois simplifié</string>
     <!-- Icon -->
     <string name="icon">Icône</string>
     <!-- Widget -->
@@ -531,5 +540,14 @@
         \n• Correction lors de l\'importation de fichiers JSON.
         \n• Couleur du thème noir fixe dans Android 12 et les appareils plus récents.
         \n• Autres corrections de bugs et améliorations de conception.
+    </string>
+    <string name="release_2_2_1">• Prise en charge du lituanien et du chinois simplifiés.
+        \n• Améliorations de design.
+        \n• Amélioration du \"Annuler/rétablir\".
+        \n• Prise en charge de l\'affichage des notes archivées et planifiées.
+        \n• Possibilité de quitter rapidement l\'application (sortie de l\'application sans naviguer vers le menu principal).
+        \n• Création de notes via une tuile Quick Note dans le centre de notification.
+        \n• Intégration de la langue de l\'application dans les paramètres du système pour Android 13 et plus.
+        \n• Corrections de bugs.
     </string>
 </resources>

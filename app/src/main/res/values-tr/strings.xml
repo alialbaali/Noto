@@ -2,7 +2,6 @@
 <resources>
     <!-- App -->
     <string name="app_name">Noto</string>
-    <string name="done">Kaydet</string>
     <!-- Button text for sorting/ordering/filtering notes options. -->
     <string name="apply">Uygula</string>
     <string name="okay">Tamam</string>
@@ -20,8 +19,8 @@
     <!-- Options for multi-selected notes. -->
     <string name="options">Seçenekler</string>
     <string name="back">Geri</string>
-    <string name="folder_layout">Klasör düzeni</string>
-    <string name="label_filtering_type">Etiket filtereleme türü</string>
+    <!-- Replacements for "Label filtering type". -->
+    <string name="filtering">Filtreleme</string>
     <string name="layout">Düzen</string>
     <string name="list">Tek sütun</string>
     <string name="inclusive">Dahil</string>
@@ -36,7 +35,7 @@
     <string name="access_date">Erişim tarihi</string>
     <string name="creation_date">Oluşturma tarihi</string>
     <string name="manual">Özel</string>
-    <string name="default_grouping">Varsayılan</string>
+    <string name="none">Hiçbiri</string>
     <string name="descending">Azalan</string>
     <string name="ascending">Artan</string>
     <string name="settings">Ayarlar</string>
@@ -50,8 +49,8 @@
     <string name="reddit_community_description">Diğer kullanıcılarla etkileşim kurmak ve tüm gelişmelerden haberdar olmak için Reddit topluluğuna katılın.</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Yazı tipi</string>
-    <string name="share_app_with_others">Noto\'yu başkalarıyla paylaş</string>
-    <string name="rate_app_on_play_store">Uygulamayı Play Store\'da değerlendir</string>
+    <string name="share_app_with_others">Noto\'yu başkalarıyla paylaşın</string>
+    <string name="rate_app_on_play_store">Uygulamayı Play Store\'da değerlendirin</string>
     <string name="report_issue">Sorun bildir</string>
     <string name="about">Hakkında</string>
     <string name="whats_new">Yenilikler</string>
@@ -107,15 +106,19 @@
     <string name="all_notes">Tüm notlar</string>
     <string name="all_folders">Tüm klasörler</string>
     <string name="clear">Temizle</string>
-    <string name="recent_notes">Yeni notlar</string>
+    <!-- Replacement for Recent Notes filtered view. -->
+    <string name="recent">En Son</string>
     <string name="collapse">Daralt</string>
     <string name="expand">Genişlet</string>
-    <string name="no_parent">Üst dizin yok</string>
     <string name="parent_folder">Üst klasör</string>
     <string name="new_note_cursor_position">Yeni bir not oluştururken başlanacak yer</string>
     <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
     <string name="open_notes_in">Not görüntüleme modu</string>
     <string name="archive">Arşivle</string>
+    <!-- Similar to Recent Notes filtered view but for archived notes. -->
+    <string name="archived">Arşivlenmiş</string>
+    <!-- Similar to Recent Notes filtered view but for notes that have reminders set. -->
+    <string name="scheduled">Hatırlatıcılı</string>
     <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
     <string name="folder_archive">%s (arşiv)</string>
     <string name="unarchive">Arşivden çıkar</string>
@@ -135,7 +138,7 @@
     <!--Select all notes. -->
     <string name="select_all">Tümünü seç</string>
     <!-- List of translations. -->
-    <string name="translations">Çeviriler</string>
+    <string name="translations">Çevirmenler</string>
     <!-- Description of the "Translations" settings option. -->
     <string name="translations_description">Noto\'nun farklı dillerde kullanılabilmesine olanak sağlayan bütün çevirmenlere teşekkürler.</string>
     <!-- List of credits. -->
@@ -157,10 +160,12 @@
     <string name="add_new_note_shortcut">Yeni not kısayolu</string>
     <string name="delete_folder_description">Bu işlem geri alınamaz. Klasör ve içindeki her şey kalıcı olarak silinecektir.</string>
     <string name="folder_title">Klasör başlığı</string>
-    <string name="color">Klasör rengi</string>
+    <!-- Folder color -->
+    <string name="color">Renk</string>
     <string name="delete_folder">Sil</string>
     <string name="delete_folder_confirmation">Bu klasörü silmek istediğinizden emin misiniz?</string>
     <string name="folders_sorting">Klasör sıralaması</string>
+    <string name="folders_ordering">Klasör düzeni</string>
     <string name="empty_title">Başlık boş bırakılamaz.</string>
     <string name="folder_is_deleted">Klasör silindi.</string>
     <string name="folder_is_archived">Klasör arşivlendi.</string>
@@ -169,6 +174,7 @@
     <string name="folder_is_unpinned">Sabitleme kaldırıldı.</string>
     <string name="no_folders_found">Klasör bulunamadı.</string>
     <string name="select_folder">Klasör seç</string>
+    <string name="folder">Klasör</string>
     <string name="select_folder_archive">Klasör arşivini seç</string>
     <string name="select_parent_folder">Üst klasörü seç</string>
     <string name="select_quick_note_folder">Hızlı not klasörünü seç</string>
@@ -278,20 +284,19 @@
     <string name="undo_history">Geri al geçmişi</string>
     <string name="redo">Yeniden yaz</string>
     <string name="redo_history">Yeniden yaz geçmişi</string>
-    <string name="share_note">Notu paylaş</string>
-    <string name="sorting_type">Sıralama türü</string>
+    <plurals name="share_note">
+        <item quantity="one">Notu paylaşın</item>
+        <item quantity="other">%d notu paylaşın</item>
+    </plurals>
     <!-- Sorting for notes/folders -->
     <string name="sorting">Sıralama</string>
-    <!-- Type of sorting for notes/folders -->
-    <string name="type">Tür</string>
-    <!-- Order of sorting for notes/folders -->
-    <string name="order">Düzen</string>
+    <!-- Ordering for sorting/grouping of notes/folders -->
+    <string name="ordering">Düzen</string>
     <string name="notes_view">Not görünümü</string>
-    <string name="sorting_order">Sıralama düzeni</string>
-    <string name="grouping_type">Gruplandırma türü</string>
+    <!-- Dialog for how folders sorted. -->
+    <string name="folders_view">Klasörler görünümü</string>
     <!-- Grouping for notes/folders -->
     <string name="grouping">Gruplandırma</string>
-    <string name="grouping_order">Gruplandırma düzeni</string>
     <string name="save_to_noto">Noto\'ya kaydet</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">Not başarıyla %s klasörüne kaydedildi.</string>
@@ -366,6 +371,10 @@
     <string name="show_notes_count">Not sayısını göster</string>
     <!-- Description of the "Show notes count" settings option. -->
     <string name="show_notes_count_description">Klasörlerde kaç not bulunduğunun gösterilip gösterilmeyeceğini belirleyin.</string>
+    <!-- Whether to exit app immediately without showing folders dialog -->
+    <string name="quick_exit">Hızlı Çıkış</string>
+    <!-- Description of the "Quick exit" settings option. -->
+    <string name="quick_exit_description">Geri düğmesine basıldığında uygulamadan hemen çıkılıp çıkılmayacağını ayarlar.</string>
     <string name="remember_scrolling_position">Kaydırma konumunu hatırla</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Klasörlerde ve notlardaki kaydırma konumunun hatırlanıp hatırlanmayacağını belirleyin.</string>
@@ -404,7 +413,6 @@
     <string name="reorder_label">Yeniden sırala</string>
     <string name="update_label">Etiketi güncelle</string>
     <string name="create_label">Etiket oluştur</string>
-    <string name="label_title">Etiket başlığı</string>
     <string name="label">Etiket</string>
     <string name="without_label">Etiketsiz</string>
     <string name="label_options">Etiket seçenekleri</string>
@@ -415,7 +423,6 @@
     <string name="delete_label_confirmation">Bu etiketi silmek istediğinizden emin misiniz?</string>
     <string name="label_is_deleted">Etiket silindi.</string>
     <string name="delete_label_description">Bu işlem geri alınamaz. Etiket silinecek ve ilgili notlardan kalıcı olarak kaldırılacaktır.</string>
-    <string name="filter_labels">Etiketleri filtrele</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
     <string name="system_dark_theme">Sistem varsayılanı + Koyu</string>
@@ -428,7 +435,7 @@
     <!-- A text next to the non-finished language. -->
     <string name="not_finished">Henüz tamamlanmadı</string>
     <!-- An option in settings to invite users to translate Noto. -->
-    <string name="translate_noto">Noto\'yu başka bir dile çevir</string>
+    <string name="translate_noto">Noto\'yu başka bir dile çevirin</string>
     <!-- Description of the "Translate Noto" settings option. -->
     <string name="translate_noto_description">Çeviriler Crowdin üzerinden yapılır.</string>
     <!-- Replacement for "System language" in settings. -->
@@ -444,6 +451,8 @@
     <string name="italian">İtalyanca</string>
     <string name="tamil">Tamilce</string>
     <string name="czech">Çekçe</string>
+    <string name="lithuanian">Litvanca</string>
+    <string name="simplified_chinese">Basitleştirilmiş Çince</string>
     <!-- Icon -->
     <string name="icon">Simge</string>
     <!-- Widget -->
@@ -476,8 +485,8 @@
         \n• Yeni deneysel özellik: İç içe klasör desteği
         \n• Yeni deneysel özellik: Özel sıralama etkinken bir klasörün dizindeki yerini değiştirmek için yatay olarak kaydır.
         \n• Herhangi bir üst klasörü olmayan notlar için \"Genel\" bir klasör eklendi.
-        \n• Tüm notları ve yeni notları görüntüleme desteği eklendi.
-        \n• Tüm notlar ve yeni notlar içinde arama yapma desteği eklendi.
+        \n• Tüm notları ve not geçmişini görüntüleme desteği eklendi.
+        \n• Tüm notlar ve not geçmişi içinde arama yapma desteği eklendi.
         \n• Arama sırasında eşleşen not içeriği artık vurgulu olarak gösterilecek.
         \n• Kullanıcını deneyimini iyileştirmek için daraltılabilir araç çubuğu eklendi.
         \n• Fransızca desteği.
@@ -508,5 +517,14 @@
         \n• JSON dosyaları içeri aktarımında yaşanan sorunlar giderildi.
         \n• Android 12 ve üstü cihazlar için siyah tema rengi düzeltildi.
         \n• Çeşitli hata düzeltmeleri ve tasarım iyileştirmeleri yapıldı.
+    </string>
+    <string name="release_2_2_1">• Litvanyaca ve Basitleştirilmiş Çince desteği getirildi.
+        \n• Tasarım iyileştirmeleri yapıldı.
+        \n• Geri al / yeniden yaz işlemleri daha etkili olacak şekilde yeniden düzenlendi.
+        \n• Arşivlenmiş ve Hatırlatıcılı notlar da artık filtrelenebilecek.
+        \n• Hızlı Çıkış özelliği eklendi (ana menüye gitmeden uygulamadan çıkma).
+        \n• Diğer uygulamalardayken bildirim çekmecesindeki Hızlı Not kutucuğunu kullanarak not oluşturmak için daha hızlı bir yol eklendi.
+        \n• Android 13 ve üzeri cihazlar için Sistem Ayarları aracılığıyla uygulama dilini değiştirme özelliği eklendi.
+        \n• Hata iyileştirmeleri yapıldı.
     </string>
 </resources>

@@ -2,7 +2,6 @@
 <resources>
     <!-- App -->
     <string name="app_name">Noto 笔记</string>
-    <string name="done">完成</string>
     <!-- Button text for sorting/ordering/filtering notes options. -->
     <string name="apply">应用</string>
     <string name="okay">确定</string>
@@ -20,8 +19,8 @@
     <!-- Options for multi-selected notes. -->
     <string name="options">笔记设置</string>
     <string name="back">返回</string>
-    <string name="folder_layout">文件夹内笔记视图</string>
-    <string name="label_filtering_type">标签筛选类型</string>
+    <!-- Replacements for "Label filtering type". -->
+    <string name="filtering">过滤</string>
     <string name="layout">布局</string>
     <string name="list">列表</string>
     <string name="inclusive">兼并</string>
@@ -36,7 +35,7 @@
     <string name="access_date">访问日期</string>
     <string name="creation_date">创建日期</string>
     <string name="manual">手动操作</string>
-    <string name="default_grouping">默认</string>
+    <string name="none">无</string>
     <string name="descending">降序</string>
     <string name="ascending">升序</string>
     <string name="settings">设置</string>
@@ -107,15 +106,19 @@
     <string name="all_notes">所有笔记</string>
     <string name="all_folders">所有文件夹</string>
     <string name="clear">清除</string>
-    <string name="recent_notes">最近的笔记</string>
+    <!-- Replacement for Recent Notes filtered view. -->
+    <string name="recent">最近</string>
     <string name="collapse">折叠</string>
     <string name="expand">展开</string>
-    <string name="no_parent">没有父级</string>
     <string name="parent_folder">上层文件夹</string>
     <string name="new_note_cursor_position">新建笔记的光标位置</string>
     <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
     <string name="open_notes_in">打开笔记的模式</string>
     <string name="archive">存档</string>
+    <!-- Similar to Recent Notes filtered view but for archived notes. -->
+    <string name="archived">已归档</string>
+    <!-- Similar to Recent Notes filtered view but for notes that have reminders set. -->
+    <string name="scheduled">已计划</string>
     <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
     <string name="folder_archive">%s 的存档</string>
     <string name="unarchive">取消存档</string>
@@ -156,10 +159,12 @@
     <string name="add_new_note_shortcut">新建笔记（桌面快捷方式）</string>
     <string name="delete_folder_description">此操作不能撤消，并且将永久删除文件夹及其所有内容。</string>
     <string name="folder_title">文件夹标题</string>
-    <string name="folder_color">文件夹颜色</string>
+    <!-- Folder color -->
+    <string name="color">颜色</string>
     <string name="delete_folder">删除</string>
     <string name="delete_folder_confirmation">您确定要删除此文件夹吗？</string>
     <string name="folders_sorting">文件夹排序</string>
+    <string name="folders_ordering">文件夹排序</string>
     <string name="empty_title">标题不能留空。</string>
     <string name="folder_is_deleted">文件夹已删除。</string>
     <string name="folder_is_archived">文件夹已归档。</string>
@@ -168,6 +173,7 @@
     <string name="folder_is_unpinned">文件夹已解除固定。</string>
     <string name="no_folders_found">找不到文件夹。</string>
     <string name="select_folder">选择文件夹</string>
+    <string name="folder">文件夹</string>
     <string name="select_folder_archive">选择文件夹存档</string>
     <string name="select_parent_folder">选择上级文件夹</string>
     <string name="select_quick_note_folder">选择快速笔记文件夹</string>
@@ -270,20 +276,18 @@
     <string name="undo_history">撤销历史记录</string>
     <string name="redo">恢复</string>
     <string name="redo_history">重做历史记录</string>
-    <string name="share_note">分享笔记</string>
-    <string name="sorting_type">排序方式</string>
+    <plurals name="share_note">
+        <item quantity="other">分享 %d 条便笺</item>
+    </plurals>
     <!-- Sorting for notes/folders -->
     <string name="sorting">排序</string>
-    <!-- Type of sorting for notes/folders -->
-    <string name="type">类型</string>
-    <!-- Order of sorting for notes/folders -->
-    <string name="order">顺序</string>
+    <!-- Ordering for sorting/grouping of notes/folders -->
+    <string name="ordering">排序方式</string>
     <string name="notes_view">笔记视图</string>
-    <string name="sorting_order">排序顺序</string>
-    <string name="grouping_type">分组方式</string>
+    <!-- Dialog for how folders sorted. -->
+    <string name="folders_view">文件夹视图</string>
     <!-- Grouping for notes/folders -->
     <string name="grouping">分组</string>
-    <string name="grouping_order">分组排序</string>
     <string name="save_to_noto">保存到 Noto 笔记</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">笔记已保存到 %s。</string>
@@ -348,6 +352,10 @@
     <string name="show_notes_count">显示笔记计数</string>
     <!-- Description of the "Show notes count" settings option. -->
     <string name="show_notes_count_description">是否在文件夹对话框中显示笔记数量。</string>
+    <!-- Whether to exit app immediately without showing folders dialog -->
+    <string name="quick_exit">快速退出</string>
+    <!-- Description of the "Quick exit" settings option. -->
+    <string name="quick_exit_description">当按返回按钮时，是否立即退出应用。</string>
     <string name="remember_scrolling_position">记住滚动位置</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">是否存储文件夹或笔记的滚动位置。</string>
@@ -386,7 +394,6 @@
     <string name="reorder_label">标签排序</string>
     <string name="update_label">更新</string>
     <string name="create_label">创建标签</string>
-    <string name="label_title">标签名称</string>
     <string name="label">标签</string>
     <string name="without_label">没有标签</string>
     <string name="label_options">标签选项</string>
@@ -397,7 +404,6 @@
     <string name="delete_label_confirmation">您确定要删除此标签吗？</string>
     <string name="label_is_deleted">标签已被删除。</string>
     <string name="delete_label_description">此操作不能撤消，将永久删除标签，并从设置好标签的笔记中移除标签。</string>
-    <string name="filter_labels">筛选标签</string>
     <!-- Theme -->
     <string name="theme">主题</string>
     <string name="system_dark_theme">跟随系统 + 深色</string>
@@ -426,6 +432,8 @@
     <string name="italian">意大利语</string>
     <string name="tamil">泰米尔语</string>
     <string name="czech">捷克语</string>
+    <string name="lithuanian">立陶宛语</string>
+    <string name="simplified_chinese">简体中文</string>
     <!-- Icon -->
     <string name="icon">图标</string>
     <!-- Widget -->
@@ -514,5 +522,14 @@
         \n• Fixed importing JSON files.
         \n• Fixed black theme color in Android 12 and newer devices.
         \n• Other bug fixes and design improvements.
+    </string>
+    <string name="release_2_2_1">• Supported Lithuanian and Simplified Chinese.
+        \n• Design improvements here and there.
+        \n• Refactored undo/redo functionality to be more effective.
+        \n• Supported viewing Archived &amp; Scheduled notes.
+        \n• Supported for Quick Exit settings toggle (exiting the app without navigating to the main menu).
+        \n• Implemented a faster way to create notes while in other apps using Quick Note tile in the notification centre.
+        \n• Integrated changing app language through System Settings for Android 13 and above.
+        \n• Bug fixes.
     </string>
 </resources>

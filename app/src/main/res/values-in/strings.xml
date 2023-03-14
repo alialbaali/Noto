@@ -2,7 +2,6 @@
 <resources>
     <!-- App -->
     <string name="app_name">Noto</string>
-    <string name="done">Selesai</string>
     <!-- Button text for sorting/ordering/filtering notes options. -->
     <string name="apply">Terapkan</string>
     <string name="okay">Baik</string>
@@ -20,8 +19,8 @@
     <!-- Options for multi-selected notes. -->
     <string name="options">Opsi</string>
     <string name="back">Kembali</string>
-    <string name="folder_layout">Tata letak map</string>
-    <string name="label_filtering_type">Jenis penyaringan label</string>
+    <!-- Replacements for "Label filtering type". -->
+    <string name="filtering">Penyaringan</string>
     <string name="layout">Tata letak</string>
     <string name="list">Daftar</string>
     <string name="inclusive">Inklusif</string>
@@ -36,7 +35,7 @@
     <string name="access_date">Tanggal akses</string>
     <string name="creation_date">Tanggal dibuat</string>
     <string name="manual">Manual</string>
-    <string name="default_grouping">Bawaan</string>
+    <string name="none">Tidak ada</string>
     <string name="descending">Menurun</string>
     <string name="ascending">Menaik</string>
     <string name="settings">Pengaturan</string>
@@ -107,15 +106,19 @@
     <string name="all_notes">Semua catatan</string>
     <string name="all_folders">Semua map</string>
     <string name="clear">Bersihkan</string>
-    <string name="recent_notes">Catatan terbaru</string>
+    <!-- Replacement for Recent Notes filtered view. -->
+    <string name="recent">Terbaru</string>
     <string name="collapse">Ciutkan</string>
     <string name="expand">Perluas</string>
-    <string name="no_parent">Tidak ada induk</string>
     <string name="parent_folder">Map induk</string>
     <string name="new_note_cursor_position">Posisi kursor catatan baru</string>
     <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
     <string name="open_notes_in">Buka catatan pada</string>
     <string name="archive">Arsip</string>
+    <!-- Similar to Recent Notes filtered view but for archived notes. -->
+    <string name="archived">Diarsipkan</string>
+    <!-- Similar to Recent Notes filtered view but for notes that have reminders set. -->
+    <string name="scheduled">Dijadwalkan</string>
     <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
     <string name="folder_archive">Arsip %s</string>
     <string name="unarchive">Batalkan arsip</string>
@@ -156,10 +159,12 @@
     <string name="add_new_note_shortcut">Tambah pintasan catatan</string>
     <string name="delete_folder_description">Tindakan ini tidak dapat diurungkan dan akan menghapus map dan semua kontennya secara permanen.</string>
     <string name="folder_title">Judul map</string>
-    <string name="color">Warna map</string>
+    <!-- Folder color -->
+    <string name="color">Warna</string>
     <string name="delete_folder">Hapus</string>
     <string name="delete_folder_confirmation">Apakah Anda yakin ingin menghapus map ini?</string>
     <string name="folders_sorting">Sortir map</string>
+    <string name="folders_ordering">Penyortiran folder</string>
     <string name="empty_title">Judul tidak boleh kosong.</string>
     <string name="folder_is_deleted">Map telah dihapus.</string>
     <string name="folder_is_archived">Map telah diarsipkan.</string>
@@ -168,6 +173,7 @@
     <string name="folder_is_unpinned">Penyemat map telah dilepas.</string>
     <string name="no_folders_found">Tidak ada map yang ditemukan.</string>
     <string name="select_folder">Pilih map</string>
+    <string name="folder">Folder</string>
     <string name="select_folder_archive">Pilih map arsip</string>
     <string name="select_parent_folder">Pilih map utama</string>
     <string name="select_quick_note_folder">Pilih map catatan cepat</string>
@@ -270,20 +276,18 @@
     <string name="undo_history">Urungkan hirtory</string>
     <string name="redo">Redo</string>
     <string name="redo_history">Mengembalikan history</string>
-    <string name="share_note">Berbagi catatan</string>
-    <string name="sorting_type">Jenis penyortiran</string>
+    <plurals name="share_note">
+        <item quantity="other">Bagikan catatan</item>
+    </plurals>
     <!-- Sorting for notes/folders -->
     <string name="sorting">Penyortiran</string>
-    <!-- Type of sorting for notes/folders -->
-    <string name="type">Tipe</string>
-    <!-- Order of sorting for notes/folders -->
-    <string name="order">Urutan</string>
+    <!-- Ordering for sorting/grouping of notes/folders -->
+    <string name="ordering">Penyortiran</string>
     <string name="notes_view">Tampilan catatan</string>
-    <string name="sorting_order">Urutan penyortiran</string>
-    <string name="grouping_type">Jenis pengelompokan</string>
+    <!-- Dialog for how folders sorted. -->
+    <string name="folders_view">Tampilan folder</string>
     <!-- Grouping for notes/folders -->
     <string name="grouping">Pengelompokan</string>
-    <string name="grouping_order">Urutan pengelompokan</string>
     <string name="save_to_noto">Simpan ke Noto</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">Catatan telah disimpan ke %s.</string>
@@ -348,6 +352,10 @@
     <string name="show_notes_count">Tampilkan jumlah catatan</string>
     <!-- Description of the "Show notes count" settings option. -->
     <string name="show_notes_count_description">Menentukan apakah akan menampilkan hitungan catatan dalam dialog map.</string>
+    <!-- Whether to exit app immediately without showing folders dialog -->
+    <string name="quick_exit">Keluar Cepat</string>
+    <!-- Description of the "Quick exit" settings option. -->
+    <string name="quick_exit_description">Menyetel apakah akan segera keluar dari aplikasi saat menekan tombol kembali.</string>
     <string name="remember_scrolling_position">Ingat posisi gulir</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Menentukan apakah akan menyimpan posisi scrolling di map, dan catatan.</string>
@@ -386,7 +394,6 @@
     <string name="reorder_label">Susun ulang</string>
     <string name="update_label">Perbarui label</string>
     <string name="create_label">Buat tanda</string>
-    <string name="label_title">Judul tanda</string>
     <string name="label">Tanda</string>
     <string name="without_label">Tanpa tanda</string>
     <string name="label_options">Pengaturan tanda</string>
@@ -397,7 +404,6 @@
     <string name="delete_label_confirmation">Apakah kamu yakin ingin menghapus tanda ini?</string>
     <string name="label_is_deleted">Tanda telah dihapus.</string>
     <string name="delete_label_description">Tindakan ini tidak dapat diurungkan dan akan menghapus tanda dan menyingkirkan tanda dari catatan terkait secara permanen.</string>
-    <string name="filter_labels">Saring label</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
     <string name="system_dark_theme">Mengikuti sistem + Gelap</string>
@@ -426,6 +432,8 @@
     <string name="italian">Italia</string>
     <string name="tamil">Tamil</string>
     <string name="czech">Ceko</string>
+    <string name="lithuanian">Lituania</string>
+    <string name="simplified_chinese">Cina (sederhana)</string>
     <!-- Icon -->
     <string name="icon">Ikon</string>
     <!-- Widget -->
@@ -514,5 +522,14 @@
          \n• Memperbaiki pengimporan file JSON.
          \n• Memperbaiki warna tema hitam di Android 12 dan perangkat yang lebih baru.
          \n• Perbaikan bug dan peningkatan desain lainnya.
+    </string>
+    <string name="release_2_2_1">• Mendukung bahasa Lituania dan Tionghoa Sederhana.
+         \n• Peningkatan desain di sana-sini.
+         \n• Memfaktorkan ulang fungsi undo/redo agar lebih efektif.
+         \n• Tampilan yang didukung Diarsipkan &amp; Catatan terjadwal.
+         \n• Mendukung setelan untuk Keluar Cepat (keluar dari aplikasi tanpa membuka menu utama).
+         \n• Mengimplementasikan cara yang lebih cepat untuk membuat catatan saat berada di aplikasi lain menggunakan petak Catatan Cepat di pusat notifikasi.
+         \n• Perubahan bahasa aplikasi terintegrasi melalui Setelan Sistem untuk Android 13 dan yang lebih baru.
+         \n• Perbaikan bug.
     </string>
 </resources>

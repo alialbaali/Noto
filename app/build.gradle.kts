@@ -4,8 +4,8 @@ plugins {
     id(Plugins.AndroidApplication)
     kotlin(Plugins.KotlinAndroid)
     id(Plugins.NavigationSafeArgs)
-    kotlin("plugin.serialization") version "1.7.20"
-    id("com.google.devtools.ksp") version "1.7.20-1.0.7"
+    kotlin("plugin.serialization") version "1.8.10"
+    id("com.google.devtools.ksp") version "1.8.10-1.0.9"
 }
 
 android {
@@ -94,16 +94,16 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.2"
+        kotlinCompilerExtensionVersion = "1.4.3"
     }
 
     testOptions {
@@ -132,7 +132,7 @@ dependencies {
     implementation(AndroidX.appCompat)
     implementation(AndroidX.coordinatorLayout)
     implementation(AndroidX.Lifecycle.viewModelKtx)
-    implementation(AndroidX.Lifecycle.runtimeKtx)
+    implementation(AndroidX.lifecycle.runtime.ktx)
     implementation(AndroidX.recyclerView)
     implementation(AndroidX.Work.runtimeKtx)
     implementation(Google.Android.material)
@@ -149,11 +149,11 @@ dependencies {
     implementation(AndroidX.viewPager2)
     ksp(AndroidX.Room.compiler)
     implementation(KotlinX.datetime)
+    implementation(AndroidX.Core.splashscreen)
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
     implementation("com.google.android:flexbox:2.0.1")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
     implementation("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation("com.robinhood.ticker:ticker:2.0.4")
-    implementation("androidx.core:core-splashscreen:1.0.0-beta02")
 
     implementation(AndroidX.Compose.material3)
     implementation(AndroidX.Compose.animation)

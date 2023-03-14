@@ -2,9 +2,6 @@
 
     <!-- App -->
     <string name="app_name">Noto</string>
-    <string name="done">Done</string>
-    <!-- Main menu dialog where it displays folders. -->
-    <string name="home">Home</string>
     <!-- Button text for sorting/ordering/filtering notes options. -->
     <string name="apply">Apply</string>
     <string name="okay">Okay</string>
@@ -22,8 +19,6 @@
     <!-- Options for multi-selected notes. -->
     <string name="options">Options</string>
     <string name="back">Back</string>
-    <string name="folder_layout">Folder layout</string>
-    <string name="label_filtering_type">Label filtering type</string>
     <!-- Replacements for "Label filtering type". -->
     <string name="filtering">Filtering</string>
     <string name="layout">Layout</string>
@@ -116,12 +111,10 @@
     <string name="all_notes">All notes</string>
     <string name="all_folders">All folders</string>
     <string name="clear">Clear</string>
-    <string name="recent_notes">Recent notes</string>
     <!-- Replacement for Recent Notes filtered view. -->
     <string name="recent">Recent</string>
     <string name="collapse">Collapse</string>
     <string name="expand">Expand</string>
-    <string name="no_parent">No parent</string>
     <string name="parent_folder">Parent folder</string>
     <string name="new_note_cursor_position">New note cursor position</string>
     <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
@@ -174,6 +167,7 @@
     <string name="add_new_note_shortcut">New note shortcut</string>
     <string name="delete_folder_description">This action can\'t be undone and will delete the folder and all of its content permanently.</string>
     <string name="folder_title">Folder title</string>
+    <!-- Folder color -->
     <string name="color">Color</string>
     <string name="delete_folder">Delete</string>
     <string name="delete_folder_confirmation">Are you sure you want to delete this folder?</string>
@@ -303,22 +297,15 @@
         <item quantity="one">Share note</item>
         <item quantity="other">Share %d notes</item>
     </plurals>
-    <string name="sorting_type">Sorting type</string>
     <!-- Sorting for notes/folders -->
     <string name="sorting">Sorting</string>
-    <!-- Type of sorting for notes/folders -->
-    <string name="type">Type</string>
-    <!-- Order of sorting for notes/folders -->
-    <string name="order">Order</string>
     <!-- Ordering for sorting/grouping of notes/folders -->
     <string name="ordering">Ordering</string>
     <string name="notes_view">Notes view</string>
+    <!-- Dialog for how folders sorted. -->
     <string name="folders_view">Folders view</string>
-    <string name="sorting_order">Sorting order</string>
-    <string name="grouping_type">Grouping type</string>
     <!-- Grouping for notes/folders -->
     <string name="grouping">Grouping</string>
-    <string name="grouping_order">Grouping order</string>
     <string name="save_to_noto">Save to Noto</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">Note has been saved to %s.</string>
@@ -394,7 +381,7 @@
     <!-- Description of the "Show notes count" settings option. -->
     <string name="show_notes_count_description">Whether to display the count of notes in the folders dialog.</string>
     <!-- Whether to exit app immediately without showing folders dialog -->
-    <string name="quick_exit">Quick exit</string>
+    <string name="quick_exit">Quick Exit</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Whether to exit the app immediately when pressing the back button.</string>
     <string name="remember_scrolling_position">Remember scrolling position</string>
@@ -437,7 +424,6 @@
     <string name="reorder_label">Reorder</string>
     <string name="update_label">Update label</string>
     <string name="create_label">Create label</string>
-    <string name="label_title">Label title</string>
     <string name="label">Label</string>
     <string name="without_label">Without label</string>
     <string name="label_options">Label options</string>
@@ -448,7 +434,6 @@
     <string name="delete_label_confirmation">Are you sure you want to delete this label?</string>
     <string name="label_is_deleted">Label has been deleted.</string>
     <string name="delete_label_description">This action can\'t be undone and will delete the label and remove the label from the associated notes permanently.</string>
-    <string name="filtered_labels">Filtered labels</string>
 
     <!-- Theme -->
     <string name="theme">Theme</string>
@@ -597,5 +582,14 @@
         \n• Fixed importing JSON files.
         \n• Fixed black theme color in Android 12 and newer devices.
         \n• Other bug fixes and design improvements.
+    </string>
+    <string name="release_2_2_1">• Supported Lithuanian and Simplified Chinese.
+        \n• Design improvements here and there.
+        \n• Refactored undo/redo functionality to be more effective.
+        \n• Supported viewing Archived &amp; Scheduled notes.
+        \n• Supported for Quick Exit settings toggle (exiting the app without navigating to the main menu).
+        \n• Implemented a faster way to create notes while in other apps using Quick Note tile in the notification center.
+        \n• Integrated changing app language through System Settings for Android 13 and above.
+        \n• Bug fixes.
     </string>
 </resources>

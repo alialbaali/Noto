@@ -2,7 +2,6 @@
 <resources>
     <!-- App -->
     <string name="app_name">Noto</string>
-    <string name="done">Hecho</string>
     <!-- Button text for sorting/ordering/filtering notes options. -->
     <string name="apply">Aplicar</string>
     <string name="okay">Ok</string>
@@ -20,8 +19,8 @@
     <!-- Options for multi-selected notes. -->
     <string name="options">Opciones</string>
     <string name="back">Volver</string>
-    <string name="folder_layout">Diseño de carpeta</string>
-    <string name="label_filtering_type">Tipo de filtrado de etiqueta</string>
+    <!-- Replacements for "Label filtering type". -->
+    <string name="filtering">Filtrando</string>
     <string name="layout">Diseño</string>
     <string name="list">Lista</string>
     <string name="inclusive">Inclusivo</string>
@@ -36,7 +35,7 @@
     <string name="access_date">Fecha de acceso</string>
     <string name="creation_date">Fecha de creación</string>
     <string name="manual">Manual</string>
-    <string name="default_grouping">Predeterminado</string>
+    <string name="none">Ninguno</string>
     <string name="descending">Descendente</string>
     <string name="ascending">Ascendente</string>
     <string name="settings">Preferencias</string>
@@ -107,15 +106,19 @@
     <string name="all_notes">Todas las notas</string>
     <string name="all_folders">Todas las carpetas</string>
     <string name="clear">Eliminar</string>
-    <string name="recent_notes">Notas recientes</string>
+    <!-- Replacement for Recent Notes filtered view. -->
+    <string name="recent">Reciente</string>
     <string name="collapse">Contraer</string>
     <string name="expand">Expandir</string>
-    <string name="no_parent">Sin tema principal</string>
     <string name="parent_folder">Carpeta principal</string>
     <string name="new_note_cursor_position">Posición del cursor en notas nuevas</string>
     <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
     <string name="open_notes_in">Abrir notas en</string>
     <string name="archive">Archivo</string>
+    <!-- Similar to Recent Notes filtered view but for archived notes. -->
+    <string name="archived">Archivado</string>
+    <!-- Similar to Recent Notes filtered view but for notes that have reminders set. -->
+    <string name="scheduled">Programado</string>
     <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
     <string name="folder_archive">%s archivo</string>
     <string name="unarchive">Desarchivar</string>
@@ -157,10 +160,12 @@
     <string name="add_new_note_shortcut">Nuevo acceso directo</string>
     <string name="delete_folder_description">Esta acción no se puede deshacer y eliminará la carpeta y todo su contenido de forma permanente.</string>
     <string name="folder_title">Título de la carpeta</string>
-    <string name="color">Color de la carpeta</string>
+    <!-- Folder color -->
+    <string name="color">Color</string>
     <string name="delete_folder">Borrar</string>
     <string name="delete_folder_confirmation">¿Está seguro de que desea eliminar esta carpeta?</string>
     <string name="folders_sorting">Ordenando carpetas</string>
+    <string name="folders_ordering">Ordenando carpetas</string>
     <string name="empty_title">El título no puede estar vacío.</string>
     <string name="folder_is_deleted">Se ha eliminado la carpeta.</string>
     <string name="folder_is_archived">La carpeta se ha archivado.</string>
@@ -169,6 +174,7 @@
     <string name="folder_is_unpinned">La carpeta ha sido desanclada.</string>
     <string name="no_folders_found">No se encontraron carpetas.</string>
     <string name="select_folder">Seleccionar carpeta</string>
+    <string name="folder">Carpeta</string>
     <string name="select_folder_archive">Seleccione archivo de carpeta</string>
     <string name="select_parent_folder">Seleccionar carpeta padre</string>
     <string name="select_quick_note_folder">Seleccionar carpeta de notas rápidas</string>
@@ -278,20 +284,19 @@
     <string name="undo_history">Deshacer Historial</string>
     <string name="redo">Rehacer</string>
     <string name="redo_history">Rehacer historial</string>
-    <string name="share_note">Compartir nota</string>
-    <string name="sorting_type">Tipo de ordenación</string>
+    <plurals name="share_note">
+        <item quantity="one">Compartir nota</item>
+        <item quantity="other">Compartir %d notas</item>
+    </plurals>
     <!-- Sorting for notes/folders -->
     <string name="sorting">Ordenar</string>
-    <!-- Type of sorting for notes/folders -->
-    <string name="type">Tipo</string>
-    <!-- Order of sorting for notes/folders -->
-    <string name="order">Orden</string>
+    <!-- Ordering for sorting/grouping of notes/folders -->
+    <string name="ordering">Ordenando</string>
     <string name="notes_view">Vista de notas</string>
-    <string name="sorting_order">Orden de clasificación</string>
-    <string name="grouping_type">Tipo de grupo</string>
+    <!-- Dialog for how folders sorted. -->
+    <string name="folders_view">Vista de carpeta</string>
     <!-- Grouping for notes/folders -->
     <string name="grouping">Agrupación</string>
-    <string name="grouping_order">Orden de clasificación</string>
     <string name="save_to_noto">Guardar en Noto</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">Se ha guardado la nota.</string>
@@ -366,6 +371,10 @@
     <string name="show_notes_count">Mostrar contador de notas</string>
     <!-- Description of the "Show notes count" settings option. -->
     <string name="show_notes_count_description">Mostrar el recuento de notas en el diálogo de carpetas.</string>
+    <!-- Whether to exit app immediately without showing folders dialog -->
+    <string name="quick_exit">Salida rápida</string>
+    <!-- Description of the "Quick exit" settings option. -->
+    <string name="quick_exit_description">Salir de la aplicación inmediatamente al pulsar el botón atrás.</string>
     <string name="remember_scrolling_position">Recordar posición de desplazamiento</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Almacenar la posición de desplazamiento en carpetas y notas.</string>
@@ -404,7 +413,6 @@
     <string name="reorder_label">Reordenar</string>
     <string name="update_label">Actualizar etiqueta</string>
     <string name="create_label">Crear etiqueta</string>
-    <string name="label_title">Título de la etiqueta</string>
     <string name="label">Etiqueta</string>
     <string name="without_label">Sin etiqueta</string>
     <string name="label_options">Opciones de etiqueta</string>
@@ -415,7 +423,6 @@
     <string name="delete_label_confirmation">¿Está seguro que desea eliminar esta etiqueta?</string>
     <string name="label_is_deleted">La etiqueta ha sido eliminada.</string>
     <string name="delete_label_description">Esta acción no se puede deshacer y eliminará la etiqueta y la etiqueta de las notas asociadas permanentemente.</string>
-    <string name="filter_labels">Filtrar etiquetas</string>
     <!-- Theme -->
     <string name="theme">Tema</string>
     <string name="system_dark_theme">Seguir sistema + Oscuro</string>
@@ -444,6 +451,8 @@
     <string name="italian">Italiano</string>
     <string name="tamil">Tamil</string>
     <string name="czech">Checo</string>
+    <string name="lithuanian">Lituano</string>
+    <string name="simplified_chinese">Chino simplificado</string>
     <!-- Icon -->
     <string name="icon">Icono</string>
     <!-- Widget -->
@@ -532,5 +541,14 @@
         \n• Corregido importando archivos JSON.
         \n• Corregido color de tema negro en Android 12 y dispositivos más nuevos.
         \n• Otras correcciones de errores y mejoras de diseño.
+    </string>
+    <string name="release_2_2_1">• Soportado en chino lituano y simplificado.
+        \n• Diseño de mejoras aquí y allá.
+        \n• Función de deshacer/rehacer reformada para ser más efectiva.
+        \n• Visualización archivada &amp; notas programadas.
+        \n• Soporte para alternar ajustes de salida rápida (saliendo de la aplicación sin navegar al menú principal).
+        \n• Implementada una forma más rápida de crear notas mientras que en otras aplicaciones usando el ajuste de Nota Rápida en el centro de notificaciones.
+        \n• Cambio completo de idioma de la aplicación a través de la Configuración del sistema para Android 13 o superior.
+        \n• Corrección de errores.
     </string>
 </resources>
