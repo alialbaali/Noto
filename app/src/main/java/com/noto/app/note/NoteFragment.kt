@@ -246,7 +246,15 @@ class NoteFragment : Fragment() {
             .debounce(DebounceTimeoutMillis)
             .onEach { (isFocused, title) ->
                 val replayCache = viewModel.titleHistory.replayCache.distinctBy { it.third }
-                    .filter { if (it.third.isNotBlank()) it.third.substring(it.first, it.second).lastOrNull()?.isWhitespace() == true else true }
+                    .filter {
+                        if (it.third.isNotBlank()) {
+                            val second = it.second
+                            val first = it.first.coerceIn(0, second)
+                            it.third.substring(first, second).lastOrNull()?.isWhitespace() ?: true
+                        } else {
+                            true
+                        }
+                    }
 
                 if (isFocused) handleUndoRedo(replayCache, title)
             }
@@ -262,7 +270,15 @@ class NoteFragment : Fragment() {
             .debounce(DebounceTimeoutMillis)
             .onEach { (isFocused, body) ->
                 val replayCache = viewModel.bodyHistory.replayCache.distinctBy { it.third }
-                    .filter { if (it.third.isNotBlank()) it.third.substring(it.first, it.second).lastOrNull()?.isWhitespace() == true else true }
+                    .filter {
+                        if (it.third.isNotBlank()) {
+                            val second = it.second
+                            val first = it.first.coerceIn(0, second)
+                            it.third.substring(first, second).lastOrNull()?.isWhitespace() ?: true
+                        } else {
+                            true
+                        }
+                    }
 
                 if (isFocused) handleUndoRedo(replayCache, body)
             }
@@ -653,8 +669,14 @@ class NoteFragment : Fragment() {
     }
 
     private fun NoteFragmentBinding.handleUndoRedo(replayCache: List<Triple<Int, Int, String>>, currentText: String) {
-        val value = replayCache.lastOrNull()
-        val isLastCharWhiteSpace = value?.third?.substring(value.first, value.second)?.lastOrNull()?.isWhitespace() == true
+        val value = replayCache.lastOrNull() ?: Triple(0, 0, "")
+        val isLastCharWhiteSpace = if (value.third.isNotBlank()) {
+            val second = value.second
+            val first = value.first.coerceIn(0, second)
+            value.third.substring(first, second).lastOrNull()?.isWhitespace() == true
+        } else {
+            true
+        }
 
         when {
             replayCache.all { it.third.isBlank() } -> {

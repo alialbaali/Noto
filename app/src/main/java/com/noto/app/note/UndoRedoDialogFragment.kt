@@ -67,7 +67,15 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                     .map { Triple(it.first.first, it.first.second, it.second) }
                     .distinctBy { it.third }
                     .filter { it.third.isNotBlank() }
-                    .filter { it.third.substring(it.first, it.second).lastOrNull()?.isWhitespace() == true }
+                    .filter {
+                        if (it.third.isNotBlank()) {
+                            val second = it.second
+                            val first = it.first.coerceIn(0, second)
+                            it.third.substring(first, second).lastOrNull()?.isWhitespace() == true
+                        } else {
+                            true
+                        }
+                    }
 
                 if (args.isTitle) {
                     val currentText = args.currentTitleText
