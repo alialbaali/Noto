@@ -327,8 +327,12 @@ fun Language.toLocale(): Locale = when (this) {
 }
 
 fun List<Language>.toLocalListCompat(): LocaleListCompat {
-    val locales = this.map { it.toLocale() }.toTypedArray()
-    return LocaleListCompat.create(*locales)
+    return try {
+        val locales = this.map { it.toLocale() }.toTypedArray()
+        LocaleListCompat.create(*locales)
+    } catch (e: Exception) {
+        LocaleListCompat.getEmptyLocaleList()
+    }
 }
 
 fun LocaleListCompat.toLanguages(): List<Language> {
