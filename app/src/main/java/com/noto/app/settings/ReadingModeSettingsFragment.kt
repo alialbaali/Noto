@@ -92,7 +92,7 @@ class ReadingModeSettingsFragment : Fragment() {
                         SettingsItem(
                             title = stringResource(id = R.string.screen_brightness_level),
                             type = SettingsItemType.Text(screenBrightnessLevel.asString()),
-                            onClick = { navController?.navigate(ReadingModeSettingsFragmentDirections.actionReadingModeSettingsFragmentToScreenBrightnessLevelDialogFragment()) },
+                            onClick = { navController?.navigateSafely(ReadingModeSettingsFragmentDirections.actionReadingModeSettingsFragmentToScreenBrightnessLevelDialogFragment()) },
                             description = stringResource(id = R.string.screen_brightness_level_description),
                             painter = painterResource(id = R.drawable.ic_round_brightness_24)
                         )
