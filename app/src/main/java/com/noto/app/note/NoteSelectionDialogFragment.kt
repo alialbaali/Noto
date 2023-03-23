@@ -42,7 +42,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
 
     private val parentView by lazy { parentFragment?.view }
 
-    private val anchorViewId by lazy { R.id.fab }
+    private val anchorViewId by lazy { R.id.bab }
 
     private val folderColor by lazy { viewModel.folder.value.color }
 
