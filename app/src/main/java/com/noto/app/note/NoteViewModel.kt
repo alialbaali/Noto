@@ -214,28 +214,28 @@ class NoteViewModel(
     fun undoTitle(): Triple<Int, Int, String> {
         val value = titleHistory.replayCache.getPreviousValueOrCurrent(note.value.title)
         setIsUndoOrRedo()
-        mutableNote.value = note.value.copy(title = value.third)
+        setNoteTitle(value.third)
         return value
     }
 
     fun redoTitle(): Triple<Int, Int, String> {
         val value = titleHistory.replayCache.getNextValueOrCurrent(note.value.title)
         setIsUndoOrRedo()
-        mutableNote.value = note.value.copy(title = value.third)
+        setNoteTitle(value.third)
         return value
     }
 
     fun undoBody(): Triple<Int, Int, String> {
         val value = bodyHistory.replayCache.getPreviousValueOrCurrent(note.value.body)
         setIsUndoOrRedo()
-        mutableNote.value = note.value.copy(body = value.third)
+        setNoteBody(value.third)
         return value
     }
 
     fun redoBody(): Triple<Int, Int, String> {
         val value = bodyHistory.replayCache.getNextValueOrCurrent(note.value.body)
         setIsUndoOrRedo()
-        mutableNote.value = note.value.copy(body = value.third)
+        setNoteBody(value.third)
         return value
     }
 
@@ -280,12 +280,10 @@ class NoteViewModel(
     }
 
     private fun List<Triple<Int, Int, String>>.getPreviousValueOrCurrent(currentValue: String): Triple<Int, Int, String> {
-        val index = indexOfFirst { it.third == currentValue }
-        return getOrElse(index - 1) { get(index) }
+        return indexOfLast { it.third == currentValue }.minus(1).coerceIn(0, lastIndex).let(this::get)
     }
 
     private fun List<Triple<Int, Int, String>>.getNextValueOrCurrent(currentValue: String): Triple<Int, Int, String> {
-        val index = indexOfFirst { it.third == currentValue }
-        return getOrElse(index + 1) { get(index) }
+        return indexOfFirst { it.third == currentValue }.plus(1).coerceIn(0, lastIndex).let(this::get)
     }
 }

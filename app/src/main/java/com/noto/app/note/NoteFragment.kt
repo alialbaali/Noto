@@ -245,18 +245,7 @@ class NoteFragment : Fragment() {
         ) { _, title, isFocused -> isFocused to title }
             .debounce(DebounceTimeoutMillis)
             .onEach { (isFocused, title) ->
-                val replayCache = viewModel.titleHistory.replayCache.distinctBy { it.third }
-                    .filter {
-                        if (it.third.isNotBlank()) {
-                            val second = it.second
-                            val first = it.first.coerceIn(0, second)
-                            it.third.substring(first, second).lastOrNull()?.isWhitespace() ?: true
-                        } else {
-                            true
-                        }
-                    }
-
-                if (isFocused) handleUndoRedo(replayCache, title)
+                if (isFocused) handleUndoRedo(viewModel.titleHistory.replayCache, title)
             }
             .launchIn(lifecycleScope)
 
@@ -269,18 +258,7 @@ class NoteFragment : Fragment() {
         ) { _, body, isFocused -> isFocused to body }
             .debounce(DebounceTimeoutMillis)
             .onEach { (isFocused, body) ->
-                val replayCache = viewModel.bodyHistory.replayCache.distinctBy { it.third }
-                    .filter {
-                        if (it.third.isNotBlank()) {
-                            val second = it.second
-                            val first = it.first.coerceIn(0, second)
-                            it.third.substring(first, second).lastOrNull()?.isWhitespace() ?: true
-                        } else {
-                            true
-                        }
-                    }
-
-                if (isFocused) handleUndoRedo(replayCache, body)
+                if (isFocused) handleUndoRedo(viewModel.bodyHistory.replayCache, body)
             }
             .launchIn(lifecycleScope)
 
