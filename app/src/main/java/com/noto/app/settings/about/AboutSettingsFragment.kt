@@ -22,30 +22,11 @@ import com.noto.app.settings.SettingsItemType
 import com.noto.app.settings.SettingsSection
 import com.noto.app.settings.SupportNotoColor
 import com.noto.app.settings.SupportNotoUrl
+import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
 import com.noto.app.util.setupMixedTransitions
 import kotlinx.coroutines.launch
-
-private const val DeveloperWebsite = "https://www.alialbaali.com"
-private const val LicenseWebsite = "https://www.apache.org/licenses/LICENSE-2.0"
-private const val GithubUrl = "https://github.com/alialbaali/Noto"
-private const val RedditUrl = "https://reddit.com/r/notoapp"
-private const val TranslationEmailType = "mailto:"
-private const val TranslationEmail = "noto@albaali.com"
-private const val TranslationEmailSubject = "Noto Translation"
-private val TranslationEmailBody = """
-    Hi there,
-    
-    I would like to translate Noto to [LANGUAGE].
-    
-    I want to be credited as (optional):
-    Name: [NAME]
-    Link (optional): [LINK]
-    
-    Regards,
-""".trimIndent()
-private const val PrivacyPolicyUrl = "https://github.com/alialbaali/Noto/blob/master/PrivacyPolicy.md"
 
 class AboutSettingsFragment : Fragment() {
 
@@ -82,7 +63,7 @@ class AboutSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.developer),
                             type = SettingsItemType.Text(stringResource(id = R.string.developer_name)),
                             onClick = {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(DeveloperWebsite))
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.Noto.DeveloperUrl))
                                 startActivity(intent)
                             },
                             painter = painterResource(id = R.drawable.ic_round_person_24),
@@ -107,10 +88,10 @@ class AboutSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.translate_noto),
                             type = SettingsItemType.None,
                             onClick = {
-                                val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(TranslationEmailType)).apply {
-                                    putExtra(Intent.EXTRA_EMAIL, arrayOf(TranslationEmail))
-                                    putExtra(Intent.EXTRA_SUBJECT, TranslationEmailSubject)
-                                    putExtra(Intent.EXTRA_TEXT, TranslationEmailBody)
+                                val intent = Intent(Intent.ACTION_SENDTO, Uri.parse(Constants.EmailType)).apply {
+                                    putExtra(Intent.EXTRA_EMAIL, arrayOf(Constants.Noto.Email))
+                                    putExtra(Intent.EXTRA_SUBJECT, Constants.Noto.TranslationEmailSubject)
+                                    putExtra(Intent.EXTRA_TEXT, Constants.Noto.TranslationEmailBody)
                                 }
                                 startActivity(intent)
                             },
@@ -145,7 +126,7 @@ class AboutSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.source_code),
                             type = SettingsItemType.None,
                             onClick = {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubUrl))
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.Noto.GithubUrl))
                                 startActivity(intent)
                             },
                             description = stringResource(id = R.string.source_code_description),
@@ -156,7 +137,7 @@ class AboutSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.reddit_community),
                             type = SettingsItemType.None,
                             onClick = {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(RedditUrl))
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.Noto.RedditUrl))
                                 startActivity(intent)
                             },
                             description = stringResource(id = R.string.reddit_community_description),
@@ -169,7 +150,7 @@ class AboutSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.privacy_policy),
                             type = SettingsItemType.None,
                             onClick = {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(PrivacyPolicyUrl))
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.Noto.PrivacyPolicyUrl))
                                 startActivity(intent)
                             },
                             description = stringResource(id = R.string.privacy_policy_description),
@@ -180,7 +161,7 @@ class AboutSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.license),
                             type = SettingsItemType.Text(stringResource(id = R.string.license_value)),
                             onClick = {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(LicenseWebsite))
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.Noto.LicenseUrl))
                                 startActivity(intent)
                             },
                             painter = painterResource(id = R.drawable.ic_round_assignment_24),

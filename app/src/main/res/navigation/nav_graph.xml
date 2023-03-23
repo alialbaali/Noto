@@ -269,7 +269,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.noto.app.settings.SettingsFragment"
-        android:label="SettingsFragment">
+        android:label="SettingsFra gment">
         <action
             android:id="@+id/action_settingsFragment_to_exportImportDialogFragment"
             app:destination="@id/exportImportDialogFragment" />
@@ -294,6 +294,9 @@
         <action
             android:id="@+id/action_settingsFragment_to_aboutSettingsFragment"
             app:destination="@id/aboutSettingsFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_reportIssueDialogFragment"
+            app:destination="@id/reportIssueDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/selectFolderDialogFragment"
@@ -678,7 +681,7 @@
     <dialog
         android:id="@+id/folderListViewDialogFragment"
         android:name="com.noto.app.main.FolderListViewDialogFragment"
-        android:label="FolderListViewDialogFragment" >
+        android:label="FolderListViewDialogFragment">
         <action
             android:id="@+id/action_folderListViewDialogFragment_to_folderListOrderingDialogFragment"
             app:destination="@id/folderListOrderingDialogFragment" />
@@ -693,7 +696,7 @@
     <fragment
         android:id="@+id/filteredFragment"
         android:name="com.noto.app.filtered.FilteredFragment"
-        android:label="FilteredFragment" >
+        android:label="FilteredFragment">
         <argument
             android:name="model"
             app:argType="com.noto.app.filtered.FilteredItemModel" />
@@ -713,4 +716,8 @@
             android:id="@+id/action_filteredFragment_to_folderFragment"
             app:destination="@id/folderFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/reportIssueDialogFragment"
+        android:name="com.noto.app.settings.ReportIssueDialogFragment"
+        android:label="ReportIssueDialogFragment" />
 </navigation>

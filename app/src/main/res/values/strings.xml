@@ -48,6 +48,8 @@
     <string name="share_app_with_others">Share Noto with others</string>
     <string name="rate_app_on_play_store">Rate Noto on Play Store</string>
     <string name="report_issue">Report an issue</string>
+    <string name="email">Email</string>
+    <string name="github" translatable="false">GitHub</string>
     <string name="about">About</string>
     <string name="whats_new">What\'s new</string>
     <!--    <string name="share_with">Share with</string>-->

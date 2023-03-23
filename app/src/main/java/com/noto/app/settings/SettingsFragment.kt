@@ -45,8 +45,6 @@ import com.noto.app.util.navigateSafely
 import com.noto.app.util.setupMixedTransitions
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private const val PlayStoreUrl = "https://play.google.com/store/apps/details?id=com.noto"
-private const val GithubIssueUrl = "https://github.com/alialbaali/Noto/issues/new"
 const val SupportNotoUrl = "https://github.com/alialbaali/Noto#support"
 val SupportNotoColor = Color(0xFFE57373)
 
@@ -140,7 +138,7 @@ class SettingsFragment : Fragment() {
                         type = "text/plain"
                         putExtra(
                             Intent.EXTRA_TEXT,
-                            "$shareContentText $PlayStoreUrl"
+                            "$shareContentText ${Constants.Noto.PlayStoreUrl}"
                         )
                     }
 
@@ -154,7 +152,7 @@ class SettingsFragment : Fragment() {
                 title = stringResource(id = R.string.rate_app_on_play_store),
                 type = SettingsItemType.None,
                 onClick = {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(PlayStoreUrl))
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.Noto.PlayStoreUrl))
                     val chooser = Intent.createChooser(intent, rateText)
                     startActivity(chooser)
                 },
@@ -170,8 +168,7 @@ class SettingsFragment : Fragment() {
                 title = stringResource(id = R.string.report_issue),
                 type = SettingsItemType.None,
                 onClick = {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GithubIssueUrl))
-                    startActivity(intent)
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToReportIssueDialogFragment())
                 },
                 painter = painterResource(id = R.drawable.ic_round_report_problem_24),
             )
