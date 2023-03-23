@@ -64,7 +64,7 @@ private fun ColumnScope.Tip(modifier: Modifier = Modifier) {
 private fun Title(title: String, modifier: Modifier = Modifier) {
     Text(
         text = title,
-        modifier = modifier.padding(top = NotoTheme.dimensions.extraSmall, bottom = NotoTheme.dimensions.medium),
+        modifier = modifier.padding(top = NotoTheme.dimensions.extraSmall, bottom = NotoTheme.dimensions.extraLarge),
         style = MaterialTheme.typography.titleMedium,
         color = MaterialTheme.colorScheme.onBackground
     )
