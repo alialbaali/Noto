@@ -355,3 +355,13 @@ fun LocaleListCompat.toLanguages(): List<Language> {
         }
     }
 }
+
+fun CharSequence.indicesOf(string: String, startIndex: Int = 0, ignoreCase: Boolean = false): List<IntRange> {
+    val indices = mutableListOf<IntRange>()
+    var index = this.indexOf(string, startIndex, ignoreCase)
+    while (index >= 0) {
+        indices += index..(index + string.length)
+        index = this.indexOf(string, startIndex = index + 1, ignoreCase)
+    }
+    return indices
+}

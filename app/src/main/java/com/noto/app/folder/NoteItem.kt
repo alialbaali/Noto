@@ -206,13 +206,16 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     }
 
     private fun String.highlightText(color: Int, context: Context): Spannable {
+        val indices = this.indicesOf(searchTerm, ignoreCase = true)
+            .filter { it.first < it.last }
+
         return this.toSpannable().apply {
-            val startIndex = this.indexOf(searchTerm, ignoreCase = true)
-            val endIndex = startIndex + searchTerm.length
-            val colorSpan = ForegroundColorSpan(color)
-            val boldFontSpan = context.tryLoadingFontResource(R.font.nunito_black)?.style?.let(::StyleSpan)
-            val boldSpan = StyleSpan(Typeface.BOLD)
-            if (startIndex != -1 && endIndex <= this.lastIndex) {
+            indices.forEach { range ->
+                val colorSpan = ForegroundColorSpan(color)
+                val boldFontSpan = context.tryLoadingFontResource(R.font.nunito_black)?.style?.let(::StyleSpan)
+                val boldSpan = StyleSpan(Typeface.BOLD)
+                val startIndex = range.first.coerceIn(0, this.length)
+                val endIndex = range.last.coerceIn(0, this.length)
                 setSpan(colorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 setSpan(boldSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 if (boldFontSpan != null) {
