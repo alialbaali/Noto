@@ -39,9 +39,9 @@ class NoteReadingModeFragment : Fragment() {
         }
 
     private fun NoteReadingModeFragmentBinding.setupListeners() {
+        val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
         nsv.setOnScrollChangeListener(
             NestedScrollView.OnScrollChangeListener { _, _, scrollY, _, _ ->
-                val savedStateHandle = navController?.getBackStackEntry(R.id.notePagerFragment)?.savedStateHandle
                 savedStateHandle?.set(Constants.ScrollPosition, scrollY)
                 savedStateHandle?.set(Constants.IsTitleVisible, tvNoteTitle.isLayoutVisible(root))
                 savedStateHandle?.set(Constants.IsBodyVisible, tvNoteBody.isLayoutVisible(root))
