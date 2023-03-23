@@ -212,7 +212,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             val colorSpan = ForegroundColorSpan(color)
             val boldFontSpan = context.tryLoadingFontResource(R.font.nunito_black)?.style?.let(::StyleSpan)
             val boldSpan = StyleSpan(Typeface.BOLD)
-            if (startIndex != -1) {
+            if (startIndex != -1 && endIndex <= this.lastIndex) {
                 setSpan(colorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 setSpan(boldSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 if (boldFontSpan != null) {
