@@ -7,6 +7,8 @@ import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Font
 import com.noto.app.domain.repository.*
 import com.noto.app.folder.NoteItemModel
+import com.noto.app.getOrDefault
+import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -53,6 +55,13 @@ class FilteredViewModel(
 
     val quickExit = settingsRepository.quickExit
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
+    val selectedNotesGroupedByFolder
+        get() = notesGroupedByFolder.value
+            .getOrDefault(emptyMap())
+            .flatMap { it.value }
+            .filter { it.isSelected }
+            .sortedBy { it.selectionOrder }
 
     init {
         combine(
@@ -193,5 +202,58 @@ class FilteredViewModel(
 
     fun updateScrollingPosition(scrollingPosition: Int) = viewModelScope.launch {
         settingsRepository.updateFilteredNotesScrollingPosition(filteredItemModel, scrollingPosition)
+    }
+
+    fun selectNote(id: Long) {
+        mutableNotesGroupedByFolder.value = notesGroupedByFolder.value.map {
+            it.map { entry ->
+                val selectionOrder = entry.value.maxOf { it.selectionOrder }.plus(1)
+                entry.key to entry.value.map { model ->
+                    if (model.note.id == id)
+                        model.copy(isSelected = true, selectionOrder = selectionOrder)
+                    else
+                        model
+                }
+            }.toMap()
+        }
+    }
+
+    fun deselectNote(id: Long) {
+        mutableNotesGroupedByFolder.value = notesGroupedByFolder.value.map {
+            it.map { entry ->
+                entry.key to entry.value.map { model ->
+                    if (model.note.id == id)
+                        model.copy(isSelected = false, selectionOrder = -1)
+                    else
+                        model
+                }
+            }.toMap()
+        }
+    }
+
+    fun deselectAllNotes() {
+        mutableNotesGroupedByFolder.value = notesGroupedByFolder.value.map {
+            it.map { entry ->
+                entry.key to entry.value.map { model ->
+                    model.copy(isSelected = false, selectionOrder = -1)
+                }
+            }.toMap()
+        }
+    }
+
+    fun unarchiveSelectedNotes() = viewModelScope.launch {
+        selectedNotesGroupedByFolder.forEach { model ->
+            launch {
+                noteRepository.updateNote(model.note.copy(isArchived = false))
+            }
+        }
+    }
+
+    fun deleteSelectedNotes() = viewModelScope.launch {
+        selectedNotesGroupedByFolder.forEach { model ->
+            launch {
+                noteRepository.deleteNote(model.note)
+            }
+        }
     }
 }

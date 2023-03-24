@@ -4,6 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <item
+        android:id="@+id/unarchive"
+        android:icon="@drawable/ic_round_unarchive_24"
+        android:contentDescription="@string/unarchive"
+        android:title="@string/unarchive"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
+
+    <item
+        android:id="@+id/delete"
+        android:icon="@drawable/ic_round_delete_24"
+        android:contentDescription="@string/delete"
+        android:title="@string/delete"
+        app:showAsAction="always"
+        tools:ignore="AlwaysShowAction" />
+
+    <item
         android:id="@+id/change_visibility"
         android:icon="@drawable/ic_round_expand_24"
         android:contentDescription="@string/expand"

@@ -715,6 +715,9 @@
         <action
             android:id="@+id/action_filteredFragment_to_folderFragment"
             app:destination="@id/folderFragment" />
+        <action
+            android:id="@+id/action_filteredFragment_to_confirmationDialogFragment"
+            app:destination="@id/confirmationDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/reportIssueDialogFragment"
