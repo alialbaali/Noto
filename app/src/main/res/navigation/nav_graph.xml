@@ -175,11 +175,11 @@
             android:defaultValue="0L"
             app:argType="long" />
         <action
-            android:id="@+id/action_folderArchiveFragment_to_noteDialogFragment"
-            app:destination="@id/noteDialogFragment" />
-        <action
             android:id="@+id/action_folderArchiveFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
+        <action
+            android:id="@+id/action_folderArchiveFragment_to_confirmationDialogFragment"
+            app:destination="@id/confirmationDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/noteReminderDialogFragment"

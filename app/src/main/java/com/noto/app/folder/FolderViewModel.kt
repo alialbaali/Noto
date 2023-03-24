@@ -89,6 +89,12 @@ class FolderViewModel(
             .filter { it.isSelected }
             .sortedBy { it.selectionOrder }
 
+    val selectedArchivedNotes
+        get() = archivedNotes.value
+            .getOrDefault(emptyList())
+            .filter { it.isSelected }
+            .sortedBy { it.selectionOrder }
+
     init {
         combine(
             folderRepository.getFolderById(folderId)
@@ -440,6 +446,53 @@ class FolderViewModel(
     fun deselectLabelForSelectedNotes(id: Long) = viewModelScope.launch {
         selectedNotes.forEach { model ->
             launch { noteLabelRepository.deleteNoteLabel(model.note.id, labelId = id) }
+        }
+    }
+
+    fun selectArchivedNote(id: Long) {
+        mutableArchivedNotes.value = archivedNotes.value.map {
+            val selectionOrder = it.maxOf { it.selectionOrder }.plus(1)
+            it.map { model ->
+                if (model.note.id == id)
+                    model.copy(isSelected = true, selectionOrder = selectionOrder)
+                else
+                    model
+            }
+        }
+    }
+
+    fun deselectArchivedNote(id: Long) {
+        mutableArchivedNotes.value = archivedNotes.value.map {
+            it.map { model ->
+                if (model.note.id == id)
+                    model.copy(isSelected = false, selectionOrder = -1)
+                else
+                    model
+            }
+        }
+    }
+
+    fun deselectAllArchivedNotes() {
+        mutableArchivedNotes.value = archivedNotes.value.map {
+            it.map { model ->
+                model.copy(isSelected = false, selectionOrder = -1)
+            }
+        }
+    }
+
+    fun unarchiveSelectedArchivedNotes() = viewModelScope.launch {
+        selectedArchivedNotes.forEach { model ->
+            launch {
+                noteRepository.updateNote(model.note.copy(isArchived = false))
+            }
+        }
+    }
+
+    fun deleteSelectedArchivedNotes() = viewModelScope.launch {
+        selectedArchivedNotes.forEach { model ->
+            launch {
+                noteRepository.deleteNote(model.note)
+            }
         }
     }
 

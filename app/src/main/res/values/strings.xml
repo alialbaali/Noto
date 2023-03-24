@@ -315,6 +315,10 @@
         <item quantity="one">Note has been archived.</item>
         <item quantity="other">%d Notes have been archived.</item>
     </plurals>
+    <plurals name="note_is_unarchived">
+        <item quantity="one">Note has been unarchived.</item>
+        <item quantity="other">%d Notes have been unarchived.</item>
+    </plurals>
     <!-- The count of the selected notes that have been pinned. -->
     <plurals name="note_is_pinned">
         <item quantity="one">Note has been pinned.</item>
