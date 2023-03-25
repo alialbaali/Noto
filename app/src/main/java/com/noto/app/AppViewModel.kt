@@ -71,6 +71,9 @@ class AppViewModel(
     val quickNoteFolderId = settingsRepository.quickNoteFolderId
         .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.GeneralFolderId)
 
+    var isQuickNoteDialogCreated = false
+        private set
+
     init {
         createGeneralFolder()
         vaultTimeout
@@ -116,5 +119,9 @@ class AppViewModel(
 
     fun updateLanguage(value: Language) = viewModelScope.launch {
         settingsRepository.updateLanguage(value)
+    }
+
+    fun setIsQuickNoteDialogCreated() {
+        isQuickNoteDialogCreated = true
     }
 }
