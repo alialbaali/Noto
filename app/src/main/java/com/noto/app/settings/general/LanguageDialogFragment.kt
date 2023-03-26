@@ -22,7 +22,7 @@ import com.noto.app.components.BottomSheetDialog
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.Language
 import com.noto.app.settings.SettingsViewModel
-import com.noto.app.util.asString
+import com.noto.app.util.localizedName
 import com.noto.app.util.toLocalizedContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -39,7 +39,7 @@ class LanguageDialogFragment : BaseDialogFragment() {
             setContent {
                 BottomSheetDialog(title = stringResource(id = R.string.language)) {
                     val selectedLanguage by viewModel.language.collectAsState()
-                    val languages = remember { Language.values().sortedBy { it in Language.Deprecated } }
+                    val languages = remember { Language.values().sortedWith(Language.Comparator) }
                     languages.forEach { language ->
                         SelectableDialogItem(
                             selected = selectedLanguage == language,
@@ -56,11 +56,11 @@ class LanguageDialogFragment : BaseDialogFragment() {
                             ) {
                                 Column(Modifier.weight(1F), verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.extraSmall)) {
                                     CompositionLocalProvider(LocalContext provides language.toLocalizedContext()) {
-                                        Text(text = language.asString())
+                                        Text(text = language.localizedName)
                                     }
                                     if (language != Language.System) {
                                         Text(
-                                            text = language.asString(),
+                                            text = language.localizedName,
                                             style = MaterialTheme.typography.labelMedium,
                                             color = MaterialTheme.colorScheme.secondary
                                         )

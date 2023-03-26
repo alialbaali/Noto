@@ -21,7 +21,7 @@ import com.noto.app.components.BaseDialogFragment
 import com.noto.app.components.BottomSheetDialog
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.ScreenBrightnessLevel
-import com.noto.app.util.asString
+import com.noto.app.util.localizedName
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.NumberFormat
 
@@ -54,7 +54,7 @@ class ScreenBrightnessLevelDialogFragment : BaseDialogFragment() {
                                 horizontalArrangement = Arrangement.SpaceBetween,
                                 verticalAlignment = Alignment.CenterVertically,
                             ) {
-                                Text(text = level.asString(), Modifier.weight(1F))
+                                Text(text = level.localizedName, Modifier.weight(1F))
                                 if (level != ScreenBrightnessLevel.System) {
                                     val percentage = remember(level) { percentageFormatter.format(level.value) }
                                     Text(text = percentage, color = MaterialTheme.colorScheme.secondary)

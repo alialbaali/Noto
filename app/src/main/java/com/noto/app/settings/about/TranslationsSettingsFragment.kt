@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -55,8 +57,35 @@ class TranslationsSettingsFragment : Fragment() {
             isTransitionGroup = true
             setContent {
                 Screen(title = stringResource(id = R.string.translations)) {
-                    CompositionLocalProvider(LocalContext provides Language.Arabic.toLocalizedContext()) {
-                        SettingsSection(title = stringResource(id = R.string.arabic), painter = painterResource(id = R.drawable.ic_saudi_arabia)) {
+                    val languages = remember { Language.values().sortedWith(Language.Comparator) }
+                    languages.forEach { language ->
+                        CompositionLocalProvider(LocalContext provides language.toLocalizedContext()) {
+                            when (language) {
+                                Language.System -> {}
+                                Language.English -> {}
+                                Language.Turkish -> Turkish()
+                                Language.Arabic -> Arabic()
+                                Language.Indonesian -> {}
+                                Language.Russian -> {}
+                                Language.Tamil -> {}
+                                Language.Spanish -> Spanish()
+                                Language.French -> French()
+                                Language.German -> German()
+                                Language.Italian -> Italian()
+                                Language.Czech -> Czech()
+                                Language.Lithuanian -> Lithuanian()
+                                Language.SimplifiedChinese -> SimplifiedChinese()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun Arabic() {
+        SettingsSection(title = stringResource(id = R.string.arabic), painter = painterResource(id = R.drawable.ic_saudi_arabia)) {
 //                            SettingsItem(
 //                                title = stringResource(id = R.string.arabic_translator),
 //                                type = SettingsItemType.None,
@@ -67,161 +96,165 @@ class TranslationsSettingsFragment : Fragment() {
 //                                painter = EmptyPainter,
 //                            )
 
-                            SettingsItem(
-                                title = stringResource(id = R.string.arabic_proofreader),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ArabicProofreaderWebsite))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
-                        }
-                    }
+            SettingsItem(
+                title = stringResource(id = R.string.arabic_proofreader),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ArabicProofreaderWebsite))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
+        }
+    }
 
-                    CompositionLocalProvider(LocalContext provides Language.Turkish.toLocalizedContext()) {
-                        SettingsSection(title = stringResource(id = R.string.turkish), painter = painterResource(id = R.drawable.ic_turkey)) {
-                            SettingsItem(
-                                title = stringResource(id = R.string.turkish_translator),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TurkishTranslatorWebsite))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
+    @Composable
+    private fun Turkish() {
+        SettingsSection(title = stringResource(id = R.string.turkish), painter = painterResource(id = R.drawable.ic_turkey)) {
+            SettingsItem(
+                title = stringResource(id = R.string.turkish_translator),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TurkishTranslatorWebsite))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
 
-                            SettingsItem(
-                                title = stringResource(id = R.string.turkish_proofreader),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TurkishProofreaderWebsite))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
-                        }
-                    }
+            SettingsItem(
+                title = stringResource(id = R.string.turkish_proofreader),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(TurkishProofreaderWebsite))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
+        }
+    }
 
-                    CompositionLocalProvider(LocalContext provides Language.German.toLocalizedContext()) {
-                        SettingsSection(title = stringResource(id = R.string.german), painter = painterResource(id = R.drawable.ic_germany)) {
-                            SettingsItem(
-                                title = stringResource(id = R.string.german_translator),
-                                type = SettingsItemType.None,
-                                onClick = null,
-                                painter = EmptyPainter,
-                            )
-                        }
-                    }
+    @Composable
+    private fun SimplifiedChinese() {
+        SettingsSection(
+            title = stringResource(id = R.string.simplified_chinese),
+            painter = painterResource(id = R.drawable.ic_china),
+        ) {
+            SettingsItem(
+                title = stringResource(id = R.string.simplified_chinese_translator),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SimplifiedChineseTranslatorWebsite))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
+        }
+    }
 
-                    CompositionLocalProvider(LocalContext provides Language.Spanish.toLocalizedContext()) {
-                        SettingsSection(title = stringResource(id = R.string.spanish), painter = painterResource(id = R.drawable.ic_spain)) {
-                            SettingsItem(
-                                title = stringResource(id = R.string.spanish_translator),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SpanishTranslatorWebsite))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
-                        }
-                    }
+    @Composable
+    private fun Lithuanian() {
+        SettingsSection(title = stringResource(id = R.string.lithuanian), painter = painterResource(id = R.drawable.ic_lithuania)) {
+            SettingsItem(
+                title = stringResource(id = R.string.lithuanian_translator),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(LithuanianTranslatorWebsite))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
+        }
+    }
 
-                    CompositionLocalProvider(LocalContext provides Language.French.toLocalizedContext()) {
-                        SettingsSection(title = stringResource(id = R.string.french), painter = painterResource(id = R.drawable.ic_france)) {
-                            SettingsItem(
-                                title = stringResource(id = R.string.french_translator),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(FrenchTranslatorWebsite))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
+    @Composable
+    private fun Czech() {
+        SettingsSection(title = stringResource(id = R.string.czech), painter = painterResource(id = R.drawable.ic_czech)) {
+            SettingsItem(
+                title = stringResource(id = R.string.czech_translator),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CzechTranslatorWebsite))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
+        }
+    }
 
-                            SettingsItem(
-                                title = stringResource(id = R.string.french_translator2),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(FrenchTranslator2Website))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
-                        }
-                    }
+    @Composable
+    private fun Italian() {
+        SettingsSection(title = stringResource(id = R.string.italian), painter = painterResource(id = R.drawable.ic_italy)) {
+            SettingsItem(
+                title = stringResource(id = R.string.italian_translator),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ItalianTranslatorWebsite))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
 
-                    CompositionLocalProvider(LocalContext provides Language.Italian.toLocalizedContext()) {
-                        SettingsSection(title = stringResource(id = R.string.italian), painter = painterResource(id = R.drawable.ic_italy)) {
-                            SettingsItem(
-                                title = stringResource(id = R.string.italian_translator),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ItalianTranslatorWebsite))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
+            SettingsItem(
+                title = stringResource(id = R.string.italian_translator2),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ItalianTranslator2Website))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
+        }
+    }
 
-                            SettingsItem(
-                                title = stringResource(id = R.string.italian_translator2),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ItalianTranslator2Website))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
-                        }
-                    }
+    @Composable
+    private fun French() {
+        SettingsSection(title = stringResource(id = R.string.french), painter = painterResource(id = R.drawable.ic_france)) {
+            SettingsItem(
+                title = stringResource(id = R.string.french_translator),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(FrenchTranslatorWebsite))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
 
-                    CompositionLocalProvider(LocalContext provides Language.Czech.toLocalizedContext()) {
-                        SettingsSection(title = stringResource(id = R.string.czech), painter = painterResource(id = R.drawable.ic_czech)) {
-                            SettingsItem(
-                                title = stringResource(id = R.string.czech_translator),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CzechTranslatorWebsite))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
-                        }
-                    }
+            SettingsItem(
+                title = stringResource(id = R.string.french_translator2),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(FrenchTranslator2Website))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
+        }
+    }
 
-                    CompositionLocalProvider(LocalContext provides Language.Lithuanian.toLocalizedContext()) {
-                        SettingsSection(title = stringResource(id = R.string.lithuanian), painter = painterResource(id = R.drawable.ic_lithuania)) {
-                            SettingsItem(
-                                title = stringResource(id = R.string.lithuanian_translator),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(LithuanianTranslatorWebsite))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
-                        }
-                    }
+    @Composable
+    private fun Spanish() {
+        SettingsSection(title = stringResource(id = R.string.spanish), painter = painterResource(id = R.drawable.ic_spain)) {
+            SettingsItem(
+                title = stringResource(id = R.string.spanish_translator),
+                type = SettingsItemType.None,
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SpanishTranslatorWebsite))
+                    startActivity(intent)
+                },
+                painter = EmptyPainter,
+            )
+        }
+    }
 
-                    CompositionLocalProvider(LocalContext provides Language.SimplifiedChinese.toLocalizedContext()) {
-                        SettingsSection(
-                            title = stringResource(id = R.string.simplified_chinese),
-                            painter = painterResource(id = R.drawable.ic_china),
-                        ) {
-                            SettingsItem(
-                                title = stringResource(id = R.string.simplified_chinese_translator),
-                                type = SettingsItemType.None,
-                                onClick = {
-                                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SimplifiedChineseTranslatorWebsite))
-                                    startActivity(intent)
-                                },
-                                painter = EmptyPainter,
-                            )
-                        }
-                    }
-                }
-            }
+    @Composable
+    private fun German() {
+        SettingsSection(title = stringResource(id = R.string.german), painter = painterResource(id = R.drawable.ic_germany)) {
+            SettingsItem(
+                title = stringResource(id = R.string.german_translator),
+                type = SettingsItemType.None,
+                onClick = null,
+                painter = EmptyPainter,
+            )
         }
     }
 }

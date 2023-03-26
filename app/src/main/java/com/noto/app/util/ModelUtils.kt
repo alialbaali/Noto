@@ -263,9 +263,9 @@ suspend fun LabelRepository.getOrCreateLabel(folderId: Long, label: Label): Long
     return existingLabel ?: createLabel(label.copy(id = 0, folderId = folderId))
 }
 
-@Composable
-fun ScreenBrightnessLevel.asString(): String {
-    return when (this) {
+val ScreenBrightnessLevel.localizedName: String
+    @Composable
+    get() = when (this) {
         ScreenBrightnessLevel.System -> stringResource(id = R.string.follow_system)
         ScreenBrightnessLevel.Min -> stringResource(id = R.string.min)
         ScreenBrightnessLevel.VeryLow -> stringResource(id = R.string.very_low)
@@ -275,11 +275,10 @@ fun ScreenBrightnessLevel.asString(): String {
         ScreenBrightnessLevel.VeryHigh -> stringResource(id = R.string.very_high)
         ScreenBrightnessLevel.Max -> stringResource(id = R.string.max)
     }
-}
 
-@Composable
-fun Language.asString(): String {
-    return when (this) {
+val Language.localizedName: String
+    @Composable
+    get() = when (this) {
         Language.System -> stringResource(id = R.string.follow_system)
         Language.English -> stringResource(id = R.string.english)
         Language.Turkish -> stringResource(id = R.string.turkish)
@@ -295,7 +294,6 @@ fun Language.asString(): String {
         Language.Lithuanian -> stringResource(id = R.string.lithuanian)
         Language.SimplifiedChinese -> stringResource(id = R.string.simplified_chinese)
     }
-}
 
 @Composable
 fun Language.toLocalizedContext(): Context {
