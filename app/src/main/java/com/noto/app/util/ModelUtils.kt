@@ -263,7 +263,7 @@ suspend fun LabelRepository.getOrCreateLabel(folderId: Long, label: Label): Long
     return existingLabel ?: createLabel(label.copy(id = 0, folderId = folderId))
 }
 
-val ScreenBrightnessLevel.localizedName: String
+val ScreenBrightnessLevel.resourceName: String
     @Composable
     get() = when (this) {
         ScreenBrightnessLevel.System -> stringResource(id = R.string.follow_system)
@@ -276,7 +276,7 @@ val ScreenBrightnessLevel.localizedName: String
         ScreenBrightnessLevel.Max -> stringResource(id = R.string.max)
     }
 
-val Language.localizedName: String
+val Language.resourceName: String
     @Composable
     get() = when (this) {
         Language.System -> stringResource(id = R.string.follow_system)

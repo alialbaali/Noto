@@ -76,7 +76,7 @@ class GeneralSettingsFragment : Fragment() {
                     Theme.Black -> stringResource(id = R.string.black_theme)
                 }
                 val language by viewModel.language.collectAsState()
-                val languageText = language.localizedName
+                val languageText = language.resourceName
                 val icon by viewModel.icon.collectAsState()
                 val iconText = when (icon) {
                     Icon.Futuristic -> stringResource(id = R.string.futuristic)

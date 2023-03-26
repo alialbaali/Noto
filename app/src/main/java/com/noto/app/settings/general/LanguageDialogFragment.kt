@@ -23,7 +23,7 @@ import com.noto.app.components.BottomSheetDialog
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.Language
 import com.noto.app.settings.SettingsViewModel
-import com.noto.app.util.localizedName
+import com.noto.app.util.resourceName
 import com.noto.app.util.toLocalizedContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -57,10 +57,10 @@ class LanguageDialogFragment : BaseDialogFragment() {
                             ) {
                                 Column(Modifier.weight(1F), verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.extraSmall)) {
                                     CompositionLocalProvider(LocalContext provides language.toLocalizedContext()) {
-                                        Text(text = language.localizedName)
+                                        Text(text = language.resourceName)
                                     }
                                     if (language != Language.System) {
-                                        MediumSubtitle(text = language.localizedName)
+                                        MediumSubtitle(text = language.resourceName)
                                     }
                                 }
                                 if (language in Language.Deprecated) {
