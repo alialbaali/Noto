@@ -6,7 +6,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -18,6 +17,7 @@ import com.noto.app.NotoTheme
 fun SettingsSection(
     modifier: Modifier = Modifier,
     title: String? = null,
+    subtitle: @Composable (() -> Unit)? = null,
     painter: Painter? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -27,7 +27,6 @@ fun SettingsSection(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = NotoTheme.dimensions.small),
-                verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.medium),
             ) {
                 if (painter != null) {
@@ -39,10 +38,15 @@ fun SettingsSection(
                     )
                 }
 
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
-                )
+                Column(Modifier.weight(1F), verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.extraSmall)) {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                    )
+                    if (subtitle != null) {
+                        subtitle()
+                    }
+                }
             }
         }
 

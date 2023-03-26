@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import com.noto.app.components.MediumSubtitle
 import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
@@ -59,11 +60,7 @@ class LanguageDialogFragment : BaseDialogFragment() {
                                         Text(text = language.localizedName)
                                     }
                                     if (language != Language.System) {
-                                        Text(
-                                            text = language.localizedName,
-                                            style = MaterialTheme.typography.labelMedium,
-                                            color = MaterialTheme.colorScheme.secondary
-                                        )
+                                        MediumSubtitle(text = language.localizedName)
                                     }
                                 }
                                 if (language in Language.Deprecated) {

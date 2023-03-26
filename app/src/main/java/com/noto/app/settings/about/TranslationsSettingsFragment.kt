@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
+import com.noto.app.components.MediumSubtitle
 import com.noto.app.R
 import com.noto.app.components.EmptyPainter
 import com.noto.app.components.Screen
@@ -85,7 +86,17 @@ class TranslationsSettingsFragment : Fragment() {
 
     @Composable
     private fun Arabic() {
-        SettingsSection(title = stringResource(id = R.string.arabic), painter = painterResource(id = R.drawable.ic_saudi_arabia)) {
+        SettingsSection(
+            title = stringResource(id = R.string.arabic),
+            subtitle = {
+                context?.let { context ->
+                    CompositionLocalProvider(LocalContext provides context) {
+                        MediumSubtitle(text = stringResource(id = R.string.arabic))
+                    }
+                }
+            },
+            painter = painterResource(id = R.drawable.ic_saudi_arabia),
+        ) {
 //                            SettingsItem(
 //                                title = stringResource(id = R.string.arabic_translator),
 //                                type = SettingsItemType.None,
@@ -110,7 +121,17 @@ class TranslationsSettingsFragment : Fragment() {
 
     @Composable
     private fun Turkish() {
-        SettingsSection(title = stringResource(id = R.string.turkish), painter = painterResource(id = R.drawable.ic_turkey)) {
+        SettingsSection(
+            title = stringResource(id = R.string.turkish),
+            subtitle = {
+                context?.let { context ->
+                    CompositionLocalProvider(LocalContext provides context) {
+                        MediumSubtitle(text = stringResource(id = R.string.turkish))
+                    }
+                }
+            },
+            painter = painterResource(id = R.drawable.ic_turkey)
+        ) {
             SettingsItem(
                 title = stringResource(id = R.string.turkish_translator),
                 type = SettingsItemType.None,
@@ -137,6 +158,13 @@ class TranslationsSettingsFragment : Fragment() {
     private fun SimplifiedChinese() {
         SettingsSection(
             title = stringResource(id = R.string.simplified_chinese),
+            subtitle = {
+                context?.let { context ->
+                    CompositionLocalProvider(LocalContext provides context) {
+                        MediumSubtitle(text = stringResource(id = R.string.simplified_chinese))
+                    }
+                }
+            },
             painter = painterResource(id = R.drawable.ic_china),
         ) {
             SettingsItem(
@@ -153,7 +181,17 @@ class TranslationsSettingsFragment : Fragment() {
 
     @Composable
     private fun Lithuanian() {
-        SettingsSection(title = stringResource(id = R.string.lithuanian), painter = painterResource(id = R.drawable.ic_lithuania)) {
+        SettingsSection(
+            title = stringResource(id = R.string.lithuanian),
+            subtitle = {
+                context?.let { context ->
+                    CompositionLocalProvider(LocalContext provides context) {
+                        MediumSubtitle(text = stringResource(id = R.string.lithuanian))
+                    }
+                }
+            },
+            painter = painterResource(id = R.drawable.ic_lithuania)
+        ) {
             SettingsItem(
                 title = stringResource(id = R.string.lithuanian_translator),
                 type = SettingsItemType.None,
@@ -168,7 +206,17 @@ class TranslationsSettingsFragment : Fragment() {
 
     @Composable
     private fun Czech() {
-        SettingsSection(title = stringResource(id = R.string.czech), painter = painterResource(id = R.drawable.ic_czech)) {
+        SettingsSection(
+            title = stringResource(id = R.string.czech),
+            subtitle = {
+                context?.let { context ->
+                    CompositionLocalProvider(LocalContext provides context) {
+                        MediumSubtitle(text = stringResource(id = R.string.czech))
+                    }
+                }
+            },
+            painter = painterResource(id = R.drawable.ic_czech)
+        ) {
             SettingsItem(
                 title = stringResource(id = R.string.czech_translator),
                 type = SettingsItemType.None,
@@ -183,7 +231,17 @@ class TranslationsSettingsFragment : Fragment() {
 
     @Composable
     private fun Italian() {
-        SettingsSection(title = stringResource(id = R.string.italian), painter = painterResource(id = R.drawable.ic_italy)) {
+        SettingsSection(
+            title = stringResource(id = R.string.italian),
+            subtitle = {
+                context?.let { context ->
+                    CompositionLocalProvider(LocalContext provides context) {
+                        MediumSubtitle(text = stringResource(id = R.string.italian))
+                    }
+                }
+            },
+            painter = painterResource(id = R.drawable.ic_italy)
+        ) {
             SettingsItem(
                 title = stringResource(id = R.string.italian_translator),
                 type = SettingsItemType.None,
@@ -208,7 +266,17 @@ class TranslationsSettingsFragment : Fragment() {
 
     @Composable
     private fun French() {
-        SettingsSection(title = stringResource(id = R.string.french), painter = painterResource(id = R.drawable.ic_france)) {
+        SettingsSection(
+            title = stringResource(id = R.string.french),
+            subtitle = {
+                context?.let { context ->
+                    CompositionLocalProvider(LocalContext provides context) {
+                        MediumSubtitle(text = stringResource(id = R.string.french))
+                    }
+                }
+            },
+            painter = painterResource(id = R.drawable.ic_france)
+        ) {
             SettingsItem(
                 title = stringResource(id = R.string.french_translator),
                 type = SettingsItemType.None,
@@ -233,7 +301,17 @@ class TranslationsSettingsFragment : Fragment() {
 
     @Composable
     private fun Spanish() {
-        SettingsSection(title = stringResource(id = R.string.spanish), painter = painterResource(id = R.drawable.ic_spain)) {
+        SettingsSection(
+            title = stringResource(id = R.string.spanish),
+            subtitle = {
+                context?.let { context ->
+                    CompositionLocalProvider(LocalContext provides context) {
+                        MediumSubtitle(text = stringResource(id = R.string.spanish))
+                    }
+                }
+            },
+            painter = painterResource(id = R.drawable.ic_spain)
+        ) {
             SettingsItem(
                 title = stringResource(id = R.string.spanish_translator),
                 type = SettingsItemType.None,
@@ -248,7 +326,17 @@ class TranslationsSettingsFragment : Fragment() {
 
     @Composable
     private fun German() {
-        SettingsSection(title = stringResource(id = R.string.german), painter = painterResource(id = R.drawable.ic_germany)) {
+        SettingsSection(
+            title = stringResource(id = R.string.german),
+            subtitle = {
+                context?.let { context ->
+                    CompositionLocalProvider(LocalContext provides context) {
+                        MediumSubtitle(text = stringResource(id = R.string.german))
+                    }
+                }
+            },
+            painter = painterResource(id = R.drawable.ic_germany)
+        ) {
             SettingsItem(
                 title = stringResource(id = R.string.german_translator),
                 type = SettingsItemType.None,
