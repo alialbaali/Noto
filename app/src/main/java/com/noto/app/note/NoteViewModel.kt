@@ -280,10 +280,12 @@ class NoteViewModel(
     }
 
     private fun List<Triple<Int, Int, String>>.getPreviousValueOrCurrent(currentValue: String): Triple<Int, Int, String> {
+        val lastIndex = lastIndex.coerceAtLeast(0)
         return indexOfLast { it.third == currentValue }.minus(1).coerceIn(0, lastIndex).let(this::get)
     }
 
     private fun List<Triple<Int, Int, String>>.getNextValueOrCurrent(currentValue: String): Triple<Int, Int, String> {
+        val lastIndex = lastIndex.coerceAtLeast(0)
         return indexOfFirst { it.third == currentValue }.plus(1).coerceIn(0, lastIndex).let(this::get)
     }
 }
