@@ -375,7 +375,7 @@ class FolderViewModel(
     fun archiveSelectedNotes() = viewModelScope.launch {
         selectedNotes.forEach { model ->
             launch {
-                noteRepository.updateNote(model.note.copy(isArchived = true))
+                noteRepository.updateNote(model.note.copy(isArchived = true, reminderDate = null))
             }
         }
     }

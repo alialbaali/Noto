@@ -131,7 +131,7 @@ class NoteViewModel(
     }
 
     fun toggleNoteIsArchived() = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(isArchived = !note.value.isArchived))
+        noteRepository.updateNote(note.value.copy(isArchived = !note.value.isArchived, reminderDate = null))
     }
 
     fun toggleNoteIsPinned() = viewModelScope.launch {

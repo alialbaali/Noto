@@ -109,6 +109,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         tvArchiveNote.setOnClickListener {
             viewModel.toggleNoteIsArchived().invokeOnCompletion {
                 context?.let { context ->
+                    alarmManager?.cancelAlarm(context, viewModel.note.value.id)
                     val isArchived = viewModel.note.value.isArchived
                     val text = if (isArchived)
                         context.stringResource(R.string.note_is_unarchived)

@@ -1,5 +1,7 @@
 package com.noto.app.folder
 
+import android.app.AlarmManager
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.*
@@ -44,6 +46,8 @@ class FolderFragment : Fragment() {
     private lateinit var itemTouchHelper: ItemTouchHelper
 
     private lateinit var layoutManager: StaggeredGridLayoutManager
+
+    private val alarmManager by lazy { context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager? }
 
     private val anchorViewId by lazy { R.id.bab_selection }
 
@@ -357,6 +361,7 @@ class FolderFragment : Fragment() {
                 R.id.archive -> {
                     viewModel.archiveSelectedNotes()
                     context?.let { context ->
+                        selectedNotes.forEach { note -> alarmManager?.cancelAlarm(context, note.id) }
                         val text = context.quantityStringResource(R.plurals.note_is_archived, selectedNotesCount, selectedNotesCount)
                         val drawableId = R.drawable.ic_round_archive_24
                         root.snackbar(text, drawableId, anchorViewId, folderColor)

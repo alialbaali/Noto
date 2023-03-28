@@ -218,6 +218,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         tvArchiveNotes.setOnClickListener {
             viewModel.archiveSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
+                    selectedNotes.forEach { note -> alarmManager?.cancelAlarm(context, note.id) }
                     val text = context.quantityStringResource(R.plurals.note_is_archived, selectedNotes.count(), selectedNotes.count())
                     val drawableId = R.drawable.ic_round_archive_24
                     parentView?.snackbar(text, drawableId, anchorViewId, folderColor)
