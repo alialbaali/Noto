@@ -36,7 +36,7 @@ object Constants {
     }
 
     object Noto {
-        const val Email = "noto@albaali.com"
+        const val Email = "noto@alialbaali.com"
         const val DeveloperUrl = "https://www.alialbaali.com"
         const val LicenseUrl = "https://www.apache.org/licenses/LICENSE-2.0"
         const val PlayStoreUrl = "https://play.google.com/store/apps/details?id=com.noto"
