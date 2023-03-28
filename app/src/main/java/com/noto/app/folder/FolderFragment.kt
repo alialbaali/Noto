@@ -361,10 +361,11 @@ class FolderFragment : Fragment() {
                 R.id.archive -> {
                     viewModel.archiveSelectedNotes()
                     context?.let { context ->
-                        selectedNotes.forEach { note -> alarmManager?.cancelAlarm(context, note.id) }
                         val text = context.quantityStringResource(R.plurals.note_is_archived, selectedNotesCount, selectedNotesCount)
                         val drawableId = R.drawable.ic_round_archive_24
                         root.snackbar(text, drawableId, anchorViewId, folderColor)
+                        selectedNotes.filter { note -> note.reminderDate != null }
+                            .forEach { note -> alarmManager?.cancelAlarm(context, note.id) }
                         context.updateAllWidgetsData()
                         context.updateNoteListWidgets()
                     }

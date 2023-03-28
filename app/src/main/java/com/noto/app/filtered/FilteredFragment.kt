@@ -1,6 +1,8 @@
 package com.noto.app.filtered
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.content.Context
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -42,6 +44,8 @@ class FilteredFragment : Fragment() {
     private val viewModel by viewModel<FilteredViewModel> { parametersOf(args.model) }
 
     private val args by navArgs<FilteredFragmentArgs>()
+
+    private val alarmManager by lazy { context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager? }
 
     private val anchorViewId by lazy { R.id.bab }
 
@@ -110,6 +114,8 @@ class FilteredFragment : Fragment() {
                                     val text = context.quantityStringResource(R.plurals.note_is_deleted, selectedNotes.count(), selectedNotes.count())
                                     val drawableId = R.drawable.ic_round_delete_24
                                     root.snackbar(text, drawableId, anchorViewId, modelColor)
+                                    selectedNotes.filter { model -> model.note.reminderDate != null }
+                                        .forEach { model -> alarmManager?.cancelAlarm(context, model.note.id) }
                                     context.updateAllWidgetsData()
                                     context.updateNoteListWidgets()
                                 }

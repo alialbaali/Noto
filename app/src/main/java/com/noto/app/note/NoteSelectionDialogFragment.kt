@@ -218,10 +218,11 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         tvArchiveNotes.setOnClickListener {
             viewModel.archiveSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
-                    selectedNotes.forEach { note -> alarmManager?.cancelAlarm(context, note.id) }
                     val text = context.quantityStringResource(R.plurals.note_is_archived, selectedNotes.count(), selectedNotes.count())
                     val drawableId = R.drawable.ic_round_archive_24
                     parentView?.snackbar(text, drawableId, anchorViewId, folderColor)
+                    selectedNotes.filter { note -> note.reminderDate != null }
+                        .forEach { note -> alarmManager?.cancelAlarm(context, note.id) }
                     context.updateAllWidgetsData()
                     context.updateNoteListWidgets()
                 }
@@ -324,10 +325,8 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                             val text = context.quantityStringResource(R.plurals.note_is_deleted, selectedNotes.count(), selectedNotes.count())
                             val drawableId = R.drawable.ic_round_delete_24
                             parentView?.snackbar(text, drawableId, anchorViewId, folderColor)
-                            selectedNotes.forEach { note ->
-                                if (note.reminderDate != null)
-                                    alarmManager?.cancelAlarm(context, note.id)
-                            }
+                            selectedNotes.filter { note -> note.reminderDate != null }
+                                .forEach { note -> alarmManager?.cancelAlarm(context, note.id) }
                             context.updateAllWidgetsData()
                             context.updateNoteListWidgets()
                             dismiss()
