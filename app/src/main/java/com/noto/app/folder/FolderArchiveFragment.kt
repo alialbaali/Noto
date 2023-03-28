@@ -121,8 +121,10 @@ class FolderArchiveFragment : Fragment() {
                 val confirmationText = context.quantityStringResource(R.plurals.delete_note_confirmation, selectedNotes.count())
                 val descriptionText = context.quantityStringResource(R.plurals.delete_note_description, selectedNotes.count())
                 val btnText = context.quantityStringResource(R.plurals.delete_note, selectedNotes.count())
-                savedStateHandle?.getLiveData<Int>(Constants.ClickListener)
-                    ?.observe(viewLifecycleOwner) {
+                val liveData = savedStateHandle?.getLiveData<Int>(Constants.ClickListener)
+                liveData?.observe(viewLifecycleOwner) {
+                    if (it != null) {
+                        liveData.value = null
                         viewModel.deleteSelectedArchivedNotes().invokeOnCompletion {
                             val text = context.quantityStringResource(R.plurals.note_is_deleted, selectedNotes.count(), selectedNotes.count())
                             val drawableId = R.drawable.ic_round_delete_24
@@ -131,6 +133,7 @@ class FolderArchiveFragment : Fragment() {
                             context.updateNoteListWidgets()
                         }
                     }
+                }
 
                 navController?.navigateSafely(
                     FolderArchiveFragmentDirections.actionFolderArchiveFragmentToConfirmationDialogFragment(
