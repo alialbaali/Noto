@@ -58,7 +58,7 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
                 context?.let { context ->
                     val colorResource = context.colorResource(folder.color.toResource())
                     tb.tvDialogTitle.setTextColor(colorResource)
-                    tb.vHead.background?.setTint(colorResource)
+                    tb.vHead.background?.mutate()?.setTint(colorResource)
                 }
 
                 val items = args.startCursorIndices
