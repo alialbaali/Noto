@@ -107,10 +107,11 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
         color: NotoColor,
     ) {
         rv.withModels {
-            items.forEach { item ->
+            items.forEachIndexed { index, item ->
                 undoRedoItem {
                     id("${item.first} ${item.second} ${item.third}")
                     text(item.third)
+                    index(index)
                     cursorStartPosition(item.first)
                     cursorEndPosition(item.second)
                     isSelected(item.third == currentItem)

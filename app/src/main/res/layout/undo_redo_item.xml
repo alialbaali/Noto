@@ -12,6 +12,15 @@
     android:background="@drawable/folder_item_shape">
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_normal"
+        android:textColor="?attr/notoSecondaryColor"
+        android:textSize="@dimen/size_extra_small"
+        tools:text="1" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_text"
         style="@style/FolderTitleTextView"
         android:layout_width="0dp"

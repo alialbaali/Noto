@@ -27,6 +27,9 @@ abstract class UndoRedoItem : EpoxyModelWithHolder<UndoRedoItem.Holder>() {
     lateinit var text: String
 
     @EpoxyAttribute
+    var index: Int = 0
+
+    @EpoxyAttribute
     var cursorStartPosition: Int = 0
 
     @EpoxyAttribute
@@ -52,6 +55,7 @@ abstract class UndoRedoItem : EpoxyModelWithHolder<UndoRedoItem.Holder>() {
             val colorPrimary = context.colorResource(color.toResource())
             val colorSecondary = context.colorAttributeResource(R.attr.notoSecondaryColor)
             ll.background?.mutate()?.setTint(if (isSelected) selectedColor else backgroundColor)
+            tvIndex.text = index.plus(1).toString()
             tvText.text = buildSpannedString {
                 if (text.isNotBlank()) {
                     val startIndex = 0
