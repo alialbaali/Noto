@@ -21,7 +21,7 @@ import com.noto.app.domain.model.Theme
 import com.noto.app.filtered.FilteredItemModel
 import com.noto.app.settings.*
 import com.noto.app.util.*
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GeneralSettingsFragment : Fragment() {
@@ -56,6 +56,7 @@ class GeneralSettingsFragment : Fragment() {
                 val archivedText = stringResource(id = R.string.archived)
                 val recentNotesText = stringResource(id = R.string.recent)
                 val scheduledText = stringResource(id = R.string.scheduled)
+                val noneText = stringResource(id = R.string.none)
                 val mainInterfaceId by viewModel.mainInterfaceId.collectAsState()
                 val mainInterfaceText by produceState(initialValue = allFoldersText, mainInterfaceId) {
                     value = when (mainInterfaceId) {
@@ -64,7 +65,7 @@ class GeneralSettingsFragment : Fragment() {
                         FilteredItemModel.Recent.id -> recentNotesText
                         FilteredItemModel.Scheduled.id -> scheduledText
                         FilteredItemModel.Archived.id -> archivedText
-                        else -> viewModel.getFolderById(mainInterfaceId).first().getTitle(context)
+                        else -> viewModel.getFolderById(mainInterfaceId).firstOrNull()?.getTitle(context) ?: noneText
                     }
                 }
                 val theme by viewModel.theme.collectAsState()
