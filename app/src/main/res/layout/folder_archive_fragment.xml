@@ -103,6 +103,7 @@
                 app:backgroundTint="?attr/notoSurfaceColor"
                 app:elevation="0dp"
                 app:rippleColor="?attr/notoSecondaryColor"
+                app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
                 app:tint="?attr/notoPrimaryColor" />
 
             <Space
@@ -119,6 +120,7 @@
                 app:backgroundTint="?attr/notoSurfaceColor"
                 app:elevation="0dp"
                 app:rippleColor="?attr/notoSecondaryColor"
+                app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
                 app:tint="?attr/notoPrimaryColor" />
         </LinearLayout>
 

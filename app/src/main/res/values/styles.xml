@@ -466,4 +466,9 @@
         <item name="cornerSize">@dimen/spacing_normal</item>
     </style>
 
+    <style name="FabShapeAppearanceOverlay">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/spacing_small</item>
+    </style>
+
 </resources>

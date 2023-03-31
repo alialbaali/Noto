@@ -101,6 +101,7 @@
             android:contentDescription="@string/create_folder"
             android:src="@drawable/ic_round_add_24"
             app:backgroundTint="?attr/notoPrimaryColor"
+            app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
             app:tint="?attr/notoBackgroundColor" />
     </FrameLayout>
 </LinearLayout>

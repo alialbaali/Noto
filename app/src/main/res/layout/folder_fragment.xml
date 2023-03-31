@@ -126,6 +126,7 @@
         android:src="@drawable/ic_round_edit_24"
         app:backgroundTint="?attr/notoPrimaryColor"
         app:layout_anchor="@id/bab"
+        app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
         app:tint="?attr/notoBackgroundColor" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -137,6 +138,7 @@
         android:src="@drawable/ic_round_tune_24"
         app:backgroundTint="?attr/notoPrimaryColor"
         app:layout_anchor="@id/bab_selection"
+        app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
         app:tint="?attr/notoBackgroundColor" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

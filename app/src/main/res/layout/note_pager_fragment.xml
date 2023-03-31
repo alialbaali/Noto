@@ -64,6 +64,7 @@
                 app:backgroundTint="?attr/notoSurfaceColor"
                 app:elevation="0dp"
                 app:rippleColor="?attr/notoSecondaryColor"
+                app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
                 app:tint="?attr/notoPrimaryColor" />
 
             <Space
@@ -80,6 +81,7 @@
                 app:backgroundTint="?attr/notoSurfaceColor"
                 app:elevation="0dp"
                 app:rippleColor="?attr/notoSecondaryColor"
+                app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
                 app:tint="?attr/notoPrimaryColor" />
         </LinearLayout>
     </com.google.android.material.bottomappbar.BottomAppBar>
@@ -92,6 +94,7 @@
         android:src="@drawable/ic_round_edit_24"
         app:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@id/bab"
+        app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
         app:tint="?attr/notoBackgroundColor" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
