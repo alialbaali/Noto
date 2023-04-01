@@ -13,11 +13,13 @@ import androidx.core.os.bundleOf
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.noto.app.R
 import com.noto.app.databinding.NotePagerFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -65,12 +67,14 @@ class NotePagerFragment : Fragment() {
             .onEach { folder ->
                 context?.let { context ->
                     val color = context.colorResource(folder.color.toResource())
-                    tb.title = folder.getTitle(context)
-                    tb.setTitleTextColor(color)
+                    tvFolderTitle.text = folder.getTitle(context)
+                    tvFolderTitle.setTextColor(color)
                     tb.navigationIcon?.mutate()?.setTint(color)
                     fab.backgroundTintList = color.toColorStateList()
                     fabPrevious.rippleColor = color
                     fabNext.rippleColor = color
+                    indicator.trackColor = color.withDefaultAlpha()
+                    indicator.setIndicatorColor(color)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         listOf(fabPrevious, fabNext, fab).forEach {
                             it.outlineAmbientShadowColor = color
@@ -99,6 +103,18 @@ class NotePagerFragment : Fragment() {
             vp.currentItem = selectedIndex
             if (isPreviousEnabled) fabPrevious.enable() else fabPrevious.disable()
             if (isNextEnabled) fabNext.enable() else fabNext.disable()
+            val notesCount = noteIds.count()
+            val selectedNoteNumber = selectedIndex + 1
+            tvNotesCount.text = context?.quantityStringResource(R.plurals.reading_mode_notes_count, notesCount, selectedNoteNumber, notesCount)
+            tvNotesCountRtl.text = context?.quantityStringResource(R.plurals.reading_mode_notes_count, notesCount, selectedNoteNumber, notesCount)
+            if (notesCount != 0) {
+                val progress = selectedNoteNumber.toDouble().div(notesCount).times(100).toInt()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    indicator.setProgress(progress, true)
+                } else {
+                    indicator.setProgressCompat(progress, true)
+                }
+            }
         }.launchIn(lifecycleScope)
 
         viewModel.isDoNotDisturb
@@ -144,6 +160,14 @@ class NotePagerFragment : Fragment() {
                 if (viewModel.lastScrollPosition.value > scrollPosition) bab.performShow(true) else bab.performHide(true)
                 viewModel.setLastScrollPosition(scrollPosition)
             }
+
+        if (isCurrentLocaleArabic()) {
+            tvNotesCount.isVisible = false
+            tvNotesCountRtl.isVisible = true
+        } else {
+            tvNotesCount.isVisible = true
+            tvNotesCountRtl.isVisible = false
+        }
     }
 
     private fun NotePagerFragmentBinding.setupListeners() {

@@ -14,12 +14,65 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/tb"
-            style="@style/Toolbar"
+            style="@style/ToolbarWithSubtitle"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             app:navigationContentDescription="@string/back"
-            app:navigationIcon="@drawable/ic_round_back_24"
-            tools:title="General" />
+            app:navigationIcon="@drawable/ic_round_back_24">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginEnd="@dimen/spacing_normal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_folder_title"
+                        style="@style/ToolbarTitleTextAppearance"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="@string/title"
+                        tools:textColor="@color/colorAccentTeal" />
+
+                    <com.robinhood.ticker.TickerView
+                        android:id="@+id/tv_notes_count"
+                        style="@style/SubtitleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:ticker_animationDuration="@integer/animation_duration"
+                        app:ticker_defaultCharacterList="number"
+                        tools:text="7 / 11 Notes" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tv_notes_count_rtl"
+                        style="@style/SubtitleTextView"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:fontFamily="@font/nunito_semibold"
+                        tools:text="7 / 11 Notes" />
+
+                </LinearLayout>
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/indicator"
+                    style="@style/ProgressIndicator"
+                    android:indeterminate="false"
+                    android:contentDescription="@string/progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:indicatorSize="24dp"
+                    tools:progress="50" />
+            </LinearLayout>
+        </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.viewpager2.widget.ViewPager2

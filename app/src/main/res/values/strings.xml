@@ -243,6 +243,14 @@
     <string name="all">All</string>
     <string name="update_reminder">Update reminder</string>
     <string name="archive_is_empty">Archive is empty.</string>
+    <!-- Notes count in Reading Mode with indicator of the current selected displayed note.
+     Such as "2/11 Notes".
+    -->
+    <plurals name="reading_mode_notes_count">
+        <item quantity="one">%1$d / %2$d Note</item>
+        <item quantity="other">%1$d / %2$d Notes</item>
+    </plurals>
+
     <plurals name="notes_count">
         <item quantity="one">%d Note</item>
         <item quantity="other">%d Notes</item>
@@ -417,6 +425,9 @@
     <string name="very_high">Very high</string>
     <!-- "Screen brightness level" option. -->
     <string name="max">Max</string>
+
+    <!--  Reading Mode progress  -->
+    <string name="progress">Progress</string>
 
     <string name="show">Show</string>
     <string name="hide">Hide</string>
