@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/BaseDialogFragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -15,35 +16,92 @@
             android:id="@+id/tb"
             layout="@layout/dialog_fragment_toolbar" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til"
-            style="@style/TextInputLayout"
+        <LinearLayout
+            android:id="@+id/ll_date"
+            android:background="@drawable/generic_ripple_shape"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_small"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_normal"
-            app:endIconDrawable="@drawable/ic_round_notification_add_24"
-            app:endIconMode="custom"
-            app:endIconTint="?attr/notoPrimaryColor">
+            android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et"
-                style="@style/TextInputEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:enabled="false"
-                android:hint="@string/reminder"
-                android:inputType="text|textPersonName|textCapWords|textMultiLine" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_date"
+                style="@style/ListDialogItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/date"
+                android:layout_weight="1"
+                app:drawableStartCompat="@drawable/ic_round_calendar_24" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_date_value"
+                style="@style/ListDialogItemValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Feb 3rd, 2023" />
+        </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_done"
-            style="@style/MaterialButton"
+        <LinearLayout
+            android:id="@+id/ll_time"
+            android:background="@drawable/generic_ripple_shape"
+            android:layout_marginHorizontal="@dimen/spacing_normal"
+            android:layout_marginBottom="@dimen/spacing_normal"
+            android:layout_marginTop="@dimen/spacing_small"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_time"
+                style="@style/ListDialogItem"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/time"
+                android:layout_weight="1"
+                app:drawableStartCompat="@drawable/ic_round_schedule_24" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_time_value"
+                style="@style/ListDialogItemValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="11:30 PM" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_margin="@dimen/spacing_normal"
-            android:padding="@dimen/spacing_normal"
-            android:text="@string/update_reminder" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_done"
+                style="@style/MaterialButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:padding="@dimen/spacing_normal"
+                android:layout_weight="1"
+                android:text="@string/set_reminder" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_cancel"
+                style="?attr/materialIconButtonFilledStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_normal"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:textSize="@dimen/size_large"
+                android:contentDescription="@string/cancel_reminder"
+                app:backgroundTint="?attr/notoSurfaceColor"
+                app:icon="@drawable/ic_round_cancel_24"
+                app:iconSize="26dp"
+                app:iconTint="?attr/notoPrimaryColor"
+                app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay" />
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

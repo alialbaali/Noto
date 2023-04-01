@@ -7,8 +7,9 @@ import com.noto.app.domain.repository.*
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import kotlinx.datetime.*
+
+private val ExtraDatePeriod = DatePeriod(days = 1)
 
 class NoteViewModel(
     private val folderRepository: FolderRepository,
@@ -59,11 +60,24 @@ class NoteViewModel(
     private var bodyCursorStartPosition = 0
     private var bodyCursorEndPosition = 0
 
+    private val mutableReminderDate = MutableStateFlow(Clock.System.now().toLocalDate().plus(ExtraDatePeriod))
+    val reminderDate get() = mutableReminderDate.asStateFlow()
+
+    private val mutableReminderTime = MutableStateFlow(Clock.System.now().toLocalTime())
+    val reminderTime get() = mutableReminderTime.asStateFlow()
+
     init {
         noteRepository.getNoteById(noteId)
             .onStart { emit(Note(noteId, folderId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
             .filterNotNull()
-            .onEach { mutableNote.value = it }
+            .onEach {
+                mutableNote.value = it
+                if (it.reminderDate != null) {
+                    val dateTime = it.reminderDate.toLocalDateTime(TimeZone.currentSystemDefault())
+                    mutableReminderDate.value = dateTime.date
+                    mutableReminderTime.value = dateTime.time
+                }
+            }
             .launchIn(viewModelScope)
 
         var selectedLabels: List<Pair<Label, Boolean>>? = null
@@ -138,8 +152,17 @@ class NoteViewModel(
         noteRepository.updateNote(note.value.copy(isPinned = !note.value.isPinned))
     }
 
-    fun setNoteReminder(instant: Instant?) = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(reminderDate = instant))
+    fun setNoteReminder(): Instant {
+        val dateTime = LocalDateTime(mutableReminderDate.value, mutableReminderTime.value)
+        val instant = dateTime.toInstant(TimeZone.currentSystemDefault())
+        viewModelScope.launch {
+            noteRepository.updateNote(note.value.copy(reminderDate = instant))
+        }
+        return instant
+    }
+
+    fun cancelNoteReminder() = viewModelScope.launch {
+        noteRepository.updateNote(note.value.copy(reminderDate = null))
     }
 
     fun moveNote(folderId: Long) = viewModelScope.launch {
@@ -277,6 +300,14 @@ class NoteViewModel(
 
     fun setBodyCursorEndPosition(position: Int) {
         bodyCursorEndPosition = position
+    }
+
+    fun setReminderDate(date: LocalDate) {
+        mutableReminderDate.value = date
+    }
+
+    fun setReminderTime(time: LocalTime) {
+        mutableReminderTime.value = time
     }
 
     private fun List<Triple<Int, Int, String>>.getPreviousValueOrCurrent(currentValue: String): Triple<Int, Int, String> {

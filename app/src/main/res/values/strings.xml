@@ -90,6 +90,7 @@
     <string name="app_icons_license_value" translatable="false">CC BY 4.0</string>
     <string name="empty_version">Version</string>
     <string name="date">Date</string>
+    <string name="time">Time</string>
     <string name="drag">Drag</string>
     <string name="nunito">Nunito (default)</string>
     <string name="monospace">Monospace</string>
@@ -241,6 +242,7 @@
 
     <!-- Note -->
     <string name="all">All</string>
+    <string name="set_reminder">Set reminder</string>
     <string name="update_reminder">Update reminder</string>
     <string name="archive_is_empty">Archive is empty.</string>
     <!-- Notes count in Reading Mode with indicator of the current selected displayed note.
@@ -338,8 +340,11 @@
         <item quantity="other">%d Notes have been unpinned.</item>
     </plurals>
     <string name="no_note_reminder">No reminder is setup.</string>
+    <string name="cancel_reminder">Cancel reminder</string>
     <string name="note_is_unarchived">Note has been unarchived.</string>
     <string name="reminder">Reminder</string>
+    <string name="reminder_is_set">Reminder has been set to %s.</string>
+    <string name="reminder_is_cancelled">Reminder has been cancelled.</string>
     <string name="reminders">Reminders</string>
     <string name="new_note_reminder">New reminder</string>
     <string name="copy">Copy</string>

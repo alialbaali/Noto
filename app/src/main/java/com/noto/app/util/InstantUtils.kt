@@ -62,7 +62,14 @@ fun LocalDate.format(): String {
     }
 }
 
+fun LocalTime.format(is24HourFormat: Boolean): String {
+    val format = if (is24HourFormat) "HH:mm" else "h:mm a"
+    val pattern = DateTimeFormatter.ofPattern(format)
+    return toJavaLocalTime().format(pattern)
+}
+
 fun Instant.toLocalDate() = toLocalDateTime(TimeZone.currentSystemDefault()).date
+fun Instant.toLocalTime() = toLocalDateTime(TimeZone.currentSystemDefault()).time
 
 private val LocalDate.isToday: Boolean
     get() {
