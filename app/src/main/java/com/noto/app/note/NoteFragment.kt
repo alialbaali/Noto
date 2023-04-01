@@ -85,6 +85,16 @@ class NoteFragment : Fragment() {
         }.launchIn(lifecycleScope)
 
         viewModel.note
+            .distinctUntilChangedBy { it.reminderDate }
+            .onEach { note ->
+                llReminder.isVisible = note.reminderDate != null
+                context?.let { context ->
+                    tvReminder.text = note.reminderDate?.format(context)
+                }
+            }
+            .launchIn(lifecycleScope)
+
+        viewModel.note
             .distinctUntilChangedBy { note -> note.reminderDate }
             .onEach { note ->
                 val reminderDrawable = if (note.reminderDate == null)
@@ -564,6 +574,7 @@ class NoteFragment : Fragment() {
             etNoteBody.setLinkTextColor(color)
             etNoteTitle.highlightColor = highlightColor
             etNoteBody.highlightColor = highlightColor
+            llReminder.background?.mutate()?.setTint(color)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 etNoteTitle.textCursorDrawable?.mutate()?.setTint(color)
                 etNoteBody.textCursorDrawable?.mutate()?.setTint(color)

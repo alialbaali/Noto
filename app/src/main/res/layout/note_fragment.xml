@@ -80,6 +80,37 @@
                 tools:itemCount="1"
                 tools:listitem="@layout/label_item" />
 
+            <LinearLayout
+                android:id="@+id/ll_reminder"
+                android:orientation="horizontal"
+                android:background="@drawable/label_item_shape"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_marginHorizontal="@dimen/spacing_normal"
+                android:layout_marginVertical="@dimen/spacing_small"
+                android:padding="@dimen/spacing_small"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:src="@drawable/ic_round_notifications_active_24"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:contentDescription="@string/reminder"
+                    android:layout_marginEnd="@dimen/spacing_extra_small"
+                    app:tint="?attr/notoBackgroundColor" />
+
+                <TextView
+                    android:id="@+id/tv_reminder"
+                    android:layout_marginStart="@dimen/spacing_extra_small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_extra_small"
+                    android:textColor="?attr/notoBackgroundColor"
+                    app:fontFamily="@font/nunito_medium"
+                    tools:text="Today, 7:30 PM" />
+            </LinearLayout>
+
             <com.noto.app.util.CustomEditText
                 android:id="@+id/et_note_title"
                 style="@style/NoteTitleEditText"
