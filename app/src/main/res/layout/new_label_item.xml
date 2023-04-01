@@ -2,7 +2,7 @@
 <ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ib_new_label"
     style="@style/LabelItem"
-    android:src="@drawable/ic_round_add_24"
+    android:src="@drawable/ic_round_new_label_24"
     android:padding="@dimen/spacing_small"
     android:layout_margin="@dimen/spacing_small"
     android:layout_width="wrap_content"

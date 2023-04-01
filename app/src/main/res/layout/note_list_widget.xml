@@ -112,7 +112,7 @@
                 android:id="@+id/ib_fab"
                 android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:src="@drawable/ic_round_edit_24"
+                android:src="@drawable/ic_round_add_24"
                 android:background="@null"
                 android:padding="@dimen/spacing_normal"
                 android:tint="@color/colorBackground"

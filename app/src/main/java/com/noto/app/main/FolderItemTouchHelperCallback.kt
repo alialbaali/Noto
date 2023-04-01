@@ -67,7 +67,7 @@ class FolderItemTouchHelperCallback(
         paint: Paint,
         margin: Int,
     ) {
-        context.drawableResource(R.drawable.ic_round_move_out_24)
+        context.drawableResource(R.drawable.ic_round_folder_move_out_24)
             ?.apply { setTint(color) }
             ?.let { drawable ->
                 val halfDrawableHeight = drawable.intrinsicHeight / 2
@@ -104,7 +104,7 @@ class FolderItemTouchHelperCallback(
         paint: Paint,
         margin: Int,
     ) {
-        context.drawableResource(R.drawable.ic_round_move_in_24)
+        context.drawableResource(R.drawable.ic_round_folder_move_in_24)
             ?.apply { setTint(color) }
             ?.let { drawable ->
                 val halfDrawableHeight = drawable.intrinsicHeight / 2

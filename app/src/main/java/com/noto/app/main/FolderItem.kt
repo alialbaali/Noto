@@ -70,6 +70,8 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
             } else {
                 if (folder.isGeneral) {
                     ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_general_24))
+                } else if (folder.isPinned) {
+                    ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_pinned_folder_24))
                 } else {
                     ivFolderIcon.setImageDrawable(context.drawableResource(R.drawable.ic_round_folder_24))
                 }

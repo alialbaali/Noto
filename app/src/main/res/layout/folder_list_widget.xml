@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_margin="@dimen/spacing_normal"
             android:layout_gravity="end|bottom"
-            android:src="@drawable/ic_round_add_24"
+            android:src="@drawable/ic_round_new_folder_24"
             android:backgroundTint="@color/colorPrimary"
             android:background="@drawable/ic_widget_btn_shape"
             android:padding="@dimen/spacing_normal"
