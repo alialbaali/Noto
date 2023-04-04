@@ -34,6 +34,9 @@
         <item name="appBarLayoutStyle">@style/Widget.MaterialComponents.AppBarLayout.Primary</item>
         <item name="snackbarStyle">@style/Snackbar</item>
         <item name="snackbarTextViewStyle">@style/SnackbarTextView</item>
+
+        <item name="materialCalendarTheme">@style/DatePickerDialog</item>
+        <item name="materialTimePickerTheme">@style/TimePickerDialog</item>
     </style>
 
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
@@ -457,18 +460,310 @@
         <item name="trackHeight">@dimen/spacing_normal</item>
     </style>
 
-    <style name="OverlayDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog.Centered">
-        <item name="shapeAppearanceOverlay">@style/OverlayDialogShape</item>
-    </style>
-
-    <style name="OverlayDialogShape">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">@dimen/spacing_normal</item>
-    </style>
-
     <style name="FabShapeAppearanceOverlay">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">@dimen/spacing_small</item>
+    </style>
+
+    <style name="DatePickerDialog" parent="ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorPrimary">?attr/notoPrimaryColor</item>
+        <!-- Content background color -->
+        <item name="colorSurface">?attr/notoBackgroundColor</item>
+        <!-- Day number color -->
+        <item name="colorOnSurface">?attr/notoSecondaryColor</item>
+        <!-- Year selector & Month pagination icons & Day name color -->
+        <item name="colorOnSurfaceVariant">?attr/notoSecondaryColor</item>
+        <!-- Tint applies to background if not disabled -->
+        <item name="elevationOverlayEnabled">false</item>
+        <!-- Header background color -->
+        <item name="materialCalendarHeaderLayout">@style/DatePickerDialog.HeaderLayout</item>
+        <!-- Header title color -->
+        <item name="materialCalendarHeaderTitle">@style/DatePickerDialog.HeaderTitle</item>
+        <!-- Header selected date color -->
+        <item name="materialCalendarHeaderSelection">@style/DatePickerDialog.HeaderSelection</item>
+        <!-- Header toggle button color -->
+        <item name="materialCalendarHeaderToggleButton">@style/DatePickerDialog.HeaderToggleButton</item>
+        <!-- Header divider style & visibility -->
+        <item name="materialCalendarHeaderDivider">@style/DatePickerDialog.HeaderDivider</item>
+        <!-- Day shape -->
+        <item name="itemShapeAppearanceOverlay">@style/DatePickerDialog.DayShape</item>
+        <!-- Dialog shape -->
+        <item name="shapeAppearanceCornerExtraLarge">@style/DateTimePickerDialog.DialogShape</item>
+        <!-- Date Input -->
+        <item name="textInputStyle">@style/DatePickerDialog.TextInputLayout</item>
+    </style>
+
+    <style name="DatePickerDialog.HeaderLayout" parent="Widget.Material3.MaterialCalendar.HeaderLayout">
+        <item name="android:background">?attr/notoSurfaceColor</item>
+    </style>
+
+    <style name="DatePickerDialog.HeaderTitle" parent="Widget.Material3.MaterialCalendar.HeaderTitle">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">@dimen/size_small</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="autoSizeTextType">none</item>
+    </style>
+
+    <style name="DatePickerDialog.HeaderSelection" parent="Widget.Material3.MaterialCalendar.HeaderSelection">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="DatePickerDialog.HeaderToggleButton" parent="Widget.Material3.MaterialCalendar.HeaderToggleButton">
+        <item name="android:tint">?attr/colorPrimary</item>
+    </style>
+
+    <style name="DatePickerDialog.HeaderDivider" parent="Widget.Material3.MaterialCalendar.HeaderDivider">
+        <item name="android:visibility">visible</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="DatePickerDialog.DayShape" parent="ShapeAppearanceOverlay.MaterialComponents.MaterialCalendar.Day">
+        <item name="cornerSize">@dimen/spacing_small</item>
+    </style>
+
+    <style name="DateTimePickerDialog.DialogShape" parent="ShapeAppearance.Material3.Corner.ExtraLarge">
+        <item name="cornerSize">@dimen/spacing_small</item>
+    </style>
+
+    <style name="DatePickerDialog.TextInputLayout" parent="TextInputLayout">
+        <item name="hintEnabled">true</item>
+        <item name="hintTextColor">#00FFFFFF</item>
+    </style>
+
+    <style name="TimePickerDialog" parent="ThemeOverlay.Material3.MaterialTimePicker">
+        <item name="colorPrimary">?attr/notoPrimaryColor</item>
+        <!-- Content background color -->
+        <item name="colorSurface">?attr/notoBackgroundColor</item>
+        <!-- Hour ":" Minute separator color -->
+        <item name="colorOnSurface">?attr/notoSecondaryColor</item>
+        <!-- Clock background color -->
+        <item name="colorSurfaceVariant">?attr/notoSurfaceColor</item>
+        <!-- Keyboard icon & Hour/Minute text in keyboard mode & Title color -->
+        <item name="colorOnSurfaceVariant">?attr/notoSecondaryColor</item>
+        <!-- Tint applies to background if not disabled -->
+        <item name="elevationOverlayEnabled">false</item>
+        <!-- Day night toggle - AM/PM -->
+        <item name="materialButtonOutlinedStyle">@style/TimePickerDialog.DayNightToggle</item>
+        <!-- Manual number input style -->
+        <item name="chipStyle">@style/TimePickerDialog.Chip</item>
+        <!-- Circle clock style -->
+        <item name="materialClockStyle">@style/TimePickerDialog.Clock</item>
+        <!-- Dialog shape -->
+        <item name="shapeAppearanceCornerExtraLarge">@style/DateTimePickerDialog.DialogShape</item>
+        <item name="textInputStyle">@style/TimePickerDialog.TextInputLayout</item>
+        <item name="materialTimePickerTitleStyle">@style/TimePickerDialog.TitleTextAppearance</item>
+    </style>
+
+    <style name="TimePickerDialog.DayNightToggle" parent="Widget.Material3.MaterialTimePicker.Button">
+        <item name="android:backgroundTint">?attr/notoSurfaceColor</item>
+        <item name="android:textColor">@color/day_night_toggle_text_color_selector</item>
+        <item name="rippleColor">?attr/colorPrimary</item>
+        <item name="strokeColor">?attr/colorPrimary</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="shapeAppearance">@style/TimePickerDialog.ShapeAppearance</item>
+    </style>
+
+    <style name="TimePickerDialog.Chip" parent="Widget.Material3.MaterialTimePicker.Display">
+        <item name="chipBackgroundColor">?attr/notoSurfaceColor</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="rippleColor">?attr/colorPrimary</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="shapeAppearance">@style/TimePickerDialog.ShapeAppearance</item>
+        <item name="android:textAppearance">@style/TimePickerDialog.ChipTextAppearance</item>
+    </style>
+
+    <style name="TimePickerDialog.Clock" parent="Widget.Material3.MaterialTimePicker.Clock">
+        <item name="clockNumberTextColor">@color/clock_number_color_selector</item>
+    </style>
+
+    <style name="TimePickerDialog.ShapeAppearance" parent="ShapeAppearance.Material3.Corner.Small">
+        <item name="cornerSize">@dimen/spacing_small</item>
+    </style>
+    ∑
+
+    <style name="TimePickerDialog.TextInputLayout" parent="Widget.Material3.MaterialTimePicker.Display.TextInputLayout">
+        <item name="materialThemeOverlay">@style/TimePickerDialog.TextInputEditTextOverlay</item>
+        <item name="boxBackgroundColor">?attr/notoSurfaceColor</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+    </style>
+
+    <style name="TimePickerDialog.TextInputEditTextOverlay" parent="ThemeOverlay.Material3.MaterialTimePicker.Display.TextInputEditText">
+        <item name="editTextStyle">@style/TimePickerDialog.TextInputEditText</item>
+    </style>
+
+    <style name="TimePickerDialog.TextInputEditText" parent="Widget.Material3.MaterialTimePicker.Display.TextInputEditText">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="TimePickerDialog.ChipTextAppearance" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/nunito_semibold</item>
+    </style>
+
+    <style name="TimePickerDialog.TitleTextAppearance" parent="TextAppearance.Material3.MaterialTimePicker.Title">
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:textSize">@dimen/size_small</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+    </style>
+
+    <style name="DatePickerDialog.Gray" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentGray</item>
+    </style>
+
+    <style name="DatePickerDialog.Blue" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentBlue</item>
+    </style>
+
+    <style name="DatePickerDialog.Pink" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentPink</item>
+    </style>
+
+    <style name="DatePickerDialog.Cyan" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentCyan</item>
+    </style>
+
+    <style name="DatePickerDialog.Purple" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentPurple</item>
+    </style>
+
+    <style name="DatePickerDialog.Red" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentRed</item>
+    </style>
+
+    <style name="DatePickerDialog.Yellow" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentYellow</item>
+    </style>
+
+    <style name="DatePickerDialog.Orange" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentOrange</item>
+    </style>
+
+    <style name="DatePickerDialog.Green" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentGreen</item>
+    </style>
+
+    <style name="DatePickerDialog.Brown" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentBrown</item>
+    </style>
+
+    <style name="DatePickerDialog.BlueGray" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentBlueGray</item>
+    </style>
+
+    <style name="DatePickerDialog.Teal" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentTeal</item>
+    </style>
+
+    <style name="DatePickerDialog.Indigo" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentIndigo</item>
+    </style>
+
+    <style name="DatePickerDialog.DeepPurple" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentDeepPurple</item>
+    </style>
+
+    <style name="DatePickerDialog.DeepOrange" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentDeepOrange</item>
+    </style>
+
+    <style name="DatePickerDialog.DeepGreen" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentDeepGreen</item>
+    </style>
+
+    <style name="DatePickerDialog.LightBlue" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentLightBlue</item>
+    </style>
+
+    <style name="DatePickerDialog.LightGreen" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentLightGreen</item>
+    </style>
+
+    <style name="DatePickerDialog.LightRed" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentLightRed</item>
+    </style>
+
+    <style name="DatePickerDialog.LightPink" parent="DatePickerDialog">
+        <item name="colorPrimary">@color/colorAccentLightPink</item>
+    </style>
+
+
+    <style name="TimePickerDialog.Gray" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentGray</item>
+    </style>
+
+    <style name="TimePickerDialog.Blue" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentBlue</item>
+    </style>
+
+    <style name="TimePickerDialog.Pink" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentPink</item>
+    </style>
+
+    <style name="TimePickerDialog.Cyan" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentCyan</item>
+    </style>
+
+    <style name="TimePickerDialog.Purple" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentPurple</item>
+    </style>
+
+    <style name="TimePickerDialog.Red" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentRed</item>
+    </style>
+
+    <style name="TimePickerDialog.Yellow" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentYellow</item>
+    </style>
+
+    <style name="TimePickerDialog.Orange" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentOrange</item>
+    </style>
+
+    <style name="TimePickerDialog.Green" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentGreen</item>
+    </style>
+
+    <style name="TimePickerDialog.Brown" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentBrown</item>
+    </style>
+
+    <style name="TimePickerDialog.BlueGray" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentBlueGray</item>
+    </style>
+
+    <style name="TimePickerDialog.Teal" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentTeal</item>
+    </style>
+
+    <style name="TimePickerDialog.Indigo" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentIndigo</item>
+    </style>
+
+    <style name="TimePickerDialog.DeepPurple" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentDeepPurple</item>
+    </style>
+
+    <style name="TimePickerDialog.DeepOrange" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentDeepOrange</item>
+    </style>
+
+    <style name="TimePickerDialog.DeepGreen" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentDeepGreen</item>
+    </style>
+
+    <style name="TimePickerDialog.LightBlue" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentLightBlue</item>
+    </style>
+
+    <style name="TimePickerDialog.LightGreen" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentLightGreen</item>
+    </style>
+
+    <style name="TimePickerDialog.LightRed" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentLightRed</item>
+    </style>
+
+    <style name="TimePickerDialog.LightPink" parent="TimePickerDialog">
+        <item name="colorPrimary">@color/colorAccentLightPink</item>
     </style>
 
 </resources>

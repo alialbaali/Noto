@@ -8,8 +8,9 @@ import com.noto.app.util.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.datetime.*
+import kotlin.time.Duration.Companion.days
 
-private val ExtraDatePeriod = DatePeriod(days = 1)
+private val ExtraDatePeriod = 1.days
 
 class NoteViewModel(
     private val folderRepository: FolderRepository,
@@ -60,11 +61,8 @@ class NoteViewModel(
     private var bodyCursorStartPosition = 0
     private var bodyCursorEndPosition = 0
 
-    private val mutableReminderDate = MutableStateFlow(Clock.System.now().toLocalDate().plus(ExtraDatePeriod))
-    val reminderDate get() = mutableReminderDate.asStateFlow()
-
-    private val mutableReminderTime = MutableStateFlow(Clock.System.now().toLocalTime())
-    val reminderTime get() = mutableReminderTime.asStateFlow()
+    private val mutableReminderDateTime = MutableStateFlow(Clock.System.now().plus(ExtraDatePeriod))
+    val reminderDateTime get() = mutableReminderDateTime.asStateFlow()
 
     init {
         noteRepository.getNoteById(noteId)
@@ -72,11 +70,7 @@ class NoteViewModel(
             .filterNotNull()
             .onEach {
                 mutableNote.value = it
-                if (it.reminderDate != null) {
-                    val dateTime = it.reminderDate.toLocalDateTime(TimeZone.currentSystemDefault())
-                    mutableReminderDate.value = dateTime.date
-                    mutableReminderTime.value = dateTime.time
-                }
+                if (it.reminderDate != null) mutableReminderDateTime.value = it.reminderDate
             }
             .launchIn(viewModelScope)
 
@@ -152,13 +146,8 @@ class NoteViewModel(
         noteRepository.updateNote(note.value.copy(isPinned = !note.value.isPinned))
     }
 
-    fun setNoteReminder(): Instant {
-        val dateTime = LocalDateTime(mutableReminderDate.value, mutableReminderTime.value)
-        val instant = dateTime.toInstant(TimeZone.currentSystemDefault())
-        viewModelScope.launch {
-            noteRepository.updateNote(note.value.copy(reminderDate = instant))
-        }
-        return instant
+    fun setNoteReminder() = viewModelScope.launch {
+        noteRepository.updateNote(note.value.copy(reminderDate = reminderDateTime.value.also(::println)))
     }
 
     fun cancelNoteReminder() = viewModelScope.launch {
@@ -302,12 +291,20 @@ class NoteViewModel(
         bodyCursorEndPosition = position
     }
 
-    fun setReminderDate(date: LocalDate) {
-        mutableReminderDate.value = date
+    fun setReminderDate(epochMilliseconds: Long) {
+        val currentDateTime = reminderDateTime.value.toLocalDateTime(TimeZone.currentSystemDefault())
+        val updatedDateTime = Instant.fromEpochMilliseconds(epochMilliseconds).toLocalDateTime(TimeZone.UTC).let {
+            LocalDateTime(it.year, it.monthNumber, it.dayOfMonth, currentDateTime.hour, currentDateTime.minute, it.second, it.nanosecond)
+        }
+        mutableReminderDateTime.value = updatedDateTime.toInstant(TimeZone.currentSystemDefault())
     }
 
-    fun setReminderTime(time: LocalTime) {
-        mutableReminderTime.value = time
+    fun setReminderTime(hour: Int, minute: Int) {
+        val currentDateTime = reminderDateTime.value.toLocalDateTime(TimeZone.currentSystemDefault())
+        val updatedDateTime = currentDateTime.let {
+            LocalDateTime(it.year, it.monthNumber, it.dayOfMonth, hour, minute, it.second, it.nanosecond)
+        }
+        mutableReminderDateTime.value = updatedDateTime.toInstant(TimeZone.currentSystemDefault())
     }
 
     private fun List<Triple<Int, Int, String>>.getPreviousValueOrCurrent(currentValue: String): Triple<Int, Int, String> {

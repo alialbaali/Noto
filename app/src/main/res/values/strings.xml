@@ -343,6 +343,8 @@
     <string name="cancel_reminder">Cancel reminder</string>
     <string name="note_is_unarchived">Note has been unarchived.</string>
     <string name="reminder">Reminder</string>
+    <string name="reminder_date">Reminder date</string>
+    <string name="reminder_time">Reminder time</string>
     <string name="reminder_is_set">Reminder has been set to %s.</string>
     <string name="reminder_is_cancelled">Reminder has been cancelled.</string>
     <string name="reminders">Reminders</string>

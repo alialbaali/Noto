@@ -35,6 +35,9 @@
         <item name="appBarLayoutStyle">@style/Widget.MaterialComponents.AppBarLayout.Primary</item>
         <item name="snackbarStyle">@style/Snackbar</item>
         <item name="snackbarTextViewStyle">@style/SnackbarTextView</item>
+
+        <item name="materialCalendarTheme">@style/DatePickerDialog</item>
+        <item name="materialTimePickerTheme">@style/TimePickerDialog</item>
     </style>
 
     <style name="BottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
