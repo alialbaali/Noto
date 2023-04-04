@@ -65,12 +65,14 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
             context?.let { context ->
                 viewModel.setNoteReminder()
                 val instant = viewModel.reminderDateTime.value
+                val date = instant.toLocalDate().format(lowercaseTimeSpan = true)
+                val time = instant.toLocalTime().format(is24HourFormat)
                 val stringId = R.string.reminder_is_set
                 val drawableId = R.drawable.ic_round_notifications_active_24
                 val note = viewModel.note.value
                 alarmManager?.createAlarm(context, note.folderId, note.id, instant.toEpochMilliseconds())
                 parentView?.snackbar(
-                    context.stringResource(stringId, instant.format(context)),
+                    context.stringResource(stringId, date, time),
                     drawableId,
                     anchorViewId,
                     folderColor

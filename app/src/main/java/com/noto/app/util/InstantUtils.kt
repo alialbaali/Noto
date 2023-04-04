@@ -40,7 +40,7 @@ fun Instant.format(context: Context): String {
     }
 }
 
-fun LocalDate.format(): String {
+fun LocalDate.format(lowercaseTimeSpan: Boolean = false): String {
     val timeZone = TimeZone.currentSystemDefault()
     val currentInstant = Clock.System.now()
     val currentDateTime = currentInstant.toLocalDateTime(timeZone)
@@ -50,6 +50,7 @@ fun LocalDate.format(): String {
         val milliseconds = atStartOfDayIn(timeZone).toEpochMilliseconds()
         val currentMilliseconds = currentDateTime.toInstant(timeZone).toEpochMilliseconds()
         val timeSpan = DateUtils.getRelativeTimeSpanString(milliseconds, currentMilliseconds, DateUtils.DAY_IN_MILLIS).toString()
+            .let { if (lowercaseTimeSpan) it.lowercase() else it }
         when {
             this.isToday -> timeSpan
             this.isThisWeek -> "$timeSpan ($formattedDate)"

@@ -330,6 +330,15 @@ class NoteFragment : Fragment() {
             navController?.navigateSafely(NoteFragmentDirections.actionNoteFragmentToMainFragment())
         }
 
+        llReminder.setOnClickListener {
+            navController?.navigateSafely(
+                NoteFragmentDirections.actionNoteFragmentToNoteReminderDialogFragment(
+                    args.folderId,
+                    viewModel.note.value.id
+                )
+            )
+        }
+
         val backCallback = {
             if (args.body != null)
                 navController?.popBackStack(R.id.mainFragment, false)
@@ -567,6 +576,7 @@ class NoteFragment : Fragment() {
         context?.let { context ->
             val color = context.colorResource(folder.color.toResource())
             val highlightColor = color.withDefaultAlpha(alpha = if (folder.color == NotoColor.Black) 32 else 128)
+            val backgroundColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             tvFolderTitle.text = folder.getTitle(context)
             tvFolderTitle.setTextColor(color)
             tb.navigationIcon?.mutate()?.setTint(color)
@@ -575,6 +585,7 @@ class NoteFragment : Fragment() {
             etNoteTitle.highlightColor = highlightColor
             etNoteBody.highlightColor = highlightColor
             llReminder.background?.mutate()?.setTint(color)
+            llReminder.background?.setRippleColor(backgroundColor.toColorStateList())
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 etNoteTitle.textCursorDrawable?.mutate()?.setTint(color)
                 etNoteBody.textCursorDrawable?.mutate()?.setTint(color)

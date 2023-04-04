@@ -345,7 +345,7 @@
     <string name="reminder">Reminder</string>
     <string name="reminder_date">Reminder date</string>
     <string name="reminder_time">Reminder time</string>
-    <string name="reminder_is_set">Reminder has been set to %s.</string>
+    <string name="reminder_is_set">Reminder has been set to run on %1$s at %2$s.</string>
     <string name="reminder_is_cancelled">Reminder has been cancelled.</string>
     <string name="reminders">Reminders</string>
     <string name="new_note_reminder">New reminder</string>

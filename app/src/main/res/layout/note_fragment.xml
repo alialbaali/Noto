@@ -61,6 +61,7 @@
         android:id="@+id/nsv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         android:overScrollMode="never"
         app:layout_behavior="com.noto.app.util.BounceScrollingViewBehavior">
 
@@ -69,7 +70,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/padding_bottom">
+            android:paddingBottom="@dimen/padding_bottom"
+            android:animateLayoutChanges="true">
 
             <com.airbnb.epoxy.EpoxyRecyclerView
                 android:id="@+id/rv"
