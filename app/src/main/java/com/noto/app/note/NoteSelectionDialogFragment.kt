@@ -64,6 +64,16 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         val snapHelper = PagerSnapHelper()
         snapHelper.attachToRecyclerView(rv)
 
+        viewModel.folder
+            .onEach { folder ->
+                context?.let { context ->
+                    val color = context.colorResource(folder.color.toResource())
+                    tb.tvDialogTitle.setTextColor(color)
+                    tb.vHead.background?.mutate()?.setTint(color)
+                }
+            }
+            .launchIn(lifecycleScope)
+
         combine(
             viewModel.folder,
             viewModel.notes,

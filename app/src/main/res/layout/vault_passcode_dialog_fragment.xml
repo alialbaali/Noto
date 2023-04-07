@@ -24,8 +24,7 @@
             android:padding="@dimen/spacing_normal"
             android:textColor="?attr/notoPrimaryColor"
             android:textSize="@dimen/size_small"
-            android:text="@string/vault_passcode_message"
-            app:fontFamily="@font/nunito_bold" />
+            android:text="@string/enable_vault_message" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_current_passcode"
@@ -40,7 +39,9 @@
             style="@style/TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayout">
+            android:theme="@style/TextInputLayout"
+            app:endIconMode="password_toggle"
+            app:endIconTint="?attr/notoSecondaryColor">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_current_passcode"
@@ -48,7 +49,7 @@
                 android:imeOptions="actionDone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/current_vault_passcode"
+                android:hint="@string/current_passcode"
                 android:inputType="numberPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -65,7 +66,10 @@
             style="@style/TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/TextInputLayout">
+            android:theme="@style/TextInputLayout"
+            app:endIconMode="password_toggle"
+            app:endIconTint="?attr/notoSecondaryColor"
+            app:helperText="@string/passcode_length_message">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/et_new_passcode"
@@ -73,18 +77,18 @@
                 android:imeOptions="actionDone"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/new_vault_passcode"
+                android:hint="@string/new_passcode"
                 android:inputType="numberPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_done"
+            android:id="@+id/btn_enable"
             style="@style/MaterialButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/spacing_normal"
             android:padding="@dimen/spacing_normal"
-            android:text="@string/update_passcode" />
+            android:text="@string/enable_vault" />
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

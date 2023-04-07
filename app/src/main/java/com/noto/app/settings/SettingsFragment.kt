@@ -63,9 +63,12 @@ class SettingsFragment : Fragment() {
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Boolean?>(Constants.IsPasscodeValid)
             ?.run {
-                observe(viewLifecycleOwner) { isPasscodeValid: Boolean? ->
+                observe(viewLifecycleOwner) { isPasscodeValid ->
                     if (isPasscodeValid == true) {
-                        if (navController?.currentDestination?.id == R.id.validateVaultPasscodeDialogFragment) navController?.navigateUp()
+                        val currentDestinationId = navController?.currentDestination?.id
+                        val isValidateDialog = currentDestinationId == R.id.validateVaultPasscodeDialogFragment
+                        val isVaultDialog = currentDestinationId == R.id.vaultPasscodeDialogFragment
+                        if (isValidateDialog || isVaultDialog) navController?.navigateUp()
                         navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToVaultSettingsFragment())
                         value = null
                     }

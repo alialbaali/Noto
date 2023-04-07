@@ -89,7 +89,7 @@ class NewFolderFragment : Fragment() {
         }
 
         tvParentFolderOption.setOnClickListener {
-            val folderTitle = context?.stringResource(R.string.select_parent_folder)
+            val folderTitle = context?.stringResource(R.string.parent_folder)
             SelectFolderDialogFragment { folderId, _ -> viewModel.setParentFolder(folderId) }.apply {
                 arguments = bundleOf(
                     Constants.FilteredFolderIds to longArrayOf(Folder.GeneralFolderId, args.folderId),

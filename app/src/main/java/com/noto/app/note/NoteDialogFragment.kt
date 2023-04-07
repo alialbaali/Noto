@@ -386,7 +386,7 @@ class NoteDialogFragment : BaseDialogFragment() {
             val color = context.colorResource(folder.color.toResource())
             val colorStateList = color.toColorStateList()
             tb.tvDialogTitle.setTextColor(color)
-            tb.vHead.backgroundTintList = colorStateList
+            tb.vHead.background?.mutate()?.setTint(color)
             when {
                 folder.openNotesIn == OpenNotesIn.Editor || isParentEditor -> {
                     tvOpenIn.text = context.stringResource(R.string.reading_mode)

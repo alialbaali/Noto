@@ -45,7 +45,7 @@ class VaultSettingsFragment : Fragment() {
                 ?.observe(viewLifecycleOwner) {
                     viewModel.disableVault()
                         .invokeOnCompletion {
-                            snackbar(context.stringResource(R.string.vault_is_disabled), R.drawable.ic_round_shield_24)
+                            snackbar(context.stringResource(R.string.vault_is_disabled), R.drawable.ic_round_vault_off_24)
                             navController?.navigateUp()
                         }
                 }
@@ -109,7 +109,7 @@ class VaultSettingsFragment : Fragment() {
                                 )
                             },
                             titleColor = MaterialTheme.colorScheme.warning,
-                            painter = painterResource(id = R.drawable.ic_round_key_off_24),
+                            painter = painterResource(id = R.drawable.ic_round_vault_off_24),
                             painterColor = MaterialTheme.colorScheme.warning,
                         )
                     }

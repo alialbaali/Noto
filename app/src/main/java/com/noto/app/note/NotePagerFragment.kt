@@ -107,6 +107,7 @@ class NotePagerFragment : Fragment() {
             val selectedNoteNumber = selectedIndex + 1
             tvNotesCount.text = context?.quantityStringResource(R.plurals.reading_mode_notes_count, notesCount, selectedNoteNumber, notesCount)
             tvNotesCountRtl.text = context?.quantityStringResource(R.plurals.reading_mode_notes_count, notesCount, selectedNoteNumber, notesCount)
+            indicator.isVisible = notesCount > 1
             if (notesCount != 0) {
                 val progress = selectedNoteNumber.toDouble().div(notesCount).times(100).toInt()
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

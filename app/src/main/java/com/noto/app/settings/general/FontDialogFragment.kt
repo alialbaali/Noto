@@ -27,7 +27,7 @@ class FontDialogFragment : BaseDialogFragment() {
         }
 
     private fun FontDialogFragmentBinding.setupState() {
-        tb.tvDialogTitle.text = context?.stringResource(R.string.font)
+        tb.tvDialogTitle.text = context?.stringResource(R.string.notes_font)
 
         viewModel.font
             .onEach { font ->

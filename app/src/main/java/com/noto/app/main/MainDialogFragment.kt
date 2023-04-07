@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.MainDialogFragmentBinding
 import com.noto.app.util.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -27,12 +27,18 @@ class MainDialogFragment : BaseDialogFragment() {
         tb.tvDialogTitle.text = context?.stringResource(R.string.app_name)
 
         navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Boolean>(Constants.IsPasscodeValid)
-            ?.observe(viewLifecycleOwner) { isPasscodeValid ->
-                if (isPasscodeValid) {
-                    viewModel.openVault()
-                    if (navController?.currentDestination?.id == R.id.validateVaultPasscodeDialogFragment) navController?.navigateUp()
-                    navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainVaultFragment())
+            ?.getLiveData<Boolean?>(Constants.IsPasscodeValid)
+            ?.run {
+                observe(viewLifecycleOwner) { isPasscodeValid ->
+                    if (isPasscodeValid == true) {
+                        viewModel.openVault()
+                        val currentDestinationId = navController?.currentDestination?.id
+                        val isValidateDialog = currentDestinationId == R.id.validateVaultPasscodeDialogFragment
+                        val isVaultDialog = currentDestinationId == R.id.vaultPasscodeDialogFragment
+                        if (isValidateDialog || isVaultDialog) navController?.navigateUp()
+                        navController?.navigateSafely(MainDialogFragmentDirections.actionMainDialogFragmentToMainVaultFragment())
+                        value = null
+                    }
                 }
             }
     }

@@ -3,15 +3,11 @@ package com.noto.app.settings
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.noto.app.NotoTheme
@@ -73,7 +69,7 @@ fun SettingsItem(
                         Spacer(Modifier.width(NotoTheme.dimensions.medium))
                         Text(
                             text = type.value,
-                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Medium),
+                            style = MaterialTheme.typography.bodyLarge.copy(MaterialTheme.colorScheme.secondary),
                             textAlign = TextAlign.End,
                             modifier = Modifier.weight(1F)
                         )
@@ -84,6 +80,9 @@ fun SettingsItem(
                             checked = type.isChecked,
                             onCheckedChange = null,
                             modifier = Modifier.height(24.dp),
+                            colors = SwitchDefaults.colors(
+                                checkedTrackColor = MaterialTheme.colorScheme.secondary
+                            )
                         )
                     }
                 }
@@ -92,7 +91,7 @@ fun SettingsItem(
             if (description != null) {
                 Text(
                     text = description,
-                    style = MaterialTheme.typography.labelLarge,
+                    style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.secondary,
                 )
             }

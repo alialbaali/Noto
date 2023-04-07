@@ -82,7 +82,7 @@ class ReadingModeSettingsFragment : Fragment() {
                         )
 
                         SettingsItem(
-                            title = stringResource(id = R.string.full_screen),
+                            title = stringResource(id = R.string.full_screen_mode),
                             type = SettingsItemType.Switch(isChecked = fullScreenEnabled),
                             onClick = { viewModel.toggleFullScreen() },
                             description = stringResource(id = R.string.full_screen_description),

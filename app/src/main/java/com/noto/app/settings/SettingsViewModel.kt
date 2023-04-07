@@ -214,4 +214,8 @@ class SettingsViewModel(
         settingsRepository.updateIsBioAuthEnabled(isEnabled = false)
         settingsRepository.updateIsVaultOpen(isOpen = false)
     }
+
+    fun openVault() = viewModelScope.launch {
+        settingsRepository.updateIsVaultOpen(true)
+    }
 }

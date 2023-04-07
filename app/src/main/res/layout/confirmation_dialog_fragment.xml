@@ -69,7 +69,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_description"
-            tools:text="@string/delete_note" />
+            tools:text="@string/delete" />
 
 
     </LinearLayout>

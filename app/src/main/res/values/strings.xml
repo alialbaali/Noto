@@ -101,7 +101,7 @@
     <!-- Description of the "Main interface" settings option. -->
     <string name="main_interface_description">The first screen displayed when launching the app.</string>
     <!-- The default folder of "Save to Noto" text selection option. -->
-    <string name="quick_note_folder">Quick note folder</string>
+    <string name="quick_note_folder">Quick Note folder</string>
     <!-- AKA "Save to Noto". -->
     <string name="quick_note">Quick Note</string>
     <!-- Description of the "Quick note folder" settings option. -->
@@ -190,6 +190,7 @@
     <!-- Vault -->
     <string name="folders_vault">Folders vault</string>
     <string name="update_passcode">Update passcode</string>
+    <string name="enable_vault">Enable vault</string>
     <string name="enter_vault_passcode">Enter vault passcode</string>
     <string name="add_to_vault">Add to vault</string>
     <string name="remove_from_vault">Remove from vault</string>
@@ -199,21 +200,26 @@
     <string name="archive_vaulted_folder_confirmation">Are you sure you want to archive this folder?</string>
     <string name="archive_vaulted_folder_description">Archiving this folder will also remove it from the vault.</string>
     <string name="vault_passcode">Vault passcode</string>
-    <string name="current_vault_passcode">Current vault passcode</string>
+    <string name="passcode">Passcode</string>
     <string name="new_vault_passcode">New vault passcode</string>
+    <string name="new_passcode">New passcode</string>
+    <string name="current_passcode">Current passcode</string>
+    <string name="vault_setup">Vault setup</string>
+    <string name="current_vault_passcode">Current vault passcode</string>
     <!-- Change vault passcode option. -->
     <string name="change_passcode">Change passcode</string>
     <!-- Vault timeout. -->
     <string name="timeout">Timeout</string>
     <!-- Description of the "Timeout" settings option. -->
     <string name="timeout_description">The time it takes to close the vault after being opened.</string>
-    <string name="vault_timeout">Vault Timeout</string>
+    <string name="vault_timeout">Vault timeout</string>
     <string name="invalid_passcode">Invalid passcode</string>
     <string name="passcode_length_message">Passcode must contain at least 6 numbers</string>
     <string name="passcode_empty_message">Passcode can\'t be empty</string>
     <string name="passcode_doesnt_match">Passcode doesn\'t match the current one</string>
     <string name="vault_passcode_has_changed">Vault passcode has been updated.</string>
-    <string name="vault_passcode_message">Vault passcode can\'t be changed if you lose the current one, so please make sure to store it in somewhere safe.</string>
+    <string name="enable_vault_message">To enable the vault, please provide a passcode.</string>
+    <string name="vault_passcode_message">Vault passcode can\'t be changed if you lose it, make sure to store it somewhere safe.</string>
     <string name="use_bio">Use biometrics</string>
     <string name="validate">Validate</string>
     <string name="vault">Vault</string>
@@ -221,6 +227,7 @@
     <string name="disable_vault">Disable vault</string>
     <!-- A message shown when "Disable vault" is being clicked. -->
     <string name="vault_is_disabled">Vault has been disabled.</string>
+    <string name="vault_is_enabled">Vault has been enabled.</string>
     <!-- An option to disable the vault in vault settings. -->
     <string name="disable">Disable</string>
     <!-- A confirmation message shown when disabling the vault in vault settings. -->
@@ -411,7 +418,7 @@
     <string name="keep_screen_on">Keep screen on</string>
     <!-- Description of the "Keep screen on" settings option. -->
     <string name="keep_screen_on_description">Whether to prevent screen from turning off during Reading Mode.</string>
-    <string name="full_screen">Go full screen</string>
+    <string name="full_screen_mode">Full screen mode</string>
     <!-- Description of the "Go full screen" settings option. -->
     <string name="full_screen_description">Whether to hide status and navigation bars during Reading Mode.</string>
     <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
