@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,13 +24,14 @@ private const val ElevationAnimationDuration = 150
 fun NotoTopAppbar(
     title: String,
     onClick: () -> Unit,
-    scrollPosition: Int,
+    isScrolling: Boolean,
     modifier: Modifier = Modifier,
     onNavigationIconClick: (() -> Unit)? = null,
+    actions: @Composable RowScope.() -> Unit = {},
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val elevation by animateDpAsState(
-        targetValue = if (scrollPosition > 0) NotoTheme.dimensions.extraSmall else 0.dp,
+        targetValue = if (isScrolling) NotoTheme.dimensions.extraSmall else 0.dp,
         animationSpec = tween(ElevationAnimationDuration)
     )
     TopAppBar(
@@ -51,6 +53,7 @@ fun NotoTopAppbar(
                 }
             }
         },
+        actions = actions,
         colors = TopAppBarDefaults.largeTopAppBarColors(containerColor = MaterialTheme.colorScheme.background)
     )
 }

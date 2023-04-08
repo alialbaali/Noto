@@ -8,7 +8,9 @@ import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
 import com.noto.app.R
 import com.noto.app.domain.model.Icon
+import com.noto.app.domain.model.Language
 import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.ScreenBrightnessLevel
 
 fun Context.colorStateListResource(@ColorRes id: Int) = ResourcesCompat.getColorStateList(resources, id, null)
 fun Context.colorResource(@ColorRes id: Int) = ResourcesCompat.getColor(resources, id, null)
@@ -79,6 +81,34 @@ fun Icon.toTitle(): Int = when (this) {
     Icon.Fire -> R.string.fire
     Icon.Purpleberry -> R.string.purpleberry
     Icon.SanguineSun -> R.string.sanguine_sun
+}
+
+fun Language.toResource(): Int = when (this) {
+    Language.System -> R.string.follow_system
+    Language.English -> R.string.english
+    Language.Turkish -> R.string.turkish
+    Language.Arabic -> R.string.arabic
+    Language.Indonesian -> R.string.indonesian
+    Language.Russian -> R.string.russian
+    Language.Tamil -> R.string.tamil
+    Language.Spanish -> R.string.spanish
+    Language.French -> R.string.french
+    Language.German -> R.string.german
+    Language.Italian -> R.string.italian
+    Language.Czech -> R.string.czech
+    Language.Lithuanian -> R.string.lithuanian
+    Language.SimplifiedChinese -> R.string.simplified_chinese
+}
+
+fun ScreenBrightnessLevel.toResource(): Int = when (this) {
+    ScreenBrightnessLevel.System -> R.string.follow_system
+    ScreenBrightnessLevel.Min -> R.string.min
+    ScreenBrightnessLevel.VeryLow -> R.string.very_low
+    ScreenBrightnessLevel.Low -> R.string.low
+    ScreenBrightnessLevel.Medium -> R.string.medium
+    ScreenBrightnessLevel.High -> R.string.high
+    ScreenBrightnessLevel.VeryHigh -> R.string.very_high
+    ScreenBrightnessLevel.Max -> R.string.max
 }
 
 val Number.dp

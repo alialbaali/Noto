@@ -8,6 +8,7 @@ import androidx.activity.addCallback
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -77,7 +78,7 @@ class GeneralSettingsFragment : Fragment() {
                     Theme.Black -> stringResource(id = R.string.black_theme)
                 }
                 val language by viewModel.language.collectAsState()
-                val languageText = language.resourceName
+                val languageText = remember(context, language) { context.stringResource(language.toResource()) }
                 val icon by viewModel.icon.collectAsState()
                 val iconText = when (icon) {
                     Icon.Futuristic -> stringResource(id = R.string.futuristic)

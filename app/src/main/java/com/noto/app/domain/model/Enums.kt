@@ -41,8 +41,6 @@ enum class Language {
     companion object {
         @Suppress("DEPRECATION")
         val Deprecated = listOf(Tamil, Russian)
-
-        val Comparator = compareByDescending<Language> { it == System }.thenBy { it in Deprecated }.thenBy { it.name }
     }
 }
 

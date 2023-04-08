@@ -5,10 +5,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.Fragment
@@ -24,6 +21,7 @@ fun Fragment.Screen(
     title: String,
     modifier: Modifier = Modifier,
     onNavigationIconClick: (() -> Unit)? = { navController?.navigateUp() },
+    actions: @Composable RowScope.() -> Unit = {},
     snackbarHost: @Composable () -> Unit = {},
     verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(NotoTheme.dimensions.medium),
     horizontalAlignment: Alignment.Horizontal = Alignment.CenterHorizontally,
@@ -33,6 +31,7 @@ fun Fragment.Screen(
     val viewModel by viewModel<SettingsViewModel>()
     val theme by viewModel.theme.collectAsState()
     val scope = rememberCoroutineScope()
+    val isScrolling by remember { derivedStateOf { scrollState.value > 0 } }
     NotoTheme(theme = theme) {
         Scaffold(
             topBar = {
@@ -43,8 +42,9 @@ fun Fragment.Screen(
                             scrollState.animateScrollTo(0)
                         }
                     },
-                    scrollState.value,
+                    isScrolling = isScrolling,
                     onNavigationIconClick = onNavigationIconClick,
+                    actions = actions,
                 )
             },
             snackbarHost = snackbarHost
@@ -55,8 +55,8 @@ fun Fragment.Screen(
                     .verticalScroll(scrollState)
                     .padding(NotoTheme.dimensions.medium)
                     .padding(contentPadding),
-                verticalArrangement,
-                horizontalAlignment,
+                verticalArrangement = verticalArrangement,
+                horizontalAlignment = horizontalAlignment,
                 content = content,
             )
         }

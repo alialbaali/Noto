@@ -52,6 +52,8 @@
     <string name="github" translatable="false">GitHub</string>
     <string name="about">About</string>
     <string name="whats_new">What\'s new</string>
+    <string name="learn_more">Learn more…</string>
+    <string name="released_on">Released on %s</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Export/Import data</string>
     <string name="exporting_failed">Failed to export the data.</string>
@@ -494,18 +496,28 @@
     <string name="lithuanian">Lithuanian</string>
     <string name="simplified_chinese">Simplified Chinese</string>
     <string name="turkish_translator" translatable="false">Nuray Sabri</string>
+    <string name="turkish_translator_url" translatable="false">https://linkedin.com/in/nuraysabri</string>
     <string name="turkish_proofreader" translatable="false">Alparslan Şakçi</string>
+    <string name="turkish_proofreader_url" translatable="false">https://sakci.me</string>
     <string name="spanish_translator" translatable="false">Faus AM</string>
+    <string name="spanish_translator_url" translatable="false">https://github.com/faus32</string>
     <string name="french_translator" translatable="false">Kernoeb</string>
+    <string name="french_translator_url" translatable="false">https://github.com/kernoeb</string>
     <string name="french_translator2" translatable="false">Geoffrey Crofte</string>
+    <string name="french_translator2_url" translatable="false">https://geoffreycrofte.com</string>
     <string name="german_translator" translatable="false">Uli N</string>
-    <string name="arabic_translator" translatable="false">Dr.Ohm</string>
     <string name="arabic_proofreader" translatable="false">Ali Albaali</string>
+    <string name="arabic_proofreader_url" translatable="false">https://www.alialbaali.com</string>
     <string name="italian_translator" translatable="false">Matteo Lombardi</string>
+    <string name="italian_translator_url" translatable="false">https://github.com/matteolomba</string>
     <string name="italian_translator2" translatable="false">SimoneG</string>
+    <string name="italian_translator2_url" translatable="false">https://github.com/SimoneG97</string>
     <string name="czech_translator" translatable="false">Viktor Novák</string>
+    <string name="czech_translator_url" translatable="false">https://github.com/vikdevelop</string>
     <string name="lithuanian_translator" translatable="false">Ernestas Karalius</string>
+    <string name="lithuanian_translator_url" translatable="false">http://github.com/ErnestasKaralius</string>
     <string name="simplified_chinese_translator" translatable="false">李華</string>
+    <string name="simplified_chinese_translator_url" translatable="false">https://steamcommunity.com/id/oliverberry</string>
 
     <!-- Icon -->
     <string name="icon">Icon</string>

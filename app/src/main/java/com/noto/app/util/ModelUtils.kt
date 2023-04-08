@@ -1,13 +1,8 @@
 package com.noto.app.util
 
 import android.content.Context
-import android.content.res.Configuration
 import android.util.Base64
 import android.view.View
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.core.os.LocaleListCompat
 import androidx.viewbinding.ViewBinding
 import com.noto.app.R
@@ -21,6 +16,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
+import java.text.Collator
 import java.util.*
 import javax.crypto.SecretKeyFactory
 import javax.crypto.spec.PBEKeySpec
@@ -263,48 +259,14 @@ suspend fun LabelRepository.getOrCreateLabel(folderId: Long, label: Label): Long
     return existingLabel ?: createLabel(label.copy(id = 0, folderId = folderId))
 }
 
-val ScreenBrightnessLevel.resourceName: String
-    @Composable
-    get() = when (this) {
-        ScreenBrightnessLevel.System -> stringResource(id = R.string.follow_system)
-        ScreenBrightnessLevel.Min -> stringResource(id = R.string.min)
-        ScreenBrightnessLevel.VeryLow -> stringResource(id = R.string.very_low)
-        ScreenBrightnessLevel.Low -> stringResource(id = R.string.low)
-        ScreenBrightnessLevel.Medium -> stringResource(id = R.string.medium)
-        ScreenBrightnessLevel.High -> stringResource(id = R.string.high)
-        ScreenBrightnessLevel.VeryHigh -> stringResource(id = R.string.very_high)
-        ScreenBrightnessLevel.Max -> stringResource(id = R.string.max)
-    }
-
-val Language.resourceName: String
-    @Composable
-    get() = when (this) {
-        Language.System -> stringResource(id = R.string.follow_system)
-        Language.English -> stringResource(id = R.string.english)
-        Language.Turkish -> stringResource(id = R.string.turkish)
-        Language.Arabic -> stringResource(id = R.string.arabic)
-        Language.Indonesian -> stringResource(id = R.string.indonesian)
-        Language.Russian -> stringResource(id = R.string.russian)
-        Language.Tamil -> stringResource(id = R.string.tamil)
-        Language.Spanish -> stringResource(id = R.string.spanish)
-        Language.French -> stringResource(id = R.string.french)
-        Language.German -> stringResource(id = R.string.german)
-        Language.Italian -> stringResource(id = R.string.italian)
-        Language.Czech -> stringResource(id = R.string.czech)
-        Language.Lithuanian -> stringResource(id = R.string.lithuanian)
-        Language.SimplifiedChinese -> stringResource(id = R.string.simplified_chinese)
-    }
-
-@Composable
-fun Language.toLocalizedContext(): Context {
-    val locale = this.toLocale()
-    val context = LocalContext.current
-    val configuration = LocalConfiguration.current
-    val localizedConfiguration = Configuration(configuration).also {
-        it.setLocale(locale)
-        it.setLayoutDirection(locale)
-    }
-    return context.createConfigurationContext(localizedConfiguration) ?: context
+fun Language.Companion.Comparator(context: Context): Comparator<Language> {
+    val collator = Collator.getInstance().apply { strength = Collator.PRIMARY }
+    return compareByDescending<Language> { it == Language.System }
+        .thenBy { it in Language.Deprecated }
+        .thenBy(collator) { it ->
+            val localizedContext = context.localize(it)
+            localizedContext.stringResource(it.toResource())
+        }
 }
 
 fun Language.toLocale(): Locale = when (this) {
