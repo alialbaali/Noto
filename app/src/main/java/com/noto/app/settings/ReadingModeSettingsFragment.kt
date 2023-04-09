@@ -18,7 +18,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
-import com.noto.app.components.EmptyPainter
 import com.noto.app.components.Screen
 import com.noto.app.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -86,7 +85,7 @@ class ReadingModeSettingsFragment : Fragment() {
                             type = SettingsItemType.Switch(isChecked = fullScreenEnabled),
                             onClick = { viewModel.toggleFullScreen() },
                             description = stringResource(id = R.string.full_screen_description),
-                            painter = EmptyPainter,
+                            painter = painterResource(id = R.drawable.ic_round_fullscreen_24),
                         )
 
                         SettingsItem(
