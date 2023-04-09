@@ -126,7 +126,8 @@
                     android:value="16"
                     android:stepSize="8"
                     android:contentDescription="@string/widget_radius"
-                    android:layout_marginHorizontal="@dimen/spacing_normal" />
+                    android:layout_marginHorizontal="@dimen/spacing_normal"
+                    app:trackColorInactive="?attr/notoBackgroundColor" />
             </LinearLayout>
 
         </LinearLayout>
