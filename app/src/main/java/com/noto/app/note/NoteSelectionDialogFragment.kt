@@ -286,13 +286,14 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                         dismiss()
                     }
                 }
-            navController?.navigateSafely(
-                NoteSelectionDialogFragmentDirections.actionNoteSelectionDialogFragmentToSelectFolderDialogFragment(
-                    longArrayOf(
-                        args.folderId
+            context?.let { context ->
+                navController?.navigateSafely(
+                    NoteSelectionDialogFragmentDirections.actionNoteSelectionDialogFragmentToSelectFolderDialogFragment(
+                        filteredFolderIds = longArrayOf(args.folderId),
+                        title = context.stringResource(R.string.copy_to).removeSuffix("…")
                     )
                 )
-            )
+            }
         }
 
         tvMoveNotes.setOnClickListener {
@@ -315,13 +316,14 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                         dismiss()
                     }
                 }
-            navController?.navigateSafely(
-                NoteSelectionDialogFragmentDirections.actionNoteSelectionDialogFragmentToSelectFolderDialogFragment(
-                    longArrayOf(
-                        args.folderId
+            context?.let { context ->
+                navController?.navigateSafely(
+                    NoteSelectionDialogFragmentDirections.actionNoteSelectionDialogFragmentToSelectFolderDialogFragment(
+                        filteredFolderIds = longArrayOf(args.folderId),
+                        title = context.stringResource(R.string.move_to).removeSuffix("…")
                     )
                 )
-            )
+            }
         }
 
         tvDeleteNotes.setOnClickListener {

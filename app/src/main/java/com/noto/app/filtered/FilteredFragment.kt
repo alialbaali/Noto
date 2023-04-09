@@ -69,7 +69,14 @@ class FilteredFragment : Fragment() {
         }
 
         fab.setOnClickListener {
-            navController?.navigateSafely(FilteredFragmentDirections.actionFilteredFragmentToSelectFolderDialogFragment(longArrayOf()))
+            context?.let { context ->
+                navController?.navigateSafely(
+                    FilteredFragmentDirections.actionFilteredFragmentToSelectFolderDialogFragment(
+                        filteredFolderIds = longArrayOf(),
+                        title = context.stringResource(R.string.select_folder)
+                    )
+                )
+            }
         }
 
         bab.setNavigationOnClickListener {
