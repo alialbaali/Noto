@@ -27,7 +27,7 @@ import com.noto.app.util.stringResource
 import com.noto.app.util.toResource
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class LanguageDialogFragment : BaseDialogFragment() {
+class LanguageDialogFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val viewModel by viewModel<SettingsViewModel>()
 
