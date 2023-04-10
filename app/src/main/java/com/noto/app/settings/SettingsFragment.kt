@@ -159,7 +159,7 @@ class SettingsFragment : Fragment() {
                     val chooser = Intent.createChooser(intent, rateText)
                     startActivity(chooser)
                 },
-                painter = painterResource(id = R.drawable.ic_round_star_rate_24),
+                painter = painterResource(id = R.drawable.ic_round_rate_review_24),
             )
         }
     }
