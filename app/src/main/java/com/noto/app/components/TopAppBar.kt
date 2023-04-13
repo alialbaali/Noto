@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.noto.app.NotoTheme
 import com.noto.app.R
 
-private const val ElevationAnimationDuration = 150
+const val ElevationAnimationDuration = 150
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
