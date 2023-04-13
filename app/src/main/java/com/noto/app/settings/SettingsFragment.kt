@@ -168,21 +168,21 @@ class SettingsFragment : Fragment() {
     private fun AboutSection(modifier: Modifier = Modifier) {
         SettingsSection(modifier) {
             SettingsItem(
+                title = stringResource(id = R.string.whats_new),
+                type = SettingsItemType.None,
+                onClick = {
+                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewFragment())
+                },
+                painter = painterResource(id = R.drawable.ic_round_updates_24),
+            )
+
+            SettingsItem(
                 title = stringResource(id = R.string.report_issue),
                 type = SettingsItemType.None,
                 onClick = {
                     navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToReportIssueDialogFragment())
                 },
                 painter = painterResource(id = R.drawable.ic_round_report_problem_24),
-            )
-
-            SettingsItem(
-                title = stringResource(id = R.string.whats_new),
-                type = SettingsItemType.None,
-                onClick = {
-                    navController?.navigateSafely(SettingsFragmentDirections.actionSettingsFragmentToWhatsNewFragment())
-                },
-                painter = painterResource(id = R.drawable.ic_round_new_releases_24),
             )
 
             SettingsItem(

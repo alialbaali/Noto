@@ -8,6 +8,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.noto.app.NotoTheme
 
@@ -32,11 +33,12 @@ fun SettingsItem(
     painter: Painter? = null,
     painterColor: Color = Color.Unspecified,
     description: String? = null,
+    descriptionMaxLines: Int = Int.MAX_VALUE,
     equalWeights: Boolean = true,
 ) {
     Surface(modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.small) {
         Row(modifier.padding(NotoTheme.dimensions.medium), horizontalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.medium)) {
-            SettingsItemContent(title, titleColor, type, painter, painterColor, description, equalWeights)
+            SettingsItemContent(title, titleColor, type, painter, painterColor, description, descriptionMaxLines, equalWeights)
         }
     }
 }
@@ -52,11 +54,12 @@ fun SettingsItem(
     painter: Painter? = null,
     painterColor: Color = Color.Unspecified,
     description: String? = null,
+    descriptionMaxLines: Int = Int.MAX_VALUE,
     equalWeights: Boolean = true,
 ) {
     Surface(onClick, modifier = Modifier.fillMaxWidth(), shape = MaterialTheme.shapes.small) {
         Row(modifier.padding(NotoTheme.dimensions.medium), horizontalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.medium)) {
-            SettingsItemContent(title, titleColor, type, painter, painterColor, description, equalWeights)
+            SettingsItemContent(title, titleColor, type, painter, painterColor, description, descriptionMaxLines, equalWeights)
         }
     }
 }
@@ -69,6 +72,7 @@ private fun RowScope.SettingsItemContent(
     painter: Painter?,
     painterColor: Color,
     description: String?,
+    descriptionMaxLines: Int,
     equalWeights: Boolean,
 ) {
     if (painter != null) {
@@ -124,6 +128,8 @@ private fun RowScope.SettingsItemContent(
                 text = description,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.secondary,
+                maxLines = descriptionMaxLines,
+                overflow = TextOverflow.Ellipsis,
             )
         }
     }

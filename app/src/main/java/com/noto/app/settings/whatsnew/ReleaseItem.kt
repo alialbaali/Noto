@@ -21,9 +21,9 @@ abstract class ReleaseItem : EpoxyModelWithHolder<ReleaseItem.Holder>() {
     lateinit var release: Release
 
     override fun bind(holder: Holder) = with(holder.binding) {
-        tvVersion.text = release.version.toString()
-        tvDate.text = release.date.format()
-        tvChangelog.text = release.changelog.text
+        tvVersion.text = release.versionFormatted
+        tvDate.text = release.dateFormatted
+        tvChangelog.text = release.changelogFormatted
         tvChangelog.removeLinksUnderline()
         tvChangelog.movementMethod = LinkMovementMethod.getInstance()
     }

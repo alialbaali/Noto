@@ -5,68 +5,78 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
-import com.noto.app.databinding.WhatsNewDialogFragmentBinding
+import com.noto.app.components.BottomSheetDialog
 import com.noto.app.domain.model.Release
-import com.noto.app.domain.model.Release.Changelog
-import com.noto.app.domain.model.Release_2_2_3
+import com.noto.app.settings.SettingsItem
+import com.noto.app.settings.SettingsItemType
+import com.noto.app.settings.SettingsSection
 import com.noto.app.settings.SettingsViewModel
-import com.noto.app.util.BounceEdgeEffectFactory
-import com.noto.app.util.VerticalListItemAnimator
-import com.noto.app.util.isScrollingAsFlow
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import com.noto.app.util.Current
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class WhatsNewDialogFragment : BaseDialogFragment() {
+class WhatsNewDialogFragment : BaseDialogFragment(isCollapsable = true) {
 
     private val viewModel by viewModel<SettingsViewModel>()
-
-    private val currentRelease: Release? by lazy {
-        context?.let { context ->
-            val changelog = Changelog(context.stringResource(R.string.release_2_2_3))
-            Release_2_2_3(changelog)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = WhatsNewDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        setupState()
-        setupListeners()
-    }
+    ): View? = context?.let { context ->
+        ComposeView(context).apply {
+            setContent {
+                val currentRelease = remember(context) { Release.Current(context) }
+                val version = remember(currentRelease) { currentRelease.versionFormatted }
+                val changelog = remember(currentRelease) { currentRelease.changelog.formatAsList() }
+                BottomSheetDialog(
+                    title = stringResource(id = R.string.whats_new_in, version),
+                    painter = painterResource(id = R.drawable.ic_round_auto_awesome_24),
+                ) {
+                    SettingsSection {
+                        changelog.forEach { item ->
+                            SettingsItem(
+                                title = item,
+                                type = SettingsItemType.None,
+                                painter = painterResource(id = R.drawable.ic_round_check_24),
+                            )
+                        }
+                    }
 
-    private fun WhatsNewDialogFragmentBinding.setupState() {
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
-        rv.itemAnimator = VerticalListItemAnimator()
-        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        tb.tvDialogTitle.text = context?.stringResource(R.string.whats_new)
+                    Spacer(modifier = Modifier.height(NotoTheme.dimensions.extraLarge))
 
-        rv.withModels {
-            currentRelease?.let { currentRelease ->
-                releaseItem {
-                    id(currentRelease.version.toString())
-                    release(currentRelease)
+                    ElevatedButton(
+                        onClick = {
+                            viewModel.updateLastVersion().invokeOnCompletion {
+                                dismiss()
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = MaterialTheme.shapes.small,
+                        contentPadding = PaddingValues(NotoTheme.dimensions.medium),
+                        colors = ButtonDefaults.elevatedButtonColors(
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary,
+                        )
+                    ) {
+                        Text(text = stringResource(id = R.string.okay), style = MaterialTheme.typography.titleMedium)
+                    }
                 }
-            }
-        }
-
-        rv.isScrollingAsFlow()
-            .onEach { isScrolling -> tb.root.isSelected = isScrolling }
-            .launchIn(lifecycleScope)
-    }
-
-    private fun WhatsNewDialogFragmentBinding.setupListeners() {
-        btnOkay.setOnClickListener {
-            viewModel.updateLastVersion().invokeOnCompletion {
-                dismiss()
             }
         }
     }

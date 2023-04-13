@@ -7,40 +7,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.noto.app.R
-import com.noto.app.databinding.WhatsNewFragmentBinding
-import com.noto.app.domain.model.Release
-import com.noto.app.domain.model.Release_1_8_0
-import com.noto.app.domain.model.Release_2_0_0
-import com.noto.app.domain.model.Release_2_0_1
-import com.noto.app.domain.model.Release_2_1_0
-import com.noto.app.domain.model.Release_2_1_1
-import com.noto.app.domain.model.Release_2_1_2
-import com.noto.app.domain.model.Release_2_1_3
-import com.noto.app.domain.model.Release_2_1_4
-import com.noto.app.domain.model.Release_2_1_5
-import com.noto.app.domain.model.Release_2_1_6
-import com.noto.app.domain.model.Release_2_2_0
-import com.noto.app.domain.model.Release_2_2_1
-import com.noto.app.domain.model.Release_2_2_2
-import com.noto.app.domain.model.Release_2_2_3
-import com.noto.app.util.BounceEdgeEffectFactory
-import com.noto.app.util.VerticalListItemAnimator
-import com.noto.app.util.navController
-import com.noto.app.util.setupMixedTransitions
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.components.HeaderItem
+import com.noto.app.components.LazyScreen
+import com.noto.app.domain.model.*
+import com.noto.app.settings.SettingsItem
+import com.noto.app.settings.SettingsItemType
+import com.noto.app.util.*
 
-private const val GitHubReleasesUrl = "https://github.com/alialbaali/Noto/releases"
+private const val PreviousReleaseChangelogMaxLines = 3
 
 class WhatsNewFragment : Fragment() {
 
-    private val releases: List<Release> by lazy {
+    private val previousReleases by lazy {
         context?.let { context ->
             listOf(
-                Release_2_2_3(Release.Changelog(context.stringResource(R.string.release_2_2_3))),
                 Release_2_2_2(Release.Changelog(context.stringResource(R.string.release_2_2_2))),
                 Release_2_2_1(Release.Changelog(context.stringResource(R.string.release_2_2_1))),
                 Release_2_2_0(Release.Changelog(context.stringResource(R.string.release_2_2_0))),
@@ -62,43 +53,72 @@ class WhatsNewFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = WhatsNewFragmentBinding.inflate(inflater, container, false).withBinding {
+    ): View? = context?.let { context ->
+        activity?.onBackPressedDispatcher?.addCallback { navController?.navigateUp() }
         setupMixedTransitions()
-        setupState()
-        setupListeners()
-    }
+        ComposeView(context).apply {
+            isTransitionGroup = true
+            setContent {
+                val currentRelease = remember(context) { Release.Current(context) }
 
-    private fun WhatsNewFragmentBinding.setupState() {
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
-        rv.itemAnimator = VerticalListItemAnimator()
-        rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                LazyScreen(
+                    title = stringResource(id = R.string.whats_new),
+                    actions = { GitHubAction() },
+                ) {
+                    item("current") {
+                        HeaderItem(title = context.stringResource(R.string.current))
+                    }
 
-        rv.withModels {
-            releases.forEach { release ->
-                releaseItem {
-                    id(release.version.toString())
-                    release(release)
+                    item(key = currentRelease.versionFormatted) {
+                        val version = remember(currentRelease) { currentRelease.versionFormatted }
+                        val date = remember(currentRelease) { currentRelease.dateFormatted }
+                        val changelog = remember(currentRelease) { currentRelease.changelogFormatted }
+                        SettingsItem(
+                            title = version,
+                            onClick = { navController?.navigate(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(currentRelease)) },
+                            type = SettingsItemType.Text(date),
+                            painter = painterResource(id = R.drawable.ic_round_auto_awesome_24),
+                            equalWeights = false,
+                            description = changelog,
+                        )
+                    }
+
+                    item(key = "previous") {
+                        HeaderItem(title = context.stringResource(R.string.previous))
+                    }
+
+                    items(previousReleases, key = { it.versionFormatted }) { previousRelease ->
+                        val version = remember(previousRelease) { previousRelease.versionFormatted }
+                        val date = remember(previousRelease) { previousRelease.dateFormatted }
+                        val changelog = remember(previousRelease) { previousRelease.changelogFormatted }
+                        SettingsItem(
+                            title = version,
+                            onClick = { navController?.navigate(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(previousRelease)) },
+                            type = SettingsItemType.Text(date),
+                            painter = painterResource(id = R.drawable.ic_round_tag_24),
+                            equalWeights = false,
+                            description = changelog,
+                            descriptionMaxLines = PreviousReleaseChangelogMaxLines,
+                        )
+                    }
                 }
             }
         }
     }
 
-    private fun WhatsNewFragmentBinding.setupListeners() {
-        activity?.onBackPressedDispatcher?.addCallback {
-            navController?.navigateUp()
-        }
-
-        tvMoreDetails.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(GitHubReleasesUrl))
-            startActivity(intent)
-        }
-
-        tb.setOnClickListener {
-            rv.smoothScrollToPosition(0)
-        }
-
-        tb.setNavigationOnClickListener {
-            navController?.navigateUp()
+    @Composable
+    private fun GitHubAction(modifier: Modifier = Modifier) {
+        IconButton(
+            onClick = {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.Noto.GitHubReleasesUrl))
+                startActivity(intent)
+            },
+            modifier = modifier,
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.ic_github_logo),
+                contentDescription = stringResource(id = R.string.github)
+            )
         }
     }
 }

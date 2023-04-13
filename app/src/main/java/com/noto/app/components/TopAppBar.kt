@@ -4,6 +4,7 @@ import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -26,6 +27,7 @@ fun NotoTopAppbar(
     onClick: () -> Unit,
     isScrolling: Boolean,
     modifier: Modifier = Modifier,
+    subtitle: String? = null,
     onNavigationIconClick: (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
 ) {
@@ -35,7 +37,18 @@ fun NotoTopAppbar(
         animationSpec = tween(ElevationAnimationDuration)
     )
     TopAppBar(
-        title = { Text(text = title) },
+        title = {
+            Column {
+                Text(text = title)
+                if (subtitle != null) {
+                    Text(
+                        text = subtitle,
+                        style = MaterialTheme.typography.labelLarge,
+                        color = MaterialTheme.colorScheme.secondary,
+                    )
+                }
+            }
+        },
         modifier = modifier
             .clickable(
                 interactionSource = interactionSource,

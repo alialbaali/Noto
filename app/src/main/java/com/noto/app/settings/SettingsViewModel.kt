@@ -159,7 +159,7 @@ class SettingsViewModel(
     }
 
     fun updateLastVersion() = viewModelScope.launch {
-        settingsRepository.updateLastVersion(Release.Version.Current)
+        settingsRepository.updateLastVersion(Release.Version.Current.format())
     }
 
     fun setMainInterfaceId(folderId: Long) = viewModelScope.launch {

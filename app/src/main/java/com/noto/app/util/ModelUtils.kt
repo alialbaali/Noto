@@ -325,3 +325,9 @@ fun CharSequence.indicesOf(string: String, startIndex: Int = 0, ignoreCase: Bool
     }
     return indices
 }
+
+fun Release.Companion.Current(context: Context) : Release {
+    val changelogText = context.stringResource(R.string.release_2_2_1)
+    val changelog = Release.Changelog(changelogText)
+    return Release_2_2_1(changelog)
+}

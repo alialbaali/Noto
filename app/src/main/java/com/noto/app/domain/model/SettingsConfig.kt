@@ -14,7 +14,7 @@ data class SettingsConfig(
     val scheduledVaultTimeout: VaultTimeout? = null,
     val isVaultOpen: Boolean = false,
     val isBioAuthEnabled: Boolean = false,
-    val lastVersion: String = Release.Version.Last,
+    val lastVersion: String = Release.Version.Last.format(),
     val sortingType: FolderListSortingType = FolderListSortingType.CreationDate,
     val sortingOrder: SortingOrder = SortingOrder.Descending,
     val isShowNotesCount: Boolean = false,

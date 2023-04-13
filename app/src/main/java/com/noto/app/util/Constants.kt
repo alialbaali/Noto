@@ -47,6 +47,9 @@ object Constants {
         const val PrivacyPolicyUrl = "https://github.com/alialbaali/Noto/blob/master/PrivacyPolicy.md"
         const val GithubIssueUrl = "https://github.com/alialbaali/Noto/issues/new"
         const val ReportIssueEmailSubject = "Issue Regarding Noto"
+        const val GitHubReleasesUrl = "https://github.com/alialbaali/Noto/releases"
+        fun GitHubReleaseUrl(version: String) = "https://github.com/alialbaali/Noto/releases/tag/v$version"
+
         fun ReportIssueEmailBody(androidVersion: String, sdkVersion: String, appVersion: String) = """
             Hi there,
             

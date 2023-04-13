@@ -2,6 +2,19 @@ package com.noto.app.components
 
 import android.annotation.SuppressLint
 import android.view.View
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
@@ -11,6 +24,74 @@ import com.noto.app.R
 import com.noto.app.databinding.HeaderItemBinding
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
+
+@Composable
+fun HeaderItem(
+    title: String,
+    modifier: Modifier = Modifier,
+) {
+    Surface(
+        modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.small,
+        color = MaterialTheme.colorScheme.background,
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.labelLarge,
+            color = MaterialTheme.colorScheme.secondary,
+            modifier = Modifier.fillMaxWidth()
+        )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HeaderItem(
+    title: String,
+    isContentVisible: Boolean,
+    onToggleContentClick: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val contentDescription = stringResource(if (isContentVisible) R.string.hide else R.string.show)
+    val rotationDegrees by animateFloatAsState(targetValue = if (isContentVisible) 180F else 0F)
+    CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
+        Surface(
+            checked = isContentVisible,
+            onCheckedChange = onToggleContentClick,
+            modifier = Modifier.fillMaxWidth(),
+            shape = MaterialTheme.shapes.small,
+            color = MaterialTheme.colorScheme.background,
+        ) {
+            Row(
+                modifier = modifier
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.labelLarge,
+                    color = MaterialTheme.colorScheme.secondary,
+                )
+
+                IconToggleButton(
+                    checked = isContentVisible,
+                    onCheckedChange = onToggleContentClick,
+                    colors = IconButtonDefaults.iconToggleButtonColors(
+                        contentColor = MaterialTheme.colorScheme.secondary,
+                        checkedContentColor = MaterialTheme.colorScheme.secondary,
+                    )
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_round_arrow_down_24),
+                        contentDescription = contentDescription,
+                        modifier = Modifier.rotate(rotationDegrees)
+                    )
+                }
+            }
+        }
+    }
+}
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass(layout = R.layout.header_item)

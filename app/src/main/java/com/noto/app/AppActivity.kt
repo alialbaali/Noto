@@ -188,7 +188,7 @@ class AppActivity : BaseActivity() {
             viewModel.lastVersion,
             navController.destinationAsFlow(),
         ) { lastVersion, _ ->
-            if (lastVersion != Release.Version.Current)
+            if (lastVersion != Release.Version.Current.format())
                 if (navController.currentDestination?.id != R.id.whatsNewDialogFragment)
                     navController.navigate(R.id.whatsNewDialogFragment)
         }.launchIn(lifecycleScope)

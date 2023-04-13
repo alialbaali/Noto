@@ -52,6 +52,7 @@
     <string name="github" translatable="false">GitHub</string>
     <string name="about">About</string>
     <string name="whats_new">What\'s new</string>
+    <string name="whats_new_in">What\'s new in %s</string>
     <string name="learn_more">Learn more…</string>
     <string name="released_on">Released on %s</string>
     <!--    <string name="share_with">Share with</string>-->
@@ -448,6 +449,7 @@
     <string name="show">Show</string>
     <string name="hide">Hide</string>
     <string name="permission_not_granted">Permission hasn\'t been granted</string>
+    <string name="current">Current</string>
 
     <!-- Label -->
     <string name="reorder_label">Reorder</string>

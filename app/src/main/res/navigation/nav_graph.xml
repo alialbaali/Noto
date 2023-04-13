@@ -323,9 +323,7 @@
             app:argType="boolean" />
         <argument
             android:name="title"
-            android:defaultValue="@null"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
     </dialog>
     <dialog
         android:id="@+id/folderListSortingDialogFragment"
@@ -583,7 +581,11 @@
     <fragment
         android:id="@+id/whatsNewFragment"
         android:name="com.noto.app.settings.whatsnew.WhatsNewFragment"
-        android:label="WhatsNewFragment" />
+        android:label="WhatsNewFragment">
+        <action
+            android:id="@+id/action_whatsNewFragment_to_releaseFragment"
+            app:destination="@id/releaseFragment" />
+    </fragment>
     <dialog
         android:id="@+id/validateVaultPasscodeDialogFragment"
         android:name="com.noto.app.vault.ValidateVaultPasscodeDialogFragment"
@@ -723,4 +725,12 @@
         android:id="@+id/reportIssueDialogFragment"
         android:name="com.noto.app.settings.ReportIssueDialogFragment"
         android:label="ReportIssueDialogFragment" />
+    <fragment
+        android:id="@+id/releaseFragment"
+        android:name="com.noto.app.settings.whatsnew.ReleaseFragment"
+        android:label="ReleaseFragment">
+        <argument
+            android:name="release"
+            app:argType="com.noto.app.domain.model.Release" />
+    </fragment>
 </navigation>

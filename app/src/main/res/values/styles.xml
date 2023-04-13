@@ -220,7 +220,7 @@
         <item name="android:textColor">?attr/notoBackgroundColor</item>
         <item name="android:textSize">@dimen/size_large</item>
         <item name="cornerRadius">@dimen/spacing_small</item>
-        <item name="fontFamily">@font/nunito_medium</item>
+        <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
     <style name="MaterialSecondaryButton" parent="Widget.Material3.Button.OutlinedButton">
@@ -230,7 +230,7 @@
         <item name="android:textColor">?attr/notoPrimaryColor</item>
         <item name="android:textSize">20sp</item>
         <item name="cornerRadius">@dimen/spacing_small</item>
-        <item name="fontFamily">@font/nunito_medium</item>
+        <item name="fontFamily">@font/nunito_bold</item>
     </style>
 
     <style name="FolderTitleTextView" parent="Widget.MaterialComponents.TextView">

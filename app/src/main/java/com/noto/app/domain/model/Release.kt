@@ -2,26 +2,48 @@ package com.noto.app.domain.model
 
 import com.noto.app.domain.model.Release.Changelog
 import com.noto.app.domain.model.Release.Version
+import com.noto.app.util.Constants
+import com.noto.app.util.format
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.Month
+import java.io.Serializable
 
-sealed interface Release {
+sealed interface Release : Serializable {
     val version: Version
     val date: LocalDate
     val changelog: Changelog
 
+    val githubUrl: String get() = Constants.Noto.GitHubReleaseUrl(versionFormatted)
+    val isCurrent: Boolean get() = this.version == Version.Current
+    val versionFormatted: String get() = version.format()
+    val dateFormatted: String get() = date.format()
+    val changelogFormatted: String get() = changelog.format()
+
     data class Version(val major: Int, val minor: Int, val patch: Int) {
 
         companion object {
-            const val Current = "2.2.3"
-            const val Last = "2.2.2"
+            val Current = Version(2, 2, 3)
+            val Last = Version(2, 2, 2)
         }
 
-        override fun toString(): String = "$major.$minor.$patch"
+        fun format(): String = "$major.$minor.$patch"
     }
 
     @JvmInline
-    value class Changelog(val text: String)
+    value class Changelog(val text: String) {
+
+        fun format(): String = text
+            .replace("• ", "")
+            .replace(".", ".\n")
+
+        fun formatAsList() = text.replace("• ", "")
+            .split(".")
+            .map { it.trim() }
+            .filter { it.isNotBlank() }
+            .map { it.plus(".") }
+    }
+
+    companion object
 }
 
 @Suppress("ClassName")
