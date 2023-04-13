@@ -4,18 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/header_item_shape"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:layout_width="match_parent">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_title"
         android:textSize="@dimen/size_extra_small"
         android:padding="@dimen/spacing_small"
-        android:layout_weight="1"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="?attr/notoSecondaryColor"
         app:fontFamily="@font/nunito_semibold"
         tools:text="Libraries" />
+
+    <View
+        android:id="@+id/v_divider"
+        android:background="@drawable/dialog_item_divider"
+        android:layout_marginHorizontal="@dimen/spacing_small"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/dialog_item_divider_height" />
 
     <ImageButton
         android:id="@+id/ib_create"

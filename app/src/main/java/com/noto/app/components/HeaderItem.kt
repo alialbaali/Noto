@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.*
@@ -20,6 +21,7 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.databinding.HeaderItemBinding
 import com.noto.app.domain.model.NotoColor
@@ -35,12 +37,18 @@ fun HeaderItem(
         shape = MaterialTheme.shapes.small,
         color = MaterialTheme.colorScheme.background,
     ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.labelLarge,
-            color = MaterialTheme.colorScheme.secondary,
-            modifier = Modifier.fillMaxWidth()
-        )
+        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.labelLarge,
+                color = MaterialTheme.colorScheme.secondary,
+            )
+
+            DividerItem(
+                modifier = Modifier.weight(1F),
+                paddingValues = PaddingValues(horizontal = NotoTheme.dimensions.medium)
+            )
+        }
     }
 }
 
@@ -72,6 +80,11 @@ fun HeaderItem(
                     text = title,
                     style = MaterialTheme.typography.labelLarge,
                     color = MaterialTheme.colorScheme.secondary,
+                )
+
+                DividerItem(
+                    modifier = Modifier.weight(1F),
+                    paddingValues = PaddingValues(horizontal = NotoTheme.dimensions.medium)
                 )
 
                 IconToggleButton(
@@ -131,6 +144,7 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
             val colorResource = root.context.colorResource(color!!.toResource())
             val colorStateList = colorResource.toColorStateList()
             tvTitle.setTextColor(colorResource)
+            vDivider.background?.mutate()?.setTint(colorResource.withDefaultAlpha())
             ibVisibility.imageTintList = colorStateList
             ibCreate.imageTintList = colorStateList
             root.background.setRippleColor(colorStateList)
