@@ -128,7 +128,7 @@ Contains all the UI logic.
 ## Screenshots
 
 <details>
-  <summary>Screenshots</summary>
+  <summary>Click to expand screenshots</summary>
 
   <div>
     <p float="left">
