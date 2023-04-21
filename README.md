@@ -4,10 +4,6 @@
   <b>Noto | Minimal Note-Taking App</b>
 </h1>
 
-
-
-
-
 ## Download
 
 You can download Noto from [Github](https://github.com/alialbaali/Noto/releases/latest) or Google Play using the following link:
