@@ -129,16 +129,16 @@ Contains all the UI logic.
 
 <div>
   <p float="left">
-    <img src="images/Frame%201.png" height="400"  alt="screenshot"/>
-    <img src="images/Frame%202.png" height="400"  alt="screenshot"/>
-    <img src="images/Frame%203.png" height="400"  alt="screenshot"/>
-    <img src="images/Frame%204.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame-1.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame-2.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame-3.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame-4.png" height="400"  alt="screenshot"/>
   </p>
   <p>
-    <img src="images/Frame%205.png" height="400"  alt="screenshot"/>
-    <img src="images/Frame%206.png" height="400"  alt="screenshot"/>
-    <img src="images/Frame%207.png" height="400"  alt="screenshot"/>
-    <img src="images/Frame%208.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame-5.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame-6.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame-7.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame-8.png" height="400"  alt="screenshot"/>
   </p>
 </div>
 
