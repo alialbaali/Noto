@@ -1,6 +1,12 @@
-# Noto | Minimal Note-Taking App
+<h1 align="center">
+  <img src="images/Icon.svg" alt="icon"/>
+  <br>
+  <b>Noto | Minimal Note-Taking App</b>
+</h1>
 
-<img src="images/Icon.svg" alt="icon"/>
+
+
+
 
 ## Download
 
