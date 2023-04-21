@@ -127,13 +127,14 @@ Contains all the UI logic.
 
 ## Screenshots
 
-<screenshots-div>
+<details>
   <summary>Screenshots</summary>
+
   a|b|c|d
 :-:|:-:|:-:|:-:
 |<img src="images/Frame-1.png" height="400"  alt="screenshot"/>|<img src="images/Frame-2.png" height="400"  alt="screenshot"/>|<img src="images/Frame-3.png" height="400"  alt="screenshot"/>|<img src="images/Frame-4.png" height="400"  alt="screenshot"/>|
 |<img src="images/Frame-5.png" height="400"  alt="screenshot"/>|<img src="images/Frame-6.png" height="400"  alt="screenshot"/>|<img src="images/Frame-7.png" height="400"  alt="screenshot"/>|<img src="images/Frame-8.png" height="400"  alt="screenshot"/>|
-</screenshots-div>
+</details>
 
 <div>
   <p float="left">
