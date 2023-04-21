@@ -47,13 +47,13 @@ You can download Noto from [Github](https://github.com/alialbaali/Noto/releases/
 
 ## Motivation
 
-<h4>
+<p>
   There are a lot of note-taking apps available out-there, but only a few that do it well. Well, Noto is one of them.
 
   The goal of Noto is to create a minimalistic, free, and open-source note-taking application that meets the user's expectations with privacy in mind.
 
   Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcases my skills regarding developing Android apps.
-</h4>
+</p>
 
 ## Features
 
@@ -123,17 +123,17 @@ You can download Noto from [Github](https://github.com/alialbaali/Noto/releases/
 
 ## Contributions
 
-<h4>
+<p>
   Contributions are always welcome! If you would like to contribute, please feel free to file an issue or create a PR.
-</h4>
+</p>
 
 #### Special thanks to everyone who has helped and contributed in the development.
 
 ## Translation and Localization
 
-<h4>
+<p>
   If you would like to translate the app, please contact me via [email](mailto:ali@albaali.com).
-</h4>
+</p>
 
 #### Special thanks to:
 
