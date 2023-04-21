@@ -127,16 +127,20 @@ Contains all the UI logic.
 
 ## Screenshots
 
-<p float="left">
-<img src="images/Frame%201.png" height="400"  alt="screenshot"/>
-<img src="images/Frame%202.png" height="400"  alt="screenshot"/>
-<img src="images/Frame%203.png" height="400"  alt="screenshot"/>
-<img src="images/Frame%204.png" height="400"  alt="screenshot"/>
-<img src="images/Frame%205.png" height="400"  alt="screenshot"/>
-<img src="images/Frame%206.png" height="400"  alt="screenshot"/>
-<img src="images/Frame%207.png" height="400"  alt="screenshot"/>
-<img src="images/Frame%208.png" height="400"  alt="screenshot"/>
-</p>
+<div>
+  <p float="left">
+    <img src="images/Frame%201.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame%202.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame%203.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame%204.png" height="400"  alt="screenshot"/>
+  </p>
+  <p>
+    <img src="images/Frame%205.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame%206.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame%207.png" height="400"  alt="screenshot"/>
+    <img src="images/Frame%208.png" height="400"  alt="screenshot"/>
+  </p>
+</div>
 
 ## Support
 
