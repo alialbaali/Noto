@@ -5,11 +5,17 @@
 </h1>
 
 <div align="center">
-  <a href="/LICENSE.md">
-    <img src="https://img.shields.io/badge/License-Apache%202.0-green?style=flat-square&logo=appveyor" alt="License">
+  <a>
+    <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
   </a>
   <a>
-    <img src="https://img.shields.io/badge/Language-Kotlin-purple?style=flat-square&logo=appveyor" alt="Kotlin">
+    <img src="https://img.shields.io/badge/Kotlin-purple?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin">
+  </a>
+  <a href="https://www.patreon.com/alialbaali">
+    <img src="https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white">
+  </a>
+  <a href="/LICENSE.md">
+    <img src="https://img.shields.io/badge/License-Apache%202.0-green?style=for-the-badge&logo=appveyor" alt="License">
   </a>
 </div>
 
