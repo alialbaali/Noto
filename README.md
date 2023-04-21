@@ -4,6 +4,35 @@
   <b>Noto | Minimal Note-Taking App</b>
 </h1>
 
+<div align="center">
+  <a href="/LICENSE.md">
+    <img src="https://img.shields.io/badge/License-Apache%202.0-green?style=flat-square&logo=appveyor" alt="License">
+  </a>
+  <a>
+    <img src="https://img.shields.io/badge/Language-Kotlin-purple?style=flat-square&logo=appveyor" alt="Kotlin">
+  </a>
+</div>
+
+<p align="center">
+  <a href="#download">Download</a>
+  •
+  <a href="#motivation">Motivation</a>
+  •
+  <a href="#features">Features</a>
+  •
+  <a href="#contributions">Contributions</a>
+  •
+  <a href="#translation-and-localization">Translation & Localization</a>
+  •
+  <a href="#architecture">Architecture</a>
+  •
+  <a href="#screenshots">Screenshots</a>
+  •
+  <a href="#support">Support</a>
+  •
+  <a href="#license">License</a>
+</p>
+
 ## Download
 
 You can download Noto from [Github](https://github.com/alialbaali/Noto/releases/latest) or Google Play using the following link:
