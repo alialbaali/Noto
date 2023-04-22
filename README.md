@@ -15,7 +15,7 @@
     <img src="https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white">
   </a>
   <a href="/LICENSE.md">
-    <img src="https://img.shields.io/badge/License-Apache%202.0-green?style=for-the-badge&logo=appveyor" alt="License">
+    <img src="https://img.shields.io/badge/License-Apache%202.0-green?style=for-the-badge&logo=apache" alt="License">
   </a>
 </div>
 
