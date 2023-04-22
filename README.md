@@ -132,7 +132,7 @@ You can download Noto from [Github](https://github.com/alialbaali/Noto/releases/
 ## Translation and Localization
 
 <p>
-  If you would like to translate the app, please contact me via [email](mailto:ali@albaali.com).
+  If you would like to translate the app, please contact me via <a href="mailto:ali@albaali.com">email</a>.
 </p>
 
 #### Special thanks to:
