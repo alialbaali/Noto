@@ -53,7 +53,7 @@ You can download Noto from [Github](https://github.com/alialbaali/Noto/releases/
 <p>
   There are a lot of note-taking apps available out-there, but only a few that do it well. Well, Noto is one of them.
 
-  The goal of Noto is to create a minimalistic, free, and open-source note-taking application that meets the user's expectations with privacy in mind.
+  The goal of Noto is to be a minimalistic, free, and open-source note-taking application that meets the user's expectations, with privacy in mind.
 
   Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcases my skills regarding developing Android apps.
 </p>
