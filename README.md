@@ -9,13 +9,16 @@
     <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
   </a>
   <a>
-    <img src="https://img.shields.io/badge/Kotlin-purple?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin">
+    <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin">
   </a>
   <a href="https://www.patreon.com/alialbaali">
     <img src="https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white">
   </a>
+  <a href="https://www.buymeacoffee.com/alialbaali">
+    <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="BuyMeACoffee">
+  </a>
   <a href="/LICENSE.md">
-    <img src="https://img.shields.io/badge/License-Apache%202.0-green?style=for-the-badge&logo=apache" alt="License">
+    <img src="https://img.shields.io/badge/Apache%202.0-green?style=for-the-badge&logo=apache" alt="License">
   </a>
 </div>
 
