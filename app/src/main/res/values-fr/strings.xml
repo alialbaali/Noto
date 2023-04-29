@@ -6,14 +6,10 @@
     <string name="apply">Appliquer</string>
     <string name="okay">Ok</string>
     <string name="search">Rechercher</string>
-    <!-- A way to support the project. -->
-    <string name="buy_me_a_coffee">Offrez-moi un café</string>
-    <!-- Description of the "Buy me a coffee" settings options. -->
-    <string name="buy_me_a_coffee_description">Si vous souhaitez montrer votre soutien.</string>
-    <!-- Description of the "Become a patron" settings options. -->
+    <!-- A settings option to support the project. -->
+    <string name="support_noto">Support Noto</string>
+    <!-- Description of the Support Noto settings options. -->
     <string name="support_noto_description">Si vous voulez vous assurer que Noto reste maintenu.</string>
-    <!-- A way to support the project. -->
-    <string name="become_a_patron">Soutenez-nous</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">Plus d\'options</string>
     <!-- Options for multi-selected notes. -->
@@ -472,7 +468,8 @@
     <string name="folders_notes_count">Nombre de notes des dossiers</string>
     <string name="loading_content">Chargement du contenu</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">• Corrections de bugs et améliorations mineures.</string>
+    <string name="release_bug_fixes_and_design_improvements">• Bug fixes and design improvements.</string>
+    <string name="release_bug_fixes">• Bug fixes</string>
     <string name="release_1_8_0">• Prise en charge du coffre-fort des bibliothèques protégées par un code d\'accès.
         \n• Prise en charge des options d\'expiration du coffre-fort.
         \n• Prise en charge de l\'authentification biométriques sur les périphériques pris en charge pour le coffre-fort.
@@ -497,7 +494,6 @@
         \n• Correction des icônes de raccourcis statiques sur les anciens appareils Android.
         \n• Autres corrections de bogues et améliorations de la conception.
     </string>
-    <string name="release_2_0_1">• Corrections de bugs.</string>
     <string name="release_2_1_0">• ajoute la possibilité d\'annuler/refaire une action, et la visualisation de leur historique.
         \n• Redesign des étiquettes.
         \n• Redesign du cadre de l\'application.
@@ -524,14 +520,9 @@
         \n• Support de l\'allemand.
         \n• Autres corrections de bugs et améliorations de conception.
     </string>
-    <string name="release_2_1_1">• Corrections de bugs.</string>
-    <string name="release_2_1_2">• Corrections de bugs et améliorations mineures.</string>
-    <string name="release_2_1_3">• Corrections de bugs et améliorations mineures.</string>
     <string name="release_2_1_4">• Correction des raccourcis non fonctionnels lors de l\'utilisation d\'une icône différente
 \n• Les étiquettes sélectionnées apparaissent en premier sur une note
 \n• Autres corrections de bugs et améliorations mineures.    </string>
-    <string name="release_2_1_5">• Corrections de bugs et améliorations mineures.</string>
-    <string name="release_2_1_6">• Corrections de bugs et améliorations mineures.</string>
     <string name="release_2_2_0">• Prise en charge du tchèque et de l\'italien.
         \n• Support de la sélection multiple pour les notes.
         \n• Prise en charge d\'une option pour ouvrir des notes en Mode Lecture par défaut.

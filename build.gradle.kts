@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
     repositories {
         google()
@@ -16,6 +18,13 @@ allprojects {
         google()
         mavenCentral()
         jcenter()
+    }
+
+    // Temporary workaround for https://github.com/google/ksp/issues/1288
+    tasks.withType<KotlinCompile>().configureEach {
+        kotlinOptions {
+            jvmTarget = JavaVersion.VERSION_11.toString()
+        }
     }
 }
 

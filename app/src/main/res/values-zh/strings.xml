@@ -6,14 +6,10 @@
     <string name="apply">应用</string>
     <string name="okay">确定</string>
     <string name="search">搜索</string>
-    <!-- A way to support the project. -->
-    <string name="buy_me_a_coffee">请我喝杯咖啡吧~</string>
-    <!-- Description of the "Buy me a coffee" settings options. -->
-    <string name="buy_me_a_coffee_description">以表示您的支持。</string>
-    <!-- Description of the "Become a patron" settings options. -->
+    <!-- A settings option to support the project. -->
+    <string name="support_noto">Support Noto</string>
+    <!-- Description of the Support Noto settings options. -->
     <string name="support_noto_description">希望 Noto 笔记能保持维护。</string>
-    <!-- A way to support the project. -->
-    <string name="become_a_patron">在 Patron 成为一名赞助者</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">显示更多选项</string>
     <!-- Options for multi-selected notes. -->
@@ -454,6 +450,7 @@
     <string name="loading_content">加载内容</string>
     <!-- Releases -->
     <string name="release_bug_fixes_and_design_improvements">• Bug fixes and design improvements.</string>
+    <string name="release_bug_fixes">• Bug fixes</string>
     <string name="release_1_8_0">• Support for passcode protected libraries vault.
         \n• Support for vault timeout options.
         \n• Support for biometric vault authentication on supported devices.
@@ -478,7 +475,6 @@
         \n• Fix static shortcuts icons on older Android devices.
         \n• Other bug fixes and design improvements.
     </string>
-    <string name="release_2_0_1">• Bug fixes.</string>
     <string name="release_2_1_0">• Support for undo/redo and viewing their history.
         \n• Redesign labels.
         \n• Redesign bottom and top app bar in all layouts.
@@ -505,15 +501,10 @@
         \n• Support German.
         \n• Other bug fixes and design improvements.
     </string>
-    <string name="release_2_1_1">• Bug fixes.</string>
-    <string name="release_2_1_2">• Bug fixes and design improvements.</string>
-    <string name="release_2_1_3">• Bug fixes and design improvements.</string>
     <string name="release_2_1_4">• Fixed shortcuts not working when using a different icon.
         \n• Selected labels now appear first in note\'s layout.
         \n• Other bug fixes and design improvements.
     </string>
-    <string name="release_2_1_5">• Bug fixes and design improvements.</string>
-    <string name="release_2_1_6">• Bug fixes and design improvements.</string>
     <string name="release_2_2_0">• Supported Czech and Italian.
         \n• Supported multi-selection for notes.
         \n• Supported an option to open notes in Reading Mode by default.
