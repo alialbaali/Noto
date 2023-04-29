@@ -6,14 +6,10 @@
     <string name="apply">Aplicar</string>
     <string name="okay">Ok</string>
     <string name="search">Buscar</string>
-    <!-- A way to support the project. -->
-    <string name="buy_me_a_coffee">Invítame a un café</string>
-    <!-- Description of the "Buy me a coffee" settings options. -->
-    <string name="buy_me_a_coffee_description">Si quieres mostrar tu apoyo.</string>
-    <!-- Description of the "Become a patron" settings options. -->
+    <!-- A settings option to support the project. -->
+    <string name="support_noto">Soporte Noto</string>
+    <!-- Description of the Support Noto settings options. -->
     <string name="support_noto_description">Si desea asegurarse de que Noto permanezca en mantenimiento.</string>
-    <!-- A way to support the project. -->
-    <string name="become_a_patron">Conviértete en un mecenas</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">Más opciones</string>
     <!-- Options for multi-selected notes. -->
@@ -473,6 +469,7 @@
     <string name="loading_content">Cargando contenido</string>
     <!-- Releases -->
     <string name="release_bug_fixes_and_design_improvements">• Corrección de errores y mejoras de diseño.</string>
+    <string name="release_bug_fixes">• Corrección de errores</string>
     <string name="release_1_8_0">• Soporte para librerías protegidas con código de acceso.
         \n• Soporte para opciones de tiempo de espera de bóveda.
         \n• Soporte para autenticación de bóveda biométrica en dispositivos compatibles.
@@ -497,7 +494,6 @@
         \n• Corregir los iconos de accesos directos estáticos en dispositivos Android antiguos.
         \n• Otras correcciones de errores y mejoras de diseño.
     </string>
-    <string name="release_2_0_1">• Corrección de errores.</string>
     <string name="release_2_1_0">• Soporte para deshacer/rehacer y ver su historial.
         \n• Rediseñar etiquetas.
         \n• Rediseñar la barra de aplicaciones inferior y superior en todos los diseños.
@@ -524,15 +520,10 @@
         \n• Soporte alemán.
         \n• Otras correcciones de errores y mejoras de diseño
     </string>
-    <string name="release_2_1_1">• Corrección de errores.</string>
-    <string name="release_2_1_2">• Corrección de errores y mejoras de diseño.</string>
-    <string name="release_2_1_3">• Corrección de errores y mejoras de diseño.</string>
     <string name="release_2_1_4">• Corregidos atajos que no funcionan cuando se utiliza un icono diferente.
         \n• Etiquetas seleccionadas ahora aparecen primero en el diseño de nota.
         \n• Otras correcciones de errores y mejoras de diseño.
     </string>
-    <string name="release_2_1_5">• Corrección de errores y mejoras de diseño.</string>
-    <string name="release_2_1_6">• Corrección de errores y mejoras de diseño.</string>
     <string name="release_2_2_0">• Compatible con Checo e Italiano.
         \n• Multiselección de notas soportada.
         \n• Soportó una opción para abrir notas en modo lectura por defecto.

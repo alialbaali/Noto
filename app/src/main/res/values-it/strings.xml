@@ -6,14 +6,10 @@
     <string name="apply">Applica</string>
     <string name="okay">Okay</string>
     <string name="search">Cerca</string>
-    <!-- A way to support the project. -->
-    <string name="buy_me_a_coffee">Offrimi un caffè</string>
-    <!-- Description of the "Buy me a coffee" settings options. -->
-    <string name="buy_me_a_coffee_description">Se vuoi supportarmi.</string>
-    <!-- Description of the "Become a patron" settings options. -->
+    <!-- A settings option to support the project. -->
+    <string name="support_noto">Sostieni Noto</string>
+    <!-- Description of the Support Noto settings options. -->
     <string name="support_noto_description">Se vuoi assicurarti che Noto rimanga mantenuto dallo sviluppatore.</string>
-    <!-- A way to support the project. -->
-    <string name="become_a_patron">Diventa un sostenitore su Patreon</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">Altre opzioni</string>
     <!-- Options for multi-selected notes. -->
@@ -472,7 +468,8 @@
     <string name="folders_notes_count">Contatore note delle cartelle</string>
     <string name="loading_content">Caricamento contenuti</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">• Correzione bug e miglioramenti dell\'interfaccia.</string>
+    <string name="release_bug_fixes_and_design_improvements">• Correzione bug e miglioramento dell\'interfaccia.</string>
+    <string name="release_bug_fixes">• Correzione bug</string>
     <string name="release_1_8_0">• Aggiunto supporto per librerie della cassaforte protette da passcode.
         \n• Aggiunte opzioni per la chiusura automatica della cassaforte.
         \n• Aggiunto supporto per autenticazione della cassaforte tramite dati biometrici per i dispositivi supportati.
@@ -495,7 +492,6 @@
         \n• Aggiunta opzione per nascondere la toolbar in maniera predefinita.
         \n• Risolto problema con le icone delle scorciatoie statiche su dispositivi Android più vecchi.
         \n• Altri bug fix e miglioramenti del design.    </string>
-    <string name="release_2_0_1">• Risolti bug.</string>
     <string name="release_2_1_0">• Aggiunto undo/redo con la corrispettiva cronologia.
         \n• Redesign delle etichette.
         \n• Redesign delle bottom and top app bar in tutti i layouts.
@@ -521,14 +517,9 @@
         \n• Cambia stile e dimensione font in diversi layout.
         \n• Aggiunta lingua Tedesca.
         \n• Altri bug fix e miglioramenti del design.    </string>
-    <string name="release_2_1_1">• Correzione bug.</string>
-    <string name="release_2_1_2">• Correzione bug e miglioramenti del design.</string>
-    <string name="release_2_1_3">• Correzione bug e miglioramenti del design.</string>
     <string name="release_2_1_4">• Risolto problema con le scorciatoie che non funzionavano quando si usava un\'icona diversa.
         \n• Le etichette selezionate adesso appaiono per prima nella struttura della nota.
         \n• Risoluzione bug e altri miglioramenti del design.    </string>
-    <string name="release_2_1_5">• Correzione bug e miglioramenti dell\'interfaccia.</string>
-    <string name="release_2_1_6">• Correzione bug e miglioramenti dell\'interfaccia.</string>
     <string name="release_2_2_0">• Sono adesso disponibili le traduzioni in Ceco ed Italiano.
         \n• Adesso possono essere selezionate più note contemporaneamente.
         \n• Aggiunta opzione per aprire le note direttamente in modalità lettura.

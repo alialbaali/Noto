@@ -6,14 +6,10 @@
     <string name="apply">Použít</string>
     <string name="okay">Ok</string>
     <string name="search">Hledat</string>
-    <!-- A way to support the project. -->
-    <string name="buy_me_a_coffee">Kupte mi kávu</string>
-    <!-- Description of the "Buy me a coffee" settings options. -->
-    <string name="buy_me_a_coffee_description">Pokud chcete vyjádřit podporu.</string>
-    <!-- Description of the "Become a patron" settings options. -->
+    <!-- A settings option to support the project. -->
+    <string name="support_noto">Support Noto</string>
+    <!-- Description of the Support Noto settings options. -->
     <string name="support_noto_description">Pokud se chcete ujistit, že Noto zůstane zachováno.</string>
-    <!-- A way to support the project. -->
-    <string name="become_a_patron">Staňte se patronem</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">Více možností</string>
     <!-- Options for multi-selected notes. -->
@@ -510,7 +506,8 @@
     <string name="folders_notes_count">Počet položek</string>
     <string name="loading_content">Načítání obsahu</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">• Opravy chyb a vylepšení designu.</string>
+    <string name="release_bug_fixes_and_design_improvements">• Bug fixes and design improvements.</string>
+    <string name="release_bug_fixes">• Bug fixes</string>
     <string name="release_1_8_0">• Podpora pro knihovny chráněné přístupovým kódem.
         \n• Podpora pro možnosti časového limitu trezoru.
         \n• Podpora biometrického ověření trezoru na podporovaných zařízeních.
@@ -535,7 +532,6 @@
         \n• Opravte statické ikony zástupců na starších zařízeních s Androidem.
         \n• Další opravy chyb a vylepšení.
     </string>
-    <string name="release_2_0_1">• Opravy chyb.</string>
     <string name="release_2_1_0">• Podpora pro vrácení/obnovení a prohlížení jejich historie.
         \n• Zrušit popisky.
         \n• Přesunout dolní a horní panel aplikací ve všech rozloženích.
@@ -562,15 +558,10 @@
         \n• Podpora němčiny.
         \n• Další opravy chyb a vylepšení.
     </string>
-    <string name="release_2_1_1">• Opravy chyb.</string>
-    <string name="release_2_1_2">• Oprava chyb a vylepšení designu.</string>
-    <string name="release_2_1_3">• Opravy chyb a vylepšení designu.</string>
     <string name="release_2_1_4">• Opravené zkratky nefungují při použití jiné ikony.
         \n• Vybrané štítky se nyní zobrazí jako první v rozvržení poznámky.
         \n• Další opravy chyb a vylepšení.
     </string>
-    <string name="release_2_1_5">• Opravy chyb a vylepšení designu.</string>
-    <string name="release_2_1_6">• Opravy chyb a vylepšení designu.</string>
     <string name="release_2_2_0">• Podporované české a italské překlady.
         \n• Podpora vícenásobného výběru poznámek.
         \n• Podporována možnost otevřít poznámky ve výchozím nastavení v režimu čtení.

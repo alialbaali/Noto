@@ -6,14 +6,10 @@
     <string name="apply">Taikyti</string>
     <string name="okay">Gerai</string>
     <string name="search">Ieškoti</string>
-    <!-- A way to support the project. -->
-    <string name="buy_me_a_coffee">Nupirkite man kavos</string>
-    <!-- Description of the "Buy me a coffee" settings options. -->
-    <string name="buy_me_a_coffee_description">Jei norite parodyti paramą.</string>
-    <!-- Description of the "Become a patron" settings options. -->
+    <!-- A settings option to support the project. -->
+    <string name="support_noto">Palaikykite Noto</string>
+    <!-- Description of the Support Noto settings options. -->
     <string name="support_noto_description">Jei norite palaikyti Noto kūrimą.</string>
-    <!-- A way to support the project. -->
-    <string name="become_a_patron">Tapkite nariu Patreon</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">Daugiau parinkčių</string>
     <!-- Options for multi-selected notes. -->
@@ -23,10 +19,10 @@
     <string name="filtering">Filtravimas</string>
     <string name="layout">Išsidėstymas</string>
     <string name="list">Sąrašas</string>
-    <string name="inclusive">Įtraukianti</string>
-    <string name="exclusive">Išskirtinė</string>
+    <string name="inclusive">Įtraukiantis</string>
+    <string name="exclusive">Išskirtinis</string>
     <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
-    <string name="strict">Griežta</string>
+    <string name="strict">Griežtas</string>
     <string name="grid">Tinklelis</string>
     <string name="created">Sukurta %s</string>
     <string name="accessed">Atidaryta %s</string>
@@ -114,7 +110,7 @@
     <string name="new_note_cursor_position">Naujo užrašo žymeklio padėtis</string>
     <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
     <string name="open_notes_in">Atidaryti užrašus</string>
-    <string name="archive">archyve</string>
+    <string name="archive">Archyvuoti</string>
     <!-- Similar to Recent Notes filtered view but for archived notes. -->
     <string name="archived">Archyvuoti</string>
     <!-- Similar to Recent Notes filtered view but for notes that have reminders set. -->
@@ -181,7 +177,7 @@
     <string name="select_parent_folder">Pasirinkti viršaplankį</string>
     <string name="select_quick_note_folder">Pasirinkti sparčiųjų užrašų aplanką</string>
     <string name="select_main_interface">Pasirinkti pagrindinę sąsają</string>
-    <string name="pinned">Prisegtas</string>
+    <string name="pinned">Prisegti</string>
     <!-- Vault -->
     <string name="folders_vault">Aplankų saugykla</string>
     <string name="update_passcode">Naujinti slaptažodį</string>
@@ -248,28 +244,28 @@
          Such as "30 Notes • 5 Filtered".
      -->
     <plurals name="notes_filtered_count">
-        <item quantity="one">Užrašai: %1$d • Išfiltruoti %2$d</item>
-        <item quantity="few">Užrašai: %1$d • Išfiltruoti %2$d</item>
-        <item quantity="many">Užrašai: %1$d • Išfiltruoti %2$d</item>
-        <item quantity="other">Užrašai: %1$d • Išfiltruoti %2$d</item>
+        <item quantity="one">Užrašai: %1$d • Išfiltruota: %2$d</item>
+        <item quantity="few">Užrašai: %1$d • Išfiltruota: %2$d</item>
+        <item quantity="many">Užrašai: %1$d • Išfiltruota: %2$d</item>
+        <item quantity="other">Užrašai: %1$d • Išfiltruota: %2$d</item>
     </plurals>
     <!-- Selected notes count is shown when a note or multiple notes are selected.
          Such as "30 Notes • 5 Selected".
      -->
     <plurals name="notes_selected_count">
-        <item quantity="one">Užrašai: %1$d • Pasirinkti %2$d</item>
-        <item quantity="few">Užrašai: %1$d • Pasirinkti %2$d</item>
-        <item quantity="many">Užrašai: %1$d • Pasirinkti %2$d</item>
-        <item quantity="other">Užrašai: %1$d • Pasirinkti %2$d</item>
+        <item quantity="one">Užrašai: %1$d • Pasirinkta: %2$d</item>
+        <item quantity="few">Užrašai: %1$d • Pasirinkta: %2$d</item>
+        <item quantity="many">Užrašai: %1$d • Pasirinkta: %2$d</item>
+        <item quantity="other">Užrašai: %1$d • Pasirinkta: %2$d</item>
     </plurals>
     <!--  Filtered notes count is shown when a label is selected, or text is searched. Selected notes count is shown when a note or multiple notes are selected.
           Such as, "30 Notes • 3 Filtered • 8 Selected".
      -->
     <plurals name="notes_filtered_selected_count">
-        <item quantity="one">Užrašai: %1$d • Išfiltruoti %2$d • Pasirinkti %3$d</item>
-        <item quantity="few">Užrašai: %1$d • Išfiltruoti %2$d • Pasirinkti %3$d</item>
-        <item quantity="many">Užrašai: %1$d • Išfiltruoti %2$d • Pasirinkti %3$d</item>
-        <item quantity="other">Užrašai: %1$d • Išfiltruoti %2$d • Pasirinkti %3$d</item>
+        <item quantity="one">Užrašai: %1$d • Išfiltruota: %2$d • Pasirinkta: %3$d</item>
+        <item quantity="few">Užrašai: %1$d • Išfiltruota: %2$d • Pasirinkta: %3$d</item>
+        <item quantity="many">Užrašai: %1$d • Išfiltruota: %2$d • Pasirinkta: %3$d</item>
+        <item quantity="other">Užrašai: %1$d • Išfiltruota: %2$d • Pasirinkta: %3$d</item>
     </plurals>
     <plurals name="words_count">
         <item quantity="one">Žodžiai: %d</item>
@@ -279,10 +275,10 @@
     </plurals>
     <!-- Selected words count is shown when text is selected in a note. -->
     <plurals name="words_selected_count">
-        <item quantity="one">Žodžiai: %1$d • Pasirinkti %2$d</item>
-        <item quantity="few">Žodžiai: %1$d • Pasirinkti %2$d</item>
-        <item quantity="many">Žodžiai: %1$d • Pasirinkti %2$d</item>
-        <item quantity="other">Žodžiai: %1$d • Pasirinkti %2$d</item>
+        <item quantity="one">Žodžiai: %1$d • Pasirinkta: %2$d</item>
+        <item quantity="few">Žodžiai: %1$d • Pasirinkta: %2$d</item>
+        <item quantity="many">Žodžiai: %1$d • Pasirinkta: %2$d</item>
+        <item quantity="other">Žodžiai: %1$d • Pasirinkta: %2$d</item>
     </plurals>
     <string name="body">Turinys</string>
     <string name="title">Antraštė</string>
@@ -510,7 +506,8 @@
     <string name="folders_notes_count">Aplankų užrašų skaičius</string>
     <string name="loading_content">Įkeliamas turinys</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">• Klaidų taisymas ir kiti patobulinimai.</string>
+    <string name="release_bug_fixes_and_design_improvements">• Klaidų taisymas ir dizaino patobulinimai.</string>
+    <string name="release_bug_fixes">• Klaidų taisymas</string>
     <string name="release_1_8_0">• Slaptažodžiu apsaugotos saugyklos.
         \n• Saugyklų skiriamojo laiko parinktys.
         \n• Biometrinis autentifikavimas palaikomuose įrenginiuose.
@@ -535,7 +532,6 @@
         \n• Pataisytos statinės nuorodų piktogramos senesniuose Android įrenginiuose.
         \n• Klaidų taisymas ir kiti patobulinimai.
     </string>
-    <string name="release_2_0_1">• Klaidų taisymas.</string>
     <string name="release_2_1_0">• Atkūrimo ir perdarymo palaikymas bei jų istorijos peržiūra.
         \n• Perkurtos žymenos.
         \n• Perkurtos apatinės ir viršutinės programėlės juostos visuose išsidėstymuose.
@@ -562,15 +558,10 @@
         \n• Vokiečių kalba.
         \n• Klaidų taisymas ir kiti patobulinimai.
     </string>
-    <string name="release_2_1_1">• Klaidų taisymas.</string>
-    <string name="release_2_1_2">• Klaidų taisymas ir kiti patobulinimai.</string>
-    <string name="release_2_1_3">• Klaidų taisymas ir kiti patobulinimai.</string>
     <string name="release_2_1_4">• Pataisytas nuorodų neveikimas naudojant kitą piktogramą.
         \n• Pasirinktos žymenos užrašų išsidėstyme pasirodo pirmiausiai.
         \n• Klaidų taisymas ir kiti patobulinimai.
     </string>
-    <string name="release_2_1_5">• Klaidų taisymas ir kiti patobulinimai.</string>
-    <string name="release_2_1_6">• Klaidų taisymas ir kiti patobulinimai.</string>
     <string name="release_2_2_0">• Čekų ir italų kalbos.
         \n• Grupinis užrašų pasirinkimas.
         \n• Parinktis numatytai atidaryti užrašus skaitymo režime.

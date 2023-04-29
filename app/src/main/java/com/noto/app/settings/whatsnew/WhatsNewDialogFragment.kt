@@ -12,9 +12,13 @@ import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.WhatsNewDialogFragmentBinding
 import com.noto.app.domain.model.Release
 import com.noto.app.domain.model.Release.Changelog
-import com.noto.app.domain.model.Release_2_2_1
+import com.noto.app.domain.model.Release_2_2_3
 import com.noto.app.settings.SettingsViewModel
-import com.noto.app.util.*
+import com.noto.app.util.BounceEdgeEffectFactory
+import com.noto.app.util.VerticalListItemAnimator
+import com.noto.app.util.isScrollingAsFlow
+import com.noto.app.util.stringResource
+import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,8 +29,8 @@ class WhatsNewDialogFragment : BaseDialogFragment() {
 
     private val currentRelease: Release? by lazy {
         context?.let { context ->
-            val changelog = Changelog(context.stringResource(R.string.release_2_2_1))
-            Release_2_2_1(changelog)
+            val changelog = Changelog(context.stringResource(R.string.release_2_2_3))
+            Release_2_2_3(changelog)
         }
     }
 

@@ -6,14 +6,10 @@
     <string name="apply">طبّق</string>
     <string name="okay">حسنا</string>
     <string name="search">البحث</string>
-    <!-- A way to support the project. -->
-    <string name="buy_me_a_coffee">اشتري لي قهوة</string>
-    <!-- Description of the "Buy me a coffee" settings options. -->
-    <string name="buy_me_a_coffee_description">إذا كنت ترغب في عرض الدعم.</string>
-    <!-- Description of the "Become a patron" settings options. -->
+    <!-- A settings option to support the project. -->
+    <string name="support_noto">دعم Noto</string>
+    <!-- Description of the Support Noto settings options. -->
     <string name="support_noto_description">إذا كنت ترغب في التأكد من أن Noto يبقى قائما.</string>
-    <!-- A way to support the project. -->
-    <string name="become_a_patron">اصبح راعياً</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">المزيد من الخيارات</string>
     <!-- Options for multi-selected notes. -->
@@ -317,7 +313,7 @@
     <string name="redo">إعادة</string>
     <string name="redo_history">تاريخ الإعادة</string>
     <plurals name="share_note">
-        <item quantity="zero">Share %d notes</item>
+        <item quantity="zero">شارك الملاحظة</item>
         <item quantity="one">شارك الملاحظة</item>
         <item quantity="two">شارك الملاحظتين</item>
         <item quantity="few">شارك %d الملاحظات</item>
@@ -549,6 +545,7 @@
     <string name="loading_content">جاري تحميل المحتوى</string>
     <!-- Releases -->
     <string name="release_bug_fixes_and_design_improvements">• إصلاح الأخطاء وتحسين التصميم.</string>
+    <string name="release_bug_fixes">• إصلاح الأخطاء</string>
     <string name="release_1_8_0">• دعم خزينة الدفاتر المحمية برمز المرور.
         \n• دعم خيارات مهلة الخزينة.
         \n• دعم  تفعيل توثيق البصمة على الأجهزة المدعومة.
@@ -573,7 +570,6 @@
         \n• إصلاح أيقونات الاختصارات الثابتة على أجهزة الأندرويد القديمة.
         \n• إصلاحات الأخطاء الأخرى وتحسين التصميم.
     </string>
-    <string name="release_2_0_1">• إصلاح الأخطاء.</string>
     <string name="release_2_1_0">• دعم التراجع/إعادة عرض السجل الخاص بهم.
         \n• إعادة تصميم الملصقات.
         \n• إعادة تصميم شريط التطبيقات أسفل وأعلى.
@@ -597,15 +593,10 @@
         \n• تغيير وزن الخط وحجم النص.
         \n• دعم الألمانية.
         \n• إصلاح الأخطاء وتحسين التصميم.    </string>
-    <string name="release_2_1_1">• إصلاح الأخطاء.</string>
-    <string name="release_2_1_2">• إصلاح الأخطاء وتحسين التصميم.</string>
-    <string name="release_2_1_3">• إصلاح الأخطاء وتحسين التصميم.</string>
     <string name="release_2_1_4">• تم أصلاح الاختصارات لا تعمل عند استخدام أيقونة مختلفة.
         \n• التسميات المحددة تظهر الآن أولا في تخطيط الملاحظة.
         \n• إصلاحات الأخطاء الأخرى وتحسين التصميم.
     </string>
-    <string name="release_2_1_5">• إصلاح الأخطاء وتحسين التصميم.</string>
-    <string name="release_2_1_6">• إصلاح الأخطاء وتحسين التصميم.</string>
     <string name="release_2_2_0">• دعم لغات التشيكية والإيطالية.
         \n• دعم تحديد الملاحظات.
         \n• دعم خيار لفتح الملاحظات في وضع القراءة افتراضيا.

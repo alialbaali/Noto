@@ -6,14 +6,10 @@
     <string name="apply">Terapkan</string>
     <string name="okay">Baik</string>
     <string name="search">Cari</string>
-    <!-- A way to support the project. -->
-    <string name="buy_me_a_coffee">Belikan saya kopi</string>
-    <!-- Description of the "Buy me a coffee" settings options. -->
-    <string name="buy_me_a_coffee_description">Jika kamu ingin menunjukan dukungan.</string>
-    <!-- Description of the "Become a patron" settings options. -->
+    <!-- A settings option to support the project. -->
+    <string name="support_noto">Dukung Noto</string>
+    <!-- Description of the Support Noto settings options. -->
     <string name="support_noto_description">Jika kamu ingin memastikan Noto tetap terawat.</string>
-    <!-- A way to support the project. -->
-    <string name="become_a_patron">Jadilah patron</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">Pilihan lain</string>
     <!-- Options for multi-selected notes. -->
@@ -453,7 +449,8 @@
     <string name="folders_notes_count">Jumlah catatan map</string>
     <string name="loading_content">Memuat konten</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">• Perbaikan bug dan peningkatan desain.</string>
+    <string name="release_bug_fixes_and_design_improvements">• Perbaikan bug dan peningkatan design.</string>
+    <string name="release_bug_fixes">• Perbaikan bug</string>
     <string name="release_1_8_0">• Dukungan untuk brankas perpustakaan yang dilindungi kode akses.
         \n• Dukungan untuk opsi batas waktu brankas.
         \n• Dukungan untuk autentikasi brankas biometrik pada perangkat yang didukung.
@@ -478,7 +475,6 @@
         \n• Memperbaiki ikon pintasan statis di perangkat Android lama.
         \n• Perbaikan bug dan peningkatan desain lainnya.
     </string>
-    <string name="release_2_0_1">• Perbaikan bug.</string>
     <string name="release_2_1_0">• Dukungan untuk membatalkan/mengulang dan melihat history.
         \n• Mendesain ulang label.
         \n• Mendesain ulang bilah aplikasi bawah dan atas di semua tata letak.
@@ -505,15 +501,10 @@
         \n• Mendukung bahasa Jerman.
         \n• Perbaikan bug dan peningkatan desain lainnya.
     </string>
-    <string name="release_2_1_1">• Perbaikan bug.</string>
-    <string name="release_2_1_2">• Perbaikan bug dan peningkatan desain.</string>
-    <string name="release_2_1_3">• Perbaikan bug dan peningkatan desain.</string>
     <string name="release_2_1_4">• Memperbaiki pintasan yang tidak berfungsi saat menggunakan ikon yang berbeda.
         \n• Label yang dipilih sekarang muncul pertama kali di tata letak catatan.
         \n• Perbaikan bug dan peningkatan desain lainnya.
     </string>
-    <string name="release_2_1_5">• Perbaikan bug dan peningkatan desain.</string>
-    <string name="release_2_1_6">• Perbaikan bug dan peningkatan desain.</string>
     <string name="release_2_2_0">• Mendukung bahasa Ceko dan Italia.
          \n• Mendukung multi-pilihan untuk catatan.
          \n• Mendukung opsi untuk membuka catatan dalam Mode Membaca secara default.
