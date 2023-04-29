@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">If you\'d like to show support.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">If you\'d like to make sure Noto remains maintained.</string>
+    <string name="support_noto_description">If you\'d like to make sure Noto remains maintained.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Become a patron</string>
     <!-- More options for folder, note, etc... -->
@@ -472,6 +472,7 @@
     <string name="folders_notes_count">Folders notes count</string>
     <string name="loading_content">உள்ளடக்கத்தை ஏற்றுகிறது</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• Bug fixes and design improvements.</string>
     <string name="release_1_8_0">• Support for passcode protected libraries vault.
         \n• Support for vault timeout options.
         \n• Support for biometric vault authentication on supported devices.

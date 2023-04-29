@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">Ne de olsa bir fincan kahvenin kırk yıl hatırı var.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">Beni Patreon üzerinden destekleyin!</string>
+    <string name="support_noto_description">Beni Patreon üzerinden destekleyin!</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Destekçim olun</string>
     <!-- More options for folder, note, etc... -->
@@ -472,6 +472,7 @@
     <string name="folders_notes_count">Not sayısı</string>
     <string name="loading_content">İçerik yükleniyor</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• Hata düzeltmeleri ve tasarımda iyileştirmeler.</string>
     <string name="release_1_8_0">• Şifre korumalı kitaplık kasası desteği
         \n• Kasa zaman aşımı ayarları
         \n• Desteklenen cihazlar için biyometrik doğrulama özelliği
@@ -500,8 +501,8 @@
     <string name="release_2_0_1">• Hata düzeltmeleri.</string>
     <string name="release_2_1_0">• Geri alma/yeniden yazma özelliği ve geri al/yeniden yaz geçmişi eklendi.\n• Etiketler yeniden tasarlandı.\n• Tüm düzen türlerinde alt ve üst uygulama çubuğu yeniden tasarlandı.\n• Ana menü yeniden tasarlandı.\n• Klasör oluşturma/düzenleme arayüzü yeniden tasarlandı.\n• Notlar için gruplandırma düzeni özelliği eklendi.\n• Etiketleri veya notları sürüklerken yükseklik eklendi.\n• Klasör, not ve etiket menülerinde önizleme desteği eklendi.\n• Tarih formatı iyileştirildi.\n• Notlarda vurgu rengi değiştirildi.\n• Uygulamadan çıkmadan önce klasör ekranında gezinilecek.\n• Material You desteği (Material 3).\n• Başlangıç ekranı yeniden tasarlandı.\n• Okuma modu iyileştirildi.\n• Klasör ve notlarda kaydırma pozisyonunu hatırlama desteği eklendi.\n• Etiket ve klasör renkleri için kullanılan animasyonları devre dışı bırakabilme desteği eklendi.\n• Verileri içeri aktarmada yaşanan sorunlar giderildi.\n• Android 11 ve üzerinde kasayı açınca yaşanan çökme sorunu giderildi.\n• Geri al/yeniden yaz özelliklerini kaydırma hareketleriyle kullanabilme desteği eklendi.\n• Etiketleri dahil veya hariç olarak filtreleme desteği eklendi.\n• Uygulama simgesi yeniden tasarlandı.\n• Uygulama simgesi artık değiştirilebilir.\n• Farklı düzenlerde yazı tipi şeklini ve yazı boyutunu değiştirebilme desteği eklendi.\n• Almanca yerelleştirme eklendi.\n• Diğer hata düzeltmeleri ve tasarım iyileştirmeleri.</string>
     <string name="release_2_1_1">• Hata düzeltmeleri.</string>
-    <string name="release_2_1_2">- Hata düzeltmeleri ve tasarımda iyileştirmeler.</string>
-    <string name="release_2_1_3">- Hata düzeltmeleri ve tasarımda iyileştirmeler.</string>
+    <string name="release_2_1_2">• Hata düzeltmeleri ve tasarımda iyileştirmeler.</string>
+    <string name="release_2_1_3">• Hata düzeltmeleri ve tasarımda iyileştirmeler.</string>
     <string name="release_2_1_4">•  Farklı bir simge kullanıldığında kısayolların çalışmaması hatası giderildi.
         \n• Seçilen etiketler artık not arayüzünün başında görünecek.
         \n• Diğer hata düzeltmeleri ve tasarım iyileştirmeleri.

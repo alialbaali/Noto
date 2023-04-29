@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">Si quieres mostrar tu apoyo.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">Si desea asegurarse de que Noto permanezca en mantenimiento.</string>
+    <string name="support_noto_description">Si desea asegurarse de que Noto permanezca en mantenimiento.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Conviértete en un mecenas</string>
     <!-- More options for folder, note, etc... -->
@@ -472,6 +472,7 @@
     <string name="folders_notes_count">Contador de notas de carpetas</string>
     <string name="loading_content">Cargando contenido</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• Corrección de errores y mejoras de diseño.</string>
     <string name="release_1_8_0">• Soporte para librerías protegidas con código de acceso.
         \n• Soporte para opciones de tiempo de espera de bóveda.
         \n• Soporte para autenticación de bóveda biométrica en dispositivos compatibles.

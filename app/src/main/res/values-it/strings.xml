@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">Se vuoi supportarmi.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">Se vuoi assicurarti che Noto rimanga mantenuto dallo sviluppatore.</string>
+    <string name="support_noto_description">Se vuoi assicurarti che Noto rimanga mantenuto dallo sviluppatore.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Diventa un sostenitore su Patreon</string>
     <!-- More options for folder, note, etc... -->
@@ -472,6 +472,7 @@
     <string name="folders_notes_count">Contatore note delle cartelle</string>
     <string name="loading_content">Caricamento contenuti</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• Correzione bug e miglioramenti dell\'interfaccia.</string>
     <string name="release_1_8_0">• Aggiunto supporto per librerie della cassaforte protette da passcode.
         \n• Aggiunte opzioni per la chiusura automatica della cassaforte.
         \n• Aggiunto supporto per autenticazione della cassaforte tramite dati biometrici per i dispositivi supportati.
