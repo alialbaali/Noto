@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">Si vous souhaitez montrer votre soutien.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">Si vous voulez vous assurer que Noto reste maintenu.</string>
+    <string name="support_noto_description">Si vous voulez vous assurer que Noto reste maintenu.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Soutenez-nous</string>
     <!-- More options for folder, note, etc... -->
@@ -472,6 +472,7 @@
     <string name="folders_notes_count">Nombre de notes des dossiers</string>
     <string name="loading_content">Chargement du contenu</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• Corrections de bugs et améliorations mineures.</string>
     <string name="release_1_8_0">• Prise en charge du coffre-fort des bibliothèques protégées par un code d\'accès.
         \n• Prise en charge des options d\'expiration du coffre-fort.
         \n• Prise en charge de l\'authentification biométriques sur les périphériques pris en charge pour le coffre-fort.

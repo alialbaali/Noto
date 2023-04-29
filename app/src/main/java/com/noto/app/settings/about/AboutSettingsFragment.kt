@@ -20,6 +20,8 @@ import com.noto.app.components.Screen
 import com.noto.app.settings.SettingsItem
 import com.noto.app.settings.SettingsItemType
 import com.noto.app.settings.SettingsSection
+import com.noto.app.settings.SupportNotoColor
+import com.noto.app.settings.SupportNotoUrl
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
 import com.noto.app.util.setupMixedTransitions
@@ -43,8 +45,6 @@ private val TranslationEmailBody = """
     
     Regards,
 """.trimIndent()
-private const val BuyMeACoffeeUrl = "https://www.buymeacoffee.com/alialbaali"
-private const val BecomeAPatronUrl = "https://www.patreon.com/alialbaali"
 private const val PrivacyPolicyUrl = "https://github.com/alialbaali/Noto/blob/master/PrivacyPolicy.md"
 
 class AboutSettingsFragment : Fragment() {
@@ -89,25 +89,16 @@ class AboutSettingsFragment : Fragment() {
                         )
 
                         SettingsItem(
-                            title = stringResource(id = R.string.buy_me_a_coffee),
+                            title = stringResource(id = R.string.support_noto),
                             type = SettingsItemType.None,
                             onClick = {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BuyMeACoffeeUrl))
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(SupportNotoUrl))
                                 startActivity(intent)
                             },
-                            description = stringResource(id = R.string.buy_me_a_coffee_description),
-                            painter = painterResource(id = R.drawable.ic_bmc_logo)
-                        )
-
-                        SettingsItem(
-                            title = stringResource(id = R.string.become_a_patron),
-                            type = SettingsItemType.None,
-                            onClick = {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(BecomeAPatronUrl))
-                                startActivity(intent)
-                            },
-                            description = stringResource(id = R.string.become_a_patron_description),
-                            painter = painterResource(id = R.drawable.ic_patreon_logo)
+                            description = stringResource(id = R.string.support_noto_description),
+                            painter = painterResource(id = R.drawable.ic_round_favorite_24),
+                            painterColor = SupportNotoColor,
+                            titleColor = SupportNotoColor,
                         )
                     }
 

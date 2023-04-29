@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">Wenn Sie Ihre Unterstützung zeigen möchten.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">Wenn Sie sicherstellen möchten, dass Noto auch in Zukunft gepflegt wird.</string>
+    <string name="support_noto_description">Wenn Sie sicherstellen möchten, dass Noto auch in Zukunft gepflegt wird.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Werde Förderer/in</string>
     <!-- More options for folder, note, etc... -->
@@ -472,6 +472,7 @@
     <string name="folders_notes_count">Anzahl der Notizen im Ordner</string>
     <string name="loading_content">Inhalt wird geladen</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• Fehlerkorrekturen und Verbesserungen des Designs.</string>
     <string name="release_1_8_0">• Unterstützung für durch Zugangscode geschützte Ordner.
         \n• Option für Unterstützung von Zeitüberschreitung bei geschützten Ordnern.
         \n• Unterstützung für biometrische Authentifizierung auf unterstützten Geräten.

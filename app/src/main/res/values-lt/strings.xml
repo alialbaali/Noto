@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">Jei norite parodyti paramą.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">Jei norite palaikyti Noto kūrimą.</string>
+    <string name="support_noto_description">Jei norite palaikyti Noto kūrimą.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Tapkite nariu Patreon</string>
     <!-- More options for folder, note, etc... -->
@@ -510,6 +510,7 @@
     <string name="folders_notes_count">Aplankų užrašų skaičius</string>
     <string name="loading_content">Įkeliamas turinys</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• Klaidų taisymas ir kiti patobulinimai.</string>
     <string name="release_1_8_0">• Slaptažodžiu apsaugotos saugyklos.
         \n• Saugyklų skiriamojo laiko parinktys.
         \n• Biometrinis autentifikavimas palaikomuose įrenginiuose.

@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">以表示您的支持。</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">希望 Noto 笔记能保持维护。</string>
+    <string name="support_noto_description">希望 Noto 笔记能保持维护。</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">在 Patron 成为一名赞助者</string>
     <!-- More options for folder, note, etc... -->
@@ -453,6 +453,7 @@
     <string name="folders_notes_count">文件夹内的笔记数</string>
     <string name="loading_content">加载内容</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• Bug fixes and design improvements.</string>
     <string name="release_1_8_0">• Support for passcode protected libraries vault.
         \n• Support for vault timeout options.
         \n• Support for biometric vault authentication on supported devices.

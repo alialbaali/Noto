@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">Pokud chcete vyjádřit podporu.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">Pokud se chcete ujistit, že Noto zůstane zachováno.</string>
+    <string name="support_noto_description">Pokud se chcete ujistit, že Noto zůstane zachováno.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Staňte se patronem</string>
     <!-- More options for folder, note, etc... -->
@@ -510,6 +510,7 @@
     <string name="folders_notes_count">Počet položek</string>
     <string name="loading_content">Načítání obsahu</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• Opravy chyb a vylepšení designu.</string>
     <string name="release_1_8_0">• Podpora pro knihovny chráněné přístupovým kódem.
         \n• Podpora pro možnosti časového limitu trezoru.
         \n• Podpora biometrického ověření trezoru na podporovaných zařízeních.

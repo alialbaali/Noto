@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">إذا كنت ترغب في عرض الدعم.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">إذا كنت ترغب في التأكد من أن Noto يبقى قائما.</string>
+    <string name="support_noto_description">إذا كنت ترغب في التأكد من أن Noto يبقى قائما.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">اصبح راعياً</string>
     <!-- More options for folder, note, etc... -->
@@ -548,6 +548,7 @@
     <string name="folders_notes_count">عدد ملاحظات المجلدات</string>
     <string name="loading_content">جاري تحميل المحتوى</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• إصلاح الأخطاء وتحسين التصميم.</string>
     <string name="release_1_8_0">• دعم خزينة الدفاتر المحمية برمز المرور.
         \n• دعم خيارات مهلة الخزينة.
         \n• دعم  تفعيل توثيق البصمة على الأجهزة المدعومة.

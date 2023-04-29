@@ -11,7 +11,7 @@
     <!-- Description of the "Buy me a coffee" settings options. -->
     <string name="buy_me_a_coffee_description">Jika kamu ingin menunjukan dukungan.</string>
     <!-- Description of the "Become a patron" settings options. -->
-    <string name="become_a_patron_description">Jika kamu ingin memastikan Noto tetap terawat.</string>
+    <string name="support_noto_description">Jika kamu ingin memastikan Noto tetap terawat.</string>
     <!-- A way to support the project. -->
     <string name="become_a_patron">Jadilah patron</string>
     <!-- More options for folder, note, etc... -->
@@ -453,6 +453,7 @@
     <string name="folders_notes_count">Jumlah catatan map</string>
     <string name="loading_content">Memuat konten</string>
     <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">• Perbaikan bug dan peningkatan desain.</string>
     <string name="release_1_8_0">• Dukungan untuk brankas perpustakaan yang dilindungi kode akses.
         \n• Dukungan untuk opsi batas waktu brankas.
         \n• Dukungan untuk autentikasi brankas biometrik pada perangkat yang didukung.
