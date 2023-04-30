@@ -25,6 +25,7 @@
     </a>
 </div>
 
+<br />
 
 <p align="center">
     <a href="#download">Download</a>
