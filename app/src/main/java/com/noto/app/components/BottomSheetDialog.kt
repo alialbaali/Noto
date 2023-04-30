@@ -14,6 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.onGloballyPositioned
@@ -33,6 +34,7 @@ private val TipWidth = 30.dp
 fun BaseDialogFragment.BottomSheetDialog(
     title: String,
     modifier: Modifier = Modifier,
+    headerColor: Color? = null,
     painter: Painter? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
@@ -80,8 +82,8 @@ fun BaseDialogFragment.BottomSheetDialog(
                 ) {
                     if (painter != null) Icon(painter = painter, contentDescription = title, modifier = Modifier.align(Alignment.TopStart))
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        Tip()
-                        Title(title)
+                        Tip(headerColor ?: MaterialTheme.colorScheme.primary)
+                        Title(title, headerColor ?: MaterialTheme.colorScheme.primary)
                     }
                 }
             }
@@ -90,22 +92,22 @@ fun BaseDialogFragment.BottomSheetDialog(
 }
 
 @Composable
-private fun ColumnScope.Tip(modifier: Modifier = Modifier) {
+private fun ColumnScope.Tip(color: Color, modifier: Modifier = Modifier) {
     Box(
         modifier
             .padding(bottom = NotoTheme.dimensions.extraSmall)
             .size(TipWidth, TipHeight)
             .align(Alignment.CenterHorizontally)
-            .background(MaterialTheme.colorScheme.primary, MaterialTheme.shapes.extraLarge)
+            .background(color, MaterialTheme.shapes.extraLarge)
     )
 }
 
 @Composable
-private fun Title(title: String, modifier: Modifier = Modifier) {
+private fun Title(title: String, color: Color, modifier: Modifier = Modifier) {
     Text(
         text = title,
         modifier = modifier.padding(top = NotoTheme.dimensions.extraSmall),
         style = MaterialTheme.typography.titleMedium,
-        color = MaterialTheme.colorScheme.onBackground
+        color = color,
     )
 }

@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
-import com.noto.app.databinding.NoteListFilteringDialogFragmentBinding
+import com.noto.app.components.BottomSheetDialog
+import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.FilteringType
-import com.noto.app.util.colorResource
-import com.noto.app.util.stringResource
+import com.noto.app.toColor
 import com.noto.app.util.toResource
-import com.noto.app.util.withBinding
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -29,37 +33,24 @@ class NoteListFilteringDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = NoteListFilteringDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        tb.tvDialogTitle.text = context?.stringResource(R.string.filtering)
+    ): View? = context?.let { context ->
+        ComposeView(context).apply {
+            setContent {
+                val folder by viewModel.folder.collectAsState()
+                val types = remember { FilteringType.values() }
 
-        viewModel.folder
-            .onEach { folder ->
-                context?.let { context ->
-                    val color = context.colorResource(folder.color.toResource())
-                    tb.tvDialogTitle.setTextColor(color)
-                    tb.vHead.background?.mutate()?.setTint(color)
-                    when (folder.filteringType) {
-                        FilteringType.Inclusive -> rbInclusive.isChecked = true
-                        FilteringType.Exclusive -> rbExclusive.isChecked = true
-                        FilteringType.Strict -> rbStrict.isChecked = true
+                BottomSheetDialog(title = stringResource(R.string.filtering), headerColor = folder.color.toColor()) {
+                    types.forEach { type ->
+                        SelectableDialogItem(
+                            selected = folder.filteringType == type,
+                            onClick = { viewModel.updateFiltering(type).invokeOnCompletion { dismiss() } },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Text(text = stringResource(id = type.toResource()))
+                        }
                     }
                 }
             }
-            .launchIn(lifecycleScope)
-
-        rbInclusive.setOnClickListener {
-            viewModel.updateFiltering(FilteringType.Inclusive)
-                .invokeOnCompletion { dismiss() }
-        }
-
-        rbExclusive.setOnClickListener {
-            viewModel.updateFiltering(FilteringType.Exclusive)
-                .invokeOnCompletion { dismiss() }
-        }
-
-        rbStrict.setOnClickListener {
-            viewModel.updateFiltering(FilteringType.Strict)
-                .invokeOnCompletion { dismiss() }
         }
     }
 }
