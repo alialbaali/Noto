@@ -223,10 +223,10 @@ Contains all the UI logic.
 
 <h1 align="center">
   <a href="https://www.patreon.com/alialbaali">
-    <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="235"/>
+    <img src="images/Patreon.png" alt="Become a Patron" width="235"/>
   </a> 
   <a href="https://www.buymeacoffee.com/alialbaali" target="_blank">
-      <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="200">
+      <img src="images/BMC.png" alt="Buy Me A Coffee" width="200">
   </a>
 </h1>
 
