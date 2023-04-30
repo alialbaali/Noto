@@ -214,11 +214,9 @@ Contains all the UI logic.
 ## Community
 
 <div align="center">
-    <div style="background-color: #ff4500; margin: 0; padding: 8px; border-radius: 8px; display: inline-block; overflow: hidden;">
-        <a href="https://www.reddit.com/r/notoapp/">
-            <img src="https://github.com/alialbaali/Noto/blob/readme/images/Reddit%20Logo/On%20Orangered/PNG/reddit_logo_horizontal_on_orangered.png?raw=true" alt="Reddit" width="150" style="display: block;" />
-        </a>
-    </div>
+  <a href="https://www.reddit.com/r/notoapp/">
+    <img src="images/Reddit.png" alt="Reddit" width="200"/>
+  </a>
 </div>
 
 ## Support
