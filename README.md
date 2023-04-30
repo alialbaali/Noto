@@ -222,14 +222,11 @@ Contains all the UI logic.
 ## Support
 
 <h1 align="center">
-    <div>
-        <a href="https://www.patreon.com/alialbaali">
-            <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="235" />
-        </a>
-    </div>
-    <a href="https://www.buymeacoffee.com/alialbaali" target="_blank">
-        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="200" />
-    </a>
+  <a href="https://www.patreon.com/alialbaali">
+    <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="235"/>
+  </a> <a href="https://www.buymeacoffee.com/alialbaali" target="_blank">
+      <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="200">
+  </a>
 </h1>
 
 ## License
