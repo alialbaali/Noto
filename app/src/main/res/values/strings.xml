@@ -19,10 +19,18 @@
     <string name="filtering">Filtering</string>
     <string name="layout">Layout</string>
     <string name="list">List</string>
+    <!-- Label filtering mode -->
     <string name="inclusive">Inclusive</string>
+    <!-- Inclusive filtering mode description -->
+    <string name="inclusive_description">Display notes that have <b>any</b> of the selected labels.</string>
+    <!-- Label filtering mode -->
     <string name="exclusive">Exclusive</string>
-    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <!-- Exclusive filtering mode description -->
+    <string name="exclusive_description">Display notes that have <b>all</b> the selected labels, nothing less.</string>
+    <!-- Label filtering mode -->
     <string name="strict">Strict</string>
+    <!-- Strict filtering mode description -->
+    <string name="strict_description">Display notes that have <b>only</b> the selected labels, nothing less, nothing more.</string>
     <string name="grid">Grid</string>
     <string name="created">Created %s</string>
     <string name="accessed">Accessed %s</string>
@@ -553,7 +561,7 @@
 
     <!-- Releases -->
     <string name="release_bug_fixes_and_design_improvements">• Bug fixes and design improvements.</string>
-    <string name="release_bug_fixes">• Bug fixes</string>
+    <string name="release_bug_fixes">• Bug fixes.</string>
 
     <string name="release_1_8_0">• Support for passcode protected libraries vault.
         \n• Support for vault timeout options.

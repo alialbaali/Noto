@@ -127,6 +127,12 @@ fun FilteringType.toResource(): Int = when (this) {
     FilteringType.Strict -> R.string.strict
 }
 
+fun FilteringType.toDescriptionResource(): Int = when (this) {
+    FilteringType.Inclusive -> R.string.inclusive_description
+    FilteringType.Exclusive -> R.string.exclusive_description
+    FilteringType.Strict -> R.string.strict_description
+}
+
 val Number.dp
     get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
