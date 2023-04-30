@@ -5,23 +5,23 @@
 </h1>
 
 <div align="center">
-    <a>
-        <img src="/images/Badges/Android.svg" style="border-radius: 4px;" />
+    <a href="https://developer.android.com/" target="_blank">
+        <img src="images/badges/Android.svg" alt="Android" />
     </a>
-    <a>
-        <img src="/images/Badges/Kotlin.svg" alt="Kotlin" style="border-radius: 4px;" />
+    <a href="https://kotlinlang.org/" target="_blank">
+        <img src="images/badges/Kotlin.svg" alt="Kotlin" />
     </a>
-    <a href="https://www.patreon.com/alialbaali">
-        <img src="/images/Badges/Patreon.svg" style="border-radius: 4px;" />
+    <a href="https://www.patreon.com/alialbaali" target="_blank">
+        <img src="images/badges/Patreon.svg" alt="Patreon" />
     </a>
-    <a href="https://www.buymeacoffee.com/alialbaali">
-        <img src="/images/Badges/BMC.svg" alt="BuyMeACoffee" style="border-radius: 4px;" />
+    <a href="https://www.buymeacoffee.com/alialbaali" target="_blank">
+        <img src="images/badges/BMC.svg" alt="Buy Me A Coffee" />
     </a>
-    <a href="https://www.reddit.com/r/notoapp/">
-        <img src="/images/Badges/Reddit.svg" alt="Reddit" style="border-radius: 4px;" />
+    <a href="https://www.reddit.com/r/notoapp/" target="_blank">
+        <img src="images/badges/Reddit.svg" alt="Reddit" />
     </a>
-    <a href="/LICENSE.md">
-        <img src="/images/Badges/Apache.svg" alt="License" style="border-radius: 4px;" />
+    <a href="/LICENSE.md" target="_blank">
+        <img src="images/badges/Apache.svg" alt="License" />
     </a>
 </div>
 
@@ -50,13 +50,13 @@
 
 <div align="center">
     <h4><b>You can get Noto from one of the links below!</b></h4>
-    <a href="https://play.google.com/store/apps/details?id=com.noto">
+    <a href="https://play.google.com/store/apps/details?id=com.noto" target="_blank">
         <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="80" />
     </a>
-    <a href="https://apt.izzysoft.de/fdroid/index/apk/com.noto">
+    <a href="https://apt.izzysoft.de/fdroid/index/apk/com.noto" target="_blank">
         <img src="images/get-it-on-fdroid-en-us.svg" alt="Get it on F-Droid" height="80" />
     </a>
-    <a href="https://github.com/alialbaali/Noto/releases/latest">
+    <a href="https://github.com/alialbaali/Noto/releases/latest" target="_blank">
         <img src="images/get-it-on-github.png" alt="Get it from GitHub" height="80" />
     </a>
 </div>
@@ -150,27 +150,27 @@ Android apps.
 ## Translation and Localization
 
 <p>
-  If you would like to translate the app, please contact me via <a href="mailto:ali@albaali.com">email</a>.
+  If you would like to translate the app, please contact me via <a href="mailto:noto@alialbaali.com">email</a>.
 </p>
 
 #### Special thanks to:
 
-- <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a>, and <a href="https://sakci.me">Alparslan Şakçi</a> for
+- <a href="https://linkedin.com/in/nuraysabri/" target="_blank">Nuray Sabri</a>, and <a href="https://sakci.me" target="_blank">Alparslan Şakçi</a> for
   the Turkish localization.
-- <a href="https://github.com/faus32">Faus AM</a> for the Spanish localization.
-- <a href="https://github.com/kernoeb">Kernoeb</a>, and <a href="https://geoffreycrofte.com">Geoffrey Crofte</a> for the
+- <a href="https://github.com/faus32" target="_blank">Faus AM</a> for the Spanish localization.
+- <a href="https://github.com/kernoeb" target="_blank">Kernoeb</a>, and <a href="https://geoffreycrofte.com" target="_blank">Geoffrey Crofte</a> for the
   French localization.
-- <a href="https://github.com/matteolomba">Matteo Lombardi</a>, and <a href="https://github.com/SimoneG97">SimoneG</a>
+- <a href="https://github.com/matteolomba" target="_blank">Matteo Lombardi</a>, and <a href="https://github.com/SimoneG97" target="_blank">SimoneG</a>
   for the Italian localization.
-- <a href="https://github.com/vikdevelop">Viktor Novák</a> for the Czech localization.
-- <a href="http://github.com/ErnestasKaralius">Ernestas Karalius</a> for the Lithuanian localization.
-- <a href="https://steamcommunity.com/id/oliverberry">李華</a> for the Simplified Chinese localization.
+- <a href="https://github.com/vikdevelop" target="_blank">Viktor Novák</a> for the Czech localization.
+- <a href="http://github.com/ErnestasKaralius" target="_blank">Ernestas Karalius</a> for the Lithuanian localization.
+- <a href="https://steamcommunity.com/id/oliverberry" target="_blank">李華</a> for the Simplified Chinese localization.
 - Uli N for the German localization.
-- <a href="https://angellabs.xyz">Angel C.</a>
+- <a href="https://angellabs.xyz" target="_blank">Angel C.</a>
 
 ## App Icons
 
-#### App icons use <a href="https://www.figma.com/community/file/830405806109119447/">Collection of Gradients</a> published by <a href="https://geoffreycrofte.com/">Geoffrey Crofte</a> licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+#### App icons use <a href="https://www.figma.com/community/file/830405806109119447/" target="_blank">Collection of Gradients</a> published by <a href="https://geoffreycrofte.com/" target="_blank">Geoffrey Crofte</a> licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>.
 
 ## Architecture
 
@@ -214,8 +214,8 @@ Contains all the UI logic.
 ## Community
 
 <div align="center">
-  <a href="https://www.reddit.com/r/notoapp/">
-    <img src="images/Reddit.png" alt="Reddit" width="200"/>
+  <a href="https://www.reddit.com/r/notoapp/" target="_blank">
+    <img src="images/Reddit.png" alt="Reddit" width="150"/>
   </a>
 </div>
 
