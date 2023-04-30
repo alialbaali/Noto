@@ -491,7 +491,10 @@ class FolderFragment : Fragment() {
                                         } else {
                                             onLongClickListener { _ ->
                                                 viewModel.enableSelection()
-                                                viewModel.selectNote(model.note.id)
+                                                if (model.isSelected)
+                                                    viewModel.deselectNote(model.note.id)
+                                                else
+                                                    viewModel.selectNote(model.note.id)
                                                 true
                                             }
                                         }
@@ -668,7 +671,10 @@ class FolderFragment : Fragment() {
 
                 override fun onItemSelected(item: NoteItem, binding: NoteItemBinding) {
                     viewModel.enableSelection()
-                    viewModel.selectNote(item.model.note.id)
+                    if (item.model.isSelected)
+                        viewModel.deselectNote(item.model.note.id)
+                    else
+                        viewModel.selectNote(item.model.note.id)
                 }
 
                 override fun onItemMoved(item: NoteItem, binding: NoteItemBinding) {
