@@ -6,22 +6,22 @@
 
 <div align="center">
     <a>
-        <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android" style="border-radius: 4px;" />
+        <img src="/images/Badges/Android.svg" style="border-radius: 4px;" />
     </a>
     <a>
-        <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin" style="border-radius: 4px;" />
+        <img src="/images/Badges/Kotlin.svg" alt="Kotlin" style="border-radius: 4px;" />
     </a>
     <a href="https://www.patreon.com/alialbaali">
-        <img src="https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white" alt="Patreon" style="border-radius: 4px;" />
+        <img src="/images/Badges/Patreon.svg" style="border-radius: 4px;" />
     </a>
     <a href="https://www.buymeacoffee.com/alialbaali">
-        <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="BuyMeACoffee" style="border-radius: 4px;" />
+        <img src="/images/Badges/BMC.svg" alt="BuyMeACoffee" style="border-radius: 4px;" />
     </a>
     <a href="https://www.reddit.com/r/notoapp/">
-        <img src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white" alt="Reddit" style="border-radius: 4px;" />
+        <img src="/images/Badges/Reddit.svg" alt="Reddit" style="border-radius: 4px;" />
     </a>
     <a href="/LICENSE.md">
-        <img src="https://img.shields.io/badge/Apache%202.0-green?style=for-the-badge&logo=apache" alt="License" style="border-radius: 4px;" />
+        <img src="/images/Badges/Apache.svg" alt="License" style="border-radius: 4px;" />
     </a>
 </div>
 
