@@ -155,12 +155,15 @@ Android apps.
 
 #### Special thanks to:
 
-- <a href="https://linkedin.com/in/nuraysabri/" target="_blank">Nuray Sabri</a>, and <a href="https://sakci.me" target="_blank">Alparslan Şakçi</a> for
+- <a href="https://linkedin.com/in/nuraysabri/" target="_blank">Nuray Sabri</a>,
+  and <a href="https://sakci.me" target="_blank">Alparslan Şakçi</a> for
   the Turkish localization.
 - <a href="https://github.com/faus32" target="_blank">Faus AM</a> for the Spanish localization.
-- <a href="https://github.com/kernoeb" target="_blank">Kernoeb</a>, and <a href="https://geoffreycrofte.com" target="_blank">Geoffrey Crofte</a> for the
+- <a href="https://github.com/kernoeb" target="_blank">Kernoeb</a>,
+  and <a href="https://geoffreycrofte.com" target="_blank">Geoffrey Crofte</a> for the
   French localization.
-- <a href="https://github.com/matteolomba" target="_blank">Matteo Lombardi</a>, and <a href="https://github.com/SimoneG97" target="_blank">SimoneG</a>
+- <a href="https://github.com/matteolomba" target="_blank">Matteo Lombardi</a>,
+  and <a href="https://github.com/SimoneG97" target="_blank">SimoneG</a>
   for the Italian localization.
 - <a href="https://github.com/vikdevelop" target="_blank">Viktor Novák</a> for the Czech localization.
 - <a href="http://github.com/ErnestasKaralius" target="_blank">Ernestas Karalius</a> for the Lithuanian localization.
@@ -222,7 +225,7 @@ Contains all the UI logic.
 ## Support
 
 <h1 align="center">
-  <a href="https://www.patreon.com/alialbaali">
+  <a href="https://www.patreon.com/alialbaali" target="_blank">
     <img src="images/Patreon.png" alt="Become a Patron"/>
   </a> 
   <a href="https://www.buymeacoffee.com/alialbaali" target="_blank">
