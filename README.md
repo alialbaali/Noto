@@ -1,70 +1,76 @@
 <h1 align="center">
-  <img src="images/Icon.svg" alt="icon"/>
-  <br>
-  <b>Noto | Minimal Note-Taking App</b>
+    <img src="images/Icon.svg" alt="icon" />
+    <br />
+    <b>Noto | Minimal Note-Taking App</b>
 </h1>
 
 <div align="center">
-  <a>
-    <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
-  </a>
-  <a>
-    <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin">
-  </a>
-  <a href="https://www.patreon.com/alialbaali">
-    <img src="https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white">
-  </a>
-  <a href="https://www.buymeacoffee.com/alialbaali">
-    <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="BuyMeACoffee">
-  </a>
-  <a href="/LICENSE.md">
-    <img src="https://img.shields.io/badge/Apache%202.0-green?style=for-the-badge&logo=apache" alt="License">
-  </a>
+    <a>
+        <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android" style="border-radius: 4px;" />
+    </a>
+    <a>
+        <img src="https://img.shields.io/badge/kotlin-%237F52FF.svg?style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin" style="border-radius: 4px;" />
+    </a>
+    <a href="https://www.patreon.com/alialbaali">
+        <img src="https://img.shields.io/badge/Patreon-F96854?style=for-the-badge&logo=patreon&logoColor=white" alt="Patreon" style="border-radius: 4px;" />
+    </a>
+    <a href="https://www.buymeacoffee.com/alialbaali">
+        <img src="https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black" alt="BuyMeACoffee" style="border-radius: 4px;" />
+    </a>
+    <a href="https://www.reddit.com/r/notoapp/">
+        <img src="https://img.shields.io/badge/Reddit-FF4500?style=for-the-badge&logo=reddit&logoColor=white" alt="Reddit" style="border-radius: 4px;" />
+    </a>
+    <a href="/LICENSE.md">
+        <img src="https://img.shields.io/badge/Apache%202.0-green?style=for-the-badge&logo=apache" alt="License" style="border-radius: 4px;" />
+    </a>
 </div>
 
+
 <p align="center">
-  <a href="#download">Download</a>
-  •
-  <a href="#motivation">Motivation</a>
-  •
-  <a href="#features">Features</a>
-  •
-  <a href="#contributions">Contributions</a>
-  •
-  <a href="#translation-and-localization">Translation & Localization</a>
-  •
-  <a href="#architecture">Architecture</a>
-  •
-  <a href="#screenshots">Screenshots</a>
-  •
-  <a href="#support">Support</a>
-  •
-  <a href="#license">License</a>
+    <a href="#download">Download</a>
+    •
+    <a href="#motivation">Motivation</a>
+    •
+    <a href="#features">Features</a>
+    •
+    <a href="#contributions">Contributions</a>
+    •
+    <a href="#translation-and-localization">Translation & Localization</a>
+    •
+    <a href="#architecture">Architecture</a>
+    •
+    <a href="#screenshots">Screenshots</a>
+    •
+    <a href="#support">Support</a>
+    •
+    <a href="#license">License</a>
 </p>
 
 ## Download
 
 <div align="center">
-  <h4><b>You can get Noto from one of the links below!</b></h4>
-  <a href="https://play.google.com/store/apps/details?id=com.noto">
-    <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="80">
-  </a>
-  <a href="https://apt.izzysoft.de/fdroid/index/apk/com.noto">
-    <img src="images/get-it-on-fdroid-en-us.svg" alt="Get it on F-Droid" height="80">
-  </a>
-  <a href="https://github.com/alialbaali/Noto/releases/latest">
-    <img src="images/get-it-on-github.png" alt="Get it from GitHub" height="80">
-  </a>
+    <h4><b>You can get Noto from one of the links below!</b></h4>
+    <a href="https://play.google.com/store/apps/details?id=com.noto">
+        <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="80" />
+    </a>
+    <a href="https://apt.izzysoft.de/fdroid/index/apk/com.noto">
+        <img src="images/get-it-on-fdroid-en-us.svg" alt="Get it on F-Droid" height="80" />
+    </a>
+    <a href="https://github.com/alialbaali/Noto/releases/latest">
+        <img src="images/get-it-on-github.png" alt="Get it from GitHub" height="80" />
+    </a>
 </div>
 
 ## Motivation
 
 <p>
-  There are a lot of note-taking apps available out-there, but only a few that do it well. Well, Noto is one of them.
+There are a lot of note-taking apps available out-there, but only a few that do it well. Well, Noto is one of them.
 
-  The goal of Noto is to be a minimalistic, free, and open-source note-taking application that meets the user's expectations, with privacy in mind.
+The goal of Noto is to be a minimalistic, free, and open-source note-taking application that meets the user's
+expectations, with privacy in mind.
 
-  Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcases my skills regarding developing Android apps.
+Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcases my skills regarding developing
+Android apps.
 </p>
 
 ## Features
@@ -149,10 +155,13 @@
 
 #### Special thanks to:
 
-- <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a>, and <a href="https://sakci.me">Alparslan Şakçi</a> for the Turkish localization.
+- <a href="https://linkedin.com/in/nuraysabri/">Nuray Sabri</a>, and <a href="https://sakci.me">Alparslan Şakçi</a> for
+  the Turkish localization.
 - <a href="https://github.com/faus32">Faus AM</a> for the Spanish localization.
-- <a href="https://github.com/kernoeb">Kernoeb</a>, and <a href="https://geoffreycrofte.com">Geoffrey Crofte</a> for the French localization.
-- <a href="https://github.com/matteolomba">Matteo Lombardi</a>, and <a href="https://github.com/SimoneG97">SimoneG</a> for the Italian localization.
+- <a href="https://github.com/kernoeb">Kernoeb</a>, and <a href="https://geoffreycrofte.com">Geoffrey Crofte</a> for the
+  French localization.
+- <a href="https://github.com/matteolomba">Matteo Lombardi</a>, and <a href="https://github.com/SimoneG97">SimoneG</a>
+  for the Italian localization.
 - <a href="https://github.com/vikdevelop">Viktor Novák</a> for the Czech localization.
 - <a href="http://github.com/ErnestasKaralius">Ernestas Karalius</a> for the Lithuanian localization.
 - <a href="https://steamcommunity.com/id/oliverberry">李華</a> for the Simplified Chinese localization.
@@ -202,13 +211,27 @@ Contains all the UI logic.
   </div>
 </details>
 
+## Community
+
+<div align="center">
+    <div style="background-color: #ff4500; margin: 0; padding: 8px; border-radius: 8px; display: inline-block; overflow: hidden;">
+        <a href="https://www.reddit.com/r/notoapp/">
+            <img src="https://github.com/alialbaali/Noto/blob/readme/images/Reddit%20Logo/On%20Orangered/PNG/reddit_logo_horizontal_on_orangered.png?raw=true" alt="Reddit" width="150" style="display: block;" />
+        </a>
+    </div>
+</div>
+
 ## Support
+
 <h1 align="center">
-  <a href="https://www.patreon.com/alialbaali">
-    <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="235"/>
-  </a> <a href="https://www.buymeacoffee.com/alialbaali" target="_blank">
-      <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="200">
-  </a>
+    <div style="margin: 0; padding: 0px; border-radius: 8px; display: inline-block; overflow: hidden;">
+        <a href="https://www.patreon.com/alialbaali">
+            <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="235" style="display: block;" />
+        </a>
+    </div>
+    <a href="https://www.buymeacoffee.com/alialbaali" target="_blank">
+        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="200" />
+    </a>
 </h1>
 
 ## License
