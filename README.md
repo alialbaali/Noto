@@ -222,9 +222,9 @@ Contains all the UI logic.
 ## Support
 
 <h1 align="center">
-    <div style="margin: 0; padding: 0px; border-radius: 8px; display: inline-block; overflow: hidden;">
+    <div>
         <a href="https://www.patreon.com/alialbaali">
-            <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="235" style="display: block;" />
+            <img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="235" />
         </a>
     </div>
     <a href="https://www.buymeacoffee.com/alialbaali" target="_blank">
