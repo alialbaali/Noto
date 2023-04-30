@@ -62,6 +62,7 @@ class NoteFragment : Fragment() {
                             etNoteBody.requestFocus()
                             activity?.showKeyboard(etNoteBody)
                         }
+
                         NewNoteCursorPosition.Title -> etNoteTitle.post {
                             etNoteTitle.requestFocus()
                             activity?.showKeyboard(etNoteTitle)
@@ -373,10 +374,12 @@ class NoteFragment : Fragment() {
                     )
                     true
                 }
+
                 R.id.share_note -> {
                     launchShareNotesIntent(listOf(viewModel.note.value))
                     true
                 }
+
                 R.id.reading_mode -> {
                     setupFadeTransition()
                     navController
@@ -389,6 +392,7 @@ class NoteFragment : Fragment() {
                         )
                     true
                 }
+
                 R.id.more -> {
                     navController?.navigateSafely(
                         NoteFragmentDirections.actionNoteFragmentToNoteDialogFragment(
@@ -400,6 +404,7 @@ class NoteFragment : Fragment() {
                     )
                     true
                 }
+
                 else -> false
             }
         }
@@ -410,6 +415,7 @@ class NoteFragment : Fragment() {
                     val index = viewModel.undoTitle().second
                     etNoteTitle.setSelection(index)
                 }
+
                 etNoteBody.isFocused -> {
                     val index = viewModel.undoBody().second
                     etNoteBody.setSelection(index)
@@ -423,6 +429,7 @@ class NoteFragment : Fragment() {
                     val index = viewModel.redoTitle().second
                     etNoteTitle.setSelection(index)
                 }
+
                 etNoteBody.isFocused -> {
                     val index = viewModel.redoBody().second
                     etNoteBody.setSelection(index)
@@ -458,6 +465,7 @@ class NoteFragment : Fragment() {
                             .toTypedArray(),
                     )
                 )
+
                 etNoteBody.isFocused -> navController?.navigateSafely(
                     NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
                         args.folderId,
@@ -510,6 +518,7 @@ class NoteFragment : Fragment() {
                             .toTypedArray(),
                     )
                 )
+
                 etNoteBody.isFocused -> navController?.navigateSafely(
                     NoteFragmentDirections.actionNoteFragmentToUndoRedoDialogFragment(
                         args.folderId,
@@ -615,10 +624,12 @@ class NoteFragment : Fragment() {
                         val index = etNoteTitle.getDisplayedTextIndex(args.scrollPosition)
                         etNoteTitle.showKeyboardAtIndex(index)
                     }
+
                     !args.isTitleVisible && args.isBodyVisible -> {
                         val index = etNoteBody.getDisplayedTextIndex(args.scrollPosition)
                         etNoteBody.showKeyboardAtIndex(index)
                     }
+
                     else -> when (viewModel.folder.value.newNoteCursorPosition) {
                         NewNoteCursorPosition.Body -> etNoteBody.showKeyboardAtIndex(0)
                         NewNoteCursorPosition.Title -> etNoteTitle.showKeyboardAtIndex(0)
@@ -685,6 +696,7 @@ class NoteFragment : Fragment() {
                 ibUndoHistory.disable()
                 ibRedoHistory.disable()
             }
+
             replayCache.first().third == currentText -> {
                 ibUndo.disable()
                 ibUndoHistory.disable()
@@ -700,6 +712,7 @@ class NoteFragment : Fragment() {
                     ibRedoHistory.disable()
                 }
             }
+
             replayCache.last().third == currentText -> {
                 ibRedo.disable()
                 ibRedoHistory.disable()
@@ -715,6 +728,7 @@ class NoteFragment : Fragment() {
                     ibUndoHistory.disable()
                 }
             }
+
             else -> {
                 ibUndo.enable()
                 ibRedo.enable()
@@ -727,10 +741,6 @@ class NoteFragment : Fragment() {
                 }
             }
         }
-        ibUndo.background = context?.drawableResource(R.drawable.generic_clickable_shape)
-        ibRedo.background = context?.drawableResource(R.drawable.generic_clickable_shape)
-        ibUndoHistory.background = context?.drawableResource(R.drawable.generic_clickable_shape)
-        ibRedoHistory.background = context?.drawableResource(R.drawable.generic_clickable_shape)
     }
 
     private fun List<Triple<Int, Int, String>>.subListOld(currentText: String): List<Triple<Int, Int, String>> {

@@ -430,7 +430,8 @@
     </style>
 
     <style name="ClickableView" parent="Widget.Material3.MaterialTimePicker.ImageButton">
-        <item name="android:background">@drawable/generic_clickable_shape</item>
+        <item name="android:background">@drawable/generic_ripple_shape</item>
+        <item name="android:backgroundTint">?attr/notoBackgroundColor</item>
         <item name="fontFamily">@font/nunito_medium</item>
         <item name="android:textSize">@dimen/size_extra_small</item>
         <item name="android:textColor">?attr/notoPrimaryColor</item>

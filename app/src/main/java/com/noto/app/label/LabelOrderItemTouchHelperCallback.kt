@@ -8,7 +8,12 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyModelTouchCallback
 import com.noto.app.R
-import com.noto.app.util.*
+import com.noto.app.util.animateBackgroundColor
+import com.noto.app.util.animateTextColor
+import com.noto.app.util.colorAttributeResource
+import com.noto.app.util.colorResource
+import com.noto.app.util.toColorStateList
+import com.noto.app.util.toResource
 
 class LabelOrderItemTouchHelperCallback(
     epoxyController: EpoxyController,
@@ -29,7 +34,6 @@ class LabelOrderItemTouchHelperCallback(
 
     override fun onDragStarted(model: LabelOrderItem?, itemView: View?, adapterPosition: Int) {
         super.onDragStarted(model, itemView, adapterPosition)
-        itemView?.isSelected = true
         itemView?.context?.let { context ->
             if (model != null) {
                 val selectedBackgroundColor = context.colorResource(model.color.toResource())
@@ -41,9 +45,10 @@ class LabelOrderItemTouchHelperCallback(
                 tvLabel.animateBackgroundColor(backgroundColor, selectedBackgroundColor)
                 tvLabel.animateTextColor(textColor, selectedTextColor)
                 ibDrag.imageTintList = selectedBackgroundColor.toColorStateList()
+                tvLabel?.isSelected = true
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    itemView.outlineAmbientShadowColor = selectedBackgroundColor
-                    itemView.outlineSpotShadowColor = selectedBackgroundColor
+                    tvLabel.outlineAmbientShadowColor = selectedBackgroundColor
+                    tvLabel.outlineSpotShadowColor = selectedBackgroundColor
                 }
             }
         }
@@ -51,7 +56,6 @@ class LabelOrderItemTouchHelperCallback(
 
     override fun onDragReleased(model: LabelOrderItem?, itemView: View?) {
         super.onDragReleased(model, itemView)
-        itemView?.isSelected = false
         itemView?.context?.let { context ->
             if (model != null) {
                 val selectedBackgroundColor = context.colorResource(model.color.toResource())
@@ -62,6 +66,7 @@ class LabelOrderItemTouchHelperCallback(
                 val ibDrag = itemView.findViewById<ImageButton>(R.id.ib_drag)
                 tvLabel.animateBackgroundColor(selectedBackgroundColor, backgroundColor)
                 tvLabel.animateTextColor(selectedTextColor, textColor)
+                tvLabel?.isSelected = false
                 ibDrag.imageTintList = textColor.toColorStateList()
             }
         }
