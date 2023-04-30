@@ -197,16 +197,16 @@ Contains all the UI logic.
 
   <div>
     <p float="left">
-      <img src="images/Frame-1.png" height="400"  alt="screenshot"/>
-      <img src="images/Frame-2.png" height="400"  alt="screenshot"/>
-      <img src="images/Frame-3.png" height="400"  alt="screenshot"/>
-      <img src="images/Frame-4.png" height="400"  alt="screenshot"/>
+      <img src="images/Frame1.svg" height="400"  alt="screenshot"/>
+      <img src="images/Frame2.svg" height="400"  alt="screenshot"/>
+      <img src="images/Frame3.svg" height="400"  alt="screenshot"/>
+      <img src="images/Frame4.svg" height="400"  alt="screenshot"/>
     </p>
     <p>
-      <img src="images/Frame-5.png" height="400"  alt="screenshot"/>
-      <img src="images/Frame-6.png" height="400"  alt="screenshot"/>
-      <img src="images/Frame-7.png" height="400"  alt="screenshot"/>
-      <img src="images/Frame-8.png" height="400"  alt="screenshot"/>
+      <img src="images/Frame5.svg" height="400"  alt="screenshot"/>
+      <img src="images/Frame6.svg" height="400"  alt="screenshot"/>
+      <img src="images/Frame7.svg" height="400"  alt="screenshot"/>
+      <img src="images/Frame8.svg" height="400"  alt="screenshot"/>
     </p>
   </div>
 </details>
