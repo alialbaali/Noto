@@ -6,7 +6,7 @@
             android:enterFadeDuration="@integer/animation_duration"
             android:exitFadeDuration="@integer/animation_duration">
             <item
-                android:drawable="@drawable/ic_round_check_circle_24"
+                android:drawable="@drawable/ic_round_check_circle_outline_24"
                 android:state_checked="true" />
             <item
                 android:drawable="@drawable/ic_round_circle_24"

@@ -25,7 +25,28 @@ import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.OpenNotesIn
 import com.noto.app.label.noteLabelItem
-import com.noto.app.util.*
+import com.noto.app.util.Constants
+import com.noto.app.util.cancelAlarm
+import com.noto.app.util.colorAttributeResource
+import com.noto.app.util.colorResource
+import com.noto.app.util.dp
+import com.noto.app.util.filterSelected
+import com.noto.app.util.format
+import com.noto.app.util.getTitle
+import com.noto.app.util.isCurrentLocaleArabic
+import com.noto.app.util.launchShareNotesIntent
+import com.noto.app.util.navController
+import com.noto.app.util.navigateSafely
+import com.noto.app.util.quantityStringResource
+import com.noto.app.util.setRippleColor
+import com.noto.app.util.snackbar
+import com.noto.app.util.stringResource
+import com.noto.app.util.toColorStateList
+import com.noto.app.util.toResource
+import com.noto.app.util.tryLoadingFontResource
+import com.noto.app.util.updateAllWidgetsData
+import com.noto.app.util.updateNoteListWidgets
+import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
@@ -51,18 +72,7 @@ class NoteDialogFragment : BaseDialogFragment() {
     private val isParentEditor
         get() = navController?.previousBackStackEntry?.destination?.id == R.id.noteFragment
 
-    private val anchorViewId by lazy {
-        val folderArchiveFragmentEntry = try {
-            navController?.getBackStackEntry(R.id.folderArchiveFragment)
-        } catch (exception: Throwable) {
-            null
-        }
-
-        if (folderArchiveFragmentEntry?.destination?.id == null)
-            R.id.bab
-        else
-            null
-    }
+    private val anchorViewId by lazy { R.id.bab }
 
     private val parentView by lazy { parentFragment?.view }
 
@@ -86,9 +96,6 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private fun NoteDialogFragmentBinding.setupState() {
         tb.tvDialogTitle.text = context?.stringResource(R.string.note_options)
-        tvSelectNote.isVisible = args.isSelectionEnabled || args.isSelectAllEnabled
-        divider2.root.isVisible = args.isSelectionEnabled || args.isSelectAllEnabled
-        tvSelectNote.text = if (args.isSelectAllEnabled) context?.stringResource(R.string.select_all) else context?.stringResource(R.string.select)
 
         viewModel.folder
             .onEach { folder -> setupFolder(folder) }
@@ -150,6 +157,7 @@ class NoteDialogFragment : BaseDialogFragment() {
                         )
                     )
                 }
+
                 openNotesIn == OpenNotesIn.ReadingMode || isParentReadingMode -> navController?.navigateSafely(
                     NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteFragment(
                         args.folderId,
@@ -300,22 +308,12 @@ class NoteDialogFragment : BaseDialogFragment() {
                 )
             }
         }
-
-        tvSelectNote.setOnClickListener {
-            if (args.isSelectAllEnabled) {
-                navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.SelectAll, true)
-            } else {
-                navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.IsSelection, args.noteId)
-            }
-            dismiss()
-        }
     }
 
     private fun NoteDialogFragmentBinding.setupNote(folder: Folder, note: Note, labels: List<Label>) {
         context?.let { context ->
             val colorResource = context.colorResource(folder.color.toResource())
             vNote.root.backgroundTintList = context.colorAttributeResource(R.attr.notoBackgroundColor).toColorStateList()
-            vNote.ibDrag.isVisible = false
             vNote.tvNoteTitle.text = note.title
             vNote.tvNoteTitle.maxLines = 3
             vNote.tvNoteTitle.isVisible = note.title.isNotBlank()
@@ -396,13 +394,14 @@ class NoteDialogFragment : BaseDialogFragment() {
                     tvOpenIn.text = context.stringResource(R.string.reading_mode)
                     tvOpenIn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_reading_mode_24, 0, 0)
                 }
+
                 folder.openNotesIn == OpenNotesIn.ReadingMode || isParentReadingMode -> {
                     tvOpenIn.text = context.stringResource(R.string.edit)
                     tvOpenIn.setCompoundDrawablesRelativeWithIntrinsicBounds(0, R.drawable.ic_round_edit_24, 0, 0)
                 }
             }
             listOf(
-                tvSelectNote, tvCopyToClipboard, tvCopyNote, tvOpenIn, tvShareNote, tvArchiveNote,
+                tvCopyToClipboard, tvCopyNote, tvOpenIn, tvShareNote, tvArchiveNote,
                 tvDuplicateNote, tvPinNote, tvRemindMe, tvDeleteNote, tvMoveNote,
             ).forEach { tv ->
                 tv.background.setRippleColor(colorStateList)

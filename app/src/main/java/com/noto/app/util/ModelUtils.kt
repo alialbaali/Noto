@@ -160,7 +160,12 @@ fun List<NoteItemModel>.groupByLabels(
             it.sortedBy { it.first.firstOrNull()?.position }
     }
 
-fun List<Note>.mapToNoteItemModel(labels: List<Label>, noteLabels: List<NoteLabel>, selectedNoteIds: LongArray = longArrayOf()): List<NoteItemModel> {
+fun List<Note>.mapToNoteItemModel(
+    labels: List<Label>,
+    noteLabels: List<NoteLabel>,
+    selectedNoteIds: LongArray = longArrayOf(),
+    draggedNoteIds: LongArray = longArrayOf(),
+): List<NoteItemModel> {
     return map { note ->
         NoteItemModel(
             note,
@@ -171,6 +176,7 @@ fun List<Note>.mapToNoteItemModel(labels: List<Label>, noteLabels: List<NoteLabe
                     }
                 },
             isSelected = selectedNoteIds.contains(note.id),
+            isDragged = draggedNoteIds.contains(note.id),
         )
     }
 }
@@ -327,7 +333,7 @@ fun CharSequence.indicesOf(string: String, startIndex: Int = 0, ignoreCase: Bool
 }
 
 fun Release.Companion.Current(context: Context) : Release {
-    val changelogText = context.stringResource(R.string.release_2_2_1)
+    val changelogText = context.stringResource(R.string.release_2_2_3)
     val changelog = Release.Changelog(changelogText)
-    return Release_2_2_1(changelog)
+    return Release_2_2_3(changelog)
 }

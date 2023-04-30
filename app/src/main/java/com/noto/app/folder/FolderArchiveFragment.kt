@@ -199,11 +199,18 @@ class FolderArchiveFragment : Fragment() {
                                     isShowCreationDate(folder.isShowNoteCreationDate)
                                     color(folder.color)
                                     isManualSorting(false)
-                                    onSelectListener { _ ->
-                                        viewModel.selectArchivedNote(archivedNoteModel.note.id)
+                                    onClickListener { _ ->
+                                        if (archivedNoteModel.isSelected)
+                                            viewModel.deselectArchivedNote(archivedNoteModel.note.id)
+                                        else
+                                            viewModel.selectArchivedNote(archivedNoteModel.note.id)
                                     }
-                                    onDeselectListener { _ ->
-                                        viewModel.deselectArchivedNote(archivedNoteModel.note.id)
+                                    onLongClickListener { _ ->
+                                        if (archivedNoteModel.isSelected)
+                                            viewModel.deselectArchivedNote(archivedNoteModel.note.id)
+                                        else
+                                            viewModel.selectArchivedNote(archivedNoteModel.note.id)
+                                        true
                                     }
                                 }
                             }

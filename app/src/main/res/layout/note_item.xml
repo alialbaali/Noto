@@ -1,122 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:animateLayoutChanges="true">
-
-    <LinearLayout
-        android:id="@+id/ll"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_small"
-        android:orientation="horizontal"
-        android:stateListAnimator="@animator/elevation_animator"
-        android:background="@drawable/note_item_shape"
-        android:padding="@dimen/spacing_normal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/spacing_extra_small"
-            android:orientation="vertical">
-
-            <com.airbnb.epoxy.EpoxyRecyclerView
-                android:id="@+id/rv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_extra_small"
-                tools:itemCount="1"
-                tools:listitem="@layout/note_label_item" />
-
-            <LinearLayout
-                android:id="@+id/ll_reminder"
-                android:orientation="horizontal"
-                android:background="@drawable/note_label_item_shape"
-                android:backgroundTint="@color/colorPrimary"
-                android:layout_marginBottom="@dimen/spacing_extra_small"
-                android:padding="@dimen/spacing_extra_small"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:src="@drawable/ic_round_notifications_active_24"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:contentDescription="@string/reminder"
-                    app:tint="?attr/notoBackgroundColor" />
-
-                <TextView
-                    android:id="@+id/tv_reminder"
-                    android:layout_marginStart="@dimen/spacing_extra_small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/size_tiny"
-                    android:textColor="?attr/notoBackgroundColor"
-                    app:fontFamily="@font/nunito_medium"
-                    tools:text="Today, 7:30 PM" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_note_title"
-                style="@style/NoteTitleTextView"
-                android:autoLink="all"
-                android:linksClickable="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_extra_small"
-                tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry" />
-
-            <TextView
-                android:id="@+id/tv_note_body"
-                style="@style/NoteBodyTextView"
-                android:autoLink="all"
-                android:linksClickable="false"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_extra_small"
-                tools:text="Lorem Ipsum is simply dummy text of the printing andttt typesetting industry" />
-
-            <TextView
-                android:id="@+id/tv_creation_date"
-                style="@style/NoteDateTextView"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Created at Aug 30" />
-
-            <TextView
-                android:id="@+id/tv_access_date"
-                style="@style/NoteDateTextView"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Accessed at Aug 30" />
-
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/ib_drag"
-            android:src="@drawable/ic_round_drag_handle_24"
-            android:background="@android:color/transparent"
-            android:layout_marginStart="@dimen/spacing_extra_small"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/drag"
-            app:tint="?attr/notoSecondaryColor" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/iv_selected"
-        android:src="@drawable/ic_round_check_circle_24"
-        android:layout_width="wrap_content"
-        android:layout_gravity="end"
-        android:stateListAnimator="@animator/elevation_animator"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:contentDescription="@string/select"
-        tools:visibility="visible" />
-</FrameLayout>
+<?xml version="1.0" encoding="utf-8"?><FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"    xmlns:app="http://schemas.android.com/apk/res-auto"    xmlns:tools="http://schemas.android.com/tools"    android:layout_width="match_parent"    android:layout_height="wrap_content"    android:animateLayoutChanges="true">    <LinearLayout        android:id="@+id/ll"        android:layout_width="match_parent"        android:layout_height="wrap_content"        android:layout_margin="@dimen/spacing_small"        android:stateListAnimator="@animator/elevation_animator"        android:background="@drawable/note_item_shape"        android:padding="@dimen/spacing_normal"        android:orientation="vertical">        <com.airbnb.epoxy.EpoxyRecyclerView            android:id="@+id/rv"            android:layout_width="match_parent"            android:layout_height="wrap_content"            android:layout_marginBottom="@dimen/spacing_extra_small"            tools:itemCount="1"            tools:listitem="@layout/note_label_item" />        <LinearLayout            android:id="@+id/ll_reminder"            android:orientation="horizontal"            android:background="@drawable/note_label_item_shape"            android:backgroundTint="@color/colorPrimary"            android:layout_marginBottom="@dimen/spacing_extra_small"            android:padding="@dimen/spacing_extra_small"            android:gravity="center"            android:layout_width="wrap_content"            android:layout_height="wrap_content">            <ImageView                android:src="@drawable/ic_round_notifications_active_24"                android:layout_width="16dp"                android:layout_height="16dp"                android:contentDescription="@string/reminder"                app:tint="?attr/notoBackgroundColor" />            <TextView                android:id="@+id/tv_reminder"                android:layout_marginStart="@dimen/spacing_extra_small"                android:layout_width="wrap_content"                android:layout_height="wrap_content"                android:textSize="@dimen/size_tiny"                android:textColor="?attr/notoBackgroundColor"                app:fontFamily="@font/nunito_medium"                tools:text="Today, 7:30 PM" />        </LinearLayout>        <TextView            android:id="@+id/tv_note_title"            style="@style/NoteTitleTextView"            android:autoLink="all"            android:linksClickable="false"            android:layout_width="match_parent"            android:layout_height="wrap_content"            android:layout_marginBottom="@dimen/spacing_extra_small"            tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry" />        <TextView            android:id="@+id/tv_note_body"            style="@style/NoteBodyTextView"            android:autoLink="all"            android:linksClickable="false"            android:layout_width="match_parent"            android:layout_height="wrap_content"            android:layout_marginTop="@dimen/spacing_extra_small"            tools:text="Lorem Ipsum is simply dummy text of the printing andttt typesetting industry" />        <TextView            android:id="@+id/tv_creation_date"            style="@style/NoteDateTextView"            android:layout_marginTop="@dimen/spacing_small"            android:layout_width="match_parent"            android:layout_height="wrap_content"            tools:text="Created at Aug 30" />        <TextView            android:id="@+id/tv_access_date"            style="@style/NoteDateTextView"            android:layout_marginTop="@dimen/spacing_small"            android:layout_width="match_parent"            android:layout_height="wrap_content"            tools:text="Accessed at Aug 30" />    </LinearLayout>    <ImageView        android:id="@+id/iv_selected"        android:src="@drawable/ic_round_check_circle_24"        android:layout_width="wrap_content"        android:layout_gravity="end"        android:stateListAnimator="@animator/elevation_animator"        android:layout_height="wrap_content"        android:visibility="gone"        android:contentDescription="@string/select"        tools:visibility="visible" /></FrameLayout>

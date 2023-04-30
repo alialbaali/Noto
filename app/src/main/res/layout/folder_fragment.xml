@@ -141,4 +141,19 @@
         app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
         app:tint="?attr/notoBackgroundColor" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_select_all"
+        android:contentDescription="@string/select_all"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginBottom="96dp"
+        android:layout_marginHorizontal="@dimen/spacing_normal"
+        android:visibility="gone"
+        android:src="@drawable/ic_round_check_all_24"
+        app:backgroundTint="?attr/notoBackgroundColor"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
+        app:tint="?attr/notoPrimaryColor" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

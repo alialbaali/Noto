@@ -3,14 +3,44 @@ package com.noto.app.folder
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
-import com.noto.app.domain.model.*
-import com.noto.app.domain.repository.*
+import com.noto.app.domain.model.FilteringType
+import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Font
+import com.noto.app.domain.model.Grouping
+import com.noto.app.domain.model.GroupingOrder
+import com.noto.app.domain.model.Layout
+import com.noto.app.domain.model.NewNoteCursorPosition
+import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.NoteLabel
+import com.noto.app.domain.model.NoteListSortingType
+import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.OpenNotesIn
+import com.noto.app.domain.model.SortingOrder
+import com.noto.app.domain.repository.FolderRepository
+import com.noto.app.domain.repository.LabelRepository
+import com.noto.app.domain.repository.NoteLabelRepository
+import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.getOrDefault
 import com.noto.app.label.LabelItemModel
 import com.noto.app.map
-import com.noto.app.util.*
+import com.noto.app.util.LineSeparator
+import com.noto.app.util.SelectedLabelsComparator
+import com.noto.app.util.forEachRecursively
+import com.noto.app.util.getOrCreateLabel
+import com.noto.app.util.mapToNoteItemModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 private const val AutoScrollDuration = 2000L
@@ -118,7 +148,15 @@ class FolderViewModel(
             noteLabelRepository.getNoteLabels()
                 .filterNotNull(),
         ) { notes, archivedNotes, labels, noteLabels ->
-            mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, selectedNoteIds)
+            val selectedNoteIds = selectedNoteIds.toList()
+                .ifEmpty { selectedNotes.map { it.note.id } }
+                .toLongArray()
+            val draggedNoteIds = mutableNotes.value
+                .getOrDefault(emptyList())
+                .filter { it.isDragged }
+                .map { it.note.id }
+                .toLongArray()
+            mutableNotes.value = notes.mapToNoteItemModel(labels, noteLabels, selectedNoteIds, draggedNoteIds)
                 .sortedBy { selectedNoteIds.indexOf(it.note.id) }
                 .let { UiState.Success(it) }
             mutableArchivedNotes.value = archivedNotes.mapToNoteItemModel(labels, noteLabels).let { UiState.Success(it) }
@@ -302,9 +340,20 @@ class FolderViewModel(
 
     fun disableSelection() {
         mutableIsSelection.value = false
+    }
+
+    fun enableDragging(id: Long) {
         mutableNotes.value = notes.value.map {
             it.map { model ->
-                model.copy(isSelected = false, selectionOrder = -1)
+                model.copy(isSelected = false, selectionOrder = -1, isDragged = model.note.id == id)
+            }
+        }
+    }
+
+    fun disableDragging() {
+        mutableNotes.value = notes.value.map {
+            it.map { model ->
+                model.copy(isDragged = false)
             }
         }
     }
@@ -321,11 +370,30 @@ class FolderViewModel(
         }
     }
 
+    fun deselectNote(id: Long) {
+        mutableNotes.value = notes.value.map {
+            it.map { model ->
+                if (model.note.id == id)
+                    model.copy(isSelected = false, selectionOrder = -1)
+                else
+                    model
+            }
+        }
+    }
+
     fun selectAllNotes() {
         var selectionOrder = -1
         mutableNotes.value = notes.value.map {
             it.map { model ->
                 model.copy(isSelected = true, selectionOrder = selectionOrder++)
+            }
+        }
+    }
+
+    fun deselectAllNotes() {
+        mutableNotes.value = notes.value.map {
+            it.map { model ->
+                model.copy(isSelected = false, selectionOrder = -1)
             }
         }
     }
@@ -341,17 +409,6 @@ class FolderViewModel(
             launch {
                 val noteLabel = NoteLabel(noteId = noteId, labelId = label.id)
                 noteLabelRepository.createNoteLabel(noteLabel)
-            }
-        }
-    }
-
-    fun deselectNote(id: Long) {
-        mutableNotes.value = notes.value.map {
-            it.map { model ->
-                if (model.note.id == id)
-                    model.copy(isSelected = false, selectionOrder = -1)
-                else
-                    model
             }
         }
     }

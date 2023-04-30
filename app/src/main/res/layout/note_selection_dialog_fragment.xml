@@ -40,27 +40,9 @@
                 android:layout_height="wrap_content"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:padding="@dimen/spacing_small"
+                android:paddingHorizontal="@dimen/spacing_small"
                 tools:itemCount="1"
                 tools:listitem="@layout/label_item" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:paddingHorizontal="@dimen/spacing_normal"
-                android:divider="@drawable/spacing_normal_divider"
-                android:showDividers="middle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tv_select_all_notes"
-                    style="@style/DialogItem"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/select_all"
-                    app:drawableTopCompat="@drawable/ic_round_check_circle_outline_24" />
-            </LinearLayout>
 
             <include
                 android:id="@+id/divider2"
@@ -96,7 +78,6 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/spacing_small"
                 android:layout_marginTop="@dimen/spacing_small"
                 android:paddingHorizontal="@dimen/spacing_normal"
                 android:divider="@drawable/spacing_normal_divider"
@@ -129,7 +110,6 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/spacing_small"
                 android:layout_marginBottom="@dimen/spacing_small"
                 android:paddingHorizontal="@dimen/spacing_normal"
                 android:divider="@drawable/spacing_normal_divider"

@@ -3,6 +3,7 @@ package com.noto.app.folder
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Typeface
+import android.os.Build
 import android.text.Spannable
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
@@ -75,12 +76,6 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     var onDragHandleTouchListener: View.OnTouchListener? = null
 
-    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    var onSelectListener: View.OnClickListener? = null
-
-    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    var onDeselectListener: View.OnClickListener? = null
-
     @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
@@ -113,6 +108,15 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
                 tvReminder.text = model.note.reminderDate?.format(context)
             }
             ivSelected.imageTintList = colorResource.toColorStateList()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                if (model.isSelected || model.isDragged) {
+                    ll.outlineAmbientShadowColor = colorResource
+                    ll.outlineSpotShadowColor = colorResource
+                } else {
+                    ll.outlineAmbientShadowColor = 0
+                    ll.outlineSpotShadowColor = 0
+                }
+            }
         }
         tvCreationDate.isVisible = isShowCreationDate
         tvAccessDate.isVisible = isShowAccessDate
@@ -120,29 +124,11 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         llReminder.isVisible = model.note.reminderDate != null
         ivSelected.isVisible = model.isSelected
         ivSelected.isSelected = model.isSelected
-        if (isSelection) {
-            if (model.isSelected) {
-                root.setOnClickListener(onDeselectListener)
-                root.setOnLongClickListener {
-                    onDeselectListener?.onClick(it)
-                    true
-                }
-            } else {
-                root.setOnClickListener(onSelectListener)
-                root.setOnLongClickListener {
-                    onSelectListener?.onClick(it)
-                    true
-                }
-            }
-        } else {
-            root.setOnClickListener(onClickListener)
-            root.setOnLongClickListener(onLongClickListener)
-        }
+        ll.isSelected = model.isSelected || model.isDragged
+        root.setOnClickListener(onClickListener)
+        root.setOnLongClickListener(onLongClickListener)
         tvNoteTitle.setSemiboldFont(font)
         tvNoteBody.setMediumFont(font)
-        ibDrag.isVisible = isManualSorting
-        ibDrag.setOnTouchListener(onDragHandleTouchListener)
-        ll.isSelected = model.isSelected
         rv.isVisible = model.labels.isNotEmpty()
         rv.layoutManager = FlexboxLayoutManager(root.context, FlexDirection.ROW, FlexWrap.WRAP)
         rv.withModels {
@@ -175,15 +161,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             }
 
             override fun onSingleTapUp(e: MotionEvent): Boolean {
-                if (isSelection) {
-                    if (model.isSelected) {
-                        onDeselectListener?.onClick(root)
-                    } else {
-                        onSelectListener?.onClick(root)
-                    }
-                } else {
-                    onClickListener?.onClick(root)
-                }
+                onClickListener?.onClick(root)
                 return true
             }
         }

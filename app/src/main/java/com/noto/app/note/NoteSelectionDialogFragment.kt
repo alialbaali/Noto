@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +21,24 @@ import com.noto.app.databinding.NoteSelectionDialogFragmentBinding
 import com.noto.app.folder.FolderViewModel
 import com.noto.app.folder.noteItem
 import com.noto.app.label.labelItem
-import com.noto.app.util.*
+import com.noto.app.util.Constants
+import com.noto.app.util.LineSeparator
+import com.noto.app.util.SmoothLinearLayoutManager
+import com.noto.app.util.cancelAlarm
+import com.noto.app.util.colorResource
+import com.noto.app.util.drawableResource
+import com.noto.app.util.format
+import com.noto.app.util.getTitle
+import com.noto.app.util.launchShareNotesIntent
+import com.noto.app.util.navController
+import com.noto.app.util.navigateSafely
+import com.noto.app.util.quantityStringResource
+import com.noto.app.util.snackbar
+import com.noto.app.util.stringResource
+import com.noto.app.util.toResource
+import com.noto.app.util.updateAllWidgetsData
+import com.noto.app.util.updateNoteListWidgets
+import com.noto.app.util.withBinding
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
@@ -104,11 +120,8 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         viewModel.notes
             .onEach { state ->
                 if (state is UiState.Success) {
-                    val isAllSelected = state.value.all { it.isSelected }
                     val selectedNotes = state.value.filter { it.isSelected }
                     val selectedNotesCount = selectedNotes.count()
-                    tvSelectAllNotes.isVisible = !isAllSelected
-                    divider2.root.isVisible = !isAllSelected
                     if (selectedNotes.none { it.note.isPinned }) {
                         tvPinNotes.text = context?.stringResource(R.string.pin)
                         tvPinNotes.compoundDrawablesRelative[1] = context?.drawableResource(R.drawable.ic_round_pin_24)
@@ -199,11 +212,6 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                     selectedNoteIds = selectedNotes.map { it.id }.toLongArray()
                 )
             )
-            dismiss()
-        }
-
-        tvSelectAllNotes.setOnClickListener {
-            navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.SelectAll, true)
             dismiss()
         }
 

@@ -92,6 +92,7 @@ class FilteredFragment : Fragment() {
                         viewModel.enableSearch()
                     true
                 }
+
                 R.id.change_visibility -> {
                     if (viewModel.notesGroupedByFolderVisibility.value.any { it.value } || viewModel.notesGroupedByDateVisibility.value.any { it.value })
                         viewModel.collapseAll()
@@ -99,6 +100,7 @@ class FilteredFragment : Fragment() {
                         viewModel.expandAll()
                     true
                 }
+
                 R.id.unarchive -> {
                     val selectedNotes = viewModel.selectedNotesGroupedByFolder
                     context?.let { context ->
@@ -109,6 +111,7 @@ class FilteredFragment : Fragment() {
                     }
                     true
                 }
+
                 R.id.delete -> {
                     val selectedNotes = viewModel.selectedNotesGroupedByFolder
                     context?.let { context ->
@@ -138,6 +141,7 @@ class FilteredFragment : Fragment() {
                     }
                     true
                 }
+
                 else -> false
             }
         }
@@ -149,6 +153,7 @@ class FilteredFragment : Fragment() {
         activity?.onBackPressedDispatcher?.addCallback {
             when {
                 viewModel.isSearchEnabled.value -> viewModel.disableSearch()
+                viewModel.selectedNotesGroupedByFolder.isNotEmpty() -> viewModel.deselectAllNotes()
                 viewModel.quickExit.value -> activity?.finish()
                 else -> navController?.navigateSafely(FilteredFragmentDirections.actionFilteredFragmentToMainFragment(exit = true))
             }
@@ -206,6 +211,7 @@ class FilteredFragment : Fragment() {
                     setupNotesGroupedByFolder(notes, notesVisibility, font, searchTerm)
                 }.launchIn(lifecycleScope)
             }
+
             FilteredItemModel.Recent, FilteredItemModel.Scheduled -> {
                 combine(
                     viewModel.notesGroupedByDate,
@@ -412,6 +418,8 @@ class FilteredFragment : Fragment() {
         font: Font,
         searchTerm: String,
     ) {
+        val isArchivedModel = args.model == FilteredItemModel.Archived
+
         when (state) {
             is UiState.Loading -> rv.setupProgressIndicator()
             is UiState.Success -> {
@@ -464,34 +472,36 @@ class FilteredFragment : Fragment() {
                                             previewSize(folder.notePreviewSize)
                                             isShowCreationDate(folder.isShowNoteCreationDate)
                                             isManualSorting(false)
-                                            isSelection(args.model == FilteredItemModel.Archived)
+                                            isSelection(isArchivedModel)
                                             onClickListener { _ ->
-                                                navController
-                                                    ?.navigateSafely(
-                                                        FilteredFragmentDirections.actionFilteredFragmentToNoteFragment(
-                                                            model.note.folderId,
-                                                            noteId = model.note.id,
-                                                            selectedNoteIds = noteIds,
+                                                if (isArchivedModel) {
+                                                    if (model.isSelected) viewModel.deselectNote(model.note.id) else viewModel.selectNote(model.note.id)
+                                                } else {
+                                                    navController
+                                                        ?.navigateSafely(
+                                                            FilteredFragmentDirections.actionFilteredFragmentToNoteFragment(
+                                                                model.note.folderId,
+                                                                noteId = model.note.id,
+                                                                selectedNoteIds = noteIds,
+                                                            )
                                                         )
-                                                    )
+                                                }
                                             }
                                             onLongClickListener { _ ->
-                                                navController
-                                                    ?.navigateSafely(
-                                                        FilteredFragmentDirections.actionFilteredFragmentToNoteDialogFragment(
-                                                            model.note.folderId,
-                                                            model.note.id,
-                                                            R.id.folderFragment,
-                                                            selectedNoteIds = noteIds,
+                                                if (isArchivedModel) {
+                                                    if (model.isSelected) viewModel.deselectNote(model.note.id) else viewModel.selectNote(model.note.id)
+                                                } else {
+                                                    navController
+                                                        ?.navigateSafely(
+                                                            FilteredFragmentDirections.actionFilteredFragmentToNoteDialogFragment(
+                                                                model.note.folderId,
+                                                                model.note.id,
+                                                                R.id.folderFragment,
+                                                                selectedNoteIds = noteIds,
+                                                            )
                                                         )
-                                                    )
+                                                }
                                                 true
-                                            }
-                                            onSelectListener { _ ->
-                                                viewModel.selectNote(model.note.id)
-                                            }
-                                            onDeselectListener { _ ->
-                                                viewModel.deselectNote(model.note.id)
                                             }
                                         }
                                     }

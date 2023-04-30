@@ -24,6 +24,7 @@ import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.components.placeholderItem
 import com.noto.app.databinding.FolderFragmentBinding
+import com.noto.app.databinding.NoteItemBinding
 import com.noto.app.domain.model.*
 import com.noto.app.getOrDefault
 import com.noto.app.label.LabelItemModel
@@ -41,9 +42,9 @@ class FolderFragment : Fragment() {
 
     private val args by navArgs<FolderFragmentArgs>()
 
-    private lateinit var epoxyController: EpoxyController
+    private var epoxyController: EpoxyController? = null
 
-    private lateinit var itemTouchHelper: ItemTouchHelper
+    private var itemTouchHelper: ItemTouchHelper? = null
 
     private lateinit var layoutManager: StaggeredGridLayoutManager
 
@@ -67,7 +68,6 @@ class FolderFragment : Fragment() {
         rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
-        val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
 
         combine(
             viewModel.folder
@@ -121,8 +121,21 @@ class FolderFragment : Fragment() {
                 searchTerm,
                 isSelection,
             )
-            setupItemTouchHelper(folder.layout)
+            if (isSelection) {
+                val isAllSelected = notes.getOrDefault(emptyList()).all { model -> model.isSelected }
+                if (isAllSelected) {
+                    fabSelectAll.hide()
+                } else {
+                    fabSelectAll.show()
+                }
+            } else {
+                fabSelectAll.hide()
+            }
         }.launchIn(lifecycleScope)
+
+        viewModel.folder
+            .onEach { folder -> setupItemTouchHelper(folder.layout, folder.sortingType) }
+            .launchIn(lifecycleScope)
 
         viewModel.isSearchEnabled
             .onEach { isSearchEnabled -> if (isSearchEnabled) enableSearch() else disableSearch() }
@@ -159,17 +172,6 @@ class FolderFragment : Fragment() {
             tvFolderNotesCount.isVisible = true
             tvFolderNotesCountRtl.isVisible = false
         }
-
-        savedStateHandle?.getLiveData<Long>(Constants.IsSelection)
-            ?.run {
-                observe(viewLifecycleOwner) { noteId ->
-                    if (noteId != null) {
-                        viewModel.enableSelection()
-                        viewModel.selectNote(noteId)
-                        value = null
-                    }
-                }
-            }
 
         viewModel.isSelection
             .onEach { isSelection ->
@@ -215,16 +217,6 @@ class FolderFragment : Fragment() {
                 }
             }
             .launchIn(lifecycleScope)
-
-        savedStateHandle?.getLiveData<Boolean>(Constants.SelectAll)
-            ?.run {
-                observe(viewLifecycleOwner) {
-                    if (it) {
-                        viewModel.selectAllNotes()
-                        value = false
-                    }
-                }
-            }
     }
 
     private fun FolderFragmentBinding.setupListeners() {
@@ -276,7 +268,9 @@ class FolderFragment : Fragment() {
                     viewModel.disableSearch()
                 } else {
                     viewModel.disableSelection()
+                    viewModel.deselectAllNotes()
                 }
+
                 viewModel.isSearchEnabled.value -> viewModel.disableSearch()
                 viewModel.labels.value.any { it.isSelected } -> viewModel.clearLabelSelection()
                 viewModel.quickExit.value -> activity?.finish()
@@ -323,6 +317,7 @@ class FolderFragment : Fragment() {
                     )
                     true
                 }
+
                 R.id.merge -> {
                     viewModel.mergeSelectedNotes()
                     context?.let { context ->
@@ -334,6 +329,7 @@ class FolderFragment : Fragment() {
                     }
                     true
                 }
+
                 R.id.pin -> {
                     if (selectedNotes.none { it.isPinned }) {
                         viewModel.pinSelectedNotes()
@@ -354,10 +350,12 @@ class FolderFragment : Fragment() {
                     }
                     true
                 }
+
                 R.id.share -> {
                     launchShareNotesIntent(selectedNotes)
                     true
                 }
+
                 R.id.archive -> {
                     viewModel.archiveSelectedNotes()
                     context?.let { context ->
@@ -371,8 +369,13 @@ class FolderFragment : Fragment() {
                     }
                     true
                 }
+
                 else -> false
             }
+        }
+
+        fabSelectAll.setOnClickListener {
+            viewModel.selectAllNotes()
         }
     }
 
@@ -461,45 +464,37 @@ class FolderFragment : Fragment() {
                                         isManualSorting(folder.sortingType == NoteListSortingType.Manual)
                                         isSelection(isSelection)
                                         onClickListener { _ ->
-                                            when (folder.openNotesIn) {
-                                                OpenNotesIn.Editor -> navController?.navigateSafely(
-                                                    FolderFragmentDirections.actionFolderFragmentToNoteFragment(
-                                                        model.note.folderId,
-                                                        noteId = model.note.id,
-                                                        selectedNoteIds = noteIds,
+                                            if (isSelection) {
+                                                if (model.isSelected) viewModel.deselectNote(model.note.id) else viewModel.selectNote(model.note.id)
+                                            } else {
+                                                when (folder.openNotesIn) {
+                                                    OpenNotesIn.Editor -> navController?.navigateSafely(
+                                                        FolderFragmentDirections.actionFolderFragmentToNoteFragment(
+                                                            model.note.folderId,
+                                                            noteId = model.note.id,
+                                                            selectedNoteIds = noteIds,
+                                                        )
                                                     )
-                                                )
-                                                OpenNotesIn.ReadingMode -> navController?.navigateSafely(
-                                                    FolderFragmentDirections.actionFolderFragmentToNotePagerFragment(
-                                                        model.note.folderId,
-                                                        model.note.id,
-                                                        noteIds
+
+                                                    OpenNotesIn.ReadingMode -> navController?.navigateSafely(
+                                                        FolderFragmentDirections.actionFolderFragmentToNotePagerFragment(
+                                                            model.note.folderId,
+                                                            model.note.id,
+                                                            noteIds
+                                                        )
                                                     )
-                                                )
+                                                }
                                             }
                                         }
-                                        onLongClickListener { _ ->
-                                            navController?.navigateSafely(
-                                                FolderFragmentDirections.actionFolderFragmentToNoteDialogFragment(
-                                                    model.note.folderId,
-                                                    model.note.id,
-                                                    R.id.folderFragment,
-                                                    isSelectionEnabled = true,
-                                                    selectedNoteIds = noteIds,
-                                                )
-                                            )
-                                            true
+                                        if (folder.sortingType == NoteListSortingType.Manual) {
+                                            onLongClickListener(null as View.OnLongClickListener?)
+                                        } else {
+                                            onLongClickListener { _ ->
+                                                viewModel.enableSelection()
+                                                viewModel.selectNote(model.note.id)
+                                                true
+                                            }
                                         }
-                                        onDragHandleTouchListener { view, event ->
-                                            if (event.action == MotionEvent.ACTION_DOWN)
-                                                rv.findContainingViewHolder(view)?.let { viewHolder ->
-                                                    if (this@FolderFragment::itemTouchHelper.isInitialized)
-                                                        itemTouchHelper.startDrag(viewHolder)
-                                                }
-                                            view.performClick()
-                                        }
-                                        onSelectListener { _ -> viewModel.selectNote(model.note.id) }
-                                        onDeselectListener { _ -> viewModel.deselectNote(model.note.id) }
                                     }
                                 }
                             }
@@ -537,11 +532,14 @@ class FolderFragment : Fragment() {
             tvFolderNotesCount.animationInterpolator = DefaultInterpolator()
             fab.backgroundTintList = colorStateList
             fabSelection.backgroundTintList = colorStateList
+            fabSelectAll.imageTintList = colorStateList
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 fab.outlineAmbientShadowColor = color
                 fab.outlineSpotShadowColor = color
                 fabSelection.outlineAmbientShadowColor = color
                 fabSelection.outlineSpotShadowColor = color
+                fabSelectAll.outlineAmbientShadowColor = color
+                fabSelectAll.outlineSpotShadowColor = color
             }
             if (folder.isArchived || folder.isVaulted) {
                 val drawableId = if (folder.isVaulted) R.drawable.ic_round_lock_24 else R.drawable.ic_round_archive_24
@@ -635,17 +633,14 @@ class FolderFragment : Fragment() {
         }
     }
 
-    private fun FolderFragmentBinding.setupItemTouchHelper(layout: Layout) {
-        if (this@FolderFragment::epoxyController.isInitialized) {
-            val itemTouchHelperCallback = NoteItemTouchHelperCallback(epoxyController, layout) {
-                rv.forEach { view ->
-                    val viewHolder = rv.findContainingViewHolder(view) as EpoxyViewHolder
-                    val item = viewHolder.model as? NoteItem
-                    if (item != null) viewModel.updateNotePosition(item.model.note, viewHolder.bindingAdapterPosition)
-                }
-            }
-            itemTouchHelper = ItemTouchHelper(itemTouchHelperCallback)
-                .apply { attachToRecyclerView(rv) }
+    private fun FolderFragmentBinding.setupItemTouchHelper(layout: Layout, sortingType: NoteListSortingType) {
+        if (sortingType == NoteListSortingType.Manual) {
+            itemTouchHelper = createCallbackInfo(layout)
+                ?.let(::NoteItemTouchHelperCallback)
+                ?.let(::ItemTouchHelper)
+                ?.apply { attachToRecyclerView(rv) }
+        } else {
+            itemTouchHelper?.attachToRecyclerView(null)
         }
     }
 
@@ -660,4 +655,39 @@ class FolderFragment : Fragment() {
         activity?.hideKeyboard(etSearch)
         etSearch.text = null
     }
+
+    private fun FolderFragmentBinding.createCallbackInfo(layout: Layout): NoteItemTouchHelperCallbackInfo? {
+        val controller = epoxyController
+        return if (controller != null) {
+            object : NoteItemTouchHelperCallbackInfo {
+                override val epoxyController: EpoxyController = controller
+                override val dragFlags: Int = when (layout) {
+                    Layout.Linear -> ItemTouchHelper.UP or ItemTouchHelper.DOWN
+                    Layout.Grid -> ItemTouchHelper.UP or ItemTouchHelper.DOWN or ItemTouchHelper.START or ItemTouchHelper.END
+                }
+
+                override fun onItemSelected(item: NoteItem, binding: NoteItemBinding) {
+                    viewModel.enableSelection()
+                    viewModel.selectNote(item.model.note.id)
+                }
+
+                override fun onItemMoved(item: NoteItem, binding: NoteItemBinding) {
+                    viewModel.disableSelection()
+                    viewModel.enableDragging(item.model.note.id)
+                    rv.forEach { rvView ->
+                        val viewHolder = rv.findContainingViewHolder(rvView) as EpoxyViewHolder
+                        val rvItem = viewHolder.model as? NoteItem
+                        if (rvItem != null) viewModel.updateNotePosition(rvItem.model.note, viewHolder.bindingAdapterPosition)
+                    }
+                }
+
+                override fun onItemReleased(item: NoteItem, binding: NoteItemBinding) {
+                    viewModel.disableDragging()
+                }
+            }
+        } else {
+            null
+        }
+    }
+
 }
