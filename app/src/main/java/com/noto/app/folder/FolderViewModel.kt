@@ -88,6 +88,9 @@ class FolderViewModel(
     private val mutableIsSelection = MutableStateFlow(false)
     val isSelection get() = mutableIsSelection.asStateFlow()
 
+    private val mutableIsDragging = MutableStateFlow(false)
+    val isDragging get() = mutableIsDragging.asStateFlow()
+
     val quickExit = settingsRepository.quickExit
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
@@ -348,6 +351,7 @@ class FolderViewModel(
                 model.copy(isSelected = false, selectionOrder = -1, isDragged = model.note.id == id)
             }
         }
+        mutableIsDragging.value = true
     }
 
     fun disableDragging() {
@@ -356,6 +360,7 @@ class FolderViewModel(
                 model.copy(isDragged = false)
             }
         }
+        mutableIsDragging.value = false
     }
 
     fun selectNote(id: Long) {

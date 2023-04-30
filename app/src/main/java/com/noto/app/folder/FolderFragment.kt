@@ -103,6 +103,7 @@ class FolderFragment : Fragment() {
             viewModel.folder,
             viewModel.searchTerm,
             viewModel.isSelection,
+            viewModel.isDragging,
         ) { values ->
             val notes = values[0] as UiState<List<NoteItemModel>>
             val labels = values[1] as List<LabelItemModel>
@@ -110,17 +111,20 @@ class FolderFragment : Fragment() {
             val folder = values[3] as Folder
             val searchTerm = values[4] as String
             val isSelection = values[5] as Boolean
+            val isDragging = values[6] as Boolean
             val filteredNotes = notes.map {
                 it.filterSelectedLabels(labels.filterSelected(), folder.filteringType).filterContent(searchTerm)
             }
-            setupNotesAndLabels(
-                filteredNotes,
-                labels,
-                font,
-                folder,
-                searchTerm,
-                isSelection,
-            )
+            if (!isDragging) {
+                setupNotesAndLabels(
+                    filteredNotes,
+                    labels,
+                    font,
+                    folder,
+                    searchTerm,
+                    isSelection,
+                )
+            }
             if (isSelection) {
                 val isAllSelected = notes.getOrDefault(emptyList()).all { model -> model.isSelected }
                 if (isAllSelected) {
