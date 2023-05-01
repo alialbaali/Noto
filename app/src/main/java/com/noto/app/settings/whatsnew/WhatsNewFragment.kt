@@ -20,16 +20,35 @@ import androidx.fragment.app.Fragment
 import com.noto.app.R
 import com.noto.app.components.HeaderItem
 import com.noto.app.components.LazyScreen
-import com.noto.app.domain.model.*
+import com.noto.app.domain.model.Release
+import com.noto.app.domain.model.Release_1_8_0
+import com.noto.app.domain.model.Release_2_0_0
+import com.noto.app.domain.model.Release_2_0_1
+import com.noto.app.domain.model.Release_2_1_0
+import com.noto.app.domain.model.Release_2_1_1
+import com.noto.app.domain.model.Release_2_1_2
+import com.noto.app.domain.model.Release_2_1_3
+import com.noto.app.domain.model.Release_2_1_4
+import com.noto.app.domain.model.Release_2_1_5
+import com.noto.app.domain.model.Release_2_1_6
+import com.noto.app.domain.model.Release_2_2_0
+import com.noto.app.domain.model.Release_2_2_1
+import com.noto.app.domain.model.Release_2_2_2
 import com.noto.app.settings.SettingsItem
 import com.noto.app.settings.SettingsItemType
-import com.noto.app.util.*
+import com.noto.app.util.Constants
+import com.noto.app.util.Current
+import com.noto.app.util.navController
+import com.noto.app.util.setupMixedTransitions
+import com.noto.app.util.stringResource
+import com.noto.app.util.toLocalDate
+import kotlinx.datetime.Clock
 
 private const val PreviousReleaseChangelogMaxLines = 3
 
 class WhatsNewFragment : Fragment() {
 
-    private val previousReleases by lazy {
+    private val previousReleasesGroupedByYear by lazy {
         context?.let { context ->
             listOf(
                 Release_2_2_2(Release.Changelog(context.stringResource(R.string.release_2_2_2))),
@@ -46,8 +65,10 @@ class WhatsNewFragment : Fragment() {
                 Release_2_0_0(Release.Changelog(context.stringResource(R.string.release_2_0_0))),
                 Release_1_8_0(Release.Changelog(context.stringResource(R.string.release_1_8_0))),
             )
-        } ?: emptyList()
+        }?.groupBy { it.date.year } ?: emptyMap()
     }
+
+    private val currentDate = Clock.System.now().toLocalDate()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,23 +104,27 @@ class WhatsNewFragment : Fragment() {
                         )
                     }
 
-                    item(key = "previous") {
-                        HeaderItem(title = context.stringResource(R.string.previous))
-                    }
+                    previousReleasesGroupedByYear.forEach { (year, previousReleases) ->
+                        val isCurrentYear = currentDate.year == year
 
-                    items(previousReleases, key = { it.versionFormatted }) { previousRelease ->
-                        val version = remember(previousRelease) { previousRelease.versionFormatted }
-                        val date = remember(previousRelease) { previousRelease.dateFormatted }
-                        val changelog = remember(previousRelease) { previousRelease.changelogFormatted }
-                        SettingsItem(
-                            title = version,
-                            onClick = { navController?.navigate(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(previousRelease)) },
-                            type = SettingsItemType.Text(date),
-                            painter = painterResource(id = R.drawable.ic_round_tag_24),
-                            equalWeights = false,
-                            description = changelog,
-                            descriptionMaxLines = PreviousReleaseChangelogMaxLines,
-                        )
+                        item(key = if (isCurrentYear) "previous" else year.toString()) {
+                            HeaderItem(title = if (isCurrentYear) context.stringResource(R.string.previous) else year.toString())
+                        }
+
+                        items(previousReleases, key = { it.versionFormatted }) { previousRelease ->
+                            val version = remember(previousRelease) { previousRelease.versionFormatted }
+                            val date = remember(previousRelease) { previousRelease.dateFormatted }
+                            val changelog = remember(previousRelease) { previousRelease.changelogFormatted }
+                            SettingsItem(
+                                title = version,
+                                onClick = { navController?.navigate(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(previousRelease)) },
+                                type = SettingsItemType.Text(date),
+                                painter = painterResource(id = R.drawable.ic_round_tag_24),
+                                equalWeights = false,
+                                description = changelog,
+                                descriptionMaxLines = PreviousReleaseChangelogMaxLines,
+                            )
+                        }
                     }
                 }
             }

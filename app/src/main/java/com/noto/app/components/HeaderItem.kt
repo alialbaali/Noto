@@ -37,7 +37,7 @@ fun HeaderItem(
         shape = MaterialTheme.shapes.small,
         color = MaterialTheme.colorScheme.background,
     ) {
-        Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = title,
                 style = MaterialTheme.typography.labelLarge,
