@@ -36,7 +36,7 @@ abstract class LabelListItem : EpoxyModelWithHolder<LabelListItem.Holder>() {
     lateinit var onNewLabelClickListener: View.OnClickListener
 
     override fun bind(holder: Holder) = with(holder.binding) {
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+//        rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.withModels {
             allLabelItem {
                 id("all")

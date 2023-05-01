@@ -45,7 +45,7 @@ class NoteFragment : Fragment() {
 
     @OptIn(FlowPreview::class)
     private fun NoteFragmentBinding.setupState() {
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+//        rv.edgeEffectFactory = BounceEdgeEffectFactory()
         abl.bringToFront()
         tvWordCount.animationInterpolator = DefaultInterpolator()
         tvWordCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold)

@@ -43,7 +43,7 @@ class QuickNoteDialogFragment constructor() : BaseDialogFragment(isCollapsable =
     ): View = QuickNoteDialogFragmentBinding.inflate(inflater, container, false)
         .also { binding = it }
         .withBinding {
-            rv.edgeEffectFactory = BounceEdgeEffectFactory()
+//            rv.edgeEffectFactory = BounceEdgeEffectFactory()
             tvWordCount.animationInterpolator = DefaultInterpolator()
             tvWordCount.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold)
             viewModel.folder

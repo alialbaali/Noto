@@ -39,7 +39,7 @@ class NewFolderFragment : Fragment() {
     private fun NewFolderFragmentBinding.setupState() {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rv.clipToOutline = true
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+//        rv.edgeEffectFactory = BounceEdgeEffectFactory()
         tvParentFolder.isVisible = args.folderId != Folder.GeneralFolderId
         tvParentFolderOption.isVisible = args.folderId != Folder.GeneralFolderId
 

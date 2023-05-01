@@ -42,7 +42,7 @@ class MainVaultFragment : BaseDialogFragment(isCollapsable = true) {
     }
 
     private fun MainVaultFragmentBinding.setupState() {
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+//        rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.itemAnimator = VerticalListItemAnimator()
         tb.tvDialogTitle.text = context?.stringResource(R.string.folders_vault)

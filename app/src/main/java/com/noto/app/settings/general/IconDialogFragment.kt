@@ -26,7 +26,7 @@ class IconDialogFragment : BaseDialogFragment(isCollapsable = true) {
         savedInstanceState: Bundle?,
     ): View = IconDialogFragmentBinding.inflate(inflater, container, false).withBinding {
         tb.tvDialogTitle.text = context?.stringResource(R.string.icon)
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+//        rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = GridLayoutManager(context, 2)
         rv.itemAnimator = VerticalListItemAnimator()
         rv.isScrollingAsFlow()

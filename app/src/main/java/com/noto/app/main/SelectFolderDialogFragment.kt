@@ -45,7 +45,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
         }
 
     private fun SelectFolderDialogFragmentBinding.setupState() {
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+//        rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         rv.itemAnimator = VerticalListItemAnimator()
         tb.tvDialogTitle.text = args.title

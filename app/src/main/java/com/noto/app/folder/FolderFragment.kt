@@ -65,7 +65,7 @@ class FolderFragment : Fragment() {
     @Suppress("UNCHECKED_CAST")
     private fun FolderFragmentBinding.setupState() {
         val archiveMenuItem = bab.menu.findItem(R.id.archive)
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+//        rv.edgeEffectFactory = BounceEdgeEffectFactory()
         rv.itemAnimator = VerticalListItemAnimator()
         layoutManager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL).also(rv::setLayoutManager)
 

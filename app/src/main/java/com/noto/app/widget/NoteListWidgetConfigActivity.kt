@@ -58,7 +58,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
         widget.lv.dividerHeight = 16.dp
         widget.lv.setPaddingRelative(8.dp, 16.dp, 8.dp, 100.dp)
         widget.root.clipToOutline = true
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+//        rv.edgeEffectFactory = BounceEdgeEffectFactory()
         listOf(swWidgetHeader, swEditWidget, swAppIcon, swNewFolder)
             .onEach { it.setupColors() }
 

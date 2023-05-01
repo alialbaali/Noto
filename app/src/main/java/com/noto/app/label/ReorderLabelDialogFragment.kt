@@ -42,7 +42,7 @@ class ReorderLabelDialogFragment : BaseDialogFragment() {
 
     private fun ReorderLabelDialogFragmentBinding.setupState() {
         rv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        rv.edgeEffectFactory = BounceEdgeEffectFactory()
+//        rv.edgeEffectFactory = BounceEdgeEffectFactory()
         tb.tvDialogTitle.text = context?.stringResource(R.string.labels_order)
 
         viewModel.folder
