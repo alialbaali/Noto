@@ -22,19 +22,25 @@ fun Context.createNoteListWidgetRemoteViews(
     widgetRadius: Int,
     folder: Folder,
     isEmpty: Boolean,
+    isFolderEmpty: Boolean,
     icon: Icon,
 ): RemoteViews {
     val color = colorResource(folder.color.toResource())
+    val placeholderId = when {
+        isFolderEmpty -> R.string.folder_is_empty
+        else -> R.string.no_notes_found_labels
+    }
     return RemoteViews(packageName, R.layout.note_list_widget).apply {
         setTextViewText(R.id.tv_folder_title, folder.getTitle(this@createNoteListWidgetRemoteViews))
+        setTextViewText(R.id.tv_placeholder, stringResource(placeholderId))
         setTextColor(R.id.tv_folder_title, color)
         setViewVisibility(R.id.ll_header, if (isHeaderEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_edit_widget, if (isEditWidgetButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.iv_app_icon, if (isAppIconEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.fab, if (isNewFolderButtonEnabled) View.VISIBLE else View.GONE)
         setViewVisibility(R.id.fab, if (isNewFolderButtonEnabled) View.VISIBLE else View.GONE)
-        setViewVisibility(R.id.tv_placeholder, if (isEmpty) View.VISIBLE else View.GONE)
-        setViewVisibility(R.id.lv, if (isEmpty) View.GONE else View.VISIBLE)
+        setViewVisibility(R.id.tv_placeholder, if (isEmpty || isFolderEmpty) View.VISIBLE else View.GONE)
+        setViewVisibility(R.id.lv, if (isEmpty || isFolderEmpty) View.GONE else View.VISIBLE)
         setOnClickPendingIntent(R.id.iv_edit_widget, createEditWidgetButtonPendingIntent(appWidgetId, folder.id))
         setOnClickPendingIntent(R.id.ib_fab, createNewNoteButtonPendingIntent(appWidgetId, folder.id))
         setOnClickPendingIntent(R.id.iv_app_icon, createAppLauncherPendingIntent(appWidgetId))

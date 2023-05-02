@@ -351,9 +351,16 @@ class FilteredFragment : Fragment() {
 
                     context?.let { context ->
                         if (notes.values.all { it.isEmpty() }) {
+                            val placeholderId = when {
+                                searchTerm.isNotBlank() -> R.string.no_notes_found_search
+                                args.model == FilteredItemModel.Recent -> R.string.no_recent_notes_found
+                                args.model == FilteredItemModel.Scheduled -> R.string.no_scheduled_notes_found
+                                else -> R.string.no_notes_found
+                            }
+
                             placeholderItem {
                                 id("placeholder")
-                                placeholder(context.stringResource(R.string.no_notes_found))
+                                placeholder(context.stringResource(placeholderId))
                             }
                         } else {
                             notes.forEach { (date, notes) ->
@@ -432,9 +439,16 @@ class FilteredFragment : Fragment() {
 
                     context?.let { context ->
                         if (notes.values.all { it.isEmpty() }) {
+                            val placeholderId = when {
+                                searchTerm.isNotBlank() -> R.string.no_notes_found_search
+                                args.model == FilteredItemModel.Archived -> R.string.no_archived_notes_found
+                                args.model == FilteredItemModel.All -> R.string.no_relevant_notes_found
+                                else -> R.string.no_notes_found
+                            }
+
                             placeholderItem {
                                 id("placeholder")
-                                placeholder(context.stringResource(R.string.no_notes_found))
+                                placeholder(context.stringResource(placeholderId))
                             }
                         } else {
                             notes.forEach { (folder, notes) ->

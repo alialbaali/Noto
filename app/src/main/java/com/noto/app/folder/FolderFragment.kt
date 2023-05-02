@@ -431,12 +431,19 @@ class FolderFragment : Fragment() {
                     }
 
                     context?.let { context ->
-                        if (notes.isEmpty())
+                        if (notes.isEmpty()) {
+                            val placeholderId = when {
+                                labels.any { it.isSelected } && searchTerm.isNotBlank() -> R.string.no_relevant_notes_found
+                                labels.any { it.isSelected } -> R.string.no_notes_found_labels
+                                searchTerm.isNotBlank() -> R.string.no_notes_found_search
+                                else -> R.string.folder_is_empty
+                            }
+
                             placeholderItem {
                                 id("placeholder")
-                                placeholder(context.stringResource(R.string.no_notes_found))
+                                placeholder(context.stringResource(placeholderId))
                             }
-                        else
+                        } else {
                             buildNotesModels(
                                 context,
                                 folder,
@@ -501,6 +508,7 @@ class FolderFragment : Fragment() {
                                     }
                                 }
                             }
+                        }
                     }
                 }
             }
