@@ -4,12 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Text
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.stringResource
+import androidx.core.text.toSpannable
+import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
-import com.noto.app.databinding.NoteListFilteringDialogFragmentBinding
+import com.noto.app.components.BottomSheetDialog
+import com.noto.app.components.MediumSubtitle
+import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.FilteringType
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
+import com.noto.app.util.toAnnotatedString
+import com.noto.app.util.toDescriptionResource
+import com.noto.app.util.toResource
 
 class NoteListFilteringWidgetDialogFragment constructor() : BaseDialogFragment() {
     private var onClick: (FilteringType) -> Unit = {}
@@ -24,28 +37,33 @@ class NoteListFilteringWidgetDialogFragment constructor() : BaseDialogFragment()
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = NoteListFilteringDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        tb.tvDialogTitle.text = context?.stringResource(R.string.filtering)
+    ): View? = context?.let { context ->
+        ComposeView(context).apply {
+            setContent {
+                val types = remember { FilteringType.values() }
 
-        when (filteringType) {
-            FilteringType.Inclusive, null -> rbInclusive.isChecked = true
-            FilteringType.Exclusive -> rbExclusive.isChecked = true
-            FilteringType.Strict -> rbStrict.isChecked = true
-        }
+                BottomSheetDialog(title = stringResource(R.string.filtering)) {
+                    types.forEach { type ->
+                        val typeDescription = remember(type) {
+                            context.getText(type.toDescriptionResource()).toSpannable().toAnnotatedString()
+                        }
 
-        rbInclusive.setOnClickListener {
-            onClick(FilteringType.Inclusive)
-            dismiss()
-        }
-
-        rbExclusive.setOnClickListener {
-            onClick(FilteringType.Exclusive)
-            dismiss()
-        }
-
-        rbStrict.setOnClickListener {
-            onClick(FilteringType.Strict)
-            dismiss()
+                        SelectableDialogItem(
+                            selected = filteringType == type,
+                            onClick = {
+                                onClick(type)
+                                dismiss()
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Column(verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.extraSmall)) {
+                                Text(text = stringResource(id = type.toResource()))
+                                MediumSubtitle(text = typeDescription)
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
