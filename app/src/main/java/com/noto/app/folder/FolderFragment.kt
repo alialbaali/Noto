@@ -154,16 +154,31 @@ class FolderFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        root.keyboardVisibilityAsFlow()
-            .onEach { isVisible ->
-                fab.isVisible = !isVisible
-                bab.isVisible = !isVisible
-                tilSearch.updateLayoutParams<CoordinatorLayout.LayoutParams> {
-                    anchorId = if (isVisible) View.NO_ID else fab.id
-                    gravity = if (isVisible) Gravity.BOTTOM else Gravity.TOP
+        combine(
+            root.keyboardVisibilityAsFlow(),
+            bab.isHiddenAsFlow()
+                .onStart { emit(false) },
+            babSelection.isHiddenAsFlow()
+                .onStart { emit(false) },
+            viewModel.isSelection,
+        ) { isKeyboardVisible, isBabHidden, isBabSelectionHidden, isSelection ->
+            fab.isVisible = !isKeyboardVisible
+            bab.isVisible = !isKeyboardVisible
+            tilSearch.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+                anchorId = when {
+                    isSelection -> when {
+                        isKeyboardVisible -> View.NO_ID
+                        isBabSelectionHidden -> R.id.fab_selection
+                        else -> R.id.fab_select_all
+                    }
+
+                    isKeyboardVisible -> View.NO_ID
+                    isBabHidden -> R.id.fab
+                    else -> bab.id
                 }
+                gravity = if (isKeyboardVisible) Gravity.BOTTOM else Gravity.TOP
             }
-            .launchIn(lifecycleScope)
+        }.launchIn(lifecycleScope)
 
         if (isCurrentLocaleArabic()) {
             tvFolderNotesCount.isVisible = false

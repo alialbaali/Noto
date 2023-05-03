@@ -34,6 +34,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -296,16 +297,23 @@ class FilteredFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        root.keyboardVisibilityAsFlow()
-            .onEach { isVisible ->
-                if (args.model != FilteredItemModel.Archived) fab.isVisible = !isVisible
-                bab.isVisible = !isVisible
-                tilSearch.updateLayoutParams<CoordinatorLayout.LayoutParams> {
-                    anchorId = if (isVisible) View.NO_ID else if (args.model == FilteredItemModel.Archived) bab.id else fab.id
-                    gravity = if (isVisible) Gravity.BOTTOM else Gravity.TOP
+        combine(
+            root.keyboardVisibilityAsFlow(),
+            bab.isHiddenAsFlow()
+                .onStart { emit(false) },
+        ) { isKeyboardVisible, isBabHidden ->
+            if (args.model != FilteredItemModel.Archived) fab.isVisible = !isKeyboardVisible
+            bab.isVisible = !isKeyboardVisible
+            tilSearch.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+                anchorId = when {
+                    isKeyboardVisible -> View.NO_ID
+                    args.model == FilteredItemModel.Archived -> R.id.bab
+                    isBabHidden -> R.id.fab
+                    else -> bab.id
                 }
+                gravity = if (isKeyboardVisible) Gravity.BOTTOM else Gravity.TOP
             }
-            .launchIn(lifecycleScope)
+        }.launchIn(lifecycleScope)
 
         savedStateHandle?.getLiveData<Long>(Constants.FolderId)
             ?.observe(viewLifecycleOwner) { folderId ->

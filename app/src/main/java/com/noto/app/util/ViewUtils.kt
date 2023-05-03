@@ -43,6 +43,7 @@ import androidx.navigation.navOptions
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.behavior.HideBottomViewOnScrollBehavior
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.snackbar.Snackbar
@@ -420,4 +421,12 @@ fun Context.highlightText(
         if (boldFontSpan != null) setSpan(boldFontSpan, matchStartIndex, matchEndIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
     return spannable
+}
+
+fun BottomAppBar.isHiddenAsFlow() = callbackFlow {
+    val listener = HideBottomViewOnScrollBehavior.OnScrollStateChangedListener { _, state ->
+        trySend(state == BottomAppBar.Behavior.STATE_SCROLLED_DOWN)
+    }
+    addOnScrollStateChangedListener(listener)
+    awaitClose { removeOnScrollStateChangedListener(listener) }
 }
