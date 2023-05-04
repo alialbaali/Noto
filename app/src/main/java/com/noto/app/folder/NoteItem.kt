@@ -1,17 +1,11 @@
 package com.noto.app.folder
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.graphics.Typeface
 import android.os.Build
-import android.text.Spannable
-import android.text.style.ForegroundColorSpan
-import android.text.style.StyleSpan
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.toSpannable
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMarginsRelative
@@ -83,13 +77,13 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             ll.background?.setRippleColor(colorResource.toColorStateList())
             tvNoteTitle.setLinkTextColor(colorResource)
             tvNoteBody.setLinkTextColor(colorResource)
-            tvNoteTitle.text = model.note.title.highlightText(colorResource, context)
+            tvNoteTitle.setHighlightedText(model.note.title, searchTerm, colorResource)
             if (model.note.title.isBlank() && previewSize == 0) {
-                tvNoteBody.text = model.note.body.takeLines(1).highlightText(colorResource, context)
+                tvNoteBody.setHighlightedText(model.note.body.takeLines(1), searchTerm, colorResource)
                 tvNoteBody.maxLines = 1
                 tvNoteBody.isVisible = true
             } else {
-                tvNoteBody.text = model.note.body.takeLines(previewSize).highlightText(colorResource, context)
+                tvNoteBody.setHighlightedText(model.note.body.takeLines(previewSize), searchTerm, colorResource)
                 tvNoteBody.isVisible = previewSize != 0 && model.note.body.isNotBlank()
                 if (isPreview) {
                     tvNoteTitle.maxLines = 3
@@ -180,26 +174,6 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
         } else {
             root.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
             root.isEnabled = true
-        }
-    }
-
-    private fun String.highlightText(color: Int, context: Context): Spannable {
-        val indices = this.indicesOf(searchTerm, ignoreCase = true)
-            .filter { it.first < it.last }
-
-        return this.toSpannable().apply {
-            indices.forEach { range ->
-                val colorSpan = ForegroundColorSpan(color)
-                val boldFontSpan = context.tryLoadingFontResource(R.font.nunito_black)?.style?.let(::StyleSpan)
-                val boldSpan = StyleSpan(Typeface.BOLD)
-                val startIndex = range.first.coerceIn(0, this.length)
-                val endIndex = range.last.coerceIn(0, this.length)
-                setSpan(colorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                setSpan(boldSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                if (boldFontSpan != null) {
-                    setSpan(boldFontSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
-            }
         }
     }
 

@@ -430,3 +430,24 @@ fun BottomAppBar.isHiddenAsFlow() = callbackFlow {
     addOnScrollStateChangedListener(listener)
     awaitClose { removeOnScrollStateChangedListener(listener) }
 }
+
+fun TextView.setHighlightedText(text: String, term: String, color: Int) {
+    val indices = text.indicesOf(term, ignoreCase = true)
+        .filter { it.first < it.last }
+
+    val highlightedText = text.toSpannable().apply {
+        indices.forEach { range ->
+            val colorSpan = ForegroundColorSpan(color)
+            val boldFontSpan = context.tryLoadingFontResource(R.font.nunito_black)?.style?.let(::StyleSpan)
+            val boldSpan = StyleSpan(Typeface.BOLD)
+            val startIndex = range.first.coerceIn(0, this.length)
+            val endIndex = range.last.coerceIn(0, this.length)
+            setSpan(colorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            setSpan(boldSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            if (boldFontSpan != null) {
+                setSpan(boldFontSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+        }
+    }
+    this.text = highlightedText
+}
