@@ -110,7 +110,7 @@
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_previous"
-                android:src="@drawable/ic_round_previous_24"
+                android:src="@drawable/ic_round_previous_page_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/previous"
@@ -127,7 +127,7 @@
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_next"
-                android:src="@drawable/ic_round_next_24"
+                android:src="@drawable/ic_round_next_page_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/next"
