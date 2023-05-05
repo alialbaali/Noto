@@ -170,11 +170,78 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bab"
+    <LinearLayout
+        android:id="@+id/ll_find_in_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:translationY="-16dp"
+        android:layout_gravity="top"
+        android:background="@drawable/generic_ripple_shape"
+        android:backgroundTint="?attr/notoBackgroundColor"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:elevation="@dimen/elevation_large"
+        android:outlineProvider="bounds"
+        android:visibility="gone"
+        app:layout_anchor="@id/bab"
+        tools:visibility="visible">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_find_in_note"
+            style="@style/SearchTextInputLayout"
+            android:elevation="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="@dimen/spacing_small"
+            android:translationY="0dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="visible"
+            app:layout_anchor="@null">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_find_in_note"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/find_in_note"
+                android:inputType="text|textCapSentences|textAutoCorrect" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <ImageButton
+            android:id="@+id/ib_previous"
+            android:background="@drawable/generic_ripple_shape"
+            android:backgroundTint="?attr/notoBackgroundColor"
+            android:src="@drawable/ic_round_back_24"
+            android:rotation="90"
+            android:padding="@dimen/spacing_normal"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:layout_marginEnd="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/previous" />
+
+        <ImageButton
+            android:id="@+id/ib_next"
+            android:background="@drawable/generic_ripple_shape"
+            android:backgroundTint="?attr/notoBackgroundColor"
+            android:src="@drawable/ic_round_back_24"
+            android:rotation="-90"
+            android:padding="@dimen/spacing_normal"
+            android:layout_gravity="center"
+            android:layout_marginStart="2dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/next" />
+    </LinearLayout>
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bab"
         android:layout_gravity="bottom"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         app:addElevationShadow="true"
         app:backgroundTint="?attr/notoBackgroundColor"
         app:elevation="@dimen/elevation_large"
@@ -190,8 +257,8 @@
         android:layout_gravity="bottom"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:paddingStart="0dp"
         android:paddingEnd="0dp"
+        android:paddingStart="0dp"
         app:addElevationShadow="true"
         app:backgroundTint="?attr/notoBackgroundColor"
         app:contentInsetEnd="0dp"
@@ -205,43 +272,43 @@
         tools:visibility="gone">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:gravity="center"
             android:layout_height="80dp"
-            android:gravity="center">
+            android:layout_width="match_parent">
 
             <ImageButton
                 android:id="@+id/ib_undo_history"
                 style="@style/ClickableView"
-                android:layout_width="wrap_content"
+                android:contentDescription="@string/undo_history"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_round_undo_history_24"
-                android:contentDescription="@string/undo_history" />
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_round_undo_history_24" />
 
             <ImageButton
                 android:id="@+id/ib_undo"
                 style="@style/ClickableView"
-                android:layout_width="match_parent"
+                android:contentDescription="@string/undo"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/undo"
+                android:layout_width="match_parent"
                 android:src="@drawable/ic_round_undo_24" />
 
             <ImageButton
                 android:id="@+id/ib_redo"
                 style="@style/ClickableView"
-                android:layout_width="match_parent"
+                android:contentDescription="@string/redo"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:contentDescription="@string/redo"
+                android:layout_width="match_parent"
                 android:src="@drawable/ic_round_redo_24" />
 
             <ImageButton
                 android:id="@+id/ib_redo_history"
                 style="@style/ClickableView"
-                android:layout_width="wrap_content"
+                android:contentDescription="@string/redo_history"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_round_redo_history_24"
-                android:contentDescription="@string/redo_history" />
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_round_redo_history_24" />
         </LinearLayout>
     </com.google.android.material.bottomappbar.BottomAppBar>
 

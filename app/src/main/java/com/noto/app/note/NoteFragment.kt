@@ -165,7 +165,9 @@ class NoteFragment : Fragment() {
                 .filterNotNull()
                 .map { it.toString() },
             etNoteBody.textSelectionAsFlow(),
-        ) { body, selectedText ->
+            viewModel.findInNoteIndices,
+            viewModel.isFindInNoteEnabled,
+        ) { body, selectedText, findInNoteIndices, isFindInNoteEnabled ->
             if (selectedText != null && selectedText.isNotBlank()) {
                 tvWordCount.text = context?.quantityStringResource(
                     R.plurals.words_selected_count,
@@ -178,6 +180,21 @@ class NoteFragment : Fragment() {
                     body.wordsCount,
                     body.wordsCount,
                     selectedText.wordsCount,
+                )
+            } else if (isFindInNoteEnabled) {
+                tvWordCount.text = context?.quantityStringResource(
+                    R.plurals.words_found_count,
+                    body.wordsCount,
+                    body.wordsCount,
+                    findInNoteIndices.toList().indexOfFirst { it.second }.plus(1),
+                    findInNoteIndices.count(),
+                )
+                tvWordCountRtl.text = context?.quantityStringResource(
+                    R.plurals.words_found_count,
+                    body.wordsCount,
+                    body.wordsCount,
+                    findInNoteIndices.toList().indexOfFirst { it.second }.plus(1),
+                    findInNoteIndices.count(),
                 )
             } else {
                 tvWordCount.text = context?.quantityStringResource(
@@ -278,14 +295,99 @@ class NoteFragment : Fragment() {
             .onEach { viewModel.updateNoteScrollingPosition(nsv.scrollY) }
             .launchIn(lifecycleScope)
 
-        root.keyboardVisibilityAsFlow()
-            .onEach { isVisible ->
-                if (isVisible) {
+        combine(
+            root.keyboardVisibilityAsFlow(),
+            etFindInNote.isFocusedAsFlow(),
+            viewModel.isFindInNoteEnabled,
+        ) { isKeyboardVisible, isFindInNoteFocused, isFindInNoteEnabled ->
+            when {
+                isKeyboardVisible && isFindInNoteFocused -> {
+                    llFindInNote.isVisible = isFindInNoteEnabled
                     bab.performHide(true)
+                    bab.isVisible = false
+                    babToolbar.performHide(true)
+                    babToolbar.isVisible = false
+                }
+
+                isKeyboardVisible && !isFindInNoteFocused -> {
+                    if (isFindInNoteEnabled) llFindInNote.isVisible = false
+                    bab.performHide(true)
+                    bab.isVisible = false
+                    babToolbar.isVisible = true
                     babToolbar.performShow(true)
-                } else {
+                }
+
+                else -> {
+                    llFindInNote.isVisible = isFindInNoteEnabled
+                    bab.isVisible = true
                     bab.performShow(true)
                     babToolbar.performHide(true)
+                    babToolbar.isVisible = false
+                }
+            }
+        }.launchIn(lifecycleScope)
+
+        combine(
+            viewModel.folder
+                .distinctUntilChangedBy { it.color },
+            viewModel.note
+                .distinctUntilChangedBy { it.body },
+            viewModel.isFindInNoteEnabled,
+            viewModel.findInNoteTerm,
+            viewModel.findInNoteIndices,
+        ) { folder, note, isEnabled, term, indices ->
+            if (isEnabled) {
+                if (term.isNotBlank()) {
+                    val termIndex = indices.toList().firstOrNull { it.second }?.first?.last?.coerceIn(0, note.body.length) ?: 0
+                    val currentIndex = etNoteBody.selectionStart
+                    context?.let { context ->
+                        val colorResource = context.colorResource(folder.color.toResource())
+                        etNoteBody.setHighlightedText(note.body, term, colorResource)
+                        if (root.isKeyboardVisible()) {
+                            etNoteBody.setSelection(currentIndex)
+                        } else {
+                            etNoteBody.requestFocus()
+                            etNoteBody.setSelection(termIndex)
+                        }
+                    }
+                }
+            } else {
+                etNoteBody.setText(note.body)
+                etNoteBody.setSelection(note.body.length)
+            }
+        }.launchIn(lifecycleScope)
+
+        viewModel.isFindInNoteEnabled
+            .onEach { isEnabled -> if (isEnabled) enableFindInNote() else disableFindInNote() }
+            .launchIn(lifecycleScope)
+
+        combine(
+            etFindInNote.textAsFlow()
+                .asSearchFlow(),
+            viewModel.note
+                .distinctUntilChangedBy { it.body },
+        ) { term, note ->
+            viewModel.setFindInNoteTerm(term, note.body)
+        }.launchIn(lifecycleScope)
+
+        viewModel.findInNoteIndices
+            .map { it.toList() }
+            .onEach { indices ->
+                val currentIndex = indices.indexOfFirst { it.second }
+                val isPreviousEnabled = indices.getOrNull(currentIndex - 1) != null
+                val isNextEnabled = indices.getOrNull(currentIndex + 1) != null
+                if (isPreviousEnabled) ibPrevious.enable() else ibPrevious.disable()
+                if (isNextEnabled) ibNext.enable() else ibNext.disable()
+
+                if (!root.isKeyboardVisible() || !etNoteBody.isFocused) {
+                    val scrollY = indices.firstOrNull { it.second }
+                        ?.first
+                        ?.first
+                        ?.let(etNoteBody.layout::getLineForOffset)
+                        ?.let(etNoteBody.layout::getLineTop)
+                    if (scrollY != null) {
+                        nsv.smoothScrollTo(0, scrollY)
+                    }
                 }
             }
             .launchIn(lifecycleScope)
@@ -356,7 +458,13 @@ class NoteFragment : Fragment() {
         }
 
         activity?.onBackPressedDispatcher
-            ?.addCallback(viewLifecycleOwner) { backCallback() }
+            ?.addCallback(viewLifecycleOwner) {
+                if (viewModel.isFindInNoteEnabled.value) {
+                    viewModel.disableFindInNote()
+                } else {
+                    backCallback()
+                }
+            }
             ?.isEnabled = true
 
         tb.setNavigationOnClickListener {
@@ -402,6 +510,14 @@ class NoteFragment : Fragment() {
                             selectedNoteIds = args.selectedNoteIds,
                         )
                     )
+                    true
+                }
+
+                R.id.find_in_note -> {
+                    if (viewModel.isFindInNoteEnabled.value)
+                        viewModel.disableFindInNote()
+                    else
+                        viewModel.enableFindInNote()
                     true
                 }
 
@@ -579,6 +695,14 @@ class NoteFragment : Fragment() {
             tvCreatedAt.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
             tvAccessedAt.typeface = context?.tryLoadingFontResource(R.font.nunito_semibold_italic)
         }
+
+        ibPrevious.setOnClickListener {
+            viewModel.selectPreviousFindInNoteIndex()
+        }
+
+        ibNext.setOnClickListener {
+            viewModel.selectNextFindInNoteIndex()
+        }
     }
 
     private fun NoteFragmentBinding.setupFolder(folder: Folder) {
@@ -598,6 +722,7 @@ class NoteFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 etNoteTitle.textCursorDrawable?.mutate()?.setTint(color)
                 etNoteBody.textCursorDrawable?.mutate()?.setTint(color)
+                etFindInNote.textCursorDrawable?.mutate()?.setTint(color)
             }
         }
     }
@@ -741,6 +866,18 @@ class NoteFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun NoteFragmentBinding.enableFindInNote() {
+        llFindInNote.isVisible = true
+        llFindInNote.postDelayed({ etFindInNote.requestFocus() }, DefaultAnimationDuration)
+        activity?.showKeyboard(etFindInNote)
+    }
+
+    private fun NoteFragmentBinding.disableFindInNote() {
+        llFindInNote.isVisible = false
+        activity?.hideKeyboard(etFindInNote)
+        etFindInNote.text = null
     }
 
     private fun List<Triple<Int, Int, String>>.subListOld(currentText: String): List<Triple<Int, Int, String>> {

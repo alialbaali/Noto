@@ -64,6 +64,15 @@ class NoteViewModel(
     private val mutableReminderDateTime = MutableStateFlow(Clock.System.now().plus(ExtraDatePeriod))
     val reminderDateTime get() = mutableReminderDateTime.asStateFlow()
 
+    private val mutableIsFindInNoteEnabled = MutableStateFlow(false)
+    val isFindInNoteEnabled get() = mutableIsFindInNoteEnabled.asStateFlow()
+
+    private val mutableFindInNoteTerm = MutableStateFlow("")
+    val findInNoteTerm get() = mutableFindInNoteTerm.asStateFlow()
+
+    private val mutableFindInNoteIndices = MutableStateFlow(emptyMap<IntRange, Boolean>())
+    val findInNoteIndices get() = mutableFindInNoteIndices.asStateFlow()
+
     init {
         noteRepository.getNoteById(noteId)
             .onStart { emit(Note(noteId, folderId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
@@ -305,6 +314,51 @@ class NoteViewModel(
             LocalDateTime(it.year, it.monthNumber, it.dayOfMonth, hour, minute, it.second, it.nanosecond)
         }
         mutableReminderDateTime.value = updatedDateTime.toInstant(TimeZone.currentSystemDefault())
+    }
+
+    fun enableFindInNote() {
+        mutableIsFindInNoteEnabled.value = true
+    }
+
+    fun disableFindInNote() {
+        mutableIsFindInNoteEnabled.value = false
+        setFindInNoteTerm("", "")
+    }
+
+    fun setFindInNoteTerm(term: String, body: String) {
+        val currentValue = findInNoteIndices.value.toList().firstOrNull { it.second }?.first
+        mutableFindInNoteTerm.value = term
+        mutableFindInNoteIndices.value = if (term.isBlank()) {
+            emptyMap()
+        } else {
+            body.indicesOf(term, ignoreCase = true).associateWith { it == currentValue }
+        }
+        // Checking if there's currently a selected value, otherwise it would reset to 1/1**.
+        if (currentValue == null) selectNextFindInNoteIndex()
+    }
+
+    fun selectNextFindInNoteIndex() {
+        val values = findInNoteIndices.value.toList()
+        val currentIndex = values.indexOfFirst { it.second }
+        val intRange = values.getOrNull(currentIndex + 1)?.first
+
+        if (intRange != null) {
+            mutableFindInNoteIndices.value = findInNoteIndices.value.map {
+                it.key to (it.key == intRange)
+            }.toMap()
+        }
+    }
+
+    fun selectPreviousFindInNoteIndex() {
+        val values = findInNoteIndices.value.toList()
+        val currentIndex = values.indexOfFirst { it.second }
+        val intRange = values.getOrNull(currentIndex - 1)?.first
+
+        if (intRange != null) {
+            mutableFindInNoteIndices.value = findInNoteIndices.value.map {
+                it.key to (it.key == intRange)
+            }.toMap()
+        }
     }
 
     private fun List<Triple<Int, Int, String>>.getPreviousValueOrCurrent(currentValue: String): Triple<Int, Int, String> {

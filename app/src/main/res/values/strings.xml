@@ -6,6 +6,8 @@
     <string name="apply">Apply</string>
     <string name="okay">Okay</string>
     <string name="search">Search</string>
+    <!-- An option in the note layout for searching for text inside a note. -->
+    <string name="find_in_note">Find in note</string>
     <!-- A settings option to support the project. -->
     <string name="support_noto">Support Noto</string>
     <!-- Description of the Support Noto settings options. -->
@@ -306,6 +308,12 @@
     <plurals name="words_selected_count">
         <item quantity="one">%1$d Word • %2$d Selected</item>
         <item quantity="other">%1$d Words • %2$d Selected</item>
+    </plurals>
+    <!-- Text displaying how many occurrences of a word has been found using "Find in note" feature. Such as "2/11 Found".
+        The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
+    <plurals name="words_found_count">
+        <item quantity="one">%1$d Word • %2$d / %3$d Found</item>
+        <item quantity="other">%1$d Words • %2$d / %3$d Found</item>
     </plurals>
     <string name="body">Body</string>
     <string name="title">Title</string>

@@ -27,6 +27,13 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/find_in_note"
+        android:contentDescription="@string/find_in_note"
+        android:icon="@drawable/ic_round_find_in_page_24"
+        android:title="@string/find_in_note"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/more"
         android:contentDescription="@string/note_options"
         android:icon="@drawable/ic_round_more_24"
