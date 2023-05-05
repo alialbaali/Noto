@@ -24,15 +24,15 @@
     <!-- Label filtering mode -->
     <string name="inclusive">Inclusive</string>
     <!-- Inclusive filtering mode description -->
-    <string name="inclusive_description">Display notes that have <b>any</b> of the selected labels.</string>
+    <string name="inclusive_description">Filter notes that have <b>any</b> of the selected labels.</string>
     <!-- Label filtering mode -->
     <string name="exclusive">Exclusive</string>
     <!-- Exclusive filtering mode description -->
-    <string name="exclusive_description">Display notes that have <b>all</b> the selected labels, nothing less.</string>
+    <string name="exclusive_description">Filter notes that have <b>all</b> the selected labels, nothing less.</string>
     <!-- Label filtering mode -->
     <string name="strict">Strict</string>
     <!-- Strict filtering mode description -->
-    <string name="strict_description">Display notes that have <b>only</b> the selected labels, nothing less, nothing more.</string>
+    <string name="strict_description">Filter notes that have <b>only</b> the selected labels, nothing less, nothing more.</string>
     <string name="grid">Grid</string>
     <string name="created">Created %s</string>
     <string name="accessed">Accessed %s</string>
