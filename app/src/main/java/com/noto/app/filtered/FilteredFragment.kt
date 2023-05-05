@@ -3,6 +3,7 @@ package com.noto.app.filtered
 import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -30,11 +31,7 @@ import com.noto.app.getOrDefault
 import com.noto.app.util.*
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.datetime.LocalDate
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -175,8 +172,12 @@ class FilteredFragment : Fragment() {
         }
 
         context?.let { context ->
-            tvTitle.setTextColor(context.colorResource(args.model.color.toResource()))
-            fab.backgroundTintList = context.colorResource(args.model.color.toResource()).toColorStateList()
+            val colorResource = context.colorResource(args.model.color.toResource())
+            tvTitle.setTextColor(colorResource)
+            fab.background?.mutate()?.setTint(colorResource)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                etSearch.textCursorDrawable?.mutate()?.setTint(colorResource)
+            }
             tvTitle.text = when (args.model) {
                 FilteredItemModel.All -> R.string.all
                 FilteredItemModel.Recent -> R.string.recent

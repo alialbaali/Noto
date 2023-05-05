@@ -567,6 +567,9 @@ class FolderFragment : Fragment() {
                 fabSelectAll.outlineAmbientShadowColor = color
                 fabSelectAll.outlineSpotShadowColor = color
             }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                etSearch.textCursorDrawable?.mutate()?.setTint(color)
+            }
             if (folder.isArchived || folder.isVaulted) {
                 val drawableId = if (folder.isVaulted) R.drawable.ic_round_lock_24 else R.drawable.ic_round_archive_24
                 val bitmapDrawable = context.drawableResource(drawableId)
