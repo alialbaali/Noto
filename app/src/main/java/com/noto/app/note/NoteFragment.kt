@@ -383,8 +383,8 @@ class NoteFragment : Fragment() {
                     val scrollY = indices.firstOrNull { it.second }
                         ?.first
                         ?.first
-                        ?.let(etNoteBody.layout::getLineForOffset)
-                        ?.let(etNoteBody.layout::getLineTop)
+                        ?.let { etNoteBody.layout?.getLineForOffset(it) }
+                        ?.let { etNoteBody.layout?.getLineTop(it) }
                     if (scrollY != null) {
                         nsv.smoothScrollTo(0, scrollY)
                     }
