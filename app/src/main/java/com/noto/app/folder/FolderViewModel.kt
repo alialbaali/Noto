@@ -176,7 +176,10 @@ class FolderViewModel(
         notes
             .onEach { notesState ->
                 val isNoneSelected = notesState.getOrDefault(emptyList()).none { it.isSelected }
-                if (isNoneSelected) disableSelection()
+                if (isNoneSelected) {
+                    disableSelection()
+                    deselectAllNotes()
+                }
             }
             .launchIn(viewModelScope)
 

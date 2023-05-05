@@ -316,6 +316,8 @@ class FolderFragment : Fragment() {
                     )
                 )
             }
+            viewModel.disableSelection()
+            viewModel.deselectAllNotes()
         }
 
         babSelection.setOnMenuItemClickListener { menuItem ->
@@ -330,6 +332,8 @@ class FolderFragment : Fragment() {
                             selectedNotes.first().id,
                         )
                     )
+                    viewModel.disableSelection()
+                    viewModel.deselectAllNotes()
                     true
                 }
 
@@ -342,6 +346,8 @@ class FolderFragment : Fragment() {
                         context.updateAllWidgetsData()
                         context.updateNoteListWidgets()
                     }
+                    viewModel.disableSelection()
+                    viewModel.deselectAllNotes()
                     true
                 }
 
@@ -363,11 +369,15 @@ class FolderFragment : Fragment() {
                             context.updateAllWidgetsData()
                         }
                     }
+                    viewModel.disableSelection()
+                    viewModel.deselectAllNotes()
                     true
                 }
 
                 R.id.share -> {
                     launchShareNotesIntent(selectedNotes)
+                    viewModel.disableSelection()
+                    viewModel.deselectAllNotes()
                     true
                 }
 
@@ -382,6 +392,8 @@ class FolderFragment : Fragment() {
                         context.updateAllWidgetsData()
                         context.updateNoteListWidgets()
                     }
+                    viewModel.disableSelection()
+                    viewModel.deselectAllNotes()
                     true
                 }
 
