@@ -299,6 +299,16 @@ fun View.isFocusedAsFlow() = callbackFlow {
     awaitClose { onFocusChangeListener = null }
 }.onStart { emit(isFocused) }
 
+fun View.isFocusedAsFlow(compositeListener: OnFocusChangedCompositeListener) = callbackFlow {
+    val listener = View.OnFocusChangeListener { _, hasFocus -> trySend(hasFocus) }
+    compositeListener.registerListener(listener)
+    onFocusChangeListener = compositeListener
+    awaitClose {
+        compositeListener.unregisterListener(listener)
+        onFocusChangeListener = null
+    }
+}.onStart { emit(isFocused) }
+
 fun View.disable() {
     animate()
         .setDuration(DefaultAnimationDuration)

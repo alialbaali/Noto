@@ -36,6 +36,8 @@ class NoteFragment : Fragment() {
 
     private val args by navArgs<NoteFragmentArgs>()
 
+    private val noteBodyOnFocusCompositeListener = OnFocusChangedCompositeListener()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteFragmentBinding.inflate(inflater, container, false).withBinding {
 //            setupMixedTransitions() // Temporally disabled due to focus isn't being set to the title.
@@ -282,7 +284,7 @@ class NoteFragment : Fragment() {
             etNoteBody.textAsFlow(emitInitialText = true)
                 .filterNotNull()
                 .map { it.toString() },
-            etNoteBody.isFocusedAsFlow(),
+            etNoteBody.isFocusedAsFlow(noteBodyOnFocusCompositeListener),
         ) { _, body, isFocused -> isFocused to body }
             .debounce(DebounceTimeoutMillis)
             .onEach { (isFocused, body) ->
@@ -337,6 +339,7 @@ class NoteFragment : Fragment() {
             viewModel.findInNoteIndices,
             root.keyboardVisibilityAsFlow()
                 .debounce(DebounceTimeoutMillis),
+            etNoteBody.isFocusedAsFlow(noteBodyOnFocusCompositeListener),
         ) { state ->
             val folder = state[0] as Folder
             val note = state[1] as Note
@@ -344,9 +347,10 @@ class NoteFragment : Fragment() {
             val term = state[3] as String
             val indices = state[4] as Map<IntRange, Boolean>
             val isKeyboardVisible = state[5] as Boolean
+            val isNoteBodyFocused = state[6] as Boolean
             if (isEnabled) {
                 if (term.isNotBlank()) {
-                    if (!isKeyboardVisible || !etNoteBody.isFocused) {
+                    if (!isKeyboardVisible || !isNoteBodyFocused) {
                         val currentIndex = etNoteBody.selectionStart.coerceIn(0, note.body.length)
                         context?.let { context ->
                             val colorResource = context.colorResource(folder.color.toResource())
@@ -396,7 +400,7 @@ class NoteFragment : Fragment() {
             viewModel.findInNoteIndices
                 .map { it.toList() },
             root.keyboardVisibilityAsFlow(),
-            etNoteBody.isFocusedAsFlow(),
+            etNoteBody.isFocusedAsFlow(noteBodyOnFocusCompositeListener),
             etNoteBody.textAsFlow(emitInitialText = true),
         ) { indices, isKeyboardVisible, isNoteBodyFocused, _ ->
             val currentIndex = indices.indexOfFirst { it.second }
