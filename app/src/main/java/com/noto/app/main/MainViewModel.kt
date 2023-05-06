@@ -10,7 +10,7 @@ import com.noto.app.domain.model.SortingOrder
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
-import com.noto.app.util.sorted
+import com.noto.app.util.Comparator
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
@@ -38,7 +38,7 @@ class MainViewModel(
         folders
             .filter { it.parentId == null }
             .mapRecursively(folders, notesCount, sortingType, sortingOrder)
-            .sorted(sortingType, sortingOrder)
+            .sortedWith(Folder.Comparator(sortingOrder, sortingType))
     }
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
@@ -52,7 +52,7 @@ class MainViewModel(
         folders
             .filter { it.parentId == null }
             .mapRecursively(folders, notesCount, sortingType, sortingOrder)
-            .sorted(sortingType, sortingOrder)
+            .sortedWith(Folder.Comparator(sortingOrder, sortingType))
     }
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
@@ -66,7 +66,7 @@ class MainViewModel(
         folders
             .filter { it.parentId == null }
             .mapRecursively(folders, notesCount, sortingType, sortingOrder)
-            .sorted(sortingType, sortingOrder)
+            .sortedWith(Folder.Comparator(sortingOrder, sortingType))
     }
         .map { UiState.Success(it) }
         .stateIn(viewModelScope, SharingStarted.Lazily, UiState.Loading)
@@ -123,7 +123,7 @@ class MainViewModel(
             val childLibraries = allFolders
                 .filter { it.parentId == folder.id }
                 .mapRecursively(allFolders, foldersNotesCount, sortingType, sortingOrder)
-                .sorted(sortingType, sortingOrder)
+                .sortedWith(Folder.Comparator(sortingOrder, sortingType))
             folder.copy(folders = childLibraries) to notesCount
         }
     }

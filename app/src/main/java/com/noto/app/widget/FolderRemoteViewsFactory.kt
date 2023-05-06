@@ -45,7 +45,7 @@ class FolderRemoteViewsFactory(private val context: Context, intent: Intent?) : 
             }
             .filterNotNull()
             .first()
-            .sorted(sortingType, sortingOrder)
+            .sortedWith(Folder.Comparator(sortingOrder, sortingType))
             .sortedByDescending { it.first.isPinned }
             .sortedByDescending { it.first.isGeneral }
     }

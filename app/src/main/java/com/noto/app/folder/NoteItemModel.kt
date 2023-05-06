@@ -9,4 +9,6 @@ data class NoteItemModel(
     val isSelected: Boolean,
     val selectionOrder: Int = -1,
     val isDragged: Boolean,
-)
+) {
+    companion object
+}

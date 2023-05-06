@@ -85,7 +85,7 @@ class FilteredViewModel(
                         }
                         .filterNotNullKeys()
                         .filterValues { it.isNotEmpty() }
-                        .mapValues { it.value.sorted(it.key.sortingType, it.key.sortingOrder) }
+                        .mapValues { it.value.sortedWith(NoteItemModel.Comparator(it.key.sortingOrder, it.key.sortingType)) }
                         .toList()
                         .sortedBy { it.first.position }
                         .sortedByDescending { it.first.isGeneral }
@@ -135,7 +135,7 @@ class FilteredViewModel(
                         }
                         .filterNotNullKeys()
                         .filterValues { it.isNotEmpty() }
-                        .mapValues { it.value.sorted(it.key.sortingType, it.key.sortingOrder) }
+                        .mapValues { it.value.sortedWith(NoteItemModel.Comparator(it.key.sortingOrder, it.key.sortingType)) }
                         .toList()
                         .sortedBy { it.first.position }
                         .sortedByDescending { it.first.isGeneral }

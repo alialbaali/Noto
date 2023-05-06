@@ -29,8 +29,8 @@ inline fun EpoxyController.buildNotesModels(
 ) {
     when (folder.grouping) {
         Grouping.None -> {
-            val pinnedNotes = notes.filter { it.note.isPinned }.sorted(folder.sortingType, folder.sortingOrder)
-            val notPinnedNotes = notes.filterNot { it.note.isPinned }.sorted(folder.sortingType, folder.sortingOrder)
+            val pinnedNotes = notes.filter { it.note.isPinned }.sortedWith(NoteItemModel.Comparator(folder.sortingOrder, folder.sortingType))
+            val notPinnedNotes = notes.filterNot { it.note.isPinned }.sortedWith(NoteItemModel.Comparator(folder.sortingOrder, folder.sortingType))
 
             if (pinnedNotes.isNotEmpty()) {
                 headerItem {
@@ -50,6 +50,7 @@ inline fun EpoxyController.buildNotesModels(
             }
             content(notPinnedNotes)
         }
+
         Grouping.CreationDate -> {
             notes.groupByCreationDate(folder.sortingType, folder.sortingOrder, folder.groupingOrder).forEach { (date, notes) ->
                 headerItem {
@@ -60,6 +61,7 @@ inline fun EpoxyController.buildNotesModels(
                 content(notes)
             }
         }
+
         Grouping.Label -> {
             notes.groupByLabels(folder.sortingType, folder.sortingOrder, folder.groupingOrder).forEach { (labels, notes) ->
                 if (labels.isEmpty())
@@ -79,6 +81,7 @@ inline fun EpoxyController.buildNotesModels(
                 content(notes)
             }
         }
+
         Grouping.AccessDate -> {
             notes.groupByAccessDate(folder.sortingType, folder.sortingOrder, folder.groupingOrder).forEach { (date, notes) ->
                 headerItem {

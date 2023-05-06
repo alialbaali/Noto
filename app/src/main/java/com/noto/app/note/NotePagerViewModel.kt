@@ -3,11 +3,12 @@ package com.noto.app.note
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.ScreenBrightnessLevel
 import com.noto.app.domain.repository.FolderRepository
 import com.noto.app.domain.repository.NoteRepository
 import com.noto.app.domain.repository.SettingsRepository
-import com.noto.app.util.sorted
+import com.noto.app.util.Comparator
 import kotlinx.coroutines.flow.*
 
 class NotePagerViewModel(
@@ -24,7 +25,7 @@ class NotePagerViewModel(
         .stateIn(viewModelScope, SharingStarted.Eagerly, Folder(position = 0))
 
     val noteIds = noteRepository.getNotesByFolderId(folderId)
-        .combine(folder) { notes, folder -> notes.sorted(folder.sortingType, folder.sortingOrder) }
+        .combine(folder) { notes, folder -> notes.sortedWith(Note.Comparator(folder.sortingOrder, folder.sortingType)) }
         .map {
             it.map { note -> note.id }
                 .filter { id -> if (selectedNoteIds.isEmpty()) true else selectedNoteIds.contains(id) }

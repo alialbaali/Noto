@@ -3,15 +3,9 @@ package com.noto.app.widget
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
-import com.noto.app.domain.repository.FolderRepository
-import com.noto.app.domain.repository.LabelRepository
-import com.noto.app.domain.repository.NoteLabelRepository
-import com.noto.app.domain.repository.NoteRepository
-import com.noto.app.domain.repository.SettingsRepository
-import com.noto.app.util.createNoteListWidgetRemoteViews
-import com.noto.app.util.filterSelectedLabels
-import com.noto.app.util.mapToNoteItemModel
-import com.noto.app.util.sorted
+import com.noto.app.domain.repository.*
+import com.noto.app.folder.NoteItemModel
+import com.noto.app.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.filter
@@ -52,7 +46,7 @@ class NoteListWidgetProvider : AppWidgetProvider(), KoinComponent {
                     .map {
                         it.mapToNoteItemModel(labels, noteLabels)
                             .filterSelectedLabels(selectedLabels, filteringType)
-                            .sorted(folder.sortingType, folder.sortingOrder)
+                            .sortedWith(NoteItemModel.Comparator(folder.sortingOrder, folder.sortingType))
                             .sortedByDescending { it.note.isPinned }
                     }
                     .first()

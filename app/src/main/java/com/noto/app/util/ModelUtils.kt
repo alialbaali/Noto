@@ -31,15 +31,6 @@ private const val HashAlgorithm = "PBKDF2WithHmacSHA1"
 private const val HashIterationCount = 65536
 private const val HashKeyLength = 128
 
-inline fun <T> List<T>.sortByOrder(
-    sortingOrder: SortingOrder,
-    comparator: Comparator<T>,
-    crossinline selector: (T) -> Comparable<*>?,
-): List<T> = when (sortingOrder) {
-    SortingOrder.Ascending -> sortedWith(comparator.thenBy(selector))
-    SortingOrder.Descending -> sortedWith(comparator.thenByDescending(selector))
-}
-
 fun String?.firstLineOrEmpty() = this?.lines()?.firstOrNull()?.trim().orEmpty()
 
 fun String?.takeAfterFirstLineOrEmpty() = this?.lines()?.drop(1)?.joinToString("\n")?.trim().orEmpty()
@@ -64,41 +55,66 @@ fun Note.format(): String = """
 val Note.isValid
     get() = title.isNotBlank() || body.isNotBlank()
 
-@Suppress("DEPRECATION")
-fun List<Pair<Folder, Int>>.sorted(
-    sortingType: FolderListSortingType,
-    sortingOrder: SortingOrder,
-) = sortByOrder(sortingOrder, comparator = compareByDescending { it.first.isPinned }) { pair ->
-    when (sortingType) {
-        FolderListSortingType.Manual -> pair.first.position
-        FolderListSortingType.CreationDate -> pair.first.creationDate
-        FolderListSortingType.Alphabetical -> pair.first.title
+@Suppress("FUNCTIONNAME")
+fun NoteItemModel.Companion.Comparator(sortingOrder: SortingOrder, sortingType: NoteListSortingType): Comparator<NoteItemModel> {
+    val collator = Collator.getInstance().apply { strength = Collator.PRIMARY }
+    val isCollatorEnabled = sortingType == NoteListSortingType.Alphabetical
+    val selector: (NoteItemModel) -> Comparable<*> = { model ->
+        when (sortingType) {
+            NoteListSortingType.Manual -> model.note.position
+            NoteListSortingType.CreationDate -> model.note.creationDate
+            NoteListSortingType.Alphabetical -> model.note.title.ifBlank { model.note.body }
+            NoteListSortingType.AccessDate -> model.note.accessDate
+        }
     }
+    return compareByDescending<NoteItemModel> { model -> model.note.isPinned }
+        .let {
+            when (sortingOrder) {
+                SortingOrder.Ascending -> if (isCollatorEnabled) it.thenBy(collator, selector) else it.thenBy(selector)
+                SortingOrder.Descending -> if (isCollatorEnabled) it.thenByDescending(collator, selector) else it.thenByDescending(selector)
+            }
+        }
 }
 
-fun List<NoteItemModel>.sorted(
-    sortingType: NoteListSortingType,
-    sortingOrder: SortingOrder,
-) = sortByOrder(sortingOrder, comparator = compareByDescending { it.note.isPinned }) { model ->
-    when (sortingType) {
-        NoteListSortingType.Manual -> model.note.position
-        NoteListSortingType.CreationDate -> model.note.creationDate
-        NoteListSortingType.Alphabetical -> model.note.title.ifBlank { model.note.body }
-        NoteListSortingType.AccessDate -> model.note.accessDate
+@Suppress("FUNCTIONNAME")
+fun Note.Companion.Comparator(sortingOrder: SortingOrder, sortingType: NoteListSortingType): Comparator<Note> {
+    val collator = Collator.getInstance().apply { strength = Collator.PRIMARY }
+    val isCollatorEnabled = sortingType == NoteListSortingType.Alphabetical
+    val selector: (Note) -> Comparable<*> = { note ->
+        when (sortingType) {
+            NoteListSortingType.Manual -> note.position
+            NoteListSortingType.CreationDate -> note.creationDate
+            NoteListSortingType.Alphabetical -> note.title.ifBlank { note.body }
+            NoteListSortingType.AccessDate -> note.accessDate
+        }
     }
+    return compareByDescending<Note> { note -> note.isPinned }
+        .let {
+            when (sortingOrder) {
+                SortingOrder.Ascending -> if (isCollatorEnabled) it.thenBy(collator, selector) else it.thenBy(selector)
+                SortingOrder.Descending -> if (isCollatorEnabled) it.thenByDescending(collator, selector) else it.thenByDescending(selector)
+            }
+        }
 }
 
-@JvmName("sortedWith")
-fun List<Note>.sorted(
-    sortingType: NoteListSortingType,
-    sortingOrder: SortingOrder,
-) = sortByOrder(sortingOrder, comparator = compareByDescending { it.isPinned }) { note ->
-    when (sortingType) {
-        NoteListSortingType.Manual -> note.position
-        NoteListSortingType.CreationDate -> note.creationDate
-        NoteListSortingType.Alphabetical -> note.title.ifBlank { note.body }
-        NoteListSortingType.AccessDate -> note.accessDate
+@Suppress("DEPRECATION", "FUNCTIONNAME")
+fun Folder.Companion.Comparator(sortingOrder: SortingOrder, sortingType: FolderListSortingType): Comparator<Pair<Folder, Int>> {
+    val collator = Collator.getInstance().apply { strength = Collator.PRIMARY }
+    val isCollatorEnabled = sortingType == FolderListSortingType.Alphabetical
+    val selector: (Pair<Folder, Int>) -> Comparable<*> = { pair ->
+        when (sortingType) {
+            FolderListSortingType.Manual -> pair.first.position
+            FolderListSortingType.CreationDate -> pair.first.creationDate
+            FolderListSortingType.Alphabetical -> pair.first.title
+        }
     }
+    return compareByDescending<Pair<Folder, Int>> { pair -> pair.first.isPinned }
+        .let {
+            when (sortingOrder) {
+                SortingOrder.Ascending -> if (isCollatorEnabled) it.thenBy(collator, selector) else it.thenBy(selector)
+                SortingOrder.Descending -> if (isCollatorEnabled) it.thenByDescending(collator, selector) else it.thenByDescending(selector)
+            }
+        }
 }
 
 fun List<NoteItemModel>.filterSelectedLabels(selectedLabels: List<Label>, filteringType: FilteringType) = filter { model ->
@@ -136,7 +152,7 @@ private fun Map<LocalDate, List<NoteItemModel>>.sorted(
     sortingOrder: SortingOrder,
     groupingOrder: GroupingOrder,
 ): List<Pair<LocalDate, List<NoteItemModel>>> =
-    mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { model -> model.note.isPinned } }
+    mapValues { it.value.sortedWith(NoteItemModel.Comparator(sortingOrder, sortingType)).sortedByDescending { model -> model.note.isPinned } }
         .map { it.toPair() }
         .let {
             if (groupingOrder == GroupingOrder.Descending)
@@ -151,7 +167,7 @@ fun List<NoteItemModel>.groupByLabels(
     groupingOrder: GroupingOrder,
 ): List<Pair<List<Label>, List<NoteItemModel>>> = map { model -> model.labels to model.copy(labels = emptyList()) }
     .groupBy({ it.first }, { it.second })
-    .mapValues { it.value.sorted(sortingType, sortingOrder).sortedByDescending { it.note.isPinned } }
+    .mapValues { it.value.sortedWith(NoteItemModel.Comparator(sortingOrder, sortingType)).sortedByDescending { it.note.isPinned } }
     .map { it.toPair() }
     .let {
         if (groupingOrder == GroupingOrder.Descending)
@@ -332,7 +348,7 @@ fun CharSequence.indicesOf(string: String, startIndex: Int = 0, ignoreCase: Bool
     return indices
 }
 
-fun Release.Companion.Current(context: Context) : Release {
+fun Release.Companion.Current(context: Context): Release {
     val changelogText = context.stringResource(R.string.release_2_2_3)
     val changelog = Release.Changelog(changelogText)
     return Release_2_2_3(changelog)
