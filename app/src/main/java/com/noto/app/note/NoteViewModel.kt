@@ -178,7 +178,7 @@ class NoteViewModel(
     }
 
     fun copyNote(folderId: Long) = viewModelScope.launch {
-        val noteId = noteRepository.createNote(note.value.copy(id = 0, folderId = folderId))
+        val noteId = noteRepository.createNote(note.value.copy(id = 0, folderId = folderId, creationDate = Clock.System.now()))
         labels.value.filterSelected().forEach { label ->
             launch {
                 val labelId = labelRepository.getOrCreateLabel(folderId, label)
@@ -188,7 +188,7 @@ class NoteViewModel(
     }
 
     fun duplicateNote() = viewModelScope.launch {
-        val noteId = noteRepository.createNote(note.value.copy(id = 0, reminderDate = null))
+        val noteId = noteRepository.createNote(note.value.copy(id = 0, reminderDate = null, creationDate = Clock.System.now()))
         labels.value.filterSelected().forEach { label ->
             launch {
                 noteLabelRepository.createNoteLabel(NoteLabel(noteId = noteId, labelId = label.id))

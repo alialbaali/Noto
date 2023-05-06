@@ -42,6 +42,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Clock
 
 private const val AutoScrollDuration = 2000L
 
@@ -443,7 +444,7 @@ class FolderViewModel(
     fun duplicateSelectedNotes() = viewModelScope.launch {
         selectedNotes.forEach { model ->
             launch {
-                val noteId = noteRepository.createNote(model.note.copy(id = 0, reminderDate = null))
+                val noteId = noteRepository.createNote(model.note.copy(id = 0, reminderDate = null, creationDate = Clock.System.now()))
                 model.labels.forEach { label ->
                     launch {
                         noteLabelRepository.createNoteLabel(NoteLabel(noteId = noteId, labelId = label.id))
@@ -470,7 +471,7 @@ class FolderViewModel(
 
     fun copySelectedNotes(folderId: Long) = viewModelScope.launch {
         selectedNotes.forEach { model ->
-            val noteId = noteRepository.createNote(model.note.copy(id = 0, folderId = folderId))
+            val noteId = noteRepository.createNote(model.note.copy(id = 0, folderId = folderId, creationDate = Clock.System.now()))
             model.labels.forEach { label ->
                 launch {
                     val labelId = labelRepository.getOrCreateLabel(folderId, label)
