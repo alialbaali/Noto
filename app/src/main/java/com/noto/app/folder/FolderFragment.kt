@@ -507,6 +507,7 @@ class FolderFragment : Fragment() {
                                                             model.note.folderId,
                                                             noteId = model.note.id,
                                                             selectedNoteIds = noteIds,
+                                                            searchTerm = searchTerm.ifBlank { null },
                                                         )
                                                     )
 

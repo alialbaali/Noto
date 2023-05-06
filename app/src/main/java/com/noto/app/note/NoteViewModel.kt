@@ -73,6 +73,9 @@ class NoteViewModel(
     private val mutableFindInNoteIndices = MutableStateFlow(emptyMap<IntRange, Boolean>())
     val findInNoteIndices get() = mutableFindInNoteIndices.asStateFlow()
 
+    var isTextHighlighted: Boolean = false
+        private set
+
     init {
         noteRepository.getNoteById(noteId)
             .onStart { emit(Note(noteId, folderId, position = 0, title = body.firstLineOrEmpty(), body = body.takeAfterFirstLineOrEmpty())) }
@@ -326,15 +329,15 @@ class NoteViewModel(
     }
 
     fun setFindInNoteTerm(term: String, body: String) {
-        val currentValue = findInNoteIndices.value.toList().firstOrNull { it.second }?.first
+        val currentIndex = findInNoteIndices.value.toList().indexOfFirst { it.second }.coerceAtLeast(0)
         mutableFindInNoteTerm.value = term
         mutableFindInNoteIndices.value = if (term.isBlank()) {
             emptyMap()
         } else {
-            body.indicesOf(term, ignoreCase = true).associateWith { it == currentValue }
+            body.indicesOf(term, ignoreCase = true)
+                .mapIndexed { index, intRange -> intRange to (index == currentIndex) }
+                .toMap()
         }
-        // Checking if there's currently a selected value, otherwise it would reset to 1/1**.
-        if (currentValue == null) selectNextFindInNoteIndex()
     }
 
     fun selectNextFindInNoteIndex() {
@@ -359,6 +362,10 @@ class NoteViewModel(
                 it.key to (it.key == intRange)
             }.toMap()
         }
+    }
+
+    fun setIsTextHighlighted(isHighlighted: Boolean) {
+        isTextHighlighted = isHighlighted
     }
 
     private fun List<Triple<Int, Int, String>>.getPreviousValueOrCurrent(currentValue: String): Triple<Int, Int, String> {

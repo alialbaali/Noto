@@ -165,6 +165,11 @@
         <argument
             android:name="selected_note_ids"
             app:argType="long[]" />
+        <argument
+            android:name="search_term"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/folderArchiveFragment"
