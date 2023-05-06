@@ -174,7 +174,7 @@ class FilteredFragment : Fragment() {
         context?.let { context ->
             val colorResource = context.colorResource(args.model.color.toResource())
             tvTitle.setTextColor(colorResource)
-            fab.background?.mutate()?.setTint(colorResource)
+            fab.backgroundTintList = colorResource.toColorStateList()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 etSearch.textCursorDrawable?.mutate()?.setTint(colorResource)
             }
