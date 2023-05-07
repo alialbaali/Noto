@@ -64,7 +64,6 @@
     <string name="whats_new">What\'s new</string>
     <string name="whats_new_in">What\'s new in %s</string>
     <string name="learn_more">Learn more…</string>
-    <string name="released_on">Released on %s</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Export/Import data</string>
     <string name="exporting_failed">Failed to export the data.</string>
@@ -107,7 +106,6 @@
     <string name="drag">Drag</string>
     <string name="nunito">Nunito (default)</string>
     <string name="monospace">Monospace</string>
-    <string name="font">Font</string>
     <string name="folders_archive">Folders archive</string>
     <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">Main interface</string>
@@ -161,9 +159,6 @@
     <!-- List of credits. -->
     <string name="credits">Credits</string>
 
-    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
-    <string name="releases_details">For more details, click here.</string>
-
     <!-- Folder -->
     <string name="folders">Folders</string>
     <plurals name="folders_count">
@@ -197,9 +192,6 @@
     <string name="select_folder">Select folder</string>
     <string name="folder">Folder</string>
     <string name="select_folder_archive">Select folder archive</string>
-    <string name="select_parent_folder">Select parent folder</string>
-    <string name="select_quick_note_folder">Select quick note folder</string>
-    <string name="select_main_interface">Select main interface</string>
     <string name="pinned">Pinned</string>
 
     <!-- Vault -->
@@ -214,7 +206,6 @@
     <string name="vault_is_empty">Vault is empty.</string>
     <string name="archive_vaulted_folder_confirmation">Are you sure you want to archive this folder?</string>
     <string name="archive_vaulted_folder_description">Archiving this folder will also remove it from the vault.</string>
-    <string name="vault_passcode">Vault passcode</string>
     <string name="passcode">Passcode</string>
     <string name="new_vault_passcode">New vault passcode</string>
     <string name="new_passcode">New passcode</string>
@@ -381,7 +372,6 @@
         <item quantity="one">Note has been unpinned.</item>
         <item quantity="other">%d Notes have been unpinned.</item>
     </plurals>
-    <string name="no_note_reminder">No reminder is setup.</string>
     <string name="cancel_reminder">Cancel reminder</string>
     <string name="note_is_unarchived">Note has been unarchived.</string>
     <string name="reminder">Reminder</string>
