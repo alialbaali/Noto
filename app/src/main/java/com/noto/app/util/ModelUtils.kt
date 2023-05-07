@@ -16,6 +16,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import java.text.Collator
 import java.util.*
 import javax.crypto.SecretKeyFactory
@@ -55,7 +57,7 @@ fun Note.format(): String = """
 val Note.isValid
     get() = title.isNotBlank() || body.isNotBlank()
 
-@Suppress("FUNCTIONNAME")
+@Suppress("FunctionName")
 fun NoteItemModel.Companion.Comparator(sortingOrder: SortingOrder, sortingType: NoteListSortingType): Comparator<NoteItemModel> {
     val collator = Collator.getInstance().apply { strength = Collator.PRIMARY }
     val isCollatorEnabled = sortingType == NoteListSortingType.Alphabetical
@@ -76,7 +78,7 @@ fun NoteItemModel.Companion.Comparator(sortingOrder: SortingOrder, sortingType: 
         }
 }
 
-@Suppress("FUNCTIONNAME")
+@Suppress("FunctionName")
 fun Note.Companion.Comparator(sortingOrder: SortingOrder, sortingType: NoteListSortingType): Comparator<Note> {
     val collator = Collator.getInstance().apply { strength = Collator.PRIMARY }
     val isCollatorEnabled = sortingType == NoteListSortingType.Alphabetical
@@ -97,7 +99,7 @@ fun Note.Companion.Comparator(sortingOrder: SortingOrder, sortingType: NoteListS
         }
 }
 
-@Suppress("DEPRECATION", "FUNCTIONNAME")
+@Suppress("DEPRECATION", "FunctionName")
 fun Folder.Companion.Comparator(sortingOrder: SortingOrder, sortingType: FolderListSortingType): Comparator<Pair<Folder, Int>> {
     val collator = Collator.getInstance().apply { strength = Collator.PRIMARY }
     val isCollatorEnabled = sortingType == FolderListSortingType.Alphabetical
@@ -353,3 +355,6 @@ fun Release.Companion.Current(context: Context): Release {
     val changelog = Release.Changelog(changelogText)
     return Release_2_2_3(changelog)
 }
+
+fun Release.toJson(): String = NotoDefaultJson.encodeToString(this)
+fun String.toRelease(): Release = NotoDefaultJson.decodeFromString(this)

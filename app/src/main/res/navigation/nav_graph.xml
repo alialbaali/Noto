@@ -167,9 +167,9 @@
             app:argType="long[]" />
         <argument
             android:name="search_term"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/folderArchiveFragment"
@@ -736,6 +736,6 @@
         android:label="ReleaseFragment">
         <argument
             android:name="release"
-            app:argType="com.noto.app.domain.model.Release" />
+            app:argType="string" />
     </fragment>
 </navigation>

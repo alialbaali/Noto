@@ -25,10 +25,13 @@ import com.noto.app.settings.SettingsItemType
 import com.noto.app.settings.SettingsSection
 import com.noto.app.util.navController
 import com.noto.app.util.setupMixedTransitions
+import com.noto.app.util.toRelease
 
 class ReleaseFragment : Fragment() {
 
     private val args by navArgs<ReleaseFragmentArgs>()
+
+    private val release by lazy { args.release.toRelease() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,9 +43,9 @@ class ReleaseFragment : Fragment() {
         ComposeView(context).apply {
             isTransitionGroup = true
             setContent {
-                val version = remember(args.release) { args.release.versionFormatted }
-                val date = remember(args.release) { args.release.dateFormatted }
-                val changelog = remember(args.release) { args.release.changelog.formatAsList() }
+                val version = remember(release) { release.versionFormatted }
+                val date = remember(release) { release.dateFormatted }
+                val changelog = remember(release) { release.changelog.formatAsList() }
 
                 Screen(
                     title = version,
@@ -65,7 +68,7 @@ class ReleaseFragment : Fragment() {
                         title = stringResource(id = R.string.learn_more),
                         type = SettingsItemType.None,
                         onClick = {
-                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(args.release.githubUrl))
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(release.githubUrl))
                             startActivity(intent)
                         },
                         painter = painterResource(id = R.drawable.ic_round_open_externally_24)
