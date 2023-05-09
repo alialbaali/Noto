@@ -20,34 +20,19 @@ import androidx.fragment.app.Fragment
 import com.noto.app.R
 import com.noto.app.components.HeaderItem
 import com.noto.app.components.LazyScreen
-import com.noto.app.domain.model.*
+import com.noto.app.domain.model.Release
 import com.noto.app.settings.SettingsItem
 import com.noto.app.settings.SettingsItemType
 import com.noto.app.util.*
 import kotlinx.datetime.Clock
 
-private const val PreviousReleaseChangelogMaxLines = 3
+private const val PreviousReleaseChangelogMaxItems = 5
 
 class WhatsNewFragment : Fragment() {
 
     private val previousReleasesGroupedByYear by lazy {
-        context?.let { context ->
-            listOf(
-                Release_2_2_2(Release.Changelog(context.stringResource(R.string.release_2_2_2))),
-                Release_2_2_1(Release.Changelog(context.stringResource(R.string.release_2_2_1))),
-                Release_2_2_0(Release.Changelog(context.stringResource(R.string.release_2_2_0))),
-                Release_2_1_6(Release.Changelog(context.stringResource(R.string.release_2_1_6))),
-                Release_2_1_5(Release.Changelog(context.stringResource(R.string.release_2_1_5))),
-                Release_2_1_4(Release.Changelog(context.stringResource(R.string.release_2_1_4))),
-                Release_2_1_3(Release.Changelog(context.stringResource(R.string.release_2_1_3))),
-                Release_2_1_2(Release.Changelog(context.stringResource(R.string.release_2_1_2))),
-                Release_2_1_1(Release.Changelog(context.stringResource(R.string.release_2_1_1))),
-                Release_2_1_0(Release.Changelog(context.stringResource(R.string.release_2_1_0))),
-                Release_2_0_1(Release.Changelog(context.stringResource(R.string.release_2_0_1))),
-                Release_2_0_0(Release.Changelog(context.stringResource(R.string.release_2_0_0))),
-                Release_1_8_0(Release.Changelog(context.stringResource(R.string.release_1_8_0))),
-            )
-        }?.groupBy { it.date.year } ?: emptyMap()
+        context?.let { context -> Release.Previous(context) }
+            ?.groupBy { it.date.year } ?: emptyMap()
     }
 
     private val currentDate = Clock.System.now().toLocalDate()
@@ -96,7 +81,7 @@ class WhatsNewFragment : Fragment() {
                         items(previousReleases, key = { it.versionFormatted }) { previousRelease ->
                             val version = remember(previousRelease) { previousRelease.versionFormatted }
                             val date = remember(previousRelease) { previousRelease.dateFormatted }
-                            val changelog = remember(previousRelease) { previousRelease.changelogFormatted }
+                            val changelog = remember(previousRelease) { previousRelease.changelog.format(PreviousReleaseChangelogMaxItems) }
                             SettingsItem(
                                 title = version,
                                 onClick = { navController?.navigate(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(previousRelease.toJson())) },
@@ -104,7 +89,6 @@ class WhatsNewFragment : Fragment() {
                                 painter = painterResource(id = R.drawable.ic_round_tag_24),
                                 equalWeights = false,
                                 description = changelog,
-                                descriptionMaxLines = PreviousReleaseChangelogMaxLines,
                             )
                         }
                     }

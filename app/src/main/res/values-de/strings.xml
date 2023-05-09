@@ -6,10 +6,12 @@
     <string name="apply">Anwenden</string>
     <string name="okay">OK</string>
     <string name="search">Suchen</string>
+    <!-- An option in the note layout for searching for text inside a note. -->
+    <string name="find_in_note">In Notiz suchen</string>
     <!-- A settings option to support the project. -->
     <string name="support_noto">Unterstütze Noto</string>
     <!-- Description of the Support Noto settings options. -->
-    <string name="support_noto_description">Wenn Sie sicherstellen möchten, dass Noto auch in Zukunft gepflegt wird.</string>
+    <string name="support_noto_description">Wenn du sicherstellen möchtest, dass Noto auch in Zukunft gepflegt wird.</string>
     <!-- More options for folder, note, etc... -->
     <string name="more_options">Weitere Optionen</string>
     <!-- Options for multi-selected notes. -->
@@ -19,10 +21,18 @@
     <string name="filtering">Filterung</string>
     <string name="layout">Layout</string>
     <string name="list">Liste</string>
+    <!-- Label filtering mode -->
     <string name="inclusive">Hinzunehmen</string>
+    <!-- Inclusive filtering mode description -->
+    <string name="inclusive_description">Notizen filtern, die <b>beliebige</b> der ausgewählten Labels haben.</string>
+    <!-- Label filtering mode -->
     <string name="exclusive">Reduzieren</string>
-    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <!-- Exclusive filtering mode description -->
+    <string name="exclusive_description">Notizen filtern, die <b>alle</b> ausgewählten Labels haben müssen.</string>
+    <!-- Label filtering mode -->
     <string name="strict">Genaue Übereinstimmung</string>
+    <!-- Strict filtering mode description -->
+    <string name="strict_description">Notizen filtern, die <b>ausschließlich</b> die ausgewählten Labels haben.</string>
     <string name="grid">Raster</string>
     <string name="created">Erstellt: %s</string>
     <string name="accessed">Letzter Zugriff: %s</string>
@@ -36,7 +46,7 @@
     <string name="ascending">Aufsteigend</string>
     <string name="settings">Einstellungen</string>
     <!-- The link of the source code of the project. -->
-    <string name="source_code">Quell-Code</string>
+    <string name="source_code">Quellcode</string>
     <!-- Description of the "Source code" settings option. -->
     <string name="source_code_description">Noto ist eine Open-Source Anwendung, deren Quellcode auf GitHub einsehbar ist.</string>
     <!-- The link of the reddit community of Noto. -->
@@ -48,8 +58,11 @@
     <string name="share_app_with_others">Noto mit anderen teilen</string>
     <string name="rate_app_on_play_store">Noto im Play Store bewerten</string>
     <string name="report_issue">Einen Fehler melden</string>
+    <string name="email">E-Mail</string>
     <string name="about">Über</string>
     <string name="whats_new">Was ist neu?</string>
+    <string name="whats_new_in">Was ist neu in %s</string>
+    <string name="learn_more">Erfahre mehr…</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Daten exportieren/importieren</string>
     <string name="exporting_failed">Export der Daten fehlgeschlagen.</string>
@@ -83,10 +96,10 @@
     <string name="license">Lizenz</string>
     <string name="empty_version">Version</string>
     <string name="date">Datum</string>
+    <string name="time">Zeit</string>
     <string name="drag">Ziehen</string>
     <string name="nunito">Nunito (Standard)</string>
     <string name="monospace">Monospace</string>
-    <string name="font">Schriftart</string>
     <string name="folders_archive">Ordnerarchiv</string>
     <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">Standard-Sammlung</string>
@@ -139,8 +152,6 @@
     <string name="translations_description">Besonderer Dank gilt all den Übersetzern, die geholfen haben, Noto in diversen Sprachen verfügbar zu machen.</string>
     <!-- List of credits. -->
     <string name="credits">Danksagung</string>
-    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
-    <string name="releases_details">Für weitere Informationen klicken Sie hier.</string>
     <!-- Folder -->
     <string name="folders">Ordner</string>
     <plurals name="folders_count">
@@ -169,16 +180,16 @@
     <string name="folder_is_pinned">Ordner wurde angepinnt.</string>
     <string name="folder_is_unpinned">Ordner wurde losgelöst.</string>
     <string name="no_folders_found">Keine Ordner gefunden.</string>
+    <!-- Text displayed when there are no folders suitable for a given action like moving/copying/etc... -->
+    <string name="no_relevant_folders_found">Keine passenden Ordner gefunden.</string>
     <string name="select_folder">Ordner auswählen</string>
     <string name="folder">Ordner</string>
     <string name="select_folder_archive">Ordner des Zielarchivs wählen</string>
-    <string name="select_parent_folder">Übergeordneten Ordner wählen</string>
-    <string name="select_quick_note_folder">Ordner für Schnellnotizen wählen</string>
-    <string name="select_main_interface">Hauptordner wählen</string>
     <string name="pinned">Angepinnt</string>
     <!-- Vault -->
     <string name="folders_vault">Ordnerschutz</string>
     <string name="update_passcode">Zugangscode aktualisieren</string>
+    <string name="enable_vault">Ordnerschutz aktivieren</string>
     <string name="enter_vault_passcode">Zugangscode eingeben</string>
     <string name="add_to_vault">Zum Ordnerschutz hinzufügen</string>
     <string name="remove_from_vault">Vom Ordnerschutz ausnehmen</string>
@@ -187,9 +198,12 @@
     <string name="vault_is_empty">Keine Ordner enthalten.</string>
     <string name="archive_vaulted_folder_confirmation">Soll dieser Ordner wirklich archiviert werden?</string>
     <string name="archive_vaulted_folder_description">Das Archivieren dieses Ordners entfernt auch den Ordnerschutz.</string>
-    <string name="vault_passcode">Zugangscode</string>
-    <string name="current_vault_passcode">Momentaner Zugangscode</string>
+    <string name="passcode">Zugangscode</string>
     <string name="new_vault_passcode">Neuer Zugangscode</string>
+    <string name="new_passcode">Neuer Zugangscode</string>
+    <string name="current_passcode">Aktueller Zugangscode</string>
+    <string name="vault_setup">Ordnerschutz einrichten</string>
+    <string name="current_vault_passcode">Momentaner Zugangscode</string>
     <!-- Change vault passcode option. -->
     <string name="change_passcode">Zugangscode ändern</string>
     <!-- Vault timeout. -->
@@ -202,7 +216,8 @@
     <string name="passcode_empty_message">Zugangscode darf nicht leer bleiben</string>
     <string name="passcode_doesnt_match">Zugangscode stimmt nicht mit dem aktuellen überein</string>
     <string name="vault_passcode_has_changed">Zugangscode wurde aktualisiert.</string>
-    <string name="vault_passcode_message">Der Zugangscode kann nicht geändert werden, wenn du den aktuellen verlierst. Bitte speichere ihn an einem sicheren Ort.</string>
+    <string name="enable_vault_message">Um den Ordnerschutz zu aktivieren, gib bitte einen Zugangscode an.</string>
+    <string name="vault_passcode_message">Der Zugangscode kann nicht geändert werden, wenn du ihn verlierst. Bitte speichere ihn an einem sicheren Ort.</string>
     <string name="use_bio">Biometrische Authentifizierung verwenden</string>
     <string name="validate">Validieren</string>
     <string name="vault">Ordnerschutz</string>
@@ -210,6 +225,7 @@
     <string name="disable_vault">Ordnerschutz deaktivieren</string>
     <!-- A message shown when "Disable vault" is being clicked. -->
     <string name="vault_is_disabled">Ordnerschutz wurde deaktiviert.</string>
+    <string name="vault_is_enabled">Der Ordnerschutz ist jetzt aktiv.</string>
     <!-- An option to disable the vault in vault settings. -->
     <string name="disable">Deaktivieren</string>
     <!-- A confirmation message shown when disabling the vault in vault settings. -->
@@ -230,8 +246,16 @@
     <string name="use_passcode">Zugangscode verwenden</string>
     <!-- Note -->
     <string name="all">Alle</string>
+    <string name="set_reminder">Benachrichtigung einstellen</string>
     <string name="update_reminder">Erinnerung aktualisieren</string>
     <string name="archive_is_empty">Archiv ist leer.</string>
+    <!-- Notes count in Reading Mode with indicator of the current selected displayed note.
+     Such as "2/11 Notes".
+    -->
+    <plurals name="reading_mode_notes_count">
+        <item quantity="one">%1$d / %2$d Notiz</item>
+        <item quantity="other">%1$d / %2$d Notizen</item>
+    </plurals>
     <plurals name="notes_count">
         <item quantity="one">%d Notiz</item>
         <item quantity="other">%d Notizen</item>
@@ -266,6 +290,12 @@
         <item quantity="one">%1$d Wort • %2$d ausgewählt</item>
         <item quantity="other">%1$d Wörter • %2$d ausgewählt</item>
     </plurals>
+    <!-- Text displaying how many occurrences of a word has been found using "Find in note" feature. Such as "2/11 Found".
+        The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
+    <plurals name="words_found_count">
+        <item quantity="one">%1$d Wort • Fundstelle %2$d / %3$d</item>
+        <item quantity="other">%1$d Worte • Fundstelle %2$d / %3$d</item>
+    </plurals>
     <string name="body">Haupttext</string>
     <string name="title">Überschrift</string>
     <!-- Note's editor, opposite of Reading Mode. -->
@@ -297,12 +327,30 @@
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">Notiz wurde in %s gespeichert.</string>
     <string name="no_notes_found">Keine Notizen gefunden.</string>
+    <!-- Text displayed when there are no notes found when search is applied, and labels are selected. -->
+    <string name="no_relevant_notes_found">Keine passenden Notizen gefunden.</string>
+    <!-- Text displayed when there are no notes found in the Recent view. -->
+    <string name="no_recent_notes_found">Keine neuesten Notizen gefunden.</string>
+    <!-- Text displayed when there are no notes found in the Archived view. -->
+    <string name="no_archived_notes_found">Keine archivierten Notizen gefunden.</string>
+    <!-- Text displayed when there are no notes found in the Scheduled view. -->
+    <string name="no_scheduled_notes_found">Keine geplanten Notizen gefunden.</string>
+    <!-- Text displayed when there are no notes found when search is applied. -->
+    <string name="no_notes_found_search">Keine Notizen gefunden, die den Suchbegriff enthalten.</string>
+    <!-- Text displayed when there are no notes found when labels are selected. -->
+    <string name="no_notes_found_labels">Keine Notizen gefunden, die die angewählten Etiketten enthalten.</string>
+    <!-- Text displayed when folder is empty, and containing 0 notes. Replacement for "No notes found". -->
+    <string name="folder_is_empty">Der Ordner ist leer.</string>
     <string name="notes">Notizen</string>
     <!-- The count of the selected notes that have been merged. -->
     <string name="notes_are_merged">%d Notizen wurden in einer neuen Notiz zusammengeführt.</string>
     <plurals name="note_is_archived">
         <item quantity="one">Die Notiz wurde archiviert.</item>
         <item quantity="other">%d Notizen wurden archiviert.</item>
+    </plurals>
+    <plurals name="note_is_unarchived">
+        <item quantity="one">Notiz wurde dearchiviert.</item>
+        <item quantity="other">%d Notizen wurden dearchiviert.</item>
     </plurals>
     <!-- The count of the selected notes that have been pinned. -->
     <plurals name="note_is_pinned">
@@ -314,9 +362,13 @@
         <item quantity="one">Die Notiz wurde losgelöst.</item>
         <item quantity="other">%d Notizen wurden losgelöst.</item>
     </plurals>
-    <string name="no_note_reminder">Keine Notiz-Erinnerung angelegt.</string>
+    <string name="cancel_reminder">Benachrichtigung verwerfen</string>
     <string name="note_is_unarchived">Notiz wurde dearchiviert.</string>
     <string name="reminder">Erinnerung</string>
+    <string name="reminder_date">Benachrichtigungsdatum</string>
+    <string name="reminder_time">Benachrichtigungszeit</string>
+    <string name="reminder_is_set">Benachrichtigung erfolgt am %1$s um %2$s.</string>
+    <string name="reminder_is_cancelled">Reminder has been cancelled.</string>
     <string name="reminders">Erinnerungen</string>
     <string name="new_note_reminder">Neue Notiz-Erinnerung</string>
     <string name="copy">Kopieren</string>
@@ -366,7 +418,7 @@
     <!-- Whether to show notes count in "All Folders" view. -->
     <string name="show_notes_count">Anzahl der Notizen anzeigen</string>
     <!-- Description of the "Show notes count" settings option. -->
-    <string name="show_notes_count_description">Gibt an, ob die Anzahl der Notizen im Ordnerdialog angezeigt werden soll.</string>
+    <string name="show_notes_count_description">Legt fest, ob die Anzahl der Notizen im Ordnerdialog angezeigt werden soll.</string>
     <!-- Whether to exit app immediately without showing folders dialog -->
     <string name="quick_exit">Schnelles Beenden</string>
     <!-- Description of the "Quick exit" settings option. -->
@@ -381,13 +433,13 @@
     <string name="keep_screen_on">Display eingeschaltet lassen</string>
     <!-- Description of the "Keep screen on" settings option. -->
     <string name="keep_screen_on_description">Legt fest, ob der Bildschirm im Lesemodus an bleiben muss.</string>
-    <string name="full_screen">Zum Vollbildmodus wechseln</string>
+    <string name="full_screen_mode">Vollbildmodus</string>
     <!-- Description of the "Go full screen" settings option. -->
-    <string name="full_screen_description">Gibt an, ob Status- und Navigationsleisten im Lesemodus ausgeblendet werden sollen.</string>
+    <string name="full_screen_description">Legt fest, ob Status- und Navigationsleisten im Lesemodus ausgeblendet werden sollen.</string>
     <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
     <string name="screen_brightness_level">Bildschirmhelligkeit</string>
     <!-- Description of the "Screen brightness level" settings option. -->
-    <string name="screen_brightness_level_description">Helligkeitsstufe des Bildschirms im Lesemodus.</string>
+    <string name="screen_brightness_level_description">Bestimmt die Helligkeitsstufe des Bildschirms im Lesemodus.</string>
     <!-- "Screen brightness level" option. -->
     <string name="min">Minimal</string>
     <!-- "Screen brightness level" option. -->
@@ -402,9 +454,12 @@
     <string name="very_high">Sehr hoch</string>
     <!-- "Screen brightness level" option. -->
     <string name="max">Maximal</string>
+    <!--  Reading Mode progress  -->
+    <string name="progress">Lesefortschritt</string>
     <string name="show">Zeigen</string>
     <string name="hide">Verbergen</string>
     <string name="permission_not_granted">Berechtigung wurde nicht gewährt</string>
+    <string name="current">Aktuelle Version</string>
     <!-- Label -->
     <string name="reorder_label">Umsortieren</string>
     <string name="update_label">Label aktualisieren</string>
@@ -468,78 +523,66 @@
     <string name="folders_notes_count">Anzahl der Notizen im Ordner</string>
     <string name="loading_content">Inhalt wird geladen</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">• Fehlerkorrekturen und Verbesserungen des Designs.</string>
-    <string name="release_bug_fixes">• Fehlerkorrekturen</string>
-    <string name="release_1_8_0">• Unterstützung für durch Zugangscode geschützte Ordner.
-        \n• Option für Unterstützung von Zeitüberschreitung bei geschützten Ordnern.
-        \n• Unterstützung für biometrische Authentifizierung auf unterstützten Geräten.
-        \n• Unterstützung für die spanische Sprache.
-        \n• Link für die neue <a href="https://www.reddit.com/r/notoapp">Reddit</a> Community hinzugefügt.
-        \n• Weitere Bugfixes und Design-Verbesserungen.
-    </string>
-    <string name="release_2_0_0">• Neues Jahr, neuer Look!
-        \n• \"Libraries\" sind Vergangenheit. Hallo Ordner!
-        \n• Verbesserte Animationen in der gesamten App.
-        \n• Experimentelle Unterstützung für verschachtelte Ordner.
-        \n• Experimentelle Unterstützung für das horizontale Wischen eines Ordners beim manuellen Sortieren.
-        \n• Standardordner \"Allgemein\" für allgemeine Notizen hinzugefügt.
-        \n• Unterstützung für das Betrachten sämtlicher Notizen und neuester Notizen sowie die Möglichkeit, diese zu durchsuchen.
-        \n• Hervorhebung des Notizinhalts bei Suchvorgängen
-        \n• Einklappbare Werkzeugleiste für bessere Nutzerfreundlichkeit und Erreichbarkeit.
-        \n• Unterstützung für die französische Sprache.
-        \n• Unterstützung für das Wischen der unteren App-Leiste um Ordner anzuzeigen.
-        \n• Zum Ordnerschutz navigieren, indem Sie auf die entsprechende Benachrichtigung klicken.
-        \n• Einstellungsoption hinzugefügt, um das Ziel des Hauptordners auszuwählen.
-        \n• Einstellungsoption hinzugefügt, um die Werkzeugleiste standardmäßig einzuklappen.
-        \n• Statische Verknüpfungssymbole auf älteren Android-Geräten repariert.
-        \n• Weitere Bugfixes und Design-Verbesserungen.
-    </string>
-    <string name="release_2_1_0">• Unterstützung für Rückgängig/Wiederholen sowie Anzeige des Verlaufs hierbei.
-        \n• Beschriftungen neu designt.
-        \n• Neudesign der unteren und oberen App-Leiste in allen Layouts.
-        \n• Viele Menüs neu designt.
-        \n• Bereich \"Neuerstellung/Bearbeiten des Ordnerlayouts\" neu designt.
-        \n• Gruppierungsreihenfolge für Notizen hinzugefügt.
-        \n• Vertikalen Versatz beim Ziehen von Bezeichnungen oder Notizen hinzugefügt.
-        \n• Vorschau in Ordner, Notiz und Label-Menüs eingefügt.
-        \n• Datum wird nun besser formatiert.
-        \n• Hervorhebungsfarbe in Notizen verändert.
-        \n• Vor dem Verlassen der App wird zum Ordnerlayout navigiert.
-        \n• Unterstützung für Material You (Material 3).
-        \n• Startbildschirm neu designt.
-        \n• Verbesserungen des Lesemodus.
-        \n• Speichern von Scrollpositionen für Ordner und Notizen.
-        \n• Animationen für Labels und Ordnerfarben deaktiviert.
-        \n• Datenimport korrigiert.
-        \n• Fehler behoben, wenn ein geschützter Ordner unter Android 11 oder höher abstürzt.
-        \n• Durchführen von Wischgesten zum Rückgängig machen/Wiederholen.
-        \n• Die Filterung durch Anwahl mehrerer Labels kann nun ausschließend oder einschließend durchgeführt werden.
-        \n• App-Icon neu designt.
-        \n• Support für Änderung das App-Icons.
-        \n• Schriftstärke und Textgröße in verschiedenen Layouts geändert.
-        \n• Deutsche Übersetzung.
-        \n• Weitere Bugfixes und Design-Verbesserungen.
-    </string>
-    <string name="release_2_1_4">• Behoben, dass Verknüpfungen bei Verwendung eines anderen Icons nicht funktionierten.
-        \n• Ausgewählte Labels erscheinen jetzt in der Notiz an erster Stelle.
-        \n• Weitere Bugfixes und Design-Verbesserungen.
-    </string>
-    <string name="release_2_2_0">• Unterstützung für Tschechisch und Italienisch.
-        \n• Unterstützung für Mehrfachauswahl von Notizen.
-        \n Standardmäßiges Öffnen von Notizen im Lesemodus ist nun aktivierbar.
-        \n• Unterstützung fürs Blättern in Notizen im Lesemodus.
-        \n• Neudesign der Einstellungen. 
-        \n• Verbesserte Startgeschwindigkeit der App.
-        \n• Behoben: Import von JSON-Dateien.
-        \n• Behoben: Schwarze Theme-Farbe auf Android 12 und neueren Geräten. 
-        \n• Weitere Bugfixes und Design-Verbesserungen.    </string>
-    <string name="release_2_2_1">• Unterstützung für Litauisch und vereinfachtes Chinesisch.
-        \n• Verbesserungen am Design.
-        \n• Effektiveres Rückgängig machen/Wiederholen.
-        \n• Ansicht für archivierte &amp; geplante Notizen.
-        \n• Option für schnelles Beenden (beendet die App, ohne das Hauptmenü zu öffnen).
-        \n• Schnelles Erstellen von Notizen aus anderen Apps heraus mit Hilfe der Schnell-Notiz-Kachel im Benachrichtigungszentrum.
-        \n• Änderung der App-Sprache durch die Systemeinstellungen für Android 13 und höher.
-        \n• Fehlerbehebungen.
-    </string>
+    <string name="release_bug_fixes_and_design_improvements">Fehlerkorrekturen und Verbesserungen des Designs.</string>
+    <string name="release_bug_fixes">Fehlerkorrekturen.</string>
+    <string name="release_1_8_0_vault">Unterstützung für durch Zugangscode geschützte Ordner.</string>
+    <string name="release_1_8_0_vault_timeout">Einführung von Optionen für Zeitüberschreitung bei geschützten Ordnern.</string>
+    <string name="release_1_8_0_vault_bio">Unterstützung für biometrische Authentifizierung auf unterstützten Geräten.</string>
+    <string name="release_1_8_0_language">Unterstützung für die spanische Sprache.</string>
+    <string name="release_1_8_0_reddit">Link für die neue <a href="https://www.reddit.com/r/notoapp">Reddit</a> Community hinzugefügt.</string>
+    <string name="release_2_0_0_new_look">Neues Jahr, neuer Look!</string>
+    <string name="release_2_0_0_folders">\"Libraries\" sind Vergangenheit. Hallo Ordner!</string>
+    <string name="release_2_0_0_animations">Verbesserte Animationen in der gesamten App.</string>
+    <string name="release_2_0_0_nested_folders">Experimentelle Unterstützung für verschachtelte Ordner.</string>
+    <string name="release_2_0_0_swipe_folder">Experimentelle Unterstützung für das horizontale Verschieben eines Ordners zum Verschachteln beim manuellen Sortieren.</string>
+    <string name="release_2_0_0_general">Standardordner \"Allgemein\" für allgemeine Notizen hinzugefügt.</string>
+    <string name="release_2_0_0_all_recent">Unterstützung für das Durchsehen sämtlicher Notizen und neuester Notizen sowie die Möglichkeit, diese zu durchsuchen.</string>
+    <string name="release_2_0_0_highlight_search">Hervorhebung des Notizinhalts bei Suchvorgängen.</string>
+    <string name="release_2_0_0_collapsing_toolbar">Einklappbare Werkzeugleiste für bessere Nutzerfreundlichkeit und Erreichbarkeit.</string>
+    <string name="release_2_0_0_language">Unterstützung für die französische Sprache.</string>
+    <string name="release_2_0_0_swipe_bottom_app_bar">Unterstützung fürs Heraufwischen der unteren App-Leiste, um Ordner anzuzeigen.</string>
+    <string name="release_2_0_0_navigation">Zum Ordnerschutz navigieren, indem Sie auf die entsprechende Benachrichtigung klicken.</string>
+    <string name="release_2_0_0_settings_main_folder">Einstellung hinzugefügt, um den Hauptordner als Ziel auszuwählen.</string>
+    <string name="release_2_0_0_settings_toolbar">Einstellung hinzugefügt, um die Werkzeugleiste standardmäßig einzuklappen.</string>
+    <string name="release_2_0_0_shortcuts">Statische Verknüpfungen auf älteren Android-Geräten repariert.</string>
+    <string name="release_2_1_0_undo_redo">Unterstützung für Rückgängig/Wiederholen sowie Anzeige des Verlaufs hierbei.</string>
+    <string name="release_2_1_0_labels">Labels neu designt.</string>
+    <string name="release_2_1_0_app_bars">Neudesign der unteren und oberen App-Leiste in allen Layouts.</string>
+    <string name="release_2_1_0_menu">Viele Menüs neu designt.</string>
+    <string name="release_2_1_0_new_folder">Bereich \"Neuerstellung/Bearbeiten des Ordnerlayouts\" neu designt.</string>
+    <string name="release_2_1_0_grouping_order">Gruppierungsreihenfolge für Notizen hinzugefügt.</string>
+    <string name="release_2_1_0_drag_elevation">Schatten beim Ziehen von Labels oder Notizen hinzugefügt.</string>
+    <string name="release_2_1_0_preview">Vorschau in Ordner, Notiz und Label-Menüs hinzugefügt.</string>
+    <string name="release_2_1_0_dates">Datum wird nun besser formatiert.</string>
+    <string name="release_2_1_0_highlight">Hervorhebungsfarbe in Notizen verändert.</string>
+    <string name="release_2_1_0_navigation">Vor dem Verlassen der App wird zum Ordnerlayout navigiert.</string>
+    <string name="release_2_1_0_material_you">Unterstützung für Material You (Material 3).</string>
+    <string name="release_2_1_0_splash_screen">Startbildschirm neu designt.</string>
+    <string name="release_2_1_0_reading_mode">Verbesserungen des Lesemodus.</string>
+    <string name="release_2_1_0_scroll_position">Speichern von Scrollpositionen für Ordner und Notizen.</string>
+    <string name="release_2_1_0_disable_animations">Animationen für Labels und Ordnerfarben deaktiviert.</string>
+    <string name="release_2_1_0_import_data">Datenimport korrigiert.</string>
+    <string name="release_2_1_0_vault_crash">Fehler behoben, wenn das Öffnen eines geschützten Ordners unter Android 11 oder höher zum Absturz führt.</string>
+    <string name="release_2_1_0_undo_redo_swipe">Einführung von Wischgesten zum Rückgängig machen/Wiederholen.</string>
+    <string name="release_2_1_0_label_filtering">Die Filterung durch Anwahl mehrerer Labels kann nun ausschließend oder einschließend durchgeführt werden.</string>
+    <string name="release_2_1_0_app_icon">App-Icon neu designt.</string>
+    <string name="release_2_1_0_change_app_icon">Änderung das App-Icons ermöglicht.</string>
+    <string name="release_2_1_0_language">Deutsche Übersetzung.</string>
+    <string name="release_2_1_4_shortcuts">Behoben, dass Verknüpfungen bei Verwendung eines anderen Icons nicht funktionierten.</string>
+    <string name="release_2_1_4_labels">Ausgewählte Labels erscheinen jetzt in der Notiz an erster Stelle.</string>
+    <string name="release_2_2_0_languages">Unterstützung für Tschechisch und Italienisch.</string>
+    <string name="release_2_2_0_multi_selection">Unterstützung für Mehrfachauswahl von Notizen.</string>
+    <string name="release_2_2_0_reading_mode">Standardmäßiges Öffnen von Notizen im Lesemodus ist nun aktivierbar.</string>
+    <string name="release_2_2_0_settings">Unterstützung fürs Blättern in Notizen im Lesemodus.</string>
+    <string name="release_2_2_0_paging">Neudesign der Einstellungen.</string>
+    <string name="release_2_2_0_app_speed">Verbesserte Startgeschwindigkeit der App.</string>
+    <string name="release_2_2_0_import_json">Behoben: Import von JSON-Dateien.</string>
+    <string name="release_2_2_0_black_theme">Behoben: Schwarze Theme-Farbe auf Android 12 und neueren Geräten.</string>
+    <string name="release_2_2_1_languages">Unterstützung für Litauisch und vereinfachtes Chinesisch.</string>
+    <string name="release_2_2_1_design">Verbesserungen am Design.</string>
+    <string name="release_2_2_1_undo_redo">Effektiveres Rückgängig machen/Wiederholen.</string>
+    <string name="release_2_2_1_filtered_view">Ansicht für archivierte &amp; geplante Notizen.</string>
+    <string name="release_2_2_1_quick_exit">Option für schnelles Beenden (beendet die App, ohne das Hauptmenü zu öffnen).</string>
+    <string name="release_2_2_1_quick_note_tile">Schnelles Erstellen von Notizen aus anderen Apps heraus mit Hilfe der Schnell-Notiz-Kachel im Benachrichtigungszentrum.</string>
+    <string name="release_2_2_1_system_app_language">Änderung der App-Sprache durch die Systemeinstellungen für Android 13 und höher.</string>
 </resources>

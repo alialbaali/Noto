@@ -16,8 +16,6 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDate
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import java.text.Collator
 import java.util.*
 import javax.crypto.SecretKeyFactory
@@ -349,12 +347,3 @@ fun CharSequence.indicesOf(string: String, startIndex: Int = 0, ignoreCase: Bool
     }
     return indices
 }
-
-fun Release.Companion.Current(context: Context): Release {
-    val changelogText = context.stringResource(R.string.release_2_2_3)
-    val changelog = Release.Changelog(changelogText)
-    return Release_2_2_3(changelog)
-}
-
-fun Release.toJson(): String = NotoDefaultJson.encodeToString(this)
-fun String.toRelease(): Release = NotoDefaultJson.decodeFromString(this)

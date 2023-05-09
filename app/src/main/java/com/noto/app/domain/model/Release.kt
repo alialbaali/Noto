@@ -33,17 +33,14 @@ sealed interface Release {
 
     @JvmInline
     @Serializable
-    value class Changelog(val text: String) {
+    value class Changelog(val changes: List<String>) {
 
-        fun format(): String = text
-            .replace("• ", "")
-            .replace(".", ".\n")
+        fun format(): String = changes.joinToString("\n\n")
 
-        fun formatAsList() = text.replace("• ", "")
-            .split(".")
-            .map { it.trim() }
-            .filter { it.isNotBlank() }
-            .map { it.plus(".") }
+        fun format(count: Int) = changes.take(count).joinToString("\n\n").let {
+            if (changes.count() > count) it.plus("\n\n...") else it
+        }
+
     }
 
     companion object

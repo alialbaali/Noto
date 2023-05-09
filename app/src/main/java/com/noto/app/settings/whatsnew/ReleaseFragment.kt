@@ -45,7 +45,7 @@ class ReleaseFragment : Fragment() {
             setContent {
                 val version = remember(release) { release.versionFormatted }
                 val date = remember(release) { release.dateFormatted }
-                val changelog = remember(release) { release.changelog.formatAsList() }
+                val changelog = remember(release) { release.changelog.changes }
 
                 Screen(
                     title = version,

@@ -6,6 +6,8 @@
     <string name="apply">Taikyti</string>
     <string name="okay">Gerai</string>
     <string name="search">Ieškoti</string>
+    <!-- An option in the note layout for searching for text inside a note. -->
+    <string name="find_in_note">Rasti užraše</string>
     <!-- A settings option to support the project. -->
     <string name="support_noto">Palaikykite Noto</string>
     <!-- Description of the Support Noto settings options. -->
@@ -19,10 +21,18 @@
     <string name="filtering">Filtravimas</string>
     <string name="layout">Išsidėstymas</string>
     <string name="list">Sąrašas</string>
+    <!-- Label filtering mode -->
     <string name="inclusive">Įtraukiantis</string>
+    <!-- Inclusive filtering mode description -->
+    <string name="inclusive_description">Filtruoti užrašus, turinčius <b>bet kurią</b> pasirinktą žymeną.</string>
+    <!-- Label filtering mode -->
     <string name="exclusive">Išskirtinis</string>
-    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <!-- Exclusive filtering mode description -->
+    <string name="exclusive_description">Filtruoti užrašus, turinčius <b>visas</b> pasirinktas žymenas.</string>
+    <!-- Label filtering mode -->
     <string name="strict">Griežtas</string>
+    <!-- Strict filtering mode description -->
+    <string name="strict_description">Filtruoti užrašus, turinčius <b>tik</b> iš pasirinktas žymenas.</string>
     <string name="grid">Tinklelis</string>
     <string name="created">Sukurta %s</string>
     <string name="accessed">Atidaryta %s</string>
@@ -48,8 +58,11 @@
     <string name="share_app_with_others">Dalinkitės Noto su kitais</string>
     <string name="rate_app_on_play_store">Įvertinkite Noto Play parduotuvėje</string>
     <string name="report_issue">Pranešti apie problemą</string>
+    <string name="email">El. paštas</string>
     <string name="about">Apie</string>
     <string name="whats_new">Kas naujo</string>
+    <string name="whats_new_in">Kas naujo %s</string>
+    <string name="learn_more">Sužinokite daugiau…</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Eksportuoti/Importuoti duomenis</string>
     <string name="exporting_failed">Nepavyko eksportuoti duomenų.</string>
@@ -59,7 +72,7 @@
     <string name="export_data">Eksportuoti duomenis</string>
     <string name="import_data">Importuoti duomenis</string>
     <string name="importing_data">Importuojami duomenys…</string>
-    <string name="exporting_data">Exportuojami duomenys…</string>
+    <string name="exporting_data">Eksportuojami duomenys…</string>
     <string name="create_file_failed">Nepavyko sukurti failo.</string>
     <string name="no_folder_is_selected">Nepasirinktas aplankas.</string>
     <string name="no_file_is_selected">Nepasirinktas failas.</string>
@@ -83,10 +96,10 @@
     <string name="license">Licencija</string>
     <string name="empty_version">Versija</string>
     <string name="date">Data</string>
+    <string name="time">Laikas</string>
     <string name="drag">Drag</string>
     <string name="nunito">Nunito (numatytasis)</string>
     <string name="monospace">Monospace</string>
-    <string name="font">Šriftas</string>
     <string name="folders_archive">Aplankų archyvas</string>
     <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">Pagrindinė sąsaja</string>
@@ -139,8 +152,6 @@
     <string name="translations_description">Ypatinga padėka visiems vertėjams, kurie padarė Noto prieinamą skirtingose kalbose.</string>
     <!-- List of credits. -->
     <string name="credits">Padėka</string>
-    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
-    <string name="releases_details">Jei norite daugiau informacijos, spustelėkite čia.</string>
     <!-- Folder -->
     <string name="folders">Aplankai</string>
     <plurals name="folders_count">
@@ -171,16 +182,16 @@
     <string name="folder_is_pinned">Aplankas prisegtas.</string>
     <string name="folder_is_unpinned">Aplankas atsegtas.</string>
     <string name="no_folders_found">Nerasta aplankų.</string>
+    <!-- Text displayed when there are no folders suitable for a given action like moving/copying/etc... -->
+    <string name="no_relevant_folders_found">Nerasta aktualių aplankų.</string>
     <string name="select_folder">Pasirinkti aplanką</string>
     <string name="folder">Aplankas</string>
     <string name="select_folder_archive">Pasirinkti aplanko archyvą</string>
-    <string name="select_parent_folder">Pasirinkti viršaplankį</string>
-    <string name="select_quick_note_folder">Pasirinkti sparčiųjų užrašų aplanką</string>
-    <string name="select_main_interface">Pasirinkti pagrindinę sąsają</string>
     <string name="pinned">Prisegti</string>
     <!-- Vault -->
     <string name="folders_vault">Aplankų saugykla</string>
     <string name="update_passcode">Naujinti slaptažodį</string>
+    <string name="enable_vault">Įjungti saugyklą</string>
     <string name="enter_vault_passcode">Įveskite saugyklos slaptažodį</string>
     <string name="add_to_vault">Pridėti į saugyklą</string>
     <string name="remove_from_vault">Šalinti iš saugyklos</string>
@@ -188,10 +199,13 @@
     <string name="folder_is_unvaulted">Aplankas pašalintas iš saugyklos.</string>
     <string name="vault_is_empty">Saugykla tuščia.</string>
     <string name="archive_vaulted_folder_confirmation">Tikrai norite suarchyvuoti šį aplanką?</string>
-    <string name="archive_vaulted_folder_description">Šio aplanko suarchyvinimas taip pat pašalins jį iš saugyklos.</string>
-    <string name="vault_passcode">Saugyklos slaptažodis</string>
-    <string name="current_vault_passcode">Dabartinis saugyklos slaptažodis</string>
+    <string name="archive_vaulted_folder_description">Šio aplanko archyvinimas taip pat pašalins jį iš saugyklos.</string>
+    <string name="passcode">Slaptažodis</string>
     <string name="new_vault_passcode">Naujas saugyklos slaptažodis</string>
+    <string name="new_passcode">Naujas slaptažodis</string>
+    <string name="current_passcode">Dabartinis slaptažodis</string>
+    <string name="vault_setup">Saugyklos sąranka</string>
+    <string name="current_vault_passcode">Dabartinis saugyklos slaptažodis</string>
     <!-- Change vault passcode option. -->
     <string name="change_passcode">Keisti slaptažodį</string>
     <!-- Vault timeout. -->
@@ -204,7 +218,8 @@
     <string name="passcode_empty_message">Slaptažodis negali būti tuščias</string>
     <string name="passcode_doesnt_match">Slaptažodis neatitinka dabartinio</string>
     <string name="vault_passcode_has_changed">Saugyklos slaptažodis atnaujintas.</string>
-    <string name="vault_passcode_message">Saugyklos slaptažodis negali būti pakeistas, jei prarasite dabartinį, todėl būtinai laikykite jį saugioje vietoje.</string>
+    <string name="enable_vault_message">Įveskite slaptažodį, kad įjungtumėte saugyklą.</string>
+    <string name="vault_passcode_message">Saugyklos slaptažodis negali būti pakeistas, jei jį prarasite, todėl būtinai laikykite jį saugioje vietoje.</string>
     <string name="use_bio">Naudoti biometriją</string>
     <string name="validate">Patvirtinti</string>
     <string name="vault">Saugykla</string>
@@ -212,6 +227,7 @@
     <string name="disable_vault">Išjungti saugyklą</string>
     <!-- A message shown when "Disable vault" is being clicked. -->
     <string name="vault_is_disabled">Saugykla išjungta.</string>
+    <string name="vault_is_enabled">Saugykla įjungta.</string>
     <!-- An option to disable the vault in vault settings. -->
     <string name="disable">Išjungti</string>
     <!-- A confirmation message shown when disabling the vault in vault settings. -->
@@ -232,8 +248,18 @@
     <string name="use_passcode">Naudoti slaptažodį</string>
     <!-- Note -->
     <string name="all">Visi</string>
+    <string name="set_reminder">Nustatyti priminimą</string>
     <string name="update_reminder">Naujinimų priminimai</string>
     <string name="archive_is_empty">Archyvas tuščias.</string>
+    <!-- Notes count in Reading Mode with indicator of the current selected displayed note.
+     Such as "2/11 Notes".
+    -->
+    <plurals name="reading_mode_notes_count">
+        <item quantity="one">%1$d užrašas iš %2$d</item>
+        <item quantity="few">%1$d užrašas iš %2$d</item>
+        <item quantity="many">%1$d užrašas iš %2$d</item>
+        <item quantity="other">%1$d užrašas iš %2$d</item>
+    </plurals>
     <plurals name="notes_count">
         <item quantity="one">Užrašai: %d</item>
         <item quantity="few">Užrašai: %d</item>
@@ -280,6 +306,14 @@
         <item quantity="many">Žodžiai: %1$d • Pasirinkta: %2$d</item>
         <item quantity="other">Žodžiai: %1$d • Pasirinkta: %2$d</item>
     </plurals>
+    <!-- Text displaying how many occurrences of a word has been found using "Find in note" feature. Such as "2/11 Found".
+        The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
+    <plurals name="words_found_count">
+        <item quantity="one">Žodžiai: %1$d • Iš %3$d rastas %2$d</item>
+        <item quantity="few">Žodžiai: %1$d • Iš %3$d rasta %2$d</item>
+        <item quantity="many">Žodžiai: %1$d • Iš %3$d rasta %2$d</item>
+        <item quantity="other">Žodžiai: %1$d • Iš %3$d rasta %2$d</item>
+    </plurals>
     <string name="body">Turinys</string>
     <string name="title">Antraštė</string>
     <!-- Note's editor, opposite of Reading Mode. -->
@@ -315,6 +349,20 @@
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">Užrašas išsaugotas į %s.</string>
     <string name="no_notes_found">Nerasta užrašų.</string>
+    <!-- Text displayed when there are no notes found when search is applied, and labels are selected. -->
+    <string name="no_relevant_notes_found">Nerasta aktualių užrašų.</string>
+    <!-- Text displayed when there are no notes found in the Recent view. -->
+    <string name="no_recent_notes_found">Nerasta paskiausių užrašų.</string>
+    <!-- Text displayed when there are no notes found in the Archived view. -->
+    <string name="no_archived_notes_found">Nerasta archyvuotų užrašų.</string>
+    <!-- Text displayed when there are no notes found in the Scheduled view. -->
+    <string name="no_scheduled_notes_found">Nerasta suplanuotų užrašų.</string>
+    <!-- Text displayed when there are no notes found when search is applied. -->
+    <string name="no_notes_found_search">Nerasta užrašų su paieškos terminu.</string>
+    <!-- Text displayed when there are no notes found when labels are selected. -->
+    <string name="no_notes_found_labels">Nerasta užrašų su pasirinktomis žymenomis.</string>
+    <!-- Text displayed when folder is empty, and containing 0 notes. Replacement for "No notes found". -->
+    <string name="folder_is_empty">Aplankas tuščias.</string>
     <string name="notes">Užrašai</string>
     <!-- The count of the selected notes that have been merged. -->
     <string name="notes_are_merged">%d užrašai sujungti į vieną.</string>
@@ -323,6 +371,12 @@
         <item quantity="few">%d užrašai suarchyvuoti.</item>
         <item quantity="many">%d užrašai suarchyvuoti.</item>
         <item quantity="other">%d užrašai suarchyvuoti.</item>
+    </plurals>
+    <plurals name="note_is_unarchived">
+        <item quantity="one">Užrašas išarchyvuotas.</item>
+        <item quantity="few">%d užrašai išarchyvuoti.</item>
+        <item quantity="many">%d užrašai išarchyvuoti.</item>
+        <item quantity="other">%d užrašai išarchyvuoti.</item>
     </plurals>
     <!-- The count of the selected notes that have been pinned. -->
     <plurals name="note_is_pinned">
@@ -338,9 +392,13 @@
         <item quantity="many">%d užrašai atsegti.</item>
         <item quantity="other">%d užrašai atsegti.</item>
     </plurals>
-    <string name="no_note_reminder">Nenustatyti jokie priminimai.</string>
+    <string name="cancel_reminder">Atšaukti priminimą</string>
     <string name="note_is_unarchived">Užrašas išarchyvuotas.</string>
     <string name="reminder">Priminimas</string>
+    <string name="reminder_date">Priminimo data</string>
+    <string name="reminder_time">Priminimo laikas</string>
+    <string name="reminder_is_set">Priminimas bus paleistas %1$s, %2$s.</string>
+    <string name="reminder_is_cancelled">Priminimas atšauktas.</string>
     <string name="reminders">Priminimai</string>
     <string name="new_note_reminder">Naujas priminimas</string>
     <string name="copy">Kopijuoti</string>
@@ -367,7 +425,7 @@
         <item quantity="other">Tikrai norite panaikinti šiuos užrašus?</item>
     </plurals>
     <string name="share_with">Bendrinti su…</string>
-    <string name="add_note_reminder">Pridėi priminimą</string>
+    <string name="add_note_reminder">Pridėti priminimą</string>
     <plurals name="delete_note_description">
         <item quantity="one">Šis veiksmas yra negrįžtamas ir panaikins šį užrašą su jo priminimu visam laikui.</item>
         <item quantity="few">Šis veiksmas yra negrįžtamas ir panaikins šiuos užrašus su jų priminimais visam laikui.</item>
@@ -419,7 +477,7 @@
     <string name="keep_screen_on">Neišjungti ekrano</string>
     <!-- Description of the "Keep screen on" settings option. -->
     <string name="keep_screen_on_description">Neleisti ekranui išsijungti skaitymo režimo metu.</string>
-    <string name="full_screen">Visas ekranas</string>
+    <string name="full_screen_mode">Viso ekrano režimas</string>
     <!-- Description of the "Go full screen" settings option. -->
     <string name="full_screen_description">Slėpti būsenos ir naršymo juostas skaitymo režimo metu.</string>
     <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
@@ -440,9 +498,12 @@
     <string name="very_high">Labai aukštas</string>
     <!-- "Screen brightness level" option. -->
     <string name="max">Maksimalus</string>
+    <!--  Reading Mode progress  -->
+    <string name="progress">Progresas</string>
     <string name="show">Rodyti</string>
     <string name="hide">Slėpti</string>
     <string name="permission_not_granted">Leidimas nesuteiktas</string>
+    <string name="current">Dabartinė versija</string>
     <!-- Label -->
     <string name="reorder_label">Perrikiuoti</string>
     <string name="update_label">Naujinti žymeną</string>
@@ -506,79 +567,66 @@
     <string name="folders_notes_count">Aplankų užrašų skaičius</string>
     <string name="loading_content">Įkeliamas turinys</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">• Klaidų taisymas ir dizaino patobulinimai.</string>
-    <string name="release_bug_fixes">• Klaidų taisymas</string>
-    <string name="release_1_8_0">• Slaptažodžiu apsaugotos saugyklos.
-        \n• Saugyklų skiriamojo laiko parinktys.
-        \n• Biometrinis autentifikavimas palaikomuose įrenginiuose.
-        \n• Ispanų kalba.
-        \n• Pridėta nauja <a href="https://www.reddit.com/r/notoapp">Reddit</a> bendruomenės nuoroda.
-        \n• Klaidų taisymas ir kiti patobulinimai.
-    </string>
-    <string name="release_2_0_0">• Nauji metai, nauja išvaizda!
-        \n• Bibliotekų nebėra. Sveiki, aplankai!
-        \n• Patobulintos visos programėlės animacijos.
-        \n• Eksperimentinis įdėtinių aplankų palaikymas.
-        \n• Eksperimentinis aplanko įdėjimas su rankiniu rikiavimu braukiant horizontaliai palaikymas.
-        \n• Pridėtas numatytasis „Bendrasis“ aplankas bendriems užrašams.
-        \n• Visų ir paskiausių užrašų peržiūra bei gebėjimas per juos ieškoti.
-        \n• Užrašų turinio paryškinimas ieškant.
-        \n• Sutraukiama įrankių juosta geresniam naudojimui ir pasiekiamumui.
-        \n• Prancūzų kalba.
-        \n• Aplankų peržiūra braukiant į viršų apatinėje programėlės juostoje.
-        \n• Patekimas į saugyklą spustelėjus pranešimą „Saugykla atidaryta“.
-        \n• Parinktys, leidžiančios pasirinkti pagrindinio aplanko vietą.
-        \n• Parinktys, leidžiančios numatytai sutraukti įrankių juostą.
-        \n• Pataisytos statinės nuorodų piktogramos senesniuose Android įrenginiuose.
-        \n• Klaidų taisymas ir kiti patobulinimai.
-    </string>
-    <string name="release_2_1_0">• Atkūrimo ir perdarymo palaikymas bei jų istorijos peržiūra.
-        \n• Perkurtos žymenos.
-        \n• Perkurtos apatinės ir viršutinės programėlės juostos visuose išsidėstymuose.
-        \n• Perkurta daug meniu.
-        \n• Perkurtas aplankų kūrimo ir redagavimo išsidėstymas.
-        \n• Pridėta grupavimo tvarka užrašams.
-        \n• Pridėtas pakilimas tempiant žymenas ar užrašus.
-        \n• Įtraukiama peržiūra aplankų, užrašų ir žymenų meniu.
-        \n• Geresnis datų formatavimas.
-        \n• Pakeista užrašų paryškinimo spalva.
-        \n• Ėjimas į aplankų išsidėstymą prieš programos uždarymą.
-        \n• Material You palaikymas (Material 3).
-        \n• Perkurtas pristatymo langas.
-        \n• Skaitymo režimo patobulinimai.
-        \n• Aplankų ir užrašų slinkimo padėties įsiminimas.
-        \n• Išjungtos užrašų ir aplankų spalvų animacijos.
-        \n• Pataisytas duomenų importavimas.
-        \n• Pataisytas strigtis atidarius saugykla Android 11 ir naujesniuose įrenginiuose.
-        \n• Įgyvendinti braukimo gestai atkūrimui/perdarymui.
-        \n• Žymenų įtraukiantis ir išskirtinis filtravimas.
-        \n• Perkurta programėlės piktograma.
-        \n• Programėlės piktogramas keitimas.
-        \n• Pakeistas šriftų svoris ir teksto dydis skirtinguose išsidėstymuose.
-        \n• Vokiečių kalba.
-        \n• Klaidų taisymas ir kiti patobulinimai.
-    </string>
-    <string name="release_2_1_4">• Pataisytas nuorodų neveikimas naudojant kitą piktogramą.
-        \n• Pasirinktos žymenos užrašų išsidėstyme pasirodo pirmiausiai.
-        \n• Klaidų taisymas ir kiti patobulinimai.
-    </string>
-    <string name="release_2_2_0">• Čekų ir italų kalbos.
-        \n• Grupinis užrašų pasirinkimas.
-        \n• Parinktis numatytai atidaryti užrašus skaitymo režime.
-        \n• Perkurtas nustatymų langas.
-        \n• Įgyvendintas puslapiavimas užrašams skaitymo režime.
-        \n• Pagreitintas programėlės paleidimas.
-        \n• Pataisytas JSON failų importavimas.
-        \n• Pataisyta juodos temos spalva Android 12 ir naujesniuose įrenginiuose.
-        \n• Klaidų taisymas ir kiti patobulinimai.
-    </string>
-    <string name="release_2_2_1">• Lietuvių is supaprastintos kinų kalbos.
-        \n• Dizaino patobulinimai.
-        \n• Efektyvesnis atkūrimo/perdarymo funkcionalumas.
-        \n• Archyvuotų ir suplanuotų užrašų peržiūra.
-        \n• Sparčiojo išėjimo nustatymo perjungimas (išėjimas iš programėlės be naršymo pagrindiniame meniu).
-        \n• Įgyvendintas greitesnis būdas sukurti užrašus kitose programėlėse naudojant plytelę „Spartusis užrašas“ pranešimų centre.
-        \n• Integruotas programėlės kalbos keitimas naudojant sistemos nustatymus Android 13 ir naujesniuose įrenginiuose.
-        \n• Klaidų taisymas.
-    </string>
+    <string name="release_bug_fixes_and_design_improvements">Klaidų taisymas ir dizaino patobulinimai.</string>
+    <string name="release_bug_fixes">Klaidų taisymas.</string>
+    <string name="release_1_8_0_vault">Slaptažodžiu apsaugotos saugyklos.</string>
+    <string name="release_1_8_0_vault_timeout">Saugyklų skiriamojo laiko parinktys.</string>
+    <string name="release_1_8_0_vault_bio">Biometrinis autentifikavimas palaikomuose įrenginiuose.</string>
+    <string name="release_1_8_0_language">Ispanų kalba.</string>
+    <string name="release_1_8_0_reddit">Pridėta nauja <a href="https://www.reddit.com/r/notoapp">Reddit</a> bendruomenės nuoroda.</string>
+    <string name="release_2_0_0_new_look">Nauji metai, nauja išvaizda!</string>
+    <string name="release_2_0_0_folders">Bibliotekų nebėra. Sveiki, aplankai!</string>
+    <string name="release_2_0_0_animations">Patobulintos visos programėlės animacijos.</string>
+    <string name="release_2_0_0_nested_folders">Eksperimentinis įdėtinių aplankų palaikymas.</string>
+    <string name="release_2_0_0_swipe_folder">Eksperimentinis aplanko įdėjimas su rankiniu rikiavimu braukiant horizontaliai palaikymas.</string>
+    <string name="release_2_0_0_general">Pridėtas numatytasis „Bendrasis“ aplankas bendriems užrašams.</string>
+    <string name="release_2_0_0_all_recent">Visų ir paskiausių užrašų peržiūra bei gebėjimas per juos ieškoti.</string>
+    <string name="release_2_0_0_highlight_search">Užrašų turinio paryškinimas ieškant.</string>
+    <string name="release_2_0_0_collapsing_toolbar">Sutraukiama įrankių juosta geresniam naudojimui ir pasiekiamumui.</string>
+    <string name="release_2_0_0_language">Prancūzų kalba.</string>
+    <string name="release_2_0_0_swipe_bottom_app_bar">Aplankų peržiūra braukiant į viršų apatinėje programėlės juostoje.</string>
+    <string name="release_2_0_0_navigation">Patekimas į saugyklą spustelėjus pranešimą „Saugykla atidaryta“.</string>
+    <string name="release_2_0_0_settings_main_folder">Parinktys, leidžiančios pasirinkti pagrindinio aplanko vietą.</string>
+    <string name="release_2_0_0_settings_toolbar">Parinktys, leidžiančios numatytai sutraukti įrankių juostą.</string>
+    <string name="release_2_0_0_shortcuts">Pataisytos statinės nuorodų piktogramos senesniuose Android įrenginiuose.</string>
+    <string name="release_2_1_0_undo_redo">Atkūrimo ir perdarymo palaikymas bei jų istorijos peržiūra.</string>
+    <string name="release_2_1_0_labels">Perkurtos žymenos.</string>
+    <string name="release_2_1_0_app_bars">Perkurtos apatinės ir viršutinės programėlės juostos visuose išsidėstymuose.</string>
+    <string name="release_2_1_0_menu">Perkurta daug meniu.</string>
+    <string name="release_2_1_0_new_folder">Perkurtas aplankų kūrimo ir redagavimo išsidėstymas.</string>
+    <string name="release_2_1_0_grouping_order">Pridėta grupavimo tvarka užrašams.</string>
+    <string name="release_2_1_0_drag_elevation">Pridėtas pakilimas tempiant žymenas ar užrašus.</string>
+    <string name="release_2_1_0_preview">Įtraukiama peržiūra aplankų, užrašų ir žymenų meniu.</string>
+    <string name="release_2_1_0_dates">Geresnis datų formatavimas.</string>
+    <string name="release_2_1_0_highlight">Pakeista užrašų paryškinimo spalva.</string>
+    <string name="release_2_1_0_navigation">Ėjimas į aplankų išsidėstymą prieš programos uždarymą.</string>
+    <string name="release_2_1_0_material_you">Material You palaikymas (Material 3).</string>
+    <string name="release_2_1_0_splash_screen">Perkurtas pristatymo langas.</string>
+    <string name="release_2_1_0_reading_mode">Skaitymo režimo patobulinimai.</string>
+    <string name="release_2_1_0_scroll_position">Aplankų ir užrašų slinkimo padėties įsiminimas.</string>
+    <string name="release_2_1_0_disable_animations">Išjungtos užrašų ir aplankų spalvų animacijos.</string>
+    <string name="release_2_1_0_import_data">Pataisytas duomenų importavimas.</string>
+    <string name="release_2_1_0_vault_crash">Pataisytas strigtis atidarius saugykla Android 11 ir naujesniuose įrenginiuose.</string>
+    <string name="release_2_1_0_undo_redo_swipe">Įgyvendinti braukimo gestai atkūrimui/perdarymui.</string>
+    <string name="release_2_1_0_label_filtering">Žymenų įtraukiantis ir išskirtinis filtravimas.</string>
+    <string name="release_2_1_0_app_icon">Perkurta programėlės piktograma.</string>
+    <string name="release_2_1_0_change_app_icon">Programėlės piktogramas keitimas.</string>
+    <string name="release_2_1_0_language">Vokiečių kalba.</string>
+    <string name="release_2_1_4_shortcuts">Pataisytas nuorodų neveikimas naudojant kitą piktogramą.</string>
+    <string name="release_2_1_4_labels">Pasirinktos žymenos užrašų išsidėstyme pasirodo pirmiausiai.</string>
+    <string name="release_2_2_0_languages">Čekų ir italų kalbos.</string>
+    <string name="release_2_2_0_multi_selection">Grupinis užrašų pasirinkimas.</string>
+    <string name="release_2_2_0_reading_mode">Parinktis numatytai atidaryti užrašus skaitymo režime.</string>
+    <string name="release_2_2_0_settings">Perkurtas nustatymų langas.</string>
+    <string name="release_2_2_0_paging">Įgyvendintas puslapiavimas užrašams skaitymo režime.</string>
+    <string name="release_2_2_0_app_speed">Pagreitintas programėlės paleidimas.</string>
+    <string name="release_2_2_0_import_json">Pataisytas JSON failų importavimas.</string>
+    <string name="release_2_2_0_black_theme">Pataisyta juodos temos spalva Android 12 ir naujesniuose įrenginiuose.</string>
+    <string name="release_2_2_1_languages">Lietuvių ir supaprastintos kinų kalbos.</string>
+    <string name="release_2_2_1_design">Dizaino patobulinimai.</string>
+    <string name="release_2_2_1_undo_redo">Efektyvesnis atkūrimo/perdarymo funkcionalumas.</string>
+    <string name="release_2_2_1_filtered_view">Archyvuotų ir suplanuotų užrašų peržiūra.</string>
+    <string name="release_2_2_1_quick_exit">Sparčiojo išėjimo nustatymo perjungimas (išėjimas iš programėlės be naršymo pagrindiniame meniu).</string>
+    <string name="release_2_2_1_quick_note_tile">Įgyvendintas greitesnis būdas sukurti užrašus kitose programėlėse naudojant plytelę „Spartusis užrašas“ pranešimų centre.</string>
+    <string name="release_2_2_1_system_app_language">Integruotas programėlės kalbos keitimas naudojant sistemos nustatymus Android 13 ir naujesniuose įrenginiuose.</string>
 </resources>

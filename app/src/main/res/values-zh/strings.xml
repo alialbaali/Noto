@@ -6,6 +6,8 @@
     <string name="apply">应用</string>
     <string name="okay">确定</string>
     <string name="search">搜索</string>
+    <!-- An option in the note layout for searching for text inside a note. -->
+    <string name="find_in_note">Find in note</string>
     <!-- A settings option to support the project. -->
     <string name="support_noto">Support Noto</string>
     <!-- Description of the Support Noto settings options. -->
@@ -19,10 +21,18 @@
     <string name="filtering">过滤</string>
     <string name="layout">布局</string>
     <string name="list">列表</string>
+    <!-- Label filtering mode -->
     <string name="inclusive">兼并</string>
+    <!-- Inclusive filtering mode description -->
+    <string name="inclusive_description">Filter notes that have <b>any</b> of the selected labels.</string>
+    <!-- Label filtering mode -->
     <string name="exclusive">包含于</string>
-    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <!-- Exclusive filtering mode description -->
+    <string name="exclusive_description">Filter notes that have <b>all</b> the selected labels, nothing less.</string>
+    <!-- Label filtering mode -->
     <string name="strict">精确对应</string>
+    <!-- Strict filtering mode description -->
+    <string name="strict_description">Filter notes that have <b>only</b> the selected labels, nothing less, nothing more.</string>
     <string name="grid">网格</string>
     <string name="created">已创建: %s</string>
     <string name="accessed">上次访问时间：%s</string>
@@ -48,8 +58,11 @@
     <string name="share_app_with_others">与他人分享 Noto 笔记</string>
     <string name="rate_app_on_play_store">在 Play 商店评价 Noto 笔记</string>
     <string name="report_issue">反馈问题</string>
+    <string name="email">Email</string>
     <string name="about">关于</string>
     <string name="whats_new">更新内容</string>
+    <string name="whats_new_in">What\'s new in %s</string>
+    <string name="learn_more">Learn more…</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">导出 / 导入数据</string>
     <string name="exporting_failed">导出数据失败。</string>
@@ -83,17 +96,17 @@
     <string name="license">许可协议</string>
     <string name="empty_version">版本</string>
     <string name="date">日期</string>
+    <string name="time">Time</string>
     <string name="drag">拖动</string>
     <string name="nunito">Nunito (默认)</string>
     <string name="monospace">等宽字体</string>
-    <string name="font">字体</string>
     <string name="folders_archive">文件夹存档</string>
     <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">主界面</string>
     <!-- Description of the "Main interface" settings option. -->
     <string name="main_interface_description">启动应用程序时显示的第一个界面。</string>
     <!-- The default folder of "Save to Noto" text selection option. -->
-    <string name="quick_note_folder">快速笔记文件夹</string>
+    <string name="quick_note_folder">Quick Note folder</string>
     <!-- AKA "Save to Noto". -->
     <string name="quick_note">快速笔记</string>
     <!-- Description of the "Quick note folder" settings option. -->
@@ -139,8 +152,6 @@
     <string name="translations_description">特别感谢所有帮助翻译 Noto 笔记的翻译者们。</string>
     <!-- List of credits. -->
     <string name="credits">鸣谢</string>
-    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
-    <string name="releases_details">如需了解详细信息，请单击此处。</string>
     <!-- Folder -->
     <string name="folders">文件夹</string>
     <plurals name="folders_count">
@@ -168,16 +179,16 @@
     <string name="folder_is_pinned">文件夹已固定。</string>
     <string name="folder_is_unpinned">文件夹已解除固定。</string>
     <string name="no_folders_found">找不到文件夹。</string>
+    <!-- Text displayed when there are no folders suitable for a given action like moving/copying/etc... -->
+    <string name="no_relevant_folders_found">No relevant folders found.</string>
     <string name="select_folder">选择文件夹</string>
     <string name="folder">文件夹</string>
     <string name="select_folder_archive">选择文件夹存档</string>
-    <string name="select_parent_folder">选择上级文件夹</string>
-    <string name="select_quick_note_folder">选择快速笔记文件夹</string>
-    <string name="select_main_interface">选择主界面</string>
     <string name="pinned">已固定</string>
     <!-- Vault -->
     <string name="folders_vault">文件夹私密库</string>
     <string name="update_passcode">更新密码</string>
+    <string name="enable_vault">Enable vault</string>
     <string name="enter_vault_passcode">请输入密码</string>
     <string name="add_to_vault">存入私密库</string>
     <string name="remove_from_vault">从私密库中移出</string>
@@ -186,22 +197,26 @@
     <string name="vault_is_empty">私密库为空。</string>
     <string name="archive_vaulted_folder_confirmation">您确定要归档所选文件夹吗？</string>
     <string name="archive_vaulted_folder_description">归档此文件夹也会从私密库中移出。</string>
-    <string name="vault_passcode">私密库密码</string>
-    <string name="current_vault_passcode">当前私密库密码</string>
+    <string name="passcode">Passcode</string>
     <string name="new_vault_passcode">新的私密库密码</string>
+    <string name="new_passcode">New passcode</string>
+    <string name="current_passcode">Current passcode</string>
+    <string name="vault_setup">Vault setup</string>
+    <string name="current_vault_passcode">当前私密库密码</string>
     <!-- Change vault passcode option. -->
     <string name="change_passcode">更改密码</string>
     <!-- Vault timeout. -->
     <string name="timeout">关闭后的保持时间</string>
     <!-- Description of the "Timeout" settings option. -->
     <string name="timeout_description">退出私密库后，保持多久才上锁</string>
-    <string name="vault_timeout">私密库打开时间超时</string>
+    <string name="vault_timeout">Vault timeout</string>
     <string name="invalid_passcode">密码无效</string>
     <string name="passcode_length_message">密码必须包含至少 6 个数字</string>
     <string name="passcode_empty_message">密码不能为空</string>
     <string name="passcode_doesnt_match">密码不匹配</string>
     <string name="vault_passcode_has_changed">私密库已更新。</string>
-    <string name="vault_passcode_message">如果您忘记了当前私密库的密码，后续就无法更改密码，所以请确保将密码存储在安全的地方。</string>
+    <string name="enable_vault_message">To enable the vault, please provide a passcode.</string>
+    <string name="vault_passcode_message">Vault passcode can\'t be changed if you lose it, make sure to store it somewhere safe.</string>
     <string name="use_bio">使用生物识别验证</string>
     <string name="validate">确认</string>
     <string name="vault">私密库</string>
@@ -209,6 +224,7 @@
     <string name="disable_vault">停用私密库</string>
     <!-- A message shown when "Disable vault" is being clicked. -->
     <string name="vault_is_disabled">私密库已停用。</string>
+    <string name="vault_is_enabled">Vault has been enabled.</string>
     <!-- An option to disable the vault in vault settings. -->
     <string name="disable">停用</string>
     <!-- A confirmation message shown when disabling the vault in vault settings. -->
@@ -229,8 +245,15 @@
     <string name="use_passcode">使用密码</string>
     <!-- Note -->
     <string name="all">全部</string>
+    <string name="set_reminder">Set reminder</string>
     <string name="update_reminder">更新提醒</string>
     <string name="archive_is_empty">存档为空。</string>
+    <!-- Notes count in Reading Mode with indicator of the current selected displayed note.
+     Such as "2/11 Notes".
+    -->
+    <plurals name="reading_mode_notes_count">
+        <item quantity="other">%1$d / %2$d Notes</item>
+    </plurals>
     <plurals name="notes_count">
         <item quantity="other">%d 篇笔记</item>
     </plurals>
@@ -258,6 +281,11 @@
     <!-- Selected words count is shown when text is selected in a note. -->
     <plurals name="words_selected_count">
         <item quantity="other">%1$d 个单词 • %2$d 个被选中</item>
+    </plurals>
+    <!-- Text displaying how many occurrences of a word has been found using "Find in note" feature. Such as "2/11 Found".
+        The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
+    <plurals name="words_found_count">
+        <item quantity="other">%1$d Words • %2$d / %3$d Found</item>
     </plurals>
     <string name="body">正文内容</string>
     <string name="title">标题内容</string>
@@ -288,11 +316,28 @@
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">笔记已保存到 %s。</string>
     <string name="no_notes_found">未找到笔记。</string>
+    <!-- Text displayed when there are no notes found when search is applied, and labels are selected. -->
+    <string name="no_relevant_notes_found">No relevant notes found.</string>
+    <!-- Text displayed when there are no notes found in the Recent view. -->
+    <string name="no_recent_notes_found">No recent notes found.</string>
+    <!-- Text displayed when there are no notes found in the Archived view. -->
+    <string name="no_archived_notes_found">No archived notes found.</string>
+    <!-- Text displayed when there are no notes found in the Scheduled view. -->
+    <string name="no_scheduled_notes_found">No scheduled notes found.</string>
+    <!-- Text displayed when there are no notes found when search is applied. -->
+    <string name="no_notes_found_search">No notes found containing the search term.</string>
+    <!-- Text displayed when there are no notes found when labels are selected. -->
+    <string name="no_notes_found_labels">No notes found containing the selected labels.</string>
+    <!-- Text displayed when folder is empty, and containing 0 notes. Replacement for "No notes found". -->
+    <string name="folder_is_empty">Folder is empty.</string>
     <string name="notes">笔记</string>
     <!-- The count of the selected notes that have been merged. -->
     <string name="notes_are_merged">%d 篇笔记已被合并为新笔记。</string>
     <plurals name="note_is_archived">
         <item quantity="other">%d 篇笔记已被归档。</item>
+    </plurals>
+    <plurals name="note_is_unarchived">
+        <item quantity="other">%d Notes have been unarchived.</item>
     </plurals>
     <!-- The count of the selected notes that have been pinned. -->
     <plurals name="note_is_pinned">
@@ -302,9 +347,13 @@
     <plurals name="note_is_unpinned">
         <item quantity="other">%d 篇笔记已被解除置顶。</item>
     </plurals>
-    <string name="no_note_reminder">还没有设置提醒。</string>
+    <string name="cancel_reminder">Cancel reminder</string>
     <string name="note_is_unarchived">笔记已被解除归档。</string>
     <string name="reminder">提醒</string>
+    <string name="reminder_date">Reminder date</string>
+    <string name="reminder_time">Reminder time</string>
+    <string name="reminder_is_set">Reminder has been set to run on %1$s at %2$s.</string>
+    <string name="reminder_is_cancelled">Reminder has been cancelled.</string>
     <string name="reminders">提醒</string>
     <string name="new_note_reminder">新建提醒</string>
     <string name="copy">复制</string>
@@ -362,7 +411,7 @@
     <string name="keep_screen_on">保持屏幕开启</string>
     <!-- Description of the "Keep screen on" settings option. -->
     <string name="keep_screen_on_description">在阅读模式下是否阻止屏幕关闭。</string>
-    <string name="full_screen">全屏模式</string>
+    <string name="full_screen_mode">Full screen mode</string>
     <!-- Description of the "Go full screen" settings option. -->
     <string name="full_screen_description">是否在阅读模式下隐藏状态栏和导航栏。</string>
     <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
@@ -383,9 +432,12 @@
     <string name="very_high">非常高</string>
     <!-- "Screen brightness level" option. -->
     <string name="max">最高</string>
+    <!--  Reading Mode progress  -->
+    <string name="progress">Progress</string>
     <string name="show">显示</string>
     <string name="hide">隐藏</string>
     <string name="permission_not_granted">未授予权限</string>
+    <string name="current">Current</string>
     <!-- Label -->
     <string name="reorder_label">标签排序</string>
     <string name="update_label">更新</string>
@@ -449,79 +501,66 @@
     <string name="folders_notes_count">文件夹内的笔记数</string>
     <string name="loading_content">加载内容</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">• Bug fixes and design improvements.</string>
-    <string name="release_bug_fixes">• Bug fixes</string>
-    <string name="release_1_8_0">• Support for passcode protected libraries vault.
-        \n• Support for vault timeout options.
-        \n• Support for biometric vault authentication on supported devices.
-        \n• Support for the Spanish language.
-        \n• Add a link for the new <a href="https://www.reddit.com/r/notoapp">Reddit</a> community.
-        \n• Other bug fixes and design improvements.
-    </string>
-    <string name="release_2_0_0">• New year, new look!
-        \n• Libraries are gone. Welcome folders!
-        \n• Improve animations across the whole app.
-        \n• Experimental support for nested folders.
-        \n• Experimental support for swiping horizontally to nest a folder when sorting is manual.
-        \n• Add a default \"General\" folder for y\'know general notes.
-        \n• Support viewing all notes and recent notes and the ability to search through them.
-        \n• Highlight note content when searching.
-        \n• Implement collapsing toolbar for better usability and hand reachability.
-        \n• Support for the French language.
-        \n• Support swiping up the bottom app bar to view the folders.
-        \n• Navigate to the vault when clicking on \'vault is open\' notification.
-        \n• Add settings option to choose main folder destination.
-        \n• Add settings option to collapse toolbar by default.
-        \n• Fix static shortcuts icons on older Android devices.
-        \n• Other bug fixes and design improvements.
-    </string>
-    <string name="release_2_1_0">• Support for undo/redo and viewing their history.
-        \n• Redesign labels.
-        \n• Redesign bottom and top app bar in all layouts.
-        \n• Redesign many menus.
-        \n• Redesign new/edit folder layout.
-        \n• Add grouping order for notes.
-        \n• Add elevation when dragging labels or notes.
-        \n• Include preview in folder, note, and label menus.
-        \n• Format dates in a better way.
-        \n• Change highlight color in notes.
-        \n• Navigate to folders layout before exiting the app.
-        \n• Support for Material You (Material 3).
-        \n• Redesign splash screen.
-        \n• Reading Mode improvements.
-        \n• Support remembering scrolling positions for folders and notes.
-        \n• Disable animations for labels and folder colors.
-        \n• Fix importing data.
-        \n• Fix a bug when opening a vault crashes on Android 11 and above.
-        \n• Implement swiping gestures to undo/redo.
-        \n• Support filtering labels inclusively or exclusively.
-        \n• Redesign app icon.
-        \n• Support changing app icon.
-        \n• Change font weight and text size in different layouts.
-        \n• Support German.
-        \n• Other bug fixes and design improvements.
-    </string>
-    <string name="release_2_1_4">• Fixed shortcuts not working when using a different icon.
-        \n• Selected labels now appear first in note\'s layout.
-        \n• Other bug fixes and design improvements.
-    </string>
-    <string name="release_2_2_0">• Supported Czech and Italian.
-        \n• Supported multi-selection for notes.
-        \n• Supported an option to open notes in Reading Mode by default.
-        \n• Redesigned settings screen.
-        \n• Implemented paging support for notes in Reading Mode.
-        \n• Improved app launching speed.
-        \n• Fixed importing JSON files.
-        \n• Fixed black theme color in Android 12 and newer devices.
-        \n• Other bug fixes and design improvements.
-    </string>
-    <string name="release_2_2_1">• Supported Lithuanian and Simplified Chinese.
-        \n• Design improvements here and there.
-        \n• Refactored undo/redo functionality to be more effective.
-        \n• Supported viewing Archived &amp; Scheduled notes.
-        \n• Supported for Quick Exit settings toggle (exiting the app without navigating to the main menu).
-        \n• Implemented a faster way to create notes while in other apps using Quick Note tile in the notification centre.
-        \n• Integrated changing app language through System Settings for Android 13 and above.
-        \n• Bug fixes.
-    </string>
+    <string name="release_bug_fixes_and_design_improvements">Bug fixes and design improvements.</string>
+    <string name="release_bug_fixes">Bug fixes.</string>
+    <string name="release_1_8_0_vault">Support for passcode protected libraries vault.</string>
+    <string name="release_1_8_0_vault_timeout">Support for vault timeout options.</string>
+    <string name="release_1_8_0_vault_bio">Support for biometric vault authentication on supported devices.</string>
+    <string name="release_1_8_0_language">Support for the Spanish language.</string>
+    <string name="release_1_8_0_reddit">Add a link for the new <a href="https://www.reddit.com/r/notoapp">Reddit</a> community.</string>
+    <string name="release_2_0_0_new_look">New year, new look!</string>
+    <string name="release_2_0_0_folders">Libraries are gone. Welcome folders!</string>
+    <string name="release_2_0_0_animations">Improve animations across the whole app.</string>
+    <string name="release_2_0_0_nested_folders">Experimental support for nested folders.</string>
+    <string name="release_2_0_0_swipe_folder">Experimental support for swiping horizontally to nest a folder when sorting is manual.</string>
+    <string name="release_2_0_0_general">Add a default \"General\" folder for y\'know general notes.</string>
+    <string name="release_2_0_0_all_recent">Support viewing all notes and recent notes and the ability to search through them.</string>
+    <string name="release_2_0_0_highlight_search">Highlight note content when searching.</string>
+    <string name="release_2_0_0_collapsing_toolbar">Implement collapsing toolbar for better usability and hand reachability.</string>
+    <string name="release_2_0_0_language">Support for the French language.</string>
+    <string name="release_2_0_0_swipe_bottom_app_bar">Support swiping up the bottom app bar to view the folders.</string>
+    <string name="release_2_0_0_navigation">Navigate to the vault when clicking on \'vault is open\' notification.</string>
+    <string name="release_2_0_0_settings_main_folder">Add settings option to choose main folder destination.</string>
+    <string name="release_2_0_0_settings_toolbar">Add settings option to collapse toolbar by default.</string>
+    <string name="release_2_0_0_shortcuts">Fix static shortcuts icons on older Android devices.</string>
+    <string name="release_2_1_0_undo_redo">Support for undo/redo and viewing their history.</string>
+    <string name="release_2_1_0_labels">Redesign labels.</string>
+    <string name="release_2_1_0_app_bars">Redesign bottom and top app bar in all layouts.</string>
+    <string name="release_2_1_0_menu">Redesign many menus.</string>
+    <string name="release_2_1_0_new_folder">Redesign new/edit folder layout.</string>
+    <string name="release_2_1_0_grouping_order">Add grouping order for notes.</string>
+    <string name="release_2_1_0_drag_elevation">Add elevation when dragging labels or notes.</string>
+    <string name="release_2_1_0_preview">Include preview in folder, note, and label menus.</string>
+    <string name="release_2_1_0_dates">Format dates in a better way.</string>
+    <string name="release_2_1_0_highlight">Change highlight color in notes.</string>
+    <string name="release_2_1_0_navigation">Navigate to folders layout before exiting the app.</string>
+    <string name="release_2_1_0_material_you">Support for Material You (Material 3).</string>
+    <string name="release_2_1_0_splash_screen">Redesign splash screen.</string>
+    <string name="release_2_1_0_reading_mode">Reading Mode improvements.</string>
+    <string name="release_2_1_0_scroll_position">Support remembering scrolling positions for folders and notes.</string>
+    <string name="release_2_1_0_disable_animations">Disable animations for labels and folder colors.</string>
+    <string name="release_2_1_0_import_data">Fix importing data.</string>
+    <string name="release_2_1_0_vault_crash">Fix a bug when opening a vault crashes on Android 11 and above.</string>
+    <string name="release_2_1_0_undo_redo_swipe">Implement swiping gestures to undo/redo.</string>
+    <string name="release_2_1_0_label_filtering">Support filtering labels inclusively or exclusively.</string>
+    <string name="release_2_1_0_app_icon">Redesign app icon.</string>
+    <string name="release_2_1_0_change_app_icon">Support changing app icon.</string>
+    <string name="release_2_1_0_language">Support German.</string>
+    <string name="release_2_1_4_shortcuts">Fixed shortcuts not working when using a different icon.</string>
+    <string name="release_2_1_4_labels">Selected labels now appear first in note\'s layout.</string>
+    <string name="release_2_2_0_languages">Supported Czech and Italian.</string>
+    <string name="release_2_2_0_multi_selection">Supported multi-selection for notes.</string>
+    <string name="release_2_2_0_reading_mode">Supported an option to open notes in Reading Mode by default.</string>
+    <string name="release_2_2_0_settings">Redesigned settings screen.</string>
+    <string name="release_2_2_0_paging">Implemented paging support for notes in Reading Mode.</string>
+    <string name="release_2_2_0_app_speed">Improved app launching speed.</string>
+    <string name="release_2_2_0_import_json">Fixed importing JSON files.</string>
+    <string name="release_2_2_0_black_theme">Fixed black theme color in Android 12 and newer devices.</string>
+    <string name="release_2_2_1_languages">Supported Lithuanian and Simplified Chinese.</string>
+    <string name="release_2_2_1_design">Design improvements here and there.</string>
+    <string name="release_2_2_1_undo_redo">Refactored undo/redo functionality to be more effective.</string>
+    <string name="release_2_2_1_filtered_view">Supported viewing Archived &amp; Scheduled notes.</string>
+    <string name="release_2_2_1_quick_exit">Supported for Quick Exit settings toggle (exiting the app without navigating to the main menu).</string>
+    <string name="release_2_2_1_quick_note_tile">Implemented a faster way to create notes while in other apps using Quick Note tile in the notification center.</string>
+    <string name="release_2_2_1_system_app_language">Integrated changing app language through System Settings for Android 13 and above.</string>
 </resources>

@@ -43,7 +43,7 @@ class WhatsNewDialogFragment : BaseDialogFragment(isCollapsable = true) {
             setContent {
                 val currentRelease = remember(context) { Release.Current(context) }
                 val version = remember(currentRelease) { currentRelease.versionFormatted }
-                val changelog = remember(currentRelease) { currentRelease.changelog.formatAsList() }
+                val changelog = remember(currentRelease) { currentRelease.changelog.changes }
                 BottomSheetDialog(
                     title = stringResource(id = R.string.whats_new_in, version),
                     painter = painterResource(id = R.drawable.ic_round_auto_awesome_24),

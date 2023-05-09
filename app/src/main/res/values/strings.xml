@@ -338,7 +338,7 @@
     <string name="note_is_saved">Note has been saved to %s.</string>
     <string name="no_notes_found">No notes found.</string>
     <!-- Text displayed when there are no notes found when search is applied, and labels are selected. -->
-    <string name="no_relevant_notes_found">No relevent notes found.</string>
+    <string name="no_relevant_notes_found">No relevant notes found.</string>
     <!-- Text displayed when there are no notes found in the Recent view. -->
     <string name="no_recent_notes_found">No recent notes found.</string>
     <!-- Text displayed when there are no notes found in the Archived view. -->
@@ -574,90 +574,93 @@
     <string name="loading_content">Loading content</string>
 
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">• Bug fixes and design improvements.</string>
-    <string name="release_bug_fixes">• Bug fixes.</string>
 
-    <string name="release_1_8_0">• Support for passcode protected libraries vault.
-        \n• Support for vault timeout options.
-        \n• Support for biometric vault authentication on supported devices.
-        \n• Support for the Spanish language.
-        \n• Add a link for the new <a href="https://www.reddit.com/r/notoapp">Reddit</a> community.
-        \n• Other bug fixes and design improvements.
-    </string>
+    <string name="release_bug_fixes_and_design_improvements">Bug fixes and design improvements.</string>
+    <string name="release_bug_fixes">Bug fixes.</string>
 
-    <string name="release_2_0_0">• New year, new look!
-        \n• Libraries are gone. Welcome folders!
-        \n• Improve animations across the whole app.
-        \n• Experimental support for nested folders.
-        \n• Experimental support for swiping horizontally to nest a folder when sorting is manual.
-        \n• Add a default "General" folder for y\'know general notes.
-        \n• Support viewing all notes and recent notes and the ability to search through them.
-        \n• Highlight note content when searching.
-        \n• Implement collapsing toolbar for better usability and hand reachability.
-        \n• Support for the French language.
-        \n• Support swiping up the bottom app bar to view the folders.
-        \n• Navigate to the vault when clicking on \'vault is open\' notification.
-        \n• Add settings option to choose main folder destination.
-        \n• Add settings option to collapse toolbar by default.
-        \n• Fix static shortcuts icons on older Android devices.
-        \n• Other bug fixes and design improvements.
-    </string>
+    <string name="release_1_8_0_vault">Support for passcode protected libraries vault.</string>
+    <string name="release_1_8_0_vault_timeout">Support for vault timeout options.</string>
+    <string name="release_1_8_0_vault_bio">Support for biometric vault authentication on supported devices.</string>
+    <string name="release_1_8_0_language">Support for the Spanish language.</string>
+    <string name="release_1_8_0_reddit">Add a link for the new <a href="https://www.reddit.com/r/notoapp">Reddit</a> community.</string>
+    <string name="release_1_8_0_bug_fixes" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
+
+    <string name="release_2_0_0_new_look">New year, new look!</string>
+    <string name="release_2_0_0_folders">Libraries are gone. Welcome folders!</string>
+    <string name="release_2_0_0_animations">Improve animations across the whole app.</string>
+    <string name="release_2_0_0_nested_folders">Experimental support for nested folders.</string>
+    <string name="release_2_0_0_swipe_folder">Experimental support for swiping horizontally to nest a folder when sorting is manual.</string>
+    <string name="release_2_0_0_general">Add a default "General" folder for y\'know general notes.</string>
+    <string name="release_2_0_0_all_recent">Support viewing all notes and recent notes and the ability to search through them.</string>
+    <string name="release_2_0_0_highlight_search">Highlight note content when searching.</string>
+    <string name="release_2_0_0_collapsing_toolbar">Implement collapsing toolbar for better usability and hand reachability.</string>
+    <string name="release_2_0_0_language">Support for the French language.</string>
+    <string name="release_2_0_0_swipe_bottom_app_bar">Support swiping up the bottom app bar to view the folders.</string>
+    <string name="release_2_0_0_navigation">Navigate to the vault when clicking on \'vault is open\' notification.</string>
+    <string name="release_2_0_0_settings_main_folder">Add settings option to choose main folder destination.</string>
+    <string name="release_2_0_0_settings_toolbar">Add settings option to collapse toolbar by default.</string>
+    <string name="release_2_0_0_shortcuts">Fix static shortcuts icons on older Android devices.</string>
+    <string name="release_2_0_0_bug_fixes" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
 
     <string name="release_2_0_1" translatable="false">@string/release_bug_fixes</string>
-    <string name="release_2_1_0">• Support for undo/redo and viewing their history.
-        \n• Redesign labels.
-        \n• Redesign bottom and top app bar in all layouts.
-        \n• Redesign many menus.
-        \n• Redesign new/edit folder layout.
-        \n• Add grouping order for notes.
-        \n• Add elevation when dragging labels or notes.
-        \n• Include preview in folder, note, and label menus.
-        \n• Format dates in a better way.
-        \n• Change highlight color in notes.
-        \n• Navigate to folders layout before exiting the app.
-        \n• Support for Material You (Material 3).
-        \n• Redesign splash screen.
-        \n• Reading Mode improvements.
-        \n• Support remembering scrolling positions for folders and notes.
-        \n• Disable animations for labels and folder colors.
-        \n• Fix importing data.
-        \n• Fix a bug when opening a vault crashes on Android 11 and above.
-        \n• Implement swiping gestures to undo/redo.
-        \n• Support filtering labels inclusively or exclusively.
-        \n• Redesign app icon.
-        \n• Support changing app icon.
-        \n• Change font weight and text size in different layouts.
-        \n• Support German.
-        \n• Other bug fixes and design improvements.
-    </string>
+
+    <string name="release_2_1_0_undo_redo">Support for undo/redo and viewing their history.</string>
+    <string name="release_2_1_0_labels">Redesign labels.</string>
+    <string name="release_2_1_0_app_bars">Redesign bottom and top app bar in all layouts.</string>
+    <string name="release_2_1_0_menu">Redesign many menus.</string>
+    <string name="release_2_1_0_new_folder">Redesign new/edit folder layout.</string>
+    <string name="release_2_1_0_grouping_order">Add grouping order for notes.</string>
+    <string name="release_2_1_0_drag_elevation">Add elevation when dragging labels or notes.</string>
+    <string name="release_2_1_0_preview">Include preview in folder, note, and label menus.</string>
+    <string name="release_2_1_0_dates">Format dates in a better way.</string>
+    <string name="release_2_1_0_highlight">Change highlight color in notes.</string>
+    <string name="release_2_1_0_navigation">Navigate to folders layout before exiting the app.</string>
+    <string name="release_2_1_0_material_you">Support for Material You (Material 3).</string>
+    <string name="release_2_1_0_splash_screen">Redesign splash screen.</string>
+    <string name="release_2_1_0_reading_mode">Reading Mode improvements.</string>
+    <string name="release_2_1_0_scroll_position">Support remembering scrolling positions for folders and notes.</string>
+    <string name="release_2_1_0_disable_animations">Disable animations for labels and folder colors.</string>
+    <string name="release_2_1_0_import_data">Fix importing data.</string>
+    <string name="release_2_1_0_vault_crash">Fix a bug when opening a vault crashes on Android 11 and above.</string>
+    <string name="release_2_1_0_undo_redo_swipe">Implement swiping gestures to undo/redo.</string>
+    <string name="release_2_1_0_label_filtering">Support filtering labels inclusively or exclusively.</string>
+    <string name="release_2_1_0_app_icon">Redesign app icon.</string>
+    <string name="release_2_1_0_change_app_icon">Support changing app icon.</string>
+    <string name="release_2_1_0_language">Support German.</string>
+    <string name="release_2_1_0_bug_fixes" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
+
     <string name="release_2_1_1" translatable="false">@string/release_bug_fixes</string>
     <string name="release_2_1_2" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
     <string name="release_2_1_3" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
-    <string name="release_2_1_4">• Fixed shortcuts not working when using a different icon.
-        \n• Selected labels now appear first in note\'s layout.
-        \n• Other bug fixes and design improvements.
-    </string>
+
+    <string name="release_2_1_4_shortcuts">Fixed shortcuts not working when using a different icon.</string>
+    <string name="release_2_1_4_labels">Selected labels now appear first in note\'s layout.</string>
+    <string name="release_2_1_4_bug_fixes" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
+
     <string name="release_2_1_5" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
+
     <string name="release_2_1_6" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
-    <string name="release_2_2_0">• Supported Czech and Italian.
-        \n• Supported multi-selection for notes.
-        \n• Supported an option to open notes in Reading Mode by default.
-        \n• Redesigned settings screen.
-        \n• Implemented paging support for notes in Reading Mode.
-        \n• Improved app launching speed.
-        \n• Fixed importing JSON files.
-        \n• Fixed black theme color in Android 12 and newer devices.
-        \n• Other bug fixes and design improvements.
-    </string>
-    <string name="release_2_2_1">• Supported Lithuanian and Simplified Chinese.
-        \n• Design improvements here and there.
-        \n• Refactored undo/redo functionality to be more effective.
-        \n• Supported viewing Archived &amp; Scheduled notes.
-        \n• Supported for Quick Exit settings toggle (exiting the app without navigating to the main menu).
-        \n• Implemented a faster way to create notes while in other apps using Quick Note tile in the notification center.
-        \n• Integrated changing app language through System Settings for Android 13 and above.
-        \n• Bug fixes.
-    </string>
+
+    <string name="release_2_2_0_languages">Supported Czech and Italian.</string>
+    <string name="release_2_2_0_multi_selection">Supported multi-selection for notes.</string>
+    <string name="release_2_2_0_reading_mode">Supported an option to open notes in Reading Mode by default.</string>
+    <string name="release_2_2_0_settings">Redesigned settings screen.</string>
+    <string name="release_2_2_0_paging">Implemented paging support for notes in Reading Mode.</string>
+    <string name="release_2_2_0_app_speed">Improved app launching speed.</string>
+    <string name="release_2_2_0_import_json">Fixed importing JSON files.</string>
+    <string name="release_2_2_0_black_theme">Fixed black theme color in Android 12 and newer devices.</string>
+    <string name="release_2_2_0_bug_fixes" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
+
+    <string name="release_2_2_1_languages">Supported Lithuanian and Simplified Chinese.</string>
+    <string name="release_2_2_1_design">Design improvements here and there.</string>
+    <string name="release_2_2_1_undo_redo">Refactored undo/redo functionality to be more effective.</string>
+    <string name="release_2_2_1_filtered_view">Supported viewing Archived &amp; Scheduled notes.</string>
+    <string name="release_2_2_1_quick_exit">Supported for Quick Exit settings toggle (exiting the app without navigating to the main menu).</string>
+    <string name="release_2_2_1_quick_note_tile">Implemented a faster way to create notes while in other apps using Quick Note tile in the notification center.</string>
+    <string name="release_2_2_1_system_app_language">Integrated changing app language through System Settings for Android 13 and above.</string>
+    <string name="release_2_2_1_bug_fixes" translatable="false">@string/release_bug_fixes</string>
+
     <string name="release_2_2_2" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
+
     <string name="release_2_2_3" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
 </resources>

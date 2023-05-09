@@ -6,6 +6,8 @@
     <string name="apply">Aplicar</string>
     <string name="okay">Ok</string>
     <string name="search">Buscar</string>
+    <!-- An option in the note layout for searching for text inside a note. -->
+    <string name="find_in_note">Buscar en la nota</string>
     <!-- A settings option to support the project. -->
     <string name="support_noto">Soporte Noto</string>
     <!-- Description of the Support Noto settings options. -->
@@ -19,10 +21,18 @@
     <string name="filtering">Filtrando</string>
     <string name="layout">Diseño</string>
     <string name="list">Lista</string>
+    <!-- Label filtering mode -->
     <string name="inclusive">Inclusivo</string>
+    <!-- Inclusive filtering mode description -->
+    <string name="inclusive_description">Filtra las notas que tienen <b>cual</b> de las etiquetas seleccionadas.</string>
+    <!-- Label filtering mode -->
     <string name="exclusive">Exclusivo</string>
-    <!-- Label filtering mode, where it filters notes which have the exact match of labels, nothing more, nothing less. -->
+    <!-- Exclusive filtering mode description -->
+    <string name="exclusive_description">Filtra las notas que tienen <b>todas</b> las etiquetas seleccionadas, nada menos.</string>
+    <!-- Label filtering mode -->
     <string name="strict">Estricto</string>
+    <!-- Strict filtering mode description -->
+    <string name="strict_description">Filtra las notas que tienen <b>solo</b> las etiquetas seleccionadas, nada menos, nada más.</string>
     <string name="grid">Mosaico</string>
     <string name="created">Creado %s</string>
     <string name="accessed">Último acceso</string>
@@ -48,8 +58,11 @@
     <string name="share_app_with_others">Comparte Noto con otros</string>
     <string name="rate_app_on_play_store">Valorar Noto en Play Store</string>
     <string name="report_issue">Reportar un problema</string>
+    <string name="email">Correo electrónico</string>
     <string name="about">Acerca de</string>
     <string name="whats_new">Novedades</string>
+    <string name="whats_new_in">Novedades en %s</string>
+    <string name="learn_more">Aprende más…</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Exportar/Importar datos</string>
     <string name="exporting_failed">Error al importar datos.</string>
@@ -83,10 +96,10 @@
     <string name="license">Licencia</string>
     <string name="empty_version">Versión</string>
     <string name="date">Fecha</string>
+    <string name="time">Hora</string>
     <string name="drag">Arrastrar</string>
     <string name="nunito">Nunito (predeterminado)</string>
     <string name="monospace">Monospace</string>
-    <string name="font">Fuente</string>
     <string name="folders_archive">Archivo de carpetas</string>
     <!-- The first screen user sees when opening the app. -->
     <string name="main_interface">Interfaz principal</string>
@@ -139,8 +152,6 @@
     <string name="translations_description">Gracias especialmente a todos los traductores que han ayudado a que Noto esté disponible en diferentes localizaciones.</string>
     <!-- List of credits. -->
     <string name="credits">Créditos</string>
-    <!-- A link that directs the user to the releases page in GitHub. This is string is used in "What's new" screen. -->
-    <string name="releases_details">Para más detalles haga click.</string>
     <!-- Folder -->
     <string name="folders">Carpetas</string>
     <plurals name="folders_count">
@@ -169,16 +180,16 @@
     <string name="folder_is_pinned">La carpeta ha sido fijada.</string>
     <string name="folder_is_unpinned">La carpeta ha sido desanclada.</string>
     <string name="no_folders_found">No se encontraron carpetas.</string>
+    <!-- Text displayed when there are no folders suitable for a given action like moving/copying/etc... -->
+    <string name="no_relevant_folders_found">No se han encontrado carpetas relevantes.</string>
     <string name="select_folder">Seleccionar carpeta</string>
     <string name="folder">Carpeta</string>
     <string name="select_folder_archive">Seleccione archivo de carpeta</string>
-    <string name="select_parent_folder">Seleccionar carpeta padre</string>
-    <string name="select_quick_note_folder">Seleccionar carpeta de notas rápidas</string>
-    <string name="select_main_interface">Cambiar interfaz principal</string>
     <string name="pinned">Anclado</string>
     <!-- Vault -->
     <string name="folders_vault">Bóveda de carpetas</string>
     <string name="update_passcode">Actualizar contraseña</string>
+    <string name="enable_vault">Habilitar bóveda</string>
     <string name="enter_vault_passcode">Introduzca contraseña de bóveda</string>
     <string name="add_to_vault">Añadir a bóveda</string>
     <string name="remove_from_vault">Eliminar de la bóveda</string>
@@ -187,21 +198,25 @@
     <string name="vault_is_empty">Bóveda vacía.</string>
     <string name="archive_vaulted_folder_confirmation">¿Está seguro que desea archivar este elemento?</string>
     <string name="archive_vaulted_folder_description">Archivar esta biblioteca también la eliminará de la bóveda.</string>
-    <string name="vault_passcode">Código de la bóveda</string>
-    <string name="current_vault_passcode">Contraseña actual de bóveda</string>
+    <string name="passcode">Clave de Acceso</string>
     <string name="new_vault_passcode">Introduzca contraseña de bóveda</string>
+    <string name="new_passcode">Nueva contraseña</string>
+    <string name="current_passcode">Contraseña actual</string>
+    <string name="vault_setup">Configuración de bóveda</string>
+    <string name="current_vault_passcode">Contraseña actual de bóveda</string>
     <!-- Change vault passcode option. -->
     <string name="change_passcode">Cambiar código de acceso</string>
     <!-- Vault timeout. -->
     <string name="timeout">Tiempo agotado</string>
     <!-- Description of the "Timeout" settings option. -->
     <string name="timeout_description">El tiempo que se tarda en cerrar la bóveda después de ser abierta.</string>
-    <string name="vault_timeout">Tiempo de espera de la bóveda</string>
+    <string name="vault_timeout">Tiempo de espera de bóveda</string>
     <string name="invalid_passcode">Contraseña no válida</string>
     <string name="passcode_length_message">La contraseña debe contener al menos 6 números</string>
     <string name="passcode_empty_message">La contraseña no puede estar vacía</string>
     <string name="passcode_doesnt_match">La contraseña no coincide con la actual</string>
     <string name="vault_passcode_has_changed">La contraseña de bóveda ha sido actualizada.</string>
+    <string name="enable_vault_message">Para habilitar la bóveda, por favor proporcione un código de acceso.</string>
     <string name="vault_passcode_message">La contraseña de la bóveda no se puede cambiar si pierde la actual, así que asegúrese de guardarla en un lugar seguro.</string>
     <string name="use_bio">Activar biometría</string>
     <string name="validate">Validar</string>
@@ -210,6 +225,7 @@
     <string name="disable_vault">Desactivar bóveda</string>
     <!-- A message shown when "Disable vault" is being clicked. -->
     <string name="vault_is_disabled">La bóveda ha sido desactivada.</string>
+    <string name="vault_is_enabled">La bóveda ha sido desactivada.</string>
     <!-- An option to disable the vault in vault settings. -->
     <string name="disable">Inhabilitar</string>
     <!-- A confirmation message shown when disabling the vault in vault settings. -->
@@ -230,8 +246,16 @@
     <string name="use_passcode">Usar contraseña</string>
     <!-- Note -->
     <string name="all">Todos</string>
+    <string name="set_reminder">Establecer recordatorio</string>
     <string name="update_reminder">Actualizar recordatorio</string>
     <string name="archive_is_empty">El archivo está vacío.</string>
+    <!-- Notes count in Reading Mode with indicator of the current selected displayed note.
+     Such as "2/11 Notes".
+    -->
+    <plurals name="reading_mode_notes_count">
+        <item quantity="one">%1$d / %2$d Nota</item>
+        <item quantity="other">%1$d / %2$d</item>
+    </plurals>
     <plurals name="notes_count">
         <item quantity="one">%d nota</item>
         <item quantity="other">%d notas</item>
@@ -266,6 +290,13 @@
         <item quantity="one">%1$d Palabra • %2$d seleccionada</item>
         <item quantity="other">%1$d Palabras • %2$d seleccionadas</item>
     </plurals>
+    <!-- Text displaying how many occurrences of a word has been found using "Find in note" feature. Such as "2/11 Found".
+        The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
+    <plurals name="words_found_count">
+        <item quantity="one">%1$d Palabra • %2$d / %3$d encontrada</item>
+        <item quantity="other">1$d Palabra • %2$d / %3$d Encontrada 
+%1$d Palabras • %2$d / %3$d Encontrada</item>
+    </plurals>
     <string name="body">Cuerpo</string>
     <string name="title">Titulo</string>
     <!-- Note's editor, opposite of Reading Mode. -->
@@ -297,11 +328,29 @@
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">Se ha guardado la nota.</string>
     <string name="no_notes_found">No se encontraron notas.</string>
+    <!-- Text displayed when there are no notes found when search is applied, and labels are selected. -->
+    <string name="no_relevant_notes_found">No se encontraron notas relevantes.</string>
+    <!-- Text displayed when there are no notes found in the Recent view. -->
+    <string name="no_recent_notes_found">No se encontraron notas recientes.</string>
+    <!-- Text displayed when there are no notes found in the Archived view. -->
+    <string name="no_archived_notes_found">No hay notas archivadas.</string>
+    <!-- Text displayed when there are no notes found in the Scheduled view. -->
+    <string name="no_scheduled_notes_found">No se encontraron notas programadas.</string>
+    <!-- Text displayed when there are no notes found when search is applied. -->
+    <string name="no_notes_found_search">No se encontraron notas que contengan el término de búsqueda.</string>
+    <!-- Text displayed when there are no notes found when labels are selected. -->
+    <string name="no_notes_found_labels">No se encontraron notas que contengan las etiquetas seleccionadas.</string>
+    <!-- Text displayed when folder is empty, and containing 0 notes. Replacement for "No notes found". -->
+    <string name="folder_is_empty">La carpeta está vacía.</string>
     <string name="notes">Notas</string>
     <!-- The count of the selected notes that have been merged. -->
     <string name="notes_are_merged">%d Notas se han fusionado en una nueva nota.</string>
     <plurals name="note_is_archived">
         <item quantity="one">La nota ha sido archivada.</item>
+        <item quantity="other">%d Notas han sido archivadas.</item>
+    </plurals>
+    <plurals name="note_is_unarchived">
+        <item quantity="one">%d Notas han sido archivadas.</item>
         <item quantity="other">%d Notas han sido archivadas.</item>
     </plurals>
     <!-- The count of the selected notes that have been pinned. -->
@@ -314,9 +363,13 @@
         <item quantity="one">La nota ha sido desanclada.</item>
         <item quantity="other">%d notas han sido desancladas.</item>
     </plurals>
-    <string name="no_note_reminder">No se ha definido ningún recordatorio.</string>
+    <string name="cancel_reminder">Cancelar recordatorio</string>
     <string name="note_is_unarchived">La nota se ha desarchivado.</string>
     <string name="reminder">Recordatorio</string>
+    <string name="reminder_date">Fecha de recordatorio</string>
+    <string name="reminder_time">Hora del recordatorio</string>
+    <string name="reminder_is_set">Recordatorio ha sido establecido para ejecutarse el %1$s a las %2$s.</string>
+    <string name="reminder_is_cancelled">El recordatorio ha sido cancelado.</string>
     <string name="reminders">Recordatorios</string>
     <string name="new_note_reminder">Nuevo Recordatorio</string>
     <string name="copy">Copiar</string>
@@ -381,7 +434,7 @@
     <string name="keep_screen_on">Mantener pantalla encendida</string>
     <!-- Description of the "Keep screen on" settings option. -->
     <string name="keep_screen_on_description">Evitar que la pantalla se apague durante el modo de lectura.</string>
-    <string name="full_screen">Ir a pantalla completa</string>
+    <string name="full_screen_mode">Modo de pantalla completa</string>
     <!-- Description of the "Go full screen" settings option. -->
     <string name="full_screen_description">Ocultar barras de estado y navegación durante el modo de lectura.</string>
     <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
@@ -402,9 +455,12 @@
     <string name="very_high">Muy alto</string>
     <!-- "Screen brightness level" option. -->
     <string name="max">Máximo</string>
+    <!--  Reading Mode progress  -->
+    <string name="progress">Progreso</string>
     <string name="show">Mostrar</string>
     <string name="hide">Ocultar</string>
     <string name="permission_not_granted">No se ha concedido permiso</string>
+    <string name="current">Actual</string>
     <!-- Label -->
     <string name="reorder_label">Reordenar</string>
     <string name="update_label">Actualizar etiqueta</string>
@@ -468,79 +524,66 @@
     <string name="folders_notes_count">Contador de notas de carpetas</string>
     <string name="loading_content">Cargando contenido</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">• Corrección de errores y mejoras de diseño.</string>
-    <string name="release_bug_fixes">• Corrección de errores</string>
-    <string name="release_1_8_0">• Soporte para librerías protegidas con código de acceso.
-        \n• Soporte para opciones de tiempo de espera de bóveda.
-        \n• Soporte para autenticación de bóveda biométrica en dispositivos compatibles.
-        \n• Soporte para el idioma Español.
-        \n• Agregar un enlace para la nueva comunidad <a href="https://www.reddit.com/r/notoapp">Reddit</a>.
-        \n• Otras correcciones de errores y mejoras de diseño.
-    </string>
-    <string name="release_2_0_0">• Año nuevo, nueva apariencia!
-        \n• Las bibliotecas han desaparecido. ¡Carpetas de Bienvenida!
-        \n• Mejorar animaciones en toda la aplicación.
-        \n• Soporte experimental para carpetas anidadas.
-        \n• Soporte experimental para deslizar horizontalmente para anidar una carpeta al ordenar es manual.
-        \n• Añadir una carpeta \"General\" por defecto para notas generales de y\'know.
-        \n• Permite ver todas las notas y notas recientes y la capacidad de buscar a través de ellas.
-        \n• Resaltar el contenido de la nota al buscar.
-        \n• Implementar la barra de herramientas que colapsa para una mejor usabilidad y capacidad de reacción manual.
-        \n• Soporte para el idioma francés.
-        \n• Soporte para deslizar hacia arriba la barra inferior de la aplicación para ver las carpetas.
-        \n• Navega a la bóveda al hacer clic en la notificación \'bóveda está abierta\'.
-        \n• Añadir opción de configuración para elegir destino de carpeta principal.
-        \n• Añadir opción de configuración para contraer la barra de herramientas por defecto.
-        \n• Corregir los iconos de accesos directos estáticos en dispositivos Android antiguos.
-        \n• Otras correcciones de errores y mejoras de diseño.
-    </string>
-    <string name="release_2_1_0">• Soporte para deshacer/rehacer y ver su historial.
-        \n• Rediseñar etiquetas.
-        \n• Rediseñar la barra de aplicaciones inferior y superior en todos los diseños.
-        \n• Rediseñar muchos menús.
-        \n• Rediseñar el diseño de carpetas/edición.
-        \n• Añadir orden de agrupación de notas.
-        \n• Añadir elevación al arrastrar etiquetas o notas.
-        \n• Incluye vista previa en los menús de carpeta, nota y etiqueta.
-        \n• Fechas de formato de una mejor manera.
-        \n• Cambiar color resaltado en notas.
-        \n• Navega a la distribución de carpetas antes de salir de la aplicación.
-        \n• Soporte para el material que usted (Material 3).
-        \n• Rediseñar pantalla de salida.
-        \n• Mejoras del modo de lectura.
-        \n• Soporte para recordar posiciones de desplazamiento para carpetas y notas.
-        \n• Desactivar animaciones para etiquetas y colores de carpetas.
-        \n• Corregir la importación de datos.
-        \n• Corregir un error al abrir una bóveda se bloquea en Android 11 o superior.
-        \n• Implementar gestos de deslizar para deshacer/rehacer.
-        \n• Etiquetas de filtrado de soporte, incluidas o exclusivamente.
-        \n• Rediseñar icono de la aplicación.
-        \n• Soporte para cambiar el icono de la aplicación.
-        \n• Cambiar el peso de la fuente y el tamaño del texto en diferentes diseños.
-        \n• Soporte alemán.
-        \n• Otras correcciones de errores y mejoras de diseño
-    </string>
-    <string name="release_2_1_4">• Corregidos atajos que no funcionan cuando se utiliza un icono diferente.
-        \n• Etiquetas seleccionadas ahora aparecen primero en el diseño de nota.
-        \n• Otras correcciones de errores y mejoras de diseño.
-    </string>
-    <string name="release_2_2_0">• Compatible con Checo e Italiano.
-        \n• Multiselección de notas soportada.
-        \n• Soportó una opción para abrir notas en modo lectura por defecto.
-        \n• Pantalla de configuración reasignada.
-        \n• Soporte de paginación implementado para notas en Modo Lectura.
-        \n• Velocidad de inicio de la aplicación mejorada.
-        \n• Corregido importando archivos JSON.
-        \n• Corregido color de tema negro en Android 12 y dispositivos más nuevos.
-        \n• Otras correcciones de errores y mejoras de diseño.
-    </string>
-    <string name="release_2_2_1">• Soportado en chino lituano y simplificado.
-        \n• Diseño de mejoras aquí y allá.
-        \n• Función de deshacer/rehacer reformada para ser más efectiva.
-        \n• Visualización archivada &amp; notas programadas.
-        \n• Soporte para alternar ajustes de salida rápida (saliendo de la aplicación sin navegar al menú principal).
-        \n• Implementada una forma más rápida de crear notas mientras que en otras aplicaciones usando el ajuste de Nota Rápida en el centro de notificaciones.
-        \n• Cambio completo de idioma de la aplicación a través de la Configuración del sistema para Android 13 o superior.
-        \n• Corrección de errores.
-    </string>
+    <string name="release_bug_fixes_and_design_improvements">Corrección de errores y mejoras de diseño.</string>
+    <string name="release_bug_fixes">Corrección de errores.</string>
+    <string name="release_1_8_0_vault">Soporte para bibliotecas protegidas con contraseñas.</string>
+    <string name="release_1_8_0_vault_timeout">Soporte para opciones de tiempo de espera de bóveda.</string>
+    <string name="release_1_8_0_vault_bio">Soporte para autenticación de bóveda biométrica en dispositivos compatibles.</string>
+    <string name="release_1_8_0_language">Apoyo al idioma español.</string>
+    <string name="release_1_8_0_reddit">Añade un enlace para la nueva comunidad de <a href="https://www.reddit.com/r/notoapp">Reddit</a>.</string>
+    <string name="release_2_0_0_new_look">Año nuevo, nuevo aspecto!</string>
+    <string name="release_2_0_0_folders">Las bibliotecas han desaparecido. Bienvenida a las carpetas!</string>
+    <string name="release_2_0_0_animations">Mejora las animaciones en toda la aplicación.</string>
+    <string name="release_2_0_0_nested_folders">Soporte experimental para carpetas anidadas.</string>
+    <string name="release_2_0_0_swipe_folder">Soporte experimental para deslizar horizontalmente para anidar una carpeta cuando la clasificación es manual.</string>
+    <string name="release_2_0_0_general">Agregue una carpeta \"General\" predeterminada para notas generales.</string>
+    <string name="release_2_0_0_all_recent">Soporte para ver todas las notas y notas recientes y la capacidad de buscar a través de ellas.</string>
+    <string name="release_2_0_0_highlight_search">Resaltar el contenido de la nota al buscar.</string>
+    <string name="release_2_0_0_collapsing_toolbar">Implementar la barra de herramientas que colapsa para una mejor usabilidad y accesibilidad manual.</string>
+    <string name="release_2_0_0_language">Apoyo al idioma francés.</string>
+    <string name="release_2_0_0_swipe_bottom_app_bar">Soporte para deslizar hacia arriba para ver las carpetas.</string>
+    <string name="release_2_0_0_navigation">Vaya a la bóveda cuando haga clic en la notificación \'bóveda está abierta\'.</string>
+    <string name="release_2_0_0_settings_main_folder">Añadir opción de configuración para elegir destino de carpeta principal.</string>
+    <string name="release_2_0_0_settings_toolbar">Añadir opción de configuración para contraer la barra de herramientas de forma predeterminada.</string>
+    <string name="release_2_0_0_shortcuts">Corregir los iconos de accesos directos estáticos en dispositivos Android.</string>
+    <string name="release_2_1_0_undo_redo">Soporte para deshacer/rehacer y ver su historial.</string>
+    <string name="release_2_1_0_labels">Rediseñar etiquetas.</string>
+    <string name="release_2_1_0_app_bars">Rediseño de la barra de aplicaciones inferior y superior en todos los diseños.</string>
+    <string name="release_2_1_0_menu">Rediseño de varios menús.</string>
+    <string name="release_2_1_0_new_folder">Rediseñado nuevo/editar diseño de carpetas.</string>
+    <string name="release_2_1_0_grouping_order">Añadir orden de agrupación para las notas.</string>
+    <string name="release_2_1_0_drag_elevation">Añadida elevación al arrastrar etiquetas o notas.</string>
+    <string name="release_2_1_0_preview">Incluida vista previa en los menús de carpetas, notas y etiquetas.</string>
+    <string name="release_2_1_0_dates">Formatear fechas de una manera mejor.</string>
+    <string name="release_2_1_0_highlight">Cambiar color de resaltado en notas.</string>
+    <string name="release_2_1_0_navigation">Navega a la distribución de carpetas antes de salir de la aplicación.</string>
+    <string name="release_2_1_0_material_you">Soporte para Material You (Material 3).</string>
+    <string name="release_2_1_0_splash_screen">Rediseñar la pantalla de presentación.</string>
+    <string name="release_2_1_0_reading_mode">Mejoras del modo de lectura.</string>
+    <string name="release_2_1_0_scroll_position">Soporte para recordar posiciones de desplazamiento para carpetas y notas.</string>
+    <string name="release_2_1_0_disable_animations">Desactivar animaciones para etiquetas y colores de carpetas.</string>
+    <string name="release_2_1_0_import_data">Corregida la importación de datos.</string>
+    <string name="release_2_1_0_vault_crash">Corregir un error al abrir una bóveda se bloquea en Android 11 o superior.</string>
+    <string name="release_2_1_0_undo_redo_swipe">Implementar gestos de deslizamiento para deshacer/rehacer.</string>
+    <string name="release_2_1_0_label_filtering">Soportar etiquetas de filtrado inclusivo o exclusivo.</string>
+    <string name="release_2_1_0_app_icon">Rediseñar icono de aplicación.</string>
+    <string name="release_2_1_0_change_app_icon">Soporte para cambiar el icono de la aplicación.</string>
+    <string name="release_2_1_0_language">Soporte para idioma Alemán.</string>
+    <string name="release_2_1_4_shortcuts">Corregidos atajos que no funcionan cuando se utiliza un icono diferente.</string>
+    <string name="release_2_1_4_labels">Las etiquetas seleccionadas ahora aparecen primero en el diseño de las notas.</string>
+    <string name="release_2_2_0_languages">Compatible con checo e italiano.</string>
+    <string name="release_2_2_0_multi_selection">Multi selección de notas soportada.</string>
+    <string name="release_2_2_0_reading_mode">Soporte para la opción para abrir notas en modo lectura por defecto.</string>
+    <string name="release_2_2_0_settings">Pantalla de configuración rediseñada.</string>
+    <string name="release_2_2_0_paging">Soporte de paginación implementado para notas en modo lectura.</string>
+    <string name="release_2_2_0_app_speed">Velocidad de lanzamiento de la aplicación mejorada.</string>
+    <string name="release_2_2_0_import_json">Se ha corregido la importación de archivos JSON.</string>
+    <string name="release_2_2_0_black_theme">Color del tema negro corregido en Android 12 y dispositivos más nuevos.</string>
+    <string name="release_2_2_1_languages">Apoyó a lituano y chino simplificado.</string>
+    <string name="release_2_2_1_design">Mejoras de diseño aquí y allá.</string>
+    <string name="release_2_2_1_undo_redo">Actualización de la funcionalidad deshacer/rehacer para ser más efectiva.</string>
+    <string name="release_2_2_1_filtered_view">Visualización soportada de notas archivadas &amp; programadas.</string>
+    <string name="release_2_2_1_quick_exit">Soportado para cambiar la configuración de Salida Rápida (salir de la aplicación sin navegar al menú principal).</string>
+    <string name="release_2_2_1_quick_note_tile">Se implementó una forma más rápida de crear notas mientras se encuentra en otras aplicaciones usando la opción Nota Rápida en el centro de notificaciones.</string>
+    <string name="release_2_2_1_system_app_language">Cambio integrado de idioma de la aplicación a través de la configuración del sistema para Android 13 o superior.</string>
 </resources>
