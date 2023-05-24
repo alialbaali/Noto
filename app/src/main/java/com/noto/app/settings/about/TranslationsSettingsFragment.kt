@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -61,6 +62,7 @@ class TranslationsSettingsFragment : Fragment() {
                 type = SettingsItemType.Text(context.stringResource(translation.language.toResource())),
                 painter = painterResource(id = translation.iconId),
                 equalWeights = false,
+                contentScale = ContentScale.Crop,
             )
 
             translation.translators.forEach { translator ->
