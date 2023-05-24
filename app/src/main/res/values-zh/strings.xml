@@ -482,6 +482,7 @@
     <string name="czech">捷克语</string>
     <string name="lithuanian">立陶宛语</string>
     <string name="simplified_chinese">简体中文</string>
+    <string name="portuguese">Portuguese</string>
     <!-- Icon -->
     <string name="icon">图标</string>
     <!-- Widget -->
@@ -563,4 +564,14 @@
     <string name="release_2_2_1_quick_exit">Supported for Quick Exit settings toggle (exiting the app without navigating to the main menu).</string>
     <string name="release_2_2_1_quick_note_tile">Implemented a faster way to create notes while in other apps using Quick Note tile in the notification center.</string>
     <string name="release_2_2_1_system_app_language">Integrated changing app language through System Settings for Android 13 and above.</string>
+    <string name="release_2_3_0_new_languages">Supported Russian &amp; Portuguese.</string>
+    <string name="release_2_3_0_reminder">Redesigned Reminder, Date &amp; Time pickers to match with Noto theme.</string>
+    <string name="release_2_3_0_selection">Revised how notes selection &amp; dragging is handled by using only long clicks.</string>
+    <string name="release_2_3_0_find_in_note">Supported Find in Note functionality, and automatic scrolling to the searched text in notes.</string>
+    <string name="release_2_3_0_archive">Supported multiple notes selection &amp; quick actions for Archive screens.</string>
+    <string name="release_2_3_0_sorting">Sorted entities with respect to languages’ diacritical letters.</string>
+    <string name="release_2_3_0_reading_mode">Displayed counter, and progress indicator when having multiple notes opened in Reading Mode.</string>
+    <string name="release_2_3_0_whats_new">Redesigned What’s New dialog &amp; screen.</string>
+    <string name="release_2_3_0_report_issues">Supported reporting issues through email in Settings.</string>
+    <string name="release_2_3_0_quick_note">Fixed multiple dialogs being opened when creating a Quick Note.</string>
 </resources>

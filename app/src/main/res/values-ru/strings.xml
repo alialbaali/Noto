@@ -548,6 +548,7 @@
     <string name="czech">Чешский</string>
     <string name="lithuanian">Литовский</string>
     <string name="simplified_chinese">Китайский упрощенный</string>
+    <string name="portuguese">Португальский</string>
     <!-- Icon -->
     <string name="icon">Иконка</string>
     <!-- Widget -->
@@ -629,4 +630,14 @@
     <string name="release_2_2_1_quick_exit">Поддерживается переключение настроек быстрого выхода (выход из приложения без перехода в главное меню).</string>
     <string name="release_2_2_1_quick_note_tile">В других приложениях реализован быстрый способ создания заметок с помощью плитки Быстрой заметки в центре уведомлений.</string>
     <string name="release_2_2_1_system_app_language">Встроенная смена языка приложения через Системные настройки для Android 13 и выше.</string>
+    <string name="release_2_3_0_new_languages">Поддерживается Русский и Португальский.</string>
+    <string name="release_2_3_0_reminder">Напоминание, а так же выбор даты/времени теперь соответствуют теме Noto.</string>
+    <string name="release_2_3_0_selection">Переосмыслена реализация Drag\'n\'Drop и Выбора используя только долгие нажатия.</string>
+    <string name="release_2_3_0_find_in_note">Поддерживается функция поиска в примечании и автоматическая прокрутка к найденному тексту в заметках.</string>
+    <string name="release_2_3_0_archive">Поддерживается выбор нескольких заметок и быстрые действия для экранов архива.</string>
+    <string name="release_2_3_0_sorting">Сортировка сущностей по отношению к диакритическим буквам языков.</string>
+    <string name="release_2_3_0_reading_mode">Счетчик и индикатор прогресса при открытии нескольких заметок в режиме чтения.</string>
+    <string name="release_2_3_0_whats_new">Переработано диалоговое окно и экран \"Что нового\".</string>
+    <string name="release_2_3_0_report_issues">Поддержка отчетов об ошибках по электронной почте в настройках.</string>
+    <string name="release_2_3_0_quick_note">Исправлено открытие нескольких диалогов при создании Быстрой Заметки.</string>
 </resources>

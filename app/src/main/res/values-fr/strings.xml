@@ -9,7 +9,7 @@
     <!-- An option in the note layout for searching for text inside a note. -->
     <string name="find_in_note">Rechercher dans la note</string>
     <!-- A settings option to support the project. -->
-    <string name="support_noto">Support Noto</string>
+    <string name="support_noto">Soutenir Noto</string>
     <!-- Description of the Support Noto settings options. -->
     <string name="support_noto_description">Si vous voulez vous assurer que Noto reste maintenu.</string>
     <!-- More options for folder, note, etc... -->
@@ -504,6 +504,7 @@
     <string name="czech">Tchèque</string>
     <string name="lithuanian">Lituanien</string>
     <string name="simplified_chinese">Chinois simplifié</string>
+    <string name="portuguese">Portugais</string>
     <!-- Icon -->
     <string name="icon">Icône</string>
     <!-- Widget -->
@@ -523,8 +524,8 @@
     <string name="folders_notes_count">Nombre de notes des dossiers</string>
     <string name="loading_content">Chargement du contenu</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">Bug fixes and design improvements.</string>
-    <string name="release_bug_fixes">Bug fixes.</string>
+    <string name="release_bug_fixes_and_design_improvements">Corrections de bugs et améliorations de l\'interface.</string>
+    <string name="release_bug_fixes">Corrections de bugs.</string>
     <string name="release_1_8_0_vault">Prise en charge du coffre-fort des bibliothèques protégées par un code d\'accès.</string>
     <string name="release_1_8_0_vault_timeout">Prise en charge des options d\'expiration du coffre-fort.</string>
     <string name="release_1_8_0_vault_bio">Prise en charge de l\'authentification biométriques sur les périphériques pris en charge pour le coffre-fort.</string>
@@ -585,4 +586,14 @@
     <string name="release_2_2_1_quick_exit">Possibilité de quitter rapidement l\'application (sortie de l\'application sans naviguer vers le menu principal).</string>
     <string name="release_2_2_1_quick_note_tile">Création de notes via une tuile Quick Note dans le centre de notification.</string>
     <string name="release_2_2_1_system_app_language">Intégration de la langue de l\'application dans les paramètres du système pour Android 13 et plus.</string>
+    <string name="release_2_3_0_new_languages">Prise en charge du russe et du portugais.</string>
+    <string name="release_2_3_0_reminder">Refonte des Rappels, sélecteurs de date et d\'heure pour correspondre avec le thème Noto.</string>
+    <string name="release_2_3_0_selection">Amélioration de la gestion de la sélection et du glissement des notes en n\'utilisant que des clics longs.</string>
+    <string name="release_2_3_0_find_in_note">Fonctionnalité de recherche dans les notes et défilement automatique vers le texte recherché dans les notes.</string>
+    <string name="release_2_3_0_archive">Prise en charge de la sélection multiple des notes et des actions rapides pour les écrans d\'archives.</string>
+    <string name="release_2_3_0_sorting">Entités triées en fonction des lettres diacritiques des langues.</string>
+    <string name="release_2_3_0_reading_mode">Affichage d\'un compteur et d\'un indicateur de progression lorsque plusieurs notes sont ouvertes en mode lecture.</string>
+    <string name="release_2_3_0_whats_new">La fenêtre de dialogue et l\'écran \"Quoi de neuf\" ont été repensés.</string>
+    <string name="release_2_3_0_report_issues">Prise en charge du rapport de problèmes par email dans les Paramètres.</string>
+    <string name="release_2_3_0_quick_note">Correction de l\'ouverture de plusieurs fenêtres de dialogue lors de la création d\'une note rapide.</string>
 </resources>

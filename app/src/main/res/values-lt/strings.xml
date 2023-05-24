@@ -535,7 +535,7 @@
     <string name="translate_noto_description">Vertimai atliekami Crowdin.</string>
     <!-- Replacement for "System language" in settings. -->
     <string name="follow_system">Sistemos</string>
-    <string name="english">Anglų (English)</string>
+    <string name="english">Anglų</string>
     <string name="turkish">Turkų</string>
     <string name="arabic">Arabų</string>
     <string name="indonesian">Indoneziečių</string>
@@ -548,6 +548,7 @@
     <string name="czech">Čekų</string>
     <string name="lithuanian">Lietuvių</string>
     <string name="simplified_chinese">Supaprastinta kinų</string>
+    <string name="portuguese">Portugalų</string>
     <!-- Icon -->
     <string name="icon">Piktograma</string>
     <!-- Widget -->
@@ -557,20 +558,20 @@
     <string name="edit_notes_widget">Redaguoti užrašų valdiklį</string>
     <string name="new_folders_widget">Naujas aplankų valdiklis</string>
     <string name="edit_folders_widget">Redaguoti aplankų valdiklį</string>
-    <string name="new_folder_button">Naujas aplanko mygtukas</string>
-    <string name="new_note_button">Naujas užrašo mygtukas</string>
+    <string name="new_folder_button">Naujo aplanko mygtukas</string>
+    <string name="new_note_button">Naujo užrašo mygtukas</string>
     <string name="widget_header">Valdiklio antraštė</string>
     <string name="app_icon">Programėlės piktograma</string>
     <string name="widget_radius">Valdiklio spindulys</string>
     <string name="edit_widget">Redaguoti valdiklį</string>
-    <string name="edit_widget_button">Redaguoti valdiklio mygtuką</string>
+    <string name="edit_widget_button">Valdiklio redagavimo mygtukas</string>
     <string name="folders_notes_count">Aplankų užrašų skaičius</string>
     <string name="loading_content">Įkeliamas turinys</string>
     <!-- Releases -->
     <string name="release_bug_fixes_and_design_improvements">Klaidų taisymas ir dizaino patobulinimai.</string>
     <string name="release_bug_fixes">Klaidų taisymas.</string>
     <string name="release_1_8_0_vault">Slaptažodžiu apsaugotos saugyklos.</string>
-    <string name="release_1_8_0_vault_timeout">Saugyklų skiriamojo laiko parinktys.</string>
+    <string name="release_1_8_0_vault_timeout">Saugyklos skiriamojo laiko parinktys.</string>
     <string name="release_1_8_0_vault_bio">Biometrinis autentifikavimas palaikomuose įrenginiuose.</string>
     <string name="release_1_8_0_language">Ispanų kalba.</string>
     <string name="release_1_8_0_reddit">Pridėta nauja <a href="https://www.reddit.com/r/notoapp">Reddit</a> bendruomenės nuoroda.</string>
@@ -629,4 +630,14 @@
     <string name="release_2_2_1_quick_exit">Sparčiojo išėjimo nustatymo perjungimas (išėjimas iš programėlės be naršymo pagrindiniame meniu).</string>
     <string name="release_2_2_1_quick_note_tile">Įgyvendintas greitesnis būdas sukurti užrašus kitose programėlėse naudojant plytelę „Spartusis užrašas“ pranešimų centre.</string>
     <string name="release_2_2_1_system_app_language">Integruotas programėlės kalbos keitimas naudojant sistemos nustatymus Android 13 ir naujesniuose įrenginiuose.</string>
+    <string name="release_2_3_0_new_languages">Rusų ir portugalų kalbos.</string>
+    <string name="release_2_3_0_reminder">Perkurti priminimų, datos ir laiko parinkikliai, kad sutaptų su Noto tema.</string>
+    <string name="release_2_3_0_selection">Pataisytas užrašų pasirinkimas ir vilkimas naudojant tik ilgus spustelėjimus.</string>
+    <string name="release_2_3_0_find_in_note">„Rasti užraše“ funkcionalumas ir automatinis slinkimas į ieškomą tekstą užrašuose.</string>
+    <string name="release_2_3_0_archive">Kelių užrašų pasirinkimas ir spartieji veiksmai archyvo ekranams.</string>
+    <string name="release_2_3_0_sorting">Esybių rikiavimas atsižvelgiant į kalbos diakritines raides.</string>
+    <string name="release_2_3_0_reading_mode">Skaitiklis ir progreso indikatorius, kai yra atidaryti keli užrašai skaitymo režime.</string>
+    <string name="release_2_3_0_whats_new">Perkurtas „Kas naujo“ dialogo ekranas.</string>
+    <string name="release_2_3_0_report_issues">Problemų pranešimas su el. paštu nustatymuose.</string>
+    <string name="release_2_3_0_quick_note">Pataisytas kelių dialogų atidarymas sukuriant spartųjų užrašą.</string>
 </resources>

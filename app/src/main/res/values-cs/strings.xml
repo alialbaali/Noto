@@ -7,7 +7,7 @@
     <string name="okay">Ok</string>
     <string name="search">Hledat</string>
     <!-- An option in the note layout for searching for text inside a note. -->
-    <string name="find_in_note">Find in note</string>
+    <string name="find_in_note">Najít v Note</string>
     <!-- A settings option to support the project. -->
     <string name="support_noto">Podpořit Noto</string>
     <!-- Description of the Support Noto settings options. -->
@@ -24,15 +24,15 @@
     <!-- Label filtering mode -->
     <string name="inclusive">Inkluzivní</string>
     <!-- Inclusive filtering mode description -->
-    <string name="inclusive_description">Filter notes that have <b>any</b> of the selected labels.</string>
+    <string name="inclusive_description">Filtrovat poznámky, které mají<b>jakékoliv</b> vybrané popisky.</string>
     <!-- Label filtering mode -->
     <string name="exclusive">Exkluzivní</string>
     <!-- Exclusive filtering mode description -->
-    <string name="exclusive_description">Filter notes that have <b>all</b> the selected labels, nothing less.</string>
+    <string name="exclusive_description">Filtrovat poznámky, která mají<b>všechny</b> vybrané popisky, nikoliv méně.</string>
     <!-- Label filtering mode -->
     <string name="strict">Přísný</string>
     <!-- Strict filtering mode description -->
-    <string name="strict_description">Filter notes that have <b>only</b> the selected labels, nothing less, nothing more.</string>
+    <string name="strict_description">Filtrovat poznámky, která mají<b>všechny</b> vybrané popisky, nikoliv více.</string>
     <string name="grid">Mřížka</string>
     <string name="created">Vytvořeno %s</string>
     <string name="accessed">Otevřeno %s</string>
@@ -61,8 +61,8 @@
     <string name="email">Email</string>
     <string name="about">O aplikaci</string>
     <string name="whats_new">Co je nového</string>
-    <string name="whats_new_in">What\'s new in %s</string>
-    <string name="learn_more">Learn more…</string>
+    <string name="whats_new_in">Co je nového v %s</string>
+    <string name="learn_more">Zjistit více…</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Exportovat/Importovat data</string>
     <string name="exporting_failed">Nezdařilo se exportovat data.</string>
@@ -96,7 +96,7 @@
     <string name="license">Licence</string>
     <string name="empty_version">Verze</string>
     <string name="date">Datum</string>
-    <string name="time">Time</string>
+    <string name="time">Čas</string>
     <string name="drag">Táhnout</string>
     <string name="nunito">Nunito (výchozí)</string>
     <string name="monospace">Monospace</string>
@@ -106,7 +106,7 @@
     <!-- Description of the "Main interface" settings option. -->
     <string name="main_interface_description">První obrazovka zobrazená při spuštění aplikace.</string>
     <!-- The default folder of "Save to Noto" text selection option. -->
-    <string name="quick_note_folder">Quick Note folder</string>
+    <string name="quick_note_folder">Složka rychlých poznámek</string>
     <!-- AKA "Save to Noto". -->
     <string name="quick_note">Rychlé poznámky</string>
     <!-- Description of the "Quick note folder" settings option. -->
@@ -183,7 +183,7 @@
     <string name="folder_is_unpinned">Složka byla odepnuta.</string>
     <string name="no_folders_found">Žádné složky nenalezeny.</string>
     <!-- Text displayed when there are no folders suitable for a given action like moving/copying/etc... -->
-    <string name="no_relevant_folders_found">No relevant folders found.</string>
+    <string name="no_relevant_folders_found">Nebyly nalezeny odpovídající složky.</string>
     <string name="select_folder">Vybrat složku</string>
     <string name="folder">Složka</string>
     <string name="select_folder_archive">Vybrat archivní složku</string>
@@ -191,7 +191,7 @@
     <!-- Vault -->
     <string name="folders_vault">Trezor složek</string>
     <string name="update_passcode">Aktualizovat přístupový kód</string>
-    <string name="enable_vault">Enable vault</string>
+    <string name="enable_vault">Povolit trezor</string>
     <string name="enter_vault_passcode">Zadejte svůj přístupový kód</string>
     <string name="add_to_vault">Přidat do trezoru</string>
     <string name="remove_from_vault">Odebrat z trezoru</string>
@@ -200,11 +200,11 @@
     <string name="vault_is_empty">Trezor je prázdný.</string>
     <string name="archive_vaulted_folder_confirmation">Opravdu chcete odstranit tuto složku?</string>
     <string name="archive_vaulted_folder_description">Archivací této složky ji také odebere z trezoru.</string>
-    <string name="passcode">Passcode</string>
+    <string name="passcode">Přístupový kód</string>
     <string name="new_vault_passcode">Nové heslo trezoru</string>
-    <string name="new_passcode">New passcode</string>
-    <string name="current_passcode">Current passcode</string>
-    <string name="vault_setup">Vault setup</string>
+    <string name="new_passcode">Nový přístupový kód</string>
+    <string name="current_passcode">Současný přístupový kód</string>
+    <string name="vault_setup">Nastavení trezoru</string>
     <string name="current_vault_passcode">Aktuální kód trezoru</string>
     <!-- Change vault passcode option. -->
     <string name="change_passcode">Změnit přístupový kód</string>
@@ -212,14 +212,14 @@
     <string name="timeout">Časový limit</string>
     <!-- Description of the "Timeout" settings option. -->
     <string name="timeout_description">Doba, po kterou bude trezor po otevření trvat.</string>
-    <string name="vault_timeout">Vault timeout</string>
+    <string name="vault_timeout">Časový limit trezoru</string>
     <string name="invalid_passcode">Neplatný přístupový kód</string>
     <string name="passcode_length_message">Heslo musí obsahovat nejméně 6 čísel</string>
     <string name="passcode_empty_message">Heslo nesmí být prázdné</string>
     <string name="passcode_doesnt_match">Heslo se neshoduje se stávajícím heslem</string>
     <string name="vault_passcode_has_changed">Kód trezoru byl aktualizován.</string>
-    <string name="enable_vault_message">To enable the vault, please provide a passcode.</string>
-    <string name="vault_passcode_message">Vault passcode can\'t be changed if you lose it, make sure to store it somewhere safe.</string>
+    <string name="enable_vault_message">Abyste povolili trezor, je potřeba zadat přístupový kód.</string>
+    <string name="vault_passcode_message">Pokud zapomenete heslo, přístupový kód trezoru není možné změnit.</string>
     <string name="use_bio">Použít biometriku</string>
     <string name="validate">Ověřit</string>
     <string name="vault">Trezor</string>
@@ -227,7 +227,7 @@
     <string name="disable_vault">Zakázat trezor</string>
     <!-- A message shown when "Disable vault" is being clicked. -->
     <string name="vault_is_disabled">Trezor byl zakázán.</string>
-    <string name="vault_is_enabled">Vault has been enabled.</string>
+    <string name="vault_is_enabled">Trezor byl povolen.</string>
     <!-- An option to disable the vault in vault settings. -->
     <string name="disable">Zakázat</string>
     <!-- A confirmation message shown when disabling the vault in vault settings. -->
@@ -248,17 +248,17 @@
     <string name="use_passcode">Použít přístupový kód</string>
     <!-- Note -->
     <string name="all">Vše</string>
-    <string name="set_reminder">Set reminder</string>
+    <string name="set_reminder">Nastavit připomínku</string>
     <string name="update_reminder">Změnit upozornění</string>
     <string name="archive_is_empty">Archiv je prázdný.</string>
     <!-- Notes count in Reading Mode with indicator of the current selected displayed note.
      Such as "2/11 Notes".
     -->
     <plurals name="reading_mode_notes_count">
-        <item quantity="one">%1$d / %2$d Note</item>
-        <item quantity="few">%1$d / %2$d Notes</item>
-        <item quantity="many">%1$d / %2$d Notes</item>
-        <item quantity="other">%1$d / %2$d Notes</item>
+        <item quantity="one">%1$d/%2$d poznámky</item>
+        <item quantity="few">%1$d/%2$d poznámek</item>
+        <item quantity="many">%1$d/%2$d poznámek</item>
+        <item quantity="other">%1$d/%2$d poznámek</item>
     </plurals>
     <plurals name="notes_count">
         <item quantity="one">%d poznámka</item>
@@ -309,10 +309,10 @@
     <!-- Text displaying how many occurrences of a word has been found using "Find in note" feature. Such as "2/11 Found".
         The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
     <plurals name="words_found_count">
-        <item quantity="one">%1$d Word • %2$d / %3$d Found</item>
-        <item quantity="few">%1$d Words • %2$d / %3$d Found</item>
-        <item quantity="many">%1$d Words • %2$d / %3$d Found</item>
-        <item quantity="other">%1$d Words • %2$d / %3$d Found</item>
+        <item quantity="one">%1$d slovo • %2$d / %3$d nalezeno</item>
+        <item quantity="few">%1$d slov • %2$d / %3$d nalezeno</item>
+        <item quantity="many">%1$d slov • %2$d / %3$d nalezeno</item>
+        <item quantity="other">%1$d slov • %2$d / %3$d nalezeno</item>
     </plurals>
     <string name="body">Text</string>
     <string name="title">Titulek</string>
@@ -350,19 +350,19 @@
     <string name="note_is_saved">Poznámka byla uložena do %s.</string>
     <string name="no_notes_found">Žádné poznámky k nalezení.</string>
     <!-- Text displayed when there are no notes found when search is applied, and labels are selected. -->
-    <string name="no_relevant_notes_found">No relevant notes found.</string>
+    <string name="no_relevant_notes_found">Nebyly nalezeny žádné odpovídající poznámky.</string>
     <!-- Text displayed when there are no notes found in the Recent view. -->
-    <string name="no_recent_notes_found">No recent notes found.</string>
+    <string name="no_recent_notes_found">Nebyly nalezeny žádné nedávné poznámky.</string>
     <!-- Text displayed when there are no notes found in the Archived view. -->
-    <string name="no_archived_notes_found">No archived notes found.</string>
+    <string name="no_archived_notes_found">Nebyly nalezeny žádné archivované poznámky.</string>
     <!-- Text displayed when there are no notes found in the Scheduled view. -->
-    <string name="no_scheduled_notes_found">No scheduled notes found.</string>
+    <string name="no_scheduled_notes_found">Nebyly nalezeny žádné poznámky s naplánováným připomenutím.</string>
     <!-- Text displayed when there are no notes found when search is applied. -->
-    <string name="no_notes_found_search">No notes found containing the search term.</string>
+    <string name="no_notes_found_search">Nebyly nalezeny žádné poznámky obsahující hledaný výraz.</string>
     <!-- Text displayed when there are no notes found when labels are selected. -->
-    <string name="no_notes_found_labels">No notes found containing the selected labels.</string>
+    <string name="no_notes_found_labels">Nebyly nalezeny žádné poznámky obsahující vybrané popisky.</string>
     <!-- Text displayed when folder is empty, and containing 0 notes. Replacement for "No notes found". -->
-    <string name="folder_is_empty">Folder is empty.</string>
+    <string name="folder_is_empty">Složka je prázdná.</string>
     <string name="notes">Poznámky</string>
     <!-- The count of the selected notes that have been merged. -->
     <string name="notes_are_merged">%d Poznámky byly sloučeny do nové poznámky.</string>
@@ -373,10 +373,10 @@
         <item quantity="other">%d poznámek bylo archivováno.</item>
     </plurals>
     <plurals name="note_is_unarchived">
-        <item quantity="one">Note has been unarchived.</item>
-        <item quantity="few">%d Notes have been unarchived.</item>
-        <item quantity="many">%d Notes have been unarchived.</item>
-        <item quantity="other">%d Notes have been unarchived.</item>
+        <item quantity="one">Poznámka byla rozbalena.</item>
+        <item quantity="few">Několik poznámek bylo rozbaleno.</item>
+        <item quantity="many">Hodně poznámek bylo rozbaleno.</item>
+        <item quantity="other">%d poznámek bylo rozbaleno.</item>
     </plurals>
     <!-- The count of the selected notes that have been pinned. -->
     <plurals name="note_is_pinned">
@@ -392,13 +392,13 @@
         <item quantity="many">%d poznámek bylo odepnuto.</item>
         <item quantity="other">%d poznámek bylo odepnuto.</item>
     </plurals>
-    <string name="cancel_reminder">Cancel reminder</string>
+    <string name="cancel_reminder">Zrušit připomenutí</string>
     <string name="note_is_unarchived">Složka byla dearchivována.</string>
     <string name="reminder">Upomínka</string>
-    <string name="reminder_date">Reminder date</string>
-    <string name="reminder_time">Reminder time</string>
-    <string name="reminder_is_set">Reminder has been set to run on %1$s at %2$s.</string>
-    <string name="reminder_is_cancelled">Reminder has been cancelled.</string>
+    <string name="reminder_date">Datum připomenut</string>
+    <string name="reminder_time">Čas připomenutí</string>
+    <string name="reminder_is_set">Připomenutí bylo nastaveno na %1$s v %2$s.</string>
+    <string name="reminder_is_cancelled">Připomenutí bylo zrušeno.</string>
     <string name="reminders">Upomínky</string>
     <string name="new_note_reminder">Nová upomínka</string>
     <string name="copy">Kopírovat</string>
@@ -477,7 +477,7 @@
     <string name="keep_screen_on">Nevypínat obrazovku</string>
     <!-- Description of the "Keep screen on" settings option. -->
     <string name="keep_screen_on_description">Určuje, zda zabránit vypnutí obrazovky během režimu čtení.</string>
-    <string name="full_screen_mode">Full screen mode</string>
+    <string name="full_screen_mode">Režim celé obrazovky</string>
     <!-- Description of the "Go full screen" settings option. -->
     <string name="full_screen_description">Zda skrýt stavové a navigační lišty během režimu čtení.</string>
     <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
@@ -499,11 +499,11 @@
     <!-- "Screen brightness level" option. -->
     <string name="max">Maximum</string>
     <!--  Reading Mode progress  -->
-    <string name="progress">Progress</string>
+    <string name="progress">Průběh</string>
     <string name="show">Zobrazit</string>
     <string name="hide">Skrýt</string>
     <string name="permission_not_granted">Oprávnění nebylo uděleno</string>
-    <string name="current">Current</string>
+    <string name="current">Současný</string>
     <!-- Label -->
     <string name="reorder_label">Změna pořadí</string>
     <string name="update_label">Aktualizovat popisek</string>
@@ -548,6 +548,7 @@
     <string name="czech">Čeština</string>
     <string name="lithuanian">Litevština</string>
     <string name="simplified_chinese">Zjednodušená Čínština</string>
+    <string name="portuguese">Portugalština</string>
     <!-- Icon -->
     <string name="icon">Ikona</string>
     <!-- Widget -->
@@ -567,8 +568,8 @@
     <string name="folders_notes_count">Počet položek</string>
     <string name="loading_content">Načítání obsahu</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">Bug fixes and design improvements.</string>
-    <string name="release_bug_fixes">Bug fixes.</string>
+    <string name="release_bug_fixes_and_design_improvements">Opravy chyb a vylepšení designu.</string>
+    <string name="release_bug_fixes">Opravy chyb.</string>
     <string name="release_1_8_0_vault">Podpora pro knihovny chráněné přístupovým kódem.</string>
     <string name="release_1_8_0_vault_timeout">Podpora pro možnosti časového limitu trezoru.</string>
     <string name="release_1_8_0_vault_bio">Podpora biometrického ověření trezoru na podporovaných zařízeních.</string>
@@ -629,4 +630,14 @@
     <string name="release_2_2_1_quick_exit">Podporováno přepínání nastavení rychlého ukončení (ukončení aplikace bez přechodu do hlavní nabídky).</string>
     <string name="release_2_2_1_quick_note_tile">Implementován rychlejší způsob vytváření poznámek v jiných aplikacích pomocí dlaždice Rychlá poznámka v oznamovacím centru.</string>
     <string name="release_2_2_1_system_app_language">Integrována změna jazyka aplikace prostřednictvím systémového nastavení pro Android 13 a vyšší.</string>
+    <string name="release_2_3_0_new_languages">Podporována ruština &amp; portugalština.</string>
+    <string name="release_2_3_0_reminder">Přepracovaná stránka připomenutí, datum &amp; posuvník času je nyní shodný s motivem Noto.</string>
+    <string name="release_2_3_0_selection">Přepracován způsob výběru poznámek &amp; přetahování je řešeno pouze dlouhými kliknutími.</string>
+    <string name="release_2_3_0_find_in_note">Podporována funkcionalita Najít v poznámce a automatické posouvání do vyhledáváného textu v poznámkách.</string>
+    <string name="release_2_3_0_archive">Podporován vyběr vícero poznámek &amp; rychlých akcí pro snímky archivů.</string>
+    <string name="release_2_3_0_sorting">Třídění entit s ohledem na diakritická písmena jazyků.</string>
+    <string name="release_2_3_0_reading_mode">Zobrazené počítadlo a ukazatel průběhu při otevření více poznámek v režimu čtení.</string>
+    <string name="release_2_3_0_whats_new">Předělán dialog &amp; obrazovka Co je nového.</string>
+    <string name="release_2_3_0_report_issues">Podporováno nahlašování problémů prostřednictvím emailu v nastavení.</string>
+    <string name="release_2_3_0_quick_note">Opraveno vícero dialogů zobrazujících se při vytváření rychlé poznámky.</string>
 </resources>

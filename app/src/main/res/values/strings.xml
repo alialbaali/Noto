@@ -519,6 +519,7 @@
     <string name="czech">Czech</string>
     <string name="lithuanian">Lithuanian</string>
     <string name="simplified_chinese">Simplified Chinese</string>
+    <string name="portuguese">Portuguese</string>
     <string name="turkish_translator" translatable="false">Nuray Sabri</string>
     <string name="turkish_translator_url" translatable="false">https://linkedin.com/in/nuraysabri</string>
     <string name="turkish_proofreader" translatable="false">Alparslan Şakçi</string>
@@ -542,6 +543,9 @@
     <string name="lithuanian_translator_url" translatable="false">http://github.com/ErnestasKaralius</string>
     <string name="simplified_chinese_translator" translatable="false">李華</string>
     <string name="simplified_chinese_translator_url" translatable="false">https://steamcommunity.com/id/oliverberry</string>
+    <string name="portuguese_translator" translatable="false">Alexthegib</string>
+    <string name="russian_translator" translatable="false">&lt;x0D&gt; Nikita Bragin</string>
+    <string name="russian_translator_url" translatable="false">https://github.com/x-0D</string>
 
     <!-- Icon -->
     <string name="icon">Icon</string>
@@ -663,4 +667,17 @@
     <string name="release_2_2_2" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
 
     <string name="release_2_2_3" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
+
+    <string name="release_2_3_0_new_languages">Supported Russian &amp; Portuguese.</string>
+    <string name="release_2_3_0_reminder">Redesigned Reminder, Date &amp; Time pickers to match with Noto theme.</string>
+    <string name="release_2_3_0_selection">Revised how notes selection &amp; dragging is handled by using only long clicks.</string>
+    <string name="release_2_3_0_find_in_note">Supported Find in Note functionality, and automatic scrolling to the searched text in notes.</string>
+    <string name="release_2_3_0_archive">Supported notes selection &amp; quick actions for Archive screens.</string>
+    <string name="release_2_3_0_sorting">Sorted entities with respect to languages’ diacritical letters.</string>
+    <string name="release_2_3_0_reading_mode">Displayed counter, and progress indicator when having multiple notes opened in Reading Mode.</string>
+    <string name="release_2_3_0_whats_new">Redesigned What’s New dialog &amp; screen.</string>
+    <string name="release_2_3_0_report_issues">Supported reporting issues through email in Settings.</string>
+    <string name="release_2_3_0_quick_note">Fixed multiple dialogs being opened when creating a Quick Note.</string>
+    <string name="release_2_3_0_bug_fixes" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
+
 </resources>

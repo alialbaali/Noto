@@ -482,6 +482,7 @@
     <string name="czech">Ceko</string>
     <string name="lithuanian">Lituania</string>
     <string name="simplified_chinese">Cina (sederhana)</string>
+    <string name="portuguese">Portugis</string>
     <!-- Icon -->
     <string name="icon">Ikon</string>
     <!-- Widget -->
@@ -563,4 +564,14 @@
     <string name="release_2_2_1_quick_exit">Mendukung setelan untuk Keluar Cepat (keluar dari aplikasi tanpa membuka menu utama).</string>
     <string name="release_2_2_1_quick_note_tile">Mengimplementasikan cara yang lebih cepat untuk membuat catatan saat berada di aplikasi lain menggunakan petak Catatan Cepat di pusat notifikasi.</string>
     <string name="release_2_2_1_system_app_language">Perubahan bahasa aplikasi terintegrasi melalui Setelan Sistem untuk Android 13 dan yang lebih baru.</string>
+    <string name="release_2_3_0_new_languages">Mendukung Rusia &amp; Portugis.</string>
+    <string name="release_2_3_0_reminder">Mendesign ulang Pengingat, Tanggal &amp; Pemilih waktu agar cocok dengan tema Noto.</string>
+    <string name="release_2_3_0_selection">Merevisi cara pemilihan catatan &amp; menyeret dapat dilakukan dengan hanya menggunakan klik panjang.</string>
+    <string name="release_2_3_0_find_in_note">Mendukung fungsi Temukan di Catatan, dan pengguliran otomatis ke teks yang dicari di catatan.</string>
+    <string name="release_2_3_0_archive">Mendukung pemilihan beberapa catatan &amp; tindakan cepat untuk layar Arsip.</string>
+    <string name="release_2_3_0_sorting">Entitas yang disortir sehubungan dengan huruf diakritik \"tanda tambahan\" bahasa.</string>
+    <string name="release_2_3_0_reading_mode">Menampilkan penghitung, dan indikator kemajuan saat beberapa catatan dibuka dalam Mode Membaca.</string>
+    <string name="release_2_3_0_whats_new">Mendesain ulang layar &amp; Dialog Apa yang Baru.</string>
+    <string name="release_2_3_0_report_issues">Mendukung pelaporan masalah melalui email di Pengaturan.</string>
+    <string name="release_2_3_0_quick_note">Memperbaiki beberapa dialog yang dibuka saat membuat Catatan Cepat.</string>
 </resources>

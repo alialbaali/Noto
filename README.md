@@ -88,7 +88,8 @@ Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcas
 * Light/Dark/Black/System themes.
 * Support for devices with API 21 (Lollipop) and up.
 * All data is stored locally on the device.
-* Language support for English, Turkish, Arabic, Indonesian, Czech, German, Italian, Spanish, and French.
+* Language support for English, Turkish, Arabic, Indonesian, Russian, Czech, German, Italian, Spanish, and French, Lithuanian, SimplifiedChinese, and
+  Portuguese.
 * Material You (Material 3) support.
 * Navigating to the top when clicking on the top app bar.
 
@@ -120,6 +121,7 @@ Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcas
 * All notes view with search functionality.
 * Recently accessed notes view with search functionality.
 * Saving selected text by using Quick note option. Default folder is General, can be overridden in Settings.
+* Find in Note, and automatic scrolling to the searched text in notes.
 
 ### Labels
 
@@ -187,6 +189,8 @@ Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcas
 - <a href="https://steamcommunity.com/id/oliverberry">李華</a> for the Simplified Chinese localization.
 - Uli N for the German localization.
 - <a href="https://angellabs.xyz">Angel C</a>.
+- Alexthegib for the Portuguese localization.
+- <a href="https://github.com/x-0D">&lt;x0D&gt; Nikita Bragin</a> for the Russian localization.
 
 ## Contributions
 

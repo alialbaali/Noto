@@ -505,6 +505,7 @@
     <string name="czech">Checo</string>
     <string name="lithuanian">Lituano</string>
     <string name="simplified_chinese">Chino simplificado</string>
+    <string name="portuguese">Portugués</string>
     <!-- Icon -->
     <string name="icon">Icono</string>
     <!-- Widget -->
@@ -586,4 +587,14 @@
     <string name="release_2_2_1_quick_exit">Soportado para cambiar la configuración de Salida Rápida (salir de la aplicación sin navegar al menú principal).</string>
     <string name="release_2_2_1_quick_note_tile">Se implementó una forma más rápida de crear notas mientras se encuentra en otras aplicaciones usando la opción Nota Rápida en el centro de notificaciones.</string>
     <string name="release_2_2_1_system_app_language">Cambio integrado de idioma de la aplicación a través de la configuración del sistema para Android 13 o superior.</string>
+    <string name="release_2_3_0_new_languages">Soportados Ruso y portugués.</string>
+    <string name="release_2_3_0_reminder">Recordatorios rediseñados, fecha &amp; selectores de hora para coincidir con el tema Noto.</string>
+    <string name="release_2_3_0_selection">Revisada la forma en que la selección de notas &amp; arrastrar es manejada usando solo clics largos.</string>
+    <string name="release_2_3_0_find_in_note">Función de búsqueda en Notas soportada, y desplazamiento automático al texto buscado en notas.</string>
+    <string name="release_2_3_0_archive">Selección de notas múltiples &amp; acciones rápidas para pantallas de Archivo.</string>
+    <string name="release_2_3_0_sorting">Entidades ordenadas con respecto a las letras diacríticas de los idiomas.</string>
+    <string name="release_2_3_0_reading_mode">Se muestra el contador, y el indicador de progreso cuando se abren varias notas en modo lectura.</string>
+    <string name="release_2_3_0_whats_new">Se ha reiniciado el nuevo cuadro de diálogo &amp; pantalla.</string>
+    <string name="release_2_3_0_report_issues">Problemas de reporte soportados a través del correo electrónico en Configuración.</string>
+    <string name="release_2_3_0_quick_note">Se han corregido múltiples diálogos abiertos al crear una Nota Rápida.</string>
 </resources>

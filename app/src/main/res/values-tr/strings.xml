@@ -7,7 +7,7 @@
     <string name="okay">Tamam</string>
     <string name="search">Ara</string>
     <!-- An option in the note layout for searching for text inside a note. -->
-    <string name="find_in_note">Find in note</string>
+    <string name="find_in_note">Notun içinde bul</string>
     <!-- A settings option to support the project. -->
     <string name="support_noto">Noto\'ya destek olun</string>
     <!-- Description of the Support Noto settings options. -->
@@ -22,17 +22,17 @@
     <string name="layout">Düzen</string>
     <string name="list">Tek sütun</string>
     <!-- Label filtering mode -->
-    <string name="inclusive">Dahil</string>
+    <string name="inclusive">Dâhil</string>
     <!-- Inclusive filtering mode description -->
-    <string name="inclusive_description">Filter notes that have <b>any</b> of the selected labels.</string>
+    <string name="inclusive_description">Seçilen etiketlerin <b>en az birine</b> sahip olan notları filtreleyin.</string>
     <!-- Label filtering mode -->
     <string name="exclusive">Hariç</string>
     <!-- Exclusive filtering mode description -->
-    <string name="exclusive_description">Filter notes that have <b>all</b> the selected labels, nothing less.</string>
+    <string name="exclusive_description">Seçilen etiketlerin <b>tümüne</b> sahip olan notları filtreleyin.</string>
     <!-- Label filtering mode -->
     <string name="strict">Tam</string>
     <!-- Strict filtering mode description -->
-    <string name="strict_description">Filter notes that have <b>only</b> the selected labels, nothing less, nothing more.</string>
+    <string name="strict_description"><b>Sadece</b> seçilen etiketlere sahip olan notları filtreleyin.</string>
     <string name="grid">Çift sütun</string>
     <string name="created">Oluşturma tarihi: %s</string>
     <string name="accessed">%s tarihinde erişildi</string>
@@ -58,11 +58,11 @@
     <string name="share_app_with_others">Noto\'yu başkalarıyla paylaşın</string>
     <string name="rate_app_on_play_store">Uygulamayı Play Store\'da değerlendirin</string>
     <string name="report_issue">Sorun bildir</string>
-    <string name="email">Email</string>
+    <string name="email">E-posta</string>
     <string name="about">Hakkında</string>
     <string name="whats_new">Yenilikler</string>
-    <string name="whats_new_in">What\'s new in %s</string>
-    <string name="learn_more">Learn more…</string>
+    <string name="whats_new_in">%s ile gelen yenilikler</string>
+    <string name="learn_more">Daha fazla bilgi</string>
     <!--    <string name="share_with">Share with</string>-->
     <string name="export_import_data">Verileri içe/dışa aktar</string>
     <string name="exporting_failed">Dışa aktarma başarısız.</string>
@@ -96,7 +96,7 @@
     <string name="license">Lisans</string>
     <string name="empty_version">Sürüm</string>
     <string name="date">Tarih</string>
-    <string name="time">Time</string>
+    <string name="time">Saat</string>
     <string name="drag">Sürükle</string>
     <string name="nunito">Nunito (varsayılan)</string>
     <string name="monospace">Monospace</string>
@@ -106,7 +106,7 @@
     <!-- Description of the "Main interface" settings option. -->
     <string name="main_interface_description">Uygulama açılınca gösterilecek ilk sayfayı belirleyin.</string>
     <!-- The default folder of "Save to Noto" text selection option. -->
-    <string name="quick_note_folder">Quick Note folder</string>
+    <string name="quick_note_folder">Hızlı Not klasörü</string>
     <!-- AKA "Save to Noto". -->
     <string name="quick_note">Hızlı not</string>
     <!-- Description of the "Quick note folder" settings option. -->
@@ -181,7 +181,7 @@
     <string name="folder_is_unpinned">Sabitleme kaldırıldı.</string>
     <string name="no_folders_found">Klasör bulunamadı.</string>
     <!-- Text displayed when there are no folders suitable for a given action like moving/copying/etc... -->
-    <string name="no_relevant_folders_found">No relevant folders found.</string>
+    <string name="no_relevant_folders_found">İlgili klasör bulunamadı.</string>
     <string name="select_folder">Klasör seç</string>
     <string name="folder">Klasör</string>
     <string name="select_folder_archive">Klasör arşivini seç</string>
@@ -189,7 +189,7 @@
     <!-- Vault -->
     <string name="folders_vault">Klasör kasası</string>
     <string name="update_passcode">Şifreyi güncelle</string>
-    <string name="enable_vault">Enable vault</string>
+    <string name="enable_vault">Kasa özelliğini etkinleştir</string>
     <string name="enter_vault_passcode">Kasa şifresini gir</string>
     <string name="add_to_vault">Kasaya ekle</string>
     <string name="remove_from_vault">Kasadan çıkar</string>
@@ -198,11 +198,11 @@
     <string name="vault_is_empty">Kasa boş.</string>
     <string name="archive_vaulted_folder_confirmation">Bu klasörü arşivlemek istediğinizden emin misiniz?</string>
     <string name="archive_vaulted_folder_description">Arşivlenen klasörler kasadan çıkartılır.</string>
-    <string name="passcode">Passcode</string>
+    <string name="passcode">Şifre</string>
     <string name="new_vault_passcode">Yeni kasa şifresi</string>
-    <string name="new_passcode">New passcode</string>
-    <string name="current_passcode">Current passcode</string>
-    <string name="vault_setup">Vault setup</string>
+    <string name="new_passcode">Yeni şifre</string>
+    <string name="current_passcode">Mevcut şifre</string>
+    <string name="vault_setup">Kasa kurulumu</string>
     <string name="current_vault_passcode">Mevcut kasa şifresi</string>
     <!-- Change vault passcode option. -->
     <string name="change_passcode">Şifreyi değiştir</string>
@@ -210,14 +210,14 @@
     <string name="timeout">Zaman aşımı</string>
     <!-- Description of the "Timeout" settings option. -->
     <string name="timeout_description">Kasanın otomatik olarak tekrar kilitlenmesi için geçmesi gereken süreyi belirleyin.</string>
-    <string name="vault_timeout">Vault timeout</string>
+    <string name="vault_timeout">Kasa zaman aşımı</string>
     <string name="invalid_passcode">Geçersiz şifre</string>
     <string name="passcode_length_message">Şifre en az 6 rakamdan oluşmalıdır</string>
     <string name="passcode_empty_message">Şifre boş bırakılamaz</string>
     <string name="passcode_doesnt_match">Girdiğiniz şifre mevcut şifreyle uyuşmuyor</string>
     <string name="vault_passcode_has_changed">Kasa şifresi güncellendi.</string>
-    <string name="enable_vault_message">To enable the vault, please provide a passcode.</string>
-    <string name="vault_passcode_message">Vault passcode can\'t be changed if you lose it, make sure to store it somewhere safe.</string>
+    <string name="enable_vault_message">Kasa özelliğini etkinkeştirmek için lütfen bir şifre girin.</string>
+    <string name="vault_passcode_message">Mevcut şifreyi unutursanız kasa şifresini tekrar değiştiremezsiniz, bu yüzden şifrenizi lütfen güvenli bir yere kaydedin.</string>
     <string name="use_bio">Biyometri kullan</string>
     <string name="validate">Doğrula</string>
     <string name="vault">Kasa</string>
@@ -225,7 +225,7 @@
     <string name="disable_vault">Kasa özelliğini kapat</string>
     <!-- A message shown when "Disable vault" is being clicked. -->
     <string name="vault_is_disabled">Kasa özelliği devre dışı bırakıldı.</string>
-    <string name="vault_is_enabled">Vault has been enabled.</string>
+    <string name="vault_is_enabled">Kasa özelliği etkinleştirildi.</string>
     <!-- An option to disable the vault in vault settings. -->
     <string name="disable">Devre dışı bırak</string>
     <!-- A confirmation message shown when disabling the vault in vault settings. -->
@@ -246,15 +246,15 @@
     <string name="use_passcode">Şifre kullan</string>
     <!-- Note -->
     <string name="all">Tümü</string>
-    <string name="set_reminder">Set reminder</string>
+    <string name="set_reminder">Hatırlatıcı ayarla</string>
     <string name="update_reminder">Hatırlatıcıyı güncelle</string>
     <string name="archive_is_empty">Arşiv boş.</string>
     <!-- Notes count in Reading Mode with indicator of the current selected displayed note.
      Such as "2/11 Notes".
     -->
     <plurals name="reading_mode_notes_count">
-        <item quantity="one">%1$d / %2$d Note</item>
-        <item quantity="other">%1$d / %2$d Notes</item>
+        <item quantity="one">Not: %1$d / %2$d</item>
+        <item quantity="other">Not: %1$d / %2$d</item>
     </plurals>
     <plurals name="notes_count">
         <item quantity="one">%d Not</item>
@@ -293,8 +293,8 @@
     <!-- Text displaying how many occurrences of a word has been found using "Find in note" feature. Such as "2/11 Found".
         The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
     <plurals name="words_found_count">
-        <item quantity="one">%1$d Word • %2$d / %3$d Found</item>
-        <item quantity="other">%1$d Words • %2$d / %3$d Found</item>
+        <item quantity="one">Kelime: %1$d • Bulunan: %2$d / %3$d</item>
+        <item quantity="other">Kelime: %1$d • Bulunan: %2$d / %3$d</item>
     </plurals>
     <string name="body">Metin</string>
     <string name="title">Başlık</string>
@@ -326,21 +326,21 @@
     <string name="save_to_noto">Noto\'ya kaydet</string>
     <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
     <string name="note_is_saved">Not başarıyla %s klasörüne kaydedildi.</string>
-    <string name="no_notes_found">Not bulunamadı.</string>
+    <string name="no_notes_found">Herhangi bir not bulunamadı.</string>
     <!-- Text displayed when there are no notes found when search is applied, and labels are selected. -->
-    <string name="no_relevant_notes_found">No relevant notes found.</string>
+    <string name="no_relevant_notes_found">İlgili not bulunamadı.</string>
     <!-- Text displayed when there are no notes found in the Recent view. -->
-    <string name="no_recent_notes_found">No recent notes found.</string>
+    <string name="no_recent_notes_found">Not geçmişinide herhangi bir not bulunamadı.</string>
     <!-- Text displayed when there are no notes found in the Archived view. -->
-    <string name="no_archived_notes_found">No archived notes found.</string>
+    <string name="no_archived_notes_found">Arşivlenmiş bir not bulunamadı.</string>
     <!-- Text displayed when there are no notes found in the Scheduled view. -->
-    <string name="no_scheduled_notes_found">No scheduled notes found.</string>
+    <string name="no_scheduled_notes_found">Hatırlatıcılı bir not bulunamadı.</string>
     <!-- Text displayed when there are no notes found when search is applied. -->
-    <string name="no_notes_found_search">No notes found containing the search term.</string>
+    <string name="no_notes_found_search">Arama terimini içeren herhangi bir not bulunamadı.</string>
     <!-- Text displayed when there are no notes found when labels are selected. -->
-    <string name="no_notes_found_labels">No notes found containing the selected labels.</string>
+    <string name="no_notes_found_labels">Seçilen etiketleri içeren herhangi bir not bulunamadı.</string>
     <!-- Text displayed when folder is empty, and containing 0 notes. Replacement for "No notes found". -->
-    <string name="folder_is_empty">Folder is empty.</string>
+    <string name="folder_is_empty">Klasör boş.</string>
     <string name="notes">Notlar</string>
     <!-- The count of the selected notes that have been merged. -->
     <string name="notes_are_merged">%d not başarıyla birleştirildi.</string>
@@ -349,8 +349,8 @@
         <item quantity="other">%d not arşivlendi.</item>
     </plurals>
     <plurals name="note_is_unarchived">
-        <item quantity="one">Note has been unarchived.</item>
-        <item quantity="other">%d Notes have been unarchived.</item>
+        <item quantity="one">Not arşivden çıkarıldı.</item>
+        <item quantity="other">%d Not arşivden çıkarıldı.</item>
     </plurals>
     <!-- The count of the selected notes that have been pinned. -->
     <plurals name="note_is_pinned">
@@ -362,13 +362,13 @@
         <item quantity="one">Sabitleme kaldırıldı.</item>
         <item quantity="other">%d notun sabitlemesi kaldırıldı.</item>
     </plurals>
-    <string name="cancel_reminder">Cancel reminder</string>
+    <string name="cancel_reminder">Hatırlatıcıyı iptal et</string>
     <string name="note_is_unarchived">Not arşivden çıkarıldı.</string>
     <string name="reminder">Hatırlatıcı</string>
-    <string name="reminder_date">Reminder date</string>
-    <string name="reminder_time">Reminder time</string>
-    <string name="reminder_is_set">Reminder has been set to run on %1$s at %2$s.</string>
-    <string name="reminder_is_cancelled">Reminder has been cancelled.</string>
+    <string name="reminder_date">Hatırlatıcı tarihi</string>
+    <string name="reminder_time">Hatırlatıcı saati</string>
+    <string name="reminder_is_set">Hatırlatıcı, %1$s saat %2$s için ayarlandı.</string>
+    <string name="reminder_is_cancelled">Hatırlatıcı iptal edildi.</string>
     <string name="reminders">Hatırlatıcılar</string>
     <string name="new_note_reminder">Yeni hatırlatıcı</string>
     <string name="copy">Panoya kopyala</string>
@@ -394,7 +394,7 @@
         <item quantity="one">Bu işlem geri alınamaz. Not ve hatırlatıcı kalıcı olarak silinecektir.</item>
         <item quantity="other">Bu işlem geri alınamaz. Notlar ve hatırlatıcıları kalıcı olarak silinecektir.</item>
     </plurals>
-    <string name="reading_mode">Okuma modu</string>
+    <string name="reading_mode">Okuma Modu</string>
     <string name="edit_note_reminder">Hatırlatıcıyı düzenle</string>
     <string name="note_options">Not seçenekleri</string>
     <!-- The count of the selected notes that have been deleted. -->
@@ -433,7 +433,7 @@
     <string name="keep_screen_on">Ekranı açık tut</string>
     <!-- Description of the "Keep screen on" settings option. -->
     <string name="keep_screen_on_description">Okuma Modu sırasında ekranın kapanmasının engellenip engellenmeyeceğini belirleyin.</string>
-    <string name="full_screen_mode">Full screen mode</string>
+    <string name="full_screen_mode">Tam ekran modu</string>
     <!-- Description of the "Go full screen" settings option. -->
     <string name="full_screen_description">Okuma Modu sırasında durum ve gezinme çubuklarının gizlenip gizlenmeyeceğini belirleyin.</string>
     <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
@@ -455,11 +455,11 @@
     <!-- "Screen brightness level" option. -->
     <string name="max">Maksimum</string>
     <!--  Reading Mode progress  -->
-    <string name="progress">Progress</string>
+    <string name="progress">İlerleme</string>
     <string name="show">Göster</string>
     <string name="hide">Gizle</string>
     <string name="permission_not_granted">İzin alma işlemi başarısız</string>
-    <string name="current">Current</string>
+    <string name="current">Mevcut</string>
     <!-- Label -->
     <string name="reorder_label">Yeniden sırala</string>
     <string name="update_label">Etiketi güncelle</string>
@@ -504,6 +504,7 @@
     <string name="czech">Çekçe</string>
     <string name="lithuanian">Litvanca</string>
     <string name="simplified_chinese">Basitleştirilmiş Çince</string>
+    <string name="portuguese">Portekizce</string>
     <!-- Icon -->
     <string name="icon">Simge</string>
     <!-- Widget -->
@@ -523,66 +524,76 @@
     <string name="folders_notes_count">Not sayısı</string>
     <string name="loading_content">İçerik yükleniyor</string>
     <!-- Releases -->
-    <string name="release_bug_fixes_and_design_improvements">Bug fixes and design improvements.</string>
-    <string name="release_bug_fixes">Bug fixes.</string>
-    <string name="release_1_8_0_vault">Şifre korumalı kitaplık kasası desteği.</string>
-    <string name="release_1_8_0_vault_timeout">Kasa zaman aşımı ayarları.</string>
-    <string name="release_1_8_0_vault_bio">Desteklenen cihazlar için biyometrik doğrulama özelliği.</string>
-    <string name="release_1_8_0_language">İspanyolca desteği.</string>
-    <string name="release_1_8_0_reddit">Yeni <a href="https://www.reddit.com/r/notoapp">Reddit</a> topluluğu linki.</string>
+    <string name="release_bug_fixes_and_design_improvements">Hatalar düzeltildi ve tasarımda iyileştirmeler yapıldı.</string>
+    <string name="release_bug_fixes">Hatalar düzeltildi.</string>
+    <string name="release_1_8_0_vault">Şifre korumalı kitaplık kasası özelliği eklendi.</string>
+    <string name="release_1_8_0_vault_timeout">Kasa zaman aşımı ayarları eklendi.</string>
+    <string name="release_1_8_0_vault_bio">Desteklenen cihazlar için biyometrik doğrulama özelliği eklendi.</string>
+    <string name="release_1_8_0_language">İspanyolca desteği getirildi.</string>
+    <string name="release_1_8_0_reddit">Yeni <a href="https://www.reddit.com/r/notoapp">Reddit</a> topluluğu linki eklendi.</string>
     <string name="release_2_0_0_new_look">Yeni yılda yepyeni bir Noto!</string>
     <string name="release_2_0_0_folders">Kitaplıklar yerini klasörlere bıraktı!</string>
     <string name="release_2_0_0_animations">Uygulama genelinde animasyonlar iyileştirildi.</string>
-    <string name="release_2_0_0_nested_folders">Yeni deneysel özellik: İç içe klasör desteği.</string>
-    <string name="release_2_0_0_swipe_folder">Yeni deneysel özellik: Özel sıralama etkinken bir klasörün dizindeki yerini değiştirmek için yatay olarak kaydır.</string>
+    <string name="release_2_0_0_nested_folders">İç içe klasör özelliği eklendi.</string>
+    <string name="release_2_0_0_swipe_folder">Özel sıralama etkinken bir klasörün dizindeki yerini artık yatay kaydırma yaparak değiştirebilirsiniz.</string>
     <string name="release_2_0_0_general">Herhangi bir üst klasörü olmayan notlar için \"Genel\" bir klasör eklendi.</string>
-    <string name="release_2_0_0_all_recent">Support viewing all notes and recent notes and the ability to search through them.</string>
-    <string name="release_2_0_0_highlight_search">Arama sırasında eşleşen not içeriği artık vurgulu olarak gösterilecek.</string>
-    <string name="release_2_0_0_collapsing_toolbar">Kullanıcını deneyimini iyileştirmek için daraltılabilir araç çubuğu eklendi.</string>
-    <string name="release_2_0_0_language">Fransızca desteği.</string>
+    <string name="release_2_0_0_all_recent">Tüm notlar ve not geçmişi içinde arama yapma özelliği eklendi.</string>
+    <string name="release_2_0_0_highlight_search">Arama sırasında eşleşen içerikler artık vurgulu olarak gösterilecek.</string>
+    <string name="release_2_0_0_collapsing_toolbar">Kullanıcı deneyimini iyileştirmek için daraltılabilir araç çubuğu eklendi.</string>
+    <string name="release_2_0_0_language">Fransızca desteği getirildi.</string>
     <string name="release_2_0_0_swipe_bottom_app_bar">Alt uygulama çubuğunu yukarı kaydırarak klasörleri görünteleyebilme özelliği eklendi.</string>
     <string name="release_2_0_0_navigation">\"Kasa açık\" bildirimine tıklandığında kasaya gitme özelliği eklendi.</string>
     <string name="release_2_0_0_settings_main_folder">Ana klasör dizini seçme ayarı eklendi.</string>
     <string name="release_2_0_0_settings_toolbar">Ayarlar ekranına varsayılan araç çubuğu görünümünü daraltılmış olarak ayarlama seçeneği eklendi.</string>
     <string name="release_2_0_0_shortcuts">Eski Android cihazlarda statik kısayol simgeleri düzeltildi.</string>
-    <string name="release_2_1_0_undo_redo">Geri alma/yeniden yazma özelliği ve geri al/yeniden yaz geçmişi eklendi.</string>
+    <string name="release_2_1_0_undo_redo">Geri alma / yeniden yazma özelliği ve geri al / yeniden yaz geçmişi eklendi.</string>
     <string name="release_2_1_0_labels">Etiketler yeniden tasarlandı.</string>
     <string name="release_2_1_0_app_bars">Tüm düzen türlerinde alt ve üst uygulama çubuğu yeniden tasarlandı.</string>
-    <string name="release_2_1_0_menu">Ana menü yeniden tasarlandı.</string>
+    <string name="release_2_1_0_menu">Birçok menü yeniden tasarlandı.</string>
     <string name="release_2_1_0_new_folder">Klasör oluşturma/düzenleme arayüzü yeniden tasarlandı.</string>
     <string name="release_2_1_0_grouping_order">Notlar için gruplandırma düzeni özelliği eklendi.</string>
-    <string name="release_2_1_0_drag_elevation">Etiketleri veya notları sürüklerken yükseklik eklendi.</string>
+    <string name="release_2_1_0_drag_elevation">Etiketleri veya notları sürüklerken taşınan öge artık daha yüksekte görünecek.</string>
     <string name="release_2_1_0_preview">Klasör, not ve etiket menülerinde önizleme desteği eklendi.</string>
     <string name="release_2_1_0_dates">Tarih formatı iyileştirildi.</string>
-    <string name="release_2_1_0_highlight">Notlarda vurgu rengi değiştirildi.</string>
-    <string name="release_2_1_0_navigation">Uygulamadan çıkmadan önce klasör ekranında gezinilecek.</string>
-    <string name="release_2_1_0_material_you">Material You desteği (Material 3).</string>
+    <string name="release_2_1_0_highlight">Notlardaki vurgu rengi değiştirildi.</string>
+    <string name="release_2_1_0_navigation">Uygulamadan çıkmadan önce artık klasör ekranına geçilecek.</string>
+    <string name="release_2_1_0_material_you">Material You (Material 3) desteği getirildi.</string>
     <string name="release_2_1_0_splash_screen">Başlangıç ekranı yeniden tasarlandı.</string>
-    <string name="release_2_1_0_reading_mode">Okuma modu iyileştirildi.</string>
-    <string name="release_2_1_0_scroll_position">Klasör ve notlarda kaydırma pozisyonunu hatırlama desteği eklendi.</string>
-    <string name="release_2_1_0_disable_animations">Etiket ve klasör renkleri için kullanılan animasyonları devre dışı bırakabilme desteği eklendi.</string>
-    <string name="release_2_1_0_import_data">Verileri içeri aktarmada yaşanan sorunlar giderildi.</string>
+    <string name="release_2_1_0_reading_mode">Okuma Modu iyileştirildi.</string>
+    <string name="release_2_1_0_scroll_position">Klasör ve notlarda kaydırma pozisyonunu hatırlama desteği getirildi.</string>
+    <string name="release_2_1_0_disable_animations">Etiket ve klasör renkleri için kullanılan animasyonları devre dışı bırakabilme özelliği eklendi.</string>
+    <string name="release_2_1_0_import_data">Verileri içeri aktarmada yaşanan hatalar düzeltildi.</string>
     <string name="release_2_1_0_vault_crash">Android 11 ve üzerinde kasayı açınca yaşanan çökme sorunu giderildi.</string>
-    <string name="release_2_1_0_undo_redo_swipe">Geri al/yeniden yaz özelliklerini kaydırma hareketleriyle kullanabilme desteği eklendi.</string>
-    <string name="release_2_1_0_label_filtering">Etiketleri dahil veya hariç olarak filtreleme desteği eklendi.\n• Uygulama simgesi yeniden tasarlandı.</string>
+    <string name="release_2_1_0_undo_redo_swipe">Geri al / yeniden yaz özelliklerini kaydırma hareketleriyle kullanabilme desteği eklendi.</string>
+    <string name="release_2_1_0_label_filtering">Etiketleri dâhil veya hariç olarak filtreleme desteği eklendi.</string>
     <string name="release_2_1_0_app_icon">Uygulama simgesi yeniden tasarlandı.</string>
     <string name="release_2_1_0_change_app_icon">Uygulama simgesi artık değiştirilebilir.</string>
-    <string name="release_2_1_0_language">Almanca yerelleştirme eklendi.</string>
+    <string name="release_2_1_0_language">Almanca desteği getirildi.</string>
     <string name="release_2_1_4_shortcuts">Farklı bir simge kullanıldığında kısayolların çalışmaması hatası giderildi.</string>
     <string name="release_2_1_4_labels">Seçilen etiketler artık not arayüzünün başında görünecek.</string>
     <string name="release_2_2_0_languages">Çekçe ve İtalyanca desteği getirildi.</string>
     <string name="release_2_2_0_multi_selection">Notlar için çoklu seçim desteği getirildi.</string>
-    <string name="release_2_2_0_reading_mode">Notları her zaman Okuma Modu\'nda açabilme seçeneği getirildi.</string>
+    <string name="release_2_2_0_reading_mode">Notları her zaman Okuma Modu\'nda açabilme seçeneği eklendi.</string>
     <string name="release_2_2_0_settings">Ayarlar ekranı baştan tasarlandı.</string>
     <string name="release_2_2_0_paging">Okuma Modu\'nda açılan notlar için sayfalandırma desteği getirildi.</string>
     <string name="release_2_2_0_app_speed">Uygulamanın ilk çalıştırma hızı iyileştirildi.</string>
     <string name="release_2_2_0_import_json">JSON dosyaları içeri aktarımında yaşanan sorunlar giderildi.</string>
     <string name="release_2_2_0_black_theme">Android 12 ve üstü cihazlar için siyah tema rengi düzeltildi.</string>
     <string name="release_2_2_1_languages">Litvanyaca ve Basitleştirilmiş Çince desteği getirildi.</string>
-    <string name="release_2_2_1_design">Tasarım iyileştirmeleri yapıldı.</string>
-    <string name="release_2_2_1_undo_redo">Geri al / yeniden yaz işlemleri daha etkili olacak şekilde yeniden düzenlendi.</string>
+    <string name="release_2_2_1_design">Tasarımda iyileştirmeler yapıldı.</string>
+    <string name="release_2_2_1_undo_redo">Geri al / yeniden yaz işlemleri daha etkili olacak şekilde revize edildi.</string>
     <string name="release_2_2_1_filtered_view">Arşivlenmiş ve Hatırlatıcılı notlar da artık filtrelenebilecek.</string>
-    <string name="release_2_2_1_quick_exit">Hızlı Çıkış özelliği eklendi (ana menüye gitmeden uygulamadan çıkma).</string>
-    <string name="release_2_2_1_quick_note_tile">Diğer uygulamalardayken bildirim çekmecesindeki Hızlı Not kutucuğunu kullanarak not oluşturmak için daha hızlı bir yol eklendi.</string>
+    <string name="release_2_2_1_quick_exit">Hızlı Çıkış (ana menüye gitmeden uygulamadan çıkma) özelliği eklendi.</string>
+    <string name="release_2_2_1_quick_note_tile">Daha hızlı bir şekilde not oluşturmak için diğer uygulamalardayken bildirim çekmecesindeki Hızlı Not kutucuğunu kullanarak not oluşturma özelliği eklendi.</string>
     <string name="release_2_2_1_system_app_language">Android 13 ve üzeri cihazlar için Sistem Ayarları aracılığıyla uygulama dilini değiştirme özelliği eklendi.</string>
+    <string name="release_2_3_0_new_languages">Rusça ve Portekizce desteği getirildi.</string>
+    <string name="release_2_3_0_reminder">Hatırlatıcı, Tarih ve Saat seçiciler Noto temasıyla uyum sağlayacak şekilde yeniden tasarlandı.</string>
+    <string name="release_2_3_0_selection">Not seçimi ve notların sürüklenmesinin uzun basma ile gerçekleştirilme prensibi revize edildi.</string>
+    <string name="release_2_3_0_find_in_note">\"Notun içinde bul\" işlevi ve arama eşleşmeleri arasında otomatik geçiş desteği getirildi.</string>
+    <string name="release_2_3_0_archive">Arşiv ekranları için çoklu not seçimi ve hızlı eylem desteği getirildi.</string>
+    <string name="release_2_3_0_sorting">Alfabetik sırlamada artık dile özel harfler de dikkate alınıyor.</string>
+    <string name="release_2_3_0_reading_mode">Artık Okuma Modu\'nda birden fazla not açıldığında bir sayaç ve ilerleme göstergesi gösterilecektir.</string>
+    <string name="release_2_3_0_whats_new">Yenilikler sayfası yeniden tasarlandı.</string>
+    <string name="release_2_3_0_report_issues">Ayarlar menüsünde e-posta yoluyla sorun bildirme desteği getirildi.</string>
+    <string name="release_2_3_0_quick_note">Hızlı Not oluştururken birden fazla diyalog penceresinin açılması hatası düzeltildi.</string>
 </resources>

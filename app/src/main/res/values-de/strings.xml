@@ -368,7 +368,7 @@
     <string name="reminder_date">Benachrichtigungsdatum</string>
     <string name="reminder_time">Benachrichtigungszeit</string>
     <string name="reminder_is_set">Benachrichtigung erfolgt am %1$s um %2$s.</string>
-    <string name="reminder_is_cancelled">Reminder has been cancelled.</string>
+    <string name="reminder_is_cancelled">Die Benachrichtigung wurde gelöscht.</string>
     <string name="reminders">Erinnerungen</string>
     <string name="new_note_reminder">Neue Notiz-Erinnerung</string>
     <string name="copy">Kopieren</string>
@@ -504,6 +504,7 @@
     <string name="czech">Tschechisch</string>
     <string name="lithuanian">Litauisch</string>
     <string name="simplified_chinese">Chinesisch (vereinfacht)</string>
+    <string name="portuguese">Portugiesisch</string>
     <!-- Icon -->
     <string name="icon">Icon</string>
     <!-- Widget -->
@@ -585,4 +586,14 @@
     <string name="release_2_2_1_quick_exit">Option für schnelles Beenden (beendet die App, ohne das Hauptmenü zu öffnen).</string>
     <string name="release_2_2_1_quick_note_tile">Schnelles Erstellen von Notizen aus anderen Apps heraus mit Hilfe der Schnell-Notiz-Kachel im Benachrichtigungszentrum.</string>
     <string name="release_2_2_1_system_app_language">Änderung der App-Sprache durch die Systemeinstellungen für Android 13 und höher.</string>
+    <string name="release_2_3_0_new_languages">Russische &amp; portugiesische Übersetzung.</string>
+    <string name="release_2_3_0_reminder">Neu-designte, zum Noto-Theme passende Dialoge für Benachrichtigungen, Datum sowie Uhrzeit.</string>
+    <string name="release_2_3_0_selection">Überarbeitung von Notizauswahl und Verschieben durch ausschließlich langes Halten.</string>
+    <string name="release_2_3_0_find_in_note">Suchen in Notizen einschl. Scrollen zur Fundstelle innerhalb der Notiz wird nun unterstützt.</string>
+    <string name="release_2_3_0_archive">Auswahl mehrerer Notizen sowie Schnellaktionen sind jetzt auch in Archiven möglich.</string>
+    <string name="release_2_3_0_sorting">Alphabetische Sortierung berücksichtigt nun Umlaute und Akzente je nach Sprache.</string>
+    <string name="release_2_3_0_reading_mode">Darstellung von Zählwerk und Lesefortschrittsanzeige, wenn mehrere Notizen im Lesemodus geöffnet sind.</string>
+    <string name="release_2_3_0_whats_new">Fenster &amp; Dialog für die Neuerungen neu gestaltet.</string>
+    <string name="release_2_3_0_report_issues">Das Melden von Problemen per E-Mail ist nun zusätzlich möglich.</string>
+    <string name="release_2_3_0_quick_note">Behoben, dass sich mehrere Dialoge beim Erstellen einer Kurznotiz öffneten.</string>
 </resources>

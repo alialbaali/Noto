@@ -10,10 +10,20 @@ fun Release.toJson(): String = NotoDefaultJson.encodeToString(this)
 fun String.toRelease(): Release = NotoDefaultJson.decodeFromString(this)
 
 fun Release.Companion.Current(context: Context): Release {
-    return Release_2_2_3(
+    return Release_2_3_0(
         Release.Changelog(
             listOf(
-                context.stringResource(R.string.release_2_2_3),
+                context.stringResource(R.string.release_2_3_0_new_languages),
+                context.stringResource(R.string.release_2_3_0_reminder),
+                context.stringResource(R.string.release_2_3_0_selection),
+                context.stringResource(R.string.release_2_3_0_find_in_note),
+                context.stringResource(R.string.release_2_3_0_archive),
+                context.stringResource(R.string.release_2_3_0_sorting),
+                context.stringResource(R.string.release_2_3_0_reading_mode),
+                context.stringResource(R.string.release_2_3_0_whats_new),
+                context.stringResource(R.string.release_2_3_0_report_issues),
+                context.stringResource(R.string.release_2_3_0_quick_note),
+                context.stringResource(R.string.release_2_3_0_bug_fixes),
             )
         )
     )
@@ -21,6 +31,13 @@ fun Release.Companion.Current(context: Context): Release {
 
 fun Release.Companion.Previous(context: Context): List<Release> {
     return listOf(
+        Release_2_2_3(
+            Release.Changelog(
+                listOf(
+                    context.stringResource(R.string.release_2_2_3),
+                )
+            )
+        ),
         Release_2_2_2(
             Release.Changelog(
                 listOf(

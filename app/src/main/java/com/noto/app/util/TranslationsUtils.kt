@@ -75,6 +75,20 @@ val Translation.Companion.Default
                 Translator(R.string.german_translator, null),
             ),
         ),
+        Translation(
+            language = Language.Portuguese,
+            iconId = R.drawable.ic_portugal,
+            translators = listOf(
+                Translator(R.string.portuguese_translator, null),
+            ),
+        ),
+        Translation(
+            language = Language.Russian,
+            iconId = R.drawable.ic_russia,
+            translators = listOf(
+                Translator(R.string.russian_translator, R.string.russian_translator_url),
+            ),
+        ),
     )
 
 fun Translation.Companion.Comparator(context: Context): Comparator<Translation> {

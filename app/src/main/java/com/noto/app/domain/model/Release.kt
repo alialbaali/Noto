@@ -21,14 +21,25 @@ sealed interface Release {
     val changelogFormatted: String get() = changelog.format()
 
     @Serializable
-    data class Version(val major: Int, val minor: Int, val patch: Int) {
+    data class Version(val major: Int, val minor: Int, val patch: Int, val status: Status = Status.Stable) {
 
         companion object {
-            val Current = Version(2, 2, 3)
-            val Last = Version(2, 2, 2)
+            val Current = Version(2, 3, 0, Status.Beta(1))
+            val Last = Version(2, 2, 3)
         }
 
-        fun format(): String = "$major.$minor.$patch"
+        fun format(): String = if (status is Status.Beta) "$major.$minor.$patch-${status.format()}" else "$major.$minor.$patch"
+
+        @Serializable
+        sealed interface Status {
+            @Serializable
+            data class Beta(val version: Int) : Status {
+                fun format() = "Beta$version"
+            }
+
+            @Serializable
+            object Stable : Status
+        }
     }
 
     @JvmInline
@@ -142,4 +153,11 @@ data class Release_2_2_2(override val changelog: Changelog) : Release {
 data class Release_2_2_3(override val changelog: Changelog) : Release {
     override val version: Version = Version(2, 2, 3)
     override val date: LocalDate = LocalDate(2023, Month.APRIL, 29)
+}
+
+@Suppress("ClassName")
+@Serializable
+data class Release_2_3_0(override val changelog: Changelog) : Release {
+    override val version: Version = Version(2, 3, 0, Version.Status.Beta(1))
+    override val date: LocalDate = LocalDate(2023, Month.MAY, 24)
 }

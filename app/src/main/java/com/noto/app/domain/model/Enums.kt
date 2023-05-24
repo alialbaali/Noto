@@ -27,20 +27,17 @@ enum class Font { Nunito, Monospace, }
 enum class Grouping { None, CreationDate, Label, AccessDate }
 
 enum class Language {
-    System, English, Turkish, Arabic, Indonesian,
-
-    @Deprecated("Not supported anymore.")
-    Russian,
+    System, English, Turkish, Arabic, Indonesian, Russian,
 
     @Deprecated("Not supported anymore.")
     Tamil,
 
     Spanish, French, German, Italian, Czech,
-    Lithuanian, SimplifiedChinese;
+    Lithuanian, SimplifiedChinese, Portuguese;
 
     companion object {
         @Suppress("DEPRECATION")
-        val Deprecated = listOf(Tamil, Russian)
+        val Deprecated = listOf(Tamil)
     }
 }
 
