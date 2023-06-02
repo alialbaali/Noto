@@ -105,7 +105,6 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_normal"
         android:contentDescription="@string/create_note"
         android:src="@drawable/ic_round_add_24"
         app:backgroundTint="?attr/notoPrimaryColor"
