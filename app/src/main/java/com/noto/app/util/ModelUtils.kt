@@ -117,7 +117,7 @@ fun Folder.Companion.Comparator(sortingOrder: SortingOrder, sortingType: FolderL
         }
 }
 
-fun List<NoteItemModel>.filterSelectedLabels(selectedLabels: List<Label>, filteringType: FilteringType) = filter { model ->
+fun List<NoteItemModel>.filterByLabels(selectedLabels: List<Label>, filteringType: FilteringType) = filter { model ->
     if (selectedLabels.isNotEmpty()) {
         when (filteringType) {
             FilteringType.Inclusive -> model.labels.any { label -> selectedLabels.any { it == label } }
@@ -129,8 +129,8 @@ fun List<NoteItemModel>.filterSelectedLabels(selectedLabels: List<Label>, filter
     }
 }
 
-fun List<NoteItemModel>.filterContent(content: CharSequence) = filter { model ->
-    model.note.title.contains(content, ignoreCase = true) || model.note.body.contains(content, ignoreCase = true)
+fun List<NoteItemModel>.filterBySearchTerm(searchTerm: CharSequence) = filter { model ->
+    model.note.title.contains(searchTerm, ignoreCase = true) || model.note.body.contains(searchTerm, ignoreCase = true)
 }
 
 fun List<NoteItemModel>.groupByCreationDate(

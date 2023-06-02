@@ -20,7 +20,7 @@ import com.noto.app.util.colorResource
 import com.noto.app.util.dp
 import com.noto.app.util.drawableResource
 import com.noto.app.util.filterSelected
-import com.noto.app.util.filterSelectedLabels
+import com.noto.app.util.filterByLabels
 import com.noto.app.util.getTitle
 import com.noto.app.util.setupColors
 import com.noto.app.util.stringResource
@@ -90,7 +90,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             viewModel.labels,
             viewModel.widgetFilteringType,
         ) { folder, notes, labels, filteringType ->
-            val filteredNotes = notes.filterSelectedLabels(labels.filterSelected(), filteringType)
+            val filteredNotes = notes.filterByLabels(labels.filterSelected(), filteringType)
             val color = colorResource(folder.color.toResource())
             val placeholderId = when {
                 notes.isEmpty() -> R.string.folder_is_empty

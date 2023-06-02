@@ -77,7 +77,7 @@ class FilteredViewModel(
                     mutableNotesGroupedByFolder.value = notes
                         .filter { note -> folders.any { folder -> folder.id == note.folderId } && !note.isArchived }
                         .mapToNoteItemModel(labels, noteLabels)
-                        .filterContent(searchTerm)
+                        .filterBySearchTerm(searchTerm)
                         .groupBy { model ->
                             folders.firstOrNull { folder ->
                                 folder.id == model.note.folderId
@@ -99,7 +99,7 @@ class FilteredViewModel(
                     mutableNotesGroupedByDate.value = notes
                         .filter { note -> folders.any { folder -> folder.id == note.folderId } && note.isRecent }
                         .mapToNoteItemModel(labels, noteLabels)
-                        .filterContent(searchTerm)
+                        .filterBySearchTerm(searchTerm)
                         .map { model -> folders.first { it.id == model.note.folderId } to model }
                         .groupBy { pair -> pair.second.note.accessDate.toLocalDate() }
                         .filterValues { it.isNotEmpty() }
@@ -114,7 +114,7 @@ class FilteredViewModel(
                     mutableNotesGroupedByDate.value = notes
                         .filter { note -> folders.any { folder -> folder.id == note.folderId } && note.reminderDate != null }
                         .mapToNoteItemModel(labels, noteLabels)
-                        .filterContent(searchTerm)
+                        .filterBySearchTerm(searchTerm)
                         .map { model -> folders.first { it.id == model.note.folderId } to model }
                         .groupBy { pair -> pair.second.note.accessDate.toLocalDate() }
                         .filterValues { it.isNotEmpty() }
@@ -127,7 +127,7 @@ class FilteredViewModel(
                     mutableNotesGroupedByFolder.value = notes
                         .filter { note -> folders.any { folder -> folder.id == note.folderId } && note.isArchived }
                         .mapToNoteItemModel(labels, noteLabels)
-                        .filterContent(searchTerm)
+                        .filterBySearchTerm(searchTerm)
                         .groupBy { model ->
                             folders.firstOrNull { folder ->
                                 folder.id == model.note.folderId

@@ -45,7 +45,7 @@ class NoteListWidgetProvider : AppWidgetProvider(), KoinComponent {
                     .filterNotNull()
                     .map {
                         it.mapToNoteItemModel(labels, noteLabels)
-                            .filterSelectedLabels(selectedLabels, filteringType)
+                            .filterByLabels(selectedLabels, filteringType)
                             .sortedWith(NoteItemModel.Comparator(folder.sortingOrder, folder.sortingType))
                             .sortedByDescending { it.note.isPinned }
                     }

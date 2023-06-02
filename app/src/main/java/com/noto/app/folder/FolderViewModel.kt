@@ -26,9 +26,9 @@ import com.noto.app.label.LabelItemModel
 import com.noto.app.map
 import com.noto.app.util.LineSeparator
 import com.noto.app.util.SelectedLabelsComparator
-import com.noto.app.util.filterContent
+import com.noto.app.util.filterBySearchTerm
 import com.noto.app.util.filterSelected
-import com.noto.app.util.filterSelectedLabels
+import com.noto.app.util.filterByLabels
 import com.noto.app.util.forEachRecursively
 import com.noto.app.util.getOrCreateLabel
 import com.noto.app.util.mapToNoteItemModel
@@ -426,8 +426,8 @@ class FolderViewModel(
     fun selectAllNotes() {
         var selectionOrder = -1
         val filteredNotes = notes.value.getOrDefault(emptyList())
-            .filterSelectedLabels(labels.value.filterSelected(), folder.value.filteringType)
-            .filterContent(searchTerm.value)
+            .filterByLabels(labels.value.filterSelected(), folder.value.filteringType)
+            .filterBySearchTerm(searchTerm.value)
 
         mutableNotes.value = notes.value.map {
             it.map { model ->

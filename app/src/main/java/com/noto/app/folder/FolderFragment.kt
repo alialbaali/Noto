@@ -118,8 +118,8 @@ class FolderFragment : Fragment() {
             val searchTerm = values[4] as String
             val isSelection = values[5] as Boolean
             val filteredNotes = notes.map {
-                it.filterSelectedLabels(labels.filterSelected(), folder.filteringType)
-                    .filterContent(searchTerm)
+                it.filterByLabels(labels.filterSelected(), folder.filteringType)
+                    .filterBySearchTerm(searchTerm)
             }
             setupNotesAndLabels(
                 filteredNotes,
@@ -675,8 +675,8 @@ class FolderFragment : Fragment() {
         searchTerm: String,
     ) {
         val selectedLabels = labels.filterSelected()
-        val filteredNotes =
-            notes.filterSelectedLabels(selectedLabels, filteringType).filterContent(searchTerm)
+        val filteredNotes = notes.filterByLabels(selectedLabels, filteringType)
+            .filterBySearchTerm(searchTerm)
         val isFiltering = selectedLabels.isNotEmpty() || searchTerm.isNotBlank()
         val selectedNotes = notes.filter { it.isSelected }
         val notesCount = notes.count()
