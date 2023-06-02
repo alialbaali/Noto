@@ -133,12 +133,12 @@ class FolderFragment : Fragment() {
                 val isAllSelected =
                     filteredNotes.getOrDefault(emptyList()).all { model -> model.isSelected }
                 if (isAllSelected) {
-                    fabSelectAll.hide()
+                    fabSelectAll.hideWithAnimation()
                 } else {
-                    fabSelectAll.show()
+                    fabSelectAll.showWithAnimation()
                 }
             } else {
-                fabSelectAll.hide()
+                fabSelectAll.hideWithAnimation()
             }
         }.launchIn(lifecycleScope)
 
@@ -203,19 +203,19 @@ class FolderFragment : Fragment() {
         viewModel.isSelection
             .onEach { isSelection ->
                 if (isSelection) {
-                    fab.hide()
+                    fab.hideWithAnimation()
                     bab.performHide(true)
                     bab.isVisible = false
                     babSelection.isVisible = true
                     babSelection.performShow(true)
-                    fabSelection.show()
+                    fabSelection.showWithAnimation()
                 } else {
-                    fabSelection.hide()
+                    fabSelection.hideWithAnimation()
                     babSelection.performHide(true)
                     babSelection.isVisible = false
                     bab.isVisible = true
                     bab.performShow(true)
-                    fab.show()
+                    fab.showWithAnimation()
                 }
             }
             .launchIn(lifecycleScope)
