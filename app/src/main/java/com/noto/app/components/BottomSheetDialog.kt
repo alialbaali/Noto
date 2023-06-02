@@ -45,13 +45,14 @@ fun BaseDialogFragment.BottomSheetDialog(
     painter: Painter? = null,
     content: @Composable ColumnScope.() -> Unit,
 ) {
-    val scrollState = rememberScrollState()
+    val contentScrollState = rememberScrollState()
+    val headerScrollState = rememberScrollState()
     val nestedScrollConnection = rememberNestedScrollInteropConnection()
     val viewModel by viewModel<SettingsViewModel>()
     val theme by viewModel.theme.collectAsState()
-    val isScrolling by remember { derivedStateOf { scrollState.value > 0 } }
+    val isContentScrolling by remember { derivedStateOf { contentScrollState.value > 0 } }
     val elevation by animateDpAsState(
-        targetValue = if (isScrolling) NotoTheme.dimensions.extraSmall else 0.dp,
+        targetValue = if (isContentScrolling) NotoTheme.dimensions.extraSmall else 0.dp,
         animationSpec = tween(ElevationAnimationDuration)
     )
     NotoTheme(theme = theme) {
@@ -66,12 +67,15 @@ fun BaseDialogFragment.BottomSheetDialog(
                     painter = painter,
                     headerColor = headerColor,
                     elevation = elevation,
+                    modifier = Modifier
+                        .nestedScroll(nestedScrollConnection)
+                        .verticalScroll(headerScrollState)
                 )
 
                 Column(
                     modifier = modifier
                         .nestedScroll(nestedScrollConnection)
-                        .verticalScroll(scrollState)
+                        .verticalScroll(contentScrollState)
                         .padding(NotoTheme.dimensions.medium),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
