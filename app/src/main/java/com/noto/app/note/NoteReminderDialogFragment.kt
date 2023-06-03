@@ -116,15 +116,15 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
 
             tvDateValue.text = date.format()
             tvTimeValue.text = time.format(is24HourFormat)
-            val datePickerDialog = createDatePickerDialog(epochMilliseconds, datePickerDialogTheme)
-            val timePickerDialog = createTimePickerDialog(time.hour, time.minute, timeFormat, timePickerDialogTheme)
 
             llDate.setOnClickListener {
+                val datePickerDialog = createDatePickerDialog(epochMilliseconds, datePickerDialogTheme)
                 val isDialogShown = parentFragmentManager.findFragmentByTag(DatePickerDialogTag)?.isAdded ?: false
                 if (!isDialogShown) datePickerDialog.show(parentFragmentManager, DatePickerDialogTag)
             }
 
             llTime.setOnClickListener {
+                val timePickerDialog = createTimePickerDialog(time.hour, time.minute, timeFormat, timePickerDialogTheme)
                 val isDialogShown = parentFragmentManager.findFragmentByTag(TimePickerDialogTag)?.isAdded ?: false
                 if (!isDialogShown) timePickerDialog.show(parentFragmentManager, TimePickerDialogTag)
             }

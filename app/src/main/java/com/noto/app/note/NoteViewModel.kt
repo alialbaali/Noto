@@ -159,7 +159,7 @@ class NoteViewModel(
     }
 
     fun setNoteReminder() = viewModelScope.launch {
-        noteRepository.updateNote(note.value.copy(reminderDate = reminderDateTime.value.also(::println)))
+        noteRepository.updateNote(note.value.copy(reminderDate = reminderDateTime.value))
     }
 
     fun cancelNoteReminder() = viewModelScope.launch {
