@@ -570,6 +570,7 @@
         <item name="chipBackgroundColor">?attr/notoSurfaceColor</item>
         <item name="android:textColor">?attr/colorPrimary</item>
         <item name="rippleColor">?attr/colorPrimary</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color_selector</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="shapeAppearance">@style/TimePickerDialog.ShapeAppearance</item>
         <item name="android:textAppearance">@style/TimePickerDialog.ChipTextAppearance</item>
@@ -582,7 +583,6 @@
     <style name="TimePickerDialog.ShapeAppearance" parent="ShapeAppearance.Material3.Corner.Small">
         <item name="cornerSize">@dimen/spacing_small</item>
     </style>
-    ∑
 
     <style name="TimePickerDialog.TextInputLayout" parent="Widget.Material3.MaterialTimePicker.Display.TextInputLayout">
         <item name="materialThemeOverlay">@style/TimePickerDialog.TextInputEditTextOverlay</item>
@@ -599,6 +599,7 @@
     </style>
 
     <style name="TimePickerDialog.ChipTextAppearance" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:letterSpacing">0</item>
         <item name="fontFamily">@font/nunito_semibold</item>
     </style>
 
@@ -687,7 +688,6 @@
     <style name="DatePickerDialog.LightPink" parent="DatePickerDialog">
         <item name="colorPrimary">@color/colorAccentLightPink</item>
     </style>
-
 
     <style name="TimePickerDialog.Gray" parent="TimePickerDialog">
         <item name="colorPrimary">@color/colorAccentGray</item>
