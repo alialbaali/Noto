@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.os.Build
+import android.util.TypedValue
 import android.view.Window
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.graphics.applyCanvas
@@ -103,3 +104,5 @@ fun Context.localize(language: Language): Context {
     }
     return this.createConfigurationContext(localizedConfiguration) ?: this
 }
+
+fun Context.pixelsOf(unit: Int, size: Float) = TypedValue.applyDimension(unit, size, resources.displayMetrics)

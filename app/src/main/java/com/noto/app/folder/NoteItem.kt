@@ -77,13 +77,13 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             ll.background?.setRippleColor(colorResource.toColorStateList())
             tvNoteTitle.setLinkTextColor(colorResource)
             tvNoteBody.setLinkTextColor(colorResource)
-            tvNoteTitle.setHighlightedText(model.note.title, searchTerm, colorResource)
+            tvNoteTitle.setHighlightedText(model.note.title, searchTerm, color)
             if (model.note.title.isBlank() && previewSize == 0) {
-                tvNoteBody.setHighlightedText(model.note.body.takeLines(1), searchTerm, colorResource)
+                tvNoteBody.setHighlightedText(model.note.body.takeLines(1), searchTerm, color)
                 tvNoteBody.maxLines = 1
                 tvNoteBody.isVisible = true
             } else {
-                tvNoteBody.setHighlightedText(model.note.body.takeLines(previewSize), searchTerm, colorResource)
+                tvNoteBody.setHighlightedText(model.note.body.takeLines(previewSize), searchTerm, color)
                 tvNoteBody.isVisible = previewSize != 0 && model.note.body.isNotBlank()
                 if (isPreview) {
                     tvNoteTitle.maxLines = 3

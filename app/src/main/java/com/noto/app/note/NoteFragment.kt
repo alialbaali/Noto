@@ -352,10 +352,7 @@ class NoteFragment : Fragment() {
                 if (term.isNotBlank()) {
                     if (!isKeyboardVisible || !isNoteBodyFocused) {
                         val currentIndex = etNoteBody.selectionStart.coerceIn(0, note.body.length)
-                        context?.let { context ->
-                            val colorResource = context.colorResource(folder.color.toResource())
-                            etNoteBody.setHighlightedText(note.body, term, colorResource)
-                        }
+                        etNoteBody.setHighlightedText(note.body, term, folder.color)
                         etNoteBody.setSelection(currentIndex)
                         viewModel.setIsTextHighlighted(isHighlighted = true)
                     }
