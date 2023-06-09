@@ -151,6 +151,11 @@ class SettingsRepositoryImpl(
         .map { it ?: false }
         .flowOn(dispatcher)
 
+    override val continuousSearch: Flow<Boolean> = storage.data
+        .map { preferences -> preferences[SettingsKeys.ContinuousSearch] }
+        .map { it ?: true }
+        .flowOn(dispatcher)
+
     override fun getFilteredNotesScrollingPosition(model: FilteredItemModel): Flow<Int> = storage.data
         .map { preferences -> preferences[SettingsKeys.FilteredItemModel(model)] }
         .map { it ?: 0 }
@@ -453,6 +458,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateQuickExit(enabled: Boolean) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.QuickExit] = enabled }
+        }
+    }
+
+    override suspend fun updateContinuousSearch(isEnabled: Boolean) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.ContinuousSearch] = isEnabled }
         }
     }
 

@@ -402,7 +402,7 @@ class FilteredFragment : Fragment() {
                                                             pair.second.note.folderId,
                                                             noteId = pair.second.note.id,
                                                             selectedNoteIds = noteIds,
-                                                            searchTerm = searchTerm,
+                                                            searchTerm = searchTerm.ifBlank { null },
                                                         )
                                                     )
                                             }
@@ -507,7 +507,7 @@ class FilteredFragment : Fragment() {
                                                                 model.note.folderId,
                                                                 noteId = model.note.id,
                                                                 selectedNoteIds = noteIds,
-                                                                searchTerm = searchTerm,
+                                                                searchTerm = searchTerm.ifBlank { null },
                                                             )
                                                         )
                                                 }

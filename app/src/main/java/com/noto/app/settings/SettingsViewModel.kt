@@ -11,7 +11,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 
 enum class FolderIdType {
@@ -76,6 +75,9 @@ class SettingsViewModel(
 
     val quickExit = settingsRepository.quickExit
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
+
+    val continuousSearch = settingsRepository.continuousSearch
+        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
     var folderIdType = FolderIdType.MainInterface
         private set
@@ -188,6 +190,10 @@ class SettingsViewModel(
 
     fun toggleQuickExit() = viewModelScope.launch {
         settingsRepository.updateQuickExit(!quickExit.value)
+    }
+
+    fun toggleContinuousSearch() = viewModelScope.launch {
+        settingsRepository.updateContinuousSearch(!continuousSearch.value)
     }
 
     fun emitIsImportFinished() = viewModelScope.launch {

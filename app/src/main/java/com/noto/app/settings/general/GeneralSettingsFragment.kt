@@ -107,6 +107,7 @@ class GeneralSettingsFragment : Fragment() {
                     viewModel.getFolderById(quickNoteFolderId)
                         .collect { value = it.getTitle(context) }
                 }
+                val continuousSearch by viewModel.continuousSearch.collectAsState()
 
                 Screen(title = stringResource(id = R.string.general)) {
                     SettingsSection {
@@ -197,6 +198,14 @@ class GeneralSettingsFragment : Fragment() {
                             type = SettingsItemType.Switch(quickExit),
                             onClick = { viewModel.toggleQuickExit() },
                             description = stringResource(id = R.string.quick_exit_description),
+                            painter = EmptyPainter,
+                        )
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.continuous_search),
+                            type = SettingsItemType.Switch(continuousSearch),
+                            onClick = { viewModel.toggleContinuousSearch() },
+                            description = stringResource(id = R.string.continuous_search_description),
                             painter = EmptyPainter,
                         )
                     }

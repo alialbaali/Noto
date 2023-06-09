@@ -73,6 +73,9 @@ class NoteViewModel(
     private val mutableFindInNoteIndices = MutableStateFlow(emptyMap<IntRange, Boolean>())
     val findInNoteIndices get() = mutableFindInNoteIndices.asStateFlow()
 
+    val continuousSearch = settingsRepository.continuousSearch
+        .stateIn(viewModelScope, SharingStarted.Eagerly, null)
+
     var isTextHighlighted: Boolean = false
         private set
 

@@ -433,6 +433,10 @@
     <string name="quick_exit">Quick Exit</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Whether to exit the app immediately when pressing the back button.</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">Continuous Search</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">Whether to pass the search term to the note screen.</string>
     <string name="remember_scrolling_position">Remember scrolling position</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Whether to store the scrolling position in folders, and notes.</string>

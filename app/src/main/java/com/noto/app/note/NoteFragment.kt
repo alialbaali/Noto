@@ -379,7 +379,8 @@ class NoteFragment : Fragment() {
         combine(
             etFindInNote.textAsFlow()
                 .onStart {
-                    if (!args.searchTerm.isNullOrBlank()) {
+                    val isContinuousSearchEnabled = viewModel.continuousSearch.first()
+                    if (!args.searchTerm.isNullOrBlank() && isContinuousSearchEnabled == true) {
                         viewModel.enableFindInNote()
                         emit(args.searchTerm)
                         etFindInNote.setText(args.searchTerm)
