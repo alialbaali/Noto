@@ -171,13 +171,6 @@ class GeneralSettingsFragment : Fragment() {
 
                     SettingsSection {
                         SettingsItem(
-                            title = stringResource(id = R.string.notes_font),
-                            type = SettingsItemType.Text(fontText),
-                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToFontDialogFragment()) },
-                            painter = EmptyPainter,
-                        )
-
-                        SettingsItem(
                             title = stringResource(id = R.string.show_notes_count),
                             type = SettingsItemType.Switch(notesCountEnabled),
                             onClick = { viewModel.toggleShowNotesCount() },
@@ -198,7 +191,16 @@ class GeneralSettingsFragment : Fragment() {
                             type = SettingsItemType.Switch(quickExit),
                             onClick = { viewModel.toggleQuickExit() },
                             description = stringResource(id = R.string.quick_exit_description),
-                            painter = EmptyPainter,
+                            painter = painterResource(id = R.drawable.ic_round_quick_exit_24),
+                        )
+                    }
+
+                    SettingsSection {
+                        SettingsItem(
+                            title = stringResource(id = R.string.notes_font),
+                            type = SettingsItemType.Text(fontText),
+                            onClick = { navController?.navigateSafely(GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToFontDialogFragment()) },
+                            painter = painterResource(id = R.drawable.ic_round_font_24),
                         )
 
                         SettingsItem(
@@ -206,7 +208,7 @@ class GeneralSettingsFragment : Fragment() {
                             type = SettingsItemType.Switch(continuousSearch),
                             onClick = { viewModel.toggleContinuousSearch() },
                             description = stringResource(id = R.string.continuous_search_description),
-                            painter = EmptyPainter,
+                            painter = painterResource(id = R.drawable.ic_round_continuous_search_24),
                         )
                     }
                 }
