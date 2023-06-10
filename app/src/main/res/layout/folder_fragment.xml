@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cool"
     android:layout_width="match_parent"
-    android:animateLayoutChanges="true"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="?attr/notoBackgroundColor">
 
     <com.airbnb.epoxy.EpoxyRecyclerView
@@ -14,8 +14,8 @@
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:paddingTop="@dimen/spacing_small"
         android:paddingHorizontal="@dimen/spacing_small"
+        android:paddingTop="@dimen/spacing_small"
         android:paddingBottom="@dimen/padding_bottom"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/note_item" />
@@ -34,16 +34,16 @@
             app:menu="@menu/folder_toolbar_menu">
 
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content">
+                android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_folder_title"
                     style="@style/ToolbarTitleTextAppearance"
-                    android:gravity="center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     tools:text="@string/title"
                     tools:textColor="@color/colorAccentTeal" />
 
@@ -59,38 +59,37 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_folder_notes_count_rtl"
                     style="@style/SubtitleTextView"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:fontFamily="@font/nunito_semibold"
                     tools:text="7 notes" />
 
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_search"
-        style="@style/SearchTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/bab"
-        tools:visibility="visible">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_search"
-            style="@style/TextInputEditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_search"
+            style="@style/SearchTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/search"
-            android:inputType="text|textCapSentences|textAutoCorrect" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            tools:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/search"
+                android:inputType="text|textCapSentences|textAutoCorrect" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
-        android:layout_gravity="bottom"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         app:addElevationShadow="true"
         app:backgroundTint="?attr/notoBackgroundColor"
         app:elevation="@dimen/elevation_large"
@@ -106,9 +105,9 @@
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab_selection"
-        android:layout_gravity="bottom"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:visibility="gone"
         app:addElevationShadow="true"
         app:backgroundTint="?attr/notoBackgroundColor"
@@ -121,9 +120,9 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:contentDescription="@string/create_note"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/create_note"
         android:src="@drawable/ic_round_add_24"
         app:backgroundTint="?attr/notoPrimaryColor"
         app:layout_anchor="@id/bab"
@@ -132,11 +131,11 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_selection"
-        android:contentDescription="@string/more_options"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/more_options"
         android:src="@drawable/ic_round_tune_24"
+        android:visibility="gone"
         app:backgroundTint="?attr/notoPrimaryColor"
         app:layout_anchor="@id/bab_selection"
         app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
@@ -144,14 +143,14 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_select_all"
-        android:contentDescription="@string/select_all"
-        android:layout_height="wrap_content"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="96dp"
         android:layout_marginHorizontal="@dimen/spacing_normal"
-        android:visibility="gone"
+        android:layout_marginBottom="96dp"
+        android:contentDescription="@string/select_all"
         android:src="@drawable/ic_round_check_all_24"
+        android:visibility="gone"
         app:backgroundTint="?attr/notoBackgroundColor"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"

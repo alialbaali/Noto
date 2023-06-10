@@ -55,6 +55,67 @@
                     tools:text="7 notes" />
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
+
+        <LinearLayout
+            android:id="@+id/ll_find_in_note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/spacing_small"
+            android:paddingBottom="@dimen/spacing_normal"
+            android:paddingHorizontal="@dimen/spacing_normal"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_find_in_note"
+                style="@style/SearchTextInputLayout"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:visibility="visible">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_find_in_note"
+                    style="@style/TextInputEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="@string/find_in_note"
+                    android:inputType="text|textCapSentences|textAutoCorrect" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageButton
+                android:id="@+id/ib_previous"
+                android:background="@drawable/generic_ripple_shape"
+                android:backgroundTint="?attr/notoSurfaceColor"
+                android:src="@drawable/ic_round_back_24"
+                android:padding="@dimen/spacing_normal"
+                android:layout_gravity="center"
+                android:rotation="90"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/previous" />
+
+            <ImageButton
+                android:id="@+id/ib_next"
+                android:background="@drawable/generic_ripple_shape"
+                android:backgroundTint="?attr/notoSurfaceColor"
+                android:src="@drawable/ic_round_back_24"
+                android:padding="@dimen/spacing_normal"
+                android:layout_gravity="center"
+                android:rotation="-90"
+                android:layout_marginStart="@dimen/spacing_small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/next" />
+        </LinearLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -169,73 +230,6 @@
                 tools:text="Accessed Tue, Aug 8" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <LinearLayout
-        android:id="@+id/ll_find_in_note"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:translationY="-16dp"
-        android:layout_gravity="top"
-        android:background="@drawable/generic_ripple_shape"
-        android:backgroundTint="?attr/notoBackgroundColor"
-        android:layout_marginStart="@dimen/spacing_normal"
-        android:layout_marginEnd="@dimen/spacing_normal"
-        android:elevation="@dimen/elevation_large"
-        android:outlineProvider="bounds"
-        android:visibility="gone"
-        app:layout_anchor="@id/bab"
-        tools:visibility="visible">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/til_find_in_note"
-            style="@style/SearchTextInputLayout"
-            android:elevation="0dp"
-            android:layout_marginStart="0dp"
-            android:layout_marginEnd="@dimen/spacing_small"
-            android:translationY="0dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:visibility="visible"
-            app:layout_anchor="@null">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_find_in_note"
-                style="@style/TextInputEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/find_in_note"
-                android:inputType="text|textCapSentences|textAutoCorrect" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageButton
-            android:id="@+id/ib_previous"
-            android:background="@drawable/generic_ripple_shape"
-            android:backgroundTint="?attr/notoBackgroundColor"
-            android:src="@drawable/ic_round_back_24"
-            android:rotation="90"
-            android:padding="@dimen/spacing_normal"
-            android:layout_gravity="center"
-            android:layout_marginStart="@dimen/spacing_small"
-            android:layout_marginEnd="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/previous" />
-
-        <ImageButton
-            android:id="@+id/ib_next"
-            android:background="@drawable/generic_ripple_shape"
-            android:backgroundTint="?attr/notoBackgroundColor"
-            android:src="@drawable/ic_round_back_24"
-            android:rotation="-90"
-            android:padding="@dimen/spacing_normal"
-            android:layout_gravity="center"
-            android:layout_marginStart="2dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/next" />
-    </LinearLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"

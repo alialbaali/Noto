@@ -302,30 +302,29 @@ class NoteFragment : Fragment() {
             etFindInNote.isFocusedAsFlow(),
             viewModel.isFindInNoteEnabled,
         ) { isKeyboardVisible, isFindInNoteFocused, isFindInNoteEnabled ->
-            when {
-                isKeyboardVisible && isFindInNoteFocused -> {
-                    llFindInNote.isVisible = isFindInNoteEnabled
-                    bab.performHide(true)
-                    bab.isVisible = false
-                    babToolbar.performHide(true)
-                    babToolbar.isVisible = false
-                }
-
-                isKeyboardVisible && !isFindInNoteFocused -> {
-                    if (isFindInNoteEnabled) llFindInNote.isVisible = false
-                    bab.performHide(true)
-                    bab.isVisible = false
-                    babToolbar.isVisible = true
+            if (isKeyboardVisible) {
+                bab.performHide(true)
+                bab.isVisible = false
+                if (isFindInNoteEnabled) {
+                    if (isFindInNoteFocused) {
+                        llFindInNote.isVisible = true
+                        babToolbar.performHide(true)
+                        babToolbar.isVisible = false
+                    } else {
+                        llFindInNote.isVisible = false
+                        babToolbar.performShow(true)
+                        babToolbar.isVisible = true
+                    }
+                } else {
                     babToolbar.performShow(true)
+                    babToolbar.isVisible = true
                 }
-
-                else -> {
-                    llFindInNote.isVisible = isFindInNoteEnabled
-                    bab.isVisible = true
-                    bab.performShow(true)
-                    babToolbar.performHide(true)
-                    babToolbar.isVisible = false
-                }
+            } else {
+                llFindInNote.isVisible = isFindInNoteEnabled
+                babToolbar.performHide(true)
+                babToolbar.isVisible = false
+                bab.performShow(true)
+                bab.isVisible = true
             }
         }.launchIn(lifecycleScope)
 

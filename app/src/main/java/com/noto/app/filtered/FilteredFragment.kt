@@ -5,16 +5,13 @@ import android.app.AlarmManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -305,15 +302,6 @@ class FilteredFragment : Fragment() {
         ) { isKeyboardVisible, isBabHidden ->
             if (args.model != FilteredItemModel.Archived) fab.isVisible = !isKeyboardVisible
             bab.isVisible = !isKeyboardVisible
-            tilSearch.updateLayoutParams<CoordinatorLayout.LayoutParams> {
-                anchorId = when {
-                    isKeyboardVisible -> View.NO_ID
-                    args.model == FilteredItemModel.Archived -> R.id.bab
-                    isBabHidden -> R.id.fab
-                    else -> bab.id
-                }
-                gravity = if (isKeyboardVisible) Gravity.BOTTOM else Gravity.TOP
-            }
         }.launchIn(lifecycleScope)
 
         savedStateHandle?.getLiveData<Long>(Constants.FolderId)

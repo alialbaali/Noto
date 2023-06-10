@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cool"
-    android:animateLayoutChanges="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     android:background="?attr/notoBackgroundColor">
 
     <com.airbnb.epoxy.EpoxyRecyclerView
@@ -14,8 +14,8 @@
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:paddingTop="@dimen/spacing_small"
         android:paddingHorizontal="@dimen/spacing_small"
+        android:paddingTop="@dimen/spacing_small"
         android:paddingBottom="@dimen/padding_bottom"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
         tools:listitem="@layout/note_item" />
@@ -33,16 +33,16 @@
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content">
+                android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_title"
                     style="@style/ToolbarTitleTextAppearance"
-                    android:text="@string/all_notes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/all_notes"
                     tools:textColor="@color/colorAccentTeal" />
 
                 <com.robinhood.ticker.TickerView
@@ -57,37 +57,37 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_notes_count_rtl"
                     style="@style/SubtitleTextView"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     app:fontFamily="@font/nunito_semibold"
                     tools:text="7 notes" />
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_search"
-        style="@style/SearchTextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_anchor="@id/bab"
-        tools:visibility="visible">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_search"
-            style="@style/TextInputEditText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_search"
+            style="@style/SearchTextInputLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/search"
-            android:inputType="text|textCapSentences|textAutoCorrect" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="wrap_content"
+            tools:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search"
+                style="@style/TextInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/search"
+                android:inputType="text|textCapSentences|textAutoCorrect" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
-        android:layout_gravity="bottom"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         app:addElevationShadow="true"
         app:backgroundTint="?attr/notoBackgroundColor"
         app:elevation="@dimen/elevation_large"

@@ -6,13 +6,11 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.activity.addCallback
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.drawable.toDrawable
 import androidx.core.view.MenuItemCompat
 import androidx.core.view.forEach
 import androidx.core.view.isVisible
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -166,31 +164,12 @@ class FolderFragment : Fragment() {
             }
             .launchIn(lifecycleScope)
 
-        combine(
-            root.keyboardVisibilityAsFlow(),
-            bab.isHiddenAsFlow()
-                .onStart { emit(false) },
-            babSelection.isHiddenAsFlow()
-                .onStart { emit(false) },
-            viewModel.isSelection,
-        ) { isKeyboardVisible, isBabHidden, isBabSelectionHidden, isSelection ->
-            fab.isVisible = !isKeyboardVisible
-            bab.isVisible = !isKeyboardVisible
-            tilSearch.updateLayoutParams<CoordinatorLayout.LayoutParams> {
-                anchorId = when {
-                    isSelection -> when {
-                        isKeyboardVisible -> View.NO_ID
-                        isBabSelectionHidden -> R.id.fab_selection
-                        else -> R.id.fab_select_all
-                    }
-
-                    isKeyboardVisible -> View.NO_ID
-                    isBabHidden -> R.id.fab
-                    else -> bab.id
-                }
-                gravity = if (isKeyboardVisible) Gravity.BOTTOM else Gravity.TOP
+        root.keyboardVisibilityAsFlow()
+            .onEach { isKeyboardVisible ->
+                fab.isVisible = !isKeyboardVisible
+                bab.isVisible = !isKeyboardVisible
             }
-        }.launchIn(lifecycleScope)
+            .launchIn(lifecycleScope)
 
         if (isCurrentLocaleArabic()) {
             tvFolderNotesCount.isVisible = false
