@@ -21,24 +21,7 @@ import com.noto.app.databinding.NoteSelectionDialogFragmentBinding
 import com.noto.app.folder.FolderViewModel
 import com.noto.app.folder.noteItem
 import com.noto.app.label.labelItem
-import com.noto.app.util.Constants
-import com.noto.app.util.LineSeparator
-import com.noto.app.util.SmoothLinearLayoutManager
-import com.noto.app.util.cancelAlarm
-import com.noto.app.util.colorResource
-import com.noto.app.util.drawableResource
-import com.noto.app.util.format
-import com.noto.app.util.getTitle
-import com.noto.app.util.launchShareNotesIntent
-import com.noto.app.util.navController
-import com.noto.app.util.navigateSafely
-import com.noto.app.util.quantityStringResource
-import com.noto.app.util.snackbar
-import com.noto.app.util.stringResource
-import com.noto.app.util.toResource
-import com.noto.app.util.updateAllWidgetsData
-import com.noto.app.util.updateNoteListWidgets
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
@@ -126,6 +109,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                         tvPinNotes.text = context?.stringResource(R.string.pin)
                         tvPinNotes.compoundDrawablesRelative[1] = context?.drawableResource(R.drawable.ic_round_pin_24)
                         tvPinNotes.setOnClickListener {
+                            disableSelection()
                             viewModel.pinSelectedNotes().invokeOnCompletion {
                                 context?.let { context ->
                                     val text = context.quantityStringResource(R.plurals.note_is_pinned, selectedNotesCount, selectedNotesCount)
@@ -140,6 +124,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                         tvPinNotes.text = context?.stringResource(R.string.unpin)
                         tvPinNotes.compoundDrawablesRelative[1] = context?.drawableResource(R.drawable.ic_round_pin_off_24)
                         tvPinNotes.setOnClickListener {
+                            disableSelection()
                             viewModel.unpinSelectedNotes().invokeOnCompletion {
                                 context?.let { context ->
                                     val text =
@@ -205,6 +190,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
 
         tvReadingMode.setOnClickListener {
+            disableSelection()
             navController?.navigateSafely(
                 NoteSelectionDialogFragmentDirections.actionNoteSelectionDialogFragmentToNotePagerFragment(
                     folderId = args.folderId,
@@ -216,6 +202,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvMergeNotes.setOnClickListener {
+            disableSelection()
             viewModel.mergeSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
                     val text = context.stringResource(R.string.notes_are_merged, selectedNotes.count())
@@ -229,11 +216,13 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvShareNotes.setOnClickListener {
+            disableSelection()
             launchShareNotesIntent(selectedNotes)
             dismiss()
         }
 
         tvArchiveNotes.setOnClickListener {
+            disableSelection()
             viewModel.archiveSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
                     val text = context.quantityStringResource(R.plurals.note_is_archived, selectedNotes.count(), selectedNotes.count())
@@ -249,6 +238,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvDuplicateNotes.setOnClickListener {
+            disableSelection()
             viewModel.duplicateSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
                     val text = context.quantityStringResource(R.plurals.note_is_duplicated, selectedNotes.count(), selectedNotes.count())
@@ -261,6 +251,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyToClipboard.setOnClickListener {
+            disableSelection()
             context?.let { context ->
                 val notesText = selectedNotes.joinToString(LineSeparator) { it.format() }
                 val clipData = ClipData.newPlainText(viewModel.folder.value.getTitle(context), notesText)
@@ -275,6 +266,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyNotes.setOnClickListener {
+            disableSelection()
             savedStateHandle?.getLiveData<Long>(Constants.FolderId)
                 ?.observe(viewLifecycleOwner) { folderId ->
                     viewModel.copySelectedNotes(folderId).invokeOnCompletion {
@@ -305,6 +297,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvMoveNotes.setOnClickListener {
+            disableSelection()
             savedStateHandle?.getLiveData<Long>(Constants.FolderId)
                 ?.observe(viewLifecycleOwner) { folderId ->
                     viewModel.moveSelectedNotes(folderId).invokeOnCompletion {
@@ -335,6 +328,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvDeleteNotes.setOnClickListener {
+            disableSelection()
             context?.let { context ->
                 val confirmationText = context.quantityStringResource(R.plurals.delete_note_confirmation, selectedNotes.count())
                 val descriptionText = context.quantityStringResource(R.plurals.delete_note_description, selectedNotes.count())
@@ -362,5 +356,9 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                 )
             }
         }
+    }
+
+    private fun disableSelection() {
+        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.DisableSelection, true)
     }
 }

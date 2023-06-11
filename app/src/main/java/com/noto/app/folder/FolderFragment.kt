@@ -223,6 +223,13 @@ class FolderFragment : Fragment() {
                 }
             }
             .launchIn(lifecycleScope)
+
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<Boolean?>(Constants.DisableSelection)
+            ?.observe(viewLifecycleOwner) {
+                viewModel.disableSelection()
+                viewModel.deselectAllNotes()
+            }
     }
 
     private fun FolderFragmentBinding.setupListeners() {
@@ -315,8 +322,6 @@ class FolderFragment : Fragment() {
                     )
                 )
             }
-            viewModel.disableSelection()
-            viewModel.deselectAllNotes()
         }
 
         babSelection.setOnMenuItemClickListener { menuItem ->

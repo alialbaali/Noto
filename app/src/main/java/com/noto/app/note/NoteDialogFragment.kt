@@ -25,28 +25,7 @@ import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.Note
 import com.noto.app.domain.model.OpenNotesIn
 import com.noto.app.label.noteLabelItem
-import com.noto.app.util.Constants
-import com.noto.app.util.cancelAlarm
-import com.noto.app.util.colorAttributeResource
-import com.noto.app.util.colorResource
-import com.noto.app.util.dp
-import com.noto.app.util.filterSelected
-import com.noto.app.util.format
-import com.noto.app.util.getTitle
-import com.noto.app.util.isCurrentLocaleArabic
-import com.noto.app.util.launchShareNotesIntent
-import com.noto.app.util.navController
-import com.noto.app.util.navigateSafely
-import com.noto.app.util.quantityStringResource
-import com.noto.app.util.setRippleColor
-import com.noto.app.util.snackbar
-import com.noto.app.util.stringResource
-import com.noto.app.util.toColorStateList
-import com.noto.app.util.toResource
-import com.noto.app.util.tryLoadingFontResource
-import com.noto.app.util.updateAllWidgetsData
-import com.noto.app.util.updateNoteListWidgets
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
@@ -114,6 +93,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
 
         tvArchiveNote.setOnClickListener {
+            disableSelection()
             viewModel.toggleNoteIsArchived().invokeOnCompletion {
                 context?.let { context ->
                     val note = viewModel.note.value
@@ -136,6 +116,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvRemindMe.setOnClickListener {
+            disableSelection()
             dismiss()
             navController?.navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReminderDialogFragment(
@@ -146,6 +127,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvOpenIn.setOnClickListener {
+            disableSelection()
             val openNotesIn = viewModel.folder.value.openNotesIn
             when {
                 openNotesIn == OpenNotesIn.Editor || isParentEditor -> {
@@ -170,6 +152,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvDuplicateNote.setOnClickListener {
+            disableSelection()
             viewModel.duplicateNote().invokeOnCompletion {
                 val stringId = R.plurals.note_is_duplicated
                 val drawableId = R.drawable.ic_round_control_point_duplicate_24
@@ -182,6 +165,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvPinNote.setOnClickListener {
+            disableSelection()
             viewModel.toggleNoteIsPinned().invokeOnCompletion {
                 val isPinned = viewModel.note.value.isPinned
                 context?.let { context ->
@@ -201,6 +185,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyToClipboard.setOnClickListener {
+            disableSelection()
             context?.let { context ->
                 val clipData = ClipData.newPlainText(viewModel.folder.value.getTitle(context), viewModel.note.value.format())
                 clipboardManager?.setPrimaryClip(clipData)
@@ -214,6 +199,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyNote.setOnClickListener {
+            disableSelection()
             savedStateHandle?.getLiveData<Long>(Constants.FolderId)
                 ?.observe(viewLifecycleOwner) { folderId ->
                     viewModel.copyNote(folderId).invokeOnCompletion {
@@ -245,6 +231,7 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvMoveNote.setOnClickListener {
+            disableSelection()
             savedStateHandle?.getLiveData<Long>(Constants.FolderId)
                 ?.observe(viewLifecycleOwner) { folderId ->
                     viewModel.moveNote(folderId).invokeOnCompletion {
@@ -276,11 +263,13 @@ class NoteDialogFragment : BaseDialogFragment() {
         }
 
         tvShareNote.setOnClickListener {
+            disableSelection()
             dismiss()
             launchShareNotesIntent(listOf(viewModel.note.value))
         }
 
         tvDeleteNote.setOnClickListener {
+            disableSelection()
             context?.let { context ->
                 val confirmationText = context.quantityStringResource(R.plurals.delete_note_confirmation, DefaultQuantity)
                 val descriptionText = context.quantityStringResource(R.plurals.delete_note_description, DefaultQuantity)
@@ -381,6 +370,10 @@ class NoteDialogFragment : BaseDialogFragment() {
                 tvRemindMe.text = context.stringResource(R.string.edit_note_reminder)
             }
         }
+    }
+
+    private fun disableSelection() {
+        navController?.previousBackStackEntry?.savedStateHandle?.set(Constants.DisableSelection, true)
     }
 
     private fun NoteDialogFragmentBinding.setupFolder(folder: Folder) {

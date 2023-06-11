@@ -23,6 +23,7 @@ object Constants {
     const val Title = "title"
     const val Model = "model"
     const val EmailType = "mailto:"
+    const val DisableSelection = "DisableSelection"
 
     object Intent {
         const val ActionCreateFolder = "com.noto.intent.action.CREATE_FOLDER"
