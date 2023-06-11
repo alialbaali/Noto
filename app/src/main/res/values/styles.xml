@@ -198,6 +198,7 @@
         <item name="boxBackgroundColor">?attr/notoSurfaceColor</item>
         <item name="endIconContentDescription">@string/clear</item>
         <item name="endIconMode">clear_text</item>
+        <item name="endIconTint">?attr/notoSecondaryColor</item>
         <item name="android:visibility">gone</item>
         <item name="android:layout_marginTop">@dimen/spacing_small</item>
         <item name="android:layout_marginBottom">@dimen/spacing_normal</item>
