@@ -488,28 +488,32 @@ fun BottomAppBar.isHiddenAsFlow() = callbackFlow {
     awaitClose { removeOnScrollStateChangedListener(listener) }
 }
 
-fun TextView.setHighlightedText(text: String, term: String, color: NotoColor) {
+fun TextView.setHighlightedText(text: String, term: String, color: NotoColor, matchIndices: IntRange? = null) {
     val indices = text.indicesOf(term, ignoreCase = true).filter { it.first < it.last }
     val colorResource = context?.colorResource(color.toResource()) ?: return
+    val lightColorResource = colorResource.withDefaultAlpha(DisabledAlpha)
     val onColorResource = context?.colorAttributeResource(R.attr.notoBackgroundColor) ?: return
-    val isBackgroundSpan = color == NotoColor.Black || color == NotoColor.Gray
+    val isDarkColor = color == NotoColor.Black || color == NotoColor.Gray
 
     val highlightedText = text.toSpannable().apply {
         indices.forEach { range ->
             val foregroundColorSpan = ForegroundColorSpan(colorResource)
             val backgroundColorSpan = CustomBackgroundColorSpan(context, colorResource, onColorResource, textSize)
+            val lightBackgroundColorSpan = CustomBackgroundColorSpan(context, lightColorResource, onColorResource, textSize)
             val boldFontSpan = context.tryLoadingFontResource(R.font.nunito_black)?.style?.let(::StyleSpan)
             val boldSpan = StyleSpan(Typeface.BOLD)
             val startIndex = range.first.coerceIn(0, this.length)
             val endIndex = range.last.coerceIn(0, this.length)
-            if (isBackgroundSpan) {
+            if (range == matchIndices) {
                 setSpan(backgroundColorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                setSpan(boldSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                if (boldFontSpan != null) setSpan(boldFontSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             } else {
-                setSpan(foregroundColorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            }
-            setSpan(boldSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            if (boldFontSpan != null) {
-                setSpan(boldFontSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                if (isDarkColor) {
+                    setSpan(lightBackgroundColorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                } else {
+                    setSpan(foregroundColorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+                }
             }
         }
     }

@@ -350,15 +350,11 @@ class NoteFragment : Fragment() {
             if (isEnabled) {
                 if (term.isNotBlank()) {
                     if (!isKeyboardVisible || !isNoteBodyFocused) {
+                        val termIndices = indices.toList().firstOrNull { it.second }?.first
                         val currentIndex = etNoteBody.selectionStart.coerceIn(0, note.body.length)
-                        etNoteBody.setHighlightedText(note.body, term, folder.color)
+                        etNoteBody.setHighlightedText(note.body, term, folder.color, termIndices)
                         etNoteBody.setSelection(currentIndex)
                         viewModel.setIsTextHighlighted(isHighlighted = true)
-                    }
-                    if (!isKeyboardVisible) {
-                        val termIndex = indices.toList().firstOrNull { it.second }?.first?.last?.coerceIn(0, note.body.length) ?: 0
-                        etNoteBody.requestFocus()
-                        etNoteBody.setSelection(termIndex)
                     }
                 }
             } else {
