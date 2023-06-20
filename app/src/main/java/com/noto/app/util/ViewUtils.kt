@@ -491,15 +491,14 @@ fun BottomAppBar.isHiddenAsFlow() = callbackFlow {
 fun TextView.setHighlightedText(text: String, term: String, color: NotoColor, matchIndices: IntRange? = null) {
     val indices = text.indicesOf(term, ignoreCase = true).filter { it.first < it.last }
     val colorResource = context?.colorResource(color.toResource()) ?: return
-    val lightColorResource = colorResource.withDefaultAlpha(DisabledAlpha)
+    val lightColorResource = context?.colorAttributeResource(R.attr.notoSecondaryColor)?.withDefaultAlpha(DisabledAlpha / 2) ?: return
     val onColorResource = context?.colorAttributeResource(R.attr.notoBackgroundColor) ?: return
-    val isDarkColor = color == NotoColor.Black || color == NotoColor.Gray
+    val onLightColorResource = context?.colorAttributeResource(R.attr.notoPrimaryColor) ?: return
 
     val highlightedText = text.toSpannable().apply {
         indices.forEach { range ->
-            val foregroundColorSpan = ForegroundColorSpan(colorResource)
             val backgroundColorSpan = CustomBackgroundColorSpan(context, colorResource, onColorResource, textSize)
-            val lightBackgroundColorSpan = CustomBackgroundColorSpan(context, lightColorResource, onColorResource, textSize)
+            val lightBackgroundColorSpan = CustomBackgroundColorSpan(context, lightColorResource, onLightColorResource, textSize)
             val boldFontSpan = context.tryLoadingFontResource(R.font.nunito_black)?.style?.let(::StyleSpan)
             val boldSpan = StyleSpan(Typeface.BOLD)
             val startIndex = range.first.coerceIn(0, this.length)
@@ -509,11 +508,7 @@ fun TextView.setHighlightedText(text: String, term: String, color: NotoColor, ma
                 setSpan(boldSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
                 if (boldFontSpan != null) setSpan(boldFontSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             } else {
-                if (isDarkColor) {
-                    setSpan(lightBackgroundColorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                } else {
-                    setSpan(foregroundColorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-                }
+                setSpan(lightBackgroundColorSpan, startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
         }
     }
