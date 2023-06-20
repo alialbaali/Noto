@@ -717,10 +717,14 @@ class NoteFragment : Fragment() {
         }
 
         ibPrevious.setOnClickListener {
+            etNoteTitle.clearFocus()
+            etNoteBody.clearFocus()
             viewModel.selectPreviousFindInNoteIndex()
         }
 
         ibNext.setOnClickListener {
+            etNoteTitle.clearFocus()
+            etNoteBody.clearFocus()
             viewModel.selectNextFindInNoteIndex()
         }
     }
