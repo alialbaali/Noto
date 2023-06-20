@@ -156,6 +156,11 @@ class SettingsRepositoryImpl(
         .map { it ?: true }
         .flowOn(dispatcher)
 
+    override val previewAutoScroll: Flow<Boolean> = storage.data
+        .map { preferences -> preferences[SettingsKeys.PreviewAutoScroll] }
+        .map { it ?: true }
+        .flowOn(dispatcher)
+
     override fun getFilteredNotesScrollingPosition(model: FilteredItemModel): Flow<Int> = storage.data
         .map { preferences -> preferences[SettingsKeys.FilteredItemModel(model)] }
         .map { it ?: 0 }
@@ -464,6 +469,12 @@ class SettingsRepositoryImpl(
     override suspend fun updateContinuousSearch(isEnabled: Boolean) {
         withContext(dispatcher) {
             storage.edit { preferences -> preferences[SettingsKeys.ContinuousSearch] = isEnabled }
+        }
+    }
+
+    override suspend fun updatePreviewAutoScroll(isEnabled: Boolean) {
+        withContext(dispatcher) {
+            storage.edit { preferences -> preferences[SettingsKeys.PreviewAutoScroll] = isEnabled }
         }
     }
 

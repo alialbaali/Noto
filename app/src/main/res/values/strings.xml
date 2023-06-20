@@ -437,6 +437,10 @@
     <string name="continuous_search">Continuous Search</string>
     <!-- Description of the "Continuous Search" settings option. -->
     <string name="continuous_search_description">Whether to pass the search term to the note screen.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">Preview auto-scroll</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">Whether to enable auto-scroll for notes in preview mode.</string>
     <string name="remember_scrolling_position">Remember scrolling position</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Whether to store the scrolling position in folders, and notes.</string>

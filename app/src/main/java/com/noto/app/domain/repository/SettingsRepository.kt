@@ -52,6 +52,8 @@ interface SettingsRepository {
 
     val continuousSearch: Flow<Boolean>
 
+    val previewAutoScroll: Flow<Boolean>
+
     fun getFilteredNotesScrollingPosition(model: FilteredItemModel): Flow<Int>
 
     fun getWidgetFolderId(widgetId: Int): Flow<Long>
@@ -141,5 +143,7 @@ interface SettingsRepository {
     suspend fun updateQuickExit(enabled: Boolean)
 
     suspend fun updateContinuousSearch(isEnabled: Boolean)
+
+    suspend fun updatePreviewAutoScroll(isEnabled: Boolean)
 
 }

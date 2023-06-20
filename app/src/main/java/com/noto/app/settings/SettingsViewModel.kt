@@ -79,6 +79,9 @@ class SettingsViewModel(
     val continuousSearch = settingsRepository.continuousSearch
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
 
+    val previewAutoScroll = settingsRepository.previewAutoScroll
+        .stateIn(viewModelScope, SharingStarted.Eagerly, true)
+
     var folderIdType = FolderIdType.MainInterface
         private set
 
@@ -194,6 +197,10 @@ class SettingsViewModel(
 
     fun toggleContinuousSearch() = viewModelScope.launch {
         settingsRepository.updateContinuousSearch(!continuousSearch.value)
+    }
+
+    fun togglePreviewAutoScroll() = viewModelScope.launch {
+        settingsRepository.updatePreviewAutoScroll(!previewAutoScroll.value)
     }
 
     fun emitIsImportFinished() = viewModelScope.launch {

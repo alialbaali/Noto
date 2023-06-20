@@ -108,6 +108,7 @@ class GeneralSettingsFragment : Fragment() {
                         .collect { value = it.getTitle(context) }
                 }
                 val continuousSearch by viewModel.continuousSearch.collectAsState()
+                val previewAutoScroll by viewModel.previewAutoScroll.collectAsState()
 
                 Screen(title = stringResource(id = R.string.general)) {
                     SettingsSection {
@@ -209,6 +210,15 @@ class GeneralSettingsFragment : Fragment() {
                             onClick = { viewModel.toggleContinuousSearch() },
                             description = stringResource(id = R.string.continuous_search_description),
                             painter = painterResource(id = R.drawable.ic_round_continuous_search_24),
+                        )
+
+
+                        SettingsItem(
+                            title = stringResource(id = R.string.preview_auto_scroll),
+                            type = SettingsItemType.Switch(previewAutoScroll),
+                            onClick = { viewModel.togglePreviewAutoScroll() },
+                            description = stringResource(id = R.string.preview_auto_scroll_description),
+                            painter = painterResource(id = R.drawable.ic_round_carousel_24),
                         )
                     }
                 }
