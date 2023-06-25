@@ -21,24 +21,24 @@
             app:navigationIcon="@drawable/ic_round_back_24">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/spacing_normal"
                 android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_weight="1"
-                    android:orientation="vertical"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_width="0dp">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_folder_title"
                         style="@style/ToolbarTitleTextAppearance"
-                        android:gravity="center_vertical"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
                         tools:text="@string/title"
                         tools:textColor="@color/colorAccentTeal" />
 
@@ -54,9 +54,9 @@
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/tv_notes_count_rtl"
                         style="@style/SubtitleTextView"
-                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         app:fontFamily="@font/nunito_semibold"
                         tools:text="7 / 11 Notes" />
 
@@ -65,10 +65,10 @@
                 <com.google.android.material.progressindicator.CircularProgressIndicator
                     android:id="@+id/indicator"
                     style="@style/ProgressIndicator"
-                    android:indeterminate="false"
-                    android:contentDescription="@string/progress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:contentDescription="@string/progress"
+                    android:indeterminate="false"
                     app:indicatorSize="24dp"
                     tools:progress="50" />
             </LinearLayout>
@@ -82,9 +82,9 @@
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bab"
-        android:layout_gravity="bottom"
-        android:layout_height="wrap_content"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
         android:paddingStart="0dp"
         android:paddingEnd="0dp"
         app:addElevationShadow="true"
@@ -105,15 +105,29 @@
             android:id="@+id/ll"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:paddingHorizontal="@dimen/spacing_normal"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/spacing_normal">
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_unarchive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/unarchive"
+                android:src="@drawable/ic_round_unarchive_24"
+                android:visibility="gone"
+                app:backgroundTint="?attr/notoSurfaceColor"
+                app:elevation="0dp"
+                app:rippleColor="?attr/notoSecondaryColor"
+                app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
+                app:tint="?attr/notoPrimaryColor" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_previous"
-                android:src="@drawable/ic_round_previous_page_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/previous"
+                android:src="@drawable/ic_round_previous_page_24"
                 app:backgroundTint="?attr/notoSurfaceColor"
                 app:elevation="0dp"
                 app:rippleColor="?attr/notoSecondaryColor"
@@ -122,15 +136,28 @@
 
             <Space
                 android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_next"
-                android:src="@drawable/ic_round_next_page_24"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/next"
+                android:src="@drawable/ic_round_next_page_24"
+                app:backgroundTint="?attr/notoSurfaceColor"
+                app:elevation="0dp"
+                app:rippleColor="?attr/notoSecondaryColor"
+                app:shapeAppearanceOverlay="@style/FabShapeAppearanceOverlay"
+                app:tint="?attr/notoPrimaryColor" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/delete"
+                android:src="@drawable/ic_round_delete_24"
+                android:visibility="gone"
                 app:backgroundTint="?attr/notoSurfaceColor"
                 app:elevation="0dp"
                 app:rippleColor="?attr/notoSecondaryColor"

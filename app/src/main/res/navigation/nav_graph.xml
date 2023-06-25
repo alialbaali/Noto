@@ -183,6 +183,9 @@
             android:id="@+id/action_folderArchiveFragment_to_noteFragment"
             app:destination="@id/noteFragment" />
         <action
+            android:id="@+id/action_folderArchiveFragment_to_notePagerFragment"
+            app:destination="@id/notePagerFragment" />
+        <action
             android:id="@+id/action_folderArchiveFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />
     </fragment>
@@ -653,6 +656,13 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/notePagerFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="is_archive"
+            android:defaultValue="false"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_notePagerFragment_to_confirmation_dialog_fragment"
+            app:destination="@id/confirmationDialogFragment" />
     </fragment>
     <dialog
         android:id="@+id/screenBrightnessLevelDialogFragment"
@@ -725,6 +735,9 @@
         <action
             android:id="@+id/action_filteredFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />
+        <action
+            android:id="@+id/action_filteredFragment_to_notePagerFragment"
+            app:destination="@id/notePagerFragment" />
     </fragment>
     <dialog
         android:id="@+id/reportIssueDialogFragment"

@@ -147,8 +147,14 @@ class FilteredFragment : Fragment() {
 
         activity?.onBackPressedDispatcher?.addCallback {
             when {
+                viewModel.isSelection.value -> if (viewModel.isSearchEnabled.value) {
+                    viewModel.disableSearch()
+                } else {
+                    viewModel.disableSelection()
+                    viewModel.deselectAllNotes()
+                }
+
                 viewModel.isSearchEnabled.value -> viewModel.disableSearch()
-                viewModel.selectedNotesGroupedByFolder.isNotEmpty() -> viewModel.deselectAllNotes()
                 viewModel.quickExit.value -> activity?.finish()
                 else -> navController?.navigateSafely(FilteredFragmentDirections.actionFilteredFragmentToMainFragment(exit = true))
             }
@@ -196,7 +202,8 @@ class FilteredFragment : Fragment() {
                     viewModel.notesGroupedByFolderVisibility,
                     viewModel.font,
                     viewModel.searchTerm,
-                ) { notes, notesVisibility, font, searchTerm ->
+                    viewModel.isSelection,
+                ) { notes, notesVisibility, font, searchTerm, isSelection ->
                     val isEmpty = notes.getOrDefault(emptyMap()).isEmpty()
                     val isEmptySelection = notes.getOrDefault(emptyMap()).flatMap { it.value }.none { it.isSelected }
                     bab.menu?.forEach { menuItem ->
@@ -207,7 +214,7 @@ class FilteredFragment : Fragment() {
                             menuItem.icon?.alpha = if (isEmptySelection) DisabledAlpha else EnabledAlpha
                         }
                     }
-                    setupNotesGroupedByFolder(notes, notesVisibility, font, searchTerm)
+                    setupNotesGroupedByFolder(notes, notesVisibility, font, searchTerm, isSelection)
                 }.launchIn(lifecycleScope)
             }
 
@@ -422,6 +429,7 @@ class FilteredFragment : Fragment() {
         notesVisibility: Map<Folder, Boolean>,
         font: Font,
         searchTerm: String,
+        isSelection: Boolean,
     ) {
         val isArchivedModel = args.model == FilteredItemModel.Archived
 
@@ -484,10 +492,21 @@ class FilteredFragment : Fragment() {
                                             previewSize(folder.notePreviewSize)
                                             isShowCreationDate(folder.isShowNoteCreationDate)
                                             isManualSorting(false)
-                                            isSelection(isArchivedModel)
+                                            isSelection(isArchivedModel && isSelection)
                                             onClickListener { _ ->
                                                 if (isArchivedModel) {
-                                                    if (model.isSelected) viewModel.deselectNote(model.note.id) else viewModel.selectNote(model.note.id)
+                                                    if (isSelection) {
+                                                        if (model.isSelected) viewModel.deselectNote(model.note.id) else viewModel.selectNote(model.note.id)
+                                                    } else {
+                                                        navController?.navigateSafely(
+                                                            FilteredFragmentDirections.actionFilteredFragmentToNotePagerFragment(
+                                                                model.note.folderId,
+                                                                model.note.id,
+                                                                notes.map { it.note.id }.toLongArray(),
+                                                                isArchive = true,
+                                                            )
+                                                        )
+                                                    }
                                                 } else {
                                                     navController
                                                         ?.navigateSafely(
@@ -502,6 +521,7 @@ class FilteredFragment : Fragment() {
                                             }
                                             onLongClickListener { _ ->
                                                 if (isArchivedModel) {
+                                                    viewModel.enableSelection()
                                                     if (model.isSelected) viewModel.deselectNote(model.note.id) else viewModel.selectNote(model.note.id)
                                                 } else {
                                                     navController

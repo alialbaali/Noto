@@ -46,7 +46,7 @@ val appModule = module {
 
     viewModel { NoteListWidgetConfigViewModel(it.get(), get(), get(), get(), get(), get()) }
 
-    viewModel { NotePagerViewModel(get(), get(), get(), it[0], it[1], it[2]) }
+    viewModel { NotePagerViewModel(get(), get(),get(), it[0], it[1], it[2], it[3]) }
 
     viewModel { FilteredViewModel(get(), get(), get(), get(), get(), it.get()) }
 

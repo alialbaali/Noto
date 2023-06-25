@@ -56,6 +56,9 @@ class FilteredViewModel(
     val quickExit = settingsRepository.quickExit
         .stateIn(viewModelScope, SharingStarted.Eagerly, false)
 
+    private val mutableIsSelection = MutableStateFlow(false)
+    val isSelection get() = mutableIsSelection.asStateFlow()
+
     val selectedNotesGroupedByFolder
         get() = notesGroupedByFolder.value
             .getOrDefault(emptyMap())
@@ -92,6 +95,7 @@ class FilteredViewModel(
                         .toMap()
                         .let { UiState.Success(it) }
                 }
+
                 FilteredItemModel.Recent -> {
                     mutableNotesGroupedByDateVisibility.value = notes
                         .map { it.accessDate.toLocalDate() }
@@ -107,6 +111,7 @@ class FilteredViewModel(
                         .toSortedMap(compareByDescending { it })
                         .let { UiState.Success(it) }
                 }
+
                 FilteredItemModel.Scheduled -> {
                     mutableNotesGroupedByDateVisibility.value = notes
                         .mapNotNull { it.reminderDate?.toLocalDate() }
@@ -122,6 +127,7 @@ class FilteredViewModel(
                         .toSortedMap(compareByDescending { it })
                         .let { UiState.Success(it) }
                 }
+
                 FilteredItemModel.Archived -> {
                     mutableNotesGroupedByFolderVisibility.value = folders.associateWith { notesGroupedByFolderVisibility.value[it] ?: true }
                     mutableNotesGroupedByFolder.value = notes
@@ -144,6 +150,16 @@ class FilteredViewModel(
                 }
             }
         }.launchIn(viewModelScope)
+
+        notesGroupedByFolder
+            .onEach { notesState ->
+                val isNoneSelected = notesState.getOrDefault(emptyMap()).none { it.value.none { it.isSelected } }
+                if (isNoneSelected) {
+                    disableSelection()
+                    deselectAllNotes()
+                }
+            }
+            .launchIn(viewModelScope)
     }
 
     fun toggleVisibilityForFolder(folderId: Long) {
@@ -183,6 +199,7 @@ class FilteredViewModel(
             FilteredItemModel.All, FilteredItemModel.Archived -> {
                 mutableNotesGroupedByFolderVisibility.value = notesGroupedByFolderVisibility.value.mapValues { true }
             }
+
             FilteredItemModel.Recent, FilteredItemModel.Scheduled -> {
                 mutableNotesGroupedByDateVisibility.value = notesGroupedByDateVisibility.value.mapValues { true }
             }
@@ -194,6 +211,7 @@ class FilteredViewModel(
             FilteredItemModel.All, FilteredItemModel.Archived -> {
                 mutableNotesGroupedByFolderVisibility.value = notesGroupedByFolderVisibility.value.mapValues { false }
             }
+
             FilteredItemModel.Recent, FilteredItemModel.Scheduled -> {
                 mutableNotesGroupedByDateVisibility.value = notesGroupedByDateVisibility.value.mapValues { false }
             }
@@ -256,4 +274,13 @@ class FilteredViewModel(
             }
         }
     }
+
+    fun enableSelection() {
+        mutableIsSelection.value = true
+    }
+
+    fun disableSelection() {
+        mutableIsSelection.value = false
+    }
+
 }

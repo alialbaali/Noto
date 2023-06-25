@@ -61,7 +61,8 @@ class FolderArchiveFragment : Fragment() {
             viewModel.archivedNotes,
             viewModel.font,
             viewModel.folder,
-        ) { archivedNotes, font, folder ->
+            viewModel.isSelection,
+        ) { archivedNotes, font, folder, isSelection ->
             val notesCount = archivedNotes.getOrDefault(emptyList()).count()
             val selectedNotesCount = archivedNotes.getOrDefault(emptyList()).count { it.isSelected }
             if (selectedNotesCount != 0) {
@@ -77,7 +78,7 @@ class FolderArchiveFragment : Fragment() {
                 fabDelete.disable()
             }
 
-            setupArchivedNotes(archivedNotes, font, folder)
+            setupArchivedNotes(archivedNotes, font, folder, isSelection)
         }.launchIn(lifecycleScope)
 
         if (isCurrentLocaleArabic()) {
@@ -112,6 +113,8 @@ class FolderArchiveFragment : Fragment() {
                 val text = context.quantityStringResource(R.plurals.note_is_unarchived, selectedNotes.count(), selectedNotes.count())
                 val drawableId = R.drawable.ic_round_unarchive_24
                 root.snackbar(text, drawableId, anchorViewId, folderColor)
+                context.updateAllWidgetsData()
+                context.updateNoteListWidgets()
             }
         }
 
@@ -163,7 +166,12 @@ class FolderArchiveFragment : Fragment() {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private fun FolderArchiveFragmentBinding.setupArchivedNotes(state: UiState<List<NoteItemModel>>, font: Font, folder: Folder) {
+    private fun FolderArchiveFragmentBinding.setupArchivedNotes(
+        state: UiState<List<NoteItemModel>>,
+        font: Font,
+        folder: Folder,
+        isSelection: Boolean,
+    ) {
         if (state is UiState.Success) {
             val archivedNotes = state.value
             rv.withModels {
@@ -195,17 +203,29 @@ class FolderArchiveFragment : Fragment() {
                                     font(font)
                                     searchTerm("")
                                     previewSize(folder.notePreviewSize)
-                                    isSelection(true)
+                                    isSelection(isSelection)
                                     isShowCreationDate(folder.isShowNoteCreationDate)
                                     color(folder.color)
                                     isManualSorting(false)
                                     onClickListener { _ ->
-                                        if (archivedNoteModel.isSelected)
-                                            viewModel.deselectArchivedNote(archivedNoteModel.note.id)
-                                        else
-                                            viewModel.selectArchivedNote(archivedNoteModel.note.id)
+                                        if (isSelection) {
+                                            if (archivedNoteModel.isSelected)
+                                                viewModel.deselectArchivedNote(archivedNoteModel.note.id)
+                                            else
+                                                viewModel.selectArchivedNote(archivedNoteModel.note.id)
+                                        } else {
+                                            navController?.navigateSafely(
+                                                FolderArchiveFragmentDirections.actionFolderArchiveFragmentToNotePagerFragment(
+                                                    args.folderId,
+                                                    archivedNoteModel.note.id,
+                                                    archivedNotes.map { it.note.id }.toLongArray(),
+                                                    isArchive = true,
+                                                )
+                                            )
+                                        }
                                     }
                                     onLongClickListener { _ ->
+                                        viewModel.enableSelection()
                                         if (archivedNoteModel.isSelected)
                                             viewModel.deselectArchivedNote(archivedNoteModel.note.id)
                                         else

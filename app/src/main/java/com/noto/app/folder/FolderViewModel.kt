@@ -165,6 +165,16 @@ class FolderViewModel(
             }
             .launchIn(viewModelScope)
 
+        archivedNotes
+            .onEach { notesState ->
+                val isNoneSelected = notesState.getOrDefault(emptyList()).none { it.isSelected }
+                if (isNoneSelected) {
+                    disableSelection()
+                    deselectAllArchivedNotes()
+                }
+            }
+            .launchIn(viewModelScope)
+
         notes.combine(previewAutoScroll) { state, isEnabled ->
             if (isEnabled) {
                 val models = state.getOrDefault(emptyList()).filter { it.isSelected }
