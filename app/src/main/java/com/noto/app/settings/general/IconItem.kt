@@ -15,7 +15,7 @@ import com.noto.app.util.*
 
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.icon_item)
+@EpoxyModelClass
 abstract class IconItem : EpoxyModelWithHolder<IconItem.Holder>() {
 
     @EpoxyAttribute
@@ -39,6 +39,8 @@ abstract class IconItem : EpoxyModelWithHolder<IconItem.Holder>() {
         }
         root.setOnClickListener(onClickListener)
     }
+
+    override fun getDefaultLayout(): Int = R.layout.icon_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: IconItemBinding

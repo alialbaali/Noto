@@ -38,8 +38,10 @@ fun DividerItem(
 }
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.divider_item)
+@EpoxyModelClass
 abstract class DividerItem : EpoxyModelWithHolder<DividerItem.Holder>() {
+
+    override fun getDefaultLayout(): Int = R.layout.divider_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: DividerItemBinding

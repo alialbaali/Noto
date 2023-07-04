@@ -13,16 +13,17 @@ object Libraries {
 
 object Versions {
     const val JavaTime = "1.1.5"
-    const val Kotlin = "1.8.10"
-    const val Android = "7.4.2"
-    const val Epoxy = "5.1.1"
-    const val Compose = "1.4.4"
+    const val Kotlin = "1.8.22"
+    const val Android = "8.0.2"
+    const val Epoxy = "5.1.3"
+    const val Compose = "1.4.8"
 }
 
 object App {
     const val VersionName = "2.3.0-Beta1"
     const val VersionCode = 55
     const val ID = "com.noto"
+    const val Namespace = "com.noto.app"
     const val MinSDK = 21
     const val CompileSDK = 33
     const val BuildTools = "33.0.0"

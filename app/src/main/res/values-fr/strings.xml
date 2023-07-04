@@ -423,6 +423,14 @@
     <string name="quick_exit">Quitter rapidement</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Quitter l\'application immédiatement en appuyant sur le bouton retour.</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">Recherche en continu</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">Transmettre ou non le terme de recherche à l\'écran des notes.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">Défilement automatique de l\'aperçu</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">Activer ou non le défilement automatique des notes en mode aperçu.</string>
     <string name="remember_scrolling_position">Mémoriser la position de défilement</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Stocker la position de défilement dans les dossiers et les notes.</string>
@@ -590,7 +598,7 @@
     <string name="release_2_3_0_reminder">Refonte des Rappels, sélecteurs de date et d\'heure pour correspondre avec le thème Noto.</string>
     <string name="release_2_3_0_selection">Amélioration de la gestion de la sélection et du glissement des notes en n\'utilisant que des clics longs.</string>
     <string name="release_2_3_0_find_in_note">Fonctionnalité de recherche dans les notes et défilement automatique vers le texte recherché dans les notes.</string>
-    <string name="release_2_3_0_archive">Prise en charge de la sélection multiple des notes et des actions rapides pour les écrans d\'archives.</string>
+    <string name="release_2_3_0_archive">Prise en charge de la sélection des notes et des actions rapides pour les écrans d\'archives.</string>
     <string name="release_2_3_0_sorting">Entités triées en fonction des lettres diacritiques des langues.</string>
     <string name="release_2_3_0_reading_mode">Affichage d\'un compteur et d\'un indicateur de progression lorsque plusieurs notes sont ouvertes en mode lecture.</string>
     <string name="release_2_3_0_whats_new">La fenêtre de dialogue et l\'écran \"Quoi de neuf\" ont été repensés.</string>

@@ -20,7 +20,7 @@ private const val Delimiter = "..."
 private const val WhiteSpace = ' '
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.undo_redo_item)
+@EpoxyModelClass
 abstract class UndoRedoItem : EpoxyModelWithHolder<UndoRedoItem.Holder>() {
 
     @EpoxyAttribute
@@ -97,6 +97,8 @@ abstract class UndoRedoItem : EpoxyModelWithHolder<UndoRedoItem.Holder>() {
         ll.setOnClickListener(onClickListener)
         ibCopy.setOnClickListener(onCopyClickListener)
     }
+
+    override fun getDefaultLayout(): Int = R.layout.undo_redo_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: UndoRedoItemBinding

@@ -467,6 +467,14 @@
     <string name="quick_exit">Rychlé ukončení</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Zda se má aplikace po stisknutí tlačítka zpět okamžitě ukončit.</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">Průběžné vyhledávání</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">Zda se má předat hledaný výraz do poznámky.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">Náhled automatického posouvání</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">Whether to enable auto-scroll for notes in preview mode.</string>
     <string name="remember_scrolling_position">Zachovat pozici rolování</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Zda uložit pozici posouvání ve složkách a poznámkách.</string>
@@ -634,7 +642,7 @@
     <string name="release_2_3_0_reminder">Přepracovaná stránka připomenutí, datum &amp; posuvník času je nyní shodný s motivem Noto.</string>
     <string name="release_2_3_0_selection">Přepracován způsob výběru poznámek &amp; přetahování je řešeno pouze dlouhými kliknutími.</string>
     <string name="release_2_3_0_find_in_note">Podporována funkcionalita Najít v poznámce a automatické posouvání do vyhledáváného textu v poznámkách.</string>
-    <string name="release_2_3_0_archive">Podporován vyběr vícero poznámek &amp; rychlých akcí pro snímky archivů.</string>
+    <string name="release_2_3_0_archive">Supported notes selection &amp; quick actions for Archive screens.</string>
     <string name="release_2_3_0_sorting">Třídění entit s ohledem na diakritická písmena jazyků.</string>
     <string name="release_2_3_0_reading_mode">Zobrazené počítadlo a ukazatel průběhu při otevření více poznámek v režimu čtení.</string>
     <string name="release_2_3_0_whats_new">Předělán dialog &amp; obrazovka Co je nového.</string>

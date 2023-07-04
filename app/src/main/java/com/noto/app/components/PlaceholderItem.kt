@@ -11,7 +11,7 @@ import com.noto.app.databinding.PlaceholderItemBinding
 import com.noto.app.util.setFullSpan
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.placeholder_item)
+@EpoxyModelClass
 abstract class PlaceholderItem : EpoxyModelWithHolder<PlaceholderItem.Holder>() {
 
     @EpoxyAttribute
@@ -25,6 +25,8 @@ abstract class PlaceholderItem : EpoxyModelWithHolder<PlaceholderItem.Holder>() 
         super.onViewAttachedToWindow(holder)
         holder.binding.root.setFullSpan()
     }
+
+    override fun getDefaultLayout(): Int = R.layout.placeholder_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: PlaceholderItemBinding

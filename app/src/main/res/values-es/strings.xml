@@ -424,6 +424,14 @@
     <string name="quick_exit">Salida rápida</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Salir de la aplicación inmediatamente al pulsar el botón atrás.</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">Búsqueda continua</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">Pasar el término de búsqueda a la pantalla de la nota.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">Vista previa de desplazamiento automático</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">Activar el desplazamiento automático para las notas en modo previsualización.</string>
     <string name="remember_scrolling_position">Recordar posición de desplazamiento</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Almacenar la posición de desplazamiento en carpetas y notas.</string>
@@ -591,7 +599,7 @@
     <string name="release_2_3_0_reminder">Recordatorios rediseñados, fecha &amp; selectores de hora para coincidir con el tema Noto.</string>
     <string name="release_2_3_0_selection">Revisada la forma en que la selección de notas &amp; arrastrar es manejada usando solo clics largos.</string>
     <string name="release_2_3_0_find_in_note">Función de búsqueda en Notas soportada, y desplazamiento automático al texto buscado en notas.</string>
-    <string name="release_2_3_0_archive">Selección de notas múltiples &amp; acciones rápidas para pantallas de Archivo.</string>
+    <string name="release_2_3_0_archive">Selección de notas admitida &amp; acciones rápidas para pantallas de archivo.</string>
     <string name="release_2_3_0_sorting">Entidades ordenadas con respecto a las letras diacríticas de los idiomas.</string>
     <string name="release_2_3_0_reading_mode">Se muestra el contador, y el indicador de progreso cuando se abren varias notas en modo lectura.</string>
     <string name="release_2_3_0_whats_new">Se ha reiniciado el nuevo cuadro de diálogo &amp; pantalla.</string>

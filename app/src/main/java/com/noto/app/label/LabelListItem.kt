@@ -10,11 +10,10 @@ import com.noto.app.R
 import com.noto.app.databinding.LabelListItemBinding
 import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.NotoColor
-import com.noto.app.util.BounceEdgeEffectFactory
 import com.noto.app.util.setFullSpan
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.label_list_item)
+@EpoxyModelClass
 abstract class LabelListItem : EpoxyModelWithHolder<LabelListItem.Holder>() {
 
     @EpoxyAttribute
@@ -72,6 +71,8 @@ abstract class LabelListItem : EpoxyModelWithHolder<LabelListItem.Holder>() {
         super.onViewAttachedToWindow(holder)
         holder.binding.root.setFullSpan()
     }
+
+    override fun getDefaultLayout(): Int = R.layout.label_list_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: LabelListItemBinding

@@ -16,7 +16,9 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NamedNavArgument
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.navArgument
 import androidx.navigation.navOptions
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -84,30 +86,51 @@ class AppActivity : BaseActivity() {
             when (val interfaceId = viewModel.mainInterfaceId.value) {
                 FilteredItemModel.All.id -> inflateGraphAndSetStartDestination(
                     R.id.filteredFragment,
-                    bundleOf(Constants.Model to FilteredItemModel.All)
+                    listOf(
+                        navArgument(Constants.Model) {
+                            defaultValue = FilteredItemModel.All
+                        }
+                    ),
                 )
+
                 FilteredItemModel.Recent.id -> inflateGraphAndSetStartDestination(
                     R.id.filteredFragment,
-                    bundleOf(Constants.Model to FilteredItemModel.Recent)
+                    listOf(
+                        navArgument(Constants.Model) {
+                            defaultValue = FilteredItemModel.Recent
+                        }
+                    ),
                 )
+
                 FilteredItemModel.Scheduled.id -> inflateGraphAndSetStartDestination(
                     R.id.filteredFragment,
-                    bundleOf(Constants.Model to FilteredItemModel.Scheduled)
+                    listOf(
+                        navArgument(Constants.Model) {
+                            defaultValue = FilteredItemModel.Scheduled
+                        }
+                    ),
                 )
+
                 FilteredItemModel.Archived.id -> inflateGraphAndSetStartDestination(
                     R.id.filteredFragment,
-                    bundleOf(Constants.Model to FilteredItemModel.Archived)
+                    listOf(
+                        navArgument(Constants.Model) {
+                            defaultValue = FilteredItemModel.Archived
+                        }
+                    ),
                 )
+
                 AllFoldersId -> {
-                    val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
+                    val args = listOf(navArgument(Constants.FolderId) { defaultValue = Folder.GeneralFolderId })
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                     if (navController.currentDestination?.id != R.id.mainFragment && viewModel.shouldNavigateToMainFragment) {
                         navController.navigate(R.id.mainFragment)
                         viewModel.setShouldNavigateToMainFragment(false)
                     }
                 }
+
                 else -> {
-                    val args = bundleOf(Constants.FolderId to interfaceId)
+                    val args = listOf(navArgument(Constants.FolderId) { defaultValue = interfaceId })
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                 }
             }
@@ -122,10 +145,12 @@ class AppActivity : BaseActivity() {
                 val content = intent.getStringExtra(Intent.EXTRA_TEXT)
                 showSelectFolderDialog(content)
             }
+
             Constants.Intent.ActionCreateFolder -> {
                 if (navController.currentDestination?.id != R.id.newFolderFragment)
                     navController.navigate(R.id.newFolderFragment)
             }
+
             Constants.Intent.ActionCreateNote -> {
                 val folderId = intent.getLongExtra(Constants.FolderId, 0)
                 if (folderId == 0L) {
@@ -137,12 +162,14 @@ class AppActivity : BaseActivity() {
                     navController.navigate(R.id.noteFragment, args)
                 }
             }
+
             Constants.Intent.ActionOpenFolder -> {
                 val folderId = intent.getLongExtra(Constants.FolderId, 0)
                 val args = bundleOf(Constants.FolderId to folderId)
                 navController.popBackStack(R.id.folderFragment, true)
                 navController.navigate(R.id.folderFragment, args)
             }
+
             Constants.Intent.ActionOpenNote -> {
                 val folderId = intent.getLongExtra(Constants.FolderId, 0)
                 val noteId = intent.getLongExtra(Constants.NoteId, 0)
@@ -151,6 +178,7 @@ class AppActivity : BaseActivity() {
                 navController.navigate(R.id.folderFragment, args)
                 navController.navigate(R.id.noteFragment, args)
             }
+
             Constants.Intent.ActionSettings -> {
                 if (navController.currentDestination?.id != R.id.settingsFragment)
                     navController.navigate(R.id.settingsFragment)
@@ -215,14 +243,17 @@ class AppActivity : BaseActivity() {
                             workManager.enqueue(createVaultTimeoutWorkRequest(1, TimeUnit.HOURS))
                             viewModel.setScheduledVaultTimeout(VaultTimeout.After1Hour)
                         }
+
                         VaultTimeout.After4Hours -> {
                             workManager.enqueue(createVaultTimeoutWorkRequest(4, TimeUnit.HOURS))
                             viewModel.setScheduledVaultTimeout(VaultTimeout.After4Hours)
                         }
+
                         VaultTimeout.After12Hours -> {
                             workManager.enqueue(createVaultTimeoutWorkRequest(12, TimeUnit.HOURS))
                             viewModel.setScheduledVaultTimeout(VaultTimeout.After12Hours)
                         }
+
                         else -> viewModel.setScheduledVaultTimeout(null)
                     }
             }
@@ -250,10 +281,13 @@ class AppActivity : BaseActivity() {
         .addTag(Constants.VaultTimeout)
         .build()
 
-    private fun inflateGraphAndSetStartDestination(startDestination: Int, args: Bundle? = null) {
+    private fun inflateGraphAndSetStartDestination(startDestinationId: Int, args: List<NamedNavArgument> = emptyList()) {
         val graph = navController.navInflater.inflate(R.navigation.nav_graph)
-            .apply { this.startDestination = startDestination }
-        navController.setGraph(graph, args)
+            .apply {
+                this.setStartDestination(startDestinationId)
+                args.forEach { this.addArgument(it.name, it.argument) }
+            }
+        navController.setGraph(graph, null)
     }
 
     @SuppressLint("RestrictedApi")

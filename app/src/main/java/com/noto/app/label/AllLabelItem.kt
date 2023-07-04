@@ -12,7 +12,7 @@ import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.*
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.all_label_item)
+@EpoxyModelClass
 abstract class AllLabelItem : EpoxyModelWithHolder<AllLabelItem.Holder>() {
 
     @EpoxyAttribute
@@ -40,6 +40,8 @@ abstract class AllLabelItem : EpoxyModelWithHolder<AllLabelItem.Holder>() {
         }
         tvAllLabel.setOnClickListener(onClickListener)
     }
+
+    override fun getDefaultLayout(): Int = R.layout.all_label_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: AllLabelItemBinding

@@ -14,7 +14,7 @@ import com.noto.app.util.setFullSpan
 import com.noto.app.util.toResource
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.progress_indicator_item)
+@EpoxyModelClass
 abstract class ProgressIndicatorItem : EpoxyModelWithHolder<ProgressIndicatorItem.Holder>() {
 
     @EpoxyAttribute
@@ -32,6 +32,8 @@ abstract class ProgressIndicatorItem : EpoxyModelWithHolder<ProgressIndicatorIte
         super.onViewAttachedToWindow(holder)
         holder.binding.root.setFullSpan()
     }
+
+    override fun getDefaultLayout(): Int = R.layout.progress_indicator_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: ProgressIndicatorItemBinding

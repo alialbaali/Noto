@@ -467,6 +467,14 @@
     <string name="quick_exit">Spartusis išėjimas</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Iš karto išeiti iš programėlės spustelėjus mygtuką „Atgal“.</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">Tolydžioji paieška</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">Perduoti paieškos užklausą užrašų ekranui.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">Automatinio slinkimo peržiūra</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">Įjungti automatinį slinkimą užrašams peržiūros režime.</string>
     <string name="remember_scrolling_position">Įsiminti slinkimo padėtį</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Išsaugoti aplankų ir užrašų slinkimo padėtis.</string>
@@ -634,7 +642,7 @@
     <string name="release_2_3_0_reminder">Perkurti priminimų, datos ir laiko parinkikliai, kad sutaptų su Noto tema.</string>
     <string name="release_2_3_0_selection">Pataisytas užrašų pasirinkimas ir vilkimas naudojant tik ilgus spustelėjimus.</string>
     <string name="release_2_3_0_find_in_note">„Rasti užraše“ funkcionalumas ir automatinis slinkimas į ieškomą tekstą užrašuose.</string>
-    <string name="release_2_3_0_archive">Kelių užrašų pasirinkimas ir spartieji veiksmai archyvo ekranams.</string>
+    <string name="release_2_3_0_archive">Užrašų pasirinkimas ir spartieji veiksmai archyvo ekranams.</string>
     <string name="release_2_3_0_sorting">Esybių rikiavimas atsižvelgiant į kalbos diakritines raides.</string>
     <string name="release_2_3_0_reading_mode">Skaitiklis ir progreso indikatorius, kai yra atidaryti keli užrašai skaitymo režime.</string>
     <string name="release_2_3_0_whats_new">Perkurtas „Kas naujo“ dialogo ekranas.</string>

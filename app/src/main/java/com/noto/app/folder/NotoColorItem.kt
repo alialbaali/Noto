@@ -15,7 +15,7 @@ import com.noto.app.util.toColorStateList
 import com.noto.app.util.toResource
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.noto_color_item)
+@EpoxyModelClass
 abstract class NotoColorItem : EpoxyModelWithHolder<NotoColorItem.Holder>() {
 
     @EpoxyAttribute
@@ -35,6 +35,8 @@ abstract class NotoColorItem : EpoxyModelWithHolder<NotoColorItem.Holder>() {
         rb.setOnClickListener(onClickListener)
         TooltipCompat.setTooltipText(rb, notoColor.name)
     }
+
+    override fun getDefaultLayout(): Int = R.layout.noto_color_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: NotoColorItemBinding

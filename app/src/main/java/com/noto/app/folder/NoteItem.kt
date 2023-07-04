@@ -26,7 +26,7 @@ import com.noto.app.util.*
 private const val WidthRatio = 0.9F
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.note_item)
+@EpoxyModelClass
 abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @EpoxyAttribute
     lateinit var model: NoteItemModel
@@ -176,6 +176,8 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
             root.isEnabled = true
         }
     }
+
+    override fun getDefaultLayout(): Int = R.layout.note_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: NoteItemBinding

@@ -14,7 +14,7 @@ import com.noto.app.util.*
 private val StrokeWidth = 1.dp
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.filtered_item)
+@EpoxyModelClass
 abstract class FilteredItem : EpoxyModelWithHolder<FilteredItem.Holder>() {
 
     @EpoxyAttribute
@@ -45,14 +45,17 @@ abstract class FilteredItem : EpoxyModelWithHolder<FilteredItem.Holder>() {
                     tvTitle.text = context.stringResource(R.string.all)
                     ivIcon.setImageResource(R.drawable.ic_round_all_notes_24)
                 }
+
                 FilteredItemModel.Recent -> {
                     tvTitle.text = context.stringResource(R.string.recent)
                     ivIcon.setImageResource(R.drawable.ic_round_schedule_24)
                 }
+
                 FilteredItemModel.Scheduled -> {
                     tvTitle.text = context.stringResource(R.string.scheduled)
                     ivIcon.setImageResource(R.drawable.ic_round_notifications_active_24)
                 }
+
                 FilteredItemModel.Archived -> {
                     tvTitle.text = context.stringResource(R.string.archived)
                     ivIcon.setImageResource(R.drawable.ic_round_inventory_24)
@@ -75,6 +78,8 @@ abstract class FilteredItem : EpoxyModelWithHolder<FilteredItem.Holder>() {
             }
         } ?: Unit
     }
+
+    override fun getDefaultLayout(): Int = R.layout.filtered_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: FilteredItemBinding

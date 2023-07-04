@@ -86,7 +86,7 @@ val Fragment.navController: NavController?
 val NavController.lastDestinationIdOrNull: Long?
     @SuppressLint("RestrictedApi")
     get() {
-        val args = backStack.lastOrNull {
+        val args = currentBackStack.value.lastOrNull {
             it.destination.id == R.id.folderFragment || it.destination.id == R.id.filteredFragment
         }?.arguments
 

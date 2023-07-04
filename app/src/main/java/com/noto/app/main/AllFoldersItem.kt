@@ -13,7 +13,7 @@ import com.noto.app.util.*
 private val StrokeWidth = 1.dp
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.all_folders_item)
+@EpoxyModelClass
 abstract class AllFoldersItem : EpoxyModelWithHolder<AllFoldersItem.Holder>() {
 
     @EpoxyAttribute
@@ -43,6 +43,8 @@ abstract class AllFoldersItem : EpoxyModelWithHolder<AllFoldersItem.Holder>() {
             }
         } ?: Unit
     }
+
+    override fun getDefaultLayout(): Int = R.layout.all_folders_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: AllFoldersItemBinding

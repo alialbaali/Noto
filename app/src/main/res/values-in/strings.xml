@@ -401,6 +401,14 @@
     <string name="quick_exit">Keluar Cepat</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Menyetel apakah akan segera keluar dari aplikasi saat menekan tombol kembali.</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">Continuous Search</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">Whether to pass the search term to the note screen.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">Preview auto-scroll</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">Whether to enable auto-scroll for notes in preview mode.</string>
     <string name="remember_scrolling_position">Ingat posisi gulir</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Menentukan apakah akan menyimpan posisi scrolling di map, dan catatan.</string>
@@ -568,7 +576,7 @@
     <string name="release_2_3_0_reminder">Mendesign ulang Pengingat, Tanggal &amp; Pemilih waktu agar cocok dengan tema Noto.</string>
     <string name="release_2_3_0_selection">Merevisi cara pemilihan catatan &amp; menyeret dapat dilakukan dengan hanya menggunakan klik panjang.</string>
     <string name="release_2_3_0_find_in_note">Mendukung fungsi Temukan di Catatan, dan pengguliran otomatis ke teks yang dicari di catatan.</string>
-    <string name="release_2_3_0_archive">Mendukung pemilihan beberapa catatan &amp; tindakan cepat untuk layar Arsip.</string>
+    <string name="release_2_3_0_archive">Supported notes selection &amp; quick actions for Archive screens.</string>
     <string name="release_2_3_0_sorting">Entitas yang disortir sehubungan dengan huruf diakritik \"tanda tambahan\" bahasa.</string>
     <string name="release_2_3_0_reading_mode">Menampilkan penghitung, dan indikator kemajuan saat beberapa catatan dibuka dalam Mode Membaca.</string>
     <string name="release_2_3_0_whats_new">Mendesain ulang layar &amp; Dialog Apa yang Baru.</string>

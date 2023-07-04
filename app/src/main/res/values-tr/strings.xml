@@ -423,6 +423,14 @@
     <string name="quick_exit">Hızlı Çıkış</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Geri düğmesine basıldığında uygulamadan hemen çıkılıp çıkılmayacağını ayarlar.</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">Kesintisiz arama</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">Arama teriminin not ekranına aktarılıp aktarılmayacağını ayarlayın.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">Önizleme modunda kaydırma</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">Önizleme modunda notlar için otomatik kaydırmanın etkinleştirilip etkinleştirilmeyeceğini ayarlayın.</string>
     <string name="remember_scrolling_position">Kaydırma konumunu hatırla</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Klasörlerde ve notlardaki kaydırma konumunun hatırlanıp hatırlanmayacağını belirleyin.</string>
@@ -590,7 +598,7 @@
     <string name="release_2_3_0_reminder">Hatırlatıcı, Tarih ve Saat seçiciler Noto temasıyla uyum sağlayacak şekilde yeniden tasarlandı.</string>
     <string name="release_2_3_0_selection">Not seçimi ve notların sürüklenmesinin uzun basma ile gerçekleştirilme prensibi revize edildi.</string>
     <string name="release_2_3_0_find_in_note">\"Notun içinde bul\" işlevi ve arama eşleşmeleri arasında otomatik geçiş desteği getirildi.</string>
-    <string name="release_2_3_0_archive">Arşiv ekranları için çoklu not seçimi ve hızlı eylem desteği getirildi.</string>
+    <string name="release_2_3_0_archive">Arşiv ekranları için not seçimi ve hızlı eylem desteği getirildi.</string>
     <string name="release_2_3_0_sorting">Alfabetik sırlamada artık dile özel harfler de dikkate alınıyor.</string>
     <string name="release_2_3_0_reading_mode">Artık Okuma Modu\'nda birden fazla not açıldığında bir sayaç ve ilerleme göstergesi gösterilecektir.</string>
     <string name="release_2_3_0_whats_new">Yenilikler sayfası yeniden tasarlandı.</string>

@@ -278,8 +278,8 @@
           Such as, "30 Notes • 3 Filtered • 8 Selected".
      -->
     <plurals name="notes_filtered_selected_count">
-        <item quantity="one">%1$d Notiz • %2$d verbleibend • %3$d ausgewählt</item>
-        <item quantity="other">%1$d Notizen • %2$d verbleibend • %3$d ausgewählt</item>
+        <item quantity="one">%1$d Notiz • %2$d gefiltert • %3$d ausgewählt</item>
+        <item quantity="other">%1$d Notizen • %2$d gefiltert • %3$d ausgewählt</item>
     </plurals>
     <plurals name="words_count">
         <item quantity="one">%d Wort</item>
@@ -423,6 +423,14 @@
     <string name="quick_exit">Schnelles Beenden</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Legt fest, ob die App beim Drücken der Zurück-Taste sofort beendet werden soll.</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">Fortgesetzte Suche</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">Legt fest, ob der Suchbegriff auch innerhalb der Notiz hervorgehoben werden soll.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">Preview auto-scroll</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">Whether to enable auto-scroll for notes in preview mode.</string>
     <string name="remember_scrolling_position">Scrollposition beibehalten</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Legt fest, ob die Scrollposition von Ordnern und Notizen gespeichert wird.</string>

@@ -12,7 +12,7 @@ import com.noto.app.domain.model.Label
 import com.noto.app.domain.model.NotoColor
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.label_order_item)
+@EpoxyModelClass
 abstract class LabelOrderItem : EpoxyModelWithHolder<LabelOrderItem.Holder>() {
 
     @EpoxyAttribute
@@ -29,6 +29,8 @@ abstract class LabelOrderItem : EpoxyModelWithHolder<LabelOrderItem.Holder>() {
         tvLabel.text = label.title
         ibDrag.setOnTouchListener(onDragHandleTouchListener)
     }
+
+    override fun getDefaultLayout(): Int = R.layout.label_order_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: LabelOrderItemBinding

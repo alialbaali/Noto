@@ -107,7 +107,7 @@ fun HeaderItem(
 }
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.header_item)
+@EpoxyModelClass
 abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
 
     @EpoxyAttribute
@@ -162,6 +162,8 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
         super.onViewAttachedToWindow(holder)
         holder.binding.root.setFullSpan()
     }
+
+    override fun getDefaultLayout(): Int = R.layout.header_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: HeaderItemBinding

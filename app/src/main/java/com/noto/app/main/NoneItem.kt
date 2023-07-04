@@ -10,7 +10,7 @@ import com.noto.app.R
 import com.noto.app.databinding.NoneItemBinding
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.none_item)
+@EpoxyModelClass
 abstract class NoneItem : EpoxyModelWithHolder<NoneItem.Holder>() {
 
     @EpoxyAttribute
@@ -24,6 +24,8 @@ abstract class NoneItem : EpoxyModelWithHolder<NoneItem.Holder>() {
         root.isSelected = isSelected
         root.setOnClickListener(onClickListener)
     }
+
+    override fun getDefaultLayout(): Int = R.layout.none_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: NoneItemBinding

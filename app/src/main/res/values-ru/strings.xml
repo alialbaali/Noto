@@ -127,7 +127,7 @@
     <!-- Similar to Recent Notes filtered view but for archived notes. -->
     <string name="archived">В архиве</string>
     <!-- Similar to Recent Notes filtered view but for notes that have reminders set. -->
-    <string name="scheduled">Запланировано</string>
+    <string name="scheduled">В планах</string>
     <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
     <string name="folder_archive">%s, архив</string>
     <string name="unarchive">Разархивировать</string>
@@ -264,7 +264,7 @@
         <item quantity="one">%d Заметка</item>
         <item quantity="few">%d Заметок</item>
         <item quantity="many">%d Заметок</item>
-        <item quantity="other">%d Заметок</item>
+        <item quantity="other">%d Заметки</item>
     </plurals>
     <!-- Filtered notes count is shown when a label is selected, or text is searched.
          Such as "30 Notes • 5 Filtered".
@@ -295,14 +295,14 @@
     </plurals>
     <plurals name="words_count">
         <item quantity="one">%d Слово</item>
-        <item quantity="few">%d Слов</item>
+        <item quantity="few">%d Слова</item>
         <item quantity="many">%d Слов</item>
         <item quantity="other">%d Слов</item>
     </plurals>
     <!-- Selected words count is shown when text is selected in a note. -->
     <plurals name="words_selected_count">
         <item quantity="one">%1$d Слово • %2$d Выбрано</item>
-        <item quantity="few">%1$d Слово • %2$d Выбрано</item>
+        <item quantity="few">%1$d Слова • %2$d Выбрано</item>
         <item quantity="many">%1$d Слово • %2$d Выбрано</item>
         <item quantity="other">%1$d Слов • %2$d Выбрано</item>
     </plurals>
@@ -310,7 +310,7 @@
         The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
     <plurals name="words_found_count">
         <item quantity="one">%1$d Слово • %2$d / %3$d Найдено</item>
-        <item quantity="few">%1$d Слово • %2$d / %3$d Найдено</item>
+        <item quantity="few">%1$d Слова • %2$d / %3$d Найдено</item>
         <item quantity="many">%1$d Слово • %2$d / %3$d Найдено</item>
         <item quantity="other">%1$d Слов • %2$d / %3$d Найдено</item>
     </plurals>
@@ -365,7 +365,7 @@
     <string name="folder_is_empty">Папка пуста.</string>
     <string name="notes">Заметки</string>
     <!-- The count of the selected notes that have been merged. -->
-    <string name="notes_are_merged">%d заметок объединены в новую заметку.</string>
+    <string name="notes_are_merged">%d Заметок объединены в новую заметку.</string>
     <plurals name="note_is_archived">
         <item quantity="one">Заметка была архивирована.</item>
         <item quantity="few">%d Заметок было архивировано.</item>
@@ -467,6 +467,14 @@
     <string name="quick_exit">Быстрый выход</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Следует ли немедленно выйти из приложения при нажатии кнопки \"Назад\".</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">Непрерывный Поиск</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">Передать ли поисковый запрос на экран заметок.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">Авто прокрутка в режиме предпросмотра</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">Включить автоматическую прокрутку заметок в режиме предварительного просмотра.</string>
     <string name="remember_scrolling_position">Запомнить положение прокрутки</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Сохранять позицию прокрутки в папках и заметках.</string>

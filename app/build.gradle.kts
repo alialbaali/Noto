@@ -1,16 +1,17 @@
-import java.util.*
+import java.util.Properties
 
 plugins {
     id(Plugins.AndroidApplication)
     kotlin(Plugins.KotlinAndroid)
     id(Plugins.NavigationSafeArgs)
-    kotlin("plugin.serialization") version "1.8.21"
-    id("com.google.devtools.ksp") version "1.8.10-1.0.9"
+    kotlin("plugin.serialization") version "1.8.22"
+    id("com.google.devtools.ksp") version "1.8.22-1.0.11"
 }
 
 android {
     compileSdk = App.CompileSDK
     buildToolsVersion = App.BuildTools
+    namespace = App.Namespace
     signingConfigs {
         create("release") {
             val properties = Properties().apply {

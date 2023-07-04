@@ -15,7 +15,7 @@ import com.noto.app.util.colorResource
 import com.noto.app.util.toResource
 
 @SuppressLint("NonConstantResourceId")
-@EpoxyModelClass(layout = R.layout.note_label_item)
+@EpoxyModelClass
 abstract class NoteLabelItem : EpoxyModelWithHolder<NoteLabelItem.Holder>() {
 
     @EpoxyAttribute
@@ -31,6 +31,8 @@ abstract class NoteLabelItem : EpoxyModelWithHolder<NoteLabelItem.Holder>() {
         }
         tvLabel.text = label.title
     }
+
+    override fun getDefaultLayout(): Int = R.layout.note_label_item
 
     class Holder : EpoxyHolder() {
         lateinit var binding: NoteLabelItemBinding

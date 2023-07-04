@@ -511,6 +511,14 @@
     <string name="quick_exit">الخروج السريع</string>
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">إذا كان سيتم الخروج من التطبيق فورا عند الضغط على زر الرجوع.</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">البحث المستمر</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">ما إذا كان سيتم تمرير مصطلح البحث إلى شاشة الملاحظة.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">معاينة التمرير التلقائي</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">ما إذا كان لتمكين التمرير التلقائي للملاحظات في وضع المعاينة.</string>
     <string name="remember_scrolling_position">تذكر موضع التمرير</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">ما إذا كان سيتم تخزين موضع التمرير في المجلدات والملاحظات.</string>
