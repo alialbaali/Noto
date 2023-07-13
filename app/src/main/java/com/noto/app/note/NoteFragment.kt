@@ -412,6 +412,16 @@ class NoteFragment : Fragment() {
             }
         }.launchIn(lifecycleScope)
 
+        etNoteTitle.textAsFlow(emitInitialText = true)
+            .filterNotNull()
+            .onEach { nsv.smoothScrollBy(0, etNoteTitle.height) }
+            .launchIn(lifecycleScope)
+
+        etNoteBody.textAsFlow(emitInitialText = true)
+            .filterNotNull()
+            .onEach { nsv.smoothScrollBy(0, etNoteBody.height) }
+            .launchIn(lifecycleScope)
+
         savedStateHandle?.getLiveData<String>(Constants.NoteTitle)
             ?.observe(viewLifecycleOwner) { title ->
                 viewModel.setIsUndoOrRedo()
