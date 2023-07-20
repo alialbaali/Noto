@@ -4,19 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.fragment.navArgs
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
-import com.noto.app.databinding.NoteListOrderingDialogFragmentBinding
+import com.noto.app.components.BottomSheetDialog
+import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.GroupingOrder
 import com.noto.app.domain.model.SortingOrder
-import com.noto.app.util.colorResource
-import com.noto.app.util.stringResource
+import com.noto.app.toColor
 import com.noto.app.util.toResource
-import com.noto.app.util.withBinding
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -30,46 +34,37 @@ class NoteListOrderingDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = NoteListOrderingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        tb.tvDialogTitle.text = context?.stringResource(R.string.ordering)
+    ): View? = context?.let { context ->
+        ComposeView(context).apply {
+            setContent {
+                val folder by viewModel.folder.collectAsState()
+                val sortingTypes = remember { SortingOrder.values().toList() }
+                val groupingTypes = remember { GroupingOrder.values().toList() }
 
-        viewModel.folder
-            .onEach { folder ->
-                context?.let { context ->
-                    val color = context.colorResource(folder.color.toResource())
-                    tb.tvDialogTitle.setTextColor(color)
-                    tb.vHead.background?.mutate()?.setTint(color)
-                }
-
-                if (args.isSorting) {
-                    when (folder.sortingOrder) {
-                        SortingOrder.Ascending -> rbAscending.isChecked = true
-                        SortingOrder.Descending -> rbDescending.isChecked = true
-                    }
-                } else {
-                    when (folder.groupingOrder) {
-                        GroupingOrder.Ascending -> rbAscending.isChecked = true
-                        GroupingOrder.Descending -> rbDescending.isChecked = true
+                BottomSheetDialog(title = stringResource(R.string.ordering), headerColor = folder.color.toColor()) {
+                    if (args.isSorting) {
+                        sortingTypes.forEach { type ->
+                            SelectableDialogItem(
+                                selected = folder.sortingOrder == type,
+                                onClick = { viewModel.updateSortingOrder(type).invokeOnCompletion { dismiss() } },
+                                modifier = Modifier.fillMaxWidth(),
+                            ) {
+                                Text(text = stringResource(id = type.toResource()))
+                            }
+                        }
+                    } else {
+                        groupingTypes.forEach { type ->
+                            SelectableDialogItem(
+                                selected = folder.groupingOrder == type,
+                                onClick = { viewModel.updateGroupingOrder(type).invokeOnCompletion { dismiss() } },
+                                modifier = Modifier.fillMaxWidth(),
+                            ) {
+                                Text(text = stringResource(id = type.toResource()))
+                            }
+                        }
                     }
                 }
             }
-            .launchIn(lifecycleScope)
-
-        rbAscending.setOnClickListener {
-            if (args.isSorting) {
-                viewModel.updateSortingOrder(SortingOrder.Ascending)
-            } else {
-                viewModel.updateGroupingOrder(GroupingOrder.Ascending)
-            }.invokeOnCompletion { dismiss() }
         }
-
-        rbDescending.setOnClickListener {
-            if (args.isSorting) {
-                viewModel.updateSortingOrder(SortingOrder.Descending)
-            } else {
-                viewModel.updateGroupingOrder(GroupingOrder.Descending)
-            }.invokeOnCompletion { dismiss() }
-        }
-
     }
 }

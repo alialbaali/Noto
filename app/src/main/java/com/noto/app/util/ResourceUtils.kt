@@ -4,21 +4,10 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.util.TypedValue
-import androidx.annotation.AttrRes
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
-import androidx.annotation.DimenRes
-import androidx.annotation.DrawableRes
-import androidx.annotation.FontRes
-import androidx.annotation.PluralsRes
-import androidx.annotation.StringRes
+import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
 import com.noto.app.R
-import com.noto.app.domain.model.FilteringType
-import com.noto.app.domain.model.Icon
-import com.noto.app.domain.model.Language
-import com.noto.app.domain.model.NotoColor
-import com.noto.app.domain.model.ScreenBrightnessLevel
+import com.noto.app.domain.model.*
 
 fun Context.colorStateListResource(@ColorRes id: Int) = ResourcesCompat.getColorStateList(resources, id, null)
 fun Context.colorResource(@ColorRes id: Int) = ResourcesCompat.getColor(resources, id, null)
@@ -132,6 +121,16 @@ fun FilteringType.toDescriptionResource(): Int = when (this) {
     FilteringType.Inclusive -> R.string.inclusive_description
     FilteringType.Exclusive -> R.string.exclusive_description
     FilteringType.Strict -> R.string.strict_description
+}
+
+fun SortingOrder.toResource(): Int = when (this) {
+    SortingOrder.Ascending -> R.string.ascending
+    SortingOrder.Descending -> R.string.descending
+}
+
+fun GroupingOrder.toResource(): Int = when (this) {
+    GroupingOrder.Ascending -> R.string.ascending
+    GroupingOrder.Descending -> R.string.descending
 }
 
 val Number.dp
