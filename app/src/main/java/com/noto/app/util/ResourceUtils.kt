@@ -140,6 +140,13 @@ fun Grouping.toResource(): Int = when (this) {
     Grouping.AccessDate -> R.string.access_date
 }
 
+fun NoteListSortingType.toResource() = when (this) {
+    NoteListSortingType.Manual -> R.string.manual
+    NoteListSortingType.CreationDate -> R.string.creation_date
+    NoteListSortingType.Alphabetical -> R.string.alphabetical
+    NoteListSortingType.AccessDate -> R.string.access_date
+}
+
 val Number.dp
     get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
