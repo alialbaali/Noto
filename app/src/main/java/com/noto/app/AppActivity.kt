@@ -202,7 +202,7 @@ class AppActivity : BaseActivity() {
                 navController.navigate(R.id.noteFragment, args)
             }
         if (navController.currentDestination?.id != R.id.selectFolderDialogFragment) {
-            val args = bundleOf(Constants.FilteredFolderIds to longArrayOf())
+            val args = bundleOf(Constants.FilteredFolderIds to longArrayOf(), Constants.Title to stringResource(R.string.select_folder))
             navController.navigate(R.id.selectFolderDialogFragment, args)
         }
     }
