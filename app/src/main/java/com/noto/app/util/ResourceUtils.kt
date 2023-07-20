@@ -133,6 +133,13 @@ fun GroupingOrder.toResource(): Int = when (this) {
     GroupingOrder.Descending -> R.string.descending
 }
 
+fun Grouping.toResource(): Int = when (this) {
+    Grouping.None -> R.string.none
+    Grouping.CreationDate -> R.string.creation_date
+    Grouping.Label -> R.string.label
+    Grouping.AccessDate -> R.string.access_date
+}
+
 val Number.dp
     get() = TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_DIP,
