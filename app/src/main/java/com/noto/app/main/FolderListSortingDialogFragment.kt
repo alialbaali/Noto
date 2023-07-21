@@ -4,15 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.stringResource
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
-import com.noto.app.databinding.FolderListSortingDialogFragmentBinding
+import com.noto.app.components.BottomSheetDialog
+import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.FolderListSortingType
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import com.noto.app.util.Constants
+import com.noto.app.util.navController
+import com.noto.app.util.toResource
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FolderListSortingDialogFragment : BaseDialogFragment() {
@@ -23,32 +30,31 @@ class FolderListSortingDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = FolderListSortingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        tb.tvDialogTitle.text = context?.stringResource(R.string.folders_sorting)
+    ): View? = context?.let { context ->
+        val navController = navController
+        val savedStateHandle = navController?.previousBackStackEntry?.savedStateHandle
 
-        viewModel.sortingType
-            .onEach { sortingType ->
-                when (sortingType) {
-                    FolderListSortingType.Alphabetical -> rbAlphabetical.isChecked = true
-                    FolderListSortingType.CreationDate -> rbCreationDate.isChecked = true
-                    FolderListSortingType.Manual -> rbManual.isChecked = true
+        ComposeView(context).apply {
+            if (navController == null || savedStateHandle == null) return@apply
+
+            setContent {
+                val sortingType by viewModel.sortingType.collectAsState()
+                val types = remember { FolderListSortingType.values().toList() }
+                val updatedSortingType by savedStateHandle.getStateFlow<FolderListSortingType?>(key = Constants.SortingType, initialValue = null)
+                    .collectAsState()
+
+                BottomSheetDialog(title = stringResource(R.string.sorting)) {
+                    types.forEach { type ->
+                        SelectableDialogItem(
+                            selected = type == (updatedSortingType ?: sortingType),
+                            onClick = { navController.previousBackStackEntry?.savedStateHandle?.set(Constants.SortingType, type); dismiss() },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Text(text = stringResource(id = type.toResource()))
+                        }
+                    }
                 }
             }
-            .launchIn(lifecycleScope)
-
-        rbManual.setOnClickListener {
-            viewModel.updateSortingType(FolderListSortingType.Manual)
-                .invokeOnCompletion { dismiss() }
-        }
-
-        rbCreationDate.setOnClickListener {
-            viewModel.updateSortingType(FolderListSortingType.CreationDate)
-                .invokeOnCompletion { dismiss() }
-        }
-
-        rbAlphabetical.setOnClickListener {
-            viewModel.updateSortingType(FolderListSortingType.Alphabetical)
-                .invokeOnCompletion { dismiss() }
         }
     }
 }
