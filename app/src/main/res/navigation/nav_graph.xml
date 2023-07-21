@@ -380,7 +380,9 @@
         android:label="LabelDialogFragment">
         <action
             android:id="@+id/action_labelDialogFragment_to_newLabelDialogFragment"
-            app:destination="@id/newLabelDialogFragment" />
+            app:destination="@id/newLabelDialogFragment"
+            app:popUpTo="@id/labelDialogFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="folder_id"
             app:argType="long" />
@@ -390,7 +392,9 @@
             app:argType="long" />
         <action
             android:id="@+id/action_labelDialogFragment_to_reorderLabelDialogFragment"
-            app:destination="@id/reorderLabelDialogFragment" />
+            app:destination="@id/reorderLabelDialogFragment"
+            app:popUpTo="@id/labelDialogFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_labelDialogFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />

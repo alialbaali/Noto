@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.LabelDialogFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
@@ -59,14 +59,12 @@ class LabelDialogFragment : BaseDialogFragment() {
     private fun LabelDialogFragmentBinding.setupListeners() {
         tvEditLabel.setOnClickListener {
             context?.updateAllWidgetsData()
-            dismiss()
             navController
                 ?.navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToNewLabelDialogFragment(args.folderId, args.labelId))
         }
 
         tvReorderLabel.setOnClickListener {
             context?.updateAllWidgetsData()
-            dismiss()
             navController
                 ?.navigateSafely(LabelDialogFragmentDirections.actionLabelDialogFragmentToReorderLabelDialogFragment(args.folderId, args.labelId))
         }
