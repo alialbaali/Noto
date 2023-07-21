@@ -53,6 +53,8 @@
     <string name="telegram_community">Telegram community</string>
     <!-- Description of the "Telegram community" settings option. -->
     <string name="telegram_community_description">Join the community to engage with other Noto users, and get the latest news.</string>
+    <!-- Text for Telegram banner in Settings & What's new dialog. -->
+    <string name="join_telegram">Join The Telegram Community!</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Notes font</string>
     <string name="share_app_with_others">Share Noto with others</string>

@@ -113,6 +113,7 @@ private val NunitoFontFamily = FontFamily(
     Font(R.font.nunito_semibold_italic, FontWeight.SemiBold, FontStyle.Italic),
     Font(R.font.nunito_bold, FontWeight.Bold, FontStyle.Normal),
     Font(R.font.nunito_bold_italic, FontWeight.Bold, FontStyle.Italic),
+    Font(R.font.nunito_black, FontWeight.Black, FontStyle.Normal)
 )
 
 private val initialTypography = Typography()

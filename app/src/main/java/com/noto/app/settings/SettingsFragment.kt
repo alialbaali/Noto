@@ -10,14 +10,7 @@ import androidx.activity.addCallback
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -39,6 +32,7 @@ import androidx.fragment.app.Fragment
 import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.Screen
+import com.noto.app.components.TelegramBanner
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
@@ -79,6 +73,7 @@ class SettingsFragment : Fragment() {
             isTransitionGroup = true
             setContent {
                 Screen(title = stringResource(id = R.string.settings)) {
+                    TelegramBanner()
                     MainSection()
                     ExportImportSection()
                     ShareAndRateSection()
