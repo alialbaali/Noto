@@ -52,7 +52,7 @@
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Reddit bendruomenė</string>
     <!-- Description of the "Reddit community" settings option. -->
-    <string name="reddit_community_description">Prisijunkite prie bendruomenės, kad bendrautumėte su kitais Noto naudotojais ir gautumėte paskiausias naujienas.</string>
+    <string name="telegram_community_description">Prisijunkite prie bendruomenės, kad bendrautumėte su kitais Noto naudotojais ir gautumėte paskiausias naujienas.</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Užrašų šriftas</string>
     <string name="share_app_with_others">Dalinkitės Noto su kitais</string>

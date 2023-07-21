@@ -52,7 +52,7 @@
     <!-- The link of the reddit community of Noto. -->
     <string name="reddit_community">Reddit topluluğu</string>
     <!-- Description of the "Reddit community" settings option. -->
-    <string name="reddit_community_description">Diğer kullanıcılarla etkileşim kurmak ve tüm gelişmelerden haberdar olmak için Reddit topluluğuna katılın.</string>
+    <string name="telegram_community_description">Diğer kullanıcılarla etkileşim kurmak ve tüm gelişmelerden haberdar olmak için Reddit topluluğuna katılın.</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Yazı tipi</string>
     <string name="share_app_with_others">Noto\'yu başkalarıyla paylaşın</string>

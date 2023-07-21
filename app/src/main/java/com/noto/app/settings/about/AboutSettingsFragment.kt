@@ -17,11 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
 import com.noto.app.components.Screen
-import com.noto.app.settings.SettingsItem
-import com.noto.app.settings.SettingsItemType
-import com.noto.app.settings.SettingsSection
-import com.noto.app.settings.SupportNotoColor
-import com.noto.app.settings.SupportNotoUrl
+import com.noto.app.settings.*
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
@@ -134,14 +130,14 @@ class AboutSettingsFragment : Fragment() {
                         )
 
                         SettingsItem(
-                            title = stringResource(id = R.string.reddit_community),
+                            title = stringResource(id = R.string.telegram_community),
                             type = SettingsItemType.None,
                             onClick = {
-                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.Noto.RedditUrl))
+                                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(Constants.Noto.TelegramUrl))
                                 startActivity(intent)
                             },
-                            description = stringResource(id = R.string.reddit_community_description),
-                            painter = painterResource(id = R.drawable.ic_reddit_logo),
+                            description = stringResource(id = R.string.telegram_community_description),
+                            painter = painterResource(id = R.drawable.ic_telegram_logo),
                         )
                     }
 
