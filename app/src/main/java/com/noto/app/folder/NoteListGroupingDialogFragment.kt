@@ -37,7 +37,7 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
         savedInstanceState: Bundle?,
     ): View? = context?.let { context ->
         val navController = navController
-        val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
+        val savedStateHandle = navController?.previousBackStackEntry?.savedStateHandle
 
         ComposeView(context).apply {
             if (navController == null || savedStateHandle == null) return@apply
