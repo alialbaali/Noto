@@ -17,8 +17,8 @@
     <a href="https://www.buymeacoffee.com/alialbaali">
         <img src="images/badges/BMC.svg" alt="Buy Me A Coffee" />
     </a>
-    <a href="https://www.reddit.com/r/notoapp/">
-        <img src="images/badges/Reddit.svg" alt="Reddit" />
+    <a href="https://t.me/notoapp">
+        <img src="images/badges/Telegram.svg" alt="Telegram" />
     </a>
     <a href="/LICENSE.md">
         <img src="images/badges/Apache.svg" alt="License" />
@@ -229,8 +229,8 @@ Contains all the UI logic.
 Feel free to join the community to stay up to date with the latest news.
 
 <div align="center">
-  <a href="https://www.reddit.com/r/notoapp/">
-    <img src="images/Reddit.png" alt="Reddit" width="150"/>
+  <a href="https://t.me/notoapp">
+    <img src="images/Telegram.svg" alt="Telegram"/>
   </a>
 </div>
 
