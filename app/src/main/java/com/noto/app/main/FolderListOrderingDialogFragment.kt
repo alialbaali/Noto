@@ -4,15 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.stringResource
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
-import com.noto.app.databinding.FolderListOrderingDialogFragmentBinding
+import com.noto.app.components.BottomSheetDialog
+import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.SortingOrder
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import com.noto.app.util.Constants
+import com.noto.app.util.navController
+import com.noto.app.util.toResource
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FolderListOrderingDialogFragment : BaseDialogFragment() {
@@ -23,26 +30,31 @@ class FolderListOrderingDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = FolderListOrderingDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        tb.tvDialogTitle.text = context?.stringResource(R.string.folders_ordering)
+    ): View? = context?.let { context ->
+        val navController = navController
+        val savedStateHandle = navController?.previousBackStackEntry?.savedStateHandle
 
-        viewModel.sortingOrder
-            .onEach { sortingOrder ->
-                when (sortingOrder) {
-                    SortingOrder.Ascending -> rbAscending.isChecked = true
-                    SortingOrder.Descending -> rbDescending.isChecked = true
+        ComposeView(context).apply {
+            if (navController == null || savedStateHandle == null) return@apply
+
+            setContent {
+                val sortingOrder by viewModel.sortingOrder.collectAsState()
+                val types = remember { SortingOrder.values().toList() }
+                val updatedSortingOrder by savedStateHandle.getStateFlow<SortingOrder?>(key = Constants.SortingOrder, initialValue = null)
+                    .collectAsState()
+
+                BottomSheetDialog(title = stringResource(R.string.ordering)) {
+                    types.forEach { type ->
+                        SelectableDialogItem(
+                            selected = type == (updatedSortingOrder ?: sortingOrder),
+                            onClick = { navController.previousBackStackEntry?.savedStateHandle?.set(Constants.SortingOrder, type); dismiss() },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Text(text = stringResource(id = type.toResource()))
+                        }
+                    }
                 }
             }
-            .launchIn(lifecycleScope)
-
-        rbAscending.setOnClickListener {
-            viewModel.updateSortingOrder(SortingOrder.Ascending)
-                .invokeOnCompletion { dismiss() }
-        }
-
-        rbDescending.setOnClickListener {
-            viewModel.updateSortingOrder(SortingOrder.Descending)
-                .invokeOnCompletion { dismiss() }
         }
     }
 }
