@@ -295,30 +295,6 @@ class FolderViewModel(
         noteRepository.updateNote(note.copy(position = position))
     }
 
-    fun updateSortingType(value: NoteListSortingType) = viewModelScope.launch {
-        if (value == NoteListSortingType.Manual)
-            folderRepository.updateFolder(
-                folder.value.copy(
-                    sortingType = value,
-                    sortingOrder = SortingOrder.Ascending
-                )
-            )
-        else
-            folderRepository.updateFolder(folder.value.copy(sortingType = value))
-    }
-
-    fun updateSortingOrder(value: SortingOrder) = viewModelScope.launch {
-        folderRepository.updateFolder(folder.value.copy(sortingOrder = value))
-    }
-
-    fun updateGroupingType(value: Grouping) = viewModelScope.launch {
-        folderRepository.updateFolder(folder.value.copy(grouping = value))
-    }
-
-    fun updateGroupingOrder(value: GroupingOrder) = viewModelScope.launch {
-        folderRepository.updateFolder(folder.value.copy(groupingOrder = value))
-    }
-
     fun selectNotoColor(notoColor: NotoColor) {
         mutableNotoColors.value = mutableNotoColors.value
             .mapTrueIfSameColor(notoColor)
@@ -350,10 +326,6 @@ class FolderViewModel(
 
     fun setSearchTerm(searchTerm: String) {
         mutableSearchTerm.value = searchTerm
-    }
-
-    fun updateFiltering(filteringType: FilteringType) = viewModelScope.launch {
-        folderRepository.updateFolder(folder.value.copy(filteringType = filteringType))
     }
 
     fun enableSelection() {
@@ -608,6 +580,24 @@ class FolderViewModel(
                 noteRepository.deleteNote(model.note)
             }
         }
+    }
+
+    fun updateFolderNotesView(
+        filteringType: FilteringType,
+        sortingType: NoteListSortingType,
+        sortingOrder: SortingOrder,
+        groupingType: Grouping,
+        groupingOrder: GroupingOrder,
+    ) = viewModelScope.launch {
+        folderRepository.updateFolder(
+            folder.value.copy(
+                filteringType = filteringType,
+                sortingType = sortingType,
+                sortingOrder = if (sortingType == NoteListSortingType.Manual) SortingOrder.Ascending else sortingOrder,
+                grouping = groupingType,
+                groupingOrder = groupingOrder,
+            )
+        )
     }
 
     private fun List<Pair<NotoColor, Boolean>>.mapTrueIfSameColor(notoColor: NotoColor) =

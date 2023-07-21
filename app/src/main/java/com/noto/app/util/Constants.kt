@@ -24,6 +24,11 @@ object Constants {
     const val Model = "model"
     const val EmailType = "mailto:"
     const val DisableSelection = "DisableSelection"
+    const val FilteringType = "FilteringType"
+    const val SortingType = "SortingType"
+    const val SortingOrder = "SortingOrder"
+    const val GroupingType = "GroupingType"
+    const val GroupingOrder = "GroupingOrder"
 
     object Intent {
         const val ActionCreateFolder = "com.noto.intent.action.CREATE_FOLDER"

@@ -4,14 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -21,13 +16,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.fragment.navArgs
 import com.noto.app.NotoTheme
 import com.noto.app.R
-import com.noto.app.components.BaseDialogFragment
-import com.noto.app.components.BottomSheetDialog
-import com.noto.app.components.BottomSheetDialogItem
-import com.noto.app.components.Group
-import com.noto.app.domain.model.Grouping
-import com.noto.app.domain.model.NoteListSortingType
+import com.noto.app.components.*
+import com.noto.app.domain.model.*
 import com.noto.app.toColor
+import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
 import com.noto.app.util.toResource
@@ -45,22 +37,37 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? = context?.let { context ->
+        val navController = navController
+        val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
+
         ComposeView(context).apply {
+            if (navController == null || savedStateHandle == null) return@apply
+
             setContent {
                 val folder by viewModel.folder.collectAsState()
+                val filteringType by savedStateHandle.getStateFlow<FilteringType?>(key = Constants.FilteringType, initialValue = null)
+                    .collectAsState()
+                val sortingType by savedStateHandle.getStateFlow<NoteListSortingType?>(key = Constants.SortingType, initialValue = null)
+                    .collectAsState()
+                val sortingOrder by savedStateHandle.getStateFlow<SortingOrder?>(key = Constants.SortingOrder, initialValue = null)
+                    .collectAsState()
+                val groupingType by savedStateHandle.getStateFlow<Grouping?>(key = Constants.GroupingType, initialValue = null)
+                    .collectAsState()
+                val groupingOrder by savedStateHandle.getStateFlow<GroupingOrder?>(key = Constants.GroupingOrder, initialValue = null)
+                    .collectAsState()
 
                 BottomSheetDialog(title = stringResource(R.string.notes_view), headerColor = folder.color.toColor()) {
                     BottomSheetDialogItem(
                         text = stringResource(id = R.string.filtering),
                         onClick = {
-                            navController?.navigateSafely(
+                            navController.navigateSafely(
                                 NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListFilteringDialogFragment(
                                     args.folderId
                                 )
                             )
                         },
                         painter = painterResource(id = R.drawable.ic_round_filtering_24),
-                        value = stringResource(id = folder.filteringType.toResource()),
+                        value = stringResource(id = filteringType?.toResource() ?: folder.filteringType.toResource()),
                         rippleColor = folder.color.toColor(),
                     )
 
@@ -70,21 +77,21 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                         BottomSheetDialogItem(
                             text = stringResource(id = R.string.sorting),
                             onClick = {
-                                navController?.navigateSafely(
+                                navController.navigateSafely(
                                     NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListSortingDialogFragment(
                                         args.folderId
                                     )
                                 )
                             },
                             painter = painterResource(id = R.drawable.ic_round_sorting_24),
-                            value = stringResource(id = folder.sortingType.toResource()),
+                            value = stringResource(id = sortingType?.toResource() ?: folder.sortingType.toResource()),
                             rippleColor = folder.color.toColor(),
                         )
 
                         BottomSheetDialogItem(
                             text = stringResource(id = R.string.ordering),
                             onClick = {
-                                navController?.navigateSafely(
+                                navController.navigateSafely(
                                     NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListOrderingDialogFragment(
                                         args.folderId,
                                         isSorting = true,
@@ -92,8 +99,8 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                                 )
                             },
                             painter = painterResource(id = R.drawable.ic_round_ordering_24),
-                            value = stringResource(id = folder.sortingOrder.toResource()),
-                            enabled = folder.sortingType != NoteListSortingType.Manual,
+                            value = stringResource(id = sortingOrder?.toResource() ?: folder.sortingOrder.toResource()),
+                            enabled = (sortingType ?: folder.sortingType) != NoteListSortingType.Manual,
                             rippleColor = folder.color.toColor(),
                         )
                     }
@@ -104,21 +111,21 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                         BottomSheetDialogItem(
                             text = stringResource(id = R.string.grouping),
                             onClick = {
-                                navController?.navigateSafely(
+                                navController.navigateSafely(
                                     NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListGroupingDialogFragment(
                                         args.folderId
                                     )
                                 )
                             },
                             painter = painterResource(id = R.drawable.ic_round_table_view_24),
-                            value = stringResource(id = folder.grouping.toResource()),
+                            value = stringResource(id = groupingType?.toResource() ?: folder.grouping.toResource()),
                             rippleColor = folder.color.toColor(),
                         )
 
                         BottomSheetDialogItem(
                             text = stringResource(id = R.string.ordering),
                             onClick = {
-                                navController?.navigateSafely(
+                                navController.navigateSafely(
                                     NoteListViewDialogFragmentDirections.actionNoteListViewDialogFragmentToNoteListOrderingDialogFragment(
                                         args.folderId,
                                         isSorting = false,
@@ -126,8 +133,8 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                                 )
                             },
                             painter = painterResource(id = R.drawable.ic_round_ordering_24),
-                            value = stringResource(id = folder.groupingOrder.toResource()),
-                            enabled = folder.grouping != Grouping.None,
+                            value = stringResource(id = groupingOrder?.toResource() ?: folder.groupingOrder.toResource()),
+                            enabled = (groupingType ?: folder.grouping) != Grouping.None,
                             rippleColor = folder.color.toColor(),
                         )
                     }
@@ -135,17 +142,19 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                     Spacer(modifier = Modifier.height(NotoTheme.dimensions.extraLarge))
 
                     Button(
-                        onClick = { dismiss() },
+                        text = stringResource(id = R.string.apply),
+                        onClick = {
+                            viewModel.updateFolderNotesView(
+                                filteringType = filteringType ?: folder.filteringType,
+                                sortingType = sortingType ?: folder.sortingType,
+                                sortingOrder = sortingOrder ?: folder.sortingOrder,
+                                groupingType = groupingType ?: folder.grouping,
+                                groupingOrder = groupingOrder ?: folder.groupingOrder,
+                            ).invokeOnCompletion { dismiss() }
+                        },
                         modifier = Modifier.fillMaxWidth(),
-                        shape = MaterialTheme.shapes.small,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = folder.color.toColor(),
-                            contentColor = MaterialTheme.colorScheme.onPrimary
-                        ),
-                        contentPadding = PaddingValues(NotoTheme.dimensions.medium),
-                    ) {
-                        Text(text = stringResource(id = R.string.apply), style = MaterialTheme.typography.titleMedium)
-                    }
+                        containerColor = folder.color.toColor(),
+                    )
                 }
             }
         }
