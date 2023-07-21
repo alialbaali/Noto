@@ -140,11 +140,17 @@ fun Grouping.toResource(): Int = when (this) {
     Grouping.AccessDate -> R.string.access_date
 }
 
-fun NoteListSortingType.toResource() = when (this) {
+fun NoteListSortingType.toResource(): Int = when (this) {
     NoteListSortingType.Manual -> R.string.manual
     NoteListSortingType.CreationDate -> R.string.creation_date
     NoteListSortingType.Alphabetical -> R.string.alphabetical
     NoteListSortingType.AccessDate -> R.string.access_date
+}
+
+fun FolderListSortingType.toResource(): Int = when (this) {
+    FolderListSortingType.Manual -> R.string.manual
+    FolderListSortingType.CreationDate -> R.string.creation_date
+    FolderListSortingType.Alphabetical -> R.string.alphabetical
 }
 
 val Number.dp

@@ -86,14 +86,12 @@ class MainViewModel(
         }
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    fun updateSortingType(value: FolderListSortingType) = viewModelScope.launch {
-        settingsRepository.updateSortingType(value)
-        if (value == FolderListSortingType.Manual)
-            updateSortingOrder(SortingOrder.Ascending)
-    }
-
-    fun updateSortingOrder(value: SortingOrder) = viewModelScope.launch {
-        settingsRepository.updateSortingOrder(value)
+    fun updateFoldersView(sortingType: FolderListSortingType, sortingOrder: SortingOrder) = viewModelScope.launch {
+        settingsRepository.updateSortingType(sortingType)
+        if (sortingType == FolderListSortingType.Manual)
+            settingsRepository.updateSortingOrder(SortingOrder.Ascending)
+        else
+            settingsRepository.updateSortingOrder(sortingOrder)
     }
 
     fun updateFolderPosition(folder: Folder, position: Int) = viewModelScope.launch {

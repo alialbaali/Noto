@@ -4,15 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import com.noto.app.NotoTheme
 import com.noto.app.R
-import com.noto.app.components.BaseDialogFragment
-import com.noto.app.databinding.FolderListViewDialogFragmentBinding
+import com.noto.app.components.*
 import com.noto.app.domain.model.FolderListSortingType
 import com.noto.app.domain.model.SortingOrder
-import com.noto.app.util.*
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import com.noto.app.util.Constants
+import com.noto.app.util.navController
+import com.noto.app.util.navigateSafely
+import com.noto.app.util.toResource
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FolderListViewDialogFragment : BaseDialogFragment() {
@@ -23,50 +32,57 @@ class FolderListViewDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = FolderListViewDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        tb.tvDialogTitle.text = context?.stringResource(R.string.folders_view)
+    ): View? = context?.let { context ->
+        val navController = navController
+        val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
 
-        viewModel.sortingType
-            .onEach { sortingType ->
-                context?.let { context ->
-                    tvSortingTypeValue.text = when (sortingType) {
-                        FolderListSortingType.Manual -> R.string.manual
-                        FolderListSortingType.CreationDate -> R.string.creation_date
-                        FolderListSortingType.Alphabetical -> R.string.alphabetical
-                    }.let(context::stringResource)
-                }
+        ComposeView(context).apply {
+            if (navController == null || savedStateHandle == null) return@apply
 
-                if (sortingType == FolderListSortingType.Manual) {
-                    llSortingOrder.isClickable = false
-                    llSortingOrder.disable()
-                } else {
-                    llSortingOrder.isClickable = true
-                    llSortingOrder.enable()
+            setContent {
+                val sortingType by viewModel.sortingType.collectAsState()
+                val sortingOrder by viewModel.sortingOrder.collectAsState()
+                val updatedSortingType by savedStateHandle.getStateFlow<FolderListSortingType?>(key = Constants.SortingType, initialValue = null)
+                    .collectAsState()
+                val updatedSortingOrder by savedStateHandle.getStateFlow<SortingOrder?>(key = Constants.SortingOrder, initialValue = null)
+                    .collectAsState()
+
+                BottomSheetDialog(title = stringResource(R.string.folders_view)) {
+                    Group {
+                        BottomSheetDialogItem(
+                            text = stringResource(id = R.string.sorting),
+                            onClick = {
+                                navController.navigateSafely(FolderListViewDialogFragmentDirections.actionFolderListViewDialogFragmentToFolderListSortingDialogFragment())
+                            },
+                            painter = painterResource(id = R.drawable.ic_round_sorting_24),
+                            value = stringResource(id = updatedSortingType?.toResource() ?: sortingType.toResource()),
+                        )
+
+                        BottomSheetDialogItem(
+                            text = stringResource(id = R.string.ordering),
+                            onClick = {
+                                navController.navigateSafely(FolderListViewDialogFragmentDirections.actionFolderListViewDialogFragmentToFolderListOrderingDialogFragment())
+                            },
+                            painter = painterResource(id = R.drawable.ic_round_ordering_24),
+                            value = stringResource(id = updatedSortingOrder?.toResource() ?: sortingOrder.toResource()),
+                            enabled = (updatedSortingType ?: sortingType) != FolderListSortingType.Manual,
+                        )
+                    }
+
+                    Spacer(modifier = Modifier.height(NotoTheme.dimensions.extraLarge))
+
+                    Button(
+                        text = stringResource(id = R.string.apply),
+                        onClick = {
+                            viewModel.updateFoldersView(
+                                sortingType = updatedSortingType ?: sortingType,
+                                sortingOrder = updatedSortingOrder ?: sortingOrder,
+                            ).invokeOnCompletion { dismiss() }
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                    )
                 }
             }
-            .launchIn(lifecycleScope)
-
-        viewModel.sortingOrder
-            .onEach { sortingOrder ->
-                context?.let { context ->
-                    tvSortingOrderValue.text = when (sortingOrder) {
-                        SortingOrder.Ascending -> R.string.ascending
-                        SortingOrder.Descending -> R.string.descending
-                    }.let(context::stringResource)
-                }
-            }
-            .launchIn(lifecycleScope)
-
-        llSortingType.setOnClickListener {
-            navController?.navigateSafely(FolderListViewDialogFragmentDirections.actionFolderListViewDialogFragmentToFolderListSortingDialogFragment())
-        }
-
-        llSortingOrder.setOnClickListener {
-            navController?.navigateSafely(FolderListViewDialogFragmentDirections.actionFolderListViewDialogFragmentToFolderListOrderingDialogFragment())
-        }
-
-        btnApply.setOnClickListener {
-            dismiss()
         }
     }
 }
