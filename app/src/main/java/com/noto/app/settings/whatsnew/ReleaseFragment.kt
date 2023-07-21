@@ -45,7 +45,7 @@ class ReleaseFragment : Fragment() {
             setContent {
                 val version = remember(release) { release.versionFormatted }
                 val date = remember(release) { release.dateFormatted }
-                val changelog = remember(release) { release.changelog.changes }
+                val changelog = remember(release) { release.changelog.changesIds }
 
                 Screen(
                     title = version,
@@ -53,9 +53,9 @@ class ReleaseFragment : Fragment() {
                     verticalArrangement = Arrangement.Top,
                 ) {
                     SettingsSection {
-                        changelog.forEach { item ->
+                        changelog.forEach { id ->
                             SettingsItem(
-                                title = item,
+                                title = stringResource(id = id),
                                 type = SettingsItemType.None,
                                 painter = painterResource(id = R.drawable.ic_round_check_24),
                             )

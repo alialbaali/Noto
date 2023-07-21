@@ -18,7 +18,6 @@ sealed interface Release {
     val isCurrent: Boolean get() = this.version == Version.Current
     val versionFormatted: String get() = version.format()
     val dateFormatted: String get() = date.format()
-    val changelogFormatted: String get() = changelog.format()
 
     @Serializable
     data class Version(val major: Int, val minor: Int, val patch: Int, val status: Status = Status.Stable) {
@@ -44,15 +43,7 @@ sealed interface Release {
 
     @JvmInline
     @Serializable
-    value class Changelog(val changes: List<String>) {
-
-        fun format(): String = changes.joinToString("\n\n")
-
-        fun format(count: Int) = changes.take(count).joinToString("\n\n").let {
-            if (changes.count() > count) it.plus("\n\n...") else it
-        }
-
-    }
+    value class Changelog(val changesIds: List<Int>)
 
     companion object
 }

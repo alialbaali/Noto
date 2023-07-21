@@ -60,7 +60,7 @@ class WhatsNewFragment : Fragment() {
                     item(key = currentRelease.versionFormatted) {
                         val version = remember(currentRelease) { currentRelease.versionFormatted }
                         val date = remember(currentRelease) { currentRelease.dateFormatted }
-                        val changelog = remember(currentRelease) { currentRelease.changelogFormatted }
+                        val changelog = remember(currentRelease) { currentRelease.changelog.format(context) }
                         SettingsItem(
                             title = version,
                             onClick = { navController?.navigate(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(currentRelease.toJson())) },
@@ -81,7 +81,7 @@ class WhatsNewFragment : Fragment() {
                         items(previousReleases, key = { it.versionFormatted }) { previousRelease ->
                             val version = remember(previousRelease) { previousRelease.versionFormatted }
                             val date = remember(previousRelease) { previousRelease.dateFormatted }
-                            val changelog = remember(previousRelease) { previousRelease.changelog.format(PreviousReleaseChangelogMaxItems) }
+                            val changelog = remember(previousRelease) { previousRelease.changelog.format(context, PreviousReleaseChangelogMaxItems) }
                             SettingsItem(
                                 title = version,
                                 onClick = { navController?.navigate(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(previousRelease.toJson())) },
