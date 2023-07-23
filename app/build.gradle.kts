@@ -4,8 +4,8 @@ plugins {
     id(Plugins.AndroidApplication)
     kotlin(Plugins.KotlinAndroid)
     id(Plugins.NavigationSafeArgs)
-    kotlin("plugin.serialization") version "1.8.22"
-    id("com.google.devtools.ksp") version "1.8.22-1.0.11"
+    kotlin(Plugins.KotlinSerialization)
+    id(Plugins.KSP) version "1.9.0-1.0.12"
 }
 
 android {
@@ -152,7 +152,6 @@ dependencies {
     ksp(AndroidX.Room.compiler)
     implementation(KotlinX.datetime)
     implementation(AndroidX.Core.splashscreen)
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
     implementation("com.google.android:flexbox:2.0.1")
     implementation("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation("com.robinhood.ticker:ticker:2.0.4")
