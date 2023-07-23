@@ -3,12 +3,14 @@ package com.noto.app.note
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
 import com.noto.app.R
 import com.noto.app.databinding.NoteReadingModeFragmentBinding
 import com.noto.app.domain.model.Folder
@@ -22,6 +24,9 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+
+private const val RightScrollDirection = 1
+private const val LeftScrollDirection = -1
 
 class NoteReadingModeFragment : Fragment() {
 
@@ -47,6 +52,8 @@ class NoteReadingModeFragment : Fragment() {
                 savedStateHandle?.set(Constants.IsBodyVisible, tvNoteBody.isLayoutVisible(root))
             }
         )
+
+        rv.addOnItemTouchListener(RecyclerViewItemTouchListener)
     }
 
     private fun NoteReadingModeFragmentBinding.setupState() {
@@ -109,3 +116,34 @@ class NoteReadingModeFragment : Fragment() {
         }
     }
 }
+
+private val RecyclerViewItemTouchListener = object : RecyclerView.OnItemTouchListener {
+    private var startX = 0f
+
+    override fun onInterceptTouchEvent(
+        recyclerView: RecyclerView,
+        event: MotionEvent
+    ): Boolean =
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> startX = event.x
+            MotionEvent.ACTION_MOVE -> {
+                val isScrollingRight = event.x < startX
+                val scrollItemsToRight = isScrollingRight && recyclerView.canScrollRight
+                val scrollItemsToLeft = !isScrollingRight && recyclerView.canScrollLeft
+                val disallowIntercept = scrollItemsToRight || scrollItemsToLeft
+                recyclerView.parent.requestDisallowInterceptTouchEvent(disallowIntercept)
+            }
+
+            MotionEvent.ACTION_UP -> startX = 0f
+            else -> Unit
+        }.let { false }
+
+    override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) = Unit
+    override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) = Unit
+}
+
+private val RecyclerView.canScrollRight: Boolean
+    get() = canScrollHorizontally(RightScrollDirection)
+
+private val RecyclerView.canScrollLeft: Boolean
+    get() = canScrollHorizontally(LeftScrollDirection)
