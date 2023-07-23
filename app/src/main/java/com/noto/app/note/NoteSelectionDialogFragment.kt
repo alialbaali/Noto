@@ -155,13 +155,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
                             else
                                 viewModel.selectLabelForSelectedNotes(model.label.id)
                         }
-                        onLongClickListener { _ ->
-                            if (model.isSelected)
-                                viewModel.deselectLabelForSelectedNotes(model.label.id)
-                            else
-                                viewModel.selectLabelForSelectedNotes(model.label.id)
-                            true
-                        }
+                        onLongClickListener { _ -> false }
                     }
                 }
             }
