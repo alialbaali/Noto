@@ -83,10 +83,12 @@ class NotePagerFragment : Fragment() {
                     fab.backgroundTintList = color.toColorStateList()
                     fabPrevious.rippleColor = color
                     fabNext.rippleColor = color
+                    fabUnarchive.rippleColor = color
+                    fabDelete.rippleColor = color
                     indicator.trackColor = color.withDefaultAlpha()
                     indicator.setIndicatorColor(color)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        listOf(fabPrevious, fabNext, fab).forEach {
+                        listOf(fabPrevious, fabNext, fab, fabUnarchive, fabDelete).forEach {
                             it.outlineAmbientShadowColor = color
                             it.outlineSpotShadowColor = color
                         }
