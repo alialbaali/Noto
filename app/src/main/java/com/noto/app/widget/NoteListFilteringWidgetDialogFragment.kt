@@ -40,7 +40,7 @@ class NoteListFilteringWidgetDialogFragment constructor() : BaseDialogFragment()
     ): View? = context?.let { context ->
         ComposeView(context).apply {
             setContent {
-                val types = remember { FilteringType.values() }
+                val types = FilteringType.entries
 
                 BottomSheetDialog(title = stringResource(R.string.filtering)) {
                     types.forEach { type ->

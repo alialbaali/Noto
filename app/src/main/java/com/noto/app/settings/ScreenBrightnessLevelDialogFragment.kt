@@ -36,7 +36,7 @@ class ScreenBrightnessLevelDialogFragment : BaseDialogFragment() {
     ): View? = context?.let { context ->
         ComposeView(context).apply {
             setContent {
-                val levels = remember { ScreenBrightnessLevel.values() }
+                val levels = ScreenBrightnessLevel.entries
                 val selectedLevel by viewModel.screenBrightnessLevel.collectAsState()
                 val percentageFormatter = remember { NumberFormat.getPercentInstance() }
                 BottomSheetDialog(title = stringResource(id = R.string.screen_brightness_level)) {

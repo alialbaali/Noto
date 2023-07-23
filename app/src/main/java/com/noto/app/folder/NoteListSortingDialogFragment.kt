@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
@@ -44,7 +43,7 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
 
             setContent {
                 val folder by viewModel.folder.collectAsState()
-                val types = remember { NoteListSortingType.values().toList() }
+                val types = NoteListSortingType.entries
                 val sortingType by savedStateHandle.getStateFlow<NoteListSortingType?>(key = Constants.SortingType, initialValue = null)
                     .collectAsState()
 

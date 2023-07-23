@@ -17,7 +17,7 @@ import androidx.compose.ui.text.style.TextDecoration
 fun Spannable.toAnnotatedString(primaryColor: Color = Color.Unspecified): AnnotatedString {
     val builder = AnnotatedString.Builder(this.toString())
     val copierContext = CopierContext(primaryColor)
-    SpanCopier.values().forEach { copier ->
+    SpanCopier.entries.forEach { copier ->
         getSpans(0, length, copier.spanClass).forEach { span ->
             copier.copySpan(span, getSpanStart(span), getSpanEnd(span), builder, copierContext)
         }

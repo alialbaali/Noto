@@ -3,7 +3,6 @@ package com.noto.app.data.database
 import android.annotation.SuppressLint
 import androidx.room.TypeConverter
 import com.noto.app.domain.model.*
-import com.noto.app.domain.model.OpenNotesIn
 import kotlinx.datetime.Instant
 
 object NotoColorConverter {
@@ -14,7 +13,7 @@ object NotoColorConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): NotoColor = NotoColor.values().first { notebookColor -> notebookColor.ordinal == ordinal }
+    fun toEnum(ordinal: Int): NotoColor = NotoColor.entries.first { notebookColor -> notebookColor.ordinal == ordinal }
 }
 
 @SuppressLint("NewApi")
@@ -38,7 +37,7 @@ object LayoutConvertor {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): Layout = Layout.values().first { layoutManager -> layoutManager.ordinal == ordinal }
+    fun toEnum(ordinal: Int): Layout = Layout.entries.first { layoutManager -> layoutManager.ordinal == ordinal }
 
 }
 
@@ -50,7 +49,7 @@ object SortingTypeConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): NoteListSortingType = NoteListSortingType.values().first { sortingType -> sortingType.ordinal == ordinal }
+    fun toEnum(ordinal: Int): NoteListSortingType = NoteListSortingType.entries.first { sortingType -> sortingType.ordinal == ordinal }
 
 }
 
@@ -62,7 +61,7 @@ object SortingOrderConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): SortingOrder = SortingOrder.values().first { sortingOrder -> sortingOrder.ordinal == ordinal }
+    fun toEnum(ordinal: Int): SortingOrder = SortingOrder.entries.first { sortingOrder -> sortingOrder.ordinal == ordinal }
 
 }
 
@@ -74,7 +73,7 @@ object GroupingConvertor {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): Grouping = Grouping.values().first { grouping -> grouping.ordinal == ordinal }
+    fun toEnum(ordinal: Int): Grouping = Grouping.entries.first { grouping -> grouping.ordinal == ordinal }
 
 }
 
@@ -86,7 +85,7 @@ object NewNoteCursorPositionConvertor {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): NewNoteCursorPosition = NewNoteCursorPosition.values().first { position -> position.ordinal == ordinal }
+    fun toEnum(ordinal: Int): NewNoteCursorPosition = NewNoteCursorPosition.entries.first { position -> position.ordinal == ordinal }
 
 }
 
@@ -98,7 +97,7 @@ object GroupingOrderConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): GroupingOrder = GroupingOrder.values().first { groupingOrder -> groupingOrder.ordinal == ordinal }
+    fun toEnum(ordinal: Int): GroupingOrder = GroupingOrder.entries.first { groupingOrder -> groupingOrder.ordinal == ordinal }
 
 }
 
@@ -110,7 +109,7 @@ object FilteringTypeConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): FilteringType = FilteringType.values().first { filteringType -> filteringType.ordinal == ordinal }
+    fun toEnum(ordinal: Int): FilteringType = FilteringType.entries.first { filteringType -> filteringType.ordinal == ordinal }
 
 }
 
@@ -122,6 +121,6 @@ object OpenNotesInConverter {
 
     @TypeConverter
     @JvmStatic
-    fun toEnum(ordinal: Int): OpenNotesIn = OpenNotesIn.values().first { openNotesIn -> openNotesIn.ordinal == ordinal }
+    fun toEnum(ordinal: Int): OpenNotesIn = OpenNotesIn.entries.first { openNotesIn -> openNotesIn.ordinal == ordinal }
 
 }

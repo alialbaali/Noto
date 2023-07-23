@@ -3,7 +3,18 @@ package com.noto.app.data.repository
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
-import com.noto.app.domain.model.*
+import com.noto.app.domain.model.FilteringType
+import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.FolderListSortingType
+import com.noto.app.domain.model.Font
+import com.noto.app.domain.model.Icon
+import com.noto.app.domain.model.Language
+import com.noto.app.domain.model.Release
+import com.noto.app.domain.model.ScreenBrightnessLevel
+import com.noto.app.domain.model.SettingsConfig
+import com.noto.app.domain.model.SortingOrder
+import com.noto.app.domain.model.Theme
+import com.noto.app.domain.model.VaultTimeout
 import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.filtered.FilteredItemModel
 import com.noto.app.util.AllFoldersId
@@ -139,11 +150,7 @@ class SettingsRepositoryImpl(
 
     override val screenBrightnessLevel: Flow<ScreenBrightnessLevel> = storage.data
         .map { preferences -> preferences[SettingsKeys.ScreenBrightnessLevel] }
-        .map {
-            ScreenBrightnessLevel.values().firstOrNull { level ->
-                level.value == it
-            } ?: ScreenBrightnessLevel.System
-        }
+        .map { ScreenBrightnessLevel.entries.firstOrNull { level -> level.value == it } ?: ScreenBrightnessLevel.System }
         .flowOn(dispatcher)
 
     override val quickExit: Flow<Boolean> = storage.data

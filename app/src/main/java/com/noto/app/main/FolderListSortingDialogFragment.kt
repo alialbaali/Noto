@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
@@ -39,7 +38,7 @@ class FolderListSortingDialogFragment : BaseDialogFragment() {
 
             setContent {
                 val sortingType by viewModel.sortingType.collectAsState()
-                val types = remember { FolderListSortingType.values().toList() }
+                val types = FolderListSortingType.entries
                 val updatedSortingType by savedStateHandle.getStateFlow<FolderListSortingType?>(key = Constants.SortingType, initialValue = null)
                     .collectAsState()
 

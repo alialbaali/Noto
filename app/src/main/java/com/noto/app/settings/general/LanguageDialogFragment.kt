@@ -41,7 +41,7 @@ class LanguageDialogFragment : BaseDialogFragment(isCollapsable = true) {
                 BottomSheetDialog(title = stringResource(id = R.string.language)) {
                     val selectedLanguage by viewModel.language.collectAsState()
                     val languages = remember(context) {
-                        Language.values()
+                        Language.entries
                             .sortedWith(Language.Comparator(context))
                             .map { it to context.localize(it) }
                     }

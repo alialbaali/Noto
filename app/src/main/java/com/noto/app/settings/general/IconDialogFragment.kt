@@ -36,7 +36,7 @@ class IconDialogFragment : BaseDialogFragment(isCollapsable = true) {
         viewModel.icon
             .onEach { selectedIcon ->
                 rv.withModels {
-                    Icon.values().forEach { icon ->
+                    Icon.entries.forEach { icon ->
                         iconItem {
                             id(icon.name)
                             icon(icon)

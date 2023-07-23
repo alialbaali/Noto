@@ -78,7 +78,7 @@ fun Context.applySystemBarsColors(window: Window, applyDefaults: Boolean = true)
 val Context.enabledComponentName: ComponentName
     get() {
         val appActivityComponentName = ComponentName(this, AppActivity::class.java)
-        val iconsComponentNames = Icon.values()
+        val iconsComponentNames = Icon.entries
             .map { it.toActivityAliasName(isAppActivityIconEnabled = false) }
             .map { ComponentName(this, it) }
         val enabledComponentName = iconsComponentNames

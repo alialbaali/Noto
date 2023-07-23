@@ -60,7 +60,7 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun setupLanguage(language: Language) {
-        Language.values()
+        Language.entries
             .filterNot { it in Language.Deprecated }
             .sortedByDescending { it == language }
             .toLocalListCompat()

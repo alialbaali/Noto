@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
@@ -44,7 +43,7 @@ class NoteListGroupingDialogFragment : BaseDialogFragment() {
 
             setContent {
                 val folder by viewModel.folder.collectAsState()
-                val types = remember { Grouping.values().toList() }
+                val types = Grouping.entries
                 val groupingType by savedStateHandle.getStateFlow<Grouping?>(key = Constants.GroupingType, initialValue = null)
                     .collectAsState()
 

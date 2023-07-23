@@ -3,14 +3,47 @@ package com.noto.app.folder
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.noto.app.UiState
-import com.noto.app.domain.model.*
-import com.noto.app.domain.repository.*
+import com.noto.app.domain.model.FilteringType
+import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Font
+import com.noto.app.domain.model.Grouping
+import com.noto.app.domain.model.GroupingOrder
+import com.noto.app.domain.model.Layout
+import com.noto.app.domain.model.NewNoteCursorPosition
+import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.NoteLabel
+import com.noto.app.domain.model.NoteListSortingType
+import com.noto.app.domain.model.NotoColor
+import com.noto.app.domain.model.OpenNotesIn
+import com.noto.app.domain.model.SortingOrder
+import com.noto.app.domain.repository.FolderRepository
+import com.noto.app.domain.repository.LabelRepository
+import com.noto.app.domain.repository.NoteLabelRepository
+import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.domain.repository.SettingsRepository
 import com.noto.app.getOrDefault
 import com.noto.app.label.LabelItemModel
 import com.noto.app.map
-import com.noto.app.util.*
+import com.noto.app.util.LineSeparator
+import com.noto.app.util.SelectedLabelsComparator
+import com.noto.app.util.filterByLabels
+import com.noto.app.util.filterBySearchTerm
+import com.noto.app.util.filterSelected
+import com.noto.app.util.forEachRecursively
+import com.noto.app.util.getOrCreateLabel
+import com.noto.app.util.mapToNoteItemModel
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Clock
 
@@ -45,8 +78,7 @@ class FolderViewModel(
     val font = settingsRepository.font
         .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
 
-    private val mutableNotoColors =
-        MutableStateFlow(NotoColor.values().associateWith { false }.toList())
+    private val mutableNotoColors = MutableStateFlow(NotoColor.entries.associateWith { false }.toList())
     val notoColors get() = mutableNotoColors.asStateFlow()
 
     private val mutableIsSearchEnabled = MutableStateFlow(false)
