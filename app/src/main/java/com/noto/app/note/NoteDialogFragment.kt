@@ -94,9 +94,9 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvArchiveNote.setOnClickListener {
             disableSelection()
+            val note = viewModel.note.value
             viewModel.toggleNoteIsArchived().invokeOnCompletion {
                 context?.let { context ->
-                    val note = viewModel.note.value
                     if (note.reminderDate != null) alarmManager?.cancelAlarm(context, note.id)
                     val isArchived = note.isArchived
                     val text = if (isArchived)
@@ -166,8 +166,8 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvPinNote.setOnClickListener {
             disableSelection()
+            val isPinned = viewModel.note.value.isPinned
             viewModel.toggleNoteIsPinned().invokeOnCompletion {
-                val isPinned = viewModel.note.value.isPinned
                 context?.let { context ->
                     val stringId = if (isPinned)
                         R.plurals.note_is_unpinned

@@ -12,9 +12,9 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navOptions
-import com.noto.app.components.BaseDialogFragment
 import com.noto.app.R
 import com.noto.app.UiState
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.FolderDialogFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.util.*
@@ -80,8 +80,8 @@ class FolderDialogFragment : BaseDialogFragment() {
                     )
                 }
             } else {
+                val isArchived = viewModel.folder.value.isArchived
                 viewModel.toggleFolderIsArchived().invokeOnCompletion {
-                    val isArchived = viewModel.folder.value.isArchived
                     val stringId = if (isArchived)
                         R.string.folder_is_unarchived
                     else
@@ -100,8 +100,8 @@ class FolderDialogFragment : BaseDialogFragment() {
         }
 
         tvVaultFolder.setOnClickListener {
+            val isVaulted = viewModel.folder.value.isVaulted
             viewModel.toggleFolderIsVaulted().invokeOnCompletion {
-                val isVaulted = viewModel.folder.value.isVaulted
                 val stringId = if (isVaulted)
                     R.string.folder_is_unvaulted
                 else
@@ -119,8 +119,8 @@ class FolderDialogFragment : BaseDialogFragment() {
         }
 
         tvPinFolder.setOnClickListener {
+            val isPinned = viewModel.folder.value.isPinned
             viewModel.toggleFolderIsPinned().invokeOnCompletion {
-                val isPinned = viewModel.folder.value.isPinned
                 val stringId = if (isPinned)
                     R.string.folder_is_unpinned
                 else
@@ -243,8 +243,8 @@ class FolderDialogFragment : BaseDialogFragment() {
             ?.getLiveData<Int>(Constants.ClickListener)
             ?.observe(viewLifecycleOwner) {
                 val parentView = parentFragment?.view
+                val isArchived = viewModel.folder.value.isArchived
                 viewModel.toggleFolderIsArchived().invokeOnCompletion {
-                    val isArchived = viewModel.folder.value.isArchived
                     val color = viewModel.folder.value.color
                     val stringId = if (isArchived)
                         R.string.folder_is_unarchived
