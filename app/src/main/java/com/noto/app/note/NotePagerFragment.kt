@@ -77,7 +77,8 @@ class NotePagerFragment : Fragment() {
                 context?.let { context ->
                     val color = context.colorResource(folder.color.toResource())
                     val folderTitle = folder.getTitle(context)
-                    tvFolderTitle.text = if (args.isArchive) context.stringResource(R.string.folder_archive, folderTitle) else folder.getTitle(context)
+                    tvFolderTitle.text =
+                        if (args.isArchive) context.stringResource(R.string.folder_archive, folderTitle) else folder.getTitle(context)
                     tvFolderTitle.setTextColor(color)
                     tb.navigationIcon?.mutate()?.setTint(color)
                     fab.backgroundTintList = color.toColorStateList()
@@ -131,41 +132,43 @@ class NotePagerFragment : Fragment() {
             }
         }.launchIn(lifecycleScope)
 
-        viewModel.isDoNotDisturb
-            .onEach { isDoNotDisturb ->
-                if (isDoNotDisturb && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notificationManager.isNotificationPolicyAccessGranted) {
-                    notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+        if (!args.isArchive) {
+            viewModel.isDoNotDisturb
+                .onEach { isDoNotDisturb ->
+                    if (isDoNotDisturb && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notificationManager.isNotificationPolicyAccessGranted) {
+                        notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_PRIORITY)
+                    }
                 }
-            }
-            .launchIn(lifecycleScope)
+                .launchIn(lifecycleScope)
 
-        viewModel.isScreenOn
-            .onEach { isScreenOn ->
-                if (isScreenOn) {
-                    activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-                } else {
-                    activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            viewModel.isScreenOn
+                .onEach { isScreenOn ->
+                    if (isScreenOn) {
+                        activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                    } else {
+                        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                    }
                 }
-            }
-            .launchIn(lifecycleScope)
+                .launchIn(lifecycleScope)
 
-        viewModel.isFullScreen
-            .onEach { isFullScreen ->
-                if (isFullScreen) {
-                    windowInsetsController?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
-                    windowInsetsController?.hide(WindowInsetsCompat.Type.systemBars())
-                } else {
-                    windowInsetsController?.show(WindowInsetsCompat.Type.systemBars())
+            viewModel.isFullScreen
+                .onEach { isFullScreen ->
+                    if (isFullScreen) {
+                        windowInsetsController?.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+                        windowInsetsController?.hide(WindowInsetsCompat.Type.systemBars())
+                    } else {
+                        windowInsetsController?.show(WindowInsetsCompat.Type.systemBars())
+                    }
                 }
-            }
-            .launchIn(lifecycleScope)
+                .launchIn(lifecycleScope)
 
-        viewModel.screenBrightnessLevel
-            .onEach { level ->
-                activity?.window?.attributes = activity?.window?.attributes
-                    ?.apply { screenBrightness = level.value }
-            }
-            .launchIn(lifecycleScope)
+            viewModel.screenBrightnessLevel
+                .onEach { level ->
+                    activity?.window?.attributes = activity?.window?.attributes
+                        ?.apply { screenBrightness = level.value }
+                }
+                .launchIn(lifecycleScope)
+        }
 
         navController?.currentBackStackEntry?.savedStateHandle
             ?.getLiveData<Int>(Constants.ScrollPosition)
@@ -289,10 +292,13 @@ class NotePagerFragment : Fragment() {
 
     override fun onDetach() {
         super.onDetach()
-        windowInsetsController?.show(WindowInsetsCompat.Type.systemBars())
-        activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        activity?.window?.attributes = activity?.window?.attributes?.apply { screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notificationManager.isNotificationPolicyAccessGranted)
-            notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
+        if (!args.isArchive) {
+            windowInsetsController?.show(WindowInsetsCompat.Type.systemBars())
+            activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            activity?.window?.attributes =
+                activity?.window?.attributes?.apply { screenBrightness = WindowManager.LayoutParams.BRIGHTNESS_OVERRIDE_NONE }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && notificationManager.isNotificationPolicyAccessGranted)
+                notificationManager.setInterruptionFilter(NotificationManager.INTERRUPTION_FILTER_ALL)
+        }
     }
 }
