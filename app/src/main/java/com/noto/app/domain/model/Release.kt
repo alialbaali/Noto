@@ -23,7 +23,7 @@ sealed interface Release {
     data class Version(val major: Int, val minor: Int, val patch: Int, val status: Status = Status.Stable) {
 
         companion object {
-            val Current = Version(2, 3, 0, Status.Beta(2))
+            val Current = Version(2, 3, 0, Status.Beta(3))
             val Last = Version(2, 2, 3)
         }
 
@@ -149,6 +149,6 @@ data class Release_2_2_3(override val changelog: Changelog) : Release {
 @Suppress("ClassName")
 @Serializable
 data class Release_2_3_0(override val changelog: Changelog) : Release {
-    override val version: Version = Version(2, 3, 0, Version.Status.Beta(2))
-    override val date: LocalDate = LocalDate(2023, Month.JULY, 4)
+    override val version: Version = Version(2, 3, 0, Version.Status.Beta(3))
+    override val date: LocalDate = LocalDate(2023, Month.JULY, 24)
 }
