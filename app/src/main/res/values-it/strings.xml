@@ -49,10 +49,12 @@
     <string name="source_code">Codice sorgente</string>
     <!-- Description of the "Source code" settings option. -->
     <string name="source_code_description">Noto è un\'applicazione open-source e il codice sorgente è su GitHub.</string>
-    <!-- The link of the reddit community of Noto. -->
-    <string name="reddit_community">Community su Reddit</string>
-    <!-- Description of the "Reddit community" settings option. -->
-    <string name="telegram_community_description">Unisciti alla community per comunicare con altri utenti di Noto e ottenere le ultime notizie.</string>
+    <!-- The link of the Telegram community of Noto. -->
+    <string name="telegram_community">Community Telegram</string>
+    <!-- Description of the "Telegram community" settings option. -->
+    <string name="telegram_community_description">Unisciti alla community per interagire con altri utenti di Noto ed essere aggiornato sulle ultime notizie.</string>
+    <!-- Text for Telegram banner in Settings & What's new dialog. -->
+    <string name="join_telegram">Unisciti alla community Telegram!</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Carattere delle note</string>
     <string name="share_app_with_others">Condividi Noto</string>
@@ -424,13 +426,13 @@
     <!-- Description of the "Quick exit" settings option. -->
     <string name="quick_exit_description">Indica se l\'app deve chiudersi subito quando usi il tasto indietro.</string>
     <!-- Whether to pass the search term to the note screen. -->
-    <string name="continuous_search">Continuous Search</string>
+    <string name="continuous_search">Ricerca continua</string>
     <!-- Description of the "Continuous Search" settings option. -->
-    <string name="continuous_search_description">Whether to pass the search term to the note screen.</string>
+    <string name="continuous_search_description">Indica se passare il termine di ricerca allo schermo della nota.</string>
     <!-- Whether to enable auto-scroll for notes in preview mode. -->
-    <string name="preview_auto_scroll">Preview auto-scroll</string>
+    <string name="preview_auto_scroll">Anteprima scorrimento automatico</string>
     <!-- Description of the "Preview auto-scroll" settings option. -->
-    <string name="preview_auto_scroll_description">Whether to enable auto-scroll for notes in preview mode.</string>
+    <string name="preview_auto_scroll_description">Indica se abilitare lo scorrimento automatico delle note in modalità anteprima.</string>
     <string name="remember_scrolling_position">Ricorda posizione dello scorrimento</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Scegli se vuoi memorizzare la posizione di scorrimento nelle cartelle e nelle note.</string>
@@ -598,7 +600,7 @@
     <string name="release_2_3_0_reminder">Nuovo design per i promemoria, selezionatori di data e ora abbinati con il tema Noto.</string>
     <string name="release_2_3_0_selection">Revisionato come la selezione e il trascinamento delle note è gestito usando solo click lunghi.</string>
     <string name="release_2_3_0_find_in_note">Aggiunta funzionalità di ricerca nelle note, e scorrimento automatico del testo trovato nelle note.</string>
-    <string name="release_2_3_0_archive">Supported notes selection &amp; quick actions for Archive screens.</string>
+    <string name="release_2_3_0_archive">Aggiunta selezione delle note e azioni rapide per le schermate dell\'Archivio.</string>
     <string name="release_2_3_0_sorting">Entità ordinate rispettando le lettere diacritiche della lingua.</string>
     <string name="release_2_3_0_reading_mode">Mostra contatore e indicatore progresso quando si hanno più note aperte in modalità lettura.</string>
     <string name="release_2_3_0_whats_new">Nuovo design per le finestre e la schermata delle novità.</string>

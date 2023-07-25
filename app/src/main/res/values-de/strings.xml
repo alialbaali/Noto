@@ -18,7 +18,7 @@
     <string name="options">Optionen</string>
     <string name="back">Zurück</string>
     <!-- Replacements for "Label filtering type". -->
-    <string name="filtering">Filterung</string>
+    <string name="filtering">Filter-Modus</string>
     <string name="layout">Layout</string>
     <string name="list">Liste</string>
     <!-- Label filtering mode -->
@@ -28,11 +28,11 @@
     <!-- Label filtering mode -->
     <string name="exclusive">Reduzieren</string>
     <!-- Exclusive filtering mode description -->
-    <string name="exclusive_description">Notizen filtern, die <b>alle</b> ausgewählten Labels haben müssen.</string>
+    <string name="exclusive_description">Notizen filtern, die <b>alle</b> ausgewählten Labels haben, keins weniger.</string>
     <!-- Label filtering mode -->
     <string name="strict">Genaue Übereinstimmung</string>
     <!-- Strict filtering mode description -->
-    <string name="strict_description">Notizen filtern, die <b>ausschließlich</b> die ausgewählten Labels haben.</string>
+    <string name="strict_description">Notizen filtern, die <b>exakt</b> die ausgewählten Labels haben, keines mehr oder weniger.</string>
     <string name="grid">Raster</string>
     <string name="created">Erstellt: %s</string>
     <string name="accessed">Letzter Zugriff: %s</string>
@@ -49,10 +49,12 @@
     <string name="source_code">Quellcode</string>
     <!-- Description of the "Source code" settings option. -->
     <string name="source_code_description">Noto ist eine Open-Source Anwendung, deren Quellcode auf GitHub einsehbar ist.</string>
-    <!-- The link of the reddit community of Noto. -->
-    <string name="reddit_community">Reddit-Community</string>
-    <!-- Description of the "Reddit community" settings option. -->
+    <!-- The link of the Telegram community of Noto. -->
+    <string name="telegram_community">Telegram-Community</string>
+    <!-- Description of the "Telegram community" settings option. -->
     <string name="telegram_community_description">Tritt der Community bei, um mit anderen Noto-Nutzern in Kontakt zu kommen und alle Neuigkeiten zu erfahren.</string>
+    <!-- Text for Telegram banner in Settings & What's new dialog. -->
+    <string name="join_telegram">Komm in die Telegram-Community!</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Schriftart der Notizen</string>
     <string name="share_app_with_others">Noto mit anderen teilen</string>
@@ -78,7 +80,7 @@
     <string name="no_file_is_selected">Es wurde keine Datei gewählt.</string>
     <!-- Open with an app such as Signal -->
     <string name="open_with">Öffnen mit</string>
-    <string name="invite_text">Schauen Sie sich Noto an, eine minimale Open-Source-App für Ihre Notizen.</string>
+    <string name="invite_text">Wirf mal einen Blick auf Noto, eine minimale Open-Source-App für Deine Notizen.</string>
     <string name="version">Version</string>
     <!-- A message shown when clicking on the app version. -->
     <string name="version_is_copied">Die Versionsnummer wurde in die Zwischenablage kopiert.</string>
@@ -246,7 +248,7 @@
     <string name="use_passcode">Zugangscode verwenden</string>
     <!-- Note -->
     <string name="all">Alle</string>
-    <string name="set_reminder">Benachrichtigung einstellen</string>
+    <string name="set_reminder">Benachrichtigung erstellen</string>
     <string name="update_reminder">Erinnerung aktualisieren</string>
     <string name="archive_is_empty">Archiv ist leer.</string>
     <!-- Notes count in Reading Mode with indicator of the current selected displayed note.
@@ -294,7 +296,7 @@
         The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
     <plurals name="words_found_count">
         <item quantity="one">%1$d Wort • Fundstelle %2$d / %3$d</item>
-        <item quantity="other">%1$d Worte • Fundstelle %2$d / %3$d</item>
+        <item quantity="other">%1$d Wörter • Fundstelle %2$d / %3$d</item>
     </plurals>
     <string name="body">Haupttext</string>
     <string name="title">Überschrift</string>
@@ -428,9 +430,9 @@
     <!-- Description of the "Continuous Search" settings option. -->
     <string name="continuous_search_description">Legt fest, ob der Suchbegriff auch innerhalb der Notiz hervorgehoben werden soll.</string>
     <!-- Whether to enable auto-scroll for notes in preview mode. -->
-    <string name="preview_auto_scroll">Preview auto-scroll</string>
+    <string name="preview_auto_scroll">Scrollende Vorschauen</string>
     <!-- Description of the "Preview auto-scroll" settings option. -->
-    <string name="preview_auto_scroll_description">Whether to enable auto-scroll for notes in preview mode.</string>
+    <string name="preview_auto_scroll_description">Legt fest, ob bei Mehrfachauswahlen die Notiz-Vorschauen gescrollt werden sollen.</string>
     <string name="remember_scrolling_position">Scrollposition beibehalten</string>
     <!-- Description of the "Remember scrolling position" settings option. -->
     <string name="remember_scrolling_position_description">Legt fest, ob die Scrollposition von Ordnern und Notizen gespeichert wird.</string>
