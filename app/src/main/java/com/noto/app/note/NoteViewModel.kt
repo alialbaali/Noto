@@ -2,12 +2,41 @@ package com.noto.app.note
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.noto.app.domain.model.*
-import com.noto.app.domain.repository.*
-import com.noto.app.util.*
-import kotlinx.coroutines.flow.*
+import com.noto.app.domain.model.Folder
+import com.noto.app.domain.model.Font
+import com.noto.app.domain.model.Label
+import com.noto.app.domain.model.Note
+import com.noto.app.domain.model.NoteLabel
+import com.noto.app.domain.repository.FolderRepository
+import com.noto.app.domain.repository.LabelRepository
+import com.noto.app.domain.repository.NoteLabelRepository
+import com.noto.app.domain.repository.NoteRepository
+import com.noto.app.domain.repository.SettingsRepository
+import com.noto.app.util.filterSelected
+import com.noto.app.util.firstLineOrEmpty
+import com.noto.app.util.getOrCreateLabel
+import com.noto.app.util.indicesOf
+import com.noto.app.util.isValid
+import com.noto.app.util.takeAfterFirstLineOrEmpty
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import kotlinx.datetime.*
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
 import kotlin.time.Duration.Companion.days
 
 private val ExtraDatePeriod = 1.days
@@ -174,8 +203,8 @@ class NoteViewModel(
         labels.value.filterSelected().forEach { label ->
             launch {
                 val labelId = labelRepository.getOrCreateLabel(folderId, label)
-                noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id))
-                noteLabelRepository.deleteNoteLabel(note.value.id, label.id)
+                launch { noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = note.value.id)) }
+                launch { noteLabelRepository.deleteNoteLabel(note.value.id, label.id) }
             }
         }
     }
@@ -185,7 +214,7 @@ class NoteViewModel(
         labels.value.filterSelected().forEach { label ->
             launch {
                 val labelId = labelRepository.getOrCreateLabel(folderId, label)
-                noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId))
+                launch { noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId)) }
             }
         }
     }
@@ -193,9 +222,7 @@ class NoteViewModel(
     fun duplicateNote() = viewModelScope.launch {
         val noteId = noteRepository.createNote(note.value.copy(id = 0, reminderDate = null, creationDate = Clock.System.now()))
         labels.value.filterSelected().forEach { label ->
-            launch {
-                noteLabelRepository.createNoteLabel(NoteLabel(noteId = noteId, labelId = label.id))
-            }
+            launch { noteLabelRepository.createNoteLabel(NoteLabel(noteId = noteId, labelId = label.id)) }
         }
     }
 

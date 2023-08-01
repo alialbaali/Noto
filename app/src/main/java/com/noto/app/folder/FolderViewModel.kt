@@ -497,43 +497,21 @@ class FolderViewModel(
 
     fun moveSelectedNotes(folderId: Long) = viewModelScope.launch {
         selectedNotes.forEach { model ->
-            launch {
-                noteRepository.updateNote(model.note.copy(folderId = folderId))
-                model.labels.forEach { label ->
-                    launch {
-                        val labelId = labelRepository.getOrCreateLabel(folderId, label)
-                        noteLabelRepository.createNoteLabel(
-                            NoteLabel(
-                                labelId = labelId,
-                                noteId = model.note.id
-                            )
-                        )
-                        noteLabelRepository.deleteNoteLabel(model.note.id, label.id)
-                    }
-                }
+            noteRepository.updateNote(model.note.copy(folderId = folderId))
+            model.labels.forEach { label ->
+                val labelId = labelRepository.getOrCreateLabel(folderId, label)
+                launch { noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = model.note.id)) }
+                launch { noteLabelRepository.deleteNoteLabel(model.note.id, label.id) }
             }
         }
     }
 
     fun copySelectedNotes(folderId: Long) = viewModelScope.launch {
         selectedNotes.forEach { model ->
-            val noteId = noteRepository.createNote(
-                model.note.copy(
-                    id = 0,
-                    folderId = folderId,
-                    creationDate = Clock.System.now()
-                )
-            )
+            val noteId = noteRepository.createNote(model.note.copy(id = 0, folderId = folderId, creationDate = Clock.System.now()))
             model.labels.forEach { label ->
-                launch {
-                    val labelId = labelRepository.getOrCreateLabel(folderId, label)
-                    noteLabelRepository.createNoteLabel(
-                        NoteLabel(
-                            labelId = labelId,
-                            noteId = noteId
-                        )
-                    )
-                }
+                val labelId = labelRepository.getOrCreateLabel(folderId, label)
+                launch { noteLabelRepository.createNoteLabel(NoteLabel(labelId = labelId, noteId = noteId)) }
             }
         }
     }
