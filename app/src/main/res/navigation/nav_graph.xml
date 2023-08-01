@@ -621,6 +621,9 @@
         <action
             android:id="@+id/action_noteSelectionDialogFragment_to_notePagerFragment"
             app:destination="@id/notePagerFragment" />
+        <action
+            android:id="@+id/action_noteSelectionDialogFragment_to_progressIndicatorDialogFragment"
+            app:destination="@id/progressIndicatorDialogFragment" />
     </dialog>
     <fragment
         android:id="@+id/aboutSettingsFragment"

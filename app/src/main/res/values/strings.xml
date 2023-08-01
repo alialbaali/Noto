@@ -385,6 +385,7 @@
     <string name="new_note_reminder">New reminder</string>
     <string name="copy">Copy</string>
     <string name="copy_to">Copy to…</string>
+    <string name="copying_notes">Copying notes to %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="one">Note has been copied to %s.</item>
@@ -420,6 +421,7 @@
         <item quantity="other">%d Notes have been duplicated.</item>
     </plurals>
     <string name="move_to">Move to…</string>
+    <string name="moving_notes">Moving notes to %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="one">Note has been moved to %s.</item>
