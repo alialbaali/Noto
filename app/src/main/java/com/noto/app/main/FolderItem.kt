@@ -39,6 +39,9 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
     @EpoxyAttribute
     var depth: Int = 1
 
+    @EpoxyAttribute
+    open var isEnabled: Boolean = true
+
     @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     lateinit var onClickListener: View.OnClickListener
 
@@ -51,18 +54,30 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
     @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
+            val defaultColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             val color = context.colorResource(folder.color.toResource())
-            val selectedColorStateList = color.withDefaultAlpha().toColorStateList()
-            val rippleDrawable = root.background as RippleDrawable
-            rippleDrawable.setColor(selectedColorStateList)
+            val selectedColor = color.withDefaultAlpha()
+            val backgroundDrawable = root.background?.mutate()
+            val rippleDrawable = backgroundDrawable as? RippleDrawable
+            if (isEnabled) {
+                if (isSelected) {
+                    backgroundDrawable?.setTint(selectedColor)
+                    rippleDrawable?.setColor(color.toColorStateList())
+                } else {
+                    backgroundDrawable?.setTint(defaultColor)
+                    rippleDrawable?.setColor(selectedColor.toColorStateList())
+                }
+                root.alpha = 1.0F
+                root.isEnabled = true
+            } else {
+                backgroundDrawable?.setTint(defaultColor)
+                root.alpha = 0.5F
+                root.isEnabled = false
+            }
             tvFolderNotesCount.text = notesCount.toString()
             tvFolderTitle.setTextColor(color)
             tvFolderNotesCount.setTextColor(color)
             ibFolderHandle.drawable?.mutate()?.setTint(color)
-            root.backgroundTintList = if (isSelected)
-                selectedColorStateList
-            else
-                context.colorAttributeResource(R.attr.notoBackgroundColor).toColorStateList()
             tvFolderTitle.text = folder.getTitle(context)
             ivFolderIcon.contentDescription = folder.getTitle(context)
             if (isSelected) {

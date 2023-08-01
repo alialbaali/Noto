@@ -17,7 +17,6 @@ import com.noto.app.databinding.SelectFolderDialogFragmentBinding
 import com.noto.app.domain.model.Folder
 import com.noto.app.filtered.*
 import com.noto.app.getOrDefault
-import com.noto.app.map
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
@@ -56,7 +55,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
             viewModel.isShowNotesCount,
         ) { folders, isShowNotesCount ->
             setupFolders(
-                folders.map { it.filterRecursively { entry -> args.filteredFolderIds.none { it == entry.first.id } } },
+                folders,
                 isShowNotesCount,
                 folders.getOrDefault(emptyList()).isEmpty(),
             )
@@ -162,6 +161,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                                 folder(generalFolder.first)
                                 notesCount(generalFolder.second)
                                 isSelected(generalFolder.first.id == args.selectedFolderId)
+                                isEnabled(if (args.filteredFolderIds.isEmpty()) true else generalFolder.first.id !in args.filteredFolderIds)
                                 isManualSorting(false)
                                 isShowNotesCount(isShowNotesCount && !args.isMainInterface)
                                 onClickListener { _ -> callback(generalFolder.first.id, generalFolder.first.getTitle(context)) }
@@ -189,6 +189,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                                         notesCount(entry.second)
                                         isShowNotesCount(isShowNotesCount && !args.isMainInterface)
                                         isSelected(entry.first.id == args.selectedFolderId)
+                                        isEnabled(if (args.filteredFolderIds.isEmpty()) true else entry.first.id !in args.filteredFolderIds)
                                         isManualSorting(false)
                                         depth(depth)
                                         onClickListener { _ -> callback(entry.first.id, entry.first.getTitle(context)) }
