@@ -201,6 +201,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         val savedStateHandle = navController?.currentBackStackEntry?.savedStateHandle
 
         tvReadingMode.setOnClickListener {
+            val selectedNotes = selectedNotes
             disableSelection()
             navController?.navigateSafely(
                 NoteSelectionDialogFragmentDirections.actionNoteSelectionDialogFragmentToNotePagerFragment(
@@ -213,6 +214,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvMergeNotes.setOnClickListener {
+            val selectedNotes = selectedNotes
             disableSelection()
             viewModel.mergeSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
@@ -227,12 +229,14 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvShareNotes.setOnClickListener {
+            val selectedNotes = selectedNotes
             disableSelection()
             launchShareNotesIntent(selectedNotes)
             dismiss()
         }
 
         tvArchiveNotes.setOnClickListener {
+            val selectedNotes = selectedNotes
             disableSelection()
             viewModel.archiveSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
@@ -249,6 +253,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvDuplicateNotes.setOnClickListener {
+            val selectedNotes = selectedNotes
             disableSelection()
             viewModel.duplicateSelectedNotes().invokeOnCompletion {
                 context?.let { context ->
@@ -262,6 +267,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyToClipboard.setOnClickListener {
+            val selectedNotes = selectedNotes
             disableSelection()
             context?.let { context ->
                 val notesText = selectedNotes.joinToString(LineSeparator) { it.format() }
@@ -277,6 +283,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvCopyNotes.setOnClickListener {
+            val selectedNotes = selectedNotes
             disableSelection()
             savedStateHandle?.getLiveData<Long>(Constants.FolderId)
                 ?.observe(viewLifecycleOwner) { folderId ->
@@ -314,6 +321,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvMoveNotes.setOnClickListener {
+            val selectedNotes = selectedNotes
             disableSelection()
             savedStateHandle?.getLiveData<Long>(Constants.FolderId)
                 ?.observe(viewLifecycleOwner) { folderId ->
@@ -351,6 +359,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         }
 
         tvDeleteNotes.setOnClickListener {
+            val selectedNotes = selectedNotes
             disableSelection()
             context?.let { context ->
                 val confirmationText = context.quantityStringResource(R.plurals.delete_note_confirmation, selectedNotes.count())
