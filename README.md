@@ -11,6 +11,9 @@
     <a href="https://kotlinlang.org/">
         <img src="images/badges/Kotlin.svg" alt="Kotlin" />
     </a>
+    <a href="https://crowdin.com/project/notoapp">
+        <img src="images/badges/Crowdin.svg" alt="Crowdin" />
+    </a>
     <a href="https://www.patreon.com/alialbaali">
         <img src="images/badges/Patreon.svg" alt="Patreon" />
     </a>
@@ -170,6 +173,7 @@ Noto is also part of my [portfolio](https://alialbaali.com) projects. It showcas
 
 <p>
   If you would like to translate the app, please contact me via <a href="mailto:noto@alialbaali.com">email</a>.
+  Translations are done through <a href="https://crowdin.com/project/notoapp">Crowdin</a>.
 </p>
 
 #### Special thanks to:
