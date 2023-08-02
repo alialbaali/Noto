@@ -213,7 +213,9 @@
             app:argType="long" />
         <action
             android:id="@+id/action_noteDialogFragment_to_noteReminderDialogFragment"
-            app:destination="@id/noteReminderDialogFragment" />
+            app:destination="@id/noteReminderDialogFragment"
+            app:popUpTo="@id/noteDialogFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_noteDialogFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />

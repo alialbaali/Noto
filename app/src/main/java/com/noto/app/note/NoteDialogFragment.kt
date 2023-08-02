@@ -117,13 +117,13 @@ class NoteDialogFragment : BaseDialogFragment() {
 
         tvRemindMe.setOnClickListener {
             disableSelection()
-            dismiss()
             navController?.navigateSafely(
                 NoteDialogFragmentDirections.actionNoteDialogFragmentToNoteReminderDialogFragment(
                     args.folderId,
                     args.noteId
                 )
             )
+            dismiss()
         }
 
         tvOpenIn.setOnClickListener {
