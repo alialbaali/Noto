@@ -29,10 +29,6 @@ class AppViewModel(
         .distinctUntilChanged()
         .shareIn(viewModelScope, SharingStarted.Eagerly, replay = 1)
 
-    val language = settingsRepository.language
-        .map { if (it in Language.Deprecated) Language.System else it }
-        .stateIn(viewModelScope, SharingStarted.Eagerly, Language.System)
-
     val icon = settingsRepository.icon
         .stateIn(viewModelScope, SharingStarted.Eagerly, Icon.Futuristic)
 
@@ -115,10 +111,6 @@ class AppViewModel(
 
     fun setNotificationPermissionResult(isGranted: Boolean?) {
         mutableIsNotificationPermissionGranted.value = isGranted
-    }
-
-    fun updateLanguage(value: Language) = viewModelScope.launch {
-        settingsRepository.updateLanguage(value)
     }
 
     fun setIsQuickNoteDialogCreated() {

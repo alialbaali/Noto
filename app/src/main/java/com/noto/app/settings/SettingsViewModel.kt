@@ -31,9 +31,6 @@ class SettingsViewModel(
     val font = settingsRepository.font
         .stateIn(viewModelScope, SharingStarted.Lazily, Font.Nunito)
 
-    val language = settingsRepository.language
-        .stateIn(viewModelScope, SharingStarted.Lazily, Language.System)
-
     val icon = settingsRepository.icon
         .stateIn(viewModelScope, SharingStarted.Eagerly, Icon.Futuristic)
 

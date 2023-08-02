@@ -10,16 +10,15 @@
         android:name=".NotoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_futuristic"
-        android:roundIcon="@mipmap/ic_launcher_futuristic_round"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_futuristic_round"
         android:supportsRtl="true"
         android:theme="@style/SplashScreen"
-        android:localeConfig="@xml/locales_config"
         tools:targetApi="tiramisu">
         <activity
             android:name=".AppActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,8 +39,8 @@
 
         <activity
             android:name=".components.TransparentActivity"
-            android:theme="@style/TransparentTheme"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/TransparentTheme">
 
             <intent-filter android:label="@string/quick_note">
                 <action android:name="android.intent.action.PROCESS_TEXT" />
@@ -53,10 +52,10 @@
 
         <activity-alias
             android:name=".Futuristic"
+            android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_futuristic"
             android:roundIcon="@mipmap/ic_launcher_futuristic_round"
-            android:enabled="false"
             android:targetActivity=".AppActivity">
 
             <intent-filter>
@@ -78,10 +77,10 @@
 
         <activity-alias
             android:name=".DarkRain"
+            android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_dark_rain"
             android:roundIcon="@mipmap/ic_launcher_dark_rain_round"
-            android:enabled="false"
             android:targetActivity=".AppActivity">
 
             <intent-filter>
@@ -103,10 +102,10 @@
 
         <activity-alias
             android:name=".Airplane"
+            android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_airplane"
             android:roundIcon="@mipmap/ic_launcher_airplane_round"
-            android:enabled="false"
             android:targetActivity=".AppActivity">
 
             <intent-filter>
@@ -128,10 +127,10 @@
 
         <activity-alias
             android:name=".BlossomIce"
+            android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_blossom_ice"
             android:roundIcon="@mipmap/ic_launcher_blossom_ice_round"
-            android:enabled="false"
             android:targetActivity=".AppActivity">
 
             <intent-filter>
@@ -153,10 +152,10 @@
 
         <activity-alias
             android:name=".DarkAlpine"
+            android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_dark_alpine"
             android:roundIcon="@mipmap/ic_launcher_dark_alpine_round"
-            android:enabled="false"
             android:targetActivity=".AppActivity">
 
             <intent-filter>
@@ -178,10 +177,10 @@
 
         <activity-alias
             android:name=".DarkSide"
+            android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_dark_side"
             android:roundIcon="@mipmap/ic_launcher_dark_side_round"
-            android:enabled="false"
             android:targetActivity=".AppActivity">
 
             <intent-filter>
@@ -203,10 +202,10 @@
 
         <activity-alias
             android:name=".Earth"
+            android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_earth"
             android:roundIcon="@mipmap/ic_launcher_earth_round"
-            android:enabled="false"
             android:targetActivity=".AppActivity">
 
             <intent-filter>
@@ -228,10 +227,10 @@
 
         <activity-alias
             android:name=".Fire"
+            android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_fire"
             android:roundIcon="@mipmap/ic_launcher_fire_round"
-            android:enabled="false"
             android:targetActivity=".AppActivity">
 
             <intent-filter>
@@ -253,10 +252,10 @@
 
         <activity-alias
             android:name=".Purpleberry"
+            android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_purpleberry"
             android:roundIcon="@mipmap/ic_launcher_purpleberry_round"
-            android:enabled="false"
             android:targetActivity=".AppActivity">
 
             <intent-filter>
@@ -278,10 +277,10 @@
 
         <activity-alias
             android:name=".SanguineSun"
+            android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_sanguine_sun"
             android:roundIcon="@mipmap/ic_launcher_sanguine_sun_round"
-            android:enabled="false"
             android:targetActivity=".AppActivity">
 
             <intent-filter>
@@ -323,8 +322,8 @@
 
         <receiver
             android:name=".widget.FolderListWidgetProvider"
-            android:label="@string/folders"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/folders">
 
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -341,8 +340,8 @@
 
         <receiver
             android:name=".widget.NoteListWidgetProvider"
-            android:label="@string/notes"
-            android:exported="true">
+            android:exported="true"
+            android:label="@string/notes">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -365,12 +364,21 @@
             android:name=".note.QuickNoteTileService"
             android:exported="true"
             android:icon="@drawable/ic_round_edit_24"
-            android:roundIcon="@drawable/ic_round_edit_24"
             android:label="@string/quick_note"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE"
+            android:roundIcon="@drawable/ic_round_edit_24">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
+        </service>
+
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
         </service>
     </application>
 

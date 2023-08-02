@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
+import androidx.core.os.LocaleListCompat
 import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
@@ -21,10 +21,7 @@ import com.noto.app.components.MediumSubtitle
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.Language
 import com.noto.app.settings.SettingsViewModel
-import com.noto.app.util.Comparator
-import com.noto.app.util.localize
-import com.noto.app.util.stringResource
-import com.noto.app.util.toResource
+import com.noto.app.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LanguageDialogFragment : BaseDialogFragment(isCollapsable = true) {
@@ -39,7 +36,7 @@ class LanguageDialogFragment : BaseDialogFragment(isCollapsable = true) {
         ComposeView(context).apply {
             setContent {
                 BottomSheetDialog(title = stringResource(id = R.string.language)) {
-                    val selectedLanguage by viewModel.language.collectAsState()
+                    val selectedLanguage = remember { AppCompatDelegate.getApplicationLocales().toLanguages().first() }
                     val languages = remember(context) {
                         Language.entries
                             .sortedWith(Language.Comparator(context))
@@ -50,6 +47,13 @@ class LanguageDialogFragment : BaseDialogFragment(isCollapsable = true) {
                             selected = selectedLanguage == language,
                             onClick = {
                                 viewModel.updateLanguage(language)
+                                if (language == Language.System) {
+                                    AppCompatDelegate.setApplicationLocales(LocaleListCompat.getEmptyLocaleList())
+                                } else {
+                                    arrayOf(language.toLocale())
+                                        .let(LocaleListCompat::create)
+                                        .also(AppCompatDelegate::setApplicationLocales)
+                                }
                                 dismiss()
                             },
                             modifier = Modifier.fillMaxWidth(),

@@ -28,6 +28,9 @@ android {
             enableSplit = false
         }
     }
+    androidResources {
+        generateLocaleConfig = true
+    }
     defaultConfig {
         applicationId = App.ID
         minSdk = App.MinSDK
@@ -41,24 +44,6 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
-        resourceConfigurations.addAll(
-            listOf(
-                "en",
-                "ar",
-                "cs",
-                "de",
-                "es",
-                "fr",
-                "in",
-                "it",
-                "lt",
-                "ru",
-//                "ta",
-                "tr",
-                "zh",
-                "pt",
-            )
-        )
     }
     buildTypes {
         getByName("release") {

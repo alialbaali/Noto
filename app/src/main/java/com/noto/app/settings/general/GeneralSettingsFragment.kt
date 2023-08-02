@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
@@ -77,7 +78,7 @@ class GeneralSettingsFragment : Fragment() {
                     Theme.Dark -> stringResource(id = R.string.dark_theme)
                     Theme.Black -> stringResource(id = R.string.black_theme)
                 }
-                val language by viewModel.language.collectAsState()
+                val language = remember { AppCompatDelegate.getApplicationLocales().toLanguages().first() }
                 val languageText = remember(context, language) { context.stringResource(language.toResource()) }
                 val icon by viewModel.icon.collectAsState()
                 val iconText = when (icon) {

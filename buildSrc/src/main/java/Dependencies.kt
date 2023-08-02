@@ -14,7 +14,7 @@ object Libraries {
 object Versions {
     const val JavaTime = "1.1.5"
     const val Kotlin = "1.9.0"
-    const val Android = "8.0.2"
+    const val Android = "8.1.0"
     const val Epoxy = "5.1.3"
     const val Compose = "1.5.0"
 }
