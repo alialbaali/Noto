@@ -405,6 +405,8 @@
     <string name="new_note_reminder">Naujas priminimas</string>
     <string name="copy">Kopijuoti</string>
     <string name="copy_to">Kopijuoti į…</string>
+    <!-- Text displayed when copying notes between folders along with a progress indicator. -->
+    <string name="copying_notes">Kopijuojami užrašai į %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="one">Užrašas nukopijuotas į %s.</item>
@@ -452,6 +454,8 @@
         <item quantity="other">%d užrašai dubliuoti.</item>
     </plurals>
     <string name="move_to">Perkelti į…</string>
+    <!-- Text displayed when moving notes between folders along with a progress indicator. -->
+    <string name="moving_notes">Perkeliami užrašai į %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="one">Užrašas perkeltas į %s.</item>

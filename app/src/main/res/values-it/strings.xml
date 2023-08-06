@@ -255,7 +255,7 @@
      Such as "2/11 Notes".
     -->
     <plurals name="reading_mode_notes_count">
-        <item quantity="one">%1$d / %2$d Note</item>
+        <item quantity="one">Nota %1$d di %2$d</item>
         <item quantity="other">Nota %1$d di %2$d</item>
     </plurals>
     <plurals name="notes_count">
@@ -295,7 +295,7 @@
     <!-- Text displaying how many occurrences of a word has been found using "Find in note" feature. Such as "2/11 Found".
         The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
     <plurals name="words_found_count">
-        <item quantity="one">%1$d Word • %2$d / %3$d Found</item>
+        <item quantity="one">%1$d Parola • %2$d di %3$d trovate</item>
         <item quantity="other">%1$d Parole • %2$d di %3$d trovate</item>
     </plurals>
     <string name="body">Contenuto</string>
@@ -351,8 +351,8 @@
         <item quantity="other">%d Note archiviate.</item>
     </plurals>
     <plurals name="note_is_unarchived">
-        <item quantity="one">Note has been unarchived.</item>
-        <item quantity="other">%d note sono state spostate dall\'archivio.</item>
+        <item quantity="one">Nota spostata dall\'archivio.</item>
+        <item quantity="other">%d Note spostate dall\'archivio.</item>
     </plurals>
     <!-- The count of the selected notes that have been pinned. -->
     <plurals name="note_is_pinned">
@@ -375,6 +375,8 @@
     <string name="new_note_reminder">Nuovo promemoria</string>
     <string name="copy">Copia</string>
     <string name="copy_to">Copia in…</string>
+    <!-- Text displayed when copying notes between folders along with a progress indicator. -->
+    <string name="copying_notes">Copia delle note in %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="one">Nota copiata in %s.</item>
@@ -410,6 +412,8 @@
         <item quantity="other">%d Note duplicate.</item>
     </plurals>
     <string name="move_to">Sposta in…</string>
+    <!-- Text displayed when moving notes between folders along with a progress indicator. -->
+    <string name="moving_notes">Spostamento delle note in %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="one">Nota spostata in %s.</item>

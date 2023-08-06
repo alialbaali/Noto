@@ -50,11 +50,11 @@
     <!-- Description of the "Source code" settings option. -->
     <string name="source_code_description">Noto 笔记是一个开源应用程序，代码发布在 GitHub 上。</string>
     <!-- The link of the Telegram community of Noto. -->
-    <string name="telegram_community">Telegram community</string>
+    <string name="telegram_community">Telegram 社区</string>
     <!-- Description of the "Telegram community" settings option. -->
-    <string name="telegram_community_description">Join the community to engage with other Noto users, and get the latest news.</string>
+    <string name="telegram_community_description">加入社区，与其他 Noto 笔记用户接触，并获取最新消息。</string>
     <!-- Text for Telegram banner in Settings & What's new dialog. -->
-    <string name="join_telegram">Join The Telegram Community!</string>
+    <string name="join_telegram">加入 Telegram 社群！</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">笔记字体</string>
     <string name="share_app_with_others">与他人分享 Noto 笔记</string>
@@ -360,6 +360,8 @@
     <string name="new_note_reminder">新建提醒</string>
     <string name="copy">复制</string>
     <string name="copy_to">复制到…</string>
+    <!-- Text displayed when copying notes between folders along with a progress indicator. -->
+    <string name="copying_notes">复制笔记到 %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="other">%d 篇笔记已复制到 %s。</item>
@@ -389,6 +391,8 @@
         <item quantity="other">已创建 %d 篇笔记副本。</item>
     </plurals>
     <string name="move_to">移动到...</string>
+    <!-- Text displayed when moving notes between folders along with a progress indicator. -->
+    <string name="moving_notes">移动笔记到 %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="other">%d 篇笔记已被移动到 %s。</item>

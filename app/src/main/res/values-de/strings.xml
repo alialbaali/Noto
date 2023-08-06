@@ -375,6 +375,8 @@
     <string name="new_note_reminder">Neue Notiz-Erinnerung</string>
     <string name="copy">Kopieren</string>
     <string name="copy_to">Kopieren nach…</string>
+    <!-- Text displayed when copying notes between folders along with a progress indicator. -->
+    <string name="copying_notes">Kopiere Notizen nach %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="one">Die Notiz wurde nach %s kopiert.</item>
@@ -410,6 +412,8 @@
         <item quantity="other">%d Notizen wurden dupliziert.</item>
     </plurals>
     <string name="move_to">Verschieben nach…</string>
+    <!-- Text displayed when moving notes between folders along with a progress indicator. -->
+    <string name="moving_notes">Verschiebe Notizen nach %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="one">Die Notiz wurde nach %s verschoben.</item>

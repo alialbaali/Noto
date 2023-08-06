@@ -50,11 +50,11 @@
     <!-- Description of the "Source code" settings option. -->
     <string name="source_code_description">Noto adalah aplikasi sumber terbuka, dan kodenya dipublikasikan di GitHub.</string>
     <!-- The link of the Telegram community of Noto. -->
-    <string name="telegram_community">Telegram community</string>
+    <string name="telegram_community">Komunitas Telegram</string>
     <!-- Description of the "Telegram community" settings option. -->
-    <string name="telegram_community_description">Join the community to engage with other Noto users, and get the latest news.</string>
+    <string name="telegram_community_description">Bergabunglah dengan komunitas untuk berinteraksi dengan pengguna Noto lainnya, dan dapatkan berita terbaru.</string>
     <!-- Text for Telegram banner in Settings & What's new dialog. -->
-    <string name="join_telegram">Join The Telegram Community!</string>
+    <string name="join_telegram">Bergabung dengan Komunitas Telegram kami!</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">Fon catatan</string>
     <string name="share_app_with_others">Bagikan Noto dengan yang lain</string>
@@ -360,6 +360,8 @@
     <string name="new_note_reminder">Pengingat baru</string>
     <string name="copy">Salin</string>
     <string name="copy_to">Salin ke…</string>
+    <!-- Text displayed when copying notes between folders along with a progress indicator. -->
+    <string name="copying_notes">Copying notes to %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="other">%d　Catatan telah disalin ke %s.</item>
@@ -389,6 +391,8 @@
         <item quantity="other">%d　Catatan telah digandakan.</item>
     </plurals>
     <string name="move_to">Pindahkan ke…</string>
+    <!-- Text displayed when moving notes between folders along with a progress indicator. -->
+    <string name="moving_notes">Moving notes to %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="other">%d Catatan telah dipindahkan ke %s.</item>

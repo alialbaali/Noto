@@ -405,6 +405,8 @@
     <string name="new_note_reminder">Nová upomínka</string>
     <string name="copy">Kopírovat</string>
     <string name="copy_to">Kopírovat do…</string>
+    <!-- Text displayed when copying notes between folders along with a progress indicator. -->
+    <string name="copying_notes">Copying notes to %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="one">Poznámka byla zkopírována do %s.</item>
@@ -452,6 +454,8 @@
         <item quantity="other">%d poznámek bylo duplikováno.</item>
     </plurals>
     <string name="move_to">Přesunout do…</string>
+    <!-- Text displayed when moving notes between folders along with a progress indicator. -->
+    <string name="moving_notes">Moving notes to %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="one">Poznámka byla přesunuta do %s.</item>

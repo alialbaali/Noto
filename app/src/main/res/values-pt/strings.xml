@@ -7,7 +7,7 @@
     <string name="okay">Ok</string>
     <string name="search">Procurar</string>
     <!-- An option in the note layout for searching for text inside a note. -->
-    <string name="find_in_note">Find in note</string>
+    <string name="find_in_note">Encontrar na nota</string>
     <!-- A settings option to support the project. -->
     <string name="support_noto">Apoiar Noto</string>
     <!-- Description of the Support Noto settings options. -->
@@ -24,11 +24,11 @@
     <!-- Label filtering mode -->
     <string name="inclusive">Inclusivo</string>
     <!-- Inclusive filtering mode description -->
-    <string name="inclusive_description">Filter notes that have <b>any</b> of the selected labels.</string>
+    <string name="inclusive_description">Filtra notas que tenham <b>qualquer</b> dos marcadores selecionados.</string>
     <!-- Label filtering mode -->
     <string name="exclusive">Exclusivo</string>
     <!-- Exclusive filtering mode description -->
-    <string name="exclusive_description">Filter notes that have <b>all</b> the selected labels, nothing less.</string>
+    <string name="exclusive_description">Filtrar notas que tenham <b>todas</b> as etiquetas selecionadas, nada menos.</string>
     <!-- Label filtering mode -->
     <string name="strict">Estrito</string>
     <!-- Strict filtering mode description -->
@@ -375,6 +375,8 @@
     <string name="new_note_reminder">Novo lembrete</string>
     <string name="copy">Cópia</string>
     <string name="copy_to">Copiar para…</string>
+    <!-- Text displayed when copying notes between folders along with a progress indicator. -->
+    <string name="copying_notes">Copying notes to %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="one">A nota foi copiada para %s.</item>
@@ -410,6 +412,8 @@
         <item quantity="other">%d As notas foram duplicadas.</item>
     </plurals>
     <string name="move_to">Mover para…</string>
+    <!-- Text displayed when moving notes between folders along with a progress indicator. -->
+    <string name="moving_notes">Moving notes to %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="one">A nota foi movida para %s.</item>

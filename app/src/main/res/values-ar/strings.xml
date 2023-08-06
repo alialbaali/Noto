@@ -435,6 +435,8 @@
     <string name="new_note_reminder">تنبيه جديد</string>
     <string name="copy">نسخ</string>
     <string name="copy_to">نسخ إلى…</string>
+    <!-- Text displayed when copying notes between folders along with a progress indicator. -->
+    <string name="copying_notes">Copying notes to %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="zero">تم نسخ الملاحظة إلى %s.</item>
@@ -494,6 +496,8 @@
         <item quantity="other">%d ملاحظات تم تكرارها.</item>
     </plurals>
     <string name="move_to">نقل إلى…</string>
+    <!-- Text displayed when moving notes between folders along with a progress indicator. -->
+    <string name="moving_notes">Moving notes to %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="zero">تم نقل الملاحظة إلى %s.</item>

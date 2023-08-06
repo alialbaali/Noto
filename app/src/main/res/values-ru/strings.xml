@@ -405,6 +405,8 @@
     <string name="new_note_reminder">Новое напоминание</string>
     <string name="copy">Копировать</string>
     <string name="copy_to">Копировать в…</string>
+    <!-- Text displayed when copying notes between folders along with a progress indicator. -->
+    <string name="copying_notes">Копирование заметок в %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="one">Заметка была скопирована в %s.</item>
@@ -452,6 +454,8 @@
         <item quantity="other">%d Заметок было дублировано.</item>
     </plurals>
     <string name="move_to">Переместить в…</string>
+    <!-- Text displayed when moving notes between folders along with a progress indicator. -->
+    <string name="moving_notes">Перемещение заметок в %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="one">Заметка была перемещена в %s.</item>
