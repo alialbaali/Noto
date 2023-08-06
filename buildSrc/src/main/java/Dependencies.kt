@@ -20,8 +20,8 @@ object Versions {
 }
 
 object App {
-    const val VersionName = "2.3.0-Beta3"
-    const val VersionCode = 57
+    const val VersionName = "2.3.0-RC"
+    const val VersionCode = 58
     const val ID = "com.noto"
     const val Namespace = "com.noto.app"
     const val MinSDK = 21
