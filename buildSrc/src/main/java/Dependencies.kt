@@ -26,7 +26,7 @@ object App {
     const val Namespace = "com.noto.app"
     const val MinSDK = 21
     const val CompileSDK = 33
-    const val BuildTools = "33.0.0"
+    const val BuildTools = "34.0.0"
     const val TargetSDK = 33
 }
 
