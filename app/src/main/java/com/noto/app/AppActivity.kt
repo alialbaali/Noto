@@ -12,14 +12,12 @@ import androidx.activity.result.contract.ActivityResultContracts.RequestPermissi
 import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navArgument
-import androidx.navigation.navOptions
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.noto.app.components.BaseActivity
@@ -124,7 +122,7 @@ class AppActivity : BaseActivity() {
                     val args = listOf(navArgument(Constants.FolderId) { defaultValue = Folder.GeneralFolderId })
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                     if (navController.currentDestination?.id != R.id.mainFragment && viewModel.shouldNavigateToMainFragment) {
-                        navController.navigate(R.id.mainFragment)
+                        navController.navigateSafely(NavGraphDirections.actionGlobalMainFragment())
                         viewModel.setShouldNavigateToMainFragment(false)
                     }
                 }
@@ -148,7 +146,7 @@ class AppActivity : BaseActivity() {
 
             Constants.Intent.ActionCreateFolder -> {
                 if (navController.currentDestination?.id != R.id.newFolderFragment)
-                    navController.navigate(R.id.newFolderFragment)
+                    navController.navigateSafely(NavGraphDirections.actionGlobalNewFolderFragment())
             }
 
             Constants.Intent.ActionCreateNote -> {
@@ -156,32 +154,49 @@ class AppActivity : BaseActivity() {
                 if (folderId == 0L) {
                     showSelectFolderDialog(null)
                 } else {
-                    val args = bundleOf(Constants.FolderId to folderId, Constants.SelectedNoteIds to longArrayOf())
-                    navController.popBackStack(R.id.folderFragment, true)
-                    navController.navigate(R.id.folderFragment, args)
-                    navController.navigate(R.id.noteFragment, args)
+                    navController.navigateSafely(NavGraphDirections.actionGlobalFolderFragment(folderId = folderId)) {
+                        popUpTo(R.id.folderFragment) {
+                            inclusive = true
+                        }
+                    }
+                    navController.navigateSafely(
+                        NavGraphDirections.actionGlobalNoteFragment(
+                            folderId = folderId,
+                            selectedNoteIds = longArrayOf(),
+                        )
+                    )
                 }
             }
 
             Constants.Intent.ActionOpenFolder -> {
                 val folderId = intent.getLongExtra(Constants.FolderId, 0)
-                val args = bundleOf(Constants.FolderId to folderId)
-                navController.popBackStack(R.id.folderFragment, true)
-                navController.navigate(R.id.folderFragment, args)
+                navController.navigateSafely(NavGraphDirections.actionGlobalFolderFragment(folderId = folderId)) {
+                    popUpTo(R.id.folderFragment) {
+                        inclusive = true
+                    }
+                }
             }
 
             Constants.Intent.ActionOpenNote -> {
                 val folderId = intent.getLongExtra(Constants.FolderId, 0)
                 val noteId = intent.getLongExtra(Constants.NoteId, 0)
-                val args = bundleOf(Constants.FolderId to folderId, Constants.NoteId to noteId, Constants.SelectedNoteIds to longArrayOf())
-                navController.popBackStack(R.id.folderFragment, true)
-                navController.navigate(R.id.folderFragment, args)
-                navController.navigate(R.id.noteFragment, args)
+                navController.navigateSafely(NavGraphDirections.actionGlobalFolderFragment(folderId = folderId)) {
+                    popUpTo(R.id.folderFragment) {
+                        inclusive = true
+                    }
+                }
+                navController.navigateSafely(
+                    NavGraphDirections.actionGlobalNoteFragment(
+                        folderId = folderId,
+                        noteId = noteId,
+                        selectedNoteIds = longArrayOf(),
+                    )
+                )
             }
 
             Constants.Intent.ActionSettings -> {
                 if (navController.currentDestination?.id != R.id.settingsFragment)
-                    navController.navigate(R.id.settingsFragment)
+                    navController.navigateSafely(NavGraphDirections.actionGlobalSettingsFragment())
             }
         }
         /** Set [intent] to null, so that the code above doesn't run again after a configuration change.*/
@@ -192,18 +207,22 @@ class AppActivity : BaseActivity() {
         navController.getBackStackEntry(R.id.folderFragment).savedStateHandle
             .getLiveData<Long>(Constants.FolderId)
             .observe(this) { folderId ->
-                val options = navOptions {
-                    popUpTo(R.id.folderFragment) {
-                        inclusive = true
-                    }
-                }
-                val args = bundleOf(Constants.FolderId to folderId, Constants.Body to content, Constants.SelectedNoteIds to longArrayOf())
-                navController.navigate(R.id.folderFragment, args, options)
-                navController.navigate(R.id.noteFragment, args)
+                navController.navigateSafely(NavGraphDirections.actionGlobalFolderFragment(folderId = folderId))
+                navController.navigateSafely(
+                    NavGraphDirections.actionGlobalNoteFragment(
+                        folderId = folderId,
+                        body = content,
+                        selectedNoteIds = longArrayOf(),
+                    )
+                )
             }
         if (navController.currentDestination?.id != R.id.selectFolderDialogFragment) {
-            val args = bundleOf(Constants.FilteredFolderIds to longArrayOf(), Constants.Title to stringResource(R.string.select_folder))
-            navController.navigate(R.id.selectFolderDialogFragment, args)
+            navController.navigateSafely(
+                NavGraphDirections.actionGlobalSelectFolderDialogFragment(
+                    filteredFolderIds = longArrayOf(),
+                    title = stringResource(R.string.select_folder),
+                )
+            )
         }
     }
 
@@ -216,9 +235,8 @@ class AppActivity : BaseActivity() {
             viewModel.lastVersion,
             navController.destinationAsFlow(),
         ) { lastVersion, _ ->
-            if (lastVersion != Release.Version.Current.format())
-                if (navController.currentDestination?.id != R.id.whatsNewDialogFragment)
-                    navController.navigate(R.id.whatsNewDialogFragment)
+            if (lastVersion != Release.Version.Current.format() && navController.currentDestination?.id != R.id.whatsNewDialogFragment)
+                navController.navigateSafely(NavGraphDirections.actionGlobalWhatsNewDialogFragment())
         }.launchIn(lifecycleScope)
 
         viewModel.isVaultOpen

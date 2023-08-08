@@ -63,7 +63,7 @@ class WhatsNewFragment : Fragment() {
                         val changelog = remember(currentRelease) { currentRelease.changelog.format(context) }
                         SettingsItem(
                             title = version,
-                            onClick = { navController?.navigate(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(currentRelease.toJson())) },
+                            onClick = { navController?.navigateSafely(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(currentRelease.toJson())) },
                             type = SettingsItemType.Text(date),
                             painter = painterResource(id = R.drawable.ic_round_auto_awesome_24),
                             equalWeights = false,
@@ -84,7 +84,7 @@ class WhatsNewFragment : Fragment() {
                             val changelog = remember(previousRelease) { previousRelease.changelog.format(context, PreviousReleaseChangelogMaxItems) }
                             SettingsItem(
                                 title = version,
-                                onClick = { navController?.navigate(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(previousRelease.toJson())) },
+                                onClick = { navController?.navigateSafely(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(previousRelease.toJson())) },
                                 type = SettingsItemType.Text(date),
                                 painter = painterResource(id = R.drawable.ic_round_tag_24),
                                 equalWeights = false,

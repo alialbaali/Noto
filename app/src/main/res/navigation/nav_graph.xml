@@ -261,6 +261,9 @@
         <action
             android:id="@+id/action_folderDialogFragment_to_confirmationDialogFragment"
             app:destination="@id/confirmationDialogFragment" />
+        <action
+            android:id="@+id/action_folderDialogFragment_to_folderFragment"
+            app:destination="@id/folderFragment" />
     </dialog>
     <dialog
         android:id="@+id/confirmationDialogFragment"
@@ -760,4 +763,25 @@
             android:name="release"
             app:argType="string" />
     </fragment>
+    <action
+        android:id="@+id/action_global_noteFragment"
+        app:destination="@id/noteFragment" />
+    <action
+        android:id="@+id/action_global_folderFragment"
+        app:destination="@id/folderFragment" />
+    <action
+        android:id="@+id/action_global_newFolderFragment"
+        app:destination="@id/newFolderFragment" />
+    <action
+        android:id="@+id/action_global_settingsFragment"
+        app:destination="@id/settingsFragment" />
+    <action
+        android:id="@+id/action_global_selectFolderDialogFragment"
+        app:destination="@id/selectFolderDialogFragment" />
+    <action
+        android:id="@+id/action_global_whatsNewDialogFragment"
+        app:destination="@id/whatsNewDialogFragment" />
+    <action
+        android:id="@+id/action_global_mainFragment"
+        app:destination="@id/mainFragment" />
 </navigation>
