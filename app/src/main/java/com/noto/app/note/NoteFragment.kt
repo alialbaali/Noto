@@ -559,12 +559,12 @@ class NoteFragment : Fragment() {
             when {
                 etNoteTitle.isFocused -> {
                     val index = viewModel.undoTitle().second
-                    etNoteTitle.setSelection(index)
+                    runCatching { etNoteTitle.setSelection(index) }
                 }
 
                 etNoteBody.isFocused -> {
                     val index = viewModel.undoBody().second
-                    etNoteBody.setSelection(index)
+                    runCatching { etNoteBody.setSelection(index) }
                 }
             }
         }
@@ -573,12 +573,12 @@ class NoteFragment : Fragment() {
             when {
                 etNoteTitle.isFocused -> {
                     val index = viewModel.redoTitle().second
-                    etNoteTitle.setSelection(index)
+                    runCatching { etNoteTitle.setSelection(index) }
                 }
 
                 etNoteBody.isFocused -> {
                     val index = viewModel.redoBody().second
-                    etNoteBody.setSelection(index)
+                    runCatching { etNoteBody.setSelection(index) }
                 }
             }
         }
