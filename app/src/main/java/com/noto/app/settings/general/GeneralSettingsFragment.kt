@@ -23,6 +23,7 @@ import com.noto.app.domain.model.Theme
 import com.noto.app.filtered.FilteredItemModel
 import com.noto.app.settings.*
 import com.noto.app.util.*
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.firstOrNull
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -67,7 +68,7 @@ class GeneralSettingsFragment : Fragment() {
                         FilteredItemModel.Recent.id -> recentNotesText
                         FilteredItemModel.Scheduled.id -> scheduledText
                         FilteredItemModel.Archived.id -> archivedText
-                        else -> viewModel.getFolderById(mainInterfaceId).firstOrNull()?.getTitle(context) ?: noneText
+                        else -> viewModel.getFolderById(mainInterfaceId).filterNotNull().firstOrNull()?.getTitle(context) ?: noneText
                     }
                 }
                 val theme by viewModel.theme.collectAsState()
@@ -106,6 +107,7 @@ class GeneralSettingsFragment : Fragment() {
                 val quickNoteFolderId by viewModel.quickNoteFolderId.collectAsState()
                 val quickNoteFolderTitle by produceState(stringResource(id = R.string.general), quickNoteFolderId) {
                     viewModel.getFolderById(quickNoteFolderId)
+                        .filterNotNull()
                         .collect { value = it.getTitle(context) }
                 }
                 val continuousSearch by viewModel.continuousSearch.collectAsState()
