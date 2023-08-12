@@ -40,7 +40,7 @@ class NoteFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
         NoteFragmentBinding.inflate(inflater, container, false).withBinding {
-//            setupMixedTransitions() // Temporally disabled due to focus isn't being set to the title.
+            setupMixedTransitions()
             setupState()
             setupListeners()
         }
