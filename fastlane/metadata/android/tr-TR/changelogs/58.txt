@@ -1,0 +1,6 @@
+- Rusça ve Portekizce desteği getirildi.
+- Hatırlatıcı, Tarih ve Saat seçiciler Noto temasıyla uyum sağlayacak şekilde yeniden tasarlandı.
+- Not seçimi ve notların sürüklenmesinin uzun basma ile gerçekleştirilme prensibi revize edildi.
+- "Notun içinde bul" işlevi ve arama eşleşmeleri arasında otomatik geçiş desteği getirildi.
+- Arşiv ekranları için not seçimi ve hızlı eylem desteği getirildi.
+- Hatalar düzeltildi ve tasarımda iyileştirmeler yapıldı.

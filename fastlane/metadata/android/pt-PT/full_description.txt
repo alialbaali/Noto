@@ -1,0 +1,65 @@
+<big><b>Livre de anúncios </b></big> 
+Todos nós odiamos anúncios. Bem, Noto não tem nenhum, e nunca terá. Aproveite a experiência completa, sem anúncios e sem custos.
+
+<big><b>Código aberto</b></big>
+Noto é uma aplicação de código aberto. Você pode visualizar seu código-fonte no GitHub a qualquer momento usando este<a href="https://www.github.com/alialbaali/Noto">link</a> https://www.github.com/alialbaali/Noto
+
+<big><b>Privacidade</b></big>
+Todas as suas notas e pastas são armazenadas localmente no seu dispositivo, e nunca o deixarão.
+
+<big><b>Design minimalista e moderno</b></big>
+Com o seu design moderno e simplista, Noto facilita a forma de navegar e procurar as coisas.
+
+<big><b>Cofre de pastas</b></big>
+Quer manter algumas coisas privadas? Pode adicionar quantas pastas quiser ao cofre e bloqueá-las com senha, impressão digital ou reconhecimento facial.
+
+<big><b>Rótulos</b></big>
+Cada pasta tem o seu próprio conjunto de etiquetas, e pode usá-los para filtrar as suas anotações da maneira que quiser. Incluindo, inclusivo ou exclusivo filtro.
+
+<big><b>Pastas e notas afixadas</b></big>
+Você pode fixar pastas e notas para permanecer no topo, sem a necessidade de pesquisar por isso.
+
+<big><b>Arquivos de pastas e notas</b></big>
+Feito com uma pasta ou uma nota, mas não quer excluí-las? Apenas arquive. Há pastas arquivadas. Além de, Cada pasta tem o seu próprio arquivo, onde pode manter as suas anotações no caso de precisar delas mais tarde. 
+
+<big><b>Duplicado/Copiar/Mover notas</b></big>
+Não suporta duplicar, mover e copiar notas em diferentes pastas.
+
+<big><b>Salvar automaticamente</b></big>
+Não precisa se preocupar em salvar suas notas constantemente. Não salva automaticamente suas notas enquanto você digita. 
+
+<big><b>A contagem de palavras de notas</b></big>
+Noto mantém o número de palavras escritas em cada nota.
+
+<big><b>Temas claro/escuro/preto/sistema</b></big>
+Você quer verificar as suas anotações à noite? Sem problemas! Não suporta o modo escuro automático por padrão. Também pode manter o tema do Noto sempre claro, escuro ou preto dependendo das suas necessidades.
+
+<big><b>Lista e modos de disposição de grade</b></big>
+Pode personalizar os disposições das pastas e notas para listar ou grade, dependendo do que você preferir.
+
+<big><b>Desfazer/Refazer com a visão do histórico</b></big>
+Você já digitou algo, mas a excluiu acidentalmente? Você pode facilmente desfazer isso, ou se desejar, pode visualizar o histórico e pular para qualquer versão anterior que goste. Além disso, Noto suporta deslizar para a esquerda ou direita para desfazer/refazer para um uso mais rápido.
+
+<big><b>Lembretes</b></big>
+Você pode anexar lembretes de suas notas e será notificado a tempo.
+
+<big><b>Modo de Leitura</b></big>
+Não quer se distrair? Funcionalidades no Modo de Leitura, onde pode ler as suas anotações sem interrupções.
+
+<big><b>Ordenação e agrupamento personalizados</b></big>
+Você pode ordenar pastas ou notas em ordem alfabética, por data de criação, ou manualmente, notas de grupo por etiqueta ou data de criação.
+
+<big><b>Todas as notas/notas recentes</b></big>
+Não se lembra qual pasta tinha a nota? Com todas as anotações, pode procurar por elas rapidamente. Ou, se o tiver verificado recentemente, será na sua opinião mais recente.
+
+<big><b>Lembrando a posição de rolagem</b></big>
+Noto pode lembrar a sua posição de rolagem para cada nota e pasta.
+
+<big><b>Idiomas suportados</b></big>
+Noto está disponível nestes idiomas: Inglês, Turco, Árabe, Indonésio, Checo, Alemão, Italiano, Espanhol e Francês.
+
+<big><b>Pastas e notas widgets</b></big>
+Com suporte a widgets, é possível executar facilmente muitas ações diretamente da sua tela inicial.
+
+<big><b>Exportar pastas e notas</b></big>
+Deseja fazer backup dos seus dados? Não oferece uma maneira fácil de exportar as suas pastas e anotações.

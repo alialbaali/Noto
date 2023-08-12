@@ -1,0 +1,68 @@
+<big><b>Bez reklam</b></big>
+Všichni nesnášíme reklamy. Noto žádné nemá a nikdy mít nebude. Užijte si plnohodnotný zážitek bez reklam a zdarma.
+
+<big><b>Open source</b></big>
+Noto je open-source aplikace. Její zdrojový kód si můžete kdykoli prohlédnout na GitHubu pomocí tohoto <a href="https://www.github.com/alialbaali/Noto">odkazu</a> https://www.github.com/alialbaali/Noto
+
+<big><b>Soukromí</b></big>
+Všechny poznámky a složky jsou uloženy lokálně v zařízení a nikdy ho neopustí.
+
+<big><b>Minimalistický a moderní design</b></big>
+Moderní a zjednodušený design Noto usnadňuje navigaci a vyhledávání.
+
+<big><b>Složky</b></big>
+Pomocí složek můžete seskupovat různé typy poznámek. Jednotlivé složky si můžete přizpůsobit různými názvy a barvami, abyste je mohli snadno najít a poznámky uspořádat.
+
+<big><b>Trezor složek</b></big>
+Chcete si některé věci nechat pro sebe? Do trezoru můžete přidat libovolný počet složek a uzamknout je pomocí přístupového kódu, otisku prstu nebo rozpoznání obličeje.
+
+<big><b>Popisky</b></big>
+Každá složka má vlastní sadu štítků, které můžete použít k filtrování poznámek podle svých představ. Včetně, včetně nebo výhradního filtrování.
+
+<big><b>Archiv složek a poznámek</b></big>
+Skončili jste se složkou nebo poznámkou, ale nechcete je odstranit? Stačí je archivovat. K dispozici je archiv složek. Kromě toho má každá složka svůj vlastní archiv, kde můžete poznámky uchovávat pro případ, že je budete potřebovat později. 
+
+<big><b>Automatické ukládání</b></big>
+Nemusíte se starat o neustálé ukládání poznámek. Noto automaticky ukládá poznámky ihned během psaní. 
+
+<big><b>Počet slov v poznámkách</b></big>
+Noto sleduje počet napsaných slov v každé poznámce.
+
+<big><b>Světlé/tmavé/černé motivy</b></big>
+Chcete si v noci zkontrolovat poznámky? Žádný problém! Noto ve výchozím nastavení podporuje automatický tmavý režim. Motiv aplikace Noto můžete také ponechat vždy světlý, tmavý nebo černý podle svých potřeb.
+
+<big><b>Zrušení/opětovné vrácení se zobrazením historie</b></big>
+Už se vám někdy stalo, že jste něco napsali, ale omylem jste to smazali? Můžete to snadno vrátit zpět, nebo pokud chcete, můžete si prohlédnout historii a přejít na libovolnou předchozí verzi. Kromě toho aplikace Noto podporuje pro rychlejší použití možnost vrátit/znovu přejetí prstem doleva nebo doprava.
+
+<big><b>Čtecí reim</b></big>
+Nechcete se nechat rozptylovat? Aplikace Noto nabízí režim čtení, ve kterém si můžete své poznámky číst bez vyrušování.
+
+<big><b>Vlastní řazení a seskupování</b></big>
+Složky nebo poznámky můžete řadit abecedně, podle data vytvoření nebo ručně, seskupovat poznámky podle štítků nebo podle data vytvoření.
+
+<big><b>Všechny poznámky/nedávné poznámky</b></big>
+Nepamatujete si, ve které složce byla poznámka? Pomocí zobrazení všech poznámek ji můžete rychle vyhledat. Nebo pokud jste ji kontrolovali nedávno, bude v zobrazení posledních poznámek.
+
+<big><b>Zapamatování polohy rolování</b></big>
+Noto si pamatuje pozici posouvání pro každou poznámku a složku.
+
+<big><b>Podporované jazyky</b></big>
+Noto je k dispozici v těchto jazycích: v angličtině, turečtině, arabštině, indonéštině, češtině, němčině, italštině, španělštině a francouzštině.
+
+<big><b>Widgety složek a poznámek</b></big>
+Díky podpoře widgetů můžete snadno provádět mnoho akcí přímo z domovské obrazovky.
+
+<big><b>Export složek a poznámek</b></big>
+Chcete zálohovat svá data? Noto nabízí snadný způsob exportu složek a poznámek.
+
+<big><b>Připnuté složky a poznámky</b></big>
+Složky a poznámky můžete připnout tak, aby zůstaly nahoře, aniž byste je museli hledat.
+
+<big><b>Duplikovat/Kopírovat/Přesunout poznámky</b></big>
+Noto podporuje duplikování, přesouvání a kopírování poznámek napříč různými poznámkami.
+
+<big><b>Režimy rozvržení seznamu a mřížky</b></big>
+Rozložení složek a poznámek můžete upravit na seznam nebo mřížku, podle toho, čemu dáváte přednost.
+
+<big><b>Připomínky</b></big>
+K poznámkám můžete připojit připomenutí a budete na ně včas upozorněni.

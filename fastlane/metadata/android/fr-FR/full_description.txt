@@ -1,0 +1,59 @@
+<big><b>Sans publicité</b></big>
+On déteste tous les publicités. Eh bien, Noto n'en a pas, et n'en aura jamais. Profitez de l'expérience complète sans aucune publicité et tout ça gratuitement.
+
+<big><b>Open source</b></big>
+Noto est une application open-source. Vous pouvez voir son code source sur GitHub à tout moment en utilisant ce lien <a href="https://www.github.com/alialbaali/Noto"></a> https://www.github.com/alialbaali/Noto
+
+<big><b>Confidentialité</b></big>
+Toutes vos notes et dossiers sont stockés localement sur votre appareil, et ne le quitteront jamais.
+
+<big><b>Design minimal et moderne</b></big>
+Avec son design moderne et simpliste, Noto rend la navigation plus simple et plus agréable.
+
+<big><b>Dossiers</b></big>
+Utilisez des dossiers pour regrouper différents types de notes. Personnalisez chaque dossier avec différents noms et couleurs, pour que vous puissiez facilement les trouver et organiser vos notes.
+
+<big><b>Dossiers dans un coffre privé</b></big>
+Vous voulez garder certaines choses privées ? Vous pouvez ajouter autant de dossiers que vous le souhaitez dans votre coffre privé et les verrouiller avec un code d'accès, une empreinte digitale ou la reconnaissance faciale.
+
+<big><b>Étiquettes</b></big>
+Chaque répertoire a son propre ensemble d'étiquettes, et vous pouvez les utiliser pour filtrer vos notes.
+
+<big><b>Dossiers épinglés & notes</b></big>
+Vous pouvez épingler des dossiers et des notes pour les garder en haut, sans avoir besoin de le rechercher.
+
+<big><b>Dossiers et notes archivées</b></big>
+Plus rien à faire avec un dossier ou une note mais vous ne voulez pas les supprimer ? Il suffit de l'archiver ! Chaque dossier a sa propre archive où vous pouvez conserver vos notes au cas où vous en auriez besoin ultérieurement. 
+
+<big><b>Dupliquer/Copier/Déplacer les notes</b></big>
+Noto supporte la duplication, le déplacement et la copie des notes dans différents dossiers.
+
+<big><b>Sauvegarde automatique</b></big>
+Vous n'avez pas besoin de vous soucier de sauvegarder vos notes de façon régulière. Noto enregistre automatiquement vos notes immédiatement pendant que vous écrivez quelque chose. 
+
+<big><b>Thèmes clair/Sombre/Noir/Système</b></big>
+Voulez-vous lire vos notes la nuit ? Pas de problème ! Noto prend en charge le mode sombre automatique par défaut. Vous pouvez également garder le thème de Noto toujours léger, sombre ou noir selon vos besoins.
+
+<big><b>Modes de mise en page liste et grille</b></big>
+Vous pouvez personnaliser la mise en page des dossiers et des notes en mode liste ou grille, en fonction de ce que vous préférez.
+
+<big><b>Annuler/Rétablir avec la vue historique</b></big>
+Avez-vous déjà tapé quelque chose que vous avez accidentellement supprimé ? Vous pouvez facilement annuler cela, ou si vous le souhaitez, vous pouvez voir l'historique et revenir à n'importe quelle version précédente. En plus de cela, Noto prend en charge le glissement vers la gauche ou la droite pour annuler/rétablir.
+
+<big><b>Rappels</b></big>
+Vous pouvez joindre des rappels à vos notes, et vous en serez informé à temps.
+
+<big><b>Mode lecture</b></big>
+Vous ne voulez pas être dérangé ? Noto inclus un mode lecture, où vous pouvez lire vos notes sans aucune interruption.
+
+<big><b>Tri et regroupement personnalisés</b></big>
+Vous pouvez trier les dossiers ou les notes par ordre alphabétique, par date de création, ou manuellement, regrouper les notes par étiquette ou par date de création.
+
+<big><b>Langues prises en charge</b></big>
+Noto est disponible dans ces langues : anglais, turc, arabe, indonésien, tchèque, allemand, italien, espagnol et français.
+
+<big><b>Dossiers et widgets</b></big>
+Avec la prise en charge des widgets, vous pouvez facilement effectuer de nombreuses actions directement depuis votre écran d'accueil.
+
+<big><b>Exporter les dossiers et les notes</b></big>
+Voulez-vous sauvegarder vos données ? Noto fournit un moyen facile d'exporter vos dossiers et vos notes.

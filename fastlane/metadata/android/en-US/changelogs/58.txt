@@ -1,0 +1,6 @@
+- Supported Russian &amp; Portuguese.
+- Redesigned Reminder, Date &amp; Time pickers to match with Noto theme.
+- Revised how notes selection &amp; dragging is handled by using only long clicks.
+- Supported Find in Note functionality, and automatic scrolling to the searched text in notes.
+- Supported notes selection &amp; quick actions for Archive screens.
+- Other bug fixes and design improvements.

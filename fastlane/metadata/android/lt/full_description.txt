@@ -1,0 +1,68 @@
+<big><b>Be reklamų</b></big>
+Mums visiems nepatinka reklamos, todėl Noto jų neturi. Mėgaukitės šia nemokama programėle be jokių reklamų.
+
+<big><b>Atvirojo kodo</b></big>
+Noto yra atvirojo kodo programėlė. Galite peržiūrėti jos pirminį kodą GitHub naudodami šią <a href="https://www.github.com/alialbaali/Noto">nuorodą</a> https://www.github.com/alialbaali/Noto
+
+<big><b>Privatumas</b></big>
+Visi jūsų užrašai ir aplankai yra saugomi jūsų įrenginyje ir niekados jo nepaliks.
+
+<big><b>Minimalus ir modernus dizainas</b></big>
+Su šiuo moderniu ir paprastu dizainu Noto leidžia lengvai naršyti ir ieškoti.
+
+<big><b>Aplankai</b></big>
+Naudokite aplankus skirtingų rūšių užrašų grupavimui. Tinkinkite kiekvieną aplanką su įvairiais pavadinimais ir spalvomis, kad organizuotumėte užrašus ir galėtumėte juos lengvai rasti.
+
+<big><b>Aplankų saugykla</b></big>
+Norite, kad kai kurie dalykai būtų privatūs? Galite pridėti kiek norite aplankų į saugyklą ir juos užrakinti su slaptažodžiu, piršto atspaudu arba veido atpažinimu.
+
+<big><b>Žymenos</b></big>
+Kiekvienas apankas turi savo žymenų rinkinį ir juos galite panaudoti užrašų filtravimui. Įskaitant įtraukiantį arba išskirtinį filtravimą.
+
+<big><b>Prisegti aplankai ir užrašai</b></big>
+Galite prisegti aplankus ir užrašus, kad jie liktų viršuje ir jums nereiktų jų ieškoti.
+
+<big><b>Aplankų ir užrašų archyvas</b></big>
+Baigėte naudoti aplanką arba užrašą, bet nenorite jo panaikinti? Tiesiog jį suarchyvuokite. Yra aplankų archyvas. Be to, kiekvienas aplankas turi savo archyvą, kuriame galite laikyti savo užrašus, jei prireiktų jų vėliau. 
+
+<big><b>Užrašų dubliavimas, kopijavimas, perkėlimas</b></big>
+Noto palaiko užrašų dubliavimą, kopijavimą ir perkėlimą į kitus aplankus.
+
+<big><b>Automatinis išsaugojimas</b></big>
+Nereikia jaudintis dėl užrašų išsaugojimo. Noto automatiškai išsaugo jūsų užrašus jums rašant. 
+
+<big><b>Užrašų žodžių skaičius</b></big>
+Noto seka kiekvieno užrašo parašytų žodžių skaičių.
+
+<big><b>Šviesi, tamsi, juoda, sistemos tema</b></big>
+Norite patikrinti savo užrašus naktį? Be problemų! Noto numatytai palaiko automatinį tamsų režimą. Taip pat, atsižvelgdami į poreikius, Noto temą galite palikti šviesią, tamsią arba juodą.
+
+<big><b>Sąrašo ir tinklelio išsidėstymo režimai</b></big>
+Galite tinkinti aplankų ir užrašų išsidėstymą į sąrašą arba tinklelį.
+
+<big><b>Atkūrimas ir perdarymas su istorijos peržiūra</b></big>
+Ar kada nors netyčia panaikinote parašytą tekstą? Galite lengvai jį atkurti ir grįžti į bet kurią praeitą versiją. Noto taip pat palaiko braukimą kairėn arba dešinėn, kad atkurtumėte/perdarytumėte greičiau.
+
+<big><b>Priminimai</b></big>
+Galite pridėti priminimus užrašams ir laiku apie juos gausite pranešimą.
+
+<big><b>Skaitymo režimas</b></big>
+Nenorite blaškytis? Noto turi skaitymo režimą, kuris leidžia skaityti užrašus be jokių trukdžių.
+
+<big><b>Tinkintas rikiavimas ir grupavimas</b></big>
+Galite rikiuoti aplankus ar užrašus abėcėliškai, pagal sukūrimo datą arba rankiniu būdu, grupuoti užrašus pagal žymeną arba sukūrimo datą.
+
+<big><b>Visi užrašai/Paskiausi užrašai</b></big>
+Nepamenate, kuriame aplanke yra užrašas? Su visų užrašų peržiūra galite greitai jį rasti. Arba, jei neseniai jį atidarėte, jis bus rodomas paskiausiuose užrašuose.
+
+<big><b>Slinkimo padėties įsiminimas</b></big>
+Noto gali įsiminti kiekvieno užrašo ir aplanko slinkimo padėtį.
+
+<big><b>Palaikomos kalbos</b></big>
+Noto palaiko šias kalbas: anglų, turkų, arabų, indoneziečių, čekų, vokiečių, italų, ispanų ir prancūzų.
+
+<big><b>Aplankų ir užrašų valdikliai</b></big>
+Naudodami valdiklius galite lengvai atlikti daugybę veiksmų tiesiai iš pagrindinio ekrano.
+
+<big><b>Aplankų ir užrašų eksportavimas</b></big>
+Norite suurti duomenų atsarginę kopiją? Noto suteikia paprastą būdą eksportuoti jūsų aplankus ir užrašus.

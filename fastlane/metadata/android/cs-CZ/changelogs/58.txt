@@ -1,0 +1,6 @@
+- Podporována ruština &amp; portugalština.
+- Přepracovaná stránka připomenutí, datum &amp; posuvník času je nyní shodný s motivem Noto.
+- Přepracován způsob výběru poznámek &amp; přetahování je řešeno pouze dlouhými kliknutími.
+- Podporována funkcionalita Najít v poznámce a automatické posouvání do vyhledáváného textu v poznámkách.
+- Podpořen výběr poznámek &amp; rychlých akcí pro archivaci poznámek.
+- Opravy chyb a vylepšení designu.

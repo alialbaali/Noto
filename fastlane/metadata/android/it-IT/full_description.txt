@@ -1,0 +1,66 @@
+<big><b>Senza pubblicità</b></big>
+Tutti odiamo le pubblicità. Noto non ne ha ora e nemmeno in futuro. Goditi l'esperienza completa senza pubblicità e privo di costi.
+
+<big><b>Codice sorgente pubblico</b></big>
+Il codice sorgente di Noto è pubblico. Puoi vederlo su GitHub in ogni momento usando questo <a href="https://www.github.com/alialbaali/Noto">link</a> https://www.github.com/alialbaali/Noto
+
+<big><b>Cartelle</b></big>
+Usa le cartelle per raggruppare diversi tipi di note. Personalizza ogni cartella con nomi e colori diversi, distinguendoli e organizzandoli facilmente.
+
+<big><b>Cassaforte</b></big>
+Vuoi tenere private alcune cose? Puoi aggiungere quante cartelle vuoi alla cassaforte e bloccarne l'accesso con un codice, l'impronta digitale o riconoscimento facciale.
+
+<big><b>Etichette</b></big>
+Ogni cartella ha un suo insieme di etichette, puoi usarle per filtrare le tue note in tutti i modi che vuoi con i filtri inclusivi ed esclusivi.
+
+<big><b>Cartelle e note fissate</b></big>
+Puoi fissare cartelle e note per fare in modo che rimangano sempre in cima, senza doverle cercare ogni volta.
+
+<big><b>Privacy</b></big>
+Tutte le tue note e cartelle sono salvate localmente nel tuo dispositivo senza mai lasciarlo.
+
+<big><b>Design moderno e minimale</b></big>
+Con il suo design moderno e semplice, Noto rende facile la navigazione e cercare qualsiasi cosa.
+
+<big><b>Archivio cartelle e note</b></big>
+Hai finito con una cartella o una nota ma non vuoi eliminarle? Archiviale. In più ogni cartella ha il suo archivio dove puoi tenere le note nel caso in cui ti possano servire in futuro. 
+
+<big><b>Duplica/Copia/Sposta le note</b></big>
+Noto supporta la duplicazione, lo spostamento e la copia delle note anche tra cartelle diverse.
+
+<big><b>Auto salvataggio</b></big>
+Non c'è bisogno di ricordarsi di salvare costantemente le note. Noto le salva automaticamente e immediatamente mentre scrivi. 
+
+<big><b>Temi chiaro/scuro/nero/sistema</b></big>
+Vuoi dare un'occhiata alle note di notte? Nessun problema! Noto supporta la modalità scura automatica.
+Puoi anche decidere di tenerlo sempre in modalità chiaro, scuro o nero in base alle tue necessità.
+
+<big><b>Modalità lista e griglia</b></big>
+Puoi personalizzare la disposizione delle cartelle e delle note come griglia o lista, in base a ciò che preferisci.
+
+<big><b>Annulla/Rifai con lo storico</b></big>
+Hai mai scritto qualcosa per poi averlo eliminato per sbaglio? Adesso puoi semplicemente annullarlo, o se lo desideri, puoi vedere lo storico e saltare ad una qualsiasi versione precedente. In più, Noto supporta lo scorrimento verso sinistra e destra per un rapido comando Annulla/Rifai.
+
+<big><b>Promemoria</b></big>
+Puoi associare un promemoria alle tue note, e arriverà una notifica a riguardo senza ritardi.
+
+<big><b>Modalità lettura</b></big>
+Non vuoi essere distratto? Noto ha una modalità lettura dove puoi leggere le tue note senza alcuna interruzione.
+
+<big><b>Ordinamento e raggruppamento personalizzabile</b></big>
+Puoi ordinare le cartelle o le note alfabeticamente, per data di creazione o manualmente, e raggruppare le note per etichette o per data di creazione.
+
+<big><b>Tutte le note e note recenti</b></big>
+Non ricordi in quale cartella è finita quella nota? Con la vista "Tutte le note", puoi trovarla facilmente. Oppure, se l'hai controllata recentemente, sarà nella vista delle note recenti.
+
+<big><b>Ricorda posizione</b></big>
+Noto ricorda la posizione in cui si trovava lo scorrimento, per ogni nota e cartella.
+
+<big><b>Lingue supportate</b></big>
+Noto è disponibile in queste lingue: Inglese, Turco, Arabo, Indonesiano, Ceco, Tedesco, Italiano, Spagnolo e Francese.
+
+<big><b>Widget di cartelle e note</b></big>
+Con il supporto dei widget, puoi facilmente svolgere diverse azioni direttamente dalla tua schermata principale.
+
+<big><b>Esporta cartelle e note</b></big>
+Vuoi fare un backup dei dati? Noto fornice un modo semplice di esportare le cartelle e le note.

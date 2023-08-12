@@ -1,0 +1,6 @@
+- Supporto russo &amp; portoghese.
+- Nuovo design per i promemoria, selezionatori di data e ora abbinati con il tema Noto.
+- Revisionato come la selezione e il trascinamento delle note è gestito usando solo click lunghi.
+- Aggiunta funzionalità di ricerca nelle note, e scorrimento automatico del testo trovato nelle note.
+- Aggiunta selezione delle note e azioni rapide per le schermate dell'Archivio.
+- Correzione bug e miglioramento dell'interfaccia.

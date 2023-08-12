@@ -1,0 +1,68 @@
+<big><b>Ad-free</b></big>
+We all hate ads. Well, Noto doesn't have any, and it never will. Enjoy the full experience without any ads and free of cost.
+
+<big><b>Open source</b></big>
+Noto is an open-source application. You can view its source code on GitHub at anytime using this <a href="https://www.github.com/alialbaali/Noto">link</a> https://www.github.com/alialbaali/Noto
+
+<big><b>Privacy</b></big>
+All your notes and folders are stored locally on your device, and they will never leave it.
+
+<big><b>Minimal and modern design</b></big>
+With its modern and simplistic design, Noto makes it easier to navigate and look things up.
+
+<big><b>Folders</b></big>
+Use folders to group different types of notes. Customize each folder with various names and colors, so you can easily find them and organize your notes.
+
+<big><b>Folders vault</b></big>
+Want to keep some stuff private? You can add as many folders as you want to the vault and lock them with passcode, fingerprint, or facial recognition.
+
+<big><b>Labels</b></big>
+Each folder has its own set of labels, and you can use them to filter your notes in the anyway you want. Including, inclusive or exclusive filtering.
+
+<big><b>Pinned folders & notes</b></big>
+You can pin folders & notes to stay at the top, without the need to search for it.
+
+<big><b>Folders & Notes archive</b></big>
+Done with a folder or a note but you don't want to delete them? Just archive it. There is folders archive. In addition to, each folder has its own archive where you can keep your notes just in case you need them at a later time. 
+
+<big><b>Duplicate/Copy/Move notes</b></big>
+Noto supports duplicating, moving, and copying notes across different folders.
+
+<big><b>Auto save</b></big>
+You don't need to worry about saving your notes constantly. Noto automatically saves your notes immediately while you're typing. 
+
+<big><b>Notes word-count</b></big>
+Noto keeps track of the number of written words in each note.
+
+<big><b>Light/Dark/Black/System themes</b></big>
+Do you want to check your notes at night? No problem! Noto supports auto dark mode by default. You can also keep Noto’s theme always light, dark, or black depending on your needs.
+
+<big><b>List and grid layout modes</b></big>
+You can customize folders’ and notes’ layouts to list or grid, depending on what you prefer.
+
+<big><b>Undo/Redo with history view</b></big>
+Have you ever typed something but accidentally deleted it? You can easily undo that, or if you wish, you can view the history and jump to any previous version you like. On top of that, Noto supports swiping left or right to undo/redo for faster usage.
+
+<big><b>Reminders</b></big>
+You can attach reminders for your notes, and you will get notified about them in time.
+
+<big><b>Reading Mode</b></big>
+Don't want to get distracted? Noto features Reading Mode, where you can read your notes without any interruptions.
+
+<big><b>Custom sorting and grouping</b></big>
+You can sort folders or notes alphabetically, by creation date, or manually, group notes by label, or by creation date.
+
+<big><b>All notes/Recent notes</b></big>
+Don't remember which folder had the note? With all notes view, you can quickly search for it. Or, if you have checked it recently, it would be in your recent notes view.
+
+<big><b>Remembering scroll position</b></big>
+Noto can remember your scrolling position for each note and folder.
+
+<big><b>Supported languages</b></big>
+Noto is available in these languages: English, Turkish, Arabic, Indonesian, Czech, German, Italian, Spanish, and French.
+
+<big><b>Folders and notes widgets</b></big>
+With widgets support, you can easily perform many actions directly from your home screen.
+
+<big><b>Export folders and notes</b></big>
+Do you want to back up your data? Noto provides an easy way to export your folders and notes.

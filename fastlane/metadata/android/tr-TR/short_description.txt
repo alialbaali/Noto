@@ -1,0 +1,1 @@
+Noto, minimalist tasarıma sahip açık kaynaklı bir not alma uygulamasıdır.

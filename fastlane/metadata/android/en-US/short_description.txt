@@ -1,0 +1,1 @@
+Noto is a minimal open-source note-taking application.

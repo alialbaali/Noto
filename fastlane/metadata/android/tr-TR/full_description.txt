@@ -1,0 +1,62 @@
+<big><b>Reklamsız</b></big>
+Herkes reklamlardan nefret eder, bu yüzden Noto'da hiç reklam yok. Reklamsız ve ücretsiz bir deneyimin tadını çıkarın.
+
+<big><b>Açık kaynak</b></big>
+Noto açık kaynaklı bir uygulamadır. Bu <a href="https://www.github.com/alialbaali/Noto">bağlantıyı</a> (https://www.github.com/alialbaali/Noto) kullanarak istediğiniz zaman kaynak kodunu görüntüleyebilirsiniz.
+
+<big><b>Gizlilik</b></big>
+Tüm notlarınız ve klasörleriniz cihazınızda yerel olarak depolanır ve siz istemediğiniz sürece asla başka bir yerde yedeklenmez.
+
+<big><b>Minimal ve modern tasarım</b></big>
+Modern ve sade tasarımıyla Noto gezinmeyi kolaylaştırır.
+
+<big><b>Klasörler</b></big>
+Klasörleri kullanarak notlarınızı gruplandırın. Her bir klasörü farklı adlar ve renklerle özelleştirebilirsiniz, böylece notlarınızı kolay bir şekilde bulup düzenleyebilirsiniz.
+
+<big><b>Klaösr kasası</b></big>
+Bazı şeyleri gizli tutmak mı istiyorsunuz? Kasanıza istediğiniz kadar klasör ekleyebilir ve kasanızı şifre, parmak izi veya yüz tanıma ile kilitleyebilirsiniz.
+
+<big><b>Etiketler</b></big>
+Etiketleri kullanarak her klasördeki notları dilediğiniz gibi sınıflandırabilirsiniz. Etiketlerde dâhilî ve haricî filtreleme özelliği de mevcuttur.
+
+<big><b>Klasörleri ve notları sabitleme</b></big>
+Daha rahat ulaşmak istediğiniz klasörleri ve notları yukarı sabitleyebilirsiniz.
+
+<big><b>Klasörler ve Not arşivi</b></big>
+Kullanmadığınız notları silmek istemiyor musunuz? Arşivleyin gitsin. Klasör arşivi özelliği uygulamada mevcuttur. Ayrıca her klasörün kendi arşivi de vardır, böylece notlarınıza istediğiniz zaman tekrar ulaşabilirsiniz. 
+
+<big><b>Notları çoğaltma, kopyalama ve taşıma</b></big>
+Noto'da farklı klasörlerdeki notları kolayca çoğaltabilir, taşıyabilir veya kopyalayabilirsin.
+
+<big><b>Otomatik kaydetme</b></big>
+Notlarınızı kaydetmeyi unutmaktan korkmanıza gerek yok. Noto, siz yazarken notlarınızı anında otomatik olarak kaydeder. 
+
+<big><b>Açık/Koyu/Siyah/Sistem teması</b></big>
+Gece notlarınıza bakmak mı istiyorsunuz? Noto, otomatik koyu tema etkinleştirme özelliğine sahiptir. Ayrıca isterseniz Noto'yu her zaman açık, koyu, siyah veya sistem teması ile de kullanabilirsiniz.
+
+<big><b>Tek ve çift sütun düzeni</b></big>
+Klasör ve not düzenlerini kolayca özelleştirebilirsiniz.
+
+<big><b>Geri al/Yeniden yaz özelliği ve geçmişi</b></big>
+Bir şeyler yazarken yazdığınız şeyi yanlışlıkla sildiğiniz oldu mu hiç? Noto'da bu hatanızı kolayca geri alabilir, hatta dilerseniz yazı geçmişinizi görüntüleyip notun daha önceki bir hâline geri dönebilirsiniz. Dahası, geri alma/yeniden yazma özelliğini daha hızlı bir şekilde kullanabilmeniz için ekranınızı sola veya sağa kaydırabilirsiniz.
+
+<big><b>Hatırlatıcılar</b></big>
+Noto'yu kullanırken notlar için hatırlatıcılar ekleyebilir ve notlarınız hakkında zamanında bildirim alabilirsiniz.
+
+<big><b>Okuma modu</b></big>
+Dikkatinizin dağılmasını istemiyor musunuz? Noto, notlarınızı rahatsız edilmeden okuyabileceğiniz Okuma Modu özelliğine sahiptir.
+
+<big><b>Sıralama ve gruplandırma</b></big>
+Klasörleri veya notları alfabetik olarak, oluşturma tarihlerine göre veya manuel olarak sıralayabilir, ayrıca notlarınızı etiketlere veya oluşturma tarihlerine göre de gruplandırabilirsiniz.
+
+<big><b>Tüm notlar ve not geçmişi özelliği</b></big>
+Notunuzun hangi klasörde olduğunu unuttunuz mu? Tüm notlar görünümünde notunuzu kolayca bulabilirsiniz. Ayrıca eğer notunuza yakın zamanda baktıysanız not geçmişi görünümünden de notunuza ulaşabilirsiniz.
+
+<big><b>Çoklu dil desteği</b></big>
+Noto'yu İngilizce, Türkçe, Arapça, Endonezce, Çekçe, Almanca, İtalyanca, İspanyolca ve Fransızca dillerinde kullanabilirsiniz.
+
+<big><b>Klasör ve not widget'ları</b></big>
+Widget desteği ile birçok işlemi doğrudan ana ekranınızdan gerçekleştirebilirsiniz.
+
+<big><b>Klasörleri ve notları dışa aktarma</b></big>
+Verilerinizi yedeklemek mi istiyorsunuz? Noto'da klasörlerinizi ve notlarınızı kolayca dışa aktarabilirsiniz.

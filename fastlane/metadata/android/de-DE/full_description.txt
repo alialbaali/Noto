@@ -1,0 +1,53 @@
+<big><b>Werbefrei</b></big>
+Niemand mag Werbung. Noto hat keine und wird sie auch nie haben. Erfreuen Sie sich am vollen Funktionsumfang, frei von Werbung und ohne Kosten.
+
+<big><b>Open Source</b></big>
+Noto ist eine Open-Source-Anwendung. Sie können sich den Quellcode auf GitHub mit diesem <a href="https://www.github.com/alialbaali/Noto">Link</a> https://www.github.com/alialbaali/Noto jederzeit ansehen
+
+<big><b>Privatsphäre</b></big>
+Alle Ihre Notizen und Ordner werden lokal auf Ihrem Gerät gespeichert und werden es auch niemals verlassen.
+
+<big><b>Minimales und modernes Design</b></big>
+Mit modernem und vereinfachtem Design erleichtert Noto das Navigieren und Nachsehen von Notizen.
+
+<big><b>Ordner</b></big>
+Verwenden Sie Ordner um verschiedene Arten von Notizen zu gruppieren. Individualisieren Sie Ihre Ordner mit unterschiedlichen Namen und Farben, so dass Sie sie leicht finden und Ihre Notizen organisieren können.
+
+<big><b>Geschützte Ordner</b></big>
+Möchten Sie einige Dinge lieber für sich behalten? Sie können beliebig viele Ordner zum Ordnerschutz hinzufügen und diese mit Passcode, Fingerabdruck oder Gesichtserkennung sperren.
+
+<big><b>Labels</b></big>
+Jeder Ordner hat seinen eigenen Satz von Labels, die Sie verwenden können, um Ihre Notizen so zu filtern, wie Sie es möchten, inklusives oder exklusives Filtern inbegriffen.
+
+<big><b>Ordner & Notizen anpinnen</b></big>
+Sie können Ordner und Notizen anpinnen, damit sie oben bleiben und Sie nicht danach suchen müssen.
+
+<big><b>Ordner- und Notiz-Archive</b></big>
+Sind Sie fertig mit einer Notiz oder einem ganzen Ordner, aber Sie möchten diese noch nicht löschen? Archivieren Sie sie einfach. Es gibt ein Archiv für Ordner. Zusätzlich dazu verfügt jeder Ordner über ein eigenes Archiv, in dem Sie Ihre Notizen aufbewahren können, falls Sie sie später benötigen. 
+
+<big><b>Helles/dunkles/schwarzes/System-Theme</b></big>
+Sie möchten Ihre Notizen bei Nacht durchsehen? Kein Problem! Noto unterstützt standardmäßig den automatischen Dunkelmodus. Sie können Notos Theme auch immer hell, dunkel oder schwarz lassen, je nach Ihren Bedürfnissen.
+
+<big><b>Rückgängig machen/Wiederholen mit Ansicht des Verlaufs</b></big>
+Haben Sie schon einmal etwas eingegeben, aber versehentlich gelöscht? Sie können das einfach rückgängig machen, oder wenn Sie möchten, können Sie den Bearbeitungsverlauf ansehen und zu jeder beliebigen Version springen. Darüber hinaus unterstützt Noto das Wischen nach links oder rechts zum Rückgängig machen/Wiederholen für eine schnellere Anwendung.
+
+<big><b>Benachrichtigungen</b></big>
+Sie können Ihren Notizen eine Benachrichtigung anhängen und werden zur rechten Zeit daran erinnert.
+
+<big><b>Lesemodus</b></big>
+Möchten Sie beim Lesen nicht abgelenkt werden? Noto zeichnet sich durch einen Lesemodus aus. So können Sie Ihre Notizen störungsfrei lesen.
+
+<big><b>Benutzerdefinierte Sortierung und Gruppierung</b></big>
+Sie können Ordner oder Notizen alphabetisch sortieren, zudem nach Erstellungsdatum oder manuell. Obendrein lassen sie sich auch gruppieren, sowohl nach Label als auch nach Erstellungsdatum.
+
+<big><b>Alle Notizen/Zuletzt geöffnete Notizen</b></big>
+Sie erinnern sich nicht mehr, in welchem Ordner Sie eine Notiz abgelegt hatten? Mit der Ansicht »Alle Notizen« können Sie schnell danach suchen. Oder, wenn Sie sie erst kürzlich angesehen haben, finden Sie sie in der Ansicht »Zuletzt geöffnete Notizen«.
+
+<big><b>Unterstützte Sprachen</b></big>
+Noto ist in folgenden Sprachen verfügbar: Englisch, Türkisch, Arabisch, Indonesisch, Tschechisch, Deutsch, Italienisch, Spanisch und Französisch.
+
+<big><b>Ordner- und Notizen-Widgets</b></big>
+Mit der Hilfe von Widgets können Sie ganz einfach viele Aktionen direkt von Ihrem Startbildschirm aus durchführen.
+
+<big><b>Ordner und Notizen exportieren</b></big>
+Möchten Sie Ihre Daten sichern? Noto bietet eine einfache Möglichkeit, Ihre Ordner und Notizen zu exportieren.

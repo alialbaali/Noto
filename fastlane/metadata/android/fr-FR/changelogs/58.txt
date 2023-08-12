@@ -1,0 +1,6 @@
+- Prise en charge du russe et du portugais.
+- Refonte des Rappels, sélecteurs de date et d'heure pour correspondre avec le thème Noto.
+- Amélioration de la gestion de la sélection et du glissement des notes en n'utilisant que des clics longs.
+- Fonctionnalité de recherche dans les notes et défilement automatique vers le texte recherché dans les notes.
+- Prise en charge de la sélection des notes et des actions rapides pour les écrans d'archives.
+- Corrections de bugs.

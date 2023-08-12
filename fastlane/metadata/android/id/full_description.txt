@@ -1,0 +1,62 @@
+<big><b>Bebas iklan</b></big>
+Kita semua membenci iklan. Nah, Noto tidak punya, dan tidak akan pernah. Nikmati pengalaman penuh tanpa iklan dan bebas biaya.
+
+<big><b>Sumber terbuka</b></big>
+Noto adalah aplikasi sumber terbuka. Anda dapat melihat kode sumbernya di GitHub kapan saja menggunakan <a href="https://www.github.com/alialbaali/Noto">tautan</a> https://www.github.com/alialbaali/Noto
+
+<big><b>Privasi</b></big>
+Semua catatan dan map anda disimpan secara lokal di perangkat anda, dan mereka tidak akan pernah hilang.
+
+<big><b>Desain minimalis dan modern</b></big>
+Dengan desainnya yang modern dan sederhana, Noto memudahkan navigasi dan pencarian.
+
+<big><b>Map</b></big>
+Gunakan map untuk mengelompokkan berbagai jenis catatan. Sesuaikan setiap map dengan berbagai nama dan warna, sehingga anda dapat dengan mudah menemukannya dan mengatur catatan anda.
+
+<big><b>Brankas map</b></big>
+Ingin merahasiakan beberapa hal? Anda dapat menambahkan map sebanyak yang anda inginkan ke brankas dan menguncinya dengan kode sandi, sidik jari, atau pengenalan wajah.
+
+<big><b>Label</b></big>
+Setiap map memiliki kumpulan labelnya sendiri, dan anda dapat menggunakannya untuk memfilter catatan sesuai keinginan anda. Termasuk, pemfilteran inklusif atau eksklusif.
+
+<big><b>Map dan catatan yang disematkan</b></big>
+Anda dapat menyematkan map & catatan untuk tetap di atas, tanpa perlu mencarinya.
+
+<big><b>Arsip Map dan Catatan</b></big>
+Selesai dengan map atau catatan tetapi anda tidak ingin menghapusnya? Arsipkan saja. Ada map arsip. Selain itu, setiap map memiliki arsipnya sendiri di mana anda dapat menyimpan catatan untuk berjaga-jaga jika anda membutuhkannya di lain waktu. 
+
+<big><b>Gandakan/Salin/Pindahkan catatan</b></big>
+Noto mendukung penggandaan, pemindahan, dan penyalinan catatan di berbagai map.
+
+<big><b>Tema Terang/Gelap/Hitam/Sistem</b></big>
+Apakah Anda ingin memeriksa catatan anda di malam hari? Tidak masalah! Noto mendukung mode gelap otomatis secara asali. Anda juga dapat menjaga agar tema Noto selalu terang, gelap, atau hitam tergantung kebutuhan anda.
+
+<big><b>Mode tata letak daftar dan kisi</b></big>
+Anda dapat menyesuaikan tata letak folder dan catatan ke daftar atau kisi, tergantung pada apa yang anda inginkan.
+
+<big><b>Urungkan/Kembalikan dengan tampilan riwayat</b></big>
+Pernahkah anda mengetik sesuatu tetapi tidak sengaja menghapusnya? anda dapat dengan mudah membatalkannya, atau jika mau, anda dapat melihat riwayat dan melompat ke versi sebelumnya yang anda suka. Selain itu, Noto mendukung menggesek ke kiri atau kanan untuk membatalkan/mengulang untuk penggunaan yang lebih cepat.
+
+<big><b>Pengingat</b></big>
+Anda dapat melampirkan pengingat untuk catatan anda, dan anda akan diberi tahu tepat waktu.
+
+<big><b>Mode Membaca</b></big>
+Tidak ingin terganggu? Noto memiliki fitur Mode Membaca, di mana anda dapat membaca catatan anda tanpa gangguan.
+
+<big><b>Penyortiran dan pengelompokan khusus</b></big>
+Anda dapat mengurutkan map atau catatan menurut abjad, menurut tanggal pembuatan, atau secara manual, mengelompokkan catatan menurut label, atau menurut tanggal pembuatan.
+
+<big><b>Semua catatan/Catatan terbaru</b></big>
+Tidak ingat map mana yang menyimpan catatan itu? Dengan semua tampilan catatan, Anda dapat dengan cepat mencarinya. Atau, jika anda telah memeriksanya baru-baru ini, itu akan ada di tampilan catatan terbaru anda.
+
+<big><b>Mengingat posisi gulir</b></big>
+Noto dapat mengingat posisi pengguliran anda untuk setiap catatan dan map.
+
+<big><b>Bahasa yang didukung</b></big>
+Noto tersedia dalam bahasa berikut: Inggris, Turki, Arab, Indonesia, Ceko, Jerman, Italia, Spanyol, dan Prancis.
+
+<big><b>Widget map dan catatan</b></big>
+Dengan dukungan widget, anda dapat dengan mudah melakukan banyak tindakan langsung dari layar beranda.
+
+<big><b>Ekspor map dan catatan</b></big>
+Apakah anda ingin mencadangkan data anda? Noto menyediakan cara mudah untuk mengekspor map dan catatan Anda.

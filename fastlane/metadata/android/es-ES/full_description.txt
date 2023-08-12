@@ -1,0 +1,67 @@
+<big><b>Sin publicidad</b></big>
+Todos odiamos los anuncios. Bueno, Noto no tiene ninguna, y nunca lo tendrá, disfruta de la experiencia completa sin ningún anuncio y sin costo alguno.
+
+<big><b>Código abierto</b></big>
+Noto es una aplicación de código abierto. Puedes ver su código fuente en GitHub en cualquier momento usando este enlace<a href="https://www.github.com/alialbaali/Noto">enlace</a> https://www.github.com/alialbaali/Noto
+
+<big><b>Privacidad</b></big>
+Todas sus notas y carpetas se almacenan localmente en su dispositivo, y nunca lo dejarán.
+
+<big><b>Diseño mínimo y moderno</b></big>
+Con su diseño moderno y simple, Noto hace más fácil navegar y ver las cosas.
+
+<big><b>Carpetas</b></big>
+Usa carpetas para agrupar diferentes tipos de notas. Personalice cada carpeta con varios nombres y colores, para que pueda encontrarlos y organizar sus notas fácilmente.
+
+<big><b>Bóveda de carpetas</b></big>
+¿Quieres mantener algunas cosas privadas? Puedes añadir tantas carpetas como quieras a la bóveda y bloquearlas con contraseña, huella dactilar o reconocimiento facial.
+
+<big><b>Labels</b></big>
+Cada carpeta tiene su propio conjunto de etiquetas y puedes usarlas para filtrar tus notas.
+Incluyendo filtrado inclusivo y exclusivos.
+
+<big><b>Puedes fijar carpetas y notas para que permanezcan resaltadas sin tener que buscarlas. </b></big>.
+
+<big><b>Archivo de carpetas & Notas</b></big>
+¿Qué hacer con una carpeta o una nota que no queremos borrar? Archívala. Hay un archivo de carpetas.
+Además cada carpeta tiene su propio archivo donde puedes mantener tus notas en caso de que las necesites más tarde. 
+
+<big><b>Duplicado/Copia/Mover notas</b></big>
+Noto soporta el duplicar, mover y copiar notas entre diferentes carpetas.
+
+<big><b>Autoguardado </b></big>
+No tienes que preocuparte de salvar tus notas constantemente. Noto salva tus notas automáticamente mientras escribes. 
+
+<big><b>Contador de palabras </b></big>
+Noto mantiene un seguimiento de las palabras escritas en cada nota. 
+
+<big><b>Claro/Oscuro/Negro/tema del sistema</b></big>
+Quieres leer tus notas por la noche? Sin problemas, Noto soporta el modo noche automático por defecto.
+También puedes mantener el tema de Noto siempre claro, oscuro o negro dependiendo de tus necesidades.
+
+<big><b>Layout modo lista o rejilla </b></big>
+Puedes configurar las notas y  las carpetas para visualizarlas en modo lista o rejilla dependiendo de tus preferencias.
+
+<big><b>Deshacer/Rehacer con vista de historial</b></big>
+¿Alguna vez has escrito algo pero has borrado accidentalmente? Puede deshacer eso fácilmente, o si lo desea, puede ver el historial y saltar a cualquier versión anterior que desee. Por encima de eso, Noto soporta deslizar izquierda o derecha a deshacer/rehacer para un uso más rápido.
+
+<big><b>Recordatorios</b></big>
+Puede adjuntar recordatorios para sus notas y se le notificará a tiempo.
+
+<big><b>Modo de lectura</b></big>
+¿No quieres distraerte? Modo de lectura Noto, donde puedes leer tus notas sin interrupciones.
+
+<big><b>Clasificación y agrupación personalizada</b></big>
+Puede ordenar carpetas o notas alfabéticamente, por fecha de creación, o manualmente, notas de grupo por etiqueta o por fecha de creación.
+
+<big><b>Todas las notas/notas recientes</b></big>
+¿No recuerda qué carpeta tenía la nota? Con la vista de todas las notas, puede buscarla rápidamente. O, si lo has comprobado recientemente, estaría en tu vista de notas recientes.
+
+<big><b>Idiomas soportados</b></big>
+Noto está disponible en estos idiomas: Inglés, turco, árabe, indonesio, checo, alemán, italiano, español y francés.
+
+<big><b>widgets de carpetas y notas</b></big>
+Con soporte de widgets puedes realizar fácilmente muchas acciones directamente desde tu pantalla de inicio.
+
+<big><b>Exportar carpetas y notas</b></big>
+¿Desea realizar una copia de seguridad de sus datos? Noto proporciona una forma fácil de exportar sus carpetas y notas.
