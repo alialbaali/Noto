@@ -12,12 +12,11 @@ import androidx.activity.result.contract.ActivityResultContracts.RequestPermissi
 import androidx.core.content.ContextCompat
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NamedNavArgument
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.navArgument
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.noto.app.components.BaseActivity
@@ -84,42 +83,26 @@ class AppActivity : BaseActivity() {
             when (val interfaceId = viewModel.mainInterfaceId.value) {
                 FilteredItemModel.All.id -> inflateGraphAndSetStartDestination(
                     R.id.filteredFragment,
-                    listOf(
-                        navArgument(Constants.Model) {
-                            defaultValue = FilteredItemModel.All
-                        }
-                    ),
+                    bundleOf(Constants.Model to FilteredItemModel.All),
                 )
 
                 FilteredItemModel.Recent.id -> inflateGraphAndSetStartDestination(
                     R.id.filteredFragment,
-                    listOf(
-                        navArgument(Constants.Model) {
-                            defaultValue = FilteredItemModel.Recent
-                        }
-                    ),
+                    bundleOf(Constants.Model to FilteredItemModel.Recent),
                 )
 
                 FilteredItemModel.Scheduled.id -> inflateGraphAndSetStartDestination(
                     R.id.filteredFragment,
-                    listOf(
-                        navArgument(Constants.Model) {
-                            defaultValue = FilteredItemModel.Scheduled
-                        }
-                    ),
+                    bundleOf(Constants.Model to FilteredItemModel.Scheduled),
                 )
 
                 FilteredItemModel.Archived.id -> inflateGraphAndSetStartDestination(
                     R.id.filteredFragment,
-                    listOf(
-                        navArgument(Constants.Model) {
-                            defaultValue = FilteredItemModel.Archived
-                        }
-                    ),
+                    bundleOf(Constants.Model to FilteredItemModel.Archived),
                 )
 
                 AllFoldersId -> {
-                    val args = listOf(navArgument(Constants.FolderId) { defaultValue = Folder.GeneralFolderId })
+                    val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                     if (navController.currentDestination?.id != R.id.mainFragment && viewModel.shouldNavigateToMainFragment) {
                         navController.navigateSafely(NavGraphDirections.actionGlobalMainFragment())
@@ -128,7 +111,7 @@ class AppActivity : BaseActivity() {
                 }
 
                 else -> {
-                    val args = listOf(navArgument(Constants.FolderId) { defaultValue = interfaceId })
+                    val args = bundleOf(Constants.FolderId to interfaceId)
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                 }
             }
@@ -299,13 +282,10 @@ class AppActivity : BaseActivity() {
         .addTag(Constants.VaultTimeout)
         .build()
 
-    private fun inflateGraphAndSetStartDestination(startDestinationId: Int, args: List<NamedNavArgument> = emptyList()) {
+    private fun inflateGraphAndSetStartDestination(startDestinationId: Int, args: Bundle? = null) {
         val graph = navController.navInflater.inflate(R.navigation.nav_graph)
-            .apply {
-                this.setStartDestination(startDestinationId)
-                args.forEach { this.addArgument(it.name, it.argument) }
-            }
-        navController.setGraph(graph, null)
+            .apply { this.setStartDestination(startDestinationId) }
+        navController.setGraph(graph, args)
     }
 
     @SuppressLint("RestrictedApi")

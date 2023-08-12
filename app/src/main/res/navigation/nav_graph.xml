@@ -5,9 +5,11 @@
     app:startDestination="@id/mainFragment">
     <argument
         android:name="folder_id"
+        android:defaultValue="-1L"
         app:argType="long" />
     <argument
         android:name="note_id"
+        android:defaultValue="-1L"
         app:argType="long" />
     <dialog
         android:id="@+id/mainFragment"
