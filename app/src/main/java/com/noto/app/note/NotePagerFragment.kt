@@ -250,7 +250,7 @@ class NotePagerFragment : Fragment() {
             context?.let { context ->
                 viewModel.unarchiveSelectedArchivedNote().invokeOnCompletion {
                     vp.adapter = null
-                    val text = context.quantityStringResource(R.plurals.note_is_unarchived, 1)
+                    val text = context.quantityStringResource(R.plurals.note_is_unarchived, 1, 1)
                     val drawableId = R.drawable.ic_round_unarchive_24
                     root.snackbar(text, drawableId, anchorViewId, folderColor)
                     context.updateAllWidgetsData()
@@ -270,7 +270,7 @@ class NotePagerFragment : Fragment() {
                         liveData.value = null
                         viewModel.deleteSelectedArchivedNote().invokeOnCompletion {
                             vp.adapter = null
-                            val text = context.quantityStringResource(R.plurals.note_is_deleted, 1)
+                            val text = context.quantityStringResource(R.plurals.note_is_deleted, 1, 1)
                             val drawableId = R.drawable.ic_round_delete_24
                             root.snackbar(text, drawableId, anchorViewId, folderColor)
                             context.updateAllWidgetsData()
