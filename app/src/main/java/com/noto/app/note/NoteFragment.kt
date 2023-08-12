@@ -558,13 +558,17 @@ class NoteFragment : Fragment() {
         ibUndo.setOnClickListener {
             when {
                 etNoteTitle.isFocused -> {
-                    val index = viewModel.undoTitle().second
-                    runCatching { etNoteTitle.setSelection(index) }
+                    val triple = viewModel.undoTitle()
+                    val lastIndex = triple.third.lastIndex.takeUnless { it == -1 } ?: 0
+                    val index = triple.second.coerceIn(0, lastIndex)
+                    etNoteTitle.setSelection(index)
                 }
 
                 etNoteBody.isFocused -> {
-                    val index = viewModel.undoBody().second
-                    runCatching { etNoteBody.setSelection(index) }
+                    val triple = viewModel.undoBody()
+                    val lastIndex = triple.third.lastIndex.takeUnless { it == -1 } ?: 0
+                    val index = triple.second.coerceIn(0, lastIndex)
+                    etNoteBody.setSelection(index)
                 }
             }
         }
@@ -572,13 +576,17 @@ class NoteFragment : Fragment() {
         ibRedo.setOnClickListener {
             when {
                 etNoteTitle.isFocused -> {
-                    val index = viewModel.redoTitle().second
-                    runCatching { etNoteTitle.setSelection(index) }
+                    val triple = viewModel.redoTitle()
+                    val lastIndex = triple.third.lastIndex.takeUnless { it == -1 } ?: 0
+                    val index = triple.second.coerceIn(0, lastIndex)
+                    etNoteTitle.setSelection(index)
                 }
 
                 etNoteBody.isFocused -> {
-                    val index = viewModel.redoBody().second
-                    runCatching { etNoteBody.setSelection(index) }
+                    val triple = viewModel.redoBody()
+                    val lastIndex = triple.third.lastIndex.takeUnless { it == -1 } ?: 0
+                    val index = triple.second.coerceIn(0, lastIndex)
+                    etNoteBody.setSelection(index)
                 }
             }
         }
