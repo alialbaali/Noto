@@ -36,6 +36,7 @@ object Constants {
         const val ActionQuickNote = "com.noto.intent.action.QUICK_NOTE"
         const val ActionOpenFolder = "com.noto.intent.action.OPEN_FOLDER"
         const val ActionOpenNote = "com.noto.intent.action.OPEN_NOTE"
+        const val ActionOpenVault = "com.noto.intent.action.OPEN_VAULT"
         const val ActionSettings = "com.noto.intent.action.SETTINGS"
     }
 

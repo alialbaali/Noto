@@ -39,6 +39,7 @@ private val AppIntents = listOf(
     Constants.Intent.ActionCreateNote,
     Constants.Intent.ActionOpenFolder,
     Constants.Intent.ActionOpenNote,
+    Constants.Intent.ActionOpenVault,
     Constants.Intent.ActionSettings,
 )
 
@@ -79,8 +80,8 @@ class AppActivity : BaseActivity() {
     }
 
     private fun setupNavigation() {
-        if (intent?.action !in AppIntents) {
-            when (val interfaceId = viewModel.mainInterfaceId.value) {
+        if (intent?.action !in AppIntents) { // Default action (i.e. opening the app from the home screen.)
+            when (val interfaceId = viewModel.mainInterfaceId.value) { // Set the start destination according to user preference.
                 FilteredItemModel.All.id -> inflateGraphAndSetStartDestination(
                     R.id.filteredFragment,
                     bundleOf(Constants.Model to FilteredItemModel.All),
@@ -115,8 +116,8 @@ class AppActivity : BaseActivity() {
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                 }
             }
-        } else {
-            inflateGraphAndSetStartDestination(R.id.folderFragment)
+        } else { // Custom action (i.e. opening the app from a shortcut, notificiation, or another app.
+            inflateGraphAndSetStartDestination(R.id.folderFragment) // Set the start destination to the General folder.
         }
     }
 
@@ -175,6 +176,11 @@ class AppActivity : BaseActivity() {
                         selectedNoteIds = longArrayOf(),
                     )
                 )
+            }
+
+            Constants.Intent.ActionOpenVault -> {
+                if (navController.currentDestination?.id != R.id.mainVaultFragment)
+                    navController.navigateSafely(NavGraphDirections.actionGlobalMainVaultFragment())
             }
 
             Constants.Intent.ActionSettings -> {

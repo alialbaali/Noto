@@ -786,4 +786,7 @@
     <action
         android:id="@+id/action_global_mainFragment"
         app:destination="@id/mainFragment" />
+    <action
+        android:id="@+id/action_global_mainVaultFragment"
+        app:destination="@id/mainVaultFragment" />
 </navigation>

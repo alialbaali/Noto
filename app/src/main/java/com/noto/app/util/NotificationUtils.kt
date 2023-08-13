@@ -8,8 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import androidx.core.os.bundleOf
-import androidx.navigation.NavDeepLinkBuilder
 import com.noto.app.R
 import com.noto.app.domain.model.Folder
 import com.noto.app.domain.model.Icon
@@ -94,25 +92,21 @@ fun NotificationManager.sendQuickNoteNotification(context: Context, folder: Fold
 }
 
 private fun Context.createVaultNotificationPendingIntent(): PendingIntent? {
-    return NavDeepLinkBuilder(this)
-        .setGraph(R.navigation.nav_graph)
-        .setDestination(R.id.mainVaultFragment)
-        .setComponentName(enabledComponentName)
-        .createTaskStackBuilder()
-        .getPendingIntent(RequestCode, PendingIntentFlags)
+    return Intent(Constants.Intent.ActionOpenVault)
+        .apply { component = enabledComponentName }
+        .let { PendingIntent.getActivity(this, RequestCode, it, PendingIntentFlags) }
 }
 
 fun NotificationManager.cancelVaultNotification() = cancel(VaultNotificationId)
 
 private fun Context.createNotificationPendingIntent(noteId: Long, folderId: Long): PendingIntent? {
-    val args = bundleOf(Constants.FolderId to folderId, Constants.NoteId to noteId, Constants.SelectedNoteIds to longArrayOf())
-    return NavDeepLinkBuilder(this)
-        .setGraph(R.navigation.nav_graph)
-        .setDestination(R.id.noteFragment)
-        .setArguments(args)
-        .setComponentName(enabledComponentName)
-        .createTaskStackBuilder()
-        .getPendingIntent(RequestCode, PendingIntentFlags)
+    return Intent(Constants.Intent.ActionOpenNote)
+        .apply {
+            component = enabledComponentName
+            putExtra(Constants.FolderId, folderId)
+            putExtra(Constants.NoteId, noteId)
+        }
+        .let { PendingIntent.getActivity(this, RequestCode, it, PendingIntentFlags) }
 }
 
 fun NotificationManager.createNotificationChannels(context: Context) {
