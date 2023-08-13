@@ -1,0 +1,1 @@
+- Hatalar düzeltildi ve tasarımda iyileştirmeler yapıldı.
