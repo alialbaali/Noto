@@ -291,6 +291,7 @@ fun Language.Companion.Comparator(context: Context): Comparator<Language> {
         }
 }
 
+@Suppress("DEPRECATION")
 fun Language.toLocale(): Locale = when (this) {
     Language.System -> Locale.getDefault()
     Language.English -> Locale("en")
@@ -318,6 +319,7 @@ fun List<Language>.toLocalListCompat(): LocaleListCompat {
     }
 }
 
+@Suppress("DEPRECATION")
 fun LocaleListCompat.toLanguages(): List<Language> {
     return toLanguageTags().split(',').map { tag ->
         when {

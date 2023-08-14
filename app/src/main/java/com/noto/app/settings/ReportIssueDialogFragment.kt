@@ -23,6 +23,7 @@ import com.noto.app.util.Constants
 
 class ReportIssueDialogFragment : BaseDialogFragment() {
 
+    @Suppress("DEPRECATION")
     private val appVersion by lazy {
         context?.let { context ->
             context.packageManager?.getPackageInfo(context.packageName, 0)?.versionName

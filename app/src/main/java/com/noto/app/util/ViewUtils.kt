@@ -394,12 +394,14 @@ fun NestedScrollView.isScrollingAsFlow() = callbackFlow {
     awaitClose { setOnScrollChangeListener(null as NestedScrollView.OnScrollChangeListener?) }
 }
 
+@Suppress("DEPRECATION")
 fun View.performClickHapticFeedback() =
     performHapticFeedback(
         HapticFeedbackConstants.VIRTUAL_KEY,
         HapticFeedbackConstants.FLAG_IGNORE_GLOBAL_SETTING
     )
 
+@Suppress("DEPRECATION")
 fun View.performLongClickHapticFeedback() =
     performHapticFeedback(
         HapticFeedbackConstants.LONG_PRESS,
@@ -409,7 +411,7 @@ fun View.performLongClickHapticFeedback() =
 
 fun NavController.destinationAsFlow() = callbackFlow {
     val listener =
-        NavController.OnDestinationChangedListener { controller, destination, arguments ->
+        NavController.OnDestinationChangedListener { _, destination, _ ->
             trySend(destination)
         }
     addOnDestinationChangedListener(listener)

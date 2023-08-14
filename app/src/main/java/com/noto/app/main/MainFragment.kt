@@ -91,11 +91,10 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
         combine(
             viewModel.folders,
             viewModel.sortingType,
-            viewModel.sortingOrder,
             viewModel.isShowNotesCount,
             viewModel.allNotes,
-        ) { folders, sortingType, sortingOrder, isShowNotesCount, allNotes ->
-            setupFolders(folders, sortingType, sortingOrder, isShowNotesCount, allNotes)
+        ) { folders, sortingType, isShowNotesCount, allNotes ->
+            setupFolders(folders, sortingType, isShowNotesCount, allNotes)
             setupItemTouchHelper(sortingType == FolderListSortingType.Manual)
         }.launchIn(lifecycleScope)
 
@@ -108,6 +107,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
                         moveDuration = DefaultAnimationDuration
                         removeDuration = DefaultAnimationDuration
                     }
+
                     else -> VerticalListItemAnimator()
                 }
             }
@@ -130,7 +130,6 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
     private fun MainFragmentBinding.setupFolders(
         state: UiState<List<Pair<Folder, Int>>>,
         sortingType: FolderListSortingType,
-        sortingOrder: SortingOrder,
         isShowNotesCount: Boolean,
         allNotes: List<Note>,
     ) {
@@ -352,6 +351,7 @@ class MainFragment : BaseDialogFragment(isCollapsable = true) {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return object : BottomSheetDialog(requireContext(), theme) {
+            @Deprecated("Deprecated in Java")
             override fun onBackPressed() {
                 if (args.exit)
                     activity?.finish()

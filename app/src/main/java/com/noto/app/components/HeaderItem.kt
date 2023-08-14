@@ -62,7 +62,7 @@ fun HeaderItem(
 ) {
     val contentDescription = stringResource(if (isContentVisible) R.string.hide else R.string.show)
     val rotationDegrees by animateFloatAsState(targetValue = if (isContentVisible) 180F else 0F)
-    CompositionLocalProvider(LocalMinimumTouchTargetEnforcement provides false) {
+    CompositionLocalProvider(LocalMinimumInteractiveComponentEnforcement provides false) {
         Surface(
             checked = isContentVisible,
             onCheckedChange = onToggleContentClick,

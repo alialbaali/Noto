@@ -26,6 +26,7 @@ import kotlinx.coroutines.launch
 
 class AboutSettingsFragment : Fragment() {
 
+    @Suppress("DEPRECATION")
     private val version by lazy {
         context?.let { context ->
             context.packageManager?.getPackageInfo(context.packageName, 0)?.versionName

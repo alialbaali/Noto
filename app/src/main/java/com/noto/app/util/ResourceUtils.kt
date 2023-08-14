@@ -82,6 +82,7 @@ fun Icon.toTitle(): Int = when (this) {
     Icon.SanguineSun -> R.string.sanguine_sun
 }
 
+@Suppress("DEPRECATION")
 fun Language.toResource(): Int = when (this) {
     Language.System -> R.string.follow_system
     Language.English -> R.string.english

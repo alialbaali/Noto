@@ -7,13 +7,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.documentfile.provider.DocumentFile
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import com.noto.app.components.BaseDialogFragment
+import androidx.lifecycle.repeatOnLifecycle
 import com.noto.app.R
+import com.noto.app.components.BaseDialogFragment
 import com.noto.app.databinding.ExportImportDialogFragmentBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 private const val JsonFileType = "application/json"
@@ -93,16 +96,20 @@ class ExportImportDialogFragment : BaseDialogFragment() {
             if (file != null) {
                 val fileOutputStream = context.contentResolver?.openOutputStream(file.uri)
                 if (fileOutputStream != null) {
-                    lifecycleScope.launchWhenCreated {
-                        val json = viewModel.exportJson()
-                        writeTextToOutputStream(fileOutputStream, json)
-                    }.invokeOnCompletion {
-                        parentView?.snackbar(
-                            context.stringResource(R.string.data_is_exported, file.uri.directoryPath),
-                            R.drawable.ic_round_file_upload_24,
-                        )
-                        navController?.navigateUp()
-                        dismiss()
+                    lifecycleScope.launch {
+                        repeatOnLifecycle(Lifecycle.State.CREATED) {
+                            launch {
+                                val json = viewModel.exportJson()
+                                writeTextToOutputStream(fileOutputStream, json)
+                            }.invokeOnCompletion {
+                                parentView?.snackbar(
+                                    context.stringResource(R.string.data_is_exported, file.uri.directoryPath),
+                                    R.drawable.ic_round_file_upload_24,
+                                )
+                                navController?.navigateUp()
+                                dismiss()
+                            }
+                        }
                     }
                 } else {
                     parentView?.snackbar(context.stringResource(R.string.exporting_failed), R.drawable.ic_round_error_24)
@@ -126,10 +133,14 @@ class ExportImportDialogFragment : BaseDialogFragment() {
             )
             val inputStream = context.contentResolver?.openInputStream(uri)
             if (inputStream != null) {
-                lifecycleScope.launchWhenCreated {
-                    val json = readTextFromInputStream(inputStream)
-                    viewModel.importJson(json)
-                }.invokeOnCompletion { viewModel.emitIsImportFinished() }
+                lifecycleScope.launch {
+                    repeatOnLifecycle(Lifecycle.State.CREATED) {
+                        launch {
+                            val json = readTextFromInputStream(inputStream)
+                            viewModel.importJson(json)
+                        }.invokeOnCompletion { viewModel.emitIsImportFinished() }
+                    }
+                }
             } else {
                 parentView?.snackbar(context.stringResource(R.string.importing_failed), R.drawable.ic_round_error_24)
                 navController?.navigateUp()

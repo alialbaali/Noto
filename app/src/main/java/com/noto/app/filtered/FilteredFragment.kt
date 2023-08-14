@@ -306,7 +306,7 @@ class FilteredFragment : Fragment() {
             root.keyboardVisibilityAsFlow(),
             bab.isHiddenAsFlow()
                 .onStart { emit(false) },
-        ) { isKeyboardVisible, isBabHidden ->
+        ) { isKeyboardVisible, _ ->
             if (args.model != FilteredItemModel.Archived) fab.isVisible = !isKeyboardVisible
             bab.isVisible = !isKeyboardVisible
         }.launchIn(lifecycleScope)

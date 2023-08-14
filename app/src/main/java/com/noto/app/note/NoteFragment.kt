@@ -45,6 +45,7 @@ class NoteFragment : Fragment() {
             setupListeners()
         }
 
+    @Suppress("UNCHECKED_CAST")
     @OptIn(FlowPreview::class)
     private fun NoteFragmentBinding.setupState() {
 //        rv.edgeEffectFactory = BounceEdgeEffectFactory()

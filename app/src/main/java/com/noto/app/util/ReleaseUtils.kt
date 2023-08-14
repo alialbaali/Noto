@@ -13,8 +13,8 @@ fun Release.Changelog.format(context: Context): String = changesIds.joinToString
 fun Release.Changelog.format(context: Context, count: Int) = changesIds.take(count).joinToString("\n\n") { id -> context.stringResource(id) }
     .let { if (changesIds.count() > count) it.plus("\n\n...") else it }
 
-fun Release.Companion.Current(context: Context): Release {
-    return Release_2_3_0(
+val Release.Companion.Current: Release
+    get() = Release_2_3_0(
         Release.Changelog(
             listOf(
                 R.string.release_2_3_0_new_languages,
@@ -31,10 +31,9 @@ fun Release.Companion.Current(context: Context): Release {
             )
         )
     )
-}
 
-fun Release.Companion.Previous(context: Context): List<Release> {
-    return listOf(
+val Release.Companion.Previous: List<Release>
+    get() = listOf(
         Release_2_2_3(
             Release.Changelog(
                 listOf(
@@ -193,4 +192,3 @@ fun Release.Companion.Previous(context: Context): List<Release> {
             )
         ),
     )
-}

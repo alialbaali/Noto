@@ -30,7 +30,7 @@ class ReadingModeSettingsFragment : Fragment() {
         context?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?
     }
 
-    private val doNotDisturbResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+    private val doNotDisturbResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { _ ->
         if (isDoNotDisturbSupported) {
             if (notificationManager?.isNotificationPolicyAccessGranted == true) {
                 viewModel.toggleDoNotDisturb()

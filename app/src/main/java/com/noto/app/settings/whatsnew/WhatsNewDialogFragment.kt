@@ -42,7 +42,7 @@ class WhatsNewDialogFragment : BaseDialogFragment(isCollapsable = true) {
     ): View? = context?.let { context ->
         ComposeView(context).apply {
             setContent {
-                val currentRelease = remember(context) { Release.Current(context) }
+                val currentRelease = remember(context) { Release.Current }
                 val version = remember(currentRelease) { currentRelease.versionFormatted }
                 val changelog = remember(currentRelease) { currentRelease.changelog.changesIds }
                 BottomSheetDialog(

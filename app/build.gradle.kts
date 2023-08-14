@@ -137,7 +137,7 @@ dependencies {
     ksp(AndroidX.Room.compiler)
     implementation(KotlinX.datetime)
     implementation(AndroidX.Core.splashscreen)
-    implementation("com.google.android:flexbox:2.0.1")
+    implementation("com.google.android.flexbox:flexbox:3.0.0")
     implementation("jp.wasabeef:recyclerview-animators:4.0.2")
     implementation("com.robinhood.ticker:ticker:2.0.4")
 

@@ -30,10 +30,7 @@ private const val PreviousReleaseChangelogMaxItems = 5
 
 class WhatsNewFragment : Fragment() {
 
-    private val previousReleasesGroupedByYear by lazy {
-        context?.let { context -> Release.Previous(context) }
-            ?.groupBy { it.date.year } ?: emptyMap()
-    }
+    private val previousReleasesGroupedByYear by lazy { Release.Previous.groupBy { it.date.year } }
 
     private val currentDate = Clock.System.now().toLocalDate()
 
@@ -47,7 +44,7 @@ class WhatsNewFragment : Fragment() {
         ComposeView(context).apply {
             isTransitionGroup = true
             setContent {
-                val currentRelease = remember(context) { Release.Current(context) }
+                val currentRelease = remember(context) { Release.Current }
 
                 LazyScreen(
                     title = stringResource(id = R.string.whats_new),
@@ -63,7 +60,13 @@ class WhatsNewFragment : Fragment() {
                         val changelog = remember(currentRelease) { currentRelease.changelog.format(context) }
                         SettingsItem(
                             title = version,
-                            onClick = { navController?.navigateSafely(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(currentRelease.toJson())) },
+                            onClick = {
+                                navController?.navigateSafely(
+                                    WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(
+                                        currentRelease.toJson()
+                                    )
+                                )
+                            },
                             type = SettingsItemType.Text(date),
                             painter = painterResource(id = R.drawable.ic_round_auto_awesome_24),
                             equalWeights = false,
@@ -84,7 +87,13 @@ class WhatsNewFragment : Fragment() {
                             val changelog = remember(previousRelease) { previousRelease.changelog.format(context, PreviousReleaseChangelogMaxItems) }
                             SettingsItem(
                                 title = version,
-                                onClick = { navController?.navigateSafely(WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(previousRelease.toJson())) },
+                                onClick = {
+                                    navController?.navigateSafely(
+                                        WhatsNewFragmentDirections.actionWhatsNewFragmentToReleaseFragment(
+                                            previousRelease.toJson()
+                                        )
+                                    )
+                                },
                                 type = SettingsItemType.Text(date),
                                 painter = painterResource(id = R.drawable.ic_round_tag_24),
                                 equalWeights = false,
