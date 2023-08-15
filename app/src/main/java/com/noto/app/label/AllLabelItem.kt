@@ -26,7 +26,7 @@ abstract class AllLabelItem : EpoxyModelWithHolder<AllLabelItem.Holder>() {
 
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
-            val selectedBackgroundColor = context.colorResource(color.toResource())
+            val selectedBackgroundColor = context.colorResource(color.toColorResourceId())
             val selectedTextColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
             val backgroundColor = context.colorAttributeResource(R.attr.notoSurfaceColor)
             val textColor = context.colorAttributeResource(R.attr.notoPrimaryColor)

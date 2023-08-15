@@ -128,7 +128,7 @@ fun View.snackbar(
         textView?.gravity = Gravity.CENTER
     }
     if (color != null) {
-        val backgroundColor = context.colorResource(color.toResource())
+        val backgroundColor = context.colorResource(color.toColorResourceId())
         val contentColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
         setBackgroundTint(backgroundColor)
         setTextColor(contentColor)
@@ -492,7 +492,7 @@ fun BottomAppBar.isHiddenAsFlow() = callbackFlow {
 
 fun TextView.setHighlightedText(text: String, term: String, color: NotoColor, matchIndices: IntRange? = null) {
     val indices = text.indicesOf(term, ignoreCase = true).filter { it.first < it.last }
-    val colorResource = context?.colorResource(color.toResource()) ?: return
+    val colorResource = context?.colorResource(color.toColorResourceId()) ?: return
     val lightColorResource = context?.colorAttributeResource(R.attr.notoSecondaryColor)?.withDefaultAlpha(DisabledAlpha / 2) ?: return
     val onColorResource = context?.colorAttributeResource(R.attr.notoBackgroundColor) ?: return
     val onLightColorResource = context?.colorAttributeResource(R.attr.notoPrimaryColor) ?: return

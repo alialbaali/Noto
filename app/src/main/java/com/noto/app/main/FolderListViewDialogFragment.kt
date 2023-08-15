@@ -21,7 +21,7 @@ import com.noto.app.domain.model.SortingOrder
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
-import com.noto.app.util.toResource
+import com.noto.app.util.toStringResourceId
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FolderListViewDialogFragment : BaseDialogFragment() {
@@ -55,7 +55,7 @@ class FolderListViewDialogFragment : BaseDialogFragment() {
                                 navController.navigateSafely(FolderListViewDialogFragmentDirections.actionFolderListViewDialogFragmentToFolderListSortingDialogFragment())
                             },
                             painter = painterResource(id = R.drawable.ic_round_sorting_24),
-                            value = stringResource(id = updatedSortingType?.toResource() ?: sortingType.toResource()),
+                            value = stringResource(id = updatedSortingType?.toStringResourceId() ?: sortingType.toStringResourceId()),
                         )
 
                         BottomSheetDialogItem(
@@ -64,7 +64,7 @@ class FolderListViewDialogFragment : BaseDialogFragment() {
                                 navController.navigateSafely(FolderListViewDialogFragmentDirections.actionFolderListViewDialogFragmentToFolderListOrderingDialogFragment())
                             },
                             painter = painterResource(id = R.drawable.ic_round_ordering_24),
-                            value = stringResource(id = updatedSortingOrder?.toResource() ?: sortingOrder.toResource()),
+                            value = stringResource(id = updatedSortingOrder?.toStringResourceId() ?: sortingOrder.toStringResourceId()),
                             enabled = (updatedSortingType ?: sortingType) != FolderListSortingType.Manual,
                         )
                     }

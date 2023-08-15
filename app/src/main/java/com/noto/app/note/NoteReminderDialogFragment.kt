@@ -134,7 +134,7 @@ class NoteReminderDialogFragment : BaseDialogFragment() {
 
     private fun NoteReminderDialogFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
-            val color = context.colorResource(folder.color.toResource())
+            val color = context.colorResource(folder.color.toColorResourceId())
             val colorStateList = color.toColorStateList()
             tb.vHead.background?.mutate()?.setTint(color)
             tb.tvDialogTitle.setTextColor(color)

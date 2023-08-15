@@ -95,7 +95,7 @@ fun Translation.Companion.Comparator(context: Context): Comparator<Translation> 
     val collator = Collator.getInstance().apply { strength = Collator.PRIMARY }
     return compareBy(collator) {
         val localizedContext = context.localize(it.language)
-        localizedContext.stringResource(it.language.toResource())
+        localizedContext.stringResource(it.language.toStringResourceId())
     }
 }
 

@@ -24,7 +24,8 @@ import com.noto.app.util.filterByLabels
 import com.noto.app.util.getTitle
 import com.noto.app.util.setupColors
 import com.noto.app.util.stringResource
-import com.noto.app.util.toResource
+import com.noto.app.util.toColorResourceId
+import com.noto.app.util.toDrawableResourceId
 import com.noto.app.util.toWidgetHeaderShapeId
 import com.noto.app.util.toWidgetShapeId
 import com.noto.app.util.updateNoteWidget
@@ -91,7 +92,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             viewModel.widgetFilteringType,
         ) { folder, notes, labels, filteringType ->
             val filteredNotes = notes.filterByLabels(labels.filterSelected(), filteringType)
-            val color = colorResource(folder.color.toResource())
+            val color = colorResource(folder.color.toColorResourceId())
             val placeholderId = when {
                 notes.isEmpty() -> R.string.folder_is_empty
                 else -> R.string.no_notes_found_labels
@@ -195,7 +196,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
             .launchIn(lifecycleScope)
 
         viewModel.icon
-            .onEach { icon -> widget.ivAppIcon.setImageResource(icon.toResource()) }
+            .onEach { icon -> widget.ivAppIcon.setImageResource(icon.toDrawableResourceId()) }
             .launchIn(lifecycleScope)
     }
 

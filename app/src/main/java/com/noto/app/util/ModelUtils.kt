@@ -287,7 +287,7 @@ fun Language.Companion.Comparator(context: Context): Comparator<Language> {
         .thenBy { it in Language.Deprecated }
         .thenBy(collator) { it ->
             val localizedContext = context.localize(it)
-            localizedContext.stringResource(it.toResource())
+            localizedContext.stringResource(it.toStringResourceId())
         }
 }
 

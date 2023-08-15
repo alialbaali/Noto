@@ -29,9 +29,9 @@ abstract class IconItem : EpoxyModelWithHolder<IconItem.Holder>() {
 
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
-            val drawable = context.drawableResource(icon.toResource())?.mutate()
+            val drawable = context.drawableResource(icon.toDrawableResourceId())?.mutate()
                 ?.let { BitmapDrawable(root.resources, it.toBitmap(50.dp, 50.dp)) }
-            root.text = context.stringResource(icon.toTitle())
+            root.text = context.stringResource(icon.toStringResourceId())
             val selectedColor = context.colorAttributeResource(R.attr.notoSurfaceColor)
             val color = context.colorAttributeResource(R.attr.notoBackgroundColor)
             root.background?.setTint(if (isSelected) selectedColor else color)

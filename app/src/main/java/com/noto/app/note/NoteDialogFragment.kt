@@ -301,7 +301,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private fun NoteDialogFragmentBinding.setupNote(folder: Folder, note: Note, labels: List<Label>) {
         context?.let { context ->
-            val colorResource = context.colorResource(folder.color.toResource())
+            val colorResource = context.colorResource(folder.color.toColorResourceId())
             vNote.root.backgroundTintList = context.colorAttributeResource(R.attr.notoBackgroundColor).toColorStateList()
             vNote.tvNoteTitle.text = note.title
             vNote.tvNoteTitle.maxLines = 3
@@ -378,7 +378,7 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private fun NoteDialogFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
-            val color = context.colorResource(folder.color.toResource())
+            val color = context.colorResource(folder.color.toColorResourceId())
             val colorStateList = color.toColorStateList()
             tb.tvDialogTitle.setTextColor(color)
             tb.vHead.background?.mutate()?.setTint(color)

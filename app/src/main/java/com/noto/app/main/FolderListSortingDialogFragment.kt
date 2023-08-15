@@ -18,7 +18,7 @@ import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.FolderListSortingType
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
-import com.noto.app.util.toResource
+import com.noto.app.util.toStringResourceId
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FolderListSortingDialogFragment : BaseDialogFragment() {
@@ -49,7 +49,7 @@ class FolderListSortingDialogFragment : BaseDialogFragment() {
                             onClick = { navController.previousBackStackEntry?.savedStateHandle?.set(Constants.SortingType, type); dismiss() },
                             modifier = Modifier.fillMaxWidth(),
                         ) {
-                            Text(text = stringResource(id = type.toResource()))
+                            Text(text = stringResource(id = type.toStringResourceId()))
                         }
                     }
                 }

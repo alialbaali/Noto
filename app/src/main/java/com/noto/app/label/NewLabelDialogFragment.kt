@@ -44,7 +44,7 @@ class NewLabelDialogFragment : BaseDialogFragment() {
         viewModel.folder
             .onEach { folder ->
                 context?.let { context ->
-                    val color = context.colorResource(folder.color.toResource())
+                    val color = context.colorResource(folder.color.toColorResourceId())
                     tb.tvDialogTitle.setTextColor(color)
                     tb.vHead.background?.mutate()?.setTint(color)
                     btnCreate.background?.mutate()?.setTint(color)

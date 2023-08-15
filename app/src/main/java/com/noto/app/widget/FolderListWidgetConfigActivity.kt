@@ -116,7 +116,7 @@ class FolderListWidgetConfigActivity : BaseActivity() {
             .launchIn(lifecycleScope)
 
         viewModel.icon
-            .onEach { icon -> widget.ivAppIcon.setImageResource(icon.toResource()) }
+            .onEach { icon -> widget.ivAppIcon.setImageResource(icon.toDrawableResourceId()) }
             .launchIn(lifecycleScope)
     }
 

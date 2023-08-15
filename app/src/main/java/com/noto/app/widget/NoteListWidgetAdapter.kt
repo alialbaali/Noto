@@ -28,7 +28,7 @@ class NoteListWidgetAdapter(
         return WidgetNoteItemBinding.inflate(layoutInflater, parent, false).withBinding {
             getItem(position)?.let { model ->
                 root.context?.let { context ->
-                    val colorResource = context.colorResource(color.toResource())
+                    val colorResource = context.colorResource(color.toColorResourceId())
                     tvNoteTitle.setLinkTextColor(colorResource)
                     tvNoteBody.setLinkTextColor(colorResource)
                     if (isShowCreationDate)
@@ -53,7 +53,7 @@ class NoteListWidgetAdapter(
                 model.labels.forEach { label ->
                     NoteLabelItemBinding.inflate(layoutInflater, parent, false).withBinding {
                         tvLabel.text = label.title
-                        tvLabel.background?.mutate()?.setTint(context.colorResource(color.toResource()))
+                        tvLabel.background?.mutate()?.setTint(context.colorResource(color.toColorResourceId()))
                         tvLabel.setTextColor(context.colorAttributeResource(R.attr.notoBackgroundColor))
                         llLabels.addView(root)
                     }

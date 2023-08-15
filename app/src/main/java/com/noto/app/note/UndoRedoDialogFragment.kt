@@ -56,7 +56,7 @@ class UndoRedoDialogFragment : BaseDialogFragment() {
         viewModel.folder
             .onEach { folder ->
                 context?.let { context ->
-                    val colorResource = context.colorResource(folder.color.toResource())
+                    val colorResource = context.colorResource(folder.color.toColorResourceId())
                     tb.tvDialogTitle.setTextColor(colorResource)
                     tb.vHead.background?.mutate()?.setTint(colorResource)
                 }

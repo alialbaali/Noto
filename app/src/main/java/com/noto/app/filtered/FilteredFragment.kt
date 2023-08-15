@@ -175,7 +175,7 @@ class FilteredFragment : Fragment() {
         }
 
         context?.let { context ->
-            val colorResource = context.colorResource(args.model.color.toResource())
+            val colorResource = context.colorResource(args.model.color.toColorResourceId())
             tvTitle.setTextColor(colorResource)
             fab.backgroundTintList = colorResource.toColorStateList()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {

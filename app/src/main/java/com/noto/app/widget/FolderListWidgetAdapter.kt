@@ -27,7 +27,7 @@ class FolderListWidgetAdapter(
             getItem(position)?.let { entry ->
                 val folder = entry.first
                 val notesCount = entry.second
-                val color = context.colorResource(folder.color.toResource())
+                val color = context.colorResource(folder.color.toColorResourceId())
                 tvFolderNotesCount.text = notesCount.toString()
                 tvFolderTitle.setTextColor(color)
                 tvFolderNotesCount.setTextColor(color)

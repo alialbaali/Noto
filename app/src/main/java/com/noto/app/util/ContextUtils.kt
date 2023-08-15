@@ -27,7 +27,7 @@ fun Context.createPinnedShortcut(folder: Folder): ShortcutInfoCompat {
         putExtra(Constants.FolderId, folder.id)
         component = enabledComponentName
     }
-    val backgroundColor = folder.color.toResource().let(this::colorResource)
+    val backgroundColor = folder.color.toColorResourceId().let(this::colorResource)
     val iconColor = colorResource(android.R.color.white)
     val bitmap = createBitmap(IconSize, IconSize).applyCanvas {
         drawColor(backgroundColor)

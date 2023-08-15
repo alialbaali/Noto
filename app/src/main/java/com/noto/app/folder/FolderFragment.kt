@@ -597,7 +597,7 @@ class FolderFragment : Fragment() {
         isRememberScrollingPosition: Boolean
     ) {
         context?.let { context ->
-            val color = context.colorResource(folder.color.toResource())
+            val color = context.colorResource(folder.color.toColorResourceId())
             val colorStateList = color.toColorStateList()
             tvFolderTitle.text = folder.getTitle(context)
             tvFolderTitle.setTextColor(colorStateList)

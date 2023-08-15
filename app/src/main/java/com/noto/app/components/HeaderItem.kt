@@ -141,7 +141,7 @@ abstract class HeaderItem : EpoxyModelWithHolder<HeaderItem.Holder>() {
         ibCreate.setOnClickListener(onCreateClickListener)
         ibCreate.isVisible = onCreateClickListener != null
         if (color != null) {
-            val colorResource = root.context.colorResource(color!!.toResource())
+            val colorResource = root.context.colorResource(color!!.toColorResourceId())
             val colorStateList = colorResource.toColorStateList()
             tvTitle.setTextColor(colorResource)
             vDivider.background?.mutate()?.setTint(colorResource.withDefaultAlpha())

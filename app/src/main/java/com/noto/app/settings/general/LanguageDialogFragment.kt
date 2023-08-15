@@ -64,9 +64,9 @@ class LanguageDialogFragment : BaseDialogFragment(isCollapsable = true) {
                                 Arrangement.SpaceBetween
                             ) {
                                 Column(Modifier.weight(1F), verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.extraSmall)) {
-                                    Text(text = localizedContext.stringResource(language.toResource()))
+                                    Text(text = localizedContext.stringResource(language.toStringResourceId()))
                                     if (language != Language.System) {
-                                        MediumSubtitle(text = context.stringResource(language.toResource()))
+                                        MediumSubtitle(text = context.stringResource(language.toStringResourceId()))
                                     }
                                 }
                                 if (language in Language.Deprecated) {

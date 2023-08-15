@@ -61,7 +61,7 @@ abstract class FilteredItem : EpoxyModelWithHolder<FilteredItem.Holder>() {
                     ivIcon.setImageResource(R.drawable.ic_round_inventory_24)
                 }
             }
-            val colorResource = context.colorResource(model.color.toResource())
+            val colorResource = context.colorResource(model.color.toColorResourceId())
             val backgroundColorResource = context.colorAttributeResource(R.attr.notoBackgroundColor)
             root.rippleColor = colorResource.toColorStateList()
             root.strokeColor = colorResource

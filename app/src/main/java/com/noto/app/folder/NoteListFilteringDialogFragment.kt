@@ -27,8 +27,8 @@ import com.noto.app.toColor
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.toAnnotatedString
-import com.noto.app.util.toDescriptionResource
-import com.noto.app.util.toResource
+import com.noto.app.util.toDescriptionResourceId
+import com.noto.app.util.toStringResourceId
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -58,7 +58,7 @@ class NoteListFilteringDialogFragment : BaseDialogFragment() {
                 BottomSheetDialog(title = stringResource(R.string.filtering), headerColor = folder.color.toColor()) {
                     types.forEach { type ->
                         val typeDescription = remember(type) {
-                            context.getText(type.toDescriptionResource()).toSpannable().toAnnotatedString()
+                            context.getText(type.toDescriptionResourceId()).toSpannable().toAnnotatedString()
                         }
 
                         SelectableDialogItem(
@@ -67,7 +67,7 @@ class NoteListFilteringDialogFragment : BaseDialogFragment() {
                             modifier = Modifier.fillMaxWidth(),
                         ) {
                             Column(verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.extraSmall)) {
-                                Text(text = stringResource(id = type.toResource()))
+                                Text(text = stringResource(id = type.toStringResourceId()))
                                 MediumSubtitle(text = typeDescription)
                             }
                         }

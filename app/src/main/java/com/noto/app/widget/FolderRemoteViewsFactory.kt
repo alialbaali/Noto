@@ -58,7 +58,7 @@ class FolderRemoteViewsFactory(private val context: Context, intent: Intent?) : 
         val entry = folders[position]
         val folder = entry.first
         val notesCount = entry.second
-        val color = context.colorResource(folder.color.toResource())
+        val color = context.colorResource(folder.color.toColorResourceId())
         val iconResource = if (folder.isGeneral) R.drawable.ic_round_folder_general_24 else R.drawable.ic_round_folder_24
         val intent = Intent(Constants.Intent.ActionOpenFolder, null).apply {
             putExtra(Constants.FolderId, folder.id)

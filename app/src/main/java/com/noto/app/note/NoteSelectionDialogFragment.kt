@@ -35,7 +35,7 @@ import com.noto.app.util.navigateSafely
 import com.noto.app.util.quantityStringResource
 import com.noto.app.util.snackbar
 import com.noto.app.util.stringResource
-import com.noto.app.util.toResource
+import com.noto.app.util.toColorResourceId
 import com.noto.app.util.updateAllWidgetsData
 import com.noto.app.util.updateNoteListWidgets
 import com.noto.app.util.withBinding
@@ -83,7 +83,7 @@ class NoteSelectionDialogFragment : BaseDialogFragment() {
         viewModel.folder
             .onEach { folder ->
                 context?.let { context ->
-                    val color = context.colorResource(folder.color.toResource())
+                    val color = context.colorResource(folder.color.toColorResourceId())
                     tb.tvDialogTitle.setTextColor(color)
                     tb.vHead.background?.mutate()?.setTint(color)
                 }

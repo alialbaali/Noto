@@ -55,7 +55,7 @@ abstract class FolderItem : EpoxyModelWithHolder<FolderItem.Holder>() {
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
             val defaultColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
-            val color = context.colorResource(folder.color.toResource())
+            val color = context.colorResource(folder.color.toColorResourceId())
             val selectedColor = color.withDefaultAlpha()
             val backgroundDrawable = root.background?.mutate()
             val rippleDrawable = backgroundDrawable as? RippleDrawable

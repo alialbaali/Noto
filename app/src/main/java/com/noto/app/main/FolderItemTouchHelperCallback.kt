@@ -46,7 +46,7 @@ class FolderItemTouchHelperCallback(
         val view = viewHolder.itemView
         val context = view.context
         val model = viewHolder.model as FolderItem
-        val color = context.colorResource(model.folder.color.toResource())
+        val color = context.colorResource(model.folder.color.toColorResourceId())
         val margin = context.dimenResource(R.dimen.spacing_normal).toInt()
         val radius = context.dimenResource(R.dimen.spacing_small)
         val paint = Paint().apply { this.color = color.withDefaultAlpha() }
@@ -140,7 +140,7 @@ class FolderItemTouchHelperCallback(
         super.onDragStarted(model, itemView, adapterPosition)
         itemView?.isSelected = true
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            val color = model?.folder?.color?.toResource()
+            val color = model?.folder?.color?.toColorResourceId()
             if (color != null) {
                 val resource = itemView?.context?.colorResource(color)
                 if (resource != null) {

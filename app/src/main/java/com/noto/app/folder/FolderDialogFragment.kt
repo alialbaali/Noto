@@ -155,7 +155,7 @@ class FolderDialogFragment : BaseDialogFragment() {
 
     private fun FolderDialogFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
-            val color = context.colorResource(folder.color.toResource())
+            val color = context.colorResource(folder.color.toColorResourceId())
             val colorStateList = color.toColorStateList()
             tb.vHead.background?.mutate()?.setTint(color)
             tb.tvDialogTitle.setTextColor(color)

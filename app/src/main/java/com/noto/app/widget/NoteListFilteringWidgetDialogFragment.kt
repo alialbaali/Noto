@@ -21,8 +21,8 @@ import com.noto.app.components.MediumSubtitle
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.FilteringType
 import com.noto.app.util.toAnnotatedString
-import com.noto.app.util.toDescriptionResource
-import com.noto.app.util.toResource
+import com.noto.app.util.toDescriptionResourceId
+import com.noto.app.util.toStringResourceId
 
 class NoteListFilteringWidgetDialogFragment constructor() : BaseDialogFragment() {
     private var onClick: (FilteringType) -> Unit = {}
@@ -45,7 +45,7 @@ class NoteListFilteringWidgetDialogFragment constructor() : BaseDialogFragment()
                 BottomSheetDialog(title = stringResource(R.string.filtering)) {
                     types.forEach { type ->
                         val typeDescription = remember(type) {
-                            context.getText(type.toDescriptionResource()).toSpannable().toAnnotatedString()
+                            context.getText(type.toDescriptionResourceId()).toSpannable().toAnnotatedString()
                         }
 
                         SelectableDialogItem(
@@ -57,7 +57,7 @@ class NoteListFilteringWidgetDialogFragment constructor() : BaseDialogFragment()
                             modifier = Modifier.fillMaxWidth(),
                         ) {
                             Column(verticalArrangement = Arrangement.spacedBy(NotoTheme.dimensions.extraSmall)) {
-                                Text(text = stringResource(id = type.toResource()))
+                                Text(text = stringResource(id = type.toStringResourceId()))
                                 MediumSubtitle(text = typeDescription)
                             }
                         }

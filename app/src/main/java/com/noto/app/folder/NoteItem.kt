@@ -73,7 +73,7 @@ abstract class NoteItem : EpoxyModelWithHolder<NoteItem.Holder>() {
     @SuppressLint("ClickableViewAccessibility")
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
-            val colorResource = context.colorResource(color.toResource())
+            val colorResource = context.colorResource(color.toColorResourceId())
             ll.background?.setRippleColor(colorResource.toColorStateList())
             tvNoteTitle.setLinkTextColor(colorResource)
             tvNoteBody.setLinkTextColor(colorResource)

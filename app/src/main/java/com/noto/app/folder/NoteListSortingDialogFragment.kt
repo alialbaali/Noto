@@ -20,7 +20,7 @@ import com.noto.app.domain.model.NoteListSortingType
 import com.noto.app.toColor
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
-import com.noto.app.util.toResource
+import com.noto.app.util.toStringResourceId
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -54,7 +54,7 @@ class NoteListSortingDialogFragment : BaseDialogFragment() {
                             onClick = { navController.previousBackStackEntry?.savedStateHandle?.set(Constants.SortingType, type); dismiss() },
                             modifier = Modifier.fillMaxWidth(),
                         ) {
-                            Text(text = stringResource(id = type.toResource()))
+                            Text(text = stringResource(id = type.toStringResourceId()))
                         }
                     }
                 }

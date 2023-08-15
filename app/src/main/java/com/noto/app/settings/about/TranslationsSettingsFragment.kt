@@ -58,8 +58,8 @@ class TranslationsSettingsFragment : Fragment() {
         val localizedContext = context.localize(translation.language)
         SettingsSection {
             SettingsItem(
-                title = localizedContext.stringResource(translation.language.toResource()),
-                type = SettingsItemType.Text(context.stringResource(translation.language.toResource())),
+                title = localizedContext.stringResource(translation.language.toStringResourceId()),
+                type = SettingsItemType.Text(context.stringResource(translation.language.toStringResourceId())),
                 painter = painterResource(id = translation.iconId),
                 equalWeights = false,
                 contentScale = ContentScale.Crop,

@@ -68,7 +68,7 @@ class GeneralSettingsFragment : Fragment() {
                 val themeId = remember(theme) { theme.toStringResourceId() }
                 val themeText = stringResource(id = themeId)
                 val language = remember { AppCompatDelegate.getApplicationLocales().toLanguages().first() }
-                val languageId = remember(language) { language.toResource() }
+                val languageId = remember(language) { language.toStringResourceId() }
                 val languageText = stringResource(id = languageId)
                 val icon by viewModel.icon.collectAsState()
                 val iconId = remember(icon) { icon.toStringResourceId() }

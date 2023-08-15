@@ -13,7 +13,7 @@ import com.noto.app.util.animateTextColor
 import com.noto.app.util.colorAttributeResource
 import com.noto.app.util.colorResource
 import com.noto.app.util.toColorStateList
-import com.noto.app.util.toResource
+import com.noto.app.util.toColorResourceId
 
 class LabelOrderItemTouchHelperCallback(
     epoxyController: EpoxyController,
@@ -36,7 +36,7 @@ class LabelOrderItemTouchHelperCallback(
         super.onDragStarted(model, itemView, adapterPosition)
         itemView?.context?.let { context ->
             if (model != null) {
-                val selectedBackgroundColor = context.colorResource(model.color.toResource())
+                val selectedBackgroundColor = context.colorResource(model.color.toColorResourceId())
                 val selectedTextColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
                 val backgroundColor = context.colorAttributeResource(R.attr.notoSurfaceColor)
                 val textColor = context.colorAttributeResource(R.attr.notoPrimaryColor)
@@ -58,7 +58,7 @@ class LabelOrderItemTouchHelperCallback(
         super.onDragReleased(model, itemView)
         itemView?.context?.let { context ->
             if (model != null) {
-                val selectedBackgroundColor = context.colorResource(model.color.toResource())
+                val selectedBackgroundColor = context.colorResource(model.color.toColorResourceId())
                 val selectedTextColor = context.colorAttributeResource(R.attr.notoBackgroundColor)
                 val backgroundColor = context.colorAttributeResource(R.attr.notoSurfaceColor)
                 val textColor = context.colorAttributeResource(R.attr.notoPrimaryColor)

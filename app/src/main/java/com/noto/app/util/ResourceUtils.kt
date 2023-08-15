@@ -33,7 +33,7 @@ fun Context.tryLoadingFontResource(@FontRes id: Int) = try {
     null
 }
 
-fun NotoColor.toResource(): Int = when (this) {
+fun NotoColor.toColorResourceId(): Int = when (this) {
     NotoColor.Blue -> R.color.colorAccentBlue
     NotoColor.Gray -> R.color.colorAccentGray
     NotoColor.Pink -> R.color.colorAccentPink
@@ -57,7 +57,7 @@ fun NotoColor.toResource(): Int = when (this) {
     NotoColor.Black -> R.color.colorAccentBlack
 }
 
-fun Icon.toResource(): Int = when (this) {
+fun Icon.toDrawableResourceId(): Int = when (this) {
     Icon.Futuristic -> R.mipmap.ic_launcher_futuristic
     Icon.DarkRain -> R.mipmap.ic_launcher_dark_rain
     Icon.Airplane -> R.mipmap.ic_launcher_airplane
@@ -70,21 +70,8 @@ fun Icon.toResource(): Int = when (this) {
     Icon.SanguineSun -> R.mipmap.ic_launcher_sanguine_sun
 }
 
-fun Icon.toTitle(): Int = when (this) {
-    Icon.Futuristic -> R.string.futuristic
-    Icon.DarkRain -> R.string.dark_rain
-    Icon.Airplane -> R.string.airplane
-    Icon.BlossomIce -> R.string.blossom_ice
-    Icon.DarkAlpine -> R.string.dark_alpine
-    Icon.DarkSide -> R.string.dark_side
-    Icon.Earth -> R.string.earth
-    Icon.Fire -> R.string.fire
-    Icon.Purpleberry -> R.string.purpleberry
-    Icon.SanguineSun -> R.string.sanguine_sun
-}
-
 @Suppress("DEPRECATION")
-fun Language.toResource(): Int = when (this) {
+fun Language.toStringResourceId(): Int = when (this) {
     Language.System -> R.string.follow_system
     Language.English -> R.string.english
     Language.Turkish -> R.string.turkish
@@ -102,7 +89,7 @@ fun Language.toResource(): Int = when (this) {
     Language.Portuguese -> R.string.portuguese
 }
 
-fun ScreenBrightnessLevel.toResource(): Int = when (this) {
+fun ScreenBrightnessLevel.toStringResourceId(): Int = when (this) {
     ScreenBrightnessLevel.System -> R.string.follow_system
     ScreenBrightnessLevel.Min -> R.string.min
     ScreenBrightnessLevel.VeryLow -> R.string.very_low
@@ -113,43 +100,43 @@ fun ScreenBrightnessLevel.toResource(): Int = when (this) {
     ScreenBrightnessLevel.Max -> R.string.max
 }
 
-fun FilteringType.toResource(): Int = when (this) {
+fun FilteringType.toStringResourceId(): Int = when (this) {
     FilteringType.Inclusive -> R.string.inclusive
     FilteringType.Exclusive -> R.string.exclusive
     FilteringType.Strict -> R.string.strict
 }
 
-fun FilteringType.toDescriptionResource(): Int = when (this) {
+fun FilteringType.toDescriptionResourceId(): Int = when (this) {
     FilteringType.Inclusive -> R.string.inclusive_description
     FilteringType.Exclusive -> R.string.exclusive_description
     FilteringType.Strict -> R.string.strict_description
 }
 
-fun SortingOrder.toResource(): Int = when (this) {
+fun SortingOrder.toStringResourceId(): Int = when (this) {
     SortingOrder.Ascending -> R.string.ascending
     SortingOrder.Descending -> R.string.descending
 }
 
-fun GroupingOrder.toResource(): Int = when (this) {
+fun GroupingOrder.toStringResourceId(): Int = when (this) {
     GroupingOrder.Ascending -> R.string.ascending
     GroupingOrder.Descending -> R.string.descending
 }
 
-fun Grouping.toResource(): Int = when (this) {
+fun Grouping.toStringResourceId(): Int = when (this) {
     Grouping.None -> R.string.none
     Grouping.CreationDate -> R.string.creation_date
     Grouping.Label -> R.string.label
     Grouping.AccessDate -> R.string.access_date
 }
 
-fun NoteListSortingType.toResource(): Int = when (this) {
+fun NoteListSortingType.toStringResourceId(): Int = when (this) {
     NoteListSortingType.Manual -> R.string.manual
     NoteListSortingType.CreationDate -> R.string.creation_date
     NoteListSortingType.Alphabetical -> R.string.alphabetical
     NoteListSortingType.AccessDate -> R.string.access_date
 }
 
-fun FolderListSortingType.toResource(): Int = when (this) {
+fun FolderListSortingType.toStringResourceId(): Int = when (this) {
     FolderListSortingType.Manual -> R.string.manual
     FolderListSortingType.CreationDate -> R.string.creation_date
     FolderListSortingType.Alphabetical -> R.string.alphabetical
@@ -181,7 +168,7 @@ fun Font.toStringResourceId(): Int = when (this) {
     Font.Monospace -> R.string.monospace
 }
 
-fun FilteredItemModel.toStringResourceId() = when (this){
+fun FilteredItemModel.toStringResourceId() = when (this) {
     FilteredItemModel.All -> R.string.all
     FilteredItemModel.Recent -> R.string.recent
     FilteredItemModel.Scheduled -> R.string.scheduled

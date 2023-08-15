@@ -25,7 +25,7 @@ fun Context.createNoteListWidgetRemoteViews(
     isFolderEmpty: Boolean,
     icon: Icon,
 ): RemoteViews {
-    val color = colorResource(folder.color.toResource())
+    val color = colorResource(folder.color.toColorResourceId())
     val placeholderId = when {
         isFolderEmpty -> R.string.folder_is_empty
         else -> R.string.no_notes_found_labels
@@ -50,7 +50,7 @@ fun Context.createNoteListWidgetRemoteViews(
         setInt(R.id.ll, SetBackgroundResourceMethodName, widgetRadius.toWidgetShapeId())
         setInt(R.id.ll_header, SetBackgroundResourceMethodName, widgetRadius.toWidgetHeaderShapeId())
         setInt(R.id.iv_fab, SetColorFilterMethodName, color)
-        setInt(R.id.iv_app_icon, SetImageResource, icon.toResource())
+        setInt(R.id.iv_app_icon, SetImageResource, icon.toDrawableResourceId())
         if (isAppIconEnabled)
             setViewPadding(R.id.tv_folder_title, 0.dp, 16.dp, 0.dp, 16.dp)
         else

@@ -22,7 +22,7 @@ import com.noto.app.toColor
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely
-import com.noto.app.util.toResource
+import com.noto.app.util.toStringResourceId
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -67,7 +67,7 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                             )
                         },
                         painter = painterResource(id = R.drawable.ic_round_filtering_24),
-                        value = stringResource(id = filteringType?.toResource() ?: folder.filteringType.toResource()),
+                        value = stringResource(id = filteringType?.toStringResourceId() ?: folder.filteringType.toStringResourceId()),
                         rippleColor = folder.color.toColor(),
                     )
 
@@ -84,7 +84,7 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                                 )
                             },
                             painter = painterResource(id = R.drawable.ic_round_sorting_24),
-                            value = stringResource(id = sortingType?.toResource() ?: folder.sortingType.toResource()),
+                            value = stringResource(id = sortingType?.toStringResourceId() ?: folder.sortingType.toStringResourceId()),
                             rippleColor = folder.color.toColor(),
                         )
 
@@ -99,7 +99,7 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                                 )
                             },
                             painter = painterResource(id = R.drawable.ic_round_ordering_24),
-                            value = stringResource(id = sortingOrder?.toResource() ?: folder.sortingOrder.toResource()),
+                            value = stringResource(id = sortingOrder?.toStringResourceId() ?: folder.sortingOrder.toStringResourceId()),
                             enabled = (sortingType ?: folder.sortingType) != NoteListSortingType.Manual,
                             rippleColor = folder.color.toColor(),
                         )
@@ -118,7 +118,7 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                                 )
                             },
                             painter = painterResource(id = R.drawable.ic_round_table_view_24),
-                            value = stringResource(id = groupingType?.toResource() ?: folder.grouping.toResource()),
+                            value = stringResource(id = groupingType?.toStringResourceId() ?: folder.grouping.toStringResourceId()),
                             rippleColor = folder.color.toColor(),
                         )
 
@@ -133,7 +133,7 @@ class NoteListViewDialogFragment : BaseDialogFragment() {
                                 )
                             },
                             painter = painterResource(id = R.drawable.ic_round_ordering_24),
-                            value = stringResource(id = groupingOrder?.toResource() ?: folder.groupingOrder.toResource()),
+                            value = stringResource(id = groupingOrder?.toStringResourceId() ?: folder.groupingOrder.toStringResourceId()),
                             enabled = (groupingType ?: folder.grouping) != Grouping.None,
                             rippleColor = folder.color.toColor(),
                         )

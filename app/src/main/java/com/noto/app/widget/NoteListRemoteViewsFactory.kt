@@ -74,7 +74,7 @@ class NoteListRemoteViewsFactory(private val context: Context, intent: Intent?) 
                 putExtra(Constants.NoteId, model.note.id)
                 component = context.enabledComponentName
             }
-            val color = context.colorResource(folder.color.toResource())
+            val color = context.colorResource(folder.color.toColorResourceId())
             removeAllViews(R.id.ll_labels)
             model.labels.forEach { label ->
                 val remoteViews = RemoteViews(context.packageName, R.layout.widget_note_label_item).apply {

@@ -12,7 +12,7 @@ import com.noto.app.databinding.NotoColorItemBinding
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.colorResource
 import com.noto.app.util.toColorStateList
-import com.noto.app.util.toResource
+import com.noto.app.util.toColorResourceId
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass
@@ -29,7 +29,7 @@ abstract class NotoColorItem : EpoxyModelWithHolder<NotoColorItem.Holder>() {
 
     override fun bind(holder: Holder) = with(holder.binding) {
         root.context?.let { context ->
-            rb.backgroundTintList = context.colorResource(notoColor.toResource()).toColorStateList()
+            rb.backgroundTintList = context.colorResource(notoColor.toColorResourceId()).toColorStateList()
         }
         rb.isChecked = isChecked
         rb.setOnClickListener(onClickListener)

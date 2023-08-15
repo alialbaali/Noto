@@ -49,7 +49,7 @@ class QuickNoteDialogFragment constructor() : BaseDialogFragment(isCollapsable =
             viewModel.folder
                 .onEach { folder ->
                     context?.let { context ->
-                        val color = context.colorResource(folder.color.toResource())
+                        val color = context.colorResource(folder.color.toColorResourceId())
                         tvDialogTitle.setTextColor(color)
                         tvDialogTitle.text = folder.getTitle(context)
                     }

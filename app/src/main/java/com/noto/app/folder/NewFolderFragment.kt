@@ -172,7 +172,7 @@ class NewFolderFragment : Fragment() {
             et.setText(folder.getTitle(context))
             et.setSelection(folder.getTitle(context).length)
             if (folder.id != 0L) {
-                val color = context.colorResource(folder.color.toResource())
+                val color = context.colorResource(folder.color.toColorResourceId())
                 tb.setTitleTextColor(color)
                 tb.setNavigationIconTint(color)
                 btnCreate.setBackgroundColor(color)

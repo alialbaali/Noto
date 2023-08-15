@@ -75,7 +75,7 @@ class NotePagerFragment : Fragment() {
         viewModel.folder
             .onEach { folder ->
                 context?.let { context ->
-                    val color = context.colorResource(folder.color.toResource())
+                    val color = context.colorResource(folder.color.toColorResourceId())
                     val folderTitle = folder.getTitle(context)
                     tvFolderTitle.text =
                         if (args.isArchive) context.stringResource(R.string.folder_archive, folderTitle) else folder.getTitle(context)

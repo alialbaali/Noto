@@ -158,7 +158,7 @@ class FolderArchiveFragment : Fragment() {
 
     private fun FolderArchiveFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
-            val color = context.colorResource(folder.color.toResource())
+            val color = context.colorResource(folder.color.toColorResourceId())
             tvFolderTitle.text = context.stringResource(R.string.folder_archive, folder.getTitle(context))
             tvFolderTitle.setTextColor(color)
             tb.setNavigationIconTint(color)

@@ -11,7 +11,7 @@ import com.noto.app.databinding.ProgressIndicatorItemBinding
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.util.colorResource
 import com.noto.app.util.setFullSpan
-import com.noto.app.util.toResource
+import com.noto.app.util.toColorResourceId
 
 @SuppressLint("NonConstantResourceId")
 @EpoxyModelClass
@@ -22,7 +22,7 @@ abstract class ProgressIndicatorItem : EpoxyModelWithHolder<ProgressIndicatorIte
 
     override fun bind(holder: Holder) {
         with(holder.binding) {
-            color?.toResource()?.let { resource ->
+            color?.toColorResourceId()?.let { resource ->
                 indicator.setIndicatorColor(root.context.colorResource(resource))
             }
         }

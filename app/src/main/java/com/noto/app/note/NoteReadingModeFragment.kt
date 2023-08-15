@@ -104,7 +104,7 @@ class NoteReadingModeFragment : Fragment() {
 
     private fun NoteReadingModeFragmentBinding.setupFolder(folder: Folder) {
         context?.let { context ->
-            val color = context.colorResource(folder.color.toResource())
+            val color = context.colorResource(folder.color.toColorResourceId())
             val highlightColor = color.withDefaultAlpha(alpha = if (folder.color == NotoColor.Black) 32 else 128)
             tvNoteTitle.setLinkTextColor(color)
             tvNoteBody.setLinkTextColor(color)
