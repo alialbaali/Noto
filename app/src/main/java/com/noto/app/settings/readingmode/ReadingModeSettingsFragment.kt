@@ -1,4 +1,4 @@
-package com.noto.app.settings
+package com.noto.app.settings.readingmode
 
 import android.app.NotificationManager
 import android.content.Context
@@ -19,6 +19,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import com.noto.app.R
 import com.noto.app.components.Screen
+import com.noto.app.settings.SettingsItem
+import com.noto.app.settings.SettingsItemType
+import com.noto.app.settings.SettingsSection
+import com.noto.app.settings.SettingsViewModel
 import com.noto.app.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

@@ -1,4 +1,4 @@
-package com.noto.app.settings
+package com.noto.app.settings.readingmode
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +21,7 @@ import com.noto.app.components.BaseDialogFragment
 import com.noto.app.components.BottomSheetDialog
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.ScreenBrightnessLevel
+import com.noto.app.settings.SettingsViewModel
 import com.noto.app.util.toStringResourceId
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.NumberFormat

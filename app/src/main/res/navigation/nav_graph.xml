@@ -596,7 +596,7 @@
     </fragment>
     <fragment
         android:id="@+id/readingModeSettingsFragment"
-        android:name="com.noto.app.settings.ReadingModeSettingsFragment"
+        android:name="com.noto.app.settings.readingmode.ReadingModeSettingsFragment"
         android:label="ReadingModeSettingsFragment">
         <action
             android:id="@+id/action_readingModeSettingsFragment_to_screenBrightnessLevelDialogFragment"
@@ -685,7 +685,7 @@
     </fragment>
     <dialog
         android:id="@+id/screenBrightnessLevelDialogFragment"
-        android:name="com.noto.app.settings.ScreenBrightnessLevelDialogFragment"
+        android:name="com.noto.app.settings.readingmode.ScreenBrightnessLevelDialogFragment"
         android:label="ScreenBrightnessLevelDialogFragment" />
     <dialog
         android:id="@+id/noteListFilteringDialogFragment"
