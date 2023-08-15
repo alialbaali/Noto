@@ -1,5 +1,7 @@
 package com.noto.app.settings
 
+import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -13,6 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.noto.app.NotoTheme
+import com.noto.app.util.DefaultAnimationDuration
 
 private val IconSize = 24.dp
 
@@ -46,7 +49,6 @@ fun SettingsItem(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsItem(
     title: String,
@@ -68,6 +70,7 @@ fun SettingsItem(
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun RowScope.SettingsItemContent(
     title: String,
@@ -118,12 +121,20 @@ private fun RowScope.SettingsItemContent(
                 is SettingsItemType.None -> {}
                 is SettingsItemType.Text -> {
                     Spacer(Modifier.width(NotoTheme.dimensions.medium))
-                    Text(
-                        text = type.value,
-                        style = MaterialTheme.typography.bodyLarge.copy(MaterialTheme.colorScheme.secondary),
-                        textAlign = TextAlign.End,
-                        modifier = if (equalWeights) Modifier.weight(1F) else Modifier
-                    )
+                    AnimatedContent(
+                        targetState = type.value,
+                        label = "$title Animation",
+                        transitionSpec = {
+                            fadeIn(tween(DefaultAnimationDuration.toInt())) with fadeOut(tween(DefaultAnimationDuration.toInt()))
+                        }
+                    ) { value ->
+                        Text(
+                            text = value,
+                            style = MaterialTheme.typography.bodyLarge.copy(MaterialTheme.colorScheme.secondary),
+                            textAlign = TextAlign.End,
+                            modifier = if (equalWeights) Modifier.weight(1F) else Modifier
+                        )
+                    }
                 }
 
                 is SettingsItemType.Switch -> {
