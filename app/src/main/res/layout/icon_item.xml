@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/rb_icon"
-    style="@style/IconItem"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:drawableTop="@mipmap/ic_launcher_futuristic"
-    tools:text="@string/futuristic" />
