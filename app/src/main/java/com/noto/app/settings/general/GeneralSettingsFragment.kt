@@ -25,6 +25,7 @@ import com.noto.app.settings.SettingsViewModel
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.map
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GeneralSettingsFragment : Fragment() {
@@ -45,7 +46,7 @@ class GeneralSettingsFragment : Fragment() {
             ?.observe(viewLifecycleOwner) { id -> viewModel.setMainInterfaceId(id) }
 
         navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Long>(Constants.QuickNoteInterfaceId)
+            ?.getLiveData<Long>(Constants.QuickNoteFolderId)
             ?.observe(viewLifecycleOwner) { id -> viewModel.setQuickNoteFolderId(id) }
 
         ComposeView(context).apply {
@@ -79,11 +80,11 @@ class GeneralSettingsFragment : Fragment() {
                 val rememberScrollingPositionEnabled by viewModel.isRememberScrollingPosition.collectAsState()
                 val quickExit by viewModel.quickExit.collectAsState()
                 val quickNoteFolderId by viewModel.quickNoteFolderId.collectAsState()
-                val quickNoteFolderTitle by produceState(stringResource(id = R.string.general), quickNoteFolderId) {
+                val quickNoteFolderTitle by remember(quickNoteFolderId) {
                     viewModel.getFolderById(quickNoteFolderId)
                         .filterNotNull()
-                        .collect { value = it.getTitle(context) }
-                }
+                        .map { it.getTitle(context) }
+                }.collectAsState(initial = stringResource(id = R.string.general))
                 val continuousSearch by viewModel.continuousSearch.collectAsState()
                 val previewAutoScroll by viewModel.previewAutoScroll.collectAsState()
 
@@ -116,7 +117,7 @@ class GeneralSettingsFragment : Fragment() {
                                         longArrayOf(),
                                         selectedFolderId = quickNoteFolderId,
                                         title = context.stringResource(R.string.quick_note_folder),
-                                        key = Constants.QuickNoteInterfaceId,
+                                        key = Constants.QuickNoteFolderId,
                                     )
                                 )
                             },

@@ -29,7 +29,7 @@ object Constants {
     const val SortingOrder = "SortingOrder"
     const val GroupingType = "GroupingType"
     const val GroupingOrder = "GroupingOrder"
-    const val QuickNoteInterfaceId = "quick_note_interface_id"
+    const val QuickNoteFolderId = "quick_note_interface_id"
     const val MainInterfaceId = "main_interface_id"
 
     object Intent {
