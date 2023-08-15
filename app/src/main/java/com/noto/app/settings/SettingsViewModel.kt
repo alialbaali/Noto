@@ -145,7 +145,7 @@ class SettingsViewModel(
         settingsRepository.updateVaultPasscode(passcode.hash())
     }
 
-    fun setVaultTimeout(timeout: VaultTimeout) = viewModelScope.launch {
+    fun updateVaultTimeout(timeout: VaultTimeout) = viewModelScope.launch {
         settingsRepository.updateVaultTimeout(timeout)
     }
 

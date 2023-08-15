@@ -168,11 +168,19 @@ fun Font.toStringResourceId(): Int = when (this) {
     Font.Monospace -> R.string.monospace
 }
 
-fun FilteredItemModel.toStringResourceId() = when (this) {
+fun FilteredItemModel.toStringResourceId(): Int = when (this) {
     FilteredItemModel.All -> R.string.all
     FilteredItemModel.Recent -> R.string.recent
     FilteredItemModel.Scheduled -> R.string.scheduled
     FilteredItemModel.Archived -> R.string.archived
+}
+
+fun VaultTimeout.toStringResourceId(): Int = when (this) {
+    VaultTimeout.Immediately -> R.string.immediately
+    VaultTimeout.OnAppClose -> R.string.on_app_close
+    VaultTimeout.After1Hour -> R.string.after_1_hour
+    VaultTimeout.After4Hours -> R.string.after_4_hours
+    VaultTimeout.After12Hours -> R.string.after_12_hours
 }
 
 val Number.dp
