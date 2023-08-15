@@ -8,6 +8,7 @@ import androidx.annotation.*
 import androidx.core.content.res.ResourcesCompat
 import com.noto.app.R
 import com.noto.app.domain.model.*
+import com.noto.app.filtered.FilteredItemModel
 
 fun Context.colorStateListResource(@ColorRes id: Int) = ResourcesCompat.getColorStateList(resources, id, null)
 fun Context.colorResource(@ColorRes id: Int) = ResourcesCompat.getColor(resources, id, null)
@@ -152,6 +153,39 @@ fun FolderListSortingType.toResource(): Int = when (this) {
     FolderListSortingType.Manual -> R.string.manual
     FolderListSortingType.CreationDate -> R.string.creation_date
     FolderListSortingType.Alphabetical -> R.string.alphabetical
+}
+
+fun Theme.toStringResourceId(): Int = when (this) {
+    Theme.System -> R.string.system_dark_theme
+    Theme.SystemBlack -> R.string.system_black_theme
+    Theme.Light -> R.string.light_theme
+    Theme.Dark -> R.string.dark_theme
+    Theme.Black -> R.string.black_theme
+}
+
+fun Icon.toStringResourceId(): Int = when (this) {
+    Icon.Futuristic -> R.string.futuristic
+    Icon.DarkRain -> R.string.dark_rain
+    Icon.Airplane -> R.string.airplane
+    Icon.BlossomIce -> R.string.blossom_ice
+    Icon.DarkAlpine -> R.string.dark_alpine
+    Icon.DarkSide -> R.string.dark_side
+    Icon.Earth -> R.string.earth
+    Icon.Fire -> R.string.fire
+    Icon.Purpleberry -> R.string.purpleberry
+    Icon.SanguineSun -> R.string.sanguine_sun
+}
+
+fun Font.toStringResourceId(): Int = when (this) {
+    Font.Nunito -> R.string.nunito
+    Font.Monospace -> R.string.monospace
+}
+
+fun FilteredItemModel.toStringResourceId() = when (this){
+    FilteredItemModel.All -> R.string.all
+    FilteredItemModel.Recent -> R.string.recent
+    FilteredItemModel.Scheduled -> R.string.scheduled
+    FilteredItemModel.Archived -> R.string.archived
 }
 
 val Number.dp
