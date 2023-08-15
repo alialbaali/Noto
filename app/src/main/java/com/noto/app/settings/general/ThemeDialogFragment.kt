@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
-import com.noto.app.components.BaseDialogFragment
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.Text
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.stringResource
 import com.noto.app.R
-import com.noto.app.databinding.ThemeDialogFragmentBinding
+import com.noto.app.components.BaseDialogFragment
+import com.noto.app.components.BottomSheetDialog
+import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.Theme
 import com.noto.app.settings.SettingsViewModel
-import com.noto.app.util.stringResource
-import com.noto.app.util.withBinding
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import com.noto.app.util.toStringResourceId
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThemeDialogFragment : BaseDialogFragment() {
@@ -24,53 +28,26 @@ class ThemeDialogFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = ThemeDialogFragmentBinding.inflate(inflater, container, false).withBinding {
-        setupState()
-        setupListeners()
-    }
-
-    private fun ThemeDialogFragmentBinding.setupState() {
-        tb.tvDialogTitle.text = context?.stringResource(R.string.theme)
-
-        viewModel.theme
-            .onEach { theme -> setupTheme(theme) }
-            .launchIn(lifecycleScope)
-    }
-
-    private fun ThemeDialogFragmentBinding.setupListeners() {
-        rbSystemDarkTheme.setOnClickListener {
-            viewModel.updateTheme(Theme.System)
-            dismiss()
-        }
-
-        rbSystemBlackTheme.setOnClickListener {
-            viewModel.updateTheme(Theme.SystemBlack)
-            dismiss()
-        }
-
-        rbLightTheme.setOnClickListener {
-            viewModel.updateTheme(Theme.Light)
-            dismiss()
-        }
-
-        rbDarkTheme.setOnClickListener {
-            viewModel.updateTheme(Theme.Dark)
-            dismiss()
-        }
-
-        rbBlackTheme.setOnClickListener {
-            viewModel.updateTheme(Theme.Black)
-            dismiss()
-        }
-    }
-
-    private fun ThemeDialogFragmentBinding.setupTheme(theme: Theme) {
-        when (theme) {
-            Theme.System -> rbSystemDarkTheme.isChecked = true
-            Theme.SystemBlack -> rbSystemBlackTheme.isChecked = true
-            Theme.Light -> rbLightTheme.isChecked = true
-            Theme.Dark -> rbDarkTheme.isChecked = true
-            Theme.Black -> rbBlackTheme.isChecked = true
+    ): View? = context?.let { context ->
+        ComposeView(context).apply {
+            setContent {
+                val themes = Theme.entries
+                val selectedTheme by viewModel.theme.collectAsState()
+                BottomSheetDialog(title = stringResource(id = R.string.theme)) {
+                    themes.forEach { theme ->
+                        SelectableDialogItem(
+                            selected = selectedTheme == theme,
+                            onClick = {
+                                viewModel.updateTheme(theme)
+                                dismiss()
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            Text(text = stringResource(theme.toStringResourceId()))
+                        }
+                    }
+                }
+            }
         }
     }
 }
