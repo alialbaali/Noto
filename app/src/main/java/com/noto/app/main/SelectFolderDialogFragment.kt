@@ -81,7 +81,7 @@ class SelectFolderDialogFragment constructor() : BaseDialogFragment(isCollapsabl
                     try {
                         navController?.previousBackStackEntry?.savedStateHandle?.apply {
                             set(Constants.FolderTitle, title)
-                            set(Constants.FolderId, id)
+                            set(args.key ?: Constants.FolderId, id)
                         }
                         onClick(id, title)
                     } catch (exception: IllegalStateException) {

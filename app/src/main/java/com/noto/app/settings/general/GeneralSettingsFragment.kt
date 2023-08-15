@@ -18,7 +18,10 @@ import com.noto.app.R
 import com.noto.app.components.EmptyPainter
 import com.noto.app.components.Screen
 import com.noto.app.filtered.FilteredItemModel
-import com.noto.app.settings.*
+import com.noto.app.settings.SettingsItem
+import com.noto.app.settings.SettingsItemType
+import com.noto.app.settings.SettingsSection
+import com.noto.app.settings.SettingsViewModel
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.firstOrNull
@@ -35,18 +38,15 @@ class GeneralSettingsFragment : Fragment() {
     ): View? = context?.let { context ->
         setupMixedTransitions()
 
-        activity?.onBackPressedDispatcher?.addCallback {
-            navController?.navigateUp()
-        }
+        activity?.onBackPressedDispatcher?.addCallback { navController?.navigateUp() }
 
         navController?.currentBackStackEntry?.savedStateHandle
-            ?.getLiveData<Long>(Constants.FolderId)
-            ?.observe(viewLifecycleOwner) { id ->
-                when (viewModel.folderIdType) {
-                    FolderIdType.MainInterface -> viewModel.setMainInterfaceId(id)
-                    FolderIdType.QuickNote -> viewModel.setQuickNoteFolderId(id)
-                }
-            }
+            ?.getLiveData<Long>(Constants.MainInterfaceId)
+            ?.observe(viewLifecycleOwner) { id -> viewModel.setMainInterfaceId(id) }
+
+        navController?.currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<Long>(Constants.QuickNoteInterfaceId)
+            ?.observe(viewLifecycleOwner) { id -> viewModel.setQuickNoteFolderId(id) }
 
         ComposeView(context).apply {
             isTransitionGroup = true
@@ -93,13 +93,13 @@ class GeneralSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.main_interface),
                             type = SettingsItemType.Text(mainInterfaceText),
                             onClick = {
-                                viewModel.setFolderIdType(FolderIdType.MainInterface)
                                 navController?.navigateSafely(
                                     GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToSelectFolderDialogFragment(
                                         longArrayOf(),
                                         selectedFolderId = mainInterfaceId,
                                         isMainInterface = true,
                                         title = context.stringResource(R.string.main_interface),
+                                        key = Constants.MainInterfaceId,
                                     )
                                 )
                             },
@@ -111,12 +111,12 @@ class GeneralSettingsFragment : Fragment() {
                             title = stringResource(id = R.string.quick_note_folder),
                             type = SettingsItemType.Text(quickNoteFolderTitle),
                             onClick = {
-                                viewModel.setFolderIdType(FolderIdType.QuickNote)
                                 navController?.navigateSafely(
                                     GeneralSettingsFragmentDirections.actionGeneralSettingsFragmentToSelectFolderDialogFragment(
                                         longArrayOf(),
                                         selectedFolderId = quickNoteFolderId,
-                                        title = context.stringResource(R.string.quick_note_folder)
+                                        title = context.stringResource(R.string.quick_note_folder),
+                                        key = Constants.QuickNoteInterfaceId,
                                     )
                                 )
                             },

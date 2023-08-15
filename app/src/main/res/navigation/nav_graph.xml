@@ -339,6 +339,11 @@
         <argument
             android:name="title"
             app:argType="string" />
+        <argument
+            android:name="key"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
     </dialog>
     <dialog
         android:id="@+id/folderListSortingDialogFragment"

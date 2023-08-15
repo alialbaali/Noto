@@ -13,10 +13,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 
-enum class FolderIdType {
-    MainInterface, QuickNote,
-}
-
 class SettingsViewModel(
     private val folderRepository: FolderRepository,
     private val noteRepository: NoteRepository,
@@ -78,9 +74,6 @@ class SettingsViewModel(
 
     val previewAutoScroll = settingsRepository.previewAutoScroll
         .stateIn(viewModelScope, SharingStarted.Eagerly, true)
-
-    var folderIdType = FolderIdType.MainInterface
-        private set
 
     fun toggleShowNotesCount() = viewModelScope.launch {
         settingsRepository.updateIsShowNotesCount(!isShowNotesCount.value)
@@ -208,10 +201,6 @@ class SettingsViewModel(
 
     fun setQuickNoteFolderId(folderId: Long) = viewModelScope.launch {
         settingsRepository.updateQuickNoteFolderId(folderId)
-    }
-
-    fun setFolderIdType(type: FolderIdType) {
-        folderIdType = type
     }
 
     fun disableVault() = viewModelScope.launch {
