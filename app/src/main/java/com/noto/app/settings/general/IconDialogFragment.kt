@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.AndroidIcon
 import com.noto.app.components.BaseDialogFragment
@@ -25,6 +24,7 @@ import com.noto.app.components.BottomSheetDialog
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.Icon
 import com.noto.app.settings.SettingsViewModel
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.toDrawableResourceId
 import com.noto.app.util.toStringResourceId
 import org.koin.androidx.viewmodel.ext.android.viewModel

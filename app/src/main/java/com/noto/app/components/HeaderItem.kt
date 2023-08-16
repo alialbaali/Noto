@@ -21,10 +21,10 @@ import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.databinding.HeaderItemBinding
 import com.noto.app.domain.model.NotoColor
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.*
 
 @Composable

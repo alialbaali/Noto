@@ -14,7 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.noto.app.NotoTheme
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.DefaultAnimationDuration
 
 private val IconSize = 24.dp

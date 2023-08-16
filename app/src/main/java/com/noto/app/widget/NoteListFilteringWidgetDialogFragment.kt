@@ -13,13 +13,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.core.text.toSpannable
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
 import com.noto.app.components.BottomSheetDialog
 import com.noto.app.components.MediumSubtitle
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.FilteringType
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.toAnnotatedString
 import com.noto.app.util.toDescriptionResourceId
 import com.noto.app.util.toStringResourceId

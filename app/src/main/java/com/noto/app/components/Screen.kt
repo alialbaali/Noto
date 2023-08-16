@@ -9,8 +9,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.fragment.app.Fragment
-import com.noto.app.NotoTheme
 import com.noto.app.settings.SettingsViewModel
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.navController
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

@@ -17,12 +17,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.Screen
 import com.noto.app.settings.SettingsItem
 import com.noto.app.settings.SettingsItemType
 import com.noto.app.settings.SettingsSection
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.navController
 import com.noto.app.util.setupMixedTransitions
 import com.noto.app.util.toRelease

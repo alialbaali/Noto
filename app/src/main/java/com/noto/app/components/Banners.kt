@@ -20,8 +20,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.Fragment
-import com.noto.app.NotoTheme
 import com.noto.app.R
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.Constants
 
 private val TelegramColor = Color(0xFF2BACEF)

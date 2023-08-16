@@ -20,8 +20,8 @@ import com.noto.app.settings.SettingsItem
 import com.noto.app.settings.SettingsItemType
 import com.noto.app.settings.SettingsSection
 import com.noto.app.settings.SettingsViewModel
+import com.noto.app.theme.warning
 import com.noto.app.util.*
-import com.noto.app.warning
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class VaultSettingsFragment : Fragment() {

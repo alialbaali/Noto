@@ -14,11 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
 import com.noto.app.components.BottomSheetDialog
 import com.noto.app.components.BottomSheetDialogItem
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.Constants
 
 class ReportIssueDialogFragment : BaseDialogFragment() {

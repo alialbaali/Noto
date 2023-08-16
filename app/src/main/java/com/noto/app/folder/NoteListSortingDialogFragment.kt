@@ -17,7 +17,7 @@ import com.noto.app.components.BaseDialogFragment
 import com.noto.app.components.BottomSheetDialog
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.NoteListSortingType
-import com.noto.app.toColor
+import com.noto.app.theme.toColor
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.toStringResourceId

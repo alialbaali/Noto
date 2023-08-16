@@ -11,7 +11,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
-import com.noto.app.NotoTheme
+import com.noto.app.theme.NotoTheme
 
 @Composable
 fun SettingsSection(

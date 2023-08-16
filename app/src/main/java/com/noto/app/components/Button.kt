@@ -8,7 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.noto.app.NotoTheme
+import com.noto.app.theme.NotoTheme
 
 @Composable
 fun Button(

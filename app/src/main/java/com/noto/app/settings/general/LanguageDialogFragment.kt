@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.core.os.LocaleListCompat
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
 import com.noto.app.components.BottomSheetDialog
@@ -21,6 +20,7 @@ import com.noto.app.components.MediumSubtitle
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.Language
 import com.noto.app.settings.SettingsViewModel
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

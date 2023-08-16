@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.dp
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.databinding.DividerItemBinding
+import com.noto.app.theme.NotoTheme
 
 private const val DefaultAlphaColor = 0.125F
 private val DividerItemHeight = 3.dp

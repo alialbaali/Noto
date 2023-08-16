@@ -20,11 +20,11 @@ import androidx.documentfile.provider.DocumentFile
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
 import com.noto.app.components.BottomSheetDialog
 import com.noto.app.components.BottomSheetDialogItem
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.*
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel

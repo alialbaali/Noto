@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import com.noto.app.NotoTheme
+import com.noto.app.theme.NotoTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

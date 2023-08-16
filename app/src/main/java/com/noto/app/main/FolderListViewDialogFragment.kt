@@ -13,11 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.*
 import com.noto.app.domain.model.FolderListSortingType
 import com.noto.app.domain.model.SortingOrder
+import com.noto.app.theme.NotoTheme
 import com.noto.app.util.Constants
 import com.noto.app.util.navController
 import com.noto.app.util.navigateSafely

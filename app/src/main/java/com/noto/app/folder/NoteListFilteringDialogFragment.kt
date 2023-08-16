@@ -16,19 +16,15 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.stringResource
 import androidx.core.text.toSpannable
 import androidx.navigation.fragment.navArgs
-import com.noto.app.NotoTheme
 import com.noto.app.R
 import com.noto.app.components.BaseDialogFragment
 import com.noto.app.components.BottomSheetDialog
 import com.noto.app.components.MediumSubtitle
 import com.noto.app.components.SelectableDialogItem
 import com.noto.app.domain.model.FilteringType
-import com.noto.app.toColor
-import com.noto.app.util.Constants
-import com.noto.app.util.navController
-import com.noto.app.util.toAnnotatedString
-import com.noto.app.util.toDescriptionResourceId
-import com.noto.app.util.toStringResourceId
+import com.noto.app.theme.NotoTheme
+import com.noto.app.theme.toColor
+import com.noto.app.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
