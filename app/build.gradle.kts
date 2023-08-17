@@ -57,6 +57,7 @@ android {
                 "zh",
             )
         )
+        vectorDrawables.generatedDensities()
     }
     buildTypes {
         getByName("release") {
