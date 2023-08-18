@@ -116,7 +116,7 @@ class AppActivity : BaseActivity() {
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                 }
             }
-        } else { // Custom action (i.e. opening the app from a shortcut, notificiation, or another app.
+        } else { // Custom action (i.e. opening the app from a shortcut, notification, or another app.
             inflateGraphAndSetStartDestination(R.id.folderFragment) // Set the start destination to the General folder.
         }
     }
