@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <shortcut
+        android:shortcutId="create_note"
+        android:enabled="true"
+        android:icon="@mipmap/ic_create_note"
+        android:shortcutShortLabel="@string/create_note"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="com.noto.intent.action.CREATE_NOTE"
+            android:targetPackage="com.noto.rc"
+            android:targetClass="com.noto.app.AppActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="create_folder"
+        android:enabled="true"
+        android:icon="@mipmap/ic_create_folder"
+        android:shortcutShortLabel="@string/create_folder"
+        tools:targetApi="n_mr1">
+        <intent
+            android:action="com.noto.intent.action.CREATE_FOLDER"
+            android:targetPackage="com.noto.rc"
+            android:targetClass="com.noto.app.AppActivity" />
+    </shortcut>
+</shortcuts>

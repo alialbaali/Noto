@@ -82,27 +82,13 @@ class AppActivity : BaseActivity() {
     private fun setupNavigation() {
         if (intent?.action !in AppIntents) { // Default action (i.e. opening the app from the home screen.)
             when (val interfaceId = viewModel.mainInterfaceId.value) { // Set the start destination according to user preference.
-                FilteredItemModel.All.id -> inflateGraphAndSetStartDestination(
-                    R.id.filteredFragment,
-                    bundleOf(Constants.Model to FilteredItemModel.All),
-                )
+                in FilteredItemModel.Ids -> {
+                    val model = FilteredItemModel.entries.first { it.id == interfaceId }
+                    val args = bundleOf(Constants.Model to model)
+                    inflateGraphAndSetStartDestination(R.id.filteredFragment, args)
+                }
 
-                FilteredItemModel.Recent.id -> inflateGraphAndSetStartDestination(
-                    R.id.filteredFragment,
-                    bundleOf(Constants.Model to FilteredItemModel.Recent),
-                )
-
-                FilteredItemModel.Scheduled.id -> inflateGraphAndSetStartDestination(
-                    R.id.filteredFragment,
-                    bundleOf(Constants.Model to FilteredItemModel.Scheduled),
-                )
-
-                FilteredItemModel.Archived.id -> inflateGraphAndSetStartDestination(
-                    R.id.filteredFragment,
-                    bundleOf(Constants.Model to FilteredItemModel.Archived),
-                )
-
-                AllFoldersId -> {
+                AllFoldersId -> { // MainFragment + General folder
                     val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                     if (navController.currentDestination?.id != R.id.mainFragment && viewModel.shouldNavigateToMainFragment) {
@@ -111,13 +97,14 @@ class AppActivity : BaseActivity() {
                     }
                 }
 
-                else -> {
+                else -> { // Custom folder
                     val args = bundleOf(Constants.FolderId to interfaceId)
                     inflateGraphAndSetStartDestination(R.id.folderFragment, args)
                 }
             }
-        } else { // Custom action (i.e. opening the app from a shortcut, notification, or another app.
-            inflateGraphAndSetStartDestination(R.id.folderFragment) // Set the start destination to the General folder.
+        } else { // Custom action (i.e. opening the app from a shortcut, notification, or another app)
+            val args = bundleOf(Constants.FolderId to Folder.GeneralFolderId)
+            inflateGraphAndSetStartDestination(R.id.folderFragment, args) // Set the start destination to the General folder.
         }
     }
 

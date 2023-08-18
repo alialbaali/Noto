@@ -9,6 +9,6 @@ enum class FilteredItemModel(val id: Long, val color: NotoColor) {
     Archived(-6L, NotoColor.Purple);
 
     companion object {
-        val Ids = listOf(All.id, Recent.id, Scheduled.id, Archived.id)
+        val Ids = entries.map(FilteredItemModel::id)
     }
 }
