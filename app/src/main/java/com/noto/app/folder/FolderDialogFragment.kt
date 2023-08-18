@@ -10,7 +10,6 @@ import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.noto.app.NavGraphDirections
 import com.noto.app.R
 import com.noto.app.UiState
 import com.noto.app.components.BaseDialogFragment
@@ -214,13 +213,6 @@ class FolderDialogFragment : BaseDialogFragment() {
                 val stringId = R.string.folder_is_deleted
                 val drawableId = R.drawable.ic_round_delete_sweep_24
                 val selectedFolderId = navController?.getBackStackEntry(R.id.folderFragment)?.arguments?.getLong(Constants.FolderId)
-                if (selectedFolderId == viewModel.folder.value.id) {
-                    navController?.navigateSafely(NavGraphDirections.actionGlobalFolderFragment(folderId = Folder.GeneralFolderId)) {
-                        popUpTo(R.id.folderFragment) {
-                            inclusive = true
-                        }
-                    }
-                }
                 val notes = viewModel.notes.value as? UiState.Success
                 context?.let { context ->
                     context.updateAllWidgetsData()
@@ -231,6 +223,14 @@ class FolderDialogFragment : BaseDialogFragment() {
                         ?.forEach { model -> alarmManager?.cancelAlarm(context, model.note.id) }
                 }
                 viewModel.deleteFolder().invokeOnCompletion { dismiss() }
+                if (selectedFolderId == viewModel.folder.value.id) {
+                    navController?.navigateUp() // Dismiss ConfirmationDialogFragment
+                    navController?.navigateSafely(FolderDialogFragmentDirections.actionFolderDialogFragmentToFolderFragment(folderId = Folder.GeneralFolderId)) {
+                        popUpTo(R.id.folderFragment) {
+                            inclusive = true
+                        }
+                    }
+                }
             }
     }
 
