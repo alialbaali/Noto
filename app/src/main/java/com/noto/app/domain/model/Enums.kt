@@ -39,6 +39,8 @@ enum class Language {
         @Suppress("DEPRECATION")
         val Deprecated = listOf(Tamil)
     }
+
+    val isSingleForm: Boolean get() = this == Indonesian || this == SimplifiedChinese
 }
 
 enum class VaultTimeout { Immediately, OnAppClose, After1Hour, After4Hours, After12Hours, }
