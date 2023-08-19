@@ -1,4 +1,4 @@
-import java.util.*
+import java.util.Properties
 
 plugins {
     id(Plugins.AndroidApplication)
@@ -57,12 +57,13 @@ android {
                 "zh",
             )
         )
-        vectorDrawables.generatedDensities()
+        vectorDrawables.generatedDensities() // Required by F-Droid
     }
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
+            isCrunchPngs = false // Required by F-Droid
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -119,6 +120,10 @@ android {
         resources.excludes.add("META-INF/LGPL2.1")
         resources.excludes.add("META-INF/LICENSE.md")
         resources.excludes.add("META-INF/LICENSE-notice.md")
+    }
+
+    androidResources {
+        noCompress.clear() // Required by F-Droid
     }
 }
 
