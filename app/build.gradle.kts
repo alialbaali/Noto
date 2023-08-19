@@ -8,6 +8,12 @@ plugins {
     id("com.google.devtools.ksp") version "1.8.10-1.0.9"
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
 android {
     compileSdk = App.CompileSDK
     buildToolsVersion = App.BuildTools
