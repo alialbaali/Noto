@@ -7,8 +7,8 @@ import android.os.Bundle
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
 import androidx.lifecycle.lifecycleScope
-import com.noto.app.components.BaseActivity
 import com.noto.app.R
+import com.noto.app.components.BaseActivity
 import com.noto.app.databinding.FolderListWidgetConfigActivityBinding
 import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
@@ -28,6 +28,7 @@ class FolderListWidgetConfigActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (appViewModel.currentTheme == null) return
         FolderListWidgetConfigActivityBinding.inflate(layoutInflater).withBinding {
             setContentView(root)
             setupState()

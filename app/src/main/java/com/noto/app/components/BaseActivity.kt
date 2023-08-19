@@ -16,17 +16,17 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 open class BaseActivity : AppCompatActivity() {
 
-    private val viewModel by viewModel<AppViewModel>()
+    protected val appViewModel by viewModel<AppViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
-        viewModel.currentTheme?.toAndroidTheme()?.also(::setTheme)
+        appViewModel.currentTheme?.toAndroidTheme()?.also(::setTheme)
         super.onCreate(savedInstanceState)
         setupState()
     }
 
     private fun setupState() {
-        viewModel.theme
+        appViewModel.theme
             .onEach(::setupTheme)
             .launchIn(lifecycleScope)
 
@@ -35,8 +35,8 @@ open class BaseActivity : AppCompatActivity() {
     }
 
     private fun setupTheme(theme: Theme) {
-        if (viewModel.currentTheme != theme) {
-            viewModel.setCurrentTheme(theme)
+        if (appViewModel.currentTheme != theme) {
+            appViewModel.setCurrentTheme(theme)
             when (theme) {
                 Theme.System -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 Theme.Light -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)

@@ -61,7 +61,8 @@ class AppActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (viewModel.currentTheme != null) requestNotificationsPermissionIfRequired() // Check required otherwise the callback runs twice.
+        if (appViewModel.currentTheme == null) return
+        requestNotificationsPermissionIfRequired()
         notificationManager.createNotificationChannels(this)
         AppActivityBinding.inflate(layoutInflater).withBinding {
             setContentView(root)

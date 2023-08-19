@@ -15,21 +15,7 @@ import com.noto.app.domain.model.FilteringType
 import com.noto.app.domain.model.NotoColor
 import com.noto.app.label.labelItem
 import com.noto.app.main.SelectFolderDialogFragment
-import com.noto.app.util.Constants
-import com.noto.app.util.colorResource
-import com.noto.app.util.dp
-import com.noto.app.util.drawableResource
-import com.noto.app.util.filterSelected
-import com.noto.app.util.filterByLabels
-import com.noto.app.util.getTitle
-import com.noto.app.util.setupColors
-import com.noto.app.util.stringResource
-import com.noto.app.util.toColorResourceId
-import com.noto.app.util.toDrawableResourceId
-import com.noto.app.util.toWidgetHeaderShapeId
-import com.noto.app.util.toWidgetShapeId
-import com.noto.app.util.updateNoteWidget
-import com.noto.app.util.withBinding
+import com.noto.app.util.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -51,6 +37,7 @@ class NoteListWidgetConfigActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (appViewModel.currentTheme == null) return
         NoteListWidgetConfigActivityBinding.inflate(layoutInflater).withBinding {
             setContentView(root)
             if (folderId == 0L)

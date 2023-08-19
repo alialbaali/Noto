@@ -22,7 +22,7 @@ class TransparentActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (viewModel.currentTheme == null) return
+        if (appViewModel.currentTheme == null) return
         setupState()
         handleIntentContent()
     }
