@@ -326,7 +326,7 @@ fun LocaleListCompat.toLanguages(): List<Language> {
             tag.startsWith("en", ignoreCase = true) -> Language.English
             tag.startsWith("tr", ignoreCase = true) -> Language.Turkish
             tag.startsWith("ar", ignoreCase = true) -> Language.Arabic
-            tag.startsWith("in", ignoreCase = true) -> Language.Indonesian
+            tag.startsWith("in", ignoreCase = true) || tag.startsWith("id", ignoreCase = true) -> Language.Indonesian
             tag.startsWith("ru", ignoreCase = true) -> Language.Russian
             tag.startsWith("ta", ignoreCase = true) -> Language.Tamil
             tag.startsWith("es", ignoreCase = true) -> Language.Spanish
