@@ -58,6 +58,7 @@ val Release.Companion.Previous: List<Release>
                     R.string.release_2_2_1_quick_exit,
                     R.string.release_2_2_1_quick_note_tile,
                     R.string.release_2_2_1_system_app_language,
+                    R.string.release_2_2_1_bug_fixes,
                 )
             )
         ),

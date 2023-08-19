@@ -158,28 +158,6 @@
         <item name="android:textColor">?attr/notoPrimaryColor</item>
     </style>
 
-    <style name="DialogRadioButtonItem" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="fontFamily">@font/nunito_semibold</item>
-        <item name="android:textSize">@dimen/size_small</item>
-        <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="android:button">@null</item>
-        <item name="android:padding">@dimen/spacing_normal</item>
-        <item name="android:layout_marginStart">@dimen/spacing_normal</item>
-        <item name="android:layout_marginEnd">@dimen/spacing_normal</item>
-        <item name="android:background">@drawable/dialog_item_selector</item>
-    </style>
-
-    <style name="IconItem" parent="Widget.MaterialComponents.TextView">
-        <item name="fontFamily">@font/nunito_semibold</item>
-        <item name="android:textSize">@dimen/size_small</item>
-        <item name="android:textColor">?attr/notoPrimaryColor</item>
-        <item name="android:padding">@dimen/spacing_normal</item>
-        <item name="android:layout_margin">@dimen/spacing_small</item>
-        <item name="android:background">@drawable/dialog_item_selector</item>
-        <item name="android:gravity">center</item>
-        <item name="android:drawablePadding">@dimen/spacing_normal</item>
-    </style>
-
     <style name="TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxBackgroundColor">?attr/notoSurfaceColor</item>
         <item name="boxStrokeWidth">0dp</item>

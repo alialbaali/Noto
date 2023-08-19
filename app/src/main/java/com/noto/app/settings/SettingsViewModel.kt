@@ -214,7 +214,4 @@ class SettingsViewModel(
         settingsRepository.updateIsVaultOpen(isOpen = false)
     }
 
-    fun openVault() = viewModelScope.launch {
-        settingsRepository.updateIsVaultOpen(true)
-    }
 }

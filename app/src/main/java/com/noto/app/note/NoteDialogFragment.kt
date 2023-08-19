@@ -58,13 +58,6 @@ class NoteDialogFragment : BaseDialogFragment() {
 
     private val folderColor by lazy { viewModel.folder.value.color }
 
-    private val selectFolderTitle by lazy {
-        when (navController?.previousBackStackEntry?.destination?.id) {
-            R.id.folderArchiveFragment -> context?.stringResource(R.string.select_folder_archive)
-            else -> context?.stringResource(R.string.select_folder)
-        }
-    }
-
     private val isSingleFormLanguage by lazy { AppCompatDelegate.getApplicationLocales().toLanguages().first().isSingleForm }
 
     override fun onCreateView(

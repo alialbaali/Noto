@@ -206,8 +206,6 @@ fun <K, V> Map<K?, V>.filterNotNullKeys() = filterKeys { it != null } as Map<K, 
 fun Map<Label, Boolean>.filterSelected() = filterValues { it }.map { it.key }
 fun List<LabelItemModel>.filterSelected() = filter { it.isSelected }.map { it.label }
 
-fun String.toLongList() = split(", ").mapNotNull { it.toLongOrNull() }
-
 fun String.hash(): String {
     val salt = ByteArray(16)
     val spec = PBEKeySpec(this.toCharArray(), salt, HashIterationCount, HashKeyLength)

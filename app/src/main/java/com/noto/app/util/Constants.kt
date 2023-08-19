@@ -6,7 +6,6 @@ object Constants {
     const val FolderTitle = "folder_title"
     const val FilteredFolderIds = "filtered_folder_ids"
     const val SelectedFolderId = "selected_folder_id"
-    const val SelectedNoteIds = "selected_note_ids"
     const val NoteId = "note_id"
     const val Body = "body"
     const val IsDismissible = "is_dismissible"

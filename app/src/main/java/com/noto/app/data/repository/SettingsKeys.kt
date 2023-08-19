@@ -23,8 +23,6 @@ object SettingsKeys {
     val IsBioAuthEnabled = stringPreferencesKey("IsBioAuthEnabled")
     val MainInterfaceId = longPreferencesKey("MainFolderId")
     val IsRememberScrollingPosition = booleanPreferencesKey("IsRememberScrollingPosition")
-    val AllNotesScrollingPosition = intPreferencesKey("AllNotesScrollingPosition")
-    val RecentNotesScrollingPosition = intPreferencesKey("RecentNotesScrollingPosition")
     val QuickNoteFolderId = longPreferencesKey("QuickNoteFolderId")
     val ScreenBrightnessLevel = floatPreferencesKey("ScreenBrightnessLevel")
     val QuickExit = booleanPreferencesKey("QuickExit")
