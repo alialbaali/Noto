@@ -127,10 +127,6 @@ android {
         resources.excludes.add("META-INF/LICENSE.md")
         resources.excludes.add("META-INF/LICENSE-notice.md")
     }
-
-    androidResources {
-        noCompress.clear() // Required by F-Droid
-    }
 }
 
 dependencies {
