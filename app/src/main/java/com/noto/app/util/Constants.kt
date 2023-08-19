@@ -31,6 +31,7 @@ object Constants {
     const val GroupingOrder = "GroupingOrder"
     const val QuickNoteFolderId = "quick_note_interface_id"
     const val MainInterfaceId = "main_interface_id"
+    const val QuickNote = "quick_note"
 
     object Intent {
         const val ActionCreateFolder = "com.noto.intent.action.CREATE_FOLDER"

@@ -10,6 +10,7 @@ import com.noto.app.util.AllFoldersId
 import com.noto.app.util.firstLineOrEmpty
 import com.noto.app.util.isGeneral
 import com.noto.app.util.takeAfterFirstLineOrEmpty
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -64,11 +65,14 @@ class AppViewModel(
     private val mutableIsNotificationPermissionGranted = MutableStateFlow<Boolean?>(null)
     val isNotificationPermissionGranted get() = mutableIsNotificationPermissionGranted.asStateFlow()
 
-    val quickNoteFolderId = settingsRepository.quickNoteFolderId
-        .stateIn(viewModelScope, SharingStarted.Eagerly, Folder.GeneralFolderId)
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val quickNoteFolder = settingsRepository.quickNoteFolderId
+        .flatMapConcat { folderRepository.getFolderById(it) }
+        .distinctUntilChanged()
+        .shareIn(viewModelScope, SharingStarted.Eagerly, Int.MAX_VALUE)
 
-    var isQuickNoteDialogCreated = false
-        private set
+    private val mutableQuickNote = MutableStateFlow<Note?>(null)
+    val quickNote get() = mutableQuickNote.asStateFlow()
 
     init {
         createGeneralFolder()
@@ -99,21 +103,20 @@ class AppViewModel(
         currentTheme = theme
     }
 
-    fun createQuickNote(content: String, onSuccess: (Folder, Note) -> Unit) = viewModelScope.launch {
+    fun createQuickNote(content: String) = viewModelScope.launch {
         val title = content.firstLineOrEmpty()
         val body = content.takeAfterFirstLineOrEmpty()
-        val folderId = settingsRepository.quickNoteFolderId.first()
+        val folderId = quickNoteFolder.first().id
         val note = Note(folderId = folderId, title = title, body = body, position = 0)
-        val noteId = noteRepository.createNote(note)
-        val folder = folderRepository.getFolderById(folderId).first()
-        onSuccess(folder, note.copy(id = noteId))
+        noteRepository.createNote(note).also(::setQuickNote)
     }
 
     fun setNotificationPermissionResult(isGranted: Boolean?) {
         mutableIsNotificationPermissionGranted.value = isGranted
     }
 
-    fun setIsQuickNoteDialogCreated() {
-        isQuickNoteDialogCreated = true
+    fun setQuickNote(noteId: Long) = viewModelScope.launch {
+        mutableQuickNote.value = noteRepository.getNoteById(noteId).first()
     }
+
 }
