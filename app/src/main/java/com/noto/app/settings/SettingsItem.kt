@@ -125,7 +125,7 @@ private fun RowScope.SettingsItemContent(
                         targetState = type.value,
                         label = "$title Animation",
                         transitionSpec = {
-                            fadeIn(tween(DefaultAnimationDuration.toInt())) with fadeOut(tween(DefaultAnimationDuration.toInt()))
+                            fadeIn(tween(DefaultAnimationDuration.toInt())) togetherWith fadeOut(tween(DefaultAnimationDuration.toInt()))
                         }
                     ) { value ->
                         Text(

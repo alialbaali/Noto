@@ -230,6 +230,7 @@ fun @receiver:ColorInt Int.withDefaultAlpha(alpha: Int = 32): Int =
     ColorUtils.setAlphaComponent(this, alpha)
 
 @SuppressLint("ClickableViewAccessibility")
+@Suppress("NOTHING_TO_OVERRIDE", "ACCIDENTAL_OVERRIDE")
 inline fun BottomAppBar.setOnSwipeGestureListener(crossinline callback: () -> Unit) {
     val gestureListener = object : GestureDetector.SimpleOnGestureListener() {
         override fun onFling(
@@ -344,6 +345,7 @@ fun View.enable() {
 }
 
 @SuppressLint("ClickableViewAccessibility")
+@Suppress("NOTHING_TO_OVERRIDE", "ACCIDENTAL_OVERRIDE")
 inline fun View.setOnSwipeGestureListener(
     crossinline onSwipeLeft: () -> Unit,
     crossinline onSwipeRight: () -> Unit,
