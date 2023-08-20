@@ -4,9 +4,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath(Libraries.Gradle.Kotlin)
-        classpath(Libraries.Gradle.Android)
-        classpath(AndroidX.Navigation.safeArgsGradlePlugin)
+        classpath(libs.kotlin.gradle.plugin)
+        classpath(libs.com.android.tools.build.gradle)
+        classpath(libs.navigation.safe.args.gradle.plugin)
     }
 }
 

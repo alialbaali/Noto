@@ -1,11 +1,15 @@
 import java.util.Properties
 
 plugins {
-    id(Plugins.AndroidApplication)
-    kotlin(Plugins.KotlinAndroid)
-    id(Plugins.NavigationSafeArgs)
-    kotlin(Plugins.KotlinSerialization)
-    id(Plugins.KSP) version "1.9.0-1.0.12"
+    id("com.android.application")
+    kotlin("android")
+    id("androidx.navigation.safeargs.kotlin")
+    alias(libs.plugins.org.jetbrains.kotlin.plugin.serialization)
+    alias(libs.plugins.com.google.devtools.ksp)
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 android {
@@ -81,16 +85,10 @@ android {
 
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.Compose
+        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
 
     testOptions {
@@ -104,73 +102,47 @@ android {
 dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
-    implementation(JakeWharton.timber)
-    implementation(AndroidX.Navigation.uiKtx)
-    implementation(AndroidX.Navigation.fragmentKtx)
-    implementation(AndroidX.Core.ktx)
-    implementation(AndroidX.constraintLayout)
-    implementation(AndroidX.appCompat)
-    implementation(AndroidX.coordinatorLayout)
-    implementation(AndroidX.Lifecycle.viewModelKtx)
-    implementation(AndroidX.lifecycle.runtime.ktx)
-    implementation(AndroidX.recyclerView)
-    implementation(AndroidX.Work.runtimeKtx)
-    implementation(Google.Android.material)
-    implementation(KotlinX.Coroutines.core)
-    implementation(KotlinX.Coroutines.android)
-    implementation(KotlinX.Serialization.json)
-    implementation(AndroidX.Biometric.ktx)
-    implementation(AndroidX.DataStore.preferences)
-    implementation(Koin.android)
-    implementation(Libraries.Main.Epoxy)
-    ksp(Libraries.Main.EpoxyProcessor)
-    implementation(AndroidX.Room.runtime)
-    implementation(AndroidX.Room.ktx)
-    implementation(AndroidX.viewPager2)
-    ksp(AndroidX.Room.compiler)
-    implementation(KotlinX.datetime)
-    implementation(AndroidX.Core.splashscreen)
-    implementation("com.google.android.flexbox:flexbox:3.0.0")
-    implementation("jp.wasabeef:recyclerview-animators:4.0.2")
-    implementation("com.robinhood.ticker:ticker:2.0.4")
+    implementation(libs.timber)
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.navigation.fragment.ktx)
 
-    implementation(AndroidX.Compose.material3)
-    implementation(AndroidX.Compose.animation)
-    implementation(AndroidX.Compose.Ui.viewBinding)
+    implementation(libs.androidx.core.core.ktx)
+    implementation(libs.constraintlayout)
+    implementation(libs.appcompat)
+    implementation(libs.coordinatorlayout)
 
-    testImplementation(Testing.Kotest.Runner.junit5)
-    testImplementation(Testing.Kotest.Assertions.core)
+    implementation(libs.lifecycle.viewmodel.ktx)
+    implementation(libs.lifecycle.runtime.ktx)
 
-    testImplementation(Koin.test)
-    testImplementation(Testing.junit4)
-    testImplementation(Testing.robolectric)
+    implementation(libs.recyclerview)
+    implementation(libs.work.runtime.ktx)
+    implementation(libs.material)
 
-    testImplementation(AndroidX.Test.coreKtx)
-    testImplementation(AndroidX.Test.runner)
-    testImplementation(AndroidX.Test.rules)
-    testImplementation(AndroidX.Test.Ext.JUnit.ktx)
-    testImplementation(AndroidX.ArchCore.testing)
-    testImplementation(AndroidX.Test.Espresso.core)
-    testImplementation(KotlinX.coroutines.test)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.serialization.json)
 
-    androidTestImplementation(KotlinX.coroutines.test)
-    androidTestImplementation(Kotlin.Test.junit)
-    androidTestImplementation(Kotlin.Test.common)
+    implementation(libs.biometric.ktx)
+    implementation(libs.datastore.preferences)
+    implementation(libs.koin.android)
+    implementation(libs.epoxy)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    implementation(libs.viewpager2)
+    implementation(libs.kotlinx.datetime)
+    implementation(libs.core.splashscreen)
+    implementation(libs.flexbox)
+    implementation(libs.recyclerview.animators)
+    implementation(libs.ticker)
 
-    androidTestImplementation(Koin.test)
-    androidTestImplementation(Testing.junit4)
+    implementation(libs.material3)
+    implementation(libs.animation)
+    implementation(libs.ui.viewbinding)
 
-    androidTestImplementation(AndroidX.Test.coreKtx)
-    androidTestImplementation(AndroidX.Test.runner)
-    androidTestImplementation(AndroidX.Test.rules)
-    androidTestImplementation(AndroidX.fragment.testing)
-    androidTestImplementation(AndroidX.Test.Ext.JUnit.ktx)
-    androidTestImplementation(AndroidX.ArchCore.testing)
-    androidTestImplementation(AndroidX.Test.Espresso.core)
-    androidTestImplementation(AndroidX.Test.Espresso.contrib)
-    androidTestImplementation(AndroidX.Navigation.testing)
+    ksp(libs.epoxy.processor)
+    ksp(libs.room.compiler)
 
-    coreLibraryDesugaring(Libraries.Main.JavaTime)
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 }
 
 tasks.withType<Test> {
