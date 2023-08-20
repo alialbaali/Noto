@@ -121,6 +121,10 @@ android {
         resources.excludes.add("META-INF/LICENSE.md")
         resources.excludes.add("META-INF/LICENSE-notice.md")
     }
+
+    androidResources {
+        noCompress("ttf")
+    }
 }
 
 kotlin {
