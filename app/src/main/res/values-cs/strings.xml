@@ -96,7 +96,6 @@
     <string name="privacy_policy_description">Naposledy aktualizováno 25. sprna 2022.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Licence</string>
-    <string name="empty_version">Verze</string>
     <string name="date">Datum</string>
     <string name="time">Čas</string>
     <string name="drag">Táhnout</string>
@@ -175,8 +174,6 @@
     <string name="color">Barva</string>
     <string name="delete_folder">Odstranit</string>
     <string name="delete_folder_confirmation">Opravdu chcete smazat tuto složku?</string>
-    <string name="folders_sorting">Řazení složek</string>
-    <string name="folders_ordering">Řazení složek</string>
     <string name="empty_title">Titulek nesmí být prázdný.</string>
     <string name="folder_is_deleted">Složka byla odstraněna.</string>
     <string name="folder_is_archived">Složka byla archivována.</string>

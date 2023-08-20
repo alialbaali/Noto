@@ -96,7 +96,6 @@
     <string name="privacy_policy_description">Last updated on August 25, 2022.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">License</string>
-    <string name="empty_version">பதிப்பு</string>
     <string name="date">தேதி</string>
     <string name="time">Time</string>
     <string name="drag">இழுக்கவும்</string>
@@ -173,8 +172,6 @@
     <string name="color">Color</string>
     <string name="delete_folder">Delete</string>
     <string name="delete_folder_confirmation">Are you sure you want to delete this folder?</string>
-    <string name="folders_sorting">Folders sorting</string>
-    <string name="folders_ordering">Folders ordering</string>
     <string name="empty_title">தலைப்பு காலியாக இருக்கக்கூடாது.</string>
     <string name="folder_is_deleted">Folder has been deleted.</string>
     <string name="folder_is_archived">Folder has been archived.</string>

@@ -96,7 +96,6 @@
     <string name="privacy_policy_description">Последнее обновление 25 августа 2022г.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Лицензия</string>
-    <string name="empty_version">Версия</string>
     <string name="date">Дата</string>
     <string name="time">Время</string>
     <string name="drag">Перетащить</string>
@@ -175,8 +174,6 @@
     <string name="color">Цвет</string>
     <string name="delete_folder">Удалить</string>
     <string name="delete_folder_confirmation">Вы уверены, что хотите удалить эту папку?</string>
-    <string name="folders_sorting">Сортировка</string>
-    <string name="folders_ordering">Порядок папок</string>
     <string name="empty_title">Название не может быть пустым.</string>
     <string name="folder_is_deleted">Папка удалена.</string>
     <string name="folder_is_archived">Папка архивирована.</string>

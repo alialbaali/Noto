@@ -96,7 +96,6 @@
     <string name="privacy_policy_description">最新更新时间: 2022年8月25日</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">许可协议</string>
-    <string name="empty_version">版本</string>
     <string name="date">日期</string>
     <string name="time">时间</string>
     <string name="drag">拖动</string>
@@ -172,8 +171,6 @@
     <string name="color">颜色</string>
     <string name="delete_folder">删除</string>
     <string name="delete_folder_confirmation">您确定要删除此文件夹吗？</string>
-    <string name="folders_sorting">文件夹排序</string>
-    <string name="folders_ordering">文件夹排序</string>
     <string name="empty_title">标题不能留空。</string>
     <string name="folder_is_deleted">文件夹已删除。</string>
     <string name="folder_is_archived">文件夹已归档。</string>

@@ -96,7 +96,6 @@
     <string name="privacy_policy_description">آخر تحديث في ٢٥ أغسطس ٢٠٢٢.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">الرخصة</string>
-    <string name="empty_version">الإصدار</string>
     <string name="date">التاريخ</string>
     <string name="time">الوقت</string>
     <string name="drag">أسحب</string>
@@ -177,8 +176,6 @@
     <string name="color">اللون</string>
     <string name="delete_folder">حذف</string>
     <string name="delete_folder_confirmation">هل أنت متأكد من حذف هذا المجلد؟</string>
-    <string name="folders_sorting">فرز المجلدات</string>
-    <string name="folders_ordering">ترتيب المجلدات</string>
     <string name="empty_title">العنوان لا يمكن أن يكون فارغاً.</string>
     <string name="folder_is_deleted">تم حذف المجلد.</string>
     <string name="folder_is_archived">تم أرشفة المجلد.</string>

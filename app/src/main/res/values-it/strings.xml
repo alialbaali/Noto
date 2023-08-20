@@ -96,7 +96,6 @@
     <string name="privacy_policy_description">Ultimo aggiornamento del 25 agosto 2022.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Licenza</string>
-    <string name="empty_version">Versione</string>
     <string name="date">Data</string>
     <string name="time">Ora</string>
     <string name="drag">Trascina</string>
@@ -173,8 +172,6 @@
     <string name="color">Colore</string>
     <string name="delete_folder">Elimina</string>
     <string name="delete_folder_confirmation">Sei sicuro di voler eliminare questa cartella?</string>
-    <string name="folders_sorting">Ordinamento cartelle</string>
-    <string name="folders_ordering">Ordinamento cartelle</string>
     <string name="empty_title">Il titolo non può essere vuoto.</string>
     <string name="folder_is_deleted">La cartella è stata eliminata.</string>
     <string name="folder_is_archived">La cartella è stata archiviata.</string>

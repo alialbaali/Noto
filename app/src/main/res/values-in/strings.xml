@@ -96,7 +96,6 @@
     <string name="privacy_policy_description">Pembaharuan terakhir pada Agustus 25, 2022.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Lisensi</string>
-    <string name="empty_version">Versi</string>
     <string name="date">Tanggal</string>
     <string name="time">Waktu</string>
     <string name="drag">Tarik</string>
@@ -172,8 +171,6 @@
     <string name="color">Warna</string>
     <string name="delete_folder">Hapus</string>
     <string name="delete_folder_confirmation">Apakah Anda yakin ingin menghapus map ini?</string>
-    <string name="folders_sorting">Sortir map</string>
-    <string name="folders_ordering">Penyortiran folder</string>
     <string name="empty_title">Judul tidak boleh kosong.</string>
     <string name="folder_is_deleted">Map telah dihapus.</string>
     <string name="folder_is_archived">Map telah diarsipkan.</string>
@@ -361,7 +358,7 @@
     <string name="copy">Salin</string>
     <string name="copy_to">Salin ke…</string>
     <!-- Text displayed when copying notes between folders along with a progress indicator. -->
-    <string name="copying_notes">Copying notes to %s</string>
+    <string name="copying_notes">Menyalin catatan ke %s</string>
     <!-- The count of the selected notes that have been copied to a folder. -->
     <plurals name="note_is_copied">
         <item quantity="other">%d　Catatan telah disalin ke %s.</item>
@@ -392,7 +389,7 @@
     </plurals>
     <string name="move_to">Pindahkan ke…</string>
     <!-- Text displayed when moving notes between folders along with a progress indicator. -->
-    <string name="moving_notes">Moving notes to %s</string>
+    <string name="moving_notes">Memindah catatan ke %s</string>
     <!-- The count of the selected notes that have been moved to a folder. -->
     <plurals name="note_is_moved">
         <item quantity="other">%d Catatan telah dipindahkan ke %s.</item>

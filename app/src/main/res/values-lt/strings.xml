@@ -96,7 +96,6 @@
     <string name="privacy_policy_description">Paskutinį kartą atnaujinta 2022 m. rugpjūčio 25 d.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Licencija</string>
-    <string name="empty_version">Versija</string>
     <string name="date">Data</string>
     <string name="time">Laikas</string>
     <string name="drag">Drag</string>
@@ -175,8 +174,6 @@
     <string name="color">Spalva</string>
     <string name="delete_folder">Naikinti</string>
     <string name="delete_folder_confirmation">Tikrai norite panaikinti šį aplanką?</string>
-    <string name="folders_sorting">Aplankų rikiavimas</string>
-    <string name="folders_ordering">Aplankų tvarka</string>
     <string name="empty_title">Antraštė negali būti tuščia.</string>
     <string name="folder_is_deleted">Aplankas panaikintas.</string>
     <string name="folder_is_archived">Aplankas suarchyvuotas.</string>

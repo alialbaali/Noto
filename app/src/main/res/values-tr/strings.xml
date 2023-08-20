@@ -96,7 +96,6 @@
     <string name="privacy_policy_description">Son güncelleme 25 Ağustos 2022 tarihinde yapıldı.</string>
     <!-- License of the project, or app icons. Example: Apache 2.0. -->
     <string name="license">Lisans</string>
-    <string name="empty_version">Sürüm</string>
     <string name="date">Tarih</string>
     <string name="time">Saat</string>
     <string name="drag">Sürükle</string>
@@ -173,8 +172,6 @@
     <string name="color">Renk</string>
     <string name="delete_folder">Sil</string>
     <string name="delete_folder_confirmation">Bu klasörü silmek istediğinizden emin misiniz?</string>
-    <string name="folders_sorting">Klasör sıralaması</string>
-    <string name="folders_ordering">Klasör düzeni</string>
     <string name="empty_title">Başlık boş bırakılamaz.</string>
     <string name="folder_is_deleted">Klasör silindi.</string>
     <string name="folder_is_archived">Klasör arşivlendi.</string>
