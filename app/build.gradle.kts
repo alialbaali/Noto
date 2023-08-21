@@ -30,6 +30,7 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        vectorDrawables.generatedDensities() // Required by F-Droid.
     }
 
     signingConfigs {
@@ -46,6 +47,7 @@ android {
 
     buildTypes {
         getByName("release") {
+            isCrunchPngs = false // Required by F-Droid.
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
@@ -73,6 +75,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+
+    androidResources {
+        noCompress.add("ttf") // Required by F-Droid.
     }
 
     bundle {
