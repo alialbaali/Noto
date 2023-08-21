@@ -9,7 +9,7 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(App.JdkVersion)
 }
 
 android {

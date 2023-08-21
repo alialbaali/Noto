@@ -7,4 +7,5 @@ object App {
     const val CompileSDK = 34
     const val BuildTools = "34.0.0"
     const val TargetSDK = 34
+    const val JdkVersion = 17
 }
