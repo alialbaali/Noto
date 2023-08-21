@@ -57,13 +57,11 @@ android {
                 "zh",
             )
         )
-        vectorDrawables.generatedDensities() // Required by F-Droid
     }
     buildTypes {
         getByName("release") {
             isMinifyEnabled = true
             isShrinkResources = true
-            isCrunchPngs = false // Required by F-Droid
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -79,6 +77,16 @@ android {
             versionNameSuffix = "-rc"
             applicationIdSuffix = ".rc"
             isDebuggable = true
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("release")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+        create("f-droid") {
+            isCrunchPngs = false // Required by F-Droid.
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
@@ -121,9 +129,11 @@ android {
         resources.excludes.add("META-INF/LICENSE.md")
         resources.excludes.add("META-INF/LICENSE-notice.md")
     }
+}
 
-    androidResources {
-        noCompress("ttf")
+androidComponents {
+    this.onVariants(selector().withName("f-droid")) { variant ->
+        variant.androidResources.noCompress.add("ttf") // Required by F-Droid.
     }
 }
 
