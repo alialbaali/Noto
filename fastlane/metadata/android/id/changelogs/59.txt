@@ -1,0 +1,6 @@
+- Mendukung Rusia &amp; Portugis.
+- Mendesign ulang Pengingat, Tanggal &amp; Pemilih waktu agar cocok dengan tema Noto.
+- Merevisi cara pemilihan catatan &amp; menyeret dapat dilakukan dengan hanya menggunakan klik panjang.
+- Mendukung fungsi Temukan di Catatan, dan pengguliran otomatis ke teks yang dicari di catatan.
+- Mendukung pemilihan beberapa catatan &amp; tindakan cepat untuk layar Arsip.
+- Perbaikan bug dan peningkatan design.

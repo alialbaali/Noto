@@ -1,0 +1,6 @@
+- Soportados Ruso y portugués.
+- Recordatorios rediseñados, fecha &amp; selectores de hora para coincidir con el tema Noto.
+- Revisada la forma en que la selección de notas &amp; arrastrar es manejada usando solo clics largos.
+- Función de búsqueda en Notas soportada, y desplazamiento automático al texto buscado en notas.
+- Selección de notas admitida &amp; acciones rápidas para pantallas de archivo.
+- Corrección de errores y mejoras de diseño.

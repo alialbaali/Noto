@@ -1,0 +1,6 @@
+- Rusų ir portugalų kalbos.
+- Perkurti priminimų, datos ir laiko parinkikliai, kad sutaptų su Noto tema.
+- Pataisytas užrašų pasirinkimas ir vilkimas naudojant tik ilgus spustelėjimus.
+- „Rasti užraše“ funkcionalumas ir automatinis slinkimas į ieškomą tekstą užrašuose.
+- Užrašų pasirinkimas ir spartieji veiksmai archyvo ekranams.
+- Klaidų taisymas ir dizaino patobulinimai.

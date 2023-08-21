@@ -1,0 +1,6 @@
+- Russische &amp; portugiesische Übersetzung.
+- Neu-designte, zum Noto-Theme passende Dialoge für Benachrichtigungen, Datum sowie Uhrzeit.
+- Überarbeitung von Notizauswahl und Verschieben durch ausschließlich langes Halten.
+- Suchen in Notizen einschl. Scrollen zur Fundstelle innerhalb der Notiz wird nun unterstützt.
+- Auswahl mehrerer Notizen sowie Schnellaktionen sind jetzt auch in Archiven möglich.
+- Fehlerkorrekturen und Verbesserungen des Designs.
