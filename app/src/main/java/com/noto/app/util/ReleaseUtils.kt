@@ -14,26 +14,34 @@ fun Release.Changelog.format(context: Context, count: Int) = changesIds.take(cou
     .let { if (changesIds.count() > count) it.plus("\n\n...") else it }
 
 val Release.Companion.Current: Release
-    get() = Release_2_3_0(
+    get() = Release_2_3_1(
         Release.Changelog(
             listOf(
-                R.string.release_2_3_0_new_languages,
-                R.string.release_2_3_0_reminder,
-                R.string.release_2_3_0_selection,
-                R.string.release_2_3_0_find_in_note,
-                R.string.release_2_3_0_archive,
-                R.string.release_2_3_0_sorting,
-                R.string.release_2_3_0_reading_mode,
-                R.string.release_2_3_0_whats_new,
-                R.string.release_2_3_0_report_issues,
-                R.string.release_2_3_0_quick_note,
-                R.string.release_2_3_0_bug_fixes,
+                R.string.release_2_3_1_languages,
+                R.string.release_2_3_1_auto_scroll,
             )
         )
     )
 
 val Release.Companion.Previous: List<Release>
     get() = listOf(
+        Release_2_3_0(
+            Release.Changelog(
+                listOf(
+                    R.string.release_2_3_0_new_languages,
+                    R.string.release_2_3_0_reminder,
+                    R.string.release_2_3_0_selection,
+                    R.string.release_2_3_0_find_in_note,
+                    R.string.release_2_3_0_archive,
+                    R.string.release_2_3_0_sorting,
+                    R.string.release_2_3_0_reading_mode,
+                    R.string.release_2_3_0_whats_new,
+                    R.string.release_2_3_0_report_issues,
+                    R.string.release_2_3_0_quick_note,
+                    R.string.release_2_3_0_bug_fixes,
+                )
+            )
+        ),
         Release_2_2_3(
             Release.Changelog(
                 listOf(

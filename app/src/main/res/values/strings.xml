@@ -694,4 +694,7 @@
     <string name="release_2_3_0_quick_note">Fixed multiple dialogs being opened when creating a Quick Note.</string>
     <string name="release_2_3_0_bug_fixes" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
 
+    <string name="release_2_3_1_languages">Supported Korean.</string>
+    <string name="release_2_3_1_auto_scroll">Improved auto-scroll when writing notes.</string>
+
 </resources>

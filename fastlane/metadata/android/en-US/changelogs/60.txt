@@ -1,0 +1,2 @@
+- Supported Korean.
+- Improved auto-scroll when writing notes.
