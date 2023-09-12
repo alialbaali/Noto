@@ -531,6 +531,7 @@
     <string name="lithuanian">Lithuanian</string>
     <string name="simplified_chinese">Simplified Chinese</string>
     <string name="portuguese">Portuguese</string>
+    <string name="korean">Korean</string>
     <string name="turkish_translator" translatable="false">Nuray Sabri</string>
     <string name="turkish_translator_url" translatable="false">https://linkedin.com/in/nuraysabri</string>
     <string name="turkish_proofreader" translatable="false">Alparslan Şakçi</string>
@@ -557,6 +558,8 @@
     <string name="portuguese_translator" translatable="false">Alexthegib</string>
     <string name="russian_translator" translatable="false">&lt;x0D&gt; Nikita Bragin</string>
     <string name="russian_translator_url" translatable="false">https://github.com/x-0D</string>
+    <string name="korean_translator" translatable="false">TsyQax</string>
+    <string name="korean_translator_url" translatable="false">https://github.com/tsyqax</string>
 
     <!-- Icon -->
     <string name="icon">Icon</string>

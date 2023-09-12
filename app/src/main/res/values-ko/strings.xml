@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App -->
+    <string name="app_name">Noto</string>
+    <!-- Button text for sorting/ordering/filtering notes options. -->
+    <string name="apply">적용하기</string>
+    <string name="okay">확인</string>
+    <string name="search">검색</string>
+    <!-- An option in the note layout for searching for text inside a note. -->
+    <string name="find_in_note">노트에서 찾기</string>
+    <!-- A settings option to support the project. -->
+    <string name="support_noto">Noto 지원하기</string>
+    <!-- Description of the Support Noto settings options. -->
+    <string name="support_noto_description">Noto가 유지되기를 보장하고 싶으시다면.</string>
+    <!-- More options for folder, note, etc... -->
+    <string name="more_options">더 보기</string>
+    <!-- Options for multi-selected notes. -->
+    <string name="options">옵션</string>
+    <string name="back">뒤로가기</string>
+    <!-- Replacements for "Label filtering type". -->
+    <string name="filtering">필터링</string>
+    <string name="layout">레이아웃</string>
+    <string name="list">목록</string>
+    <!-- Label filtering mode -->
+    <string name="inclusive">포함</string>
+    <!-- Inclusive filtering mode description -->
+    <string name="inclusive_description">선택한 라벨 중 <b>하나라도</b> 있는 노트를 필터링합니다.</string>
+    <!-- Label filtering mode -->
+    <string name="exclusive">제외</string>
+    <!-- Exclusive filtering mode description -->
+    <string name="exclusive_description"><b>모든</b> 선택된 라벨을 가지고 있는 노트를 필터링합니다.</string>
+    <!-- Label filtering mode -->
+    <string name="strict">엄격</string>
+    <!-- Strict filtering mode description -->
+    <string name="strict_description">선택한 라벨들<b>만</b> 있는 노트를 필터링합니다.</string>
+    <string name="grid">격자</string>
+    <string name="created">%s에 작성함</string>
+    <string name="accessed">%s에 확인함</string>
+    <string name="alphabetical">알파벳 순</string>
+    <!-- Sorting/Grouping notes by access date. -->
+    <string name="access_date">확인 날짜</string>
+    <string name="creation_date">작성일</string>
+    <string name="manual">수동</string>
+    <string name="none">없음</string>
+    <string name="descending">내림차순</string>
+    <string name="ascending">오름차순</string>
+    <string name="settings">설정</string>
+    <!-- The link of the source code of the project. -->
+    <string name="source_code">소스 코드</string>
+    <!-- Description of the "Source code" settings option. -->
+    <string name="source_code_description">Noto는 오픈소스 앱이고, 코드는 Github에 게시됩니다.</string>
+    <!-- The link of the Telegram community of Noto. -->
+    <string name="telegram_community">Telegram 커뮤니티</string>
+    <!-- Description of the "Telegram community" settings option. -->
+    <string name="telegram_community_description">다른 Noto 사용자와 관계를 맺기 위해 커뮤니티에 참여하고 최신 뉴스를 얻으세요.</string>
+    <!-- Text for Telegram banner in Settings & What's new dialog. -->
+    <string name="join_telegram">Telegram 커뮤니티에 가입하세요!</string>
+    <!-- The font used in notes, such as Monospace, or Nunito. -->
+    <string name="notes_font">노트 글꼴</string>
+    <string name="share_app_with_others">다른 사용자에게 Noto를 공유</string>
+    <string name="rate_app_on_play_store">Play 스토어에서 Noto 별점 주기</string>
+    <string name="report_issue">문제 보고하기</string>
+    <string name="email">이메일</string>
+    <string name="about">소개</string>
+    <string name="whats_new">새로운 소식</string>
+    <string name="whats_new_in">%s의 새로운 소식</string>
+    <string name="learn_more">더 알아보기…</string>
+    <!--    <string name="share_with">Share with</string>-->
+    <string name="export_import_data">데이터 가져오기/내보내기</string>
+    <string name="exporting_failed">데이터 내보내기에 실패했습니다.</string>
+    <string name="importing_failed">데이터 가져오기에 실패했습니다.</string>
+    <string name="data_is_exported">데이터를 %s로 내보냈습니다.</string>
+    <string name="data_is_imported">데이터를 가져왔습니다.</string>
+    <string name="export_data">데이터 내보내기</string>
+    <string name="import_data">데이터 가져오기</string>
+    <string name="importing_data">데이터를 가져오는 중…</string>
+    <string name="exporting_data">데이터를 내보내는 중…</string>
+    <string name="create_file_failed">파일을 생성하는데 실패했습니다.</string>
+    <string name="no_folder_is_selected">선택된 폴더가 없습니다.</string>
+    <string name="no_file_is_selected">선택된 파일이 없습니다.</string>
+    <!-- Open with an app such as Signal -->
+    <string name="open_with">다음으로 열기:</string>
+    <string name="invite_text">가장 작은 오픈소스 노트 작성 앱인 Noto를 확인하세요.</string>
+    <string name="version">버전</string>
+    <!-- A message shown when clicking on the app version. -->
+    <string name="version_is_copied">버전이 클립보드에 복사되었습니다.</string>
+    <!-- Me -->
+    <string name="developer">개발자</string>
+    <!-- Creator of app icons. -->
+    <string name="creator">제작자</string>
+    <!-- Translator of a language. -->
+    <!-- Proofreader of a language. -->
+    <string name="app_icons">엡 아이콘</string>
+    <string name="privacy_policy">개인 정보 보호 정책</string>
+    <!-- Description of the "Privacy policy" settings option. -->
+    <string name="privacy_policy_description">2022년 8월 25일에 마지막 업데이트.</string>
+    <!-- License of the project, or app icons. Example: Apache 2.0. -->
+    <string name="license">라이선스</string>
+    <string name="date">날짜</string>
+    <string name="time">시간</string>
+    <string name="drag">드래그</string>
+    <string name="nunito">Nunito (기본값)</string>
+    <string name="monospace">고정폭</string>
+    <string name="folders_archive">폴더 보관하기</string>
+    <!-- The first screen user sees when opening the app. -->
+    <string name="main_interface">메인 화면</string>
+    <!-- Description of the "Main interface" settings option. -->
+    <string name="main_interface_description">앱 실행 시 표시되는 처음 화면입니다.</string>
+    <!-- The default folder of "Save to Noto" text selection option. -->
+    <string name="quick_note_folder">빠른 노트 폴더</string>
+    <!-- AKA "Save to Noto". -->
+    <string name="quick_note">빠른 노트</string>
+    <!-- Description of the "Quick note folder" settings option. -->
+    <string name="quick_note_folder_description">\"빠른 노트\" 옵션을 사용하여 메모를 저장할 때 기본 폴더입니다.</string>
+    <string name="general">일반</string>
+    <string name="all_notes">모든 노트</string>
+    <string name="all_folders">모든 폴더</string>
+    <string name="clear">삭제하기</string>
+    <!-- Replacement for Recent Notes filtered view. -->
+    <string name="recent">최근</string>
+    <string name="collapse">접기</string>
+    <string name="expand">펼치기</string>
+    <string name="parent_folder">상위 폴더</string>
+    <string name="new_note_cursor_position">새 노트 커서 위치</string>
+    <!-- Opening notes in Reading Mode, or Editor, when clicking on them by default. -->
+    <string name="open_notes_in">노트 열기:</string>
+    <string name="archive">보관하기</string>
+    <!-- Similar to Recent Notes filtered view but for archived notes. -->
+    <string name="archived">보관됨</string>
+    <!-- Similar to Recent Notes filtered view but for notes that have reminders set. -->
+    <string name="scheduled">예정됨</string>
+    <!-- The name of the folder archive, which contains folder's archived notes. E.g. Recipes archive. -->
+    <string name="folder_archive">%s 보관함</string>
+    <string name="unarchive">보관 해제하기</string>
+    <string name="edit">편집하기</string>
+    <!-- An option in Reading Mode, to move to the next note. -->
+    <string name="next">다음</string>
+    <!-- An option in Reading Mode, to move to the previous note. -->
+    <string name="previous">이전</string>
+    <string name="pin">고정하기</string>
+    <!-- Merge multiple notes into a new note. -->
+    <string name="merge">통합하기</string>
+    <string name="unpin">고정 해제하기</string>
+    <string name="delete">삭제하기</string>
+    <string name="just_now">방금</string>
+    <!--Select a note. -->
+    <string name="select">선택하기</string>
+    <!--Select all notes. -->
+    <string name="select_all">전체 선택하기</string>
+    <!-- List of translations. -->
+    <string name="translations">번역</string>
+    <!-- Description of the "Translations" settings option. -->
+    <string name="translations_description">Noto를 다른 지역에서 이용할 수 있도록 특별히 도와주신 분들에 대해 감사드립니다.</string>
+    <!-- List of credits. -->
+    <string name="credits">크레딧</string>
+    <!-- Folder -->
+    <string name="folders">폴더</string>
+    <plurals name="folders_count">
+        <item quantity="other">폴더 %d개</item>
+    </plurals>
+    <string name="create_folder">폴더 만들기</string>
+    <string name="update_folder">폴더 업데이트</string>
+    <string name="archive_folder">보관 폴더</string>
+    <string name="new_folder">새 폴더</string>
+    <string name="edit_folder">폴더 편집</string>
+    <string name="folder_options">폴더 옵션</string>
+    <string name="add_new_note_shortcut">새 노트 바로가기</string>
+    <string name="delete_folder_description">이 작업은 실행 취소할 수 없으며 폴더와 폴더의 모든 콘텐츠가 영구적으로 삭제됩니다.</string>
+    <string name="folder_title">폴더 제목</string>
+    <!-- Folder color -->
+    <string name="color">색상</string>
+    <string name="delete_folder">삭제하기</string>
+    <string name="delete_folder_confirmation">정말 이 폴더를 삭제하실건가요?</string>
+    <string name="empty_title">제목을 입력해주세요.</string>
+    <string name="folder_is_deleted">폴더가 삭제되었습니다.</string>
+    <string name="folder_is_archived">폴더가 보관되었습니다.</string>
+    <string name="folder_is_unarchived">폴더가 보관 해제되었습니다.</string>
+    <string name="folder_is_pinned">폴더가 고정되었습니다.</string>
+    <string name="folder_is_unpinned">폴더의 고정이 해제되었습니다.</string>
+    <string name="no_folders_found">폴더를 찾을 수 없습니다.</string>
+    <!-- Text displayed when there are no folders suitable for a given action like moving/copying/etc... -->
+    <string name="no_relevant_folders_found">관련 폴더를 찾을 수 없습니다.</string>
+    <string name="select_folder">폴더 선택하기</string>
+    <string name="folder">폴더</string>
+    <string name="select_folder_archive">폴더 보관 선택</string>
+    <string name="pinned">고정됨</string>
+    <!-- Vault -->
+    <string name="folders_vault">잠긴 폴더</string>
+    <string name="update_passcode">비밀번호 업데이트</string>
+    <string name="enable_vault">잠금 활성화</string>
+    <string name="enter_vault_passcode">비밀번호 입력</string>
+    <string name="add_to_vault">잠그기</string>
+    <string name="remove_from_vault">잠금 해제하기</string>
+    <string name="folder_is_vaulted">폴더가 잠겼습니다.</string>
+    <string name="folder_is_unvaulted">폴더가 잠금 해제되었습니다.</string>
+    <string name="vault_is_empty">아무것도 잠기지 않았습니다.</string>
+    <string name="archive_vaulted_folder_confirmation">정말 이 폴더를 보관하실건가요?</string>
+    <string name="archive_vaulted_folder_description">이 폴더를 보관하면 잠금도 해제됩니다.</string>
+    <string name="passcode">비밀번호</string>
+    <string name="new_vault_passcode">새 비밀번호</string>
+    <string name="new_passcode">새 비밀번호</string>
+    <string name="current_passcode">현재 비밀번호</string>
+    <string name="vault_setup">잠금 설정</string>
+    <string name="current_vault_passcode">현재 비밀번호</string>
+    <!-- Change vault passcode option. -->
+    <string name="change_passcode">비밀번호 변경하기</string>
+    <!-- Vault timeout. -->
+    <string name="timeout">타임아웃</string>
+    <!-- Description of the "Timeout" settings option. -->
+    <string name="timeout_description">잠긴 것을 열람하고 다시 잠그기까지 걸리는 시간</string>
+    <string name="vault_timeout">타임아웃</string>
+    <string name="invalid_passcode">비밀번호 오류</string>
+    <string name="passcode_length_message">비밀번호는 최소 6자 이상이어야 합니다</string>
+    <string name="passcode_empty_message">비밀번호는 비워둘 수 없습니다</string>
+    <string name="passcode_doesnt_match">비밀번호가 현재 비밀번호와 일치하지 않습니다</string>
+    <string name="vault_passcode_has_changed">비밀번호가 변경되었습니다.</string>
+    <string name="enable_vault_message">잠금을 활성화하려면, 비밀번호를 생성해주세요.</string>
+    <string name="vault_passcode_message">비밀번호를 잊어버리면 다시 변경할 수 없습니다. 어딘가 안전한 곳에 보관해주세요.</string>
+    <string name="use_bio">생체 인식 사용하기</string>
+    <string name="validate">인증하기</string>
+    <string name="vault">잠금</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable_vault">잠금 비활성화</string>
+    <!-- A message shown when "Disable vault" is being clicked. -->
+    <string name="vault_is_disabled">잠금이 비활성화되었습니다.</string>
+    <string name="vault_is_enabled">잠금히 활성화되었습니다.</string>
+    <!-- An option to disable the vault in vault settings. -->
+    <string name="disable">비활성화하기</string>
+    <!-- A confirmation message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_confirmation">정말로 잠금을 사용하지 않으실 건가요?</string>
+    <!-- A description message shown when disabling the vault in vault settings. -->
+    <string name="disable_vault_description">이 작업은 실행 취소할 수 없으며 잠금을 사용하지 않도록 설정하고 모든 폴더를 잠금 해제합니다.</string>
+    <string name="vault_is_open">잠금이 풀려있습니다.</string>
+    <string name="immediately">즉시</string>
+    <string name="on_app_close">앱 종료 시</string>
+    <string name="after_1_hour">1시간 후</string>
+    <string name="after_4_hours">4시간 후</string>
+    <string name="after_12_hours">12시간 후</string>
+    <string name="close_vault">잠그기</string>
+    <!-- Enabling biometric authentication for the app. -->
+    <string name="bio_auth">생체 인증 활성화하기</string>
+    <!-- Description of the "Enable biometric authentication" settings option. -->
+    <string name="bio_auth_description">얼굴인식 또는 지문과 같은 생체 인식 인증 방법을 사용하여 잠금을 해제하도록 허용할지 여부입니다.</string>
+    <string name="use_passcode">비밀번호 사용</string>
+    <!-- Note -->
+    <string name="all">전체</string>
+    <string name="set_reminder">알림 설정하기</string>
+    <string name="update_reminder">알림 업데이트</string>
+    <string name="archive_is_empty">아무것도 보관되지 않았습니다.</string>
+    <!-- Notes count in Reading Mode with indicator of the current selected displayed note.
+     Such as "2/11 Notes".
+    -->
+    <plurals name="reading_mode_notes_count">
+        <item quantity="other">노트 %1$d / %2$d</item>
+    </plurals>
+    <plurals name="notes_count">
+        <item quantity="other">노트 %d개</item>
+    </plurals>
+    <!-- Filtered notes count is shown when a label is selected, or text is searched.
+         Such as "30 Notes • 5 Filtered".
+     -->
+    <plurals name="notes_filtered_count">
+        <item quantity="other">%1$d개 노트 • %2$d개 검색됨</item>
+    </plurals>
+    <!-- Selected notes count is shown when a note or multiple notes are selected.
+         Such as "30 Notes • 5 Selected".
+     -->
+    <plurals name="notes_selected_count">
+        <item quantity="other">%1$d개 노트 • %2$d개 선택됨</item>
+    </plurals>
+    <!--  Filtered notes count is shown when a label is selected, or text is searched. Selected notes count is shown when a note or multiple notes are selected.
+          Such as, "30 Notes • 3 Filtered • 8 Selected".
+     -->
+    <plurals name="notes_filtered_selected_count">
+        <item quantity="other">%1$d개 노트 • %2$d개 검색됨 • %3$d개 선택됨</item>
+    </plurals>
+    <plurals name="words_count">
+        <item quantity="other">단어 %d개</item>
+    </plurals>
+    <!-- Selected words count is shown when text is selected in a note. -->
+    <plurals name="words_selected_count">
+        <item quantity="other">%1$d개 단어 • %2$d개 선택됨</item>
+    </plurals>
+    <!-- Text displaying how many occurrences of a word has been found using "Find in note" feature. Such as "2/11 Found".
+        The First number is for the current displayed word, and the other number is the total count of words that have been found. -->
+    <plurals name="words_found_count">
+        <item quantity="other">%1$d개 단어%2$d / %3$d 개 발견됨</item>
+    </plurals>
+    <string name="body">본문</string>
+    <string name="title">제목</string>
+    <!-- Note's editor, opposite of Reading Mode. -->
+    <string name="editor">편집기</string>
+    <string name="create_note">노트 만들기</string>
+    <plurals name="delete_note">
+        <item quantity="other">노트 삭제하기</item>
+    </plurals>
+    <string name="duplicate">복제하기</string>
+    <string name="undo">취소하기</string>
+    <string name="undo_history">취소 기록</string>
+    <string name="redo">다시 실행</string>
+    <string name="redo_history">다시 실행 기록</string>
+    <plurals name="share_note">
+        <item quantity="other">노트 공유하기</item>
+    </plurals>
+    <!-- Sorting for notes/folders -->
+    <string name="sorting">정렬</string>
+    <!-- Ordering for sorting/grouping of notes/folders -->
+    <string name="ordering">순서</string>
+    <string name="notes_view">노트 보기</string>
+    <!-- Dialog for how folders sorted. -->
+    <string name="folders_view">폴더 보기</string>
+    <!-- Grouping for notes/folders -->
+    <string name="grouping">그룹화</string>
+    <string name="save_to_noto">Noto에 저장하기</string>
+    <!-- When selecting text, and then doing "Save to Noto", this message is shown in the notification. -->
+    <string name="note_is_saved">노트가 %s에 저장되었습니다</string>
+    <string name="no_notes_found">노트를 찾을 수 없습니다.</string>
+    <!-- Text displayed when there are no notes found when search is applied, and labels are selected. -->
+    <string name="no_relevant_notes_found">관련 노트를 찾을 수 없습니다.</string>
+    <!-- Text displayed when there are no notes found in the Recent view. -->
+    <string name="no_recent_notes_found">최근 노트를 찾을 수 없습니다.</string>
+    <!-- Text displayed when there are no notes found in the Archived view. -->
+    <string name="no_archived_notes_found">보관된 노트를 찾을 수 없습니다.</string>
+    <!-- Text displayed when there are no notes found in the Scheduled view. -->
+    <string name="no_scheduled_notes_found">알림 설정된 노트를 찾을 수 없습니다.</string>
+    <!-- Text displayed when there are no notes found when search is applied. -->
+    <string name="no_notes_found_search">검색어를 포함하는 노트를 찾을 수 없습니다.</string>
+    <!-- Text displayed when there are no notes found when labels are selected. -->
+    <string name="no_notes_found_labels">선택된 라벨을 가진 노트를 찾을 수 없습니다.</string>
+    <!-- Text displayed when folder is empty, and containing 0 notes. Replacement for "No notes found". -->
+    <string name="folder_is_empty">폴더가 비어있습니다.</string>
+    <string name="notes">노트</string>
+    <!-- The count of the selected notes that have been merged. -->
+    <string name="notes_are_merged">%d개의 노트가 새로운 노트로 통합되었습니다.</string>
+    <plurals name="note_is_archived">
+        <item quantity="other">노트가 보관되었습니다.</item>
+    </plurals>
+    <plurals name="note_is_unarchived">
+        <item quantity="other">노트가 보관 해제되었습니다.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been pinned. -->
+    <plurals name="note_is_pinned">
+        <item quantity="other">노트가 고정되었습니다.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been unpinned. -->
+    <plurals name="note_is_unpinned">
+        <item quantity="other">노트가 고정 해제되었습니다.</item>
+    </plurals>
+    <string name="cancel_reminder">알림 취소하기</string>
+    <string name="note_is_unarchived">노트가 보관 해제되었습니다.</string>
+    <string name="reminder">알림</string>
+    <string name="reminder_date">알림 날짜</string>
+    <string name="reminder_time">알림 시간</string>
+    <string name="reminder_is_set">알림이 %1$s에서 %2$s에 실행되도록 설정되었습니다.</string>
+    <string name="reminder_is_cancelled">알림이 취소되었습니다.</string>
+    <string name="reminders">알림</string>
+    <string name="new_note_reminder">새 알림</string>
+    <string name="copy">복사하기</string>
+    <string name="copy_to">…로 복사하기</string>
+    <!-- Text displayed when copying notes between folders along with a progress indicator. -->
+    <string name="copying_notes">%s로 노트 복사 중</string>
+    <!-- The count of the selected notes that have been copied to a folder. -->
+    <plurals name="note_is_copied">
+        <item quantity="other">%s로 노트가 복사되었습니다.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been copied to clipboard. -->
+    <plurals name="note_copied_to_clipboard">
+        <item quantity="other">노트가 클립보드에 복사되었습니다.</item>
+    </plurals>
+    <string name="text_copied">글자가 클립보드에 복사되었습니다.</string>
+    <plurals name="delete_note_confirmation">
+        <item quantity="other">정말로 노트를 삭제하실건가요?</item>
+    </plurals>
+    <string name="share_with">…에 공유하기</string>
+    <string name="add_note_reminder">알림 추가하기</string>
+    <plurals name="delete_note_description">
+        <item quantity="other">이 작업은 실행 취소할 수 없으며 노트와 알림을 영구적으로 삭제합니다.</item>
+    </plurals>
+    <string name="reading_mode">읽기 모드</string>
+    <string name="edit_note_reminder">알림 편집하기</string>
+    <string name="note_options">노트 옵션</string>
+    <!-- The count of the selected notes that have been deleted. -->
+    <plurals name="note_is_deleted">
+        <item quantity="other">노트가 삭제되었습니다.</item>
+    </plurals>
+    <!-- The count of the selected notes that have been duplicated. -->
+    <plurals name="note_is_duplicated">
+        <item quantity="other">노트가 복제되었습니다.</item>
+    </plurals>
+    <string name="move_to">…로 이동하기</string>
+    <!-- Text displayed when moving notes between folders along with a progress indicator. -->
+    <string name="moving_notes">%s로 노트 이동 중</string>
+    <!-- The count of the selected notes that have been moved to a folder. -->
+    <plurals name="note_is_moved">
+        <item quantity="other">%s로 노트가 이동되었습니다.</item>
+    </plurals>
+    <string name="note_preview_size">노트 미리보기 크기</string>
+    <string name="show_note_creation_date">노트 생성일 보여주기</string>
+    <!-- Whether to show notes count in "All Folders" view. -->
+    <string name="show_notes_count">노트 개수 표시하기</string>
+    <!-- Description of the "Show notes count" settings option. -->
+    <string name="show_notes_count_description">폴더 이름 옆에 노트 개수를 표시할지 여부.</string>
+    <!-- Whether to exit app immediately without showing folders dialog -->
+    <string name="quick_exit">빠른 종료</string>
+    <!-- Description of the "Quick exit" settings option. -->
+    <string name="quick_exit_description">뒤로가기 버튼을 눌렀을 때 앱을 즉시 종료할지 여부.</string>
+    <!-- Whether to pass the search term to the note screen. -->
+    <string name="continuous_search">검색어 표시</string>
+    <!-- Description of the "Continuous Search" settings option. -->
+    <string name="continuous_search_description">검색어를 노트 화면에 표시할지 여부.</string>
+    <!-- Whether to enable auto-scroll for notes in preview mode. -->
+    <string name="preview_auto_scroll">미리보기 자동 스크롤</string>
+    <!-- Description of the "Preview auto-scroll" settings option. -->
+    <string name="preview_auto_scroll_description">미리보기 모드에서 자동 스크롤을 활성화할지 여부.</string>
+    <string name="remember_scrolling_position">스크롤 위치 기억하기</string>
+    <!-- Description of the "Remember scrolling position" settings option. -->
+    <string name="remember_scrolling_position_description">폴더와 노트 안에서의 스크롤 위치를 기억할지 여부.</string>
+    <string name="do_not_disturb">방해 금지</string>
+    <!-- Description of the "Do Not Disturb" settings option. -->
+    <string name="do_not_disturb_description">읽기 모드 중에 방해 금지 모드를 설정할지 여부.</string>
+    <!-- An option for Reading Mode settings to keep screen on while in Reading Mode. -->
+    <string name="keep_screen_on">화면 켜짐 유지하기</string>
+    <!-- Description of the "Keep screen on" settings option. -->
+    <string name="keep_screen_on_description">읽기 모드 중에 화면 꺼짐을 막을지 여부.</string>
+    <string name="full_screen_mode">전체 화면 모드</string>
+    <!-- Description of the "Go full screen" settings option. -->
+    <string name="full_screen_description">읽기 모드 중에 상태표시줄과 네비게이션 바를 숨길지 여부.</string>
+    <!-- An option for Reading Mode settings to set a custom screen brightness level while in Reading Mode. -->
+    <string name="screen_brightness_level">화면 밝기 수준</string>
+    <!-- Description of the "Screen brightness level" settings option. -->
+    <string name="screen_brightness_level_description">읽기 모드에서의 화면 밝기 수준.</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="min">최소</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_low">매우 낮음</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="low">낮음</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="medium">중간</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="high">높음</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="very_high">매우 높음</string>
+    <!-- "Screen brightness level" option. -->
+    <string name="max">최대</string>
+    <!--  Reading Mode progress  -->
+    <string name="progress">진행도</string>
+    <string name="show">표시하기</string>
+    <string name="hide">숨기기</string>
+    <string name="permission_not_granted">권한이 부여되지 않았습니다</string>
+    <string name="current">현재</string>
+    <!-- Label -->
+    <string name="reorder_label">재정렬</string>
+    <string name="update_label">라벨 업데이트</string>
+    <string name="create_label">라벨 만들기</string>
+    <string name="label">라벨</string>
+    <string name="without_label">라벨 없이</string>
+    <string name="label_options">라벨 옵션</string>
+    <string name="delete_label">라벨 삭제하기</string>
+    <string name="new_label">새 라벨</string>
+    <string name="edit_label">라벨 수정하기</string>
+    <string name="labels_order">라벨 정렬</string>
+    <string name="delete_label_confirmation">이 라벨을 정말로 삭제하실건가요?</string>
+    <string name="label_is_deleted">라벨이 삭제되었습니다.</string>
+    <string name="delete_label_description">이 작업은 실행 취소할 수 없으며 라벨을 삭제하고 관련 노트에서 라벨을 영구적으로 제거합니다.</string>
+    <!-- Theme -->
+    <string name="theme">테마</string>
+    <string name="system_dark_theme">시스템 테마 + 어두운 테마</string>
+    <string name="system_black_theme">시스템 테마 + 검정 테마</string>
+    <string name="light_theme">밝은 테마</string>
+    <string name="dark_theme">어두운 테마</string>
+    <string name="black_theme">검정 테마</string>
+    <!-- Language -->
+    <string name="language">언어</string>
+    <!-- A text next to the non-finished language. -->
+    <string name="not_finished">완료되지 않음</string>
+    <!-- An option in settings to invite users to translate Noto. -->
+    <string name="translate_noto">Noto 번역하기</string>
+    <!-- Description of the "Translate Noto" settings option. -->
+    <string name="translate_noto_description">번역은 Crowdin에서 이루어집니다.</string>
+    <!-- Replacement for "System language" in settings. -->
+    <string name="follow_system">시스템 언어</string>
+    <string name="english">영어</string>
+    <string name="turkish">터키어</string>
+    <string name="arabic">아랍어</string>
+    <string name="indonesian">인도네시아어</string>
+    <string name="russian">러시아어</string>
+    <string name="spanish">스페인어</string>
+    <string name="french">프랑스어</string>
+    <string name="german">독일어</string>
+    <string name="italian">이탈리아어</string>
+    <string name="tamil">타밀어</string>
+    <string name="czech">체코어</string>
+    <string name="lithuanian">리투아니아어</string>
+    <string name="simplified_chinese">중국어(간체)</string>
+    <string name="portuguese">포르투갈어</string>
+    <!-- Icon -->
+    <string name="icon">아이콘</string>
+    <!-- Widget -->
+    <string name="create_widget">위젯 만들기</string>
+    <string name="update_widget">위젯 업데이트</string>
+    <string name="new_notes_widget">새 노트 위젯</string>
+    <string name="edit_notes_widget">노트 위젯 편집하기</string>
+    <string name="new_folders_widget">새 폴더 위젯</string>
+    <string name="edit_folders_widget">폴더 위젯 편집하기</string>
+    <string name="new_folder_button">새 폴더 버튼</string>
+    <string name="new_note_button">새 노트 버튼</string>
+    <string name="widget_header">위젯 헤더</string>
+    <string name="app_icon">앱 아이콘</string>
+    <string name="widget_radius">위젯 반지름</string>
+    <string name="edit_widget">위젯 편집하기</string>
+    <string name="edit_widget_button">위젯 편집 버튼</string>
+    <string name="folders_notes_count">폴더 노트 수</string>
+    <string name="loading_content">내용 로드 중</string>
+    <!-- Releases -->
+    <string name="release_bug_fixes_and_design_improvements">버그 수정 및 디자인 개선.</string>
+    <string name="release_bug_fixes">버그 수정.</string>
+    <string name="release_1_8_0_vault">비밀번호로 보호되는 잠금 지원.</string>
+    <string name="release_1_8_0_vault_timeout">잠금 타임아웃 옵션 지원.</string>
+    <string name="release_1_8_0_vault_bio">지원되는 기기에서의 생체 인식을 통한 잠금 해제 지원.</string>
+    <string name="release_1_8_0_language">스페인어 지원.</string>
+    <string name="release_1_8_0_reddit">새로운 <a href="https://www.reddit.com/r/notoapp">Reddit 커뮤니티</a> 링크 추가.</string>
+    <string name="release_2_0_0_new_look">새해, 새로운 모습!</string>
+    <string name="release_2_0_0_folders">라이브러리는 갔습니다. 폴더를 환영해요!</string>
+    <string name="release_2_0_0_animations">앱 전체의 애니메이션 개선.</string>
+    <string name="release_2_0_0_nested_folders">중첩 폴더에 대한 실험적 지원.</string>
+    <string name="release_2_0_0_swipe_folder">정렬이 수동일 때 폴더를 중첩하기 위해 수평으로 스와이프하는 실험 지원.</string>
+    <string name="release_2_0_0_general">일반 메모를 위한 \"기본\" 폴더 추가.</string>
+    <string name="release_2_0_0_all_recent">모든 메모와 최근 메모 보기 및 검색 기능 지원.</string>
+    <string name="release_2_0_0_highlight_search">검색 시 노트 강조 지원.</string>
+    <string name="release_2_0_0_collapsing_toolbar">더 나은 유용성과 손 접근성을 위해 도구 모음 단축기를 지원.</string>
+    <string name="release_2_0_0_language">프랑스어 지원.</string>
+    <string name="release_2_0_0_swipe_bottom_app_bar">하단 앱 바를 위로 스 와이프하여 폴더를 볼 수 있도록 지원.</string>
+    <string name="release_2_0_0_navigation">\'잠금이 풀렸습니다\' 알림을 누르면 잠금으로 이동.</string>
+    <string name="release_2_0_0_settings_main_folder">기본 폴더 대상을 선택하는 설정을 추가.</string>
+    <string name="release_2_0_0_settings_toolbar">기본적으로 도구 모음을 축소하는 설정을 추가.</string>
+    <string name="release_2_0_0_shortcuts">이전 Android 기기에서 정적 바로가기 아이콘 수정.</string>
+    <string name="release_2_1_0_undo_redo">기록 보기와 취소/다시 실행 지원.</string>
+    <string name="release_2_1_0_labels">라벨 새롭게 디자인.</string>
+    <string name="release_2_1_0_app_bars">모든 레이아웃에서 하단 및 상단 앱 바 재설계.</string>
+    <string name="release_2_1_0_menu">많은 매뉴 재설계.</string>
+    <string name="release_2_1_0_new_folder">새 폴더/폴더 편집 레이아웃 새롭게 디자인.</string>
+    <string name="release_2_1_0_grouping_order">노트에 대한 그룹화 순서를 추가.</string>
+    <string name="release_2_1_0_drag_elevation">라벨이나 노트를 드래그할 때 표고를 추가.</string>
+    <string name="release_2_1_0_preview">폴더, 노트, 라벨 메뉴에 미리보기 포함.</string>
+    <string name="release_2_1_0_dates">날자 형식 개선.</string>
+    <string name="release_2_1_0_highlight">노트 강조 색상 변경.</string>
+    <string name="release_2_1_0_navigation">앱을 종료하기 전에 폴더 레이아웃으로 이동.</string>
+    <string name="release_2_1_0_material_you">Material You 지원 (Material 3).</string>
+    <string name="release_2_1_0_splash_screen">스플래시 화면 새롭게 디자인.</string>
+    <string name="release_2_1_0_reading_mode">읽기 모드 개선.</string>
+    <string name="release_2_1_0_scroll_position">노트와 폴더의 스크롤 위치 기억 지원.</string>
+    <string name="release_2_1_0_disable_animations">라벨 애니메이션과 폴더 색 비활성화.</string>
+    <string name="release_2_1_0_import_data">데이터 가져오기 수정.</string>
+    <string name="release_2_1_0_vault_crash">안드로이드 11 이상에서 잠금을 해제하려고 할 때 생기는 버그 수정.</string>
+    <string name="release_2_1_0_undo_redo_swipe">취소/다시 실행 스와이프 제스처 개선.</string>
+    <string name="release_2_1_0_label_filtering">포함하거나 제외하는 라벨 필터링 지원.</string>
+    <string name="release_2_1_0_app_icon">앱 아이콘 새롭게 디자인.</string>
+    <string name="release_2_1_0_change_app_icon">앱 아이콘 변경 지원.</string>
+    <string name="release_2_1_0_language">독일어 지원.</string>
+    <string name="release_2_1_4_shortcuts">기본 아이콘을 사용할 때 단축 기능이 작동하지 않는 버그 수정.</string>
+    <string name="release_2_1_4_labels">선택된 라벨은 이제 노트 레이아웃에서 먼저 표시됩니다.</string>
+    <string name="release_2_2_0_languages">체코어, 이탈리아어 지원.</string>
+    <string name="release_2_2_0_multi_selection">메모 다중 선택 지원.</string>
+    <string name="release_2_2_0_reading_mode">기본적으로 읽기 모드에서 메모를 여는 옵션을 지원.</string>
+    <string name="release_2_2_0_settings">설정 화면 새롭게 디자인.</string>
+    <string name="release_2_2_0_paging">읽기 모드에서의 페이지 넘기기 개선.</string>
+    <string name="release_2_2_0_app_speed">앱 시작 속도 개선.</string>
+    <string name="release_2_2_0_import_json">JSON 파일 가져오기 수정.</string>
+    <string name="release_2_2_0_black_theme">안드로이드 12 이상의 기기에서의 검정 테마 수정.</string>
+    <string name="release_2_2_1_languages">리투아니아어, 중국어(간체) 지원.</string>
+    <string name="release_2_2_1_design">여기저기 디자인 개선.</string>
+    <string name="release_2_2_1_undo_redo">취소/다시 실행 기능을 더 효과적으로 리팩토링.</string>
+    <string name="release_2_2_1_filtered_view">보관된 노트 &amp; 알림 설정된 노트 보기 지원.</string>
+    <string name="release_2_2_1_quick_exit">빠른 종료 설정 토글(기본 메뉴로 이동하지 않고 앱을 종료) 지원.</string>
+    <string name="release_2_2_1_quick_note_tile">알림 센터의 빠른 노트 타일을 사용하여 다른 앱에 있는 동안 노트를 생성하는 더 빠른 방법을 구현.</string>
+    <string name="release_2_2_1_system_app_language">Android 13 이상을 위한 시스템 설정을 통해 앱 언어 통합 변경.</string>
+    <string name="release_2_3_0_new_languages">러시아어 &amp; 포르투갈어 지원.</string>
+    <string name="release_2_3_0_reminder">Noto 테마와 일치하도록 리마인더, 날짜 &amp; 시간 선택기를 재설계.</string>
+    <string name="release_2_3_0_selection">긴 클릭만으로 노트 선택 &amp; 드래그를 처리하는 방법을 수정.</string>
+    <string name="release_2_3_0_find_in_note">노트에서 찾기 기능을 지원하고 노트에서 검색된 텍스트로 자동 스크롤.</string>
+    <string name="release_2_3_0_archive">보관 화면에서 지원되는 노트 선택 &amp; 빠른 작업.</string>
+    <string name="release_2_3_0_sorting">언어의 분음 기호와 관련하여 정렬된 엔티티.</string>
+    <string name="release_2_3_0_reading_mode">읽기 모드에서 여러 노트를 열 때 표시되는 카운터 및 진행률 표시기.</string>
+    <string name="release_2_3_0_whats_new">새롭게 디자인된 What’s New 대화 상자 &amp; 화면.</string>
+    <string name="release_2_3_0_report_issues">설정에서 이메일을 통한 문제 보고 지원.</string>
+    <string name="release_2_3_0_quick_note">빠른 노트를 만들 때 여러 대화 상자가 열리는 것을 수정.</string>
+</resources>

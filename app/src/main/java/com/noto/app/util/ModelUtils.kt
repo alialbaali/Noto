@@ -306,6 +306,7 @@ fun Language.toLocale(): Locale = when (this) {
     Language.Lithuanian -> Locale("lt")
     Language.SimplifiedChinese -> Locale("zh")
     Language.Portuguese -> Locale("pt")
+    Language.Korean -> Locale("ko")
 }
 
 fun List<Language>.toLocalListCompat(): LocaleListCompat {
@@ -335,6 +336,7 @@ fun LocaleListCompat.toLanguages(): List<Language> {
             tag.startsWith("lt", ignoreCase = true) -> Language.Lithuanian
             tag.startsWith("zh", ignoreCase = true) -> Language.SimplifiedChinese
             tag.startsWith("pt", ignoreCase = true) -> Language.Portuguese
+            tag.startsWith("ko", ignoreCase = true) -> Language.Korean
             else -> Language.System
         }
     }

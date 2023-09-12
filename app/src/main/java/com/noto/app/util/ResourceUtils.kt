@@ -87,6 +87,7 @@ fun Language.toStringResourceId(): Int = when (this) {
     Language.Lithuanian -> R.string.lithuanian
     Language.SimplifiedChinese -> R.string.simplified_chinese
     Language.Portuguese -> R.string.portuguese
+    Language.Korean -> R.string.korean
 }
 
 fun ScreenBrightnessLevel.toStringResourceId(): Int = when (this) {
