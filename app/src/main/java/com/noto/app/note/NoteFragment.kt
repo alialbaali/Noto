@@ -415,12 +415,14 @@ class NoteFragment : Fragment() {
 
         etNoteTitle.textAsFlow(emitInitialText = true)
             .filterNotNull()
-            .onEach { nsv.smoothScrollBy(0, etNoteTitle.height) }
+            .distinctUntilChangedBy { etNoteTitle.lineCount }
+            .onEach { etNoteTitle.post { nsv.smoothScrollTo(0, etNoteTitle.currentLineScrollPosition, DefaultAnimationDuration.toInt()) } }
             .launchIn(lifecycleScope)
 
         etNoteBody.textAsFlow(emitInitialText = true)
             .filterNotNull()
-            .onEach { nsv.smoothScrollBy(0, etNoteBody.height) }
+            .distinctUntilChangedBy { etNoteBody.lineCount }
+            .onEach { etNoteBody.post { nsv.smoothScrollTo(0, etNoteBody.currentLineScrollPosition, DefaultAnimationDuration.toInt()) } }
             .launchIn(lifecycleScope)
 
         savedStateHandle?.getLiveData<String>(Constants.NoteTitle)

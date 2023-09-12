@@ -538,3 +538,12 @@ fun FloatingActionButton.showWithAnimation() {
         .withEndAction { isVisible = true }
         .start()
 }
+
+val TextView.currentLine: Int
+    get() {
+        val cursorPosition = selectionStart.coerceAtLeast(0)
+        return layout?.getLineForOffset(cursorPosition)?.coerceIn(0, lineCount) ?: 0
+    }
+
+val TextView.currentLineScrollPosition: Int
+    get() = layout?.getLineTop(currentLine) ?: 0
