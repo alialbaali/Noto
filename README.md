@@ -59,16 +59,16 @@
 <div align="center">
     <h4><b>You can get Noto from one of the links below!</b></h4>
     <a href="https://play.google.com/store/apps/details?id=com.noto">
-        <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="80" />
+        <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="60" />
     </a>
     <a href="https://f-droid.org/en/packages/com.noto">
-        <img src="images/get-it-on-fdroid-en-us.svg" alt="Get it on F-Droid" height="80" />
+        <img src="images/get-it-on-fdroid-en-us.svg" alt="Get it on F-Droid" height="60" />
     </a>
     <a href="https://apt.izzysoft.de/fdroid/index/apk/com.noto">
-        <img src="images/get-it-on-izzy-on-droid.png" alt="Get it on IzzyOnDroid" height="80" />
+        <img src="images/get-it-on-izzy-on-droid.png" alt="Get it on IzzyOnDroid" height="60" />
     </a>
     <a href="https://github.com/alialbaali/Noto/releases/latest">
-        <img src="images/get-it-on-github.png" alt="Get it from GitHub" height="80" />
+        <img src="images/get-it-on-github.png" alt="Get it from GitHub" height="60" />
     </a>
 </div>
 
