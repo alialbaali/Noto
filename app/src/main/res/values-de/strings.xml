@@ -516,6 +516,7 @@
     <string name="lithuanian">Litauisch</string>
     <string name="simplified_chinese">Chinesisch (vereinfacht)</string>
     <string name="portuguese">Portugiesisch</string>
+    <string name="korean">Koreanisch</string>
     <!-- Icon -->
     <string name="icon">Icon</string>
     <!-- Widget -->
@@ -607,4 +608,6 @@
     <string name="release_2_3_0_whats_new">Fenster &amp; Dialog für die Neuerungen neu gestaltet.</string>
     <string name="release_2_3_0_report_issues">Das Melden von Problemen per E-Mail ist nun zusätzlich möglich.</string>
     <string name="release_2_3_0_quick_note">Behoben, dass sich mehrere Dialoge beim Erstellen einer Kurznotiz öffneten.</string>
+    <string name="release_2_3_1_languages">Koreanische Übersetzung.</string>
+    <string name="release_2_3_1_auto_scroll">Verbesserung für automatisches Scrollen beim Schreiben von Notizen.</string>
 </resources>

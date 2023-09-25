@@ -560,6 +560,7 @@
     <string name="lithuanian">Литовский</string>
     <string name="simplified_chinese">Китайский упрощенный</string>
     <string name="portuguese">Португальский</string>
+    <string name="korean">Korean</string>
     <!-- Icon -->
     <string name="icon">Иконка</string>
     <!-- Widget -->
@@ -651,4 +652,6 @@
     <string name="release_2_3_0_whats_new">Переработано диалоговое окно и экран \"Что нового\".</string>
     <string name="release_2_3_0_report_issues">Поддержка отчетов об ошибках по электронной почте в настройках.</string>
     <string name="release_2_3_0_quick_note">Исправлено открытие нескольких диалогов при создании Быстрой Заметки.</string>
+    <string name="release_2_3_1_languages">Supported Korean.</string>
+    <string name="release_2_3_1_auto_scroll">Improved auto-scroll when writing notes.</string>
 </resources>

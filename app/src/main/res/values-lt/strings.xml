@@ -560,6 +560,7 @@
     <string name="lithuanian">Lietuvių</string>
     <string name="simplified_chinese">Supaprastinta kinų</string>
     <string name="portuguese">Portugalų</string>
+    <string name="korean">Korėjiečių</string>
     <!-- Icon -->
     <string name="icon">Piktograma</string>
     <!-- Widget -->
@@ -651,4 +652,6 @@
     <string name="release_2_3_0_whats_new">Perkurtas „Kas naujo“ dialogo ekranas.</string>
     <string name="release_2_3_0_report_issues">Problemų pranešimas su el. paštu nustatymuose.</string>
     <string name="release_2_3_0_quick_note">Pataisytas kelių dialogų atidarymas sukuriant spartųjų užrašą.</string>
+    <string name="release_2_3_1_languages">Korėjiečių kalba.</string>
+    <string name="release_2_3_1_auto_scroll">Patobulintas automatinis slinkimas.</string>
 </resources>

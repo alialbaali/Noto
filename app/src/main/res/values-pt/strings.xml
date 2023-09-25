@@ -516,6 +516,7 @@
     <string name="lithuanian">Lituano</string>
     <string name="simplified_chinese">Chinês simplificado</string>
     <string name="portuguese">Português</string>
+    <string name="korean">Coreano</string>
     <!-- Icon -->
     <string name="icon">Ícone</string>
     <!-- Widget -->
@@ -607,4 +608,6 @@
     <string name="release_2_3_0_whats_new">Redesenhou o novo diálogo &amp; tela.</string>
     <string name="release_2_3_0_report_issues">Suporte para relatar problemas por e-mail em Configurações.</string>
     <string name="release_2_3_0_quick_note">Diálogos de diálogo corrigidos sendo abertos ao criar uma nota rápida.</string>
+    <string name="release_2_3_1_languages">Coreano suportado.</string>
+    <string name="release_2_3_1_auto_scroll">Melhoria da deslocação automática ao escrever notas.</string>
 </resources>

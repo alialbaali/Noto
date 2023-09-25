@@ -516,6 +516,7 @@
     <string name="lithuanian">Litvanca</string>
     <string name="simplified_chinese">Basitleştirilmiş Çince</string>
     <string name="portuguese">Portekizce</string>
+    <string name="korean">Korece</string>
     <!-- Icon -->
     <string name="icon">Simge</string>
     <!-- Widget -->
@@ -607,4 +608,6 @@
     <string name="release_2_3_0_whats_new">Yenilikler sayfası yeniden tasarlandı.</string>
     <string name="release_2_3_0_report_issues">Ayarlar menüsünde e-posta yoluyla sorun bildirme desteği getirildi.</string>
     <string name="release_2_3_0_quick_note">Hızlı Not oluştururken birden fazla diyalog penceresinin açılması hatası düzeltildi.</string>
+    <string name="release_2_3_1_languages">Korece desteği getirildi.</string>
+    <string name="release_2_3_1_auto_scroll">Not yazarken otomatik kaydırma yapabilme özelliği geliştirildi.</string>
 </resources>

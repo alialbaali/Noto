@@ -516,6 +516,7 @@
     <string name="lithuanian">Lithuanian</string>
     <string name="simplified_chinese">Simplified Chinese</string>
     <string name="portuguese">Portuguese</string>
+    <string name="korean">Korean</string>
     <!-- Icon -->
     <string name="icon">Icon</string>
     <!-- Widget -->
@@ -607,4 +608,6 @@
     <string name="release_2_3_0_whats_new">Redesigned What’s New dialog &amp; screen.</string>
     <string name="release_2_3_0_report_issues">Supported reporting issues through email in Settings.</string>
     <string name="release_2_3_0_quick_note">Fixed multiple dialogs being opened when creating a Quick Note.</string>
+    <string name="release_2_3_1_languages">Supported Korean.</string>
+    <string name="release_2_3_1_auto_scroll">Improved auto-scroll when writing notes.</string>
 </resources>

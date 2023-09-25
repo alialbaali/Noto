@@ -494,6 +494,7 @@
     <string name="lithuanian">Lituania</string>
     <string name="simplified_chinese">Cina (sederhana)</string>
     <string name="portuguese">Portugis</string>
+    <string name="korean">Korean</string>
     <!-- Icon -->
     <string name="icon">Ikon</string>
     <!-- Widget -->
@@ -585,4 +586,6 @@
     <string name="release_2_3_0_whats_new">Mendesain ulang layar &amp; Dialog Apa yang Baru.</string>
     <string name="release_2_3_0_report_issues">Mendukung pelaporan masalah melalui email di Pengaturan.</string>
     <string name="release_2_3_0_quick_note">Memperbaiki beberapa dialog yang dibuka saat membuat Catatan Cepat.</string>
+    <string name="release_2_3_1_languages">Supported Korean.</string>
+    <string name="release_2_3_1_auto_scroll">Improved auto-scroll when writing notes.</string>
 </resources>

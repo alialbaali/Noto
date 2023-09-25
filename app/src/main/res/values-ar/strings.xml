@@ -604,6 +604,7 @@
     <string name="lithuanian">الليتوانية</string>
     <string name="simplified_chinese">الصينية المبسطة</string>
     <string name="portuguese">البرتغالية</string>
+    <string name="korean">الكورية</string>
     <!-- Icon -->
     <string name="icon">الأيقونة</string>
     <!-- Widget -->
@@ -695,4 +696,6 @@
     <string name="release_2_3_0_whats_new">إعادة تصميم حوار &amp; واجهه استخدام ما هو الجديد.</string>
     <string name="release_2_3_0_report_issues">دعم الإبلاغ عن الأخطاء من خلال البريد الإلكتروني في الإعدادات.</string>
     <string name="release_2_3_0_quick_note">إصلاح حوارات متعددة يتم فتحها عند إنشاء ملاحظة سريعة.</string>
+    <string name="release_2_3_1_languages">دعم الكورية.</string>
+    <string name="release_2_3_1_auto_scroll">تحسين السحب التلقائي عند كتابة الملاحظات.</string>
 </resources>

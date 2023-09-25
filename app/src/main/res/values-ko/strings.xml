@@ -57,7 +57,7 @@
     <string name="join_telegram">Telegram 커뮤니티에 가입하세요!</string>
     <!-- The font used in notes, such as Monospace, or Nunito. -->
     <string name="notes_font">노트 글꼴</string>
-    <string name="share_app_with_others">다른 사용자에게 Noto를 공유</string>
+    <string name="share_app_with_others">다른 사용자에게 Noto 공유하기</string>
     <string name="rate_app_on_play_store">Play 스토어에서 Noto 별점 주기</string>
     <string name="report_issue">문제 보고하기</string>
     <string name="email">이메일</string>
@@ -90,7 +90,7 @@
     <string name="creator">제작자</string>
     <!-- Translator of a language. -->
     <!-- Proofreader of a language. -->
-    <string name="app_icons">엡 아이콘</string>
+    <string name="app_icons">앱 아이콘</string>
     <string name="privacy_policy">개인 정보 보호 정책</string>
     <!-- Description of the "Privacy policy" settings option. -->
     <string name="privacy_policy_description">2022년 8월 25일에 마지막 업데이트.</string>
@@ -142,7 +142,7 @@
     <string name="merge">통합하기</string>
     <string name="unpin">고정 해제하기</string>
     <string name="delete">삭제하기</string>
-    <string name="just_now">방금</string>
+    <string name="just_now">방금 전</string>
     <!--Select a note. -->
     <string name="select">선택하기</string>
     <!--Select all notes. -->
@@ -494,6 +494,7 @@
     <string name="lithuanian">리투아니아어</string>
     <string name="simplified_chinese">중국어(간체)</string>
     <string name="portuguese">포르투갈어</string>
+    <string name="korean">한국어</string>
     <!-- Icon -->
     <string name="icon">아이콘</string>
     <!-- Widget -->
@@ -585,4 +586,6 @@
     <string name="release_2_3_0_whats_new">새롭게 디자인된 What’s New 대화 상자 &amp; 화면.</string>
     <string name="release_2_3_0_report_issues">설정에서 이메일을 통한 문제 보고 지원.</string>
     <string name="release_2_3_0_quick_note">빠른 노트를 만들 때 여러 대화 상자가 열리는 것을 수정.</string>
+    <string name="release_2_3_1_languages">한국어 지원.</string>
+    <string name="release_2_3_1_auto_scroll">노트를 작성할 때 자동 스크롤 개선.</string>
 </resources>

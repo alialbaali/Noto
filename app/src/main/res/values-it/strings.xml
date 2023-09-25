@@ -516,6 +516,7 @@
     <string name="lithuanian">Lituano</string>
     <string name="simplified_chinese">Cinese Semplificato</string>
     <string name="portuguese">Portoghese</string>
+    <string name="korean">Korean</string>
     <!-- Icon -->
     <string name="icon">Icona</string>
     <!-- Widget -->
@@ -607,4 +608,6 @@
     <string name="release_2_3_0_whats_new">Nuovo design per le finestre e la schermata delle novità.</string>
     <string name="release_2_3_0_report_issues">Aggiuntà possibilità di segnalare problemi tramite email nelle impostazioni.</string>
     <string name="release_2_3_0_quick_note">Risolto problema in cui molteplici finestre venivano aperte quando si cercava di creare una nota rapida.</string>
+    <string name="release_2_3_1_languages">Supported Korean.</string>
+    <string name="release_2_3_1_auto_scroll">Improved auto-scroll when writing notes.</string>
 </resources>
