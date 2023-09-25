@@ -697,4 +697,6 @@
     <string name="release_2_3_1_languages">Supported Korean.</string>
     <string name="release_2_3_1_auto_scroll">Improved auto-scroll when writing notes.</string>
 
+    <string name="release_2_3_2" translatable="false">@string/release_bug_fixes_and_design_improvements</string>
+
 </resources>

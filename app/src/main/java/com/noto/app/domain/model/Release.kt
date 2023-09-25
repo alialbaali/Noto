@@ -23,8 +23,8 @@ sealed interface Release {
     data class Version(val major: Int, val minor: Int, val patch: Int, val status: Status = Status.Stable) {
 
         companion object {
-            val Current = Version(2, 3, 1)
-            val Last = Version(2, 3, 0)
+            val Current = Version(2, 3, 2)
+            val Last = Version(2, 3, 1)
         }
 
         fun format(): String = if (status is Status.Beta) "$major.$minor.$patch-${status.format()}" else "$major.$minor.$patch"
@@ -161,4 +161,11 @@ data class Release_2_3_0(override val changelog: Changelog) : Release {
 data class Release_2_3_1(override val changelog: Changelog) : Release {
     override val version: Version = Version(2, 3, 1)
     override val date: LocalDate = LocalDate(2023, Month.SEPTEMBER, 11)
+}
+
+@Suppress("ClassName")
+@Serializable
+data class Release_2_3_2(override val changelog: Changelog) : Release {
+    override val version: Version = Version(2, 3, 2)
+    override val date: LocalDate = LocalDate(2023, Month.SEPTEMBER, 24)
 }

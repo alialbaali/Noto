@@ -14,17 +14,24 @@ fun Release.Changelog.format(context: Context, count: Int) = changesIds.take(cou
     .let { if (changesIds.count() > count) it.plus("\n\n...") else it }
 
 val Release.Companion.Current: Release
-    get() = Release_2_3_1(
+    get() = Release_2_3_2(
         Release.Changelog(
             listOf(
-                R.string.release_2_3_1_languages,
-                R.string.release_2_3_1_auto_scroll,
+                R.string.release_2_3_2,
             )
         )
     )
 
 val Release.Companion.Previous: List<Release>
     get() = listOf(
+        Release_2_3_1(
+            Release.Changelog(
+                listOf(
+                    R.string.release_2_3_1_languages,
+                    R.string.release_2_3_1_auto_scroll,
+                )
+            )
+        ),
         Release_2_3_0(
             Release.Changelog(
                 listOf(
